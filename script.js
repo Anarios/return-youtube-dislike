@@ -94,8 +94,8 @@ function isVideoLoaded() {
 
 function numberFormat(numberState) {
   const userLocales = navigator.language;
-  const formatter = Intl.NumberFormat(userLocales, { notation: 'compact' })
-  return formatter.format(numberState)
+  const formatter = Intl.NumberFormat(userLocales, { notation: 'compact' });
+  return formatter.format(numberState);
 }
 
 function setEventListeners(evt) {
