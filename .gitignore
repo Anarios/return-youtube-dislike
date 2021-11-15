@@ -1,1 +1,4 @@
 *.idea
+*Backend
+*cert
+*StaticSite
