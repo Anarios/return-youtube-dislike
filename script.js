@@ -55,6 +55,7 @@ function setState() {
     },
     function (response) {
       if (response != undefined) {
+        const formattedDislike = numberFormat(response.dislikes);
         // setLikes(response.likes);
         console.log(response);
         setDislikes(response.dislikes);
@@ -89,6 +90,12 @@ function isVideoLoaded() {
   return (
     document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null
   );
+}
+
+function numberFormat(numberState) {
+  const userLocales = navigator.language;
+  const formatter = Intl.NumberFormat(userLocales, { notation: 'compact' });
+  return formatter.format(numberState);
 }
 
 function setEventListeners(evt) {
