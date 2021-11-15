@@ -47,7 +47,7 @@ function setDislikes(dislikesCount) {
 }
 
 function setState() {
-  chrome.runtime.sendMessage(
+  browser.runtime.sendMessage(
     {
       message: "set_state",
       videoId: getVideoId(),

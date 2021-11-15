@@ -1,26 +1,19 @@
 {
   "name": "Youtube Dislike Button",
   "description": "Returns ability to see dislikes",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": [
-    "activeTab",
-    "scripting"
-  ],
-  "host_permissions": [
-    "*://*.youtube.com/*"
-  ],
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["*://*.youtube.com/*"],
   "action": {
     "default_popup": "popup.html"
   },
   "oauth2": {
     "client_id": "292556337651-kbmq2pduaejrol457a5s1089ut6ug0u9.apps.googleusercontent.com",
-    "scopes": [
-      "openid"
-    ]
+    "scopes": ["openid"]
   },
   "content_scripts": [
     {
@@ -28,6 +21,5 @@
       "js": ["content-script.js"],
       "run_at": "document_idle"
     }
-  ],
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiHSM4q3Ti5gb2j6lfOwlNvrl0IGtIVOdZZNckjd15gAZh5oo9BfO1QwqJQD39KdiyELCfTduxcDeQM5RLZ6V59iK5Lt04edFS6hF7gYrB5TMQ7pgFLetT4EUgZusu9PgApU11ZWrS+VfL/2XIcIGMdpBQ1rq7X6s7ffWoQzQiQhjZUoNaCMvyI0iCEH7RS4qylV5el80kH6RyUXCDFoo1zr06BiZOj65fALgbUmiz1RstI5/bsCgA44DHXonA7d/dvc5jWvXEuZdNWvuvYdpPPxGebSEktn0+waI+VXV5vggsTfILerIsKNb6rwTlujB6Ke98cKhIF3wGqUuvwdV6wIDAQAB"
+  ]
 }
