@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Return Youtube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
-// @version      0.1
+// @version      0.2
 // @description  Return of the Youtube Dislike, Based off https://www.returnyoutubedislike.com/
 // @author       Anarios & JRWR
 // @match        *://*.youtube.com/*
@@ -132,6 +132,6 @@ function setEventListeners(evt) {
 
 (function() {
     'use strict';
+    window.addEventListener("yt-navigate-finish", setEventListeners, true);
     setEventListeners();
-
 })();
