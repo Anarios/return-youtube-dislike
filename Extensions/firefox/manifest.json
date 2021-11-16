@@ -16,12 +16,6 @@
       "js": ["content-script.js"],
       "run_at": "document_idle"
     }
-  ],
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "returnyoutubedislike@returnyoutubedislike.com",
-      "update_url": "https://returnyoutubedislike.com/files/ff/updates.json"
-    }
-  }
+  ]
 
 }
