@@ -6,6 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
+  "permissions": ["activeTab", "scripting"],
   "host_permissions": ["*://*.youtube.com/*"],
   "action": {
     "default_popup": "popup.html"
@@ -18,16 +19,7 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "js": ["content-script.js"],
-      "run_at": "document_start"
+      "run_at": "document_idle"
     }
-  ],
-  "externally_connectable": {
-    "matches": ["*://*.youtube.com/*"]
-  },
-  "web_accessible_resources": [
-	{
-	  "resources": ["script.js"],
-      "matches": ["*://*.youtube.com/*"]
-	}
   ]
 }
