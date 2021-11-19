@@ -26,9 +26,9 @@
     "matches": ["*://*.youtube.com/*"]
   },
   "web_accessible_resources": [
-	{
-	  "resources": ["script.js"],
+    {
+      "resources": ["script.js"],
       "matches": ["*://*.youtube.com/*"]
-	}
+    }
   ]
 }
