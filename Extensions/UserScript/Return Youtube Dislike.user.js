@@ -13,7 +13,6 @@
 // @compatible edge
 // @downloadURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @updateURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
-// @grant GM_xmlhttpRequest
 // ==/UserScript==
 function getButtons() {
     return document
@@ -63,19 +62,25 @@ function setDislikes(dislikesCount) {
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
 }
 
+function reqListener() {
+  const response = JSON.parse(this.responseText);
+  if (response != undefined) {
+     const formattedDislike = numberFormat(response.dislikes);
+     console.log(response);
+     setDislikes(formattedDislike);
+   }
+}
+
+function reqError(err) {
+  console.log('Fetch Error :-S', err)
+}
+
 function setState() {
-    GM_xmlhttpRequest({
-        method: "GET",
-        responseType: "json",
-        url: "https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=" + getVideoId(),
-        onload: function(response) {
-            if (response != undefined) {
-                const formattedDislike = numberFormat(response.response.dislikes);
-                console.log(response);
-                setDislikes(formattedDislike);
-            }
-        }
-    });
+    const oReq = new XMLHttpRequest();
+    oReq.onload = reqListener
+    oReq.onerror = reqError
+    oReq.open('get', "https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=" + getVideoId(), true)
+    oReq.send()
 }
 
 function likeClicked() {
