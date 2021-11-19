@@ -64,15 +64,18 @@ function setDislikes(dislikesCount) {
 
 function reqListener() {
   const response = JSON.parse(this.responseText);
-  if (response != undefined) {
-     const formattedDislike = numberFormat(response.dislikes);
-     console.log(response);
-     setDislikes(formattedDislike);
+  if (response != undefined && response.id != null) {
+       console.log(response);
+       setDislikes(numberFormat(response.dislikes));
+   } else {
+       console.log("Retry")
+       setDislikes("DISLIKE");
+       setTimeout(setState, 3000);
    }
 }
 
 function reqError(err) {
-  console.log('Fetch Error :-S', err)
+    console.log('Fetch Error :-S', err)
 }
 
 function setState() {
@@ -138,5 +141,8 @@ function setEventListeners(evt) {
 (function() {
     'use strict';
     window.addEventListener("yt-navigate-finish", setEventListeners, true);
+
+    // handle click on other video
+    window.addEventListener('locationchange', setEventListeners)
     setEventListeners();
 })();
