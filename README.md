@@ -14,7 +14,7 @@
 
 ## The Story
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) thathe YouTube dislike count would be removed.  
+On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count will be removed.  
   
 Additionally, the `dislike` field in the YouTube API will be [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
 
