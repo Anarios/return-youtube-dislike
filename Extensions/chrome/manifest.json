@@ -1,7 +1,7 @@
 {
   "name": "Youtube Dislike Button",
   "description": "Returns ability to see dislikes",
-  "version": "0.0.0.3",
+  "version": "0.0.0.4",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
@@ -18,7 +18,8 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "js": ["content-script.js"],
-      "run_at": "document_start"
+      "run_at": "document_start",
+      "css": ["content-style.css"]
     }
   ],
   "externally_connectable": {
