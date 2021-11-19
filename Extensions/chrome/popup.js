@@ -4,7 +4,6 @@ document.querySelector('#login')
   chrome.runtime.sendMessage({ message: 'get_auth_token' });
 });
 
-document.querySelector('#log_off')
-.addEventListener('click', function () {
-  chrome.runtime.sendMessage({ message: 'log_off' });
+document.querySelector("#log_off").addEventListener("click", function () {
+  chrome.runtime.sendMessage({ message: "log_off" });
 });

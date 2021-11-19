@@ -1,0 +1,14 @@
+#return-youtube-dislike-bar-container {
+  background: #c6c6c6;
+}
+
+#return-youtube-dislike-bar {
+  background: #5094c8;
+}
+
+[dark] #return-youtube-dislike-bar-container {
+}
+
+[dark] #return-youtube-dislike-bar {
+  background: #3ea6ff;
+}
