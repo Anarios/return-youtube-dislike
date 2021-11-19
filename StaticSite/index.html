@@ -13,9 +13,36 @@
 </head>
 <body>
 <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Return youtube dislike count</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#downloads">Downloads</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#installation">Installation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#faq">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#communication">Communication</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#sources">Sources</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
   <div class="row justify-content-center">
     <div class="col-lg-8 col-md-10 col-sm-12">
-      <h2 class="mt-4">Chrome/Firefox/Usersript extension to return youtube dislike count</h2>
+      <h3 class="mt-4">Chrome/Firefox/Usersript extension to return youtube dislike count</h3>
       <img src="images/aAGrY8L_700b.jpg" class="img-fluid"/>
       <p><strong>Now <a href="https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/">available</a> in
         firefox addon store! </strong></p>
@@ -30,9 +57,9 @@
       <p>Youtube has removed dislike statistics. Since this was a very usefull feature -
         this extension aims to return this functionality to users.
       </p>
-      <p>
+      <div class="alert alert-primary" role="alert">
         Currently available only for Chrome and Firefox desktop browsers. Coming to mobile soon.
-      </p>
+      </div>
       <p>We're considering integration with <a href="https://vancedapp.com/">Youtube Vanced</a> mobile app, if the devs
         will want to utilize our API</p>
 
@@ -40,6 +67,8 @@
       <p>The downvotes count looks like this, similar to what it used to be before it was removed</p>
       <p>Like/dislike ratio bar is coming soon</p>
       <img class="img-fluid mb-5" src="images/DislikeScreenshot.JPG"/>
+
+      <hr>
 
       <section id="downloads" class="pb-5">
         <h2>Downloads:</h2>
@@ -62,8 +91,6 @@
         Check for updates often - this extension is being actively improved
 
         <p>
-
-
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
@@ -98,7 +125,8 @@
           https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js</a>
           </a></p>
       </section>
-      <section in="installation" class="pb-5">
+      <hr>
+      <section id="installation" class="pb-5">
         <h2>Installation on chrome</h2>
         <p></p><strong>Before installing new version - please manually delete old version</strong></p>
         <p></p><strong>Chrome might disable this extension - you'll need to delete it and reinstall. </strong>
@@ -126,6 +154,7 @@
           <li>Select the folder that you extracted .zip file contents into</li>
         </ol>
       </section>
+      <hr>
       <section id="faq" class="pb-4">
         <h2>FAQ</h2>
         <ol>
@@ -154,14 +183,20 @@
 
         For anything else contact us at email\discord channel listed in Communication section
       </section>
-
+      <hr>
       <section id="communication" class="pb-5">
         <h2>Communication</h2>
         <h4>Email</h4>
-        <p>You can mail me at selivano.d@gmail.com</p>
+        <span>You can mail me at</span>
+        <a href="mailto:selivano.d@gmail.com?subject=Return-youtube-dislike-count&body=Message">
+          selivano.d@gmail.com
+        </a>
+        <br>
+        <br>
         <h4>Discord server</h4>
         <a href="https://discord.gg/HvwXNG4M">Join</a> a discord discussion
       </section>
+      <hr>
       <section id="sources" class="pb-5">
         <h2> Sources </h2>
         <a
