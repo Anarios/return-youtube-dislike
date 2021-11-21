@@ -1,4 +1,12 @@
 (function (extensionId) {
+  function cLog(message, writer) {
+    message = `[return youtube dislike]: ${message}`;
+    if (writer) {
+      writer(message);
+    } else {
+      console.log(message);
+    }
+  }
   function getButtons() {
     return document
       .getElementById("menu-container")
@@ -48,6 +56,32 @@
   }
 
   function setState() {
+    let statsSet = false;
+    chrome.runtime.sendMessage(
+      extensionId,
+      {
+        message: "fetch_from_youtube",
+        videoId: getVideoId(window.location.href),
+      },
+      function (response) {
+        if (response != undefined) {
+          cLog("response from youtube:");
+          cLog(JSON.stringify(response));
+          try {
+            if (response.likes || response.dislikes) {
+              const formattedDislike = numberFormat(response.dislikes);
+              setDislikes(formattedDislike);
+              createRateBar(response.likes, response.dislikes);
+              statsSet = true;
+            }
+          } catch (e) {
+            debugger;
+            statsSet = false;
+          }
+        }
+      }
+    );
+
     chrome.runtime.sendMessage(
       extensionId,
       {
@@ -56,7 +90,9 @@
         state: getState(),
       },
       function (response) {
-        if (response != undefined) {
+        cLog("response from api:");
+        cLog(JSON.stringify(response));
+        if (response != undefined && !statsSet) {
           const formattedDislike = numberFormat(response.dislikes);
           // setLikes(response.likes);
           setDislikes(formattedDislike);
@@ -137,11 +173,22 @@
     if (!rateBar) {
       document.getElementById("menu-container").insertAdjacentHTML(
         "beforeend",
-        `<div id="return-youtube-dislike-bar-container" 
-                  style="width: ${widthPx}px; 
-                  height: 3px; margin-left: 6px;">
-                  <div id="return-youtube-dislike-bar" style="width: ${widthPercent}%; height: 100%" ></div>
-                </div>`
+        `
+<div class="ryd-tooltip">
+  <div
+    id="return-youtube-dislike-bar-container"
+    style="width: ${widthPx}px;
+                  height: 3px; margin-left: 6px;"
+  >
+    <div
+      id="return-youtube-dislike-bar"
+      style="width: ${widthPercent}%; height: 100%"
+    ></div>
+  </div>
+
+  <span class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
+</div>
+`
       );
     } else {
       document.getElementById(
