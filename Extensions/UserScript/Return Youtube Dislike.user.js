@@ -15,6 +15,11 @@
 // @updateURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @grant GM_xmlhttpRequest
 // ==/UserScript==
+function cLog(text, subtext = '') {
+  subtext = subtext.trim() === '' ? '' : `(${subtext})`;
+  console.log(`[Return Youtube Dislikes] ${text} ${subtext}`);
+}
+
 function getButtons() {
   return document
     .getElementById("menu-container")
@@ -52,6 +57,7 @@ function getState() {
   if (isVideoDisliked()) {
     return "disliked";
   }
+
   return "neutral";
 }
 
@@ -64,29 +70,32 @@ function setDislikes(dislikesCount) {
 }
 
 function setState() {
+  cLog('Fetching votes...');
+
   GM_xmlhttpRequest({
     method: "GET",
     responseType: "json",
     url:
       "https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=" +
       getVideoId(),
-    onload: function (response) {
-      if (response != undefined) {
-        const formattedDislike = numberFormat(response.response.dislikes);
-        console.log(response);
-        setDislikes(formattedDislike);
+    onload: function (xhr) {
+      if (xhr != undefined) {
+        const { dislikes } = xhr.response;
+
+        cLog(`Received count: ${dislikes}`);
+        setDislikes(numberFormat(dislikes));
       }
     },
   });
 }
 
 function likeClicked() {
-  console.log("like" + getState());
+  cLog('Like clicked', getState());
   setState();
 }
 
 function dislikeClicked() {
-  console.log("dislike" + getState());
+  cLog('Dislike clicked', getState());
   setState();
 }
 
@@ -97,11 +106,13 @@ function setInitalState() {
 function getVideoId() {
   const urlParams = new URLSearchParams(window.location.search);
   const videoId = urlParams.get("v");
+
   return videoId;
 }
 
 function isVideoLoaded() {
   const videoId = getVideoId();
+
   return (
     document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null
   );
@@ -110,6 +121,7 @@ function isVideoLoaded() {
 function numberFormat(numberState) {
   const userLocales = navigator.language;
   const formatter = Intl.NumberFormat(userLocales, { notation: "compact" });
+
   return formatter.format(numberState);
 }
 
@@ -118,7 +130,9 @@ function setEventListeners(evt) {
     if (getButtons()?.offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
       const buttons = getButtons();
+
       if (!window.returnDislikeButtonlistenersSet) {
+        cLog('Registering button listeners...');
         buttons.children[0].addEventListener("click", likeClicked);
         buttons.children[1].addEventListener("click", dislikeClicked);
         window.returnDislikeButtonlistenersSet = true;
@@ -128,6 +142,7 @@ function setEventListeners(evt) {
   }
 
   if (window.location.href.indexOf("watch?") >= 0) {
+    cLog('Setting up...');
     var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
 }
