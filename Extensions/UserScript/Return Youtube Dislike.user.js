@@ -14,10 +14,22 @@
 // @downloadURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @updateURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @grant GM_xmlhttpRequest
+// @grant GM.xmlHttpRequest
 // ==/UserScript==
 function cLog(text, subtext = '') {
   subtext = subtext.trim() === '' ? '' : `(${subtext})`;
   console.log(`[Return Youtube Dislikes] ${text} ${subtext}`);
+}
+
+function doXHR(opts) {
+  if (typeof GM_xmlhttpRequest === 'function') {
+    return GM_xmlhttpRequest(opts);
+  }
+  if (typeof GM.xmlHttpRequest === 'function') {
+    return GM.xmlHttpRequest(opts);
+  }
+
+  console.error('Unable to detect UserScript plugin.');
 }
 
 function getButtons() {
@@ -72,7 +84,7 @@ function setDislikes(dislikesCount) {
 function setState() {
   cLog('Fetching votes...');
 
-  GM_xmlhttpRequest({
+  doXHR({
     method: "GET",
     responseType: "json",
     url:
