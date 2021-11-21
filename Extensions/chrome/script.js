@@ -76,7 +76,6 @@
               statsSet = true;
             }
           } catch (e) {
-            debugger;
             statsSet = false;
           }
         }
@@ -187,7 +186,7 @@
     ></div>
   </div>
 
-  <span class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
+  <span id="ryd-dislike-tooltip" class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
 </div>
 `
       );
@@ -197,6 +196,8 @@
       ).style.width = widthPx + 'px';
       document.getElementById('return-youtube-dislike-bar').style.width =
         widthPercent + '%';
+
+      document.getElementById('ryd-dislike-tooltip').innerHTML = `${likes}&nbsp;/&nbsp;${dislikes}`
     }
   }
 

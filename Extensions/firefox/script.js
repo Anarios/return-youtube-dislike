@@ -192,7 +192,7 @@ function createRateBar(likes, dislikes) {
     ></div>
   </div>
 
-  <span class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
+  <span i="ryd-dislike-tooltip" class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
 </div>
 `
     );
@@ -202,6 +202,9 @@ function createRateBar(likes, dislikes) {
     ).style.width = widthPx + "px";
     document.getElementById("return-youtube-dislike-bar").style.width =
       widthPercent + "%";
+    document.getElementById(
+      "ryd-dislike-tooltip"
+    ).innerHTML = `${likes}&nbsp;/&nbsp;${dislikes}`;
   }
 }
 
