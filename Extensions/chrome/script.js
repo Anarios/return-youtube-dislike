@@ -79,7 +79,7 @@
 
   function setInitalState() {
     setState();
-    setTimeout(() => sendVideoIds(), 1500);
+    // setTimeout(() => sendVideoIds(), 1500);
   }
 
   function getVideoId(url) {
@@ -152,24 +152,24 @@
     }
   }
 
-  function sendVideoIds() {
-    const ids = Array.from(
-      document.getElementsByClassName(
-        "yt-simple-endpoint ytd-compact-video-renderer"
-      )
-    )
-      .concat(
-        Array.from(
-          document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
-        )
-      )
-      .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-      .map((x) => getVideoId(x.href));
-    chrome.runtime.sendMessage(extensionId, {
-      message: "send_links",
-      videoIds: ids,
-    });
-  }
+  // function sendVideoIds() {
+  //   const ids = Array.from(
+  //     document.getElementsByClassName(
+  //       "yt-simple-endpoint ytd-compact-video-renderer"
+  //     )
+  //   )
+  //     .concat(
+  //       Array.from(
+  //         document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
+  //       )
+  //     )
+  //     .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
+  //     .map((x) => getVideoId(x.href));
+  //   chrome.runtime.sendMessage(extensionId, {
+  //     message: "send_links",
+  //     videoIds: ids,
+  //   });
+  // }
 
   setEventListeners();
 
@@ -179,9 +179,9 @@
     setEventListeners();
   });
 
-  window.onscrollend = () => {
-    sendVideoIds();
-  };
+  // window.onscrollend = () => {
+  //   sendVideoIds();
+  // };
 
-  setTimeout(() => sendVideoIds(), 1500);
+  // setTimeout(() => sendVideoIds(), 1500);
 })(document.currentScript.getAttribute("extension-id"));

@@ -1,7 +1,7 @@
 {
   "name": "Youtube Dislike Button",
   "description": "Returns ability to see dislikes",
-  "version": "0.0.0.4",
+  "version": "0.0.0.5",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"

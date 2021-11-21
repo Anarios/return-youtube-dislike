@@ -30,14 +30,32 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .catch();
     //});
     return true;
+  } else if (request.message == "send_links") {
+    toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
+    if (toSend.length >= 20) {
+      fetch(`${apiUrl}/votes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(toSend),
+      });
+      for (const toSendUrl of toSend) {
+        sentIds.add(toSendUrl);
+      }
+      toSend = [];
+    }
   }
 });
+
+const sentIds = new Set();
+let toSend = [];
 
 browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
   if (changeInfo.status == "complete") {
     if (tab.url && tab.url.indexOf("youtube.") < 0) return;
     browser.tabs.get(tabId, (tab) => {
-      browser.tabs.executeScript(tab.id,{
+      browser.tabs.executeScript(tab.id, {
         file: "script.js",
       });
     });

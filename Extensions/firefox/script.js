@@ -50,7 +50,7 @@ function setState() {
   browser.runtime.sendMessage(
     {
       message: "set_state",
-      videoId: getVideoId(),
+      videoId: getVideoId(window.location.href),
       state: getState(),
     },
     function (response) {
@@ -59,6 +59,7 @@ function setState() {
         // setLikes(response.likes);
         console.log(response);
         setDislikes(formattedDislike);
+        createRateBar(response.likes, response.dislikes);
       } else {
       }
     }
@@ -66,27 +67,28 @@ function setState() {
 }
 
 function likeClicked() {
-  console.log("like" + getState());
-  setState();
+  // console.log("like" + getState());
+  // setState();
 }
 
 function dislikeClicked() {
-  console.log("dislike" + getState());
-  setState();
+  // console.log("dislike" + getState());
+  // setState();
 }
 
 function setInitalState() {
   setState();
+  // setTimeout(() => sendVideoIds(), 1500);
 }
 
-function getVideoId() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const videoId = urlParams.get("v");
+function getVideoId(url) {
+  const urlObject = new URL(url);
+  const videoId = urlObject.searchParams.get("v");
   return videoId;
 }
 
 function isVideoLoaded() {
-  const videoId = getVideoId();
+  const videoId = getVideoId(window.location.href);
   return (
     document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null
   );
@@ -106,6 +108,20 @@ function setEventListeners(evt) {
       if (!window.returnDislikeButtonlistenersSet) {
         buttons.children[0].addEventListener("click", likeClicked);
         buttons.children[1].addEventListener("click", dislikeClicked);
+        let lastKnownScrollPosition = 0;
+        let ticking = false;
+        // document.addEventListener('scroll', function(e) {
+        //   lastKnownScrollPosition = window.scrollY;
+        //
+        //   if (!ticking) {
+        //     window.requestAnimationFrame(function() {
+        //       // sendVideoIds();
+        //       ticking = false;
+        //     });
+        //
+        //     ticking = true;
+        //   }
+        // });
         window.returnDislikeButtonlistenersSet = true;
       }
       setInitalState();
@@ -117,6 +133,69 @@ function setEventListeners(evt) {
   }
 }
 
+function createRateBar(likes, dislikes) {
+  var rateBar = document.getElementById(
+    "return-youtube-dislike-bar-container"
+  );
+  const widthPx =
+    getButtons().children[0].clientWidth +
+    getButtons().children[1].clientWidth;
+
+  const widthPercent =
+    likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
+
+  if (!rateBar) {
+    document.getElementById("menu-container").insertAdjacentHTML(
+      "beforeend",
+      `<div id="return-youtube-dislike-bar-container" 
+                  style="width: ${widthPx}px; 
+                  height: 3px; margin-left: 6px;">
+                  <div id="return-youtube-dislike-bar" style="width: ${widthPercent}%; height: 100%" ></div>
+                </div>`
+    );
+  } else {
+    document.getElementById(
+      "return-youtube-dislike-bar-container"
+    ).style.width = widthPx + "px";
+    document.getElementById("return-youtube-dislike-bar").style.width =
+      widthPercent + "%";
+  }
+}
+
+// function sendVideoIds() {
+//   const ids = Array.from(
+//     document.getElementsByClassName(
+//       "yt-simple-endpoint ytd-compact-video-renderer"
+//     )
+//   )
+//   .concat(
+//     Array.from(
+//       document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
+//     )
+//   )
+//   .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
+//   .map((x) => getVideoId(x.href));
+//   browser.runtime.sendMessage({
+//     message: "send_links",
+//     videoIds: ids,
+//   });
+// }
+
 setEventListeners();
+
+// document.addEventListener("yt-navigate-finish", function (event) {
+//   if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
+//   window.returnDislikeButtonlistenersSet = false;
+//   setEventListeners();
+// });
+
+
+
+
+// window.onscrollend = () => {
+//   sendVideoIds();
+// };
+//
+// setTimeout(() => sendVideoIds(), 1500);
 
 //window.addEventListener("hashchange", setEventListeners, false);
