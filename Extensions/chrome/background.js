@@ -59,7 +59,10 @@ chrome.runtime.onMessageExternal.addListener(
         .then((response) => response.text())
         .then((text) => {
           var result = getDislikesFromYoutubeResponse(text);
-          sendUserSubmittedStatisticsToApi({...result, videoId: request.videoId});
+          sendUserSubmittedStatisticsToApi({
+            ...result,
+            videoId: request.videoId,
+          });
           sendResponse(result);
         });
     }
@@ -95,7 +98,7 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
     likes,
     dislikes: Math.round(dislikes),
     rating,
-    viewCount: +jsonResult.viewCount
+    viewCount: +jsonResult.viewCount,
   };
   return result;
 }

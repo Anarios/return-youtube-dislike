@@ -1,14 +1,46 @@
 #return-youtube-dislike-bar-container {
-    background: #c6c6c6;
+  background: #c6c6c6;
 }
 
 #return-youtube-dislike-bar {
-    background: #5094c8;
+  background: #5094c8;
 }
 
 [dark] #return-youtube-dislike-bar-container {
 }
 
 [dark] #return-youtube-dislike-bar {
-    background: #3ea6ff;
+  background: #3ea6ff;
+}
+
+.ryd-tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  cursor: pointer;
+  height: 10px;
+  margin-bottom: -5px;
+}
+
+/* Tooltip text */
+.ryd-tooltip .ryd-tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #000000c4;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+  bottom: 15px;
+  left: 10px;
+  font-size: 12px;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.ryd-tooltip:hover .ryd-tooltiptext {
+  visibility: visible;
 }

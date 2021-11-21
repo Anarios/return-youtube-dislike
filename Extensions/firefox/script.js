@@ -1,3 +1,12 @@
+function cLog(message, writer) {
+  message = `[return youtube dislike]: ${message}`;
+  if (writer) {
+    writer(message);
+  } else {
+    console.log(message);
+  }
+}
+
 function getButtons() {
   return document
     .getElementById("menu-container")
@@ -47,6 +56,30 @@ function setDislikes(dislikesCount) {
 }
 
 function setState() {
+  let statsSet = false;
+  browser.runtime.sendMessage(
+    {
+      message: "fetch_from_youtube",
+      videoId: getVideoId(window.location.href),
+    },
+    function (response) {
+      if (response != undefined) {
+        cLog("response from youtube:");
+        cLog(JSON.stringify(response));
+        try {
+          if (response.likes || response.dislikes) {
+            const formattedDislike = numberFormat(response.dislikes);
+            setDislikes(formattedDislike);
+            createRateBar(response.likes, response.dislikes);
+            statsSet = true;
+          }
+        } catch (e) {
+          statsSet = false;
+        }
+      }
+    }
+  );
+
   browser.runtime.sendMessage(
     {
       message: "set_state",
@@ -54,7 +87,9 @@ function setState() {
       state: getState(),
     },
     function (response) {
-      if (response != undefined) {
+      cLog("response from api:");
+      cLog(JSON.stringify(response));
+      if (response != undefined && !statsSet) {
         const formattedDislike = numberFormat(response.dislikes);
         // setLikes(response.likes);
         console.log(response);
@@ -134,12 +169,9 @@ function setEventListeners(evt) {
 }
 
 function createRateBar(likes, dislikes) {
-  var rateBar = document.getElementById(
-    "return-youtube-dislike-bar-container"
-  );
+  var rateBar = document.getElementById("return-youtube-dislike-bar-container");
   const widthPx =
-    getButtons().children[0].clientWidth +
-    getButtons().children[1].clientWidth;
+    getButtons().children[0].clientWidth + getButtons().children[1].clientWidth;
 
   const widthPercent =
     likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
@@ -147,11 +179,22 @@ function createRateBar(likes, dislikes) {
   if (!rateBar) {
     document.getElementById("menu-container").insertAdjacentHTML(
       "beforeend",
-      `<div id="return-youtube-dislike-bar-container" 
-                  style="width: ${widthPx}px; 
-                  height: 3px; margin-left: 6px;">
-                  <div id="return-youtube-dislike-bar" style="width: ${widthPercent}%; height: 100%" ></div>
-                </div>`
+      `
+<div class="ryd-tooltip">
+  <div
+    id="return-youtube-dislike-bar-container"
+    style="width: ${widthPx}px;
+                  height: 3px; margin-left: 6px;"
+  >
+    <div
+      id="return-youtube-dislike-bar"
+      style="width: ${widthPercent}%; height: 100%"
+    ></div>
+  </div>
+
+  <span class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
+</div>
+`
     );
   } else {
     document.getElementById(
@@ -188,9 +231,6 @@ setEventListeners();
 //   window.returnDislikeButtonlistenersSet = false;
 //   setEventListeners();
 // });
-
-
-
 
 // window.onscrollend = () => {
 //   sendVideoIds();
