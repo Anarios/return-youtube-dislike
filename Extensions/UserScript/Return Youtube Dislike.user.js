@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Return Youtube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
-// @version      0.2
+// @version      0.5
 // @description  Return of the Youtube Dislike, Based off https://www.returnyoutubedislike.com/
 // @author       Anarios & JRWR
 // @match        *://*.youtube.com/*
@@ -13,7 +13,6 @@
 // @compatible edge
 // @downloadURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @updateURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
-// @grant GM_xmlhttpRequest
 // @grant GM.xmlHttpRequest
 // ==/UserScript==
 function cLog(text, subtext = '') {
