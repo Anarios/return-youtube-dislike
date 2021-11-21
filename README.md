@@ -1,3 +1,8 @@
+[![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits)](https://github.com/Anarios/return-youtube-dislike/commits/main)
+[![Issues](https://img.shields.io/github/issues/Anarios/return-youtube-dislike)](https://github.com/Anarios/return-youtube-dislike/issues)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
+[![Mozilla Add-ons](https://img.shields.io/amo/rating/return-youtube-dislikes?label=Firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
+
 # Return YouTube Dislike
 
 <p align="center">
@@ -23,5 +28,4 @@ and estimates based on view\like ratios.
 ## Why it Matters
 
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
-
 
