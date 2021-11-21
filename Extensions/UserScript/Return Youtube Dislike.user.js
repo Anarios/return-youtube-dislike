@@ -29,7 +29,16 @@ function doXHR(opts) {
     return GM.xmlHttpRequest(opts);
   }
 
-  console.error('Unable to detect UserScript plugin.');
+  console.warn('Unable to detect UserScript plugin, falling back to native XHR.');
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.open(opts.method, opts.url, true);
+  xhr.onload = () => opts.onload({
+    response: JSON.parse(xhr.responseText),
+  });
+  xhr.onerror = err => console.error('XHR Failed', err);
+  xhr.send();
 }
 
 function getButtons() {
