@@ -1,9 +1,11 @@
-[![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=for-the-badge)](https://github.com/Anarios/return-youtube-dislike/commits/main)
-[![Issues](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=for-the-badge)](https://github.com/Anarios/return-youtube-dislike/issues)
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
-[![Mozilla Add-ons](https://img.shields.io/amo/rating/return-youtube-dislikes?label=Firefox&style=for-the-badge&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/gebbhagfogifgggkldgodflihgfeippi?label=Chrome&style=for-the-badge&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/)
-[![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=for-the-badge&logo=discord)](https://discord.gg/UMxyMmCgfF)
+[![Mozilla rating](https://img.shields.io/amo/stars/return-youtube-dislikes?label=Firefox&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
+[![Mozilla downloads](https://img.shields.io/amo/dw/return-youtube-dislikes?label=Firefox&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
+[![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
+[![Issues](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=flat)](https://github.com/Anarios/return-youtube-dislike/issues)
+[![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
+<!---[![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/gebbhagfogifgggkldgodflihgfeippi?label=Chrome&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/) -->
+
 
 # Return YouTube Dislike
 
