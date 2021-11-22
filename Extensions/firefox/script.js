@@ -192,7 +192,7 @@ function createRateBar(likes, dislikes) {
     ></div>
   </div>
 
-  <span i="ryd-dislike-tooltip" class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
+  <span id="ryd-dislike-tooltip" class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
 </div>
 `
     );
