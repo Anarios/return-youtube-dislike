@@ -10,7 +10,7 @@ body:
       - Extension
       - Userscript
       - Both
-  validation:
+  validations:
     required: true
 - type: textarea
   attributes:
@@ -26,6 +26,6 @@ body:
   attributes:
     label: Can you work on this?
     options:
-      - label: Yes
-      - label: No
+      - label: "Yes"
+      - label: "No"
   
