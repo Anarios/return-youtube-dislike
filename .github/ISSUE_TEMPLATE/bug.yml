@@ -32,6 +32,13 @@ body:
     placeholder: "Example: Version 0.0.0.1"
   validations:
     required: true
+- type: input
+  attributes:
+    label: Video link where you see the problem
+    description: Video link where you see the problem
+    placeholder: "Example: https://www.youtube.com/watch?v=s4-gMgdsnHQ"
+  validations:
+    required: true
 - type: textarea
   attributes:
     label: What happened?
