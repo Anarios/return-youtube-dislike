@@ -2,6 +2,7 @@
 [![Issues](https://img.shields.io/github/issues/Anarios/return-youtube-dislike)](https://github.com/Anarios/return-youtube-dislike/issues)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 [![Mozilla Add-ons](https://img.shields.io/amo/rating/return-youtube-dislikes?label=Firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/gebbhagfogifgggkldgodflihgfeippi?label=Chrome)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/)
 
 # Return YouTube Dislike
 
