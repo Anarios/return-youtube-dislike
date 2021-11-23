@@ -119,8 +119,18 @@ function dislikeClicked() {
   setState();
 }
 
+function checkPrivate () {
+  return document.getElementsByClassName("ytd-badge-supported-renderer")[0].innerText == " Private"
+}
+
+function checkUnlisted () {
+  return document.getElementsByClassName("ytd-badge-supported-renderer")[0].innerText == " Unlisted"
+}
+
 function setInitalState() {
+  if (checkPrivate()) return cLog("video is private, not fetching api");
   setState();
+  // setTimeout(() => sendVideoIds(), 1500);
 }
 
 function getVideoId() {
