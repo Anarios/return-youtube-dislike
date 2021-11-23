@@ -33,3 +33,8 @@ and estimates based on view\like ratios.
 
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
+## Donate
+[ko-fi](https://ko-fi.com/returnyoutubedislike)
+
+[Patreon](https://www.patreon.com/returnyoutubedislike/)
+
