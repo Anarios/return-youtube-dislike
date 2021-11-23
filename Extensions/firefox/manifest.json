@@ -6,7 +6,7 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "permissions": ["activeTab", "*://*.youtube.com/*"],
+  "permissions": ["activeTab", "*://*.youtube.com/*", "storage"],
   "browser_action": {
     "default_popup": "popup.html"
   },

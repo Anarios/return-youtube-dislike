@@ -111,8 +111,29 @@ function dislikeClicked() {
   // setState();
 }
 
+function checkPrivate () {
+  return document.getElementsByClassName("ytd-badge-supported-renderer")[0].innerText == " Private"
+}
+
+function checkUnlisted () {
+  return document.getElementsByClassName("ytd-badge-supported-renderer")[0].innerText == " Unlisted"
+}
+
 function setInitalState() {
-  setState();
+  if (checkPrivate()) return cLog("video is private, not fetching api");
+  browser.storage.local.get("dont_run_on_private_unlisted", response => {
+    if (response.dont_run_on_private_unlisted) {
+      if (checkUnlisted()) { 
+        cLog("video is unlisted, not fetching api");
+      }
+      else {
+        setState()
+      }
+    }
+    else {
+      setState()
+    }
+  })
   // setTimeout(() => sendVideoIds(), 1500);
 }
 

@@ -113,8 +113,31 @@
     // setState();
   }
 
+  function checkPrivate () {
+    return document.getElementsByClassName("ytd-badge-supported-renderer")[0].innerText == " Private"
+  }
+
+  function checkUnlisted () {
+    return document.getElementsByClassName("ytd-badge-supported-renderer")[0].innerText == " Unlisted"
+  }
+
   function setInitalState () {
-    setState();
+    if (checkPrivate()) return cLog("video is private, not fetching api");
+    chrome.runtime.sendMessage(extensionId, {
+      message: 'dont_run_on_private_unlisted',
+    }, response => {
+      if (response) {
+        if (checkUnlisted()) { 
+          cLog("video is unlisted, not fetching api");
+        }
+        else {
+          setState()
+        }
+      }
+      else {
+        setState()
+      }
+    })
     // setTimeout(() => sendVideoIds(), 1500);
   }
 

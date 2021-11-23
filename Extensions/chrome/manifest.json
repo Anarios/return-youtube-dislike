@@ -6,6 +6,9 @@
   "background": {
     "service_worker": "background.js"
   },
+  "permissions": [
+    "storage"
+  ],
   "host_permissions": ["*://*.youtube.com/*"],
   "action": {
     "default_popup": "popup.html"

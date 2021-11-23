@@ -61,6 +61,10 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
         } catch {}
       });
     return true;
+  } else if (request.message == "dont_run_on_private_unlisted") {
+    browser.storage.local.get("dont_run_on_private_unlisted", result => {
+      sendResponse(result.dont_run_on_private_unlisted);
+    });
   }
 });
 
@@ -121,3 +125,7 @@ function sendUserSubmittedStatisticsToApi(statistics) {
     body: JSON.stringify(statistics),
   });
 }
+
+browser.runtime.onInstalled.addListener(_details => {
+  browser.storage.local.set({"dont_run_on_private_unlisted": true}, () => { console.log("initial value for \"dont_run_on_private_unlisted\" set") });
+});

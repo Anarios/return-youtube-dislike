@@ -1,3 +1,14 @@
+body {
+    background-color: #fff;
+    color: #000;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 300px;
+}
+
 button {
     height: 30px;
     width: 30px;
@@ -11,3 +22,5 @@ button.current {
     box-shadow: 0 0 0 2px white,
     0 0 0 4px black;
 }
+
+
