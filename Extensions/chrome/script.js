@@ -189,7 +189,7 @@
              </div>
           </div>
           <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-             <!--css-build:shady-->${likes}&nbsp;/&nbsp;${dislikes}
+             <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
           </tp-yt-paper-tooltip>
           </div>
   `
@@ -203,7 +203,7 @@
 
       document
         .getElementById("ryd-dislike-tooltip")
-        .firstChild().innerHTML = `${likes}&nbsp;/&nbsp;${dislikes}</div>`;
+        .firstChild().innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}</div>`;
     }
   }
 
