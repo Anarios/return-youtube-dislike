@@ -163,41 +163,47 @@
     var rateBar = document.getElementById(
       'return-youtube-dislike-bar-container'
     );
+
     const widthPx =
       getButtons().children[0].clientWidth +
-      getButtons().children[1].clientWidth;
+      getButtons().children[1].clientWidth +
+      8;
 
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
     if (!rateBar) {
-      document.getElementById('menu-container').insertAdjacentHTML(
-        'beforeend',
+      document.getElementById("menu-container").insertAdjacentHTML(
+        "beforeend",
         `
-<div class="ryd-tooltip">
-  <div
-    id="return-youtube-dislike-bar-container"
-    style="width: ${widthPx}px;
-                  height: 3px; margin-left: 6px;"
-  >
-    <div
-      id="return-youtube-dislike-bar"
-      style="width: ${widthPercent}%; height: 100%"
-    ></div>
-  </div>
-
-  <span id="ryd-dislike-tooltip" class="ryd-tooltiptext ryd-tooltip-top">${likes}&nbsp;/&nbsp;${dislikes}</span>
-</div>
-`
+          <div class="ryd-tooltip" style="width: ${widthPx}px">
+          <div class="ryd-tooltip-bar-container">
+             <div
+                id="return-youtube-dislike-bar-container"
+                style="width: 100%; height: 2px;"
+                >
+                <div
+                   id="return-youtube-dislike-bar"
+                   style="width: ${widthPercent}%; height: 100%"
+                   ></div>
+             </div>
+          </div>
+          <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
+             <!--css-build:shady-->${likes}&nbsp;/&nbsp;${dislikes}
+          </tp-yt-paper-tooltip>
+          </div>
+  `
       );
     } else {
       document.getElementById(
-        'return-youtube-dislike-bar-container'
-      ).style.width = widthPx + 'px';
-      document.getElementById('return-youtube-dislike-bar').style.width =
-        widthPercent + '%';
+        "return-youtube-dislike-bar-container"
+      ).style.width = widthPx + "px";
+      document.getElementById("return-youtube-dislike-bar").style.width =
+        widthPercent + "%";
 
-      document.getElementById('ryd-dislike-tooltip').innerHTML = `${likes}&nbsp;/&nbsp;${dislikes}`
+      document
+        .getElementById("ryd-dislike-tooltip")
+        .firstChild().innerHTML = `${likes}&nbsp;/&nbsp;${dislikes}</div>`;
     }
   }
 
