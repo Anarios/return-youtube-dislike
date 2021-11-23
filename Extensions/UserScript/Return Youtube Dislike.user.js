@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Return Youtube Dislike
+// @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @version      0.5
-// @description  Return of the Youtube Dislike, Based off https://www.returnyoutubedislike.com/
+// @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @author       Anarios & JRWR
 // @match        *://*.youtube.com/*
 // @include      *://*.youtube.com/*
