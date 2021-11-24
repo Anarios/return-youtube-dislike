@@ -1,66 +1,55 @@
 const apiUrl = "https://return-youtube-dislike-api.azurewebsites.net";
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === "get_auth_token") {
-    // chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    //   console.log(token);
-    //   chrome.identity.getProfileUserInfo(function (userInfo) {
-    //     console.log(JSON.stringify(userInfo));
-    //   });
-    // });
-  } else if (request.message === "log_off") {
-    // console.log("logging off");
-    // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
-  } else if (request.message == "set_state") {
-    console.log(request);
-    // chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    let token = "";
-    fetch(`${apiUrl}/votes?videoId=${request.videoId}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        sendResponse(response);
-      })
-      .catch();
-    //});
-    return true;
-  } else if (request.message == "send_links") {
-    toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
-    if (toSend.length >= 20) {
-      fetch(`${apiUrl}/votes`, {
-        method: "POST",
+  switch (request.message) {
+    case "set_state":
+      console.log(request);
+      let token = "";
+      fetch(`${apiUrl}/votes?videoId=${request.videoId}`, {
+        method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
         },
-        body: JSON.stringify(toSend),
-      });
-      for (const toSendUrl of toSend) {
-        sentIds.add(toSendUrl);
+      })
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response);
+            sendResponse(response);
+          })
+          .catch();
+      return true;
+    case "send_links":
+      toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
+      if (toSend.length >= 20) {
+        fetch(`${apiUrl}/votes`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(toSend),
+        });
+        for (const toSendUrl of toSend) {
+          sentIds.add(toSendUrl);
+        }
+        toSend = [];
       }
-      toSend = [];
-    }
-  } else if (request.message == "fetch_from_youtube") {
-    fetch(`https://www.youtube.com/watch?v=${request.videoId}`, {
-      method: "GET",
-    })
-      .then((response) => response.text())
-      .then((text) => {
-        let result = getDislikesFromYoutubeResponse(text);
-        sendResponse(result);
-        try {
-          sendUserSubmittedStatisticsToApi({
-            ...result,
-            videoId: request.videoId,
+    case "fetch_from_youtube":
+      fetch(`https://www.youtube.com/watch?v=${request.videoId}`, {
+        method: "GET",
+      })
+          .then((response) => response.text())
+          .then((text) => {
+            let result = getDislikesFromYoutubeResponse(text);
+            sendResponse(result);
+            try {
+              sendUserSubmittedStatisticsToApi({
+                ...result,
+                videoId: request.videoId,
+              });
+            } catch {}
           });
-        } catch {}
-      });
-    return true;
+      return true;
   }
 });
 

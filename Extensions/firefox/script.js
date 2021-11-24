@@ -101,21 +101,6 @@ function setState() {
   );
 }
 
-function likeClicked() {
-  // console.log("like" + getState());
-  // setState();
-}
-
-function dislikeClicked() {
-  // console.log("dislike" + getState());
-  // setState();
-}
-
-function setInitalState() {
-  setState();
-  // setTimeout(() => sendVideoIds(), 1500);
-}
-
 function getVideoId(url) {
   const urlObject = new URL(url);
   const videoId = urlObject.searchParams.get("v");
@@ -145,18 +130,6 @@ function setEventListeners(evt) {
         buttons.children[1].addEventListener("click", dislikeClicked);
         let lastKnownScrollPosition = 0;
         let ticking = false;
-        // document.addEventListener('scroll', function(e) {
-        //   lastKnownScrollPosition = window.scrollY;
-        //
-        //   if (!ticking) {
-        //     window.requestAnimationFrame(function() {
-        //       // sendVideoIds();
-        //       ticking = false;
-        //     });
-        //
-        //     ticking = true;
-        //   }
-        // });
         window.returnDislikeButtonlistenersSet = true;
       }
       setInitalState();
@@ -170,7 +143,7 @@ function setEventListeners(evt) {
 
 function createRateBar(likes, dislikes) {
   var rateBar = document.getElementById("return-youtube-dislike-bar-container");
-  
+
   const widthPx =
       getButtons().children[0].clientWidth +
       getButtons().children[1].clientWidth +
@@ -214,37 +187,4 @@ function createRateBar(likes, dislikes) {
     }
 }
 
-// function sendVideoIds() {
-//   const ids = Array.from(
-//     document.getElementsByClassName(
-//       "yt-simple-endpoint ytd-compact-video-renderer"
-//     )
-//   )
-//   .concat(
-//     Array.from(
-//       document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
-//     )
-//   )
-//   .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-//   .map((x) => getVideoId(x.href));
-//   browser.runtime.sendMessage({
-//     message: "send_links",
-//     videoIds: ids,
-//   });
-// }
-
 setEventListeners();
-
-// document.addEventListener("yt-navigate-finish", function (event) {
-//   if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
-//   window.returnDislikeButtonlistenersSet = false;
-//   setEventListeners();
-// });
-
-// window.onscrollend = () => {
-//   sendVideoIds();
-// };
-//
-// setTimeout(() => sendVideoIds(), 1500);
-
-//window.addEventListener("hashchange", setEventListeners, false);

@@ -103,19 +103,8 @@
     );
   }
 
-  function likeClicked () {
-    // console.log("like" + getState());
-    // setState();
-  }
-
-  function dislikeClicked () {
-    // console.log("dislike" + getState());
-    // setState();
-  }
-
   function setInitalState () {
     setState();
-    // setTimeout(() => sendVideoIds(), 1500);
   }
 
   function getVideoId (url) {
@@ -207,25 +196,6 @@
     }
   }
 
-  // function sendVideoIds() {
-  //   const ids = Array.from(
-  //     document.getElementsByClassName(
-  //       "yt-simple-endpoint ytd-compact-video-renderer"
-  //     )
-  //   )
-  //     .concat(
-  //       Array.from(
-  //         document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
-  //       )
-  //     )
-  //     .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-  //     .map((x) => getVideoId(x.href));
-  //   chrome.runtime.sendMessage(extensionId, {
-  //     message: "send_links",
-  //     videoIds: ids,
-  //   });
-  // }
-
   setEventListeners();
 
   document.addEventListener('yt-navigate-finish', function (event) {
@@ -233,10 +203,6 @@
     window.returnDislikeButtonlistenersSet = false;
     setEventListeners();
   });
-
-  // window.onscrollend = () => {
-  //   sendVideoIds();
-  // };
 
   // setTimeout(() => sendVideoIds(), 1500);
 })(document.currentScript.getAttribute('extension-id'));
