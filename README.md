@@ -38,5 +38,5 @@ You can learn more at our website at: [returnyoutubedislike.com](https://www.ret
 
 [Patreon](https://www.patreon.com/returnyoutubedislike/)
 
-[YooMoney form at my site](https://returnyoutubedislike.com/donate.html)
+[YooMoney form at my site](https://returnyoutubedislike.com/pay/yoomoney)
 
