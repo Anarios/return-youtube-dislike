@@ -1,3 +1,9 @@
 *.idea
 *Backend
 *cert
+StaticSite/.editorconfig
+StaticSite/package-lock.json
+
+Website/node_modules
+Website/.nuxt
+Website/.editorconfig
