@@ -6,6 +6,10 @@
   "background": {
     "service_worker": "background.js"
   },
+  "icons": {
+    "48": "icons/icon48.png",
+   "128": "icons/icon128.png"
+  },
   "host_permissions": ["*://*.youtube.com/*"],
   "action": {
     "default_popup": "popup.html"
