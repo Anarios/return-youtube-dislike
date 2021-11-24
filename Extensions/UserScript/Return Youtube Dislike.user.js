@@ -120,11 +120,11 @@ function dislikeClicked() {
 }
 
 function checkPrivate () {
-  return document.getElementsByClassName("ytd-badge-supported-renderer")[0].innerText == " Private"
+  return document.querySelector("#container > ytd-badge-supported-renderer:nth-child(5) > div > yt-icon > svg > g > path").getAttribute("d").startsWith('M17,8')
 }
 
 function checkUnlisted () {
-  return document.getElementsByClassName("ytd-badge-supported-renderer")[0].innerText == " Unlisted"
+  return document.querySelector("#container > ytd-badge-supported-renderer:nth-child(5) > div > yt-icon > svg > g > path").getAttribute("d").startsWith("M17.7")
 }
 
 function setInitalState() {
