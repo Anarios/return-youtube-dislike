@@ -1,6 +1,7 @@
 *.idea
 *Backend
 *cert
+.DS_Store
 StaticSite/.editorconfig
 StaticSite/package-lock.json
 
