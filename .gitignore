@@ -7,3 +7,5 @@ StaticSite/package-lock.json
 Website/node_modules
 Website/.nuxt
 Website/.editorconfig
+Website/dist/
+Website/_nuxt

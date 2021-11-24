@@ -1,17 +1,17 @@
 <template>
   <div>
-    
+
     <section style="position: relative;">
-      
+
 
       <div class="center">
         <center>
 
           <h1 style="font-size: 3em; margin-bottom: 0;">Select Your Platform</h1>
-          
+
           <div style="color: #999">
             <p style="margin-bottom: 0;"> This is an <b>ALPHA version!</b> It may be slow. It may be buggy.</p>
-            <p style="margin-bottom: 3em;">Only available for chrome and Firefox now and as a Userscript now, but coming to other platforms soon.</p>
+            <p style="margin-bottom: 3em;">Only available for Chrome, Firefox and as a Userscript now, but coming to other platforms soon.</p>
           </div>
 
           <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
@@ -30,6 +30,9 @@
           </v-btn>
 
           <h3 style="margin-top: 3em;">Third Party Implementations</h3>
+          <div style="color: #999">
+            <p style="margin-bottom: 0;">No liability on our side, use at your own risk</p>
+          </div>
           <v-btn class="mainAltButton" :href="iosJailbreakLink" target="_blank">
             <v-icon style="margin-right: 0.5em;">mdi-apple</v-icon>
             iOS (Jailbroken)

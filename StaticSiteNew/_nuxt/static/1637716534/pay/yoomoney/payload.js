@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/pay/yoomoney", {data:[{}],fetch:{},mutations:void 0});

@@ -1,13 +1,16 @@
 <template>
   <div>
-    
+
     <section style="position: relative;">
-      
+
 
       <div class="center">
         <center>
 
-          <h1 style="font-size: 3em; margin-bottom: 0.5em;">Return Youtube Dislike</h1>
+          <h1 style="font-size: 3em; margin-bottom:0;">Return Youtube Dislike</h1>
+          <div style="color: #999">
+            <p style="margin-top: 0">Browser extension and an API that show you dislikes on youtube</p>
+          </div>
 
           <v-btn :to="installLink" color="primary lighten-1" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em;">
             <v-icon large style="margin-right: 0.5em;">mdi-tray-arrow-down</v-icon>
