@@ -21,11 +21,8 @@ function cLog(text, subtext = '') {
 }
 
 function doXHR(opts) {
-  if (typeof GM_xmlhttpRequest === 'function') {
+  if (typeof GM_xmlhttpRequest === 'function' || typeof GM.xmlHttpRequest === 'function') {
     return GM_xmlhttpRequest(opts);
-  }
-  if (typeof GM.xmlHttpRequest === 'function') {
-    return GM.xmlHttpRequest(opts);
   }
 
   console.warn('Unable to detect UserScript plugin, falling back to native XHR.');
@@ -73,11 +70,9 @@ function isVideoNotDisliked() {
 function getState() {
   if (isVideoLiked()) {
     return "liked";
-  }
-  if (isVideoDisliked()) {
+  } else if (isVideoDisliked()) {
     return "disliked";
   }
-
   return "neutral";
 }
 
