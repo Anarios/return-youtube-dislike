@@ -8,9 +8,13 @@ function cLog(message, writer) {
 }
 
 function getButtons() {
-  return document
-    .getElementById("menu-container")
-    ?.querySelector("#top-level-buttons-computed");
+  if (document.getElementById("menu-container").offsetParent === null) {
+    return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
+  } else {
+    return document
+      .getElementById("menu-container")
+      ?.querySelector("#top-level-buttons-computed");
+  }
 }
 
 function getLikeButton() {
@@ -170,19 +174,22 @@ function setEventListeners(evt) {
 
 function createRateBar(likes, dislikes) {
   var rateBar = document.getElementById("return-youtube-dislike-bar-container");
-  
+
   const widthPx =
-      getButtons().children[0].clientWidth +
-      getButtons().children[1].clientWidth +
-      8;
+    getButtons().children[0].clientWidth +
+    getButtons().children[1].clientWidth +
+    8;
 
-    const widthPercent =
-      likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
+  const widthPercent =
+    likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
-    if (!rateBar) {
-      document.getElementById("menu-container").insertAdjacentHTML(
-        "beforeend",
-        `
+  if (!rateBar) {
+    (
+      document.querySelector("#actions-inner") ||
+      document.getElementById("menu-container")
+    ).insertAdjacentHTML(
+      "beforeend",
+      `
           <div class="ryd-tooltip" style="width: ${widthPx}px">
           <div class="ryd-tooltip-bar-container">
              <div
@@ -196,22 +203,23 @@ function createRateBar(likes, dislikes) {
              </div>
           </div>
           <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
+          <div>
              <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
           </tp-yt-paper-tooltip>
           </div>
   `
-      );
-    } else {
-      document.getElementById(
-        "return-youtube-dislike-bar-container"
-      ).style.width = widthPx + "px";
-      document.getElementById("return-youtube-dislike-bar").style.width =
-        widthPercent + "%";
+    );
+  } else {
+    document.getElementById(
+      "return-youtube-dislike-bar-container"
+    ).style.width = widthPx + "px";
+    document.getElementById("return-youtube-dislike-bar").style.width =
+      widthPercent + "%";
 
-      document
-        .getElementById("ryd-dislike-tooltip")
-        .firstChild().innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}</div>`;
-    }
+    document.querySelector(
+      "#ryd-dislike-tooltip > #tooltip"
+    ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+  }
 }
 
 // function sendVideoIds() {

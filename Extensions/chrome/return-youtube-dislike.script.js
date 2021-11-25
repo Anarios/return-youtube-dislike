@@ -1,5 +1,5 @@
 (function (extensionId) {
-  function cLog (message, writer) {
+  function cLog(message, writer) {
     message = `[return youtube dislike]: ${message}`;
     if (writer) {
       writer(message);
@@ -8,65 +8,71 @@
     }
   }
 
-  function getButtons () {
-    return document
-    .getElementById('menu-container')
-    ?.querySelector('#top-level-buttons-computed');
+  function getButtons() {
+    if (document.getElementById("menu-container").offsetParent === null) {
+      return document.querySelector(
+        "ytd-menu-renderer.ytd-watch-metadata > div"
+      );
+    } else {
+      return document
+        .getElementById("menu-container")
+        ?.querySelector("#top-level-buttons-computed");
+    }
   }
 
-  function getLikeButton () {
+  function getLikeButton() {
     return getButtons().children[0];
   }
 
-  function getDislikeButton () {
+  function getDislikeButton() {
     return getButtons().children[1];
   }
 
-  function isVideoLiked () {
-    return getLikeButton().classList.contains('style-default-active');
+  function isVideoLiked() {
+    return getLikeButton().classList.contains("style-default-active");
   }
 
-  function isVideoDisliked () {
-    return getDislikeButton().classList.contains('style-default-active');
+  function isVideoDisliked() {
+    return getDislikeButton().classList.contains("style-default-active");
   }
 
-  function isVideoNotLiked () {
-    return getLikeButton().classList.contains('style-text');
+  function isVideoNotLiked() {
+    return getLikeButton().classList.contains("style-text");
   }
 
-  function isVideoNotDisliked () {
-    return getDislikeButton().classList.contains('style-text');
+  function isVideoNotDisliked() {
+    return getDislikeButton().classList.contains("style-text");
   }
 
-  function getState () {
+  function getState() {
     if (isVideoLiked()) {
-      return 'liked';
+      return "liked";
     }
     if (isVideoDisliked()) {
-      return 'disliked';
+      return "disliked";
     }
-    return 'neutral';
+    return "neutral";
   }
 
-  function setLikes (likesCount) {
-    getButtons().children[0].querySelector('#text').innerText = likesCount;
+  function setLikes(likesCount) {
+    getButtons().children[0].querySelector("#text").innerText = likesCount;
   }
 
-  function setDislikes (dislikesCount) {
-    getButtons().children[1].querySelector('#text').innerText = dislikesCount;
+  function setDislikes(dislikesCount) {
+    getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   }
 
-  function setState () {
+  function setState() {
     let statsSet = false;
     chrome.runtime.sendMessage(
       extensionId,
       {
-        message: 'fetch_from_youtube',
-        videoId: getVideoId(window.location.href)
+        message: "fetch_from_youtube",
+        videoId: getVideoId(window.location.href),
       },
       function (response) {
         if (response != undefined) {
-          cLog('response from youtube:');
+          cLog("response from youtube:");
           cLog(JSON.stringify(response));
           try {
             if (response.likes || response.dislikes) {
@@ -85,12 +91,12 @@
     chrome.runtime.sendMessage(
       extensionId,
       {
-        message: 'set_state',
+        message: "set_state",
         videoId: getVideoId(window.location.href),
-        state: getState()
+        state: getState(),
       },
       function (response) {
-        cLog('response from api:');
+        cLog("response from api:");
         cLog(JSON.stringify(response));
         if (response != undefined && !statsSet) {
           const formattedDislike = numberFormat(response.dislikes);
@@ -103,65 +109,65 @@
     );
   }
 
-  function likeClicked () {
+  function likeClicked() {
     // console.log("like" + getState());
     // setState();
   }
 
-  function dislikeClicked () {
+  function dislikeClicked() {
     // console.log("dislike" + getState());
     // setState();
   }
 
-  function setInitalState () {
+  function setInitalState() {
     setState();
     // setTimeout(() => sendVideoIds(), 1500);
   }
 
-  function getVideoId (url) {
+  function getVideoId(url) {
     const urlObject = new URL(url);
-    const videoId = urlObject.searchParams.get('v');
+    const videoId = urlObject.searchParams.get("v");
     return videoId;
   }
 
-  function isVideoLoaded () {
+  function isVideoLoaded() {
     const videoId = getVideoId(window.location.href);
     return (
       document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null
     );
   }
 
-  function numberFormat (numberState) {
+  function numberFormat(numberState) {
     const userLocales = navigator.language;
-    const formatter = Intl.NumberFormat(userLocales, { notation: 'compact' });
+    const formatter = Intl.NumberFormat(userLocales, { notation: "compact" });
     return formatter.format(numberState);
   }
 
   var jsInitChecktimer = null;
 
-  function setEventListeners (evt) {
-    function checkForJS_Finish () {
+  function setEventListeners(evt) {
+    function checkForJS_Finish() {
       if (getButtons()?.offsetParent && isVideoLoaded()) {
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
         const buttons = getButtons();
         if (!window.returnDislikeButtonlistenersSet) {
-          buttons.children[0].addEventListener('click', likeClicked);
-          buttons.children[1].addEventListener('click', dislikeClicked);
+          buttons.children[0].addEventListener("click", likeClicked);
+          buttons.children[1].addEventListener("click", dislikeClicked);
           window.returnDislikeButtonlistenersSet = true;
         }
         setInitalState();
       }
     }
 
-    if (window.location.href.indexOf('watch?') >= 0) {
+    if (window.location.href.indexOf("watch?") >= 0) {
       jsInitChecktimer = setInterval(checkForJS_Finish, 111);
     }
   }
 
-  function createRateBar (likes, dislikes) {
+  function createRateBar(likes, dislikes) {
     var rateBar = document.getElementById(
-      'return-youtube-dislike-bar-container'
+      "return-youtube-dislike-bar-container"
     );
 
     const widthPx =
@@ -201,9 +207,9 @@
       document.getElementById("return-youtube-dislike-bar").style.width =
         widthPercent + "%";
 
-      document
-        .getElementById("ryd-dislike-tooltip")
-        .firstChild().innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}</div>`;
+      document.querySelector(
+        "#ryd-dislike-tooltip > #tooltip"
+      ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
     }
   }
 
@@ -228,7 +234,7 @@
 
   setEventListeners();
 
-  document.addEventListener('yt-navigate-finish', function (event) {
+  document.addEventListener("yt-navigate-finish", function (event) {
     if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
     window.returnDislikeButtonlistenersSet = false;
     setEventListeners();
@@ -239,4 +245,4 @@
   // };
 
   // setTimeout(() => sendVideoIds(), 1500);
-})(document.currentScript.getAttribute('extension-id'));
+})(document.currentScript.getAttribute("extension-id"));
