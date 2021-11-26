@@ -34,6 +34,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
         }
         toSend = [];
       }
+      break;
     case "fetch_from_youtube":
       fetch(`https://www.youtube.com/watch?v=${request.videoId}`, {
         method: "GET",
