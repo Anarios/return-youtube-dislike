@@ -1,39 +1,27 @@
 <template>
   <div>
 
-    <section style="position: relative;">
+    <h1 style="font-size: 3em; margin-bottom:0;">Return Youtube Dislike</h1>
+    <div style="color: #999">
+      <p style="margin-top: 0">Browser extension and an API that show you dislikes on youtube</p>
+    </div>
 
+    <v-btn :to="installLink" color="primary lighten-1" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em;">
+      <v-icon large style="margin-right: 0.5em;">mdi-tray-arrow-down</v-icon>
+      Install
+    </v-btn>
 
-      <div class="center">
-        <center>
+    <br>
 
-          <h1 style="font-size: 3em; margin-bottom:0;">Return Youtube Dislike</h1>
-          <div style="color: #999">
-            <p style="margin-top: 0">Browser extension and an API that show you dislikes on youtube</p>
-          </div>
+    <v-btn class="mainAltButton" :href="githubLink" target="_blank">
+      <v-icon style="margin-right: 0.5em;">mdi-github</v-icon>
+      Github
+    </v-btn>
 
-          <v-btn :to="installLink" color="primary lighten-1" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em;">
-            <v-icon large style="margin-right: 0.5em;">mdi-tray-arrow-down</v-icon>
-            Install
-          </v-btn>
-
-          <br>
-
-          <v-btn class="mainAltButton" :href="githubLink" target="_blank">
-            <v-icon style="margin-right: 0.5em;">mdi-github</v-icon>
-            Github
-          </v-btn>
-
-          <v-btn class="mainAltButton" :href="discordLink" target="_blank">
-            <v-icon style="margin-right: 0.5em;">mdi-discord</v-icon>
-            Our Discord
-          </v-btn>
-
-        </center>
-      </div>
-
-
-    </section>
+    <v-btn class="mainAltButton" :href="discordLink" target="_blank">
+      <v-icon style="margin-right: 0.5em;">mdi-discord</v-icon>
+      Our Discord
+    </v-btn>
 
   </div>
 </template>

@@ -1,6 +1,6 @@
 {
-  "name": "Return-Youtube-Dislike",
-  "version": "1.0.0",
+  "name": "return-youtube-dislike-site",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
