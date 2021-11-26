@@ -19,6 +19,7 @@ function cLog(text, subtext = '') {
   console.log(`[Return Youtube Dislikes] ${text} ${subtext}`);
 }
 
+function doXHR(opts) {
   if (typeof GM_xmlhttpRequest === 'function') {
     return GM_xmlhttpRequest(opts);
   }
