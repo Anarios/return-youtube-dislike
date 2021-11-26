@@ -4,8 +4,7 @@
 // @version      0.5
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @author       Anarios & JRWR
-// @match        *://*.youtube.com/*
-// @include      *://*.youtube.com/*
+// @match      *://*.youtube.com/watch*
 // @compatible chrome
 // @compatible firefox
 // @compatible opera
