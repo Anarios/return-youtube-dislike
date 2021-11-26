@@ -19,9 +19,11 @@ function cLog(text, subtext = '') {
   console.log(`[Return Youtube Dislikes] ${text} ${subtext}`);
 }
 
-function doXHR(opts) {
-  if (typeof GM_xmlhttpRequest === 'function' || typeof GM.xmlHttpRequest === 'function') {
+  if (typeof GM_xmlhttpRequest === 'function') {
     return GM_xmlhttpRequest(opts);
+  }
+  if (typeof GM.xmlHttpRequest === 'function') {
+    return GM.xmlHttpRequest(opts);
   }
 
   console.warn('Unable to detect UserScript plugin, falling back to native XHR.');
