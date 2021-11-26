@@ -137,11 +137,23 @@ function isVideoLoaded() {
   );
 }
 
+function roundDown(num) {
+  if (num < 1000) return num;
+  const decimal = Math.floor(Math.log10(num) - 1);
+  const value = Math.floor(num / 10 ** decimal);
+  return value * (10 ** decimal);
+}
+
 function numberFormat(numberState) {
   const userLocales = navigator.language;
-  const formatter = Intl.NumberFormat(userLocales, { notation: "compact" });
 
-  return formatter.format(numberState);
+  const formatter = Intl.NumberFormat(userLocales, {
+    notation: 'compact',
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1
+  });
+
+  return formatter.format(roundDown(numberState)).replace('.0', '');
 }
 
 function setEventListeners(evt) {
