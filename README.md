@@ -38,7 +38,7 @@ You can learn more at our website at: [returnyoutubedislike.com](https://www.ret
 
 ## Contributing
 
-Please read the [contribution guide.](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTION.md)
+Please read the [contribution guide.](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)
 
 ## Donate
 
