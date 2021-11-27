@@ -14,15 +14,8 @@
       <v-img src="/ui/abstract.svg" style="position: absolute; top: 0; right: 0; width: 100%; height: 100%;" />
       
 
-      <section style="position: relative;">
-        <div class="center" style="width: 90vw">
-          <center style="width: 90vw">
-            
-            <nuxt />
-
-          </center>
-        </div>
-      </section>
+      
+      <nuxt />
 
 
     </v-main>

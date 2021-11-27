@@ -84,7 +84,6 @@ function getState() {
   if (isVideoDisliked()) {
     return "disliked";
   }
-
   return "neutral";
 }
 

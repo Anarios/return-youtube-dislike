@@ -53,6 +53,7 @@
 
 <script>
 export default {
+  layout: 'default_legacy',
   data() {
     return {
       githubLink: "https://github.com/Anarios/return-youtube-dislike",
