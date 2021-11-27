@@ -24,3 +24,15 @@ button {
     font-weight: 500;
     box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
 }
+
+#advancedToggle {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+#advancedSettings {
+    display: none;
+    border: 2px solid var(--secondary);
+    border-radius: 4px;
+    padding: 0.5em;
+}
