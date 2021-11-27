@@ -13,6 +13,11 @@ html,body {
     min-width: 300px;
     padding: 0.5em;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+h1 {
+    font-size: 26px;
 }
 
 button {
