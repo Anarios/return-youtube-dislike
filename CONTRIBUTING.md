@@ -22,4 +22,4 @@ If you found a feature that you feel you might be able to implement, don't be sh
 - Issue fixes.
 - Feature implementation.
 - Typos or better and easier words to use.
-- Website contribution.
+- Website contributions.
