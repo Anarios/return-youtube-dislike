@@ -30,13 +30,15 @@ This plugin will re-enable the visibility of the dislike count, fetching the tot
 With the removal of dislike stats from the YouTube API, our backend will switch to using a combination of scraped dislike stats, estimates extrapolated from extension user data
 and estimates based on view\like ratios.
 
+[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/FAQ.md)
+
 ## Why it Matters
 
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-## Contribution guide
+## Contributing
 
-Please use Prettier with default settings for formatting
+Please read the [contribution guide.](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTION.md)
 
 ## Donate
 
