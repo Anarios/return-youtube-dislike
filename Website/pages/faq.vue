@@ -1,18 +1,14 @@
 <template>
   <div>
-    
-
     <h1 style="font-size: 3em; margin-bottom: 0em;">Frequently Asked Questions</h1>
     <p style="color: #999; margin-bottom: 3em;">Still have questions? Feel free to join our Discord!</p>
 
     <v-expansion-panels focusable>
       <v-expansion-panel v-for="(item, i) in items" :key="i" style="width: 50vw; min-width: 300px;">
-        <v-expansion-panel-header v-text="item.question">Loading</v-expansion-panel-header>
-        <v-expansion-panel-content v-html="item.answer" style="text-align: left; padding: 0.5em;">Loading</v-expansion-panel-content>
+        <v-expansion-panel-header>{{item.question}}</v-expansion-panel-header>
+        <v-expansion-panel-content style="text-align: left; padding: 0.5em;">{{item.answer}}</v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-
-
   </div>
 </template>
 
@@ -38,6 +34,5 @@
         },
       ],
     }),
-  
   }
 </script>

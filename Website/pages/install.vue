@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <h1 style="font-size: 3em; margin-bottom: 0;">Select Your Platform</h1>
 
     <div style="color: #999">
@@ -31,8 +30,6 @@
       <v-icon style="margin-right: 0.5em;">mdi-apple</v-icon>
       iOS (Jailbroken)
     </v-btn>
-
-
   </div>
 </template>
 

@@ -29,26 +29,6 @@
   </v-app>
 </template>
 
-<style>
-html, body {
-  overflow: hidden;
-}
-
-section {
-  height: 90vh;
-  width: 100vw;
-}
-.mainAltButton {
-  margin: 0.25em;
-}
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-</style>
-
 <script>
   export default {
     data: () => ({
@@ -77,3 +57,23 @@ section {
     }),
   }
 </script>
+
+<style>
+html, body {
+  overflow: hidden;
+}
+
+section {
+  height: 90vh;
+  width: 100vw;
+}
+.mainAltButton {
+  margin: 0.25em;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</style>
