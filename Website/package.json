@@ -6,7 +6,9 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
+    "lint": "npm run lint:js"
   },
   "dependencies": {
     "core-js": "^3.15.1",
@@ -14,6 +16,15 @@
     "vuetify": "^2.5.5"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.1"
+    "@babel/eslint-parser": "^7.14.7",
+    "@nuxtjs/vuetify": "^1.12.1",
+    "@nuxtjs/eslint-config": "^6.0.1",
+    "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/stylelint-module": "^4.0.0",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "eslint-plugin-vue": "^7.12.1",
+    "prettier": "^2.3.2"
   }
 }
