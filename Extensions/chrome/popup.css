@@ -10,8 +10,9 @@
 html,body {
     background-color: var(--background);
     color: var(--white);
-    min-width: 300px;
+    width: 300px;
     padding: 0.5em;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 button {

@@ -1,13 +1,39 @@
-button {
-    height: 30px;
-    width: 30px;
-    outline: none;
-    margin: 10px;
-    border: none;
-    border-radius: 2px;
+/* Variables */
+:root {
+    --background: #111;
+    --primary: #ff4444;
+    --secondary: #272727;
+    --white: #fff;
 }
 
-button.current {
-    box-shadow: 0 0 0 2px white,
-    0 0 0 4px black;
+/* Window Styling */
+html,body {
+    background-color: var(--background);
+    color: var(--white);
+    width: 300px;
+    padding: 0.5em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    color: var(--white);
+    background: var(--secondary);
+    cursor: pointer;
+    padding: 5px 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+}
+
+#advancedToggle {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+#advancedSettings {
+    display: none;
+    border: 2px solid var(--secondary);
+    border-radius: 4px;
+    padding: 0.5em;
 }
