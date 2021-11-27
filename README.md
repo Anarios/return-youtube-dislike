@@ -34,6 +34,10 @@ and estimates based on view\like ratios.
 
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
+## Contribution guide
+
+Please use Prettier with default settings for formatting
+
 ## Donate
 
 [Patreon](https://www.patreon.com/returnyoutubedislike/)
