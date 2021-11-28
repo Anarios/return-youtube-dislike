@@ -150,7 +150,7 @@ function numberFormat(numberState) {
     maximumFractionDigits: 1
   });
 
-  return formatter.format(roundDown(numberState)).replace('.0', '');
+  return formatter.format(roundDown(numberState)).replace(/.0|,0/gi, '');
 }
 
 function setEventListeners(evt) {
