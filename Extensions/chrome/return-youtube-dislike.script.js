@@ -139,7 +139,8 @@
 
   function roundDown(num) {
     if (num < 1000) return num;
-    const decimal = Math.floor(Math.log10(num) - 1);
+    const int = Math.floor(Math.log10(num) - 2);
+    const decimal = int + (int % 3 ? 1 : 0);
     const value = Math.floor(num / 10 ** decimal);
     return value * (10 ** decimal);
   }
