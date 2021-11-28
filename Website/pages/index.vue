@@ -20,7 +20,7 @@
 
     <v-btn class="mainAltButton" :href="discordLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-discord</v-icon>
-      Our Discord
+      Discord
     </v-btn>
 
   </div>
