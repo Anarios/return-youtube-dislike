@@ -34,9 +34,15 @@ function doXHR(opts) {
   const xhr = new XMLHttpRequest();
 
   xhr.open(opts.method, opts.url, true);
-  xhr.onload = () => opts.onload({
-    response: JSON.parse(xhr.responseText),
-  });
+  if (opts.responseType === 'text') {
+    xhr.onload = () => opts.onload({
+      response: xhr.responseText,
+    });
+  } else {
+    xhr.onload = () => opts.onload({
+      response: JSON.parse(xhr.responseText),
+    });
+  }
   xhr.onerror = err => console.error('XHR Failed', err);
   xhr.send();
 }
@@ -145,6 +151,28 @@ function createRateBar(likes, dislikes) {
 
 function setState() {
   cLog('Fetching votes...');
+  let statsSet = false;
+  doXHR({
+    method: 'GET',
+    responseType: 'text',
+    url: `https://www.youtube.com/watch?v=${getVideoId()}`,
+    onload: function (xhr) {
+      if (xhr) {
+        let result = getDislikesFromYoutubeResponse(xhr.response);
+        if (result) {
+          cLog("response from youtube:");
+          cLog(JSON.stringify(result));
+            if (result.likes || result.dislikes) {
+              const formattedDislike = numberFormat(result.dislikes);
+              setDislikes(formattedDislike);
+              createRateBar(result.likes, result.dislikes);
+              statsSet = true;
+            }
+        }
+
+      }
+    }
+  })
 
   doXHR({
     method: "GET",
@@ -153,7 +181,7 @@ function setState() {
       "https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=" +
       getVideoId(),
     onload: function (xhr) {
-      if (xhr != undefined) {
+      if (xhr != undefined && !statsSet) {
         const { dislikes, likes } = xhr.response;
         cLog(`Received count: ${dislikes}`);
         setDislikes(numberFormat(dislikes));
@@ -210,6 +238,37 @@ function numberFormat(numberState) {
   });
 
   return formatter.format(roundDown(numberState)).replace(/\.0|,0/, '');
+}
+
+function getDislikesFromYoutubeResponse(htmlResponse) {
+  let start =
+    htmlResponse.indexOf('"videoDetails":') + '"videoDetails":'.length;
+  let end =
+    htmlResponse.indexOf('"isLiveContent":false}', start) +
+    '"isLiveContent":false}'.length;
+  if (end < start) {
+    end =
+      htmlResponse.indexOf('"isLiveContent":true}', start) +
+      '"isLiveContent":true}'.length;
+  }
+  let jsonStr = htmlResponse.substring(start, end);
+  let jsonResult = JSON.parse(jsonStr);
+  let rating = jsonResult.averageRating;
+
+  start = htmlResponse.indexOf('"topLevelButtons":[', end);
+  start =
+    htmlResponse.indexOf('"accessibilityData":', start) +
+    '"accessibilityData":'.length;
+  end = htmlResponse.indexOf("}", start);
+  let likes = +htmlResponse.substring(start, end).replace(/\D/g, "");
+  let dislikes = (likes * (5 - rating)) / (rating - 1);
+  let result = {
+    likes,
+    dislikes: Math.round(dislikes),
+    rating,
+    viewCount: +jsonResult.viewCount,
+  };
+  return result;
 }
 
 function setEventListeners(evt) {
