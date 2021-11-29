@@ -14,44 +14,48 @@
 // @updateURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @grant GM.xmlHttpRequest
 // ==/UserScript==
-function cLog(text, subtext = '') {
-  subtext = subtext.trim() === '' ? '' : `(${subtext})`;
+function cLog(text, subtext = "") {
+  subtext = subtext.trim() === "" ? "" : `(${subtext})`;
   console.log(`[Return Youtube Dislikes] ${text} ${subtext}`);
 }
 
 function doXHR(opts) {
-  if (typeof GM_xmlhttpRequest === 'function') {
+  if (typeof GM_xmlhttpRequest === "function") {
     return GM_xmlhttpRequest(opts);
   }
-  if (typeof GM !== 'undefined') /*This will prevent from throwing "Uncaught ReferenceError: GM is not defined"*/ {
-    if (typeof GM.xmlHttpRequest === 'function') {
+  if (typeof GM !== "undefined") {
+    /*This will prevent from throwing "Uncaught ReferenceError: GM is not defined"*/ if (
+      typeof GM.xmlHttpRequest === "function"
+    ) {
       return GM.xmlHttpRequest(opts);
     }
   }
 
-  console.warn('Unable to detect UserScript plugin, falling back to native XHR.');
+  console.warn(
+    "Unable to detect UserScript plugin, falling back to native XHR."
+  );
 
   const xhr = new XMLHttpRequest();
 
   xhr.open(opts.method, opts.url, true);
-  if (opts.responseType === 'text') {
-    xhr.onload = () => opts.onload({
-      response: xhr.responseText,
-    });
+  if (opts.responseType === "text") {
+    xhr.onload = () =>
+      opts.onload({
+        response: xhr.responseText,
+      });
   } else {
-    xhr.onload = () => opts.onload({
-      response: JSON.parse(xhr.responseText),
-    });
+    xhr.onload = () =>
+      opts.onload({
+        response: JSON.parse(xhr.responseText),
+      });
   }
-  xhr.onerror = err => console.error('XHR Failed', err);
+  xhr.onerror = (err) => console.error("XHR Failed", err);
   xhr.send();
 }
 
 function getButtons() {
   if (document.getElementById("menu-container").offsetParent === null) {
-    return document.querySelector(
-      "ytd-menu-renderer.ytd-watch-metadata > div"
-    );
+    return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
   } else {
     return document
       .getElementById("menu-container")
@@ -102,9 +106,7 @@ function setDislikes(dislikesCount) {
 }
 
 function createRateBar(likes, dislikes) {
-  var rateBar = document.getElementById(
-    "return-youtube-dislike-bar-container"
-  );
+  var rateBar = document.getElementById("return-youtube-dislike-bar-container");
 
   const widthPx =
     getButtons().children[0].clientWidth +
@@ -150,11 +152,11 @@ function createRateBar(likes, dislikes) {
 }
 
 function setState() {
-  cLog('Fetching votes...');
+  cLog("Fetching votes...");
   let statsSet = false;
   doXHR({
-    method: 'GET',
-    responseType: 'text',
+    method: "GET",
+    responseType: "text",
     url: `https://www.youtube.com/watch?v=${getVideoId()}`,
     onload: function (xhr) {
       if (xhr) {
@@ -162,17 +164,16 @@ function setState() {
         if (result) {
           cLog("response from youtube:");
           cLog(JSON.stringify(result));
-            if (result.likes || result.dislikes) {
-              const formattedDislike = numberFormat(result.dislikes);
-              setDislikes(formattedDislike);
-              createRateBar(result.likes, result.dislikes);
-              statsSet = true;
-            }
+          if (result.likes || result.dislikes) {
+            const formattedDislike = numberFormat(result.dislikes);
+            setDislikes(formattedDislike);
+            createRateBar(result.likes, result.dislikes);
+            statsSet = true;
+          }
         }
-
       }
-    }
-  })
+    },
+  });
 
   doXHR({
     method: "GET",
@@ -192,12 +193,12 @@ function setState() {
 }
 
 function likeClicked() {
-  cLog('Like clicked', getState());
+  cLog("Like clicked", getState());
   setState();
 }
 
 function dislikeClicked() {
-  cLog('Dislike clicked', getState());
+  cLog("Dislike clicked", getState());
   setState();
 }
 
@@ -225,19 +226,19 @@ function roundDown(num) {
   const int = Math.floor(Math.log10(num) - 2);
   const decimal = int + (int % 3 ? 1 : 0);
   const value = Math.floor(num / 10 ** decimal);
-  return value * (10 ** decimal);
+  return value * 10 ** decimal;
 }
 
 function numberFormat(numberState) {
   const userLocales = navigator.language;
 
   const formatter = Intl.NumberFormat(userLocales, {
-    notation: 'compact',
+    notation: "compact",
     minimumFractionDigits: 1,
-    maximumFractionDigits: 1
+    maximumFractionDigits: 1,
   });
 
-  return formatter.format(roundDown(numberState)).replace(/\.0|,0/, '');
+  return formatter.format(roundDown(numberState)).replace(/\.0|,0/, "");
 }
 
 function getDislikesFromYoutubeResponse(htmlResponse) {
@@ -278,7 +279,7 @@ function setEventListeners(evt) {
       const buttons = getButtons();
 
       if (!window.returnDislikeButtonlistenersSet) {
-        cLog('Registering button listeners...');
+        cLog("Registering button listeners...");
         buttons.children[0].addEventListener("click", likeClicked);
         buttons.children[1].addEventListener("click", dislikeClicked);
         window.returnDislikeButtonlistenersSet = true;
@@ -288,7 +289,7 @@ function setEventListeners(evt) {
   }
 
   if (window.location.href.indexOf("watch?") >= 0) {
-    cLog('Setting up...');
+    cLog("Setting up...");
     var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
 }
