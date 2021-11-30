@@ -16,7 +16,7 @@
 // ==/UserScript==
 function cLog(text, subtext = '') {
   subtext = subtext.trim() === '' ? '' : `(${subtext})`;
-  console.log(`[Return Youtube Dislikes] ${text} ${subtext}`);
+  console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
 }
 
 function doXHR(opts) {
