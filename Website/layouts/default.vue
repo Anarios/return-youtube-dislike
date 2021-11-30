@@ -3,7 +3,7 @@
     <v-app-bar app color="lighten-2" flat>
 
       <v-tabs centered class="ml-n9" color="primary" router>
-        <v-tab v-for="link in links" :key="link" :to="link.path">
+        <v-tab v-for="link in links" :key="link.path" :to="link.path">
           {{ link.name }}
         </v-tab>
       </v-tabs>
