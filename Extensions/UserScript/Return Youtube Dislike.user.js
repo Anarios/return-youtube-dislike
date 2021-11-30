@@ -121,9 +121,9 @@ function setState() {
   cLog("Fetching votes...");
   let statsSet = false;
 
-  fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then(response => {
-    response.text().then(text => {
-      let result = getDislikesFromYoutubeResponse(text)
+  fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then((response) => {
+    response.text().then((text) => {
+      let result = getDislikesFromYoutubeResponse(text);
       if (result) {
         cLog("response from youtube:");
         cLog(JSON.stringify(result));
@@ -134,19 +134,21 @@ function setState() {
           statsSet = true;
         }
       }
-    })
-  })
+    });
+  });
 
-  fetch(`https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=${getVideoId()}`).then(response => {
-    response.json().then(json => {
+  fetch(
+    `https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=${getVideoId()}`
+  ).then((response) => {
+    response.json().then((json) => {
       if (json && !statsSet) {
         const { dislikes, likes } = json;
         cLog(`Received count: ${dislikes}`);
         setDislikes(numberFormat(dislikes));
         createRateBar(likes, dislikes);
       }
-    })
-  })
+    });
+  });
 }
 
 function likeClicked() {
