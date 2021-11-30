@@ -19,40 +19,6 @@ function cLog(text, subtext = "") {
   console.log(`[Return Youtube Dislikes] ${text} ${subtext}`);
 }
 
-function doXHR(opts) {
-  if (typeof GM_xmlhttpRequest === "function") {
-    return GM_xmlhttpRequest(opts);
-  }
-  if (typeof GM !== "undefined") {
-    /*This will prevent from throwing "Uncaught ReferenceError: GM is not defined"*/ if (
-      typeof GM.xmlHttpRequest === "function"
-    ) {
-      return GM.xmlHttpRequest(opts);
-    }
-  }
-
-  console.warn(
-    "Unable to detect UserScript plugin, falling back to native XHR."
-  );
-
-  const xhr = new XMLHttpRequest();
-
-  xhr.open(opts.method, opts.url, true);
-  if (opts.responseType === "text") {
-    xhr.onload = () =>
-      opts.onload({
-        response: xhr.responseText,
-      });
-  } else {
-    xhr.onload = () =>
-      opts.onload({
-        response: JSON.parse(xhr.responseText),
-      });
-  }
-  xhr.onerror = (err) => console.error("XHR Failed", err);
-  xhr.send();
-}
-
 function getButtons() {
   if (document.getElementById("menu-container").offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
@@ -154,42 +120,33 @@ function createRateBar(likes, dislikes) {
 function setState() {
   cLog("Fetching votes...");
   let statsSet = false;
-  doXHR({
-    method: "GET",
-    responseType: "text",
-    url: `https://www.youtube.com/watch?v=${getVideoId()}`,
-    onload: function (xhr) {
-      if (xhr) {
-        let result = getDislikesFromYoutubeResponse(xhr.response);
-        if (result) {
-          cLog("response from youtube:");
-          cLog(JSON.stringify(result));
-          if (result.likes || result.dislikes) {
-            const formattedDislike = numberFormat(result.dislikes);
-            setDislikes(formattedDislike);
-            createRateBar(result.likes, result.dislikes);
-            statsSet = true;
-          }
+
+  fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then(response => {
+    response.text().then(text => {
+      let result = getDislikesFromYoutubeResponse(text)
+      if (result) {
+        cLog("response from youtube:");
+        cLog(JSON.stringify(result));
+        if (result.likes || result.dislikes) {
+          const formattedDislike = numberFormat(result.dislikes);
+          setDislikes(formattedDislike);
+          createRateBar(result.likes, result.dislikes);
+          statsSet = true;
         }
       }
-    },
-  });
+    })
+  })
 
-  doXHR({
-    method: "GET",
-    responseType: "json",
-    url:
-      "https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=" +
-      getVideoId(),
-    onload: function (xhr) {
-      if (xhr != undefined && !statsSet) {
-        const { dislikes, likes } = xhr.response;
+  fetch(`https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=${getVideoId()}`).then(response => {
+    response.json().then(json => {
+      if (json && !statsSet) {
+        const { dislikes, likes } = json;
         cLog(`Received count: ${dislikes}`);
         setDislikes(numberFormat(dislikes));
         createRateBar(likes, dislikes);
       }
-    },
-  });
+    })
+  })
 }
 
 function likeClicked() {
