@@ -46,7 +46,7 @@ button {
   display: none;
   color: var(--tertiary);
   border: 2px solid var(--secondary);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   padding: 1rem;
 }
 
@@ -64,10 +64,10 @@ button {
   display: inline-block;
   width: 30px;
   height: 17px;
-  margin-bottom: 0.5em;
+  margin-bottom: 1rem;
 }
 
-.switch:last-of-time {
+.switch:last-of-type {
   margin-bottom: 0;
 }
 
