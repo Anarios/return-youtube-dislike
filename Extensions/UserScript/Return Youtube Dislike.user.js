@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
-// @version      0.5
+// @version      0.6
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @author       Anarios & JRWR
 // @match      *://*.youtube.com/*
@@ -138,7 +138,7 @@ function setState() {
   });
 
   fetch(
-    `https://return-youtube-dislike-api.azurewebsites.net/votes?videoId=${getVideoId()}`
+    `https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`
   ).then((response) => {
     response.json().then((json) => {
       if (json && !statsSet) {
