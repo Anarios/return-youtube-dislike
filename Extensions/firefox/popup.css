@@ -1,8 +1,11 @@
 /* Variables */
 :root {
+    --primary: #CC2929;
+    --accent: #581111;
+
     --background: #111;
-    --primary: #ff4444;
     --secondary: #272727;
+    --lightGrey: #999;
     --white: #fff;
 }
 
@@ -42,4 +45,56 @@ button {
     border-radius: 4px;
     padding: 0.5em;
     margin-right: 1em; /* FIREFOX ONLY */
+}
+
+/*   Switches   */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+    margin-bottom: 0.5em;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--secondary);
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: '';
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 2px;
+    background: var(--lightGrey);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background: var(--accent);
+}
+
+input:checked+.slider:before {
+    transform: translateX(13px);
+    background: var(--primary);
+}
+
+.switchLabel {
+    width: 250px !important;
+    transform: translateX(35px);
+    display: inline-block;
 }
