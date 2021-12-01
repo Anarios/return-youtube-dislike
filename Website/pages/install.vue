@@ -13,10 +13,20 @@
       Chrome
     </v-btn>
 
+    <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
+      <v-icon style="margin-right: 0.5em;">mdi-microsoft-edge</v-icon>
+      Edge
+    </v-btn>
+
+    <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
+      <v-icon style="margin-right: 0.5em;">mdi-opera</v-icon>
+      Opera
+    </v-btn>
     <v-btn class="mainAltButton" :href="firefoxLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-firefox</v-icon>
       Firefox
     </v-btn>
+    <br><br>
 
     <v-btn class="mainAltButton" :href="scriptLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-script-text-outline</v-icon>
