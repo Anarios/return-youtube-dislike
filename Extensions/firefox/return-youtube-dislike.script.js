@@ -7,7 +7,14 @@ function cLog(message, writer) {
   }
 }
 
+function isMobile() {
+  return Boolean(document.getElementsByClassName("slim-video-action-bar-actions"))
+}
+
 function getButtons() {
+  if (isMobile()) {
+    return document.querySelector(".slim-video-action-bar-actions")
+  }
   if (document.getElementById("menu-container").offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
   } else {
@@ -52,11 +59,23 @@ function getState() {
 }
 
 function setLikes(likesCount) {
-  getButtons().children[0].querySelector("#text").innerText = likesCount;
+  const selector = isMobile() ? ".button-renderer-text" : "#text"
+  getButtons().children[0].querySelector(selector).innerText = likesCount;
 }
 
+let mobileOverwriteInterval
+
 function setDislikes(dislikesCount) {
-  getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+  if (isMobile()) {
+    if (mobileOverwriteInterval) clearInterval(mobileOverwriteInterval)
+    // Mobile youtube overwrites the button text after some time
+    getButtons().children[1].querySelector(".button-renderer-text").innerText = dislikesCount;
+    mobileOverwriteInterval = setInterval(() => {
+      getButtons().children[1].querySelector(".button-renderer-text").innerText = dislikesCount;
+    }, 1000)
+  } else {
+    getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+  }
 }
 
 function setState() {
@@ -128,7 +147,7 @@ function getVideoId(url) {
 
 function isVideoLoaded() {
   const videoId = getVideoId(window.location.href);
-  return (
+  return isMobile() || (
     document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null
   );
 }
