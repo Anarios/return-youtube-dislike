@@ -44,13 +44,12 @@ button {
 
 #advancedSettings {
   display: none;
-  color: var(--tertiary);
   border: 2px solid var(--secondary);
   border-radius: 0.5rem;
   padding: 1rem;
 }
 
-#andvancedLegend {
+#advancedLegend {
   color: var(--tertiary) !important;
   /* margin: auto; */ /* Center the label */
   /* padding: .25rem .5rem; */
