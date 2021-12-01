@@ -3,8 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'Return Youtube Dislike',
-    title: 'Return Youtube Dislike',
+    titleTemplate: 'Return YouTube Dislike',
+    title: 'Return YouTube Dislike',
     htmlAttrs: {
       lang: 'en'
     },

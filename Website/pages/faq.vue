@@ -21,20 +21,20 @@
     data: () => ({
       items: [
         { 
-          question: "Where does extension get data?",
-          answer: "Combination of GoogleAPI data and scraped data. We save all available data to our DB for it to be available after google shuts down dislike counts in their API."
+          question: "Where does the extension get its data?",
+          answer: "A combination of Google's API data and scraped data. We save all available data to our DB so it can be made available after Google removes dislike counts from their API."
         },
         { 
-          question: "Video dislike count doesn't update",
-          answer: "Right now video dislikes are cached, and arent updated very frequenly. Once in 2-3 days, not more often Yeah, it's not ideal, but it is what it is. Working on improving how often we can update  them"
+          question: "Why isn't the dislike count updating?",
+          answer: "Right now video dislikes are cached and they arent updated very frequenly. Currently this is set to update once every 2–3 days.  This isn't ideal and we are working on improving how often we can update them"
         },
         { 
           question: "How does this work?",
-          answer: "The extension collects the video id of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API, if this is the first time the video was fetched by our API, it will use the YouTube API to get the data, then stores the data in a database for caching (cached for around 2-3 days) and archiving purposes and returns it to you. The extension then displays the dislikes to you."
+          answer: "The extension collects the video ID of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API, if this is the first time the video was fetched by our API, it will use the YouTube API to get the data, then store it in the database for caching (cached for around 2-3 days) and archiving purposes, and returns it to you. The extension then displays the dislike count and ratio on the page."
         },
         { 
           question: "What will happen after the YouTube API stops returning the dislike count?",
-          answer: "The backend will switch to using a combination of archived dislike stats, estimates extrapolated from extension user data and estimates based on view/like ratios for videos whose dislikes weren't archived and for outdated dislike archives."
+          answer: "The backend will switch to using a combination of archived dislike stats, estimates extrapolated from extension user data, and estimates based on view/like ratios for videos whose dislikes weren't archived as well as outdated dislike count archives."
         },
       ],
     }),

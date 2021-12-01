@@ -4,7 +4,7 @@
 // @version      0.5
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @author       Anarios & JRWR
-// @match      *://*.youtube.com/watch*
+// @match      *://*.youtube.com/*
 // @compatible chrome
 // @compatible firefox
 // @compatible opera
@@ -14,9 +14,9 @@
 // @updateURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @grant GM.xmlHttpRequest
 // ==/UserScript==
-function cLog(text, subtext = "") {
-  subtext = subtext.trim() === "" ? "" : `(${subtext})`;
-  console.log(`[Return Youtube Dislikes] ${text} ${subtext}`);
+function cLog(text, subtext = '') {
+  subtext = subtext.trim() === '' ? '' : `(${subtext})`;
+  console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
 }
 
 function getButtons() {
