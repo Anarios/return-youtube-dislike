@@ -255,37 +255,26 @@ function createRateBar(likes, dislikes) {
   }
 }
 
-// function sendVideoIds() {
-//   const ids = Array.from(
-//     document.getElementsByClassName(
-//       "yt-simple-endpoint ytd-compact-video-renderer"
-//     )
-//   )
-//   .concat(
-//     Array.from(
-//       document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
-//     )
-//   )
-//   .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-//   .map((x) => getVideoId(x.href));
-//   browser.runtime.sendMessage({
-//     message: "send_links",
-//     videoIds: ids,
-//   });
-// }
+function sendVideoIds() {
+  const ids = Array.from(
+    document.getElementsByClassName(
+      "yt-simple-endpoint ytd-compact-video-renderer"
+    )
+  )
+  .concat(
+    Array.from(
+      document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
+    )
+  )
+  .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
+  .map((x) => getVideoId(x.href));
+  browser.runtime.sendMessage({
+    message: "send_links",
+    videoIds: ids,
+  });
+}
 
 setEventListeners();
 
-// document.addEventListener("yt-navigate-finish", function (event) {
-//   if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
-//   window.returnDislikeButtonlistenersSet = false;
-//   setEventListeners();
-// });
+setTimeout(() => sendVideoIds(), 1500);
 
-// window.onscrollend = () => {
-//   sendVideoIds();
-// };
-//
-// setTimeout(() => sendVideoIds(), 1500);
-
-//window.addEventListener("hashchange", setEventListeners, false);

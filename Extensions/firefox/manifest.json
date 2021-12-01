@@ -1,7 +1,7 @@
 {
   "name": "Return YouTube Dislike",
   "description": "Returns ability to see dislikes",
-  "version": "0.0.0.9",
+  "version": "1.0.0.2",
   "manifest_version": 2,
   "background": {
     "scripts": ["return-youtube-dislike.background.js"]
