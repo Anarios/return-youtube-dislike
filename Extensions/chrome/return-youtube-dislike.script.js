@@ -1,4 +1,8 @@
 (function (extensionId) {
+  let storedData = {
+    dislikes: 0
+  };
+
   function cLog(message, writer) {
     message = `[return youtube dislike]: ${message}`;
     if (writer) {
@@ -66,13 +70,6 @@
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   }
 
-  //---   Gets Current Dislike Value From Local Device   ---//
-  function getDislikes() {
-    let dislikes = getButtons().children[1].querySelector("#text").innerText;
-    dislikes = parseInt(dislikes);
-    return dislikes;
-  }
-
 
 
   function setState() {
@@ -91,6 +88,7 @@
             if (response.likes || response.dislikes) {
               const formattedDislike = numberFormat(response.dislikes);
               setDislikes(formattedDislike);
+              storedData.dislikes = parseInt(response.dislikes);
               createRateBar(response.likes, response.dislikes);
               statsSet = true;
             }
@@ -133,9 +131,9 @@
     console.log("Dislike State:",state);
 
     if (state == 'disliked') {
-      setDislikes(getDislikes() + 1)
+      setDislikes(numberFormat(storedData.dislikes))
     } else if (state == 'neutral') {
-      setDislikes(getDislikes() + -1)
+      setDislikes(numberFormat(storedData.dislikes - 1))
     }
 
     // setState();
