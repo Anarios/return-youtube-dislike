@@ -9,10 +9,13 @@
   }
 
   function getButtons() {
-    if (document.getElementById("menu-container").offsetParent === null) {
+
+    //---   If Menu Element Is Displayed:   ---//
+    if (document.getElementById('menu-container').offsetParent === null) {
       return document.querySelector(
         "ytd-menu-renderer.ytd-watch-metadata > div"
       );
+    //---   If Menu Element Isnt Displayed:   ---//
     } else {
       return document
         .getElementById("menu-container")
@@ -44,6 +47,7 @@
     return getDislikeButton().classList.contains("style-text");
   }
 
+
   function getState() {
     if (isVideoLiked()) {
       return "liked";
@@ -54,13 +58,22 @@
     return "neutral";
   }
 
+  //---   Sets The Likes And Dislikes Values   ---//
   function setLikes(likesCount) {
     getButtons().children[0].querySelector("#text").innerText = likesCount;
   }
-
   function setDislikes(dislikesCount) {
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   }
+
+  //---   Gets Current Dislike Value From Local Device   ---//
+  function getDislikes() {
+    let dislikes = getButtons().children[1].querySelector("#text").innerText;
+    dislikes = parseInt(dislikes);
+    return dislikes;
+  }
+
+
 
   function setState() {
     let statsSet = false;
@@ -110,12 +123,21 @@
   }
 
   function likeClicked() {
-    // console.log("like" + getState());
+    console.log("Dislike State:",getState());
     // setState();
   }
 
   function dislikeClicked() {
-    // console.log("dislike" + getState());
+    let state = getState();
+
+    console.log("Dislike State:",state);
+
+    if (state == 'disliked') {
+      setDislikes(getDislikes() + 1)
+    } else if (state == 'neutral') {
+      setDislikes(getDislikes() + -1)
+    }
+
     // setState();
   }
 
