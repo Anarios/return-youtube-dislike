@@ -1,8 +1,8 @@
 /*   Config   */
 const config = {
   advanced: false,
-  showAdvancedMessage: "Show Advanced",
-  hideAdvancedMessage: "Hide Advanced",
+  showAdvancedMessage: "Show Settings",
+  hideAdvancedMessage: "Hide Settings",
 
   links: {
     website: 'https://returnyoutubedislike.com',
