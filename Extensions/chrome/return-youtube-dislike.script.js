@@ -131,9 +131,9 @@
     console.log("Dislike State:",state);
 
     if (state == 'disliked') {
-      setDislikes(numberFormat(storedData.dislikes))
+      setDislikes(numberFormat(storedData.dislikes + 1))
     } else if (state == 'neutral') {
-      setDislikes(numberFormat(storedData.dislikes - 1))
+      setDislikes(numberFormat(storedData.dislikes))
     }
 
     // setState();
