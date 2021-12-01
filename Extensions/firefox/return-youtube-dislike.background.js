@@ -1,4 +1,4 @@
-const apiUrl = "https://return-youtube-dislike-api.azurewebsites.net";
+const apiUrl = "https://returnyoutubedislikeapi.com";
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "get_auth_token") {

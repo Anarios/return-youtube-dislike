@@ -1,4 +1,4 @@
-const apiUrl = "https://return-youtube-dislike-api.azurewebsites.net";
+const apiUrl = "https://returnyoutubedislikeapi.com";
 
 // Security token causes issues if extension is reloaded/updated while several tabs are open
 // const securityToken = Math.random().toString(36).substring(2, 15);
