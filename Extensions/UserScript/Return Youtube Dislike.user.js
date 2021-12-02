@@ -131,7 +131,7 @@ function setState() {
       if (result) {
         cLog("response from youtube:");
         cLog(JSON.stringify(result));
-        if (result.likes || result.dislikes) {
+        if (result.likes && result.dislikes) {
           const formattedDislike = numberFormat(result.dislikes);
           setDislikes(formattedDislike);
           createRateBar(result.likes, result.dislikes);
