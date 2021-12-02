@@ -1,6 +1,8 @@
-let storedData = {
-  dislikes: 0
-};
+if (!storedData) {
+  var storedData = {
+    dislikes: 0,
+  };
+}
 
 function cLog(message, writer) {
   message = `[return youtube dislike]: ${message}`;
@@ -12,11 +14,10 @@ function cLog(message, writer) {
 }
 
 function getButtons() {
-
   //---   If Menu Element Is Displayed:   ---//
   if (document.getElementById("menu-container").offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
-  //---   If Menu Element Isnt Displayed:   ---//
+    //---   If Menu Element Isnt Displayed:   ---//
   } else {
     return document
       .getElementById("menu-container")
@@ -66,7 +67,6 @@ function setDislikes(dislikesCount) {
   getButtons().children[1].querySelector("#text").innerText = dislikesCount;
 }
 
-
 function setState() {
   let statsSet = false;
   browser.runtime.sendMessage(
@@ -79,7 +79,7 @@ function setState() {
         cLog("response from youtube:");
         cLog(JSON.stringify(response));
         try {
-          if (response.likes || response.dislikes) {
+          if (response.likes && response.dislikes) {
             const formattedDislike = numberFormat(response.dislikes);
             setDislikes(formattedDislike);
             storedData.dislikes = parseInt(response.dislikes);
@@ -115,20 +115,16 @@ function setState() {
   );
 }
 
-function likeClicked() {
-  console.log("Dislike State:",getState());
-  // setState();
-}
+function likeClicked() {}
 
 function dislikeClicked() {
   let state = getState();
-
-  console.log("Dislike State:",state);
-
-  if (state == 'disliked') {
-    setDislikes(numberFormat(storedData.dislikes + 1))
-  } else if (state == 'neutral') {
-    setDislikes(numberFormat(storedData.dislikes))
+  if (state == "disliked") {
+    storedData.dislikes++;
+    setDislikes(numberFormat(storedData.dislikes));
+  } else if (state == "neutral") {
+    storedData.dislikes--;
+    setDislikes(numberFormat(storedData.dislikes));
   }
 
   // setState();
@@ -157,19 +153,19 @@ function roundDown(num) {
   const int = Math.floor(Math.log10(num) - 2);
   const decimal = int + (int % 3 ? 1 : 0);
   const value = Math.floor(num / 10 ** decimal);
-  return value * (10 ** decimal);
+  return value * 10 ** decimal;
 }
 
 function numberFormat(numberState) {
   const userLocales = navigator.language;
 
   const formatter = Intl.NumberFormat(userLocales, {
-    notation: 'compact',
+    notation: "compact",
     minimumFractionDigits: 1,
-    maximumFractionDigits: 1
+    maximumFractionDigits: 1,
   });
 
-  return formatter.format(roundDown(numberState)).replace(/\.0|,0/, '');
+  return formatter.format(roundDown(numberState)).replace(/\.0|,0/, "");
 }
 
 function setEventListeners(evt) {
@@ -261,13 +257,13 @@ function sendVideoIds() {
       "yt-simple-endpoint ytd-compact-video-renderer"
     )
   )
-  .concat(
-    Array.from(
-      document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
+    .concat(
+      Array.from(
+        document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
+      )
     )
-  )
-  .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-  .map((x) => getVideoId(x.href));
+    .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
+    .map((x) => getVideoId(x.href));
   browser.runtime.sendMessage({
     message: "send_links",
     videoIds: ids,
@@ -277,4 +273,3 @@ function sendVideoIds() {
 setEventListeners();
 
 setTimeout(() => sendVideoIds(), 1500);
-

@@ -85,7 +85,7 @@
           cLog("response from youtube:");
           cLog(JSON.stringify(response));
           try {
-            if (response.likes || response.dislikes) {
+            if (response.likes && response.dislikes) {
               const formattedDislike = numberFormat(response.dislikes);
               setDislikes(formattedDislike);
               storedData.dislikes = parseInt(response.dislikes);
@@ -121,7 +121,7 @@
   }
 
   function likeClicked() {
-    console.log("Dislike State:",getState());
+    console.log("Dislike State:", getState());
     // setState();
   }
 
@@ -131,8 +131,10 @@
     console.log("Dislike State:",state);
 
     if (state == 'disliked') {
-      setDislikes(numberFormat(storedData.dislikes + 1))
+      storedData.dislikes++;
+      setDislikes(numberFormat( storedData.dislikes))
     } else if (state == 'neutral') {
+      storedData.dislikes--;
       setDislikes(numberFormat(storedData.dislikes))
     }
 
