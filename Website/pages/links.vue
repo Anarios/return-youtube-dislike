@@ -1,10 +1,10 @@
 <template>
   <div style="height: 100%">
     
-    <h1 style="font-size: 3em; margin-bottom: 0;">Project Links</h1>
+    <h1 :style="$vuetify.breakpoint.xs ? 'font-size: 2rem;' : 'font-size: 3rem;'" >Project Links</h1>
           
     <div style="color: #999">
-      <p style="margin-bottom: 1em;">Links to the project and it's developers</p>
+      <p style="margin-top: .5rem; margin-bottom: .5em;">Links to the project and it's developers</p>
     </div>
 
     <v-btn class="mainAltButton" :href="githubLink" target="_blank">

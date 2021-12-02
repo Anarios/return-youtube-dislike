@@ -2,8 +2,8 @@
   <div>
     
 
-    <h1 style="font-size: 3em; margin-bottom: 0em;">Frequently Asked Questions</h1>
-    <p style="color: #999; margin-bottom: 3em;">Still have questions? Feel free to join our Discord!</p>
+    <h1 :style="$vuetify.breakpoint.xs ? 'font-size: 2rem;' : 'font-size: 3rem;'" >Frequently Asked Questions</h1>
+    <p style="color: #999; margin-top: .5rem; margin-bottom: 2rem;">Still have questions? Feel free to join our Discord!</p>
 
     <v-expansion-panels focusable>
       <v-expansion-panel v-for="(item, i) in items" :key="i" style="width: 50vw; min-width: 300px;">
