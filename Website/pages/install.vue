@@ -1,11 +1,11 @@
 <template>
   <div>
 
-    <h1 style="font-size: 3em; margin-bottom: 0;">Select Your Platform</h1>
+    <h1 :style="$vuetify.breakpoint.xs ? 'font-size: 2rem;' : 'font-size: 3rem;'" >Select Your Platform</h1>
 
-    <div style="color: #999">
-      <p style="margin-bottom: 0;"> This is an <b>ALPHA version!</b> It may be slow. It may be buggy.</p>
-      <p style="margin-bottom: 1em;">Available for Firefox and all Chromium browsers (Chrome/Edge/Opera/Brave).</p>
+    <div style="color: #999;">
+      <p style=" margin-top: .5rem; margin-bottom: 0;"> This is an <b>ALPHA version!</b> It may be slow. It may be buggy.</p>
+      <p style="margin-bottom: 1rem;">Available for Firefox and all Chromium browsers (Chrome/Edge/Opera/Brave).</p>
     </div>
 
     <v-btn class="mainAltButton" :href="firefoxLink" target="_blank">
@@ -28,9 +28,14 @@
       Opera
     </v-btn>
 
+    <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
+      <v-img style="margin-right: 1rem;" src="ui/brave-mono.svg" height="20" width="20" />
+      Brave
+    </v-btn>
+
     <h3 style="margin-top: 3em; margin-bottom:0">Other Platforms</h3>
     <div style="color: #999">
-      <p style="margin-top: 0em; margin-bottom:0;">If your browser is not yet supported, try this UserScript.</p>
+      <p style="margin-top: .5rem; margin-bottom:.5rem;">If your browser is not yet supported, try this UserScript.</p>
     </div>
 
     <v-btn class="mainAltButton" :href="scriptLink" target="_blank">
@@ -39,8 +44,8 @@
     </v-btn>
 
     <h3 style="margin-top: 3em;">Third Party Implementations</h3>
-    <div style="color: #999">
-      <p style="margin-bottom: 0;">No liability on our side, use at your own risk.</p>
+    <div style="color: #999;">
+      <p style="margin-top: .5rem; margin-bottom: .5rem;">No liability on our side, use at your own risk.</p>
     </div>
     <v-btn class="mainAltButton" :href="iosJailbreakLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-apple</v-icon>
