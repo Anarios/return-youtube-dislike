@@ -1,3 +1,7 @@
+let storedData = {
+  dislikes: 0
+};
+
 function cLog(message, writer) {
   message = `[return youtube dislike]: ${message}`;
   if (writer) {
@@ -8,8 +12,11 @@ function cLog(message, writer) {
 }
 
 function getButtons() {
+
+  //---   If Menu Element Is Displayed:   ---//
   if (document.getElementById("menu-container").offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
+  //---   If Menu Element Isnt Displayed:   ---//
   } else {
     return document
       .getElementById("menu-container")
@@ -51,13 +58,14 @@ function getState() {
   return "neutral";
 }
 
+//---   Sets The Likes And Dislikes Values   ---//
 function setLikes(likesCount) {
   getButtons().children[0].querySelector("#text").innerText = likesCount;
 }
-
 function setDislikes(dislikesCount) {
   getButtons().children[1].querySelector("#text").innerText = dislikesCount;
 }
+
 
 function setState() {
   let statsSet = false;
@@ -74,6 +82,7 @@ function setState() {
           if (response.likes || response.dislikes) {
             const formattedDislike = numberFormat(response.dislikes);
             setDislikes(formattedDislike);
+            storedData.dislikes = parseInt(response.dislikes);
             createRateBar(response.likes, response.dislikes);
             statsSet = true;
           }
@@ -95,6 +104,7 @@ function setState() {
       cLog(JSON.stringify(response));
       if (response != undefined && !statsSet) {
         const formattedDislike = numberFormat(response.dislikes);
+        storedData.dislikes = response.dislikes;
         // setLikes(response.likes);
         console.log(response);
         setDislikes(formattedDislike);
@@ -106,12 +116,21 @@ function setState() {
 }
 
 function likeClicked() {
-  // console.log("like" + getState());
+  console.log("Dislike State:",getState());
   // setState();
 }
 
 function dislikeClicked() {
-  // console.log("dislike" + getState());
+  let state = getState();
+
+  console.log("Dislike State:",state);
+
+  if (state == 'disliked') {
+    setDislikes(numberFormat(storedData.dislikes + 1))
+  } else if (state == 'neutral') {
+    setDislikes(numberFormat(storedData.dislikes))
+  }
+
   // setState();
 }
 

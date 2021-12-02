@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta content="text/html; charset=utf-8">
+    <meta content="text/html; charset=utf-8" />
     <title>Return YouTube Dislike</title>
-    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-
-
     <center>
       <img src="icons/icon48.png" alt="Logo" />
       <h1>Return YouTube Dislike</h1>
@@ -18,15 +16,26 @@
       <button id="link_discord">Discord</button>
 
       <br>
-<!--      <button id="advancedToggle">Show Advanced</button>-->
+      <button id="advancedToggle">Show Settings</button>
+      <br>
 
     </center>
 
-    <div id="advancedSettings">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo laboriosam, veritatis sint dolores assumenda harum quidem molestiae ad repellendus aliquid?
-    </div>
+    <fieldset id="advancedSettings">
+      <legend id="advancedLegend">Settings</legend>
 
+      <label class="switch">
+        <input type="checkbox" id="disable_ratio_bar" />
+        <span class="slider" />
+        <span class="switchLabel">Lorem ipsum dolor sit amet</span> </label
+      ><br />
 
+      <label class="switch">
+        <input type="checkbox" id="disable_api_unlisted" />
+        <span class="slider" />
+        <span class="switchLabel">Lorem ipsum dolor sit amet</span> </label
+      ><br />
+    </fieldset>
   </body>
   <script src="popup.js"></script>
 </html>
