@@ -1,4 +1,8 @@
 (function (extensionId) {
+  let storedData = {
+    dislikes: 0
+  };
+
   function cLog(message, writer) {
     message = `[return youtube dislike]: ${message}`;
     if (writer) {
@@ -9,10 +13,13 @@
   }
 
   function getButtons() {
-    if (document.getElementById("menu-container").offsetParent === null) {
+
+    //---   If Menu Element Is Displayed:   ---//
+    if (document.getElementById('menu-container').offsetParent === null) {
       return document.querySelector(
         "ytd-menu-renderer.ytd-watch-metadata > div"
       );
+    //---   If Menu Element Isnt Displayed:   ---//
     } else {
       return document
         .getElementById("menu-container")
@@ -44,6 +51,7 @@
     return getDislikeButton().classList.contains("style-text");
   }
 
+
   function getState() {
     if (isVideoLiked()) {
       return "liked";
@@ -54,13 +62,15 @@
     return "neutral";
   }
 
+  //---   Sets The Likes And Dislikes Values   ---//
   function setLikes(likesCount) {
     getButtons().children[0].querySelector("#text").innerText = likesCount;
   }
-
   function setDislikes(dislikesCount) {
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   }
+
+
 
   function setState() {
     let statsSet = false;
@@ -75,9 +85,10 @@
           cLog("response from youtube:");
           cLog(JSON.stringify(response));
           try {
-            if (response.likes || response.dislikes) {
+            if (response.likes && response.dislikes) {
               const formattedDislike = numberFormat(response.dislikes);
               setDislikes(formattedDislike);
+              storedData.dislikes = parseInt(response.dislikes);
               createRateBar(response.likes, response.dislikes);
               statsSet = true;
             }
@@ -110,12 +121,23 @@
   }
 
   function likeClicked() {
-    // console.log("like" + getState());
+    console.log("Dislike State:", getState());
     // setState();
   }
 
   function dislikeClicked() {
-    // console.log("dislike" + getState());
+    let state = getState();
+
+    console.log("Dislike State:",state);
+
+    if (state == 'disliked') {
+      storedData.dislikes++;
+      setDislikes(numberFormat( storedData.dislikes))
+    } else if (state == 'neutral') {
+      storedData.dislikes--;
+      setDislikes(numberFormat(storedData.dislikes))
+    }
+
     // setState();
   }
 

@@ -1,18 +1,22 @@
 // ==UserScript==
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
-// @version      0.6
+// @homepage     https://www.returnyoutubedislike.com/
+// @version      0.6.1
+// @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
+// @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
 // @author       Anarios & JRWR
-// @match      *://*.youtube.com/*
-// @compatible chrome
-// @compatible firefox
-// @compatible opera
-// @compatible safari
-// @compatible edge
-// @downloadURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
-// @updateURL https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
-// @grant GM.xmlHttpRequest
+// @match        *://*.youtube.com/*
+// @compatible   chrome
+// @compatible   firefox
+// @compatible   opera
+// @compatible   safari
+// @compatible   edge
+// @downloadURL  https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
+// @updateURL    https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
+// @grant        GM.xmlHttpRequest
+// @run-at       document-end
 // ==/UserScript==
 function cLog(text, subtext = '') {
   subtext = subtext.trim() === '' ? '' : `(${subtext})`;
@@ -127,7 +131,7 @@ function setState() {
       if (result) {
         cLog("response from youtube:");
         cLog(JSON.stringify(result));
-        if (result.likes || result.dislikes) {
+        if (result.likes && result.dislikes) {
           const formattedDislike = numberFormat(result.dislikes);
           setDislikes(formattedDislike);
           createRateBar(result.likes, result.dislikes);
