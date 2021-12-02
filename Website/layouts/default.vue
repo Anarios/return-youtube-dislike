@@ -1,6 +1,10 @@
 <template>
   <v-app id="inspire" dark>
-    <v-app-bar app color="ma-4 glassy" flat style="border-radius: 1rem; overflow: hidden">
+    <v-app-bar app flat class="glassy fly-in-from-top"
+      :class="$vuetify.breakpoint.mobile ? 'ma-4' : 'my-4 mx-auto'"
+      :style="$vuetify.breakpoint.mobile ? '' : 'width: 50%'"
+      style="border-radius: 1rem; overflow: hidden;"
+      >
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
           {{ link.name }}
@@ -42,6 +46,23 @@ html, body {
   background-color: rgba(42, 42, 42, 0.75) !important;
   border-radius: 12px;
   /* border: 1px solid rgba(255, 255, 255, 0.125); */
+}
+
+.fly-in-from-top {
+  opacity: 0;
+  transform: scale(0.8) translateY(-200%);
+  animation: fly-in-from-top 0.5s .3s ease forwards;
+}
+
+@keyframes fly-in-from-top {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-200%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 </style>
 

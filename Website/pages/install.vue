@@ -28,6 +28,11 @@
       Opera
     </v-btn>
 
+    <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
+      <v-img style="margin-right: 1rem;" src="ui/brave-mono.svg" height="20" width="20" />
+      Brave
+    </v-btn>
+
     <h3 style="margin-top: 3em; margin-bottom:0">Other Platforms</h3>
     <div style="color: #999">
       <p style="margin-top: .5rem; margin-bottom:.5rem;">If your browser is not yet supported, try this UserScript.</p>
