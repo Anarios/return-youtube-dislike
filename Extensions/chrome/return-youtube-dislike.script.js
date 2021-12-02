@@ -75,7 +75,7 @@
           cLog("response from youtube:");
           cLog(JSON.stringify(response));
           try {
-            if (response.likes || response.dislikes) {
+            if (response.likes >=0 || response.dislikes >=0) {
               const formattedDislike = numberFormat(response.dislikes);
               setDislikes(formattedDislike);
               createRateBar(response.likes, response.dislikes);
