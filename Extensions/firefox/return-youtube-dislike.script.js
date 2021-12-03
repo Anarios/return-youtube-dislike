@@ -160,12 +160,10 @@ function numberFormat(numberState) {
   const userLocales = navigator.language;
 
   const formatter = Intl.NumberFormat(userLocales, {
-    notation: "compact",
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
+    notation: "compact"
   });
 
-  return formatter.format(roundDown(numberState)).replace(/\.0|,0/, "");
+  return formatter.format(roundDown(numberState));
 }
 
 function setEventListeners(evt) {
