@@ -37,6 +37,10 @@ button {
     0 1px 10px 0 rgb(0 0 0 / 12%);
 }
 
+button:hover {
+    background: #444;
+}
+
 #advancedToggle {
   margin-top: 1em;
   margin-bottom: 2em;
