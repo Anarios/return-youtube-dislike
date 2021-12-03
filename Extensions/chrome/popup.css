@@ -17,7 +17,7 @@ body {
   color: var(--white);
   min-width: 300px;
   padding: 0.5em;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: 14px;
 }
 
