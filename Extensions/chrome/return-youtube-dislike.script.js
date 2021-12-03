@@ -143,7 +143,7 @@
 
   function setInitalState() {
     setState();
-    // setTimeout(() => sendVideoIds(), 1500);
+    setTimeout(() => sendVideoIds(), 1500);
   }
 
   function getVideoId(url) {
@@ -171,12 +171,10 @@
     const userLocales = navigator.language;
 
     const formatter = Intl.NumberFormat(userLocales, {
-      notation: 'compact',
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1
+      notation: 'compact'
     });
 
-    return formatter.format(roundDown(numberState)).replace(/\.0|,0/, '');
+    return formatter.format(roundDown(numberState));
   }
 
   var jsInitChecktimer = null;
@@ -249,24 +247,24 @@
     }
   }
 
-  // function sendVideoIds() {
-  //   const ids = Array.from(
-  //     document.getElementsByClassName(
-  //       "yt-simple-endpoint ytd-compact-video-renderer"
-  //     )
-  //   )
-  //     .concat(
-  //       Array.from(
-  //         document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
-  //       )
-  //     )
-  //     .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-  //     .map((x) => getVideoId(x.href));
-  //   chrome.runtime.sendMessage(extensionId, {
-  //     message: "send_links",
-  //     videoIds: ids,
-  //   });
-  // }
+  function sendVideoIds() {
+    const ids = Array.from(
+      document.getElementsByClassName(
+        "yt-simple-endpoint ytd-compact-video-renderer"
+      )
+    )
+      .concat(
+        Array.from(
+          document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
+        )
+      )
+      .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
+      .map((x) => getVideoId(x.href));
+    chrome.runtime.sendMessage(extensionId, {
+      message: "send_links",
+      videoIds: ids,
+    });
+  }
 
   setEventListeners();
 
@@ -276,9 +274,7 @@
     setEventListeners();
   });
 
-  // window.onscrollend = () => {
-  //   sendVideoIds();
-  // };
 
-  // setTimeout(() => sendVideoIds(), 1500);
+
+  setTimeout(() => sendVideoIds(), 2500);
 })(document.currentScript.getAttribute("extension-id"));
