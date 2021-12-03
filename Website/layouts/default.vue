@@ -1,9 +1,7 @@
 <template>
-  <v-app id="inspire" dark>
-    <v-app-bar app flat class="glassy fly-in-from-top"
+  <v-app dark>
+    <v-app-bar app flat class="topBar fly-in-from-top"
       :class="$vuetify.breakpoint.mobile ? 'ma-4' : 'my-4 mx-auto'"
-      :style="$vuetify.breakpoint.mobile ? '' : 'width: 50%'"
-      style="border-radius: 1rem; overflow: hidden;"
       >
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
@@ -43,13 +41,13 @@ html, body {
   display: none;
 }
 
-/* Glassmorphism effect */
-.glassy {
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(42, 42, 42, 0.75) !important;
+.topBar {
+  background-color: #222 !important;
   border-radius: 12px;
-  /* border: 1px solid rgba(255, 255, 255, 0.125); */
+  width: fit-content !important;
+  padding: 0 50px;
+  border-radius: 1rem !important;
+  overflow: hidden;
 }
 
 .fly-in-from-top {
@@ -68,6 +66,13 @@ html, body {
     transform: scale(1) translateY(0);
   }
 }
+
+@media (min-width: 1670px) { 
+  .WhyCelesteHead { 
+    width: 1234px; 
+  } 
+}
+
 </style>
 
 <script>
