@@ -7,7 +7,9 @@ const config = {
   links: {
     website: 'https://returnyoutubedislike.com',
     github: 'https://github.com/Anarios/return-youtube-dislike',
-    discord: 'https://discord.gg/mYnESY4Md5'
+    discord: 'https://discord.gg/mYnESY4Md5',
+    patreon: 'https://www.patreon.com/returnyoutubedislike',
+    yoomoney: 'https://returnyoutubedislike.com/pay/yoomoney'
   },
 };
 
@@ -23,6 +25,15 @@ document.getElementById('link_github').addEventListener('click', () => {
 document.getElementById('link_discord').addEventListener('click', () => {
   chrome.tabs.create({url: config.links.discord});
 });
+
+document.getElementById('link_patreon').addEventListener('click', () => {
+  chrome.tabs.create({url: config.links.patreon});
+});
+
+document.getElementById('link_yoomoney').addEventListener('click', () => {
+  chrome.tabs.create({url: config.links.yoomoney});
+});
+
 
 /*   Advanced Toggle   */
 const advancedToggle = document.getElementById('advancedToggle');
