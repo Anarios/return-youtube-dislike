@@ -66,12 +66,13 @@ html, body {
     transform: scale(1) translateY(0);
   }
 }
-
-@media (min-width: 1670px) { 
-  .WhyCelesteHead { 
-    width: 1234px; 
+/*
+@media (min-width: 1234px) { 
+  .topBar { 
+    width: 95%; 
   } 
 }
+*/
 
 </style>
 
