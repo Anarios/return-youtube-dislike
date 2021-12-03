@@ -8,7 +8,7 @@
     <v-expansion-panels focusable>
       <v-expansion-panel v-for="(item, i) in items" :key="i" style="width: 50vw; min-width: 300px;">
         <v-expansion-panel-header v-text="item.question">Loading</v-expansion-panel-header>
-        <v-expansion-panel-content v-html="item.answer" style="text-align: left; padding: 0.5em;">Loading</v-expansion-panel-content>
+        <v-expansion-panel-content v-html="item.answer" style="text-align: left; padding: 24px;">Loading</v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
 
