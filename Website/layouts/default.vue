@@ -16,10 +16,10 @@
 
     <v-main class="pt-4">
 
-      <section style="height: calc(100vh - 1rem); padding-top: 5rem; padding-bottom: 5rem; overflow-y: auto;">
+      <section class="hidden-chrome-scrollbar" style="height: calc(100vh - 1rem); padding-top: 5rem; padding-bottom: 5rem; overflow-y: auto;">
           <center
-            class="mx-auto d-flex flex-column justify-center items-center"
-            style="width: 90vw; min-height: 100%; overflow-y: scroll;">
+            class="hidden-chrome-scrollbar mx-auto d-flex flex-column justify-center items-center"
+            style="width: 90vw; min-height: 100%; overflow-y: auto;">
 
             <nuxt />
 
@@ -37,6 +37,10 @@ html, body {
 
 .mainAltButton {
   margin: 0.25em;
+}
+
+.hidden-chrome-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Glassmorphism effect */
