@@ -31,18 +31,20 @@
 <style scoped>
 #thumbslogo {
   opacity: 0;
+  transition-property: opacity, transform;
   transform: scale(0) rotate(180deg);
   animation: popin 1s 1s ease-in-out 1 forwards, thumbsflip 2s 3s ease-in-out infinite alternate;
 }
 @keyframes popin {
   0% {
-    transform: rotate(180deg) scale(0.5);
+    transform: rotate(180deg) scale(0);
     opacity: 0;
   } 100% {
     transform: rotate(0deg) scale(1);
     opacity: 1;
   }
 }
+
 @keyframes thumbsflip {
   0% {
     transform: rotate(0deg) scale(1);
@@ -50,6 +52,15 @@
     transform: rotate(0) scale(1);
   } 100% {
     transform: rotate(180deg) scale(.9);
+  }
+}
+
+/* reduced-motion animations */
+@media (prefers-reduced-motion) {
+  #thumbslogo {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
 </style>

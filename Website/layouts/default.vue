@@ -114,6 +114,51 @@ html, body {
     transform: scale(1) translateY(0);
   }
 }
+
+/* reduced-motion animations */
+@media (prefers-reduced-motion) {
+  .fly-in-from-top {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .swoop-in-enter-active,
+  .swoop-in-leave-active,
+  .swoop-out-enter-active,
+  .swoop-out-leave-active,
+  .swoop-left-enter-active,
+  .swoop-left-leave-active,
+  .swoop-right-enter-active,
+  .swoop-right-leave-active {
+    transition-duration: 0.05s;
+    transition-property: opacity;
+  }
+
+  .swoop-left-enter,
+  .swoop-right-leave-active {
+    opacity: 0;
+    transform: none;
+  }
+
+  .swoop-left-leave-active,
+  .swoop-right-enter {
+    opacity: 0;
+    transform: none;
+  }
+
+  .swoop-in-enter,
+  .swoop-out-leave-active {
+    opacity: 0;
+    transform: none;
+  }
+
+  .swoop-in-leave-active,
+  .swoop-out-enter {
+    opacity: 0;
+    transform: none;
+  }
+}
 </style>
 
 <script>
