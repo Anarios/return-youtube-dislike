@@ -8,27 +8,27 @@
       <p style="margin-bottom: 1rem;">Available for Firefox and all Chromium browsers (Chrome/Edge/Opera/Brave).</p>
     </div>
 
-    <v-btn class="mainAltButton" :href="firefoxLink" target="_blank">
+    <v-btn class="mainAltButton mb-2" :href="firefoxLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-firefox</v-icon>
       Firefox
     </v-btn>
 
-    <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
+    <v-btn class="mainAltButton mb-2" :href="chromeLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-google-chrome</v-icon>
       Chrome
     </v-btn>
 
-    <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
+    <v-btn class="mainAltButton mb-2" :href="chromeLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-microsoft-edge</v-icon>
       Edge
     </v-btn>
 
-    <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
+    <v-btn class="mainAltButton mb-2" :href="chromeLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-opera</v-icon>
       Opera
     </v-btn>
 
-    <v-btn class="mainAltButton" :href="chromeLink" target="_blank">
+    <v-btn class="mainAltButton mb-2" :href="chromeLink" target="_blank">
       <v-img style="margin-right: 1rem;" src="ui/brave-mono.svg" height="20" width="20" />
       Brave
     </v-btn>

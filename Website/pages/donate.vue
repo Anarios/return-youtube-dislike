@@ -2,7 +2,7 @@
   <div>
     
     <h1 class="title-text" >Donate</h1>
-    <p style="color: #999; margin-top: .5rem; margin-bottom: 2rem;">You can support our efforts to keep the internet free with a donation!</p>
+    <p style="color: #999; margin-top: .5rem; margin-bottom: 1.5rem;">You can support our efforts to keep the internet free with a donation!</p>
     <v-btn class="mainAltButton" :href="patreonLink" target="_blank">
       <v-icon style="margin-right: 0.5em;">mdi-patreon</v-icon>
       Patreon

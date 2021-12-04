@@ -3,7 +3,7 @@
     
 
     <h1 class="title-text" >Frequently Asked Questions</h1>
-    <p style="color: #999; margin-top: .5rem; margin-bottom: 2rem;">Still have questions? Feel free to join our Discord!</p>
+    <p style="color: #999; margin-top: .5rem; margin-bottom: 1.5rem;">Still have questions? Feel free to join our Discord!</p>
 
     <v-expansion-panels focusable>
       <v-expansion-panel v-for="(item, i) in items" :key="i" style="width: 50vw; min-width: 300px;">
