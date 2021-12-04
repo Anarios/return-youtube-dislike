@@ -1,6 +1,7 @@
 if (!storedData) {
   var storedData = {
     dislikes: 0,
+    previousState: 'neutral'
   };
 }
 
@@ -51,12 +52,12 @@ function isVideoNotDisliked() {
 
 function getState() {
   if (isVideoLiked()) {
-    return "liked";
+    return {current: "liked", previous: storedData.previousState};
   }
   if (isVideoDisliked()) {
-    return "disliked";
+    return {current: "disliked", previous: storedData.previousState};
   }
-  return "neutral";
+  return {current: "neutral", previous: storedData.previousState};
 }
 
 //---   Sets The Likes And Dislikes Values   ---//
@@ -97,7 +98,7 @@ function setState() {
     {
       message: "set_state",
       videoId: getVideoId(window.location.href),
-      state: getState(),
+      state: getState().current,
     },
     function (response) {
       cLog("response from api:");
@@ -118,13 +119,15 @@ function setState() {
 function likeClicked() {}
 
 function dislikeClicked() {
-  let state = getState();
+  let state = getState().current;
   if (state == "disliked") {
     storedData.dislikes++;
     setDislikes(numberFormat(storedData.dislikes));
+    storedData.previousState = 'disliked';
   } else if (state == "neutral") {
     storedData.dislikes--;
     setDislikes(numberFormat(storedData.dislikes));
+    storedData.previousState = 'neutral';
   }
 
   // setState();
