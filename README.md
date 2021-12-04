@@ -36,6 +36,21 @@ and estimates based on view\like ratios.
 
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
+## Help archiving dislikes
+
+[archiveteam.org](https://tracker.archiveteam.org/youtube-dislikes/) provides an easy way to help archiving dislikes.
+
+How to contribute:
+1. [Download VirtualBox](https://www.virtualbox.org/)
+2. Go to https://tracker.archiveteam.org/youtube-dislikes/
+3. Click on "Run your own ArchiveTeam Warrior."
+4. Click on "Download the appliance"
+5. Download "archiveteam-warrior-v3-20171013.ova" ([mirror link](https://warriorhq.archiveteam.org/downloads/warrior3/archiveteam-warrior-v3-20171013.ova))
+6. Import the file in VirtualBox & start the virtual machine
+7. Go to http://localhost:8001/, select "YouTube dislikes" and click on "Work on this project"
+8. Spread awareness about this project ♥️
+
+
 ## Contributing
 
 Please read the [contribution guide.](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)
