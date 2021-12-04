@@ -16,6 +16,7 @@
 // @downloadURL  https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @updateURL    https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @grant        GM.xmlHttpRequest
+// @grant        GM_addStyle
 // @run-at       document-end
 // ==/UserScript==
 function cLog(text, subtext = '') {
@@ -74,6 +75,42 @@ function setLikes(likesCount) {
 function setDislikes(dislikesCount) {
   getButtons().children[1].querySelector("#text").innerText = dislikesCount;
 }
+
+(typeof GM_addStyle != 'undefined'
+ ? GM_addStyle
+ : styles => {
+  var styleNode = document.createElement("style")
+  styleNode.type = "text/css";
+  styleNode.innerText = styles;
+  document.head.appendChild(styleNode);
+})(`
+    #return-youtube-dislike-bar-container {
+      background: var(--yt-spec-icon-disabled);
+      border-radius: 2px;
+    }
+
+    #return-youtube-dislike-bar {
+      background: var(--yt-spec-text-primary);
+      border-radius: 2px;
+      transition: all 0.15s ease-in-out;
+    }
+
+    .ryd-tooltip {
+      position: relative;
+      display: block;
+      height: 2px;
+      top: 9px;
+    }
+
+    .ryd-tooltip-bar-container {
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      padding-top: 6px;
+      padding-bottom: 28px;
+      top: -6px;
+    }
+  `);
 
 function createRateBar(likes, dislikes) {
   var rateBar = document.getElementById("return-youtube-dislike-bar-container");
