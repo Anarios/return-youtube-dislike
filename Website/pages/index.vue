@@ -1,14 +1,14 @@
 <template>
   <div>
 
-    <svg id="thumbslogo" width="150" height="150" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 240 240"><path d="M139.1 65.3H81.8c-5.3 0-9.8 3.2-11.7 7.7l-19.3 45c-.6 1.4-.9 3-.9 4.6v12.7c0 7 5.8 12.8 12.8 12.8h40.2l-6 29.1-.3 2c0 2.7 1.1 5 2.8 6.8l6.8 6.7 42-42c2.3-2.3 3.7-5.5 3.7-9V78c0-7-5.8-12.7-12.8-12.7Zm25.5 0v76.4h25.5V65.3h-25.5Z" style="fill:url(#a);fill-rule:nonzero"/><defs><linearGradient id="a" x1="0" x2="1" y1="0" y2="0" gradientTransform="rotate(45.1 -33.6 75.6) scale(216.517)" gradientUnits="userSpaceOnUse"><stop offset="0" style="stop-color:#f44;stop-opacity:1"/><stop offset=".6" style="stop-color:#400;stop-opacity:1"/><stop offset="1" style="stop-color:#000;stop-opacity:1"/></linearGradient></defs></svg>
+    <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24"><path d="m15 3h-9c-0.83 0-1.54 0.5-1.84 1.22l-3.02 7.05c-0.09 0.23-0.14 0.47-0.14 0.73v2a2 2 0 0 0 2 2h6.31l-0.95 4.57a1.49 1.49 0 0 0 0.41 1.37l1.06 1.06 6.58-6.59c0.37-0.36 0.59-0.86 0.59-1.41v-10a2 2 0 0 0-2-2zm4 12h4v-12h-4z" /><path d="m7.47 12.2 4.76-2.7-4.76-2.71z" fill="#fff" stroke="none"/></svg>
 
     <h1 class="title-text" >Return YouTube Dislike</h1>
     <div class="mb-4" style="color: #999">
       <p style="margin-top: 0">Browser extension and an API that show you dislikes on youtube</p>
     </div>
 
-    <v-btn :to="installLink" color="primary lighten-1 px-6" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em;">
+    <v-btn :to="installLink" color="primary px-6" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em;">
       <v-icon large class="mr-6">mdi-tray-arrow-down</v-icon>
       Install
     </v-btn>
@@ -31,10 +31,13 @@
 <style scoped>
 #thumbslogo {
   opacity: 0;
+  fill: transparent;
+  stroke: #f44;
   transition-property: opacity, transform;
   transform: scale(0) rotate(180deg);
-  animation: popin 1s 1s ease-in-out 1 forwards, thumbsflip 2s 3s ease-in-out infinite alternate;
+  animation: popin 1s 1s ease-in-out 1 forwards, tap .3s 2.5s ease-in-out 1 forwards;
 }
+
 @keyframes popin {
   0% {
     transform: rotate(180deg) scale(0);
@@ -45,13 +48,19 @@
   }
 }
 
-@keyframes thumbsflip {
+@keyframes tap {
   0% {
-    transform: rotate(0deg) scale(1);
-  } 50% {
-    transform: rotate(0) scale(1);
+    fill: transparent;
+    stroke: #f44;
+    transform: scale(1);
+  } 25% {
+    fill: #f44;
+    stroke: none;
+    transform: scale(.8);
   } 100% {
-    transform: rotate(180deg) scale(.9);
+    fill: #f44;
+    stroke: none;
+    transform: scale(1);
   }
 }
 
@@ -59,6 +68,8 @@
 @media (prefers-reduced-motion) {
   #thumbslogo {
     opacity: 1;
+    fill: #f44;
+    stroke: none;
     transform: none;
     animation: none;
   }
