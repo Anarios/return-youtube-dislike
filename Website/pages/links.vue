@@ -1,10 +1,10 @@
 <template>
   <div style="height: 100%">
     
-    <h1 :style="$vuetify.breakpoint.xs ? 'font-size: 2rem;' : 'font-size: 3rem;'" >Project Links</h1>
+    <h1 class="title-text" >Project Links</h1>
           
     <div style="color: #999">
-      <p style="margin-top: .5rem; margin-bottom: .5em;">Links to the project and it's developers</p>
+      <p style="margin-top: .5rem; margin-bottom: 1rem;">Links to the project and it's developers</p>
     </div>
 
     <v-btn class="mainAltButton" :href="githubLink" target="_blank">
@@ -38,6 +38,13 @@
 
 <script>
 export default {
+  transition(to, from) {
+    if (!from) return 'swoop-in'
+    let routes = ['index', 'install', 'faq', 'donate', 'links']
+    if (routes.indexOf(to.name) < 0) return 'swoop-out'
+    if (routes.indexOf(from.name) < 0) return 'swoop-in'
+    return routes.indexOf(to.name) > routes.indexOf(from.name) ? 'swoop-left' : 'swoop-right'
+  },
   data() {
     return {
       githubLink: "https://github.com/Anarios/return-youtube-dislike",
