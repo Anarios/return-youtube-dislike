@@ -2,7 +2,7 @@
   <div>
     
 
-    <h1 :style="$vuetify.breakpoint.xs ? 'font-size: 2rem;' : 'font-size: 3rem;'" >Frequently Asked Questions</h1>
+    <h1 class="title-text" >Frequently Asked Questions</h1>
     <p style="color: #999; margin-top: .5rem; margin-bottom: 2rem;">Still have questions? Feel free to join our Discord!</p>
 
     <v-expansion-panels focusable>

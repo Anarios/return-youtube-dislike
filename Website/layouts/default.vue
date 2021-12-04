@@ -1,8 +1,6 @@
 <template>
   <v-app dark>
-    <v-app-bar app flat class="topBar fly-in-from-top"
-      :class="$vuetify.breakpoint.mobile ? 'ma-4' : 'my-4 mx-auto'"
-      >
+    <v-app-bar app flat class="topBar fly-in-from-top my-4 mx-auto" >
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
           {{ link.name }}
@@ -16,11 +14,9 @@
 
       <section class="hidden-chrome-scrollbar" style="height: calc(100vh - 1rem); padding-top: 5rem; padding-bottom: 5rem; overflow-y: auto;">
           <center
-            class="hidden-chrome-scrollbar mx-auto d-flex flex-column justify-center items-center"
-            style="width: 90vw; min-height: 100%; overflow-y: auto;">
-
+            class="mx-auto d-flex flex-column justify-center items-center"
+            style="width: 90vw; min-height: 100%;">
             <nuxt />
-
           </center>
       </section>
 
@@ -33,21 +29,35 @@ html, body {
   overflow: hidden;
 }
 
+.title-text {
+  font-size: 3rem;
+}
+
+.topBar {
+  padding: 0 3rem;
+  width: fit-content !important;
+  background-color: #222 !important;
+  border-radius: 1rem !important;
+  border-radius: .75rem;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) { /* mobile */
+  .title-text {
+    font-size: 2rem;
+  }
+  .topBar { 
+    width: calc(100vw - 2rem) !important; /* (2rem = mx-4) */
+    padding: 0;
+  } 
+}
+
 .mainAltButton {
   margin: 0.25em;
 }
 
 .hidden-chrome-scrollbar::-webkit-scrollbar {
   display: none;
-}
-
-.topBar {
-  background-color: #222 !important;
-  border-radius: 12px;
-  width: fit-content !important;
-  padding: 0 50px;
-  border-radius: 1rem !important;
-  overflow: hidden;
 }
 
 .fly-in-from-top {
@@ -66,14 +76,6 @@ html, body {
     transform: scale(1) translateY(0);
   }
 }
-/*
-@media (min-width: 1234px) { 
-  .topBar { 
-    width: 95%; 
-  } 
-}
-*/
-
 </style>
 
 <script>

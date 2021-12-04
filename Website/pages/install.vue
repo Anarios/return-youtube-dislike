@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <h1 :style="$vuetify.breakpoint.xs ? 'font-size: 2rem;' : 'font-size: 3rem;'" >Select Your Platform</h1>
+    <h1 class="title-text" >Select Your Platform</h1>
 
     <div style="color: #999;">
       <p style=" margin-top: .5rem; margin-bottom: 0;"> This is an <b>ALPHA version!</b> It may be slow. It may be buggy.</p>
