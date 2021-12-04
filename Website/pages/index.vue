@@ -56,6 +56,13 @@
 
 <script>
 export default {
+  transition(to, from) {
+    if (!from) return 'swoop-in'
+    let routes = ['index', 'install', 'faq', 'donate', 'links']
+    if (routes.indexOf(to.name) < 0) return 'swoop-out'
+    if (routes.indexOf(from.name) < 0) return 'swoop-in'
+    return routes.indexOf(to.name) > routes.indexOf(from.name) ? 'swoop-left' : 'swoop-right'
+  },
   data() {
     return {
       installLink: "/install",

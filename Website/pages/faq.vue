@@ -1,23 +1,34 @@
 <template>
   <div>
-    
 
     <h1 class="title-text" >Frequently Asked Questions</h1>
     <p style="color: #999; margin-top: .5rem; margin-bottom: 1.5rem;">Still have questions? Feel free to join our Discord!</p>
 
-    <v-expansion-panels focusable>
-      <v-expansion-panel v-for="(item, i) in items" :key="i" style="width: 50vw; min-width: 300px;">
-        <v-expansion-panel-header v-text="item.question">Loading</v-expansion-panel-header>
-        <v-expansion-panel-content v-html="item.answer" style="text-align: left; padding: 24px;">Loading</v-expansion-panel-content>
+    <v-expansion-panels class="col-xs-12 col-sm-11 col-md-9 col-lg-7">
+      <v-expansion-panel v-for="(item, i) in items" :key="i" >
+        <v-expansion-panel-header>
+          {{ item.question }}
+        </v-expansion-panel-header>
+        <v-expansion-panel-content class="text-left">
+          <hr style="border-color: #444;">
+          <br>
+          {{ item.answer }}
+        </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
-
 
   </div>
 </template>
 
 <script>
   export default {
+    transition(to, from) {
+      if (!from) return 'swoop-in'
+      let routes = ['index', 'install', 'faq', 'donate', 'links']
+      if (routes.indexOf(to.name) < 0) return 'swoop-out'
+      if (routes.indexOf(from.name) < 0) return 'swoop-in'
+      return routes.indexOf(to.name) > routes.indexOf(from.name) ? 'swoop-left' : 'swoop-right'
+    },
     data: () => ({
       items: [
         { 

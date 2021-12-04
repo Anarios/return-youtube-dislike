@@ -16,7 +16,7 @@
           <center
             class="mx-auto d-flex flex-column justify-center items-center"
             style="width: 90vw; min-height: 100%;">
-            <nuxt />
+              <nuxt />
           </center>
       </section>
 
@@ -58,6 +58,44 @@ html, body {
 
 .hidden-chrome-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* animations and all that */
+.swoop-in-enter-active,
+.swoop-in-leave-active,
+.swoop-out-enter-active,
+.swoop-out-leave-active,
+.swoop-left-enter-active,
+.swoop-left-leave-active,
+.swoop-right-enter-active,
+.swoop-right-leave-active {
+  transition-duration: 0.1s;
+  transition-property: opacity, transform;
+  overflow: hidden;
+}
+
+.swoop-left-enter,
+.swoop-right-leave-active {
+  opacity: 0;
+  transform: translate(1rem, 0);
+}
+
+.swoop-left-leave-active,
+.swoop-right-enter {
+  opacity: 0;
+  transform: translate(-1rem, 0);
+}
+
+.swoop-in-enter,
+.swoop-out-leave-active {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.swoop-in-leave-active,
+.swoop-out-enter {
+  opacity: 0;
+  transform: scale(1.1);
 }
 
 .fly-in-from-top {
