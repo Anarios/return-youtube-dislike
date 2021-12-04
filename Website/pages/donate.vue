@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <h1 class="title-text" >Donate</h1>
     <p style="color: #999; margin-top: .5rem; margin-bottom: 1.5rem;">You can support our efforts to keep the internet free with a donation!</p>
     <v-btn class="mainAltButton" :href="patreonLink" target="_blank">
@@ -10,6 +10,10 @@
     <v-btn class="mainAltButton" :to="yoomoneyLink">
       <v-icon style="margin-right: 0.5em;">mdi-cash-multiple</v-icon>
       Yoomoney
+    </v-btn>
+    <v-btn class="mainAltButton" :to="cryptoLink">
+      <v-icon style="margin-right: 0.5em;">mdi-bitcoin</v-icon>
+      Crypto
     </v-btn>
 
   </div>
@@ -26,7 +30,8 @@
     },
     data: () => ({
       patreonLink: "https://www.patreon.com/returnyoutubedislike",
-      yoomoneyLink: "/pay/yoomoney"
+      yoomoneyLink: "/pay/yoomoney",
+      cryptoLink: "/pay/crypto"
     })
   }
 </script>
