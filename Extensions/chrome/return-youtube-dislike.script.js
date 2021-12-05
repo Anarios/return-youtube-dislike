@@ -154,8 +154,12 @@
 
   function getVideoId(url) {
     const urlObject = new URL(url);
-    const videoId = urlObject.searchParams.get("v");
-    return videoId;
+    const pathname = urlObject.pathname;
+    if (pathname.startsWith('/clips')) {
+      return document.querySelector("meta[itemprop='videoId']").content;
+    } else {
+      return urlObject.searchParams.get("v");
+    }
   }
 
   function isVideoLoaded() {
