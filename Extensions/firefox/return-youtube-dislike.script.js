@@ -1,7 +1,11 @@
+const LIKED_STATE = "LIKED_STATE";
+const DISLIKED_STATE = "DISLIKED_STATE";
+const NEUTRAL_STATE = "NEUTRAL_STATE";
+
 if (!storedData) {
   var storedData = {
     dislikes: 0,
-    previousState: 'neutral'
+    previousState: NEUTRAL_STATE
   };
 }
 
@@ -52,12 +56,12 @@ function isVideoNotDisliked() {
 
 function getState() {
   if (isVideoLiked()) {
-    return {current: "liked", previous: storedData.previousState};
+    return {current: LIKED_STATE, previous: storedData.previousState};
   }
   if (isVideoDisliked()) {
-    return {current: "disliked", previous: storedData.previousState};
+    return {current: DISLIKED_STATE, previous: storedData.previousState};
   }
-  return {current: "neutral", previous: storedData.previousState};
+  return {current: NEUTRAL_STATE, previous: storedData.previousState};
 }
 
 //---   Sets The Likes And Dislikes Values   ---//
@@ -120,14 +124,14 @@ function likeClicked() {}
 
 function dislikeClicked() {
   let state = getState().current;
-  if (state == "disliked") {
+  if (state == DISLIKED_STATE) {
     storedData.dislikes++;
     setDislikes(numberFormat(storedData.dislikes));
-    storedData.previousState = 'disliked';
-  } else if (state == "neutral") {
+    storedData.previousState = DISLIKED_STATE;
+  } else if (state == NEUTRAL_STATE) {
     storedData.dislikes--;
     setDislikes(numberFormat(storedData.dislikes));
-    storedData.previousState = 'neutral';
+    storedData.previousState = NEUTRAL_STATE;
   }
 
   // setState();

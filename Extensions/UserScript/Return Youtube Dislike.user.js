@@ -19,6 +19,10 @@
 // @grant        GM_addStyle
 // @run-at       document-end
 // ==/UserScript==
+const LIKED_STATE = "LIKED_STATE";
+const DISLIKED_STATE = "DISLIKED_STATE";
+const NEUTRAL_STATE = "NEUTRAL_STATE";
+
 function cLog(text, subtext = '') {
   subtext = subtext.trim() === '' ? '' : `(${subtext})`;
   console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
@@ -60,12 +64,12 @@ function isVideoNotDisliked() {
 
 function getState() {
   if (isVideoLiked()) {
-    return "liked";
+    return LIKED_STATE;
   }
   if (isVideoDisliked()) {
-    return "disliked";
+    return DISLIKED_STATE;
   }
-  return "neutral";
+  return NEUTRAL_STATE;
 }
 
 function setLikes(likesCount) {
