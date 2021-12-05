@@ -202,7 +202,7 @@ function dislikeClicked() {
   setState();
 }
 
-function setInitalState() {
+function setInitialState() {
   setState();
 }
 
@@ -284,7 +284,7 @@ function setEventListeners(evt) {
         buttons.children[1].addEventListener("click", dislikeClicked);
         window.returnDislikeButtonlistenersSet = true;
       }
-      setInitalState();
+      setInitialState();
     }
   }
 

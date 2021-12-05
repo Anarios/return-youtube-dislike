@@ -133,7 +133,7 @@ function dislikeClicked() {
   // setState();
 }
 
-function setInitalState() {
+function setInitialState() {
   setState();
   // setTimeout(() => sendVideoIds(), 1500);
 }
@@ -193,7 +193,7 @@ function setEventListeners(evt) {
         // });
         window.returnDislikeButtonlistenersSet = true;
       }
-      setInitalState();
+      setInitialState();
     }
   }
 
