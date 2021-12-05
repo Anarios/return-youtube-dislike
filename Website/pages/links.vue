@@ -24,7 +24,12 @@
       Email
     </v-btn>
 
-    <p id="credits">Site by <v-icon color="#555">mdi-discord</v-icon> Front#2990</p>
+    <p id="credits" class="flex-row no-wrap">
+      Site by <v-icon color="#555">mdi-discord</v-icon> Front#2990
+      <br>
+      <span style="color: #444; font-size: 0.75rem">& <v-icon color="#333" size="1rem">mdi-discord</v-icon> PickleNik#0864</span>
+    </p>
+    <!-- 🤫 😉 -->
 
   </div>
 </template>
