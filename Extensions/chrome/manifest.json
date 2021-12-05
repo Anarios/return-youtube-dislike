@@ -21,6 +21,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
+      "exclude_matches": ["*://*.music.youtube.com/*"],
       "js": ["return-youtube-dislike.content-script.js"],
       "run_at": "document_start",
       "css": ["content-style.css"]

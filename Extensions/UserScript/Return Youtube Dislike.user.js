@@ -8,6 +8,8 @@
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
 // @author       Anarios & JRWR
 // @match        *://*.youtube.com/*
+// @exclude      *://music.youtube.com/*
+// @exclude      *://*.music.youtube.com/*
 // @compatible   chrome
 // @compatible   firefox
 // @compatible   opera
