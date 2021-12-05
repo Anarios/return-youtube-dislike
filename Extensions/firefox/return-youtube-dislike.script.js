@@ -120,7 +120,13 @@ function setState() {
   );
 }
 
-function likeClicked() {}
+function likeClicked() {
+  if (storedData.previousState === 'disliked') {
+    storedData.dislikes--;
+    setDislikes(numberFormat(storedData.dislikes));
+    storedData.previousState = 'liked';
+  }
+}
 
 function dislikeClicked() {
   let state = getState().current;
