@@ -37,7 +37,7 @@
         },
         { 
           question: "Why isn't the dislike count updating?",
-          answer: "Right now video dislikes are cached and they arent updated very frequenly. Currently this is set to update once every 2–3 days.  This isn't ideal and we are working on improving how often we can update them"
+          answer: "Right now video dislikes are cached and they aren't updated very frequently. Currently this is set to update once every 2–3 days.  This isn't ideal and we are working on improving how often we can update them."
         },
         { 
           question: "How does this work?",
