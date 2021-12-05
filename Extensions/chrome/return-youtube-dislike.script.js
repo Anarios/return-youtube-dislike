@@ -151,7 +151,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     // setState();
   }
 
-  function setInitalState() {
+  function setInitialState() {
     setState();
     setTimeout(() => sendVideoIds(), 1500);
   }
@@ -200,7 +200,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
           buttons.children[1].addEventListener("click", dislikeClicked);
           window.returnDislikeButtonlistenersSet = true;
         }
-        setInitalState();
+        setInitialState();
       }
     }
 

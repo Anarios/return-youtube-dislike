@@ -16,6 +16,7 @@
 // @downloadURL  https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @updateURL    https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 // @grant        GM.xmlHttpRequest
+// @connect      youtube.com
 // @grant        GM_addStyle
 // @run-at       document-end
 // ==/UserScript==
@@ -23,12 +24,17 @@ const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
+var isMobile = (location.hostname == "m.youtube.com");
+var mobileDislikes = 0;
 function cLog(text, subtext = '') {
   subtext = subtext.trim() === '' ? '' : `(${subtext})`;
   console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
 }
 
 function getButtons() {
+  if (isMobile) {
+    return document.querySelector(".slim-video-action-bar-actions");
+  }
   if (document.getElementById("menu-container").offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
   } else {
@@ -47,18 +53,30 @@ function getDislikeButton() {
 }
 
 function isVideoLiked() {
+  if (isMobile) {
+    return getLikeButton().querySelector("button").getAttribute("aria-label") == "true";
+  }
   return getLikeButton().classList.contains("style-default-active");
 }
 
 function isVideoDisliked() {
+  if (isMobile) {
+    return getDislikeButton().querySelector("button").getAttribute("aria-label") == "true";
+  }
   return getDislikeButton().classList.contains("style-default-active");
 }
 
 function isVideoNotLiked() {
+  if (isMobile) {
+    return !isVideoLiked();
+  }
   return getLikeButton().classList.contains("style-text");
 }
 
 function isVideoNotDisliked() {
+  if (isMobile) {
+    return !isVideoDisliked();
+  }
   return getDislikeButton().classList.contains("style-text");
 }
 
@@ -73,10 +91,18 @@ function getState() {
 }
 
 function setLikes(likesCount) {
+  if (isMobile) {
+    getButtons().children[0].querySelector(".button-renderer-text").innerText = likesCount;
+    return;
+  }
   getButtons().children[0].querySelector("#text").innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
+  if (isMobile) {
+    mobileDislikes = dislikesCount;
+    return;
+  }
   getButtons().children[1].querySelector("#text").innerText = dislikesCount;
 }
 
@@ -117,6 +143,9 @@ function setDislikes(dislikesCount) {
   `);
 
 function createRateBar(likes, dislikes) {
+  if (isMobile) {
+    return;
+  }
   var rateBar = document.getElementById("return-youtube-dislike-bar-container");
 
   const widthPx =
@@ -165,22 +194,45 @@ function createRateBar(likes, dislikes) {
 function setState() {
   cLog("Fetching votes...");
   let statsSet = false;
-
-  fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then((response) => {
-    response.text().then((text) => {
-      let result = getDislikesFromYoutubeResponse(text);
-      if (result) {
-        cLog("response from youtube:");
-        cLog(JSON.stringify(result));
-        if (result.likes && result.dislikes) {
-          const formattedDislike = numberFormat(result.dislikes);
-          setDislikes(formattedDislike);
-          createRateBar(result.likes, result.dislikes);
-          statsSet = true;
+  if (isMobile) {
+    GM.xmlHttpRequest({
+      method: "GET",
+      url: `https://youtube.com/watch?v=${getVideoId()}`,
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.3674"
+      },
+      onload: (response) => {
+        let result = getDislikesFromYoutubeResponse(response.responseText);
+        if (result) {
+          cLog("response from youtube:");
+          cLog(JSON.stringify(result));
+          if (result.likes && result.dislikes) {
+            const formattedDislike = numberFormat(result.dislikes);
+            setDislikes(formattedDislike);
+            createRateBar(result.likes, result.dislikes);
+            statsSet = true;
+          }
         }
       }
     });
-  });
+  }
+  else {
+    fetch(`https://youtube.com/watch?v=${getVideoId()}`).then((response) => {
+      response.text().then((text) => {
+        let result = getDislikesFromYoutubeResponse(text);
+        if (result) {
+          cLog("response from youtube:");
+          cLog(JSON.stringify(result));
+          if (result.likes && result.dislikes) {
+            const formattedDislike = numberFormat(result.dislikes);
+            setDislikes(formattedDislike);
+            createRateBar(result.likes, result.dislikes);
+            statsSet = true;
+          }
+        }
+      });
+    });
+  }
 
   fetch(
     `https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`
@@ -206,7 +258,7 @@ function dislikeClicked() {
   setState();
 }
 
-function setInitalState() {
+function setInitialState() {
   setState();
 }
 
@@ -218,6 +270,9 @@ function getVideoId() {
 }
 
 function isVideoLoaded() {
+  if (isMobile) {
+    return document.getElementById("player").getAttribute("loading") == "false";
+  }
   const videoId = getVideoId();
 
   return (
@@ -277,7 +332,8 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
 }
 
 function setEventListeners(evt) {
-  function checkForJS_Finish() {
+  function checkForJS_Finish(check) {
+    console.log()
     if (getButtons()?.offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
       const buttons = getButtons();
@@ -288,11 +344,11 @@ function setEventListeners(evt) {
         buttons.children[1].addEventListener("click", dislikeClicked);
         window.returnDislikeButtonlistenersSet = true;
       }
-      setInitalState();
+      setInitialState();
     }
   }
 
-  if (window.location.href.indexOf("watch?") >= 0) {
+  if (window.location.href.indexOf("watch?") >= 0 || (isMobile && evt?.indexOf("watch?") >= 0)) {
     cLog("Setting up...");
     var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
@@ -303,3 +359,14 @@ function setEventListeners(evt) {
   window.addEventListener("yt-navigate-finish", setEventListeners, true);
   setEventListeners();
 })();
+if (isMobile) {
+  let originalPush = history.pushState;
+  history.pushState = function (...args) {
+    window.returnDislikeButtonlistenersSet = false;
+    setEventListeners(args[2]);
+    return originalPush.apply(history, args);
+  }
+  setInterval(() => {
+    getDislikeButton().querySelector(".button-renderer-text").innerText = mobileDislikes;
+  }, 1000);
+}
