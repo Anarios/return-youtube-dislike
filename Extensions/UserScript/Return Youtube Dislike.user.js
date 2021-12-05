@@ -289,7 +289,7 @@ function roundDown(num) {
 }
 
 function numberFormat(numberState) {
-  const userLocales = navigator.language;
+  const userLocales = document.documentElement.lang;
 
   const formatter = Intl.NumberFormat(userLocales, {
     notation: "compact",
