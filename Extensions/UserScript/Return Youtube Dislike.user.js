@@ -222,9 +222,14 @@ function isVideoLoaded() {
 }
 
 function numberFormat(num) {
-  const sign = [[1E6, "M"], [1E3, "K"],[1, ""]];
+  const sign = [
+    [1e6, "M"],
+    [1e3, "K"],
+    [1, ""],
+  ];
   for (let i = 0; i <= sign.length; i++)
-     if (num >= sign[i][0]) return (num / sign[i][0]).toFixed(1).replace('.0', '') + sign[i][1];
+    if (num >= sign[i][0])
+      return (num / sign[i][0]).toFixed(1).replace(".0", "") + sign[i][1];
 }
 
 function getDislikesFromYoutubeResponse(htmlResponse) {
