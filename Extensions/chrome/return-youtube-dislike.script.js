@@ -147,7 +147,7 @@
     // setState();
   }
 
-  function setInitalState() {
+  function setInitialState() {
     setState();
     setTimeout(() => sendVideoIds(), 1500);
   }
@@ -196,7 +196,7 @@
           buttons.children[1].addEventListener("click", dislikeClicked);
           window.returnDislikeButtonlistenersSet = true;
         }
-        setInitalState();
+        setInitialState();
       }
     }
 
