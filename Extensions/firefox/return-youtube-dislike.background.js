@@ -96,6 +96,7 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
   let jsonStr = htmlResponse.substring(start, end);
   let jsonResult = JSON.parse(jsonStr);
   let rating = jsonResult.averageRating;
+  if (jsonResult.allowRatings === false) return false;
 
   start = htmlResponse.indexOf('"topLevelButtons":[', end);
   start =

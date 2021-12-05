@@ -165,6 +165,12 @@ function setState() {
   fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then((response) => {
     response.text().then((text) => {
       let result = getDislikesFromYoutubeResponse(text);
+      if (result === false){
+        cLog("response from youtube:");
+        cLog("Creator has opted to hide likes and dislikes");
+        statsSet = true;
+        return;
+      }
       if (result) {
         cLog("response from youtube:");
         cLog(JSON.stringify(result));
@@ -181,7 +187,8 @@ function setState() {
   fetch(
     `https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`
   ).then((response) => {
-    response.json().then((json) => {
+    response.json().then(async (json) => {
+      await sleep(1000);
       if (json && !statsSet) {
         const { dislikes, likes } = json;
         cLog(`Received count: ${dislikes}`);
@@ -190,6 +197,10 @@ function setState() {
       }
     });
   });
+}
+
+function sleep(ms) {
+  new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function likeClicked() {
@@ -255,6 +266,7 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
   let jsonStr = htmlResponse.substring(start, end);
   let jsonResult = JSON.parse(jsonStr);
   let rating = jsonResult.averageRating;
+  if (jsonResult.allowRatings === false) return false;
 
   start = htmlResponse.indexOf('"topLevelButtons":[', end);
   start =

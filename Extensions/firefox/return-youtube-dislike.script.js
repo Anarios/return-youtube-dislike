@@ -76,6 +76,12 @@ function setState() {
       videoId: getVideoId(window.location.href),
     },
     function (response) {
+      if (response === false){
+        cLog("response from youtube:");
+        cLog("Creator has opted to hide likes and dislikes");
+        statsSet = true;
+        return;
+      }
       if (response != undefined) {
         cLog("response from youtube:");
         cLog(JSON.stringify(response));
@@ -100,9 +106,10 @@ function setState() {
       videoId: getVideoId(window.location.href),
       state: getState().current,
     },
-    function (response) {
+    async function (response) {
       cLog("response from api:");
       cLog(JSON.stringify(response));
+      await sleep(1000);
       if (response != undefined && !statsSet) {
         const formattedDislike = numberFormat(response.dislikes);
         storedData.dislikes = response.dislikes;
@@ -114,6 +121,9 @@ function setState() {
       }
     }
   );
+}
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function likeClicked() {}
