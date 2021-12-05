@@ -213,6 +213,14 @@ function getVideoId() {
   return videoId;
 }
 
+function isVideoLoaded() {
+  const videoId = getVideoId();
+
+  return (
+    document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null
+  );
+}
+
 function numberFormat(num) {
   const sign = [[1E6, "M"], [1E3, "K"],[1, ""]];
   for (let i = 0; i <= sign.length; i++)
