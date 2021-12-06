@@ -24,7 +24,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
       return document.querySelector(
         "ytd-menu-renderer.ytd-watch-metadata > div"
       );
-    //---   If Menu Element Isnt Displayed:   ---//
+      //---   If Menu Element Isnt Displayed:   ---//
     } else {
       return document
         .getElementById("menu-container")
@@ -58,12 +58,12 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 
   function getState() {
     if (isVideoLiked()) {
-      return {current: LIKED_STATE, previous: storedData.previousState};
+      return { current: LIKED_STATE, previous: storedData.previousState };
     }
     if (isVideoDisliked()) {
-      return {current: DISLIKED_STATE, previous: storedData.previousState};
+      return { current: DISLIKED_STATE, previous: storedData.previousState };
     }
-    return {current: NEUTRAL_STATE, previous: storedData.previousState};
+    return { current: NEUTRAL_STATE, previous: storedData.previousState };
   }
 
   //---   Sets The Likes And Dislikes Values   ---//
@@ -89,7 +89,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
           cLog("response from youtube:");
           cLog(JSON.stringify(response));
           try {
-            if (response.likes && response.dislikes) {
+            if ("likes" in response && "dislikes" in response) {
               const formattedDislike = numberFormat(response.dislikes);
               setDislikes(formattedDislike);
               storedData.dislikes = parseInt(response.dislikes);
@@ -113,7 +113,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
       function (response) {
         cLog("response from api:");
         cLog(JSON.stringify(response));
-        if (response != undefined && !statsSet) {
+        if (response != undefined && !("traceId" in response) && !statsSet) {
           const formattedDislike = numberFormat(response.dislikes);
           // setLikes(response.likes);
           setDislikes(formattedDislike);
@@ -136,7 +136,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   function dislikeClicked() {
     let state = getState().current;
 
-    console.log("Dislike State:",getState());
+    console.log("Dislike State:", getState());
 
     if (state == DISLIKED_STATE) {
       storedData.dislikes++;
