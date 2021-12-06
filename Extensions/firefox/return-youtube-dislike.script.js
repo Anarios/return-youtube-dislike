@@ -56,12 +56,12 @@ function isVideoNotDisliked() {
 
 function getState() {
   if (isVideoLiked()) {
-    return {current: LIKED_STATE, previous: storedData.previousState};
+    return { current: LIKED_STATE, previous: storedData.previousState };
   }
   if (isVideoDisliked()) {
-    return {current: DISLIKED_STATE, previous: storedData.previousState};
+    return { current: DISLIKED_STATE, previous: storedData.previousState };
   }
-  return {current: NEUTRAL_STATE, previous: storedData.previousState};
+  return { current: NEUTRAL_STATE, previous: storedData.previousState };
 }
 
 //---   Sets The Likes And Dislikes Values   ---//
@@ -84,7 +84,7 @@ function setState() {
         cLog("response from youtube:");
         cLog(JSON.stringify(response));
         try {
-          if (response.likes && response.dislikes) {
+          if ("likes" in response && "dislikes" in response) {
             const formattedDislike = numberFormat(response.dislikes);
             setDislikes(formattedDislike);
             storedData.dislikes = parseInt(response.dislikes);
@@ -107,7 +107,7 @@ function setState() {
     function (response) {
       cLog("response from api:");
       cLog(JSON.stringify(response));
-      if (response != undefined && !statsSet) {
+      if (response != undefined && !("traceId" in response) && !statsSet) {
         const formattedDislike = numberFormat(response.dislikes);
         storedData.dislikes = response.dislikes;
         // setLikes(response.likes);
