@@ -42,7 +42,7 @@ function getButtons() {
   } else {
     return document
       .getElementById("menu-container")
-      ?.querySelector("#top-level-buttons-computed");
+      .querySelector("#top-level-buttons-computed");
   }
 }
 
@@ -175,7 +175,6 @@ function createRateBar(likes, dislikes) {
            </div>
         </div>
         <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-           <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
         </tp-yt-paper-tooltip>
         </div>
 `
@@ -298,10 +297,12 @@ function numberFormat(numberState) {
 
   const formatter = Intl.NumberFormat(userLocales, {
     notation: "compact",
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   });
 
+  cLog('This is the number format!');
+  cLog(formatter.format(roundDown(numberState)).replace(/\.0|,0/, ""));
   return formatter.format(roundDown(numberState)).replace(/\.0|,0/, "");
 }
 
@@ -339,7 +340,7 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
 function setEventListeners(evt) {
   function checkForJS_Finish(check) {
     console.log()
-    if (getButtons()?.offsetParent && isVideoLoaded()) {
+    if (getButtons().offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
       const buttons = getButtons();
 
@@ -353,7 +354,7 @@ function setEventListeners(evt) {
     }
   }
 
-  if (window.location.href.indexOf("watch?") >= 0 || (isMobile && evt?.indexOf("watch?") >= 0)) {
+  if (window.location.href.indexOf("watch?") >= 0 || (isMobile && evt.indexOf("watch?") >= 0)) {
     cLog("Setting up...");
     var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
