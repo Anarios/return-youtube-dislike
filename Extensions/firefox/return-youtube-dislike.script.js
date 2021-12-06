@@ -21,7 +21,7 @@ function cLog(message, writer) {
 
 function getButtons() {
   //---   If Menu Element Is Displayed:   ---//
-  if (document.getElementById("menu-container").offsetParent === null) {
+  if (document.getElementById("menu-container")?.offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
     //---   If Menu Element Isnt Displayed:   ---//
   } else {
@@ -57,12 +57,12 @@ function isVideoNotDisliked() {
 
 function getState() {
   if (isVideoLiked()) {
-    return {current: LIKED_STATE, previous: storedData.previousState};
+    return { current: LIKED_STATE, previous: storedData.previousState };
   }
   if (isVideoDisliked()) {
-    return {current: DISLIKED_STATE, previous: storedData.previousState};
+    return { current: DISLIKED_STATE, previous: storedData.previousState };
   }
-  return {current: NEUTRAL_STATE, previous: storedData.previousState};
+  return { current: NEUTRAL_STATE, previous: storedData.previousState };
 }
 
 //---   Sets The Likes And Dislikes Values   ---//
@@ -85,7 +85,7 @@ function setState() {
         cLog("response from youtube:");
         cLog(JSON.stringify(response));
         try {
-          if (response.viewCount) {
+          if ("likes" in response && "dislikes" in response) {
             const formattedDislike = numberFormat(response.dislikes);
             setDislikes(formattedDislike);
             storedData.dislikes = parseInt(response.dislikes);
@@ -109,7 +109,7 @@ function setState() {
     function (response) {
       cLog("response from api:");
       cLog(JSON.stringify(response));
-      if (response != undefined && !statsSet) {
+      if (response != undefined && !("traceId" in response) && !statsSet) {
         const formattedDislike = numberFormat(response.dislikes);
         storedData.dislikes = response.dislikes;
         // setLikes(response.likes);

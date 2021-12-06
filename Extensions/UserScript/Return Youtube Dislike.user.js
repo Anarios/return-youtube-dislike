@@ -40,7 +40,7 @@ function getButtons() {
   if (isMobile) {
     return document.querySelector(".slim-video-action-bar-actions");
   }
-  if (document.getElementById("menu-container").offsetParent === null) {
+  if (document.getElementById("menu-container")?.offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
   } else {
     return document
@@ -303,10 +303,13 @@ function setInitialState() {
 }
 
 function getVideoId() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const videoId = urlParams.get("v");
-
-  return videoId;
+  const urlObject = new URL(window.location.href);
+  const pathname = urlObject.pathname;
+  if (pathname.startsWith('/clips')) {
+    return document.querySelector("meta[itemprop='videoId']").content;
+  } else {
+    return urlObject.searchParams.get("v");
+  }
 }
 
 function isVideoLoaded() {
