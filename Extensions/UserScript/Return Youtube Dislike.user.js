@@ -211,7 +211,7 @@ function setState() {
         if (result) {
           cLog("response from youtube:");
           cLog(JSON.stringify(result));
-          if (result.viewCount) {
+          if ("likes" in response && "dislikes" in response) {
             const formattedDislike = numberFormat(result.dislikes);
             setDislikes(formattedDislike);
             likesvalue = result.likes
@@ -230,7 +230,7 @@ function setState() {
         if (result) {
           cLog("response from youtube:");
           cLog(JSON.stringify(result));
-          if (result.viewCount) {
+          if ("likes" in response && "dislikes" in response) {
             const formattedDislike = numberFormat(result.dislikes);
             setDislikes(formattedDislike);
             likesvalue = result.likes;
