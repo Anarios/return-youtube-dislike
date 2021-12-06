@@ -4,6 +4,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 
 (function (extensionId) {
   let storedData = {
+    likes: 0,
     dislikes: 0,
     previousState: NEUTRAL_STATE
   };
@@ -89,13 +90,14 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
           cLog("response from youtube:");
           cLog(JSON.stringify(response));
           try {
-            if (response.likes && response.dislikes) {
+            if (response.viewCount) {
               const formattedDislike = numberFormat(response.dislikes);
               setDislikes(formattedDislike);
               storedData.dislikes = parseInt(response.dislikes);
+              storedData.likes = parseInt(response.likes);
               createRateBar(response.likes, response.dislikes);
               statsSet = true;
-            }
+           }
           } catch (e) {
             statsSet = false;
           }
@@ -128,24 +130,42 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     console.log(storedData.previousState)
     if (storedData.previousState == DISLIKED_STATE) {
       storedData.dislikes--;
+      storedData.likes++;
+      createRateBar(storedData.likes, storedData.dislikes);
       setDislikes(numberFormat(storedData.dislikes));
       storedData.previousState = LIKED_STATE;
+    } else if (storedData.previousState == NEUTRAL_STATE) {
+      storedData.likes++;
+      createRateBar(storedData.likes, storedData.dislikes);
+      storedData.previousState = LIKED_STATE;
+    } else if (storedData.previousState = LIKED_STATE) {
+      storedData.likes--;
+      createRateBar(storedData.likes, storedData.dislikes)
+      storedData.previousState = NEUTRAL_STATE;
     }
   }
 
   function dislikeClicked() {
-    let state = getState().current;
+    //let state = getState().current;
 
     console.log("Dislike State:",getState());
 
-    if (state == DISLIKED_STATE) {
+    if (storedData.previousState == NEUTRAL_STATE) {
       storedData.dislikes++;
       setDislikes(numberFormat(storedData.dislikes));
+      createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = DISLIKED_STATE;
-    } else if (state == NEUTRAL_STATE) {
+    } else if (storedData.previousState == DISLIKED_STATE) {
       storedData.dislikes--;
       setDislikes(numberFormat(storedData.dislikes));
+      createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = NEUTRAL_STATE;
+    } else if (storedData.previousState == LIKED_STATE) {
+      storedData.likes--;
+      storedData.dislikes++;
+      setDislikes(numberFormat(storedData.dislikes));
+      createRateBar(storedData.likes, storedData.dislikes);
+      storedData.previousState = DISLIKED_STATE;
     }
 
     // setState();
