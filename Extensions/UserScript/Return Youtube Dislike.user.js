@@ -265,10 +265,13 @@ function setInitialState() {
 }
 
 function getVideoId() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const videoId = urlParams.get("v");
-
-  return videoId;
+  const urlObject = new URL(window.location.href);
+  const pathname = urlObject.pathname;
+  if (pathname.startsWith('/clips')) {
+    return document.querySelector("meta[itemprop='videoId']").content;
+  } else {
+    return urlObject.searchParams.get("v");
+  }
 }
 
 function isVideoLoaded() {
