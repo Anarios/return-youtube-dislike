@@ -5,7 +5,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 if (!storedData) {
   var storedData = {
     dislikes: 0,
-    previousState: NEUTRAL_STATE
+    previousState: NEUTRAL_STATE,
   };
 }
 
@@ -56,12 +56,12 @@ function isVideoNotDisliked() {
 
 function getState() {
   if (isVideoLiked()) {
-    return {current: LIKED_STATE, previous: storedData.previousState};
+    return { current: LIKED_STATE, previous: storedData.previousState };
   }
   if (isVideoDisliked()) {
-    return {current: DISLIKED_STATE, previous: storedData.previousState};
+    return { current: DISLIKED_STATE, previous: storedData.previousState };
   }
-  return {current: NEUTRAL_STATE, previous: storedData.previousState};
+  return { current: NEUTRAL_STATE, previous: storedData.previousState };
 }
 
 //---   Sets The Likes And Dislikes Values   ---//
@@ -74,13 +74,12 @@ function setDislikes(dislikesCount) {
 
 function setState() {
   let statsSet = false;
-  browser.runtime.sendMessage(
-    {
+  browser.runtime
+    .sendMessage({
       message: "fetch_from_youtube",
       videoId: getVideoId(window.location.href),
     })
-    .then(
-    function (response) {
+    .then(function (response) {
       if (response != undefined) {
         cLog("response from youtube:");
         cLog(JSON.stringify(response));
@@ -96,16 +95,15 @@ function setState() {
           statsSet = false;
         }
       }
-    }
-  );
+    });
 
-  browser.runtime.sendMessage(
-    {
+  browser.runtime
+    .sendMessage({
       message: "set_state",
       videoId: getVideoId(window.location.href),
       state: getState().current,
-    }).then(
-    function (response) {
+    })
+    .then(function (response) {
       cLog("response from api:");
       cLog(JSON.stringify(response));
       if (response != undefined && !statsSet) {
@@ -117,15 +115,14 @@ function setState() {
         createRateBar(response.likes, response.dislikes);
       } else {
       }
-    }
-  );
+    });
 }
 
 function likeClicked() {
-  if (storedData.previousState === 'disliked') {
+  if (storedData.previousState === "disliked") {
     storedData.dislikes--;
     setDislikes(numberFormat(storedData.dislikes));
-    storedData.previousState = 'liked';
+    storedData.previousState = "liked";
   }
 }
 
@@ -152,7 +149,7 @@ function setInitialState() {
 function getVideoId(url) {
   const urlObject = new URL(url);
   const pathname = urlObject.pathname;
-  if (pathname.startsWith('/clips')) {
+  if (pathname.startsWith("/clips")) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
     return urlObject.searchParams.get("v");
@@ -178,7 +175,7 @@ function numberFormat(numberState) {
   const userLocales = navigator.language;
 
   const formatter = Intl.NumberFormat(userLocales, {
-    notation: "compact"
+    notation: "compact",
   });
 
   return formatter.format(roundDown(numberState));
