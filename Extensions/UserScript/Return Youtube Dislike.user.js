@@ -301,8 +301,6 @@ function numberFormat(numberState) {
     maximumFractionDigits: 0,
   });
 
-  cLog('This is the number format!');
-  cLog(formatter.format(roundDown(numberState)).replace(/\.0|,0/, ""));
   return formatter.format(roundDown(numberState)).replace(/\.0|,0/, "");
 }
 
