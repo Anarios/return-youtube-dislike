@@ -37,7 +37,7 @@ function getButtons() {
   if (isMobile) {
     return document.querySelector(".slim-video-action-bar-actions");
   }
-  if (document.getElementById("menu-container").offsetParent === null) {
+  if (document.getElementById("menu-container")?.offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
   } else {
     return document

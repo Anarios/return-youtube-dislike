@@ -20,7 +20,7 @@ function cLog(message, writer) {
 
 function getButtons() {
   //---   If Menu Element Is Displayed:   ---//
-  if (document.getElementById("menu-container").offsetParent === null) {
+  if (document.getElementById("menu-container")?.offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
     //---   If Menu Element Isnt Displayed:   ---//
   } else {
