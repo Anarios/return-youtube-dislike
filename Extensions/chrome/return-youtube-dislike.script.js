@@ -5,7 +5,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 (function (extensionId) {
   let storedData = {
     dislikes: 0,
-    previousState: NEUTRAL_STATE
+    previousState: NEUTRAL_STATE,
   };
 
   function cLog(message, writer) {
@@ -18,9 +18,8 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   }
 
   function getButtons() {
-
     //---   If Menu Element Is Displayed:   ---//
-    if (document.getElementById('menu-container')?.offsetParent === null) {
+    if (document.getElementById("menu-container")?.offsetParent === null) {
       return document.querySelector(
         "ytd-menu-renderer.ytd-watch-metadata > div"
       );
@@ -74,8 +73,6 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   }
 
-
-
   function setState() {
     let statsSet = false;
     chrome.runtime.sendMessage(
@@ -125,7 +122,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   }
 
   function likeClicked() {
-    console.log(storedData.previousState)
+    console.log(storedData.previousState);
     if (storedData.previousState == DISLIKED_STATE) {
       storedData.dislikes--;
       setDislikes(numberFormat(storedData.dislikes));
@@ -159,7 +156,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   function getVideoId(url) {
     const urlObject = new URL(url);
     const pathname = urlObject.pathname;
-    if (pathname.startsWith('/clips')) {
+    if (pathname.startsWith("/clips")) {
       return document.querySelector("meta[itemprop='videoId']").content;
     } else {
       return urlObject.searchParams.get("v");
@@ -178,14 +175,18 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     const int = Math.floor(Math.log10(num) - 2);
     const decimal = int + (int % 3 ? 1 : 0);
     const value = Math.floor(num / 10 ** decimal);
-    return value * (10 ** decimal);
+    return value * 10 ** decimal;
   }
 
   function numberFormat(numberState) {
-    const userLocales = navigator.language;
+    const userLocales = new URL(
+      Array.from(document.querySelectorAll("head > link[rel='search']"))
+        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+        ?.getAttribute("href")
+    )?.searchParams?.get("locale");
 
-    const formatter = Intl.NumberFormat(userLocales, {
-      notation: 'compact'
+    const formatter = Intl.NumberFormat(userLocales || navigator.language, {
+      notation: "compact",
     });
 
     return formatter.format(roundDown(numberState));
@@ -287,8 +288,6 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     window.returnDislikeButtonlistenersSet = false;
     setEventListeners();
   });
-
-
 
   setTimeout(() => sendVideoIds(), 2500);
 })(document.currentScript.getAttribute("extension-id"));
