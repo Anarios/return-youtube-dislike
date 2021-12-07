@@ -85,6 +85,17 @@ function isVideoNotDisliked() {
   return getDislikeButton().classList.contains("style-text");
 }
 
+function checkForSignInButton() {
+  if (isMobile) {
+    return;
+  }
+  if (document.querySelector('[aria-label="Sign in"]')) {
+    return true
+  } else {
+    return false
+  }
+}
+
 function getState() {
   if (isVideoLiked()) {
     return LIKED_STATE;
@@ -260,6 +271,7 @@ function setState() {
 }
 
 function likeClicked() {
+  if (checkForSignInButton() == false) {
     if (previousState == 1) {
       likesvalue--;
       createRateBar(likesvalue, dislikesvalue);
@@ -277,8 +289,10 @@ function likeClicked() {
       previousState = 1
     }
   }
+}
 
 function dislikeClicked() {
+  if (checkForSignInButton() == false) {
     if (previousState == 3) {
       dislikesvalue++;
       setDislikes(numberFormat(dislikesvalue));
@@ -296,6 +310,7 @@ function dislikeClicked() {
       createRateBar(likesvalue, dislikesvalue);
       previousState = 2
     }
+  }
 }
 
 function setInitialState() {
