@@ -236,18 +236,26 @@ function setState() {
     });
   }
 
-  fetch(
-    `https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`
-  ).then((response) => {
-    response.json().then((json) => {
-      if (json && !("traceId" in response) && !statsSet) {
-        const { dislikes, likes } = json;
-        cLog(`Received count: ${dislikes}`);
-        setDislikes(numberFormat(dislikes));
-        createRateBar(likes, dislikes);
+  GM.xmlHttpRequest({
+      method: "GET",
+      url: `https://youtube.com/watch?v=${getVideoId()}`,
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.3674"
+      },
+      onload: (response) => {
+        let result = getDislikesFromYoutubeResponse(response.responseText);
+        if (result) {
+          cLog("response from youtube:");
+          cLog(JSON.stringify(result));
+          if ("likes" in result && "dislikes" in result) {
+            const formattedDislike = numberFormat(result.dislikes);
+            setDislikes(formattedDislike);
+            createRateBar(result.likes, result.dislikes);
+            statsSet = true;
+          }
+        }
       }
     });
-  });
 }
 
 function likeClicked() {
