@@ -4,7 +4,7 @@
     <h1 class="title-text" >Project Links</h1>
           
     <div style="color: #999">
-      <p style="margin-top: .5rem; margin-bottom: 1rem;">Links to the project and it's developers</p>
+      <p style="margin-top: .5rem; margin-bottom: 1rem;">Links to the project and its developers</p>
     </div>
 
     <v-btn class="mainAltButton" :href="githubLink" target="_blank">
