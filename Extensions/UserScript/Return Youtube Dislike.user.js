@@ -222,7 +222,7 @@ function setState() {
         if (result) {
           cLog("response from youtube:");
           cLog(JSON.stringify(result));
-          if ("likes" in response && "dislikes" in response) {
+          if ("likes" in result && "dislikes" in result) {
             const formattedDislike = numberFormat(result.dislikes);
             setDislikes(formattedDislike);
             likesvalue = result.likes
@@ -241,7 +241,7 @@ function setState() {
         if (result) {
           cLog("response from youtube:");
           cLog(JSON.stringify(result));
-          if ("likes" in response && "dislikes" in response) {
+          if ("likes" in result && "dislikes" in result) {
             const formattedDislike = numberFormat(result.dislikes);
             setDislikes(formattedDislike);
             likesvalue = result.likes;
@@ -258,7 +258,7 @@ function setState() {
     `https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`
   ).then((response) => {
     response.json().then((json) => {
-      if (json && !statsSet) {
+      if (json && !("traceId" in response) && !statsSet) {
         const { dislikes, likes } = json;
         cLog(`Received count: ${dislikes}`);
         likesvalue = likes;
