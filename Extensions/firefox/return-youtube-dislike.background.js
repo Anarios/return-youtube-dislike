@@ -46,8 +46,14 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
       toSend = [];
     }
   } else if (request.message == "fetch_from_youtube") {
+    let headers = {}
+    if (navigator && navigator.userAgent) {
+      // Never request mobile version
+      headers["User-Agent"] = navigator.userAgent.replace(/\(.*Mobile;/,"(X11; Linux x86_64;");
+    }
     fetch(`https://www.youtube.com/watch?v=${request.videoId}`, {
       method: "GET",
+      headers: headers
     })
       .then((response) => response.text())
       .then((text) => {
