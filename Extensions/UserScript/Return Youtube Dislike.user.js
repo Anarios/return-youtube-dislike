@@ -308,7 +308,7 @@ function numberFormat(numberState) {
   )?.searchParams?.get("locale");
 
   const formatter = Intl.NumberFormat(
-    userLocales || document.documentElement.lang,
+    document.documentElement.lang || userLocales,
     {
       notation: "compact",
       minimumFractionDigits: 1,

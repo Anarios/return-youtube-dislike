@@ -179,7 +179,7 @@ function numberFormat(numberState) {
       ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
       ?.getAttribute("href")
   )?.searchParams?.get("locale");
-  const formatter = Intl.NumberFormat(userLocales || navigator.language, {
+  const formatter = Intl.NumberFormat(document.documentElement.lang || userLocales || navigator.language, {
     notation: "compact",
   });
 
