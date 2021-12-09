@@ -45,7 +45,7 @@ How to contribute:
 2. Go to https://tracker.archiveteam.org/youtube-dislikes/
 3. Click on "Run your own ArchiveTeam Warrior."
 4. Click on "Download the appliance"
-5. Download "archiveteam-warrior-v3-20171013.ova" ([mirror link](https://warriorhq.archiveteam.org/downloads/warrior3/archiveteam-warrior-v3.2-20210306.ova))
+5. Download "archiveteam-warrior-v3.2-20210306.ova" ([mirror link](https://warriorhq.archiveteam.org/downloads/warrior3/archiveteam-warrior-v3.2-20210306.ova))
 6. Import the file in VirtualBox & start the virtual machine
 7. Go to http://localhost:8001/, select "YouTube dislikes" and click on "Work on this project"
 8. Spread awareness about this project ♥️
