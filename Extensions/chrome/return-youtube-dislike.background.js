@@ -55,7 +55,7 @@ chrome.runtime.onMessageExternal.addListener(
       })
         .then((response) => response.text())
         .then((text) => {
-          var result = getDislikesFromYoutubeResponse(text);
+          let result = getDislikesFromYoutubeResponse(text);
           sendUserSubmittedStatisticsToApi({
             ...result,
             videoId: request.videoId,
