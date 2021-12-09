@@ -76,20 +76,6 @@ const sentIds = new Set();
 let toSend = [];
 let lastCalled = new Date();
 
-browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
-	if (changeInfo.status == "complete" && (+new Date() - +lastCalled) > 100) {
-		lastCalled = new Date();
-		console.log("Tab update complete");
-
-		if (tab.url && tab.url.indexOf("youtube.") < 0) return;
-		browser.tabs.get(tabId, (tab) => {
-			browser.tabs.executeScript(tab.id, {
-				file: "return-youtube-dislike.script.js",
-			});
-		});
-	}
-});
-
 function getDislikesFromYoutubeResponse(htmlResponse) {
 	let start =
     htmlResponse.indexOf("\"videoDetails\":") + "\"videoDetails\":".length;

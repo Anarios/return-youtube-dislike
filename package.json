@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "build": "parcel build Extensions/browser/manifest.json --no-content-hash --no-source-maps --dist-dir dist --no-cache --detailed-report 0",
-    "watch": "parcel watch Extensions/browser/manifest.json --no-source-maps --dist-dir dist --no-cache --detailed-report 0",
+    "watch": "parcel watch Extensions/browser/manifest.json --dist-dir dist --detailed-report 0 --no-cache --no-hmr",
     "lint": "run-p 'lint:*'",
     "lint:ts": "eslint --ext ts Extensions/browser",
     "lint:css": "stylelint 'Extensions/browser/*.css'",
