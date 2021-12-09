@@ -25,12 +25,12 @@
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
-var previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
-var likesvalue = 0;
-var dislikesvalue = 0;
+let previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
+let likesvalue = 0;
+let dislikesvalue = 0;
 
-var isMobile = location.hostname == "m.youtube.com";
-var mobileDislikes = 0;
+let isMobile = location.hostname == "m.youtube.com";
+let mobileDislikes = 0;
 function cLog(text, subtext = "") {
   subtext = subtext.trim() === "" ? "" : `(${subtext})`;
   console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
@@ -132,7 +132,7 @@ function setDislikes(dislikesCount) {
 (typeof GM_addStyle != "undefined"
   ? GM_addStyle
   : (styles) => {
-      var styleNode = document.createElement("style");
+      let styleNode = document.createElement("style");
       styleNode.type = "text/css";
       styleNode.innerText = styles;
       document.head.appendChild(styleNode);
@@ -169,7 +169,7 @@ function createRateBar(likes, dislikes) {
   if (isMobile) {
     return;
   }
-  var rateBar = document.getElementById("return-youtube-dislike-bar-container");
+  let rateBar = document.getElementById("return-youtube-dislike-bar-container");
 
   const widthPx =
     getButtons().children[0].clientWidth +
@@ -425,7 +425,7 @@ function setEventListeners(evt) {
     (isMobile && evt?.indexOf("watch?") >= 0)
   ) {
     cLog("Setting up...");
-    var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
+    let jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
 }
 
