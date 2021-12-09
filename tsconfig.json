@@ -1,0 +1,6 @@
+{
+    "compilerOptions": {
+        "module": "system",
+        "removeComments": true,   
+    }
+}

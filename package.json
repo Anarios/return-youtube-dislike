@@ -2,7 +2,6 @@
   "name": "return-youtube-dislike",
   "version": "1.1.0",
   "description": "Returns ability to see dislikes",
-  "main": "index.js",
   "repository": "https://github.com/Anarios/return-youtube-dislike/",
   "author": "Dmitrii Selivanov",
   "license": "GPLv3",
@@ -10,11 +9,9 @@
   "scripts": {
     "build": "parcel build Extensions/browser/manifest.json --no-content-hash --no-source-maps --dist-dir dist --no-cache --detailed-report 0",
     "watch": "parcel watch Extensions/browser/manifest.json --no-source-maps --dist-dir dist --no-cache --detailed-report 0",
-    "lint": "run-p lint:*",
-    "lint:css": "eslint --ext .css Extensions/browser/",
-    "lint:ts": "eslint --ext .ts Extensions/browser/",
-    "lint-fix": "run-p 'lint:* -- --fix'",
-    "test": "run-p lint:* build"
+    "lint": "eslint --ext css,ts Extensions/browser",
+    "lint-fix": "run-p 'lint --fix'",
+    "test": "run-p lint build"
   },
   "dependencies": {
     "webextension-polyfill": "^0.8.0"

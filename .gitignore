@@ -12,3 +12,5 @@ Website/dist/
 Website/_nuxt
 
 node_modules
+.parcel-cache
+dist
