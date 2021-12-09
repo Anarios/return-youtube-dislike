@@ -29,10 +29,10 @@ var previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
 var likesvalue = 0;
 var dislikesvalue = 0;
 
-var isMobile = (location.hostname == "m.youtube.com");
+var isMobile = location.hostname == "m.youtube.com";
 var mobileDislikes = 0;
-function cLog(text, subtext = '') {
-  subtext = subtext.trim() === '' ? '' : `(${subtext})`;
+function cLog(text, subtext = "") {
+  subtext = subtext.trim() === "" ? "" : `(${subtext})`;
   console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
 }
 
@@ -59,14 +59,20 @@ function getDislikeButton() {
 
 function isVideoLiked() {
   if (isMobile) {
-    return getLikeButton().querySelector("button").getAttribute("aria-label") == "true";
+    return (
+      getLikeButton().querySelector("button").getAttribute("aria-label") ==
+      "true"
+    );
   }
   return getLikeButton().classList.contains("style-default-active");
 }
 
 function isVideoDisliked() {
   if (isMobile) {
-    return getDislikeButton().querySelector("button").getAttribute("aria-label") == "true";
+    return (
+      getDislikeButton().querySelector("button").getAttribute("aria-label") ==
+      "true"
+    );
   }
   return getDislikeButton().classList.contains("style-default-active");
 }
@@ -108,7 +114,8 @@ function getState() {
 
 function setLikes(likesCount) {
   if (isMobile) {
-    getButtons().children[0].querySelector(".button-renderer-text").innerText = likesCount;
+    getButtons().children[0].querySelector(".button-renderer-text").innerText =
+      likesCount;
     return;
   }
   getButtons().children[0].querySelector("#text").innerText = likesCount;
@@ -122,14 +129,14 @@ function setDislikes(dislikesCount) {
   getButtons().children[1].querySelector("#text").innerText = dislikesCount;
 }
 
-(typeof GM_addStyle != 'undefined'
- ? GM_addStyle
- : styles => {
-  var styleNode = document.createElement("style")
-  styleNode.type = "text/css";
-  styleNode.innerText = styles;
-  document.head.appendChild(styleNode);
-})(`
+(typeof GM_addStyle != "undefined"
+  ? GM_addStyle
+  : (styles) => {
+      var styleNode = document.createElement("style");
+      styleNode.type = "text/css";
+      styleNode.innerText = styles;
+      document.head.appendChild(styleNode);
+    })(`
     #return-youtube-dislike-bar-container {
       background: var(--yt-spec-icon-disabled);
       border-radius: 2px;
@@ -215,7 +222,8 @@ function setState() {
       method: "GET",
       url: `https://www.youtube.com/watch?v=${getVideoId()}`,
       headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.3674"
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.3674",
       },
       onload: (response) => {
         let result = getDislikesFromYoutubeResponse(response.responseText);
@@ -231,11 +239,10 @@ function setState() {
             statsSet = true;
           }
         }
-      }
+      },
     });
-  }
-  else {
-    fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then((response) => {
+  } else {
+    fetch(`https://youtube.com/watch?v=${getVideoId()}`).then((response) => {
       response.text().then((text) => {
         let result = getDislikesFromYoutubeResponse(text);
         if (result) {
@@ -320,7 +327,7 @@ function setInitialState() {
 function getVideoId() {
   const urlObject = new URL(window.location.href);
   const pathname = urlObject.pathname;
-  if (pathname.startsWith('/clips')) {
+  if (pathname.startsWith("/clips")) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
     return urlObject.searchParams.get("v");
@@ -347,13 +354,20 @@ function roundDown(num) {
 }
 
 function numberFormat(numberState) {
-  const userLocales = document.documentElement.lang;
+  const userLocales = new URL(
+    Array.from(document.querySelectorAll("head > link[rel='search']"))
+      ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+      ?.getAttribute("href")
+  )?.searchParams?.get("locale");
 
-  const formatter = Intl.NumberFormat(userLocales, {
-    notation: "compact",
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
-  });
+  const formatter = Intl.NumberFormat(
+    document.documentElement.lang || userLocales,
+    {
+      notation: "compact",
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }
+  );
 
   return formatter.format(roundDown(numberState)).replace(/\.0|,0/, "");
 }
@@ -391,7 +405,7 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
 
 function setEventListeners(evt) {
   function checkForJS_Finish(check) {
-    console.log()
+    console.log();
     if (getButtons()?.offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
       const buttons = getButtons();
@@ -406,7 +420,10 @@ function setEventListeners(evt) {
     }
   }
 
-  if (window.location.href.indexOf("watch?") >= 0 || (isMobile && evt?.indexOf("watch?") >= 0)) {
+  if (
+    window.location.href.indexOf("watch?") >= 0 ||
+    (isMobile && evt?.indexOf("watch?") >= 0)
+  ) {
     cLog("Setting up...");
     var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
@@ -423,8 +440,9 @@ if (isMobile) {
     window.returnDislikeButtonlistenersSet = false;
     setEventListeners(args[2]);
     return originalPush.apply(history, args);
-  }
+  };
   setInterval(() => {
-    getDislikeButton().querySelector(".button-renderer-text").innerText = mobileDislikes;
+    getDislikeButton().querySelector(".button-renderer-text").innerText =
+      mobileDislikes;
   }, 1000);
 }
