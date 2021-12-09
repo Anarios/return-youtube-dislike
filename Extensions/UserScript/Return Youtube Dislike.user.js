@@ -25,6 +25,9 @@
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
+var previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
+var likesvalue = 0;
+var dislikesvalue = 0;
 
 var isMobile = location.hostname == "m.youtube.com";
 var mobileDislikes = 0;
@@ -86,6 +89,17 @@ function isVideoNotDisliked() {
     return !isVideoDisliked();
   }
   return getDislikeButton().classList.contains("style-text");
+}
+
+function checkForSignInButton() {
+  if (isMobile) {
+    return;
+  }
+  if (document.querySelector('[aria-label="Sign in"]')) {
+    return true
+  } else {
+    return false
+  }
 }
 
 function getState() {
@@ -206,7 +220,7 @@ function setState() {
   if (isMobile) {
     GM.xmlHttpRequest({
       method: "GET",
-      url: `https://youtube.com/watch?v=${getVideoId()}`,
+      url: `https://www.youtube.com/watch?v=${getVideoId()}`,
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.3674",
@@ -216,9 +230,11 @@ function setState() {
         if (result) {
           cLog("response from youtube:");
           cLog(JSON.stringify(result));
-          if (result.likes && result.dislikes) {
+          if ("likes" in result && "dislikes" in result) {
             const formattedDislike = numberFormat(result.dislikes);
             setDislikes(formattedDislike);
+            likesvalue = result.likes
+            dislikesvalue = result.dislikes
             createRateBar(result.likes, result.dislikes);
             statsSet = true;
           }
@@ -232,9 +248,11 @@ function setState() {
         if (result) {
           cLog("response from youtube:");
           cLog(JSON.stringify(result));
-          if (result.likes && result.dislikes) {
+          if ("likes" in result && "dislikes" in result) {
             const formattedDislike = numberFormat(result.dislikes);
             setDislikes(formattedDislike);
+            likesvalue = result.likes;
+            dislikesvalue = result.dislikes;
             createRateBar(result.likes, result.dislikes);
             statsSet = true;
           }
@@ -247,9 +265,11 @@ function setState() {
     `https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`
   ).then((response) => {
     response.json().then((json) => {
-      if (json && !statsSet) {
+      if (json && !("traceId" in response) && !statsSet) {
         const { dislikes, likes } = json;
         cLog(`Received count: ${dislikes}`);
+        likesvalue = likes;
+        dislikesvalue = dislikes;
         setDislikes(numberFormat(dislikes));
         createRateBar(likes, dislikes);
       }
@@ -258,13 +278,46 @@ function setState() {
 }
 
 function likeClicked() {
-  cLog("Like clicked", getState());
-  setState();
+  if (checkForSignInButton() == false) {
+    if (previousState == 1) {
+      likesvalue--;
+      createRateBar(likesvalue, dislikesvalue);
+      setDislikes(numberFormat(dislikesvalue));
+      previousState = 3
+    } else if (previousState == 2) {
+      likesvalue++;
+      dislikesvalue--;
+      setDislikes(numberFormat(dislikesvalue))
+      createRateBar(likesvalue, dislikesvalue);
+      previousState = 1
+    } else if (previousState == 3) {
+      likesvalue++;
+      createRateBar(likesvalue, dislikesvalue)
+      previousState = 1
+    }
+  }
 }
 
 function dislikeClicked() {
-  cLog("Dislike clicked", getState());
-  setState();
+  if (checkForSignInButton() == false) {
+    if (previousState == 3) {
+      dislikesvalue++;
+      setDislikes(numberFormat(dislikesvalue));
+      createRateBar(likesvalue, dislikesvalue);
+      previousState = 2
+    } else if (previousState == 2) {
+      dislikesvalue--;
+      setDislikes(numberFormat(dislikesvalue));
+      createRateBar(likesvalue, dislikesvalue);
+      previousState = 3
+    } else if (previousState == 1) {
+      likesvalue--;
+      dislikesvalue++;
+      setDislikes(numberFormat(dislikesvalue));
+      createRateBar(likesvalue, dislikesvalue);
+      previousState = 2
+    }
+  }
 }
 
 function setInitialState() {
