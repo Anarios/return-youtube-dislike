@@ -10,3 +10,5 @@ Website/.nuxt
 Website/.editorconfig
 Website/dist/
 Website/_nuxt
+
+node_modules
