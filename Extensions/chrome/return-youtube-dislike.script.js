@@ -217,7 +217,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     return formatter.format(roundDown(numberState));
   }
 
-  var jsInitChecktimer = null;
+  let jsInitChecktimer = null;
 
   function setEventListeners(evt) {
     function checkForJS_Finish() {
@@ -240,7 +240,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   }
 
   function createRateBar(likes, dislikes) {
-    var rateBar = document.getElementById(
+    let rateBar = document.getElementById(
       "return-youtube-dislike-bar-container"
     );
 
