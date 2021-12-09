@@ -74,7 +74,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 const sentIds = new Set();
 let toSend = [];
-let lastCalled = new Date();
+const lastCalled = new Date();
 
 function getDislikesFromYoutubeResponse(htmlResponse) {
 	let start =

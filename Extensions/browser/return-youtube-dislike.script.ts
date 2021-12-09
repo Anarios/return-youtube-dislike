@@ -7,7 +7,7 @@ declare global {
 }
 
 const browser = require("webextension-polyfill");
-console.log(browser)
+console.log(browser);
 
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
@@ -96,8 +96,8 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 	function setState() {
 		let statsSet = false;
 		browser.runtime.sendMessage({
-				message: "fetch_from_youtube",
-				videoId: getVideoId(window.location.href),
+			message: "fetch_from_youtube",
+			videoId: getVideoId(window.location.href),
 		}).then(function (response) {
 			if (response != undefined) {
 				cLog("response from youtube:");
@@ -115,7 +115,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 					statsSet = false;
 				}
 			}
-		})
+		});
 			
 
 		browser.runtime.sendMessage(
