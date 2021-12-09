@@ -17,10 +17,8 @@ chrome.runtime.onMessageExternal.addListener(
       //   });
       // });
     } else if (request.message === "log_off") {
-      // console.log("logging off");
       // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
     } else if (request.message == "set_state") {
-      // console.log(request);
       // chrome.identity.getAuthToken({ interactive: true }, function (token) {
       let token = "";
       fetch(`${apiUrl}/votes?videoId=${request.videoId}`, {
@@ -35,7 +33,6 @@ chrome.runtime.onMessageExternal.addListener(
           sendResponse(response);
         })
         .catch();
-      //});
       return true;
     } else if (request.message == "send_links") {
       toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
