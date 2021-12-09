@@ -8,21 +8,14 @@
   "private": true,
   "scripts": {
     "build": "parcel build Extensions/browser/manifest.json --no-content-hash --no-source-maps --dist-dir dist --no-cache --detailed-report 0",
-    "watch": "parcel watch Extensions/browser/manifest.json --dist-dir dist --detailed-report 0 --no-cache --no-hmr",
+    "watch": "parcel watch Extensions/browser/manifest.json --no-source-maps --dist-dir dist --no-cache --detailed-report 0",
     "lint": "run-p 'lint:*'",
     "lint:ts": "eslint --ext ts Extensions/browser",
     "lint:css": "stylelint 'Extensions/browser/*.css'",
-    "lint-fix": "run-p 'lint:* -- --fix'",
-    "test": "run-p lint:* build",
-    "preversion": "yarn test",
-    "postversion": "ts-node Scripts/version_incrementer.ts && echo \"Upgraded to version $npm_package_version\"",
-    "prepare": "husky install"
+    "lint-fix": "run-p 'lint:* --fix'",
+    "test": "run-p lint:* build"
   },
   "dependencies": {
-    "@types/node": "^16.11.12",
-    "dotenv": "^10.0.0",
-    "ts-node": "^10.4.0",
-    "husky": "^7.0.4",
     "webextension-polyfill": "^0.8.0"
   },
   "devDependencies": {
@@ -34,7 +27,7 @@
     "parcel": "^2.0.1",
     "stylelint": "^14.1.0",
     "stylelint-config-standard": "^24.0.0",
-    "typescript": "^4.5.3"
+    "typescript": "^4.5.2"
   },
   "browserslist": [
     "last 1 Chrome version",
