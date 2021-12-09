@@ -4,6 +4,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 
 if (!storedData) {
   var storedData = {
+    likes: 0,
     dislikes: 0,
     previousState: NEUTRAL_STATE
   };
@@ -60,6 +61,14 @@ function isVideoNotDisliked() {
       || getDislikeButton().querySelector('[aria-pressed="false"]') !== null;
 }
 
+function checkForSignInButton() {
+  if (document.querySelector('[aria-label="Sign in"]')) {
+    return true
+  } else {
+    return false
+  }
+}
+
 function getState() {
   if (isVideoLiked()) {
     return { current: LIKED_STATE, previous: storedData.previousState };
@@ -94,6 +103,7 @@ function setState() {
             const formattedDislike = numberFormat(response.dislikes);
             setDislikes(formattedDislike);
             storedData.dislikes = parseInt(response.dislikes);
+            storedData.likes = parseInt(response.likes)
             createRateBar(response.likes, response.dislikes);
             statsSet = true;
           }
@@ -127,26 +137,45 @@ function setState() {
 }
 
 function likeClicked() {
-  if (storedData.previousState === 'disliked') {
-    storedData.dislikes--;
-    setDislikes(numberFormat(storedData.dislikes));
-    storedData.previousState = 'liked';
+  if (checkForSignInButton() == false) {
+    if (storedData.previousState == DISLIKED_STATE) {
+      storedData.dislikes--;
+      storedData.likes++;
+      createRateBar(storedData.likes, storedData.dislikes);
+      setDislikes(numberFormat(storedData.dislikes));
+      storedData.previousState = LIKED_STATE;
+    } else if (storedData.previousState == NEUTRAL_STATE) {
+      storedData.likes++;
+      createRateBar(storedData.likes, storedData.dislikes);
+      storedData.previousState = LIKED_STATE;
+    } else if (storedData.previousState = LIKED_STATE) {
+      storedData.likes--;
+      createRateBar(storedData.likes, storedData.dislikes)
+      storedData.previousState = NEUTRAL_STATE;
+    }
   }
 }
 
 function dislikeClicked() {
-  let state = getState().current;
-  if (state == DISLIKED_STATE) {
-    storedData.dislikes++;
-    setDislikes(numberFormat(storedData.dislikes));
-    storedData.previousState = DISLIKED_STATE;
-  } else if (state == NEUTRAL_STATE) {
-    storedData.dislikes--;
-    setDislikes(numberFormat(storedData.dislikes));
-    storedData.previousState = NEUTRAL_STATE;
+  if (checkForSignInButton() == false) {
+    if (storedData.previousState == NEUTRAL_STATE) {
+      storedData.dislikes++;
+      setDislikes(numberFormat(storedData.dislikes));
+      createRateBar(storedData.likes, storedData.dislikes);
+      storedData.previousState = DISLIKED_STATE;
+    } else if (storedData.previousState == DISLIKED_STATE) {
+      storedData.dislikes--;
+      setDislikes(numberFormat(storedData.dislikes));
+      createRateBar(storedData.likes, storedData.dislikes);
+      storedData.previousState = NEUTRAL_STATE;
+    } else if (storedData.previousState == LIKED_STATE) {
+      storedData.likes--;
+      storedData.dislikes++;
+      setDislikes(numberFormat(storedData.dislikes));
+      createRateBar(storedData.likes, storedData.dislikes);
+      storedData.previousState = DISLIKED_STATE;
+    }
   }
-
-  // setState();
 }
 
 function setInitialState() {
