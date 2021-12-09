@@ -18,7 +18,6 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "exclude_matches": ["*://*.music.youtube.com/*"],
-      "js": ["content-script.js"],
       "run_at": "document_idle",
       "css": ["content-style.css"]
     }
