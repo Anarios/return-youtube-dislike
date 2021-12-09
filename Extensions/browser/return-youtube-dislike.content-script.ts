@@ -1,5 +1,5 @@
 const browser = require("webextension-polyfill");
-browser.runtime.sendMessage({}, (securityToken) => {
+browser.runtime.sendMessage({}, (securityToken: string) => {
 	const script = document.createElement("script");
 	script.setAttribute("security-token", securityToken);
 	script.setAttribute("extension-id", browser.runtime.id);

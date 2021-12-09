@@ -14,3 +14,4 @@ Website/_nuxt
 node_modules
 .parcel-cache
 dist
+yarn-error.log

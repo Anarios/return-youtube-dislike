@@ -1,4 +1,5 @@
-import browser from "webextension-polyfill";
+export {};
+const browser = require("webextension-polyfill");
 
 /*   Config   */
 const config = {
