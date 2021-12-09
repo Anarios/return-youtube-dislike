@@ -3,7 +3,7 @@ const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
 if (!storedData) {
-  var storedData = {
+  let storedData = {
     likes: 0,
     dislikes: 0,
     previousState: NEUTRAL_STATE,
@@ -252,12 +252,12 @@ function setEventListeners(evt) {
   }
 
   if (window.location.href.indexOf("watch?") >= 0) {
-    var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
+    let jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
 }
 
 function createRateBar(likes, dislikes) {
-  var rateBar = document.getElementById("return-youtube-dislike-bar-container");
+  let rateBar = document.getElementById("return-youtube-dislike-bar-container");
 
   const widthPx =
     getLikeButton().clientWidth +
