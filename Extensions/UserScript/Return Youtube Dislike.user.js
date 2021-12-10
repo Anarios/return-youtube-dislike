@@ -404,6 +404,8 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
 }
 
 function setEventListeners(evt) {
+  let jsInitChecktimer;
+  
   function checkForJS_Finish(check) {
     console.log();
     if (getButtons()?.offsetParent && isVideoLoaded()) {
@@ -425,7 +427,7 @@ function setEventListeners(evt) {
     (isMobile && evt?.indexOf("watch?") >= 0)
   ) {
     cLog("Setting up...");
-    let jsInitChecktimer = setInterval(checkForJS_Finish, 111);
+    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
 }
 
