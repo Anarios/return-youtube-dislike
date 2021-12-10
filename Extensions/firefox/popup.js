@@ -36,6 +36,7 @@ document.getElementById('link_yoomoney').addEventListener('click', () => {
 
 
 /*   Advanced Toggle   */
+/* Not currently used in this version
 const advancedToggle = document.getElementById('advancedToggle');
 advancedToggle.addEventListener('click', () => {
   const adv = document.getElementById('advancedSettings');
@@ -49,7 +50,7 @@ advancedToggle.addEventListener('click', () => {
     config.advanced = true;
   }
 });
-
+*/
 
 
 /* popup-script.js 
