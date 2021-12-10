@@ -1,9 +1,9 @@
-const LIKED_STATE = "LIKED_STATE";
-const DISLIKED_STATE = "DISLIKED_STATE";
-const NEUTRAL_STATE = "NEUTRAL_STATE";
+var LIKED_STATE = "LIKED_STATE";
+var DISLIKED_STATE = "DISLIKED_STATE";
+var NEUTRAL_STATE = "NEUTRAL_STATE";
 
 if (!storedData) {
-  let storedData = {
+  var storedData = {
     likes: 0,
     dislikes: 0,
     previousState: NEUTRAL_STATE,
@@ -224,6 +224,7 @@ function numberFormat(numberState) {
 }
 
 function setEventListeners(evt) {
+  let jsInitChecktimer;
   function checkForJS_Finish() {
     if (getButtons()?.offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
@@ -252,7 +253,7 @@ function setEventListeners(evt) {
   }
 
   if (window.location.href.indexOf("watch?") >= 0) {
-    let jsInitChecktimer = setInterval(checkForJS_Finish, 111);
+    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
 }
 
