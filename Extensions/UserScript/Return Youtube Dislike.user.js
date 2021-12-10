@@ -242,7 +242,7 @@ function setState() {
       },
     });
   } else {
-    fetch(`https://youtube.com/watch?v=${getVideoId()}`).then((response) => {
+    fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then((response) => {
       response.text().then((text) => {
         let result = getDislikesFromYoutubeResponse(text);
         if (result) {
