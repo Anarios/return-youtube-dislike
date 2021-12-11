@@ -1,6 +1,6 @@
-const LIKED_STATE = "LIKED_STATE";
-const DISLIKED_STATE = "DISLIKED_STATE";
-const NEUTRAL_STATE = "NEUTRAL_STATE";
+var LIKED_STATE = "LIKED_STATE";
+var DISLIKED_STATE = "DISLIKED_STATE";
+var NEUTRAL_STATE = "NEUTRAL_STATE";
 
 if (!storedData) {
   var storedData = {
@@ -224,6 +224,7 @@ function numberFormat(numberState) {
 }
 
 function setEventListeners(evt) {
+  let jsInitChecktimer;
   function checkForJS_Finish() {
     if (getButtons()?.offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
@@ -252,12 +253,12 @@ function setEventListeners(evt) {
   }
 
   if (window.location.href.indexOf("watch?") >= 0) {
-    var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
+    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
 }
 
 function createRateBar(likes, dislikes) {
-  var rateBar = document.getElementById("return-youtube-dislike-bar-container");
+  let rateBar = document.getElementById("return-youtube-dislike-bar-container");
 
   const widthPx =
     getLikeButton().clientWidth +
