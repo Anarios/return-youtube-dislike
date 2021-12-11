@@ -12,6 +12,9 @@ const config = {
     yoomoney: "https://returnyoutubedislike.com/pay/yoomoney"
   },
 };
+const settings = {
+  disableRateBar: false,
+}
 
 /*   Links   */
 document.getElementById("link_website").addEventListener("click", () => {
@@ -48,7 +51,17 @@ advancedToggle.addEventListener("click", () => {
     config.advanced = true;
   }
 });
-
+/*   Advanced Settings   */
+const disableRateBar = document.getElementById("disable_rate_bar");
+chrome.storage.local.get('settings', (local) => {
+  Object.assign(settings, local.settings);
+  disableRateBar.checked = Boolean(local.settings.disableRateBar) || settings.disableRateBar;
+});
+disableRateBar.addEventListener("input", (e) => {
+  settings.disableRateBar = e.target.checked;
+  chrome.storage.local.set({ settings });
+});
+console.log(document);
 /* popup-script.js 
 document.querySelector('#login')
 .addEventListener('click', function () {

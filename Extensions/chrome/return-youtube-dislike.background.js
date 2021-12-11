@@ -7,6 +7,12 @@ const apiUrl = "https://returnyoutubedislikeapi.com";
 //   sendResponse(securityToken);
 // });
 
+// Storage
+chrome.storage.onChanged.addListener((changes, area) => {
+  console.log(changes)
+  console.log(area)
+});
+
 chrome.runtime.onMessageExternal.addListener(
   (request, sender, sendResponse) => {
     if (request.message === "get_auth_token") {

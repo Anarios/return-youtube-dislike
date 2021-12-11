@@ -10,6 +10,7 @@
     "48": "icons/icon48.png",
    "128": "icons/icon128.png"
   },
+  "permissions": ["storage"],
   "host_permissions": ["*://*.youtube.com/*"],
   "action": {
     "default_popup": "popup.html"
@@ -22,7 +23,7 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "exclude_matches": ["*://*.music.youtube.com/*"],
-      "js": ["return-youtube-dislike.content-script.js"],
+      "js": ["return-youtube-dislike.content-script.js", "popup.js"],
       "run_at": "document_start",
       "css": ["content-style.css"]
     }
