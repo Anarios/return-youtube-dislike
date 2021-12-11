@@ -91,11 +91,11 @@ function isVideoNotDisliked() {
   return getDislikeButton().classList.contains("style-text");
 }
 
-function checkForSignInButton() {
+function checkForUserAvatarButton() {
   if (isMobile) {
     return;
   }
-  if (document.querySelector('[aria-label="Sign in"]')) {
+  if (document.querySelector('#avatar-btn')) {
     return true
   } else {
     return false
@@ -278,7 +278,7 @@ function setState() {
 }
 
 function likeClicked() {
-  if (checkForSignInButton() == false) {
+  if (checkForUserAvatarButton() == true) {
     if (previousState == 1) {
       likesvalue--;
       createRateBar(likesvalue, dislikesvalue);
@@ -299,7 +299,7 @@ function likeClicked() {
 }
 
 function dislikeClicked() {
-  if (checkForSignInButton() == false) {
+  if (checkForUserAvatarButton() == true) {
     if (previousState == 3) {
       dislikesvalue++;
       setDislikes(numberFormat(dislikesvalue));

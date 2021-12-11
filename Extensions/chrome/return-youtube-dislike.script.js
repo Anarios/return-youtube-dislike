@@ -56,8 +56,8 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
     return getDislikeButton().classList.contains("style-text");
   }
   
-  function checkForSignInButton() {
-    if (document.querySelector('[aria-label="Sign in"]')) {
+  function checkForUserAvatarButton() {
+    if (document.querySelector('#avatar-btn')) {
       return true
     } else {
       return false
@@ -132,7 +132,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   }
 
   function likeClicked() {
-      if (checkForSignInButton() == false) {
+    if (checkForUserAvatarButton() == true) {
         if (storedData.previousState == DISLIKED_STATE) {
           storedData.dislikes--;
           storedData.likes++;
@@ -152,7 +152,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   }
 
   function dislikeClicked() {
-    if (checkForSignInButton() == false) {
+    if (checkForUserAvatarButton() == true) {
       if (storedData.previousState == NEUTRAL_STATE) {
         storedData.dislikes++;
         setDislikes(numberFormat(storedData.dislikes));
