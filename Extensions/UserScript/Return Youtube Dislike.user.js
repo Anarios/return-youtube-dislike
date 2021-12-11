@@ -327,7 +327,7 @@ function setInitialState() {
 function getVideoId() {
   const urlObject = new URL(window.location.href);
   const pathname = urlObject.pathname;
-  if (pathname.startsWith("/clips")) {
+  if (pathname.startsWith("/clip")) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
     return urlObject.searchParams.get("v");
