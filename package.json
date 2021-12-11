@@ -15,12 +15,14 @@
     "lint-fix": "run-p 'lint:* -- --fix'",
     "test": "run-p lint:* build",
     "preversion": "yarn test",
-    "postversion": "ts-node Scripts/version_incrementer.ts && echo \"Upgraded to version $npm_package_version\""
+    "postversion": "ts-node Scripts/version_incrementer.ts && echo \"Upgraded to version $npm_package_version\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/node": "^16.11.12",
     "dotenv": "^10.0.0",
     "ts-node": "^10.4.0",
+    "husky": "^7.0.4",
     "webextension-polyfill": "^0.8.0"
   },
   "devDependencies": {
