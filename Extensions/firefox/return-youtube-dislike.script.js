@@ -61,8 +61,8 @@ function isVideoNotDisliked() {
       || getDislikeButton().querySelector('[aria-pressed="false"]') !== null;
 }
 
-function checkForSignInButton() {
-  if (document.querySelector('[aria-label="Sign in"]')) {
+function checkForUserAvatarButton() {
+  if (document.querySelector('#avatar-btn')) {
     return true
   } else {
     return false
@@ -137,7 +137,7 @@ function setState() {
 }
 
 function likeClicked() {
-  if (checkForSignInButton() == false) {
+  if (checkForUserAvatarButton() == true) {
     if (storedData.previousState == DISLIKED_STATE) {
       storedData.dislikes--;
       storedData.likes++;
@@ -157,7 +157,7 @@ function likeClicked() {
 }
 
 function dislikeClicked() {
-  if (checkForSignInButton() == false) {
+  if (checkForUserAvatarButton() == true) {
     if (storedData.previousState == NEUTRAL_STATE) {
       storedData.dislikes++;
       setDislikes(numberFormat(storedData.dislikes));
