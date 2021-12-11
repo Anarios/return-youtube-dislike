@@ -23,7 +23,7 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "exclude_matches": ["*://*.music.youtube.com/*"],
-      "js": ["return-youtube-dislike.content-script.js", "popup.js"],
+      "js": ["return-youtube-dislike.content-script.js", "return-youtube-dislike.script.js"],
       "run_at": "document_start",
       "css": ["content-style.css"]
     }

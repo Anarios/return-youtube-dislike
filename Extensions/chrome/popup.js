@@ -57,11 +57,18 @@ chrome.storage.local.get('settings', (local) => {
   Object.assign(settings, local.settings);
   disableRateBar.checked = Boolean(local.settings.disableRateBar) || settings.disableRateBar;
 });
+//chrome.storage.sync.get('settings', (sync) => {
+//  Object.assign(settings, sync.settings);
+//  disableRateBar.checked = Boolean(sync.settings.disableRateBar) || settings.disableRateBar;
+//});
 disableRateBar.addEventListener("input", (e) => {
   settings.disableRateBar = e.target.checked;
   chrome.storage.local.set({ settings });
 });
-console.log(document);
+//disableRateBar.addEventListener("input", (e) => {
+//  settings.disableRateBar = e.target.checked;
+//  chrome.storage.sync.set({ settings });
+//});
 /* popup-script.js 
 document.querySelector('#login')
 .addEventListener('click', function () {

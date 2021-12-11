@@ -2,6 +2,8 @@ const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
+chrome.storage.onChanged.addListener((changes, area) => console.log(area, changes));
+
 (function (extensionId) {
   let storedData = {
     likes: 0,
