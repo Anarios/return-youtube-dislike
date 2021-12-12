@@ -1,12 +1,29 @@
-*.idea
-*Backend
 *cert
+*Backend
 .DS_Store
-StaticSite/.editorconfig
-StaticSite/package-lock.json
 
+# Website node modules and build output
+Website/package-lock.json
+Website/.editorconfig
 Website/node_modules
 Website/.nuxt
-Website/.editorconfig
 Website/dist/
 Website/_nuxt
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
