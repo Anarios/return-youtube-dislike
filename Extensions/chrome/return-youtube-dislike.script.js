@@ -57,7 +57,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
   }
   
   function hasAvatarButton() {
-    return document.querySelector('#avatar-btn') !== null
+    return !!document.querySelector('#avatar-btn')
   }
 
   function getState() {
