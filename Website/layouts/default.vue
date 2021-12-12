@@ -2,7 +2,7 @@
   <v-app dark>
 
     <!-- height = 4rem, margin-y = 1rem -->
-    <v-app-bar app flat class="topBar fly-in-from-top my-4 mx-auto" >
+    <v-app-bar app flat class="topBar fly-in-from-top my-4 mx-auto">
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
           {{ link.name }}
@@ -13,8 +13,7 @@
     <!-- abstract background -->
     <v-img src="/ui/abstract.svg" style="position: absolute; left: 0; right: 0; width: 100%; height: 100%;" />
 
-    <!-- padding-top = 4rem (from toolbar height ^^) -->
-    <v-main>
+    <v-main style="padding-top: 4rem !important;">
       <!-- min-height helps keep content centered, use .debug to to see it -->
       <center
         class="py-8 mx-auto d-flex flex-column justify-center items-center"
@@ -101,14 +100,14 @@ html, body {
 
 .fly-in-from-top {
   opacity: 0;
-  transform: scale(0.8) translateY(-200%);
+  transform: scale(0.8) translateY(-12rem);
   animation: fly-in-from-top 0.5s .3s ease forwards;
 }
 
 @keyframes fly-in-from-top {
   0% {
     opacity: 0;
-    transform: scale(0.8) translateY(-200%);
+    transform: scale(0.8) translateY(-12rem);
   }
   100% {
     opacity: 1;
