@@ -29,10 +29,9 @@ For detailed explanation on how things work, check out the [documentation](https
 
 >`Ctrl(Cmd)` + `Shift` + `P` > Open Settings (JSON)
 ```
-"editor.formatOnSave": false,
-"eslint.autoFixOnSave": true,
-"eslint.options: {
-    "extensions": [ ".js", ".vue" ]
+"editor.formatOnSave": true,
+"editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
 }
 "vetur.validation.template": false,
 ```
