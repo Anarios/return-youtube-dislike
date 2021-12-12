@@ -5,11 +5,11 @@
 StaticSite/.editorconfig
 StaticSite/package-lock.json
 
-Website/node_modules
-Website/.nuxt
-Website/.editorconfig
-Website/dist/
-Website/_nuxt
+returnyoutubedislike.com/Website/node_modules
+returnyoutubedislike.com/Website/.nuxt
+returnyoutubedislike.com/Website/.editorconfig
+returnyoutubedislike.com/Website/dist/
+returnyoutubedislike.com/Website/_nuxt
 
 node_modules
 .parcel-cache

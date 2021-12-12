@@ -34,12 +34,12 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 		if (document.getElementById("menu-container")?.offsetParent === null) {
 			return document.querySelector(
 				"ytd-menu-renderer.ytd-watch-metadata > div"
-			);
+			) as HTMLMetaElement;
 			//---   If Menu Element Isnt Displayed:   ---//
 		} else {
 			return document
 				.getElementById("menu-container")
-				?.querySelector("#top-level-buttons-computed");
+				?.querySelector("#top-level-buttons-computed") as HTMLMetaElement;
 		}
 	}
 
@@ -66,13 +66,9 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 	function isVideoNotDisliked() {
 		return getDislikeButton().classList.contains("style-text");
 	}
-  
-	function checkForSignInButton() {
-		if (document.querySelector("[aria-label=\"Sign in\"]")) {
-			return true;
-		} else {
-			return false;
-		}
+
+	function checkForUserAvatarButton() {
+		return !!document.querySelector('#avatar-btn');
 	}
 
 	function getState() {
@@ -87,10 +83,10 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 
 	//---   Sets The Likes And Dislikes Values   ---//
 	function setLikes(likesCount) {
-		getButtons().children[0].querySelector("#text").innerText = likesCount;
+		(<HTMLMetaElement> getButtons().children[0].querySelector("#text")).innerText = likesCount;
 	}
 	function setDislikes(dislikesCount) {
-		getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+		(<HTMLMetaElement> getButtons().children[1].querySelector("#text")).innerText = dislikesCount;
 	}
 
 	function setState() {
@@ -139,7 +135,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 	}
 
 	function likeClicked() {
-		if (checkForSignInButton() == false) {
+		if (checkForUserAvatarButton() == false) {
 			if (storedData.previousState == DISLIKED_STATE) {
 				storedData.dislikes--;
 				storedData.likes++;
@@ -159,7 +155,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 	}
 
 	function dislikeClicked() {
-		if (checkForSignInButton() == false) {
+		if (checkForUserAvatarButton() == false) {
 			if (storedData.previousState == NEUTRAL_STATE) {
 				storedData.dislikes++;
 				setDislikes(numberFormat(storedData.dislikes));
@@ -188,8 +184,8 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 	function getVideoId(url) {
 		const urlObject = new URL(url);
 		const pathname = urlObject.pathname;
-		if (pathname.startsWith("/clips")) {
-			return document.querySelector("meta[itemprop='videoId']").content;
+		if (pathname.startsWith("/clip")) {
+			return (<HTMLMetaElement> document.querySelector("meta[itemprop='videoId']")).content;
 		} else {
 			return urlObject.searchParams.get("v");
 		}
@@ -224,7 +220,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 		return formatter.format(roundDown(numberState));
 	}
 
-	var jsInitChecktimer = null;
+    let jsInitChecktimer = null;
 
 	function setEventListeners(evt?) {
 		function checkForJS_Finish() {
@@ -247,17 +243,13 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 	}
 
 	function createRateBar(likes, dislikes) {
-		var rateBar = document.getElementById(
+		let rateBar = document.getElementById(
 			"return-youtube-dislike-bar-container"
 		);
 
-		const widthPx =
-      getButtons().children[0].clientWidth +
-      getButtons().children[1].clientWidth +
-      8;
+        const widthPx = getButtons().children[0].clientWidth + getButtons().children[1].clientWidth + 8;
 
-		const widthPercent =
-      likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
+        const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
 		if (!rateBar) {
 			document.getElementById("menu-container").insertAdjacentHTML(
@@ -305,8 +297,8 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 					document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
 				)
 			)
-			.filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-			.map((x) => getVideoId(x.href));
+			.filter((x: HTMLAnchorElement) => x.href && x.href.indexOf("/watch?v=") > 0)
+			.map((x: HTMLAnchorElement) => getVideoId(x.href));
 		browser.runtime.sendMessage(extensionId, {
 			message: "send_links",
 			videoIds: ids,

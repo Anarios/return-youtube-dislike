@@ -1,14 +1,9 @@
-html {
-  /* fallback values for mobile */
-  --yt-spec-icon-disabled: #909090;
-  --yt-spec-text-primary: #030303;
-}
-
+/*noinspection CssUnresolvedCustomProperty*/
 #return-youtube-dislike-bar-container {
   background: var(--yt-spec-icon-disabled);
   border-radius: 2px;
 }
-
+/*noinspection CssUnresolvedCustomProperty*/
 #return-youtube-dislike-bar {
   background: var(--yt-spec-text-primary);
   border-radius: 2px;
@@ -20,16 +15,6 @@ html {
   display: block;
   height: 2px;
   top: 9px;
-}
-
-ytm-slim-video-action-bar-renderer > .ryd-tooltip {
-  padding-left: 12px;
-  top: 0px;
-}
-
-/* tp-yt-paper-tooltip not supported on mobile */
-ytm-slim-video-action-bar-renderer tp-yt-paper-tooltip {
-  display: none;
 }
 
 .ryd-tooltip-bar-container {
