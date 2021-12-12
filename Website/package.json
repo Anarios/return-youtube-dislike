@@ -7,7 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint": "eslint --fix --ext .js,.vue ./"
+    "lint": "eslint --fix --ext .js,.vue --ignore-path .eslintignore ."
   },
   "dependencies": {
     "core-js": "^3.15.1",
