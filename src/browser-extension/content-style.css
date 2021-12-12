@@ -1,9 +1,10 @@
-/*noinspection CssUnresolvedCustomProperty*/
+/* noinspection CssUnresolvedCustomProperty */
 #return-youtube-dislike-bar-container {
   background: var(--yt-spec-icon-disabled);
   border-radius: 2px;
 }
-/*noinspection CssUnresolvedCustomProperty*/
+
+/* noinspection CssUnresolvedCustomProperty */
 #return-youtube-dislike-bar {
   background: var(--yt-spec-text-primary);
   border-radius: 2px;

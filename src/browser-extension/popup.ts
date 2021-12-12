@@ -39,9 +39,9 @@ document.getElementById("link_yoomoney").addEventListener("click", () => {
 
 
 /*   Advanced Toggle   */
-const advancedToggle = document.getElementById("advancedToggle");
+const advancedToggle = document.getElementById("advanced-toggle");
 advancedToggle.addEventListener("click", () => {
-	const adv = document.getElementById("advancedSettings");
+	const adv = document.getElementById("advanced-settings");
 	if (config.advanced) {
 		adv.style.display = "none";
 		advancedToggle.innerHTML = config.showAdvancedMessage;

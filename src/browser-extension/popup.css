@@ -2,11 +2,10 @@
 :root {
   --primary: #cc2929;
   --accent: #581111;
-
   --background: #111;
   --secondary: #272727;
-  --tertiary: #333333;
-  --lightGrey: #999;
+  --tertiary: #333;
+  --light-grey: #999;
   --white: #fff;
 }
 
@@ -17,7 +16,7 @@ body {
   color: var(--white);
   min-width: 300px;
   padding: 0.5em;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 14px;
 }
 
@@ -34,31 +33,27 @@ button {
   border-radius: 4px;
   font-weight: 500;
   box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
-  transition: .4s;
+  transition: 0.4s;
 }
 
 button:hover {
   background: #444;
 }
 
-#advancedToggle {
+#advanced-toggle {
   margin-top: 1em;
   margin-bottom: 2em;
 }
 
-#advancedSettings {
+#advanced-settings {
   display: none;
   border: 2px solid var(--secondary);
   border-radius: 0.5rem;
   padding: 1rem;
 }
 
-#advancedLegend {
+#advanced-legend {
   color: var(--tertiary) !important;
-  /* margin: auto; */ /* Center the label */
-  /* padding: .25rem .5rem; */
-  /* border-radius: .25rem; */
-  /* border: .25rem solid var(--secondary); */
 }
 
 /*   Switches   */
@@ -97,7 +92,7 @@ button:hover {
   width: 13px;
   left: 2px;
   bottom: 2px;
-  background: var(--lightGrey);
+  background: var(--light-grey);
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -111,7 +106,7 @@ input:checked + .slider:before {
   background: var(--primary);
 }
 
-.switchLabel {
+.switch-label {
   margin-left: 0.5rem;
   width: 250px !important;
   transform: translateX(35px);

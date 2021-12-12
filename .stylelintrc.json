@@ -1,6 +1,10 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "no-eol-whitespace": null
+    "no-eol-whitespace": null,
+    "selector-pseudo-element-colon-notation": "single",
+    "number-leading-zero": "always",
+    "selector-id-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+    "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$"
   }
 }

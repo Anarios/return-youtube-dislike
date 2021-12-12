@@ -10,8 +10,8 @@
     "build": "parcel build src/browser-extension/manifest.json --no-content-hash --no-source-maps --dist-dir dist --no-cache --detailed-report 0",
     "watch": "parcel watch src/browser-extension/manifest.json --no-source-maps --dist-dir dist --no-cache --detailed-report 0",
     "lint": "run-p 'lint:*'",
-    "lint:ts": "eslint --ext ts Extensions/browser",
-    "lint:css": "stylelint 'Extensions/browser/*.css'",
+    "lint:ts": "eslint --ext ts src/browser-extension",
+    "lint:css": "stylelint 'src/browser-extension/*.css'",
     "lint-fix": "run-p 'lint:* --fix'",
     "test": "run-p lint:* build"
   },

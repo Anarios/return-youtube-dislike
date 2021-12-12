@@ -76,26 +76,26 @@ const sentIds = new Set();
 let toSend = [];
 
 function getDislikesFromYoutubeResponse(htmlResponse) {
-    let start = htmlResponse.indexOf('"videoDetails":') + '"videoDetails":'.length;
-    let end = htmlResponse.indexOf('"isLiveContent":false}', start) + '"isLiveContent":false}'.length;
-    if (end < start) {
-        end = htmlResponse.indexOf('"isLiveContent":true}', start) + '"isLiveContent":true}'.length;
-    }
-    let jsonStr = htmlResponse.substring(start, end);
-    let jsonResult = JSON.parse(jsonStr);
-    let rating = jsonResult.averageRating;
+	let start = htmlResponse.indexOf("\"videoDetails\":") + "\"videoDetails\":".length;
+	let end = htmlResponse.indexOf("\"isLiveContent\":false}", start) + "\"isLiveContent\":false}".length;
+	if (end < start) {
+		end = htmlResponse.indexOf("\"isLiveContent\":true}", start) + "\"isLiveContent\":true}".length;
+	}
+	const jsonStr = htmlResponse.substring(start, end);
+	const jsonResult = JSON.parse(jsonStr);
+	const rating = jsonResult.averageRating;
 
-    start = htmlResponse.indexOf('"topLevelButtons":[', end);
-    start = htmlResponse.indexOf('"accessibilityData":', start) + '"accessibilityData":'.length;
-    end = htmlResponse.indexOf("}", start);
-    let likes = +htmlResponse.substring(start, end).replace(/\D/g, "");
-    let dislikes = (likes * (5 - rating)) / (rating - 1);
-    return {
-        likes,
-        dislikes: Math.round(dislikes),
-        rating,
-        viewCount: +jsonResult.viewCount,
-    };
+	start = htmlResponse.indexOf("\"topLevelButtons\":[", end);
+	start = htmlResponse.indexOf("\"accessibilityData\":", start) + "\"accessibilityData\":".length;
+	end = htmlResponse.indexOf("}", start);
+	const likes = +htmlResponse.substring(start, end).replace(/\D/g, "");
+	const dislikes = (likes * (5 - rating)) / (rating - 1);
+	return {
+		likes,
+		dislikes: Math.round(dislikes),
+		rating,
+		viewCount: +jsonResult.viewCount,
+	};
 }
 
 function sendUserSubmittedStatisticsToApi(statistics) {
