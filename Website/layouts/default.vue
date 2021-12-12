@@ -1,5 +1,7 @@
 <template>
   <v-app dark>
+
+    <!-- height = 4rem, margin-y = 1rem -->
     <v-app-bar app flat class="topBar fly-in-from-top my-4 mx-auto" >
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
@@ -8,29 +10,34 @@
       </v-tabs>
     </v-app-bar>
     
+    <!-- abstract background -->
     <v-img src="/ui/abstract.svg" style="position: absolute; left: 0; right: 0; width: 100%; height: 100%;" />
 
-    <v-main class="pt-4">
-
-      <section class="hidden-chrome-scrollbar" style="height: calc(100vh - 1rem); padding-top: 5rem; padding-bottom: 5rem; overflow-y: auto;">
-          <center
-            class="mx-auto d-flex flex-column justify-center items-center"
-            style="width: 90vw; min-height: 100%;">
-              <nuxt />
-          </center>
-      </section>
-
+    <!-- padding-top = 4rem (from toolbar height ^^) -->
+    <v-main>
+      <!-- min-height helps keep content centered, use .debug to to see it -->
+      <center
+        class="py-8 mx-auto d-flex flex-column justify-center items-center"
+        style="width: 90vw; min-height: calc(100vh - 8rem);">
+          <nuxt />
+      </center>
     </v-main>
   </v-app>
 </template>
 
 <style>
 html, body {
-  overflow: hidden;
+  height: 100%;
+  height: -webkit-fill-available;
+  overflow: auto;
 }
 
-.title-text {
-  font-size: 3rem;
+.debug { /* usage: add class="debug" to the element */
+  outline: 2px solid red;
+}
+
+.mainAltButton {
+  margin: 0.25em;
 }
 
 .topBar {
@@ -41,23 +48,17 @@ html, body {
   border-radius: .75rem;
   overflow: hidden;
 }
-
+.title-text {
+  font-size: 3rem;
+}
 @media (max-width: 768px) { /* mobile */
   .title-text {
     font-size: 2rem;
   }
   .topBar { 
-    width: calc(100vw - 2rem) !important; /* (2rem = mx-4) */
+    width: calc(100vw - 2rem) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
     padding: 0;
   } 
-}
-
-.mainAltButton {
-  margin: 0.25em;
-}
-
-.hidden-chrome-scrollbar::-webkit-scrollbar {
-  display: none;
 }
 
 /* animations and all that */
@@ -71,7 +72,7 @@ html, body {
 .swoop-right-leave-active {
   transition-duration: 0.1s;
   transition-property: opacity, transform;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .swoop-left-enter,
