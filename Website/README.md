@@ -29,10 +29,12 @@ For detailed explanation on how things work, check out the [documentation](https
 
 >`Ctrl(Cmd)` + `Shift` + `P` > Open Settings (JSON)
 ```
-"[vue]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-},
-"editor.formatOnSave": true,
+"editor.formatOnSave": false,
+"eslint.autoFixOnSave": true,
+"eslint.options: {
+    "extensions": [ ".js", ".vue" ]
+}
+"vetur.validation.template": false,
 ```
 
 ## Special Directories

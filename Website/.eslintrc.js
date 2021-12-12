@@ -1,28 +1,23 @@
 module.exports = {
     root: true,
-
     env: {
-        browser: true,
-        node: true,
+      node: true,
+      browser: true,
     },
-
     parserOptions: {
-      parser: '@babel/eslint-parser',
-      requireConfigFile: false,
-      ecmaVersion: 2020
+      parser: 'babel-eslint',
     },
     extends: [
-      'plugin:vue/essential',
-      'plugin:nuxt/recommended',
+      'prettier/vue',
+      'eslint:recommended',
+      'plugin:vue/recommended',
       'plugin:prettier/recommended',
-      'eslint:recommended', //
-      '@vue/prettier',
-      'prettier',
-      '@nuxtjs',
     ],
+    plugins: ['vue'],
     rules: {
+        // semi: [2, 'never'],
+        // 'prettier/prettier': ['error', { semi: false }],
         'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     },
-
 }
