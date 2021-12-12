@@ -143,7 +143,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
           storedData.likes++;
           createRateBar(storedData.likes, storedData.dislikes);
           storedData.previousState = LIKED_STATE;
-        } else if (storedData.previousState = LIKED_STATE) {
+        } else if (storedData.previousState == LIKED_STATE) {
           storedData.likes--;
           createRateBar(storedData.likes, storedData.dislikes)
           storedData.previousState = NEUTRAL_STATE;
