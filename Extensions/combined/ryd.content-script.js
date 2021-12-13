@@ -99,7 +99,7 @@ function RYD() {
 
   //---   Sets The Likes And Dislikes Values   ---//
   function setLikes(likesCount) {
-    getButtons().children[0].querySelector("#text").innerText = likesCount;
+    (getButtons().children[0].querySelector("#text")).innerText = likesCount;
   }
 
   function setDislikes(dislikesCount) {
@@ -109,7 +109,7 @@ function RYD() {
       ).innerText = dislikesCount;
       return;
     }
-    getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+    (getButtons().children[1].querySelector("#text").innerText) = dislikesCount;
   }
 
   function getLikeCountFromButton() {
@@ -148,7 +148,8 @@ function RYD() {
             if (
               "likes" in response &&
               "dislikes" in response &&
-              response.dislikes !== null
+              response.dislikes !== null &&
+              !Number.isNaN(response.dislikes)
             ) {
               processResponse(response);
               statsSet = true;
