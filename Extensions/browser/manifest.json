@@ -1,31 +1,27 @@
 {
-	"name": "Return YouTube Dislike",
-	"description": "Returns ability to see dislikes",
-	"version": "1.1.0.2",
-	"manifest_version": 2,
-	"background": {
-	  "scripts": ["return-youtube-dislike.background.ts"]
-	},
-	"icons": {
-	  "48": "icons/icon48.png",
-	 "128": "icons/icon128.png"
-	},
-	"permissions": ["activeTab", "*://*.youtube.com/*"],
-	"browser_action": {
-	  "default_popup": "popup.html"
-	},
-	"content_scripts": [
-	  {
-		"matches": ["*://*.youtube.com/*"],
-		"exclude_matches": ["*://*.music.youtube.com/*"],
-		"js": ["return-youtube-dislike.content-script.ts", "return-youtube-dislike.script.ts"],
-		"run_at": "document_start",
-		"css": ["content-style.css"]
-	  }
-	],
-	"oauth2": {
-		"client_id": "292556337651-kbmq2pduaejrol457a5s1089ut6ug0u9.apps.googleusercontent.com",
-		"scopes": ["openid"]
-	}
-  }
-  
+  "name": "Return YouTube Dislike",
+  "description": "Returns ability to see dislikes",
+  "version": "2.0.0.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["ryd.background.ts"]
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+   "128": "icons/icon128.png"
+  },
+  "permissions": ["activeTab", "*://*.youtube.com/*", "storage"],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "exclude_matches": ["*://*.music.youtube.com/*"],
+      "run_at": "document_idle",
+      "css": ["content-style.css"],
+      "js": ["ryd.content-script.ts", "ryd.tools.ts", "/init/init.ts"]
+    }
+  ]
+
+}

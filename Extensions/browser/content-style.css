@@ -1,9 +1,9 @@
-#return-youtube-dislike-bar-container {
+#ryd-bar-container {
   background: var(--yt-spec-icon-disabled);
   border-radius: 2px;
 }
 
-#return-youtube-dislike-bar {
+#ryd-bar {
   background: var(--yt-spec-text-primary);
   border-radius: 2px;
   transition: all 0.15s ease-in-out;
