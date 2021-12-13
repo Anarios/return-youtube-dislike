@@ -75,6 +75,10 @@ function RYD() {
     return getDislikeButton().classList.contains("style-text");
   }
 
+  function isVideoRatingVisible() {
+    return getLikeButton().querySelector("yt-formatted-string").hasAttribute('aria-label')
+  }
+
   function checkForSignInButton() {
     if (
       document.querySelector(
@@ -121,11 +125,13 @@ function RYD() {
   }
 
   function processResponse(response) {
-    const formattedDislike = numberFormat(response.dislikes);
-    setDislikes(formattedDislike);
-    storedData.dislikes = parseInt(response.dislikes);
-    storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
-    createRateBar(storedData.likes, storedData.dislikes);
+    if(isVideoRatingVisible()) {
+      const formattedDislike = numberFormat(response.dislikes);
+      setDislikes(formattedDislike);
+      storedData.dislikes = parseInt(response.dislikes);
+      storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
+      createRateBar(storedData.likes, storedData.dislikes);
+    }
   }
 
   function setState() {
