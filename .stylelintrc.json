@@ -1,6 +1,10 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "no-eol-whitespace": null
+    "no-eol-whitespace": null,
+    "custom-property-pattern": null,
+    "selector-id-pattern": null,
+    "selector-class-pattern": null,
+    "font-family-name-quotes": null
   }
 }

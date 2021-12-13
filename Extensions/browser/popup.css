@@ -2,10 +2,9 @@
 :root {
   --primary: #cc2929;
   --accent: #581111;
-
   --background: #111;
   --secondary: #272727;
-  --tertiary: #333333;
+  --tertiary: #333;
   --lightGrey: #999;
   --white: #fff;
 }
@@ -17,7 +16,7 @@ body {
   color: var(--white);
   min-width: 300px;
   padding: 0.5em;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 14px;
 }
 
@@ -34,7 +33,7 @@ button {
   border-radius: 4px;
   font-weight: 500;
   box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
-  transition: .4s;
+  transition: 0.4s;
 }
 
 button:hover {
@@ -55,9 +54,15 @@ button:hover {
 
 #advancedLegend {
   color: var(--tertiary) !important;
-  /* margin: auto; */ /* Center the label */
+
+  /* margin: auto; */
+
+  /* Center the label */
+
   /* padding: .25rem .5rem; */
+
   /* border-radius: .25rem; */
+
   /* border: .25rem solid var(--secondary); */
 }
 
@@ -90,7 +95,7 @@ button:hover {
   border-radius: 34px;
 }
 
-.slider:before {
+.slider::before {
   position: absolute;
   content: "";
   height: 13px;
@@ -106,7 +111,7 @@ input:checked + .slider {
   background: var(--accent);
 }
 
-input:checked + .slider:before {
+input:checked + .slider::before {
   transform: translateX(13px);
   background: var(--primary);
 }

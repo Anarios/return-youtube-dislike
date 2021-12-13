@@ -1,4 +1,4 @@
-require('dotenv').config()
+import { options } from '../options';
 import fs = require('fs');
 
 const getFileContent = (filePath: string) => {
@@ -10,7 +10,7 @@ const getFileContent = (filePath: string) => {
     }
 };
 
-const extensionManifestFilePath = process.env.Extension_Manifest_Json;
+const extensionManifestFilePath = options.manifest_path;
 
 const extensionManifestContent = JSON.parse(getFileContent(extensionManifestFilePath));
 const packageJsonContent = JSON.parse(getFileContent("package.json"));

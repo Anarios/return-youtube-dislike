@@ -12,7 +12,7 @@
     "lint": "run-p 'lint:*'",
     "lint:ts": "eslint --ext ts Extensions/browser",
     "lint:css": "stylelint 'Extensions/browser/*.css'",
-    "lint-fix": "run-p 'lint:* -- --fix'",
+    "lint-fix": "run-p 'lint:* --fix'",
     "test": "run-p lint:* build",
     "preversion": "yarn test",
     "postversion": "ts-node Scripts/version_incrementer.ts && echo \"Upgraded to version $npm_package_version\"",
