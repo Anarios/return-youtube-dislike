@@ -1,7 +1,10 @@
 <template>
   <div>
 
-    <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24"><path d="m15 3h-9c-0.83 0-1.54 0.5-1.84 1.22l-3.02 7.05c-0.09 0.23-0.14 0.47-0.14 0.73v2a2 2 0 0 0 2 2h6.31l-0.95 4.57a1.49 1.49 0 0 0 0.41 1.37l1.06 1.06 6.58-6.59c0.37-0.36 0.59-0.86 0.59-1.41v-10a2 2 0 0 0-2-2zm4 12h4v-12h-4z" /><path d="m7.47 12.2 4.76-2.7-4.76-2.71z" fill="#fff" stroke="none"/></svg>
+    <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24" overflow="visible" >
+      <path d="M14.9 3H6c-.9 0-1.6.5-1.9 1.2l-3 7c-.1.3-.1.5-.1.7v2c0 1.1.9 2 2 2h6.3l-.9 4.5c-.1.5 0 1 .4 1.4l1.1 1.1 6.5-6.6c.4-.4.6-.9.6-1.4V5c-.1-1.1-1-2-2.1-2zm7.4 12.8h-2.9c-.4 0-.7-.3-.7-.7V3.9c0-.4.3-.7.7-.7h2.9c.4 0 .7.3.7.7V15c0 .4-.3.8-.7.8z"/>
+      <path id="plarrow" d="m8 12.5 5.1-2.9L8 6.7v5.8z" fill="#fff" stroke="none"/>
+    </svg>
 
     <h1 class="title-text" >Return YouTube Dislike</h1>
     <div class="mb-4" style="color: #999">
@@ -35,7 +38,24 @@
   stroke: #f44;
   transition-property: opacity, transform;
   transform: scale(0) rotate(180deg);
-  animation: popin 1s 1s ease-in-out 1 forwards, tap .3s 2.5s ease-in-out 1 forwards;
+  animation: popin 1s .3s ease-in-out 1 forwards, tap .3s 1.7s ease-in-out 1 forwards;
+}
+
+#plarrow {
+  opacity: 0;
+  transform: translateX(-0.25rem);
+  transition-property: opacity, transform;
+  animation: slidin .5s 1.7s ease 1 forwards;
+}
+
+@keyframes slidin {
+  0% {
+    opacity: 0;
+    transform: translateX(-0.25rem);
+  } 100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes popin {
@@ -48,6 +68,14 @@
   }
 }
 
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  } 100% {
+    opacity: 1;
+  }
+}
+
 @keyframes tap {
   0% {
     fill: transparent;
@@ -56,7 +84,7 @@
   } 25% {
     fill: #f44;
     stroke: none;
-    transform: scale(.8);
+    transform: scale(.85);
   } 100% {
     fill: #f44;
     stroke: none;
@@ -72,6 +100,17 @@
     stroke: none;
     transform: none;
     animation: none;
+  }
+  #thumbsripple {
+    opacity: 0;
+    transform: none;
+    animation: none;
+  }
+  #plarrow {
+    opacity: 0;
+    transform: none;
+    transition-property: opacity;
+    animation: fadein .5s .5s ease 1 forwards;
   }
 }
 </style>

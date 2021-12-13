@@ -25,12 +25,12 @@
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
-var previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
-var likesvalue = 0;
-var dislikesvalue = 0;
+let previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
+let likesvalue = 0;
+let dislikesvalue = 0;
 
-var isMobile = location.hostname == "m.youtube.com";
-var mobileDislikes = 0;
+let isMobile = location.hostname == "m.youtube.com";
+let mobileDislikes = 0;
 function cLog(text, subtext = "") {
   subtext = subtext.trim() === "" ? "" : `(${subtext})`;
   console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
@@ -91,11 +91,11 @@ function isVideoNotDisliked() {
   return getDislikeButton().classList.contains("style-text");
 }
 
-function checkForSignInButton() {
+function checkForUserAvatarButton() {
   if (isMobile) {
     return;
   }
-  if (document.querySelector('[aria-label="Sign in"]')) {
+  if (document.querySelector('#avatar-btn')) {
     return true
   } else {
     return false
@@ -132,7 +132,7 @@ function setDislikes(dislikesCount) {
 (typeof GM_addStyle != "undefined"
   ? GM_addStyle
   : (styles) => {
-      var styleNode = document.createElement("style");
+      let styleNode = document.createElement("style");
       styleNode.type = "text/css";
       styleNode.innerText = styles;
       document.head.appendChild(styleNode);
@@ -169,7 +169,7 @@ function createRateBar(likes, dislikes) {
   if (isMobile) {
     return;
   }
-  var rateBar = document.getElementById("return-youtube-dislike-bar-container");
+  let rateBar = document.getElementById("return-youtube-dislike-bar-container");
 
   const widthPx =
     getButtons().children[0].clientWidth +
@@ -242,7 +242,7 @@ function setState() {
       },
     });
   } else {
-    fetch(`https://youtube.com/watch?v=${getVideoId()}`).then((response) => {
+    fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then((response) => {
       response.text().then((text) => {
         let result = getDislikesFromYoutubeResponse(text);
         if (result) {
@@ -278,7 +278,7 @@ function setState() {
 }
 
 function likeClicked() {
-  if (checkForSignInButton() == false) {
+  if (checkForUserAvatarButton() == true) {
     if (previousState == 1) {
       likesvalue--;
       createRateBar(likesvalue, dislikesvalue);
@@ -299,7 +299,7 @@ function likeClicked() {
 }
 
 function dislikeClicked() {
-  if (checkForSignInButton() == false) {
+  if (checkForUserAvatarButton() == true) {
     if (previousState == 3) {
       dislikesvalue++;
       setDislikes(numberFormat(dislikesvalue));
@@ -327,7 +327,7 @@ function setInitialState() {
 function getVideoId() {
   const urlObject = new URL(window.location.href);
   const pathname = urlObject.pathname;
-  if (pathname.startsWith("/clips")) {
+  if (pathname.startsWith("/clip")) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
     return urlObject.searchParams.get("v");
@@ -404,6 +404,8 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
 }
 
 function setEventListeners(evt) {
+  let jsInitChecktimer;
+  
   function checkForJS_Finish(check) {
     console.log();
     if (getButtons()?.offsetParent && isVideoLoaded()) {
@@ -425,7 +427,7 @@ function setEventListeners(evt) {
     (isMobile && evt?.indexOf("watch?") >= 0)
   ) {
     cLog("Setting up...");
-    var jsInitChecktimer = setInterval(checkForJS_Finish, 111);
+    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   }
 }
 

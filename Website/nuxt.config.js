@@ -17,6 +17,7 @@ export default {
       { hid: 'theme-color', name: 'theme-color', content: '#ff0000' }
     ],
     link: [
+      { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },

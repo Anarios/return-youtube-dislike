@@ -1,0 +1,26 @@
+#ryd-bar-container {
+  background: var(--yt-spec-icon-disabled);
+  border-radius: 2px;
+}
+
+#ryd-bar {
+  background: var(--yt-spec-text-primary);
+  border-radius: 2px;
+  transition: all 0.15s ease-in-out;
+}
+
+.ryd-tooltip {
+  position: relative;
+  display: block;
+  height: 2px;
+  top: 9px;
+}
+
+.ryd-tooltip-bar-container {
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  padding-top: 6px;
+  padding-bottom: 28px;
+  top: -6px;
+}
