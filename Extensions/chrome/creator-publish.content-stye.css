@@ -1,0 +1,15 @@
+.returnyoutube-button{
+    background-color:#1c1c1c;
+    padding:10px;
+    border-radius: 2px;
+    border: 1px #333 solid;
+    padding-left:30px;
+    background-image: url("https://github.com/Anarios/return-youtube-dislike/blob/main/Icons/Return%20Youtube%20Dislike%20-%20Dark.jpg?raw=true");
+    background-repeat: no-repeat;
+    background-size:30px auto;
+    background-position: 2px center;
+    font-size:1.2em;
+}
+.returnyoutube-button:hover{
+    cursor: pointer;
+}

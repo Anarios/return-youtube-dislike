@@ -21,10 +21,16 @@
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
-      "exclude_matches": ["*://*.music.youtube.com/*"],
+      "exclude_matches": ["*://*.music.youtube.com/*", "*://*.studio.youtube.com/*"],
       "js": ["return-youtube-dislike.content-script.js"],
       "run_at": "document_start",
       "css": ["content-style.css"]
+    },
+    {
+      "matches": ["*://studio.youtube.com/*"],
+      "js": ["creator-publish.content-script.js"],
+      "run_at": "document_start",
+      "css": ["creator-publish.content-stye.css"]
     }
   ],
   "externally_connectable": {
@@ -32,7 +38,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["return-youtube-dislike.script.js"],
+      "resources": ["return-youtube-dislike.script.js", "creator-publish.script.js"],
       "matches": ["*://*.youtube.com/*"]
     }
   ]
