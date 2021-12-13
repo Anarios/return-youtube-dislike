@@ -358,10 +358,10 @@ function numberFormat(numberState) {
     ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
     ?.getAttribute("href");
   
-  const userLocales = localeURL ? new URL(localeURL)?.searchParams?.get("locale") : 'en';
+  const userLocales = localeURL ? new URL(localeURL)?.searchParams?.get("locale") : null;
 
   const formatter = Intl.NumberFormat(
-    document.documentElement.lang || userLocales,
+    document.documentElement.lang || userLocales || navigator.language,
     {
       notation: "compact",
       minimumFractionDigits: 1,
