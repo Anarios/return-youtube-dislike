@@ -169,7 +169,7 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
   let dislikes = (likes * (5 - rating)) / (rating - 1);
   let result = {
     likes,
-    dislikes: Math.round(dislikes),
+    dislikes: Math.abs(Math.round(dislikes)),
     rating,
     viewCount: +jsonResult.viewCount,
   };
