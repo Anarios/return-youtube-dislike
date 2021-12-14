@@ -1,1 +1,0 @@
-console.log(path.resolve(__dirname, "Extensions/combined"))

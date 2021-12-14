@@ -10,4 +10,5 @@ module.exports = {
     ramda: "R",
   },
   module: {},
+  watch: true
 };
