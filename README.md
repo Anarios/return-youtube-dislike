@@ -57,7 +57,5 @@ Please read the [contribution guide.](https://github.com/Anarios/return-youtube-
 
 ## Donate
 
-[Patreon](https://www.patreon.com/returnyoutubedislike/)
-
-[YooMoney form at my site](https://returnyoutubedislike.com/pay/yoomoney)
+[Donate](https://returnyoutubedislike.com/donate)
 
