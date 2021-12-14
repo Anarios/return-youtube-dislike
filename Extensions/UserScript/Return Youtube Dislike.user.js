@@ -354,14 +354,14 @@ function roundDown(num) {
 }
 
 function numberFormat(numberState) {
-  const userLocales = new URL(
-    Array.from(document.querySelectorAll("head > link[rel='search']"))
-      ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-      ?.getAttribute("href")
-  )?.searchParams?.get("locale");
+  let localeURL = Array.from(document.querySelectorAll("head > link[rel='search']"))
+    ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+    ?.getAttribute("href");
+  
+  const userLocales = localeURL ? new URL(localeURL)?.searchParams?.get("locale") : document.body.lang;
 
   const formatter = Intl.NumberFormat(
-    document.documentElement.lang || userLocales,
+    document.documentElement.lang || userLocales || navigator.language,
     {
       notation: "compact",
       minimumFractionDigits: 1,
