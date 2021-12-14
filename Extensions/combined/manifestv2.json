@@ -20,7 +20,7 @@
       "exclude_matches": ["*://*.music.youtube.com/*"],
       "run_at": "document_idle",
       "css": ["content-style.css"],
-      "js": ["ryd.content-script.js", "ryd.tools.js", "/init/init.js"]
+      "js": ["bundled-content-script.js"]
     }
   ]
 
