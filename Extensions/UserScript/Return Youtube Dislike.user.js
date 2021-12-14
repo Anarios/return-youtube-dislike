@@ -358,7 +358,7 @@ function numberFormat(numberState) {
     ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
     ?.getAttribute("href");
   
-  const userLocales = localeURL ? new URL(localeURL)?.searchParams?.get("locale") : null;
+  const userLocales = localeURL ? new URL(localeURL)?.searchParams?.get("locale") : document.body.lang;
 
   const formatter = Intl.NumberFormat(
     document.documentElement.lang || userLocales || navigator.language,
