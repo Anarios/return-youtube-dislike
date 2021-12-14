@@ -5,7 +5,7 @@
 
     <h1 class="title-text" >Return YouTube Dislike</h1>
     <div class="mb-4" style="color: #999">
-      <p style="margin-top: 0">Browser extension and an API that show you dislikes on youtube</p>
+      <p style="margin-top: 0">Browser extension and an API that show you dislikes on Youtube</p>
     </div>
 
     <v-btn :to="installLink" color="primary px-6" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em;">
