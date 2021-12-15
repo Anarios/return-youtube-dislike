@@ -3,6 +3,7 @@ const config = {
   advanced: false,
   showAdvancedMessage: "Show Settings",
   hideAdvancedMessage: "Hide Settings",
+  disableVoteSubmission: false,
 
   links: {
     website: "https://returnyoutubedislike.com",
@@ -29,8 +30,11 @@ document.getElementById("link_donate").addEventListener("click", () => {
   chrome.tabs.create({ url: config.links.donate });
 });
 
+document.getElementById("disable_vote_submission").addEventListener("click", (ev) => {
+  chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
+});
+
 /*   Advanced Toggle   */
-/* Not currently used in this version
 const advancedToggle = document.getElementById("advancedToggle");
 advancedToggle.addEventListener("click", () => {
   const adv = document.getElementById("advancedSettings");
@@ -44,7 +48,31 @@ advancedToggle.addEventListener("click", () => {
     config.advanced = true;
   }
 });
-*/
+
+initConfig();
+
+function initConfig() {
+  initializeDisableVoteSubmission();
+}
+
+function initializeDisableVoteSubmission() {
+  chrome.storage.sync.get(['disableVoteSubmission'], (res) => {
+    handleDisableVoteSubmissionChangeEvent(res.disableVoteSubmission);
+  });
+}
+
+chrome.storage.onChanged.addListener(storageChangeHandler);
+
+function storageChangeHandler(changes, area) {
+  if (changes.disableVoteSubmission !== undefined) {
+    handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
+  }
+}
+
+function handleDisableVoteSubmissionChangeEvent(value) {
+  config.disableVoteSubmission = value;
+  document.getElementById("disable_vote_submission").checked = value;
+}
 
 /* popup-script.js
 document.querySelector('#login')
