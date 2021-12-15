@@ -1,0 +1,28 @@
+# This workflow lints the code in /Website, if any was committed
+
+name: Website Lint
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - Website/**
+
+  pull_request:
+    branches: [ main ]
+    paths:
+      - Website/**
+
+jobs:
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@main
+    - name: npm install
+      run: npm install
+      working-directory: Website
+    - name: npm run lint
+      run: npm run lint
+      working-directory: Website
