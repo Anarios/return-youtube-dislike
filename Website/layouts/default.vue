@@ -62,6 +62,7 @@ body {
   height: 100%;
   background: #111; /* for MacOS/iOS overscroll */
   height: -webkit-fill-available;
+  background: #111;
   overflow: auto;
 }
 
