@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      0.6.1
+// @version      0.9.0
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -217,49 +217,6 @@ function createRateBar(likes, dislikes) {
 function setState() {
   cLog("Fetching votes...");
   let statsSet = false;
-  if (isMobile) {
-    GM.xmlHttpRequest({
-      method: "GET",
-      url: `https://www.youtube.com/watch?v=${getVideoId()}`,
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.3674",
-      },
-      onload: (response) => {
-        let result = getDislikesFromYoutubeResponse(response.responseText);
-        if (result) {
-          cLog("response from youtube:");
-          cLog(JSON.stringify(result));
-          if ("likes" in result && "dislikes" in result) {
-            const formattedDislike = numberFormat(result.dislikes);
-            setDislikes(formattedDislike);
-            likesvalue = result.likes
-            dislikesvalue = result.dislikes
-            createRateBar(result.likes, result.dislikes);
-            statsSet = true;
-          }
-        }
-      },
-    });
-  } else {
-    fetch(`https://www.youtube.com/watch?v=${getVideoId()}`).then((response) => {
-      response.text().then((text) => {
-        let result = getDislikesFromYoutubeResponse(text);
-        if (result) {
-          cLog("response from youtube:");
-          cLog(JSON.stringify(result));
-          if ("likes" in result && "dislikes" in result) {
-            const formattedDislike = numberFormat(result.dislikes);
-            setDislikes(formattedDislike);
-            likesvalue = result.likes;
-            dislikesvalue = result.dislikes;
-            createRateBar(result.likes, result.dislikes);
-            statsSet = true;
-          }
-        }
-      });
-    });
-  }
 
   fetch(
     `https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`
@@ -354,14 +311,14 @@ function roundDown(num) {
 }
 
 function numberFormat(numberState) {
-  const userLocales = new URL(
-    Array.from(document.querySelectorAll("head > link[rel='search']"))
-      ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-      ?.getAttribute("href")
-  )?.searchParams?.get("locale");
+  let localeURL = Array.from(document.querySelectorAll("head > link[rel='search']"))
+    ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+    ?.getAttribute("href");
+
+  const userLocales = localeURL ? new URL(localeURL)?.searchParams?.get("locale") : document.body.lang;
 
   const formatter = Intl.NumberFormat(
-    document.documentElement.lang || userLocales,
+    document.documentElement.lang || userLocales || navigator.language,
     {
       notation: "compact",
       minimumFractionDigits: 1,
@@ -405,7 +362,7 @@ function getDislikesFromYoutubeResponse(htmlResponse) {
 
 function setEventListeners(evt) {
   let jsInitChecktimer;
-  
+
   function checkForJS_Finish(check) {
     console.log();
     if (getButtons()?.offsetParent && isVideoLoaded()) {
