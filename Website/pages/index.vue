@@ -27,11 +27,19 @@
       <v-icon style="margin-right: 0.5em;">mdi-discord</v-icon>
       Discord
     </v-btn>
-
+    <div id="sponsors">
+      <h3>Sponsors:</h3>
+      <p v-for="sponsor in sponsors" style="margin: 0px 0px ">
+        <a :href="sponsor.link">{{sponsor.name}}</a>
+      </p>
+    </div>
   </div>
 </template>
 
 <style scoped>
+#sponsors {
+  margin-top: 200px;
+}
 #thumbslogo {
   opacity: 0;
   fill: transparent;
@@ -129,6 +137,12 @@ export default {
       installLink: "/install",
       githubLink: "https://github.com/Anarios/return-youtube-dislike",
       discordLink: "https://discord.gg/mYnESY4Md5",
+      sponsors: [
+        {name: "Piepacker", link: "https://piepacker.com/" },
+        {name: "nodetube", link: "https://github.com/mayeaux/nodetube"},
+        {name: "trig404"},
+        {name: "Peter33"}
+      ]
     }
   }
 }
