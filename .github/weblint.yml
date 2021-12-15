@@ -14,7 +14,7 @@ on:
       - Website/**
 
 jobs:
-  lint:
+  weblint:
 
     runs-on: ubuntu-latest
 
