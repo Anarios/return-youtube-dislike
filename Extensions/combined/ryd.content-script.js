@@ -156,13 +156,16 @@ function RYD() {
   }
 
   function sendVote(vote) {
-    if(!storedData.do_submission){
-      return;
-    }
-    RYDTools.getBrowser().runtime.sendMessage({
-      message: "send_vote",
-      vote: vote,
-      videoId: getVideoId(window.location.href)
+    RYDTools.getBrowser().storage.sync.get(["do_submission"], (resp) => {
+      if(!resp["do_submission"]){
+        return;
+      }
+      console.log("Sending vote...");
+      RYDTools.getBrowser().runtime.sendMessage({
+        message: "send_vote",
+        vote: vote,
+        videoId: getVideoId(window.location.href)
+      });
     });
   }
 
@@ -213,22 +216,6 @@ function RYD() {
       }
     }
   }
-
-  // Listens for submission toggle
-  RYDTools.getBrowser().runtime.onMessage.addListener(msg => {
-    if(msg.message == 'toggle_submission'){
-      storedData.do_submission = !storedData.do_submission;
-      console.log(`Set do_submission to: ${storedData.do_submission}`);
-    }
-  });
-  
-  // Listens for toggle state query
-  RYDTools.getBrowser().runtime.onMessage.addListener((msg, sender, sendResponse) => {
-    if(msg.message == 'get_toggle_state'){
-      console.log('Received toggle state query, answer is ' + storedData.do_submission);
-      sendResponse(storedData.do_submission);
-    }
-  });
 
   function setInitialState() {
     setState();
@@ -384,6 +371,10 @@ function RYD() {
     if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
     window.returnDislikeButtonlistenersSet = false;
     setEventListeners();
+  });
+
+  RYDTools.getBrowser().storage.sync.set({"do_submission": true}, () => {
+    console.log("Initializd do_submission");
   });
 
   setTimeout(() => sendVideoIds(), 2500);

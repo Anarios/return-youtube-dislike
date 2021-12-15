@@ -33,35 +33,24 @@ loadSubmissionToggle();
 
 /*   Dislike submission toggle   */
 function loadSubmissionToggle(){
-  document.getElementById("dislike_submission_toggle").style.visibility = "hidden";
-  chrome.tabs.query({}, tabs => {
-    let currTab = tabs[0].id;
-    currVal = chrome.tabs.sendMessage(currTab, {"message" : "get_toggle_state"}, (resp) => {
-      let currVal = resp;
-      setSubmissionOptions(currVal);
-      document.getElementById("dislike_submission_toggle").addEventListener("click", () => {
-        chrome.tabs.query({}, tabs => {
-          tabs.forEach(tab => {
-            chrome.tabs.sendMessage(tab.id, {'message' : 'toggle_submission'});
-          });
-        });
-        currVal = !currVal;
-        setSubmissionOptions(currVal);
-      });
+  let slider = document.getElementById("dislike_submission_toggle");
+  slider.style.visibility = "hidden";
+  chrome.storage.sync.get(["do_submission"], (resp) => {
+    let val = resp["do_submission"];
+    //alert(val);
+    setSubmissionOptions(val);
+    slider.style.visibility = "visible";
+    slider.addEventListener("change", () => {
+      let state = (document.getElementById("dislike_submission_toggle").checked);
+      //alert(document.getElementById("dislike_submission_toggle").checked + " " + state);
+      chrome.storage.sync.set({"do_submission" : state});
     });
   });
 }
 
 function setSubmissionOptions(currVal){
   //alert('Set submission opts with ' + currVal);
-  document.getElementById("dislike_submission_toggle").style.visibility = "visible";
-  if(currVal){
-    document.getElementById("warning").style.visibility = "visible";
-    document.getElementById("dislike_submission_toggle").innerHTML = "Disable Dislike Submission";
-  } else {
-    document.getElementById("warning").style.visibility = "hidden";
-    document.getElementById("dislike_submission_toggle").innerHTML = "Enable Dislike Submission";
-  }
+  document.getElementById("dislike_submission_toggle").checked = currVal;
 }
 /*   Advanced Toggle   */
 /* Not currently used in this version
