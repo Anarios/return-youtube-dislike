@@ -67,14 +67,6 @@ function RYD() {
     return getDislikeButton().classList.contains("style-default-active");
   }
 
-  function isVideoNotLiked() {
-    return getLikeButton().classList.contains("style-text");
-  }
-
-  function isVideoNotDisliked() {
-    return getDislikeButton().classList.contains("style-text");
-  }
-
   function checkForSignInButton() {
     if (
       document.querySelector(
