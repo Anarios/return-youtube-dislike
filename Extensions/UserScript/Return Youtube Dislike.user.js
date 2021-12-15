@@ -329,37 +329,6 @@ function numberFormat(numberState) {
   return formatter.format(roundDown(numberState)).replace(/\.0|,0/, "");
 }
 
-function getDislikesFromYoutubeResponse(htmlResponse) {
-  let start =
-    htmlResponse.indexOf('"videoDetails":') + '"videoDetails":'.length;
-  let end =
-    htmlResponse.indexOf('"isLiveContent":false}', start) +
-    '"isLiveContent":false}'.length;
-  if (end < start) {
-    end =
-      htmlResponse.indexOf('"isLiveContent":true}', start) +
-      '"isLiveContent":true}'.length;
-  }
-  let jsonStr = htmlResponse.substring(start, end);
-  let jsonResult = JSON.parse(jsonStr);
-  let rating = jsonResult.averageRating;
-
-  start = htmlResponse.indexOf('"topLevelButtons":[', end);
-  start =
-    htmlResponse.indexOf('"accessibilityData":', start) +
-    '"accessibilityData":'.length;
-  end = htmlResponse.indexOf("}", start);
-  let likes = +htmlResponse.substring(start, end).replace(/\D/g, "");
-  let dislikes = (likes * (5 - rating)) / (rating - 1);
-  let result = {
-    likes,
-    dislikes: Math.round(dislikes),
-    rating,
-    viewCount: +jsonResult.viewCount,
-  };
-  return result;
-}
-
 function setEventListeners(evt) {
   let jsInitChecktimer;
 
