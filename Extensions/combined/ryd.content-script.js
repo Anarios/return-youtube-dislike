@@ -7,6 +7,7 @@ function RYD() {
     likes: 0,
     dislikes: 0,
     previousState: NEUTRAL_STATE,
+    do_submission: true,
   };
 
   function cLog(message, writer) {
@@ -186,7 +187,7 @@ function RYD() {
   }
 
   function dislikeClicked() {
-    if (checkForSignInButton() == false) {
+    if (checkForSignInButton() == false && storedData.do_submission) {
       if (storedData.previousState === NEUTRAL_STATE) {
         sendVote(-1);
         storedData.dislikes++;
@@ -209,6 +210,22 @@ function RYD() {
       }
     }
   }
+
+  // Listens for submission toggle
+  RYDTools.getBrowser().runtime.onMessage.addListener(msg => {
+    if(msg.message == 'toggle_submission'){
+      storedData.do_submission = !storedData.do_submission;
+      console.log(`Set do_submission to: ${storedData.do_submission}`);
+    }
+  });
+  
+  // Listens for toggle state query
+  RYDTools.getBrowser().runtime.onMessage.addListener((msg, sender, sendResponse) => {
+    if(msg.message == 'get_toggle_state'){
+      console.log('Received toggle state query, answer is ' + storedData.do_submission);
+      sendResponse(storedData.do_submission);
+    }
+  });
 
   function setInitialState() {
     setState();
