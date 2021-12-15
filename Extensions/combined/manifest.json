@@ -1,7 +1,7 @@
 {
   "name": "Return YouTube Dislike",
   "description": "Returns ability to see dislikes",
-  "version": "2.0.0.1",
+  "version": "2.0.0.2",
   "manifest_version": 3,
   "background": {
     "service_worker": "ryd.background.js"

@@ -135,29 +135,6 @@ function RYD() {
       ? LIKED_STATE
       : NEUTRAL_STATE;
     let statsSet = false;
-    RYDTools.getBrowser().runtime.sendMessage(
-      {
-        message: "fetch_from_youtube",
-        videoId: getVideoId(window.location.href),
-      },
-      function (response) {
-        if (response !== undefined) {
-          cLog("response from youtube:");
-          cLog(JSON.stringify(response));
-          try {
-            if (
-              "likes" in response &&
-              "dislikes" in response &&
-              response.dislikes !== null &&
-              !Number.isNaN(response.dislikes)
-            ) {
-              processResponse(response);
-              statsSet = true;
-            }
-          } catch (e) {}
-        }
-      }
-    );
 
     RYDTools.getBrowser().runtime.sendMessage(
       {

@@ -48,20 +48,6 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       toSend = [];
     }
-  } else if (request.message == "fetch_from_youtube") {
-    fetch(`https://www.youtube.com/watch?v=${request.videoId}`, {
-      method: "GET",
-    })
-      .then((response) => response.text())
-      .then((text) => {
-        let result = getDislikesFromYoutubeResponse(text);
-        sendUserSubmittedStatisticsToApi({
-          ...result,
-          videoId: request.videoId,
-        });
-        sendResponse(result);
-      });
-    return true;
   } else if (request.message == "register") {
     register();
     return true;
