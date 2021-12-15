@@ -372,11 +372,14 @@ function RYD() {
     window.returnDislikeButtonlistenersSet = false;
     setEventListeners();
   });
-
-  RYDTools.getBrowser().storage.sync.set({"do_submission": true}, () => {
-    console.log("Initializd do_submission");
+  RYDTools.getBrowser().storage.get(["init_submission"], (resp) => {
+    if(resp.length == 0){
+      RYDTools.getBrowser().storage.sync.set({"do_submission": true}, () => {
+        console.log("Initializd do_submission");
+      });
+      RYDTools.getBrowser().storage.sync.set({"init_submission": true});
+    }
   });
-
   setTimeout(() => sendVideoIds(), 2500);
 
   this.init = function () {};
