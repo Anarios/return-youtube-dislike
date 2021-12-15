@@ -156,6 +156,9 @@ function RYD() {
   }
 
   function sendVote(vote) {
+    if(!storedData.do_submission){
+      return;
+    }
     RYDTools.getBrowser().runtime.sendMessage({
       message: "send_vote",
       vote: vote,
@@ -187,7 +190,7 @@ function RYD() {
   }
 
   function dislikeClicked() {
-    if (checkForSignInButton() == false && storedData.do_submission) {
+    if (checkForSignInButton() == false) {
       if (storedData.previousState === NEUTRAL_STATE) {
         sendVote(-1);
         storedData.dislikes++;
