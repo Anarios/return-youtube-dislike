@@ -1,6 +1,5 @@
 <template>
   <v-app dark>
-
     <!-- height = 4rem, margin-y = 1rem -->
     <v-app-bar app flat class="topBar fly-in-from-top my-4 mx-auto">
       <v-tabs centered center-active color="primary" router show-arrows>
@@ -9,30 +8,66 @@
         </v-tab>
       </v-tabs>
     </v-app-bar>
-    
-    <!-- abstract background -->
-    <v-img src="/ui/abstract.svg" style="position: absolute; left: 0; right: 0; width: 100%; height: 100%;" />
 
-    <v-main style="padding-top: 4rem !important;">
+    <!-- abstract background -->
+    <v-img
+      src="/ui/abstract.svg"
+      style="position: absolute; left: 0; right: 0; width: 100%; height: 100%"
+    />
+
+    <v-main style="padding-top: 4rem !important">
       <!-- min-height helps keep content centered, use .debug to to see it -->
       <center
         class="py-8 mx-auto d-flex flex-column justify-center items-center"
-        style="width: 90vw; min-height: calc(100vh - 8rem);">
-          <nuxt />
+        style="width: 90vw; min-height: calc(100vh - 8rem)"
+      >
+        <nuxt />
       </center>
     </v-main>
   </v-app>
 </template>
 
+<script>
+export default {
+  data: () => ({
+    links: [
+      {
+        name: "Home",
+        path: "/",
+      },
+      {
+        name: "Install",
+        path: "/install",
+      },
+      {
+        name: "FAQ",
+        path: "/faq",
+      },
+      {
+        name: "Donate",
+        path: "/donate",
+      },
+      {
+        name: "Links",
+        path: "/links",
+      },
+    ],
+  }),
+};
+</script>
+
 <style>
-html, body {
+html,
+body {
   height: 100%;
+  background: #111; /* for MacOS/iOS overscroll */
   height: -webkit-fill-available;
   background: #111;
   overflow: auto;
 }
 
-.debug { /* usage: add class="debug" to the element */
+.debug {
+  /* usage: add class="debug" to the element */
   outline: 2px solid red;
 }
 
@@ -45,20 +80,23 @@ html, body {
   width: fit-content !important;
   background-color: #222 !important;
   border-radius: 1rem !important;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   overflow: hidden;
 }
 .title-text {
   font-size: 3rem;
 }
-@media (max-width: 768px) { /* mobile */
+@media (max-width: 768px) {
+  /* mobile */
   .title-text {
     font-size: 2rem;
   }
-  .topBar { 
-    width: calc(100vw - 2rem) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
+  .topBar {
+    width: calc(
+      100vw - 2rem
+    ) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
     padding: 0;
-  } 
+  }
 }
 
 /* animations and all that */
@@ -102,7 +140,7 @@ html, body {
 .fly-in-from-top {
   opacity: 0;
   transform: scale(0.8) translateY(-12rem);
-  animation: fly-in-from-top 0.5s .3s ease forwards;
+  animation: fly-in-from-top 0.5s 0.3s ease forwards;
 }
 
 @keyframes fly-in-from-top {
@@ -161,32 +199,3 @@ html, body {
   }
 }
 </style>
-
-<script>
-  export default {
-    data: () => ({
-      links: [
-        {
-          name: 'Home',
-          path: '/'
-        },
-        {
-          name: 'Install',
-          path: '/install'
-        },
-        {
-          name: 'FAQ',
-          path: '/faq'
-        },
-        {
-          name: 'Donate',
-          path: '/donate'
-        },
-        {
-          name: 'Links',
-          path: '/links'
-        },
-      ],
-    }),
-  }
-</script>
