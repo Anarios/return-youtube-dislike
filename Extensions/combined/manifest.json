@@ -2,40 +2,26 @@
   "name": "Return YouTube Dislike",
   "description": "Returns ability to see dislikes",
   "version": "2.0.0.2",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "background": {
-    "service_worker": "ryd.background.js"
+    "scripts": ["ryd.background.js"]
   },
   "icons": {
     "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+   "128": "icons/icon128.png"
   },
-  "host_permissions": ["*://*.youtube.com/*"],
-  "permissions": [
-    "storage"
-  ],
-  "action": {
+  "permissions": ["activeTab", "*://*.youtube.com/*", "storage"],
+  "browser_action": {
     "default_popup": "popup.html"
   },
   "content_scripts": [
     {
-      "matches": [
-        "*://youtube.com/*",
-        "*://www.youtube.com/*",
-        "*://m.youtube.com/*"
-      ],
+      "matches": ["*://*.youtube.com/*"],
       "exclude_matches": ["*://*.music.youtube.com/*"],
-      "js": ["ryd.content-script.js", "ryd.tools.js", "/init/init.js"],
-      "css": ["content-style.css"]
-    }
-  ],
-  "externally_connectable": {
-    "matches": ["*://*.youtube.com/*"]
-  },
-  "web_accessible_resources": [
-    {
-      "resources": ["ryd.script.js"],
-      "matches": ["*://*.youtube.com/*"]
+      "run_at": "document_idle",
+      "css": ["content-style.css"],
+      "js": ["bundled-content-script.js"]
     }
   ]
+
 }

@@ -4,6 +4,35 @@ Thank you for investing your time in contributing to our project! All your chang
 
 ## Getting Started
 Please use Prettier with default settings for formatting.
+
+#### Prerequisites
+
+You need to have node and npm installed to create the bundled version of the source.
+
+Versions used when setting up:
+
+- node: 12.18.4
+- npm: 6.14.6
+
+To create the `bundled-content-script.js` that contains most of the business logic of this extension you have to install all dependencies first.
+
+1. Go to the root of the repo and run:
+
+```
+npm install
+```
+
+2. Run the following command to create `bundled-content-script.js` which is used in `manifest.json`
+
+```
+npm run bundle
+```
+
+This will also start a watcher that re-bundles automatically once you save a file inside the source.
+
+Congratulations, You are now ready to develop!
+
+
 ### Issues
 #### Opening a new issue
 If you have any issues with the extension, please search to make sure the issue isn't already reported. If it isn't, open an issue, using the issue form is highly recommended but not mandatory.
