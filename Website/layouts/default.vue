@@ -28,6 +28,7 @@
 html, body {
   height: 100%;
   height: -webkit-fill-available;
+  background: #111;
   overflow: auto;
 }
 
