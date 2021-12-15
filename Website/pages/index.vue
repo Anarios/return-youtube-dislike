@@ -1,45 +1,70 @@
 <template>
-  <div>
+  <div class="d-flex flex-column justify-between" style="height: calc(100vh - 10rem)">
+    <div class="col"></div>
 
-    <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24" overflow="visible" >
-      <path d="M14.9 3H6c-.9 0-1.6.5-1.9 1.2l-3 7c-.1.3-.1.5-.1.7v2c0 1.1.9 2 2 2h6.3l-.9 4.5c-.1.5 0 1 .4 1.4l1.1 1.1 6.5-6.6c.4-.4.6-.9.6-1.4V5c-.1-1.1-1-2-2.1-2zm7.4 12.8h-2.9c-.4 0-.7-.3-.7-.7V3.9c0-.4.3-.7.7-.7h2.9c.4 0 .7.3.7.7V15c0 .4-.3.8-.7.8z"/>
-      <path id="plarrow" d="m8 12.5 5.1-2.9L8 6.7v5.8z" fill="#fff" stroke="none"/>
-    </svg>
+    <div class="col">
+      <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24" overflow="visible" >
+        <path d="M14.9 3H6c-.9 0-1.6.5-1.9 1.2l-3 7c-.1.3-.1.5-.1.7v2c0 1.1.9 2 2 2h6.3l-.9 4.5c-.1.5 0 1 .4 1.4l1.1 1.1 6.5-6.6c.4-.4.6-.9.6-1.4V5c-.1-1.1-1-2-2.1-2zm7.4 12.8h-2.9c-.4 0-.7-.3-.7-.7V3.9c0-.4.3-.7.7-.7h2.9c.4 0 .7.3.7.7V15c0 .4-.3.8-.7.8z"/>
+        <path id="plarrow" d="m8 12.5 5.1-2.9L8 6.7v5.8z" fill="#fff" stroke="none"/>
+      </svg>
 
-    <h1 class="title-text" >Return YouTube Dislike</h1>
-    <div class="mb-4" style="color: #999">
-      <p style="margin-top: 0">Browser extension and an API that show you dislikes on Youtube</p>
+      <h1 class="title-text" >Return YouTube Dislike</h1>
+      <div class="mb-4" style="color: #999">
+        <p style="margin-top: 0">Browser extension and an API that show you dislikes on Youtube</p>
+      </div>
+
+      <v-btn :to="installLink" color="primary px-6" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em;">
+        <v-icon large class="mr-6">mdi-tray-arrow-down</v-icon>
+        Install
+      </v-btn>
+
+      <br>
+
+      <v-btn class="mainAltButton" :href="githubLink" target="_blank">
+        <v-icon style="margin-right: 0.5em;">mdi-github</v-icon>
+        GitHub
+      </v-btn>
+
+      <v-btn class="mainAltButton" :href="discordLink" target="_blank">
+        <v-icon style="margin-right: 0.5em;">mdi-discord</v-icon>
+        Discord
+      </v-btn>
     </div>
 
-    <v-btn :to="installLink" color="primary px-6" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em;">
-      <v-icon large class="mr-6">mdi-tray-arrow-down</v-icon>
-      Install
-    </v-btn>
+    <v-spacer />
 
-    <br>
-
-    <v-btn class="mainAltButton" :href="githubLink" target="_blank">
-      <v-icon style="margin-right: 0.5em;">mdi-github</v-icon>
-      GitHub
-    </v-btn>
-
-    <v-btn class="mainAltButton" :href="discordLink" target="_blank">
-      <v-icon style="margin-right: 0.5em;">mdi-discord</v-icon>
-      Discord
-    </v-btn>
-    <div id="sponsors">
-      <h3>Sponsors:</h3>
-      <p v-for="sponsor in sponsors" style="margin: 0px 0px ">
-        <a :href="sponsor.link">{{sponsor.name}}</a>
-      </p>
+    <div id="sponsors" class="d-flex flex-column items-center py-8">
+      <h3 class="mb-4">
+        <v-icon class="mb-2">mdi-heart</v-icon>
+        Sponsors
+      </h3>
+      <v-row class="justify-center mx-auto">
+        <p v-for="sponsor in sponsors" class="sponsor">
+          <a
+            :style="sponsor.link ? { cursor: 'pointer' } : { cursor: 'default' }"
+            :href="sponsor.link"
+          >
+            {{ sponsor.name }}
+          </a>
+        </p>
+      </v-row>
     </div>
   </div>
 </template>
 
 <style scoped>
-#sponsors {
-  margin-top: 200px;
+.sponsor {
+  margin: 1rem;
+  height: max-content;
 }
+
+@media (max-width: 767px) {
+  .sponsor {
+    margin: .5rem;
+    height: max-content;
+  }
+}
+
 #thumbslogo {
   opacity: 0;
   fill: transparent;
