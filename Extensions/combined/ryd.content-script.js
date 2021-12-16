@@ -157,15 +157,13 @@ function RYD() {
 
   function sendVote(vote) {
     RYDTools.getBrowser().storage.sync.get(["do_submission"], (resp) => {
-      if(!resp["do_submission"]){
-        return;
+      if(resp["do_submission"]){
+        RYDTools.getBrowser().runtime.sendMessage({
+          message: "send_vote",
+          vote: vote,
+          videoId: getVideoId(window.location.href)
+        });
       }
-      console.log("Sending vote...");
-      RYDTools.getBrowser().runtime.sendMessage({
-        message: "send_vote",
-        vote: vote,
-        videoId: getVideoId(window.location.href)
-      });
     });
   }
 
@@ -369,14 +367,12 @@ function RYD() {
 
   document.addEventListener("yt-navigate-finish", function (event) {
     if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
-    window.returnDislikeButtonlistenersSet = false;
+    window.returnDislikeButtonListenersSet = false;
     setEventListeners();
   });
   RYDTools.getBrowser().storage.get(["init_submission"], (resp) => {
-    if(resp.length == 0){
-      RYDTools.getBrowser().storage.sync.set({"do_submission": true}, () => {
-        console.log("Initializd do_submission");
-      });
+    if(!resp){
+      RYDTools.getBrowser().storage.sync.set({"do_submission": true});
       RYDTools.getBrowser().storage.sync.set({"init_submission": true});
     }
   });
