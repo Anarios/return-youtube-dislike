@@ -5,7 +5,7 @@
 
   --background: #111;
   --secondary: #272727;
-  --tertiary: #333333;
+  --tertiary: #424242;
   --lightGrey: #999;
   --white: #fff;
 }
@@ -43,12 +43,36 @@ button:hover {
 }
 
 #advancedToggle {
-  margin-top: 1em;
-  margin-bottom: 2em;
+  position: fixed;
+  background: none;
+  box-shadow: none;
+  color: var(--lightGrey);
+  top: 22px; right: 22px;
+  padding: 2px;
+  z-index: 69;
+  height: 2rem;
+  width: 2rem;
+}
+
+#advancedToggle:hover {
+  color: var(--white);
+  transform: rotate(-90deg);
+}
+
+#advancedToggle:active {
+  transform: scale(1.5);
 }
 
 #advancedSettings {
-  display: none;
+  opacity: 0;
+  transition-duration: .15s;
+  transition-timing-function: ease-in-out;
+  transform: scale(1.1);
+  position: fixed;
+  background: var(--background);
+  top: 4px; right: 9px;
+  width: calc(100% - 55px);
+  height: calc(100% - 48px);
   border: 2px solid var(--secondary);
   border-radius: 0.5rem;
   padding: 1rem;
