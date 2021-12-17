@@ -1,6 +1,9 @@
-  const LIKED_STATE = "LIKED_STATE";
-  const DISLIKED_STATE = "DISLIKED_STATE";
-  const NEUTRAL_STATE = "NEUTRAL_STATE";
+import {
+  LIKED_STATE,
+  DISLIKED_STATE,
+  NEUTRAL_STATE,
+} from "./src/state";
+
 
   let storedData = {
     likes: 0,
