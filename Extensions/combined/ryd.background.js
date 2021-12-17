@@ -60,7 +60,8 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
     if (!storageResult.userId || !storageResult.registrationConfirmed) {
-      register().then(() => sendVote(videoId, vote));
+      await register();
+      return;
     }
     fetch(`${apiUrl}/interact/vote`, {
       method: "POST",
@@ -73,7 +74,14 @@ async function sendVote(videoId, vote) {
         value: vote,
       }),
     })
-      .then((response) => response.json())
+      .then(async (response) => {
+        if (response.status == 401) {
+          await register();
+          await sendVote(videoId, vote);
+          return;
+        }
+        return response.json()
+      })
       .then((response) => {
         solvePuzzle(response).then((solvedPuzzle) => {
           fetch(`${apiUrl}/interact/confirmVote`, {
@@ -123,7 +131,7 @@ function register() {
 }
 
 api.storage.sync.get(null, (res) => {
-  if (!res.userId || !res.registrationConfirmed) {
+  if (!res || !res.userId || !res.registrationConfirmed) {
     register();
   }
 });

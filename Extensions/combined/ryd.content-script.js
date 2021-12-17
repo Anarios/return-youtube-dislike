@@ -26,12 +26,12 @@ function RYD() {
     if (isMobile()) {
       return document.querySelector(".slim-video-action-bar-actions");
     }
-    //---   If Menu Element Is Displayed:   ---//
+    //   If Menu Element Is Displayed:
     if (document.getElementById("menu-container")?.offsetParent === null) {
       return document.querySelector(
         "ytd-menu-renderer.ytd-watch-metadata > div"
       );
-      //---   If Menu Element Isnt Displayed:   ---//
+      //   If Menu Element Isnt Displayed:
     } else {
       return document
         .getElementById("menu-container")
