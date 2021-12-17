@@ -39,6 +39,16 @@ function getBrowser() {
   }
 }
 
+function getVideoId(url) {
+  const urlObject = new URL(url);
+  const pathname = urlObject.pathname;
+  if (pathname.startsWith("/clip")) {
+    return document.querySelector("meta[itemprop='videoId']").content;
+  } else {
+    return urlObject.searchParams.get("v");
+  }
+}
+
 function cLog(message, writer) {
   message = `[return youtube dislike]: ${message}`;
   if (writer) {
@@ -48,4 +58,4 @@ function cLog(message, writer) {
   }
 }
 
-export { numberFormat, getBrowser, cLog }
+export { numberFormat, getBrowser, getVideoId, cLog }

@@ -1,4 +1,6 @@
 import { getLikeButton, getDislikeButton, getButtons } from "./buttons";
+import { createRateBar } from "./bar";
+import { getBrowser, getVideoId, cLog, numberFormat } from "./utils";
 
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
@@ -60,11 +62,46 @@ function getLikeCountFromButton() {
   return likesStr.length > 0 ? parseInt(likesStr) : false;
 }
 
+function processResponse(response, storedData) {
+  const formattedDislike = numberFormat(response.dislikes);
+  setDislikes(formattedDislike);
+  storedData.dislikes = parseInt(response.dislikes);
+  storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
+  createRateBar(storedData.likes, storedData.dislikes);
+}
+
+function setState(storedData) {
+  storedData.previousState = isVideoDisliked()
+    ? DISLIKED_STATE
+    : isVideoLiked()
+    ? LIKED_STATE
+    : NEUTRAL_STATE;
+  let statsSet = false;
+
+  getBrowser().runtime.sendMessage(
+    {
+      message: "set_state",
+      videoId: getVideoId(window.location.href),
+      state: getState(storedData).current,
+      likeCount: getLikeCountFromButton() || null,
+    },
+    function (response) {
+      cLog("response from api:");
+      cLog(JSON.stringify(response));
+      if (response !== undefined && !("traceId" in response) && !statsSet) {
+        processResponse(response, storedData);
+      } else {
+      }
+    }
+  );
+}
+
 export {
   isMobile,
   isVideoDisliked,
   isVideoLiked,
   getState,
+  setState,
   setLikes,
   setDislikes,
   getLikeCountFromButton,

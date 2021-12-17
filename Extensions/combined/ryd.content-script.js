@@ -9,6 +9,7 @@ import {
   isVideoDisliked,
   isVideoLiked,
   getState,
+  setState,
   setLikes,
   setDislikes,
   getLikeCountFromButton,
@@ -16,7 +17,7 @@ import {
   DISLIKED_STATE,
   NEUTRAL_STATE,
 } from "./src/state";
-import { numberFormat, getBrowser, cLog } from "./src/utils";
+import { numberFormat, getBrowser, getVideoId, cLog } from "./src/utils";
 import { createRateBar } from "./src/bar";
 
 let storedData = {
@@ -24,40 +25,6 @@ let storedData = {
   dislikes: 0,
   previousState: NEUTRAL_STATE,
 };
-
-function processResponse(response) {
-  const formattedDislike = numberFormat(response.dislikes);
-  setDislikes(formattedDislike);
-  storedData.dislikes = parseInt(response.dislikes);
-  storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
-  createRateBar(storedData.likes, storedData.dislikes);
-}
-
-function setState() {
-  storedData.previousState = isVideoDisliked()
-    ? DISLIKED_STATE
-    : isVideoLiked()
-    ? LIKED_STATE
-    : NEUTRAL_STATE;
-  let statsSet = false;
-
-  getBrowser().runtime.sendMessage(
-    {
-      message: "set_state",
-      videoId: getVideoId(window.location.href),
-      state: getState(storedData).current,
-      likeCount: getLikeCountFromButton() || null,
-    },
-    function (response) {
-      cLog("response from api:");
-      cLog(JSON.stringify(response));
-      if (response !== undefined && !("traceId" in response) && !statsSet) {
-        processResponse(response);
-      } else {
-      }
-    }
-  );
-}
 
 function sendVote(vote) {
   getBrowser().runtime.sendMessage({
@@ -116,20 +83,10 @@ function dislikeClicked() {
 }
 
 function setInitialState() {
-  setState();
+  setState(storedData);
   setTimeout(() => {
     sendVideoIds();
   }, 1500);
-}
-
-function getVideoId(url) {
-  const urlObject = new URL(url);
-  const pathname = urlObject.pathname;
-  if (pathname.startsWith("/clip")) {
-    return document.querySelector("meta[itemprop='videoId']").content;
-  } else {
-    return urlObject.searchParams.get("v");
-  }
 }
 
 function isVideoLoaded() {
