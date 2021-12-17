@@ -1,4 +1,3 @@
-function RYD() {
   const LIKED_STATE = "LIKED_STATE";
   const DISLIKED_STATE = "DISLIKED_STATE";
   const NEUTRAL_STATE = "NEUTRAL_STATE";
@@ -146,12 +145,12 @@ function RYD() {
     );
   }
 
-  function sendVote(vote) {
-    RYDTools.getBrowser().runtime.sendMessage({
-      message: "send_vote",
-      vote: vote,
-      videoId: getVideoId(window.location.href)
-    });
+function sendVote(vote) {
+  getBrowser().runtime.sendMessage({
+    message: "send_vote",
+    vote: vote,
+    videoId: getVideoId(window.location.href),
+  });
   }
 
   function likeClicked() {
@@ -344,10 +343,10 @@ function RYD() {
     const ids = links
       .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
       .map((x) => getVideoId(x.href));
-    RYDTools.getBrowser().runtime.sendMessage({
-      message: "send_links",
-      videoIds: ids,
-    });
+  getBrowser().runtime.sendMessage({
+    message: "send_links",
+    videoIds: ids,
+  });
   }
 
   setEventListeners();
@@ -360,17 +359,7 @@ function RYD() {
 
   setTimeout(() => sendVideoIds(), 2500);
 
-  this.init = function () {};
-}
-
-RYD.getInstance = function () {
-  if (typeof RYD.instance == "undefined") RYD.instance = new RYD();
-  return RYD.instance;
-};
-
-RYDTools = {};
-
-RYDTools.getBrowser = function () {
+function getBrowser() {
   if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
     return chrome;
   } else if (
@@ -382,6 +371,4 @@ RYDTools.getBrowser = function () {
     console.log("browser is not supported");
     return false;
   }
-};
-
-RYD.getInstance().init();
+}
