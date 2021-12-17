@@ -4,6 +4,7 @@ import {
   getDislikeButton,
   checkForSignInButton,
 } from "./src/buttons";
+
 import {
   isMobile,
   isVideoDisliked,
@@ -17,7 +18,7 @@ import {
   NEUTRAL_STATE,
 } from "./src/state";
 
-import { numberFormat } from "./src/utils";
+import { numberFormat, getBrowser } from "./src/utils";
 
 let storedData = {
   likes: 0,
@@ -253,17 +254,3 @@ document.addEventListener("yt-navigate-finish", function (event) {
 });
 
 setTimeout(() => sendVideoIds(), 2500);
-
-function getBrowser() {
-  if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
-    return chrome;
-  } else if (
-    typeof browser !== "undefined" &&
-    typeof browser.runtime !== "undefined"
-  ) {
-    return browser;
-  } else {
-    console.log("browser is not supported");
-    return false;
-  }
-}
