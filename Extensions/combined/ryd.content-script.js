@@ -130,12 +130,12 @@ import {
       : NEUTRAL_STATE;
     let statsSet = false;
 
-    RYDTools.getBrowser().runtime.sendMessage(
+  getBrowser().runtime.sendMessage(
       {
         message: "set_state",
         videoId: getVideoId(window.location.href),
-        state: getState().current,
-        likeCount: getLikeCountFromButton() || null
+      state: getState(storedData).current,
+      likeCount: getLikeCountFromButton() || null,
       },
       function (response) {
         cLog("response from api:");
