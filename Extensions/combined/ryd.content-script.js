@@ -4,7 +4,6 @@ import {
   getDislikeButton,
   checkForSignInButton,
 } from "./src/buttons";
-
 import {
   isMobile,
   isVideoDisliked,
@@ -17,8 +16,8 @@ import {
   DISLIKED_STATE,
   NEUTRAL_STATE,
 } from "./src/state";
-
 import { numberFormat, getBrowser, cLog } from "./src/utils";
+import { createRateBar } from "./src/bar";
 
 let storedData = {
   likes: 0,
@@ -161,52 +160,6 @@ function setEventListeners(evt) {
 
   if (window.location.href.indexOf("watch?") >= 0) {
     jsInitChecktimer = setInterval(checkForJS_Finish, 111);
-  }
-}
-
-function createRateBar(likes, dislikes) {
-  let rateBar = document.getElementById("ryd-bar-container");
-
-  const widthPx =
-    getButtons().children[0].clientWidth +
-    getButtons().children[1].clientWidth +
-    8;
-
-  const widthPercent =
-    likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
-
-  if (!rateBar) {
-    (
-      document.getElementById("menu-container") ||
-      document.querySelector("ytm-slim-video-action-bar-renderer")
-    ).insertAdjacentHTML(
-      "beforeend",
-      `
-          <div class="ryd-tooltip" style="width: ${widthPx}px">
-          <div class="ryd-tooltip-bar-container">
-             <div
-                id="ryd-bar-container"
-                style="width: 100%; height: 2px;"
-                >
-                <div
-                   id="ryd-bar"
-                   style="width: ${widthPercent}%; height: 100%"
-                   ></div>
-             </div>
-          </div>
-          <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-             <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
-          </tp-yt-paper-tooltip>
-          </div>
-  `
-    );
-  } else {
-    document.getElementById("ryd-bar-container").style.width = widthPx + "px";
-    document.getElementById("ryd-bar").style.width = widthPercent + "%";
-
-    document.querySelector(
-      "#ryd-dislike-tooltip > #tooltip"
-    ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
   }
 }
 
