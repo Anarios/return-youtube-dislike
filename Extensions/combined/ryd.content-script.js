@@ -224,8 +224,7 @@ function sendVote(vote) {
   function isVideoLoaded() {
     const videoId = getVideoId(window.location.href);
     return (
-      document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !==
-        null ||
+    document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null ||
       // mobile: no video-id attribute
       document.querySelector('#player[loading="false"]:not([hidden])') !== null
     );
