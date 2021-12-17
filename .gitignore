@@ -29,3 +29,6 @@ yarn-error.log*
 *.sw*
 
 node_modules
+
+# Build files
+Extensions/combined/bundled-content-script.js

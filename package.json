@@ -4,8 +4,9 @@
   "description": "Chrome extension to return youtube dislikes",
   "main": "ryd.content-script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "bundle": "node_modules/.bin/webpack \"./Extensions/combined/ryd.content-script.js\" -o \"./Extensions/combined\""
+    "start": "node_modules/.bin/webpack \"./Extensions/combined/ryd.content-script.js\" -o \"./Extensions/combined\" --watch",
+    "build": "node_modules/.bin/webpack \"./Extensions/combined/ryd.content-script.js\" -o \"./Extensions/combined\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
