@@ -25,10 +25,12 @@ npm install
 2. Run the following command to create `bundled-content-script.js` which is used in `manifest.json`
 
 ```
-npm run bundle
-```
+npm start // to create the build file(s) and start a file watcher that hot-reloads on save
 
-This will also start a watcher that re-bundles automatically once you save a file inside the source.
+// or
+
+npm run build // to create the build file(s) once
+```
 
 Congratulations, You are now ready to develop!
 
