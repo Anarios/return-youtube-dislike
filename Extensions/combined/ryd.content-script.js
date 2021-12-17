@@ -68,14 +68,6 @@ function RYD() {
     return getDislikeButton().classList.contains("style-default-active");
   }
 
-  function isVideoNotLiked() {
-    return getLikeButton().classList.contains("style-text");
-  }
-
-  function isVideoNotDisliked() {
-    return getDislikeButton().classList.contains("style-text");
-  }
-
   function checkForSignInButton() {
     if (
       document.querySelector(
@@ -385,3 +377,21 @@ RYD.getInstance = function () {
   if (typeof RYD.instance == "undefined") RYD.instance = new RYD();
   return RYD.instance;
 };
+
+RYDTools = {};
+
+RYDTools.getBrowser = function () {
+  if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
+    return chrome;
+  } else if (
+    typeof browser !== "undefined" &&
+    typeof browser.runtime !== "undefined"
+  ) {
+    return browser;
+  } else {
+    console.log("browser is not supported");
+    return false;
+  }
+};
+
+RYD.getInstance().init();

@@ -1,1 +1,0 @@
-RYD.getInstance().init();
