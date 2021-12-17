@@ -39,4 +39,13 @@ function getBrowser() {
   }
 }
 
-export { numberFormat, getBrowser }
+function cLog(message, writer) {
+  message = `[return youtube dislike]: ${message}`;
+  if (writer) {
+    writer(message);
+  } else {
+    console.log(message);
+  }
+}
+
+export { numberFormat, getBrowser, cLog }

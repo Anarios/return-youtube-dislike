@@ -18,22 +18,13 @@ import {
   NEUTRAL_STATE,
 } from "./src/state";
 
-import { numberFormat, getBrowser } from "./src/utils";
+import { numberFormat, getBrowser, cLog } from "./src/utils";
 
 let storedData = {
   likes: 0,
   dislikes: 0,
   previousState: NEUTRAL_STATE,
 };
-
-function cLog(message, writer) {
-  message = `[return youtube dislike]: ${message}`;
-  if (writer) {
-    writer(message);
-  } else {
-    console.log(message);
-  }
-}
 
 function processResponse(response) {
   const formattedDislike = numberFormat(response.dislikes);
