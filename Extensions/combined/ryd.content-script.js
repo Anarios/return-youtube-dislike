@@ -17,7 +17,7 @@ import {
   DISLIKED_STATE,
   NEUTRAL_STATE,
 } from "./src/state";
-import { numberFormat, getBrowser, getVideoId, cLog } from "./src/utils";
+import { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog } from "./src/utils";
 import { createRateBar } from "./src/bar";
 
 let storedData = {
@@ -87,15 +87,6 @@ function setInitialState() {
   setTimeout(() => {
     sendVideoIds();
   }, 1500);
-}
-
-function isVideoLoaded() {
-  const videoId = getVideoId(window.location.href);
-  return (
-    document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null ||
-    // mobile: no video-id attribute
-    document.querySelector('#player[loading="false"]:not([hidden])') !== null
-  );
 }
 
 let jsInitChecktimer = null;

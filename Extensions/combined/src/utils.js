@@ -49,6 +49,15 @@ function getVideoId(url) {
   }
 }
 
+function isVideoLoaded() {
+  const videoId = getVideoId(window.location.href);
+  return (
+    document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null ||
+    // mobile: no video-id attribute
+    document.querySelector('#player[loading="false"]:not([hidden])') !== null
+  );
+}
+
 function cLog(message, writer) {
   message = `[return youtube dislike]: ${message}`;
   if (writer) {
@@ -58,4 +67,4 @@ function cLog(message, writer) {
   }
 }
 
-export { numberFormat, getBrowser, getVideoId, cLog }
+export { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog }
