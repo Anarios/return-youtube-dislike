@@ -362,12 +362,13 @@ function RYD() {
     window.returnDislikeButtonListenersSet = false;
     setEventListeners();
   });
-  RYDTools.getBrowser().storage.get(["init_submission"], (resp) => {
-    if(!resp){
+  
+  RYDTools.getBrowser().storage.sync.get(["do_submission"], (resp) => {
+    if(Object.keys(resp).length === 0){
       RYDTools.getBrowser().storage.sync.set({"do_submission": true});
-      RYDTools.getBrowser().storage.sync.set({"init_submission": true});
     }
   });
+
   setTimeout(() => sendVideoIds(), 2500);
 
   this.init = function () {};

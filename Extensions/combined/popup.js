@@ -36,15 +36,18 @@ function loadSubmissionToggle(){
   let slider = document.getElementById("dislike_submission_toggle");
   slider.style.visibility = "hidden";
   chrome.storage.sync.get(["do_submission"], (resp) => {
-    if(resp){
-      let val = resp["do_submission"];
-      slider.checked = val;
-      slider.style.visibility = "visible";
-      slider.addEventListener("change", () => {
-        let state = (document.getElementById("dislike_submission_toggle").checked);
-        chrome.storage.sync.set({"do_submission" : state});
-      });
+    let val = true;
+    if(Object.keys(resp).length > 0){
+      val = resp["do_submission"];
+    } else {
+      chrome.storage.sync.set({"do_submission": true});
     }
+    slider.checked = val;
+    slider.style.visibility = "visible";
+    slider.addEventListener("change", () => {
+      let state = (document.getElementById("dislike_submission_toggle").checked);
+      chrome.storage.sync.set({"do_submission" : state});
+    });
   });
 }
 /*   Advanced Toggle   */
