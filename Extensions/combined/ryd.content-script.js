@@ -10,6 +10,7 @@ import {
   isVideoLiked,
   getState,
   setState,
+  setInitialState,
   setLikes,
   setDislikes,
   getLikeCountFromButton,
@@ -27,13 +28,6 @@ let storedData = {
   previousState: NEUTRAL_STATE,
 };
 
-function setInitialState() {
-  setState(storedData);
-  setTimeout(() => {
-    sendVideoIds();
-  }, 1500);
-}
-
 let jsInitChecktimer = null;
 
 function setEventListeners(evt) {
@@ -47,7 +41,7 @@ function setEventListeners(evt) {
         buttons.children[1].addEventListener("click", () => dislikeClicked(storedData));
         window.returnDislikeButtonlistenersSet = true;
       }
-      setInitialState();
+      setInitialState(storedData);
     }
   }
 
