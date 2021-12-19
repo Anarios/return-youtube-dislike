@@ -16,3 +16,6 @@ The extension collects the video id of the video you are watching, fetches the d
 
 ### **4. What will happen after the YouTube API stops returning the dislike count?**
 The backend will switch to using a combination of archived dislike stats, estimates extrapolated from extension user data and estimates based on view/like ratios for videos whose dislikes weren't archived and for outdated dislike archives.
+
+## I have security / privacy concerns
+See [this page](SECURITY-FAQ.md) for more info.
