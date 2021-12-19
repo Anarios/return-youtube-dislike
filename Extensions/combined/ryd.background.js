@@ -1,12 +1,17 @@
 const apiUrl = "https://returnyoutubedislikeapi.com";
+const voteDisabledIconName = 'icon_hold128.png';
+const defaultIconName = 'icon128.png';
 let api;
-if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined")
-  api = chrome;
-else if (
-  typeof browser !== "undefined" &&
-  typeof browser.runtime !== "undefined"
-)
-  api = browser;
+
+/** stores extension's global config */
+let extConfig = {
+  disableVoteSubmission: false
+}
+
+if (isChrome()) api = chrome;
+else if (isFirefox()) api = browser;
+
+initExtConfig()
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "get_auth_token") {
@@ -217,4 +222,51 @@ function generateUserID(length = 36) {
     }
     return result;
   }
+}
+
+function storageChangeHandler(changes, area) {
+  if (changes.disableVoteSubmission !== undefined) {
+    handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
+  }
+}
+
+function handleDisableVoteSubmissionChangeEvent(value) {
+  extConfig.disableVoteSubmission = value;
+  if (value === true) {
+    changeIcon(voteDisabledIconName);
+  } else {
+    changeIcon(defaultIconName);
+  }
+}
+
+function changeIcon(iconName) {
+  if (api.action !== undefined) api.action.setIcon({path: "/icons/" + iconName});
+  else if (api.browserAction !== undefined) api.browserAction.setIcon({path: "/icons/" + iconName});
+  else console.log('changing icon is not supported');
+}
+
+api.storage.onChanged.addListener(storageChangeHandler);
+
+function initExtConfig() {
+  initializeDisableVoteSubmission();
+}
+
+function initializeDisableVoteSubmission() {
+  api.storage.sync.get(['disableVoteSubmission'], (res) => {
+    if (res.disableVoteSubmission === undefined) {
+      api.storage.sync.set({disableVoteSubmission: false});
+    }
+    else {
+      extConfig.disableVoteSubmission = res.disableVoteSubmission;
+      if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
+    }
+  });
+}
+
+function isChrome() {
+  return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
+}
+
+function isFirefox() {
+  return typeof browser !== "undefined" && typeof browser.runtime !== "undefined";
 }

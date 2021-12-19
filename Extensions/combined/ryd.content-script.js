@@ -17,16 +17,13 @@ import {
   LIKED_STATE,
   DISLIKED_STATE,
   NEUTRAL_STATE,
+  initExtConfig,
 } from "./src/state";
 import { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog } from "./src/utils";
 import { createRateBar } from "./src/bar";
-import { sendVideoIds, sendVote, likeClicked, dislikeClicked } from "./src/events"
+import { sendVideoIds, sendVote, likeClicked, dislikeClicked, addLikeDislikeEventListener, storageChangeHandler  } from "./src/events"
 
-let storedData = {
-  likes: 0,
-  dislikes: 0,
-  previousState: NEUTRAL_STATE,
-};
+initExtConfig()
 
 let jsInitChecktimer = null;
 
@@ -35,13 +32,9 @@ function setEventListeners(evt) {
     if (getButtons()?.offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
       jsInitChecktimer = null;
-      const buttons = getButtons();
-      if (!window.returnDislikeButtonlistenersSet) {
-        buttons.children[0].addEventListener("click", () => likeClicked(storedData));
-        buttons.children[1].addEventListener("click", () => dislikeClicked(storedData));
-        window.returnDislikeButtonlistenersSet = true;
-      }
-      setInitialState(storedData);
+      addLikeDislikeEventListener();
+      setInitialState();
+      getBrowser().storage.onChanged.addListener(storageChangeHandler);
     }
   }
 

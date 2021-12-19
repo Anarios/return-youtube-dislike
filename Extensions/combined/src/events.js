@@ -1,14 +1,16 @@
-import { getBrowser, getVideoId, numberFormat } from "./utils"
-import { checkForSignInButton } from "./buttons"
-import { NEUTRAL_STATE, LIKED_STATE, DISLIKED_STATE, setDislikes } from "./state"
+import { getBrowser, getVideoId, numberFormat, cLog } from "./utils"
+import { checkForSignInButton, getButtons } from "./buttons"
+import { NEUTRAL_STATE, LIKED_STATE, DISLIKED_STATE, setDislikes, extConfig, storedData } from "./state"
 import { createRateBar } from "./bar"
 
 function sendVote(vote) {
-  getBrowser().runtime.sendMessage({
-    message: "send_vote",
-    vote: vote,
-    videoId: getVideoId(window.location.href),
-  });
+  if (extConfig.disableVoteSubmission !== true) {
+    getBrowser().runtime.sendMessage({
+      message: "send_vote",
+      vote: vote,
+      videoId: getVideoId(window.location.href),
+    });
+  }
 }
 
 function sendVideoIds() {
@@ -37,7 +39,7 @@ function sendVideoIds() {
   });
 }
 
-function likeClicked(storedData) {
+function likeClicked() {
   if (checkForSignInButton() === false) {
     if (storedData.previousState === DISLIKED_STATE) {
       sendVote(1);
@@ -60,7 +62,7 @@ function likeClicked(storedData) {
   }
 }
 
-function dislikeClicked(storedData) {
+function dislikeClicked() {
   if (checkForSignInButton() == false) {
     if (storedData.previousState === NEUTRAL_STATE) {
       sendVote(-1);
@@ -85,4 +87,30 @@ function dislikeClicked(storedData) {
   }
 }
 
-export { sendVote, sendVideoIds, likeClicked, dislikeClicked }
+function addLikeDislikeEventListener() {
+  const buttons = getButtons();
+    if (!window.returnDislikeButtonlistenersSet) {
+      buttons.children[0].addEventListener("click", likeClicked);
+      buttons.children[1].addEventListener("click", dislikeClicked);
+      window.returnDislikeButtonlistenersSet = true;
+    }
+}
+
+function storageChangeHandler(changes, area) {
+  if (changes.disableVoteSubmission !== undefined) {
+    handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
+  }
+}
+
+function handleDisableVoteSubmissionChangeEvent(value) {
+  extConfig.disableVoteSubmission = value;
+}
+
+export {
+  sendVote,
+  sendVideoIds,
+  likeClicked,
+  dislikeClicked,
+  addLikeDislikeEventListener,
+  storageChangeHandler,
+};
