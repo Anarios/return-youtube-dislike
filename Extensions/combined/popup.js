@@ -10,6 +10,7 @@ const config = {
     github: "https://github.com/Anarios/return-youtube-dislike",
     discord: "https://discord.gg/mYnESY4Md5",
     donate: 'https://returnyoutubedislike.com/donate'
+    faq: 'https://returnyoutubedislike.com/faq'
   },
 };
 
@@ -24,6 +25,10 @@ document.getElementById("link_github").addEventListener("click", () => {
 
 document.getElementById("link_discord").addEventListener("click", () => {
   chrome.tabs.create({ url: config.links.discord });
+});
+
+document.getElementById("link_faq").addEventListener("click", () => {
+  chrome.tabs.create({ url: config.links.faq });
 });
 
 document.getElementById("link_donate").addEventListener("click", () => {
