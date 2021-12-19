@@ -18,7 +18,7 @@ The backend keeps IP addresses in volatile memory (RAM) only. These addresses ar
 
 ### I heard some discussion over OAuth, and access to my YouTube account!
 
-This feature is optional, and very much opt-in. If you are a YouTube creator, and would like to share your dislike stats with us, you can. The way OAuth was structured, is it's actually very secure. You can revoke access to your account at any time, and can give very specific permissions to us. We will not ask for any permissions that aren't required. We'll only ask for permissions to view your video stats. 
+This feature is optional, and very much opt-in. If you are a YouTube creator, and would like to share your dislike stats with us, you can. The way [OAuth](https://en.wikipedia.org/wiki/OAuth#:~:text=but%20without%20giving%20them%20the%20passwords.) was structured, is it's actually very secure. You can revoke access to your account at any time, and can give very specific permissions to us. We will not ask for any permissions that aren't required. We'll only ask for permissions to view your video stats. 
 
 ### How can I trust this dislike count?
 
