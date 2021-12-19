@@ -2,7 +2,7 @@
 
 ### Are you tracking my viewing history?
 
-No. The extension's code is public and you can see it for yourself. The only information being sent is the video ID. There are no additional headers being sent. Over the communication layer, your public IP will be exposed to the server, as well as the time when the request was made. However, none of these are uniquely identifying you in any way. Assuming a zero-trust environment, the best we could get is a dynamic IP. Which, today is yours, tomorrow is your neighbor's. If you're really worried about your IP being traced, you probably already use a VPN.
+No. The extension's code is public and you can see it for yourself. The only information being sent is the video ID, which is required to fetch the dislike count for the videos. There are no additional headers being sent. Over the communication layer, your public IP will be exposed to the server, as well as the time when the request was made. However, none of these are uniquely identifying you in any way. Assuming a zero-trust environment, the best we could get is a dynamic IP. Which, today is yours, tomorrow is your neighbor's. If you're really worried about your IP being traced, you probably already use a VPN.
 
 ### Can you uniquely identify me if I dislike?
 
@@ -22,7 +22,7 @@ This feature is optional, and very much opt-in. If you are a YouTube creator, an
 
 ### How can I trust this dislike count?
 
-Short answer is: you can't. We've implemented anti-botting measures, but at the end of the day, it's up to you to decide whether you trust our count or not. 
+We have implemented measures to prevent bot attacks, and we are going to continue to work on improving the effectiveness of the bot prevention system. This will help us keep the dislike count as a good representative of the actual count. Of course, it can never be 100% accurate. So it's up to you to decide whether you trust the count or not.
 
 ### Why don't you share the backend code? 
 
