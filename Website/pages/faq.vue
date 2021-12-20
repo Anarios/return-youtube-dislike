@@ -54,6 +54,12 @@ export default {
         answer:
           "The backend will switch to using a combination of archived dislike stats, estimates extrapolated from extension user data, and estimates based on view/like ratios for videos whose dislikes weren't archived as well as outdated dislike count archives.",
       },
+      {
+        question:
+          "What data do you collect and how is it treated?",
+        answer:
+          "to be added + link",
+      },
     ],
   }),
 };
