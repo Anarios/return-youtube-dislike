@@ -29,6 +29,8 @@ document.getElementById("link_donate").addEventListener("click", () => {
   chrome.tabs.create({ url: config.links.donate });
 });
 
+
+chrome.runtime.sendMessage({ message: 'get_auth_token' });
 /*   Advanced Toggle   */
 /* Not currently used in this version
 const advancedToggle = document.getElementById("advancedToggle");
@@ -51,6 +53,7 @@ document.querySelector('#login')
 .addEventListener('click', function () {
   chrome.runtime.sendMessage({ message: 'get_auth_token' });
 });
+
 
 document.querySelector("#log_off").addEventListener("click", function () {
   chrome.runtime.sendMessage({ message: "log_off" });

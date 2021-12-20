@@ -10,12 +10,12 @@ else if (
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "get_auth_token") {
-    // chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    //   console.log(token);
-    //   chrome.identity.getProfileUserInfo(function (userInfo) {
-    //     console.log(JSON.stringify(userInfo));
-    //   });
-    // });
+    chrome.identity.getAuthToken({ interactive: true }, function (token) {
+      console.log(token);
+      chrome.identity.getProfileUserInfo(function (userInfo) {
+        console.log(JSON.stringify(userInfo));
+      });
+    });
   } else if (request.message === "log_off") {
     // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
   } else if (request.message == "set_state") {
