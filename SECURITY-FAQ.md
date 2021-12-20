@@ -6,7 +6,7 @@ No. The extension's code is public and you can see it for yourself. The only inf
 
 ### Can you uniquely identify me if I dislike?
 
-No. When you dislike a video, we create a unique (but random and non-identifiable) ID for you. This is done to prevent botting. But again, it cannot uniquely identify you.
+Yes. When you dislike a video, we create a randomly generated unique ID for you that is not tied to your Google account. This is done to prevent botting.
 
 ### What information do you have, exactly?
 
