@@ -37,6 +37,10 @@ and estimates based on view\like ratios.
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
 
+## HELP WANTED
+
+We have an issue which is happening to a low percentage of Chrome users. service worker (ex background script) goes to Inactive state and doesn't wake up even when youtube tab is reopened. Only switching the extension off and on in extensions tab helps. This looks like a Chrome manifestv3 bug - so if anyone knows a good workaround - please open an issue\create a PR.
+
 ## Contributing
 
 Please read the [contribution guide.](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)
