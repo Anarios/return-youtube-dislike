@@ -7,6 +7,16 @@ const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
+let extConfig = {
+  disableVoteSubmission: false,
+};
+
+let storedData = {
+  likes: 0,
+  dislikes: 0,
+  previousState: NEUTRAL_STATE,
+};
+
 function isMobile() {
   return location.hostname == "m.youtube.com";
 }
@@ -97,11 +107,26 @@ function setState(storedData) {
   );
 }
 
-function setInitialState(storedData) {
+function setInitialState() {
   setState(storedData);
   setTimeout(() => {
     sendVideoIds();
   }, 1500);
+}
+
+function initExtConfig() {
+  initializeDisableVoteSubmission();
+}
+
+function initializeDisableVoteSubmission() {
+  getBrowser().storage.sync.get(['disableVoteSubmission'], (res) => {
+    if (res.disableVoteSubmission === undefined) {
+      getBrowser().storage.sync.set({disableVoteSubmission: false});
+    }
+    else {
+      extConfig.disableVoteSubmission = res.disableVoteSubmission;
+    }
+  });
 }
 
 export {
@@ -117,4 +142,7 @@ export {
   LIKED_STATE,
   DISLIKED_STATE,
   NEUTRAL_STATE,
+  extConfig,
+  initExtConfig,
+  storedData,
 };
