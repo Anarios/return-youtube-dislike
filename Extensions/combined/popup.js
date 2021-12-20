@@ -10,6 +10,7 @@ const config = {
     github: "https://github.com/Anarios/return-youtube-dislike",
     discord: "https://discord.gg/mYnESY4Md5",
     donate: 'https://returnyoutubedislike.com/donate'
+    wip
   },
 };
 
