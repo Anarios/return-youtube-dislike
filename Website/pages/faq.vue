@@ -36,23 +36,23 @@ export default {
       {
         question: "Where does the extension get its data?",
         answer:
-          "A combination of Google's API data and scraped data. We save all available data to our DB so it can be made available after Google removes dislike counts from their API.",
+          "A combination of archived data from before the offical YouTube dislike API shut down, and extrapolated extension user behavior.",
       },
       {
         question: "Why isn't the dislike count updating?",
         answer:
-          "Right now video dislikes are cached and they aren't updated very frequently. Currently this is set to update once every 2–3 days.  This isn't ideal and we are working on improving how often we can update them.",
+          "Right now video dislikes are cached and they aren't updated very frequently. It varies on video popularity but can take anywhere between a few hours and a few days days to update.",
       },
       {
         question: "How does this work?",
         answer:
-          "The extension collects the video ID of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API, if this is the first time the video was fetched by our API, it will use the YouTube API to get the data, then store it in the database for caching (cached for around 2-3 days) and archiving purposes, and returns it to you. The extension then displays the dislike count and ratio on the page.",
+          "The extension collects the video ID of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you dislike or like a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
       },
       {
         question:
-          "What will happen after the YouTube API stops returning the dislike count?",
+        "Can I share my dislke count with you?",
         answer:
-          "The backend will switch to using a combination of archived dislike stats, estimates extrapolated from extension user data, and estimates based on view/like ratios for videos whose dislikes weren't archived as well as outdated dislike count archives.",
+          "Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability. ",
       },
     ],
   }),
