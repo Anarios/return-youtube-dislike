@@ -14,7 +14,7 @@ Just the video ID. Not your comments, not your username, not who you've shared t
 
 ### How is my IP stored?
 
-The backend keeps IP addresses in volatile memory (RAM) only. These addresses aren't stored on a hard drive, and therefore aren't logged. We hash the IP addresses, and that's stored instead. This is done to prevent database vandalism.
+The backend keeps unhashed IP addresses in volatile memory (RAM) only. These addresses aren't stored on a hard drive, and therefore aren't logged. We hash the IP addresses, and that's stored instead. This is done to prevent database vandalism.
 
 ### I heard some discussion over OAuth, and access to my YouTube account!
 
