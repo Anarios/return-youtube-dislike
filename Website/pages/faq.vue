@@ -58,7 +58,7 @@ export default {
         question:
           "What data do you collect and how is it treated?",
         answer:
-          "to be added + link",
+          "The extension only collects data that is strictly necessary for it to function properly, such as IP address or ID of the video you're watching. None of your data will ever be sold to 3rd parties. If you would like to know more about how we handle security and privacy check out our [add link here to security-faq.md]",
       },
     ],
   }),
