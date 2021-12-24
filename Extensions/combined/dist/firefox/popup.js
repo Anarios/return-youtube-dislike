@@ -85,15 +85,18 @@ function handleDisableVoteSubmissionChangeEvent(value) {
 
 (async function getStatus() {
   let status = document.getElementById("status");
+  let serverStatus = document.getElementById("server-status");
   let resp = await fetch(
-    "https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g"
+    "https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g1"
   );
   let result = await resp.status;
   if (result === 200) {
     status.innerText = "Online";
     status.style.color = "green";
+    serverStatus.style.color = "green";
   } else {
     status.innerText = "Offline";
+    serverStatus.style.color = "red";
     status.style.color = "red";
   }
 })();
