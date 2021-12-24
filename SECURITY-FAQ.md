@@ -6,7 +6,7 @@ No. The extension's code is public and you can see it for yourself. The only inf
 
 ### Can you uniquely identify me if I dislike?
 
-Yes. When you dislike a video, we create a randomly generated unique ID for you that is not tied to your Google account. This is done to prevent botting.
+Yes. When you dislike a video, we create a randomly generated unique ID for you that is not tied to your Google account. This is done to prevent botting. But there is no way to tie this random Id to you or your personal youtube account.
 
 ### What information do you have, exactly?
 
@@ -14,7 +14,7 @@ Just the video ID. Not your comments, not your username, not who you've shared t
 
 ### How is my IP stored?
 
-The backend keeps IP addresses in volatile memory (RAM) only. These addresses aren't stored on a hard drive, and therefore aren't logged. We hash the IP addresses, and that's stored instead. This is done to prevent database vandalism.
+The backend keeps unhashed IP addresses in volatile memory (RAM) only. These addresses aren't stored on a hard drive, and therefore aren't logged. We hash the IP addresses, and that's stored instead. This is done to prevent database vandalism.
 
 ### I heard some discussion over OAuth, and access to my YouTube account!
 
@@ -26,5 +26,5 @@ We have implemented measures to prevent bot attacks and are gonna continue to wo
 
 ### Why don't you share the backend code? 
 
-We may share it at some point - but there's really no real reason to share it. It gives a false sense of security - because in a zero-trust system, we could just as well disclose one version but deploy another. There are plenty of reasons to keep the code hidden, specifically, how we battle spam. Hiding/Obfuscating the spam handling code is a fairly standard practice.
+We will share it at some point - but there's really no real reason to share it right now. It gives a false sense of security - because in a zero-trust system, we could just as well disclose one version but deploy another. There are plenty of reasons to keep the code hidden, specifically, how we battle spam. Hiding/Obfuscating the spam handling code is a fairly standard practice.
 
