@@ -87,7 +87,7 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   let status = document.getElementById("status");
   let serverStatus = document.getElementById("server-status");
   let resp = await fetch(
-    "https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g1"
+    "https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g"
   );
   let result = await resp.status;
   if (result === 200) {
