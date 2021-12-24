@@ -1,9 +1,12 @@
+//---   Import Button Functions   ---//
 import {
   getButtons,
   getLikeButton,
   getDislikeButton,
   checkForSignInButton,
 } from "./src/buttons";
+
+//---   Import State Functions   ---//
 import {
   isMobile,
   isVideoDisliked,
@@ -19,9 +22,12 @@ import {
   NEUTRAL_STATE,
   initExtConfig,
 } from "./src/state";
+
+//---   Import Video & Browser Functions   ---//
 import { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog } from "./src/utils";
 import { createRateBar } from "./src/bar";
 import { sendVideoIds, sendVote, likeClicked, dislikeClicked, addLikeDislikeEventListener, storageChangeHandler  } from "./src/events"
+
 
 initExtConfig()
 
