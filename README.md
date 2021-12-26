@@ -25,9 +25,7 @@ Additionally, the `dislike` field in the YouTube API will be [removed](https://s
 
 ## What it Does
 
-This plugin will re-enable the visibility of the dislike count, fetching the total number of dislikes via our API, which in turn relies upon YouTube's [Data API](https://developers.google.com/youtube/v3).
-
-With the removal of dislike stats from the YouTube API, our backend will switch to using a combination of scraped dislike stats, estimates extrapolated from extension user data
+With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data
 and estimates based on view\like ratios.
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/FAQ.md)
