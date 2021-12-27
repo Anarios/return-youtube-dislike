@@ -34,22 +34,22 @@
         links: [{
             text: 'API Usage Rights',
             icon: 'mdi-book-open-variant',
-            to: 'documenation/usage-rights'
+            to: 'documentation/usage-rights'
           },
           {
             text: 'API URL Information',
             icon: 'mdi-web',
-            to: 'documenation/url'
+            to: 'documentation/url'
           },
           {
             text: 'Available Endpoints',
             icon: 'mdi-transit-connection-variant',
-            to: 'documenation/endpoints'
+            to: 'documentation/endpoints'
           },
           {
             text: 'Basic Fetching Tutorial',
             icon: 'mdi-school',
-            to: 'documenation/fetching'
+            to: 'documentation/fetching'
           },
         ]
       }
