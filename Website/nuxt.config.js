@@ -28,7 +28,7 @@ export default {
   },
 
   env: {
-    apiUrl: "https://returnyoutubedislikeapi.com"
+    apiUrl: "https://returnyoutubedislikeapi.com",
   },
 
   target: "static",
@@ -56,7 +56,7 @@ export default {
       },
     },
   },
-/*
+  /*
   build: {
     extend(config, ctx) {
       // Run ESLint on save (dev-only)

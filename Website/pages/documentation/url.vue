@@ -1,9 +1,8 @@
 <template>
   <div>
     <h1 class="primary--text">URL Information</h1>
-    The API is accessible over the following base URL:<br>
-    <a :href="apiUrl" v-text="apiUrl" target="_blank" />
-
+    The API is accessible over the following base URL:<br />
+    <a :href="apiUrl" target="_blank" v-text="apiUrl" />
   </div>
 </template>
 
@@ -11,8 +10,8 @@
 export default {
   data() {
     return {
-      apiUrl: process.env.apiUrl
-    }
-  }
-}
+      apiUrl: process.env.apiUrl,
+    };
+  },
+};
 </script>
