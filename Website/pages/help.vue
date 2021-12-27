@@ -3,7 +3,7 @@
     <h1 class="title-text pt-12">Troubleshooting</h1>
     <ol
       class="col-xs-12 col-sm-11 col-md-9 col-lg-7 q-mx-auto text-left"
-      style="line-height: 2.5rem; color: #aaa"
+      style="line-height: 3rem; color: #aaa"
     >
       <li>
         Make sure you have latest version of extension installed,
@@ -90,23 +90,15 @@ export default {
   },
   data: () => ({
     version: "2.0.0.3",
+    discordLink: "https://discord.gg/mYnESY4Md5",
   }),
   mounted() {
     fetch(
       "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
     )
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        // for (const product of data.products) {
-        //   let listItem = document.createElement("li");
-        //   listItem.appendChild(document.createElement("strong")).textContent =
-        //     product.Name;
-        //   listItem.append(` can be found in ${product.Location}. Cost: `);
-        //   listItem.appendChild(
-        //     document.createElement("strong")
-        //   ).textContent = `£${product.Price}`;
-        // }
+      .then((json) => {
+        this.version = json.version;
       });
     // .catch(console.error);
   },
