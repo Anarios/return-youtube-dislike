@@ -21,13 +21,11 @@
 
 On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.  
   
-Additionally, the `dislike` field in the YouTube API will be [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
 
 ## What it Does
 
-This plugin will re-enable the visibility of the dislike count, fetching the total number of dislikes via our API, which in turn relies upon YouTube's [Data API](https://developers.google.com/youtube/v3).
-
-With the removal of dislike stats from the YouTube API, our backend will switch to using a combination of scraped dislike stats, estimates extrapolated from extension user data
+With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data
 and estimates based on view\like ratios.
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/FAQ.md)
@@ -36,6 +34,37 @@ and estimates based on view\like ratios.
 
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
+## API documentation
+
+Third party use of this open API is allowed with the following restrictions:
+
+- **Attribution**: This project should be clearly attributed with either a link to this repo or a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a *429* status code indicating that your application should back off.
+
+The API is accessible over the following base URL:  
+https://returnyoutubedislikeapi.com  
+
+List of available endpoints is available here:  
+https://returnyoutubedislikeapi.com/swagger/index.html
+
+### Get votes
+Example to get votes of a given YouTube video ID:  
+`/votes?videoId=kxOuG8jMIgI`
+
+```json
+{
+    "id": "kxOuG8jMIgI",
+    "dateCreated": "2021-12-20T12:25:54.418014Z",
+    "likes": 27326,
+    "dislikes": 498153,
+    "rating": 1.212014408444885,
+    "viewCount": 3149885,
+    "deleted": false
+}
+```
+
+None existing YouTube ID will return status code *404* "Not Found".  
+Wrong formed YouTube ID will return *400* "Bad Request".
 
 ## HELP WANTED
 

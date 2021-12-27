@@ -311,22 +311,22 @@ function roundDown(num) {
 }
 
 function numberFormat(numberState) {
-  let localeURL = Array.from(document.querySelectorAll("head > link[rel='search']"))
-    ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-    ?.getAttribute("href");
-
-  const userLocales = localeURL ? new URL(localeURL)?.searchParams?.get("locale") : document.body.lang;
-
+  let userLocales;
+  try {
+    userLocales = new URL(
+      Array.from(document.querySelectorAll("head > link[rel='search']"))
+        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+        ?.getAttribute("href")
+    )?.searchParams?.get("locale");
+  } catch {}
   const formatter = Intl.NumberFormat(
     document.documentElement.lang || userLocales || navigator.language,
     {
       notation: "compact",
-      minimumFractionDigits: 1,
-      maximumFractionDigits: 1,
     }
   );
 
-  return formatter.format(roundDown(numberState)).replace(/\.0|,0/, "");
+  return formatter.format(roundDown(numberState));
 }
 
 function setEventListeners(evt) {
