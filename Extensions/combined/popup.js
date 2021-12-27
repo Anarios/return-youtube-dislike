@@ -93,11 +93,13 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   if (result === 200) {
     status.innerText = "Online";
     status.style.color = "green";
-    serverStatus.style.color = "green";
+    serverStatus.style.filter =
+      "invert(58%) sepia(81%) saturate(2618%) hue-rotate(81deg) brightness(119%) contrast(129%)";
   } else {
     status.innerText = "Offline";
-    serverStatus.style.color = "red";
     status.style.color = "red";
+    serverStatus.style.filter =
+      "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
   }
 })();
 
