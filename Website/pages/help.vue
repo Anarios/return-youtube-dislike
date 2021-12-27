@@ -7,8 +7,8 @@
     >
       <li>
         Make sure you have latest version of extension installed,
-        <code
-          ><b>{{ version }}</b></code
+        <code style="color: #eee">
+          <b>{{ version }}</b></code
         >
         right now
       </li>
@@ -41,13 +41,33 @@
           :href="discordLink"
           target="_blank"
         >
-          <v-icon style="margin-right: 0.5em">mdi-discord</v-icon>
+          <v-icon size="1.25rem" style="margin-right: 0.5em"
+            >mdi-discord</v-icon
+          >
           Discord
         </v-btn>
         <ol type="a">
           <li>
             Tell us your <b>Operating System</b>, <b>Browser Name</b> and
             <b>Browser Version</b>.
+            <span style="color: #f44"> Detected: </span>
+            <v-btn
+              class="mainAltButton"
+              style="
+                height: 1.5rem;
+                font-size: 0.75rem;
+                text-transform: none !important;
+                padding-left: 0.5rem !important;
+                padding-right: 0.25rem !important;
+              "
+              target="_blank"
+              @click="copyToClipboard(platform)"
+            >
+              {{ platform }}
+              <v-icon size="1rem" style="margin-left: 0.5em"
+                >mdi-content-copy</v-icon
+              >
+            </v-btn>
           </li>
 
           <li style="position: relative; width: 100%">
@@ -90,6 +110,7 @@ export default {
   },
   data: () => ({
     version: "2.0.0.3",
+    platform: "Unknown platform",
     discordLink: "https://discord.gg/mYnESY4Md5",
   }),
   mounted() {
@@ -101,6 +122,46 @@ export default {
         this.version = json.version;
       });
     // .catch(console.error);
+
+    // This script sets OSName variable as follows:
+    // "Windows"    for all versions of Windows
+    // "MacOS"      for all versions of Macintosh OS
+    // "Linux"      for all versions of Linux
+    // "UNIX"       for all other UNIX flavors
+    // "Unknown OS" indicates failure to detect the OS
+
+    var OSName = "Unknown OS";
+    if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
+    if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
+    if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
+    if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
+
+    // browser parcer
+    navigator.sayswho = (function () {
+      var ua = navigator.userAgent;
+      var tem;
+      var M =
+        ua.match(
+          /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
+        ) || [];
+      if (/trident/i.test(M[1])) {
+        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return "IE " + (tem[1] || "");
+      }
+      if (M[1] === "Chrome") {
+        tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
+        if (tem != null) return tem.slice(1).join(" ").replace("OPR", "Opera");
+      }
+      M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, "-?"];
+      if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
+      return M.join(" ");
+    })();
+    this.platform = OSName + ", " + navigator.sayswho;
+  },
+  methods: {
+    copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+    },
   },
 };
 </script>
