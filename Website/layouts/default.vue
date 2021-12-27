@@ -40,6 +40,10 @@ export default {
         path: "/install",
       },
       {
+        name: "Help",
+        path: "/help",
+      },
+      {
         name: "FAQ",
         path: "/faq",
       },
@@ -64,6 +68,20 @@ body {
   height: -webkit-fill-available;
   background: #111;
   overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #111; /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff4444; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 4px solid #111; /* creates padding around scroll thumb */
 }
 
 .debug {

@@ -81,7 +81,7 @@
 export default {
   transition(to, from) {
     if (!from) return "swoop-in";
-    let routes = ["index", "install", "faq", "donate", "links"];
+    let routes = ["index", "install", "help", "faq", "donate", "links"];
     if (routes.indexOf(to.name) < 0) return "swoop-out";
     if (routes.indexOf(from.name) < 0) return "swoop-in";
     return routes.indexOf(to.name) > routes.indexOf(from.name)
@@ -97,8 +97,14 @@ export default {
         { name: "Piepacker", link: "https://piepacker.com/" },
         { name: "nodetube", link: "https://github.com/mayeaux/nodetube" },
         { name: "trig404" },
-        { name: "Peter33", link: "https://www.youtube.com/watch?v=G5kzUpWAusI" },
-        { name: "Seed4.Me VPN", link: "https://www.seed4.me/users/register?gift=ReturnYoutubeDislike" },
+        {
+          name: "Peter33",
+          link: "https://www.youtube.com/watch?v=G5kzUpWAusI",
+        },
+        {
+          name: "Seed4.Me VPN",
+          link: "https://www.seed4.me/users/register?gift=ReturnYoutubeDislike",
+        },
       ],
     };
   },

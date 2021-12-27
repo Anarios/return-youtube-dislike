@@ -24,7 +24,7 @@
 export default {
   transition(to, from) {
     if (!from) return "swoop-in";
-    let routes = ["index", "install", "faq", "donate", "links"];
+    let routes = ["index", "install", "help", "faq", "donate", "links"];
     if (routes.indexOf(to.name) < 0) return "swoop-out";
     if (routes.indexOf(from.name) < 0) return "swoop-in";
     return routes.indexOf(to.name) > routes.indexOf(from.name)
@@ -49,8 +49,7 @@ export default {
           "The extension collects the video ID of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you dislike or like a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
       },
       {
-        question:
-        "Can I share my dislke count with you?",
+        question: "Can I share my dislke count with you?",
         answer:
           "Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability. ",
       },
