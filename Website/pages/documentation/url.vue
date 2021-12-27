@@ -7,11 +7,12 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      apiUrl: process.env.apiUrl,
-    };
-  },
-};
+  export default {
+    data() {
+      return {
+        apiUrl: process.env.apiUrl,
+      };
+    },
+  };
+
 </script>
