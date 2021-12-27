@@ -14,19 +14,22 @@
         <span>Device Type: {{ device._parsed.category }}</span><br>
       </v-card-text>
       <v-card-actions>
-          <v-spacer />
-          <v-btn><v-icon small style="margin-right: 0.25em;">mdi-content-copy</v-icon>Copy</v-btn>
+        <v-spacer />
+        <v-btn>
+          <v-icon small style="margin-right: 0.25em;">mdi-content-copy</v-icon>Copy
+        </v-btn>
       </v-card-actions>
     </v-card>
   </div>
 </template>
 
 <script>
-export default {
+  export default {
     data() {
-        return {
-            device: this.$ua,
-        }
+      return {
+        device: this.$ua,
+      }
     }
-}
+  }
+
 </script>
