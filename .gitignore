@@ -1,6 +1,7 @@
 *cert
 *Backend
 .DS_Store
+package-lock.json
 
 # Website node modules and build output
 Website/package-lock.json
@@ -32,3 +33,7 @@ node_modules
 
 # Build files
 Extensions/combined/bundled-content-script.js
+
+# Dist Files
+Extensions/combined/dist/*
+package-lock.json
