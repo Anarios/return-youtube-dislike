@@ -4,16 +4,6 @@ const config = {
   showAdvancedMessage: "Show Settings",
   hideAdvancedMessage: "Hide Settings",
   disableVoteSubmission: false,
-}
-
- function initConfig() {
-  initializeVersionNumber();
-  }
-
- function initializeVersionNumber() {
-  const version = chrome.runtime.getManifest().version;
-  document.getElementById('ext-version').innerHTML = 'v' + version;
-}
   
   links: {
     website: "https://returnyoutubedislike.com",
@@ -70,6 +60,12 @@ initConfig();
 
 function initConfig() {
   initializeDisableVoteSubmission();
+  initializeVersionNumber();
+}
+
+function initializeVersionNumber() {
+  const version = chrome.runtime.getManifest().version;
+  document.getElementById('ext-version').innerHTML = 'v' + version;
 }
 
 function initializeDisableVoteSubmission() {
