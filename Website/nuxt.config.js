@@ -35,7 +35,7 @@ export default {
   css: [],
   plugins: [],
   components: true,
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: ["@nuxtjs/vuetify", '@nuxtjs/device'],
   modules: [],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

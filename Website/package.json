@@ -15,6 +15,7 @@
     "vuetify": "^2.5.5"
   },
   "devDependencies": {
+    "@nuxtjs/device": "^2.1.0",
     "@nuxtjs/vuetify": "^1.12.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
