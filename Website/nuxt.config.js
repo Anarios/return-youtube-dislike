@@ -27,6 +27,10 @@ export default {
     ],
   },
 
+  env: {
+    apiUrl: "https://returnyoutubedislikeapi.com"
+  },
+
   target: "static",
   css: [],
   plugins: [],
@@ -52,7 +56,7 @@ export default {
       },
     },
   },
-
+/*
   build: {
     extend(config, ctx) {
       // Run ESLint on save (dev-only)
@@ -65,5 +69,6 @@ export default {
         });
       }
     },
-  },
+  }
+*/
 };
