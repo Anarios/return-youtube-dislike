@@ -1,6 +1,18 @@
 <template>
   <div>
-    <h1>Welcome to the <span class="primary--text">official RYD docs</span>!</h1>
-    <p>To get started, select a section.</p>
+    <h1 class="primary--text">URL Information</h1>
+    The API is accessible over the following base URL:
+    <a :href="apiUrl" v-text="apiUrl" />
+
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      apiUrl: process.env.apiUrl
+    }
+  }
+}
+</script>

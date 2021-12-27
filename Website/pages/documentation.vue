@@ -32,24 +32,24 @@
       return {
         //---   Links To Generate Above    ---//
         links: [{
-            text: 'API Usage Rights',
+            text: 'Usage Rights',
             icon: 'mdi-book-open-variant',
-            to: 'usage-rights'
+            to: '/documentation/usage-rights'
           },
           {
-            text: 'API URL Information',
+            text: 'URL Information',
             icon: 'mdi-web',
-            to: 'url'
+            to: '/documentation/url'
           },
           {
             text: 'Available Endpoints',
             icon: 'mdi-transit-connection-variant',
-            to: 'endpoints'
+            to: '/documentation/endpoints'
           },
           {
             text: 'Basic Fetching Tutorial',
             icon: 'mdi-school',
-            to: 'fetching'
+            to: '/documentation/fetching'
           },
         ]
       }
