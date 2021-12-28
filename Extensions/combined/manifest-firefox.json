@@ -21,6 +21,11 @@
       "run_at": "document_idle",
       "css": ["content-style.css"],
       "js": ["bundled-content-script.js"]
+    },
+    {
+      "matches": ["*://*.returnyoutubedislike.com/debug","http://localhost/debug"],
+      "run_at": "document_idle",
+      "js": ["debug.js"]
     }
   ]
 }

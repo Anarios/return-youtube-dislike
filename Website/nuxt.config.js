@@ -31,7 +31,7 @@ export default {
     apiUrl: "https://returnyoutubedislikeapi.com",
   },
 
-  //server: { host: '0.0.0.0' }, //LINE FOR DEBUGGING ONLY
+  //server: { host: '0.0.0.0', port: 80 }, //LINE FOR DEBUGGING ONLY
 
   target: "static",
   css: [],

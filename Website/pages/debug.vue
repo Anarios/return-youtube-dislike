@@ -11,7 +11,10 @@
         <span>Version: {{ device._parsed.version }}</span><br>
         <span>Operating System: {{ device._parsed.os }}</span><br>
         <span>Operating System Version: {{ device._parsed.os_version }}</span><br>
-        <span>Device Type: {{ device._parsed.category }}</span><br>
+        <span>Device Type: {{ device._parsed.category }}</span><br><br>
+        <!--   Gather Extension Information   -->
+        <span><b>Installed Extension Information:</b></span><br>
+        <span>Extension Version: <span id="extension-version"/></span><br>
       </v-card-text>
       <v-card-actions>
         <v-spacer />

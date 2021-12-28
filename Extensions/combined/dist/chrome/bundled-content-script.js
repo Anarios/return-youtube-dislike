@@ -96,11 +96,13 @@ function cLog(message, writer) {
 
 
 function sendVote(vote) {
-  getBrowser().runtime.sendMessage({
-    message: "send_vote",
-    vote: vote,
-    videoId: getVideoId(window.location.href)
-  });
+  if (extConfig.disableVoteSubmission !== true) {
+    getBrowser().runtime.sendMessage({
+      message: "send_vote",
+      vote: vote,
+      videoId: getVideoId(window.location.href)
+    });
+  }
 }
 
 function sendVideoIds() {
@@ -118,7 +120,7 @@ function sendVideoIds() {
   });
 }
 
-function likeClicked(storedData) {
+function likeClicked() {
   if (checkForSignInButton() === false) {
     if (storedData.previousState === DISLIKED_STATE) {
       sendVote(1);
@@ -141,7 +143,7 @@ function likeClicked(storedData) {
   }
 }
 
-function dislikeClicked(storedData) {
+function dislikeClicked() {
   if (checkForSignInButton() == false) {
     if (storedData.previousState === NEUTRAL_STATE) {
       sendVote(-1);
@@ -166,6 +168,26 @@ function dislikeClicked(storedData) {
   }
 }
 
+function addLikeDislikeEventListener() {
+  var buttons = buttons_getButtons();
+
+  if (!window.returnDislikeButtonlistenersSet) {
+    buttons.children[0].addEventListener("click", likeClicked);
+    buttons.children[1].addEventListener("click", dislikeClicked);
+    window.returnDislikeButtonlistenersSet = true;
+  }
+}
+
+function storageChangeHandler(changes, area) {
+  if (changes.disableVoteSubmission !== undefined) {
+    handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
+  }
+}
+
+function handleDisableVoteSubmissionChangeEvent(value) {
+  extConfig.disableVoteSubmission = value;
+}
+
 
 ;// CONCATENATED MODULE: ./Extensions/combined/src/state.js
 
@@ -175,6 +197,14 @@ function dislikeClicked(storedData) {
 var LIKED_STATE = "LIKED_STATE";
 var DISLIKED_STATE = "DISLIKED_STATE";
 var NEUTRAL_STATE = "NEUTRAL_STATE";
+var extConfig = {
+  disableVoteSubmission: false
+};
+var storedData = {
+  likes: 0,
+  dislikes: 0,
+  previousState: NEUTRAL_STATE
+};
 
 function isMobile() {
   return location.hostname == "m.youtube.com";
@@ -262,11 +292,27 @@ function setState(storedData) {
   });
 }
 
-function setInitialState(storedData) {
+function setInitialState() {
   setState(storedData);
   setTimeout(function () {
     sendVideoIds();
   }, 1500);
+}
+
+function initExtConfig() {
+  initializeDisableVoteSubmission();
+}
+
+function initializeDisableVoteSubmission() {
+  getBrowser().storage.sync.get(['disableVoteSubmission'], function (res) {
+    if (res.disableVoteSubmission === undefined) {
+      getBrowser().storage.sync.set({
+        disableVoteSubmission: false
+      });
+    } else {
+      extConfig.disableVoteSubmission = res.disableVoteSubmission;
+    }
+  });
 }
 
 
@@ -308,16 +354,15 @@ function checkForSignInButton() {
 
 
 ;// CONCATENATED MODULE: ./Extensions/combined/ryd.content-script.js
+//---   Import Button Functions   ---//
+ //---   Import State Functions   ---//
+
+ //---   Import Video & Browser Functions   ---//
 
 
 
 
-
-var storedData = {
-  likes: 0,
-  dislikes: 0,
-  previousState: NEUTRAL_STATE
-};
+initExtConfig();
 var jsInitChecktimer = null;
 
 function setEventListeners(evt) {
@@ -327,19 +372,9 @@ function setEventListeners(evt) {
     if ((_getButtons = buttons_getButtons()) !== null && _getButtons !== void 0 && _getButtons.offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
       jsInitChecktimer = null;
-      var buttons = buttons_getButtons();
-
-      if (!window.returnDislikeButtonlistenersSet) {
-        buttons.children[0].addEventListener("click", function () {
-          return likeClicked(storedData);
-        });
-        buttons.children[1].addEventListener("click", function () {
-          return dislikeClicked(storedData);
-        });
-        window.returnDislikeButtonlistenersSet = true;
-      }
-
-      setInitialState(storedData);
+      addLikeDislikeEventListener();
+      setInitialState();
+      getBrowser().storage.onChanged.addListener(storageChangeHandler);
     }
   }
 

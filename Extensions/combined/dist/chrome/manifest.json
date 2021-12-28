@@ -27,6 +27,10 @@
       "exclude_matches": ["*://*.music.youtube.com/*"],
       "js": ["bundled-content-script.js"],
       "css": ["content-style.css"]
+    },
+    {
+      "matches": ["*://*.returnyoutubedislike.com/debug","http://localhost/debug"],
+      "js": ["debug.js"]
     }
   ],
   "externally_connectable": {
