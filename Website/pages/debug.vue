@@ -14,11 +14,11 @@
         <span>Device Type: {{ device._parsed.category }}</span><br><br>
         <!--   Gather Extension Information   -->
         <span><b>Installed Extension Information:</b></span><br>
-        <span>Extension Version: <span id="extension-version"/></span><br>
+        <span>Extension Version: <span id="extension-version">Waiting For Extension...</span></span><br>
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn>
+        <v-btn @click="copy()">
           <v-icon small style="margin-right: 0.25em;">mdi-content-copy</v-icon>Copy
         </v-btn>
       </v-card-actions>
@@ -32,7 +32,28 @@
       return {
         device: this.$ua,
       }
+    },
+
+    methods: {
+        copy() {
+
+            const toCopy = `\`\`\`
+Browser Information:
+Browser: ${ this.device._parsed.name }
+Browser Vendor: ${ this.device._parsed.vendor }
+Version: ${ this.device._parsed.version }
+Operating System: ${ this.device._parsed.os }
+Operating System Version: ${ this.device._parsed.os_version }
+Device Type: ${ this.device._parsed.category }
+
+Installed Extension Information:
+Extension Version: ${document.getElementById('extension-version').innerHTML}
+\`\`\``;
+
+            navigator.clipboard.writeText(toCopy);
+        }
     }
+
   }
 
 </script>
