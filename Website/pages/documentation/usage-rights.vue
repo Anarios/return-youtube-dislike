@@ -20,12 +20,11 @@
 </template>
 
 <style scoped>
-  li {
-    margin-top: 0.5em;
-  }
+li {
+  margin-top: 0.5em;
+}
 
-  b {
-    font-weight: 900 !important;
-  }
-
+b {
+  font-weight: 900 !important;
+}
 </style>

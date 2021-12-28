@@ -7,14 +7,13 @@
 </template>
 
 <script>
-  let apiUrl = process.env.apiUrl;
-  export default {
-    data() {
-      return {
-        apiUrl: apiUrl,
-        endpointUrl: apiUrl + "/swagger/index.html",
-      };
-    },
-  };
-
+let apiUrl = process.env.apiUrl;
+export default {
+  data() {
+    return {
+      apiUrl: apiUrl,
+      endpointUrl: apiUrl + "/swagger/index.html",
+    };
+  },
+};
 </script>

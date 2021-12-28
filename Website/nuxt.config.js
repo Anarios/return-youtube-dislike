@@ -38,7 +38,7 @@ export default {
   plugins: [],
   components: true,
   buildModules: ["@nuxtjs/vuetify"],
-  modules: ['nuxt-user-agent'],
+  modules: ["nuxt-user-agent"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
