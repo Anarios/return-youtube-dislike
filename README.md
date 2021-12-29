@@ -47,9 +47,9 @@ https://returnyoutubedislikeapi.com
 List of available endpoints is available here:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
+### Get Votes
 Example to get votes of a given YouTube video ID:  
-`/votes?videoId=kxOuG8jMIgI`
+GET `/votes?videoId=kxOuG8jMIgI`
 
 ```json
 {
@@ -65,6 +65,69 @@ Example to get votes of a given YouTube video ID:
 
 None existing YouTube ID will return status code *404* "Not Found".  
 Wrong formed YouTube ID will return *400* "Bad Request".
+
+### Post Votes
+To be allowed to vote on a video you'll have to register with your user ID:
+1. Generate a random user ID with length of 36 ascii letters and strings. This ID should be unique and static per user.
+2. Register your ID with the API to get the puzzle:
+
+GET `/puzzle/registration?userId=YourUserID`
+```json
+{
+    "challenge": "aaaaaaaaaaaaaaaaaaaaaaaa",
+    "solution": null,
+    "difficulty": 17
+}
+```
+3. Refer to the source code on how to solve the hashing challenge.
+4. Post your solution to confirm your registration:
+
+POST `/puzzle/registration?userId=YourUserID`
+```json
+{
+    "solution": "bbbbbbbb"
+}
+```
+
+After that you are allowed to vote on a YouTube ID.
+
+1. First get your challenge:
+POST `/interact/vote`
+```json
+{
+    "userId": "YourUserID",
+    "videoId": "kxOuG8jMIgI",
+    "value": -1,
+}
+```
+Where the value represents your vote:
+- **-1**: Dislike
+- **1**: Like
+- **0**: Neutral (*aka* undo your previous vote)
+
+This will return another challenge to solve:
+```json
+{
+    "challenge": "cccccccccccccccccccccccc",
+    "solution": null,
+    "difficulty": 16
+}
+```
+2. Solve the challenge 
+3. Then post the result to confirm your vote:
+
+POST `/interact/confirmVote`
+```json
+{
+    "userId": "YourUserID",
+    "videoId": "kxOuG8jMIgI",
+    "solution": "ddddddddddddd"
+}
+```
+
+## API Clients
+There is a Python library implementing the steps described above:  
+[https://github.com/bbilly1/ryd-client](https://github.com/bbilly1/ryd-client)
 
 ## HELP WANTED
 
