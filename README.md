@@ -63,7 +63,7 @@ Example to get votes of a given YouTube video ID:
 }
 ```
 
-None existing YouTube ID will return status code *404* "Not Found".  
+Non-existent YouTube ID will return status code *404* "Not Found".  
 Wrong formed YouTube ID will return *400* "Bad Request".
 
 ## HELP WANTED
