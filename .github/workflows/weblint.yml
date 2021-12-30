@@ -20,9 +20,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@main
-    - name: npm install
-      run: npm install
+    - run: npm install
       working-directory: Website
-    - name: npm run lint
-      run: npm run lint
+    - run: npm run lint
       working-directory: Website
