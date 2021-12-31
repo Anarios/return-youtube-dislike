@@ -41,16 +41,16 @@ export default {
       {
         question: "Why isn't the dislike count updating?",
         answer:
-          "Right now video dislikes are cached and they aren't updated very frequently. It varies on video popularity but can take anywhere between a few hours and a few days days to update.",
+          "Right now video dislikes are cached and they aren't updated very frequently. It varies depending on a video's popularity but can take anywhere between a few hours and a few days days to update.",
       },
       {
         question: "How does this work?",
         answer:
-          "The extension collects the video ID of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you dislike or like a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
+          "The extension collects the video ID of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you like or dislike a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
       },
       {
         question:
-        "Can I share my dislke count with you?",
+        "Can I share my dislike count with you?",
         answer:
           "Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability. ",
       },
