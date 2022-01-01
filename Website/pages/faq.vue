@@ -50,7 +50,7 @@ export default {
       },
       {
         question:
-        "Can I share my dislke count with you?",
+        "Can I share my dislike count with you?",
         answer:
           "Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability. ",
       },
