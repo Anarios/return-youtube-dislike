@@ -1,6 +1,6 @@
 import { getBrowser, getVideoId, numberFormat, cLog } from "./utils"
 import { checkForSignInButton, getButtons } from "./buttons"
-import { NEUTRAL_STATE, LIKED_STATE, DISLIKED_STATE, setDislikes, extConfig, storedData } from "./state"
+import { NEUTRAL_STATE, LIKED_STATE, DISLIKED_STATE, setDislikes, extConfig, storedData, setLikes } from "./state"
 import { createRateBar } from "./bar"
 
 function sendVote(vote) {

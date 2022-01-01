@@ -5,17 +5,20 @@ var __webpack_exports__ = {};
 ;// CONCATENATED MODULE: ./Extensions/combined/src/bar.js
 
 
-function createRateBar(likes, dislikes) {
-  var rateBar = document.getElementById("ryd-bar-container");
-  var widthPx = buttons_getButtons().children[0].clientWidth + buttons_getButtons().children[1].clientWidth + 8;
-  var widthPercent = likes + dislikes > 0 ? likes / (likes + dislikes) * 100 : 50;
 
-  if (!rateBar) {
-    (document.getElementById("menu-container") || document.querySelector("ytm-slim-video-action-bar-renderer")).insertAdjacentHTML("beforeend", "\n          <div class=\"ryd-tooltip\" style=\"width: ".concat(widthPx, "px\">\n          <div class=\"ryd-tooltip-bar-container\">\n             <div\n                id=\"ryd-bar-container\"\n                style=\"width: 100%; height: 2px;\"\n                >\n                <div\n                   id=\"ryd-bar\"\n                   style=\"width: ").concat(widthPercent, "%; height: 100%\"\n                   ></div>\n             </div>\n          </div>\n          <tp-yt-paper-tooltip position=\"top\" id=\"ryd-dislike-tooltip\" class=\"style-scope ytd-sentiment-bar-renderer\" role=\"tooltip\" tabindex=\"-1\">\n             <!--css-build:shady-->").concat(likes.toLocaleString(), "&nbsp;/&nbsp;").concat(dislikes.toLocaleString(), "\n          </tp-yt-paper-tooltip>\n          </div>\n  "));
-  } else {
-    document.getElementById("ryd-bar-container").style.width = widthPx + "px";
-    document.getElementById("ryd-bar").style.width = widthPercent + "%";
-    document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML = "".concat(likes.toLocaleString(), "&nbsp;/&nbsp;").concat(dislikes.toLocaleString());
+function createRateBar(likes, dislikes) {
+  if (!likesDisabledState) {
+    var rateBar = document.getElementById("ryd-bar-container");
+    var widthPx = buttons_getButtons().children[0].clientWidth + buttons_getButtons().children[1].clientWidth + 8;
+    var widthPercent = likes + dislikes > 0 ? likes / (likes + dislikes) * 100 : 50;
+
+    if (!rateBar) {
+      (document.getElementById("menu-container") || document.querySelector("ytm-slim-video-action-bar-renderer")).insertAdjacentHTML("beforeend", "\n            <div class=\"ryd-tooltip\" style=\"width: ".concat(widthPx, "px\">\n            <div class=\"ryd-tooltip-bar-container\">\n              <div\n                  id=\"ryd-bar-container\"\n                  style=\"width: 100%; height: 2px;\"\n                  >\n                  <div\n                    id=\"ryd-bar\"\n                    style=\"width: ").concat(widthPercent, "%; height: 100%\"\n                    ></div>\n              </div>\n            </div>\n            <tp-yt-paper-tooltip position=\"top\" id=\"ryd-dislike-tooltip\" class=\"style-scope ytd-sentiment-bar-renderer\" role=\"tooltip\" tabindex=\"-1\">\n              <!--css-build:shady-->").concat(likes.toLocaleString(), "&nbsp;/&nbsp;").concat(dislikes.toLocaleString(), "\n            </tp-yt-paper-tooltip>\n            </div>\n    "));
+    } else {
+      document.getElementById("ryd-bar-container").style.width = widthPx + "px";
+      document.getElementById("ryd-bar").style.width = widthPercent + "%";
+      document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML = "".concat(likes.toLocaleString(), "&nbsp;/&nbsp;").concat(dislikes.toLocaleString());
+    }
   }
 }
 
@@ -197,6 +200,7 @@ function handleDisableVoteSubmissionChangeEvent(value) {
 var LIKED_STATE = "LIKED_STATE";
 var DISLIKED_STATE = "DISLIKED_STATE";
 var NEUTRAL_STATE = "NEUTRAL_STATE";
+var DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
 var extConfig = {
   disableVoteSubmission: false
 };
@@ -205,6 +209,7 @@ var storedData = {
   dislikes: 0,
   previousState: NEUTRAL_STATE
 };
+var likesDisabledState = true;
 
 function isMobile() {
   return location.hostname == "m.youtube.com";
@@ -253,12 +258,23 @@ function setLikes(likesCount) {
 }
 
 function setDislikes(dislikesCount) {
-  if (isMobile()) {
-    buttons_getButtons().children[1].querySelector(".button-renderer-text").innerText = dislikesCount;
-    return;
-  }
+  if (!likesDisabledState) {
+    if (isMobile()) {
+      buttons_getButtons().children[1].querySelector(".button-renderer-text").innerText = dislikesCount;
+      return;
+    }
 
-  buttons_getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+    buttons_getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+  } else {
+    cLog("likes count diabled by creator");
+
+    if (isMobile()) {
+      buttons_getButtons().children[1].querySelector(".button-renderer-text").innerText = DISLIKES_DISABLED_TEXT;
+      return;
+    }
+
+    buttons_getButtons().children[1].querySelector("#text").innerText = DISLIKES_DISABLED_TEXT;
+  }
 }
 
 function getLikeCountFromButton() {
@@ -271,7 +287,10 @@ function processResponse(response, storedData) {
   setDislikes(formattedDislike);
   storedData.dislikes = parseInt(response.dislikes);
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
-  createRateBar(storedData.likes, storedData.dislikes);
+
+  if (!likesDisabledState) {
+    createRateBar(storedData.likes, storedData.dislikes);
+  }
 }
 
 function setState(storedData) {
@@ -285,10 +304,11 @@ function setState(storedData) {
   }, function (response) {
     cLog("response from api:");
     cLog(JSON.stringify(response));
+    likesDisabledState = numberFormat(response.dislikes) == 0 && numberFormat(response.likes) == 0 && numberFormat(response.viewCount) == 0;
 
     if (response !== undefined && !("traceId" in response) && !statsSet) {
       processResponse(response, storedData);
-    } else {}
+    }
   });
 }
 
@@ -354,7 +374,10 @@ function checkForSignInButton() {
 
 
 ;// CONCATENATED MODULE: ./Extensions/combined/ryd.content-script.js
+//---   Import Button Functions   ---//
+ //---   Import State Functions   ---//
 
+ //---   Import Video & Browser Functions   ---//
 
 
 

@@ -7,6 +7,8 @@ const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
+const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED"
+
 let extConfig = {
   disableVoteSubmission: false,
 };
@@ -16,6 +18,8 @@ let storedData = {
   dislikes: 0,
   previousState: NEUTRAL_STATE,
 };
+
+let likesDisabledState = true;
 
 function isMobile() {
   return location.hostname == "m.youtube.com";
@@ -57,12 +61,22 @@ function setLikes(likesCount) {
 }
 
 function setDislikes(dislikesCount) {
-  if (isMobile()) {
-    getButtons().children[1].querySelector(".button-renderer-text").innerText =
-      dislikesCount;
-    return;
+  if(!likesDisabledState) {
+    if (isMobile()) {
+      getButtons().children[1].querySelector(".button-renderer-text").innerText =
+        dislikesCount;
+      return;
+    }
+    getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+  } else {
+    cLog("likes count diabled by creator");
+    if (isMobile()) {
+      getButtons().children[1].querySelector(".button-renderer-text").innerText =
+      DISLIKES_DISABLED_TEXT;
+      return;
+    }
+    getButtons().children[1].querySelector("#text").innerText = DISLIKES_DISABLED_TEXT;
   }
-  getButtons().children[1].querySelector("#text").innerText = dislikesCount;
 }
 
 function getLikeCountFromButton() {
@@ -78,7 +92,9 @@ function processResponse(response, storedData) {
   setDislikes(formattedDislike);
   storedData.dislikes = parseInt(response.dislikes);
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
-  createRateBar(storedData.likes, storedData.dislikes);
+  if(!likesDisabledState) {
+    createRateBar(storedData.likes, storedData.dislikes);
+  }
 }
 
 function setState(storedData) {
@@ -99,9 +115,9 @@ function setState(storedData) {
     function (response) {
       cLog("response from api:");
       cLog(JSON.stringify(response));
+      likesDisabledState = numberFormat(response.dislikes) == 0 && numberFormat(response.likes) == 0 && numberFormat(response.viewCount) == 0;
       if (response !== undefined && !("traceId" in response) && !statsSet) {
         processResponse(response, storedData);
-      } else {
       }
     }
   );
@@ -145,4 +161,5 @@ export {
   extConfig,
   initExtConfig,
   storedData,
+  likesDisabledState,
 };

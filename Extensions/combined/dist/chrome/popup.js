@@ -4,7 +4,17 @@ const config = {
   showAdvancedMessage: "Show Settings",
   hideAdvancedMessage: "Hide Settings",
   disableVoteSubmission: false,
+}
 
+ function initConfig() {
+  initializeVersionNumber();
+  }
+
+ function initializeVersionNumber() {
+  const version = chrome.runtime.getManifest().version;
+  document.getElementById('ext-version').innerHTML = 'v' + version;
+}
+  
   links: {
     website: "https://returnyoutubedislike.com",
     github: "https://github.com/Anarios/return-youtube-dislike",
