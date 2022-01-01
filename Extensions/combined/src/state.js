@@ -92,9 +92,7 @@ function processResponse(response, storedData) {
   setDislikes(formattedDislike);
   storedData.dislikes = parseInt(response.dislikes);
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
-  if(!likesDisabledState) {
-    createRateBar(storedData.likes, storedData.dislikes);
-  }
+  createRateBar(storedData.likes, storedData.dislikes);
 }
 
 function setState(storedData) {

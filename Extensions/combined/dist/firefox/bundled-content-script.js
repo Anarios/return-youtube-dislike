@@ -2,27 +2,6 @@
 /******/ 	"use strict";
 var __webpack_exports__ = {};
 
-;// CONCATENATED MODULE: ./Extensions/combined/src/bar.js
-
-
-
-function createRateBar(likes, dislikes) {
-  if (!likesDisabledState) {
-    var rateBar = document.getElementById("ryd-bar-container");
-    var widthPx = buttons_getButtons().children[0].clientWidth + buttons_getButtons().children[1].clientWidth + 8;
-    var widthPercent = likes + dislikes > 0 ? likes / (likes + dislikes) * 100 : 50;
-
-    if (!rateBar) {
-      (document.getElementById("menu-container") || document.querySelector("ytm-slim-video-action-bar-renderer")).insertAdjacentHTML("beforeend", "\n            <div class=\"ryd-tooltip\" style=\"width: ".concat(widthPx, "px\">\n            <div class=\"ryd-tooltip-bar-container\">\n              <div\n                  id=\"ryd-bar-container\"\n                  style=\"width: 100%; height: 2px;\"\n                  >\n                  <div\n                    id=\"ryd-bar\"\n                    style=\"width: ").concat(widthPercent, "%; height: 100%\"\n                    ></div>\n              </div>\n            </div>\n            <tp-yt-paper-tooltip position=\"top\" id=\"ryd-dislike-tooltip\" class=\"style-scope ytd-sentiment-bar-renderer\" role=\"tooltip\" tabindex=\"-1\">\n              <!--css-build:shady-->").concat(likes.toLocaleString(), "&nbsp;/&nbsp;").concat(dislikes.toLocaleString(), "\n            </tp-yt-paper-tooltip>\n            </div>\n    "));
-    } else {
-      document.getElementById("ryd-bar-container").style.width = widthPx + "px";
-      document.getElementById("ryd-bar").style.width = widthPercent + "%";
-      document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML = "".concat(likes.toLocaleString(), "&nbsp;/&nbsp;").concat(dislikes.toLocaleString());
-    }
-  }
-}
-
-
 ;// CONCATENATED MODULE: ./Extensions/combined/src/utils.js
 function roundDown(num) {
   if (num < 1000) return num;
@@ -88,6 +67,32 @@ function cLog(message, writer) {
     writer(message);
   } else {
     console.log(message);
+  }
+}
+
+
+;// CONCATENATED MODULE: ./Extensions/combined/src/bar.js
+
+
+
+
+function createRateBar(likes, dislikes) {
+  if (!likesDisabledState) {
+    var rateBar = document.getElementById("ryd-bar-container");
+    var widthPx = buttons_getButtons().children[0].clientWidth + buttons_getButtons().children[1].clientWidth + 8;
+    var widthPercent = likes + dislikes > 0 ? likes / (likes + dislikes) * 100 : 50;
+
+    if (!rateBar) {
+      (document.getElementById("menu-container") || document.querySelector("ytm-slim-video-action-bar-renderer")).insertAdjacentHTML("beforeend", "\n            <div class=\"ryd-tooltip\" style=\"width: ".concat(widthPx, "px\">\n            <div class=\"ryd-tooltip-bar-container\">\n              <div\n                  id=\"ryd-bar-container\"\n                  style=\"width: 100%; height: 2px;\"\n                  >\n                  <div\n                    id=\"ryd-bar\"\n                    style=\"width: ").concat(widthPercent, "%; height: 100%\"\n                    ></div>\n              </div>\n            </div>\n            <tp-yt-paper-tooltip position=\"top\" id=\"ryd-dislike-tooltip\" class=\"style-scope ytd-sentiment-bar-renderer\" role=\"tooltip\" tabindex=\"-1\">\n              <!--css-build:shady-->").concat(likes.toLocaleString(), "&nbsp;/&nbsp;").concat(dislikes.toLocaleString(), "\n            </tp-yt-paper-tooltip>\n            </div>\n    "));
+    } else {
+      document.getElementById("ryd-bar-container").style.width = widthPx + "px";
+      document.getElementById("ryd-bar").style.width = widthPercent + "%";
+      document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML = "".concat(likes.toLocaleString(), "&nbsp;/&nbsp;").concat(dislikes.toLocaleString());
+    }
+  } else {
+    cLog('removing bar');
+    var ratebar = document.getElementById("ryd-bar-container");
+    ratebar.parentNode.removeChild(ratebar);
   }
 }
 

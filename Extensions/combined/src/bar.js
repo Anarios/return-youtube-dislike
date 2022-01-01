@@ -1,5 +1,6 @@
 import { getButtons } from "./buttons";
 import { likesDisabledState } from "./state";
+import { cLog } from "./utils";
 
 function createRateBar(likes, dislikes) {
   if (!likesDisabledState)
@@ -47,6 +48,10 @@ function createRateBar(likes, dislikes) {
         "#ryd-dislike-tooltip > #tooltip"
       ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
     }
+  } else {
+    cLog('removing bar');
+    let ratebar = document.getElementById("ryd-bar-container");
+    ratebar.parentNode.removeChild(ratebar);
   }
 }
 
