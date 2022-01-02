@@ -38,21 +38,6 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })
       .catch();
     return true;
-  } else if (request.message == "send_links") {
-    toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
-    if (toSend.length >= 20) {
-      fetch(`${apiUrl}/votes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(toSend),
-      });
-      for (const toSendUrl of toSend) {
-        sentIds.add(toSendUrl);
-      }
-      toSend = [];
-    }
   } else if (request.message == "register") {
     register();
     return true;
@@ -140,9 +125,6 @@ api.storage.sync.get(null, (res) => {
     register();
   }
 });
-
-const sentIds = new Set();
-let toSend = [];
 
 function sendUserSubmittedStatisticsToApi(statistics) {
   fetch(`${apiUrl}/votes/user-submitted`, {
