@@ -1,7 +1,6 @@
 import { getLikeButton, getDislikeButton, getButtons } from "./buttons";
 import { createRateBar } from "./bar";
 import { getBrowser, getVideoId, cLog, numberFormat } from "./utils";
-import { sendVideoIds } from "./events";
 
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
@@ -109,9 +108,6 @@ function setState(storedData) {
 
 function setInitialState() {
   setState(storedData);
-  setTimeout(() => {
-    sendVideoIds();
-  }, 1500);
 }
 
 function initExtConfig() {

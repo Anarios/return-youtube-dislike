@@ -26,7 +26,7 @@ import {
 //---   Import Video & Browser Functions   ---//
 import { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog } from "./src/utils";
 import { createRateBar } from "./src/bar";
-import { sendVideoIds, sendVote, likeClicked, dislikeClicked, addLikeDislikeEventListener, storageChangeHandler  } from "./src/events"
+import { sendVote, likeClicked, dislikeClicked, addLikeDislikeEventListener, storageChangeHandler  } from "./src/events"
 
 
 initExtConfig()
@@ -56,5 +56,3 @@ document.addEventListener("yt-navigate-finish", function (event) {
   window.returnDislikeButtonlistenersSet = false;
   setEventListeners();
 });
-
-setTimeout(() => sendVideoIds(), 2500);
