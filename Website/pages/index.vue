@@ -97,8 +97,14 @@ export default {
         { name: "Piepacker", link: "https://piepacker.com/" },
         { name: "nodetube", link: "https://github.com/mayeaux/nodetube" },
         { name: "trig404" },
-        { name: "Peter33", link: "https://www.youtube.com/watch?v=G5kzUpWAusI" },
-        { name: "Seed4.Me VPN", link: "https://www.seed4.me/users/register?gift=ReturnYoutubeDislike" },
+        {
+          name: "Peter33",
+          link: "https://www.youtube.com/watch?v=G5kzUpWAusI",
+        },
+        {
+          name: "Seed4.Me VPN",
+          link: "https://www.seed4.me/users/register?gift=ReturnYoutubeDislike",
+        },
       ],
     };
   },

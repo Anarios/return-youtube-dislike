@@ -27,12 +27,18 @@ export default {
     ],
   },
 
+  env: {
+    apiUrl: "https://returnyoutubedislikeapi.com",
+  },
+
+  //server: { host: '0.0.0.0', port: 80 }, //LINE FOR DEBUGGING ONLY
+
   target: "static",
   css: [],
   plugins: [],
   components: true,
   buildModules: ["@nuxtjs/vuetify"],
-  modules: [],
+  modules: ["nuxt-user-agent"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -52,7 +58,7 @@ export default {
       },
     },
   },
-
+  /*
   build: {
     extend(config, ctx) {
       // Run ESLint on save (dev-only)
@@ -65,5 +71,6 @@ export default {
         });
       }
     },
-  },
+  }
+*/
 };

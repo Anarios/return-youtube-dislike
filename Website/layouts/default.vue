@@ -31,26 +31,12 @@
 export default {
   data: () => ({
     links: [
-      {
-        name: "Home",
-        path: "/",
-      },
-      {
-        name: "Install",
-        path: "/install",
-      },
-      {
-        name: "FAQ",
-        path: "/faq",
-      },
-      {
-        name: "Donate",
-        path: "/donate",
-      },
-      {
-        name: "Links",
-        path: "/links",
-      },
+      { name: "Home", path: "/" },
+      { name: "Install", path: "/install" },
+      { name: "FAQ", path: "/faq" },
+      { name: "Donate", path: "/donate" },
+      { name: "Links", path: "/links" },
+      { name: "API", path: "/documentation" },
     ],
   }),
 };
