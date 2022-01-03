@@ -33,9 +33,11 @@ With the removal of dislike stats from the YouTube API, our backend switched to 
 
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
+
 ## API documentation
 
 Third-party use of this open API is allowed with the following restrictions:
+
 
 - **Attribution**: This project should be clearly attributed with either a link to this repo or a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a *429* status code indicating that your application should back off.
@@ -62,17 +64,18 @@ Example to get votes of a given YouTube video ID:
 }
 ```
 
+
 None existing YouTube ID will return status code *404* "Not Found".  
 Wrong formed YouTube ID will return *400* "Bad Request".
 
+
+
+<!---
+## API documentation
+
 You can view all documentation on our website.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/)
+[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
-## HELP WANTED
-
-We have an issue that is happening to a low percentage of Chrome users. Service worker (ex background script) goes to Inactive state and doesn't wake up even when youtube tab is reopened. Only switching the extension off and on in your extensions tab will help. This looks like a Chrome manifestv3 bug - so if anyone knows of a good workaround - please open an issue\create a PR.
-
-Looks like it's [this bug in chromium](https://bugs.chromium.org/p/chromium/issues/detail?id=1271154), and there is no good workaround. If anyone is aware of a workaounds - please contact.
 
 ## Contributing
 
