@@ -29,6 +29,15 @@
 
 <script>
 export default {
+  transition(to, from) {
+    if (!from) return "swoop-in";
+    let routes = ["index", "install", "docs", "help", "faq", "donate", "links"];
+    if (routes.indexOf(to.name) < 0) return "swoop-out";
+    if (routes.indexOf(from.name) < 0) return "swoop-in";
+    return routes.indexOf(to.name) > routes.indexOf(from.name)
+      ? "swoop-left"
+      : "swoop-right";
+  },
   data() {
     return {
       //---   Links To Generate Above    ---//
@@ -36,22 +45,22 @@ export default {
         {
           text: "Usage Rights",
           icon: "mdi-book-open-variant",
-          to: "/documentation/usage-rights",
+          to: "/docs/usage-rights",
         },
         {
           text: "URL Information",
           icon: "mdi-web",
-          to: "/documentation/url",
+          to: "/docs/url",
         },
         {
           text: "Available Endpoints",
           icon: "mdi-transit-connection-variant",
-          to: "/documentation/endpoints",
+          to: "/docs/endpoints",
         },
         {
           text: "Basic Fetching Tutorial",
           icon: "mdi-school",
-          to: "/documentation/fetching",
+          to: "/docs/fetching",
         },
       ],
     };

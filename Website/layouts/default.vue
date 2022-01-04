@@ -12,7 +12,7 @@
     <!-- abstract background -->
     <v-img
       src="/ui/abstract.svg"
-      style="position: absolute; left: 0; right: 0; width: 100%; height: 100%"
+      style="position: absolute; left: 0; right: 0; width: 100vw; height: 100vh"
     />
 
     <v-main style="padding-top: 4rem !important">
@@ -33,11 +33,11 @@ export default {
     links: [
       { name: "Home", path: "/" },
       { name: "Install", path: "/install" },
+      { name: "API", path: "/docs" },
       { name: "Help", path: "/help" },
       { name: "FAQ", path: "/faq" },
       { name: "Donate", path: "/donate" },
       { name: "Links", path: "/links" },
-      { name: "API", path: "/documentation" },
     ],
   }),
 };
@@ -62,7 +62,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #ff4444; /* color of the scroll thumb */
+  background-color: #333; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 4px solid #111; /* creates padding around scroll thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #f22; /* color of the scroll thumb */
   border-radius: 20px; /* roundness of the scroll thumb */
   border: 4px solid #111; /* creates padding around scroll thumb */
 }

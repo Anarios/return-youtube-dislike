@@ -40,6 +40,9 @@
 
 <script>
 export default {
+  transition(to) {
+    return to.name == "debug" ? "swoop-in" : "swoop-out";
+  },
   data() {
     return {
       device: this.$ua,
