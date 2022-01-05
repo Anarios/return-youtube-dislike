@@ -98,7 +98,6 @@ export default {
         this.alert.html = `Looks like you're using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Internet Explorer</b>. Stop it, get some help.`;
         this.alert.show = true;
       }
-
     }, 1000);
   },
 };
@@ -144,7 +143,7 @@ body {
   outline: 2px solid red;
 }
 
-.v-sheet.v-snack__wrapper{
+.v-sheet.v-snack__wrapper {
   border-radius: 0.75rem !important;
 }
 

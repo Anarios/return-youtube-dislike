@@ -3,7 +3,12 @@
     <!--   Left Section // "Sections" Card   -->
     <v-card
       class="col-xs-12 mx-2 elevation-0"
-      style="background: transparent; height: max-content"
+      style="
+        background: transparent;
+        height: max-content;
+        position: sticky;
+        top: 5.5rem;
+      "
     >
       <!-- <v-card-title style="padding-bottom: 0 !important; color: #aaa">
         Sections
