@@ -1,11 +1,25 @@
 <template>
-  <div>
+  <div class="row wrap justify-center full-width">
     <!--   Top Section // "Sections" Card   -->
-    <v-card max-width="600px" class="rounded-lg">
-      <v-card-title style="padding-bottom: 0">Sections</v-card-title>
-      <v-list>
+    <v-card
+      max-width="600px"
+      class="mx-2"
+      style="background: transparent; width: max-content; height: max-content"
+    >
+      <!-- <v-card-title style="padding-bottom: 0 !important; color: #aaa">
+        Sections
+      </v-card-title> -->
+      <v-list style="background: transparent">
         <!--   Dynamically Generate Links From Below   -->
-        <v-list-item v-for="(item, i) in links" :key="i" router :to="item.to">
+        <v-list-item
+          v-for="(item, i) in links"
+          :key="i"
+          :to="item.to"
+          router
+          class="mt-4"
+          color="primary"
+          style="overflow: hidden; border-radius: 0.75rem"
+        >
           <v-list-item-icon>
             <v-icon v-text="item.icon" />
           </v-list-item-icon>
@@ -19,8 +33,12 @@
     <!--   Child Pages // Card   -->
     <v-card
       max-width="600px"
-      class="rounded-lg"
-      style="margin: 1em; padding: 0.75em; text-align: left"
+      class="col-xs col-md col-6 text-left mx-2 my-6 pa-8"
+      style="
+        height: max-content;
+        background-color: #222;
+        border-radius: 0.75rem;
+      "
     >
       <NuxtChild />
     </v-card>

@@ -18,10 +18,15 @@
       </li>
       <li>
         Make sure that this link opens:
-        <a href="https://returnyoutubedislikeapi.com/votes?videoId=QOFEgexls14">
+        <a
+          class="px-2 py-1"
+          style="background: #222; border-radius: 0.25rem"
+          href="https://returnyoutubedislikeapi.com/votes?videoId=QOFEgexls14"
+        >
           https://returnyoutubedislikeapi.com/votes?videoId=QOFEgexls14
         </a>
-        , you should see plain text: <br />
+        , <br />
+        you should see plain text: <br />
         <span style="color: #eee">
           {"id":"QOFEgexls14", "dateCreated":"2021-12-15T16:54:12.250813Z",
           "likes":2907, "dislikes":215, "rating":4.725641025641026,
@@ -36,21 +41,20 @@
           style="
             font-size: 0.5rem;
             height: 1.5rem;
+            color: #aaa;
             padding-left: 0.25rem !important;
+            padding-right: 0.5rem !important;
           "
           :href="discordLink"
           target="_blank"
         >
-          <v-icon size="1.25rem" style="margin-right: 0.5em"
-            >mdi-discord</v-icon
-          >
+          <v-icon size="1rem" style="margin-right: 0.5em">mdi-discord</v-icon>
           Discord
         </v-btn>
         <ol type="a">
           <li>
             Tell us your <b>Operating System</b>, <b>Browser Name</b> and
             <b>Browser Version</b>.
-            <span style="color: #f44"> Detected: </span>
             <v-btn
               class="mainAltButton"
               style="
@@ -63,10 +67,11 @@
               target="_blank"
               @click="copyToClipboard(platform)"
             >
-              {{ platform }}
-              <v-icon size="1rem" style="margin-left: 0.5em"
+              <v-icon size=".75rem" color="primary" style="margin-right: 0.5em"
                 >mdi-content-copy</v-icon
               >
+              <span style="color: #f44"> Detected: </span>
+              &nbsp;{{ platform }}
             </v-btn>
           </li>
 
