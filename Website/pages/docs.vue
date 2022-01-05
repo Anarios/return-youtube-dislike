@@ -1,10 +1,9 @@
 <template>
-  <div class="row wrap justify-center full-width">
-    <!--   Top Section // "Sections" Card   -->
+  <div class="row wrap justify-center full-width" style="max-width: 100%">
+    <!--   Left Section // "Sections" Card   -->
     <v-card
-      max-width="600px"
-      class="mx-2"
-      style="background: transparent; width: max-content; height: max-content"
+      class="col-xs-12 mx-2 elevation-0"
+      style="background: transparent; height: max-content"
     >
       <!-- <v-card-title style="padding-bottom: 0 !important; color: #aaa">
         Sections
@@ -32,12 +31,12 @@
 
     <!--   Child Pages // Card   -->
     <v-card
-      max-width="600px"
-      class="col-xs col-md col-6 text-left mx-2 my-6 pa-8"
+      class="col-xs-12 col-md-6 text-left mx-2 my-6 pa-8"
       style="
         height: max-content;
         background-color: #222;
         border-radius: 0.75rem;
+        max-width: 90%;
       "
     >
       <NuxtChild />

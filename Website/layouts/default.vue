@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <!-- height = 4rem, margin-y = 1rem -->
-    <v-app-bar app flat class="topBar fly-in-from-top my-4 mx-auto">
+    <v-app-bar app text class="topBar fly-in-from-top my-4 mx-auto">
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
           {{ link.name }}
@@ -24,6 +24,32 @@
         <nuxt />
       </center>
     </v-main>
+
+    <!--   Debugger Notification   -->
+    <v-snackbar
+      v-model="alert.show"
+      :timeout="-1"
+      class="ma-4 desktop-only"
+      color="primary"
+      bottom
+      left
+      text
+    >
+      <v-icon color="primary" class="mr-4">mdi-alert-circle-outline</v-icon>
+      <span v-html="alert.html" class="my-auto"></span>
+
+      <template #action="{ attrs }">
+        <v-btn
+          v-bind="attrs"
+          color="primary"
+          flat
+          icon
+          @click="alert.show = false"
+        >
+          <v-icon>mdi-close-circle-outline</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -39,7 +65,35 @@ export default {
       { name: "Donate", path: "/donate" },
       { name: "Links", path: "/links" },
     ],
+    alert: {
+      show: false,
+      html: "",
+    },
   }),
+  mounted() {
+    setTimeout(() => {
+      // check if browser version out of date
+      if (
+        window.navigator.userAgent.indexOf("Chrome") > -1 &&
+        window.navigator.userAgent.indexOf("Edge") === -1
+      ) {
+        let chrome = window.navigator.userAgent.match(/Chrome\/(\d+)/);
+        let chromeVersion = chrome ? chrome[1] : 0;
+        if (chromeVersion < 70) {
+          this.alert.html = `You are using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b>. Please update to the latest version.`;
+          this.alert.show = true;
+        }
+      }
+      if (window.navigator.userAgent.indexOf("Firefox") > -1) {
+        let firefox = window.navigator.userAgent.match(/Firefox\/(\d+)/);
+        let firefoxVersion = firefox ? firefox[1] : 0;
+        if (firefoxVersion < 60) {
+          this.alert.html = `You are using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b>. Please update to the latest version.`;
+          this.alert.show = true;
+        }
+      }
+    }, 1000);
+  },
 };
 </script>
 
@@ -51,6 +105,11 @@ body {
   height: -webkit-fill-available;
   background: #111;
   overflow: auto;
+}
+
+::selection {
+  background: #f44;
+  color: #111;
 }
 
 ::-webkit-scrollbar {
@@ -76,6 +135,10 @@ body {
 .debug {
   /* usage: add class="debug" to the element */
   outline: 2px solid red;
+}
+
+.v-sheet.v-snack__wrapper{
+  border-radius: 0.75rem !important;
 }
 
 .mainAltButton {
