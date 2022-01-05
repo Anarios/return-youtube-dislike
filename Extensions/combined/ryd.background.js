@@ -6,6 +6,8 @@ let api;
 /** stores extension's global config */
 let extConfig = {
   disableVoteSubmission: false
+  // coloredThumbs: false,
+  // coloredBar: false,
 }
 
 if (isChrome()) api = chrome;
