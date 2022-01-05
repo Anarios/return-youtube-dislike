@@ -30,19 +30,20 @@
       v-model="alert.show"
       :timeout="-1"
       class="ma-4 desktop-only"
+      transition="slide-y-reverse-transition"
       color="primary"
       bottom
       left
       text
     >
       <v-icon color="primary" class="mr-4">mdi-alert-circle-outline</v-icon>
-      <span v-html="alert.html" class="my-auto"></span>
+      <span class="my-auto" v-html="alert.html"></span>
 
       <template #action="{ attrs }">
         <v-btn
           v-bind="attrs"
           color="primary"
-          flat
+          text
           icon
           @click="alert.show = false"
         >
@@ -92,6 +93,12 @@ export default {
           this.alert.show = true;
         }
       }
+      // check for IE browser
+      if (window.navigator.userAgent.indexOf("MSIE") > -1) {
+        this.alert.html = `Looks like you're using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Internet Explorer</b>. Stop it, get some help.`;
+        this.alert.show = true;
+      }
+
     }, 1000);
   },
 };
