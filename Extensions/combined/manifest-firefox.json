@@ -20,16 +20,12 @@
       "exclude_matches": ["*://*.music.youtube.com/*"],
       "run_at": "document_idle",
       "css": ["content-style.css"],
-<<<<<<< HEAD:Extensions/combined/manifest-firefox.json
       "js": ["bundled-content-script.js"]
     },
     {
       "matches": ["*://*.returnyoutubedislike.com/debug","http://localhost/debug"],
       "run_at": "document_idle",
       "js": ["debug.js"]
-=======
-      "js": ["ryd.content-script.js"]
->>>>>>> aeb2263 (settings popup):Extensions/combined/manifest.json
     }
   ]
 }
