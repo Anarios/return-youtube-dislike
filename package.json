@@ -4,7 +4,7 @@
   "description": "Chrome extension to return youtube dislikes",
   "main": "ryd.content-script.js",
   "scripts": {
-	"start": "echo To build for development, please use \"npm run dev\". To build for production, please use \"npm run build\".",
+    "start": "echo To build for development, please use \"npm run dev\". To build for production, please use \"npm run build\".",
     "dev": "webpack --mode=development \"./Extensions/combined/ryd.content-script.js\" -o \"./Extensions/combined/dist/\" --watch",
     "build": "webpack --mode=production \"./Extensions/combined/ryd.content-script.js\" -o \"./Extensions/combined\"",
     "test": "echo \"Error: no test specified\" && exit 1"
