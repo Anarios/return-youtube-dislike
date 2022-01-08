@@ -28,12 +28,17 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.message == "set_state") {
     // chrome.identity.getAuthToken({ interactive: true }, function (token) {
     let token = "";
-    fetch(`${apiUrl}/votes?videoId=${request.videoId}&likeCount=${request.likeCount || ''}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-    })
+    fetch(
+      `${apiUrl}/votes?videoId=${request.videoId}&likeCount=${
+        request.likeCount || ""
+      }`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((response) => {
         sendResponse(response);

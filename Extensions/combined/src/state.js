@@ -3,6 +3,8 @@ import { createRateBar } from "./bar";
 import { getBrowser, getVideoId, cLog, numberFormat } from "./utils";
 import { sendVideoIds } from "./events";
 
+//TODO: Do not duplicate here and in ryd.background.js
+const apiUrl = "https://returnyoutubedislikeapi.com";
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
@@ -98,7 +100,7 @@ function processResponse(response, storedData) {
   createRateBar(storedData.likes, storedData.dislikes);
 }
 
-function setState(storedData) {
+async function setState(storedData) {
   storedData.previousState = isVideoDisliked()
     ? DISLIKED_STATE
     : isVideoLiked()
@@ -106,25 +108,29 @@ function setState(storedData) {
     : NEUTRAL_STATE;
   let statsSet = false;
 
-  getBrowser().runtime.sendMessage(
+  let videoId = getVideoId(window.location.href);
+  let likeCount = getLikeCountFromButton() || null;
+
+  let response = await fetch(
+    `${apiUrl}/votes?videoId=${videoId}&likeCount=${likeCount || ""}`,
     {
-      message: "set_state",
-      videoId: getVideoId(window.location.href),
-      state: getState(storedData).current,
-      likeCount: getLikeCountFromButton() || null,
-    },
-    function (response) {
-      cLog("response from api:");
-      cLog(JSON.stringify(response));
-      likesDisabledState =
-        numberFormat(response.dislikes) == 0 &&
-        numberFormat(response.likes) == 0 &&
-        numberFormat(response.viewCount) == 0;
-      if (response !== undefined && !("traceId" in response) && !statsSet) {
-        processResponse(response, storedData);
-      }
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
     }
-  );
+  )
+    .then((response) => response.json())
+    .catch();
+  cLog("response from api:");
+  cLog(JSON.stringify(response));
+  likesDisabledState =
+    numberFormat(response.dislikes) == 0 &&
+    numberFormat(response.likes) == 0 &&
+    numberFormat(response.viewCount) == 0;
+  if (response !== undefined && !("traceId" in response) && !statsSet) {
+    processResponse(response, storedData);
+  }
 }
 
 function setInitialState() {

@@ -13,7 +13,7 @@ module.exports = {
     minimize: false,
   },
   watchOptions: {
-    ignored: "./Extensions/combined/dist/*"
+    ignored: "./Extensions/combined/dist/*",
   },
   plugins: [
     // exclude locale files in moment
@@ -50,15 +50,23 @@ module.exports = {
         {
           from: "./Extensions/combined/manifest-firefox.json",
           to: "./firefox/manifest.json",
-        }
+        },
       ],
     }),
     new FileManagerPlugin({
       events: {
         onEnd: {
           copy: [
-            { source: "./Extensions/combined/dist/bundled-content-script.js", destination: "./Extensions/combined/dist/firefox/bundled-content-script.js" },
-            { source: "./Extensions/combined/dist/bundled-content-script.js", destination: "./Extensions/combined/dist/chrome/bundled-content-script.js" },
+            {
+              source: "./Extensions/combined/dist/bundled-content-script.js",
+              destination:
+                "./Extensions/combined/dist/firefox/bundled-content-script.js",
+            },
+            {
+              source: "./Extensions/combined/dist/bundled-content-script.js",
+              destination:
+                "./Extensions/combined/dist/chrome/bundled-content-script.js",
+            },
           ],
         },
       },
