@@ -81,8 +81,9 @@ You can view all documentation on our website.
 
 Please read the [contribution guide.](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)
 
-## Donate
+## Support this project!
 
+You can support this project by donating to us on the link below:
 [Donate](https://returnyoutubedislike.com/donate)
 
 ## Sponsors
