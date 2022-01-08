@@ -1,57 +1,67 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+const FileManagerPlugin = require("filemanager-webpack-plugin");
 
 module.exports = {
-  entry: path.join(__dirname, './Extensions/combined/ryd.content-script.js'),
+  entry: path.join(__dirname, "./Extensions/combined/ryd.content-script.js"),
   output: {
-    filename: 'bundled-content-script.js',
-    path: path.resolve(__dirname, 'Extensions/combined')
+    filename: "bundled-content-script.js",
+    path: path.resolve(__dirname, "Extensions/combined/dist"),
+    clean: true,
   },
   optimization: {
-    minimize: false
+    minimize: false,
   },
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-proposal-object-rest-spread']
-          }
-        }
-      }
-    ]
+  watchOptions: {
+    ignored: "./Extensions/combined/dist/*"
   },
   plugins: [
     // exclude locale files in moment
     new CopyPlugin({
       patterns: [
         {
-          from: './Extensions/combined',
-          to: './dist/chrome',
+          from: "./Extensions/combined",
+          to: "./chrome",
           globOptions: {
-            ignore: ['**/manifest-**', '**/dist/**', '**/src/**','**/ryd.content-script.js']
-          }
+            ignore: [
+              "**/manifest-**",
+              "**/dist/**",
+              "**/src/**",
+              "**/ryd.content-script.js",
+            ],
+          },
         },
         {
-          from: './Extensions/combined/manifest-chrome.json',
-          to: './dist/chrome/manifest.json'
+          from: "./Extensions/combined/manifest-chrome.json",
+          to: "./chrome/manifest.json",
         },
         {
-          from: './Extensions/combined',
-          to: './dist/firefox',
+          from: "./Extensions/combined",
+          to: "./firefox",
           globOptions: {
-            ignore: ['**/manifest-**', '**/dist/**', '**/src/**','**/ryd.content-script.js']
-          }
+            ignore: [
+              "**/manifest-**",
+              "**/dist/**",
+              "**/src/**",
+              "**/ryd.content-script.js",
+            ],
+          },
         },
         {
-          from: './Extensions/combined/manifest-firefox.json',
-          to: './dist/firefox/manifest.json'
+          from: "./Extensions/combined/manifest-firefox.json",
+          to: "./firefox/manifest.json",
         }
-      ]
-    })
-  ]
+      ],
+    }),
+    new FileManagerPlugin({
+      events: {
+        onEnd: {
+          copy: [
+            { source: "./Extensions/combined/dist/bundled-content-script.js", destination: "./Extensions/combined/dist/firefox/bundled-content-script.js" },
+            { source: "./Extensions/combined/dist/bundled-content-script.js", destination: "./Extensions/combined/dist/chrome/bundled-content-script.js" },
+          ],
+        },
+      },
+    }),
+  ],
 };

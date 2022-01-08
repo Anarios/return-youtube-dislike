@@ -5,8 +5,8 @@
   "main": "ryd.content-script.js",
   "scripts": {
     "start": "echo To build for development, please use \"npm run dev\". To build for production, please use \"npm run build\".",
-    "dev": "webpack --mode=development \"./Extensions/combined/ryd.content-script.js\" -o \"./Extensions/combined/dist/\" --watch",
-    "build": "webpack --mode=production \"./Extensions/combined/ryd.content-script.js\" -o \"./Extensions/combined\"",
+    "dev": "webpack --mode=production --watch",
+    "build": "webpack --mode=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,6 +30,7 @@
     "@babel/runtime": "^7.16.5",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.0",
+    "filemanager-webpack-plugin": "^6.1.7",
     "webpack-cli": "^4.9.1"
   }
 }
