@@ -7,7 +7,7 @@ const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
-const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED"
+const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
 
 let extConfig = {
   disableVoteSubmission: false,
@@ -61,21 +61,24 @@ function setLikes(likesCount) {
 }
 
 function setDislikes(dislikesCount) {
-  if(!likesDisabledState) {
+  if (!likesDisabledState) {
     if (isMobile()) {
-      getButtons().children[1].querySelector(".button-renderer-text").innerText =
-        dislikesCount;
+      getButtons().children[1].querySelector(
+        ".button-renderer-text"
+      ).innerText = dislikesCount;
       return;
     }
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   } else {
     cLog("likes count diabled by creator");
     if (isMobile()) {
-      getButtons().children[1].querySelector(".button-renderer-text").innerText =
-      DISLIKES_DISABLED_TEXT;
+      getButtons().children[1].querySelector(
+        ".button-renderer-text"
+      ).innerText = DISLIKES_DISABLED_TEXT;
       return;
     }
-    getButtons().children[1].querySelector("#text").innerText = DISLIKES_DISABLED_TEXT;
+    getButtons().children[1].querySelector("#text").innerText =
+      DISLIKES_DISABLED_TEXT;
   }
 }
 
@@ -113,7 +116,10 @@ function setState(storedData) {
     function (response) {
       cLog("response from api:");
       cLog(JSON.stringify(response));
-      likesDisabledState = numberFormat(response.dislikes) == 0 && numberFormat(response.likes) == 0 && numberFormat(response.viewCount) == 0;
+      likesDisabledState =
+        numberFormat(response.dislikes) == 0 &&
+        numberFormat(response.likes) == 0 &&
+        numberFormat(response.viewCount) == 0;
       if (response !== undefined && !("traceId" in response) && !statsSet) {
         processResponse(response, storedData);
       }
@@ -133,11 +139,10 @@ function initExtConfig() {
 }
 
 function initializeDisableVoteSubmission() {
-  getBrowser().storage.sync.get(['disableVoteSubmission'], (res) => {
+  getBrowser().storage.sync.get(["disableVoteSubmission"], (res) => {
     if (res.disableVoteSubmission === undefined) {
-      getBrowser().storage.sync.set({disableVoteSubmission: false});
-    }
-    else {
+      getBrowser().storage.sync.set({ disableVoteSubmission: false });
+    } else {
       extConfig.disableVoteSubmission = res.disableVoteSubmission;
     }
   });

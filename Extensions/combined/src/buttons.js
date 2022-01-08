@@ -35,9 +35,4 @@ function checkForSignInButton() {
   }
 }
 
-export {
-  getButtons,
-  getLikeButton,
-  getDislikeButton,
-  checkForSignInButton,
-};
+export { getButtons, getLikeButton, getDislikeButton, checkForSignInButton };

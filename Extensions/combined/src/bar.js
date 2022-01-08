@@ -3,8 +3,7 @@ import { likesDisabledState } from "./state";
 import { cLog } from "./utils";
 
 function createRateBar(likes, dislikes) {
-  if (!likesDisabledState)
-  {
+  if (!likesDisabledState) {
     let rateBar = document.getElementById("ryd-bar-container");
 
     const widthPx =
@@ -24,18 +23,18 @@ function createRateBar(likes, dislikes) {
         `
             <div class="ryd-tooltip" style="width: ${widthPx}px">
             <div class="ryd-tooltip-bar-container">
-              <div
+               <div
                   id="ryd-bar-container"
                   style="width: 100%; height: 2px;"
                   >
                   <div
-                    id="ryd-bar"
-                    style="width: ${widthPercent}%; height: 100%"
-                    ></div>
-              </div>
+                     id="ryd-bar"
+                     style="width: ${widthPercent}%; height: 100%"
+                     ></div>
+               </div>
             </div>
             <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-              <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
+               <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
             </tp-yt-paper-tooltip>
             </div>
     `
@@ -43,13 +42,12 @@ function createRateBar(likes, dislikes) {
     } else {
       document.getElementById("ryd-bar-container").style.width = widthPx + "px";
       document.getElementById("ryd-bar").style.width = widthPercent + "%";
-
       document.querySelector(
         "#ryd-dislike-tooltip > #tooltip"
       ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
     }
   } else {
-    cLog('removing bar');
+    cLog("removing bar");
     let ratebar = document.getElementById("ryd-bar-container");
     ratebar.parentNode.removeChild(ratebar);
   }
