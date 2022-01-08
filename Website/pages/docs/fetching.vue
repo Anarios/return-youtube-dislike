@@ -61,9 +61,8 @@
 
 <style scoped>
 .code {
-  width: 100%;
   background: #353535;
-  border-radius: 3px;
+  border-radius: 0.25rem;
 }
 </style>
 

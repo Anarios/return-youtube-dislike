@@ -28,11 +28,8 @@
     <p id="credits" class="flex-row no-wrap">
       Site by <v-icon color="#555">mdi-discord</v-icon> Front#2990
       <br />
-      <span style="color: #444; font-size: 0.75rem"
-        >&
-        <v-icon color="#333" size="1rem">mdi-discord</v-icon>
-        PickleNik#0864</span
-      >
+      & <v-icon color="#555">mdi-discord</v-icon>
+      PickleNik#0864
     </p>
   </div>
 </template>
@@ -41,7 +38,7 @@
 export default {
   transition(to, from) {
     if (!from) return "swoop-in";
-    let routes = ["index", "install", "faq", "donate", "links"];
+    let routes = ["index", "install", "docs", "help", "faq", "donate", "links"];
     if (routes.indexOf(to.name) < 0) return "swoop-out";
     if (routes.indexOf(from.name) < 0) return "swoop-in";
     return routes.indexOf(to.name) > routes.indexOf(from.name)
