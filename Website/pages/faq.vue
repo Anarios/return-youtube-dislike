@@ -41,7 +41,7 @@ export default {
       {
         question: "Why isn't the dislike count updating?",
         answer:
-          "Right now video dislikes are cached and they aren't updated very frequently. It varies depending on a video's popularity but can take anywhere between a few hours and a few days days to update.",
+          "Right now video dislikes are cached and they aren't updated very frequently. It varies depending on a video's popularity but can take anywhere between a few hours and a few days to update.",
       },
       {
         question: "How does this work?",
