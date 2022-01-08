@@ -36,7 +36,8 @@ You can learn more at our website at: [returnyoutubedislike.com](https://www.ret
 
 ## API documentation
 
-Third party use of this open API is allowed with the following restrictions:
+Third-party use of this open API is allowed with the following restrictions:
+
 
 - **Attribution**: This project should be clearly attributed with either a link to this repo or a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a *429* status code indicating that your application should back off.
@@ -62,6 +63,7 @@ Example to get votes of a given YouTube video ID:
     "deleted": false
 }
 ```
+
 
 None existing YouTube ID will return status code *404* "Not Found".  
 Wrong formed YouTube ID will return *400* "Bad Request".

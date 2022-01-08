@@ -1,7 +1,15 @@
-import { getBrowser, getVideoId, numberFormat, cLog } from "./utils"
-import { checkForSignInButton, getButtons } from "./buttons"
-import { NEUTRAL_STATE, LIKED_STATE, DISLIKED_STATE, setDislikes, extConfig, storedData } from "./state"
-import { createRateBar } from "./bar"
+import { getBrowser, getVideoId, numberFormat, cLog } from "./utils";
+import { checkForSignInButton, getButtons } from "./buttons";
+import {
+  NEUTRAL_STATE,
+  LIKED_STATE,
+  DISLIKED_STATE,
+  setDislikes,
+  extConfig,
+  storedData,
+  setLikes,
+} from "./state";
+import { createRateBar } from "./bar";
 
 function sendVote(vote) {
   if (extConfig.disableVoteSubmission !== true) {
@@ -89,16 +97,18 @@ function dislikeClicked() {
 
 function addLikeDislikeEventListener() {
   const buttons = getButtons();
-    if (!window.returnDislikeButtonlistenersSet) {
-      buttons.children[0].addEventListener("click", likeClicked);
-      buttons.children[1].addEventListener("click", dislikeClicked);
-      window.returnDislikeButtonlistenersSet = true;
-    }
+  if (!window.returnDislikeButtonlistenersSet) {
+    buttons.children[0].addEventListener("click", likeClicked);
+    buttons.children[1].addEventListener("click", dislikeClicked);
+    window.returnDislikeButtonlistenersSet = true;
+  }
 }
 
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
-    handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
+    handleDisableVoteSubmissionChangeEvent(
+      changes.disableVoteSubmission.newValue
+    );
   }
 }
 
