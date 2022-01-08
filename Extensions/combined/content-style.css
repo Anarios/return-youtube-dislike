@@ -1,3 +1,23 @@
+:root {
+  /* --yt-spec-icon-disabled: #f44 !important;
+  --yt-spec-text-primary: #4f4 !important; */
+  /* --yt-spec-general-background-a: #000 !important;
+  --yt-spec-general-background-b: #000 !important;
+  --yt-spec-general-background-c: #000 !important;
+  --yt-spec-brand-background-solid: #000 !important;
+  --yt-spec-brand-background-primary: #000 !important;
+  --yt-spec-brand-background-secondary: #000 !important; */
+}
+
+/* html:not(.style-scope)[dark], :not(.style-scope)[dark] {
+  --yt-spec-general-background-a: #000 !important;
+  --yt-spec-general-background-b: #000 !important;
+  --yt-spec-general-background-c: #000 !important;
+  --yt-spec-brand-background-solid: #000 !important;
+  --yt-spec-brand-background-primary: #000 !important;
+  --yt-spec-brand-background-secondary: #000 !important;
+} */
+
 #ryd-bar-container {
   background: var(--yt-spec-icon-disabled);
   border-radius: 2px;
