@@ -1,7 +1,7 @@
 {
   "name": "Return YouTube Dislike",
   "description": "Returns ability to see dislikes",
-  "version": "2.1.0.0",
+  "version": "2.1.0.2",
   "manifest_version": 2,
   "background": {
     "scripts": ["ryd.background.js"]
@@ -10,7 +10,7 @@
     "48": "icons/icon48.png",
    "128": "icons/icon128.png"
   },
-  "permissions": ["activeTab", "*://*.youtube.com/*", "storage"],
+  "permissions": ["activeTab", "*://*.youtube.com/*", "storage", "*://returnyoutubedislikeapi.com/*"],
   "browser_action": {
     "default_popup": "popup.html"
   },
@@ -23,7 +23,7 @@
       "js": ["bundled-content-script.js"]
     },
     {
-      "matches": ["*://*.returnyoutubedislike.com/debug","http://localhost/debug"],
+      "matches": ["*://*.returnyoutubedislike.com/debug"],
       "run_at": "document_idle",
       "js": ["debug.js"]
     }
