@@ -49,8 +49,8 @@ button:hover {
   bottom: 1.15rem;
   right: 1.15rem;
   background: var(--secondary);
-  border-radius: .25rem;
-  padding: .25rem .5rem;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
 }
 
 #advancedToggle {
@@ -58,7 +58,8 @@ button:hover {
   background: none;
   box-shadow: none;
   color: var(--lightGrey);
-  top: 26px; right: 26px;
+  top: 26px;
+  right: 26px;
   padding: 2px;
   z-index: 69;
   height: 2rem;
@@ -77,12 +78,13 @@ button:hover {
 #advancedSettings {
   opacity: 0;
   pointer-events: none;
-  transition-duration: .15s;
+  transition-duration: 0.15s;
   transition-timing-function: ease-in-out;
   transform: scale(1.1);
   position: fixed;
   background: var(--background);
-  top: 10px; right: 14px;
+  top: 10px;
+  right: 14px;
   width: calc(100% - 65px);
   height: calc(100% - 58px);
   border: 2px solid var(--secondary);
@@ -160,4 +162,10 @@ input:checked + .slider:before {
   width: 90px;
   /* filter: invert(21%) sepia(100%) saturate(3618%) hue-rotate(102deg)
     brightness(96%) contrast(108%); */
+}
+
+#tips {
+  border: 3px dashed var(--tertiary);
+  border-radius: 4px;
+  padding: 0.4rem;
 }

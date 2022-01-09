@@ -13,7 +13,13 @@ const config = {
     donate: "https://returnyoutubedislike.com/donate",
     faq: "https://returnyoutubedislike.com/faq",
   },
+  tips: [
+    'If you have stopped seeing the dislike count, try disabling and re-enabling the plugin.'
+  ]
 };
+
+/* Tips */
+renderTip();
 
 /*   Links   */
 document.getElementById("link_website").addEventListener("click", () => {
@@ -113,6 +119,12 @@ function handleDisableVoteSubmissionChangeEvent(value) {
       "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
   }
 })();
+
+
+function renderTip(){
+  document.getElementById('tips').innerText = config.tips[Math.floor(Math.random()*config.tips.length)];
+  
+}
 
 /* popup-script.js
 document.querySelector('#login')
