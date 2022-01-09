@@ -1,7 +1,7 @@
 {
   "name": "Return YouTube Dislike",
   "description": "Returns ability to see dislikes",
-  "version": "2.1.0.0",
+  "version": "2.1.0.2",
   "manifest_version": 3,
   "background": {
     "service_worker": "ryd.background.js"
@@ -29,7 +29,7 @@
       "css": ["content-style.css"]
     },
     {
-      "matches": ["*://*.returnyoutubedislike.com/debug","http://localhost/debug"],
+      "matches": ["*://*.returnyoutubedislike.com/debug"],
       "js": ["debug.js"]
     }
   ],
