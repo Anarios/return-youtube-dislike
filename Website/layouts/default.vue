@@ -40,13 +40,7 @@
       <span class="my-auto" v-html="alert.html"></span>
 
       <template #action="{ attrs }">
-        <v-btn
-          v-bind="attrs"
-          color="primary"
-          text
-          icon
-          @click="alert.show = false"
-        >
+        <v-btn v-bind="attrs" color="primary" text icon @click="alert.show = false">
           <v-icon>mdi-close-circle-outline</v-icon>
         </v-btn>
       </template>
@@ -119,7 +113,6 @@ body {
   background: #111; /* for MacOS/iOS overscroll */
   height: -webkit-fill-available;
   background: #111;
-  overflow: auto;
 }
 
 ::selection {
@@ -178,9 +171,7 @@ body {
     font-size: 2rem;
   }
   .topBar {
-    width: calc(
-      100vw - 2rem
-    ) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
+    width: calc(100vw - 2rem) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
     padding: 0;
   }
 }
