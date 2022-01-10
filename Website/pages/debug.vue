@@ -122,13 +122,6 @@
   </div>
 </template>
 
-<style scoped>
-.reportHeader {
-  display: flex;
-  margin-top: 1em;
-}
-</style>
-
 <script>
 export default {
   data() {
@@ -250,3 +243,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.reportHeader {
+  display: flex;
+  margin-top: 1em;
+}
+</style>
