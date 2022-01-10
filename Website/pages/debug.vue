@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div id="extension-version" />
 
     <v-stepper :value="progress" class="mt-12" outlined max-width="800px">
       <v-stepper-header>
@@ -130,12 +129,14 @@
     },
 
     mounted() {
+      const vm = this;
+
       //---   Wait   ---//
       setTimeout(() => {
 
         this.$axios.$get('https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json')
         .then(res => {
-          console.log(res)
+          this.userInformation.extension.latestExtensionVersion = res.version;
         })
 
 
