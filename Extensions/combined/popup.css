@@ -68,15 +68,13 @@ button:hover {
   border-radius: .25rem;
 }
 
-.switch::before {
+.switch:before {
   content: attr(data-hover);
   visibility: hidden;
-  opacity: 0;
   width: 250px;
   background-color: var(--secondary);
   border-radius: .5rem;
-  padding: .25rem .5rem;
-  transition: opacity .2 ease-in-out;
+  padding: .5rem;
 
   position: absolute;
   z-index: 1;
@@ -84,8 +82,7 @@ button:hover {
   top: 160%;
 }
 
-.switch:hover::before {
-  opacity: 1;
+.switch:hover:before {
   visibility: visible;
 }
 
