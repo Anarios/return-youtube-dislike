@@ -163,9 +163,3 @@ input:checked + .slider:before {
   /* filter: invert(21%) sepia(100%) saturate(3618%) hue-rotate(102deg)
     brightness(96%) contrast(108%); */
 }
-
-#tips {
-  border: 3px dashed var(--tertiary);
-  border-radius: 4px;
-  padding: 0.4rem;
-}
