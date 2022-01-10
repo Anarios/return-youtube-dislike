@@ -65,16 +65,19 @@
     </button>
 
     <!-- bottom-right -->
-    <p id="ext-version"></p>
+    <div id="ext">
+      <a href="https://returnyoutubedislike.com/install" target="_blank" id="ext-update"></a>
+      <span id="ext-version"></span>
+    </div>
 
     <!-- dialog box -->
     <fieldset id="advancedSettings">
       <legend id="advancedLegend">Settings</legend>
 
-      <label class="switch">
+      <label class="switch" data-hover="Stops counting your likes and dislikes.">
         <input type="checkbox" id="disable_vote_submission" />
         <span class="slider" />
-        <span class="switchLabel">Disable like/dislike submission</span>
+        <span class="switchLabel">Disable vote submission</span>
       </label>
       <!-- <br />
       <label class="switch">
