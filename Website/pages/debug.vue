@@ -58,9 +58,8 @@
           <v-divider style="transform: translateY(1.5em)" />
         </div>
         <v-alert dense outlined v-text="notices.extension.text" :type="notices.extension.type" />
-        <span><b>RUNNING-</b> {{ userInformation.extension.running ? "Yes" : "Failed to connect"}}</span><br>
-        <span><b>VERSION-</b> {{ userInformation.extension.version || "Failed to connect"}} </span><br>
-        <span><b>SERVER CONNECTION-</b>{{ userInformation.extension.serverConnection ? "Working" : "Failed to connect" }}</span><br>
+        <span><b>LATEST EXTENSION VERSION-</b> {{ userInformation.extension.latestExtensionVersion || "Failed to lookup data" }}</span><br>
+        <span><b>SERVER CONNECTION-</b> {{ userInformation.extension.serverConnection ? "Working" : "Failed to connect" }}</span><br>
       </v-stepper-content>
 
     </v-stepper>
@@ -103,8 +102,6 @@
             type: this.$ua._parsed.category
           },
           extension: {
-            running: null,
-            version: null,
             serverConnection: null,
             latestExtensionVersion: null,
           },
@@ -129,9 +126,7 @@
     },
 
     mounted() {
-      const vm = this;
-
-      //---   Wait   ---//
+      //---   Init Stuff   ---//
       setTimeout(() => {
 
         this.$axios.$get('https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json')
@@ -174,13 +169,8 @@
 
 
         //---   Parse Extension Data   ---//
-        this.notices.extension.text = `Everything is running normally!`;
-        this.notices.extension.type = "success";
-
-        if (this.userInformation.extension.running != true) {
-          this.notices.extension.text = `The extension doesn't appear to be running!`;
-          this.notices.extension.type = "error";
-        }
+        this.notices.extension.text = `We are unable to automatically check that your extension is up to date. Please check that the number below matches your extension version.`;
+        this.notices.extension.type = "warning";
 
         if (this.userInformation.extension.serverConnection != true) {
           this.notices.extension.text = `Failed to connect to the server!`;
