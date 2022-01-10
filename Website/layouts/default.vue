@@ -110,9 +110,9 @@ export default {
 html,
 body {
   height: 100%;
-  background: #111; /* for MacOS/iOS overscroll */
-  height: -webkit-fill-available;
   background: #111;
+  height: -webkit-fill-available; /* for MacOS/iOS overscroll */
+  scrollbar-color: #424242 #111;
 }
 
 ::selection {
@@ -130,14 +130,18 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: #333; /* color of the scroll thumb */
-  border-radius: 20px; /* roundness of the scroll thumb */
-  border: 4px solid #111; /* creates padding around scroll thumb */
+  border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
+  border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-top: 0.25rem solid #111; /* creates padding around scroll thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #f22; /* color of the scroll thumb */
-  border-radius: 20px; /* roundness of the scroll thumb */
-  border: 4px solid #111; /* creates padding around scroll thumb */
+  border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
+  border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-top: 0.25rem solid #111; /* creates padding around scroll thumb */
 }
 
 .debug {
@@ -156,9 +160,11 @@ body {
 .topBar {
   padding: 0 3rem;
   width: fit-content !important;
-  background-color: #222 !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(42, 42, 42, 0.75) !important;
   border-radius: 1rem !important;
-  border-radius: 0.75rem;
+  /* border: 1px solid #222; */
   overflow: hidden;
 }
 .title-text {
@@ -187,7 +193,7 @@ body {
 .swoop-right-leave-active {
   transition-duration: 0.1s;
   transition-property: opacity, transform;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .swoop-left-enter,
