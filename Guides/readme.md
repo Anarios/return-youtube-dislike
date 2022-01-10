@@ -22,7 +22,7 @@
 ## FAQs
 
 - [General](https://github.com/Anarios/return-youtube-dislike/blob/main/FAQ.md)
-- [Security](FAQ_Privacy.mdhttps://github.com/Anarios/return-youtube-dislike/blob/main/SECURITY-FAQ.md)
+- [Security](https://github.com/Anarios/return-youtube-dislike/blob/main/SECURITY-FAQ.md)
 
 <!-- - [Privacy](FAQ_Privacy.md)
 - [Technical](FAQ_Technical.md)
