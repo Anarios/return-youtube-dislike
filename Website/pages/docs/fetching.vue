@@ -59,13 +59,6 @@
   </div>
 </template>
 
-<style scoped>
-.code {
-  background: #353535;
-  border-radius: 0.25rem;
-}
-</style>
-
 <script>
 export default {
   data() {
@@ -75,3 +68,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.code {
+  background: #353535;
+  border-radius: 0.25rem;
+}
+</style>
