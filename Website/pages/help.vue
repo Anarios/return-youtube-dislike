@@ -17,6 +17,10 @@
         browser (all active windows, not just one tab).
       </li>
       <li>
+        On Google Chrome, try checking the menu (three-dotted icon) to see
+        if the extension was disabled due to permission changes. If so, click
+        the prompt to re-activate the extension.
+      <li>
         Make sure that this link opens:
         <a
           class="px-2 py-1"
