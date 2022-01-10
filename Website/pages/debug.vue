@@ -78,7 +78,7 @@
   export default {
     data() {
       return {
-        stepTime: 1000,
+        stepTime: 2500,
         supportedBrowsers: ["Firefox", "Chrome", "Brave", "Edge", "Opera"],
 
         progress: 1,
