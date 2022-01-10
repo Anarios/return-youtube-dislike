@@ -45,7 +45,7 @@
       &nbsp;"deleted": false<br />
       }
     </div>
-    <br /><br />
+    <br />
     <v-alert border="left" color="orange" text type="info">
       <span>An invalid YouTube ID will return status code 404 "Not Found".</span
       ><br />
@@ -73,7 +73,7 @@ export default {
 .code {
   color: #aaa;
   background: #353535;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   font-family: monospace;
 }
 </style>

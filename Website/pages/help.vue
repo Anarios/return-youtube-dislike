@@ -1,8 +1,5 @@
 <template>
-  <div
-    style="width: 80vw"
-    class="col-xs-12 col-sm-11 col-md-9 col-lg-7 mx-auto"
-  >
+  <div style="width: 80vw" class="col-xs-12 col-sm-11 col-md-9 col-lg-7 mx-auto">
     <h1 class="title-text pt-12">Troubleshooting</h1>
     <ol style="line-height: 3rem; color: #aaa" class="text-left">
       <li>
@@ -13,8 +10,8 @@
         right now
       </li>
       <li>
-        Try removing extension and installing it again, then restarting the
-        browser (all active windows, not just one tab).
+        Try removing extension and installing it again, then restarting the browser (all
+        active windows, not just one tab).
       </li>
       <li>
         Make sure that this link opens:
@@ -28,9 +25,8 @@
         , <br />
         you should see plain text: <br />
         <span style="color: #eee">
-          {"id":"QOFEgexls14", "dateCreated":"2021-12-15T16:54:12.250813Z",
-          "likes":2907, "dislikes":215, "rating":4.725641025641026,
-          "viewCount":28222, "deleted":false}
+          {"id":"QOFEgexls14", "dateCreated":"2021-12-15T16:54:12.250813Z", "likes":2907,
+          "dislikes":215, "rating":4.725641025641026, "viewCount":28222, "deleted":false}
         </span>
       </li>
       <li>
@@ -71,13 +67,14 @@
                 >mdi-content-copy</v-icon
               >
               <span style="color: #f44"> Detected: </span>
-              &nbsp;{{ platform }}
+              &nbsp;
+              {{ platform }}
             </v-btn>
           </li>
 
           <li style="position: relative; width: 100%">
-            Take screenshot of page with problem (i.e. youtube video page) with
-            console open (press <code>F12</code>) - example screenshot below.
+            Take screenshot of page with problem (i.e. youtube video page) with console
+            open (press <code>F12</code>) - example screenshot below.
             <img
               width="100%"
               style="border-radius: 1rem; border: 2px solid #333"
@@ -87,15 +84,13 @@
           </li>
 
           <li>
-            Take screenshot of extensions page of your browser with extension
-            installed.
+            Take screenshot of extensions page of your browser with extension installed.
             <br />
             To see extensions put this into adress bar:
             <br />
             <code>about:addons</code> for Firefox
             <br />
-            <code>chrome://extensions</code> for Chrome, Edge, Brave, Opera,
-            Vivaldi
+            <code>chrome://extensions</code> for Chrome, Edge, Brave, Opera, Vivaldi
           </li>
         </ol>
       </li>
@@ -114,11 +109,20 @@ export default {
       ? "swoop-left"
       : "swoop-right";
   },
-  data: () => ({
-    version: "loading",
-    platform: "Unknown platform",
-    discordLink: "https://discord.gg/mYnESY4Md5",
-  }),
+  data() {
+    return {
+      platform:
+        this.$ua._parsed.os +
+        " " +
+        this.$ua._parsed.os_version +
+        ", " +
+        this.$ua._parsed.name +
+        " " +
+        this.$ua._parsed.version,
+      version: "loading",
+      discordLink: "https://discord.gg/mYnESY4Md5",
+    };
+  },
   mounted() {
     fetch(
       "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
@@ -128,45 +132,10 @@ export default {
         this.version = json.version;
       });
     // .catch(console.error);
-
-    // This script sets OSName variable as follows:
-    // "Windows"    for all versions of Windows
-    // "MacOS"      for all versions of Macintosh OS
-    // "Linux"      for all versions of Linux
-    // "UNIX"       for all other UNIX flavors
-    // "Unknown OS" indicates failure to detect the OS
-
-    var OSName = "Unknown OS";
-    if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
-    if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
-    if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
-    if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
-
-    // browser parcer
-    navigator.sayswho = (function () {
-      var ua = navigator.userAgent;
-      var tem;
-      var M =
-        ua.match(
-          /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
-        ) || [];
-      if (/trident/i.test(M[1])) {
-        tem = /\brv[ :]+(\d+)/g.exec(ua) || [];
-        return "IE " + (tem[1] || "");
-      }
-      if (M[1] === "Chrome") {
-        tem = ua.match(/\b(OPR|Edge)\/(\d+)/);
-        if (tem != null) return tem.slice(1).join(" ").replace("OPR", "Opera");
-      }
-      M = M[2] ? [M[1], M[2]] : [navigator.appName, navigator.appVersion, "-?"];
-      if ((tem = ua.match(/version\/(\d+)/i)) != null) M.splice(1, 1, tem[1]);
-      return M.join(" ");
-    })();
-    this.platform = OSName + ", " + navigator.sayswho;
   },
   methods: {
     copyToClipboard(text) {
-      navigator.clipboard.writeText(text);
+      navigator.clipboard.writeText("```" + text + "```");
     },
   },
 };
