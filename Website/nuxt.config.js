@@ -31,14 +31,14 @@ export default {
     apiUrl: "https://returnyoutubedislikeapi.com",
   },
 
-  server: { host: '0.0.0.0', port: 80 }, //LINE FOR DEBUGGING ONLY
+  server: { host: "0.0.0.0", port: 80 }, //LINE FOR DEBUGGING ONLY
 
   target: "static",
   css: [],
   plugins: [],
   components: true,
   buildModules: ["@nuxtjs/vuetify"],
-  modules: ['@nuxtjs/axios','nuxt-user-agent'],
+  modules: ["@nuxtjs/axios", "nuxt-user-agent"],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
