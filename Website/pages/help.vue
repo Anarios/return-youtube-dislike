@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div
+    style="width: 80vw"
+    class="col-xs-12 col-sm-11 col-md-9 col-lg-7 mx-auto"
+  >
     <h1 class="title-text pt-12">Troubleshooting</h1>
-    <ol
-      class="col-xs-12 col-sm-11 col-md-9 col-lg-7 q-mx-auto text-left"
-      style="line-height: 3rem; color: #aaa"
-    >
+    <ol style="line-height: 3rem; color: #aaa" class="text-left">
       <li>
         Make sure you have latest version of extension installed,
         <code style="color: #eee">
@@ -88,7 +88,8 @@
 
           <li>
             Take screenshot of extensions page of your browser with extension
-            installed. <br />
+            installed.
+            <br />
             To see extensions put this into adress bar:
             <br />
             <code>about:addons</code> for Firefox
@@ -114,7 +115,7 @@ export default {
       : "swoop-right";
   },
   data: () => ({
-    version: "2.0.0.3",
+    version: "loading",
     platform: "Unknown platform",
     discordLink: "https://discord.gg/mYnESY4Md5",
   }),

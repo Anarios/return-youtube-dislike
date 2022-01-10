@@ -1,5 +1,5 @@
 <template>
-  <div class="row wrap justify-center full-width" style="max-width: 100%">
+  <div class="row wrap justify-center full-width mx-auto" style="width: 80vw">
     <!--   Left Section // "Sections" Card   -->
     <v-card
       class="col-xs-12 mx-2 elevation-0"
@@ -8,6 +8,7 @@
         height: max-content;
         position: sticky;
         top: 5.5rem;
+        max-width: 500px;
       "
     >
       <!-- <v-card-title style="padding-bottom: 0 !important; color: #aaa">
@@ -24,12 +25,12 @@
           color="primary"
           style="overflow: hidden; border-radius: 0.75rem"
         >
+          <v-list-item-title style="text-align: right">
+            <v-list-item-title v-text="item.text" />
+          </v-list-item-title>
           <v-list-item-icon>
             <v-icon v-text="item.icon" />
           </v-list-item-icon>
-          <v-list-item-title style="text-align: left">
-            <v-list-item-title v-text="item.text" />
-          </v-list-item-title>
         </v-list-item>
       </v-list>
     </v-card>
@@ -41,7 +42,7 @@
         height: max-content;
         background-color: #222;
         border-radius: 0.75rem;
-        max-width: 90%;
+        width: 90%;
       "
     >
       <NuxtChild />

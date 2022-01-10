@@ -73,7 +73,7 @@ export default {
   }),
   mounted() {
     setTimeout(() => {
-      // check if browser version out of date
+      // Chrome < 70
       if (
         window.navigator.userAgent.indexOf("Chrome") > -1 &&
         window.navigator.userAgent.indexOf("Edge") === -1
@@ -85,6 +85,8 @@ export default {
           this.alert.show = true;
         }
       }
+
+      // FF < 60
       if (window.navigator.userAgent.indexOf("Firefox") > -1) {
         let firefox = window.navigator.userAgent.match(/Firefox\/(\d+)/);
         let firefoxVersion = firefox ? firefox[1] : 0;
@@ -93,9 +95,16 @@ export default {
           this.alert.show = true;
         }
       }
-      // check for IE browser
+
+      // IE
       if (window.navigator.userAgent.indexOf("MSIE") > -1) {
         this.alert.html = `Looks like you're using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Internet Explorer</b>. Stop it, get some help.`;
+        this.alert.show = true;
+      }
+
+      // Win7
+      if (window.navigator.userAgent.indexOf("Windows NT 6.1") > -1) {
+        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Windows 7</b> is not supported. Update Windows, or install Linux :)`;
         this.alert.show = true;
       }
     }, 1000);
@@ -162,6 +171,7 @@ body {
 .title-text {
   font-size: 3rem;
 }
+
 @media (max-width: 768px) {
   /* mobile */
   .title-text {

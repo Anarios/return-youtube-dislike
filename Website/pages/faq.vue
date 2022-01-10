@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="width: 90vw" class="mx-auto">
     <h1 class="title-text">Frequently Asked Questions</h1>
     <p style="color: #999; margin-top: 0.5rem; margin-bottom: 1.5rem">
       Still have questions? Feel free to join our Discord!
     </p>
 
-    <v-expansion-panels class="col-xs-12 col-sm-11 col-md-9 col-lg-7">
+    <v-expansion-panels class="col-xs-12 col-sm-11 col-md-9 col-lg-8">
       <v-expansion-panel v-for="(item, i) in items" :key="i">
         <v-expansion-panel-header>
           {{ item.question }}
@@ -49,8 +49,7 @@ export default {
           "The extension collects the video ID of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you like or dislike a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
       },
       {
-
-        question:"Can I share my dislike count with you?",
+        question: "Can I share my dislike count with you?",
 
         answer:
           "Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability. ",
