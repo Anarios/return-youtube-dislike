@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div id="extension-version" />
+
     <v-stepper :value="progress" class="mt-12" outlined max-width="800px">
       <v-stepper-header>
         <v-stepper-step step="1" :complete="steps.one">Setup</v-stepper-step>
