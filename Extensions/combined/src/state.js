@@ -13,6 +13,8 @@ const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
 
 let extConfig = {
   disableVoteSubmission: false,
+  numberDisplayFormat: 'compactShort',
+  numberDisplayRoundDown: true,
 };
 
 let storedData = {
@@ -142,6 +144,8 @@ function setInitialState() {
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeNumberDisplayFormat();
+  initializeNumberDisplayRoundDown();
 }
 
 function initializeDisableVoteSubmission() {
@@ -150,6 +154,27 @@ function initializeDisableVoteSubmission() {
       getBrowser().storage.sync.set({ disableVoteSubmission: false });
     } else {
       extConfig.disableVoteSubmission = res.disableVoteSubmission;
+    }
+  });
+}
+
+function initializeNumberDisplayRoundDown() {
+  getBrowser().storage.sync.get(["numberDisplayRoundDown"], (res) => {
+    if (res.numberDisplayRoundDown === undefined) {
+      getBrowser().storage.sync.set({ numberDisplayRoundDown: true });
+    } else {
+      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
+    }
+  });
+}
+
+function initializeNumberDisplayFormat() {
+  getBrowser().storage.sync.get(['numberDisplayFormat'], (res) => {
+    if (res.numberDisplayFormat === undefined) {
+      getBrowser().storage.sync.set({ numberDisplayFormat: 'compactShort' });
+    }
+    else {
+      extConfig.numberDisplayFormat = res.numberDisplayFormat;
     }
   });
 }

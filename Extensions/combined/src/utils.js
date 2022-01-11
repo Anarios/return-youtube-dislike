@@ -1,3 +1,7 @@
+import {
+  extConfig,
+} from "./state";
+
 function roundDown(num) {
   if (num < 1000) return num;
   const int = Math.floor(Math.log10(num) - 2);
@@ -15,14 +19,43 @@ function numberFormat(numberState) {
         ?.getAttribute("href")
     )?.searchParams?.get("locale");
   } catch {}
+  
+  let numberDisplay;
+  if (extConfig.numberDisplayRoundDown === false) {
+    numberDisplay = numberState;
+  } else {
+    numberDisplay = roundDown(numberState);
+  }
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(numberDisplay);
+}
+
+function getNumberFormatter(optionSelect) {
+  let formatterNotation;
+  let formatterCompactDisplay;
+  
+  switch(optionSelect) {
+    case 'compactLong':
+      formatterNotation = 'compact';
+      formatterCompactDisplay = 'long';
+      break;
+    case 'standard': 
+      formatterNotation = 'standard';
+      formatterCompactDisplay = 'short';
+      break;
+    case 'compactShort':
+    default:
+      formatterNotation = 'compact';
+      formatterCompactDisplay = 'short';
+  }
+  
   const formatter = Intl.NumberFormat(
     document.documentElement.lang || userLocales || navigator.language,
     {
-      notation: "compact",
+      notation: formatterNotation,
+      compactDisplay: formatterCompactDisplay,
     }
   );
-
-  return formatter.format(roundDown(numberState));
+  return formatter;
 }
 
 function getBrowser() {

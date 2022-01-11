@@ -5,10 +5,12 @@ let api;
 
 /** stores extension's global config */
 let extConfig = {
-  disableVoteSubmission: false
+  disableVoteSubmission: false,
   // coloredThumbs: false,
   // coloredBar: false,
-}
+  numberDisplayFormat: 'compactShort', // compactShort, compactLong, standard
+  numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
+};
 
 if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
@@ -235,6 +237,14 @@ function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }
+  if (changes.numberDisplayRoundDown !== undefined) {
+    handleNumberDisplayRoundDownChangeEvent(
+      changes.numberDisplayRoundDown.newValue
+      );
+  }
+  if (changes.numberDisplayFormat !== undefined) {
+    handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -244,6 +254,14 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   } else {
     changeIcon(defaultIconName);
   }
+}
+
+function handleNumberDisplayFormatChangeEvent(value) {
+  extConfig.numberDisplayFormat = value;
+}
+
+function handleNumberDisplayRoundDownChangeEvent(value) {
+  extConfig.numberDisplayRoundDown = value;
 }
 
 function changeIcon(iconName) {
@@ -256,6 +274,8 @@ api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeNumberDisplayFormat();
+  initializeNumberDisplayRoundDown();
 }
 
 function initializeDisableVoteSubmission() {
@@ -266,6 +286,26 @@ function initializeDisableVoteSubmission() {
     else {
       extConfig.disableVoteSubmission = res.disableVoteSubmission;
       if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
+    }
+  });
+}
+
+function initializeNumberDisplayRoundDown() {
+  api.storage.sync.get(['numberDisplayRoundDown'], (res) => {
+    if (res.numberDisplayRoundDown === undefined) {
+      api.storage.sync.set({numberDisplayRoundDown: true});
+    } else {
+      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
+    }
+  });
+}
+
+function initializeNumberDisplayFormat() {
+  api.storage.sync.get(['numberDisplayFormat'], (res) => {
+    if (res.numberDisplayFormat === undefined) {
+      api.storage.sync.set({ numberDisplayFormat: 'compactShort' });
+    } else {
+      extConfig.numberDisplayFormat = res.numberDisplayFormat;
     }
   });
 }

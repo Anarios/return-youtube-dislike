@@ -110,10 +110,26 @@ function storageChangeHandler(changes, area) {
       changes.disableVoteSubmission.newValue
     );
   }
+  if (changes.numberDisplayRoundDown !== undefined) {
+    handleNumberDisplayRoundDownChangeEvent(
+      changes.numberDisplayRoundDown.newValue
+    );
+  }
+  if (changes.numberDisplayFormat !== undefined) {
+    handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
   extConfig.disableVoteSubmission = value;
+}
+
+function handleNumberDisplayFormatChangeEvent(value) {
+  extConfig.numberDisplayFormat = value;
+}
+
+function handleNumberDisplayRoundDownChangeEvent(value) {
+  extConfig.numberDisplayRoundDown = value;
 }
 
 export {
