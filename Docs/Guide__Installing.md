@@ -35,7 +35,6 @@
         - [Firefox Based Browsers](#firefox-based-browsers-2)
       - [Mobile](#mobile-2)
         - [Firefox Based Browsers](#firefox-based-browsers-3)
-        - [Android - F-Droid Store](#android---f-droid-store)
         - [Chromium Based Browsers](#chromium-based-browsers-3)
 
 <br>
@@ -72,14 +71,20 @@ It should be able to work on [all Chromium-based browsers (list here)][4]. But t
 
 #### Android
 
-1. apk app file
+1. **F-Droid Store**
 
-    You can download the apk file from
-    [https://github.com/jesperbakhandskemager/view-youtube-dislike/releases/](https://github.com/jesperbakhandskemager/view-youtube-dislike/releases/)
+- [Show Youtube Dislikes](https://f-droid.org/en/packages/com.jesperh.showyoutubedislikes/)
+  
+  [Download from here (Click here)](https://f-droid.org/en/packages/com.jesperh.showyoutubedislikes/)
 
-    **Note: This app is NOT made by the original author of the extension**.
+  The source code is available at [github.com/jesperbakhandskemager/view-youtube-dislike](https://github.com/jesperbakhandskemager/view-youtube-dislike)
 
-2. [Firefox Nightly][2]
+  You can download the apk file from
+  [https://github.com/jesperbakhandskemager/view-youtube-dislike/releases/](https://github.com/jesperbakhandskemager/view-youtube-dislike/releases/)
+
+  **Note: This app is NOT made by the original author of the extension**.
+
+2. [**Firefox Nightly**][2]
 
 - This addon should be able to run on most of the [Firefox-based browsers][5]. But isn't guaranteed.
 
@@ -281,18 +286,6 @@ You can also refer here (for pictures):
 7. You will see an option as `Install`. Tap on it.
 8. Tap - `Add` when asked `Add to Home screen?`
 9. Enjoy the YT site as a Firefox nightly app !!
-
-<br>
-
-##### Android - F-Droid Store
-
-- [Show Youtube Dislikes](https://f-droid.org/en/packages/com.jesperh.showyoutubedislikes/)
-
-  This is a community-made app and isn't related to the owner of [Return YouTube Dislike Extension](https://github.com/Anarios/return-youtube-dislike).
-  
-  [Download from here (Click here)](https://f-droid.org/en/packages/com.jesperh.showyoutubedislikes/)
-
-  The source code is available at [github.com/jesperbakhandskemager/view-youtube-dislike](https://github.com/jesperbakhandskemager/view-youtube-dislike)
 
 <br>
 
