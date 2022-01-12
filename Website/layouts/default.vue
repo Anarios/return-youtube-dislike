@@ -75,7 +75,7 @@ export default {
         let chrome = window.navigator.userAgent.match(/Chrome\/(\d+)/);
         let chromeVersion = chrome ? chrome[1] : 0;
         if (chromeVersion < 70) {
-          this.alert.html = `You are using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b>. Please update to the latest version.`;
+          this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b> is not supported. Consider updating to the latest version.`;
           this.alert.show = true;
         }
       }
@@ -85,7 +85,7 @@ export default {
         let firefox = window.navigator.userAgent.match(/Firefox\/(\d+)/);
         let firefoxVersion = firefox ? firefox[1] : 0;
         if (firefoxVersion < 60) {
-          this.alert.html = `You are using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b>. Please update to the latest version.`;
+          this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b> is not supported. Consider updating to the latest version.`;
           this.alert.show = true;
         }
       }
@@ -98,7 +98,7 @@ export default {
 
       // Win7
       if (window.navigator.userAgent.indexOf("Windows NT 6.1") > -1) {
-        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Windows 7</b> is not supported. Update Windows, or install Linux :)`;
+        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Windows 7</b> is not supported. Consider upgrading Windows, or installing Linux.`;
         this.alert.show = true;
       }
     }, 1000);
@@ -177,7 +177,9 @@ body {
     font-size: 2rem;
   }
   .topBar {
-    width: calc(100vw - 2rem) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
+    width: calc(
+      100vw - 2rem
+    ) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
     padding: 0;
   }
 }

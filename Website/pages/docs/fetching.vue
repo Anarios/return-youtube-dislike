@@ -3,9 +3,7 @@
     <h1 class="primary--text">Basic Fetching Tutorial</h1>
 
     <span>Example to get votes of a given YouTube video ID:</span>
-    <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank"
-      >kxOuG8jMIgI</a
-    >
+    <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank">kxOuG8jMIgI</a>
 
     <h2>Example Request:</h2>
     <span>Request URL:</span>
@@ -47,12 +45,8 @@
     </div>
     <br />
     <v-alert border="left" color="orange" text type="info">
-      <span>An invalid YouTube ID will return status code 404 "Not Found".</span
-      ><br />
-      <span
-        >An incorrectly formatted YouTube ID will return 400 "Bad
-        Request".</span
-      >
+      <span>An invalid YouTube ID will return status code 404 "Not Found".</span><br />
+      <span>An incorrectly formatted YouTube ID will return 400 "Bad Request".</span>
     </v-alert>
 
     <a :href="endpointUrl" target="_blank" v-text="endpointUrl" />
@@ -75,5 +69,6 @@ export default {
   background: #353535;
   border-radius: 0.5rem;
   font-family: monospace;
+  line-height: 2rem;
 }
 </style>
