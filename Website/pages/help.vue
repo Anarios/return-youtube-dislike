@@ -89,9 +89,8 @@
 
           <li>
             Take screenshot of extensions page of your browser with extension
-            installed.
-            <br />
-            To see extensions put this into adress bar:
+            installed. <br />
+            To see extensions put this into address bar:
             <br />
             <code>about:addons</code> for Firefox
             <br />

@@ -91,7 +91,8 @@ button:hover {
   background: none;
   box-shadow: none;
   color: var(--lightGrey);
-  top: 26px; right: 26px;
+  top: 26px;
+  right: 26px;
   padding: 2px;
   z-index: 69;
   height: 2rem;
@@ -110,12 +111,13 @@ button:hover {
 #advancedSettings {
   opacity: 0;
   pointer-events: none;
-  transition-duration: .15s;
+  transition-duration: 0.15s;
   transition-timing-function: ease-in-out;
   transform: scale(1.1);
   position: fixed;
   background: var(--background);
-  top: 10px; right: 14px;
+  top: 10px;
+  right: 14px;
   width: calc(100% - 65px);
   height: calc(100% - 58px);
   border: 2px solid var(--secondary);
