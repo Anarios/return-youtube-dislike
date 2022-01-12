@@ -40,7 +40,13 @@
       <span class="my-auto" v-html="alert.html"></span>
 
       <template #action="{ attrs }">
-        <v-btn v-bind="attrs" color="primary" text icon @click="alert.show = false">
+        <v-btn
+          v-bind="attrs"
+          color="primary"
+          text
+          icon
+          @click="alert.show = false"
+        >
           <v-icon>mdi-close-circle-outline</v-icon>
         </v-btn>
       </template>
@@ -67,38 +73,22 @@ export default {
   }),
   mounted() {
     setTimeout(() => {
-      // Chrome < 70
+      // Chrome < 70 or FF < 60
       if (
-        window.navigator.userAgent.indexOf("Chrome") > -1 &&
-        window.navigator.userAgent.indexOf("Edge") === -1
+        (this.$ua._parsed.name == "Chrome" &&
+          parseInt(this.$ua._parsed.version.slice(0, 2)) < 70) ||
+        (this.$ua._parsed.name == "Firefox" &&
+          parseInt(this.$ua._parsed.version.slice(0, 2)) < 60)
       ) {
-        let chrome = window.navigator.userAgent.match(/Chrome\/(\d+)/);
-        let chromeVersion = chrome ? chrome[1] : 0;
-        if (chromeVersion < 70) {
-          this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b> is not supported. Consider updating to the latest version.`;
-          this.alert.show = true;
-        }
-      }
-
-      // FF < 60
-      if (window.navigator.userAgent.indexOf("Firefox") > -1) {
-        let firefox = window.navigator.userAgent.match(/Firefox\/(\d+)/);
-        let firefoxVersion = firefox ? firefox[1] : 0;
-        if (firefoxVersion < 60) {
-          this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b> is not supported. Consider updating to the latest version.`;
-          this.alert.show = true;
-        }
-      }
-
-      // IE
-      if (window.navigator.userAgent.indexOf("MSIE") > -1) {
-        this.alert.html = `Looks like you're using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Internet Explorer</b>. Stop it, get some help.`;
+        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .25rem .25rem .5rem; margin: 0 .25rem;">
+        ${this.$ua._parsed.name} ${this.$ua._parsed.version.slice(0, 2)}
+        </b> is not supported. Consider upgrading to the latest version.`;
         this.alert.show = true;
       }
 
       // Win7
       if (window.navigator.userAgent.indexOf("Windows NT 6.1") > -1) {
-        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Windows 7</b> is not supported. Consider upgrading Windows, or installing Linux.`;
+        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem; margin: 0 .25rem;">Windows 7</b> is not supported. Consider upgrading Windows, or installing Linux.`;
         this.alert.show = true;
       }
     }, 1000);

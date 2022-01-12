@@ -1,5 +1,8 @@
 <template>
-  <div style="width: 80vw" class="col-xs-12 col-sm-11 col-md-9 col-lg-7 mx-auto">
+  <div
+    style="width: 80vw"
+    class="col-xs-12 col-sm-11 col-md-9 col-lg-7 mx-auto"
+  >
     <h1 class="title-text pt-12">Troubleshooting</h1>
     <ol style="line-height: 3rem; color: #aaa" class="text-left">
       <li>
@@ -10,8 +13,8 @@
         right now
       </li>
       <li>
-        Try removing extension and installing it again, then restarting the browser (all
-        active windows, not just one tab).
+        Try removing extension and installing it again, then restarting the
+        browser (all active windows, not just one tab).
       </li>
       <li>
         Make sure that this link opens:
@@ -25,8 +28,9 @@
         , <br />
         you should see plain text: <br />
         <span style="color: #eee">
-          {"id":"QOFEgexls14", "dateCreated":"2021-12-15T16:54:12.250813Z", "likes":2907,
-          "dislikes":215, "rating":4.725641025641026, "viewCount":28222, "deleted":false}
+          {"id":"QOFEgexls14", "dateCreated":"2021-12-15T16:54:12.250813Z",
+          "likes":2907, "dislikes":215, "rating":4.725641025641026,
+          "viewCount":28222, "deleted":false}
         </span>
       </li>
       <li>
@@ -73,8 +77,8 @@
           </li>
 
           <li style="position: relative; width: 100%">
-            Take screenshot of page with problem (i.e. youtube video page) with console
-            open (press <code>F12</code>) - example screenshot below.
+            Take screenshot of page with problem (i.e. youtube video page) with
+            console open (press <code>F12</code>) - example screenshot below.
             <img
               width="100%"
               style="border-radius: 1rem; border: 2px solid #333"
@@ -84,13 +88,15 @@
           </li>
 
           <li>
-            Take screenshot of extensions page of your browser with extension installed.
+            Take screenshot of extensions page of your browser with extension
+            installed.
             <br />
             To see extensions put this into adress bar:
             <br />
             <code>about:addons</code> for Firefox
             <br />
-            <code>chrome://extensions</code> for Chrome, Edge, Brave, Opera, Vivaldi
+            <code>chrome://extensions</code> for Chrome, Edge, Brave, Opera,
+            Vivaldi
           </li>
         </ol>
       </li>
