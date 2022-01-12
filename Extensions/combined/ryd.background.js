@@ -5,9 +5,10 @@ let api;
 
 /** stores extension's global config */
 let extConfig = {
-  disableVoteSubmission: false
-  // coloredThumbs: false,
-  // coloredBar: false,
+  disableVoteSubmission: false,
+  coloredThumbs: false,
+  coloredBar: false,
+  colorTheme: "default", // default, classic, accessible, neon
 }
 
 if (isChrome()) api = chrome;
