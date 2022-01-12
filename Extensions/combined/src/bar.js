@@ -1,5 +1,5 @@
 import { getButtons } from "./buttons";
-import { likesDisabledState } from "./state";
+import { likesDisabledState, extConfig } from "./state";
 import { cLog } from "./utils";
 
 function createRateBar(likes, dislikes) {
@@ -46,6 +46,11 @@ function createRateBar(likes, dislikes) {
         "#ryd-dislike-tooltip > #tooltip"
       ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
     }
+  
+  if (extConfig.coloredBar) {
+    // TODO: colorize bar
+  }
+  
   } else {
     cLog("removing bar");
     let ratebar = document.getElementById("ryd-bar-container");

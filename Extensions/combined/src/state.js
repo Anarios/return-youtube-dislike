@@ -13,6 +13,9 @@ const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
 
 let extConfig = {
   disableVoteSubmission: false,
+  coloredThumbs: false,
+  coloredBar: false,
+  colorTheme: "classic",
 };
 
 let storedData = {
@@ -98,6 +101,9 @@ function processResponse(response, storedData) {
   storedData.dislikes = parseInt(response.dislikes);
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
   createRateBar(storedData.likes, storedData.dislikes);
+  if (extConfig.coloredThumbs === true) {
+    // TODO: colorize thumbs
+  }
 }
 
 async function setState(storedData) {
@@ -142,6 +148,9 @@ function setInitialState() {
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeColoredThumbs();
+  initializeColoredBar();
+  initializeColorTheme();
 }
 
 function initializeDisableVoteSubmission() {
