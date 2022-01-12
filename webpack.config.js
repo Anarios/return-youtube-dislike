@@ -2,10 +2,20 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 
+const entries = ['ryd.content-script', 'ryd.background', 'popup', 'debug'];
+
+const ignorePatterns = [
+  "**/manifest-**",
+  "**/dist/**",
+  "**/src/**",
+  "**/readme.md",
+  ...entries.map(entry => `**/${entry}.js`)
+];
+
 module.exports = {
-  entry: path.join(__dirname, "./Extensions/combined/ryd.content-script.js"),
+  entry: Object.fromEntries(entries.map(entry => [entry, path.join(__dirname, './Extensions/combined/', `${entry}.js`)])),
   output: {
-    filename: "bundled-content-script.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "Extensions/combined/dist"),
     clean: true,
   },
@@ -23,12 +33,7 @@ module.exports = {
           from: "./Extensions/combined",
           to: "./chrome",
           globOptions: {
-            ignore: [
-              "**/manifest-**",
-              "**/dist/**",
-              "**/src/**",
-              "**/ryd.content-script.js",
-            ],
+            ignore: ignorePatterns,
           },
         },
         {
@@ -39,12 +44,7 @@ module.exports = {
           from: "./Extensions/combined",
           to: "./firefox",
           globOptions: {
-            ignore: [
-              "**/manifest-**",
-              "**/dist/**",
-              "**/src/**",
-              "**/ryd.content-script.js",
-            ],
+            ignore: ignorePatterns,
           },
         },
         {
@@ -58,14 +58,14 @@ module.exports = {
         onEnd: {
           copy: [
             {
-              source: "./Extensions/combined/dist/bundled-content-script.js",
+              source: "./Extensions/combined/dist/**.js",
               destination:
-                "./Extensions/combined/dist/firefox/bundled-content-script.js",
+                "./Extensions/combined/dist/firefox/",
             },
             {
-              source: "./Extensions/combined/dist/bundled-content-script.js",
+              source: "./Extensions/combined/dist/**.js",
               destination:
-                "./Extensions/combined/dist/chrome/bundled-content-script.js",
+                "./Extensions/combined/dist/chrome/",
             },
           ],
         },
