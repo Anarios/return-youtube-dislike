@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div style="width: 90vw" class="mx-auto">
     <h1 class="title-text">Frequently Asked Questions</h1>
     <p style="color: #999; margin-top: 0.5rem; margin-bottom: 1.5rem">
       Still have questions? Feel free to join our Discord!
     </p>
 
-    <v-expansion-panels class="col-xs-12 col-sm-11 col-md-9 col-lg-7">
+    <v-expansion-panels class="col-xs-12 col-sm-11 col-md-9 col-lg-8">
       <v-expansion-panel v-for="(item, i) in items" :key="i">
         <v-expansion-panel-header>
           {{ item.question }}

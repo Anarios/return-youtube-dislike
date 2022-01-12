@@ -65,6 +65,19 @@ function initConfig() {
 function initializeVersionNumber() {
   const version = chrome.runtime.getManifest().version;
   document.getElementById('ext-version').innerHTML = 'v' + version;
+
+  fetch(
+    "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
+  )
+    .then((response) => response.json())
+    .then((json) => {
+      if (version !== json.version) {
+        document.getElementById('ext-update').innerHTML = 'update to v' + json.version;
+        document.getElementById('ext-update').style.padding = '.25rem .5rem';
+      }
+    });
+  // .catch(console.error);
+
 }
 
 function initializeDisableVoteSubmission() {

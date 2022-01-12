@@ -43,14 +43,47 @@ button:hover {
 }
 
 #ext-version {
+  padding: .25rem .5rem;
+}
+
+#ext-update {
+  cursor: pointer;
+  color: var(--white);
+  text-decoration: none;
+  background: var(--primary);
+  border-radius: .25rem;
+}
+#ext-update:hover {
+  text-decoration: underline;
+}
+
+#ext {
+  padding: .25rem 0;
   z-index: 69;
   position: fixed;
+  background: var(--secondary);
   margin: 0;
   bottom: 1.15rem;
   right: 1.15rem;
-  background: var(--secondary);
-  border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
+  border-radius: .25rem;
+}
+
+.switch:before {
+  content: attr(data-hover);
+  visibility: hidden;
+  width: 250px;
+  background-color: var(--secondary);
+  border-radius: .5rem;
+  padding: .5rem;
+
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 160%;
+}
+
+.switch:hover:before {
+  visibility: visible;
 }
 
 #advancedToggle {
