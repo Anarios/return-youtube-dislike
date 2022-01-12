@@ -98,3 +98,5 @@ trig404
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
 
+[PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
+
