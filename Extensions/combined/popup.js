@@ -12,30 +12,24 @@ const config = {
     discord: "https://discord.gg/mYnESY4Md5",
     donate: "https://returnyoutubedislike.com/donate",
     faq: "https://returnyoutubedislike.com/faq",
+    help: "https://returnyoutubedislike.com/help"
   },
 };
 
+
 /*   Links   */
-document.getElementById("link_website").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.website });
-});
+createLink(config.links.website,"link_website")
+createLink(config.links.github,"link_github")
+createLink(config.links.discord,"link_discord")
+createLink(config.links.faq,"link_faq")
+createLink(config.links.donate,"link_donate")
+createLink(config.links.help,"link_help")
 
-document.getElementById("link_github").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.github });
-});
-
-document.getElementById("link_discord").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.discord });
-});
-
-document.getElementById("link_faq").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.faq });
-});
-
-document.getElementById("link_donate").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.donate });
-});
-
+function createLink(url,id) {
+  document.getElementById(id).addEventListener("click",()=>{
+    chrome.tabs.create({ url: url})
+  })
+}
 document
   .getElementById("disable_vote_submission")
   .addEventListener("click", (ev) => {
@@ -113,6 +107,7 @@ function handleDisableVoteSubmissionChangeEvent(value) {
       "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
   }
 })();
+
 
 /* popup-script.js
 document.querySelector('#login')
