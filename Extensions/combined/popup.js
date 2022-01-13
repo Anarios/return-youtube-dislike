@@ -12,30 +12,24 @@ const config = {
     discord: "https://discord.gg/mYnESY4Md5",
     donate: "https://returnyoutubedislike.com/donate",
     faq: "https://returnyoutubedislike.com/faq",
+    help: "https://returnyoutubedislike.com/help"
   },
 };
 
+
 /*   Links   */
-document.getElementById("link_website").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.website });
-});
+createLink(config.links.website,"link_website")
+createLink(config.links.github,"link_github")
+createLink(config.links.discord,"link_discord")
+createLink(config.links.faq,"link_faq")
+createLink(config.links.donate,"link_donate")
+createLink(config.links.help,"link_help")
 
-document.getElementById("link_github").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.github });
-});
-
-document.getElementById("link_discord").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.discord });
-});
-
-document.getElementById("link_faq").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.faq });
-});
-
-document.getElementById("link_donate").addEventListener("click", () => {
-  chrome.tabs.create({ url: config.links.donate });
-});
-
+function createLink(url,id) {
+  document.getElementById(id).addEventListener("click",()=>{
+    chrome.tabs.create({ url: url})
+  })
+}
 document
   .getElementById("disable_vote_submission")
   .addEventListener("click", (ev) => {
@@ -71,6 +65,19 @@ function initConfig() {
 function initializeVersionNumber() {
   const version = chrome.runtime.getManifest().version;
   document.getElementById('ext-version').innerHTML = 'v' + version;
+
+  fetch(
+    "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
+  )
+    .then((response) => response.json())
+    .then((json) => {
+      if (version !== json.version) {
+        document.getElementById('ext-update').innerHTML = 'update to v' + json.version;
+        document.getElementById('ext-update').style.padding = '.25rem .5rem';
+      }
+    });
+  // .catch(console.error);
+
 }
 
 function initializeDisableVoteSubmission() {
@@ -113,6 +120,7 @@ function handleDisableVoteSubmissionChangeEvent(value) {
       "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
   }
 })();
+
 
 /* popup-script.js
 document.querySelector('#login')

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="line-height: 3rem">
     <h1>
       Welcome to the <span class="primary--text">official RYD docs</span>!
     </h1>
-    <p>&lt;- To get started, select a section on the left.</p>
+    To get started, select a section from the menu.
   </div>
 </template>
