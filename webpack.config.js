@@ -2,7 +2,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 
-const entries = ['ryd.content-script', 'ryd.background', 'popup', 'debug'];
+const entries = ['ryd.content-script', 'ryd.background', 'popup'];
 
 const ignorePatterns = [
   "**/manifest-**",
