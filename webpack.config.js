@@ -51,6 +51,17 @@ module.exports = {
           from: "./Extensions/combined/manifest-firefox.json",
           to: "./firefox/manifest.json",
         },
+        {
+          from: "./Extensions/combined",
+          to: "./safari",
+          globOptions: {
+            ignore: ignorePatterns,
+          },
+        },
+        {
+          from: "./Extensions/combined/manifest-safari.json",
+          to: "./safari/manifest.json",
+        },
       ],
     }),
     new FileManagerPlugin({
@@ -66,6 +77,11 @@ module.exports = {
               source: "./Extensions/combined/dist/**.js",
               destination:
                 "./Extensions/combined/dist/chrome/",
+            },
+             {
+              source: "./Extensions/combined/dist/**.js",
+              destination:
+                "./Extensions/combined/dist/safari/",
             },
           ],
         },
