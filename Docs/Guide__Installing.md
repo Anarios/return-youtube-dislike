@@ -1,41 +1,40 @@
-# Downloading, Installing & Using
+
 
 **Contents**
 
-- [Downloading, Installing & Using](#downloading-installing--using)
-  - [Downloading](#downloading)
-    - [Desktop (all OS supported by these browsers)](#desktop-all-os-supported-by-these-browsers)
-      - [Chromium Based Browsers](#chromium-based-browsers)
-      - [Firefox Based Browsers](#firefox-based-browsers)
-    - [Mobile](#mobile)
-      - [Android](#android)
-      - [iOS](#ios)
-      - [Userscript](#userscript)
-  - [Installation](#installation)
-    - [Desktop](#desktop)
-      - [**Chromium based browsers**](#chromium-based-browsers-1)
-        - [From Chrome Webstore](#from-chrome-webstore)
-        - [From crx/zip file](#from-crxzip-file)
-        - [From unzipped folder](#from-unzipped-folder)
-      - [**Firefox Based Browsers**](#firefox-based-browsers-1)
-        - [From addon store](#from-addon-store)
-        - [From xpi/jar/zip file](#from-xpijarzip-file)
-    - [Mobile](#mobile-1)
-      - [Android](#android-1)
-        - [App from Play Store](#app-from-play-store)
-        - [On Firefox](#on-firefox)
-      - [iOS](#ios-1)
-  - [Using](#using)
-  - [Updating](#updating)
-    - [Extension / Addon](#extension--addon)
-  - [Miscellaneous](#miscellaneous)
-    - [Using YouTube website as an app with an extension](#using-youtube-website-as-an-app-with-an-extension)
-      - [Desktop](#desktop-1)
-        - [Chromium Based Browsers](#chromium-based-browsers-2)
-        - [Firefox Based Browsers](#firefox-based-browsers-2)
-      - [Mobile](#mobile-2)
-        - [Firefox Based Browsers](#firefox-based-browsers-3)
-        - [Chromium Based Browsers](#chromium-based-browsers-3)
+- [Downloading](#downloading)
+  - [Desktop (all OS supported by these browsers)](#desktop-all-os-supported-by-these-browsers)
+    - [Chromium Based Browsers](#chromium-based-browsers)
+    - [Firefox Based Browsers](#firefox-based-browsers)
+  - [Mobile](#mobile)
+    - [Android](#android)
+    - [iOS](#ios)
+    - [Userscript](#userscript)
+- [Installation](#installation)
+  - [Desktop](#desktop)
+    - [**Chromium based browsers**](#chromium-based-browsers-1)
+      - [From Chrome Webstore](#from-chrome-webstore)
+      - [From crx/zip file](#from-crxzip-file)
+      - [From unzipped folder](#from-unzipped-folder)
+    - [**Firefox Based Browsers**](#firefox-based-browsers-1)
+      - [From addon store](#from-addon-store)
+      - [From xpi/jar/zip file](#from-xpijarzip-file)
+  - [Mobile](#mobile-1)
+    - [Android](#android-1)
+      - [App from Play Store](#app-from-play-store)
+      - [On Firefox](#on-firefox)
+    - [iOS](#ios-1)
+- [Using](#using)
+- [Updating](#updating)
+  - [Extension / Addon](#extension--addon)
+- [Miscellaneous](#miscellaneous)
+  - [Using YouTube website as an app with an extension](#using-youtube-website-as-an-app-with-an-extension)
+    - [Desktop](#desktop-1)
+      - [Chromium Based Browsers](#chromium-based-browsers-2)
+      - [Firefox Based Browsers](#firefox-based-browsers-2)
+    - [Mobile](#mobile-2)
+      - [Firefox Based Browsers](#firefox-based-browsers-3)
+      - [Chromium Based Browsers](#chromium-based-browsers-3)
 
 <br>
 
@@ -87,6 +86,12 @@ It should be able to work on [all Chromium-based browsers (list here)][4]. But t
 2. [**Firefox Nightly**][2]
 
 - This addon should be able to run on most of the [Firefox-based browsers][5]. But isn't guaranteed.
+
+3. [**Chromium Based browsers**][4]
+
+Most [**Chromium Based browsers**][4] **don't support extensions on Android or iOS**
+
+However, [Kiwi Browser](https://kiwibrowser.com/) does. You can refer to this video - [Google Chrome Extensions on Android with Kiwi Browser!](https://youtu.be/T6J0T_-oim4)
 
 <br>
 
@@ -290,8 +295,6 @@ You can also refer here (for pictures):
 <br>
 
 ##### [Chromium Based Browsers][4]
-
-[**Chromium Based browsers**][4] **don't support extensions on Android or iOS**
 
 But still - here are the steps:
 
