@@ -7,7 +7,8 @@
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
 // @author       Anarios & JRWR
-// @match        *://*.youtube.com/*
+// @match        *://*.youtube.com/watch*
+// @match        *://*.youtube.com/clip*
 // @exclude      *://music.youtube.com/*
 // @exclude      *://*.music.youtube.com/*
 // @compatible   chrome
@@ -348,13 +349,8 @@ function setEventListeners(evt) {
     }
   }
 
-  if (
-    window.location.href.indexOf("watch?") >= 0 ||
-    (isMobile && evt?.indexOf("watch?") >= 0)
-  ) {
-    cLog("Setting up...");
-    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
-  }
+  cLog("Setting up...");
+  jsInitChecktimer = setInterval(checkForJS_Finish, 111);
 }
 
 (function () {

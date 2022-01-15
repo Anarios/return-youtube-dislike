@@ -16,7 +16,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
+      "matches": ["*://*.youtube.com/watch*", "*://*.youtube.com/clip*"],
       "exclude_matches": ["*://*.music.youtube.com/*"],
       "run_at": "document_idle",
       "css": ["content-style.css"],
