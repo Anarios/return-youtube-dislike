@@ -101,6 +101,9 @@ function processResponse(response, storedData) {
   storedData.dislikes = parseInt(response.dislikes);
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
   createRateBar(storedData.likes, storedData.dislikes);
+  if (extConfig.coloredThumbs === true) {
+    // TODO: colorize thumbs
+  }
 }
 
 async function setState(storedData) {
