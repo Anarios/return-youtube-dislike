@@ -13,6 +13,9 @@ const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
 
 let extConfig = {
   disableVoteSubmission: false,
+  coloredThumbs: false,
+  coloredBar: false,
+  colorTheme: "classic",
 };
 
 let storedData = {
@@ -142,6 +145,9 @@ function setInitialState() {
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeColoredThumbs();
+  initializeColoredBar();
+  initializeColorTheme();
 }
 
 function initializeDisableVoteSubmission() {

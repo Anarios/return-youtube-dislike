@@ -236,6 +236,15 @@ function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }
+  if (changes.coloredThumbs !== undefined) {
+    handleColoredThumbsChangeEvent(changes.coloredThumbs.newValue);
+  }
+  if (changes.coloredBar !== undefined) {
+    handleColoredBarChangeEvent(changes.coloredBar.newValue);
+  }
+  if (changes.colorTheme !== undefined) {
+    handleColorThemeChangeEvent(changes.colorTheme.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -253,10 +262,25 @@ function changeIcon(iconName) {
   else console.log('changing icon is not supported');
 }
 
+function handleColoredThumbsChangeEvent(value) {
+  extConfig.coloredThumbs = value;
+}
+
+function handleColoredBarChangeEvent(value) {
+  extConfig.coloredBar = value;
+}
+
+function handleColorThemeChangeEvent(value) {
+  extConfig.colorTheme = value;
+}
+
 api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeColoredThumbs();
+  initializeColoredBar();
+  initializeColorTheme();
 }
 
 function initializeDisableVoteSubmission() {
@@ -267,6 +291,39 @@ function initializeDisableVoteSubmission() {
     else {
       extConfig.disableVoteSubmission = res.disableVoteSubmission;
       if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
+    }
+  });
+}
+
+function initializeColoredThumbs() {
+  api.storage.sync.get(['coloredThumbs'], (res) => {
+    if (res.coloredThumbs === undefined) {
+      api.storage.sync.set({coloredThumbs: false});
+    }
+    else {
+      extConfig.coloredThumbs = res.coloredThumbs;
+    }
+  });
+}
+
+function initializeColoredBar() {
+  api.storage.sync.get(['coloredBar'], (res) => {
+    if (res.coloredBar === undefined) {
+      api.storage.sync.set({coloredBar: false});
+    }
+    else {
+      extConfig.coloredBar = res.coloredBar;
+    }
+  });
+}
+
+function initializeColorTheme() {
+  api.storage.sync.get(['colorTheme'], (res) => {
+    if (res.colorTheme === undefined) {
+      api.storage.sync.set({colorTheme: false});
+    }
+    else {
+      extConfig.colorTheme = res.colorTheme;
     }
   });
 }
