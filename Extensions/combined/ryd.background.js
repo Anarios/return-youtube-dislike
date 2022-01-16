@@ -8,7 +8,7 @@ let extConfig = {
   disableVoteSubmission: false,
   coloredThumbs: false,
   coloredBar: false,
-  colorTheme: "default", // default, classic, accessible, neon
+  colorTheme: "classic", // classic, accessible, neon
 }
 
 if (isChrome()) api = chrome;
