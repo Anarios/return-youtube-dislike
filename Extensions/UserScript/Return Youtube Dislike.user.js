@@ -7,8 +7,7 @@
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
 // @author       Anarios & JRWR
-// @match        *://*.youtube.com/watch*
-// @match        *://*.youtube.com/clip*
+// @match        *://*.youtube.com/*
 // @exclude      *://music.youtube.com/*
 // @exclude      *://*.music.youtube.com/*
 // @compatible   chrome

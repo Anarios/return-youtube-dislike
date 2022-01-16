@@ -19,7 +19,11 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/watch*", "*://*.youtube.com/clip*"],
+      "matches": [
+        "*://youtube.com/*",
+        "*://www.youtube.com/*",
+        "*://m.youtube.com/*"
+      ],
       "exclude_matches": ["*://*.music.youtube.com/*"],
       "js": ["ryd.content-script.js"],
       "css": ["content-style.css"]
