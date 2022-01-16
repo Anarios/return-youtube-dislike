@@ -27,7 +27,7 @@ Additionally, the `dislike` field in the YouTube API was [removed](https://suppo
 
 With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
 
-[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/FAQ.md)
+[FAQ]https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
 ## Why it Matters
 
