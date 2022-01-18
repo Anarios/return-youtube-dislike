@@ -1,51 +1,51 @@
 <template>
-  <div>
+  <div style="line-height: 3rem">
     <h1 class="primary--text">Basic Fetching Tutorial</h1>
 
     <span>Example to get votes of a given YouTube video ID:</span>
     <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank"
       >kxOuG8jMIgI</a
-    ><br /><br />
+    >
 
     <h2>Example Request:</h2>
-    <span><b>Request URL:</b></span>
+    <span>Request URL:</span>
     <a
       :href="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
       target="_blank"
       v-text="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
-    /><br />
-    <span
-      ><b>Request Method:</b>
+    />
+    <br />
+    <span>
+      Request Method:
       <a
         href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET"
         target="_blank"
         >HTTP/GET</a
-      ></span
-    ><br />
-    <span><b>Headers:</b></span
-    ><br />
-    <code class="code">
+      >
+    </span>
+    <br />
+    <span>Headers:</span>
+    <br />
+    <div class="code pa-4">
       Accept: text/html,application/xhtml+xml,application/xml;q=0.9<br />
       Pragma: no-cache<br />
       Cache-Control: no-cache<br />
-      Connection: keep-alive </code
-    ><br />
-    <span><b>Response:</b></span
-    ><br />
-    <div class="code">
-      <code style="background-color: rgba(0, 0, 0, 0)">
-        {<br />
-        "id": "kxOuG8jMIgI",<br />
-        "dateCreated": "2021-12-20T12:25:54.418014Z",<br />
-        "likes": 27326,<br />
-        "dislikes": 498153,<br />
-        "rating": 1.212014408444885,<br />
-        "viewCount": 3149885,<br />
-        "deleted": false<br />
-        }
-      </code>
+      Connection: keep-alive
     </div>
-    <br /><br />
+    <span>Response:</span><br />
+    <div class="code pa-4">
+      {
+      <br />
+      &nbsp;"id": "kxOuG8jMIgI",<br />
+      &nbsp;"dateCreated": "2021-12-20T12:25:54.418014Z",<br />
+      &nbsp;"likes": 27326,<br />
+      &nbsp;"dislikes": 498153,<br />
+      &nbsp;"rating": 1.212014408444885,<br />
+      &nbsp;"viewCount": 3149885,<br />
+      &nbsp;"deleted": false<br />
+      }
+    </div>
+    <br />
     <v-alert border="left" color="orange" text type="info">
       <span>An invalid YouTube ID will return status code 404 "Not Found".</span
       ><br />
@@ -59,13 +59,6 @@
   </div>
 </template>
 
-<style scoped>
-.code {
-  background: #353535;
-  border-radius: 0.25rem;
-}
-</style>
-
 <script>
 export default {
   data() {
@@ -75,3 +68,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.code {
+  color: #aaa;
+  background: #353535;
+  border-radius: 0.5rem;
+  font-family: monospace;
+  line-height: 2rem;
+}
+</style>

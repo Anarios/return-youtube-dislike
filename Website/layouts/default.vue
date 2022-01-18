@@ -73,29 +73,22 @@ export default {
   }),
   mounted() {
     setTimeout(() => {
-      // check if browser version out of date
+      // Chrome < 70 or FF < 60
       if (
-        window.navigator.userAgent.indexOf("Chrome") > -1 &&
-        window.navigator.userAgent.indexOf("Edge") === -1
+        (this.$ua._parsed.name == "Chrome" &&
+          parseInt(this.$ua._parsed.version.slice(0, 2)) < 70) ||
+        (this.$ua._parsed.name == "Firefox" &&
+          parseInt(this.$ua._parsed.version.slice(0, 2)) < 60)
       ) {
-        let chrome = window.navigator.userAgent.match(/Chrome\/(\d+)/);
-        let chromeVersion = chrome ? chrome[1] : 0;
-        if (chromeVersion < 70) {
-          this.alert.html = `You are using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b>. Please update to the latest version.`;
-          this.alert.show = true;
-        }
+        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .25rem .25rem .5rem; margin: 0 .25rem;">
+        ${this.$ua._parsed.name} ${this.$ua._parsed.version.slice(0, 2)}
+        </b> is not supported. Consider upgrading to the latest version.`;
+        this.alert.show = true;
       }
-      if (window.navigator.userAgent.indexOf("Firefox") > -1) {
-        let firefox = window.navigator.userAgent.match(/Firefox\/(\d+)/);
-        let firefoxVersion = firefox ? firefox[1] : 0;
-        if (firefoxVersion < 60) {
-          this.alert.html = `You are using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version}</b>. Please update to the latest version.`;
-          this.alert.show = true;
-        }
-      }
-      // check for IE browser
-      if (window.navigator.userAgent.indexOf("MSIE") > -1) {
-        this.alert.html = `Looks like you're using <b style="background: #222; border-radius: .5rem; padding: .25rem .5rem;">Internet Explorer</b>. Stop it, get some help.`;
+
+      // Win7
+      if (window.navigator.userAgent.indexOf("Windows NT 6.1") > -1) {
+        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem; margin: 0 .25rem;">Windows 7</b> is not supported. Consider upgrading Windows, or installing Linux.`;
         this.alert.show = true;
       }
     }, 1000);
@@ -107,10 +100,9 @@ export default {
 html,
 body {
   height: 100%;
-  background: #111; /* for MacOS/iOS overscroll */
-  height: -webkit-fill-available;
   background: #111;
-  overflow: auto;
+  height: -webkit-fill-available; /* for MacOS/iOS overscroll */
+  scrollbar-color: #424242 #111;
 }
 
 ::selection {
@@ -128,14 +120,18 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background-color: #333; /* color of the scroll thumb */
-  border-radius: 20px; /* roundness of the scroll thumb */
-  border: 4px solid #111; /* creates padding around scroll thumb */
+  border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
+  border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-top: 0.25rem solid #111; /* creates padding around scroll thumb */
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #f22; /* color of the scroll thumb */
-  border-radius: 20px; /* roundness of the scroll thumb */
-  border: 4px solid #111; /* creates padding around scroll thumb */
+  border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
+  border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-top: 0.25rem solid #111; /* creates padding around scroll thumb */
 }
 
 .debug {
@@ -154,14 +150,17 @@ body {
 .topBar {
   padding: 0 3rem;
   width: fit-content !important;
-  background-color: #222 !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(42, 42, 42, 0.75) !important;
   border-radius: 1rem !important;
-  border-radius: 0.75rem;
+  /* border: 1px solid #222; */
   overflow: hidden;
 }
 .title-text {
   font-size: 3rem;
 }
+
 @media (max-width: 768px) {
   /* mobile */
   .title-text {
@@ -186,7 +185,7 @@ body {
 .swoop-right-leave-active {
   transition-duration: 0.1s;
   transition-property: opacity, transform;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .swoop-left-enter,

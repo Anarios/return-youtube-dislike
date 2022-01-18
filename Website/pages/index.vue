@@ -64,10 +64,9 @@
       <v-row class="justify-center mx-auto">
         <p v-for="sponsor in sponsors" :key="sponsor.name" class="sponsor">
           <a
-            :style="
-              sponsor.link ? { cursor: 'pointer' } : { cursor: 'default' }
-            "
+            :style="sponsor.link ? { cursor: 'pointer' } : { cursor: 'default' }"
             :href="sponsor.link"
+            rel="sponsored"
           >
             {{ sponsor.name }}
           </a>
@@ -105,6 +104,10 @@ export default {
           name: "Seed4.Me VPN",
           link: "https://www.seed4.me/users/register?gift=ReturnYoutubeDislike",
         },
+        {
+          name: "PocketTube",
+          link: "https://yousub.info/?utm_source=returnyoutubedislike"
+        }
       ],
     };
   },

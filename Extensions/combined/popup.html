@@ -26,15 +26,13 @@
       <button id="link_website">Website</button>
       <button id="link_github">GitHub</button>
       <button id="link_discord">Discord</button>
-
       <br />
-
       <button style="margin-top: 0.3rem" id="link_faq">FAQ</button>
       <button style="margin-top: 0.3em" id="link_donate">Donate</button>
+      <button style="margin-top: 0.3em" id="link_help">Help</button>
 
       <br />
       <br />
-
       <p style="display: none">API Status: <b id="status"></b></p>
       <img
         id="server-status"
@@ -42,7 +40,7 @@
         src="./icons/server.svg"
         alt=""
       />
-
+      
       <br />
       <br />
     </center>
@@ -65,16 +63,19 @@
     </button>
 
     <!-- bottom-right -->
-    <p id="ext-version"></p>
+    <div id="ext">
+      <a href="https://returnyoutubedislike.com/install" target="_blank" id="ext-update"></a>
+      <span id="ext-version"></span>
+    </div>
 
     <!-- dialog box -->
     <fieldset id="advancedSettings">
       <legend id="advancedLegend">Settings</legend>
 
-      <label class="switch">
+      <label class="switch" data-hover="Stops counting your likes and dislikes.">
         <input type="checkbox" id="disable_vote_submission" />
         <span class="slider" />
-        <span class="switchLabel">Disable like/dislike submission</span>
+        <span class="switchLabel">Disable vote submission</span>
       </label>
       <!-- <br />
       <label class="switch">

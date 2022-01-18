@@ -25,7 +25,7 @@
         "*://m.youtube.com/*"
       ],
       "exclude_matches": ["*://*.music.youtube.com/*"],
-      "js": ["bundled-content-script.js"],
+      "js": ["ryd.content-script.js"],
       "css": ["content-style.css"]
     }
   ],

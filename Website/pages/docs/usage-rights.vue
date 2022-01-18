@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="line-height: 3rem">
     <h1 class="primary--text">Usage Rights</h1>
     <p>
       Third party use of this open API is allowed with the following
