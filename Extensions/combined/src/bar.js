@@ -55,8 +55,8 @@ function createRateBar(likes, dislikes) {
         "#ryd-dislike-tooltip > #tooltip"
       ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
       if (extConfig.coloredBar) {
-        document.getElementById("ryd-bar-container").style.backgroundColor = getColorFromTheme(true);
-        document.getElementById("ryd-bar").style.backgroundColor = getColorFromTheme(false);
+        document.getElementById("ryd-bar-container").style.backgroundColor = getColorFromTheme(false);
+        document.getElementById("ryd-bar").style.backgroundColor = getColorFromTheme(true);
       }
     }
   } else {
