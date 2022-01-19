@@ -99,4 +99,11 @@ function getColorFromTheme(voteIsLike) {
   return colorString;
 }
 
-export { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog }
+export {
+  numberFormat,
+  getBrowser,
+  getVideoId,
+  isVideoLoaded,
+  cLog,
+  getColorFromTheme,
+}

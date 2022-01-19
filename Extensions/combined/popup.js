@@ -51,7 +51,7 @@ document
 document
   .getElementById("color_theme")
   .addEventListener("click", (ev) => {
-    chrome.storage.sync.set({ colorTheme: ev.target.checked });
+    chrome.storage.sync.set({ colorTheme: ev.target.value });
   });
 
 /*   Advanced Toggle   */
@@ -167,7 +167,8 @@ function handleColoredBarChangeEvent(value) {
 
 function handleColorThemeChangeEvent(value) {
   config.colorTheme = value;
-  // TODO: check selected menu item
+  document.getElementById("color_theme_example_like").style.backgroundColor = getColorFromTheme(value, true);
+  document.getElementById("color_theme_example_dislike").style.backgroundColor = getColorFromTheme(value, false);
 }
 
 (async function getStatus() {
@@ -189,6 +190,34 @@ function handleColorThemeChangeEvent(value) {
       "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
   }
 })();
+
+function getColorFromTheme(colorTheme, voteIsLike) {
+  let colorString;
+  switch(colorTheme) {
+    case 'accessible':
+      if (voteIsLike === true) {
+        colorString = 'dodgerblue';
+      } else {
+        colorString = 'gold';
+      }
+      break;
+    case 'neon':
+      if (voteIsLike === true) {
+        colorString = 'aqua';
+      } else {
+        colorString = 'magenta';
+      }
+      break;
+    case 'classic':
+    default:
+      if (voteIsLike === true) {
+        colorString = 'lime';
+      } else {
+        colorString = 'red';
+      }
+  }
+  return colorString;
+}
 
 
 /* popup-script.js

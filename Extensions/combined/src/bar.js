@@ -1,6 +1,9 @@
 import { getButtons } from "./buttons";
 import { likesDisabledState, extConfig } from "./state";
-import { cLog } from "./utils";
+import {
+  cLog,
+  getColorFromTheme,
+} from "./utils";
 
 function createRateBar(likes, dislikes) {
   if (!likesDisabledState) {
@@ -15,6 +18,12 @@ function createRateBar(likes, dislikes) {
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
     if (!rateBar) {
+      let colorLikeStyle = '';
+      let colorDislikeStyle = '';
+      if (extConfig.coloredBar) {
+        colorLikeStyle = '; background-color: ' + getColorFromTheme(true);
+        colorDislikeStyle = '; background-color: ' + getColorFromTheme(false);
+      }
       (
         document.getElementById("menu-container") ||
         document.querySelector("ytm-slim-video-action-bar-renderer")
@@ -25,11 +34,11 @@ function createRateBar(likes, dislikes) {
             <div class="ryd-tooltip-bar-container">
                <div
                   id="ryd-bar-container"
-                  style="width: 100%; height: 2px;"
+                  style="width: 100%; height: 2px;${colorDislikeStyle}"
                   >
                   <div
                      id="ryd-bar"
-                     style="width: ${widthPercent}%; height: 100%"
+                     style="width: ${widthPercent}%; height: 100%${colorLikeStyle}"
                      ></div>
                </div>
             </div>
@@ -45,12 +54,11 @@ function createRateBar(likes, dislikes) {
       document.querySelector(
         "#ryd-dislike-tooltip > #tooltip"
       ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+      if (extConfig.coloredBar) {
+        document.getElementById("ryd-bar-container").style.backgroundColor = getColorFromTheme(true);
+        document.getElementById("ryd-bar").style.backgroundColor = getColorFromTheme(false);
+      }
     }
-  
-  if (extConfig.coloredBar) {
-    // TODO: colorize bar
-  }
-  
   } else {
     cLog("removing bar");
     let ratebar = document.getElementById("ryd-bar-container");

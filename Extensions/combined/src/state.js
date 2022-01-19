@@ -1,6 +1,12 @@
 import { getLikeButton, getDislikeButton, getButtons } from "./buttons";
 import { createRateBar } from "./bar";
-import { getBrowser, getVideoId, cLog, numberFormat } from "./utils";
+import { 
+  getBrowser,
+  getVideoId,
+  cLog,
+  numberFormat,
+  getColorFromTheme,
+} from "./utils";
 import { sendVideoIds } from "./events";
 
 //TODO: Do not duplicate here and in ryd.background.js
@@ -102,7 +108,8 @@ function processResponse(response, storedData) {
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
   createRateBar(storedData.likes, storedData.dislikes);
   if (extConfig.coloredThumbs === true) {
-    // TODO: colorize thumbs
+    getLikeButton().style.color = getColorFromTheme(true);
+    getDislikeButton().style.color = getColorFromTheme(false);
   }
 }
 
@@ -159,6 +166,39 @@ function initializeDisableVoteSubmission() {
       getBrowser().storage.sync.set({ disableVoteSubmission: false });
     } else {
       extConfig.disableVoteSubmission = res.disableVoteSubmission;
+    }
+  });
+}
+
+function initializeColoredThumbs() {
+  getBrowser().storage.sync.get(['coloredThumbs'], (res) => {
+    if (res.coloredThumbs === undefined) {
+      getBrowser().storage.sync.set({coloredThumbs: false});
+    }
+    else {
+      extConfig.coloredThumbs = res.coloredThumbs;
+    }
+  });
+}
+
+function initializeColoredBar() {
+  getBrowser().storage.sync.get(['coloredBar'], (res) => {
+    if (res.coloredBar === undefined) {
+      getBrowser().storage.sync.set({coloredBar: false});
+    }
+    else {
+      extConfig.coloredBar = res.coloredBar;
+    }
+  });
+}
+
+function initializeColorTheme() {
+  getBrowser().storage.sync.get(['colorTheme'], (res) => {
+    if (res.colorTheme === undefined) {
+      getBrowser().storage.sync.set({colorTheme: false});
+    }
+    else {
+      extConfig.colorTheme = res.colorTheme;
     }
   });
 }
