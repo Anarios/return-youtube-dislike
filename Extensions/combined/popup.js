@@ -167,8 +167,15 @@ function handleColoredBarChangeEvent(value) {
 
 function handleColorThemeChangeEvent(value) {
   config.colorTheme = value;
-  document.getElementById("color_theme_example_like").style.backgroundColor = getColorFromTheme(value, true);
-  document.getElementById("color_theme_example_dislike").style.backgroundColor = getColorFromTheme(value, false);
+  document
+    .getElementById("color_theme")
+    .querySelector('option[value="' + value + '"]').selected = true;
+  updateColorThemePreviewContent(value);
+}
+
+function updateColorThemePreviewContent(themeName) {
+  document.getElementById("color_theme_example_like").style.backgroundColor = getColorFromTheme(themeName, true);
+  document.getElementById("color_theme_example_dislike").style.backgroundColor = getColorFromTheme(themeName, false);
 }
 
 (async function getStatus() {
