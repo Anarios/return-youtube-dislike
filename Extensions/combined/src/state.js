@@ -9,7 +9,7 @@ const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
-const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
+const DISLIKES_DISABLED_TEXT = "DISLIKE";
 
 let extConfig = {
   disableVoteSubmission: false,
