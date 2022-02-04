@@ -16,7 +16,7 @@ export default {
         hid: "description",
         name: "description",
         content:
-          "An extension that returns dislike statistics to YouTube. For now, it only works if a video had public display of dislikes enabled before YouTube removed dislike stats. ",
+          "An extension that returns dislike statistics to YouTube using a combination of scraped dislike stats and estimates extrapolated from extension user data.",
       },
       { hid: "og:image", name: "og:image", content: "/logo.png" },
       { hid: "theme-color", name: "theme-color", content: "#ff0000" },
