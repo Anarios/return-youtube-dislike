@@ -13,6 +13,7 @@ const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
 
 let extConfig = {
   disableVoteSubmission: false,
+  disableLogging: true
 };
 
 let storedData = {
@@ -142,6 +143,7 @@ function setInitialState() {
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeDisableLogging();
 }
 
 function initializeDisableVoteSubmission() {
@@ -153,6 +155,17 @@ function initializeDisableVoteSubmission() {
     }
   });
 }
+
+function initializeDisableLogging() {
+  getBrowser().storage.sync.get(["disableLogging"], (res) => {
+    if (res.disableLogging === undefined) {
+      getBrowser().storage.sync.set({ disableLogging: true });
+    } else {
+      extConfig.disableLogging = res.disableLogging;
+    }
+  });
+}
+
 
 export {
   isMobile,

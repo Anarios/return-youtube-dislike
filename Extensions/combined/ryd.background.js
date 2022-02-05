@@ -5,7 +5,8 @@ let api;
 
 /** stores extension's global config */
 let extConfig = {
-  disableVoteSubmission: false
+  disableVoteSubmission: false,
+  disableLogging: true
   // coloredThumbs: false,
   // coloredBar: false,
 }
@@ -235,6 +236,9 @@ function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }
+  else if (changes.disableLogging !== undefined){
+    handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -244,6 +248,10 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   } else {
     changeIcon(defaultIconName);
   }
+}
+
+function handleDisableLoggingChangeEvent(value) {
+  extConfig.disableLogging = value;
 }
 
 function changeIcon(iconName) {
@@ -256,6 +264,7 @@ api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeDisableLogging();
 }
 
 function initializeDisableVoteSubmission() {
@@ -268,6 +277,17 @@ function initializeDisableVoteSubmission() {
       if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
     }
   });
+}
+
+function initializeDisableLogging(){
+  api.storage.sync.get(['disableLogging'],(res)=>{
+    if (res.disableLogging === undefined) {
+      api.storage.sync.set({disableLogging:true});
+    }
+    else {
+      extConfig.disableLogging = res.disableLogging;
+    }
+  })
 }
 
 function isChrome() {

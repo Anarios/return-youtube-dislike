@@ -1,3 +1,4 @@
+import {extConfig} from './state.js'
 function roundDown(num) {
   if (num < 1000) return num;
   const int = Math.floor(Math.log10(num) - 2);
@@ -59,11 +60,13 @@ function isVideoLoaded() {
 }
 
 function cLog(message, writer) {
-  message = `[return youtube dislike]: ${message}`;
-  if (writer) {
-    writer(message);
-  } else {
-    console.log(message);
+  if (!extConfig.disableLogging){
+    message = `[return youtube dislike]: ${message}`;
+    if (writer) {
+      writer(message);
+    } else {
+      console.log(message);
+    }
   }
 }
 
