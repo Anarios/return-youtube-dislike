@@ -44,9 +44,7 @@ function setEventListeners(evt) {
     }
   }
 
-  if (window.location.href.indexOf("watch?") >= 0) {
-    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
-  }
+  jsInitChecktimer = setInterval(checkForJS_Finish, 111);
 }
 
 setEventListeners();

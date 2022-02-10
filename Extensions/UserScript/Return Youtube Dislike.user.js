@@ -348,13 +348,8 @@ function setEventListeners(evt) {
     }
   }
 
-  if (
-    window.location.href.indexOf("watch?") >= 0 ||
-    (isMobile && evt?.indexOf("watch?") >= 0)
-  ) {
-    cLog("Setting up...");
-    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
-  }
+  cLog("Setting up...");
+  jsInitChecktimer = setInterval(checkForJS_Finish, 111);
 }
 
 (function () {
