@@ -72,7 +72,7 @@ function setDislikes(dislikesCount) {
     }
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   } else {
-    cLog("likes count diabled by creator");
+    cLog("likes count disabled by creator");
     if (isMobile()) {
       getButtons().children[1].querySelector(
         ".button-renderer-text"
