@@ -1,0 +1,35 @@
+{
+    "extensionName": {
+        "message": "Возвращение YouTube Не нравится"
+    },
+    "extensionDesc": {
+        "message": "Возвращает способность видеть неприязнь"
+    },
+    "textDeveloper": {
+        "message": "Дмитрий Селиванов и сообщество"
+    },
+    "linkWebsite": {
+        "message": "Сайт"
+    },
+    "linkFAQ": {
+        "message": "ЧАВО"
+    },
+    "linkDonate": {
+        "message": "Пожертвовать"
+    },
+    "linkHelp": {
+        "message": "Помощь"
+    },
+    "legendSettings": {
+        "message": "Настройки"
+    },
+    "textSettings": {
+        "message": "Отключить отправку нравится/не нравится"
+    },
+    "textSettingsHover": {
+        "message": "Перестаньте считать свои симпатии и антипатии."
+    },
+    "textUpdate": {
+        "message": "обновление до"
+    }
+}

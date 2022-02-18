@@ -1,0 +1,35 @@
+{
+    "extensionName": {
+        "message": "Retour YouTube Dislike"
+    },
+    "extensionDesc": {
+        "message": "Rend la capacité de voir les aversions"
+    },
+    "textDeveloper": {
+        "message": "par Dmitrii Selivanov & Communauté"
+    },
+    "linkWebsite": {
+        "message": "Site web"
+    },
+    "linkFAQ": {
+        "message": "FAQs"
+    },
+    "linkDonate": {
+        "message": "Don"
+    },
+    "linkHelp": {
+        "message": "Aide"
+    },
+    "legendSettings": {
+        "message": "Paramètres"
+    },
+    "textSettings": {
+        "message": "Désactiver la soumission ou like/dislikes"
+    },
+    "textSettingsHover": {
+        "message": "Arrête de compter tes goûts et tes aversions."
+    },
+    "textUpdate": {
+        "message": "actualiser pour"
+    }
+}
