@@ -69,6 +69,10 @@
       <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
       iOS (Jailbroken)
     </v-btn>
+    <v-btn class="mainAltButton" :href="androidVanced" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
+      Android (Youtube Vanced)
+    </v-btn>
   </div>
 </template>
 
@@ -93,6 +97,7 @@ export default {
         "https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js",
 
       iosJailbreakLink: "https://chariz.com/get/return-youtube-dislike/",
+      androidVanced: "https://vancedapp.com/",
     };
   },
 };
