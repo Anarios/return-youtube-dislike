@@ -1,0 +1,46 @@
+:root {
+  /* --yt-spec-icon-disabled: #f44 !important;
+  --yt-spec-text-primary: #4f4 !important; */
+  /* --yt-spec-general-background-a: #000 !important;
+  --yt-spec-general-background-b: #000 !important;
+  --yt-spec-general-background-c: #000 !important;
+  --yt-spec-brand-background-solid: #000 !important;
+  --yt-spec-brand-background-primary: #000 !important;
+  --yt-spec-brand-background-secondary: #000 !important; */
+}
+
+/* html:not(.style-scope)[dark], :not(.style-scope)[dark] {
+  --yt-spec-general-background-a: #000 !important;
+  --yt-spec-general-background-b: #000 !important;
+  --yt-spec-general-background-c: #000 !important;
+  --yt-spec-brand-background-solid: #000 !important;
+  --yt-spec-brand-background-primary: #000 !important;
+  --yt-spec-brand-background-secondary: #000 !important;
+} */
+
+#ryd-bar-container {
+  background: var(--yt-spec-icon-disabled);
+  border-radius: 2px;
+}
+
+#ryd-bar {
+  background: var(--yt-spec-text-primary);
+  border-radius: 2px;
+  transition: all 0.15s ease-in-out;
+}
+
+.ryd-tooltip {
+  position: relative;
+  display: block;
+  height: 2px;
+  top: 9px;
+}
+
+.ryd-tooltip-bar-container {
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  padding-top: 6px;
+  padding-bottom: 28px;
+  top: -6px;
+}
