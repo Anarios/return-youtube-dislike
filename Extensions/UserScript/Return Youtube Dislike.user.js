@@ -179,7 +179,7 @@ function createRateBar(likes, dislikes) {
   const widthPercent =
     likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
-  if (!rateBar) {
+  if (!rateBar && !isMobile) {
     document.getElementById("menu-container").insertAdjacentHTML(
       "beforeend",
       `
