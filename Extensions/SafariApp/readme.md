@@ -1,0 +1,1 @@
+# Get Started with Safari web extension
