@@ -76,12 +76,12 @@ export default {
       // Chrome < 70 or FF < 60
       if (
         (this.$ua._parsed.name == "Chrome" &&
-          parseInt(this.$ua._parsed.version.slice(0, 2)) < 70) ||
+          parseInt(this.$ua._parsed.version.split(".")[0]) < 70) ||
         (this.$ua._parsed.name == "Firefox" &&
-          parseInt(this.$ua._parsed.version.slice(0, 2)) < 60)
+          parseInt(this.$ua._parsed.version.split(".")[0]) < 60)
       ) {
         this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .25rem .25rem .5rem; margin: 0 .25rem;">
-        ${this.$ua._parsed.name} ${this.$ua._parsed.version.slice(0, 2)}
+        ${this.$ua._parsed.name} ${this.$ua._parsed.version.split(".")[0]}
         </b> is not supported. Consider upgrading to the latest version.`;
         this.alert.show = true;
       }
