@@ -232,6 +232,7 @@ function setState() {
       }
     });
   });
+  setState = function(){};
 }
 
 function likeClicked() {
