@@ -54,14 +54,20 @@
       </v-btn>
     </div>
 
-    <div class="mb-4" style="color: #999">
-      Get dislikes manually: <input placeholder=" Video URL">
-      <p id="output"></p>
-    </div>
+<!--    <div class="mb-4" style="color: #999">-->
+<!--      Get dislikes manually: <input placeholder=" Video URL">-->
+<!--      <p id="output"></p>-->
+<!--    </div>-->
 
     <v-spacer />
+    <div id="support-ukraine" class="d-flex flex-column items-center py-2">
+      <h3 class="mb-2">
+        <v-img src="/ukraine-flag-xs.png" width="40px"></v-img>
+        <a href="https://helpukrainewin.org/">Support Ukraine</a>
+      </h3>
+    </div>
 
-    <div id="sponsors" class="d-flex flex-column items-center py-8">
+    <div id="cool-people" class="d-flex flex-column items-center py-8">
       <h3 class="mb-4">
         <v-icon class="mb-2">mdi-heart</v-icon>
         Sponsors
