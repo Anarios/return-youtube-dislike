@@ -16,7 +16,7 @@ const config = {
   },
 };
 
-/*   Change lenguage   */
+/*   Change language   */
 function localizeHtmlPage()
 {
     //Localize by replacing __MSG_***__ meta tags
