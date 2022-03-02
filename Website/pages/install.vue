@@ -65,13 +65,13 @@
         No liability on our side, use at your own risk.
       </p>
     </div>
-    <v-btn class="mainAltButton" :href="iosJailbreakLink" target="_blank">
-      <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
-      iOS (Jailbroken)
-    </v-btn>
     <v-btn class="mainAltButton" :href="androidVanced" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
       Android (Youtube Vanced)
+    </v-btn>
+    <v-btn class="mainAltButton" :href="iosJailbreakLink" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
+      iOS (Jailbroken)
     </v-btn>
   </div>
 </template>
