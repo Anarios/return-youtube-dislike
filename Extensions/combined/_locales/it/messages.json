@@ -1,0 +1,35 @@
+{
+    "extensionName": {
+        "message": "Return YouTube Dislike"
+    },
+    "extensionDesc": {
+        "message": "Riattiva i dislike su Youtube"
+    },
+    "textDeveloper": {
+        "message": "di Dmitrii Selivanov & Community"
+    },
+    "linkWebsite": {
+        "message": "Sito"
+    },
+    "linkFAQ": {
+        "message": "Domande frequenti"
+    },
+    "linkDonate": {
+        "message": "Dona"
+    },
+    "linkHelp": {
+        "message": "Aiuto"
+    },
+    "legendSettings": {
+        "message": "Opzioni"
+    },
+    "textSettings": {
+        "message": "Disattiva l'invio dei like/dislike"
+    },
+    "textSettingsHover": {
+        "message": "Smetti di contare i like/dislike"
+    },
+    "textUpdate": {
+        "message": "aggiorna a"
+    }
+}
