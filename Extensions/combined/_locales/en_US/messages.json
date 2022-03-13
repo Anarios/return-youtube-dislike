@@ -1,0 +1,35 @@
+{
+    "extensionName": {
+        "message": "Return YouTube Dislike"
+    },
+    "extensionDesc": {
+        "message": "Returns ability to see dislikes"
+    },
+    "textDeveloper": {
+        "message": "by Dmitrii Selivanov & Community"
+    },
+    "linkWebsite": {
+        "message": "Website"
+    },
+    "linkFAQ": {
+        "message": "FAQ"
+    },
+    "linkDonate": {
+        "message": "Donate"
+    },
+    "linkHelp": {
+        "message": "Help"
+    },
+    "legendSettings": {
+        "message": "Settings"
+    },
+    "textSettings": {
+        "message": "Disable like/dislike submission"
+    },
+    "textSettingsHover": {
+        "message": "Stops counting your likes and dislikes."
+    },
+    "textUpdate": {
+        "message": "update to"
+    }
+}
