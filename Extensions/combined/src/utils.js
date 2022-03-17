@@ -59,7 +59,7 @@ function isVideoLoaded() {
 }
 
 function cLog(message, writer) {
-  message = `[return youtube dislike]: ${message}`;
+  message = `[return your dislike]: ${message}`;
   if (writer) {
     writer(message);
   } else {

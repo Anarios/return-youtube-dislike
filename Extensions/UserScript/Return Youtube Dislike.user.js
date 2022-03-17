@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Return YouTube Dislike
+// @name         Return Your Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
 // @version      0.9.0
@@ -33,7 +33,7 @@ let isMobile = location.hostname == "m.youtube.com";
 let mobileDislikes = 0;
 function cLog(text, subtext = "") {
   subtext = subtext.trim() === "" ? "" : `(${subtext})`;
-  console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
+  console.log(`[Return Your Dislikes] ${text} ${subtext}`);
 }
 
 function getButtons() {

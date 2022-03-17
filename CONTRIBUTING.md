@@ -1,4 +1,4 @@
-# Welcome To Return YouTube Dislikes contributing guide
+# Welcome To Return Your Dislikes contributing guide
 
 Thank you for investing your time in contributing to our project! All your changes will be reflected in the next version of the extension (or the [website](https://www.returnyoutubedislike.com/)).
 
