@@ -9,6 +9,7 @@ import {
 //---   Import State Functions   ---//
 import {
   isMobile,
+  isShorts,
   isVideoDisliked,
   isVideoLiked,
   getState,
@@ -35,7 +36,7 @@ let jsInitChecktimer = null;
 
 function setEventListeners(evt) {
   function checkForJS_Finish() {
-    if (getButtons()?.offsetParent && isVideoLoaded()) {
+    if (isShorts() || getButtons()?.offsetParent && isVideoLoaded()) {
       clearInterval(jsInitChecktimer);
       jsInitChecktimer = null;
       addLikeDislikeEventListener();

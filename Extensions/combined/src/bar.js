@@ -1,5 +1,5 @@
 import { getButtons } from "./buttons";
-import { likesDisabledState } from "./state";
+import { isMobile, likesDisabledState } from "./state";
 import { cLog } from "./utils";
 
 function createRateBar(likes, dislikes) {
