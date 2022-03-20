@@ -13,7 +13,7 @@ function createRateBar(likes, dislikes) {
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
-    if (!rateBar) {
+    if (!rateBar && !isMobile()) {
       let colorLikeStyle = "";
       let colorDislikeStyle = "";
       if (extConfig.coloredBar) {
@@ -21,13 +21,12 @@ function createRateBar(likes, dislikes) {
         colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
       }
 
-      if (!rateBar && !isMobile()) {
-        (
-          document.getElementById("menu-container") ||
-          document.querySelector("ytm-slim-video-action-bar-renderer")
-        ).insertAdjacentHTML(
-          "beforeend",
-          `
+      (
+        document.getElementById("menu-container") ||
+        document.querySelector("ytm-slim-video-action-bar-renderer")
+      ).insertAdjacentHTML(
+        "beforeend",
+        `
             <div class="ryd-tooltip" style="width: ${widthPx}px">
             <div class="ryd-tooltip-bar-container">
                <div
@@ -45,26 +44,24 @@ function createRateBar(likes, dislikes) {
             </tp-yt-paper-tooltip>
             </div>
     `
-        );
-      } else {
-        document.getElementById("ryd-bar-container").style.width =
-          widthPx + "px";
-        document.getElementById("ryd-bar").style.width = widthPercent + "%";
-        document.querySelector(
-          "#ryd-dislike-tooltip > #tooltip"
-        ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
-        if (extConfig.coloredBar) {
-          document.getElementById("ryd-bar-container").style.backgroundColor =
-            getColorFromTheme(false);
-          document.getElementById("ryd-bar").style.backgroundColor =
-            getColorFromTheme(true);
-        }
-      }
+      );
     } else {
-      cLog("removing bar");
-      let ratebar = document.getElementById("ryd-bar-container");
-      ratebar.parentNode.removeChild(ratebar);
+      document.getElementById("ryd-bar-container").style.width = widthPx + "px";
+      document.getElementById("ryd-bar").style.width = widthPercent + "%";
+      document.querySelector(
+        "#ryd-dislike-tooltip > #tooltip"
+      ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+      if (extConfig.coloredBar) {
+        document.getElementById("ryd-bar-container").style.backgroundColor =
+          getColorFromTheme(false);
+        document.getElementById("ryd-bar").style.backgroundColor =
+          getColorFromTheme(true);
+      }
     }
+  } else {
+    cLog("removing bar");
+    let ratebar = document.getElementById("ryd-bar-container");
+    ratebar.parentNode.removeChild(ratebar);
   }
 }
 

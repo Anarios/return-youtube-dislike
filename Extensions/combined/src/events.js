@@ -145,6 +145,7 @@ function handleColoredBarChangeEvent(value) {
 }
 
 function handleColorThemeChangeEvent(value) {
+  if (!value) value = "classic";
   extConfig.colorTheme = value;
 }
 

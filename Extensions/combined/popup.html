@@ -102,10 +102,7 @@
         >
       </label>
       <br />
-      <label class="switch" data-hover="Use custom colors in new pages.">
-        <input type="checkbox" id="colored_bar" />
-      </label>
-      <label class="switch">
+      <label class="switch" data-hover="Round down numbers (default YouTube behavior)">
         <input type="checkbox" id="number_round_down" />
         <span class="slider" />
         <span class="switchLabel">Show rounded down numbers</span>
@@ -119,15 +116,15 @@
           <option value="standard" id="number_format_standard"></option>
         </select>
       </div>
-
-      <!-- <br />
-      <label class="switch">
-        <input type="checkbox" id="color_ratio" />
-        <span class="slider" />
-        <span class="switchLabel">Colorize ratio bar</span>
-      </label>
       <br />
-      <label class="switch" data-hover="Use custom colors in new pages.">
+      <div class="custom-select">
+        <label class="switch" data-hover="Use custom colors for ratio bar.">
+          <input type="checkbox" id="colored_bar" />
+          <span class="slider" />
+          <span class="switchLabel">Colorize ratio bar</span>
+        </label>
+      </div>
+      <label class="switch" data-hover="Use custom colors for thumb icons.">
         <input type="checkbox" id="colored_thumbs" />
         <span class="slider" />
         <span class="switchLabel">Colorize thumbs</span>
@@ -137,26 +134,32 @@
         <label for="color_theme">Color theme:</label>
         <select name="color_theme" id="color_theme">
           <option value="classic" id="color_theme_classic">Classic</option>
-          <option value="accessible" id="color_theme_accessible">Accessible</option>
+          <option value="accessible" id="color_theme_accessible">
+            Accessible
+          </option>
           <option value="neon" id="color_theme_neon">Neon</option>
         </select>
-        <span id="color_theme_example_like" style="display: inline-block; vertical-align: text-top; width: 1em; height: 1em;">&nbsp;</span>
-        <span id="color_theme_example_dislike"  style="display: inline-block; vertical-align: text-top; width: 1em; height: 1em;">&nbsp;</span>
+        <span
+          id="color_theme_example_like"
+          style="
+            display: inline-block;
+            vertical-align: text-top;
+            width: 1em;
+            height: 1em;
+          "
+          >&nbsp;</span
+        >
+        <span
+          id="color_theme_example_dislike"
+          style="
+            display: inline-block;
+            vertical-align: text-top;
+            width: 1em;
+            height: 1em;
+          "
+          >&nbsp;</span
+        >
       </div>
-
-      <!-- <br />
-      <label class="switch">
-        <input type="checkbox" id="star_ratio" />
-        <span class="slider" />
-        <span class="switchLabel">5-star Rating Bar</span>
-      </label>
-      <br /> -->
-
-      <!-- <label class="switch">
-        <input type="checkbox" id="disable_api_unlisted" />
-        <span class="slider" />
-        <span class="switchLabel">Lorem ipsum dolor sit amet</span> </label
-      ><br /> -->
     </fieldset>
   </body>
   <script src="popup.js"></script>

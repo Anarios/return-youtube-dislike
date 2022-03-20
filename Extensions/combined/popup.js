@@ -55,17 +55,21 @@ function createLink(url, id) {
     chrome.tabs.create({ url: url });
   });
 }
+
 document
   .getElementById("disable_vote_submission")
   .addEventListener("click", (ev) => {
     chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
   });
+
 document.getElementById("colored_thumbs").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ coloredThumbs: ev.target.checked });
 });
+
 document.getElementById("colored_bar").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ coloredBar: ev.target.checked });
 });
+
 document.getElementById("color_theme").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ colorTheme: ev.target.value });
 });
@@ -223,6 +227,9 @@ function handleColoredBarChangeEvent(value) {
 }
 
 function handleColorThemeChangeEvent(value) {
+  if (!value) {
+    value = "classic";
+  }
   config.colorTheme = value;
   document
     .getElementById("color_theme")
@@ -236,6 +243,7 @@ function updateColorThemePreviewContent(themeName) {
   document.getElementById("color_theme_example_dislike").style.backgroundColor =
     getColorFromTheme(themeName, false);
 }
+
 function handleNumberDisplayRoundDownChangeEvent(value) {
   config.numberDisplayRoundDown = value;
   document.getElementById("number_round_down").checked = value;
@@ -251,6 +259,14 @@ function handleNumberDisplayFormatChangeEvent(value) {
 function getNumberFormatter(optionSelect) {
   let formatterNotation;
   let formatterCompactDisplay;
+  let userLocales;
+  try {
+    userLocales = new URL(
+      Array.from(document.querySelectorAll("head > link[rel='search']"))
+        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+        ?.getAttribute("href")
+    )?.searchParams?.get("locale");
+  } catch {}
 
   switch (optionSelect) {
     case "compactLong":
