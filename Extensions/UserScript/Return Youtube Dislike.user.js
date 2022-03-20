@@ -51,7 +51,7 @@ function isInViewport(element) {
 
 function getButtons() {
   if(isShorts()) {
-    let elements=document.querySelectorAll("#like-button > ytd-like-button-renderer");
+    let elements=document.querySelectorAll(isMobile ? "ytm-like-button-renderer" : "#like-button > ytd-like-button-renderer");
     for(let element of elements) {
       if(isInViewport(element)) {
         return element;
@@ -360,16 +360,20 @@ function setEventListeners(evt) {
   function checkForJS_Finish(check) {
     console.log();
     if (isShorts() || getButtons()?.offsetParent && isVideoLoaded()) {
-      clearInterval(jsInitChecktimer);
       const buttons = getButtons();
 
       if (!window.returnDislikeButtonlistenersSet) {
         cLog("Registering button listeners...");
-        buttons.children[0].addEventListener("click", likeClicked);
-        buttons.children[1].addEventListener("click", dislikeClicked);
+        try {
+          buttons.children[0].addEventListener("click", likeClicked);
+          buttons.children[1].addEventListener("click", dislikeClicked);
+          buttons.children[0].addEventListener("touchstart", likeClicked);
+          buttons.children[1].addEventListener("touchstart", dislikeClicked);
+        } catch { return } //Don't spam errors into the console
         window.returnDislikeButtonlistenersSet = true;
       }
       setInitialState();
+      clearInterval(jsInitChecktimer);
     }
   }
 
