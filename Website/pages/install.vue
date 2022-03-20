@@ -65,9 +65,13 @@
         No liability on our side, use at your own risk.
       </p>
     </div>
-    <v-btn class="mainAltButton" :href="androidVanced" target="_blank">
+    <v-btn class="mainAltButton" :href="androidNewPipe" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
-      Android (Youtube Vanced)
+      Android (NewPipe fork)
+    </v-btn>
+    <v-btn class="mainAltButton" :href="androidVueTube" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
+      Android (VueTube)
     </v-btn>
     <v-btn class="mainAltButton" :href="iosJailbreakLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
@@ -97,7 +101,8 @@ export default {
         "https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js",
 
       iosJailbreakLink: "https://chariz.com/get/return-youtube-dislike/",
-      androidVanced: "https://vancedapp.com/",
+      androidNewPipe: "https://github.com/polymorphicshade/NewPipe",
+      androidVueTube: "https://vuetube.app",
     };
   },
 };
