@@ -1,6 +1,12 @@
 import { getLikeButton, getDislikeButton, getButtons } from "./buttons";
 import { createRateBar } from "./bar";
-import { getBrowser, getVideoId, cLog, numberFormat } from "./utils";
+import { 
+  getBrowser,
+  getVideoId,
+  cLog,
+  numberFormat,
+  getColorFromTheme,
+} from "./utils";
 import { sendVideoIds } from "./events";
 
 //TODO: Do not duplicate here and in ryd.background.js
@@ -13,6 +19,9 @@ const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
 
 let extConfig = {
   disableVoteSubmission: false,
+  coloredThumbs: false,
+  coloredBar: false,
+  colorTheme: "classic",
   numberDisplayFormat: 'compactShort',
   numberDisplayRoundDown: true,
 };
@@ -109,6 +118,10 @@ function processResponse(response, storedData) {
   storedData.dislikes = parseInt(response.dislikes);
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
   createRateBar(storedData.likes, storedData.dislikes);
+  if (extConfig.coloredThumbs === true) {
+    getLikeButton().style.color = getColorFromTheme(true);
+    getDislikeButton().style.color = getColorFromTheme(false);
+  }
 }
 
 async function setState(storedData) {
@@ -153,6 +166,9 @@ function setInitialState() {
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeColoredThumbs();
+  initializeColoredBar();
+  initializeColorTheme();
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
 }
@@ -167,6 +183,26 @@ function initializeDisableVoteSubmission() {
   });
 }
 
+
+function initializeColoredThumbs() {
+  getBrowser().storage.sync.get(['coloredThumbs'], (res) => {
+    if (res.coloredThumbs === undefined) {
+      getBrowser().storage.sync.set({coloredThumbs: false});
+    }
+    else {
+      extConfig.coloredThumbs = res.coloredThumbs;
+    }
+  });
+}
+
+function initializeColoredBar() {
+  getBrowser().storage.sync.get(['coloredBar'], (res) => {
+    if (res.coloredBar === undefined) {
+      getBrowser().storage.sync.set({coloredBar: false});
+    }
+    else {
+      extConfig.coloredBar = res.coloredBar;
+    }
 function initializeNumberDisplayRoundDown() {
   getBrowser().storage.sync.get(["numberDisplayRoundDown"], (res) => {
     if (res.numberDisplayRoundDown === undefined) {
@@ -177,6 +213,16 @@ function initializeNumberDisplayRoundDown() {
   });
 }
 
+
+function initializeColorTheme() {
+  getBrowser().storage.sync.get(['colorTheme'], (res) => {
+    if (res.colorTheme === undefined) {
+      getBrowser().storage.sync.set({colorTheme: false});
+    }
+    else {
+      extConfig.colorTheme = res.colorTheme;
+    }
+  }
 function initializeNumberDisplayFormat() {
   getBrowser().storage.sync.get(['numberDisplayFormat'], (res) => {
     if (res.numberDisplayFormat === undefined) {

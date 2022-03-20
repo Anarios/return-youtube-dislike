@@ -111,7 +111,20 @@ function storageChangeHandler(changes, area) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
     );
+  if (changes.coloredThumbs !== undefined) {
+    handleColoredThumbsChangeEvent(
+      changes.coloredThumbs.newValue
+    );
   }
+  if (changes.coloredBar !== undefined) {
+    handleColoredBarChangeEvent(
+      changes.coloredBar.newValue
+    );
+  }
+  if (changes.colorTheme !== undefined) {
+    handleColorThemeChangeEvent(
+      changes.colorTheme.newValue
+    );
   if (changes.numberDisplayRoundDown !== undefined) {
     handleNumberDisplayRoundDownChangeEvent(
       changes.numberDisplayRoundDown.newValue
@@ -126,6 +139,19 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   extConfig.disableVoteSubmission = value;
 }
 
+
+function handleColoredThumbsChangeEvent(value) {
+  extConfig.coloredThumbs = value;
+}
+
+function handleColoredBarChangeEvent(value) {
+  extConfig.coloredBar = value;
+}
+
+function handleColorThemeChangeEvent(value) {
+  extConfig.colorTheme = value;
+}
+    
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
 }

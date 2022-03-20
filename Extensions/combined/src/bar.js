@@ -1,7 +1,11 @@
 import { getButtons } from "./buttons";
+import { likesDisabledState, extConfig } from "./state";
+import {
+  cLog,
+  getColorFromTheme,
+} from "./utils";
 import { isMobile, likesDisabledState } from "./state";
 import { cLog } from "./utils";
-
 function createRateBar(likes, dislikes) {
   if (!likesDisabledState) {
     let rateBar = document.getElementById("ryd-bar-container");
@@ -14,6 +18,15 @@ function createRateBar(likes, dislikes) {
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
+
+    if (!rateBar) {
+      let colorLikeStyle = '';
+      let colorDislikeStyle = '';
+      if (extConfig.coloredBar) {
+        colorLikeStyle = '; background-color: ' + getColorFromTheme(true);
+        colorDislikeStyle = '; background-color: ' + getColorFromTheme(false);
+      }
+
     if (!rateBar && !isMobile()) {
       (
         document.getElementById("menu-container") ||
@@ -25,11 +38,11 @@ function createRateBar(likes, dislikes) {
             <div class="ryd-tooltip-bar-container">
                <div
                   id="ryd-bar-container"
-                  style="width: 100%; height: 2px;"
+                  style="width: 100%; height: 2px;${colorDislikeStyle}"
                   >
                   <div
                      id="ryd-bar"
-                     style="width: ${widthPercent}%; height: 100%"
+                     style="width: ${widthPercent}%; height: 100%${colorLikeStyle}"
                      ></div>
                </div>
             </div>
@@ -45,6 +58,10 @@ function createRateBar(likes, dislikes) {
       document.querySelector(
         "#ryd-dislike-tooltip > #tooltip"
       ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+      if (extConfig.coloredBar) {
+        document.getElementById("ryd-bar-container").style.backgroundColor = getColorFromTheme(false);
+        document.getElementById("ryd-bar").style.backgroundColor = getColorFromTheme(true);
+      }
     }
   } else {
     cLog("removing bar");
