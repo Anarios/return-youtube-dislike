@@ -78,8 +78,23 @@ function getVideoId(url) {
   if (pathname.startsWith("/clip")) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
+    if (pathname.startsWith("/shorts")) {
+      return pathname.substr(8);
+    }
     return urlObject.searchParams.get("v");
   }
+}
+
+function isInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  const height = innerHeight || document.documentElement.clientHeight;
+  const width = innerWidth || document.documentElement.clientWidth;
+  return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= height &&
+      rect.right <= width
+  );
 }
 
 function isVideoLoaded() {
@@ -100,4 +115,4 @@ function cLog(message, writer) {
   }
 }
 
-export { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog }
+export { numberFormat, getBrowser, getVideoId, isInViewport, isVideoLoaded, cLog }

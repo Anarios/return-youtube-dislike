@@ -1,5 +1,5 @@
 import { getButtons } from "./buttons";
-import { likesDisabledState } from "./state";
+import { isMobile, likesDisabledState } from "./state";
 import { cLog } from "./utils";
 
 function createRateBar(likes, dislikes) {
@@ -14,7 +14,7 @@ function createRateBar(likes, dislikes) {
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
-    if (!rateBar) {
+    if (!rateBar && !isMobile()) {
       (
         document.getElementById("menu-container") ||
         document.querySelector("ytm-slim-video-action-bar-renderer")

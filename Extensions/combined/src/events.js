@@ -100,6 +100,8 @@ function addLikeDislikeEventListener() {
   if (!window.returnDislikeButtonlistenersSet) {
     buttons.children[0].addEventListener("click", likeClicked);
     buttons.children[1].addEventListener("click", dislikeClicked);
+    buttons.children[0].addEventListener("touchstart", likeClicked);
+    buttons.children[1].addEventListener("touchstart", dislikeClicked);
     window.returnDislikeButtonlistenersSet = true;
   }
 }

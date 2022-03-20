@@ -1,7 +1,8 @@
 {
-  "name": "Return YouTube Dislike",
-  "description": "Returns ability to see dislikes",
-  "version": "2.1.0.3",
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDesc__",
+  "default_locale": "en",
+  "version": "2.1.0.4",
   "manifest_version": 2,
   "background": {
     "scripts": ["ryd.background.js"]

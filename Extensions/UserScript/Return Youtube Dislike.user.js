@@ -30,13 +30,34 @@ let likesvalue = 0;
 let dislikesvalue = 0;
 
 let isMobile = location.hostname == "m.youtube.com";
+let isShorts = () => location.pathname.startsWith("/shorts")
 let mobileDislikes = 0;
 function cLog(text, subtext = "") {
   subtext = subtext.trim() === "" ? "" : `(${subtext})`;
   console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
 }
 
+function isInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  const height = innerHeight || document.documentElement.clientHeight;
+  const width = innerWidth || document.documentElement.clientWidth;
+  return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= height &&
+      rect.right <= width
+  );
+}
+
 function getButtons() {
+  if(isShorts()) {
+    let elements=document.querySelectorAll(isMobile ? "ytm-like-button-renderer" : "#like-button > ytd-like-button-renderer");
+    for(let element of elements) {
+      if(isInViewport(element)) {
+        return element;
+      }
+    }
+  }
   if (isMobile) {
     return document.querySelector(".slim-video-action-bar-actions");
   }
@@ -179,7 +200,7 @@ function createRateBar(likes, dislikes) {
   const widthPercent =
     likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
-  if (!rateBar) {
+  if (!rateBar && !isMobile) {
     document.getElementById("menu-container").insertAdjacentHTML(
       "beforeend",
       `
@@ -213,6 +234,7 @@ function createRateBar(likes, dislikes) {
     ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
   }
 }
+
 
 function setState() {
   cLog("Fetching votes...");
@@ -287,6 +309,9 @@ function getVideoId() {
   if (pathname.startsWith("/clip")) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
+    if (pathname.startsWith("/shorts")) {
+      return pathname.substr(8);
+    }
     return urlObject.searchParams.get("v");
   }
 }
@@ -334,27 +359,26 @@ function setEventListeners(evt) {
 
   function checkForJS_Finish(check) {
     console.log();
-    if (getButtons()?.offsetParent && isVideoLoaded()) {
-      clearInterval(jsInitChecktimer);
+    if (isShorts() || getButtons()?.offsetParent && isVideoLoaded()) {
       const buttons = getButtons();
 
       if (!window.returnDislikeButtonlistenersSet) {
         cLog("Registering button listeners...");
-        buttons.children[0].addEventListener("click", likeClicked);
-        buttons.children[1].addEventListener("click", dislikeClicked);
+        try {
+          buttons.children[0].addEventListener("click", likeClicked);
+          buttons.children[1].addEventListener("click", dislikeClicked);
+          buttons.children[0].addEventListener("touchstart", likeClicked);
+          buttons.children[1].addEventListener("touchstart", dislikeClicked);
+        } catch { return } //Don't spam errors into the console
         window.returnDislikeButtonlistenersSet = true;
       }
       setInitialState();
+      clearInterval(jsInitChecktimer);
     }
   }
 
-  if (
-    window.location.href.indexOf("watch?") >= 0 ||
-    (isMobile && evt?.indexOf("watch?") >= 0)
-  ) {
-    cLog("Setting up...");
-    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
-  }
+  cLog("Setting up...");
+  jsInitChecktimer = setInterval(checkForJS_Finish, 111);
 }
 
 (function () {

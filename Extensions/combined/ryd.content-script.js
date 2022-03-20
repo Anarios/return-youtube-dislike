@@ -9,6 +9,7 @@ import {
 //---   Import State Functions   ---//
 import {
   isMobile,
+  isShorts,
   isVideoDisliked,
   isVideoLiked,
   getState,
@@ -35,18 +36,16 @@ let jsInitChecktimer = null;
 
 function setEventListeners(evt) {
   function checkForJS_Finish() {
-    if (getButtons()?.offsetParent && isVideoLoaded()) {
-      clearInterval(jsInitChecktimer);
-      jsInitChecktimer = null;
+    if (isShorts() || getButtons()?.offsetParent && isVideoLoaded()) {
       addLikeDislikeEventListener();
       setInitialState();
       getBrowser().storage.onChanged.addListener(storageChangeHandler);
+      clearInterval(jsInitChecktimer);
+      jsInitChecktimer = null;
     }
   }
 
-  if (window.location.href.indexOf("watch?") >= 0) {
-    jsInitChecktimer = setInterval(checkForJS_Finish, 111);
-  }
+  jsInitChecktimer = setInterval(checkForJS_Finish, 111);
 }
 
 setEventListeners();
