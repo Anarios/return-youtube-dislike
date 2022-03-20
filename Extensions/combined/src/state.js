@@ -27,6 +27,10 @@ function isMobile() {
   return location.hostname == "m.youtube.com";
 }
 
+function isShorts() {
+  return location.pathname.startsWith("/shorts")
+}
+
 function isVideoLiked() {
   if (isMobile()) {
     return (
@@ -85,6 +89,11 @@ function setDislikes(dislikesCount) {
 }
 
 function getLikeCountFromButton() {
+  if(isShorts()) {
+    //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
+    //It should be possible to fix this function, but it's not critical to showing the dislike count.
+    return 0;
+  }
   let likesStr = getLikeButton()
     .querySelector("button")
     .getAttribute("aria-label")
@@ -156,6 +165,7 @@ function initializeDisableVoteSubmission() {
 
 export {
   isMobile,
+  isShorts,
   isVideoDisliked,
   isVideoLiked,
   getState,
