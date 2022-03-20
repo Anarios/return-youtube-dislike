@@ -3,12 +3,16 @@ import { isInViewport } from "./utils";
 
 function getButtons() {
   //---   If Watching Youtube Shorts:   ---//
-  if(isShorts()) {
-    let elements=document.querySelectorAll(isMobile() ? "ytm-like-button-renderer" : "#like-button > ytd-like-button-renderer"); 
-    for(let element of elements) {
+  if (isShorts()) {
+    let elements = document.querySelectorAll(
+      isMobile()
+        ? "ytm-like-button-renderer"
+        : "#like-button > ytd-like-button-renderer"
+    );
+    for (let element of elements) {
       //Youtube Shorts can have multiple like/dislike buttons when scrolling through videos
       //However, only one of them should be visible (no matter how you zoom)
-      if(isInViewport(element)) {
+      if (isInViewport(element)) {
         return element;
       }
     }

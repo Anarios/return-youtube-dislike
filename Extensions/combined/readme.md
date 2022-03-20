@@ -1,7 +1,9 @@
 # Extension Source
+
 ## Guide to Compiling
 
 ## Compiling to Development (Testing)
+
 <ol>
     <li>Go to the root directory of the project</li>
     <li>Run <code>npm i</code> to install all project dependancies (if not done so already)</li>
@@ -9,6 +11,7 @@
 </ol>
 
 ## Compiling to Production (Final Release)
+
 <ol>
     <li>Go to the root directory of the project</li>
     <li>Run <code>npm i</code> to install all project dependancies (if not done so already)</li>

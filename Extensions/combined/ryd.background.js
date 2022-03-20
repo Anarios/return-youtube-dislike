@@ -1,6 +1,6 @@
 const apiUrl = "https://returnyoutubedislikeapi.com";
-const voteDisabledIconName = 'icon_hold128.png';
-const defaultIconName = 'icon128.png';
+const voteDisabledIconName = "icon_hold128.png";
+const defaultIconName = "icon128.png";
 let api;
 
 /** stores extension's global config */
@@ -11,14 +11,14 @@ let extConfig = {
   colorTheme: "classic", // classic, accessible, neon
   // coloredThumbs: false,
   // coloredBar: false,
-  numberDisplayFormat: 'compactShort', // compactShort, compactLong, standard
+  numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
 };
 
 if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
 
-initExtConfig()
+initExtConfig();
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "get_auth_token") {
@@ -97,7 +97,7 @@ async function sendVote(videoId, vote) {
           await sendVote(videoId, vote);
           return;
         }
-        return response.json()
+        return response.json();
       })
       .then((response) => {
         solvePuzzle(response).then((solvedPuzzle) => {
@@ -238,7 +238,9 @@ function generateUserID(length = 36) {
 
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
-    handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
+    handleDisableVoteSubmissionChangeEvent(
+      changes.disableVoteSubmission.newValue
+    );
   }
   if (changes.coloredThumbs !== undefined) {
     handleColoredThumbsChangeEvent(changes.coloredThumbs.newValue);
@@ -248,10 +250,11 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
+  }
   if (changes.numberDisplayRoundDown !== undefined) {
     handleNumberDisplayRoundDownChangeEvent(
       changes.numberDisplayRoundDown.newValue
-      );
+    );
   }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
@@ -276,9 +279,11 @@ function handleNumberDisplayRoundDownChangeEvent(value) {
 }
 
 function changeIcon(iconName) {
-  if (api.action !== undefined) api.action.setIcon({path: "/icons/" + iconName});
-  else if (api.browserAction !== undefined) api.browserAction.setIcon({path: "/icons/" + iconName});
-  else console.log('changing icon is not supported');
+  if (api.action !== undefined)
+    api.action.setIcon({ path: "/icons/" + iconName });
+  else if (api.browserAction !== undefined)
+    api.browserAction.setIcon({ path: "/icons/" + iconName });
+  else console.log("changing icon is not supported");
 }
 
 function handleColoredThumbsChangeEvent(value) {
@@ -305,61 +310,59 @@ function initExtConfig() {
 }
 
 function initializeDisableVoteSubmission() {
-  api.storage.sync.get(['disableVoteSubmission'], (res) => {
+  api.storage.sync.get(["disableVoteSubmission"], (res) => {
     if (res.disableVoteSubmission === undefined) {
-      api.storage.sync.set({disableVoteSubmission: false});
-    }
-    else {
+      api.storage.sync.set({ disableVoteSubmission: false });
+    } else {
       extConfig.disableVoteSubmission = res.disableVoteSubmission;
       if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
     }
   });
 }
 
-
 function initializeColoredThumbs() {
-  api.storage.sync.get(['coloredThumbs'], (res) => {
+  api.storage.sync.get(["coloredThumbs"], (res) => {
     if (res.coloredThumbs === undefined) {
-      api.storage.sync.set({coloredThumbs: false});
-    }
-    else {
+      api.storage.sync.set({ coloredThumbs: false });
+    } else {
       extConfig.coloredThumbs = res.coloredThumbs;
     }
-    
+  });
+}
+
 function initializeNumberDisplayRoundDown() {
-  api.storage.sync.get(['numberDisplayRoundDown'], (res) => {
+  api.storage.sync.get(["numberDisplayRoundDown"], (res) => {
     if (res.numberDisplayRoundDown === undefined) {
-      api.storage.sync.set({numberDisplayRoundDown: true});
+      api.storage.sync.set({ numberDisplayRoundDown: true });
     } else {
       extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
     }
   });
 }
 
-
 function initializeColoredBar() {
-  api.storage.sync.get(['coloredBar'], (res) => {
+  api.storage.sync.get(["coloredBar"], (res) => {
     if (res.coloredBar === undefined) {
-      api.storage.sync.set({coloredBar: false});
-    }
-    else {
+      api.storage.sync.set({ coloredBar: false });
+    } else {
       extConfig.coloredBar = res.coloredBar;
     }
   });
 }
 
 function initializeColorTheme() {
-  api.storage.sync.get(['colorTheme'], (res) => {
+  api.storage.sync.get(["colorTheme"], (res) => {
     if (res.colorTheme === undefined) {
-      api.storage.sync.set({colorTheme: false});
-    }
-    else {
+      api.storage.sync.set({ colorTheme: false });
+    } else {
       extConfig.colorTheme = res.colorTheme;
     }
+  });
+}
 function initializeNumberDisplayFormat() {
-  api.storage.sync.get(['numberDisplayFormat'], (res) => {
+  api.storage.sync.get(["numberDisplayFormat"], (res) => {
     if (res.numberDisplayFormat === undefined) {
-      api.storage.sync.set({ numberDisplayFormat: 'compactShort' });
+      api.storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
     }
@@ -371,5 +374,7 @@ function isChrome() {
 }
 
 function isFirefox() {
-  return typeof browser !== "undefined" && typeof browser.runtime !== "undefined";
+  return (
+    typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
+  );
 }

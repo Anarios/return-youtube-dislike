@@ -1,6 +1,6 @@
 import { getLikeButton, getDislikeButton, getButtons } from "./buttons";
 import { createRateBar } from "./bar";
-import { 
+import {
   getBrowser,
   getVideoId,
   cLog,
@@ -22,7 +22,7 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic",
-  numberDisplayFormat: 'compactShort',
+  numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
 };
 
@@ -39,7 +39,7 @@ function isMobile() {
 }
 
 function isShorts() {
-  return location.pathname.startsWith("/shorts")
+  return location.pathname.startsWith("/shorts");
 }
 
 function isVideoLiked() {
@@ -100,7 +100,7 @@ function setDislikes(dislikesCount) {
 }
 
 function getLikeCountFromButton() {
-  if(isShorts()) {
+  if (isShorts()) {
     //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
     //It should be possible to fix this function, but it's not critical to showing the dislike count.
     return 0;
@@ -183,26 +183,26 @@ function initializeDisableVoteSubmission() {
   });
 }
 
-
 function initializeColoredThumbs() {
-  getBrowser().storage.sync.get(['coloredThumbs'], (res) => {
+  getBrowser().storage.sync.get(["coloredThumbs"], (res) => {
     if (res.coloredThumbs === undefined) {
-      getBrowser().storage.sync.set({coloredThumbs: false});
-    }
-    else {
+      getBrowser().storage.sync.set({ coloredThumbs: false });
+    } else {
       extConfig.coloredThumbs = res.coloredThumbs;
     }
   });
 }
 
 function initializeColoredBar() {
-  getBrowser().storage.sync.get(['coloredBar'], (res) => {
+  getBrowser().storage.sync.get(["coloredBar"], (res) => {
     if (res.coloredBar === undefined) {
-      getBrowser().storage.sync.set({coloredBar: false});
-    }
-    else {
+      getBrowser().storage.sync.set({ coloredBar: false });
+    } else {
       extConfig.coloredBar = res.coloredBar;
     }
+  });
+}
+
 function initializeNumberDisplayRoundDown() {
   getBrowser().storage.sync.get(["numberDisplayRoundDown"], (res) => {
     if (res.numberDisplayRoundDown === undefined) {
@@ -213,22 +213,21 @@ function initializeNumberDisplayRoundDown() {
   });
 }
 
-
 function initializeColorTheme() {
-  getBrowser().storage.sync.get(['colorTheme'], (res) => {
+  getBrowser().storage.sync.get(["colorTheme"], (res) => {
     if (res.colorTheme === undefined) {
-      getBrowser().storage.sync.set({colorTheme: false});
-    }
-    else {
+      getBrowser().storage.sync.set({ colorTheme: false });
+    } else {
       extConfig.colorTheme = res.colorTheme;
     }
-  }
+  });
+}
+
 function initializeNumberDisplayFormat() {
-  getBrowser().storage.sync.get(['numberDisplayFormat'], (res) => {
+  getBrowser().storage.sync.get(["numberDisplayFormat"], (res) => {
     if (res.numberDisplayFormat === undefined) {
-      getBrowser().storage.sync.set({ numberDisplayFormat: 'compactShort' });
-    }
-    else {
+      getBrowser().storage.sync.set({ numberDisplayFormat: "compactShort" });
+    } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
     }
   });

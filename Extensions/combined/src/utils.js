@@ -1,6 +1,4 @@
-import {
-  extConfig,
-} from "./state";
+import { extConfig } from "./state";
 
 function roundDown(num) {
   if (num < 1000) return num;
@@ -19,35 +17,37 @@ function numberFormat(numberState) {
         ?.getAttribute("href")
     )?.searchParams?.get("locale");
   } catch {}
-  
+
   let numberDisplay;
   if (extConfig.numberDisplayRoundDown === false) {
     numberDisplay = numberState;
   } else {
     numberDisplay = roundDown(numberState);
   }
-  return getNumberFormatter(extConfig.numberDisplayFormat).format(numberDisplay);
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(
+    numberDisplay
+  );
 }
 
 function getNumberFormatter(optionSelect) {
   let formatterNotation;
   let formatterCompactDisplay;
-  
-  switch(optionSelect) {
-    case 'compactLong':
-      formatterNotation = 'compact';
-      formatterCompactDisplay = 'long';
+
+  switch (optionSelect) {
+    case "compactLong":
+      formatterNotation = "compact";
+      formatterCompactDisplay = "long";
       break;
-    case 'standard': 
-      formatterNotation = 'standard';
-      formatterCompactDisplay = 'short';
+    case "standard":
+      formatterNotation = "standard";
+      formatterCompactDisplay = "short";
       break;
-    case 'compactShort':
+    case "compactShort":
     default:
-      formatterNotation = 'compact';
-      formatterCompactDisplay = 'short';
+      formatterNotation = "compact";
+      formatterCompactDisplay = "short";
   }
-  
+
   const formatter = Intl.NumberFormat(
     document.documentElement.lang || userLocales || navigator.language,
     {
@@ -90,10 +90,10 @@ function isInViewport(element) {
   const height = innerHeight || document.documentElement.clientHeight;
   const width = innerWidth || document.documentElement.clientWidth;
   return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= height &&
-      rect.right <= width
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= height &&
+    rect.right <= width
   );
 }
 
@@ -115,30 +115,29 @@ function cLog(message, writer) {
   }
 }
 
-
 function getColorFromTheme(voteIsLike) {
   let colorString;
-  switch(extConfig.colorTheme) {
-    case 'accessible':
+  switch (extConfig.colorTheme) {
+    case "accessible":
       if (voteIsLike === true) {
-        colorString = 'dodgerblue';
+        colorString = "dodgerblue";
       } else {
-        colorString = 'gold';
+        colorString = "gold";
       }
       break;
-    case 'neon':
+    case "neon":
       if (voteIsLike === true) {
-        colorString = 'aqua';
+        colorString = "aqua";
       } else {
-        colorString = 'magenta';
+        colorString = "magenta";
       }
       break;
-    case 'classic':
+    case "classic":
     default:
       if (voteIsLike === true) {
-        colorString = 'lime';
+        colorString = "lime";
       } else {
-        colorString = 'red';
+        colorString = "red";
       }
   }
   return colorString;
@@ -151,5 +150,12 @@ export {
   isVideoLoaded,
   cLog,
   getColorFromTheme,
-}
-export { numberFormat, getBrowser, getVideoId, isInViewport, isVideoLoaded, cLog }
+};
+export {
+  numberFormat,
+  getBrowser,
+  getVideoId,
+  isInViewport,
+  isVideoLoaded,
+  cLog,
+};

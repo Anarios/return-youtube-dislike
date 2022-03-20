@@ -25,18 +25,30 @@ import {
 } from "./src/state";
 
 //---   Import Video & Browser Functions   ---//
-import { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog } from "./src/utils";
+import {
+  numberFormat,
+  getBrowser,
+  getVideoId,
+  isVideoLoaded,
+  cLog,
+} from "./src/utils";
 import { createRateBar } from "./src/bar";
-import { sendVideoIds, sendVote, likeClicked, dislikeClicked, addLikeDislikeEventListener, storageChangeHandler  } from "./src/events"
+import {
+  sendVideoIds,
+  sendVote,
+  likeClicked,
+  dislikeClicked,
+  addLikeDislikeEventListener,
+  storageChangeHandler,
+} from "./src/events";
 
-
-initExtConfig()
+initExtConfig();
 
 let jsInitChecktimer = null;
 
 function setEventListeners(evt) {
   function checkForJS_Finish() {
-    if (isShorts() || getButtons()?.offsetParent && isVideoLoaded()) {
+    if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       addLikeDislikeEventListener();
       setInitialState();
       getBrowser().storage.onChanged.addListener(storageChangeHandler);

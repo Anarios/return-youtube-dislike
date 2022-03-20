@@ -30,7 +30,7 @@ let likesvalue = 0;
 let dislikesvalue = 0;
 
 let isMobile = location.hostname == "m.youtube.com";
-let isShorts = () => location.pathname.startsWith("/shorts")
+let isShorts = () => location.pathname.startsWith("/shorts");
 let mobileDislikes = 0;
 function cLog(text, subtext = "") {
   subtext = subtext.trim() === "" ? "" : `(${subtext})`;
@@ -42,18 +42,22 @@ function isInViewport(element) {
   const height = innerHeight || document.documentElement.clientHeight;
   const width = innerWidth || document.documentElement.clientWidth;
   return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= height &&
-      rect.right <= width
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= height &&
+    rect.right <= width
   );
 }
 
 function getButtons() {
-  if(isShorts()) {
-    let elements=document.querySelectorAll(isMobile ? "ytm-like-button-renderer" : "#like-button > ytd-like-button-renderer");
-    for(let element of elements) {
-      if(isInViewport(element)) {
+  if (isShorts()) {
+    let elements = document.querySelectorAll(
+      isMobile
+        ? "ytm-like-button-renderer"
+        : "#like-button > ytd-like-button-renderer"
+    );
+    for (let element of elements) {
+      if (isInViewport(element)) {
         return element;
       }
     }
@@ -116,10 +120,10 @@ function checkForUserAvatarButton() {
   if (isMobile) {
     return;
   }
-  if (document.querySelector('#avatar-btn')) {
-    return true
+  if (document.querySelector("#avatar-btn")) {
+    return true;
   } else {
-    return false
+    return false;
   }
 }
 
@@ -235,7 +239,6 @@ function createRateBar(likes, dislikes) {
   }
 }
 
-
 function setState() {
   cLog("Fetching votes...");
   let statsSet = false;
@@ -262,17 +265,17 @@ function likeClicked() {
       likesvalue--;
       createRateBar(likesvalue, dislikesvalue);
       setDislikes(numberFormat(dislikesvalue));
-      previousState = 3
+      previousState = 3;
     } else if (previousState == 2) {
       likesvalue++;
       dislikesvalue--;
-      setDislikes(numberFormat(dislikesvalue))
+      setDislikes(numberFormat(dislikesvalue));
       createRateBar(likesvalue, dislikesvalue);
-      previousState = 1
+      previousState = 1;
     } else if (previousState == 3) {
       likesvalue++;
-      createRateBar(likesvalue, dislikesvalue)
-      previousState = 1
+      createRateBar(likesvalue, dislikesvalue);
+      previousState = 1;
     }
   }
 }
@@ -283,18 +286,18 @@ function dislikeClicked() {
       dislikesvalue++;
       setDislikes(numberFormat(dislikesvalue));
       createRateBar(likesvalue, dislikesvalue);
-      previousState = 2
+      previousState = 2;
     } else if (previousState == 2) {
       dislikesvalue--;
       setDislikes(numberFormat(dislikesvalue));
       createRateBar(likesvalue, dislikesvalue);
-      previousState = 3
+      previousState = 3;
     } else if (previousState == 1) {
       likesvalue--;
       dislikesvalue++;
       setDislikes(numberFormat(dislikesvalue));
       createRateBar(likesvalue, dislikesvalue);
-      previousState = 2
+      previousState = 2;
     }
   }
 }
@@ -359,7 +362,7 @@ function setEventListeners(evt) {
 
   function checkForJS_Finish(check) {
     console.log();
-    if (isShorts() || getButtons()?.offsetParent && isVideoLoaded()) {
+    if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
 
       if (!window.returnDislikeButtonlistenersSet) {
@@ -369,7 +372,9 @@ function setEventListeners(evt) {
           buttons.children[1].addEventListener("click", dislikeClicked);
           buttons.children[0].addEventListener("touchstart", likeClicked);
           buttons.children[1].addEventListener("touchstart", dislikeClicked);
-        } catch { return } //Don't spam errors into the console
+        } catch {
+          return;
+        } //Don't spam errors into the console
         window.returnDislikeButtonlistenersSet = true;
       }
       setInitialState();

@@ -43,7 +43,7 @@ button:hover {
 }
 
 #ext-version {
-  padding: .25rem .5rem;
+  padding: 0.25rem 0.5rem;
 }
 
 #ext-update {
@@ -51,21 +51,21 @@ button:hover {
   color: var(--white);
   text-decoration: none;
   background: var(--primary);
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 #ext-update:hover {
   text-decoration: underline;
 }
 
 #ext {
-  padding: .25rem 0;
+  padding: 0.25rem 0;
   z-index: 69;
   position: fixed;
   background: var(--secondary);
   margin: 0;
   bottom: 1.15rem;
   right: 1.15rem;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
 .switch:before {
@@ -73,8 +73,8 @@ button:hover {
   visibility: hidden;
   width: 250px;
   background-color: var(--secondary);
-  border-radius: .5rem;
-  padding: .5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
 
   position: absolute;
   z-index: 1;
