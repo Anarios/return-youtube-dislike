@@ -23,7 +23,7 @@ module.exports = {
     minimize: false,
   },
   watchOptions: {
-    ignored: "./Extensions/combined/dist/*",
+    ignored: "**/dist/**",
   },
   plugins: [
     // exclude locale files in moment

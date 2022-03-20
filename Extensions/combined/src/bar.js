@@ -1,8 +1,6 @@
 import { getButtons } from "./buttons";
-import { likesDisabledState, extConfig } from "./state";
+import { likesDisabledState, extConfig, isMobile } from "./state";
 import { cLog, getColorFromTheme } from "./utils";
-import { isMobile, likesDisabledState } from "./state";
-import { cLog } from "./utils";
 function createRateBar(likes, dislikes) {
   if (!likesDisabledState) {
     let rateBar = document.getElementById("ryd-bar-container");

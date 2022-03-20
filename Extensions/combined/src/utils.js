@@ -147,15 +147,8 @@ export {
   numberFormat,
   getBrowser,
   getVideoId,
-  isVideoLoaded,
-  cLog,
-  getColorFromTheme,
-};
-export {
-  numberFormat,
-  getBrowser,
-  getVideoId,
   isInViewport,
   isVideoLoaded,
   cLog,
+  getColorFromTheme,
 };
