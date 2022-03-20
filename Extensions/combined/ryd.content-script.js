@@ -37,11 +37,11 @@ let jsInitChecktimer = null;
 function setEventListeners(evt) {
   function checkForJS_Finish() {
     if (isShorts() || getButtons()?.offsetParent && isVideoLoaded()) {
-      clearInterval(jsInitChecktimer);
-      jsInitChecktimer = null;
       addLikeDislikeEventListener();
       setInitialState();
       getBrowser().storage.onChanged.addListener(storageChangeHandler);
+      clearInterval(jsInitChecktimer);
+      jsInitChecktimer = null;
     }
   }
 
