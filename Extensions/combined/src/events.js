@@ -100,6 +100,8 @@ function addLikeDislikeEventListener() {
   if (!window.returnDislikeButtonlistenersSet) {
     buttons.children[0].addEventListener("click", likeClicked);
     buttons.children[1].addEventListener("click", dislikeClicked);
+    buttons.children[0].addEventListener("touchstart", likeClicked);
+    buttons.children[1].addEventListener("touchstart", dislikeClicked);
     window.returnDislikeButtonlistenersSet = true;
   }
 }
@@ -109,7 +111,6 @@ function storageChangeHandler(changes, area) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
     );
-  }
   if (changes.coloredThumbs !== undefined) {
     handleColoredThumbsChangeEvent(
       changes.coloredThumbs.newValue
@@ -124,12 +125,20 @@ function storageChangeHandler(changes, area) {
     handleColorThemeChangeEvent(
       changes.colorTheme.newValue
     );
+  if (changes.numberDisplayRoundDown !== undefined) {
+    handleNumberDisplayRoundDownChangeEvent(
+      changes.numberDisplayRoundDown.newValue
+    );
+  }
+  if (changes.numberDisplayFormat !== undefined) {
+    handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
   extConfig.disableVoteSubmission = value;
 }
+
 
 function handleColoredThumbsChangeEvent(value) {
   extConfig.coloredThumbs = value;
@@ -141,6 +150,14 @@ function handleColoredBarChangeEvent(value) {
 
 function handleColorThemeChangeEvent(value) {
   extConfig.colorTheme = value;
+}
+    
+function handleNumberDisplayFormatChangeEvent(value) {
+  extConfig.numberDisplayFormat = value;
+}
+
+function handleNumberDisplayRoundDownChangeEvent(value) {
+  extConfig.numberDisplayRoundDown = value;
 }
 
 export {

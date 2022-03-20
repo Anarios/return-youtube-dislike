@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta content="text/html; charset=utf-8" />
-    <title>Return YouTube Dislike</title>
+    <title title="__MSG_extensionName__">__MSG_extensionName__</title>
     <link rel="stylesheet" href="popup.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,16 +20,16 @@
         />
         <path d="m8 12.5 5.1-2.9L8 6.7v5.8z" fill="#fff" />
       </svg>
-      <h1 style="margin-bottom: 0.75rem">Return YouTube Dislike</h1>
-      <p style="color: var(--lightGrey)">by Dmitrii Selivanov & Community</p>
+      <h1 style="margin-bottom: 0.75rem" title="__MSG_extensionName__">__MSG_extensionName__</h1>
+      <p style="color: var(--lightGrey)" title="__MSG_textDeveloper__">__MSG_textDeveloper__</p>
 
-      <button id="link_website">Website</button>
-      <button id="link_github">GitHub</button>
+      <button id="link_website" title="__MSG_linkWebsite__">__MSG_linkWebsite__</button>
+      <button id="link_github" >GitHub</button>
       <button id="link_discord">Discord</button>
       <br />
-      <button style="margin-top: 0.3rem" id="link_faq">FAQ</button>
-      <button style="margin-top: 0.3em" id="link_donate">Donate</button>
-      <button style="margin-top: 0.3em" id="link_help">Help</button>
+      <button style="margin-top: 0.3rem" id="link_faq" title="__MSG_linkFAQ__">__MSG_linkFAQ__</button>
+      <button style="margin-top: 0.3em" id="link_donate" title="__MSG_linkDonate__">__MSG_linkDonate__</button>
+      <button style="margin-top: 0.3em" id="link_help" title="__MSG_linkHelp__">__MSG_linkHelp__</button>
 
       <br />
       <br />
@@ -40,7 +40,7 @@
         src="./icons/server.svg"
         alt=""
       />
-      
+
       <br />
       <br />
     </center>
@@ -70,16 +70,35 @@
 
     <!-- dialog box -->
     <fieldset id="advancedSettings">
-      <legend id="advancedLegend">Settings</legend>
+      <legend id="advancedLegend" title="__MSG_legendSettings__">__MSG_legendSettings__</legend>
 
-      <label class="switch" data-hover="Stops counting your likes and dislikes.">
+      <label class="switch" data-hover="__MSG_textSettingsHover__">
         <input type="checkbox" id="disable_vote_submission" />
         <span class="slider" />
-        <span class="switchLabel">Disable vote submission</span>
+        <span class="switchLabel" title="__MSG_textSettings__">__MSG_textSettings__</span>
       </label>
       <br />
       <label class="switch" data-hover="Use custom colors in new pages.">
         <input type="checkbox" id="colored_bar" />
+      </label>
+      <label class="switch">
+        <input type="checkbox" id="number_round_down" />
+        <span class="slider" />
+        <span class="switchLabel">Show rounded down numbers</span>
+      </label>
+      <br />
+      <div class="custom-select">
+        <label for="number_format">Number format:</label>
+        <select name="number_format" id="number_format">
+          <option value="compactShort" id="number_format_compactShort"></option>
+          <option value="compactLong" id="number_format_compactLong"></option>
+          <option value="standard" id="number_format_standard"></option>
+        </select>
+      </div>
+
+      <!-- <br />
+      <label class="switch">
+        <input type="checkbox" id="color_ratio" />
         <span class="slider" />
         <span class="switchLabel">Colorize ratio bar</span>
       </label>

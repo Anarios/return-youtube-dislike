@@ -54,9 +54,20 @@
       </v-btn>
     </div>
 
-    <v-spacer />
+<!--    <div class="mb-4" style="color: #999">-->
+<!--      Get dislikes manually: <input placeholder=" Video URL">-->
+<!--      <p id="output"></p>-->
+<!--    </div>-->
 
-    <div id="sponsors" class="d-flex flex-column items-center py-8">
+    <v-spacer />
+    <div id="support-ukraine" class="d-flex flex-column items-center py-2">
+      <h3 class="mb-2">
+        <v-img src="/ukraine-flag-xs.png" width="40px"></v-img>
+        <a href="https://helpukrainewin.org/">Support Ukraine</a>
+      </h3>
+    </div>
+
+    <div id="cool-people" class="d-flex flex-column items-center py-8">
       <h3 class="mb-4">
         <v-icon class="mb-2">mdi-heart</v-icon>
         Sponsors
@@ -111,6 +122,18 @@ export default {
       ],
     };
   },
+  mounted() {
+    const YOUTUBE_REGEX = /(?:http:|https:)*?\/\/(?:www\.|)(?:youtube\.com|m\.youtube\.com|youtu\.|youtube-nocookie\.com).*(?:v=|v%3D|v\/|(?:a|p)\/(?:a|u)\/\d.*\/|watch\?|vi(?:=|\/)|\/embed\/|oembed\?|be\/|e\/)([^&?%#\/\n]*)/;
+    let lastVideoId = "";
+    window.oninput = (e) => {
+      const videoId = (e.target.value.match(YOUTUBE_REGEX) || {})[1] || e.target.value;
+      if (videoId !== lastVideoId && videoId.length === 11) {
+        fetch("https://returnyoutubedislikeapi.com/votes?videoId=" + (lastVideoId = videoId))
+          .then(resp => resp.json())
+          .then(data => document.getElementById("output").innerText = "Likes=" + data.likes + " Dislikes=" + data.dislikes);
+      }
+    };
+  },
 };
 </script>
 
@@ -118,6 +141,10 @@ export default {
 .sponsor {
   margin: 1rem;
   height: max-content;
+}
+
+input {
+  background-color: #999999;
 }
 
 @media (max-width: 767px) {

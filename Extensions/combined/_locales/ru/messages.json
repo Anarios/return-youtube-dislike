@@ -1,0 +1,35 @@
+{
+    "extensionName": {
+        "message": "Возвращение отметки не нравится YouTube"
+    },
+    "extensionDesc": {
+        "message": "Возвращает способность видеть отметки не нравится"
+    },
+    "textDeveloper": {
+        "message": "Дмитрий Селиванов и сообщество"
+    },
+    "linkWebsite": {
+        "message": "Сайт"
+    },
+    "linkFAQ": {
+        "message": "ЧАВО"
+    },
+    "linkDonate": {
+        "message": "Пожертвовать"
+    },
+    "linkHelp": {
+        "message": "Помощь"
+    },
+    "legendSettings": {
+        "message": "Настройки"
+    },
+    "textSettings": {
+        "message": "Отключить отправку нравится/не нравится"
+    },
+    "textSettingsHover": {
+        "message": "Отключает отправку ваших отметок нравится/не нравится"
+    },
+    "textUpdate": {
+        "message": "обновление до"
+    }
+}

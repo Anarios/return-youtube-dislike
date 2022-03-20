@@ -19,14 +19,43 @@ function numberFormat(numberState) {
         ?.getAttribute("href")
     )?.searchParams?.get("locale");
   } catch {}
+  
+  let numberDisplay;
+  if (extConfig.numberDisplayRoundDown === false) {
+    numberDisplay = numberState;
+  } else {
+    numberDisplay = roundDown(numberState);
+  }
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(numberDisplay);
+}
+
+function getNumberFormatter(optionSelect) {
+  let formatterNotation;
+  let formatterCompactDisplay;
+  
+  switch(optionSelect) {
+    case 'compactLong':
+      formatterNotation = 'compact';
+      formatterCompactDisplay = 'long';
+      break;
+    case 'standard': 
+      formatterNotation = 'standard';
+      formatterCompactDisplay = 'short';
+      break;
+    case 'compactShort':
+    default:
+      formatterNotation = 'compact';
+      formatterCompactDisplay = 'short';
+  }
+  
   const formatter = Intl.NumberFormat(
     document.documentElement.lang || userLocales || navigator.language,
     {
-      notation: "compact",
+      notation: formatterNotation,
+      compactDisplay: formatterCompactDisplay,
     }
   );
-
-  return formatter.format(roundDown(numberState));
+  return formatter;
 }
 
 function getBrowser() {
@@ -49,8 +78,23 @@ function getVideoId(url) {
   if (pathname.startsWith("/clip")) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
+    if (pathname.startsWith("/shorts")) {
+      return pathname.substr(8);
+    }
     return urlObject.searchParams.get("v");
   }
+}
+
+function isInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  const height = innerHeight || document.documentElement.clientHeight;
+  const width = innerWidth || document.documentElement.clientWidth;
+  return (
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= height &&
+      rect.right <= width
+  );
 }
 
 function isVideoLoaded() {
@@ -70,6 +114,7 @@ function cLog(message, writer) {
     console.log(message);
   }
 }
+
 
 function getColorFromTheme(voteIsLike) {
   let colorString;
@@ -107,3 +152,4 @@ export {
   cLog,
   getColorFromTheme,
 }
+export { numberFormat, getBrowser, getVideoId, isInViewport, isVideoLoaded, cLog }

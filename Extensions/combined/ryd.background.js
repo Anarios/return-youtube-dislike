@@ -9,7 +9,11 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
-}
+  // coloredThumbs: false,
+  // coloredBar: false,
+  numberDisplayFormat: 'compactShort', // compactShort, compactLong, standard
+  numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
+};
 
 if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
@@ -244,6 +248,13 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
+  if (changes.numberDisplayRoundDown !== undefined) {
+    handleNumberDisplayRoundDownChangeEvent(
+      changes.numberDisplayRoundDown.newValue
+      );
+  }
+  if (changes.numberDisplayFormat !== undefined) {
+    handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
 }
 
@@ -254,6 +265,14 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   } else {
     changeIcon(defaultIconName);
   }
+}
+
+function handleNumberDisplayFormatChangeEvent(value) {
+  extConfig.numberDisplayFormat = value;
+}
+
+function handleNumberDisplayRoundDownChangeEvent(value) {
+  extConfig.numberDisplayRoundDown = value;
 }
 
 function changeIcon(iconName) {
@@ -281,6 +300,8 @@ function initExtConfig() {
   initializeColoredThumbs();
   initializeColoredBar();
   initializeColorTheme();
+  initializeNumberDisplayFormat();
+  initializeNumberDisplayRoundDown();
 }
 
 function initializeDisableVoteSubmission() {
@@ -295,6 +316,7 @@ function initializeDisableVoteSubmission() {
   });
 }
 
+
 function initializeColoredThumbs() {
   api.storage.sync.get(['coloredThumbs'], (res) => {
     if (res.coloredThumbs === undefined) {
@@ -303,8 +325,17 @@ function initializeColoredThumbs() {
     else {
       extConfig.coloredThumbs = res.coloredThumbs;
     }
+    
+function initializeNumberDisplayRoundDown() {
+  api.storage.sync.get(['numberDisplayRoundDown'], (res) => {
+    if (res.numberDisplayRoundDown === undefined) {
+      api.storage.sync.set({numberDisplayRoundDown: true});
+    } else {
+      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
+    }
   });
 }
+
 
 function initializeColoredBar() {
   api.storage.sync.get(['coloredBar'], (res) => {
@@ -324,6 +355,13 @@ function initializeColorTheme() {
     }
     else {
       extConfig.colorTheme = res.colorTheme;
+    }
+function initializeNumberDisplayFormat() {
+  api.storage.sync.get(['numberDisplayFormat'], (res) => {
+    if (res.numberDisplayFormat === undefined) {
+      api.storage.sync.set({ numberDisplayFormat: 'compactShort' });
+    } else {
+      extConfig.numberDisplayFormat = res.numberDisplayFormat;
     }
   });
 }

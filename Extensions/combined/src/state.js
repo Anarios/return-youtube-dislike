@@ -22,6 +22,8 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic",
+  numberDisplayFormat: 'compactShort',
+  numberDisplayRoundDown: true,
 };
 
 let storedData = {
@@ -34,6 +36,10 @@ let likesDisabledState = true;
 
 function isMobile() {
   return location.hostname == "m.youtube.com";
+}
+
+function isShorts() {
+  return location.pathname.startsWith("/shorts")
 }
 
 function isVideoLiked() {
@@ -81,7 +87,7 @@ function setDislikes(dislikesCount) {
     }
     getButtons().children[1].querySelector("#text").innerText = dislikesCount;
   } else {
-    cLog("likes count diabled by creator");
+    cLog("likes count disabled by creator");
     if (isMobile()) {
       getButtons().children[1].querySelector(
         ".button-renderer-text"
@@ -94,6 +100,11 @@ function setDislikes(dislikesCount) {
 }
 
 function getLikeCountFromButton() {
+  if(isShorts()) {
+    //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
+    //It should be possible to fix this function, but it's not critical to showing the dislike count.
+    return 0;
+  }
   let likesStr = getLikeButton()
     .querySelector("button")
     .getAttribute("aria-label")
@@ -158,6 +169,8 @@ function initExtConfig() {
   initializeColoredThumbs();
   initializeColoredBar();
   initializeColorTheme();
+  initializeNumberDisplayFormat();
+  initializeNumberDisplayRoundDown();
 }
 
 function initializeDisableVoteSubmission() {
@@ -169,6 +182,7 @@ function initializeDisableVoteSubmission() {
     }
   });
 }
+
 
 function initializeColoredThumbs() {
   getBrowser().storage.sync.get(['coloredThumbs'], (res) => {
@@ -189,8 +203,16 @@ function initializeColoredBar() {
     else {
       extConfig.coloredBar = res.coloredBar;
     }
+function initializeNumberDisplayRoundDown() {
+  getBrowser().storage.sync.get(["numberDisplayRoundDown"], (res) => {
+    if (res.numberDisplayRoundDown === undefined) {
+      getBrowser().storage.sync.set({ numberDisplayRoundDown: true });
+    } else {
+      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
+    }
   });
 }
+
 
 function initializeColorTheme() {
   getBrowser().storage.sync.get(['colorTheme'], (res) => {
@@ -200,11 +222,21 @@ function initializeColorTheme() {
     else {
       extConfig.colorTheme = res.colorTheme;
     }
+  }
+function initializeNumberDisplayFormat() {
+  getBrowser().storage.sync.get(['numberDisplayFormat'], (res) => {
+    if (res.numberDisplayFormat === undefined) {
+      getBrowser().storage.sync.set({ numberDisplayFormat: 'compactShort' });
+    }
+    else {
+      extConfig.numberDisplayFormat = res.numberDisplayFormat;
+    }
   });
 }
 
 export {
   isMobile,
+  isShorts,
   isVideoDisliked,
   isVideoLiked,
   getState,

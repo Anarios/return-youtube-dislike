@@ -4,7 +4,8 @@ import {
   cLog,
   getColorFromTheme,
 } from "./utils";
-
+import { isMobile, likesDisabledState } from "./state";
+import { cLog } from "./utils";
 function createRateBar(likes, dislikes) {
   if (!likesDisabledState) {
     let rateBar = document.getElementById("ryd-bar-container");
@@ -17,6 +18,7 @@ function createRateBar(likes, dislikes) {
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
+
     if (!rateBar) {
       let colorLikeStyle = '';
       let colorDislikeStyle = '';
@@ -24,6 +26,8 @@ function createRateBar(likes, dislikes) {
         colorLikeStyle = '; background-color: ' + getColorFromTheme(true);
         colorDislikeStyle = '; background-color: ' + getColorFromTheme(false);
       }
+
+    if (!rateBar && !isMobile()) {
       (
         document.getElementById("menu-container") ||
         document.querySelector("ytm-slim-video-action-bar-renderer")
