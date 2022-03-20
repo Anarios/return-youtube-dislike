@@ -8,10 +8,10 @@
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
 
-# Return YouTube Dislike
+# Return Your Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
+    <b>Return Your Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
     Available for Chrome and Firefox as a Web Extension.<br>
     Also available for other browsers as JS Userscript.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>

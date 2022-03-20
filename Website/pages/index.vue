@@ -25,7 +25,7 @@
         />
       </svg>
 
-      <h1 class="title-text">Return YouTube Dislike</h1>
+      <h1 class="title-text">Return Your Dislike</h1>
       <div class="mb-4" style="color: #999">
         <p style="margin-top: 0">
           Browser extension and an API that shows you dislikes on Youtube
