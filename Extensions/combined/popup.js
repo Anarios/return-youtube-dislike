@@ -138,9 +138,9 @@ function compareVersions(latestStr, currentStr) {
   let currentarr = currentStr.split(".");
   let outdated = false;
   // goes through version numbers from left to right from greatest to least significant
-  for (let i = 0; i < latestarr.length; i++) {
-    let latest = parseInt(latestarr[i]);
-    let current = parseInt(currentarr[i]);
+  for (let i = 0; i < Math.max(latestarr.length, currentarr.length); i++) {
+    let latest = i < latestarr.length ? parseInt(latestarr[i]) : 0;
+    let current = i < currentarr.length ? parseInt(currentarr[i]) : 0;
     if (latest > current) {
       outdated = true;
       break;
