@@ -79,7 +79,7 @@ function getVideoId(url) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
     if (pathname.startsWith("/shorts")) {
-      return pathname.substr(8);
+      return pathname.slice(8);
     }
     return urlObject.searchParams.get("v");
   }
