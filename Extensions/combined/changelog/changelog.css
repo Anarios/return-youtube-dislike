@@ -18,11 +18,11 @@ body {
   min-width: 300px;
   padding: 0.5em;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 h1 {
-  font-size: 26px;
+
 }
 
 button {
@@ -36,6 +36,7 @@ button {
   /* box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%),
     0 1px 10px 0 rgb(0 0 0 / 12%); */
   transition: 0.4s;
+  font-size: 16px;
 }
 
 button:hover {
@@ -201,4 +202,8 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+h2 {
+  margin: 0.25rem;
 }

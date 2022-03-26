@@ -74,6 +74,10 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
+api.runtime.onInstalled.addListener(() => {
+  api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
+})
+
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
     if (!storageResult.userId || !storageResult.registrationConfirmed) {
@@ -362,6 +366,7 @@ function initializeColorTheme() {
     }
   });
 }
+
 function initializeNumberDisplayFormat() {
   api.storage.sync.get(["numberDisplayFormat"], (res) => {
     if (res.numberDisplayFormat === undefined) {

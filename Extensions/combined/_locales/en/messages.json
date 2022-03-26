@@ -31,5 +31,20 @@
     },
     "textUpdate": {
         "message": "update to"
+    },
+    "version30installed": {
+        "message": "Version 4.0.0.0 installed"
+    },
+    "whatsnew": {
+        "message": "What's new"
+    },
+    "shortsSupport": {
+        "message": "YouTube Shorts Support"
+    },
+    "customColors": {
+        "message": "Custom colors for dislike bar and buttons"
+    },
+    "customNumberFormats": {
+        "message": "Custom number formats"
     }
 }

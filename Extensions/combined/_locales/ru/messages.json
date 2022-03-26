@@ -1,9 +1,9 @@
 {
     "extensionName": {
-        "message": "Возвращение отметки не нравится YouTube"
+        "message": "Return YouTube Dislike"
     },
     "extensionDesc": {
-        "message": "Возвращает способность видеть отметки не нравится"
+        "message": "Возвращает способность видеть дизлайки"
     },
     "textDeveloper": {
         "message": "Дмитрий Селиванов и сообщество"
@@ -24,12 +24,27 @@
         "message": "Настройки"
     },
     "textSettings": {
-        "message": "Отключить отправку нравится/не нравится"
+        "message": "Отключить отправку лайков/дизлайков"
     },
     "textSettingsHover": {
         "message": "Отключает отправку ваших отметок нравится/не нравится"
     },
     "textUpdate": {
         "message": "обновление до"
+    },
+    "version30installed": {
+        "message": "Версия 4.0.0.0 установлена"
+    },
+    "whatsnew": {
+        "message": "Что нового"
+    },
+    "shortsSupport": {
+        "message": "Поддержка YouTube Shorts"
+    },
+    "customColors": {
+        "message": "Выбор цветов дизлайк бара и кнопок"
+    },
+    "customNumberFormats": {
+        "message": "Выбор формата чисел"
     }
 }
