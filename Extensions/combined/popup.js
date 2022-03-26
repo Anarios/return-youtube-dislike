@@ -123,13 +123,33 @@ function initializeVersionNumber() {
   )
     .then((response) => response.json())
     .then((json) => {
-      if (version !== json.version) {
+      if (compareVersions(json.version, version)) {
         document.getElementById("ext-update").innerHTML =
-          chrome.i18n.getMessage("textUpdate") + " v" + json.version;
+        chrome.i18n.getMessage("textUpdate") + " v" + json.version;
         document.getElementById("ext-update").style.padding = ".25rem .5rem";
       }
     });
   // .catch(console.error);
+}
+
+// returns whether current < latest
+function compareVersions(latestStr, currentStr) {
+  let latestarr = latestStr.split(".");
+  let currentarr = currentStr.split(".");
+  let outdated = false;
+  // goes through version numbers from left to right from greatest to least significant
+  for (let i = 0; i < Math.max(latestarr.length, currentarr.length); i++) {
+    let latest = i < latestarr.length ? parseInt(latestarr[i]) : 0;
+    let current = i < currentarr.length ? parseInt(currentarr[i]) : 0;
+    if (latest > current) {
+      outdated = true;
+      break;
+    } else if (latest < current) {
+      outdated = false;
+      break;
+    }
+  }
+  return outdated;
 }
 
 function initializeDisableVoteSubmission() {
