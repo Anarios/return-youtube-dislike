@@ -8,6 +8,7 @@ import {
   getColorFromTheme,
 } from "./utils";
 import { sendVideoIds } from "./events";
+import { localize } from "./utils";
 
 //TODO: Do not duplicate here and in ryd.background.js
 const apiUrl = "https://returnyoutubedislikeapi.com";
@@ -124,6 +125,13 @@ function processResponse(response, storedData) {
   }
 }
 
+// Tells the user if the API is down
+function displayError(error) {
+  getButtons().children[1].querySelector("#text").innerText = localize(
+    "textTempUnavailable"
+  );
+}
+
 async function setState(storedData) {
   storedData.previousState = isVideoDisliked()
     ? DISLIKED_STATE
@@ -144,8 +152,12 @@ async function setState(storedData) {
       },
     }
   )
+    .then((response) => {
+      if (!response.ok) displayError(response.error);
+      return response;
+    })
     .then((response) => response.json())
-    .catch();
+    .catch(displayError);
   cLog("response from api:");
   cLog(JSON.stringify(response));
   likesDisabledState =

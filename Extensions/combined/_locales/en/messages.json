@@ -29,6 +29,9 @@
     "textSettingsHover": {
         "message": "Stops counting your likes and dislikes."
     },
+    "textTempUnavailable": {
+        "message": "temporarily unavailable"
+    },
     "textUpdate": {
         "message": "update to"
     },
