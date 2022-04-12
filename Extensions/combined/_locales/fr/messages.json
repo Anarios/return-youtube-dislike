@@ -23,6 +23,9 @@
     "legendSettings": {
         "message": "Paramètres"
     },
+    "textLikesDisabled": {
+        "message": "Désactivé par le créateur"
+    },
     "textSettings": {
         "message": "Désactiver l'envoi des likes/dislikes"
     },
