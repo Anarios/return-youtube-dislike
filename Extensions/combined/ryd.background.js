@@ -74,9 +74,12 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-api.runtime.onInstalled.addListener(() => {
-  api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
-})
+api.storage.sync.get(['newInstallation'], (result) => {
+  if (result.newInstallation !== false) {
+    api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
+  }
+});
+api.storage.sync.set({'newInstallation': false});
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
