@@ -19,6 +19,7 @@ const config = {
     donate: "https://returnyoutubedislike.com/donate",
     faq: "https://returnyoutubedislike.com/faq",
     help: "https://returnyoutubedislike.com/help",
+    changelog: "/changelog/3/changelog_3.0.html"
   },
 };
 
@@ -49,6 +50,7 @@ createLink(config.links.discord, "link_discord");
 createLink(config.links.faq, "link_faq");
 createLink(config.links.donate, "link_donate");
 createLink(config.links.help, "link_help");
+createLink(config.links.changelog, "link_changelog");
 
 function createLink(url, id) {
   document.getElementById(id).addEventListener("click", () => {
