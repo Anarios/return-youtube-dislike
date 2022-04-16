@@ -5,14 +5,14 @@ let api;
 
 /** stores extension's global config */
 let extConfig = {
-  disableVoteSubmission: false,
-  coloredThumbs: false,
-  coloredBar: false,
-  colorTheme: "classic", // classic, accessible, neon
-  // coloredThumbs: false,
-  // coloredBar: false,
-  numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
-  numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
+    disableVoteSubmission: false,
+    coloredThumbs: false,
+    coloredBar: false,
+    colorTheme: "classic", // classic, accessible, neon
+    // coloredThumbs: false,
+    // coloredBar: false,
+    numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
+    numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
 };
 
 if (isChrome()) api = chrome;
@@ -21,372 +21,370 @@ else if (isFirefox()) api = browser;
 initExtConfig();
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === "get_auth_token") {
-    chrome.identity.getAuthToken({ interactive: true }, function (token) {
-      console.log(token);
-      chrome.identity.getProfileUserInfo(function (userInfo) {
-        console.log(JSON.stringify(userInfo));
-      });
-    });
-  } else if (request.message === "log_off") {
-    // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
-  } else if (request.message == "set_state") {
-    // chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    let token = "";
-    fetch(
-      `${apiUrl}/votes?videoId=${request.videoId}&likeCount=${
+    if (request.message === "get_auth_token") {
+        chrome.identity.getAuthToken({ interactive: true }, function(token) {
+            console.log(token);
+            chrome.identity.getProfileUserInfo(function(userInfo) {
+                console.log(JSON.stringify(userInfo));
+            });
+        });
+    } else if (request.message === "log_off") {
+        // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
+    } else if (request.message == "set_state") {
+        // chrome.identity.getAuthToken({ interactive: true }, function (token) {
+        let token = "";
+        fetch(
+                `${apiUrl}/votes?videoId=${request.videoId}&likeCount=${
         request.likeCount || ""
-      }`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        sendResponse(response);
-      })
-      .catch();
-    return true;
-  } else if (request.message == "send_links") {
-    toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
-    if (toSend.length >= 20) {
-      fetch(`${apiUrl}/votes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(toSend),
-      });
-      for (const toSendUrl of toSend) {
-        sentIds.add(toSendUrl);
-      }
-      toSend = [];
+      }`, {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                    },
+                }
+            )
+            .then((response) => response.json())
+            .then((response) => {
+                sendResponse(response);
+            })
+            .catch();
+        return true;
+    } else if (request.message == "send_links") {
+        toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
+        if (toSend.length >= 20) {
+            fetch(`${apiUrl}/votes`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(toSend),
+            });
+            for (const toSendUrl of toSend) {
+                sentIds.add(toSendUrl);
+            }
+            toSend = [];
+        }
+    } else if (request.message == "register") {
+        register();
+        return true;
+    } else if (request.message == "send_vote") {
+        sendVote(request.videoId, request.vote);
+        return true;
     }
-  } else if (request.message == "register") {
-    register();
-    return true;
-  } else if (request.message == "send_vote") {
-    sendVote(request.videoId, request.vote);
-    return true;
-  }
 });
 
 api.storage.local.get(['newInstallation'], (result) => {
-  if (result.newInstallation !== false) {
-    console.log(result.newInstallation);
-    api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
-  }
+    if (result.newInstallation !== false) {
+        api.tabs.create({ url: api.runtime.getURL("/changelog/3/changelog_3.0.html") });
+    }
 });
-api.storage.local.set({'newInstallation': false});
+api.storage.local.set({ 'newInstallation': false });
 
 async function sendVote(videoId, vote) {
-  api.storage.sync.get(null, async (storageResult) => {
-    if (!storageResult.userId || !storageResult.registrationConfirmed) {
-      await register();
-      return;
-    }
-    fetch(`${apiUrl}/interact/vote`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: storageResult.userId,
-        videoId,
-        value: vote,
-      }),
-    })
-      .then(async (response) => {
-        if (response.status == 401) {
-          await register();
-          await sendVote(videoId, vote);
-          return;
+    api.storage.sync.get(null, async(storageResult) => {
+        if (!storageResult.userId || !storageResult.registrationConfirmed) {
+            await register();
+            return;
         }
-        return response.json();
-      })
-      .then((response) => {
-        solvePuzzle(response).then((solvedPuzzle) => {
-          fetch(`${apiUrl}/interact/confirmVote`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              ...solvedPuzzle,
-              userId: storageResult.userId,
-              videoId,
-            }),
-          });
-        });
-      });
-  });
+        fetch(`${apiUrl}/interact/vote`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    userId: storageResult.userId,
+                    videoId,
+                    value: vote,
+                }),
+            })
+            .then(async(response) => {
+                if (response.status == 401) {
+                    await register();
+                    await sendVote(videoId, vote);
+                    return;
+                }
+                return response.json();
+            })
+            .then((response) => {
+                solvePuzzle(response).then((solvedPuzzle) => {
+                    fetch(`${apiUrl}/interact/confirmVote`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            ...solvedPuzzle,
+                            userId: storageResult.userId,
+                            videoId,
+                        }),
+                    });
+                });
+            });
+    });
 }
 
 function register() {
-  let userId = generateUserID();
-  api.storage.sync.set({ userId });
-  return fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((response) => {
-      return solvePuzzle(response).then((solvedPuzzle) => {
-        return fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(solvedPuzzle),
-        }).then((response) =>
-          response.json().then((result) => {
-            if (result === true) {
-              return api.storage.sync.set({ registrationConfirmed: true });
-            }
-          })
-        );
-      });
-    })
-    .catch();
+    let userId = generateUserID();
+    api.storage.sync.set({ userId });
+    return fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+            },
+        })
+        .then((response) => response.json())
+        .then((response) => {
+            return solvePuzzle(response).then((solvedPuzzle) => {
+                return fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(solvedPuzzle),
+                }).then((response) =>
+                    response.json().then((result) => {
+                        if (result === true) {
+                            return api.storage.sync.set({ registrationConfirmed: true });
+                        }
+                    })
+                );
+            });
+        })
+        .catch();
 }
 
 api.storage.sync.get(null, (res) => {
-  if (!res || !res.userId || !res.registrationConfirmed) {
-    register();
-  }
+    if (!res || !res.userId || !res.registrationConfirmed) {
+        register();
+    }
 });
 
 const sentIds = new Set();
 let toSend = [];
 
 function sendUserSubmittedStatisticsToApi(statistics) {
-  fetch(`${apiUrl}/votes/user-submitted`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(statistics),
-  });
+    fetch(`${apiUrl}/votes/user-submitted`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(statistics),
+    });
 }
 
 function countLeadingZeroes(uInt8View, limit) {
-  let zeroes = 0;
-  let value = 0;
-  for (let i = 0; i < uInt8View.length; i++) {
-    value = uInt8View[i];
-    if (value === 0) {
-      zeroes += 8;
-    } else {
-      let count = 1;
-      if (value >>> 4 === 0) {
-        count += 4;
-        value <<= 4;
-      }
-      if (value >>> 6 === 0) {
-        count += 2;
-        value <<= 2;
-      }
-      zeroes += count - (value >>> 7);
-      break;
+    let zeroes = 0;
+    let value = 0;
+    for (let i = 0; i < uInt8View.length; i++) {
+        value = uInt8View[i];
+        if (value === 0) {
+            zeroes += 8;
+        } else {
+            let count = 1;
+            if (value >>> 4 === 0) {
+                count += 4;
+                value <<= 4;
+            }
+            if (value >>> 6 === 0) {
+                count += 2;
+                value <<= 2;
+            }
+            zeroes += count - (value >>> 7);
+            break;
+        }
+        if (zeroes >= limit) {
+            break;
+        }
     }
-    if (zeroes >= limit) {
-      break;
-    }
-  }
-  return zeroes;
+    return zeroes;
 }
 
 async function solvePuzzle(puzzle) {
-  let challenge = Uint8Array.from(atob(puzzle.challenge), (c) =>
-    c.charCodeAt(0)
-  );
-  let buffer = new ArrayBuffer(20);
-  let uInt8View = new Uint8Array(buffer);
-  let uInt32View = new Uint32Array(buffer);
-  let maxCount = Math.pow(2, puzzle.difficulty) * 5;
-  for (let i = 4; i < 20; i++) {
-    uInt8View[i] = challenge[i - 4];
-  }
-
-  for (let i = 0; i < maxCount; i++) {
-    uInt32View[0] = i;
-    let hash = await crypto.subtle.digest("SHA-512", buffer);
-    let hashUint8 = new Uint8Array(hash);
-    if (countLeadingZeroes(hashUint8) >= puzzle.difficulty) {
-      return {
-        solution: btoa(String.fromCharCode.apply(null, uInt8View.slice(0, 4))),
-      };
+    let challenge = Uint8Array.from(atob(puzzle.challenge), (c) =>
+        c.charCodeAt(0)
+    );
+    let buffer = new ArrayBuffer(20);
+    let uInt8View = new Uint8Array(buffer);
+    let uInt32View = new Uint32Array(buffer);
+    let maxCount = Math.pow(2, puzzle.difficulty) * 5;
+    for (let i = 4; i < 20; i++) {
+        uInt8View[i] = challenge[i - 4];
     }
-  }
+
+    for (let i = 0; i < maxCount; i++) {
+        uInt32View[0] = i;
+        let hash = await crypto.subtle.digest("SHA-512", buffer);
+        let hashUint8 = new Uint8Array(hash);
+        if (countLeadingZeroes(hashUint8) >= puzzle.difficulty) {
+            return {
+                solution: btoa(String.fromCharCode.apply(null, uInt8View.slice(0, 4))),
+            };
+        }
+    }
 }
 
 function generateUserID(length = 36) {
-  const charset =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let result = "";
-  if (crypto && crypto.getRandomValues) {
-    const values = new Uint32Array(length);
-    crypto.getRandomValues(values);
-    for (let i = 0; i < length; i++) {
-      result += charset[values[i] % charset.length];
+    const charset =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    if (crypto && crypto.getRandomValues) {
+        const values = new Uint32Array(length);
+        crypto.getRandomValues(values);
+        for (let i = 0; i < length; i++) {
+            result += charset[values[i] % charset.length];
+        }
+        return result;
+    } else {
+        for (let i = 0; i < length; i++) {
+            result += charset[Math.floor(Math.random() * charset.length)];
+        }
+        return result;
     }
-    return result;
-  } else {
-    for (let i = 0; i < length; i++) {
-      result += charset[Math.floor(Math.random() * charset.length)];
-    }
-    return result;
-  }
 }
 
 function storageChangeHandler(changes, area) {
-  if (changes.disableVoteSubmission !== undefined) {
-    handleDisableVoteSubmissionChangeEvent(
-      changes.disableVoteSubmission.newValue
-    );
-  }
-  if (changes.coloredThumbs !== undefined) {
-    handleColoredThumbsChangeEvent(changes.coloredThumbs.newValue);
-  }
-  if (changes.coloredBar !== undefined) {
-    handleColoredBarChangeEvent(changes.coloredBar.newValue);
-  }
-  if (changes.colorTheme !== undefined) {
-    handleColorThemeChangeEvent(changes.colorTheme.newValue);
-  }
-  if (changes.numberDisplayRoundDown !== undefined) {
-    handleNumberDisplayRoundDownChangeEvent(
-      changes.numberDisplayRoundDown.newValue
-    );
-  }
-  if (changes.numberDisplayFormat !== undefined) {
-    handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
-  }
+    if (changes.disableVoteSubmission !== undefined) {
+        handleDisableVoteSubmissionChangeEvent(
+            changes.disableVoteSubmission.newValue
+        );
+    }
+    if (changes.coloredThumbs !== undefined) {
+        handleColoredThumbsChangeEvent(changes.coloredThumbs.newValue);
+    }
+    if (changes.coloredBar !== undefined) {
+        handleColoredBarChangeEvent(changes.coloredBar.newValue);
+    }
+    if (changes.colorTheme !== undefined) {
+        handleColorThemeChangeEvent(changes.colorTheme.newValue);
+    }
+    if (changes.numberDisplayRoundDown !== undefined) {
+        handleNumberDisplayRoundDownChangeEvent(
+            changes.numberDisplayRoundDown.newValue
+        );
+    }
+    if (changes.numberDisplayFormat !== undefined) {
+        handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
+    }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
-  extConfig.disableVoteSubmission = value;
-  if (value === true) {
-    changeIcon(voteDisabledIconName);
-  } else {
-    changeIcon(defaultIconName);
-  }
+    extConfig.disableVoteSubmission = value;
+    if (value === true) {
+        changeIcon(voteDisabledIconName);
+    } else {
+        changeIcon(defaultIconName);
+    }
 }
 
 function handleNumberDisplayFormatChangeEvent(value) {
-  extConfig.numberDisplayFormat = value;
+    extConfig.numberDisplayFormat = value;
 }
 
 function handleNumberDisplayRoundDownChangeEvent(value) {
-  extConfig.numberDisplayRoundDown = value;
+    extConfig.numberDisplayRoundDown = value;
 }
 
 function changeIcon(iconName) {
-  if (api.action !== undefined)
-    api.action.setIcon({ path: "/icons/" + iconName });
-  else if (api.browserAction !== undefined)
-    api.browserAction.setIcon({ path: "/icons/" + iconName });
-  else console.log("changing icon is not supported");
+    if (api.action !== undefined)
+        api.action.setIcon({ path: "/icons/" + iconName });
+    else if (api.browserAction !== undefined)
+        api.browserAction.setIcon({ path: "/icons/" + iconName });
+    else console.log("changing icon is not supported");
 }
 
 function handleColoredThumbsChangeEvent(value) {
-  extConfig.coloredThumbs = value;
+    extConfig.coloredThumbs = value;
 }
 
 function handleColoredBarChangeEvent(value) {
-  extConfig.coloredBar = value;
+    extConfig.coloredBar = value;
 }
 
 function handleColorThemeChangeEvent(value) {
-  if (!value) {
-    value = "classic";
-  }
-  extConfig.colorTheme = value;
+    if (!value) {
+        value = "classic";
+    }
+    extConfig.colorTheme = value;
 }
 
 api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
-  initializeDisableVoteSubmission();
-  initializeColoredThumbs();
-  initializeColoredBar();
-  initializeColorTheme();
-  initializeNumberDisplayFormat();
-  initializeNumberDisplayRoundDown();
+    initializeDisableVoteSubmission();
+    initializeColoredThumbs();
+    initializeColoredBar();
+    initializeColorTheme();
+    initializeNumberDisplayFormat();
+    initializeNumberDisplayRoundDown();
 }
 
 function initializeDisableVoteSubmission() {
-  api.storage.sync.get(["disableVoteSubmission"], (res) => {
-    if (res.disableVoteSubmission === undefined) {
-      api.storage.sync.set({ disableVoteSubmission: false });
-    } else {
-      extConfig.disableVoteSubmission = res.disableVoteSubmission;
-      if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
-    }
-  });
+    api.storage.sync.get(["disableVoteSubmission"], (res) => {
+        if (res.disableVoteSubmission === undefined) {
+            api.storage.sync.set({ disableVoteSubmission: false });
+        } else {
+            extConfig.disableVoteSubmission = res.disableVoteSubmission;
+            if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
+        }
+    });
 }
 
 function initializeColoredThumbs() {
-  api.storage.sync.get(["coloredThumbs"], (res) => {
-    if (res.coloredThumbs === undefined) {
-      api.storage.sync.set({ coloredThumbs: false });
-    } else {
-      extConfig.coloredThumbs = res.coloredThumbs;
-    }
-  });
+    api.storage.sync.get(["coloredThumbs"], (res) => {
+        if (res.coloredThumbs === undefined) {
+            api.storage.sync.set({ coloredThumbs: false });
+        } else {
+            extConfig.coloredThumbs = res.coloredThumbs;
+        }
+    });
 }
 
 function initializeNumberDisplayRoundDown() {
-  api.storage.sync.get(["numberDisplayRoundDown"], (res) => {
-    if (res.numberDisplayRoundDown === undefined) {
-      api.storage.sync.set({ numberDisplayRoundDown: true });
-    } else {
-      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
-    }
-  });
+    api.storage.sync.get(["numberDisplayRoundDown"], (res) => {
+        if (res.numberDisplayRoundDown === undefined) {
+            api.storage.sync.set({ numberDisplayRoundDown: true });
+        } else {
+            extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
+        }
+    });
 }
 
 function initializeColoredBar() {
-  api.storage.sync.get(["coloredBar"], (res) => {
-    if (res.coloredBar === undefined) {
-      api.storage.sync.set({ coloredBar: false });
-    } else {
-      extConfig.coloredBar = res.coloredBar;
-    }
-  });
+    api.storage.sync.get(["coloredBar"], (res) => {
+        if (res.coloredBar === undefined) {
+            api.storage.sync.set({ coloredBar: false });
+        } else {
+            extConfig.coloredBar = res.coloredBar;
+        }
+    });
 }
 
 function initializeColorTheme() {
-  api.storage.sync.get(["colorTheme"], (res) => {
-    if (res.colorTheme === undefined) {
-      api.storage.sync.set({ colorTheme: false });
-    } else {
-      extConfig.colorTheme = res.colorTheme;
-    }
-  });
+    api.storage.sync.get(["colorTheme"], (res) => {
+        if (res.colorTheme === undefined) {
+            api.storage.sync.set({ colorTheme: false });
+        } else {
+            extConfig.colorTheme = res.colorTheme;
+        }
+    });
 }
 
 function initializeNumberDisplayFormat() {
-  api.storage.sync.get(["numberDisplayFormat"], (res) => {
-    if (res.numberDisplayFormat === undefined) {
-      api.storage.sync.set({ numberDisplayFormat: "compactShort" });
-    } else {
-      extConfig.numberDisplayFormat = res.numberDisplayFormat;
-    }
-  });
+    api.storage.sync.get(["numberDisplayFormat"], (res) => {
+        if (res.numberDisplayFormat === undefined) {
+            api.storage.sync.set({ numberDisplayFormat: "compactShort" });
+        } else {
+            extConfig.numberDisplayFormat = res.numberDisplayFormat;
+        }
+    });
 }
 
 function isChrome() {
-  return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
+    return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
 }
 
 function isFirefox() {
-  return (
-    typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
-  );
+    return (
+        typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
+    );
 }
