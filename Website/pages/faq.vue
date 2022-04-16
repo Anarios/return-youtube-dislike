@@ -46,7 +46,7 @@ export default {
       {
         question: "Why is the dislike count on my videos inaccurate?",
         answer:
-          "Extrapolated data tends to get better with the increase in diversity and the quantity of voters. \nTo ensure and increase the accuracy of the extrapolated vote data for your videos, you can ask your viewers to uses this extension (or any app that submits votes to returnyoutubedislikeapi.com) ",
+          "Extrapolated data tends to get better with the increase in diversity and the quantity of voters. \nTo ensure and increase the accuracy of the extrapolated vote data for your videos, you can encourage your viewers to uses this extension (or any app that submits votes to returnyoutubedislikeapi.com) ",
       },
       {
         question: "How does this work?",
