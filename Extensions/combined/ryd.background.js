@@ -9,8 +9,6 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
-  // coloredThumbs: false,
-  // coloredBar: false,
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
 };
@@ -74,9 +72,12 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-api.runtime.onInstalled.addListener(() => {
-  api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
-})
+api.storage.sync.get(['newInstallation'], (result) => {
+  if (result.newInstallation !== false) {
+    api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
+  }
+});
+api.storage.sync.set({'newInstallation': false});
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
