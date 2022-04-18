@@ -22,6 +22,20 @@
 // @grant        GM_addStyle
 // @run-at       document-end
 // ==/UserScript==
+
+const extConfig = {
+// BEGIN USER OPTIONS
+// You may change the following variables to allowed values listed in the bracket (* means default). Keep the style and keywords intact. 
+  showUpdatePopup: false, // [true, false*] Show popup tab after extension update (See what's new)
+  disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
+  coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
+  coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
+  colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
+  numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
+  numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
+// END USER OPTIONS
+};
+
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
