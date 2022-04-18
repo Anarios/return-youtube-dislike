@@ -9,8 +9,6 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
-  // coloredThumbs: false,
-  // coloredBar: false,
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
 };
