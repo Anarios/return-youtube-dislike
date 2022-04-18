@@ -3,7 +3,7 @@
       "message": "Return YouTube Dislike"
   },
   "extensionDesc": {
-      "message": "Bringt die Möglichkeit zurück, Dislikes zu sehen"
+      "message": "Macht Dislikes wieder sichtbar"
   },
   "textDeveloper": {
       "message": "von Dmitry Selivanov & Community"
@@ -24,7 +24,7 @@
       "message": "Einstellungen"
   },
   "textSettings": {
-      "message": "Likes/Dislikes nicht einreichen"
+      "message": "Deaktiviere Like/Dislike-Übermittlung"
   },
   "textSettingsHover": {
       "message": "Stoppt deine Likes und Dislikes zu zählen."
