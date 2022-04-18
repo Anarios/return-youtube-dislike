@@ -33,11 +33,9 @@ With the removal of dislike stats from the YouTube API, our backend switched to 
 
 You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-
 ## API documentation
 
 Third-party use of this open API is allowed with the following restrictions:
-
 
 - **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a *429* status code indicating that your application should back off.
@@ -79,7 +77,7 @@ You can view all documentation on our website.
 
 ## Contributing
 
-Please read the [contribution guide.](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)
+Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
 
 ## Support this project!
 
