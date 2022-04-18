@@ -25,8 +25,8 @@
 
 const extConfig = {
 // BEGIN USER OPTIONS
-// You may change the following variables to allowed values listed in the bracket (* means default). Keep the style and keywords intact. 
-  showUpdatePopup: false, // [true, false*] Show popup tab after extension update (See what's new)
+// You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact. 
+  showUpdatePopup: false, // [true, false*] Show a popup tab after extension update (See what's new)
   disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
@@ -361,14 +361,45 @@ function numberFormat(numberState) {
         ?.getAttribute("href")
     )?.searchParams?.get("locale");
   } catch {}
+
+  let numberDisplay;
+  if (extConfig.numberDisplayRoundDown === false) {
+    numberDisplay = numberState;
+  } else {
+    numberDisplay = roundDown(numberState);
+  }
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(
+    numberDisplay
+  );
+}
+
+function getNumberFormatter(optionSelect) {
+  let formatterNotation;
+  let formatterCompactDisplay;
+
+  switch (optionSelect) {
+    case "compactLong":
+      formatterNotation = "compact";
+      formatterCompactDisplay = "long";
+      break;
+    case "standard":
+      formatterNotation = "standard";
+      formatterCompactDisplay = "short";
+      break;
+    case "compactShort":
+    default:
+      formatterNotation = "compact";
+      formatterCompactDisplay = "short";
+  }
+
   const formatter = Intl.NumberFormat(
     document.documentElement.lang || userLocales || navigator.language,
     {
-      notation: "compact",
+      notation: formatterNotation,
+      compactDisplay: formatterCompactDisplay,
     }
   );
-
-  return formatter.format(roundDown(numberState));
+  return formatter;
 }
 
 function setEventListeners(evt) {
