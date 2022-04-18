@@ -219,6 +219,13 @@ function createRateBar(likes, dislikes) {
     likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
   if (!rateBar && !isMobile) {
+    let colorLikeStyle = "";
+    let colorDislikeStyle = "";
+    if (extConfig.coloredBar) {
+      colorLikeStyle = "; background-color: " + getColorFromTheme(true);
+      colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
+    }
+    
     document.getElementById("menu-container").insertAdjacentHTML(
       "beforeend",
       `
@@ -226,11 +233,11 @@ function createRateBar(likes, dislikes) {
         <div class="ryd-tooltip-bar-container">
            <div
               id="return-youtube-dislike-bar-container"
-              style="width: 100%; height: 2px;"
+              style="width: 100%; height: 2px;${colorDislikeStyle}"
               >
               <div
                  id="return-youtube-dislike-bar"
-                 style="width: ${widthPercent}%; height: 100%"
+                 style="width: ${widthPercent}%; height: 100%${colorDislikeStyle}"
                  ></div>
            </div>
         </div>
@@ -250,6 +257,13 @@ function createRateBar(likes, dislikes) {
     document.querySelector(
       "#ryd-dislike-tooltip > #tooltip"
     ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+    
+    if (extConfig.coloredBar) {
+      document.getElementById("return-youtube-dislike-bar-container").style.backgroundColor =
+        getColorFromTheme(false);
+      document.getElementById("return-youtube-dislike-bar").style.backgroundColor =
+        getColorFromTheme(true);
+    }
   }
 }
 
@@ -268,6 +282,10 @@ function setState() {
         dislikesvalue = dislikes;
         setDislikes(numberFormat(dislikes));
         createRateBar(likes, dislikes);
+        if (extConfig.coloredThumbs === true) {
+          getLikeButton().style.color = getColorFromTheme(true);
+          getDislikeButton().style.color = getColorFromTheme(false);
+        }
       }
     });
   });
@@ -400,6 +418,34 @@ function getNumberFormatter(optionSelect) {
     }
   );
   return formatter;
+}
+
+function getColorFromTheme(voteIsLike) {
+  let colorString;
+  switch (extConfig.colorTheme) {
+    case "accessible":
+      if (voteIsLike === true) {
+        colorString = "dodgerblue";
+      } else {
+        colorString = "gold";
+      }
+      break;
+    case "neon":
+      if (voteIsLike === true) {
+        colorString = "aqua";
+      } else {
+        colorString = "magenta";
+      }
+      break;
+    case "classic":
+    default:
+      if (voteIsLike === true) {
+        colorString = "lime";
+      } else {
+        colorString = "red";
+      }
+  }
+  return colorString;
 }
 
 function setEventListeners(evt) {
