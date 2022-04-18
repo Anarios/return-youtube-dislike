@@ -1,50 +1,50 @@
 {
     "extensionName": {
-        "message": "Return YouTube Dislike"
+        "message": "Επιστροφή του YouTube Dislike"
     },
     "extensionDesc": {
-        "message": "Returns ability to see dislikes"
+        "message": "Επιστρέφει τα dislikes"
     },
     "textDeveloper": {
-        "message": "by Dmitry Selivanov & Community"
+        "message": "από τον Dmitry Selivanov & την κοινότητα"
     },
     "linkWebsite": {
-        "message": "Website"
+        "message": "Ιστοσελίδα"
     },
     "linkFAQ": {
-        "message": "FAQ"
+        "message": "Γρήγορες Ερωτήσιες & Απαντήσεις"
     },
     "linkDonate": {
-        "message": "Donate"
+        "message": "Στηρίξτε"
     },
     "linkHelp": {
-        "message": "Help"
+        "message": "Βοήθεια"
     },
     "legendSettings": {
-        "message": "Settings"
+        "message": "Ρυθμίσεις"
     },
     "textSettings": {
-        "message": "Disable like/dislike submission"
+        "message": "Διακοπή υποβολής like/dislike"
     },
     "textSettingsHover": {
-        "message": "Stops counting your likes and dislikes."
+        "message": "Σταματάει να μετράει τα likes & dislikes που κάνεις."
     },
     "textUpdate": {
-        "message": "update to"
+        "message": "ενημέρωση σε"
     },
     "version30installed": {
-        "message": "Version 4.0.0.0 installed"
+        "message": "Εκδοση 4.0.0.0 εγκαταστάθηκε"
     },
     "whatsnew": {
-        "message": "What's new"
+        "message": "Τι είναι νέο;"
     },
     "shortsSupport": {
-        "message": "YouTube Shorts Support"
+        "message": "Υποστήριξη για YouTube Shorts"
     },
     "customColors": {
-        "message": "Custom colors for dislike bar and buttons"
+        "message": "Προσαρμοζόμενα χρώματα για τα κουμπιά και την μπάρα dislike"
     },
     "customNumberFormats": {
-        "message": "Custom number formats"
+        "message": "Προσαρμοζόμενη μορφή αριθμών."
     }
 }
