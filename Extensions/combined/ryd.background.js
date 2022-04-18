@@ -11,6 +11,7 @@ let extConfig = {
   colorTheme: "classic", // classic, accessible, neon
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
+  showUpdatePopup: false, 
 };
 
 if (isChrome()) api = chrome;
@@ -73,7 +74,9 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 api.storage.sync.get(['newInstallation'], (result) => {
-  if (result.newInstallation !== false) {
+  if (result.newInstallation !== false 
+    || extConfig.showUpdatePopup === true
+  ) {
     api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
   }
 });
@@ -264,6 +267,9 @@ function storageChangeHandler(changes, area) {
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
+  if (changes.showUpdatePopup !== undefined) {
+    handleShowUpdatePopupChangeEvent(changes.showUpdatePopup.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -306,6 +312,10 @@ function handleColorThemeChangeEvent(value) {
   extConfig.colorTheme = value;
 }
 
+function handleShowUpdatePopupChangeEvent(value) {
+  extConfig.showUpdatePopup = value;
+}
+
 api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
@@ -315,6 +325,7 @@ function initExtConfig() {
   initializeColorTheme();
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
+  initializeShowUpdatePopup();
 }
 
 function initializeDisableVoteSubmission() {
@@ -374,6 +385,16 @@ function initializeNumberDisplayFormat() {
       api.storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
+    }
+  });
+}
+
+function initializeShowUpdatePopup() {
+  api.storage.sync.get(["showUpdatePopup"], (res) => {
+    if (res.showUpdatePopup === undefined) {
+      api.storage.sync.set({ showUpdatePopup: false });
+    } else {
+      extConfig.showUpdatePopup = res.showUpdatePopup;
     }
   });
 }
