@@ -11,6 +11,7 @@ let extConfig = {
   colorTheme: "classic", // classic, accessible, neon
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
+  numberDisplayReformatLikes: false, // use existing (native) likes number
 };
 
 if (isChrome()) api = chrome;
@@ -264,6 +265,9 @@ function storageChangeHandler(changes, area) {
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
+  if (changes.numberDisplayReformatLikes !== undefined) {
+    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -306,6 +310,10 @@ function handleColorThemeChangeEvent(value) {
   extConfig.colorTheme = value;
 }
 
+function handleNumberDisplayReformatLikesChangeEvent(value) {
+  extConfig.numberDisplayReformatLikes = value;
+}
+
 api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
@@ -315,6 +323,7 @@ function initExtConfig() {
   initializeColorTheme();
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
+  initializeNumberDisplayReformatLikes();
 }
 
 function initializeDisableVoteSubmission() {
@@ -374,6 +383,16 @@ function initializeNumberDisplayFormat() {
       api.storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
+    }
+  });
+}
+
+function initializeNumberDisplayReformatLikes() {
+  api.storage.sync.get(["numberDisplayReformatLikes"], (res) => {
+    if (res.numberDisplayReformatLikes === undefined) {
+      api.storage.sync.set({ numberDisplayReformatLikes: false });
+    } else {
+      extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
     }
   });
 }

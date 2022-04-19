@@ -24,6 +24,7 @@ let extConfig = {
   colorTheme: "classic",
   numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
+  numberDisplayReformatLikes: false,
 };
 
 let storedData = {
@@ -115,6 +116,12 @@ function getLikeCountFromButton() {
 function processResponse(response, storedData) {
   const formattedDislike = numberFormat(response.dislikes);
   setDislikes(formattedDislike);
+  if (extConfig.numberDisplayReformatLikes === true) {
+    const nativeLikes = getLikeCountFromButton();
+    if (nativeLikes !== false) {
+      setLikes(numberFormat(nativeLikes));
+    }
+  }
   storedData.dislikes = parseInt(response.dislikes);
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
   createRateBar(storedData.likes, storedData.dislikes);
@@ -171,6 +178,7 @@ function initExtConfig() {
   initializeColorTheme();
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
+  initializeNumberDisplayReformatLikes();
 }
 
 function initializeDisableVoteSubmission() {
@@ -229,6 +237,16 @@ function initializeNumberDisplayFormat() {
       getBrowser().storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
+    }
+  });
+}
+
+function initializeNumberDisplayReformatLikes() {
+  getBrowser().storage.sync.get(["numberDisplayReformatLikes"], (res) => {
+    if (res.numberDisplayReformatLikes === undefined) {
+      getBrowser().storage.sync.set({ numberDisplayReformatLikes: false });
+    } else {
+      extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
     }
   });
 }

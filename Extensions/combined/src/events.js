@@ -130,6 +130,9 @@ function storageChangeHandler(changes, area) {
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
+  if (changes.numberDisplayReformatLikes !== undefined) {
+    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -155,6 +158,10 @@ function handleNumberDisplayFormatChangeEvent(value) {
 
 function handleNumberDisplayRoundDownChangeEvent(value) {
   extConfig.numberDisplayRoundDown = value;
+}
+
+function handleNumberDisplayReformatLikesChangeEvent(value) {
+  extConfig.numberDisplayReformatLikes = value;
 }
 
 export {
