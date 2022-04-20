@@ -83,10 +83,8 @@ api.runtime.onInstalled.addListener((details) => {
       details.previousVersion === chrome.runtime.getManifest().version)
   )
     return;
-  api.tabs.create({
-    url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
-  });
-});
+  api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
+})
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
