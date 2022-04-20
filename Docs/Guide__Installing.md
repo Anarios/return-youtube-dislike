@@ -191,7 +191,8 @@ For now, you can try this
 
 ##### App from Play Store
 
-- Although app(s) which use this API exist but they aren't official.
+- Although app(s) which use this API exist, they aren't official.
+
   
 ##### On Firefox
 
