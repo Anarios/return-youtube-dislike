@@ -33,6 +33,7 @@ const extConfig = {
   colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
+  numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
 // END USER OPTIONS
 };
 
@@ -168,6 +169,19 @@ function setDislikes(dislikesCount) {
   getButtons().children[1].querySelector("#text").innerText = dislikesCount;
 }
 
+function getLikeCountFromButton() {
+  if (isShorts()) {
+    //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
+    //It should be possible to fix this function, but it's not critical to showing the dislike count.
+    return 0;
+  }
+  let likesStr = getLikeButton()
+    .querySelector("button")
+    .getAttribute("aria-label")
+    .replace(/\D/g, "");
+  return likesStr.length > 0 ? parseInt(likesStr) : false;
+}
+
 (typeof GM_addStyle != "undefined"
   ? GM_addStyle
   : (styles) => {
@@ -281,6 +295,12 @@ function setState() {
         likesvalue = likes;
         dislikesvalue = dislikes;
         setDislikes(numberFormat(dislikes));
+        if (extConfig.numberDisplayReformatLikes === true) {
+          const nativeLikes = getLikeCountFromButton();
+          if (nativeLikes !== false) {
+            setLikes(numberFormat(nativeLikes));
+          }
+        }
         createRateBar(likes, dislikes);
         if (extConfig.coloredThumbs === true) {
           getLikeButton().style.color = getColorFromTheme(true);
