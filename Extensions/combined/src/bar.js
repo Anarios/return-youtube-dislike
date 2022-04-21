@@ -13,6 +13,21 @@ function createRateBar(likes, dislikes) {
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
+    var likePercentage = Math.round(widthPercent.toFixed(1));
+    const dislikePercentage = (100 - likePercentage).toLocaleString();
+    likePercentage = likePercentage.toLocaleString();
+    const tooltipPercentageDisplayModes = {
+      "classic": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`,
+      "dash_like": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`,
+      "dash_dislike": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`,
+      "both": `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`,
+      "only_like": `${likePercentage}%`,
+      "only_dislike": `${dislikePercentage}%`
+    };
+
+    const tooltipOption = "both";
+    
+    
     if (!rateBar && !isMobile()) {
       let colorLikeStyle = "";
       let colorDislikeStyle = "";
@@ -40,7 +55,7 @@ function createRateBar(likes, dislikes) {
                </div>
             </div>
             <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-               <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
+               <!--css-build:shady-->${tooltipPercentageDisplayModes[tooltipOption]}
             </tp-yt-paper-tooltip>
             </div>
     `
@@ -50,7 +65,7 @@ function createRateBar(likes, dislikes) {
       document.getElementById("ryd-bar").style.width = widthPercent + "%";
       document.querySelector(
         "#ryd-dislike-tooltip > #tooltip"
-      ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+      ).innerHTML = tooltipPercentageDisplayModes[tooltipOption];
       if (extConfig.coloredBar) {
         document.getElementById("ryd-bar-container").style.backgroundColor =
           getColorFromTheme(false);
