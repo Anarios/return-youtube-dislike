@@ -13,7 +13,7 @@ function createRateBar(likes, dislikes) {
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
-    var likePercentage = Math.round(widthPercent.toFixed(1));
+    var likePercentage = parseFloat(widthPercent.toFixed(1));
     const dislikePercentage = (100 - likePercentage).toLocaleString();
     likePercentage = likePercentage.toLocaleString();
     const tooltipPercentageDisplayModes = {
@@ -25,7 +25,10 @@ function createRateBar(likes, dislikes) {
       "only_dislike": `${dislikePercentage}%`
     };
 
-    const tooltipOption = "both";
+    var tooltipOption = "classic";
+    if (extConfig.showTooltipPercentage) {
+      tooltipOption = extConfig.tooltipPercentageMode;
+    };
     
     
     if (!rateBar && !isMobile()) {
