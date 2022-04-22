@@ -93,7 +93,6 @@ document.getElementById("show_tooltip_percentage").addEventListener("click", (ev
 
 document.getElementById("tooltip_percentage_mode").addEventListener("change", (ev) => {
   chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
-  updateTooltipPercentageModePreviewContent(ev.target.value);
 });
 
 /*   Advanced Toggle   */
@@ -320,27 +319,7 @@ function handleTooltipPercentageModeChangeEvent(value) {
   document
     .getElementById("tooltip_percentage_mode")
     .querySelector('option[value="' + value + '"]').selected = true;
-    updateTooltipPercentageModePreviewContent(value);
 };
-
-function updateTooltipPercentageModePreviewContent(modeName) {
-  switch (modeName) {
-    case "dash_dislike":
-      document.getElementById("percentage_mode_example").innerHTML = "190&nbsp;/&nbsp;10&nbsp;&nbsp;-&nbsp;&nbsp;5%";
-      break;
-    case "both":
-      document.getElementById("percentage_mode_example").innerHTML = "95%&nbsp;/&nbsp;5%";
-      break;
-    case "only_like":
-      document.getElementById("percentage_mode_example").innerHTML = "95%";
-      break;
-    case "only_dislike":
-      document.getElementById("percentage_mode_example").innerHTML = "5%";
-      break;
-    default:
-      document.getElementById("percentage_mode_example").innerHTML = "190&nbsp;/&nbsp;10&nbsp;&nbsp;-&nbsp;&nbsp;95%";
-  };
-}
 
 function getNumberFormatter(optionSelect) {
   let formatterNotation;
