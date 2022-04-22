@@ -29,6 +29,9 @@ let previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
 let likesvalue = 0;
 let dislikesvalue = 0;
 
+// Temporary user config variable until better solution is found:
+var tooltipPercentageDisplayOption = "classic"; // classic ; dash_like ; dash_dislike ; both ; only_like ; only_dislike
+
 let isMobile = location.hostname == "m.youtube.com";
 let isShorts = () => location.pathname.startsWith("/shorts");
 let mobileDislikes = 0;
@@ -204,6 +207,23 @@ function createRateBar(likes, dislikes) {
   const widthPercent =
     likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
+  var likePercentage = parseFloat(widthPercent.toFixed(1));
+  const dislikePercentage = (100 - likePercentage).toLocaleString();
+  likePercentage = likePercentage.toLocaleString();
+  const tooltipPercentageDisplayModes = {
+    "classic": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`,
+    "dash_like": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`,
+    "dash_dislike": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`,
+    "both": `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`,
+    "only_like": `${likePercentage}%`,
+    "only_dislike": `${dislikePercentage}%`
+  };
+
+  if (tooltipPercentageDisplayModes[tooltipPercentageDisplayOption] === undefined) {    
+    tooltipPercentageDisplayOption = "classic";
+  };
+
+
   if (!rateBar && !isMobile) {
     document.getElementById("menu-container").insertAdjacentHTML(
       "beforeend",
@@ -221,7 +241,7 @@ function createRateBar(likes, dislikes) {
            </div>
         </div>
         <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-           <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
+        <!--css-build:shady-->${tooltipPercentageDisplayModes[tooltipPercentageDisplayOption]}
         </tp-yt-paper-tooltip>
         </div>
 `
@@ -235,7 +255,7 @@ function createRateBar(likes, dislikes) {
 
     document.querySelector(
       "#ryd-dislike-tooltip > #tooltip"
-    ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+    ).innerHTML = tooltipPercentageDisplayModes[tooltipPercentageDisplayOption];
   }
 }
 
