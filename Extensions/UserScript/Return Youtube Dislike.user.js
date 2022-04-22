@@ -241,7 +241,7 @@ function createRateBar(likes, dislikes) {
            </div>
         </div>
         <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-        <!--css-build:shady-->${tooltipPercentageDisplayModes[tooltipPercentageDisplayOption]}
+           <!--css-build:shady-->${tooltipPercentageDisplayModes[tooltipPercentageDisplayOption]}
         </tp-yt-paper-tooltip>
         </div>
 `
