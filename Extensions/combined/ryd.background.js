@@ -74,12 +74,16 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-api.storage.sync.get(['showChangelog'], (details) => {
-  if (details.showChangelog !== false) {
-    api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
-    api.storage.sync.set({'showChangelog': false});
-  }
-});
+  api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
+    if (extConfig.showUpdatePopup === true &&
+      details.lastShowChangelogVersion !== chrome.runtime.getManifest().version
+      ) {
+      // keep it inside get to avoid race condition
+      api.storage.sync.set({'lastShowChangelogVersion ': chrome.runtime.getManifest().version});
+      // wait until async get runs & don't steal tab focus
+      api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
+    }
+  });
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
