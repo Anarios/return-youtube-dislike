@@ -16,19 +16,28 @@ function createRateBar(likes, dislikes) {
     var likePercentage = parseFloat(widthPercent.toFixed(1));
     const dislikePercentage = (100 - likePercentage).toLocaleString();
     likePercentage = likePercentage.toLocaleString();
-    const tooltipPercentageDisplayModes = {
-      "classic": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`,
-      "dash_like": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`,
-      "dash_dislike": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`,
-      "both": `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`,
-      "only_like": `${likePercentage}%`,
-      "only_dislike": `${dislikePercentage}%`
-    };
 
-    var tooltipOption = "classic";
     if (extConfig.showTooltipPercentage) {
-      tooltipOption = extConfig.tooltipPercentageMode;
-    };
+      var tooltipInnerHTML;
+      switch (extConfig.tooltipPercentageMode) {        
+        case "dash_dislike":
+          tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`
+        break;
+        case "both":
+          tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`
+          break;
+        case "only_like":
+          tooltipInnerHTML = `${likePercentage}%`
+          break;
+        case "only_dislike":
+          tooltipInnerHTML = `${dislikePercentage}%`
+          break;
+        default: // dash_like
+          tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`
+      }
+    } else {
+      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`
+    }
     
     
     if (!rateBar && !isMobile()) {
@@ -58,7 +67,7 @@ function createRateBar(likes, dislikes) {
                </div>
             </div>
             <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-               <!--css-build:shady-->${tooltipPercentageDisplayModes[tooltipOption]}
+               <!--css-build:shady-->${tooltipInnerHTML}
             </tp-yt-paper-tooltip>
             </div>
     `
@@ -68,7 +77,7 @@ function createRateBar(likes, dislikes) {
       document.getElementById("ryd-bar").style.width = widthPercent + "%";
       document.querySelector(
         "#ryd-dislike-tooltip > #tooltip"
-      ).innerHTML = tooltipPercentageDisplayModes[tooltipOption];
+      ).innerHTML = tooltipInnerHTML;
       if (extConfig.coloredBar) {
         document.getElementById("ryd-bar-container").style.backgroundColor =
           getColorFromTheme(false);

@@ -35,7 +35,7 @@ const extConfig = {
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
   
   // READING THIS ^ INFO IS NOT IMPLEMENTED HERE (LOOK AT PULL REQUEST #540)
-  tooltipPercentageDisplayOption: "none", // [none*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
+  tooltipPercentageMode: "none", // [none*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
 // END USER OPTIONS
 };
 
@@ -224,18 +224,27 @@ function createRateBar(likes, dislikes) {
   var likePercentage = parseFloat(widthPercent.toFixed(1));
   const dislikePercentage = (100 - likePercentage).toLocaleString();
   likePercentage = likePercentage.toLocaleString();
-  const tooltipPercentageDisplayModes = {
-    "none": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`,
-    "dash_like": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`,
-    "dash_dislike": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`,
-    "both": `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`,
-    "only_like": `${likePercentage}%`,
-    "only_dislike": `${dislikePercentage}%`
-  };
-
-  if (tooltipPercentageDisplayModes[extConfig.tooltipPercentageDisplayOption] === undefined) {
-    extConfig.tooltipPercentageDisplayOption = "none";
-  };
+  
+  var tooltipInnerHTML;
+  switch (extConfig.tooltipPercentageMode) {
+    case "dash_like":
+      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`
+    break;
+    case "dash_dislike":
+      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`
+    break;
+    case "both":
+      tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`
+      break;
+    case "only_like":
+      tooltipInnerHTML = `${likePercentage}%`
+      break;
+    case "only_dislike":
+      tooltipInnerHTML = `${dislikePercentage}%`
+      break;
+    default:
+      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`
+  }
 
 
   if (!rateBar && !isMobile) {
@@ -255,7 +264,7 @@ function createRateBar(likes, dislikes) {
            </div>
         </div>
         <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-           <!--css-build:shady-->${tooltipPercentageDisplayModes[extConfig.tooltipPercentageDisplayOption]}
+           <!--css-build:shady-->${tooltipInnerHTML}
         </tp-yt-paper-tooltip>
         </div>
 `
@@ -269,7 +278,7 @@ function createRateBar(likes, dislikes) {
 
     document.querySelector(
       "#ryd-dislike-tooltip > #tooltip"
-    ).innerHTML = tooltipPercentageDisplayModes[extConfig.tooltipPercentageDisplayOption];
+    ).innerHTML = tooltipInnerHTML;
   }
 }
 
