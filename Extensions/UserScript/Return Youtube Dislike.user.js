@@ -22,15 +22,29 @@
 // @grant        GM_addStyle
 // @run-at       document-end
 // ==/UserScript==
+
+const extConfig = {
+// BEGIN USER OPTIONS
+// You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact. 
+  showUpdatePopup: false, // [true, false*] Show a popup tab after extension update (See what's new)
+  disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
+  coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
+  coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
+  colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
+  numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
+  numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
+  
+  // READING THIS ^ INFO IS NOT IMPLEMENTED HERE (LOOK AT PULL REQUEST #540)
+  tooltipPercentageDisplayOption: "classic", // [classic*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
+// END USER OPTIONS
+};
+
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 let previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
 let likesvalue = 0;
 let dislikesvalue = 0;
-
-// Temporary user config variable until better solution is found:
-var tooltipPercentageDisplayOption = "classic"; // classic ; dash_like ; dash_dislike ; both ; only_like ; only_dislike
 
 let isMobile = location.hostname == "m.youtube.com";
 let isShorts = () => location.pathname.startsWith("/shorts");
@@ -219,8 +233,8 @@ function createRateBar(likes, dislikes) {
     "only_dislike": `${dislikePercentage}%`
   };
 
-  if (tooltipPercentageDisplayModes[tooltipPercentageDisplayOption] === undefined) {    
-    tooltipPercentageDisplayOption = "classic";
+  if (tooltipPercentageDisplayModes[extConfig.tooltipPercentageDisplayOption] === undefined) {
+    extConfig.tooltipPercentageDisplayOption = "classic";
   };
 
 
@@ -241,7 +255,7 @@ function createRateBar(likes, dislikes) {
            </div>
         </div>
         <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-           <!--css-build:shady-->${tooltipPercentageDisplayModes[tooltipPercentageDisplayOption]}
+           <!--css-build:shady-->${tooltipPercentageDisplayModes[extConfig.tooltipPercentageDisplayOption]}
         </tp-yt-paper-tooltip>
         </div>
 `
@@ -255,7 +269,7 @@ function createRateBar(likes, dislikes) {
 
     document.querySelector(
       "#ryd-dislike-tooltip > #tooltip"
-    ).innerHTML = tooltipPercentageDisplayModes[tooltipPercentageDisplayOption];
+    ).innerHTML = tooltipPercentageDisplayModes[extConfig.tooltipPercentageDisplayOption];
   }
 }
 
