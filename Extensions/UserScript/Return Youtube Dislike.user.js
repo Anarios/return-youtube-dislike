@@ -35,7 +35,7 @@ const extConfig = {
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
   
   // READING THIS ^ INFO IS NOT IMPLEMENTED HERE (LOOK AT PULL REQUEST #540)
-  tooltipPercentageDisplayOption: "classic", // [classic*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
+  tooltipPercentageDisplayOption: "none", // [none*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
 // END USER OPTIONS
 };
 
@@ -225,7 +225,7 @@ function createRateBar(likes, dislikes) {
   const dislikePercentage = (100 - likePercentage).toLocaleString();
   likePercentage = likePercentage.toLocaleString();
   const tooltipPercentageDisplayModes = {
-    "classic": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`,
+    "none": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`,
     "dash_like": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`,
     "dash_dislike": `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`,
     "both": `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`,
@@ -234,7 +234,7 @@ function createRateBar(likes, dislikes) {
   };
 
   if (tooltipPercentageDisplayModes[extConfig.tooltipPercentageDisplayOption] === undefined) {
-    extConfig.tooltipPercentageDisplayOption = "classic";
+    extConfig.tooltipPercentageDisplayOption = "none";
   };
 
 
