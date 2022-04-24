@@ -424,7 +424,7 @@ function getColorFromTheme(voteIsLike) {
   let colorString;
   const isDarkTheme = document.querySelector('html').getAttribute('dark') === 'true';
   switch (extConfig.colorTheme) {
-    case "accessible":
+    case "capetian":
       colorString = isDarkTheme ?
         voteIsLike ? "dodgerblue" : "gold" :
         voteIsLike ? "dodgerblue" : "goldenrod";
@@ -439,7 +439,7 @@ function getColorFromTheme(voteIsLike) {
         voteIsLike ? "lime" : "magenta" :
         voteIsLike ? "green" : "magenta";
       break;
-    case "classic":
+    case "watermelon":
     default:
       colorString = isDarkTheme ?
         voteIsLike ? "lime" : "red" :
