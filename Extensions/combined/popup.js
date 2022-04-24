@@ -259,9 +259,13 @@ function handleColorThemeChangeEvent(value) {
 
 function updateColorThemePreviewContent(themeName) {
   document.getElementById("color_theme_example_like").style.backgroundColor =
-    getColorFromTheme(themeName, true);
+    getColorFromTheme(themeName, true, false);
   document.getElementById("color_theme_example_dislike").style.backgroundColor =
-    getColorFromTheme(themeName, false);
+    getColorFromTheme(themeName, false, false);
+  document.getElementById("color_theme_example_like_dark").style.backgroundColor =
+    getColorFromTheme(themeName, true, true);
+  document.getElementById("color_theme_example_dislike_dark").style.backgroundColor =
+    getColorFromTheme(themeName, false, true);
 }
 
 function handleNumberDisplayRoundDownChangeEvent(value) {
@@ -332,30 +336,29 @@ function getNumberFormatter(optionSelect) {
   }
 })();
 
-function getColorFromTheme(colorTheme, voteIsLike) {
+function getColorFromTheme(colorTheme, voteIsLike, isDarkTheme) {
   let colorString;
   switch (colorTheme) {
     case "accessible":
-      if (voteIsLike === true) {
-        colorString = "dodgerblue";
-      } else {
-        colorString = "gold";
-      }
+      colorString = isDarkTheme ?
+        voteIsLike ? "dodgerblue" : "gold" :
+        voteIsLike ? "dodgerblue" : "goldenrod";
       break;
     case "neon":
-      if (voteIsLike === true) {
-        colorString = "aqua";
-      } else {
-        colorString = "magenta";
-      }
+      colorString = isDarkTheme ?
+        voteIsLike ? "aqua" : "magenta" :
+        voteIsLike ? "turquoise" : "magenta";
+      break;
+    case "hibiscus":
+      colorString = isDarkTheme ?
+        voteIsLike ? "lime" : "magenta" :
+        voteIsLike ? "green" : "magenta";
       break;
     case "classic":
     default:
-      if (voteIsLike === true) {
-        colorString = "lime";
-      } else {
-        colorString = "red";
-      }
+      colorString = isDarkTheme ?
+        voteIsLike ? "lime" : "red" :
+        voteIsLike ? "green" : "red";
   }
   return colorString;
 }

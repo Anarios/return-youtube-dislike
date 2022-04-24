@@ -117,28 +117,28 @@ function cLog(message, writer) {
 
 function getColorFromTheme(voteIsLike) {
   let colorString;
+  const isDarkTheme = document.querySelector('html').getAttribute('dark') === 'true';
   switch (extConfig.colorTheme) {
     case "accessible":
-      if (voteIsLike === true) {
-        colorString = "dodgerblue";
-      } else {
-        colorString = "gold";
-      }
+      colorString = isDarkTheme ?
+        voteIsLike ? "dodgerblue" : "gold" :
+        voteIsLike ? "dodgerblue" : "goldenrod";
       break;
     case "neon":
-      if (voteIsLike === true) {
-        colorString = "aqua";
-      } else {
-        colorString = "magenta";
-      }
+      colorString = isDarkTheme ?
+        voteIsLike ? "aqua" : "magenta" :
+        voteIsLike ? "turquoise" : "magenta";
+      break;
+    case "hibiscus":
+      colorString = isDarkTheme ?
+        voteIsLike ? "lime" : "magenta" :
+        voteIsLike ? "green" : "magenta";
       break;
     case "classic":
     default:
-      if (voteIsLike === true) {
-        colorString = "lime";
-      } else {
-        colorString = "red";
-      }
+      colorString = isDarkTheme ?
+        voteIsLike ? "lime" : "red" :
+        voteIsLike ? "green" : "red";
   }
   return colorString;
 }

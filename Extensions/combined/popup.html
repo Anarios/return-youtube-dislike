@@ -131,34 +131,55 @@
   </label>
   <br/>
   <div class="custom-select">
-    <label for="color_theme">Color theme:</label>
+    <label for="color_theme" data-hover="* Colorblind friendly">Color theme:</label>
     <select name="color_theme" id="color_theme">
-      <option value="classic" id="color_theme_classic">Classic</option>
+      <option value="classic" id="color_theme_classic">Watermelon</option>
       <option value="accessible" id="color_theme_accessible">
-        Accessible
+        Capetian*
       </option>
       <option value="neon" id="color_theme_neon">Neon</option>
+      <option value="hibiscus" id="color_theme_hibiscus">Hibiscus*</option>
     </select>
-    <span
-      id="color_theme_example_like"
-      style="
-            display: inline-block;
-            vertical-align: text-top;
-            width: 1em;
-            height: 1em;
-          "
-    >&nbsp;</span
-    >
-    <span
-      id="color_theme_example_dislike"
-      style="
-            display: inline-block;
-            vertical-align: text-top;
-            width: 1em;
-            height: 1em;
-          "
-    >&nbsp;</span
-    >
+    <span style="background-color: rgb(255,255,255); height: 1.4em; padding: 0.2em;">
+      <span
+        id="color_theme_example_like"
+        style="
+              display: inline-block;
+              text-align: center;
+              width: 1em;
+              height: 1em;
+            "
+      >&nbsp;</span>&nbsp;
+      <span
+        id="color_theme_example_dislike"
+        style="
+              display: inline-block;
+              text-align: center;
+              width: 1em;
+              height: 1em;
+            "
+      >&nbsp;</span>
+    </span>
+    <span style="background-color: rgb(3,3,3); height: 1.4em; padding: 0.2em;">
+      <span
+        id="color_theme_example_like_dark"
+        style="
+              display: inline-block;
+              text-align: center;
+              width: 1em;
+              height: 1em;
+            "
+      >&nbsp;</span>&nbsp;
+      <span
+        id="color_theme_example_dislike_dark"
+        style="
+              display: inline-block;
+              text-align: center;
+              width: 1em;
+              height: 1em;
+            "
+      >&nbsp;</span>
+    </span>
   </div>
 </fieldset>
 </body>
