@@ -74,8 +74,10 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-api.runtime.onInstalled.addListener(() => {
-  api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
+api.runtime.onInstalled.addListener(({ reason }) => {
+  if (reason === "update") {
+    api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
+  }
 })
 
 async function sendVote(videoId, vote) {
