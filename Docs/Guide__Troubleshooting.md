@@ -12,7 +12,7 @@ Troubleshooting Guide
   - [Check for conflicting extensions](#check-for-conflicting-extensions)
   - [Known conflicts](#known-conflicts)
 - [iOS app](#ios-app)
-- [YouTube Vanced  app](#youtube-vanced--app)
+- [YouTube Vanced app](#youtube-vanced--app)
 - [Contact in Discord Server](#contact-in-discord-server)
 - [Useful Links](#useful-links)
 
@@ -41,7 +41,7 @@ If the basic checks didn't resolve anything
 
 - If you **don't see something like** this, then the **API is down** and **everything is fine on your side**.
   `{"id":"QOFEgexls14","dateCreated":"2021-12-28T02:53:20.995329Z","likes":2968,"dislikes":204,"rating":4.725047080979285,"viewCount":29157,"deleted":false}`
-- If you see some responses but not in the above format (with likes and dislikes) then probably you are being rate-limited. It is done to prevent bot attacks and database vandalization. It depends on IP (its hash - which is never stored in non-volatile storage) for its countermeasures. If many people are accessing the server from the same IP (as in the case of public/institutional Wi-Fi) then it's possible that the IP is being rate-limited. If that's the case, There's no way for us to differentiate you from a bot/attacker.
+- If you see some responses but not in the above format (with likes and dislikes) then probably you are being rate-limited. It is done to prevent bot attacks and database vandalization. It depends on IP (its hash - which is never stored in non-volatile storage) for its countermeasures. If many people are accessing the server from the same IP (as in the case of public/institutional Wi-Fi) then it's possible that the IP is being rate-limited. If that's the case, there's no way for us to differentiate you from a bot/attacker.
 
 **If you see "Certificate error" and [if you are on Windows 7 (or earlier) read this](#install-certificates)**
 
@@ -63,12 +63,12 @@ You can follow this guide:
 
 [Fix error NET::ERR CERT DATE INVALID - Your connection is not private - Windows 7 - 2021](https://youtu.be/JYZLxP2Z8G4)
 
-If you don't want to install the certificate from Google drive
+If you don't want to install the certificate from Google Drive
 
 - Here is the official link to the certificate [**x1.i.lencr.org**](http://x1.i.lencr.org/).
 - **You will have to close all the tabs** before downloading this certificate.
 
-**The thumb print of real certificate is `cabd2a79a1076a31f21d253635cb039d4329a5e8`**
+**The thumbprint of real certificate is `cabd2a79a1076a31f21d253635cb039d4329a5e8`**
 
 **To make sure that you have installed the correct certificate, you should consider checking if the thumbprints match.** To do this you can follow this guide: [How to check a certificate's thumbprint](https://knowledge.digicert.com/solution/SO9840.html)
 
@@ -117,7 +117,7 @@ If it does, find the extension(s) preventing RYD from working correctly and re-c
 >
 > **Solution:** Trust `returnyoutubedislikeapi.com` manually
 >
-> ![rust returnyoutubedislikeapi.com manually](https://cdn.discordapp.com/attachments/821116437720334397/929814357708247060/unknown.png)
+> ![trust returnyoutubedislikeapi.com manually](https://cdn.discordapp.com/attachments/821116437720334397/929814357708247060/unknown.png)
 
 <br>
 
@@ -139,7 +139,7 @@ Coming soon. Please have patience.
 
 <br>
 
-## YouTube Vanced  app
+## YouTube Vanced app
 
 Coming soon. Please have patience.
 
@@ -153,11 +153,11 @@ Coming soon. Please have patience.
 
 [Discord server link: https://discord.gg/mYnESY4Md5][3]
 
-0. Join the discord server if haven't already
+0. Join the discord server if you haven't already
 1. Go to the #Bugs-and-problems channel
 2. There, thoroughly describe:
    - your problem
-   - what you have tried & what didn't work
+   - what you have tried and what didn't work
    - results of the troubleshooting steps
 
 <!-- {

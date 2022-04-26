@@ -33,8 +33,6 @@ const extConfig = {
   colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
-  
-  // READING THIS ^ INFO IS NOT IMPLEMENTED HERE (LOOK AT PULL REQUEST #540)
   tooltipPercentageMode: "none", // [none*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
 // END USER OPTIONS
 };
@@ -248,6 +246,13 @@ function createRateBar(likes, dislikes) {
 
 
   if (!rateBar && !isMobile) {
+    let colorLikeStyle = "";
+    let colorDislikeStyle = "";
+    if (extConfig.coloredBar) {
+      colorLikeStyle = "; background-color: " + getColorFromTheme(true);
+      colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
+    }
+    
     document.getElementById("menu-container").insertAdjacentHTML(
       "beforeend",
       `
@@ -255,11 +260,11 @@ function createRateBar(likes, dislikes) {
         <div class="ryd-tooltip-bar-container">
            <div
               id="return-youtube-dislike-bar-container"
-              style="width: 100%; height: 2px;"
+              style="width: 100%; height: 2px;${colorDislikeStyle}"
               >
               <div
                  id="return-youtube-dislike-bar"
-                 style="width: ${widthPercent}%; height: 100%"
+                 style="width: ${widthPercent}%; height: 100%${colorDislikeStyle}"
                  ></div>
            </div>
         </div>
@@ -279,6 +284,13 @@ function createRateBar(likes, dislikes) {
     document.querySelector(
       "#ryd-dislike-tooltip > #tooltip"
     ).innerHTML = tooltipInnerHTML;
+    
+    if (extConfig.coloredBar) {
+      document.getElementById("return-youtube-dislike-bar-container").style.backgroundColor =
+        getColorFromTheme(false);
+      document.getElementById("return-youtube-dislike-bar").style.backgroundColor =
+        getColorFromTheme(true);
+    }
   }
 }
 
@@ -297,6 +309,10 @@ function setState() {
         dislikesvalue = dislikes;
         setDislikes(numberFormat(dislikes));
         createRateBar(likes, dislikes);
+        if (extConfig.coloredThumbs === true) {
+          getLikeButton().style.color = getColorFromTheme(true);
+          getDislikeButton().style.color = getColorFromTheme(false);
+        }
       }
     });
   });
@@ -390,14 +406,73 @@ function numberFormat(numberState) {
         ?.getAttribute("href")
     )?.searchParams?.get("locale");
   } catch {}
+
+  let numberDisplay;
+  if (extConfig.numberDisplayRoundDown === false) {
+    numberDisplay = numberState;
+  } else {
+    numberDisplay = roundDown(numberState);
+  }
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(
+    numberDisplay
+  );
+}
+
+function getNumberFormatter(optionSelect) {
+  let formatterNotation;
+  let formatterCompactDisplay;
+
+  switch (optionSelect) {
+    case "compactLong":
+      formatterNotation = "compact";
+      formatterCompactDisplay = "long";
+      break;
+    case "standard":
+      formatterNotation = "standard";
+      formatterCompactDisplay = "short";
+      break;
+    case "compactShort":
+    default:
+      formatterNotation = "compact";
+      formatterCompactDisplay = "short";
+  }
+
   const formatter = Intl.NumberFormat(
     document.documentElement.lang || userLocales || navigator.language,
     {
-      notation: "compact",
+      notation: formatterNotation,
+      compactDisplay: formatterCompactDisplay,
     }
   );
+  return formatter;
+}
 
-  return formatter.format(roundDown(numberState));
+function getColorFromTheme(voteIsLike) {
+  let colorString;
+  switch (extConfig.colorTheme) {
+    case "accessible":
+      if (voteIsLike === true) {
+        colorString = "dodgerblue";
+      } else {
+        colorString = "gold";
+      }
+      break;
+    case "neon":
+      if (voteIsLike === true) {
+        colorString = "aqua";
+      } else {
+        colorString = "magenta";
+      }
+      break;
+    case "classic":
+    default:
+      if (voteIsLike === true) {
+        colorString = "lime";
+      } else {
+        colorString = "red";
+      }
+  }
+  return colorString;
 }
 
 function setEventListeners(evt) {
