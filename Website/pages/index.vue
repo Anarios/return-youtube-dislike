@@ -123,7 +123,7 @@ export default {
     };
   },
   mounted() {
-    const YOUTUBE_REGEX = /(?:http:|https:)*?\/\/(?:www\.|)(?:youtube\.com|m\.youtube\.com|youtu\.|youtube-nocookie\.com).*(?:v=|v%3D|v\/|(?:a|p)\/(?:a|u)\/\d.*\/|watch\?|vi(?:=|\/)|\/embed\/|oembed\?|be\/|e\/)([^&?%#\/\n]*)/;
+    const YOUTUBE_REGEX = /(?:http:|https:)*?\/\/(?:www\.|)(?:youtube\.com|m\.youtube\.com|youtu\.|youtube-nocookie\.com).*(?:v=|v%3D|v\/|(?:a|p)\/(?:a|u)\/\d.*\/|watch\?|vi(?:=|\/)|\/embed\/|oembed\?|be\/|e\/)([^&?%#/\n]*)/;
     let lastVideoId = "";
     window.oninput = (e) => {
       const videoId = (e.target.value.match(YOUTUBE_REGEX) || {})[1] || e.target.value;

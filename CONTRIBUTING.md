@@ -34,6 +34,8 @@ npm run build // to create the build file(s) once
 
 Congratulations, You are now ready to develop!
 
+If you are new to developing Chrome extensions, or need extra help, please see [this YouTube tutorial](https://www.youtube.com/watch?v=mdOj6HYE3_0)
+
 
 ### Issues
 #### Opening a new issue

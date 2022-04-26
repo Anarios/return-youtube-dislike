@@ -8,14 +8,13 @@ import {
   getColorFromTheme,
 } from "./utils";
 import { sendVideoIds } from "./events";
+import { localize } from "./utils";
 
 //TODO: Do not duplicate here and in ryd.background.js
 const apiUrl = "https://returnyoutubedislikeapi.com";
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
-
-const DISLIKES_DISABLED_TEXT = "DISLIKES DISABLED";
 
 let extConfig = {
   disableVoteSubmission: false,
@@ -32,8 +31,6 @@ let storedData = {
   previousState: NEUTRAL_STATE,
 };
 
-let likesDisabledState = true;
-
 function isMobile() {
   return location.hostname == "m.youtube.com";
 }
@@ -41,6 +38,7 @@ function isMobile() {
 function isShorts() {
   return location.pathname.startsWith("/shorts");
 }
+
 
 let mutationObserver = new Object();
 
@@ -70,6 +68,15 @@ if (isShorts() && mutationObserver.exists !== true) {
       cLog('unexpected mutation observer event: ' + mutation.target + mutation.type);
     });
   });
+
+function isLikesDisabled() {
+  // return true if the like button's text doesn't contain any number
+  if (isMobile()) {
+    return /^\D*$/.test(
+      getButtons().children[0].querySelector(".button-renderer-text").innerText
+    );
+  }
+  return /^\D*$/.test(getButtons().children[0].querySelector("#text").innerText);
 }
 
 function isVideoLiked() {
@@ -108,7 +115,7 @@ function setLikes(likesCount) {
 }
 
 function setDislikes(dislikesCount) {
-  if (!likesDisabledState) {
+  if (!isLikesDisabled()) {
     if (isMobile()) {
       getButtons().children[1].querySelector(
         ".button-renderer-text"
@@ -121,11 +128,12 @@ function setDislikes(dislikesCount) {
     if (isMobile()) {
       getButtons().children[1].querySelector(
         ".button-renderer-text"
-      ).innerText = DISLIKES_DISABLED_TEXT;
+      ).innerText = localize("TextLikesDisabled");
       return;
     }
-    getButtons().children[1].querySelector("#text").innerText =
-      DISLIKES_DISABLED_TEXT;
+    getButtons().children[1].querySelector("#text").innerText = localize(
+      "TextLikesDisabled"
+    );
   }
 }
 
@@ -167,6 +175,13 @@ function processResponse(response, storedData) {
   }
 }
 
+// Tells the user if the API is down
+function displayError(error) {
+  getButtons().children[1].querySelector("#text").innerText = localize(
+    "textTempUnavailable"
+  );
+}
+
 async function setState(storedData) {
   storedData.previousState = isVideoDisliked()
     ? DISLIKED_STATE
@@ -187,14 +202,14 @@ async function setState(storedData) {
       },
     }
   )
+    .then((response) => {
+      if (!response.ok) displayError(response.error);
+      return response;
+    })
     .then((response) => response.json())
-    .catch();
+    .catch(displayError);
   cLog("response from api:");
   cLog(JSON.stringify(response));
-  likesDisabledState =
-    numberFormat(response.dislikes) == 0 &&
-    numberFormat(response.likes) == 0 &&
-    numberFormat(response.viewCount) == 0;
   if (response !== undefined && !("traceId" in response) && !statsSet) {
     processResponse(response, storedData);
   }
@@ -293,5 +308,5 @@ export {
   extConfig,
   initExtConfig,
   storedData,
-  likesDisabledState,
+  isLikesDisabled
 };
