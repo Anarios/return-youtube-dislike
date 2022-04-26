@@ -25,6 +25,7 @@ let extConfig = {
   numberDisplayRoundDown: true,
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
+  numberDisplayReformatLikes: false,
 };
 
 let storedData = {
@@ -39,6 +40,37 @@ function isMobile() {
 
 function isShorts() {
   return location.pathname.startsWith("/shorts");
+}
+
+
+let mutationObserver = new Object();
+
+if (isShorts() && mutationObserver.exists !== true) {
+  cLog('initializing mutation observer')
+  mutationObserver.options = {
+    childList: false,
+    attributes: true,
+    subtree: false
+  };
+  mutationObserver.exists = true;
+  mutationObserver.observer = new MutationObserver( function(mutationList, observer) {
+    mutationList.forEach( (mutation) => {
+      if (mutation.type === 'attributes' && 
+        mutation.target.nodeName === 'TP-YT-PAPER-BUTTON' && 
+        mutation.target.id === 'button') {
+        // cLog('Short thumb button status changed');
+        if (mutation.target.getAttribute('aria-pressed') === 'true') {
+          mutation.target.style.color =
+            (mutation.target.parentElement.parentElement.id === 'like-button') ? 
+            getColorFromTheme(true) : getColorFromTheme(false);
+        } else {
+          mutation.target.style.color = 'unset';
+        }
+        return;
+      }
+      cLog('unexpected mutation observer event: ' + mutation.target + mutation.type);
+    });
+  });
 }
 
 function isLikesDisabled() {
@@ -125,12 +157,31 @@ function getLikeCountFromButton() {
 function processResponse(response, storedData) {
   const formattedDislike = numberFormat(response.dislikes);
   setDislikes(formattedDislike);
+  if (extConfig.numberDisplayReformatLikes === true) {
+    const nativeLikes = getLikeCountFromButton();
+    if (nativeLikes !== false) {
+      setLikes(numberFormat(nativeLikes));
+    }
+  }
   storedData.dislikes = parseInt(response.dislikes);
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
   createRateBar(storedData.likes, storedData.dislikes);
   if (extConfig.coloredThumbs === true) {
-    getLikeButton().style.color = getColorFromTheme(true);
-    getDislikeButton().style.color = getColorFromTheme(false);
+    if (isShorts()) { // for shorts, leave deactived buttons in default color
+      let shortLikeButton = getLikeButton().querySelector('tp-yt-paper-button#button');
+      let shortDislikeButton = getDislikeButton().querySelector('tp-yt-paper-button#button');
+      if (shortLikeButton.getAttribute('aria-pressed') === 'true') {
+        shortLikeButton.style.color = getColorFromTheme(true);
+      }
+      if (shortDislikeButton.getAttribute('aria-pressed') === 'true') {
+        shortDislikeButton.style.color = getColorFromTheme(false);
+      }
+      mutationObserver.observer.observe(shortLikeButton, mutationObserver.options);
+      mutationObserver.observer.observe(shortDislikeButton, mutationObserver.options);
+    } else {
+      getLikeButton().style.color = getColorFromTheme(true);
+      getDislikeButton().style.color = getColorFromTheme(false);
+    }
   }
 }
 
@@ -190,6 +241,7 @@ function initExtConfig() {
   initializeNumberDisplayRoundDown();
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
+  initializeNumberDisplayReformatLikes();
 }
 
 function initializeDisableVoteSubmission() {
@@ -268,6 +320,16 @@ function initializeTooltipPercentageMode() {
       getBrowser().storage.sync.set({ tooltipPercentageMode: "dash_like" });
     } else {
       extConfig.tooltipPercentageMode = res.tooltipPercentageMode;
+    }
+  });
+}
+
+function initializeNumberDisplayReformatLikes() {
+  getBrowser().storage.sync.get(["numberDisplayReformatLikes"], (res) => {
+    if (res.numberDisplayReformatLikes === undefined) {
+      getBrowser().storage.sync.set({ numberDisplayReformatLikes: false });
+    } else {
+      extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
     }
   });
 }
