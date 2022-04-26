@@ -88,13 +88,9 @@ You can support this project by donating to us on the link below:
 ## Sponsors
 [Piepacker](https://piepacker.com)
 
-[nodetube](https://github.com/mayeaux/nodetube)
-
-trig404
-
-[Peter33](https://www.youtube.com/watch?v=G5kzUpWAusI)
-
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
 
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
+
+[Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
 
