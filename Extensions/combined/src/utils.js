@@ -29,6 +29,10 @@ function numberFormat(numberState) {
   );
 }
 
+function localize(localeString) {
+  return chrome.i18n.getMessage(localeString);
+}
+
 function getNumberFormatter(optionSelect) {
   let formatterNotation;
   let formatterCompactDisplay;
@@ -151,4 +155,5 @@ export {
   isVideoLoaded,
   cLog,
   getColorFromTheme,
+  localize,
 };
