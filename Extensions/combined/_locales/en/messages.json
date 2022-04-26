@@ -39,7 +39,7 @@
         "message": "update to"
     },
     "version30installed": {
-        "message": "Version 4.0.0.0 installed"
+        "message": "Version 3.0.0.1 installed"
     },
     "whatsnew": {
         "message": "What's new"
@@ -52,5 +52,8 @@
     },
     "customNumberFormats": {
         "message": "Custom number formats"
+    },
+    "considerDonating": {
+        "message": "The only thing that keeps the extension running is your donations, please consider supporting the project."
     }
 }
