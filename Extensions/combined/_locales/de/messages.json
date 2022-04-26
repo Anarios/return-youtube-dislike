@@ -1,50 +1,54 @@
 {
   "extensionName": {
-      "message": "Return YouTube Dislike"
+    "message": "Return YouTube Dislike"
+  },
+
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
   },
   "extensionDesc": {
-      "message": "Macht Dislikes wieder sichtbar"
+    "message": "Macht Dislikes wieder sichtbar"
   },
   "textDeveloper": {
-      "message": "von Dmitry Selivanov & Community"
+    "message": "von Dmitry Selivanov & Community"
   },
   "linkWebsite": {
-      "message": "Website"
+    "message": "Website"
   },
   "linkFAQ": {
-      "message": "FAQ"
+    "message": "FAQ"
   },
   "linkDonate": {
-      "message": "Spenden"
+    "message": "Spenden"
   },
   "linkHelp": {
-      "message": "Hilfe"
+    "message": "Hilfe"
   },
   "legendSettings": {
-      "message": "Einstellungen"
+    "message": "Einstellungen"
   },
   "textSettings": {
-      "message": "Deaktiviere Like/Dislike-Übermittlung"
+    "message": "Deaktiviere Like/Dislike-Übermittlung"
   },
   "textSettingsHover": {
-      "message": "Stoppt deine Likes und Dislikes zu zählen."
+    "message": "Stoppt deine Likes und Dislikes zu zählen."
   },
   "textUpdate": {
-      "message": "aktualisieren auf"
+    "message": "aktualisieren auf"
   },
   "version30installed": {
-      "message": "Version 3.0.0.1 installiert"
+    "message": "Version 3.0.0.1 installiert"
   },
   "whatsnew": {
-      "message": "Was ist neu"
+    "message": "Was ist neu"
   },
   "shortsSupport": {
-      "message": "YouTube Shorts Unterstützung"
+    "message": "YouTube Shorts Unterstützung"
   },
   "customColors": {
-      "message": "Benutzerdefinierte Farben für Dislike-Leiste und Buttons"
+    "message": "Benutzerdefinierte Farben für Dislike-Leiste und Buttons"
   },
   "customNumberFormats": {
-      "message": "Benutzerdefinierte Zahlenformate"
+    "message": "Benutzerdefinierte Zahlenformate"
   }
 }
