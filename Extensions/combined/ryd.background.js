@@ -12,6 +12,7 @@ let extConfig = {
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
   showUpdatePopup: false, 
+  numberDisplayReformatLikes: false, // use existing (native) likes number
 };
 
 if (isChrome()) api = chrome;
@@ -73,22 +74,36 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-api.storage.sync.get(['newInstallation'], (result) => {
-  if (result.newInstallation !== false 
-    || extConfig.showUpdatePopup === true
-  ) {
-    api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
-  }
+api.runtime.onInstalled.addListener((details) => {
+  if (
+    // No need to show changelog if its was a browser update (and not extension update)
+    details.reason === "browser_update" ||
+    // No need to show changelog if developer just reloaded the extension
+    details.reason === "update"
+  )
+    return;
+  api.tabs.create({
+    url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
+  });
 });
-api.storage.sync.set({'newInstallation': false});
+
+// api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
+//   if (extConfig.showUpdatePopup === true &&
+//     details.lastShowChangelogVersion !== chrome.runtime.getManifest().version
+//     ) {
+//     // keep it inside get to avoid race condition
+//     api.storage.sync.set({'lastShowChangelogVersion ': chrome.runtime.getManifest().version});
+//     // wait until async get runs & don't steal tab focus
+//     api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
+//   }
+// });
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
     if (!storageResult.userId || !storageResult.registrationConfirmed) {
       await register();
-      return;
     }
-    fetch(`${apiUrl}/interact/vote`, {
+    let voteResponse = await fetch(`${apiUrl}/interact/vote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,81 +113,71 @@ async function sendVote(videoId, vote) {
         videoId,
         value: vote,
       }),
-    })
-      .then(async (response) => {
-        if (response.status == 401) {
-          await register();
-          await sendVote(videoId, vote);
-          return;
-        }
-        return response.json();
-      })
-      .then((response) => {
-        solvePuzzle(response).then((solvedPuzzle) => {
-          fetch(`${apiUrl}/interact/confirmVote`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              ...solvedPuzzle,
-              userId: storageResult.userId,
-              videoId,
-            }),
-          });
-        });
-      });
+    });
+
+    if (voteResponse.status == 401) {
+      await register();
+      await sendVote(videoId, vote);
+      return;
+    }
+    const voteResponseJson = await voteResponse.json();
+    const solvedPuzzle = await solvePuzzle(voteResponseJson);
+    if (!solvedPuzzle.solution) {
+      await sendVote(videoId, vote);
+      return;
+    }
+
+    await fetch(`${apiUrl}/interact/confirmVote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...solvedPuzzle,
+        userId: storageResult.userId,
+        videoId,
+      }),
+    });
   });
 }
 
-function register() {
-  let userId = generateUserID();
+async function register() {
+  const userId = generateUserID();
   api.storage.sync.set({ userId });
-  return fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
-    method: "GET",
+  const registrationResponse = await fetch(
+    `${apiUrl}/puzzle/registration?userId=${userId}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+  const solvedPuzzle = await solvePuzzle(registrationResponse);
+  if (!solvedPuzzle.solution) {
+    await register();
+    return;
+  }
+  const result = await fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
+    method: "POST",
     headers: {
-      Accept: "application/json",
+      "Content-Type": "application/json",
     },
-  })
-    .then((response) => response.json())
-    .then((response) => {
-      return solvePuzzle(response).then((solvedPuzzle) => {
-        return fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(solvedPuzzle),
-        }).then((response) =>
-          response.json().then((result) => {
-            if (result === true) {
-              return api.storage.sync.set({ registrationConfirmed: true });
-            }
-          })
-        );
-      });
-    })
-    .catch();
+    body: JSON.stringify(solvedPuzzle),
+  }).then((response) => response.json());
+  if (result === true) {
+    return api.storage.sync.set({ registrationConfirmed: true });
+  }
 }
 
-api.storage.sync.get(null, (res) => {
+api.storage.sync.get(null, async (res) => {
   if (!res || !res.userId || !res.registrationConfirmed) {
-    register();
+    await register();
   }
 });
 
 const sentIds = new Set();
 let toSend = [];
-
-function sendUserSubmittedStatisticsToApi(statistics) {
-  fetch(`${apiUrl}/votes/user-submitted`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(statistics),
-  });
-}
 
 function countLeadingZeroes(uInt8View, limit) {
   let zeroes = 0;
@@ -208,7 +213,7 @@ async function solvePuzzle(puzzle) {
   let buffer = new ArrayBuffer(20);
   let uInt8View = new Uint8Array(buffer);
   let uInt32View = new Uint32Array(buffer);
-  let maxCount = Math.pow(2, puzzle.difficulty) * 5;
+  let maxCount = Math.pow(2, puzzle.difficulty) * 3;
   for (let i = 4; i < 20; i++) {
     uInt8View[i] = challenge[i - 4];
   }
@@ -223,6 +228,7 @@ async function solvePuzzle(puzzle) {
       };
     }
   }
+  return {};
 }
 
 function generateUserID(length = 36) {
@@ -270,6 +276,11 @@ function storageChangeHandler(changes, area) {
   if (changes.showUpdatePopup !== undefined) {
     handleShowUpdatePopupChangeEvent(changes.showUpdatePopup.newValue);
   }
+  if (changes.numberDisplayReformatLikes !== undefined) {
+    handleNumberDisplayReformatLikesChangeEvent(
+      changes.numberDisplayReformatLikes.newValue
+    );
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -316,6 +327,10 @@ function handleShowUpdatePopupChangeEvent(value) {
   extConfig.showUpdatePopup = value;
 }
 
+function handleNumberDisplayReformatLikesChangeEvent(value) {
+  extConfig.numberDisplayReformatLikes = value;
+}
+
 api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
@@ -326,6 +341,7 @@ function initExtConfig() {
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
   initializeShowUpdatePopup();
+  initializeNumberDisplayReformatLikes();
 }
 
 function initializeDisableVoteSubmission() {
@@ -395,6 +411,16 @@ function initializeShowUpdatePopup() {
       api.storage.sync.set({ showUpdatePopup: false });
     } else {
       extConfig.showUpdatePopup = res.showUpdatePopup;
+    }
+  });
+}
+
+function initializeNumberDisplayReformatLikes() {
+  api.storage.sync.get(["numberDisplayReformatLikes"], (res) => {
+    if (res.numberDisplayReformatLikes === undefined) {
+      api.storage.sync.set({ numberDisplayReformatLikes: false });
+    } else {
+      extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
     }
   });
 }

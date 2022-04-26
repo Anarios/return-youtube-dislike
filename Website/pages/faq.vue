@@ -36,12 +36,17 @@ export default {
       {
         question: "Where does the extension get its data?",
         answer:
-          "A combination of archived data from before the offical YouTube dislike API shut down, and extrapolated extension user behavior.",
+          "A combination of archived data from before the official YouTube dislike API shut down, and extrapolated extension user behavior.",
       },
       {
         question: "Why isn't the dislike count updating?",
         answer:
           "Right now video dislikes are cached and they aren't updated very frequently. It varies depending on a video's popularity but can take anywhere between a few hours and a few days to update.",
+      },
+      {
+        question: "Why is the dislike count on my videos inaccurate?",
+        answer:
+          "Extrapolated data tends to get better with the increase in diversity and the quantity of voters. \nTo ensure and increase the accuracy of the extrapolated vote data for your videos, you can encourage your viewers to use this extension (or any app that submits votes to returnyoutubedislikeapi.com) ",
       },
       {
         question: "How does this work?",

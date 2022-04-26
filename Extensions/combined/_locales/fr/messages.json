@@ -23,11 +23,17 @@
     "legendSettings": {
         "message": "Paramètres"
     },
+    "textLikesDisabled": {
+        "message": "Désactivé par le créateur"
+    },
     "textSettings": {
         "message": "Désactiver l'envoi des likes/dislikes"
     },
     "textSettingsHover": {
         "message": "Arrête de compter les likes et les dislikes mis sur les vidéos."
+    },
+    "textTempUnavailable": {
+        "message": "temporairement indisponible"
     },
     "textUpdate": {
         "message": "mettre à jour vers"
