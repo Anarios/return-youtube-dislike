@@ -90,6 +90,9 @@ document.getElementById("number_format").addEventListener("change", (ev) => {
 
 document.getElementById("show_update_popup").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ showUpdatePopup: ev.target.checked });
+  if (ev.target.checked === true) { // avoid undefined or outdated lastShowChangelogVersion
+    api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version});
+  }
 });
   
 document.getElementById("number_reformat_likes").addEventListener("click", (ev) => {

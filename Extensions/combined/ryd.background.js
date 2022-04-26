@@ -74,29 +74,16 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-api.runtime.onInstalled.addListener((details) => {
-  if (
-    // No need to show changelog if its was a browser update (and not extension update)
-    details.reason === "browser_update" ||
-    // No need to show changelog if developer just reloaded the extension
-    details.reason === "update"
-  )
-    return;
-  api.tabs.create({
-    url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
-  });
+api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], (config) => {
+  if (config.showUpdatePopup === true &&
+    config.lastShowChangelogVersion !== chrome.runtime.getManifest().version
+    ) {
+    // keep it inside get to avoid race condition
+    api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version});
+    // wait until async get runs & don't steal tab focus
+    api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
+  }
 });
-
-// api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
-//   if (extConfig.showUpdatePopup === true &&
-//     details.lastShowChangelogVersion !== chrome.runtime.getManifest().version
-//     ) {
-//     // keep it inside get to avoid race condition
-//     api.storage.sync.set({'lastShowChangelogVersion ': chrome.runtime.getManifest().version});
-//     // wait until async get runs & don't steal tab focus
-//     api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
-//   }
-// });
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
