@@ -6,7 +6,7 @@ No. The extension's code is public and you can see it for yourself. The only inf
 
 ### Can you uniquely identify me if I dislike?
 
-Yes. When you dislike a video, we create a randomly generated unique ID for you that is not tied to your Google account. This is done to prevent botting. But there is no way to tie this random Id to you or your personal youtube account.
+Yes. When you dislike a video, we create a randomly generated unique ID for you that is not tied to your Google account. This is done to prevent botting. But there is no way to tie this random Id to you or your personal YouTube account.
 
 ### What information do you have, exactly?
 
@@ -18,7 +18,7 @@ The backend keeps unhashed IP addresses in volatile memory (RAM) only. These add
 
 ### I heard some discussion over OAuth, and access to my YouTube account!
 
-This feature will be optional, and very much opt-in. If you are a YouTube creator, and would like to share your dislike stats with us, you can. The way [OAuth](https://en.wikipedia.org/wiki/OAuth#:~:text=but%20without%20giving%20them%20the%20passwords.) was structured, is it's actually very secure. You can revoke access to your account at any time, and can give very specific permissions to us. We will not ask for any permissions that aren't required. We'll only ask for permissions to view your video stats. 
+This feature will be optional, and very much opt-in. If you are a YouTube creator, and would like to share your dislike stats with us, you can. The way [OAuth](https://en.wikipedia.org/wiki/OAuth#:~:text=but%20without%20giving%20them%20the%20passwords.) was structured, it's actually very secure. You can revoke access to your account at any time, and can give very specific permissions to us. We will not ask for any permissions that aren't required. We'll only ask for permissions to view your video stats. 
 
 ### How can I trust this dislike count?
 

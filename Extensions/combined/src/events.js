@@ -21,32 +21,6 @@ function sendVote(vote) {
   }
 }
 
-function sendVideoIds() {
-  let links = Array.from(
-    document.getElementsByClassName(
-      "yt-simple-endpoint ytd-compact-video-renderer"
-    )
-  ).concat(
-    Array.from(
-      document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
-    )
-  );
-  // Also try mobile
-  if (links.length < 1)
-    links = Array.from(
-      document.querySelectorAll(
-        ".large-media-item-metadata > a, a.large-media-item-thumbnail-container"
-      )
-    );
-  const ids = links
-    .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-    .map((x) => getVideoId(x.href));
-  getBrowser().runtime.sendMessage({
-    message: "send_links",
-    videoIds: ids,
-  });
-}
-
 function likeClicked() {
   if (checkForSignInButton() === false) {
     if (storedData.previousState === DISLIKED_STATE) {
@@ -130,6 +104,9 @@ function storageChangeHandler(changes, area) {
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
+  if (changes.numberDisplayReformatLikes !== undefined) {
+    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -157,9 +134,12 @@ function handleNumberDisplayRoundDownChangeEvent(value) {
   extConfig.numberDisplayRoundDown = value;
 }
 
+function handleNumberDisplayReformatLikesChangeEvent(value) {
+  extConfig.numberDisplayReformatLikes = value;
+}
+
 export {
   sendVote,
-  sendVideoIds,
   likeClicked,
   dislikeClicked,
   addLikeDislikeEventListener,

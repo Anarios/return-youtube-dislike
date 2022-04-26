@@ -9,10 +9,9 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
-  // coloredThumbs: false,
-  // coloredBar: false,
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
+  numberDisplayReformatLikes: false, // use existing (native) likes number
 };
 
 if (isChrome()) api = chrome;
@@ -85,6 +84,18 @@ api.runtime.onInstalled.addListener((details) => {
     return;
   api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html")});
 })
+
+// api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
+//   if (extConfig.showUpdatePopup === true &&
+//     details.lastShowChangelogVersion !== chrome.runtime.getManifest().version
+//     ) {
+//     // keep it inside get to avoid race condition
+//     api.storage.sync.set({'lastShowChangelogVersion ': chrome.runtime.getManifest().version});
+//     // wait until async get runs & don't steal tab focus
+//     api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
+//   }
+// });
+
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
@@ -271,6 +282,9 @@ function storageChangeHandler(changes, area) {
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
+  if (changes.numberDisplayReformatLikes !== undefined) {
+    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -313,6 +327,10 @@ function handleColorThemeChangeEvent(value) {
   extConfig.colorTheme = value;
 }
 
+function handleNumberDisplayReformatLikesChangeEvent(value) {
+  extConfig.numberDisplayReformatLikes = value;
+}
+
 api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
@@ -322,6 +340,7 @@ function initExtConfig() {
   initializeColorTheme();
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
+  initializeNumberDisplayReformatLikes();
 }
 
 function initializeDisableVoteSubmission() {
@@ -381,6 +400,16 @@ function initializeNumberDisplayFormat() {
       api.storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
+    }
+  });
+}
+
+function initializeNumberDisplayReformatLikes() {
+  api.storage.sync.get(["numberDisplayReformatLikes"], (res) => {
+    if (res.numberDisplayReformatLikes === undefined) {
+      api.storage.sync.set({ numberDisplayReformatLikes: false });
+    } else {
+      extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
     }
   });
 }

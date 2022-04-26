@@ -1,13 +1,13 @@
-# Frquently Asked Questions
+# Frequently Asked Questions
 ## Before asking a question on GitHub or Discord, please refer to this.
 
-### **1. Where does extension get data?**
-Combination of GoogleAPI data and scraped data.
+### **1. Where does this extension get the data?**
+A Combination of Google APIs and scraped data.
 
-We save all available data to our DB for it to be available after google shuts down dislike counts in their API.
+We save all available data to our DB for it to be available after Google shuts down dislike counts in their API.
 
 ### **2. Video dislike count doesn't update**
-Right now video dislikes are cached, and arent updated very frequenly. Once in 2-3 days, not more often.
+Right now video dislikes are cached, and aren't updated very frequenly. Once every 2-3 days, not more often.
 
 Yeah, it's not ideal, but it is what it is. Working on improving how often we can update them.
 
