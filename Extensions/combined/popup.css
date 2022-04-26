@@ -71,6 +71,8 @@ button:hover {
 .switch:before {
   content: attr(data-hover);
   visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.1s linear, opacity 0.1s linear;
   width: 250px;
   background-color: var(--secondary);
   border-radius: 0.5rem;
@@ -84,6 +86,24 @@ button:hover {
 
 .switch:hover:before {
   visibility: visible;
+  opacity: 1;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 #advancedToggle {
@@ -123,8 +143,28 @@ button:hover {
   border: 2px solid var(--secondary);
   border-radius: 0.5rem;
   padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--tertiary); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--lightGrey); 
+}
 #advancedLegend {
   color: var(--tertiary) !important;
   /* margin: auto; */ /* Center the label */
