@@ -34,7 +34,6 @@ import {
 } from "./src/utils";
 import { createRateBar } from "./src/bar";
 import {
-  sendVideoIds,
   sendVote,
   likeClicked,
   dislikeClicked,
@@ -67,5 +66,3 @@ document.addEventListener("yt-navigate-finish", function (event) {
   window.returnDislikeButtonlistenersSet = false;
   setEventListeners();
 });
-
-setTimeout(() => sendVideoIds(), 2500);
