@@ -1,8 +1,9 @@
 import { getButtons } from "./buttons";
-import { likesDisabledState, extConfig, isMobile } from "./state";
+import { extConfig, isMobile, isLikesDisabled } from "./state";
 import { cLog, getColorFromTheme } from "./utils";
+
 function createRateBar(likes, dislikes) {
-  if (!likesDisabledState) {
+  if (!isLikesDisabled()) {
     let rateBar = document.getElementById("ryd-bar-container");
 
     const widthPx =
@@ -61,7 +62,9 @@ function createRateBar(likes, dislikes) {
   } else {
     cLog("removing bar");
     let ratebar = document.getElementById("ryd-bar-container");
-    ratebar.parentNode.removeChild(ratebar);
+    if(ratebar) {
+      ratebar.parentNode.removeChild(ratebar);
+    }
   }
 }
 
