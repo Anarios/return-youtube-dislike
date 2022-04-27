@@ -22,7 +22,7 @@
 
     <v-btn class="mainAltButton" :href="emailLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-email</v-icon>
-      Email
+      selivano.d@gmail.com
     </v-btn>
 
     <p id="credits" class="flex-row no-wrap">

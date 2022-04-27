@@ -1,0 +1,50 @@
+{
+    "extensionName": {
+        "message": "Επιστροφή του YouTube Dislike"
+    },
+    "extensionDesc": {
+        "message": "Επιστρέφει τα dislikes"
+    },
+    "textDeveloper": {
+        "message": "από τον Dmitry Selivanov & την κοινότητα"
+    },
+    "linkWebsite": {
+        "message": "Ιστοσελίδα"
+    },
+    "linkFAQ": {
+        "message": "Γρήγορες Ερωτήσιες & Απαντήσεις"
+    },
+    "linkDonate": {
+        "message": "Στηρίξτε"
+    },
+    "linkHelp": {
+        "message": "Βοήθεια"
+    },
+    "legendSettings": {
+        "message": "Ρυθμίσεις"
+    },
+    "textSettings": {
+        "message": "Διακοπή υποβολής like/dislike"
+    },
+    "textSettingsHover": {
+        "message": "Σταματάει να μετράει τα likes & dislikes που κάνεις."
+    },
+    "textUpdate": {
+        "message": "ενημέρωση σε"
+    },
+    "version30installed": {
+        "message": "Εκδοση 3.0.0.1 εγκαταστάθηκε"
+    },
+    "whatsnew": {
+        "message": "Τι είναι νέο;"
+    },
+    "shortsSupport": {
+        "message": "Υποστήριξη για YouTube Shorts"
+    },
+    "customColors": {
+        "message": "Προσαρμοζόμενα χρώματα για τα κουμπιά και την μπάρα dislike"
+    },
+    "customNumberFormats": {
+        "message": "Προσαρμοζόμενη μορφή αριθμών."
+    }
+}
