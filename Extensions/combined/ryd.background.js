@@ -74,15 +74,21 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], (config) => {
-  if (config.showUpdatePopup === true &&
-    config.lastShowChangelogVersion !== chrome.runtime.getManifest().version
-    ) {
-    // keep it inside get to avoid race condition
-    api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version});
-    // wait until async get runs & don't steal tab focus
-    api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
+api.runtime.onInstalled.addListener((details) => {
+  // No need for further logic if it's the browser getting the update
+  if (details.reason === "browser_update") {
+    return;
   }
+  api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], (config) => {
+    if (config.showUpdatePopup === true &&
+      config.lastShowChangelogVersion !== chrome.runtime.getManifest().version
+      ) {
+      // keep it inside get to avoid race condition
+      api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version});
+      // wait until async get runs & don't steal tab focus
+      api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
+    }
+  });
 });
 
 async function sendVote(videoId, vote) {
