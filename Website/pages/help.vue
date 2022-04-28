@@ -77,6 +77,7 @@
             Take screenshot of page with problem (i.e. youtube video page) with
             console open (press <code>F12</code>) - example screenshot below.
             <img
+              loading="eager"
               width="100%"
               style="border-radius: 1rem; border: 2px solid #333"
               src="ui/troubleshooting.png"
