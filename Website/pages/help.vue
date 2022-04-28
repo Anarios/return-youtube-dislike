@@ -80,7 +80,7 @@
               loading="eager"
               width="100%"
               style="border-radius: 1rem; border: 2px solid #333"
-              src="ui/troubleshooting.png"
+              src="ui/troubleshooting.webp"
               alt="example-screenshot"
             />
           </li>

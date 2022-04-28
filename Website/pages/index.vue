@@ -62,7 +62,7 @@
     <v-spacer />
     <div id="support-ukraine" class="d-flex flex-column items-center py-2">
       <h3 class="mb-2">
-        <v-img src="/ukraine-flag-xs.png" width="40px"></v-img>
+        <v-img src="/ukraine-flag-xs.webp" width="42px" height="28px"></v-img>
         <a href="https://helpukrainewin.org/">Support Ukraine</a>
       </h3>
     </div>
