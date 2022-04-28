@@ -85,12 +85,6 @@ export default {
         </b> is not supported. Consider upgrading to the latest version.`;
         this.alert.show = true;
       }
-
-      // Win7
-      if (window.navigator.userAgent.indexOf("Windows NT 6.1") > -1) {
-        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .5rem; margin: 0 .25rem;">Windows 7</b> is not supported. Consider upgrading Windows, or installing Linux.`;
-        this.alert.show = true;
-      }
     }, 1000);
   },
 };
