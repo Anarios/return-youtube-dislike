@@ -1,48 +1,46 @@
 <template>
-  <div class="row wrap justify-center full-width mx-auto" style="width: 80vw">
-    <!--   Left Section // "Sections" Card   -->
-    <v-card
-      class="col-xs-12 mx-2 elevation-0"
+  <!-- min-height overrides vertical centering from the parent default.vue layout -->
+  <div
+    class="width-constraint flex-wrapper"
+    style="min-height: calc(100vh - 10rem); position: relative"
+  >
+    <!-- docs navigation  -->
+    <v-list
+      class="py-0 mr-3"
       style="
         background: transparent;
-        height: max-content;
         position: sticky;
-        top: 5.5rem;
-        max-width: 500px;
+        top: 6rem;
+        align-self: flex-start;
       "
     >
-      <!-- <v-card-title style="padding-bottom: 0 !important; color: #aaa">
-        Sections
-      </v-card-title> -->
-      <v-list style="background: transparent">
-        <!--   Dynamically Generate Links From Below   -->
-        <v-list-item
-          v-for="(item, i) in links"
-          :key="i"
-          :to="item.to"
-          router
-          class="mt-4"
-          color="primary"
-          style="overflow: hidden; border-radius: 0.75rem"
-        >
-          <v-list-item-title style="text-align: right">
-            <v-list-item-title v-text="item.text" />
-          </v-list-item-title>
-          <v-list-item-icon>
-            <v-icon v-text="item.icon" />
-          </v-list-item-icon>
-        </v-list-item>
-      </v-list>
-    </v-card>
+      <v-list-item
+        v-for="(item, i) in links"
+        :key="i"
+        :to="item.to"
+        router
+        class="mb-4"
+        color="primary"
+        style="overflow: hidden !important; border-radius: 0.75rem"
+      >
+        <v-list-item-title style="text-align: right">
+          <v-list-item-title v-text="item.text" />
+        </v-list-item-title>
+        <v-list-item-icon>
+          <v-icon v-text="item.icon" />
+        </v-list-item-icon>
+      </v-list-item>
+    </v-list>
 
-    <!--   Child Pages // Card   -->
+    <!-- docs content -->
     <v-card
-      class="col-xs-12 col-md-6 text-left mx-2 my-6 pa-8"
+      class="text-left pa-8"
       style="
+        flex-grow: 2;
         height: max-content;
+        max-width: 90vw !important;
         background-color: #222;
         border-radius: 0.75rem;
-        width: 90%;
       "
     >
       <NuxtChild />

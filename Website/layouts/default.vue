@@ -141,6 +141,9 @@ body {
   margin: 0.25em;
 }
 
+.title-text {
+  font-size: 3rem;
+}
 .topBar {
   padding: 0 3rem;
   width: fit-content !important;
@@ -151,10 +154,12 @@ body {
   /* border: 1px solid #222; */
   overflow: hidden;
 }
-.title-text {
-  font-size: 3rem;
-}
 
+/* used in docs.vue */
+.flex-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+}
 @media (max-width: 768px) {
   /* mobile */
   .title-text {
@@ -165,6 +170,35 @@ body {
       100vw - 2rem
     ) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
     padding: 0;
+  }
+  .flex-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+/* used in docs.vue, help.vue and faq.vue */
+.width-constraint {
+  max-width: auto;
+  margin: 0 auto;
+}
+@media (min-width: 960px) {
+  /* tablet */
+  .width-constraint {
+    width: 75vw;
+  }
+}
+@media (min-width: 1264px) {
+  /* desktop */
+  .width-constraint {
+    width: 60vw;
+  }
+}
+
+@media (min-width: 1904) {
+  /* 4k/ultrawide */
+  .width-constraint {
+    width: 42vw;
   }
 }
 
@@ -179,7 +213,6 @@ body {
 .swoop-right-leave-active {
   transition-duration: 0.1s;
   transition-property: opacity, transform;
-  overflow: hidden;
 }
 
 .swoop-left-enter,

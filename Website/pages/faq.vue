@@ -1,5 +1,5 @@
 <template>
-  <div class="col-xs-12 col-sm-11 col-md-9 col-lg-7 mx-auto">
+  <div class="width-constraint">
     <h1 class="title-text">Frequently Asked Questions</h1>
     <p style="color: #999; margin-top: 0.5rem; margin-bottom: 1.5rem">
       Still have questions? Feel free to join our Discord!
