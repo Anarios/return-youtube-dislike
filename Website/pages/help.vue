@@ -1,8 +1,5 @@
 <template>
-  <div
-    style="width: 80vw"
-    class="col-xs-12 col-sm-11 col-md-9 col-lg-7 mx-auto"
-  >
+  <div class="col-xs-12 col-sm-11 col-md-9 col-lg-7 mx-auto">
     <h1 class="title-text pt-12">Troubleshooting</h1>
     <ol style="line-height: 3rem; color: #aaa" class="text-left">
       <li>
