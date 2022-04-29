@@ -40,7 +40,7 @@
         height: max-content;
         max-width: 90vw !important;
         background-color: #222;
-        border-radius: 0.75rem;
+        border-radius: 1rem;
       "
     >
       <NuxtChild />

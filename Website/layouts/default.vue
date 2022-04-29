@@ -1,7 +1,11 @@
 <template>
   <v-app dark>
     <!-- height = 4rem, margin-y = 1rem -->
-    <v-app-bar app text class="topBar fly-in-from-top my-4 mx-auto">
+    <v-app-bar
+      app
+      class="topBar glass elevation-0 fly-in-from-top my-4 mx-auto"
+    >
+      <!-- Translator desktop -->
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
           {{ link.name }}
@@ -12,7 +16,7 @@
     <!-- abstract background -->
     <v-img
       src="/ui/abstract.svg"
-      style="position: absolute; left: 0; right: 0; width: 100vw; height: 100vh"
+      style="position: fixed; left: 0; right: 0; width: 100vw; height: 100vh"
     />
 
     <v-main style="padding-top: 4rem !important">
@@ -24,6 +28,46 @@
         <nuxt />
       </center>
     </v-main>
+
+    <!-- Translator mobile -->
+    <v-menu
+      top
+      left
+      offset-y
+      rounded="lg"
+      nudge-top="16"
+      class="d-flex flex-column"
+      transition="slide-y-reverse-transition"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          text
+          fab
+          class="glass"
+          style="
+            border-radius: 1rem !important;
+            position: fixed;
+            bottom: 2rem;
+            right: 1rem;
+          "
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon>mdi-translate</v-icon>
+        </v-btn>
+      </template>
+      <v-list class="py-0">
+        <v-list-item
+          v-for="(lang, index) in langs"
+          :key="index"
+          link
+          :class="$vuetify.lang.current === lang.locale ? 'primary--text' : ''"
+          @click="$vuetify.lang.current = lang.locale"
+        >
+          <v-list-item-title v-text="lang.name"></v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
 
     <!--   Debugger Notification   -->
     <v-snackbar
@@ -66,12 +110,25 @@ export default {
       { name: "Donate", path: "/donate" },
       { name: "Links", path: "/links" },
     ],
+    langs: [
+      { name: "English", locale: "en" },
+      { name: "Español", locale: "es" },
+      { name: "Türkçe", locale: "tr" },
+      { name: "Русский", locale: "ru" },
+      // { name: "Français", locale: "fr" },
+      // { name: "Deutsch", locale: "de" },
+      // { name: "日本語" },
+    ],
     alert: {
       show: false,
       html: "",
     },
   }),
   mounted() {
+    if (process.client && navigator.language) {
+      this.$vuetify.lang.current = navigator.language.slice(0, 2);
+    }
+    console.log(this.$vuetify.lang);
     setTimeout(() => {
       // Chrome < 70 or FF < 60
       if (
@@ -147,12 +204,13 @@ body {
 .topBar {
   padding: 0 3rem;
   width: fit-content !important;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background: rgba(42, 42, 42, 0.75) !important;
   border-radius: 1rem !important;
-  /* border: 1px solid #222; */
-  overflow: hidden;
+  /* overflow: hidden; */
+}
+.glass {
+  backdrop-filter: blur(16px) saturate(200%);
+  -webkit-backdrop-filter: blur(16px) saturate(200%);
+  background: rgba(42, 42, 42, 0.75) !important;
 }
 
 /* used in docs.vue */

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title-text">Select Your Platform</h1>
+    <h1 class="title-text">{{ $vuetify.lang.t("$vuetify.install.title") }}</h1>
 
     <div style="color: #999">
       <p style="margin-bottom: 1rem">

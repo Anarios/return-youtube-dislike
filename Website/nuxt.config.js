@@ -1,3 +1,7 @@
+import en from "./_locales/en";
+import es from "./_locales/es";
+import tr from "./_locales/tr";
+import ru from "./_locales/ru";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -40,6 +44,10 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
+    lang: {
+      locales: { en, es, tr, ru },
+      current: "en",
+    },
     theme: {
       dark: true,
       themes: {
