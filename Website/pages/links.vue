@@ -1,12 +1,12 @@
 <template>
   <div class="pt-12">
-    <h1 class="title-text">Project Links</h1>
+    <h1 class="title-text">
+      {{ $vuetify.lang.t("$vuetify.links.title") }}
+    </h1>
 
-    <div style="color: #999">
-      <p style="margin-top: 0.5rem; margin-bottom: 1rem">
-        Links to the project and its developers
-      </p>
-    </div>
+    <p style="color: #9999; margin-top: 0.5rem; margin-bottom: 1rem">
+      {{ $vuetify.lang.t("$vuetify.links.subtitle") }}
+    </p>
 
     <v-btn class="mainAltButton" :href="githubLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-github</v-icon>
@@ -18,7 +18,9 @@
       Discord
     </v-btn>
 
-    <h1 style="margin-top: 1em">Contact Me</h1>
+    <h1 style="margin-top: 1em">
+      {{ $vuetify.lang.t("$vuetify.links.contact") }}
+    </h1>
 
     <v-btn class="mainAltButton" :href="emailLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-email</v-icon>
@@ -38,7 +40,8 @@
     </p>
     <!-- Translators -->
     <div style="color: #555; width: 250px">
-      Translators: <br />
+      {{ $vuetify.lang.t("$vuetify.links.translators") }}
+      <br />
       <div
         v-for="translator in translators"
         :key="translator.tag"

@@ -12,7 +12,7 @@
       </a>
     </div>
 
-    <h2 class="mt-4">{{ $vuetify.lang.t("$vuetify.api.fetching.title2") }}</h2>
+    <h3 class="mt-6">{{ $vuetify.lang.t("$vuetify.api.fetching.title2") }}</h3>
     <div class="ma-2">
       {{ $vuetify.lang.t("$vuetify.api.fetching.url") }}
       <a
