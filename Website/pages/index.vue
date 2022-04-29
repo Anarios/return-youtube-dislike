@@ -25,12 +25,12 @@
         />
       </svg>
 
-      <h1 class="title-text">Return YouTube Dislike</h1>
-      <div class="mb-4" style="color: #999">
-        <p style="margin-top: 0">
-          Browser extension and an API that shows you dislikes on Youtube
-        </p>
-      </div>
+      <h1 class="title-text">
+        {{ $vuetify.lang.t("$vuetify.home.title") }}
+      </h1>
+      <p class="mb-4" style="color: #999; margin-top: 0">
+        {{ $vuetify.lang.t("$vuetify.home.subtitle") }}
+      </p>
 
       <v-btn
         :to="installLink"
@@ -38,7 +38,7 @@
         style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em"
       >
         <v-icon large class="mr-6">mdi-tray-arrow-down</v-icon>
-        Install
+        {{ $vuetify.lang.t("$vuetify.home.install") }}
       </v-btn>
 
       <br />
@@ -63,14 +63,16 @@
     <div id="support-ukraine" class="d-flex flex-column items-center py-2">
       <h3 class="mb-2">
         <v-img src="/ukraine-flag-xs.webp" width="42px" height="28px"></v-img>
-        <a href="https://helpukrainewin.org/">Support Ukraine</a>
+        <a href="https://helpukrainewin.org/">
+          {{ $vuetify.lang.t("$vuetify.home.ukraine") }}
+        </a>
       </h3>
     </div>
 
     <div id="biggest-supporters" class="d-flex flex-column items-center py-8">
       <h3 class="mb-4">
         <v-icon class="mb-2">mdi-heart</v-icon>
-        Sponsors
+        {{ $vuetify.lang.t("$vuetify.home.sponsors") }}
       </h3>
       <v-row class="justify-center mx-auto">
         <p v-for="sponsor in sponsors" :key="sponsor.name" class="sponsor">

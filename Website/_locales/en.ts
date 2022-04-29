@@ -2,81 +2,68 @@ import { en } from 'vuetify/src/locale'
 
 export default {
     ...en,
-    home: 'Home',
-    menu: {
-      install: 'Install',
-      api: 'API',
-      help: 'Help',
-      faq: 'FAQ',
-      donate: 'Donate',
-      links: 'Links',
-    },
     home: {
+        name: 'Home',
         title: 'Return YouTube Dislike',
         subtitle: 'Browser extension and an API that shows you dislikes on Youtube',
         install: 'Install',
-        supportUkraine: 'Support Ukraine',
+        ukraine: 'Support Ukraine',
         sponsors: 'Sponsors',
     },
     install: {
+        name: 'Install',
         title: 'Select Your Platform',
         subtitle: 'Available for Firefox and all Chromium browsers',
-        "other-platforms": 'Other Platforms',
-    }
-
-// INSTALL
-
-// Select Your Platform > Elige tu plataforma
-// Available for Firefox and all Chromium browsers > Disponible para Firefox y todos los navegadores Chromium
-// Other Platforms > Otras plataformas
-// If your browser is not yet supported, try this UserScript > Si tu navegador aún no es compatible, usa este UserScript
-// Third Party Implementations > Implementaciones de terceros
-// No liability on our side, use at your own risk > No nos hacemos responsables, úsalas bajo tu propio riesgo
-
-// API
-
-// Welcome to the official RYD docs! > ¡Bienvenido a la documentación oficial de RYD!
-// To get started, select a section from the menu. > Para empezar, elige una sección del menú.
-
-// - USAGE RIGHTS > Derechos de uso (1)
-// - URL INFORMATION > Información de URL (2)
-// - AVAIABLE ENDPOINTS > Endpoints disponibles (3)
-// - BASIC FETCHING TUTORIAL > Tutorial de consulta básica (4)
-
-// (1)
-
-// Usage Rights > Derechos de uso
-// Third party use of this open API is allowed with the following restrictions > El uso de terceros de esta API abierta se permite bajo las siguientes restricciones
-// Attribution: > Atribución
-// This project should be clearly attributed with either a link to this repo or a link to returnyoutubedislike.com > El proyecto debe estar claramente atribuido con un link a esta página o a returnyoutubedislike.com
-// Rate Limiting > Límites de velocidad
-// There are per client rate limits in place of 100 per minute and 10'000 per day > Hay límites de velocidad por cliente de 100 por minuto y 10.000 por día
-// This will return a 429 status code indicating that your application should back off > Esto regresará un código de estado 409 indicando que tu aplicación debe bajar la velocidad.
-
-// (2)
-
-// URL Information > Información de URL
-// The API is accessible over the following base URL > Esta API es accesible sobre la siguiente URL base
-// https://returnyoutubedislikeapi.com
-
-// (3)
-
-// Available Endpoints > Endpoints disponibles
-// List of available endpoints is available here: > La lista de los endpoints disponibles está disponible aquí:
-// https://returnyoutubedislikeapi.com/swagger/index.html
-
-// (4)
-
-// Basic Fetching Tutorial > Tutorial de consulta básica
-// Example to get votes of a given YouTube video ID > Ejemplo para obtener los votos del ID de un vídeo de YouTube
-// Example Request: > Consulta de ejemplo:
-// Request URL > URL de la consulta
-// Request Method > Método de la consulta
-// Headers: > Encabezados:
-// Response: > Respuesta:
-// An invalid YouTube ID will return status code 404 "Not Found" > Un ID de YouTube inválido responderá con el código de estado 404 "Not Found"
-// An incorrectly formatted YouTube ID will return 400 "Bad Request" > Un ID de YouTube con mal formato responderá con 400 "Bad Request"
-
+        title2: 'Other Platforms',
+        subtitle2: 'If your browser is not yet supported, try this UserScript',
+        title3: 'Third Party Implementations',
+        subtitle3: 'No liability on our side, use at your own risk',
+    },
+    api: {
+        name: 'API',
+        title: 'Welcome to the official RYD docs',
+        subtitle: 'To get started, select a section from the menu.',
+        rights: {
+            title: 'Usage Rights',
+            subtitle: 'Third party use of this open API is allowed with the following restrictions:',
+            bullet1: 'Attribution: ',
+            bullet1text: 'This project should be clearly attributed with either a link to this repo or a link to returnyoutubedislike.com',
+            bullet2: 'Rate Limiting',
+            bullet2text: 'There are per client rate limits in place of 100 per minute and 10,000 per day. This will return a 429 status code indicating that your application should back off',
+        },
+        url: {
+            title: 'URL Information',
+            subtitle: 'The API is accessible over the following base URL: ',
+        },
+        endpoints: {
+            title: 'Available Endpoints',
+            subtitle: 'List of available endpoints is available here: ',
+        },
+        fetching: {
+            title: 'Basic Fetching Tutorial',
+            subtitle: 'Example to get votes of a given YouTube video ID: ',
+            title2: 'Example Request: ',
+            url: 'Request URL: ',
+            method: 'Request Method: ',
+            headers: 'Headers: ',
+            response: 'Response: ',
+            error1: 'An invalid YouTube ID will return status code 404 "Not Found"',
+            error2: 'An incorrectly formatted YouTube ID will return 400 "Bad Request"'
+        },
+    },
+    help: {
+        name: 'Help',
+    },
+    faq: {
+        name: 'FAQ',
+    },
+    donate: {
+        name: 'Donate',
+    },
+    links: {
+        name: 'Links',
+    },
+}
 // HELP
 
 // Troubleshooting > Solución de problemas
@@ -135,4 +122,3 @@ export default {
 // Project Links > Links del proyecto
 // Links to the project and its developers > Links al proyecto y sus desarrolladores
 // Contact Me > Contactame
-}

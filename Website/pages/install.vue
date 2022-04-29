@@ -2,12 +2,9 @@
   <div>
     <h1 class="title-text">{{ $vuetify.lang.t("$vuetify.install.title") }}</h1>
 
-    <div style="color: #999">
-      <p style="margin-bottom: 1rem">
-        Available for Firefox and all Chromium browsers
-        (Chrome/Edge/Opera/Brave).
-      </p>
-    </div>
+    <p style="color: #999; margin-bottom: 1rem">
+      {{ $vuetify.lang.t("$vuetify.install.subtitle") }}
+    </p>
 
     <v-btn class="mainAltButton mb-2" :href="firefoxLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-firefox</v-icon>
@@ -46,12 +43,13 @@
       Brave
     </v-btn>
 
-    <h3 style="margin-top: 3em; margin-bottom: 0">Other Platforms</h3>
-    <div style="color: #999">
-      <p style="margin-top: 0.5rem; margin-bottom: 0.5rem">
-        If your browser is not yet supported, try this UserScript.
-      </p>
-    </div>
+    <!-- Userscript -->
+    <h3 style="margin-top: 3em; margin-bottom: 0">
+      {{ $vuetify.lang.t("$vuetify.install.title2") }}
+    </h3>
+    <p style="color: #999; margin-top: 0.5rem; margin-bottom: 0.5rem">
+      {{ $vuetify.lang.t("$vuetify.install.subtitle2") }}
+    </p>
 
     <v-btn class="mainAltButton" :href="scriptLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-script-text-outline</v-icon>
@@ -59,23 +57,36 @@
       <div style="font-size: 0.55rem">(Tampermonkey)</div>
     </v-btn>
 
-    <h3 style="margin-top: 3em">Third Party Implementations</h3>
-    <div style="color: #999">
-      <p style="margin-top: 0.5rem; margin-bottom: 0.5rem">
-        No liability on our side, use at your own risk.
-      </p>
-    </div>
+    <!-- 3rd party clients -->
+    <h3 style="margin-top: 3em">
+      {{ $vuetify.lang.t("$vuetify.install.title3") }}
+    </h3>
+    <p style="color: #999; margin-top: 0.5rem; margin-bottom: 0.5rem">
+      {{ $vuetify.lang.t("$vuetify.install.subtitle3") }}
+    </p>
     <v-btn class="mainAltButton" :href="androidNewPipe" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
-      Android (NewPipe fork)
+      Android &nbsp; <span style="font-size: 0.55rem">(NewPipe fork)</span>
     </v-btn>
-    <v-btn class="mainAltButton" :href="androidVueTube" target="_blank">
-      <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
-      Android (VueTube)
+    <v-btn
+      class="mainAltButton"
+      style="color: #999"
+      :href="androidVueTube"
+      target="_blank"
+    >
+      <v-icon class="white--text">mdi-android</v-icon>
+      <v-icon>mdi-apple</v-icon>
+      <v-icon>mdi-linux</v-icon>
+      <v-icon style="margin-right: 0.5em">mdi-microsoft-windows</v-icon>
+      <div style="font-size: 0.75rem">
+        VueTube (WIP) <br />
+        <span style="font-size: 0.55rem">pre-alpha</span>
+      </div>
+      <v-icon style="margin-left: 0.5rem">mdi-hammer-wrench</v-icon>
     </v-btn>
     <v-btn class="mainAltButton" :href="iosJailbreakLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
-      iOS (Jailbroken)
+      iOS &nbsp; <span style="font-size: 0.55rem">(Jailbroken)</span>
     </v-btn>
   </div>
 </template>

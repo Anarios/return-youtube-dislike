@@ -8,7 +8,7 @@
       <!-- Translator desktop -->
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
-          {{ link.name }}
+          {{ $vuetify.lang.t(`$vuetify.${link.name}.name`) }}
         </v-tab>
       </v-tabs>
     </v-app-bar>
@@ -102,13 +102,13 @@
 export default {
   data: () => ({
     links: [
-      { name: "Home", path: "/" },
-      { name: "Install", path: "/install" },
-      { name: "API", path: "/docs" },
-      { name: "Help", path: "/help" },
-      { name: "FAQ", path: "/faq" },
-      { name: "Donate", path: "/donate" },
-      { name: "Links", path: "/links" },
+      { name: "home", path: "/" },
+      { name: "install", path: "/install" },
+      { name: "api", path: "/docs" },
+      { name: "help", path: "/help" },
+      { name: "faq", path: "/faq" },
+      { name: "donate", path: "/donate" },
+      { name: "links", path: "/links" },
     ],
     langs: [
       { name: "English", locale: "en" },
@@ -128,7 +128,6 @@ export default {
     if (process.client && navigator.language) {
       this.$vuetify.lang.current = navigator.language.slice(0, 2);
     }
-    console.log(this.$vuetify.lang);
     setTimeout(() => {
       // Chrome < 70 or FF < 60
       if (

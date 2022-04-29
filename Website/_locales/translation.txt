@@ -1,5 +1,4 @@
 TRANSLATION OF RYD WEBSITE TO SPANISH - BY ALEJANDRO GAYOL
-If something doesn't appear translated, it's the same in English and Spanish.
 
 MENU
 

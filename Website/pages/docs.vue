@@ -15,32 +15,34 @@
       "
     >
       <v-list-item
-        v-for="(item, i) in links"
+        v-for="(link, i) in links"
         :key="i"
-        :to="item.to"
+        :to="link.to"
         router
         class="mb-4"
         color="primary"
         style="overflow: hidden !important; border-radius: 0.75rem"
       >
         <v-list-item-title style="text-align: right">
-          <v-list-item-title v-text="item.text" />
+          <v-list-item-title
+            v-text="$vuetify.lang.t(`$vuetify.api.${link.name}.title`)"
+          />
         </v-list-item-title>
         <v-list-item-icon>
-          <v-icon v-text="item.icon" />
+          <v-icon v-text="link.icon" />
         </v-list-item-icon>
       </v-list-item>
     </v-list>
 
     <!-- docs content -->
     <v-card
-      class="text-left pa-8"
+      class="text-left pa-6"
       style="
         flex-grow: 2;
         height: max-content;
         max-width: 90vw !important;
         background-color: #222;
-        border-radius: 1rem;
+        border-radius: 0.75rem;
       "
     >
       <NuxtChild />
@@ -64,22 +66,22 @@ export default {
       //---   Links To Generate Above    ---//
       links: [
         {
-          text: "Usage Rights",
+          name: "rights",
           icon: "mdi-book-open-variant",
           to: "/docs/usage-rights",
         },
         {
-          text: "URL Information",
+          name: "url",
           icon: "mdi-web",
           to: "/docs/url",
         },
         {
-          text: "Available Endpoints",
+          name: "endpoints",
           icon: "mdi-transit-connection-variant",
           to: "/docs/endpoints",
         },
         {
-          text: "Basic Fetching Tutorial",
+          name: "fetching",
           icon: "mdi-school",
           to: "/docs/fetching",
         },
