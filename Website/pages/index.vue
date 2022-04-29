@@ -38,7 +38,7 @@
         style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em"
       >
         <v-icon large class="mr-6">mdi-tray-arrow-down</v-icon>
-        {{ $vuetify.lang.t("$vuetify.home.install") }}
+        {{ $vuetify.lang.t("$vuetify.install.name") }}
       </v-btn>
 
       <br />
