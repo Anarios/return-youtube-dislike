@@ -50,7 +50,7 @@
           :key="index"
           link
           :class="$vuetify.lang.current === lang.locale ? 'primary--text' : ''"
-          @click="$vuetify.lang.current = lang.locale"
+          @click="changeLocale(lang.locale)"
         >
           <v-list-item-title v-text="lang.name"></v-list-item-title>
         </v-list-item>
@@ -112,12 +112,17 @@ export default {
       html: "",
     },
   }),
-  mounted() {
+  created() {
+    // fetch locale preference or browser default
     if (process.client && navigator.language) {
-      this.$vuetify.lang.current = navigator.language.slice(0, 2);
+      if (!("locale" in localStorage))
+        this.$vuetify.lang.current = navigator.language.slice(0, 2);
+      else this.$vuetify.lang.current = localStorage.locale;
     }
+  },
+  mounted() {
     setTimeout(() => {
-      // Chrome < 70 or FF < 60
+      // Chrome < 70 or FF < 60 unsupported warning popup
       if (
         (this.$ua._parsed.name == "Chrome" &&
           parseInt(this.$ua._parsed.version.split(".")[0]) < 70) ||
@@ -130,6 +135,15 @@ export default {
         this.alert.show = true;
       }
     }, 1000);
+  },
+  methods: {
+    changeLocale(locale) {
+      // reset to browser default if selection matches browser default
+      if (locale == navigator.language.slice(0, 2)) localStorage.clear();
+      // else save preference
+      else localStorage.locale = locale;
+      this.$vuetify.lang.current = locale;
+    },
   },
 };
 </script>

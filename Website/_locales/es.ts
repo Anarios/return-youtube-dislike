@@ -1,6 +1,5 @@
-// BY ALEJANDRO GAYOL
 import { es } from 'vuetify/src/locale'
-
+// By Alejandro Gayol
 export default {
     ...es,
     home: {
@@ -98,6 +97,6 @@ export default {
         title: 'Project Links',
         subtitle: 'Links to the project and its developers',
         contact: 'Contact Me',
-        translators: 'Translators',
+        translators: 'Traductores',
     },
 }

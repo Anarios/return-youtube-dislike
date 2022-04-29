@@ -40,7 +40,9 @@
     </p>
     <!-- Translators -->
     <div style="color: #555; width: 250px">
-      {{ $vuetify.lang.t("$vuetify.links.translators") }}
+      <b class="white--text">
+        {{ $vuetify.lang.t("$vuetify.links.translators") }}
+      </b>
       <br />
       <div
         v-for="translator in translators"
@@ -80,7 +82,7 @@ export default {
       {
         tag: "PickleNik#0864",
         lang: "Русский",
-      }
+      },
     ],
   }),
 };
