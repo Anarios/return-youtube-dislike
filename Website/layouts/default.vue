@@ -40,19 +40,7 @@
       transition="slide-y-reverse-transition"
     >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          text
-          fab
-          class="glass"
-          style="
-            border-radius: 1rem !important;
-            position: fixed;
-            bottom: 2rem;
-            right: 1rem;
-          "
-          v-bind="attrs"
-          v-on="on"
-        >
+        <v-btn text fab class="glass" id="translator" v-bind="attrs" v-on="on">
           <v-icon>mdi-translate</v-icon>
         </v-btn>
       </template>
@@ -217,6 +205,14 @@ body {
   display: flex;
   flex-wrap: nowrap;
 }
+
+#translator {
+  border-radius: 1rem !important;
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+}
+
 @media (max-width: 768px) {
   /* mobile */
   .title-text {
@@ -231,6 +227,9 @@ body {
   .flex-wrapper {
     display: flex;
     flex-wrap: wrap;
+  }
+  #translator {
+    bottom: 1rem;
   }
 }
 
