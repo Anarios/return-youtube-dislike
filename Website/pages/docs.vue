@@ -36,12 +36,11 @@
 
     <!-- docs content -->
     <v-card
-      class="text-left pa-6"
+      class="text-left glass pa-6"
       style="
         flex-grow: 2;
         height: max-content;
         max-width: 90vw !important;
-        background-color: #222;
         border-radius: 0.75rem;
       "
     >

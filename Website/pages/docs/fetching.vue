@@ -32,7 +32,7 @@
     <div class="mt-4 ml-2">
       {{ $vuetify.lang.t("$vuetify.api.fetching.headers") }}
     </div>
-    <div class="code pa-4">
+    <div class="code px-4 py-2">
       Accept: text/html,application/xhtml+xml,application/xml;q=0.9<br />
       Pragma: no-cache<br />
       Cache-Control: no-cache<br />
@@ -41,7 +41,7 @@
     <div class="mt-4 ml-2">
       {{ $vuetify.lang.t("$vuetify.api.fetching.response") }}
     </div>
-    <div class="code pa-4">
+    <div class="code px-4 py-2">
       {
       <br />
       &nbsp;"id": "kxOuG8jMIgI",<br />
@@ -59,8 +59,6 @@
       <br />
       <span>{{ $vuetify.lang.t("$vuetify.api.fetching.error2") }}</span>
     </v-alert>
-
-    <a :href="endpointUrl" target="_blank" v-text="endpointUrl" />
   </div>
 </template>
 

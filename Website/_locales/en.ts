@@ -6,7 +6,6 @@ export default {
         name: 'Home',
         title: 'Return YouTube Dislike',
         subtitle: 'Browser extension and an API that shows you dislikes on Youtube',
-        install: 'Install',
         ukraine: 'Support Ukraine',
         sponsors: 'Sponsors',
     },

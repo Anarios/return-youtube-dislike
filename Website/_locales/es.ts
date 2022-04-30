@@ -61,7 +61,7 @@ export default {
         bullet4: 'Si nada de esto funciona, reporta tú problema en',
         bullet41: 'en nuestro',
         bullet4a: 'Dínos tu sistema operativo, nombre del navegador y versión del navegador',
-        bullet4b: 'TToma una captura de pantalla de la página con el problema (cómo una página de un vídeo de YouTube) con la consola abierta (pulsa ',
+        bullet4b: 'Toma una captura de pantalla de la página con el problema (cómo una página de un vídeo de YouTube) con la consola abierta (pulsa ',
         bullet4b1: ') - captura de pantalla de ejemplo abajo.',
         bullet4c: 'Toma una captura de la página de extensiones de tu navegador con la extensión instalada.',
         bullet4c1: 'Para ver las extensiones pon esto en la barra de dirección: ',

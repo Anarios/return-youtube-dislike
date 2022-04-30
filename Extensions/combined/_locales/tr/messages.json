@@ -1,0 +1,59 @@
+{
+    "extensionName": {
+        "message": "Return YouTube Dislike"
+    },
+    "extensionDesc": {
+        "message": "Beğenmeme yeteneğini geri getir"
+    },
+    "textDeveloper": {
+        "message": "Dmitry Selivanov ve Topluluk tarafından oluşturuldu"
+    },
+    "linkWebsite": {
+        "message": "Web sitesi"
+    },
+    "linkFAQ": {
+        "message": "SSS"
+    },
+    "linkDonate": {
+        "message": "Bağış Yap"
+    },
+    "linkHelp": {
+        "message": "Yardım"
+    },
+    "legendSettings": {
+        "message": "Ayarlar"
+    },
+    "textSettings": {
+        "message": "Disable like/dislike submission Beğenme/Beğenmeme talebini devre dışı bırak"
+    },
+    "textLikesDisabled": {
+        "message": "Sahibi tarafından devre dışı bırakıldı"
+    },
+    "textSettingsHover": {
+        "message": "Beğendiklerinizi ve beğenmediklerinizi saymayı durdurur."
+    },
+    "textTempUnavailable": {
+        "message": "Geçici olarak devre dışı"
+    },
+    "textUpdate": {
+        "message": "güncelle"
+    },
+    "version30installed": {
+        "message": "3.0.0.1 versiyonu yüklendi"
+    },
+    "whatsnew": {
+        "message": "Neler yeni"
+    },
+    "shortsSupport": {
+        "message": "YouTube Shorts Desteği"
+    },
+    "customColors": {
+        "message": "Beğenmeme çubuğu ve butonlar için özel renkler"
+    },
+    "customNumberFormats": {
+        "message": "Özel sayı formatları"
+    },
+    "considerDonating": {
+        "message": "Uzantının sürdürülmesini sağlayan tek şey bağışlarınızdır, lütfen projeyi desteklemeyi düşünün."
+    }
+}

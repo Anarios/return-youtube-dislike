@@ -6,7 +6,6 @@ export default {
         name: 'Home',
         title: 'Return YouTube Dislike',
         subtitle: 'Browser extension and an API that shows you dislikes on Youtube',
-        install: 'Install',
         ukraine: 'Support Ukraine',
         sponsors: 'Sponsors',
     },
@@ -21,7 +20,7 @@ export default {
     },
     api: {
         name: 'API',
-        title: 'Welcome to the official RYD docs',
+        title: 'Welcome to the official RYD docs!',
         subtitle: 'To get started, select a section from the menu.',
         rights: {
             title: 'Usage Rights',
@@ -86,7 +85,7 @@ export default {
         bullet6: 'How does the API/Backend work?',
         bullet6text: 'The backend is using archived data from when the youtube api was still returning the dislike count, extension users like/discount count and extrapolation. In the near future we will be allowing content creators to submit their dislike count easily and safely and we will be adding ArchiveTeam\'s archived data (4.56 billion videos) into our current database. You can also view a video on the topic.',
         bullet7: 'Why does the dislike count show \'DISLIKES DISABLED\'?',
-        bullet7text: 'At the time of writing we aren\'t showing dislikes for videos that disabled their likes and dislikes count. The extension displays \'DISLIKES DISABLED\' for these videos. We will be showing dislikes on all videos soon, this is just a temporary workaround so people don\'t think the extension is broken (which isn\'t working well). Sometimes a recently uploaded video might show \'DISLIKES DISABLED\' even if the creator hasn\'t disabled it, this is due to how we are detecting if dislikes are disabled, it should go away in a few hours or by liking or disliking the video and refreshing the page (hopefully).',
+        bullet7text: 'Sometimes a recently uploaded video might show \'DISLIKES DISABLED\' even if the creator hasn\'t disabled it, this is due to how we are detecting if dislikes are disabled, it should go away in a few hours or by liking or disliking the video and refreshing the page (hopefully).',
     },
     donate: {
         name: 'Donate',
@@ -97,6 +96,6 @@ export default {
         title: 'Project Links',
         subtitle: 'Links to the project and its developers',
         contact: 'Contact Me',
-        translators: 'Переводчики',
+        translators: 'Translators',
     },
 }
