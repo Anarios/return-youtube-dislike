@@ -79,10 +79,10 @@ export default {
         tag: "trbatuhankara#7738",
         lang: "Türkçe",
       },
-      {
-        tag: "PickleNik#0864",
-        lang: "Русский",
-      },
+      // {
+      //   tag: "PickleNik#0864",
+      //   lang: "Русский",
+      // },
     ],
   }),
 };
