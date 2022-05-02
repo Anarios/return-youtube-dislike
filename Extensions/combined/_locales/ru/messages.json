@@ -1,0 +1,56 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Возвращает способность видеть дизлайки"
+  },
+  "textDeveloper": {
+    "message": "Дмитрий Селиванов и сообщество"
+  },
+  "linkWebsite": {
+    "message": "Сайт"
+  },
+  "linkFAQ": {
+    "message": "ЧАВО"
+  },
+  "linkDonate": {
+    "message": "Пожертвовать"
+  },
+  "linkHelp": {
+    "message": "Помощь"
+  },
+  "legendSettings": {
+    "message": "Настройки"
+  },
+  "textSettings": {
+    "message": "Отключить отправку лайков/дизлайков"
+  },
+  "textSettingsHover": {
+    "message": "Отключает отправку ваших отметок нравится/не нравится"
+  },
+  "textUpdate": {
+    "message": "обновление до"
+  },
+  "version30installed": {
+    "message": "Версия 3.0.0.1 установлена"
+  },
+  "whatsnew": {
+    "message": "Что нового"
+  },
+  "shortsSupport": {
+    "message": "Поддержка YouTube Shorts"
+  },
+  "customColors": {
+    "message": "Выбор цветов панели дизлайков и кнопок"
+  },
+  "customNumberFormats": {
+    "message": "Выбор формата чисел"
+  },
+  "considerDonating": {
+    "message": "Единственный источник доходов позволяющий расширению продолжать работу - ваши пожертвования. Пожалуйста, поддержите нас и помогите нам развиваться."
+  }
+}

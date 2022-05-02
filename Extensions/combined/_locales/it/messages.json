@@ -1,0 +1,53 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Ripristina la possibilità di vedere i dislikes"
+  },
+  "textDeveloper": {
+    "message": "di Dmitry Selivanov e la Community"
+  },
+  "linkWebsite": {
+    "message": "Sito web"
+  },
+  "linkFAQ": {
+    "message": "Domande frequenti"
+  },
+  "linkDonate": {
+    "message": "Fai una donazione"
+  },
+  "linkHelp": {
+    "message": "Aiuto"
+  },
+  "legendSettings": {
+    "message": "Impostazioni"
+  },
+  "textSettings": {
+    "message": "Disabilita l'invio di like/dislike"
+  },
+  "textSettingsHover": {
+    "message": "Interrompe il conteggio dei tuoi likes e dislikes."
+  },
+  "textUpdate": {
+    "message": "aggiorna a"
+  },
+  "version30installed": {
+    "message": "Versione 3.0.0.1 installata"
+  },
+  "whatsnew": {
+    "message": "Cosa c'è di nuovo"
+  },
+  "shortsSupport": {
+    "message": "Supporto per YouTube Shorts"
+  },
+  "customColors": {
+    "message": "Colori personalizzati per la barra dei dislike e i bottoni"
+  },
+  "customNumberFormats": {
+    "message": "Formati numerici personalizzati"
+  }
+}

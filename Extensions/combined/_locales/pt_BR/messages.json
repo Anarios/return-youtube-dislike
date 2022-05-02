@@ -1,0 +1,38 @@
+{
+  "extensionName": {
+    "message": "Devolver Dislikes do YouTube"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "A capacidade de ver os retornos de não gostos"
+  },
+  "textDeveloper": {
+    "message": "por Dmitry Selivanov e a Comunidade"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
+  "linkDonate": {
+    "message": "Doe"
+  },
+  "linkHelp": {
+    "message": "Ajuda"
+  },
+  "legendSettings": {
+    "message": "Ajustes"
+  },
+  "textSettings": {
+    "message": "Desaproveitar as aversões"
+  },
+  "textSettingsHover": {
+    "message": "Pare de contar as antipatias."
+  },
+  "textUpdate": {
+    "message": "atualização para"
+  }
+}

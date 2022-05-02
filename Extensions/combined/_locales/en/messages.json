@@ -1,0 +1,62 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Returns ability to see dislikes"
+  },
+  "textDeveloper": {
+    "message": "by Dmitry Selivanov & Community"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
+  "linkDonate": {
+    "message": "Donate"
+  },
+  "linkHelp": {
+    "message": "Help"
+  },
+  "legendSettings": {
+    "message": "Settings"
+  },
+  "textSettings": {
+    "message": "Disable like/dislike submission"
+  },
+  "textLikesDisabled": {
+    "message": "disabled by owner"
+  },
+  "textSettingsHover": {
+    "message": "Stops counting your likes and dislikes."
+  },
+  "textTempUnavailable": {
+    "message": "temporarily unavailable"
+  },
+  "textUpdate": {
+    "message": "update to"
+  },
+  "version30installed": {
+    "message": "Version 3.0.0.1 installed"
+  },
+  "whatsnew": {
+    "message": "What's new"
+  },
+  "shortsSupport": {
+    "message": "YouTube Shorts Support"
+  },
+  "customColors": {
+    "message": "Custom colors for dislike bar and buttons"
+  },
+  "customNumberFormats": {
+    "message": "Custom number formats"
+  },
+  "considerDonating": {
+    "message": "The only thing that keeps the extension running is your donations, please consider supporting the project."
+  }
+}

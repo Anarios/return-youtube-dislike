@@ -54,14 +54,20 @@
       </v-btn>
     </div>
 
-    <div class="mb-4" style="color: #999">
-      Get dislikes manually: <input placeholder=" Video URL">
-      <p id="output"></p>
-    </div>
+<!--    <div class="mb-4" style="color: #999">-->
+<!--      Get dislikes manually: <input placeholder=" Video URL">-->
+<!--      <p id="output"></p>-->
+<!--    </div>-->
 
     <v-spacer />
+    <div id="support-ukraine" class="d-flex flex-column items-center py-2">
+      <h3 class="mb-2">
+        <v-img src="/ukraine-flag-xs.png" width="40px"></v-img>
+        <a href="https://helpukrainewin.org/">Support Ukraine</a>
+      </h3>
+    </div>
 
-    <div id="sponsors" class="d-flex flex-column items-center py-8">
+    <div id="biggest-supporters" class="d-flex flex-column items-center py-8">
       <h3 class="mb-4">
         <v-icon class="mb-2">mdi-heart</v-icon>
         Sponsors
@@ -99,12 +105,6 @@ export default {
       discordLink: "https://discord.gg/mYnESY4Md5",
       sponsors: [
         { name: "Piepacker", link: "https://piepacker.com/" },
-        { name: "nodetube", link: "https://github.com/mayeaux/nodetube" },
-        { name: "trig404" },
-        {
-          name: "Peter33",
-          link: "https://www.youtube.com/watch?v=G5kzUpWAusI",
-        },
         {
           name: "Seed4.Me VPN",
           link: "https://www.seed4.me/users/register?gift=ReturnYoutubeDislike",
@@ -112,12 +112,15 @@ export default {
         {
           name: "PocketTube",
           link: "https://yousub.info/?utm_source=returnyoutubedislike"
+        }, {
+          name: "Become our sponsor",
+          link: "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601"
         }
       ],
     };
   },
   mounted() {
-    const YOUTUBE_REGEX = /(?:http:|https:)*?\/\/(?:www\.|)(?:youtube\.com|m\.youtube\.com|youtu\.|youtube-nocookie\.com).*(?:v=|v%3D|v\/|(?:a|p)\/(?:a|u)\/\d.*\/|watch\?|vi(?:=|\/)|\/embed\/|oembed\?|be\/|e\/)([^&?%#\/\n]*)/;
+    const YOUTUBE_REGEX = /(?:http:|https:)*?\/\/(?:www\.|)(?:youtube\.com|m\.youtube\.com|youtu\.|youtube-nocookie\.com).*(?:v=|v%3D|v\/|(?:a|p)\/(?:a|u)\/\d.*\/|watch\?|vi(?:=|\/)|\/embed\/|oembed\?|be\/|e\/)([^&?%#/\n]*)/;
     let lastVideoId = "";
     window.oninput = (e) => {
       const videoId = (e.target.value.match(YOUTUBE_REGEX) || {})[1] || e.target.value;

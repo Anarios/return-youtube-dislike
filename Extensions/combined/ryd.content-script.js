@@ -9,6 +9,7 @@ import {
 //---   Import State Functions   ---//
 import {
   isMobile,
+  isShorts,
   isVideoDisliked,
   isVideoLiked,
   getState,
@@ -24,23 +25,34 @@ import {
 } from "./src/state";
 
 //---   Import Video & Browser Functions   ---//
-import { numberFormat, getBrowser, getVideoId, isVideoLoaded, cLog } from "./src/utils";
+import {
+  numberFormat,
+  getBrowser,
+  getVideoId,
+  isVideoLoaded,
+  cLog,
+} from "./src/utils";
 import { createRateBar } from "./src/bar";
-import { sendVideoIds, sendVote, likeClicked, dislikeClicked, addLikeDislikeEventListener, storageChangeHandler  } from "./src/events"
+import {
+  sendVote,
+  likeClicked,
+  dislikeClicked,
+  addLikeDislikeEventListener,
+  storageChangeHandler,
+} from "./src/events";
 
-
-initExtConfig()
+initExtConfig();
 
 let jsInitChecktimer = null;
 
 function setEventListeners(evt) {
   function checkForJS_Finish() {
-    if (getButtons()?.offsetParent && isVideoLoaded()) {
-      clearInterval(jsInitChecktimer);
-      jsInitChecktimer = null;
+    if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       addLikeDislikeEventListener();
       setInitialState();
       getBrowser().storage.onChanged.addListener(storageChangeHandler);
+      clearInterval(jsInitChecktimer);
+      jsInitChecktimer = null;
     }
   }
 
@@ -54,5 +66,3 @@ document.addEventListener("yt-navigate-finish", function (event) {
   window.returnDislikeButtonlistenersSet = false;
   setEventListeners();
 });
-
-setTimeout(() => sendVideoIds(), 2500);

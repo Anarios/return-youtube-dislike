@@ -1,7 +1,8 @@
 {
-  "name": "Return YouTube Dislike",
-  "description": "Returns ability to see dislikes",
-  "version": "2.1.0.3",
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDesc__",
+  "default_locale": "en",
+  "version": "3.0.0.0",
   "manifest_version": 3,
   "background": {
     "service_worker": "ryd.background.js"
@@ -11,9 +12,7 @@
     "128": "icons/icon128.png"
   },
   "host_permissions": ["*://*.youtube.com/*"],
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html"
   },

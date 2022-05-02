@@ -1,0 +1,44 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Ré-affiche les pouces rouges/dislikes des vidées"
+  },
+  "textDeveloper": {
+    "message": "par Dmitry Selivanov & Communauté"
+  },
+  "linkWebsite": {
+    "message": "Site web"
+  },
+  "linkFAQ": {
+    "message": "Questions fréquentes"
+  },
+  "linkDonate": {
+    "message": "Faire un don"
+  },
+  "linkHelp": {
+    "message": "Aide"
+  },
+  "legendSettings": {
+    "message": "Paramètres"
+  },
+  "textLikesDisabled": {
+    "message": "Désactivé par le créateur"
+  },
+  "textSettings": {
+    "message": "Désactiver l'envoi des likes/dislikes"
+  },
+  "textSettingsHover": {
+    "message": "Arrête de compter les likes et les dislikes mis sur les vidéos."
+  },
+  "textTempUnavailable": {
+    "message": "temporairement indisponible"
+  },
+  "textUpdate": {
+    "message": "mettre à jour vers"
+  }
+}

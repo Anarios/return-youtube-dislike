@@ -1,9 +1,9 @@
 import { getButtons } from "./buttons";
-import { likesDisabledState } from "./state";
-import { cLog } from "./utils";
+import { extConfig, isMobile, isLikesDisabled } from "./state";
+import { cLog, getColorFromTheme } from "./utils";
 
 function createRateBar(likes, dislikes) {
-  if (!likesDisabledState) {
+  if (!isLikesDisabled()) {
     let rateBar = document.getElementById("ryd-bar-container");
 
     const widthPx =
@@ -14,7 +14,14 @@ function createRateBar(likes, dislikes) {
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
-    if (!rateBar) {
+    if (!rateBar && !isMobile()) {
+      let colorLikeStyle = "";
+      let colorDislikeStyle = "";
+      if (extConfig.coloredBar) {
+        colorLikeStyle = "; background-color: " + getColorFromTheme(true);
+        colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
+      }
+
       (
         document.getElementById("menu-container") ||
         document.querySelector("ytm-slim-video-action-bar-renderer")
@@ -25,11 +32,11 @@ function createRateBar(likes, dislikes) {
             <div class="ryd-tooltip-bar-container">
                <div
                   id="ryd-bar-container"
-                  style="width: 100%; height: 2px;"
+                  style="width: 100%; height: 2px;${colorDislikeStyle}"
                   >
                   <div
                      id="ryd-bar"
-                     style="width: ${widthPercent}%; height: 100%"
+                     style="width: ${widthPercent}%; height: 100%${colorLikeStyle}"
                      ></div>
                </div>
             </div>
@@ -45,11 +52,19 @@ function createRateBar(likes, dislikes) {
       document.querySelector(
         "#ryd-dislike-tooltip > #tooltip"
       ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+      if (extConfig.coloredBar) {
+        document.getElementById("ryd-bar-container").style.backgroundColor =
+          getColorFromTheme(false);
+        document.getElementById("ryd-bar").style.backgroundColor =
+          getColorFromTheme(true);
+      }
     }
   } else {
     cLog("removing bar");
     let ratebar = document.getElementById("ryd-bar-container");
-    ratebar.parentNode.removeChild(ratebar);
+    if(ratebar) {
+      ratebar.parentNode.removeChild(ratebar);
+    }
   }
 }
 

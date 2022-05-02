@@ -21,32 +21,6 @@ function sendVote(vote) {
   }
 }
 
-function sendVideoIds() {
-  let links = Array.from(
-    document.getElementsByClassName(
-      "yt-simple-endpoint ytd-compact-video-renderer"
-    )
-  ).concat(
-    Array.from(
-      document.getElementsByClassName("yt-simple-endpoint ytd-thumbnail")
-    )
-  );
-  // Also try mobile
-  if (links.length < 1)
-    links = Array.from(
-      document.querySelectorAll(
-        ".large-media-item-metadata > a, a.large-media-item-thumbnail-container"
-      )
-    );
-  const ids = links
-    .filter((x) => x.href && x.href.indexOf("/watch?v=") > 0)
-    .map((x) => getVideoId(x.href));
-  getBrowser().runtime.sendMessage({
-    message: "send_links",
-    videoIds: ids,
-  });
-}
-
 function likeClicked() {
   if (checkForSignInButton() === false) {
     if (storedData.previousState === DISLIKED_STATE) {
@@ -100,6 +74,8 @@ function addLikeDislikeEventListener() {
   if (!window.returnDislikeButtonlistenersSet) {
     buttons.children[0].addEventListener("click", likeClicked);
     buttons.children[1].addEventListener("click", dislikeClicked);
+    buttons.children[0].addEventListener("touchstart", likeClicked);
+    buttons.children[1].addEventListener("touchstart", dislikeClicked);
     window.returnDislikeButtonlistenersSet = true;
   }
 }
@@ -110,15 +86,60 @@ function storageChangeHandler(changes, area) {
       changes.disableVoteSubmission.newValue
     );
   }
+  if (changes.coloredThumbs !== undefined) {
+    handleColoredThumbsChangeEvent(changes.coloredThumbs.newValue);
+  }
+  if (changes.coloredBar !== undefined) {
+    handleColoredBarChangeEvent(changes.coloredBar.newValue);
+  }
+  if (changes.colorTheme !== undefined) {
+    handleColorThemeChangeEvent(changes.colorTheme.newValue);
+  }
+
+  if (changes.numberDisplayRoundDown !== undefined) {
+    handleNumberDisplayRoundDownChangeEvent(
+      changes.numberDisplayRoundDown.newValue
+    );
+  }
+  if (changes.numberDisplayFormat !== undefined) {
+    handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
+  }
+  if (changes.numberDisplayReformatLikes !== undefined) {
+    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
   extConfig.disableVoteSubmission = value;
 }
 
+function handleColoredThumbsChangeEvent(value) {
+  extConfig.coloredThumbs = value;
+}
+
+function handleColoredBarChangeEvent(value) {
+  extConfig.coloredBar = value;
+}
+
+function handleColorThemeChangeEvent(value) {
+  if (!value) value = "classic";
+  extConfig.colorTheme = value;
+}
+
+function handleNumberDisplayFormatChangeEvent(value) {
+  extConfig.numberDisplayFormat = value;
+}
+
+function handleNumberDisplayRoundDownChangeEvent(value) {
+  extConfig.numberDisplayRoundDown = value;
+}
+
+function handleNumberDisplayReformatLikesChangeEvent(value) {
+  extConfig.numberDisplayReformatLikes = value;
+}
+
 export {
   sendVote,
-  sendVideoIds,
   likeClicked,
   dislikeClicked,
   addLikeDislikeEventListener,
