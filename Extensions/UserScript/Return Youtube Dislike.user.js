@@ -28,7 +28,7 @@ const extConfig = {
 // You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact. 
   showUpdatePopup: false, // [true, false*] Show a popup tab after extension update (See what's new)
   disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
-  disableLogging: true, // [true*, false] Disable Logging API Response in Javascript Console.
+  disableLogging: true, // [true*, false] Disable Logging API Response in JavaScript Console.
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
   colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
