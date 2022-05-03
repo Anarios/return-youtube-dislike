@@ -34,7 +34,7 @@ const extConfig = {
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
   tooltipPercentageMode: "none", // [none*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
-  numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
+  numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent. Shorts data are from RYD server.)
 // END USER OPTIONS
 };
 
@@ -204,7 +204,7 @@ function getLikeCountFromButton() {
   if (isShorts()) {
     //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
     //It should be possible to fix this function, but it's not critical to showing the dislike count.
-    return 0;
+    return false;
   }
   let likesStr = getLikeButton()
     .querySelector("button")
@@ -356,6 +356,8 @@ function setState() {
           const nativeLikes = getLikeCountFromButton();
           if (nativeLikes !== false) {
             setLikes(numberFormat(nativeLikes));
+          } else {
+            setLikes(numberFormat(json.likes));
           }
         }
         createRateBar(likes, dislikes);
