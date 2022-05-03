@@ -278,7 +278,7 @@ function storageChangeHandler(changes, area) {
       changes.numberDisplayReformatLikes.newValue
     );
   }
-  else if (changes.disableLogging !== undefined){
+  if (changes.disableLogging !== undefined){
     handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
   }
 }

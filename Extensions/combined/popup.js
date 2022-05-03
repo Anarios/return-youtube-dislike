@@ -65,9 +65,10 @@ document
     chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
   });
 
-document.getElementById("disable_logging").addEventListener("click",(ev)=>{
-  chrome.storage.sync.set({disableLogging:ev.target.checked})
+document.getElementById("disable_logging").addEventListener("click", (ev) => {
+  chrome.storage.sync.set({ disableLogging:ev.target.checked })
 });
+
 document.getElementById("colored_thumbs").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ coloredThumbs: ev.target.checked });
 });
@@ -171,10 +172,11 @@ function initializeDisableVoteSubmission() {
 }
 
 function initializeDisableLogging(){
-  chrome.storage.sync.get(['disableLogging'],(res)=>{
+  chrome.storage.sync.get(['disableLogging'], (res) => {
     handleDisableLoggingChangeEvent(res.disableLogging);
   });
 }
+
 function initializeColoredThumbs() {
   chrome.storage.sync.get(["coloredThumbs"], (res) => {
     handleColoredThumbsChangeEvent(res.coloredThumbs);
@@ -235,7 +237,7 @@ function storageChangeHandler(changes, area) {
       changes.disableVoteSubmission.newValue
     );
   }
-  else if (changes.disableLogging !== undefined){
+  if (changes.disableLogging !== undefined) {
     handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
   }
   if (changes.coloredThumbs !== undefined) {
@@ -265,7 +267,7 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   document.getElementById("disable_vote_submission").checked = value;
 }
 
-function handleDisableLoggingChangeEvent(value){
+function handleDisableLoggingChangeEvent(value) {
   config.disableLogging = value;
   document.getElementById("disable_logging").checked = value;
 }

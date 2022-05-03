@@ -276,7 +276,7 @@ function initializeDisableLogging() {
     }
   });
 }
-=======
+
 function initializeColoredThumbs() {
   getBrowser().storage.sync.get(["coloredThumbs"], (res) => {
     if (res.coloredThumbs === undefined) {
