@@ -36,6 +36,14 @@ function localize(localeString) {
 function getNumberFormatter(optionSelect) {
   let formatterNotation;
   let formatterCompactDisplay;
+  let userLocales;
+  try {
+    userLocales = new URL(
+      Array.from(document.querySelectorAll("head > link[rel='search']"))
+      ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+      ?.getAttribute("href")
+    )?.searchParams?.get("locale");
+  } catch {}
 
   switch (optionSelect) {
     case "compactLong":

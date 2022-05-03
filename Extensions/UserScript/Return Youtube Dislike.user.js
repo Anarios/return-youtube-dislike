@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      0.9.0
+// @version      3.0.1
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -468,7 +468,9 @@ function numberFormat(numberState) {
         ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
         ?.getAttribute("href")
     )?.searchParams?.get("locale");
-  } catch {}
+  } catch {
+    userLocales = document.documentElement.lang;
+  }
 
   let numberDisplay;
   if (extConfig.numberDisplayRoundDown === false) {
@@ -476,12 +478,12 @@ function numberFormat(numberState) {
   } else {
     numberDisplay = roundDown(numberState);
   }
-  return getNumberFormatter(extConfig.numberDisplayFormat).format(
+  return getNumberFormatter(extConfig.numberDisplayFormat, userLocales).format(
     numberDisplay
   );
 }
 
-function getNumberFormatter(optionSelect) {
+function getNumberFormatter(optionSelect, userLocales) {
   let formatterNotation;
   let formatterCompactDisplay;
 
