@@ -28,6 +28,7 @@ const extConfig = {
 // You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact. 
   showUpdatePopup: false, // [true, false*] Show a popup tab after extension update (See what's new)
   disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
+  disableLogging: true, // [true*, false] Disable Logging of Response Data To Javascript Console.
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
   colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
@@ -48,8 +49,10 @@ let isMobile = location.hostname == "m.youtube.com";
 let isShorts = () => location.pathname.startsWith("/shorts");
 let mobileDislikes = 0;
 function cLog(text, subtext = "") {
-  subtext = subtext.trim() === "" ? "" : `(${subtext})`;
-  console.log(`[Return YouTube Dislikes] ${text} ${subtext}`);
+  if (!extConfig.disableLogging) {
+    subtext = subtext.trim() === "" ? "" : `(${subtext})`; 
+    console.log(`[Return YouTube Dislikes] ${text} ${subtext}`); 
+  }
 }
 
 function isInViewport(element) {
