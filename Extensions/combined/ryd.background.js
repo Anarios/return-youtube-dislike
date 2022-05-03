@@ -277,6 +277,12 @@ function storageChangeHandler(changes, area) {
       changes.numberDisplayReformatLikes.newValue
     );
   }
+  if (changes.showTooltipPercentage !== undefined) {
+    handleShowTooltipPercentageChangeEvent(changes.showTooltipPercentage.newValue);
+  }
+  if (changes.numberDisplayReformatLikes !== undefined) {
+    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -291,6 +297,17 @@ function handleDisableVoteSubmissionChangeEvent(value) {
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
 }
+
+function handleShowTooltipPercentageChangeEvent(value) {
+  extConfig.showTooltipPercentage = value;
+};
+
+function handleTooltipPercentageModeChangeEvent(value) {
+  if (!value) {
+    value = "dash_like";
+  }
+  extConfig.tooltipPercentageMode = value;
+};
 
 function handleNumberDisplayRoundDownChangeEvent(value) {
   extConfig.numberDisplayRoundDown = value;
@@ -333,6 +350,8 @@ function initExtConfig() {
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
   initializeNumberDisplayReformatLikes();
+  initializeTooltipPercentage();
+  initializeTooltipPercentageMode();
 }
 
 function initializeDisableVoteSubmission() {
@@ -392,6 +411,26 @@ function initializeNumberDisplayFormat() {
       api.storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
+    }
+  });
+}
+
+function initializeTooltipPercentage() {
+  api.storage.sync.get(["showTooltipPercentage"], (res) => {
+    if (res.showTooltipPercentage === undefined) {
+      api.storage.sync.set({ showTooltipPercentage: false });
+    } else {
+      extConfig.showTooltipPercentage = res.showTooltipPercentage;
+    }
+  });
+}
+
+function initializeTooltipPercentageMode() {
+  api.storage.sync.get(["tooltipPercentageMode"], (res) => {
+    if (res.tooltipPercentageMode === undefined) {
+      api.storage.sync.set({ tooltipPercentageMode: "dash_like" });
+    } else {
+      extConfig.tooltipPercentageMode = res.tooltipPercentageMode;
     }
   });
 }
