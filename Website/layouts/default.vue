@@ -102,10 +102,10 @@ export default {
       { name: "English", locale: "en" },
       { name: "Español", locale: "es" },
       { name: "Türkçe", locale: "tr" },
-      // { name: "Русский", locale: "ru" },
+      { name: "Русский", locale: "ru" },
       // { name: "Français", locale: "fr" },
       // { name: "Deutsch", locale: "de" },
-      // { name: "日本語" },
+      // ...
     ],
     alert: {
       show: false,

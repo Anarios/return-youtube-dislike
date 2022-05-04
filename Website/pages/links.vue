@@ -27,7 +27,7 @@
       selivano.d@gmail.com
     </v-btn>
 
-    <p style="color: #555" class="mt-8">
+    <p style="color: #555" class="my-8">
       Site by <v-icon color="#555">mdi-discord</v-icon>
       <a class="attr-link" href="https://github.com/Frontesque" target="_blank">
         Front#2990
@@ -79,10 +79,10 @@ export default {
         tag: "trbatuhankara#7738",
         lang: "Türkçe",
       },
-      // {
-      //   tag: "PickleNik#0864",
-      //   lang: "Русский",
-      // },
+      {
+        tag: "PickleNik#0864",
+        lang: "Русский",
+      },
     ],
   }),
 };
