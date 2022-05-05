@@ -1,0 +1,62 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "低評価を表示する機能を復元"
+  },
+  "textDeveloper": {
+    "message": "by Dmitry Selivanov & コミュニティ"
+  },
+  "linkWebsite": {
+    "message": "Webサイト"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
+  "linkDonate": {
+    "message": "寄付"
+  },
+  "linkHelp": {
+    "message": "ヘルプ"
+  },
+  "legendSettings": {
+    "message": "設定"
+  },
+  "textSettings": {
+    "message": "高評価/低評価を表示しない"
+  },
+  "textLikesDisabled": {
+    "message": "投稿者により無効化"
+  },
+  "textSettingsHover": {
+    "message": "評価数のカウントを停止します。"
+  },
+  "textTempUnavailable": {
+    "message": "一時的に利用不可"
+  },
+  "textUpdate": {
+    "message": "アップデート："
+  },
+  "version30installed": {
+    "message": "バージョン 3.0.0.1 がインストールされました。"
+  },
+  "whatsnew": {
+    "message": "新機能"
+  },
+  "shortsSupport": {
+    "message": "YouTubeショートのサポート"
+  },
+  "customColors": {
+    "message": "低評価ボタンとバーの色のカスタマイズ"
+  },
+  "customNumberFormats": {
+    "message": "評価数の表示形式のカスタマイズ"
+  },
+  "considerDonating": {
+    "message": "この拡張機能を存続させることができるのは、皆様からの寄付だけです。"
+  }
+}
