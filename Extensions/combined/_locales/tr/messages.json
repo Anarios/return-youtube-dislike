@@ -3,10 +3,10 @@
         "message": "Return YouTube Dislike"
     },
     "extensionDesc": {
-        "message": "Beğenmeme yeteneğini geri getir"
+        "message": "Beğenmeme sayısını görme özelliğini geri getirir"
     },
     "textDeveloper": {
-        "message": "Dmitry Selivanov ve Topluluk tarafından oluşturuldu"
+        "message": "Dmitry Selivanov ve topluluk tarafından oluşturuldu"
     },
     "linkWebsite": {
         "message": "Web sitesi"
@@ -24,7 +24,7 @@
         "message": "Ayarlar"
     },
     "textSettings": {
-        "message": "Beğenme/Beğenmeme talebini devre dışı bırak"
+        "message": "Beğenme/Beğenmeme göndermeyi devre dışı bırak"
     },
     "textLikesDisabled": {
         "message": "Sahibi tarafından devre dışı bırakıldı"
@@ -42,7 +42,7 @@
         "message": "3.0.0.1 versiyonu yüklendi"
     },
     "whatsnew": {
-        "message": "Neler yeni"
+        "message": "Yenilikler"
     },
     "shortsSupport": {
         "message": "YouTube Shorts Desteği"
