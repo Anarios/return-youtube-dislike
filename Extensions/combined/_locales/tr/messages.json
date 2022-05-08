@@ -1,59 +1,63 @@
 {
-    "extensionName": {
-        "message": "Return YouTube Dislike"
-    },
-    "extensionDesc": {
-        "message": "Beğenmeme yeteneğini geri getir"
-    },
-    "textDeveloper": {
-        "message": "Dmitry Selivanov ve Topluluk tarafından oluşturuldu"
-    },
-    "linkWebsite": {
-        "message": "Web sitesi"
-    },
-    "linkFAQ": {
-        "message": "SSS"
-    },
-    "linkDonate": {
-        "message": "Bağış Yap"
-    },
-    "linkHelp": {
-        "message": "Yardım"
-    },
-    "legendSettings": {
-        "message": "Ayarlar"
-    },
-    "textSettings": {
-        "message": "Beğenme/Beğenmeme talebini devre dışı bırak"
-    },
-    "textLikesDisabled": {
-        "message": "Sahibi tarafından devre dışı bırakıldı"
-    },
-    "textSettingsHover": {
-        "message": "Beğendiklerinizi ve beğenmediklerinizi saymayı durdurur."
-    },
-    "textTempUnavailable": {
-        "message": "Geçici olarak devre dışı"
-    },
-    "textUpdate": {
-        "message": "güncelle"
-    },
-    "version30installed": {
-        "message": "3.0.0.1 versiyonu yüklendi"
-    },
-    "whatsnew": {
-        "message": "Neler yeni"
-    },
-    "shortsSupport": {
-        "message": "YouTube Shorts Desteği"
-    },
-    "customColors": {
-        "message": "Beğenmeme çubuğu ve butonlar için özel renkler"
-    },
-    "customNumberFormats": {
-        "message": "Özel sayı formatları"
-    },
-    "considerDonating": {
-        "message": "Uzantının sürdürülmesini sağlayan tek şey bağışlarınızdır, lütfen projeyi desteklemeyi düşünün."
-    }
+  "extensionName": {
+    "message": "YouTube Dislike Sayısını Geri Getir"
+  },
+  "extensionNameBeta": {
+    "message": "YouTube Dislike Sayısını Geri Getir Beta"
+  },
+  "extensionDesc": {
+    "message": "Dislike'ları görebilme yeteneği verir"
+  },
+  "textDeveloper": {
+    "message": "Dmitry Selivanov ve Topluluk tarafından"
+  },
+  "linkWebsite": {
+    "message": "Site"
+  },
+  "linkFAQ": {
+    "message": "SSS"
+  },
+  "linkDonate": {
+    "message": "Bağış Yap"
+  },
+  "linkHelp": {
+    "message": "Yardım"
+  },
+  "legendSettings": {
+    "message": "Ayarlar"
+  },
+  "textSettings": {
+    "message": "Like/dislike gönderimini devre dışı bırak"
+  },
+  "textLikesDisabled": {
+    "message": "sahibi tarafından devre dışı bırakıldı"
+  },
+  "textSettingsHover": {
+    "message": "Like'larınızı ve dislike'larınızı saymayı bırakır."
+  },
+  "textTempUnavailable": {
+    "message": "geçici olarak kullanım dışı"
+  },
+  "textUpdate": {
+    "message": "şu sürüme güncelle"
+  },
+  "version30installed": {
+    "message": "Sürüm 3.0.0.1 yüklendi"
+  },
+  "whatsnew": {
+    "message": "Yenilikler:"
+  },
+  "shortsSupport": {
+    "message": "YouTube Shorts Desteği"
+  },
+  "customColors": {
+    "message": "Dislike çubuğu ve düğmeler için özel renkler"
+  },
+  "customNumberFormats": {
+    "message": "Özel sayı biçimleri"
+  },
+  "considerDonating": {
+    "message": "Uzantının var olmasını sağlayan tek şey bağışlarınızdır, lütfen projeyi desteklemeyi düşünün."
+  }
 }
+  

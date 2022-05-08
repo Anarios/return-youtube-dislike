@@ -80,6 +80,10 @@ export default {
         lang: "Türkçe",
       },
       {
+        tag: "iLBAn#7421",
+        lang: "Türkçe",
+      },
+      {
         tag: "PickleNik#0864",
         lang: "Русский",
       },
