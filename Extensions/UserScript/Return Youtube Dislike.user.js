@@ -30,7 +30,7 @@ const extConfig = {
   disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
-  colorTheme: "watermelon", // [watermelon*, capetian, neon, hibiscus, nostalgic] Color theme (red/green, blue/yellow, pink/cyan, green/megenta, blue/grey. Light/dark themes aware. Capetian and hibiscus are colorblind friendly)
+  colorTheme: "watermelon", // [watermelon*, capetian, neon, hibiscus, nostalgia] Color theme (red/green, blue/yellow, pink/cyan, green/megenta, blue/grey. Light/dark themes aware. Capetian and hibiscus are colorblind friendly)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
   numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
@@ -113,7 +113,7 @@ mutationObserver.observer = new MutationObserver( function(mutationList, observe
       mutation.target.id === "button"
     ) {
       // cLog('Short thumb button status changed');
-      if (extConfig.colorTheme === 'nostalgic') {
+      if (extConfig.colorTheme === 'nostalgia') {
         if (mutation.target.getAttribute("aria-pressed") === "true") {
           mutation.target.style.color = getColorFromTheme(-1);
         } else {
@@ -133,7 +133,7 @@ mutationObserver.observer = new MutationObserver( function(mutationList, observe
     }
     if (
       !isShorts() && 
-      extConfig.colorTheme === 'nostalgic' && 
+      extConfig.colorTheme === 'nostalgia' && 
       mutation.type === "attributes" &&
       mutation.target.nodeName === "YTD-TOGGLE-BUTTON-RENDERER"
     ) {
@@ -288,7 +288,7 @@ function createRateBar(likes, dislikes) {
     let colorLikeStyle = "";
     let colorDislikeStyle = "";
     if (extConfig.coloredBar) {
-      colorLikeStyle = (extConfig.colorTheme === 'nostalgic' && (isVideoDisliked() || isVideoLiked()) ) ?
+      colorLikeStyle = (extConfig.colorTheme === 'nostalgia' && (isVideoDisliked() || isVideoLiked()) ) ?
           "; background-color: " + getColorFromTheme(-1) :
           "; background-color: " + getColorFromTheme(true);
       colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
@@ -330,7 +330,7 @@ function createRateBar(likes, dislikes) {
       document.getElementById("return-youtube-dislike-bar-container").style.backgroundColor =
         getColorFromTheme(false);
       document.getElementById("return-youtube-dislike-bar").style.backgroundColor = 
-        (extConfig.colorTheme === 'nostalgic' && (isVideoDisliked() || isVideoLiked())) ?
+        (extConfig.colorTheme === 'nostalgia' && (isVideoDisliked() || isVideoLiked())) ?
         getColorFromTheme(-1) :
         getColorFromTheme(true);
     }
@@ -362,7 +362,7 @@ function setState() {
           if (isShorts()) { // for shorts, leave deactived buttons in default color
             let shortLikeButton = getLikeButton().querySelector('tp-yt-paper-button#button');
             let shortDislikeButton = getDislikeButton().querySelector('tp-yt-paper-button#button');
-            if (extConfig.colorTheme === 'nostalgic') {
+            if (extConfig.colorTheme === 'nostalgia') {
               if (shortLikeButton.getAttribute("aria-pressed") === "true") {
                 shortLikeButton.style.color = getColorFromTheme(-1);
               }
@@ -380,7 +380,7 @@ function setState() {
             mutationObserver.observer.observe(shortLikeButton, mutationObserver.options);
             mutationObserver.observer.observe(shortDislikeButton, mutationObserver.options);
           } else {
-            if (extConfig.colorTheme === 'nostalgic') {
+            if (extConfig.colorTheme === 'nostalgia') {
               getLikeButton().style.color = getColorFromTheme(isVideoLiked() ? -1 : true);
               getDislikeButton().style.color = getColorFromTheme(isVideoDisliked() ? -1 : true);
               mutationObserver.observer.observe(
@@ -552,7 +552,7 @@ function getColorFromTheme(voteIsLike) {
         voteIsLike ? "lime" : "magenta" :
         voteIsLike ? "green" : "magenta";
       break;
-    case "nostalgic":
+    case "nostalgia":
       colorString = (voteIsLike === -1) ?
         "#0450dc" : isDarkTheme ?
         voteIsLike ? "#909090" : "#606060" :
