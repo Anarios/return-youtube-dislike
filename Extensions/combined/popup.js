@@ -303,7 +303,7 @@ function handleColorThemeCustomChangeEvent(value) {
 
 function updateColorThemePreviewContent(themeName) {
   if (themeName === 'custom') {
-    ["color_theme_example_like","color_theme_example_dislike","color_theme_example_like_dark","color_theme_example_dislike_dark"].forEach(item => {
+    ["color_theme_example_light","color_theme_example_dark"].forEach(item => {
       document.getElementById(item).style.display = "none";
     });
     ["color_theme_custom_picker_light","color_theme_custom_picker_dark"].forEach(item => {
@@ -318,7 +318,7 @@ function updateColorThemePreviewContent(themeName) {
     document.getElementById("custom_color_picker_dislike_dark").setAttribute("value", 
       getColorFromTheme(themeName, false, true));
   } else {
-    ["color_theme_example_like","color_theme_example_dislike","color_theme_example_like_dark","color_theme_example_dislike_dark"].forEach(item => {
+    ["color_theme_example_light","color_theme_example_dark"].forEach(item => {
       document.getElementById(item).style.display = "inline-block";
     });
     ["color_theme_custom_picker_light","color_theme_custom_picker_dark"].forEach(item => {
