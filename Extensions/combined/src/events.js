@@ -8,6 +8,7 @@ import {
   extConfig,
   storedData,
   setLikes,
+  getLikeCountFromButton,
 } from "./state";
 import { createRateBar } from "./bar";
 
@@ -41,6 +42,14 @@ function likeClicked() {
       createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = NEUTRAL_STATE;
     }
+    if (extConfig.numberDisplayReformatLikes === true) {
+      const nativeLikes = getLikeCountFromButton();
+      if (nativeLikes !== false) {
+        setLikes(numberFormat(nativeLikes));
+      } else {
+        setLikes(numberFormat(storedData.likes));
+      }
+    }
   }
 }
 
@@ -65,6 +74,14 @@ function dislikeClicked() {
       setDislikes(numberFormat(storedData.dislikes));
       createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = DISLIKED_STATE;
+      if (extConfig.numberDisplayReformatLikes === true) {
+        const nativeLikes = getLikeCountFromButton();
+        if (nativeLikes !== false) {
+          setLikes(numberFormat(nativeLikes));
+        } else {
+          setLikes(numberFormat(storedData.likes));
+        }
+      }
     }
   }
 }

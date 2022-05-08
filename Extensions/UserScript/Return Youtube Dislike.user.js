@@ -372,6 +372,14 @@ function likeClicked() {
       createRateBar(likesvalue, dislikesvalue);
       previousState = 1;
     }
+    if (extConfig.numberDisplayReformatLikes === true) {
+      const nativeLikes = getLikeCountFromButton();
+      if (nativeLikes !== false) {
+        setLikes(numberFormat(nativeLikes));
+      } else {
+        setLikes(numberFormat(storedData.likes));
+      }
+    }
   }
 }
 
@@ -393,6 +401,14 @@ function dislikeClicked() {
       setDislikes(numberFormat(dislikesvalue));
       createRateBar(likesvalue, dislikesvalue);
       previousState = 2;
+      if (extConfig.numberDisplayReformatLikes === true) {
+        const nativeLikes = getLikeCountFromButton();
+        if (nativeLikes !== false) {
+          setLikes(numberFormat(nativeLikes));
+        } else {
+          setLikes(numberFormat(storedData.likes));
+        }
+      }
     }
   }
 }
