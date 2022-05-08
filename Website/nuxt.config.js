@@ -1,5 +1,10 @@
-import colors from "vuetify/es5/util/colors";
-
+import en from "./_locales/en";
+import es from "./_locales/es";
+import tr from "./_locales/tr";
+import ru from "./_locales/ru";
+// import fr from "./_locales/fr";
+// import de from "./_locales/de";
+// ...
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -42,18 +47,15 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ["~/assets/variables.scss"],
+    lang: {
+      locales: { en, es, tr, ru /*, fr, de, ...*/ },
+      current: "en",
+    },
     theme: {
       dark: true,
       themes: {
         dark: {
           primary: "#ff4444",
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
         },
       },
     },

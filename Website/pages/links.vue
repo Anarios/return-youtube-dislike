@@ -1,12 +1,12 @@
 <template>
-  <div style="height: 100%">
-    <h1 class="title-text">Project Links</h1>
+  <div class="pt-12">
+    <h1 class="title-text">
+      {{ $vuetify.lang.t("$vuetify.links.title") }}
+    </h1>
 
-    <div style="color: #999">
-      <p style="margin-top: 0.5rem; margin-bottom: 1rem">
-        Links to the project and its developers
-      </p>
-    </div>
+    <p style="color: #9999; margin-top: 0.5rem; margin-bottom: 1rem">
+      {{ $vuetify.lang.t("$vuetify.links.subtitle") }}
+    </p>
 
     <v-btn class="mainAltButton" :href="githubLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-github</v-icon>
@@ -18,19 +18,40 @@
       Discord
     </v-btn>
 
-    <h1 style="margin-top: 1em">Contact Me</h1>
+    <h1 style="margin-top: 1em">
+      {{ $vuetify.lang.t("$vuetify.links.contact") }}
+    </h1>
 
     <v-btn class="mainAltButton" :href="emailLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-email</v-icon>
       selivano.d@gmail.com
     </v-btn>
 
-    <p id="credits" class="flex-row no-wrap">
-      Site by <v-icon color="#555">mdi-discord</v-icon> Front#2990
+    <p style="color: #555" class="my-8">
+      Site by <v-icon color="#555">mdi-discord</v-icon>
+      <a class="attr-link" href="https://github.com/Frontesque" target="_blank">
+        Front#2990
+      </a>
       <br />
       & <v-icon color="#555">mdi-discord</v-icon>
-      PickleNik#0864
+      <a class="attr-link" href="https://github.com/PickleNik" target="_blank">
+        PickleNik#0864
+      </a>
     </p>
+    <!-- Translators -->
+    <div style="color: #555; width: 250px">
+      <b class="white--text">
+        {{ $vuetify.lang.t("$vuetify.links.translators") }}
+      </b>
+      <br />
+      <div
+        v-for="translator in translators"
+        :key="translator.tag"
+        class="d-flex"
+      >
+        {{ translator.lang }} - <v-spacer /> {{ translator.tag }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,20 +66,36 @@ export default {
       ? "swoop-left"
       : "swoop-right";
   },
-  data() {
-    return {
-      githubLink: "https://github.com/Anarios/return-youtube-dislike",
-      discordLink: "https://discord.gg/mYnESY4Md5",
-
-      emailLink: "mailto:selivano.d@gmail.com ",
-    };
-  },
+  data: () => ({
+    githubLink: "https://github.com/Anarios/return-youtube-dislike",
+    discordLink: "https://discord.gg/mYnESY4Md5",
+    emailLink: "mailto:selivano.d@gmail.com ",
+    translators: [
+      {
+        tag: "alexuspromago#9473",
+        lang: "Español",
+      },
+      {
+        tag: "trbatuhankara#7738",
+        lang: "Türkçe",
+      },
+      {
+        tag: "PickleNik#0864",
+        lang: "Русский",
+      },
+    ],
+  }),
 };
 </script>
 
-<style scoped>
-#credits {
-  transform: translate(0, 100%);
-  color: #555;
+<style>
+.attr-link {
+  color: #555 !important;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.attr-link:hover {
+  text-decoration: underline;
+  color: #f77 !important;
 }
 </style>
