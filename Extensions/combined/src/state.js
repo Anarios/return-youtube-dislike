@@ -153,7 +153,7 @@ function getLikeCountFromButton() {
     return 0;
   }
   let likesStr = getLikeButton()
-    .querySelector("button")
+    .querySelector("yt-formatted-string#text")
     .getAttribute("aria-label")
     .replace(/\D/g, "");
   return likesStr.length > 0 ? parseInt(likesStr) : false;
