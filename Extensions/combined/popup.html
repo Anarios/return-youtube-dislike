@@ -146,6 +146,7 @@
       <option value="neon" id="color_theme_neon">Neon</option>
       <option value="hibiscus" id="color_theme_hibiscus">Hibiscus*</option>
       <option value="nostalgic" id="color_theme_nostalgic">Nostalgia</option>
+      <option value="custom" id="color_theme_custom">Custom</option>
     </select>
     <span style="background-color: rgb(255,255,255); height: 1.4em; padding: 0.2em;">
       <span
@@ -166,6 +167,10 @@
               height: 1em;
             "
       >&nbsp;</span>
+      <span id="color_theme_custom_picker_light">
+        <input type="color" class="custom-color-picker" id="custom_color_picker_like" value="#008000"></input>&nbsp;
+        <input type="color" class="custom-color-picker" id="custom_color_picker_dislike" value="#ff0000"></input>
+      </span>
     </span>
     <span style="background-color: rgb(3,3,3); height: 1.4em; padding: 0.2em;">
       <span
@@ -186,7 +191,13 @@
               height: 1em;
             "
       >&nbsp;</span>
+      <span id="color_theme_custom_picker_dark">
+        <input type="color" class="custom-color-picker" id="custom_color_picker_like_dark" value="#00ff00"></input>&nbsp;
+        <input type="color" class="custom-color-picker" id="custom_color_picker_dislike_dark" value="#ff0000"></input>
+      </span>
     </span>
+    <!-- <div class="custom-color-select"> -->
+</div>
   </div>
 </fieldset>
 </body>

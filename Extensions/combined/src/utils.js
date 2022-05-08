@@ -152,6 +152,11 @@ function getColorFromTheme(voteIsLike) {
         voteIsLike ? "#909090" : "#606060" :
         voteIsLike ? "#909090" : "#cccccc";
       break;
+    case "custom":
+      colorString = isDarkTheme ?
+        voteIsLike ? extConfig.colorThemeCustom.like_dark : extConfig.colorThemeCustom.dislike_dark :
+        voteIsLike ? extConfig.colorThemeCustom.like : extConfig.colorThemeCustom.dislike;
+      break;
     case "classic":
     default:
       colorString = isDarkTheme ?

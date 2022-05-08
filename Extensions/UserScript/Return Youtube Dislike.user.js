@@ -30,7 +30,8 @@ const extConfig = {
   disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
-  colorTheme: "watermelon", // [watermelon*, capetian, neon, hibiscus, nostalgia] Color theme (red/green, blue/yellow, pink/cyan, green/megenta, blue/grey. Light/dark themes aware. Capetian and hibiscus are colorblind friendly)
+  colorTheme: "watermelon", // [watermelon*, capetian, neon, hibiscus, nostalgia, custom] Color theme (red/green, blue/yellow, pink/cyan, green/megenta, blue/grey. Light/dark themes aware. Capetian and hibiscus are colorblind friendly)
+  colorThemeCustom: {like_dark: '#00ff00', dislike_dark: '#ff0000', like: '#008000', dislike: '#ff0000'}, // [rgb color codes] Custom color codes (works with "custom" color theme)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
   numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
@@ -557,6 +558,11 @@ function getColorFromTheme(voteIsLike) {
         "#0450dc" : isDarkTheme ?
         voteIsLike ? "#909090" : "#606060" :
         voteIsLike ? "#909090" : "#cccccc";
+      break;
+    case "custom":
+      colorString = isDarkTheme ?
+        voteIsLike ? extConfig.colorThemeCustom.like_dark : extConfig.colorThemeCustom.dislike_dark :
+        voteIsLike ? extConfig.colorThemeCustom.like : extConfig.colorThemeCustom.dislike;
       break;
     case "watermelon":
     default:

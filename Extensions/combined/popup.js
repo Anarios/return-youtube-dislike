@@ -5,6 +5,7 @@ const config = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic",
+  colorThemeCustom: {like_dark: '#00ff00', dislike_dark: '#ff0000', like: '#008000', dislike: '#ff0000'}, 
   numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
   numberDisplayReformatLikes: false, 
@@ -75,6 +76,22 @@ document.getElementById("colored_bar").addEventListener("click", (ev) => {
 
 document.getElementById("color_theme").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ colorTheme: ev.target.value });
+});
+
+document.getElementById("custom_color_picker_like").addEventListener("change", (ev) => {
+  chrome.storage.sync.set({ colorThemeCustom: {like_dark: config.colorThemeCustom.like_dark, dislike_dark: config.colorThemeCustom.dislike_dark, like: ev.target.value, dislike: config.colorThemeCustom.dislike} });
+});
+
+document.getElementById("custom_color_picker_dislike").addEventListener("change", (ev) => {
+  chrome.storage.sync.set({ colorThemeCustom: {like_dark: config.colorThemeCustom.like_dark, dislike_dark: config.colorThemeCustom.dislike_dark, like: config.colorThemeCustom.like, dislike: ev.target.value} });
+});
+
+document.getElementById("custom_color_picker_like_dark").addEventListener("change", (ev) => {
+  chrome.storage.sync.set({ colorThemeCustom: {like_dark: ev.target.value, dislike_dark: config.colorThemeCustom.dislike_dark, like: config.colorThemeCustom.like, dislike: config.colorThemeCustom.dislike} });
+});
+
+document.getElementById("custom_color_picker_dislike_dark").addEventListener("change", (ev) => {
+  chrome.storage.sync.set({ colorThemeCustom: {like_dark: config.colorThemeCustom.like_dark, dislike_dark: ev.target.value, like: config.colorThemeCustom.like, dislike: config.colorThemeCustom.dislike} });
 });
 
 document.getElementById("number_round_down").addEventListener("click", (ev) => {
@@ -179,8 +196,10 @@ function initializeColoredBar() {
 }
 
 function initializeColorTheme() {
-  chrome.storage.sync.get(["colorTheme"], (res) => {
+  chrome.storage.sync.get(["colorTheme","colorThemeCustom"], (res) => {
     handleColorThemeChangeEvent(res.colorTheme);
+    handleColorThemeCustomChangeEvent(res.colorThemeCustom);
+    updateColorThemePreviewContent(res.colorTheme);
   });
 }
 
@@ -235,6 +254,9 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
+  if (changes.colorThemeCustom !== undefined) {
+    handleColorThemeCustomChangeEvent(changes.colorThemeCustom.newValue);
+  }
   if (changes.numberDisplayRoundDown !== undefined) {
     handleNumberDisplayRoundDownChangeEvent(
       changes.numberDisplayRoundDown.newValue
@@ -274,15 +296,43 @@ function handleColorThemeChangeEvent(value) {
   updateColorThemePreviewContent(value);
 }
 
+function handleColorThemeCustomChangeEvent(value) {
+  config.colorThemeCustom = value;
+  updateColorThemePreviewContent(config.colorTheme);
+}
+
 function updateColorThemePreviewContent(themeName) {
-  document.getElementById("color_theme_example_like").style.backgroundColor =
-    getColorFromTheme(themeName, true, false);
-  document.getElementById("color_theme_example_dislike").style.backgroundColor =
-    getColorFromTheme(themeName, false, false);
-  document.getElementById("color_theme_example_like_dark").style.backgroundColor =
-    getColorFromTheme(themeName, true, true);
-  document.getElementById("color_theme_example_dislike_dark").style.backgroundColor =
-    getColorFromTheme(themeName, false, true);
+  if (themeName === 'custom') {
+    ["color_theme_example_like","color_theme_example_dislike","color_theme_example_like_dark","color_theme_example_dislike_dark"].forEach(item => {
+      document.getElementById(item).style.display = "none";
+    });
+    ["color_theme_custom_picker_light","color_theme_custom_picker_dark"].forEach(item => {
+      document.getElementById(item).style.display = "inline-block";
+    });
+    document.getElementById("custom_color_picker_like").setAttribute("value", 
+      getColorFromTheme(themeName, true, false));
+    document.getElementById("custom_color_picker_dislike").setAttribute("value", 
+      getColorFromTheme(themeName, false, false));
+    document.getElementById("custom_color_picker_like_dark").setAttribute("value", 
+      getColorFromTheme(themeName, true, true));
+    document.getElementById("custom_color_picker_dislike_dark").setAttribute("value", 
+      getColorFromTheme(themeName, false, true));
+  } else {
+    ["color_theme_example_like","color_theme_example_dislike","color_theme_example_like_dark","color_theme_example_dislike_dark"].forEach(item => {
+      document.getElementById(item).style.display = "inline-block";
+    });
+    ["color_theme_custom_picker_light","color_theme_custom_picker_dark"].forEach(item => {
+      document.getElementById(item).style.display = "none";
+    });
+    document.getElementById("color_theme_example_like").style.backgroundColor =
+      getColorFromTheme(themeName, true, false);
+    document.getElementById("color_theme_example_dislike").style.backgroundColor =
+      getColorFromTheme(themeName, false, false);
+    document.getElementById("color_theme_example_like_dark").style.backgroundColor =
+      getColorFromTheme(themeName, true, true);
+    document.getElementById("color_theme_example_dislike_dark").style.backgroundColor =
+      getColorFromTheme(themeName, false, true);
+  }
 }
 
 function handleNumberDisplayRoundDownChangeEvent(value) {
@@ -379,7 +429,12 @@ function getColorFromTheme(colorTheme, voteIsLike, isDarkTheme) {
     case "nostalgic":
       colorString = isDarkTheme ?
         voteIsLike ? "#909090" : "#606060" :
-        voteIsLike ? "#909090" : "#cccccc";
+        voteIsLike ? "#0450dc" : "#cccccc";
+      break;
+    case "custom":
+      colorString = isDarkTheme ?
+        voteIsLike ? config.colorThemeCustom.like_dark : config.colorThemeCustom.dislike_dark :
+        voteIsLike ? config.colorThemeCustom.like : config.colorThemeCustom.dislike;
       break;
     case "classic":
     default:

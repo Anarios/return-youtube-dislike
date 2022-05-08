@@ -20,6 +20,7 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic",
+  colorThemeCustom: {like_dark: '#00ff00', dislike_dark: '#ff0000', like: '#008000', dislike: '#ff0000'}, 
   numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
   numberDisplayReformatLikes: false,
@@ -336,11 +337,16 @@ function initializeNumberDisplayRoundDown() {
 }
 
 function initializeColorTheme() {
-  getBrowser().storage.sync.get(["colorTheme"], (res) => {
+  getBrowser().storage.sync.get(["colorTheme", "colorThemeCustom"], (res) => {
     if (res.colorTheme === undefined) {
       getBrowser().storage.sync.set({ colorTheme: false });
     } else {
       extConfig.colorTheme = res.colorTheme;
+    }
+    if (res.colorThemeCustom === undefined) {
+      getBrowser().storage.sync.set({ colorThemeCustom: {like_dark: '#00ff00', dislike_dark: '#ff0000', like: '#008000', dislike: '#ff0000'} });
+    } else {
+      extConfig.colorThemeCustom = res.colorThemeCustom;
     }
   });
 }

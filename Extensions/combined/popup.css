@@ -256,3 +256,16 @@ input:checked + .slider:before {
   flex-direction: column;
   align-items: center;
 }
+
+input.custom-color-picker {
+    width: 1em;
+    padding: 0px;
+    border: none;
+    height: 1em;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+
+input.custom-color-picker::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
