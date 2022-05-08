@@ -148,23 +148,29 @@ button:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 1rem;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--tertiary); 
-  border-radius: 10px;
+  background: #111; /* color of the tracking area */
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--lightGrey); 
+::-webkit-scrollbar-thumb {
+  background-color: #333; /* color of the scroll thumb */
+  border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
+  border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-top: 0.25rem solid #111; /* creates padding around scroll thumb */
 }
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #f22; /* color of the scroll thumb */
+  border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
+  border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-top: 0.25rem solid #111; /* creates padding around scroll thumb */
+}
+
 #advancedLegend {
   color: var(--tertiary) !important;
   /* margin: auto; */ /* Center the label */
