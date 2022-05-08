@@ -5,7 +5,7 @@ export default {
     home: {
         name: 'Ana Sayfa',
         title: 'YouTube Dislike Sayısını Geri Getir',
-        subtitle: 'Tarayıcı uzantısı ve bir API, YouTube’daki dislike sayınızı geri getirir',
+        subtitle: 'Tarayıcı uzantısı ve bir API, YouTube\'daki dislike sayınızı geri getirir',
         ukraine: 'Ukrayna\'ya Destek Ol',
         sponsors: 'Sponsorlar',
     },
@@ -36,18 +36,18 @@ export default {
         },
         endpoints: {
             title: 'Kullanılabilir Endpoint\'ler',
-            subtitle: 'Kullanılabilir endpoint’lerin listesi burada mevcuttur: ',
+            subtitle: 'Kullanılabilir endpoint\'lerin listesi burada mevcuttur: ',
         },
         fetching: {
             title: 'Temel Fetching Eğitimi',
-            subtitle: 'Belirli bir YouTube ID’sinin oylamalarını elde etmek için bir örnek: ',
+            subtitle: 'Belirli bir YouTube ID\'sinin oylamalarını elde etmek için bir örnek: ',
             title2: 'Örnek İstek: ',
-            url: 'İstek URL’si: ',
+            url: 'İstek URL\'si: ',
             method: 'İstek Yöntemi: ',
             headers: 'Header\'lar: ',
             response: 'Sonuç: ',
-            error1: 'Geçersiz bir YouTube ID’si, 404 "Not Found" olarak döndürülür',
-            error2: 'Yanlış biçimlendirilmiş bir YouTube ID’si, 400 "Bad Request" olarak döndürülür'
+            error1: 'Geçersiz bir YouTube ID\'si, 404 "Not Found" olarak döndürülür',
+            error2: 'Yanlış biçimlendirilmiş bir YouTube ID\'si, 400 "Bad Request" olarak döndürülür'
         },
     },
     help: {
@@ -77,7 +77,7 @@ export default {
         bullet2: 'Dislike sayısı neden güncellenmiyor?',
         bullet2text: 'Şu anda dislike durumları önbelleğe alınır ve çok sık güncellenmez. Bir videonun popülerliğine bağlı olarak değişir ancak güncellenmesi birkaç saat ilâ birkaç gün sürebilir.',
         bullet3: 'Bu nasıl çalışıyor?',
-        bullet3text: 'Uzantı, izlediğiniz videonun ID\'sini alır, API\'miz üzerinden dislike sayılarınızı geri getirir (aynı zamanda görüntülenmenizi, like’ınızı vb. diğer alanları da). Uzantı daha sonra sayfada dislike sayısını ve oranını görüntüler. Bir videoya like veya dislike atarsanız bu kaydedilir ve veri tabanına gönderilir, böylece doğru dislike sayısını tahmin edebilir.',
+        bullet3text: 'Uzantı, izlediğiniz videonun ID\'sini alır, API\'miz üzerinden dislike sayılarınızı geri getirir (aynı zamanda görüntülenmenizi, like\'ınızı vb. diğer alanları da). Uzantı daha sonra sayfada dislike sayısını ve oranını görüntüler. Bir videoya like veya dislike atarsanız bu kaydedilir ve veri tabanına gönderilir, böylece doğru dislike sayısını tahmin edebilir.',
         bullet4: 'Dislike sayımı sizinle paylaşabilir miyim?',
         bullet4text: 'Çok yakında evet. İçerik üreticilerinin dislike sayıları için doğrulanabilirliğini paylaşabilmeleri amacıyla Oauth ya da sınırlı bir kapsamda farklı bir salt okunur API kullanmayı düşünüyoruz.',
         bullet5: 'Hangi verileri topluyorsunuz ve bunlar nasıl işleniyor?',
@@ -89,7 +89,7 @@ export default {
     },
     donate: {
         name: 'Bağış Yap',
-        subtitle: 'İnterneti özgür bırakma çabamızda bize bir bağışla destek olabilirsiniz!',
+        subtitle: 'İnterneti özgür bırakma çabamızda bize bağışınızla destek olabilirsiniz!',
     },
     links: {
         name: 'Bağlantılar',
