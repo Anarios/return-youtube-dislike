@@ -75,20 +75,58 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 api.runtime.onInstalled.addListener((details) => {
+  // PLEASE DO NOT REMOVE Multiple user complained their UPDATED extension v3.0.0.1 keeps showing popups after browser updates, and this is causing a ton of confusions. 
+  // Let's not create such a drama over this little feature. #576 #589 #553 (updated) #569 #572 #556 #544 #537 #535 #534
   // No need for further logic if it's the browser getting the update
   if (details.reason === "browser_update") {
     return;
   }
-  api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], (config) => {
-    if (config.showUpdatePopup === true &&
-      config.lastShowChangelogVersion !== chrome.runtime.getManifest().version
-      ) {
-      // keep it inside get to avoid race condition
-      api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version});
-      // wait until async get runs & don't steal tab focus
+  // The redundant logic below is to work around Chrome bug https://github.com/Anarios/return-youtube-dislike/issues/576#issuecomment-1116838544
+  // this bug is likely only affecting this single option, since all others are read frequently throughout normal use
+  // Also, keep all set inside get callback to avoid race condition, and vice versa
+  let tmp_ReallyShowPopup = false;
+  api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], (config_sync) => {
+    if (config_sync.showUpdatePopup === undefined || config_sync.lastShowChangelogVersion === undefined) { // bug case -- try again with local storage before hard reset
+      api.storage.local.get(['lastShowChangelogVersion','showUpdatePopup'], (config_local) => {
+        if (config_local.showUpdatePopup === undefined || config_local.lastShowChangelogVersion === undefined) { // this can either be a bug case or uninitialized local storage
+          api.storage.local.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version, 'showUpdatePopup': false}, function() {
+            api.storage.local.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {}); // overcome that bug
+          });
+          api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version, 'showUpdatePopup': false}, function() {
+            api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {}); // overcome that bug
+          });
+        } else { // local storage has valid values
+          api.storage.sync.set({'lastShowChangelogVersion': config_local.lastShowChangelogVersion, 'showUpdatePopup': config_local.showUpdatePopup}, function() {
+            api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {}); // overcome that bug
+          });
+        if (config_local.showUpdatePopup === true && 
+          config_local.lastShowChangelogVersion !== chrome.runtime.getManifest().version
+          ) {
+          tmp_ReallyShowPopup = true;
+        }
+        } // if-local
+      }); // local-get
+    } else { // sync storage has valid values
+      api.storage.local.set({'lastShowChangelogVersion': config_sync.lastShowChangelogVersion, 'showUpdatePopup': config_sync.showUpdatePopup}, function() {
+        api.storage.local.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {}); // overcome that bug
+      });
+      if (config_sync.showUpdatePopup === true && 
+        config_sync.lastShowChangelogVersion !== chrome.runtime.getManifest().version
+        ) {
+        tmp_ReallyShowPopup = true;
+      }
+    } // if-sync
+    if (tmp_ReallyShowPopup === true) {
+      api.storage.local.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
+        api.storage.local.get(['lastShowChangelogVersion'], function (t1) {}); // overcome that bug
+      });
+      api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
+        api.storage.sync.get(['lastShowChangelogVersion'], function (t1) {}); // overcome that bug
+      });
+      // don't steal tab focus #553
       api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
     }
-  });
+  }); // sync-get
 });
 
 async function sendVote(videoId, vote) {
