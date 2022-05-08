@@ -150,7 +150,7 @@ function getLikeCountFromButton() {
   if (isShorts()) {
     //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
     //It should be possible to fix this function, but it's not critical to showing the dislike count.
-    return 0;
+    return false;
   }
   let likesStr = getLikeButton()
     .querySelector("yt-formatted-string#text")
