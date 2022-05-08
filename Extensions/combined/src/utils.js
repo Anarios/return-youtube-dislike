@@ -148,7 +148,8 @@ function getColorFromTheme(voteIsLike) {
       break;
     case "nostalgic":
       colorString = (voteIsLike === -1) ?
-        "#0450dc" : isDarkTheme ?
+        isDarkTheme ? "#16a0ff" : "#0450dc" :
+        isDarkTheme ?
         voteIsLike ? "#909090" : "#606060" :
         voteIsLike ? "#909090" : "#cccccc";
       break;
