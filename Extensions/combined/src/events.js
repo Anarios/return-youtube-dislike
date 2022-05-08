@@ -46,8 +46,6 @@ function likeClicked() {
       const nativeLikes = getLikeCountFromButton();
       if (nativeLikes !== false) {
         setLikes(numberFormat(nativeLikes));
-      } else {
-        setLikes(numberFormat(storedData.likes));
       }
     }
   }
@@ -78,8 +76,6 @@ function dislikeClicked() {
         const nativeLikes = getLikeCountFromButton();
         if (nativeLikes !== false) {
           setLikes(numberFormat(nativeLikes));
-        } else {
-          setLikes(numberFormat(storedData.likes));
         }
       }
     }
