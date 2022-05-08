@@ -30,7 +30,7 @@ const extConfig = {
   disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
-  colorTheme: "watermelon", // [watermelon*, capetian, neon, hibiscus] Color theme (red/green, blue/yellow, pink/cyan, green/megenta. Light/dark themes aware. Capetian and hibiscus are colorblind friendly)
+  colorTheme: "watermelon", // [watermelon*, capetian, neon, hibiscus, nostalgic] Color theme (red/green, blue/yellow, pink/cyan, green/megenta, blue/grey. Light/dark themes aware. Capetian and hibiscus are colorblind friendly)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
   numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
@@ -97,35 +97,57 @@ function getDislikeButton() {
   return getButtons().children[1];
 }
 
+cLog('initializing mutation observer');
 let mutationObserver = new Object();
-
-if (isShorts() && mutationObserver.exists !== true) {
-  cLog('initializing mutation observer')
-  mutationObserver.options = {
-    childList: false,
-    attributes: true,
-    subtree: false
-  };
-  mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver( function(mutationList, observer) {
-    mutationList.forEach( (mutation) => {
-      if (mutation.type === 'attributes' && 
-        mutation.target.nodeName === 'TP-YT-PAPER-BUTTON' && 
-        mutation.target.id === 'button') {
-        cLog('Short thumb button status changed');
-        if (mutation.target.getAttribute('aria-pressed') === 'true') {
-          mutation.target.style.color =
-            (mutation.target.parentElement.parentElement.id === 'like-button') ? 
-            getColorFromTheme(true) : getColorFromTheme(false);
+mutationObserver.options = {
+  childList: false,
+  attributes: true,
+  subtree: false
+};
+mutationObserver.observer = new MutationObserver( function(mutationList, observer) {
+  mutationList.forEach( (mutation) => {
+    if (
+      isShorts() && 
+      mutation.type === "attributes" &&
+      mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
+      mutation.target.id === "button"
+    ) {
+      // cLog('Short thumb button status changed');
+      if (extConfig.colorTheme === 'nostalgic') {
+        if (mutation.target.getAttribute("aria-pressed") === "true") {
+          mutation.target.style.color = getColorFromTheme(-1);
         } else {
-          mutation.target.style.color = 'unset';
+          mutation.target.style.color = "unset";
         }
-        return;
+      } else {
+        if (mutation.target.getAttribute("aria-pressed") === "true") {
+          mutation.target.style.color =
+            mutation.target.parentElement.parentElement.id === "like-button"
+              ? getColorFromTheme(true)
+              : getColorFromTheme(false);
+        } else {
+          mutation.target.style.color = "unset";
+        }
       }
-      cLog('unexpected mutation observer event: ' + mutation.target + mutation.type);
-    });
+      return;
+    }
+    if (
+      !isShorts() && 
+      extConfig.colorTheme === 'nostalgic' && 
+      mutation.type === "attributes" &&
+      mutation.target.nodeName === "YTD-TOGGLE-BUTTON-RENDERER"
+    ) {
+      let buttonDOM = mutation.target.querySelector('button#button');
+      if (buttonDOM) {
+        mutation.target.style.color = (buttonDOM.getAttribute("aria-pressed") === "true") ? getColorFromTheme(-1) : getColorFromTheme(true); 
+      }
+      return;
+    }
+    cLog(
+      "unexpected mutation observer event: " + mutation.target.nodeName + mutation.type
+    );
   });
-}
+});
 
 function isVideoLiked() {
   if (isMobile) {
@@ -266,7 +288,9 @@ function createRateBar(likes, dislikes) {
     let colorLikeStyle = "";
     let colorDislikeStyle = "";
     if (extConfig.coloredBar) {
-      colorLikeStyle = "; background-color: " + getColorFromTheme(true);
+      colorLikeStyle = (extConfig.colorTheme === 'nostalgic' && (isVideoDisliked() || isVideoLiked()) ) ?
+          "; background-color: " + getColorFromTheme(-1) :
+          "; background-color: " + getColorFromTheme(true);
       colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
     }
     
@@ -305,7 +329,9 @@ function createRateBar(likes, dislikes) {
     if (extConfig.coloredBar) {
       document.getElementById("return-youtube-dislike-bar-container").style.backgroundColor =
         getColorFromTheme(false);
-      document.getElementById("return-youtube-dislike-bar").style.backgroundColor =
+      document.getElementById("return-youtube-dislike-bar").style.backgroundColor = 
+        (extConfig.colorTheme === 'nostalgic' && (isVideoDisliked() || isVideoLiked())) ?
+        getColorFromTheme(-1) :
         getColorFromTheme(true);
     }
   }
@@ -336,17 +362,39 @@ function setState() {
           if (isShorts()) { // for shorts, leave deactived buttons in default color
             let shortLikeButton = getLikeButton().querySelector('tp-yt-paper-button#button');
             let shortDislikeButton = getDislikeButton().querySelector('tp-yt-paper-button#button');
-            if (shortLikeButton.getAttribute('aria-pressed') === 'true') {
-              shortLikeButton.style.color = getColorFromTheme(true);
-            }
-            if (shortDislikeButton.getAttribute('aria-pressed') === 'true') {
-              shortDislikeButton.style.color = getColorFromTheme(false);
+            if (extConfig.colorTheme === 'nostalgic') {
+              if (shortLikeButton.getAttribute("aria-pressed") === "true") {
+                shortLikeButton.style.color = getColorFromTheme(-1);
+              }
+              if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
+                shortDislikeButton.style.color = getColorFromTheme(-1);
+              }
+            } else {
+              if (shortLikeButton.getAttribute("aria-pressed") === "true") {
+                shortLikeButton.style.color = getColorFromTheme(true);
+              }
+              if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
+                shortDislikeButton.style.color = getColorFromTheme(false);
+              }
             }
             mutationObserver.observer.observe(shortLikeButton, mutationObserver.options);
             mutationObserver.observer.observe(shortDislikeButton, mutationObserver.options);
           } else {
-            getLikeButton().style.color = getColorFromTheme(true);
-            getDislikeButton().style.color = getColorFromTheme(false);
+            if (extConfig.colorTheme === 'nostalgic') {
+              getLikeButton().style.color = getColorFromTheme(isVideoLiked() ? -1 : true);
+              getDislikeButton().style.color = getColorFromTheme(isVideoDisliked() ? -1 : true);
+              mutationObserver.observer.observe(
+                getLikeButton(),
+                mutationObserver.options
+              );
+              mutationObserver.observer.observe(
+                getDislikeButton(),
+                mutationObserver.options
+              );
+            } else {
+              getLikeButton().style.color = getColorFromTheme(true);
+              getDislikeButton().style.color = getColorFromTheme(false);
+            }
           }
         }
       }
@@ -503,6 +551,12 @@ function getColorFromTheme(voteIsLike) {
       colorString = isDarkTheme ?
         voteIsLike ? "lime" : "magenta" :
         voteIsLike ? "green" : "magenta";
+      break;
+    case "nostalgic":
+      colorString = (voteIsLike === -1) ?
+        "#0450dc" : isDarkTheme ?
+        voteIsLike ? "#909090" : "#606060" :
+        voteIsLike ? "#909090" : "#cccccc";
       break;
     case "watermelon":
     default:

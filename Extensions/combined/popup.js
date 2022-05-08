@@ -376,6 +376,11 @@ function getColorFromTheme(colorTheme, voteIsLike, isDarkTheme) {
         voteIsLike ? "lime" : "magenta" :
         voteIsLike ? "green" : "magenta";
       break;
+    case "nostalgic":
+      colorString = isDarkTheme ?
+        voteIsLike ? "#909090" : "#606060" :
+        voteIsLike ? "#909090" : "#cccccc";
+      break;
     case "classic":
     default:
       colorString = isDarkTheme ?
