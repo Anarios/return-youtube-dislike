@@ -434,32 +434,38 @@ function roundDown(num) {
 }
 
 function numberFormat(numberState) {
-  let userLocales;
-  try {
-    userLocales = new URL(
-      Array.from(document.querySelectorAll("head > link[rel='search']"))
-        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-        ?.getAttribute("href")
-    )?.searchParams?.get("locale");
-  } catch {
-    userLocales = document.documentElement.lang;
-  }
-
   let numberDisplay;
   if (extConfig.numberDisplayRoundDown === false) {
     numberDisplay = numberState;
   } else {
     numberDisplay = roundDown(numberState);
   }
-  return getNumberFormatter(extConfig.numberDisplayFormat, userLocales).format(
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(
     numberDisplay
   );
 }
 
-function getNumberFormatter(optionSelect, userLocales) {
+function getNumberFormatter(optionSelect) {
+  let userLocales;
+  if (document.documentElement.lang) {
+    userLocales = document.documentElement.lang;
+  } else if (navigator.language) {
+    userLocales = navigator.language;
+  } else {
+    try {
+      userLocales = new URL(
+        Array.from(document.querySelectorAll("head > link[rel='search']"))
+          ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+          ?.getAttribute("href")
+      )?.searchParams?.get("locale");
+    } catch {
+      cLog('Cannot find browser locale. Use en as default for number formatting.');
+      userLocales = 'en';
+    }
+  }
+
   let formatterNotation;
   let formatterCompactDisplay;
-
   switch (optionSelect) {
     case "compactLong":
       formatterNotation = "compact";
@@ -476,7 +482,7 @@ function getNumberFormatter(optionSelect, userLocales) {
   }
 
   const formatter = Intl.NumberFormat(
-    document.documentElement.lang || userLocales || navigator.language,
+    userLocales,
     {
       notation: formatterNotation,
       compactDisplay: formatterCompactDisplay,
