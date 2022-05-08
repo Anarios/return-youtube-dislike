@@ -68,7 +68,7 @@ button:hover {
   border-radius: 0.25rem;
 }
 
-.switch:before {
+.switch:before, .label-with-hover-tip:before {
   content: attr(data-hover);
   visibility: hidden;
   opacity: 0;
@@ -84,7 +84,7 @@ button:hover {
   top: 160%;
 }
 
-.switch:hover:before {
+.switch:hover:before, .label-with-hover-tip:hover:before {
   visibility: visible;
   opacity: 1;
 }
@@ -184,6 +184,14 @@ button:hover {
   position: relative;
   display: inline-block;
   width: 30px;
+  height: 17px;
+  margin-bottom: 1rem;
+}
+
+.label-with-hover-tip {
+  position: relative;
+  display: inline-block;
+  width: 80px;
   height: 17px;
   margin-bottom: 1rem;
 }
