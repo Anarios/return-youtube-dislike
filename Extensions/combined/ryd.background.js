@@ -78,7 +78,7 @@ api.runtime.onInstalled.addListener((details) => {
   // PLEASE DO NOT REMOVE Multiple user complained their UPDATED extension v3.0.0.1 keeps showing popups after browser updates, and this is causing a ton of confusions. 
   // Let's not create such a drama over this little feature. #576 #589 #553 (updated) #569 #572 #556 #544 #537 #535 #534
   // No need for further logic if it's the browser getting the update
-  if (details.reason === "browser_update" || details.reason === "chrome_update") {
+  if (details.reason === "chrome_update" || details.reason === "browser_update") {
     return;
   }
   // The redundant logic below is to work around Chrome bug https://github.com/Anarios/return-youtube-dislike/issues/576#issuecomment-1116838544
