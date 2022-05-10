@@ -10,45 +10,45 @@
 
 # Return YouTube Dislike
 
-Read this in other languajes: [Español](READMEes.md)
+Leer en otros idiomas: [Inglés](README.md)
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
-    Available for Chrome and Firefox as a Web Extension.<br>
-    Also available for other browsers as JS Userscript.<br><br>
+    <b>Return YouTube Dislike es una extensión de código abierto que regresa el contador de dislikes.</b><br>
+    Disponible para Chrome y Firefox cómo una extensión web.<br>
+    También disponible para otros navegadores cómo un Userscript de JS.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## The Story
+## La historia
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.  
-  
-Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+El 10 de Noviembre de 2021, Google [anunció](https://blog.youtube/news-and-events/update-to-youtube/) que el contador de dislikes de YouTube sería eliminado.  
 
-## What it Does
+Adicionalmente, el campo de 'dislike' en la API de YouTube fue [eliminado](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) el 13 de Diciembre de 2021, acabando con la habilidad de juzgar la calidad del contenido antes de verlo.
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+## Que hace
+
+Con la retirada de las estadísticas de dislikes de la API de YouTube, nuestro *backend* pasó a usar una combinación de las estadísticas de dislikes archivadas y datos extrapolados de los usuarios de la extensión.
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
-## Why it Matters
+## Por qué importa
 
-You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+Puedes aprender más en nuestro sitio web en: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-## API documentation
+## Documentación de la API
 
-Third-party use of this open API is allowed with the following restrictions:
+El uso de terceros de esta API abierta se permite bajo las siguientes restricciones:
 
-- **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a *429* status code indicating that your application should back off.
+- **Atribución**: Este proyecto debe estar claramente atribuido con un link a [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **Límites de velocidad**: Hay límites de velocidad por cliente de 100 por minuto y 10.000 por día. Excederlos retornará un código de estado *409* indicando que tu aplicación debe bajar la velocidad.
 
-The API is accessible over the following base URL:  
+La API es accesible sobre la siguiente URL base:  
 https://returnyoutubedislikeapi.com  
 
-List of available endpoints is available here:  
+La lista de los *endpoints* disponibles se puede consultar aquí:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
-Example to get votes of a given YouTube video ID:  
+### Obtener votos
+Ejemplo para obtener los votos del ID de un vídeo de YouTube proporcionado:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -64,8 +64,8 @@ Example to get votes of a given YouTube video ID:
 ```
 
 
-None existing YouTube ID will return status code *404* "Not Found".  
-Wrong formed YouTube ID will return *400* "Bad Request".
+Un ID de YouTube no existente retornará el codigo de estado *404* "Not Found" (no encontrado).
+Un ID de YouTube mal estructurado retornará *400* "Bad Request" (solicitud incorrecta).
 
 
 
@@ -76,22 +76,21 @@ You can view all documentation on our website.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
 
-## Contributing
+## Contribuciones
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Por favor, lee la [guía de contribución](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
 
-## Support this project!
+## ¡Apoya este proyecto!
 
-You can support this project by donating to us on the link below:
+Puedes apoyar este proyecto donándonos en el enlace inferior:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[Donar](https://returnyoutubedislike.com/donate)
 
-## Sponsors
+## Patrocinadores
 [Piepacker](https://piepacker.com)
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
 
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
-[Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
-
+[Hazte nuestro patrocionador](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
