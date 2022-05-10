@@ -1,30 +1,20 @@
 <template>
-  <div style="line-height: 3rem">
-    <h1 class="primary--text">Usage Rights</h1>
-    <p>
-      Third party use of this open API is allowed with the following
-      restrictions:
-    </p>
+  <div style="line-height: 2rem">
+    <h2 class="primary--text">
+      {{ $vuetify.lang.t("$vuetify.api.rights.title") }}
+    </h2>
+    <div class="my-4">
+      {{ $vuetify.lang.t("$vuetify.api.rights.subtitle") }}
+    </div>
     <ul>
-      <li>
-        <b>Attribution:</b> This project should be clearly attributed with
-        either a link to this repo or a link to returnyoutubedislike.com.
+      <li class="my-4">
+        <b>{{ $vuetify.lang.t("$vuetify.api.rights.bullet1") }}</b>
+        {{ $vuetify.lang.t("$vuetify.api.rights.bullet1text") }}
       </li>
-      <li>
-        <b>Rate Limiting:</b> There are per client rate limits in place of 100
-        per minute and 10'000 per day. This will return a 429 status code
-        indicating that your application should back off.
+      <li class="my-4">
+        <b>{{ $vuetify.lang.t("$vuetify.api.rights.bullet2") }}</b>
+        {{ $vuetify.lang.t("$vuetify.api.rights.bullet2text") }}
       </li>
     </ul>
   </div>
 </template>
-
-<style scoped>
-li {
-  margin-top: 0.5em;
-}
-
-b {
-  font-weight: 900 !important;
-}
-</style>

@@ -1,39 +1,47 @@
 <template>
-  <div style="line-height: 3rem">
-    <h1 class="primary--text">Basic Fetching Tutorial</h1>
+  <div style="line-height: 2rem">
+    <h2 class="primary--text">
+      {{ $vuetify.lang.t("$vuetify.api.fetching.title") }}
+    </h2>
 
-    <span>Example to get votes of a given YouTube video ID:</span>
-    <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank"
-      >kxOuG8jMIgI</a
-    >
+    <div class="ma-2">
+      {{ $vuetify.lang.t("$vuetify.api.fetching.subtitle") }}
 
-    <h2>Example Request:</h2>
-    <span>Request URL:</span>
-    <a
-      :href="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
-      target="_blank"
-      v-text="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
-    />
-    <br />
-    <span>
-      Request Method:
+      <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank">
+        kxOuG8jMIgI
+      </a>
+    </div>
+
+    <h3 class="mt-6">{{ $vuetify.lang.t("$vuetify.api.fetching.title2") }}</h3>
+    <div class="ma-2">
+      {{ $vuetify.lang.t("$vuetify.api.fetching.url") }}
+      <a
+        :href="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
+        target="_blank"
+        v-text="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
+      />
+      <br />
+      {{ $vuetify.lang.t("$vuetify.api.fetching.method") }}
       <a
         href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET"
         target="_blank"
-        >HTTP/GET</a
       >
-    </span>
-    <br />
-    <span>Headers:</span>
-    <br />
-    <div class="code pa-4">
+        HTTP/GET
+      </a>
+    </div>
+    <div class="mt-4 ml-2">
+      {{ $vuetify.lang.t("$vuetify.api.fetching.headers") }}
+    </div>
+    <div class="code px-4 py-2">
       Accept: text/html,application/xhtml+xml,application/xml;q=0.9<br />
       Pragma: no-cache<br />
       Cache-Control: no-cache<br />
       Connection: keep-alive
     </div>
-    <span>Response:</span><br />
-    <div class="code pa-4">
+    <div class="mt-4 ml-2">
+      {{ $vuetify.lang.t("$vuetify.api.fetching.response") }}
+    </div>
+    <div class="code px-4 py-2">
       {
       <br />
       &nbsp;"id": "kxOuG8jMIgI",<br />
@@ -46,16 +54,11 @@
       }
     </div>
     <br />
-    <v-alert border="left" color="orange" text type="info">
-      <span>An invalid YouTube ID will return status code 404 "Not Found".</span
-      ><br />
-      <span
-        >An incorrectly formatted YouTube ID will return 400 "Bad
-        Request".</span
-      >
+    <v-alert border="left" color="orange" text type="info" class="mb-0">
+      <span>{{ $vuetify.lang.t("$vuetify.api.fetching.error1") }}</span>
+      <br />
+      <span>{{ $vuetify.lang.t("$vuetify.api.fetching.error2") }}</span>
     </v-alert>
-
-    <a :href="endpointUrl" target="_blank" v-text="endpointUrl" />
   </div>
 </template>
 
