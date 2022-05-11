@@ -30,7 +30,7 @@
     "message": "Disable like/dislike submission"
   },
   "textLikesDisabled": {
-    "message": "disabled by owner"
+    "message": "Disabled by Owner"
   },
   "textSettingsHover": {
     "message": "Stops counting your likes and dislikes."
