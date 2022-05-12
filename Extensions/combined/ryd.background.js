@@ -116,6 +116,9 @@ api.runtime.onInstalled.addListener((details) => {
         tmp_ReallyShowPopup = true;
       }
     } // if-sync
+    if (details.reason === "install") {
+      tmp_ReallyShowPopup = true;
+    }
     if (tmp_ReallyShowPopup === true) {
       api.storage.local.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
         api.storage.local.get(['lastShowChangelogVersion'], function (t1) {}); // overcome that bug
