@@ -10,7 +10,7 @@
 
 # Return YouTube Dislike
 
-Read this in other languajes: [Español](READMEes.md)
+Read this in other languages: [Español](READMEes.md), [русский](READMEru.md)
 <p align="center">
     <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
     Available for Chrome and Firefox as a Web Extension.<br>
