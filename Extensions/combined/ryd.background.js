@@ -85,19 +85,28 @@ api.runtime.onInstalled.addListener((details) => {
   // this bug is likely only affecting this single option, since all others are read frequently throughout normal use
   // Also, keep all set inside get callback to avoid race condition, and vice versa
   let tmp_ReallyShowPopup = false;
+  if (details.reason === "install") {
+    tmp_ReallyShowPopup = true;
+  }
   api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], (config_sync) => {
     if (config_sync.showUpdatePopup === undefined || config_sync.lastShowChangelogVersion === undefined) { // bug case -- try again with local storage before hard reset
       api.storage.local.get(['lastShowChangelogVersion','showUpdatePopup'], (config_local) => {
         if (config_local.showUpdatePopup === undefined || config_local.lastShowChangelogVersion === undefined) { // this can either be a bug case or uninitialized local storage
           api.storage.local.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version, 'showUpdatePopup': false}, function() {
-            api.storage.local.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {}); // overcome that bug
+            api.storage.local.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {
+              console.log('changelog popup settings: local set: ' + t1.showUpdatePopup + ' , ' + t1.lastShowChangelogVersion);
+            }); // overcome that bug -- console logs may be necessary to enforce storage write
           });
           api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version, 'showUpdatePopup': false}, function() {
-            api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {}); // overcome that bug
+            api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {
+              console.log('changelog popup settings: sync set: ' + t1.showUpdatePopup + ' , ' + t1.lastShowChangelogVersion);
+            }); // overcome that bug
           });
         } else { // local storage has valid values
           api.storage.sync.set({'lastShowChangelogVersion': config_local.lastShowChangelogVersion, 'showUpdatePopup': config_local.showUpdatePopup}, function() {
-            api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {}); // overcome that bug
+            api.storage.sync.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {
+              console.log('changelog popup settings: local ok, sync set: ' + t1.showUpdatePopup + ' , ' + t1.lastShowChangelogVersion);
+            }); // overcome that bug
           });
         if (config_local.showUpdatePopup === true && 
           config_local.lastShowChangelogVersion !== chrome.runtime.getManifest().version
@@ -108,7 +117,9 @@ api.runtime.onInstalled.addListener((details) => {
       }); // local-get
     } else { // sync storage has valid values
       api.storage.local.set({'lastShowChangelogVersion': config_sync.lastShowChangelogVersion, 'showUpdatePopup': config_sync.showUpdatePopup}, function() {
-        api.storage.local.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {}); // overcome that bug
+        api.storage.local.get(['lastShowChangelogVersion','showUpdatePopup'], function (t1) {
+              console.log('changelog popup settings: sync ok, local set: ' + t1.showUpdatePopup + ' , ' + t1.lastShowChangelogVersion);
+            }); // overcome that bug
       });
       if (config_sync.showUpdatePopup === true && 
         config_sync.lastShowChangelogVersion !== chrome.runtime.getManifest().version
@@ -116,15 +127,16 @@ api.runtime.onInstalled.addListener((details) => {
         tmp_ReallyShowPopup = true;
       }
     } // if-sync
-    if (details.reason === "install") {
-      tmp_ReallyShowPopup = true;
-    }
     if (tmp_ReallyShowPopup === true) {
       api.storage.local.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
-        api.storage.local.get(['lastShowChangelogVersion'], function (t1) {}); // overcome that bug
+        api.storage.local.get(['lastShowChangelogVersion'], function (t1) {
+          console.log('changelog popup settings: local set: ' + t1.lastShowChangelogVersion);
+        }); // overcome that bug
       });
       api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
-        api.storage.sync.get(['lastShowChangelogVersion'], function (t1) {}); // overcome that bug
+        api.storage.sync.get(['lastShowChangelogVersion'], function (t1) {
+          console.log('changelog popup settings: sync set: ' + t1.lastShowChangelogVersion);
+        }); // overcome that bug
       });
       // don't steal tab focus #553
       api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
