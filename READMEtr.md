@@ -26,7 +26,7 @@ Ek olarak, YouTube API'sindeki "dislike" alanı 13 Aralık 2021 tarihinde [kald�
 
 ## Ne İşe Yarar
 
-YouTube API'sinden dislike istatistiklerinin kaldırılmasıyla, beckend'imiz, uzantı kullanıcı verilerinden tahmin edilen, toplanmış dislike istatistiklerinin bir birleşimini kullanmaya başladı.
+YouTube API'sinden dislike istatistiklerinin kaldırılmasıyla, backend'imiz, uzantı kullanıcı verilerinden tahmin edilen, toplanmış dislike istatistiklerinin bir birleşimini kullanmaya başladı.
 
 [SSS](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
@@ -36,13 +36,13 @@ Sitemizden daha fazla bilgi edinebilirsiniz: [returnyoutubedislike.com](https://
 
 ## API Belgelemesi
 
-Bu açık API'nin üçüncü taraflarca kullanımına aşağıdaki kısıtlamalarla izin verilir:
+Bu açık API'nin üçüncü taraflarca kullanımına, aşağıdaki kısıtlamalarla izin verilir:
 
-- **Atfetme**: Bu proje, açıkça [returnyoutubedislike.com](https://returnyoutubedislike.com/) adresine yönlendirilmelidir.
+- **Atfetme**: Bu proje, açık bir biçimde [returnyoutubedislike.com](https://returnyoutubedislike.com/) adresine yönlendirilmelidir.
 - **Hız Sınırlaması**: Kullanıcı başına dakikada 100 ve günde 10.000 hız sınırlaması vardır. Bu, uygulamanızın geri çekilmesi gerektiğini belirten 429 durum kodunu döndürür
 
 API'ye aşağıdaki temel URL üzerinden erişilebilir:
-https://returnyoutubedislikeapi.com  
+https://returnyoutubedislikeapi.com
 
 Kullanılabilir endpoint'lerin listesi burada mevcuttur:
 https://returnyoutubedislikeapi.com/swagger/index.html
@@ -78,13 +78,13 @@ Tüm belgelemeleri sitemizden inceleyebilirsiniz.
 
 ## Katkıda Bulunma
 
-Lütfen [katkı kılavuzunu](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md) okuyun.
+Lütfen [katkı kılavuzu](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)nu okuyun.
 
 ## Bu Projeyi Destekle!
 
-Aşağıdaki linkten bize bağış yaparak bu projeye destek olabilirsiniz:
+Aşağıdaki bağlantıdan bize bağış yapabilir ve bu projeye destek olabilirsiniz:
 
-[Bağış Yap](https://returnyoutubedislike.com/donate)
+[Bağış Yapın](https://returnyoutubedislike.com/donate)
 
 ## Sponsorlar
 [Piepacker](https://piepacker.com)
@@ -93,5 +93,4 @@ Aşağıdaki linkten bize bağış yaparak bu projeye destek olabilirsiniz:
 
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
-[Sponsorumuz ol](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
-
+[Sponsorumuz olun](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
