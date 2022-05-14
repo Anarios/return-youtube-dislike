@@ -108,11 +108,11 @@ api.runtime.onInstalled.addListener((details) => {
               console.log('changelog popup settings: local ok, sync set: ' + t1.showUpdatePopup + ' , ' + t1.lastShowChangelogVersion);
             }); // overcome that bug
           });
-        if (config_local.showUpdatePopup === true && 
-          config_local.lastShowChangelogVersion !== chrome.runtime.getManifest().version
-          ) {
-          tmp_ReallyShowPopup = true;
-        }
+          if (config_local.showUpdatePopup === true && 
+            config_local.lastShowChangelogVersion !== chrome.runtime.getManifest().version
+            ) {
+            tmp_ReallyShowPopup = true;
+          }
         } // if-local
       }); // local-get
     } else { // sync storage has valid values
