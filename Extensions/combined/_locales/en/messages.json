@@ -58,5 +58,35 @@
   },
   "considerDonating": {
     "message": "The only thing that keeps the extension running is your donations, please consider supporting the project."
+  },
+  "roundNumbers": {
+    "message": "Show rounded down numbers"
+  },
+  "roundNumbersHover": {
+    "message": "Round down numbers (default YouTube behavior)."
+  },
+  "reformatLikes": {
+    "message": "Re-format like numbers"
+  },
+  "reformatLikesHover": {
+    "message": "Make likes and dislikes format consistent."
+  },
+  "numberFormat": {
+    "message": "Number format:"
+  },
+  "colorizeRatio": {
+    "message": "Colorize ratio bar"
+  },
+  "colorizeRatioHover": {
+    "message": "Use custom colors for the ratio bar."
+  },
+  "colorizeThumbs": {
+    "message": "Colorize thumbs"
+  },
+  "colorizeThumbsHover": {
+    "message": "Use custom colors for the thumb icons."
+  },
+  "colorTheme": {
+    "message": "Color theme:"
   }
 }
