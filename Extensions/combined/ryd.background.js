@@ -114,6 +114,9 @@ api.runtime.onInstalled.addListener((details) => {
             tmp_ReallyShowPopup = true;
           }
         } // if-local
+        if (tmp_ReallyShowPopup === true) {
+          showChangelogPopup();
+        }
       }); // local-get
     } else { // sync storage has valid values
       api.storage.local.set({'lastShowChangelogVersion': config_sync.lastShowChangelogVersion, 'showUpdatePopup': config_sync.showUpdatePopup}, function() {
@@ -126,23 +129,27 @@ api.runtime.onInstalled.addListener((details) => {
         ) {
         tmp_ReallyShowPopup = true;
       }
+      if (tmp_ReallyShowPopup === true) {
+        showChangelogPopup();
+      }
     } // if-sync
-    if (tmp_ReallyShowPopup === true) {
-      api.storage.local.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
-        api.storage.local.get(['lastShowChangelogVersion'], function (t1) {
-          console.log('changelog popup settings: local set: ' + t1.lastShowChangelogVersion);
-        }); // overcome that bug
-      });
-      api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
-        api.storage.sync.get(['lastShowChangelogVersion'], function (t1) {
-          console.log('changelog popup settings: sync set: ' + t1.lastShowChangelogVersion);
-        }); // overcome that bug
-      });
-      // don't steal tab focus #553
-      api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
-    }
   }); // sync-get
 });
+
+function showChangelogPopup() {
+  api.storage.local.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
+    api.storage.local.get(['lastShowChangelogVersion'], function (t1) {
+      console.log('changelog popup settings: local set: ' + t1.lastShowChangelogVersion);
+    }); // overcome that bug
+  });
+  api.storage.sync.set({'lastShowChangelogVersion': chrome.runtime.getManifest().version}, function() {
+    api.storage.sync.get(['lastShowChangelogVersion'], function (t1) {
+      console.log('changelog popup settings: sync set: ' + t1.lastShowChangelogVersion);
+    }); // overcome that bug
+  });
+  // don't steal tab focus #553
+  api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
+}
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {
