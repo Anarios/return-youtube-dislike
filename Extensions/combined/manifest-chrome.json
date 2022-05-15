@@ -2,7 +2,7 @@
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDesc__",
   "default_locale": "en",
-  "version": "3.0.0.0",
+  "version": "3.0.0.1",
   "manifest_version": 3,
   "background": {
     "service_worker": "ryd.background.js"
@@ -12,7 +12,9 @@
     "128": "icons/icon128.png"
   },
   "host_permissions": ["*://*.youtube.com/*"],
-  "permissions": ["storage"],
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_popup": "popup.html"
   },
