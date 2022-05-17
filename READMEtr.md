@@ -9,7 +9,7 @@
 
 # YouTube Dislike Sayısını Geri Getir
 
-Bunu diğer dillerde okuyun: [İngilizce](README.md), [İspanyolca](READMEes.md), [Rusça](READMEru.md)
+Bunu diğer dillerde okuyun: [English](README.md), [Español](READMEes.md), [русский](READMEru.md)
 
 <p align="center">
     <b>YouTube Dislike Sayısını Geri Getir, YouTube'daki dislike sayısını gösteren açık-kaynaklı bir uzantıdır.</b><br>
