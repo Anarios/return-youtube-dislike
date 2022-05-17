@@ -516,7 +516,7 @@ function getColorFromTheme(voteIsLike) {
 function setEventListeners(evt) {
   let jsInitChecktimer;
 
-  function checkForJS_Finish(check) {
+  function checkForJS_Finish() {
     console.log();
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
