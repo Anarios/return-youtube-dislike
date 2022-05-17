@@ -9,7 +9,7 @@
 
 # Return YouTube Dislike
 
-Leer en otros idiomas: [English](README.md), [русский](READMEru.md),  [Türkçe](READMEtr.md)
+Leer en otros idiomas: [English](README.md), [русский](READMEru.md), [Türkçe](READMEtr.md)
 
 <p align="center">
     <b>Return YouTube Dislike es una extensión de código abierto que regresa el contador de dislikes.</b><br>
