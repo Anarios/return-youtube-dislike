@@ -63,7 +63,7 @@
     "message": "Afficher les nombres arrondis"
   },
   "roundNumbersHover": {
-    "message": "Arrondissez les chiffres (comportement par défaut de YouTube)."
+    "message": "Arrondir les nombres à la baisse (comportement par défaut de YouTube)."
   },
   "reformatLikes": {
     "message": "Formater le nombre de likes"
@@ -81,10 +81,10 @@
     "message": "Utilisez des couleurs personnalisées pour la barre de ratio."
   },
   "colorizeThumbs": {
-    "message": "Colorie les boutons"
+    "message": "Mettre en couleur les boutons like et dislike"
   },
   "colorizeThumbsHover": {
-    "message": "Colorez les boutons like et dislike pas avec des couleurs personnalisées."
+    "message": "Utiliser des couleurs personnalisées pour les boutons like et dislike."
   },
   "colorTheme": {
     "message": "Schéma de couleur:"
