@@ -71,7 +71,7 @@ export default {
     faq: {
         name: 'FAQ',
         title: 'Foire Aux Questions',
-        subtitle: 'Vous avez encore des questions ? N\'hésitez pas à rejoindre notre Discord !',
+        subtitle: 'Vous avez encore des questions ? N\'hésitez pas à rejoindre notre Discord (en anglais) !',
         bullet1: 'Où l\'extension obtient-elle ses données ?',
         bullet1text: 'Une combinaison de données archivées datant d\'avant la fermeture de l\'API officielle de YouTube pour les dislikes, et d\'extrapolation du comportement des utilisateurs.',
         bullet2: 'Pourquoi le nombre de dislike n\'est-il pas mis à jour ?',
