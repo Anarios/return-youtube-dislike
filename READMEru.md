@@ -7,10 +7,9 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
+Прочитать на других языках: [English](README.md), [Español](READMEes.md), [Türkçe](READMEtr.md)
 
 # Return YouTube Dislike
-
-Прочитать на других языках: [English](README.md), [Español](READMEes.md), [Türkçe](READMEtr.md)
 
 <p align="center">
     <b>Return YouTube Dislike - это расширение с открытым исходным кодом, которое возвращает счётчик отметок «Не нравится» на YouTube.</b><br>
