@@ -7,12 +7,9 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Leer en otros idiomas: 
+Leer en otros idiomas: [русский](READMEru.md), [English](README.md), [Türkçe](READMEtr.md)
 
 # Return YouTube Dislike
-
-
-Leer en otros idiomas: [English](README.md), [русский](READMEru.md),  [Türkçe](READMEtr.md)
 
 <p align="center">
     <b>Return YouTube Dislike es una extensión de código abierto que regresa el contador de dislikes.</b><br>
