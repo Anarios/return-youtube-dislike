@@ -28,7 +28,7 @@ function createRateBar(likes, dislikes) {
       ).insertAdjacentHTML(
         "beforeend",
         `
-            <div class="ryd-tooltip" style="width: ${widthPx}px${isNewDesign() ? "; margin-top: -10px; margin-bottom: 15px" : ""}">
+            <div class="ryd-tooltip" style="width: ${widthPx}px${isNewDesign() ? "; margin-bottom: -2px" : ""}">
             <div class="ryd-tooltip-bar-container">
                <div
                   id="ryd-bar-container"
@@ -46,6 +46,13 @@ function createRateBar(likes, dislikes) {
             </div>
     `
       );
+
+      // Add border between info and comments
+      if (isNewDesign()) {
+        let descriptionAndActionsElement = document.getElementById("description-and-actions");
+        descriptionAndActionsElement.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer)";
+        descriptionAndActionsElement.style.paddingBottom = "10px";
+      }
     } else {
       document.getElementById("ryd-bar-container").style.width = widthPx + "px";
       document.getElementById("ryd-bar").style.width = widthPercent + "%";
