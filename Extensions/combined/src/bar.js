@@ -1,5 +1,5 @@
 import { getButtons } from "./buttons";
-import { extConfig, isMobile, isLikesDisabled } from "./state";
+import { extConfig, isMobile, isLikesDisabled, isNewDesign } from "./state";
 import { cLog, getColorFromTheme } from "./utils";
 
 function createRateBar(likes, dislikes) {
@@ -23,12 +23,12 @@ function createRateBar(likes, dislikes) {
       }
 
       (
-        document.getElementById("menu-container") ||
+        document.getElementById(isNewDesign() ? "actions-inner" : "menu-container") ||
         document.querySelector("ytm-slim-video-action-bar-renderer")
       ).insertAdjacentHTML(
         "beforeend",
         `
-            <div class="ryd-tooltip" style="width: ${widthPx}px">
+            <div class="ryd-tooltip" style="width: ${widthPx}px${isNewDesign() ? "; margin-top: -10px; margin-bottom: 15px" : ""}">
             <div class="ryd-tooltip-bar-container">
                <div
                   id="ryd-bar-container"
@@ -62,7 +62,7 @@ function createRateBar(likes, dislikes) {
   } else {
     cLog("removing bar");
     let ratebar = document.getElementById("ryd-bar-container");
-    if(ratebar) {
+    if (ratebar) {
       ratebar.parentNode.removeChild(ratebar);
     }
   }
