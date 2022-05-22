@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [русский](READMEru.md), [English](README.md), [Türkçe](READMEtr.md)
+Read this in other languages: [Español](READMEes.md), [русский](READMEru.md), [Türkçe](READMEtr.md)
 
 # Return YouTube Dislike
 
