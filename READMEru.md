@@ -22,13 +22,13 @@
 
 10 ноября 2021 года Google [объявили](https://blog.youtube/news-and-events/update-to-youtube/), что счётчик «Не нравится» на YouTube будет удален.  
   
-Кроме того, поле отметок `«Не нравится»` в API YouTube было [удалено]](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 декабря 2021 года, удалив любую возможность судить о качестве контента перед просмотром.
+Кроме того, поле отметок `dislike` в API YouTube было [удалено]](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 декабря 2021 года, удалив любую возможность судить о качестве контента перед просмотром.
 
 ## Как оно работает
 
 С удалением статистики отметок из API YouTube наш сервер переключился на использование комбинации собранной статистики отметок «Не нравится», оценок, экстраполированных из пользовательских данных расширения.
 
-[ЧаВО (англ.)](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[ЧаВО](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQru.md)
 
 ## Почему это важно
 
@@ -38,7 +38,7 @@
 
 Стороннее использование этого открытого API разрешено со следующими ограничениями:
 
-- **Атрибуция**: Этот проект должен быть четко атрибутирован со ссылкой на [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **Атрибуция**: Этот проект должен быть чётко атрибутирован со ссылкой на [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Ограничение**: Существуют ограничения скорости для каждого клиента вместо 100 в минуту и 10 000 в день. Это выдаст код ошибки *429*, указывающий на то, что ваше приложение должно быть отключено.
 
 API доступен по следующему основному URL-адресу:  
@@ -78,7 +78,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 ## Участие/помощь в разработке
 
-Пожалуйста, ознакомьтесь с [руководством по внесению вклада в проект (англ.)](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Пожалуйста, ознакомьтесь с [руководством по внесению вклада в проект](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGru.md).
 
 ## Поддержите этот проект!
 
