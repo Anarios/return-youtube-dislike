@@ -3,7 +3,7 @@ Lisez ceci dans d'autres langues : [English](readme.md)
 **Contenu**
 
 - [Guides](#guides)
-- [FAQs](#faqs)
+- [FAQ](#faq)
 <!-- - [Autres listes](#autres-listes) -->
 
 <br>
