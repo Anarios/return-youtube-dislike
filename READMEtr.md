@@ -5,7 +5,7 @@
 [![Commit sayısı](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
 [![Issue'ler](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=flat&label=Issues)](https://github.com/Anarios/return-youtube-dislike/issues)
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
-[![Lisans](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
+[![Lisans](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](LICENSE)
 
 Bunu diğer dillerde okuyun: [English](README.md), [Español](READMEes.md), [русский](READMEru.md)
 
@@ -28,7 +28,7 @@ Ek olarak, YouTube API'sindeki "dislike" alanı 13 Aralık 2021 tarihinde [kald�
 
 YouTube API'sinden dislike istatistiklerinin kaldırılmasıyla, backend'imiz, uzantı kullanıcı verilerinden tahmin edilen, toplanmış dislike istatistiklerinin bir birleşimini kullanmaya başladı.
 
-[SSS](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[SSS](Docs/FAQ.md)
 
 ## Neden Önemlidir
 
@@ -78,7 +78,7 @@ Tüm belgelemeleri sitemizden inceleyebilirsiniz.
 
 ## Katkıda Bulunma
 
-Lütfen [katkı kılavuzu](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)nu okuyun.
+Lütfen [katkı kılavuzu](CONTRIBUTING.md)nu okuyun.
 
 ## Bu Projeyi Destekle!
 
