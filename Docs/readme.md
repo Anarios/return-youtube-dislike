@@ -13,7 +13,7 @@
 - [Troubleshooting](https://github.com/Anarios/return-youtube-dislike/wiki/Troubleshooting-Guide)
 <!-- - [FAQ](FAQ.md)
 - [When & How to Report Bugs](Guide__Bug_Reporting.md)
-- [Contributing](/CONTRIBUTING.md) -->
+- [Contributing](../CONTRIBUTING.md) -->
 <!-- - [How to update wiki](/) -->
 
 <br>
