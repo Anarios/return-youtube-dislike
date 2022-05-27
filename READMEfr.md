@@ -9,7 +9,7 @@
 
 # Return YouTube Dislike
 
-Lisez ceci dans d'autres langues: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Türkçe](READMEtr.md)
+Lisez ceci dans d'autres langues : [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Türkçe](READMEtr.md)
 
 <p align="center">
     <b>Return YouTube Dislike est une extension open-source qui ré-affiche les dislikes (pouces rouges) sur YouTube.</b><br>
@@ -28,7 +28,7 @@ En outre, le champ `dislike` de l'API YouTube a été [supprimé](https://suppor
 
 Avec la suppression des statistiques du nombre de dislike de l'API YouTube, notre backend est passé à l'utilisation d'une combinaison de statistiques du nombre de dislike scrapé et d'estimations extrapolées à partir des données d'extension des utilisateurs.
 
-[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[FAQ](Docs/FAQfr.md)
 
 ## Pourquoi c'est important
 
@@ -70,15 +70,15 @@ Un ID YouTube invilide renverra *400* "Bad Request".
 
 
 <!---
-## API documentation
+## Documentation de l'API
 
-You can view all documentation on our website.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+Vous pouvez consulter toute la documentation sur notre site web.
+[https://returnyoutubedislike.com/docs](https://returnyoutubedislike.com/docs) -->
 
 
 ## Contribution
 
-Veuillez lire le [guide des contributions](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Veuillez lire le [guide des contributions](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGfr.md).
 
 ## Soutenez ce projet !
 
