@@ -1,3 +1,5 @@
+Lisez ceci dans d'autres langues : [English](FAQ.md)
+
 # Foire Aux Questions
 ## Avant de poser une question sur GitHub ou Discord, veuillez vous référer à ceci.
 

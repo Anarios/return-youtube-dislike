@@ -1,3 +1,5 @@
+Lisez ceci dans d'autres langues : [English](CONTRIBUTING.md)
+
 # Bienvenue dans le guide de contribution à Return YouTube Dislikes
 
 Merci d'investir votre temps pour contribuer à notre projet ! Toutes vos modifications seront prises en compte dans la prochaine version de l'extension (ou du site web).

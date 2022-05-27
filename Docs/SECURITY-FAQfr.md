@@ -1,3 +1,5 @@
+Lisez ceci dans d'autres langues : [English](SECURITY-FAQ.md)
+
 # Sécurité
 
 ### Est-ce que vous traquer l'historique des vidéos que je visionne ?
