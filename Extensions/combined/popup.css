@@ -68,7 +68,7 @@ button:hover {
   border-radius: 0.25rem;
 }
 
-.switch:before {
+.switch::before {
   content: attr(data-hover);
   visibility: hidden;
   width: 250px;
@@ -82,7 +82,7 @@ button:hover {
   top: 160%;
 }
 
-.switch:hover:before {
+.switch:hover::before {
   visibility: visible;
 }
 
@@ -162,7 +162,7 @@ button:hover {
   border-radius: 34px;
 }
 
-.slider:before {
+.slider::before {
   position: absolute;
   content: "";
   height: 13px;
@@ -178,7 +178,7 @@ input:checked + .slider {
   background: var(--accent);
 }
 
-input:checked + .slider:before {
+input:checked + .slider::before {
   transform: translateX(13px);
   background: var(--primary);
 }
