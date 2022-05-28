@@ -10,8 +10,8 @@ Lisez ceci dans d'autres langues : [English](readme.md)
 
 ## Guides
 
-- [Téléchargement, installation et utilisation](https://github.com/Anarios/return-youtube-dislike/wiki/Downloading,-Installing-&-Using)
-- [Dépannage](https://github.com/Anarios/return-youtube-dislike/wiki/Troubleshooting-Guide)
+- [Téléchargement, installation et utilisation](https://github.com/Anarios/return-youtube-dislike/wiki/T%C3%A9l%C3%A9chargement,-installation-et-utilisation)
+- [Dépannage](https://github.com/Anarios/return-youtube-dislike/wiki/Guide-de-d%C3%A9pannage)
 <!-- - [FAQ](FAQfr.md)
 - [Quand et comment signaler les bugs](Guide__Bug_Reportingfr.md)
 - [Contribution](/CONTRIBUTINGfr.md) -->
