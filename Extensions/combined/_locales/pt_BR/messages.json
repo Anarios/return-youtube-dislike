@@ -6,10 +6,10 @@
     "message": "Return YouTube Dislike Beta"
   },
   "extensionDesc": {
-    "message": "Possibilita ver os \"Não gostei\" do YouTube novamente."
+    "message": "Possibilita ver a quantidade de \"Não gostei\" do YouTube novamente."
   },
   "textDeveloper": {
-    "message": "por Dmitry Selivanov e comunidade"
+    "message": "por Dmitry Selivanov e contribuidores da comunidade"
   },
   "linkWebsite": {
     "message": "Website"
@@ -54,7 +54,7 @@
     "message": "Cores personalizadas para a barra e o botão de \"Não gostei\""
   },
   "customNumberFormats": {
-    "message": "Formatos de número personalizados"
+    "message": "Formatos personalizados de números"
   },
   "considerDonating": {
     "message": "A única coisa que mantém a extensão de pé são as doações de nossos usuários. Por gentileza, considere apoiar o projeto."
