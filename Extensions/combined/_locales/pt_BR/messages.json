@@ -51,10 +51,10 @@
     "message": "Adição de compatibilidade com o YouTube Shorts"
   },
   "customColors": {
-    "message": "Cores personalizadas para a barra e o botão de \"Não gostei\""
+    "message": "Cores personalizadas para a barra de \"Não gostei\" e botões"
   },
   "customNumberFormats": {
-    "message": "Formatos personalizados de números"
+    "message": "Números com formatos personalizados"
   },
   "considerDonating": {
     "message": "A única coisa que mantém a extensão de pé são as doações de nossos usuários. Por gentileza, considere apoiar o projeto."
