@@ -1,38 +1,62 @@
 {
   "extensionName": {
-    "message": "Devolver Dislikes do YouTube"
+    "message": "Return YouTube Dislike"
   },
   "extensionNameBeta": {
     "message": "Return YouTube Dislike Beta"
   },
   "extensionDesc": {
-    "message": "A capacidade de ver os retornos de não gostos"
+    "message": "Possibilita ver os \"Não gostei\" do YouTube novamente."
   },
   "textDeveloper": {
-    "message": "por Dmitry Selivanov e a Comunidade"
+    "message": "por Dmitry Selivanov e comunidade"
   },
   "linkWebsite": {
     "message": "Website"
   },
   "linkFAQ": {
-    "message": "FAQ"
+    "message": "Perguntas frequentes"
   },
   "linkDonate": {
-    "message": "Doe"
+    "message": "Doar"
   },
   "linkHelp": {
     "message": "Ajuda"
   },
   "legendSettings": {
-    "message": "Ajustes"
+    "message": "Configurações"
   },
   "textSettings": {
-    "message": "Desaproveitar as aversões"
+    "message": "Desativar envio de \"Gostei\"/\"Não gostei\""
+  },
+  "textLikesDisabled": {
+    "message": "desativado pelo dono"
   },
   "textSettingsHover": {
-    "message": "Pare de contar as antipatias."
+    "message": "Para de contabilizar os seus \"Gostei\" e \"Não gostei\"."
+  },
+  "textTempUnavailable": {
+    "message": "temporariamente indisponível"
   },
   "textUpdate": {
-    "message": "atualização para"
+    "message": "atualizar para"
+  },
+  "version30installed": {
+    "message": "Versão 3.0.0.1 instalada"
+  },
+  "whatsnew": {
+    "message": "Novidades"
+  },
+  "shortsSupport": {
+    "message": "Adição de compatibilidade com o YouTube Shorts"
+  },
+  "customColors": {
+    "message": "Cores personalizadas para a barra e o botão de \"Não gostei\""
+  },
+  "customNumberFormats": {
+    "message": "Formatos de número personalizados"
+  },
+  "considerDonating": {
+    "message": "A única coisa que mantém a extensão de pé são as doações de nossos usuários. Por gentileza, considere apoiar o projeto."
   }
 }
