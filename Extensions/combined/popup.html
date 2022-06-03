@@ -44,7 +44,7 @@
     </button>
     <br>
     <button style="margin-top: 0.3em" id="link_changelog" title="__MSG_linkChangelog__">
-      Change Log
+      __MSG_linkChangelog__
     </button>
   
     <br/>
@@ -102,20 +102,24 @@
     >
   </label>
   <br/>
-  <label class="switch" data-hover="Round down numbers (default YouTube behavior)">
+  <label class="switch" data-hover="__MSG_textRoundingNumbersHover__">
     <input type="checkbox" id="number_round_down"/>
     <span class="slider"/>
-    <span class="switchLabel">Show rounded down numbers</span>
+    <span class="switchLabel" title="__MSG_textRoundingNumbers__"
+    >__MSG_textRoundingNumbers__</span
+    >
   </label>
   <br/>
-  <label class="switch" data-hover="Make likes and dislikes format consistent">
+  <label class="switch" data-hover="__MSG_textConsistentFormatHover__">
     <input type="checkbox" id="number_reformat_likes"/>
     <span class="slider"/>
-    <span class="switchLabel">Re-format like numbers</span>
+    <span class="switchLabel" title="__MSG_textConsistentFormat__"
+    >__MSG_textConsistentFormat__</span
+    >
   </label>
   <br/>
   <div class="custom-select">
-    <label for="number_format">Number format:</label>
+    <label for="number_format">"__MSG_textNumberFormat__"</label>
     <select name="number_format" id="number_format">
       <option value="compactShort" id="number_format_compactShort"></option>
       <option value="compactLong" id="number_format_compactLong"></option>
@@ -124,26 +128,28 @@
   </div>
   <br/>
   <div class="custom-select">
-    <label class="switch" data-hover="Use custom colors for ratio bar.">
+    <label class="switch" data-hover="__MSG_textColorizeRatioBarHover__">
       <input type="checkbox" id="colored_bar"/>
       <span class="slider"/>
-      <span class="switchLabel">Colorize ratio bar</span>
+      <span class="switchLabel" title="__MSG_textColorizeRatioBar__"
+      >__MSG_textColorizeRatioBar__</span
+      >
     </label>
   </div>
-  <label class="switch" data-hover="Use custom colors for thumb icons.">
+  <label class="switch" data-hover="__MSG_textColorizeThumbsHover__">
     <input type="checkbox" id="colored_thumbs"/>
     <span class="slider"/>
-    <span class="switchLabel">Colorize thumbs</span>
+    <span class="switchLabel" title="__MSG_textColorizeThumbs__"
+    >__MSG_textColorizeThumbs__</span
+    >
   </label>
   <br/>
   <div class="custom-select">
-    <label for="color_theme">Color theme:</label>
+    <label for="color_theme">"__MSG_textColorTheme__"</label>
     <select name="color_theme" id="color_theme">
-      <option value="classic" id="color_theme_classic">Classic</option>
-      <option value="accessible" id="color_theme_accessible">
-        Accessible
-      </option>
-      <option value="neon" id="color_theme_neon">Neon</option>
+      <option value="classic" id="color_theme_classic">"__MSG_textColorTheme1__"</option>
+      <option value="accessible" id="color_theme_accessible">"__MSG_textColorTheme2__"</option>
+      <option value="neon" id="color_theme_neon">"__MSG_textColorTheme3__"</option>
     </select>
     <span
       id="color_theme_example_like"
