@@ -25,7 +25,7 @@ RYD uses the votes from it's users to extrapolate the dislike count.
 
 - If the video was uploaded after the API was shut down:
 
-  $$ RYD \ \ Dislike \ \ Count = ( { RYD \ \ Users \ \ Like \ \ Count \over RYD \ \ Users \ \ Dislike \ \ Count} ) * Public \ \ Like \ \ Count $$
+  $$ \textup{RYD Dislike Count} = \left( \frac{\textup{RYD Users Like Count}}{\textup{RYD Users Dislike Count}} \right) \times \textup{Public Like Count} $$
 
 - If the RYD database somehow had the actual like and dislike count (provided by the uploader or from the archive), the dislike count will be calculated based on both - the users' votes and the archived value. The archived value will have less influence on the final count as it ages.
 
