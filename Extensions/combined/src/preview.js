@@ -13,6 +13,11 @@ async function showRatioPreviews() {
   // Get videos that are not already show the ratio
   currentVideos = currentVideos.filter(element => !videos.includes(element));
   for (let video of currentVideos) {  // Iterate through all videos
+    // Check if video already has ratio preview
+    if (video.querySelector("#ratio-display")) {
+      video.querySelector("#ratio-display").remove();
+    }
+
     // Get video data
     let videoLink = video.querySelector("a").href;
     let videoId = getVideoId(videoLink);
@@ -30,7 +35,7 @@ async function showRatioPreviews() {
     let color = (ratio > 90 ? '#2ab92a' : ratio > 50 ? '#ffca00' : '#d73131');
 
     // Add percentage to video
-    video.querySelector("#metadata-line").innerHTML += `<span style="color: ${color};">${ratio}%</span>`;
+    video.querySelector("#metadata-line").innerHTML += `<span id='ratio-display' style="color: ${color};">${ratio}%</span>`;
 
     // Add video to list of videos already shown
     videos.push(video);
