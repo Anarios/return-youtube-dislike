@@ -212,32 +212,38 @@ async function setState(storedData) {
   storedData.previousState = isVideoDisliked()
     ? DISLIKED_STATE
     : isVideoLiked()
-    ? LIKED_STATE
-    : NEUTRAL_STATE;
+      ? LIKED_STATE
+      : NEUTRAL_STATE;
   let statsSet = false;
 
   let videoId = getVideoId(window.location.href);
   let likeCount = getLikeCountFromButton() || null;
 
-  let response = await fetch(
-    `${apiUrl}/votes?videoId=${videoId}&likeCount=${likeCount || ""}`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  )
-    .then((response) => {
-      if (!response.ok) displayError(response.error);
-      return response;
-    })
-    .then((response) => response.json())
-    .catch(displayError);
+  let response = await getApiData(videoId, likeCount);
+  if (response.error) {
+    displayError(response.error);
+  }
   cLog("response from api:");
   cLog(JSON.stringify(response));
   if (response !== undefined && !("traceId" in response) && !statsSet) {
     processResponse(response, storedData);
+  }
+}
+
+async function getApiData(videoId, likeCount = null) {
+  try {
+    const response = await fetch(
+      `${apiUrl}/votes?videoId=${videoId}${likeCount ? "&likeCount=" + likeCount : ""}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+    return await response.json();
+  } catch (error) {
+    return { "error": error };
   }
 }
 
@@ -343,4 +349,5 @@ export {
   initExtConfig,
   storedData,
   isLikesDisabled,
+  getApiData
 };

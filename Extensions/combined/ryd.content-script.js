@@ -40,12 +40,18 @@ import {
   addLikeDislikeEventListener,
   storageChangeHandler,
 } from "./src/events";
+import {
+  showRatioPreviews,
+  resetVideoList,
+} from "./src/preview";
 
 initExtConfig();
 
 let jsInitChecktimer = null;
 
 function setEventListeners(evt) {
+  // Reset ratio preview video list on tab change 
+  resetVideoList();
   function checkForJS_Finish() {
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       addLikeDislikeEventListener();
@@ -66,3 +72,7 @@ document.addEventListener("yt-navigate-finish", function (event) {
   window.returnDislikeButtonlistenersSet = false;
   setEventListeners();
 });
+
+setInterval(function () {
+  showRatioPreviews();
+}, 3000);
