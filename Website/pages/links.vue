@@ -22,10 +22,8 @@
       {{ $vuetify.lang.t("$vuetify.links.contact") }}
     </h1>
 
-    <v-btn class="mainAltButton" :href="emailLink" target="_blank">
-      <v-icon style="margin-right: 0.5em">mdi-email</v-icon>
-      selivano.d@gmail.com
-    </v-btn>
+    <v-icon style="margin-right: 0.5em">mdi-email</v-icon>
+    selivano.d@gmail.com
 
     <p style="color: #555" class="my-8">
       Site by <v-icon color="#555">mdi-discord</v-icon>
@@ -39,7 +37,7 @@
       </a>
     </p>
     <!-- Translators -->
-    <div style="color: #555; width: 250px">
+    <div style="color: #555; width: 250px"  class="my-8">
       <b class="white--text">
         {{ $vuetify.lang.t("$vuetify.links.translators") }}
       </b>
@@ -50,6 +48,20 @@
         class="d-flex"
       >
         {{ translator.lang }} - <v-spacer /> {{ translator.tag }}
+      </div>
+    </div>
+    <!-- Cool Projects -->
+    <div style="color: #555; width: 400px">
+      <b class="white--text">
+        {{ $vuetify.lang.t("$vuetify.links.coolProjects") }}
+      </b>
+      <br />
+      <div
+          v-for="project in coolProjects"
+          :key="project.url"
+          class="d-flex justify-center"
+      >
+        <a class="attr-link" :href="project.url" target="_blank">{{ project.name }} - {{  $vuetify.lang.t(project.description) }} </a>
       </div>
     </div>
   </div>
@@ -87,6 +99,10 @@ export default {
         tag: "PickleNik#0864",
         lang: "Русский",
       },
+    ],
+    coolProjects: [
+      { name: "SponsorBlock", url: "https://sponsor.ajay.app/", description: "$vuetify.links.sponsorBlockDescription" },
+      { name: "Filmot", url: "https://filmot.com/", description: "$vuetify.links.filmotDescription" }
     ],
   }),
 };

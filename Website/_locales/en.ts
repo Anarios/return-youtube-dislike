@@ -97,5 +97,8 @@ export default {
         subtitle: 'Links to the project and its developers',
         contact: 'Contact Me',
         translators: 'Translators',
+        coolProjects: 'Cool Projects',
+        sponsorBlockDescription: 'Skips ads integrated in video',
+        filmotDescription: 'Search YouTube videos by subtitles'
     },
 }
