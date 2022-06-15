@@ -105,7 +105,7 @@ export default {
       },
       {
         tag: "ShaCHO36P",
-        lang: "やまと",
+        lang: "日本語",
       },
     ],
     coolProjects: [
