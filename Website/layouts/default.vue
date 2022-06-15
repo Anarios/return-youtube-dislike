@@ -104,7 +104,7 @@ export default {
       { name: "Türkçe", locale: "tr" },
       { name: "Русский", locale: "ru" },
       { name: "Čeština", locale: "cs" },
-      { name: "やまと", locale: "ja" },
+      { name: "日本語", locale: "ja" },
       // { name: "Français", locale: "fr" },
       // { name: "Deutsch", locale: "de" },
       // ...
