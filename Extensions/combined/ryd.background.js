@@ -77,6 +77,8 @@ api.runtime.onInstalled.addListener((details) => {
   if (
     // No need to show changelog if its was a browser update (and not extension update)
     details.reason === "browser_update" ||
+    // Chromium (e.g., Google Chrome Cannary) uses this name instead of the one above for some reason
+    details.reason === "chrome_update" ||
     // No need to show changelog if developer just reloaded the extension
     details.reason === "update"
   )
