@@ -90,6 +90,10 @@ document.getElementById("number_reformat_likes").addEventListener("click", (ev) 
   chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
 });
 
+document.getElementById("ratio_preview").addEventListener("click", (ev) => {
+  chrome.storage.sync.set({ ratioPreview: ev.target.value });
+});
+
 /*   Advanced Toggle   */
 const advancedToggle = document.getElementById("advancedToggle");
 advancedToggle.addEventListener("click", () => {
@@ -120,6 +124,7 @@ function initConfig() {
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
   initializeNumberDisplayReformatLikes();
+  initializeRatioPreview();
 }
 
 function initializeVersionNumber() {
@@ -218,9 +223,16 @@ function initializeNumberDisplayReformatLikes() {
   });
 }
 
+function initializeRatioPreview() {
+  chrome.storage.sync.get(["ratioPreview"], (res) => {
+    handleRatioPreviewChangeEvent(res.ratioPreview);
+  });
+}
+
 chrome.storage.onChanged.addListener(storageChangeHandler);
 
 function storageChangeHandler(changes, area) {
+  console.log('test');
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
@@ -245,6 +257,9 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+  }
+  if (changes.ratioPreview !== undefined) {
+    handleRatioPreviewChangeEvent(changes.ratioPreview.newValue);
   }
 }
 
@@ -296,6 +311,16 @@ function handleNumberDisplayFormatChangeEvent(value) {
 function handleNumberDisplayReformatLikesChangeEvent(value) {
   config.numberDisplayReformatLikes = value;
   document.getElementById("number_reformat_likes").checked = value;
+}
+
+function handleRatioPreviewChangeEvent(value) {
+  if (!value) {
+    value = "hover";
+  }
+  config.ratioPreview = value;
+  document
+  .getElementById("ratio_preview")
+  .querySelector('option[value="' + value + '"]').selected = true;
 }
 
 function getNumberFormatter(optionSelect) {
