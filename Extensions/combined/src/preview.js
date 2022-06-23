@@ -32,7 +32,7 @@ async function showRatioPreviews() {
     }
 
     // Set color depending on ratio
-    let color = (ratio > 90 ? '#2ab92a' : ratio > 50 ? '#ffca00' : '#d73131');
+    let color = (ratio >= 90 ? "#2ab92a" : ratio >= 70 ? "#ffca00" : "#d73131");
 
     // Add percentage to video
     video.querySelector("#metadata-line").innerHTML += `<span id="ratio-display" style="color: ${color};">${ratio}%</span>`;
