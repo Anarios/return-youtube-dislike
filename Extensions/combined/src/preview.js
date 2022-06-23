@@ -24,8 +24,8 @@ async function showRatioPreviews() {
     let apiResponse = await getApiData(videoId);
 
     // Calculate like-dislike ratio
-    let likes = apiResponse['likes'];
-    let dislikes = apiResponse['dislikes'];
+    let likes = apiResponse["likes"];
+    let dislikes = apiResponse["dislikes"];
     let ratio = Math.round(likes / (likes + dislikes) * 100);
     if (likes === undefined || dislikes === undefined) {
       return;
@@ -35,7 +35,7 @@ async function showRatioPreviews() {
     let color = (ratio > 90 ? '#2ab92a' : ratio > 50 ? '#ffca00' : '#d73131');
 
     // Add percentage to video
-    video.querySelector("#metadata-line").innerHTML += `<span id='ratio-display' style="color: ${color};">${ratio}%</span>`;
+    video.querySelector("#metadata-line").innerHTML += `<span id="ratio-display" style="color: ${color};">${ratio}%</span>`;
 
     // Add video to list of videos already shown
     videos.push(video);
