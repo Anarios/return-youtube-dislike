@@ -202,3 +202,12 @@ input:checked + .slider:before {
   flex-direction: column;
   align-items: center;
 }
+
+.custom-select select {
+  outline: none;
+  border: none;
+  padding: 5px;
+  color: var(--white);
+  background-color: var(--secondary);
+  border-radius: 0.25rem;
+}
