@@ -20,13 +20,11 @@
 
 #ryd-bar-container {
   background: var(--yt-spec-icon-disabled);
-  border-radius: 2px;
 }
 
 #ryd-bar {
   background: var(--yt-spec-text-primary);
-  border-radius: 2px;
-  transition: all 0.15s ease-in-out;
+  transition: width 0.3s;
 }
 
 .ryd-tooltip {
@@ -43,4 +41,9 @@
   padding-top: 6px;
   padding-bottom: 28px;
   top: -6px;
+}
+
+#actions-inner .ryd-tooltip{
+  top: 1px;
+  left: 4px;
 }

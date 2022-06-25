@@ -9,7 +9,7 @@ function createRateBar(likes, dislikes) {
     const widthPx =
       getButtons().children[0].clientWidth +
       getButtons().children[1].clientWidth +
-      8;
+      (document.getElementById("actions-inner") ? 4 : 8);
 
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
@@ -23,6 +23,7 @@ function createRateBar(likes, dislikes) {
       }
 
       (
+        document.getElementById("actions-inner") ||
         document.getElementById("menu-container") ||
         document.querySelector("ytm-slim-video-action-bar-renderer")
       ).insertAdjacentHTML(
@@ -62,7 +63,7 @@ function createRateBar(likes, dislikes) {
   } else {
     cLog("removing bar");
     let ratebar = document.getElementById("ryd-bar-container");
-    if(ratebar) {
+    if (ratebar) {
       ratebar.parentNode.removeChild(ratebar);
     }
   }
