@@ -8,6 +8,7 @@ import {
   getColorFromTheme,
 } from "./utils";
 import { localize } from "./utils";
+import { createStarRating } from "./starRating";
 
 //TODO: Do not duplicate here and in ryd.background.js
 const apiUrl = "https://returnyoutubedislikeapi.com";
@@ -199,6 +200,7 @@ function processResponse(response, storedData) {
       getDislikeButton().style.color = getColorFromTheme(false);
     }
   }
+  createStarRating(response.rating, isMobile());
 }
 
 // Tells the user if the API is down
