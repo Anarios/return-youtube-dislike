@@ -84,6 +84,19 @@
       </div>
       <v-icon style="margin-left: 0.5rem">mdi-hammer-wrench</v-icon>
     </v-btn>
+    <v-btn
+      class="mainAltButton"
+      style="color: #999"
+      :href="androidWebTube"
+      target="_blank"
+    >
+      <v-icon class="white--text">mdi-android</v-icon>
+      <div style="font-size: 0.75rem">
+        WebTube (WIP) <br />
+        <span style="font-size: 0.55rem">pre-alpha</span>
+      </div>
+      <v-icon style="margin-left: 0.5rem">mdi-hammer-wrench</v-icon>
+    </v-btn>
     <v-btn class="mainAltButton" :href="iosJailbreakLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
       iOS &nbsp; <span style="font-size: 0.55rem">(Jailbroken)</span>
@@ -114,6 +127,7 @@ export default {
       iosJailbreakLink: "https://chariz.com/get/return-youtube-dislike/",
       androidNewPipe: "https://github.com/polymorphicshade/NewPipe",
       androidVueTube: "https://vuetube.app",
+      androidWebTube: "https://webtubeapp.xyz",
     };
   },
 };
