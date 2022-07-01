@@ -59,8 +59,8 @@ body:
   attributes:
     label: "Will you be available for follow-up questions to help developers diagnose & fix the issue?"
     options: 
-      - Yes
-      - No
+      - "Yes"
+      - "No"
   validations:
     required: true
 
