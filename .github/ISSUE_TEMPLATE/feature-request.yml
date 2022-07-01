@@ -28,4 +28,12 @@ body:
     options:
       - label: "Yes"
       - label: "No"
+- type: dropdown
+  attributes:
+    label: "Will you be available for follow-up questions to help developers implement this?"
+    options: 
+      - "Yes"
+      - "No"
+  validations:
+    required: true
   
