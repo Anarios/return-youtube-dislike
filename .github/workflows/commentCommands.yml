@@ -1,4 +1,4 @@
-name: Assign issue/pull to the commenter
+name: commentCommands
 
 on:
   issue_comment:
