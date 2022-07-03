@@ -14,6 +14,8 @@ async function showRatioPreviews() {
   currentVideos = currentVideos.concat([].slice.call(document.getElementsByTagName("ytd-compact-video-renderer")));
   // Search results
   currentVideos = currentVideos.concat([].slice.call(document.getElementsByTagName("ytd-video-renderer")));
+  // Channel overview videos
+  currentVideos = currentVideos.concat([].slice.call(document.getElementsByTagName("ytd-grid-video-renderer")));
   // Get videos that are not already show the ratio
   currentVideos = currentVideos.filter(element => !videos.includes(element));
   for (let video of currentVideos) {  // Iterate through all videos
