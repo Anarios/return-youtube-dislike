@@ -23,7 +23,7 @@ jobs:
   add-label-duplicate:
     runs-on: ubuntu-latest
     if: |
-      startsWith(github.event.comment.body, "/duplicate") == '/add' && (
+      contains(github.event.comment.body, "/duplicate") == '/add' && (
       github.event.comment.author_association == 'OWNER' ||
       github.event.comment.author_association == 'COLLABORATOR' ||
       github.event.comment.author_association == 'CONTRIBUTOR' )
