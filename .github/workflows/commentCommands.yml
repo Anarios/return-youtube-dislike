@@ -23,7 +23,7 @@ jobs:
   add-label-duplicate:
     runs-on: ubuntu-latest
     if: |
-      contains(github.event.comment.body, "/duplicate") == '/add' && (
+      contains(github.event.comment.body, "/duplicate") && (
       github.event.comment.author_association == 'OWNER' ||
       github.event.comment.author_association == 'COLLABORATOR' ||
       github.event.comment.author_association == 'CONTRIBUTOR' )
@@ -34,5 +34,5 @@ jobs:
               -X POST \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/label \
+              https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \
               -d '{"labels":["duplicate"]}'
