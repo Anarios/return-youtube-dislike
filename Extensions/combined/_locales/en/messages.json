@@ -30,13 +30,13 @@
     "message": "Disable like/dislike submission"
   },
   "textLikesDisabled": {
-    "message": "disabled by owner"
+    "message": "Dislike"
   },
   "textSettingsHover": {
     "message": "Stops counting your likes and dislikes."
   },
   "textTempUnavailable": {
-    "message": "temporarily unavailable"
+    "message": "Temporarily unavailable"
   },
   "textUpdate": {
     "message": "update to"
