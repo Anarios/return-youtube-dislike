@@ -23,6 +23,7 @@ let extConfig = {
   numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
   numberDisplayReformatLikes: false,
+  ratioPreview: "never",
 };
 
 let storedData = {

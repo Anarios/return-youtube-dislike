@@ -1,10 +1,12 @@
 import { getVideoId } from "./utils";
-import { getApiData } from "./state";
+import { getApiData, getLikeCountFromButton } from "./state";
 
 let videos = [];
 
 let cache = {};
 let cacheDuration = 60 * 10; // 10 minutes
+
+let currentUrl; // Current URL to detect URL change
 
 
 async function showRatioPreviews() {
@@ -31,13 +33,19 @@ async function showRatioPreviews() {
 
     // Check if data was fetched
     if (!data) {
-      return;
+      return false;
     }
 
     // Calculate like-dislike ratio
-    let likes = data["likes"];
+    let likes = getLikeCountFromButton();
     let dislikes = data["dislikes"];
-    let ratio = Math.round(likes / (likes + dislikes) * 100);
+    
+    // Calculate ratio
+    if (isNaN(likes) || isNaN(dislikes)) {
+      return 0;
+    } else {
+      let ratio = Math.round(likes / (likes + dislikes) * 100) || 0;
+    }
 
     // Set color depending on ratio
     let color = (ratio >= 90 ? "#2ab92a" : ratio >= 70 ? "#ffca00" : "#d73131");
@@ -50,7 +58,14 @@ async function showRatioPreviews() {
   }
 }
 
-async function getData(videoId) {
+function isNewUrl() {
+  // Returns if URL has changed
+  let newUrl = window.location.href !== currentUrl;
+  currentUrl = window.location.href;
+  return newUrl;
+}
+
+function cacheCleanup() {
   // Remove expired cache entries
   const now = new Date().getTime();
   let removed = 0;
@@ -62,10 +77,17 @@ async function getData(videoId) {
       break;
     }
   }
+}
+
+async function getData(videoId) {
+  const now = new Date().getTime();
+
+  if (isNewUrl()) {
+    cacheCleanup();
+  }
 
   // Check if video is in cache
   if (videoId in cache) {
-    console.log('USING CACHE!!! for ' + videoId);
     return cache[videoId];
   }
 
@@ -74,7 +96,7 @@ async function getData(videoId) {
 
   // Check if request was successful
   if (!apiResponse.likes) {
-    return;
+    return false;
   }
 
   cache[videoId] = apiResponse;

@@ -12,6 +12,7 @@ let extConfig = {
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
   numberDisplayReformatLikes: false, // use existing (native) likes number
+  ratioPreview: "never", // always, hover, never
 };
 
 if (isChrome()) api = chrome;
