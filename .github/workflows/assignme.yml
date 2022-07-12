@@ -1,16 +1,18 @@
-name: Assign issue/pull to the commenter
+name: commentCommands
 
 on:
   issue_comment:
     types: created
     
 jobs:
-  assign:
+
+  assign-commentor:
     runs-on: ubuntu-latest
     if: |
-      github.event.comment.body == '/assignme'
+      contains(github.event.comment.body, '/assignme') ||
+      contains(github.event.comment.body, '/assign me')
     steps:
-      - name: Assigning to commentor
+      - name: Assigning to commenter
         run: |
           curl \
           -X POST \
