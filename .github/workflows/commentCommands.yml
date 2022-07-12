@@ -23,10 +23,10 @@ jobs:
   request-issue-framing-improvement:
     runs-on: ubuntu-latest
     if: |
-      github.event.comment.body == '/improve' && (
+      contains(github.event.comment.body,'/improve') && (
       github.event.comment.author_association == 'OWNER' ||
       github.event.comment.author_association == 'COLLABORATOR' ||
-      github.event.comment.author_association == 'CONTRIBUTOR' )
+      github.event.comment.author_association != 'CONTRIBUTOR' )
     steps:
       - name: request-issue-framing-improvement
         run: |
