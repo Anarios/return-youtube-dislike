@@ -9,7 +9,8 @@ jobs:
   assign-commentor:
     runs-on: ubuntu-latest
     if: |
-      github.event.comment.body == '/assignme'
+      contains(github.event.comment.body, '/assignme') ||
+      contains(github.event.comment.body, '/assign me')
     steps:
       - name: Assigning to commenter
         run: |
@@ -23,10 +24,10 @@ jobs:
   add-label-duplicate:
     runs-on: ubuntu-latest
     if: |
-      contains(github.event.comment.body, "/duplicate") && (
+      contains(github.event.comment.body, '/duplicate') && (
       github.event.comment.author_association == 'OWNER' ||
       github.event.comment.author_association == 'COLLABORATOR' ||
-      github.event.comment.author_association == 'CONTRIBUTOR' )
+      github.event.comment.author_association != 'CONTRIBUTOR' )
     steps:
       - name: add-label-duplicate
         run: |
