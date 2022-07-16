@@ -1,5 +1,5 @@
 import { getVideoId } from "./utils";
-import { getApiData, getLikeCountFromButton } from "./state";
+import { getApiData } from "./state";
 
 let videos = [];
 
@@ -37,7 +37,7 @@ async function showRatioPreviews() {
     }
 
     // Calculate like-dislike ratio
-    let likes = getLikeCountFromButton();
+    let likes = data["likes"];
     let dislikes = data["dislikes"];
     
     // Calculate ratio
