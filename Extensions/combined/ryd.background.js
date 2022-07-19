@@ -9,6 +9,7 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
+  colorThemeCustom: {like_dark: '#00ff00', dislike_dark: '#ff0000', like: '#008000', dislike: '#ff0000'}, 
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
   numberDisplayReformatLikes: false, // use existing (native) likes number
@@ -264,6 +265,9 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
+  if (changes.colorThemeCustom !== undefined) {
+    handleColorThemeCustomChangeEvent(changes.colorThemeCustom.newValue);
+  }
   if (changes.numberDisplayRoundDown !== undefined) {
     handleNumberDisplayRoundDownChangeEvent(
       changes.numberDisplayRoundDown.newValue
@@ -317,6 +321,10 @@ function handleColorThemeChangeEvent(value) {
     value = "classic";
   }
   extConfig.colorTheme = value;
+}
+
+function handleColorThemeCustomChangeEvent(value) {
+  extConfig.colorThemeCustom = value;
 }
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
@@ -377,11 +385,16 @@ function initializeColoredBar() {
 }
 
 function initializeColorTheme() {
-  api.storage.sync.get(["colorTheme"], (res) => {
+  api.storage.sync.get(["colorTheme","colorThemeCustom"], (res) => {
     if (res.colorTheme === undefined) {
       api.storage.sync.set({ colorTheme: false });
     } else {
       extConfig.colorTheme = res.colorTheme;
+    }
+    if (res.colorThemeCustom === undefined) {
+      api.storage.sync.set({ colorThemeCustom: {like_dark: '#00ff00', dislike_dark: '#ff0000', like: '#008000', dislike: '#ff0000'} });
+    } else {
+      extConfig.colorThemeCustom = res.colorThemeCustom;
     }
   });
 }

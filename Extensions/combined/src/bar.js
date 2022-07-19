@@ -1,5 +1,5 @@
 import { getButtons } from "./buttons";
-import { extConfig, isMobile, isLikesDisabled } from "./state";
+import { extConfig, isMobile, isLikesDisabled, isVideoLiked, isVideoDisliked } from "./state";
 import { cLog, getColorFromTheme } from "./utils";
 
 function createRateBar(likes, dislikes) {
@@ -18,7 +18,9 @@ function createRateBar(likes, dislikes) {
       let colorLikeStyle = "";
       let colorDislikeStyle = "";
       if (extConfig.coloredBar) {
-        colorLikeStyle = "; background-color: " + getColorFromTheme(true);
+        colorLikeStyle = (extConfig.colorTheme === 'nostalgic' && (isVideoDisliked() || isVideoLiked()) ) ?
+            "; background-color: " + getColorFromTheme(-1) :
+            "; background-color: " + getColorFromTheme(true);
         colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
       }
 
@@ -55,7 +57,9 @@ function createRateBar(likes, dislikes) {
       if (extConfig.coloredBar) {
         document.getElementById("ryd-bar-container").style.backgroundColor =
           getColorFromTheme(false);
-        document.getElementById("ryd-bar").style.backgroundColor =
+        document.getElementById("ryd-bar").style.backgroundColor = 
+          (extConfig.colorTheme === 'nostalgic' && (isVideoDisliked() || isVideoLiked())) ?
+          getColorFromTheme(-1) :
           getColorFromTheme(true);
       }
     }

@@ -21,6 +21,7 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic",
+  colorThemeCustom: {like_dark: '#00ff00', dislike_dark: '#ff0000', like: '#008000', dislike: '#ff0000'}, 
   numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
   numberDisplayReformatLikes: false,
@@ -40,27 +41,32 @@ function isShorts() {
   return location.pathname.startsWith("/shorts");
 }
 
+cLog("initializing mutation observer");
 let mutationObserver = new Object();
-
-if (isShorts() && mutationObserver.exists !== true) {
-  cLog("initializing mutation observer");
-  mutationObserver.options = {
-    childList: false,
-    attributes: true,
-    subtree: false,
-  };
-  mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver(function (
-    mutationList,
-    observer
-  ) {
-    mutationList.forEach((mutation) => {
-      if (
-        mutation.type === "attributes" &&
-        mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
-        mutation.target.id === "button"
-      ) {
-        // cLog('Short thumb button status changed');
+mutationObserver.options = {
+  childList: false,
+  attributes: true,
+  subtree: false,
+};
+mutationObserver.observer = new MutationObserver(function (
+  mutationList,
+  observer
+) {
+  mutationList.forEach((mutation) => {
+    if (
+      isShorts() && 
+      mutation.type === "attributes" &&
+      mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
+      mutation.target.id === "button"
+    ) {
+      // cLog('Short thumb button status changed');
+      if (extConfig.colorTheme === 'nostalgic') {
+        if (mutation.target.getAttribute("aria-pressed") === "true") {
+          mutation.target.style.color = getColorFromTheme(-1);
+        } else {
+          mutation.target.style.color = "unset";
+        }
+      } else {
         if (mutation.target.getAttribute("aria-pressed") === "true") {
           mutation.target.style.color =
             mutation.target.parentElement.parentElement.id === "like-button"
@@ -69,14 +75,27 @@ if (isShorts() && mutationObserver.exists !== true) {
         } else {
           mutation.target.style.color = "unset";
         }
-        return;
       }
-      cLog(
-        "unexpected mutation observer event: " + mutation.target + mutation.type
-      );
-    });
+      return;
+    }
+    if (
+      !isShorts() && 
+      extConfig.colorTheme === 'nostalgic' && 
+      mutation.type === "attributes" &&
+      mutation.target.nodeName === "YTD-TOGGLE-BUTTON-RENDERER"
+    ) {
+      let buttonDOM = mutation.target.querySelector('button#button');
+      if (buttonDOM) {
+        mutation.target.style.color = (buttonDOM.getAttribute("aria-pressed") === "true") ? getColorFromTheme(-1) : getColorFromTheme(true); 
+      }
+      return;
+    }
+    cLog(
+      "unexpected mutation observer event: " + mutation.target.nodeName + mutation.type
+    );
   });
-}
+});
+
 
 function isLikesDisabled() {
   // return true if the like button's text doesn't contain any number
@@ -181,11 +200,20 @@ function processResponse(response, storedData) {
       let shortDislikeButton = getDislikeButton().querySelector(
         "tp-yt-paper-button#button"
       );
-      if (shortLikeButton.getAttribute("aria-pressed") === "true") {
-        shortLikeButton.style.color = getColorFromTheme(true);
-      }
-      if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
-        shortDislikeButton.style.color = getColorFromTheme(false);
+      if (extConfig.colorTheme === 'nostalgic') {
+        if (shortLikeButton.getAttribute("aria-pressed") === "true") {
+          shortLikeButton.style.color = getColorFromTheme(-1);
+        }
+        if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
+          shortDislikeButton.style.color = getColorFromTheme(-1);
+        }
+      } else {
+        if (shortLikeButton.getAttribute("aria-pressed") === "true") {
+          shortLikeButton.style.color = getColorFromTheme(true);
+        }
+        if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
+          shortDislikeButton.style.color = getColorFromTheme(false);
+        }
       }
       mutationObserver.observer.observe(
         shortLikeButton,
@@ -196,8 +224,21 @@ function processResponse(response, storedData) {
         mutationObserver.options
       );
     } else {
-      getLikeButton().style.color = getColorFromTheme(true);
-      getDislikeButton().style.color = getColorFromTheme(false);
+      if (extConfig.colorTheme === 'nostalgic') {
+        getLikeButton().style.color = getColorFromTheme(isVideoLiked() ? -1 : true);
+        getDislikeButton().style.color = getColorFromTheme(isVideoDisliked() ? -1 : true);
+        mutationObserver.observer.observe(
+          getLikeButton(),
+          mutationObserver.options
+        );
+        mutationObserver.observer.observe(
+          getDislikeButton(),
+          mutationObserver.options
+        );
+      } else {
+        getLikeButton().style.color = getColorFromTheme(true);
+        getDislikeButton().style.color = getColorFromTheme(false);
+      }
     }
   }
   createStarRating(response.rating, isMobile());
@@ -298,11 +339,16 @@ function initializeNumberDisplayRoundDown() {
 }
 
 function initializeColorTheme() {
-  getBrowser().storage.sync.get(["colorTheme"], (res) => {
+  getBrowser().storage.sync.get(["colorTheme", "colorThemeCustom"], (res) => {
     if (res.colorTheme === undefined) {
       getBrowser().storage.sync.set({ colorTheme: false });
     } else {
       extConfig.colorTheme = res.colorTheme;
+    }
+    if (res.colorThemeCustom === undefined) {
+      getBrowser().storage.sync.set({ colorThemeCustom: {like_dark: '#00ff00', dislike_dark: '#ff0000', like: '#008000', dislike: '#ff0000'} });
+    } else {
+      extConfig.colorThemeCustom = res.colorThemeCustom;
     }
   });
 }
