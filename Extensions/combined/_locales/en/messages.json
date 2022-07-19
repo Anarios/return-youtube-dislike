@@ -33,7 +33,7 @@
     "message": "Disable like/dislike submission"
   },
   "textLikesDisabled": {
-    "message": "disabled by owner"
+    "message": "Disabled by Owner"
   },
   "textSettingsHover": {
     "message": "Stops counting your likes and dislikes."
@@ -78,10 +78,10 @@
     "message": "Neon"
   },
   "textTempUnavailable": {
-    "message": "temporarily unavailable"
+    "message": "Temporarily Unavailable"
   },
   "textUpdate": {
-    "message": "update to"
+    "message": "Update to"
   },
   "version30installed": {
     "message": "Version 3.0.0.1 installed"
