@@ -15,7 +15,8 @@ html,
 body {
   background-color: var(--background);
   color: var(--white);
-  min-width: 300px;
+  min-width: 310px;
+  min-height: 350px;
   padding: 0.5em;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -68,9 +69,12 @@ button:hover {
   border-radius: 0.25rem;
 }
 
-.switch::before {
+
+.switch::before, .label-with-hover-tip::before {
   content: attr(data-hover);
   visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.1s linear, opacity 0.1s linear;
   width: 250px;
   background-color: var(--secondary);
   border-radius: 0.5rem;
@@ -82,8 +86,27 @@ button:hover {
   top: 160%;
 }
 
-.switch:hover::before {
+
+.switch:hover::before, .label-with-hover-tip:hover::before {
   visibility: visible;
+  opacity: 1;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 2s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 #advancedToggle {
@@ -123,6 +146,32 @@ button:hover {
   border: 2px solid var(--secondary);
   border-radius: 0.5rem;
   padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #111; /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333; /* color of the scroll thumb */
+  border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
+  border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-top: 0.25rem solid #111; /* creates padding around scroll thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #f22; /* color of the scroll thumb */
+  border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
+  border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
+  border-top: 0.25rem solid #111; /* creates padding around scroll thumb */
 }
 
 #advancedLegend {
@@ -138,6 +187,14 @@ button:hover {
   position: relative;
   display: inline-block;
   width: 30px;
+  height: 17px;
+  margin-bottom: 1rem;
+}
+
+.label-with-hover-tip {
+  position: relative;
+  display: inline-block;
+  width: 80px;
   height: 17px;
   margin-bottom: 1rem;
 }

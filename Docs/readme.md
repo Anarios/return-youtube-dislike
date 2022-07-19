@@ -1,3 +1,5 @@
+Read this in other languages: [Français](readmefr.md)
+
 **Contents**
 
 - [Guides](#guides)

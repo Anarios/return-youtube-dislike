@@ -99,6 +99,10 @@ export default {
         tag: "PickleNik#0864",
         lang: "Русский",
       },
+      {
+        tag: "NiniKo",
+        lang: "Français",
+      },
     ],
     coolProjects: [
       { name: "SponsorBlock", url: "https://sponsor.ajay.app/", description: "$vuetify.links.sponsorBlockDescription" },

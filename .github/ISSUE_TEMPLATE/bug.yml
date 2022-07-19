@@ -1,6 +1,6 @@
 name: Bug Report
 description: File a bug report!
-title: "(Bug): "
+# title: "(Bug): "
 labels: ["bug"]
 body:
 - type: input
@@ -55,4 +55,13 @@ body:
     value: "Tell us how it happened with detailed steps for us."
   validations:
     required: true
+- type: dropdown
+  attributes:
+    label: "Will you be available for follow-up questions to help developers diagnose & fix the issue?"
+    options: 
+      - "Yes"
+      - "No"
+  validations:
+    required: true
+
     

@@ -1,3 +1,5 @@
+Read this in other languages: [Français](SECURITY-FAQfr.md)
+
 # Security
 
 ### Are you tracking my viewing history?
