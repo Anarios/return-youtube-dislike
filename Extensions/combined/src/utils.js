@@ -16,7 +16,7 @@ function numberFormat(numberState) {
         ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
         ?.getAttribute("href")
     )?.searchParams?.get("locale");
-  } catch {}
+  } catch { }
 
   let numberDisplay;
   if (extConfig.numberDisplayRoundDown === false) {
@@ -40,10 +40,10 @@ function getNumberFormatter(optionSelect) {
   try {
     userLocales = new URL(
       Array.from(document.querySelectorAll("head > link[rel='search']"))
-      ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-      ?.getAttribute("href")
+        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+        ?.getAttribute("href")
     )?.searchParams?.get("locale");
-  } catch {}
+  } catch { }
 
   switch (optionSelect) {
     case "compactLong":
