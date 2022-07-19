@@ -13,7 +13,7 @@
 - [Troubleshooting](https://github.com/Anarios/return-youtube-dislike/wiki/Troubleshooting-Guide)
 <!-- - [FAQ](FAQ.md)
 - [When & How to Report Bugs](Guide__Bug_Reporting.md)
-- [Contributing](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md) -->
+- [Contributing](../CONTRIBUTING.md) -->
 <!-- - [How to update wiki](/) -->
 
 <br>
@@ -21,8 +21,8 @@
 
 ## FAQs
 
-- [General](https://github.com/Anarios/return-youtube-dislike/blob/main/Guides/FAQ.md)
-- [Security](https://github.com/Anarios/return-youtube-dislike/blob/main/Guides/SECURITY-FAQ.md)
+- [General](FAQ.md)
+- [Security](SECURITY-FAQ.md)
 
 <!-- - [Privacy](FAQ_Privacy.md)
 - [Technical](FAQ_Technical.md)

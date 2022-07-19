@@ -5,7 +5,7 @@
 [![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
 [![Issues](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=flat&label=Issues)](https://github.com/Anarios/return-youtube-dislike/issues)
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](LICENSE)
 
 Прочитать на других языках: [English](README.md), [Español](READMEes.md), [Türkçe](READMEtr.md)
 
@@ -28,7 +28,7 @@
 
 С удалением статистики отметок из API YouTube наш сервер переключился на использование комбинации собранной статистики отметок «Не нравится», оценок, экстраполированных из пользовательских данных расширения.
 
-[ЧаВО (англ.)](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[ЧаВО (англ.)](Docs/FAQ.md)
 
 ## Почему это важно
 
@@ -78,7 +78,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 ## Участие/помощь в разработке
 
-Пожалуйста, ознакомьтесь с [руководством по внесению вклада в проект (англ.)](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Пожалуйста, ознакомьтесь с [руководством по внесению вклада в проект (англ.)](CONTRIBUTING.md).
 
 ## Поддержите этот проект!
 

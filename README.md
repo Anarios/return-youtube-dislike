@@ -5,7 +5,7 @@
 [![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
 [![Issues](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=flat&label=Issues)](https://github.com/Anarios/return-youtube-dislike/issues)
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
+[![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](LICENSE)
 
 Read this in other languages: [Español](READMEes.md), [русский](READMEru.md), [Türkçe](READMEtr.md)
 
@@ -28,7 +28,7 @@ Additionally, the `dislike` field in the YouTube API was [removed](https://suppo
 
 With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
 
-[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[FAQ](Docs/FAQ.md)
 
 ## Why it Matters
 
@@ -78,7 +78,7 @@ You can view all documentation on our website.
 
 ## Contributing
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Please read the [contribution guide](CONTRIBUTING.md).
 
 ## Support this project!
 
