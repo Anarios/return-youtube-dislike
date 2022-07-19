@@ -23,6 +23,9 @@
   "linkHelp": {
     "message": "Help"
   },
+  "linkChangelog": {
+    "message": "Change Log"
+  },
   "legendSettings": {
     "message": "Settings"
   },
@@ -30,16 +33,55 @@
     "message": "Disable like/dislike submission"
   },
   "textLikesDisabled": {
-    "message": "disabled by owner"
+    "message": "Disabled by Owner"
   },
   "textSettingsHover": {
     "message": "Stops counting your likes and dislikes."
   },
+  "textRoundingNumbers": {
+    "message": "Round down like/dislike stats (default YouTube behavior)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Show rounded down stats."
+  },
+  "textConsistentFormat": {
+    "message": "Make likes and dislikes format consistent"
+  },
+  "textConsistentFormatHover": {
+    "message": "Re-format like numbers."
+  },
+  "textNumberFormat": {
+    "message": "Number format:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colorize ratio bar"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Use custom colors for ratio bar."
+  },
+  "textColorizeThumbs": {
+    "message": "Colorize thumbs"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Use custom colors for thumb icons."
+  },
+  "textColorTheme": {
+    "message": "Color theme:"
+  },
+  "textColorTheme1": {
+    "message": "Classic"
+  },
+  "textColorTheme2": {
+    "message": "Accessible"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
+  },
   "textTempUnavailable": {
-    "message": "temporarily unavailable"
+    "message": "Temporarily Unavailable"
   },
   "textUpdate": {
-    "message": "update to"
+    "message": "Update to"
   },
   "version30installed": {
     "message": "Version 3.0.0.1 installed"
@@ -58,5 +100,35 @@
   },
   "considerDonating": {
     "message": "The only thing that keeps the extension running is your donations, please consider supporting the project."
+  },
+  "roundNumbers": {
+    "message": "Show rounded down numbers"
+  },
+  "roundNumbersHover": {
+    "message": "Round down numbers (default YouTube behavior)."
+  },
+  "reformatLikes": {
+    "message": "Re-format like numbers"
+  },
+  "reformatLikesHover": {
+    "message": "Make likes and dislikes format consistent."
+  },
+  "numberFormat": {
+    "message": "Number format:"
+  },
+  "colorizeRatio": {
+    "message": "Colorize ratio bar"
+  },
+  "colorizeRatioHover": {
+    "message": "Use custom colors for the ratio bar."
+  },
+  "colorizeThumbs": {
+    "message": "Colorize thumbs"
+  },
+  "colorizeThumbsHover": {
+    "message": "Use custom colors for the thumb icons."
+  },
+  "colorTheme": {
+    "message": "Color theme:"
   }
 }

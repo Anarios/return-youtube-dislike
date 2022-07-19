@@ -27,7 +27,7 @@ export default {
             subtitle: 'Third party use of this open API is allowed with the following restrictions:',
             bullet1: 'Attribution: ',
             bullet1text: 'This project should be clearly attributed with either a link to this repo or a link to returnyoutubedislike.com',
-            bullet2: 'Rate Limiting',
+            bullet2: 'Rate Limiting: ',
             bullet2text: 'There are per client rate limits in place of 100 per minute and 10,000 per day. This will return a 429 status code indicating that your application should back off',
         },
         url: {
@@ -77,7 +77,7 @@ export default {
         bullet2: 'Why isn\'t the dislike count updating?',
         bullet2text: 'Right now video dislikes are cached and they aren\'t updated very frequently. It varies depending on a video\'s popularity but can take anywhere between a few hours and a few days to update.',
         bullet3: 'How does this work?',
-        bullet3text: 'The extension collects the video ID of the video you are watching, fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you like or dislike a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.',
+        bullet3text: 'The extension collects the video ID of the video you are watching, and fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you like or dislike a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.',
         bullet4: 'Can I share my dislike count with you?',
         bullet4text: 'Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability.',
         bullet5: 'What data do you collect and how is it treated?',
