@@ -94,7 +94,7 @@
     __MSG_legendSettings__
   </legend>
 
-  <label class="switch" data-hover="__MSG_textSettingsHover__">
+  <label class="switch" data-hover="Stop counting your likes and dislikes">
     <input type="checkbox" id="disable_vote_submission"/>
     <span class="slider"/>
     <span class="switchLabel" title="__MSG_textSettings__"
@@ -108,7 +108,7 @@
     <span class="switchLabel">Show rounded down numbers</span>
   </label>
   <br/>
-  <label class="switch" data-hover="Make likes and dislikes format consistent">
+  <label class="switch" data-hover="Make likes and dislikes format consistent (does not work on Shorts)">
     <input type="checkbox" id="number_reformat_likes"/>
     <span class="slider"/>
     <span class="switchLabel">Re-format like numbers</span>
@@ -137,7 +137,7 @@
   </label>
   <br/>
   <div class="custom-select">
-    <label for="color_theme">Color theme:</label>
+    <label for="color_theme" class="label-with-hover-tip" data-hover="">Color theme:</label>
     <select name="color_theme" id="color_theme">
       <option value="classic" id="color_theme_classic">Classic</option>
       <option value="accessible" id="color_theme_accessible">
@@ -165,6 +165,22 @@
           "
     >&nbsp;</span
     >
+  </div>
+  <br/>
+  <label class="switch" data-hover="Display percentage in like/dislike bar tooltip.">
+    <input type="checkbox" id="show_tooltip_percentage"/>
+    <span class="slider"/>
+    <span class="switchLabel">Percentage in like/dislike bar tooltip.</span>
+  </label>
+  <div class="custom-select">
+    <label for="tooltip_percentage_mode" data-hover="Use custom percentage display on hover.">Percent mode:</label>
+    <select name="tooltip_percentage_mode" id="tooltip_percentage_mode">
+      <option value="dash_like" id="tooltip_percentage_mode_dash_like">190&nbsp;/&nbsp;10&nbsp;&nbsp;-&nbsp;&nbsp;95%</option>
+      <option value="dash_dislike" id="tooltip_percentage_mode_dash_dislike">190&nbsp;/&nbsp;10&nbsp;&nbsp;-&nbsp;&nbsp;5%</option>
+      <option value="both" id="tooltip_percentage_mode_both">95%&nbsp;/&nbsp;5%</option>
+      <option value="only_like" id="tooltip_percentage_mode_only_like">95%</option>
+      <option value="only_dislike" id="tooltip_percentage_mode_only_dislike">5%</option>
+    </select>
   </div>
 </fieldset>
 </body>
