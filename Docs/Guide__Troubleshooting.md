@@ -27,8 +27,8 @@ Troubleshooting Guide
 1. Make sure you have the latest version of the extension installed. ([Click Here to check](https://chrome.google.com/webstore/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi#:~:text=Report%20abuse-,Version,-2.0.0.3))
 2. Close all the tabs & restart your browser
 3. Reinstall the extension.
-4. [Check API status]
-5. [Check service worker] (only for chromium based browsers)
+4. [Check API status](#check-api-status)
+5. [Check Cloudflare status](https://www.cloudflarestatus.com/)
 6. [If you are on Windows 7 read this](#install-certificates)
 
 <br>
