@@ -15,7 +15,8 @@ html,
 body {
   background-color: var(--background);
   color: var(--white);
-  min-width: 300px;
+  min-width: 310px;
+  min-height: 350px;
   padding: 0.5em;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 14px;
