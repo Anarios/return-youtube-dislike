@@ -111,14 +111,13 @@ advancedToggle.addEventListener("click", () => {
     adv.style.pointerEvents = "none";
     adv.style.opacity = "0";
     advancedToggle.innerHTML = config.showAdvancedMessage;
-    config.advanced = false;
   } else {
     adv.style.transform = "scale(1)";
     adv.style.pointerEvents = "auto";
     adv.style.opacity = "1";
     advancedToggle.innerHTML = config.hideAdvancedMessage;
-    config.advanced = true;
   }
+  config.advanced = !config.advanced;
 });
 
 initConfig();
