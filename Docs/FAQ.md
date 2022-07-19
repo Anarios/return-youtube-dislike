@@ -1,3 +1,5 @@
+Read this in other languages: [Français](FAQfr.md)
+
 # Frequently Asked Questions
 ## Before asking a question on GitHub or Discord, please refer to this.
 

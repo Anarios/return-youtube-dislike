@@ -2,7 +2,7 @@ import en from "./_locales/en";
 import es from "./_locales/es";
 import tr from "./_locales/tr";
 import ru from "./_locales/ru";
-// import fr from "./_locales/fr";
+import fr from "./_locales/fr";
 // import de from "./_locales/de";
 // ...
 export default {
@@ -48,7 +48,7 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     lang: {
-      locales: { en, es, tr, ru /*, fr, de, ...*/ },
+      locales: { en, es, tr, ru, fr /*, de, ...*/ },
       current: "en",
     },
     theme: {
