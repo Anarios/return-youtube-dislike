@@ -1,6 +1,6 @@
 Return YouTube Dislike restores the ability to see dislikes on YouTube.
 
-If it doesn't work: open extensions tab (chrome://extensions/) disable this extension and enable it again. This is a bug in chromium that breaks the extension in some cases. This should fix most of the problems. Hopefully the chromium team will fix this soon.
+If it doesn't work: open the Extensions tab (chrome://extensions/), disable this extension and enable it again. This should fix most of the problems, since there is a bug in Chromium that breaks the extension in some cases. Hopefully the Chromium team will fix this soon.
 
 Starting December 13th 2021, YouTube removed the ability to see dislikes from their API.
 This extension aims to restore power to users by using a combination of archived like and dislike data, as well as the likes and dislikes made by extension users to show the most accurate ratings.

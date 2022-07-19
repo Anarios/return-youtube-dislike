@@ -1,15 +1,15 @@
 {
   "extensionName": {
-    "message": "Regresar los Dislikes de YouTube"
+    "message": "Return YouTube Dislike"
   },
   "extensionNameBeta": {
     "message": "Return YouTube Dislike Beta"
   },
   "extensionDesc": {
-    "message": "Regresa la posibilidad de ver los dislikes"
+    "message": "Recupera la característica de los «dislikes» («No me gusta»)"
   },
   "textDeveloper": {
-    "message": "por Dmitry Selivanov y la Comunidad"
+    "message": "por Dmitry Selivanov y la comunidad"
   },
   "linkWebsite": {
     "message": "Página web"
@@ -23,16 +23,82 @@
   "linkHelp": {
     "message": "Ayuda"
   },
+  "linkChangelog": {
+    "message": "Historial de cambios"
+  },
   "legendSettings": {
     "message": "Ajustes"
   },
   "textSettings": {
-    "message": "Desactivar los dislikes"
+    "message": "Desactivar envío de votos"
+  },
+  "textLikesDisabled": {
+    "message": "desactivado por el propietario"
   },
   "textSettingsHover": {
-    "message": "Dejar de contar los dislikes."
+    "message": "Deja de contar tus «Me gusta» y «No me gusta»."
+  },
+  "textRoundingNumbers": {
+    "message": "Redondear cifras (comportamiento original de YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Muestra las estadísticas redondeadas."
+  },
+  "textConsistentFormat": {
+    "message": "Unificar formato de votos"
+  },
+  "textConsistentFormatHover": {
+    "message": "Cambia el formato de las cifras de «Me gusta» y «No me gusta»."
+  },
+  "textNumberFormat": {
+    "message": "Formato de cifras:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Cambiar color de barra de votos"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Utiliza colores personalizados para la barra de votos."
+  },
+  "textColorizeThumbs": {
+    "message": "Cambiar color de iconos de pulgares"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Utiliza colores personalizados para los iconos de los pulgares."
+  },
+  "textColorTheme": {
+    "message": "Esquema de colores:"
+  },
+  "textColorTheme1": {
+    "message": "Clásico"
+  },
+  "textColorTheme2": {
+    "message": "Accesible"
+  },
+  "textColorTheme3": {
+    "message": "Neón"
+  },
+  "textTempUnavailable": {
+    "message": "no disponible temporalmente"
   },
   "textUpdate": {
     "message": "actualizar a"
+  },
+  "version30installed": {
+    "message": "Versión 3.0.0.1 instalada"
+  },
+  "whatsnew": {
+    "message": "Novedades"
+  },
+  "shortsSupport": {
+    "message": "Soporte para YouTube Shorts"
+  },
+  "customColors": {
+    "message": "Personalización de colores para la barra de Me gusta y sus botones"
+  },
+  "customNumberFormats": {
+    "message": "Formatos personalizados de números"
+  },
+  "considerDonating": {
+    "message": "Lo único que mantiene esta extensión a flote son vuestros donativos, rogamos que pienses en apoyar al proyecto."
   }
 }
