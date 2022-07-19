@@ -96,31 +96,26 @@
 
   <label class="switch" data-hover="Stop counting your likes and dislikes">
     <input type="checkbox" id="disable_vote_submission"/>
-    <span class="slider"/>
-    <span class="switchLabel" title="__MSG_textSettings__"
-    >__MSG_textSettings__</span
-    >
+    <span class="slider" />
+    <span class="switchLabel" title="__MSG_textSettings__">
+      __MSG_textSettings__
+    </span>
   </label>
   <br/>
-  <label class="switch" data-hover="__MSG_textRoundingNumbersHover__">
+  <label class="switch" data-hover="__MSG_roundNumbersHover__">
     <input type="checkbox" id="number_round_down"/>
-    <span class="slider"/>
-    <span class="switchLabel" title="__MSG_textRoundingNumbers__"
-    >__MSG_textRoundingNumbers__</span
-    >
+    <span class="slider" />
+    <span class="switchLabel">__MSG_roundNumbers__</span>
   </label>
   <br/>
-
-  <label class="switch" data-hover="__MSG_textConsistentFormatHover__">
+  <label class="switch" data-hover="__MSG_reformatLikesHover__">
     <input type="checkbox" id="number_reformat_likes"/>
-    <span class="slider"/>
-    <span class="switchLabel" title="__MSG_textConsistentFormat__"
-    >__MSG_textConsistentFormat__</span
-    >
+    <span class="slider" />
+    <span class="switchLabel">__MSG_reformatLikes__</span>
   </label>
   <br/>
   <div class="custom-select">
-    <label for="number_format">"__MSG_textNumberFormat__"</label>
+    <label for="number_format">__MSG_numberFormat__</label>
     <select name="number_format" id="number_format">
       <option value="compactShort" id="number_format_compactShort"></option>
       <option value="compactLong" id="number_format_compactLong"></option>
@@ -129,24 +124,20 @@
   </div>
   <br/>
   <div class="custom-select">
-    <label class="switch" data-hover="__MSG_textColorizeRatioBarHover__">
+    <label class="switch" data-hover="__MSG_colorizeRatioHover__">
       <input type="checkbox" id="colored_bar"/>
-      <span class="slider"/>
-      <span class="switchLabel" title="__MSG_textColorizeRatioBar__"
-      >__MSG_textColorizeRatioBar__</span
-      >
+      <span class="slider" />
+      <span class="switchLabel">__MSG_colorizeRatio__</span>
     </label>
   </div>
-  <label class="switch" data-hover="__MSG_textColorizeThumbsHover__">
+  <label class="switch" data-hover="__MSG_colorizeThumbsHover__">
     <input type="checkbox" id="colored_thumbs"/>
-    <span class="slider"/>
-    <span class="switchLabel" title="__MSG_textColorizeThumbs__"
-    >__MSG_textColorizeThumbs__</span
-    >
+    <span class="slider" />
+    <span class="switchLabel">__MSG_colorizeThumbs__</span>
   </label>
   <br/>
   <div class="custom-select">
-    <label for="color_theme" class="label-with-hover-tip" data-hover="">__MSG_textColorTheme__</label>
+    <label for="color_theme">__MSG_colorTheme__</label>
     <select name="color_theme" id="color_theme">
       <option value="classic" id="color_theme_classic">"__MSG_textColorTheme1__"</option>
       <option value="accessible" id="color_theme_accessible">"__MSG_textColorTheme2__"</option>
@@ -160,8 +151,7 @@
             width: 1em;
             height: 1em;
           "
-    >&nbsp;</span
-    >
+    >&nbsp;</span>
     <span
       id="color_theme_example_dislike"
       style="
@@ -170,8 +160,7 @@
             width: 1em;
             height: 1em;
           "
-    >&nbsp;</span
-    >
+    >&nbsp;</span>
   </div>
   <br/>
   <label class="switch" data-hover="Display percentage in like/dislike bar tooltip.">

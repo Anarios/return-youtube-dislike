@@ -90,15 +90,45 @@
     "message": "Novedades"
   },
   "shortsSupport": {
-    "message": "Soporte para YouTube Shorts"
+    "message": "Soporte de YouTube Shorts"
   },
   "customColors": {
-    "message": "Personalización de colores para la barra de Me gusta y sus botones"
+    "message": "Colores personalizados para la barra y los botones que no me gustan"
   },
   "customNumberFormats": {
-    "message": "Formatos personalizados de números"
+    "message":"Formatos de números personalizados"
   },
   "considerDonating": {
-    "message": "Lo único que mantiene esta extensión a flote son vuestros donativos, rogamos que pienses en apoyar al proyecto."
+    "message": "Lo único que mantiene la extensión en funcionamiento son sus donaciones, considere apoyar el proyecto."
+  },
+  "roundNumbers": {
+    "message": "Mostrar números redondeados hacia abajo"
+  },
+  "roundNumbersHover": {
+    "message": "Redondear números hacia abajo (comportamiento predeterminado de YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Reformatear como números"
+  },
+  "reformatLikesHover": {
+    "message": "Haz que el formato de like y dislike sea consistente."
+  },
+  "numberFormat": {
+    "message": "Formato de número:"
+  },
+  "colorizeRatio": {
+    "message": "Colorear barra de relación"
+  },
+  "colorizeRatioHover": {
+    "message": "Usar colores personalizados para la barra de proporción."
+  },
+  "colorizeThumbs": {
+    "message": "Colorear los botones likes y dislike"
+  },
+  "colorizeThumbsHover": {
+    "message": "Usar colores personalizados para los íconos de los botones."
+  },
+  "colorTheme": {
+    "message": "Combinación de colores:"
   }
 }

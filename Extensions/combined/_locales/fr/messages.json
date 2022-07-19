@@ -40,5 +40,53 @@
   },
   "textUpdate": {
     "message": "mettre à jour vers"
+  },
+  "version30installed": {
+    "message": "Version 3.0.0.1 installée"
+  },
+  "whatsnew": {
+    "message": "Quoi de neuf"
+  },
+  "shortsSupport": {
+    "message": "Prise en charge des YouTube Shorts"
+  },
+  "customColors": {
+    "message": "Couleurs personnalisées pour la barre du dislike et les boutons"
+  },
+  "customNumberFormats": {
+    "message": "Formats numériques personnalisés"
+  },
+  "considerDonating": {
+    "message": "La seule chose qui permet à l'extension de fonctionner est vos dons, veuillez envisager de soutenir le projet."
+  },
+  "roundNumbers": {
+    "message": "Afficher les nombres arrondis"
+  },
+  "roundNumbersHover": {
+    "message": "Arrondir les nombres à la baisse (comportement par défaut de YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Formater le nombre de likes"
+  },
+  "reformatLikesHover": {
+    "message": "Rend la valeur des statistiques plus cohérente."
+  },
+  "numberFormat": {
+    "message": "Format numérique:"
+  },
+  "colorizeRatio": {
+    "message": "Coloriser la barre de ratio"
+  },
+  "colorizeRatioHover": {
+    "message": "Utilisez des couleurs personnalisées pour la barre de ratio."
+  },
+  "colorizeThumbs": {
+    "message": "Mettre en couleur les boutons like et dislike"
+  },
+  "colorizeThumbsHover": {
+    "message": "Utiliser des couleurs personnalisées pour les boutons like et dislike."
+  },
+  "colorTheme": {
+    "message": "Schéma de couleur:"
   }
 }
