@@ -100,6 +100,14 @@ export default {
         lang: "Русский",
       },
       {
+        tag: "Fjuro#0179",
+        lang: "Čeština",
+      },
+      {
+        tag: "ShaCHO36P",
+        lang: "日本語",
+      },
+      {
         tag: "NiniKo",
         lang: "Français",
       },
