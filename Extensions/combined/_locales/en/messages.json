@@ -36,7 +36,7 @@
     "message": "Stops counting your likes and dislikes."
   },
   "textTempUnavailable": {
-    "message": "temporarily unavailable"
+    "message": "temp n/a"
   },
   "textUpdate": {
     "message": "update to"
