@@ -93,5 +93,5 @@ You can support this project by donating to us on the link below:
 
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
-[Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
+**[SPONSOR US](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)**
 
