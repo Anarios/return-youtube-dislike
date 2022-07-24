@@ -24,6 +24,7 @@ let extConfig = {
   numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
   numberDisplayReformatLikes: false,
+  starRating: true,
 };
 
 let storedData = {
@@ -200,7 +201,9 @@ function processResponse(response, storedData) {
       getDislikeButton().style.color = getColorFromTheme(false);
     }
   }
-  createStarRating(response.rating, isMobile());
+  if (extConfig.starRating) {
+    createStarRating(response.rating, isMobile());
+  }
 }
 
 // Tells the user if the API is down
@@ -255,6 +258,7 @@ function initExtConfig() {
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
   initializeNumberDisplayReformatLikes();
+  initializeStarRating();
 }
 
 function initializeDisableVoteSubmission() {
@@ -323,6 +327,16 @@ function initializeNumberDisplayReformatLikes() {
       getBrowser().storage.sync.set({ numberDisplayReformatLikes: false });
     } else {
       extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
+    }
+  });
+}
+
+function initializeStarRating() {
+  getBrowser().storage.sync.get(["starRating"], (res) => {
+    if (res.starRating === undefined) {
+      getBrowser().storage.sync.set({ starRating: true });
+    } else {
+      extConfig.starRating = res.starRating;
     }
   });
 }
