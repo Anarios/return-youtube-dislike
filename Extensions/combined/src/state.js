@@ -42,6 +42,10 @@ function isShorts() {
   return location.pathname.startsWith("/shorts");
 }
 
+function isNewDesign() {
+  return document.getElementById("comment-teaser") !== null;
+}
+
 let mutationObserver = new Object();
 
 if (isShorts() && mutationObserver.exists !== true) {
@@ -356,6 +360,7 @@ export {
   isShorts,
   isVideoDisliked,
   isVideoLiked,
+  isNewDesign,
   getState,
   setState,
   setInitialState,

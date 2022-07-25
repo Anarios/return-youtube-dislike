@@ -1,5 +1,5 @@
 import { getButtons } from "./buttons";
-import { extConfig, isMobile, isLikesDisabled, isShorts } from "./state";
+import { extConfig, isMobile, isLikesDisabled, isNewDesign, isShorts } from "./state";
 import { cLog, getColorFromTheme } from "./utils";
 
 function createRateBar(likes, dislikes) {
@@ -17,6 +17,7 @@ function createRateBar(likes, dislikes) {
     var likePercentage = parseFloat(widthPercent.toFixed(1));
     const dislikePercentage = (100 - likePercentage).toLocaleString();
     likePercentage = likePercentage.toLocaleString();
+
 
     if (extConfig.showTooltipPercentage) {
       var tooltipInnerHTML;
@@ -38,8 +39,7 @@ function createRateBar(likes, dislikes) {
       }
     } else {
       tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`
-    }
-    
+    }  
     
     if (!isShorts()) {
       if (!rateBar && !isMobile()) {
@@ -51,12 +51,12 @@ function createRateBar(likes, dislikes) {
         }
 
         (
-          document.getElementById("menu-container") ||
+         document.getElementById(isNewDesign() ? "actions-inner" : "menu-container") ||
           document.querySelector("ytm-slim-video-action-bar-renderer")
         ).insertAdjacentHTML(
           "beforeend",
           `
-              <div class="ryd-tooltip" style="width: ${widthPx}px">
+              <div class="ryd-tooltip" style="width: ${widthPx}px${isNewDesign() ? "; margin-bottom: -2px" : ""}">
               <div class="ryd-tooltip-bar-container">
                 <div
                     id="ryd-bar-container"
@@ -74,6 +74,12 @@ function createRateBar(likes, dislikes) {
               </div>
       `
         );
+        
+      // Add border between info and comments
+      if (isNewDesign()) {
+        let descriptionAndActionsElement = document.getElementById("top-row");
+        descriptionAndActionsElement.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer)";
+        descriptionAndActionsElement.style.paddingBottom = "10px";
       } else {
         document.getElementById("ryd-bar-container").style.width = widthPx + "px";
         document.getElementById("ryd-bar").style.width = widthPercent + "%";
