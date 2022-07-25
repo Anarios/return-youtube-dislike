@@ -118,7 +118,9 @@ function storageChangeHandler(changes, area) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
-    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+    handleNumberDisplayReformatLikesChangeEvent(
+      changes.numberDisplayReformatLikes.newValue
+    );
   }
 }
 

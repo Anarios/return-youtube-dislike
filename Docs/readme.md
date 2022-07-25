@@ -20,7 +20,6 @@ Read this in other languages: [Français](readmefr.md)
 
 <br>
 
-
 ## FAQs
 
 - [General](https://github.com/Anarios/return-youtube-dislike/blob/main/Guides/FAQ.md)

@@ -26,6 +26,6 @@ Cette fonctionnalité sera facultative et fera l'objet d'une demande d'adhésion
 
 Nous avons mis en place des mesures pour prévenir les attaques de robots et nous allons continuer à travailler pour améliorer l'efficacité du système de prévention des robots : cela nous aidera à faire en sorte que le nombre de dislikes soit une bonne représentation du nombre réel. Bien entendu, il ne sera jamais précis à 100 %, c'est donc à vous de décider si vous lui faites confiance ou non.
 
-### Pourquoi ne pas partager le code du backend ? 
+### Pourquoi ne pas partager le code du backend ?
 
 Nous la partagerons à un moment donné - mais il n'y a pas vraiment de raison de la partager pour le moment. Cela donne un faux sentiment de sécurité, car dans un système zero-trust, nous pourrions tout aussi bien publier une version et en déployer une autre. Il y a de nombreuses raisons de garder le code caché, notamment pour lutter contre le spam. Cacher/dissimuler le code de traitement du spam est une pratique assez standard.

@@ -59,34 +59,34 @@
   "considerDonating": {
     "message": "この拡張機能を存続させることができるのは,皆様からの寄付だけです。"
   },
-  "roundNumbers":{
-    "message":"四捨五入された数値を表示"
+  "roundNumbers": {
+    "message": "四捨五入された数値を表示"
   },
-  "roundNumbersHover":{
+  "roundNumbersHover": {
     "message": "カウント値を四捨五入します（これはYouTubeのデフォルトオプションです）。"
   },
-  "reformatLikes":{
-    "message":"いいねの数をフォーマットする"
+  "reformatLikes": {
+    "message": "いいねの数をフォーマットする"
   },
-  "reformatLikesHover":{
-    "message":"統計値の一貫性を高めます。"
+  "reformatLikesHover": {
+    "message": "統計値の一貫性を高めます。"
   },
-  "numberFormat":{
-    "message":"数値形式"
+  "numberFormat": {
+    "message": "数値形式"
   },
-  "colorizeRatio":{
-    "message":"嫌いなバーに色を付ける"
+  "colorizeRatio": {
+    "message": "嫌いなバーに色を付ける"
   },
-  "colorizeRatioHover":{
-    "message":"嫌いなバーをカスタムカラーで色付けします。"
+  "colorizeRatioHover": {
+    "message": "嫌いなバーをカスタムカラーで色付けします。"
   },
-  "colorizeThumbs":{
-    "message":"ボタンに色を付ける"
+  "colorizeThumbs": {
+    "message": "ボタンに色を付ける"
   },
-  "colorizeThumbsHover":{
-    "message":"カスタムカラーのボタンの色が好きで嫌いです。"
+  "colorizeThumbsHover": {
+    "message": "カスタムカラーのボタンの色が好きで嫌いです。"
   },
-  "colorTheme":{
+  "colorTheme": {
     "message": "配色："
   }
 }

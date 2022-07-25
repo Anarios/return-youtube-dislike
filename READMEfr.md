@@ -20,8 +20,8 @@ Lisez ceci dans d'autres langues : [English](README.md), [Español](READMEes.md)
 
 ## Le récit des événements
 
-Le 10 novembre 2021, Google [a annoncé](https://blog.youtube/news-and-events/update-to-youtube/) que le compteur de dislike sur YouTube serait supprimé.  
-  
+Le 10 novembre 2021, Google [a annoncé](https://blog.youtube/news-and-events/update-to-youtube/) que le compteur de dislike sur YouTube serait supprimé.
+
 En outre, le champ `dislike` de l'API YouTube a été [supprimé](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) le 13 décembre 2021, supprimant ainsi toute possibilité de juger de la qualité du contenu d'une vidéo avant de la regarder.
 
 ## Ce qu'il fait
@@ -39,42 +39,39 @@ Vous pouvez en savoir plus sur notre site web à l'adresse suivante : [returnyou
 L'utilisation par des tiers de cette API ouverte est autorisée avec les restrictions suivantes :
 
 - **Attribution**: Ce projet doit être clairement nommé avec un lien vers [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Limitation des requêtes**: Il y a des limites de requêtes par client en place qui sont de 100 requêtes par minute et 10 000 par jour. Nous renverrons un code d'erreur *429* indiquant que votre application devrait se calmer.
+- **Limitation des requêtes**: Il y a des limites de requêtes par client en place qui sont de 100 requêtes par minute et 10 000 par jour. Nous renverrons un code d'erreur _429_ indiquant que votre application devrait se calmer.
 
 L'API est accessible via l'URL de base suivante:  
-https://returnyoutubedislikeapi.com  
+https://returnyoutubedislikeapi.com
 
 La liste des endpoints est disponible ici:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Obtenir les likes
+
 Exemple pour obtenir les likes d'une vidéo YouTube avec un ID donné:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
 {
-    "id": "kxOuG8jMIgI",
-    "dateCreated": "2021-12-20T12:25:54.418014Z",
-    "likes": 27326,
-    "dislikes": 498153,
-    "rating": 1.212014408444885,
-    "viewCount": 3149885,
-    "deleted": false
+  "id": "kxOuG8jMIgI",
+  "dateCreated": "2021-12-20T12:25:54.418014Z",
+  "likes": 27326,
+  "dislikes": 498153,
+  "rating": 1.212014408444885,
+  "viewCount": 3149885,
+  "deleted": false
 }
 ```
 
-
-Si aucunne vidéo YouTube à cet ID, il sera retourner le code d'erreur *404* "Not Found".  
-Un ID YouTube invilide renverra *400* "Bad Request".
-
-
+Si aucunne vidéo YouTube à cet ID, il sera retourner le code d'erreur _404_ "Not Found".  
+Un ID YouTube invilide renverra _400_ "Bad Request".
 
 <!---
 ## Documentation de l'API
 
 Vous pouvez consulter toute la documentation sur notre site web.
 [https://returnyoutubedislike.com/docs](https://returnyoutubedislike.com/docs) -->
-
 
 ## Contribution
 
@@ -87,6 +84,7 @@ Vous pouvez soutenir ce projet en faisant un don grâce au lien ci-dessous :
 [Donner](https://returnyoutubedislike.com/donate)
 
 ## Sponsors
+
 [Piepacker](https://piepacker.com)
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)

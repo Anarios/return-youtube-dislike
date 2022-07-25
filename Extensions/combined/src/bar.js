@@ -1,5 +1,11 @@
 import { getButtons } from "./buttons";
-import { extConfig, isMobile, isLikesDisabled, isNewDesign, isShorts } from "./state";
+import {
+  extConfig,
+  isMobile,
+  isLikesDisabled,
+  isNewDesign,
+  isShorts,
+} from "./state";
 import { cLog, getColorFromTheme } from "./utils";
 
 function createRateBar(likes, dislikes) {
@@ -18,29 +24,28 @@ function createRateBar(likes, dislikes) {
     const dislikePercentage = (100 - likePercentage).toLocaleString();
     likePercentage = likePercentage.toLocaleString();
 
-
     if (extConfig.showTooltipPercentage) {
       var tooltipInnerHTML;
-      switch (extConfig.tooltipPercentageMode) {        
+      switch (extConfig.tooltipPercentageMode) {
         case "dash_dislike":
-          tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`
-        break;
+          tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`;
+          break;
         case "both":
-          tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`
+          tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`;
           break;
         case "only_like":
-          tooltipInnerHTML = `${likePercentage}%`
+          tooltipInnerHTML = `${likePercentage}%`;
           break;
         case "only_dislike":
-          tooltipInnerHTML = `${dislikePercentage}%`
+          tooltipInnerHTML = `${dislikePercentage}%`;
           break;
         default: // dash_like
-          tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`
+          tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`;
       }
     } else {
-      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`
-    }  
-    
+      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+    }
+
     if (!isShorts()) {
       if (!rateBar && !isMobile()) {
         let colorLikeStyle = "";
@@ -51,12 +56,15 @@ function createRateBar(likes, dislikes) {
         }
 
         (
-         document.getElementById(isNewDesign() ? "actions-inner" : "menu-container") ||
-          document.querySelector("ytm-slim-video-action-bar-renderer")
+          document.getElementById(
+            isNewDesign() ? "actions-inner" : "menu-container"
+          ) || document.querySelector("ytm-slim-video-action-bar-renderer")
         ).insertAdjacentHTML(
           "beforeend",
           `
-              <div class="ryd-tooltip" style="width: ${widthPx}px${isNewDesign() ? "; margin-bottom: -2px" : ""}">
+              <div class="ryd-tooltip" style="width: ${widthPx}px${
+            isNewDesign() ? "; margin-bottom: -2px" : ""
+          }">
               <div class="ryd-tooltip-bar-container">
                 <div
                     id="ryd-bar-container"
@@ -74,18 +82,20 @@ function createRateBar(likes, dislikes) {
               </div>
       `
         );
-        
-      // Add border between info and comments
-      if (isNewDesign()) {
-        let descriptionAndActionsElement = document.getElementById("top-row");
-        descriptionAndActionsElement.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer)";
-        descriptionAndActionsElement.style.paddingBottom = "10px";
+
+        // Add border between info and comments
+        if (isNewDesign()) {
+          let descriptionAndActionsElement = document.getElementById("top-row");
+          descriptionAndActionsElement.style.borderBottom =
+            "1px solid var(--yt-spec-10-percent-layer)";
+          descriptionAndActionsElement.style.paddingBottom = "10px";
+        }
       } else {
-        document.getElementById("ryd-bar-container").style.width = widthPx + "px";
+        document.getElementById("ryd-bar-container").style.width =
+          widthPx + "px";
         document.getElementById("ryd-bar").style.width = widthPercent + "%";
-        document.querySelector(
-          "#ryd-dislike-tooltip > #tooltip"
-        ).innerHTML = tooltipInnerHTML;
+        document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML =
+          tooltipInnerHTML;
         if (extConfig.coloredBar) {
           document.getElementById("ryd-bar-container").style.backgroundColor =
             getColorFromTheme(false);
@@ -97,7 +107,7 @@ function createRateBar(likes, dislikes) {
   } else {
     cLog("removing bar");
     let ratebar = document.getElementById("ryd-bar-container");
-    if(ratebar) {
+    if (ratebar) {
       ratebar.parentNode.removeChild(ratebar);
     }
   }

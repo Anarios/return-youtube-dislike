@@ -3,9 +3,8 @@ name: commentCommands
 on:
   issue_comment:
     types: created
-    
-jobs:
 
+jobs:
   assign-commenter:
     runs-on: ubuntu-latest
     if: |
@@ -35,7 +34,7 @@ jobs:
           -H "Accept: application/vnd.github+json" \
           -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
           https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments \
-          -d '{"body":"This issue is put on hold due to low quality. No reviews or fixes will be performed at this time. Eventually, it will be closed. While we appreciate your effort writing, we are not able to further investigate it. Please improve it by writing a better title or providing more details, and you may re-open it."}'    
+          -d '{"body":"This issue is put on hold due to low quality. No reviews or fixes will be performed at this time. Eventually, it will be closed. While we appreciate your effort writing, we are not able to further investigate it. Please improve it by writing a better title or providing more details, and you may re-open it."}'
   add-label-duplicate:
     runs-on: ubuntu-latest
     if: |

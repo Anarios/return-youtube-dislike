@@ -206,7 +206,8 @@ function processResponse(response, storedData) {
       getDislikeButton().style.color = getColorFromTheme(false);
     }
   }
-  createStarRating(response.rating, isMobile());
+  //Temporary disabling this - it breaks all places where getButtons()[1] is used
+  // createStarRating(response.rating, isMobile());
 }
 
 // Tells the user if the API is down

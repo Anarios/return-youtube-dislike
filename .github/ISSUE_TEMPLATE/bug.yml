@@ -3,65 +3,63 @@ description: File a bug report!
 # title: "(Bug): "
 labels: ["bug"]
 body:
-- type: input
-  attributes:
-    label: Browser
-    description: Which browser are you using?
-    placeholder: "Example: Google Chrome"
-  validations:
-    required: true
-- type: input
-  attributes:
-    label: Browser Version
-    description: Which browser version are you using?
-    placeholder: "Example: Chromium v95"
-  validations:
-    required: true
-- type: dropdown
-  attributes:
-    label: "Extension or Userscript?"
-    options: 
-      - Extension
-      - Userscript
-  validations:
-    required: true
-- type: input
-  attributes:
-    label: Extension/Userscript Version
-    description: Which extension/userscript version are you using?
-    placeholder: "Example: Version 0.0.0.1"
-  validations:
-    required: true
-- type: input
-  attributes:
-    label: Video link where you see the problem
-    description: Video link where you see the problem
-    placeholder: "Example: https://www.youtube.com/watch?v=s4-gMgdsnHQ"
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: What happened?
-    description: Also tell us, what did you expect to happen?
-    placeholder: Tell us what you see!
-    value: "A bug happened!"
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: How to reproduce/recreate?
-    description: Detailed steps to reproduce/recreate it.
-    placeholder: "We need to be able to reproduce/recreate that bug/event in order to fix it. Please write the steps in detail."
-    value: "Tell us how it happened with detailed steps for us."
-  validations:
-    required: true
-- type: dropdown
-  attributes:
-    label: "Will you be available for follow-up questions to help developers diagnose & fix the issue?"
-    options: 
-      - "Yes"
-      - "No"
-  validations:
-    required: true
-
-    
+  - type: input
+    attributes:
+      label: Browser
+      description: Which browser are you using?
+      placeholder: "Example: Google Chrome"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Browser Version
+      description: Which browser version are you using?
+      placeholder: "Example: Chromium v95"
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: "Extension or Userscript?"
+      options:
+        - Extension
+        - Userscript
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Extension/Userscript Version
+      description: Which extension/userscript version are you using?
+      placeholder: "Example: Version 0.0.0.1"
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Video link where you see the problem
+      description: Video link where you see the problem
+      placeholder: "Example: https://www.youtube.com/watch?v=s4-gMgdsnHQ"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: How to reproduce/recreate?
+      description: Detailed steps to reproduce/recreate it.
+      placeholder: "We need to be able to reproduce/recreate that bug/event in order to fix it. Please write the steps in detail."
+      value: "Tell us how it happened with detailed steps for us."
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: "Will you be available for follow-up questions to help developers diagnose & fix the issue?"
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true

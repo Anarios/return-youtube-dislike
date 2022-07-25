@@ -1,38 +1,42 @@
 import { cLog } from "./utils";
 
 function createStarRating(rating, isMobile) {
-    let starRating = document.createElement('label');
+  let starRating = document.createElement("label");
 
-    let starSlider = document.createElement("input");
-    starSlider.setAttribute("class", "rating");
-    starSlider.setAttribute("max", "5");
-    starSlider.setAttribute("readonly", "");
-    starSlider.setAttribute("style", `--fill:rgb(255, 215, 0);--value:${rating.toString()};};background-color: transparent;`);
-    starSlider.setAttribute("type", "range");
-    
-    starRating.appendChild(starSlider);
-    
-    let YTLikeButton;
+  let starSlider = document.createElement("input");
+  starSlider.setAttribute("class", "rating");
+  starSlider.setAttribute("max", "5");
+  starSlider.setAttribute("readonly", "");
+  starSlider.setAttribute(
+    "style",
+    `--fill:rgb(255, 215, 0);--value:${rating.toString()};};background-color: transparent;`
+  );
+  starSlider.setAttribute("type", "range");
 
-    if (isMobile){
-      YTLikeButton = document.querySelector('#app > div.page-container > ytm-watch > ytm-single-column-watch-next-results-renderer > ytm-slim-video-metadata-section-renderer > ytm-slim-video-action-bar-renderer > div > ytm-slim-metadata-toggle-button-renderer:nth-child(1)');
-    } else {
-      YTLikeButton = document.querySelector('#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(1)');
-    }
-    
-    YTLikeButton.insertAdjacentElement('afterend', starRating);
+  starRating.appendChild(starSlider);
 
-    try {
-      let YTBar = document.querySelector('#ryd-bar-container');
-      YTBar.setAttribute("style", "width: 190%; height: 2px;");
-    }
-    catch(err) {
-      cLog("RateBar Not Present");
-    }
+  let YTLikeButton;
 
+  if (isMobile) {
+    YTLikeButton = document.querySelector(
+      "#app > div.page-container > ytm-watch > ytm-single-column-watch-next-results-renderer > ytm-slim-video-metadata-section-renderer > ytm-slim-video-action-bar-renderer > div > ytm-slim-metadata-toggle-button-renderer:nth-child(1)"
+    );
+  } else {
+    YTLikeButton = document.querySelector(
+      "#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(1)"
+    );
+  }
 
+  YTLikeButton.insertAdjacentElement("afterend", starRating);
 
-    let style = `<style>
+  try {
+    let YTBar = document.querySelector("#ryd-bar-container");
+    YTBar.setAttribute("style", "width: 190%; height: 2px;");
+  } catch (err) {
+    cLog("RateBar Not Present");
+  }
+
+  let style = `<style>
 
 .rating {
     --dir: right;
@@ -94,8 +98,7 @@ function createStarRating(rating, isMobile) {
 
 </style>`;
 
-document.head.insertAdjacentHTML("beforeend", style);
+  document.head.insertAdjacentHTML("beforeend", style);
+}
 
-  }
-
-  export { createStarRating };
+export { createStarRating };

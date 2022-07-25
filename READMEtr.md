@@ -48,33 +48,30 @@ Kullanılabilir endpoint'lerin listesi burada mevcuttur:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Oylamaları Elde Etme
+
 Belirli bir YouTube video ID'sinin oylamalarını elde etmek için bir örnek:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
 {
-    "id": "kxOuG8jMIgI",
-    "dateCreated": "2021-12-20T12:25:54.418014Z",
-    "likes": 27326,
-    "dislikes": 498153,
-    "rating": 1.212014408444885,
-    "viewCount": 3149885,
-    "deleted": false
+  "id": "kxOuG8jMIgI",
+  "dateCreated": "2021-12-20T12:25:54.418014Z",
+  "likes": 27326,
+  "dislikes": 498153,
+  "rating": 1.212014408444885,
+  "viewCount": 3149885,
+  "deleted": false
 }
 ```
 
-
-Hiçbir mevcut YouTube ID'si *404* "Not Found" durum kodunu döndürmez.
-Yanlış oluşturulmuş bir YouTube ID'si *400* "Bad Request" durum kodunu döndürür.
-
-
+Hiçbir mevcut YouTube ID'si _404_ "Not Found" durum kodunu döndürmez.
+Yanlış oluşturulmuş bir YouTube ID'si _400_ "Bad Request" durum kodunu döndürür.
 
 <!---
 ## API Belgelemesi
 
 Tüm belgelemeleri sitemizden inceleyebilirsiniz.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
-
 
 ## Katkıda Bulunma
 
@@ -87,6 +84,7 @@ Aşağıdaki bağlantıdan bize bağış yapabilir ve bu projeye destek olabilir
 [Bağış Yapın](https://returnyoutubedislike.com/donate)
 
 ## Sponsorlar
+
 [Piepacker](https://piepacker.com)
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)

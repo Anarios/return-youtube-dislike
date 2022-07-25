@@ -24,7 +24,7 @@ const config = {
     donate: "https://returnyoutubedislike.com/donate",
     faq: "https://returnyoutubedislike.com/faq",
     help: "https://returnyoutubedislike.com/help",
-    changelog: "/changelog/3/changelog_3.0.html"
+    changelog: "/changelog/3/changelog_3.0.html",
   },
 };
 
@@ -90,17 +90,23 @@ document.getElementById("number_format").addEventListener("change", (ev) => {
   chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
 });
 
-document.getElementById("show_tooltip_percentage").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
-});
+document
+  .getElementById("show_tooltip_percentage")
+  .addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
+  });
 
-document.getElementById("tooltip_percentage_mode").addEventListener("change", (ev) => {
-  chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
-});
+document
+  .getElementById("tooltip_percentage_mode")
+  .addEventListener("change", (ev) => {
+    chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
+  });
 
-document.getElementById("number_reformat_likes").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
-});
+document
+  .getElementById("number_reformat_likes")
+  .addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
+  });
 
 /*   Advanced Toggle   */
 const advancedToggle = document.getElementById("advancedToggle");
@@ -146,7 +152,7 @@ function initializeVersionNumber() {
     .then((json) => {
       if (compareVersions(json.version, version)) {
         document.getElementById("ext-update").innerHTML =
-        chrome.i18n.getMessage("textUpdate") + " v" + json.version;
+          chrome.i18n.getMessage("textUpdate") + " v" + json.version;
         document.getElementById("ext-update").style.padding = ".25rem .5rem";
       }
     });
@@ -203,17 +209,17 @@ function initializeNumberDisplayRoundDown() {
   });
 }
 
-function initializeTooltipPercentage(){
+function initializeTooltipPercentage() {
   chrome.storage.sync.get(["showTooltipPercentage"], (res) => {
     handleShowTooltipPercentageChangeEvent(res.showTooltipPercentage);
   });
-};
+}
 
 function initializeTooltipPercentageMode() {
   chrome.storage.sync.get(["tooltipPercentageMode"], (res) => {
     handleTooltipPercentageModeChangeEvent(res.tooltipPercentageMode);
   });
-};
+}
 
 function initializeNumberDisplayFormat() {
   chrome.storage.sync.get(["numberDisplayFormat"], (res) => {
@@ -269,10 +275,14 @@ function storageChangeHandler(changes, area) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
   if (changes.showTooltipPercentage !== undefined) {
-    handleShowTooltipPercentageChangeEvent(changes.showTooltipPercentage.newValue);
+    handleShowTooltipPercentageChangeEvent(
+      changes.showTooltipPercentage.newValue
+    );
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
-    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+    handleNumberDisplayReformatLikesChangeEvent(
+      changes.numberDisplayReformatLikes.newValue
+    );
   }
 }
 
@@ -324,7 +334,7 @@ function handleNumberDisplayFormatChangeEvent(value) {
 function handleShowTooltipPercentageChangeEvent(value) {
   config.showTooltipPercentage = value;
   document.getElementById("show_tooltip_percentage").checked = value;
-};
+}
 
 function handleTooltipPercentageModeChangeEvent(value) {
   if (!value) {
@@ -335,7 +345,7 @@ function handleTooltipPercentageModeChangeEvent(value) {
   document
     .getElementById("tooltip_percentage_mode")
     .querySelector('option[value="' + value + '"]').selected = true;
-};
+}
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
   config.numberDisplayReformatLikes = value;

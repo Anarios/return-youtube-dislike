@@ -20,15 +20,15 @@
 
 ## これまでの経緯
 
-2021年10月10日、GoogleはYouTubeの低評価を非表示にすると[発表しました](https://blog.youtube/news-and-events/update-to-youtube/)。
+2021 年 10 月 10 日、Google は YouTube の低評価を非表示にすると[発表しました](https://blog.youtube/news-and-events/update-to-youtube/)。
 
-そして2021年12月13日、YouTube APIからも低評価が[削除]((https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts))され、動画のクオリティを判断する手段がなくなってしまいました。
+そして 2021 年 12 月 13 日、YouTube API からも低評価が[削除](<(https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts)>)され、動画のクオリティを判断する手段がなくなってしまいました。
 
 ## What it Does
 
 <!-- この部分の翻訳が微妙? -->
 
-YouTube APIから低評価が削除されたことにより、バックエンドは拡張機能のユーザーをもとにスクレイピングされたデータと組み合わせて表示するように切り替わりました
+YouTube API から低評価が削除されたことにより、バックエンドは拡張機能のユーザーをもとにスクレイピングされたデータと組み合わせて表示するように切り替わりました
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
@@ -38,45 +38,42 @@ YouTube APIから低評価が削除されたことにより、バックエンド
 
 ## API ドキュメント
 
-サードパーティは以下の制限のもとでAPIを利用できます: 
+サードパーティは以下の制限のもとで API を利用できます:
 
 - **帰属**: [returnyoutubedislike.com](https://returnyoutubedislike.com/) へのリンクを明確に表記してください。
-- **レート制限**: クライアントごとに1分あたり100回、1日あたり10000回という制限があります。制限に達すると*429*コードが返されます。
+- **レート制限**: クライアントごとに 1 分あたり 100 回、1 日あたり 10000 回という制限があります。制限に達すると*429*コードが返されます。
 
-APIは以下のBase URLでアクセスできます:  
-https://returnyoutubedislikeapi.com  
+API は以下の Base URL でアクセスできます:  
+https://returnyoutubedislikeapi.com
 
 利用可能なエンドポイントはこちらを参照してください:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### 評価を取得
-APIを利用してYouTube video IDから評価を取得する例です:  
+
+API を利用して YouTube video ID から評価を取得する例です:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
 {
-    "id": "kxOuG8jMIgI",
-    "dateCreated": "2021-12-20T12:25:54.418014Z",
-    "likes": 27326,
-    "dislikes": 498153,
-    "rating": 1.212014408444885,
-    "viewCount": 3149885,
-    "deleted": false
+  "id": "kxOuG8jMIgI",
+  "dateCreated": "2021-12-20T12:25:54.418014Z",
+  "likes": 27326,
+  "dislikes": 498153,
+  "rating": 1.212014408444885,
+  "viewCount": 3149885,
+  "deleted": false
 }
 ```
 
-
-存在しないYouTube IDの場合 *404* "Not Found" が返されます。
-不正なフォーマットのYouTube IDの場合 *400* "Bad Request"が返されます。
-
-
+存在しない YouTube ID の場合 _404_ "Not Found" が返されます。
+不正なフォーマットの YouTube ID の場合 _400_ "Bad Request"が返されます。
 
 <!---
 ## API ドキュメント
 
 APIの完全なドキュメントは公式サイトを参照してください。
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
-
 
 ## 貢献する
 
@@ -89,6 +86,7 @@ APIの完全なドキュメントは公式サイトを参照してください�
 [寄付](https://returnyoutubedislike.com/donate)
 
 ## スポンサー
+
 [Piepacker](https://piepacker.com)
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
@@ -96,4 +94,3 @@ APIの完全なドキュメントは公式サイトを参照してください�
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
 [Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
-

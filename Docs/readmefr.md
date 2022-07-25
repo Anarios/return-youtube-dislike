@@ -19,7 +19,6 @@ Lisez ceci dans d'autres langues : [English](readme.md)
 
 <br>
 
-
 ## FAQ
 
 - [Général](FAQfr.md)

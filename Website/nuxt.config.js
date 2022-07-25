@@ -50,8 +50,7 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     lang: {
-
-      locales: { en, es, tr, ru, cs, ja, fr, /* de, ...*/ },
+      locales: { en, es, tr, ru, cs, ja, fr /* de, ...*/ },
       current: "en",
     },
     theme: {

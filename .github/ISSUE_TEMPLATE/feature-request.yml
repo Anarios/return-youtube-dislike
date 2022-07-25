@@ -3,37 +3,36 @@ description: Request or suggest a new feature!
 # title: "(Feature Request): "
 labels: ["enhancement"]
 body:
-- type: dropdown
-  attributes:
-    label: Extension or Userscript?
-    options: 
-      - Extension
-      - Userscript
-      - Both
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: Request or suggest a new feature!
-    placeholder: I want to suggest...
-  validations:
-    required: true
-- type: textarea
-  attributes:
-    label: Ways to implement this!
-    placeholder: We can implement it by...
-- type: checkboxes
-  attributes:
-    label: Can you work on this?
-    options:
-      - label: "Yes"
-      - label: "No"
-- type: dropdown
-  attributes:
-    label: "Will you be available for follow-up questions to help developers implement this?"
-    options: 
-      - "Yes"
-      - "No"
-  validations:
-    required: true
-  
+  - type: dropdown
+    attributes:
+      label: Extension or Userscript?
+      options:
+        - Extension
+        - Userscript
+        - Both
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Request or suggest a new feature!
+      placeholder: I want to suggest...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Ways to implement this!
+      placeholder: We can implement it by...
+  - type: checkboxes
+    attributes:
+      label: Can you work on this?
+      options:
+        - label: "Yes"
+        - label: "No"
+  - type: dropdown
+    attributes:
+      label: "Will you be available for follow-up questions to help developers implement this?"
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true

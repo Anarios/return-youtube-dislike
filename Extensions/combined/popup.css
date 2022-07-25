@@ -69,8 +69,8 @@ button:hover {
   border-radius: 0.25rem;
 }
 
-
-.switch::before, .label-with-hover-tip::before {
+.switch::before,
+.label-with-hover-tip::before {
   content: attr(data-hover);
   visibility: hidden;
   opacity: 0;
@@ -86,27 +86,27 @@ button:hover {
   top: 160%;
 }
 
-
-.switch:hover::before, .label-with-hover-tip:hover::before {
+.switch:hover::before,
+.label-with-hover-tip:hover::before {
   visibility: visible;
   opacity: 1;
 }
 
 .fade-in {
-	opacity: 1;
-	animation-name: fadeInOpacity;
-	animation-iteration-count: 1;
-	animation-timing-function: ease-in;
-	animation-duration: 2s;
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 2s;
 }
 
 @keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 #advancedToggle {

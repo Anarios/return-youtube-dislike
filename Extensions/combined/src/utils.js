@@ -34,8 +34,10 @@ function getNumberFormatter(optionSelect) {
           ?.getAttribute("href")
       )?.searchParams?.get("locale");
     } catch {
-      cLog('Cannot find browser locale. Use en as default for number formatting.');
-      userLocales = 'en';
+      cLog(
+        "Cannot find browser locale. Use en as default for number formatting."
+      );
+      userLocales = "en";
     }
   }
 
@@ -56,13 +58,10 @@ function getNumberFormatter(optionSelect) {
       formatterCompactDisplay = "short";
   }
 
-  const formatter = Intl.NumberFormat(
-    userLocales,
-    {
-      notation: formatterNotation,
-      compactDisplay: formatterCompactDisplay,
-    }
-  );
+  const formatter = Intl.NumberFormat(userLocales, {
+    notation: formatterNotation,
+    compactDisplay: formatterCompactDisplay,
+  });
   return formatter;
 }
 

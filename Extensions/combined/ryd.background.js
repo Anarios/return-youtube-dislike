@@ -280,10 +280,14 @@ function storageChangeHandler(changes, area) {
     );
   }
   if (changes.showTooltipPercentage !== undefined) {
-    handleShowTooltipPercentageChangeEvent(changes.showTooltipPercentage.newValue);
+    handleShowTooltipPercentageChangeEvent(
+      changes.showTooltipPercentage.newValue
+    );
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
-    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+    handleNumberDisplayReformatLikesChangeEvent(
+      changes.numberDisplayReformatLikes.newValue
+    );
   }
 }
 
@@ -302,14 +306,14 @@ function handleNumberDisplayFormatChangeEvent(value) {
 
 function handleShowTooltipPercentageChangeEvent(value) {
   extConfig.showTooltipPercentage = value;
-};
+}
 
 function handleTooltipPercentageModeChangeEvent(value) {
   if (!value) {
     value = "dash_like";
   }
   extConfig.tooltipPercentageMode = value;
-};
+}
 
 function handleNumberDisplayRoundDownChangeEvent(value) {
   extConfig.numberDisplayRoundDown = value;

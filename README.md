@@ -20,8 +20,8 @@ Read this in other languages: [Español](READMEes.md), [русский](READMEru
 
 ## The Story
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.  
-  
+On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.
+
 Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
 
 ## What it Does
@@ -39,42 +39,39 @@ You can learn more at our website at: [returnyoutubedislike.com](https://www.ret
 Third-party use of this open API is allowed with the following restrictions:
 
 - **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a *429* status code indicating that your application should back off.
+- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a _429_ status code indicating that your application should back off.
 
 The API is accessible over the following base URL:  
-https://returnyoutubedislikeapi.com  
+https://returnyoutubedislikeapi.com
 
 List of available endpoints is available here:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Get votes
+
 Example to get votes of a given YouTube video ID:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
 {
-    "id": "kxOuG8jMIgI",
-    "dateCreated": "2021-12-20T12:25:54.418014Z",
-    "likes": 27326,
-    "dislikes": 498153,
-    "rating": 1.212014408444885,
-    "viewCount": 3149885,
-    "deleted": false
+  "id": "kxOuG8jMIgI",
+  "dateCreated": "2021-12-20T12:25:54.418014Z",
+  "likes": 27326,
+  "dislikes": 498153,
+  "rating": 1.212014408444885,
+  "viewCount": 3149885,
+  "deleted": false
 }
 ```
 
-
-None existing YouTube ID will return status code *404* "Not Found".  
-Wrong formed YouTube ID will return *400* "Bad Request".
-
-
+None existing YouTube ID will return status code _404_ "Not Found".  
+Wrong formed YouTube ID will return _400_ "Bad Request".
 
 <!---
 ## API documentation
 
 You can view all documentation on our website.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
-
 
 ## Contributing
 
@@ -87,6 +84,7 @@ You can support this project by donating to us on the link below:
 [Donate](https://returnyoutubedislike.com/donate)
 
 ## Sponsors
+
 [Piepacker](https://piepacker.com)
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
@@ -94,4 +92,3 @@ You can support this project by donating to us on the link below:
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
 [Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
-
