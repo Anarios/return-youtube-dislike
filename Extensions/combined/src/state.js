@@ -23,6 +23,8 @@ let extConfig = {
   colorTheme: "classic",
   numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
+  showTooltipPercentage: false,
+  tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
 };
 
@@ -155,10 +157,10 @@ function getLikeCountFromButton() {
   if (isShorts()) {
     //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
     //It should be possible to fix this function, but it's not critical to showing the dislike count.
-    return 0;
+    return false;
   }
   let likesStr = getLikeButton()
-    .querySelector("button")
+    .querySelector("yt-formatted-string#text")
     .getAttribute("aria-label")
     .replace(/\D/g, "");
   return likesStr.length > 0 ? parseInt(likesStr) : false;
@@ -258,6 +260,8 @@ function initExtConfig() {
   initializeColorTheme();
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
+  initializeTooltipPercentage();
+  initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
 }
 
@@ -317,6 +321,26 @@ function initializeNumberDisplayFormat() {
       getBrowser().storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
+    }
+  });
+}
+
+function initializeTooltipPercentage() {
+  getBrowser().storage.sync.get(["showTooltipPercentage"], (res) => {
+    if (res.showTooltipPercentage === undefined) {
+      getBrowser().storage.sync.set({ showTooltipPercentage: false });
+    } else {
+      extConfig.showTooltipPercentage = res.showTooltipPercentage;
+    }
+  });
+}
+
+function initializeTooltipPercentageMode() {
+  getBrowser().storage.sync.get(["tooltipPercentageMode"], (res) => {
+    if (res.tooltipPercentageMode === undefined) {
+      getBrowser().storage.sync.set({ tooltipPercentageMode: "dash_like" });
+    } else {
+      extConfig.tooltipPercentageMode = res.tooltipPercentageMode;
     }
   });
 }

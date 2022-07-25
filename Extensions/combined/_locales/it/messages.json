@@ -9,7 +9,7 @@
     "message": "Ripristina la possibilità di vedere i dislikes"
   },
   "textDeveloper": {
-    "message": "di Dmitry Selivanov e la Community"
+    "message": "grazie a Dmitry Selivanov e alla Comunità"
   },
   "linkWebsite": {
     "message": "Sito web"
@@ -27,10 +27,10 @@
     "message": "Impostazioni"
   },
   "textSettings": {
-    "message": "Disabilita l'invio di like/dislike"
+    "message": "Disabilita l'invio dei like e dei dislike"
   },
   "textSettingsHover": {
-    "message": "Interrompe il conteggio dei tuoi likes e dislikes."
+    "message": "Interrompe il conteggio dei tuoi likes e dislikes da parte dell'estensione."
   },
   "textUpdate": {
     "message": "aggiorna a"
@@ -39,7 +39,7 @@
     "message": "Versione 3.0.0.1 installata"
   },
   "whatsnew": {
-    "message": "Cosa c'è di nuovo"
+    "message": "Quali sono le novità"
   },
   "shortsSupport": {
     "message": "Supporto per YouTube Shorts"
@@ -49,5 +49,38 @@
   },
   "customNumberFormats": {
     "message": "Formati numerici personalizzati"
+  },
+  "considerDonating": {
+    "message": "Le uniche cosa che tengono in piedi il progetto sono le vostre donazioni. Per favore, considera di effettuare una donazione per supportarci. Grazie."
+  },
+  "roundNumbers": {
+    "message": "Mostra i numeri arrotondati"
+  },
+  "roundNumbersHover": {
+    "message": "Arrotonda il valore del conteggio (questa è l'opzione predefinita di YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Formatta il numero di like"
+  },
+  "reformatLikesHover": {
+    "message": "Rende il valore delle statistiche più consistente."
+  },
+  "numberFormat": {
+    "message": "Formato numerico"
+  },
+  "colorizeRatio": {
+    "message": "Colora la barra dei dislike"
+  },
+  "colorizeRatioHover": {
+    "message": "Colora la barra dei dislike con colori personalizzati."
+  },
+  "colorizeThumbs": {
+    "message": "Colora i pulsanti"
+  },
+  "colorizeThumbsHover": {
+    "message": "Colora i pulsanti dei like e dei dislike con colori personalizzati."
+  },
+  "colorTheme": {
+    "message": "Schema colori:"
   }
 }

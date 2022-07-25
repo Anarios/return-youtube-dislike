@@ -7,48 +7,50 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md)
+別の言語: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Türkçe](READMEtr.md)
 
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
-    Available for Chrome and Firefox as a Web Extension.<br>
-    Also available for other browsers as JS Userscript.<br><br>
+    <b>Return YouTube DislikeはYouTubeの低評価を表示するためのオープンソースな拡張機能です。</b><br>
+    ChromeとFireFoxで拡張機能を利用可能です。<br>
+    また、他のブラウザでもJS Userscriptを利用できます。<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## The Story
+## これまでの経緯
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.  
-  
-Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+2021年10月10日、GoogleはYouTubeの低評価を非表示にすると[発表しました](https://blog.youtube/news-and-events/update-to-youtube/)。
+
+そして2021年12月13日、YouTube APIからも低評価が[削除]((https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts))され、動画のクオリティを判断する手段がなくなってしまいました。
 
 ## What it Does
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+<!-- この部分の翻訳が微妙? -->
+
+YouTube APIから低評価が削除されたことにより、バックエンドは拡張機能のユーザーをもとにスクレイピングされたデータと組み合わせて表示するように切り替わりました
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
-## Why it Matters
+## 低評価が重要な理由
 
-You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+ウェブサイトに詳細が書かれています: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-## API documentation
+## API ドキュメント
 
-Third-party use of this open API is allowed with the following restrictions:
+サードパーティは以下の制限のもとでAPIを利用できます: 
 
-- **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a *429* status code indicating that your application should back off.
+- **帰属**: [returnyoutubedislike.com](https://returnyoutubedislike.com/) へのリンクを明確に表記してください。
+- **レート制限**: クライアントごとに1分あたり100回、1日あたり10000回という制限があります。制限に達すると*429*コードが返されます。
 
-The API is accessible over the following base URL:  
+APIは以下のBase URLでアクセスできます:  
 https://returnyoutubedislikeapi.com  
 
-List of available endpoints is available here:  
+利用可能なエンドポイントはこちらを参照してください:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
-Example to get votes of a given YouTube video ID:  
+### 評価を取得
+APIを利用してYouTube video IDから評価を取得する例です:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -64,29 +66,29 @@ Example to get votes of a given YouTube video ID:
 ```
 
 
-None existing YouTube ID will return status code *404* "Not Found".  
-Wrong formed YouTube ID will return *400* "Bad Request".
+存在しないYouTube IDの場合 *404* "Not Found" が返されます。
+不正なフォーマットのYouTube IDの場合 *400* "Bad Request"が返されます。
 
 
 
 <!---
-## API documentation
+## API ドキュメント
 
-You can view all documentation on our website.
+APIの完全なドキュメントは公式サイトを参照してください。
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
 
-## Contributing
+## 貢献する
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+こちらの[contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)を読んでください。
 
-## Support this project!
+## プロジェクトを支援!
 
-You can support this project by donating to us on the link below:
+以下のリンクに寄付をしてこのプロジェクトを支援できます:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[寄付](https://returnyoutubedislike.com/donate)
 
-## Sponsors
+## スポンサー
 [Piepacker](https://piepacker.com)
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
