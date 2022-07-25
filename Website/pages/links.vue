@@ -37,7 +37,7 @@
       </a>
     </p>
     <!-- Translators -->
-    <div style="color: #555; width: 250px"  class="my-8">
+    <div style="color: #555; width: 250px" class="my-8">
       <b class="white--text">
         {{ $vuetify.lang.t("$vuetify.links.translators") }}
       </b>
@@ -57,11 +57,13 @@
       </b>
       <br />
       <div
-          v-for="project in coolProjects"
-          :key="project.url"
-          class="d-flex justify-center"
+        v-for="project in coolProjects"
+        :key="project.url"
+        class="d-flex justify-center"
       >
-        <a class="attr-link" :href="project.url" target="_blank">{{ project.name }} - {{  $vuetify.lang.t(project.description) }} </a>
+        <a class="attr-link" :href="project.url" target="_blank"
+          >{{ project.name }} - {{ $vuetify.lang.t(project.description) }}
+        </a>
       </div>
     </div>
   </div>
@@ -99,10 +101,30 @@ export default {
         tag: "PickleNik#0864",
         lang: "Русский",
       },
+      {
+        tag: "Fjuro#0179",
+        lang: "Čeština",
+      },
+      {
+        tag: "ShaCHO36P",
+        lang: "日本語",
+      },
+      {
+        tag: "NiniKo",
+        lang: "Français",
+      },
     ],
     coolProjects: [
-      { name: "SponsorBlock", url: "https://sponsor.ajay.app/", description: "$vuetify.links.sponsorBlockDescription" },
-      { name: "Filmot", url: "https://filmot.com/", description: "$vuetify.links.filmotDescription" }
+      {
+        name: "SponsorBlock",
+        url: "https://sponsor.ajay.app/",
+        description: "$vuetify.links.sponsorBlockDescription",
+      },
+      {
+        name: "Filmot",
+        url: "https://filmot.com/",
+        description: "$vuetify.links.filmotDescription",
+      },
     ],
   }),
 };

@@ -57,6 +57,36 @@
     "message": "評価数の表示形式のカスタマイズ"
   },
   "considerDonating": {
-    "message": "この拡張機能を存続させることができるのは、皆様からの寄付だけです。"
+    "message": "この拡張機能を存続させることができるのは,皆様からの寄付だけです。"
+  },
+  "roundNumbers": {
+    "message": "四捨五入された数値を表示"
+  },
+  "roundNumbersHover": {
+    "message": "カウント値を四捨五入します（これはYouTubeのデフォルトオプションです）。"
+  },
+  "reformatLikes": {
+    "message": "いいねの数をフォーマットする"
+  },
+  "reformatLikesHover": {
+    "message": "統計値の一貫性を高めます。"
+  },
+  "numberFormat": {
+    "message": "数値形式"
+  },
+  "colorizeRatio": {
+    "message": "嫌いなバーに色を付ける"
+  },
+  "colorizeRatioHover": {
+    "message": "嫌いなバーをカスタムカラーで色付けします。"
+  },
+  "colorizeThumbs": {
+    "message": "ボタンに色を付ける"
+  },
+  "colorizeThumbsHover": {
+    "message": "カスタムカラーのボタンの色が好きで嫌いです。"
+  },
+  "colorTheme": {
+    "message": "配色："
   }
 }

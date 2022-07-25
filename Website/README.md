@@ -23,11 +23,13 @@ $ npm run generate
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
 ## Recommended VSCode Setup
- - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) `ext install dbaeumer.vscode-eslint`
- - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) `ext install esbenp.prettier-vscode`
- - [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
 
->`Ctrl(Cmd)` + `Shift` + `P` > Open Settings (JSON)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) `ext install dbaeumer.vscode-eslint`
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) `ext install esbenp.prettier-vscode`
+- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+
+> `Ctrl(Cmd)` + `Shift` + `P` > Open Settings (JSON)
+
 ```
 "editor.formatOnSave": true,
 "editor.codeActionsOnSave": {

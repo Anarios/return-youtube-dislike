@@ -1,0 +1,62 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Navrátí možnost zobrazení počtu disliků"
+  },
+  "textDeveloper": {
+    "message": "vytvořil Dmitry Selivanov & komunita"
+  },
+  "linkWebsite": {
+    "message": "Web"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
+  "linkDonate": {
+    "message": "Přispějte"
+  },
+  "linkHelp": {
+    "message": "Nápověda"
+  },
+  "legendSettings": {
+    "message": "Nastavení"
+  },
+  "textSettings": {
+    "message": "Zakázat odesílání like/dislike"
+  },
+  "textLikesDisabled": {
+    "message": "zakázáno majitelem"
+  },
+  "textSettingsHover": {
+    "message": "Zastaví počítání vašich liků a disliků."
+  },
+  "textTempUnavailable": {
+    "message": "dočasně nedostupné"
+  },
+  "textUpdate": {
+    "message": "aktualizovat na"
+  },
+  "version30installed": {
+    "message": "Verze 3.0.0.1 nainstalována"
+  },
+  "whatsnew": {
+    "message": "Co je nového"
+  },
+  "shortsSupport": {
+    "message": "Podpora YouTube Shorts"
+  },
+  "customColors": {
+    "message": "Vlastní barvy pro lištu disliků a tlačítka"
+  },
+  "customNumberFormats": {
+    "message": "Vlastní formáty čísel"
+  },
+  "considerDonating": {
+    "message": "Jediná věc, díky které rozšíření funguje, jsou vaše příspěvky. Zvažte prosím podpoření projektu."
+  }
+}

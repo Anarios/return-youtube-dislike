@@ -1,5 +1,3 @@
-
-
 **Contents**
 
 - [Downloading](#downloading)
@@ -73,7 +71,7 @@ It should be able to work on [all Chromium-based browsers (list here)][4]. But t
 1. **F-Droid Store**
 
 - [Show Youtube Dislikes](https://f-droid.org/en/packages/com.jesperh.showyoutubedislikes/)
-  
+
   [Download from here (Click here)](https://f-droid.org/en/packages/com.jesperh.showyoutubedislikes/)
 
   The source code is available at [github.com/jesperbakhandskemager/view-youtube-dislike](https://github.com/jesperbakhandskemager/view-youtube-dislike)
@@ -107,7 +105,7 @@ You can have a look at these pages for more information (the reason why it's not
 For now, you can try this
 
 - [For Jailbroken iOS - **WE TAKE NO RESPONSIBILITY. USE AT YOUR OWN RISK**](https://chariz.com/get/return-youtube-dislike)
-  
+
   This is an iOS port [**developed by a separate team**](https://github.com/PoomSmart/Return-YouTube-Dislikes) not related to the owner of github.com/Anarios/return-youtube-dislike
 
 #### Userscript
@@ -193,7 +191,6 @@ For now, you can try this
 
 - Although app(s) which use this API exist, they aren't official.
 
-  
 ##### On Firefox
 
 1. Install Firefox Nightly. Refer to this blog post for the procedure: [Expanded extension support in Firefox for Android Nightly](https://blog.mozilla.org/addons/2020/09/29/expanded-extension-support-in-firefox-for-android-nightly/)
@@ -316,13 +313,8 @@ But still - here are the steps:
 <!-- links -->
 
 [1]: https://chrome.google.com/webstore/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi
-
 [2]: https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/
-
 [3]: https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
-
 [4]: https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium
-
 [5]: https://en.wikipedia.org/wiki/Category:Web_browsers_based_on_Firefox
-
 [6]: chrome://extensions

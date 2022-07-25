@@ -9,15 +9,6 @@ function roundDown(num) {
 }
 
 function numberFormat(numberState) {
-  let userLocales;
-  try {
-    userLocales = new URL(
-      Array.from(document.querySelectorAll("head > link[rel='search']"))
-        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-        ?.getAttribute("href")
-    )?.searchParams?.get("locale");
-  } catch {}
-
   let numberDisplay;
   if (extConfig.numberDisplayRoundDown === false) {
     numberDisplay = numberState;
@@ -29,22 +20,29 @@ function numberFormat(numberState) {
   );
 }
 
-function localize(localeString) {
-  return chrome.i18n.getMessage(localeString);
-}
-
 function getNumberFormatter(optionSelect) {
+  let userLocales;
+  if (document.documentElement.lang) {
+    userLocales = document.documentElement.lang;
+  } else if (navigator.language) {
+    userLocales = navigator.language;
+  } else {
+    try {
+      userLocales = new URL(
+        Array.from(document.querySelectorAll("head > link[rel='search']"))
+          ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+          ?.getAttribute("href")
+      )?.searchParams?.get("locale");
+    } catch {
+      cLog(
+        "Cannot find browser locale. Use en as default for number formatting."
+      );
+      userLocales = "en";
+    }
+  }
+
   let formatterNotation;
   let formatterCompactDisplay;
-  let userLocales;
-  try {
-    userLocales = new URL(
-      Array.from(document.querySelectorAll("head > link[rel='search']"))
-      ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-      ?.getAttribute("href")
-    )?.searchParams?.get("locale");
-  } catch {}
-
   switch (optionSelect) {
     case "compactLong":
       formatterNotation = "compact";
@@ -60,14 +58,15 @@ function getNumberFormatter(optionSelect) {
       formatterCompactDisplay = "short";
   }
 
-  const formatter = Intl.NumberFormat(
-    document.documentElement.lang || userLocales || navigator.language,
-    {
-      notation: formatterNotation,
-      compactDisplay: formatterCompactDisplay,
-    }
-  );
+  const formatter = Intl.NumberFormat(userLocales, {
+    notation: formatterNotation,
+    compactDisplay: formatterCompactDisplay,
+  });
   return formatter;
+}
+
+function localize(localeString) {
+  return chrome.i18n.getMessage(localeString);
 }
 
 function getBrowser() {

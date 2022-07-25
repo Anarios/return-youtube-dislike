@@ -2,7 +2,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-
   "extensionNameBeta": {
     "message": "Return YouTube Dislike Beta"
   },
@@ -50,5 +49,38 @@
   },
   "customNumberFormats": {
     "message": "Benutzerdefinierte Zahlenformate"
+  },
+  "considerDonating": {
+    "message": "Das Einzige, was die Erweiterung am Laufen hält, sind Ihre Spenden, bitte erwägen Sie, das Projekt zu unterstützen."
+  },
+  "roundNumbers": {
+    "message": "Zeige abgerundete Zahlen"
+  },
+  "roundNumbersHover": {
+    "message": "Zahlen abrunden (Standardverhalten von YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Wie Zahlen neu formatieren"
+  },
+  "reformatLikesHover": {
+    "message": "Machen Sie das Format der Vorlieben und Abneigungen konsistent."
+  },
+  "numberFormat": {
+    "message": "Zahlenformat:"
+  },
+  "colorizeRatio": {
+    "message": "Verhältnisbalken einfärben"
+  },
+  "colorizeRatioHover": {
+    "message": "Benutzerdefinierte Farben für die Verhältnisleiste verwenden."
+  },
+  "colorizeThumbs": {
+    "message": "Buttons einfärben"
+  },
+  "colorizeThumbsHover": {
+    "message": "Benutzerdefinierte Farben für die Schaltflächensymbole verwenden."
+  },
+  "colorTheme": {
+    "message": "Farbschema:"
   }
 }

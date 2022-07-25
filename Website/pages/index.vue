@@ -54,10 +54,10 @@
       </v-btn>
     </div>
 
-<!--    <div class="mb-4" style="color: #999">-->
-<!--      Get dislikes manually: <input placeholder=" Video URL">-->
-<!--      <p id="output"></p>-->
-<!--    </div>-->
+    <!--    <div class="mb-4" style="color: #999">-->
+    <!--      Get dislikes manually: <input placeholder=" Video URL">-->
+    <!--      <p id="output"></p>-->
+    <!--    </div>-->
 
     <v-spacer />
     <div id="support-ukraine" class="d-flex flex-column items-center py-2">
@@ -77,7 +77,9 @@
       <v-row class="justify-center mx-auto">
         <p v-for="sponsor in sponsors" :key="sponsor.name" class="sponsor">
           <a
-            :style="sponsor.link ? { cursor: 'pointer' } : { cursor: 'default' }"
+            :style="
+              sponsor.link ? { cursor: 'pointer' } : { cursor: 'default' }
+            "
             :href="sponsor.link"
             rel="sponsored"
           >
@@ -113,23 +115,33 @@ export default {
         },
         {
           name: "PocketTube",
-          link: "https://yousub.info/?utm_source=returnyoutubedislike"
-        }, {
+          link: "https://yousub.info/?utm_source=returnyoutubedislike",
+        },
+        {
           name: "Become our sponsor",
-          link: "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601"
-        }
+          link: "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601",
+        },
       ],
     };
   },
   mounted() {
-    const YOUTUBE_REGEX = /(?:http:|https:)*?\/\/(?:www\.|)(?:youtube\.com|m\.youtube\.com|youtu\.|youtube-nocookie\.com).*(?:v=|v%3D|v\/|(?:a|p)\/(?:a|u)\/\d.*\/|watch\?|vi(?:=|\/)|\/embed\/|oembed\?|be\/|e\/)([^&?%#/\n]*)/;
+    const YOUTUBE_REGEX =
+      /(?:http:|https:)*?\/\/(?:www\.|)(?:youtube\.com|m\.youtube\.com|youtu\.|youtube-nocookie\.com).*(?:v=|v%3D|v\/|(?:a|p)\/(?:a|u)\/\d.*\/|watch\?|vi(?:=|\/)|\/embed\/|oembed\?|be\/|e\/)([^&?%#/\n]*)/;
     let lastVideoId = "";
     window.oninput = (e) => {
-      const videoId = (e.target.value.match(YOUTUBE_REGEX) || {})[1] || e.target.value;
+      const videoId =
+        (e.target.value.match(YOUTUBE_REGEX) || {})[1] || e.target.value;
       if (videoId !== lastVideoId && videoId.length === 11) {
-        fetch("https://returnyoutubedislikeapi.com/votes?videoId=" + (lastVideoId = videoId))
-          .then(resp => resp.json())
-          .then(data => document.getElementById("output").innerText = "Likes=" + data.likes + " Dislikes=" + data.dislikes);
+        fetch(
+          "https://returnyoutubedislikeapi.com/votes?videoId=" +
+            (lastVideoId = videoId)
+        )
+          .then((resp) => resp.json())
+          .then(
+            (data) =>
+              (document.getElementById("output").innerText =
+                "Likes=" + data.likes + " Dislikes=" + data.dislikes)
+          );
       }
     };
   },

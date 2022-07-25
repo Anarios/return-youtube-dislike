@@ -12,9 +12,7 @@
     "128": "icons/icon128.png"
   },
   "host_permissions": ["*://*.youtube.com/*"],
-  "permissions": [
-    "storage"
-  ],
+  "permissions": ["storage"],
   "action": {
     "default_popup": "popup.html"
   },

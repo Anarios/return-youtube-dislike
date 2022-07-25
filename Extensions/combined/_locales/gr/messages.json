@@ -49,5 +49,38 @@
   },
   "customNumberFormats": {
     "message": "Προσαρμοζόμενη μορφή αριθμών."
+  },
+  "considerDonating": {
+    "message": "Το μόνο πράγμα που διατηρεί την επέκταση σε λειτουργία είναι οι δωρεές σας, σκεφτείτε να υποστηρίξετε το έργο."
+  },
+  "roundNumbers": {
+    "message": "Εμφάνιση στρογγυλεμένων αριθμών"
+  },
+  "roundNumbersHover": {
+    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (αυτή είναι η προεπιλεγμένη επιλογή του YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Μορφοποίηση του αριθμού των likes"
+  },
+  "reformatLikesHover": {
+    "message": "Κάνει την αξία των στατιστικών πιο συνεπή."
+  },
+  "numberFormat": {
+    "message": "Αριθμητική μορφή"
+  },
+  "colorizeRatio": {
+    "message": "Χρωματίστε τη γραμμή dislikes"
+  },
+  "colorizeRatioHover": {
+    "message": "Χρωματίστε τη γραμμή dislikes με προσαρμοσμένα χρώματα."
+  },
+  "colorizeThumbs": {
+    "message": "Χρωματίστε τα κουμπιά"
+  },
+  "colorizeThumbsHover": {
+    "message": "Χρωματίστε τα κουμπιά likes και dislikes με προσαρμοσμένα χρώματα."
+  },
+  "colorTheme": {
+    "message": "Χρωματικός συνδυασμός:"
   }
 }

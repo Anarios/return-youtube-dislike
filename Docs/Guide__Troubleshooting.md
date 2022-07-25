@@ -51,7 +51,7 @@ If the basic checks didn't resolve anything
 
 **Applies for Windows 7 (and earlier) only**
 
-and only for  [Chromium Based Browsers][1]
+and only for [Chromium Based Browsers][1]
 
 - [Chromium-based browsers][1] don't have their own certificate manager.
 - They use Windows' certificates manager.
@@ -113,7 +113,7 @@ If it does, find the extension(s) preventing RYD from working correctly and re-c
 
 ### Known conflicts
 
->### scriptSafe
+> ### scriptSafe
 >
 > **Solution:** Trust `returnyoutubedislikeapi.com` manually
 >
@@ -179,9 +179,6 @@ Coming soon. Please have patience.
 <!-- links -->
 
 [1]: https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium
-
 [2]: https://en.wikipedia.org/wiki/Category:Web_browsers_based_on_Firefox
-
 [3]: https://discord.gg/mYnESY4Md5
-
 [4]: #contact-in-discord-server

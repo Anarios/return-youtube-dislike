@@ -24,8 +24,8 @@
 // ==/UserScript==
 
 const extConfig = {
-// BEGIN USER OPTIONS
-// You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact. 
+  // BEGIN USER OPTIONS
+  // You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact.
   showUpdatePopup: false, // [true, false*] Show a popup tab after extension update (See what's new)
   disableVoteSubmission: false, // [true, false*] Disable like/dislike submission (Stops counting your likes and dislikes)
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
@@ -33,8 +33,9 @@ const extConfig = {
   colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
+  tooltipPercentageMode: "none", // [none*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
   numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
-// END USER OPTIONS
+  // END USER OPTIONS
 };
 
 const LIKED_STATE = "LIKED_STATE";
@@ -100,29 +101,37 @@ function getDislikeButton() {
 let mutationObserver = new Object();
 
 if (isShorts() && mutationObserver.exists !== true) {
-  cLog('initializing mutation observer')
+  cLog("initializing mutation observer");
   mutationObserver.options = {
     childList: false,
     attributes: true,
-    subtree: false
+    subtree: false,
   };
   mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver( function(mutationList, observer) {
-    mutationList.forEach( (mutation) => {
-      if (mutation.type === 'attributes' && 
-        mutation.target.nodeName === 'TP-YT-PAPER-BUTTON' && 
-        mutation.target.id === 'button') {
-        cLog('Short thumb button status changed');
-        if (mutation.target.getAttribute('aria-pressed') === 'true') {
+  mutationObserver.observer = new MutationObserver(function (
+    mutationList,
+    observer
+  ) {
+    mutationList.forEach((mutation) => {
+      if (
+        mutation.type === "attributes" &&
+        mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
+        mutation.target.id === "button"
+      ) {
+        cLog("Short thumb button status changed");
+        if (mutation.target.getAttribute("aria-pressed") === "true") {
           mutation.target.style.color =
-            (mutation.target.parentElement.parentElement.id === 'like-button') ? 
-            getColorFromTheme(true) : getColorFromTheme(false);
+            mutation.target.parentElement.parentElement.id === "like-button"
+              ? getColorFromTheme(true)
+              : getColorFromTheme(false);
         } else {
-          mutation.target.style.color = 'unset';
+          mutation.target.style.color = "unset";
         }
         return;
       }
-      cLog('unexpected mutation observer event: ' + mutation.target + mutation.type);
+      cLog(
+        "unexpected mutation observer event: " + mutation.target + mutation.type
+      );
     });
   });
 }
@@ -203,10 +212,10 @@ function getLikeCountFromButton() {
   if (isShorts()) {
     //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
     //It should be possible to fix this function, but it's not critical to showing the dislike count.
-    return 0;
+    return false;
   }
   let likesStr = getLikeButton()
-    .querySelector("button")
+    .querySelector("yt-formatted-string#text")
     .getAttribute("aria-label")
     .replace(/\D/g, "");
   return likesStr.length > 0 ? parseInt(likesStr) : false;
@@ -262,6 +271,31 @@ function createRateBar(likes, dislikes) {
   const widthPercent =
     likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
+  var likePercentage = parseFloat(widthPercent.toFixed(1));
+  const dislikePercentage = (100 - likePercentage).toLocaleString();
+  likePercentage = likePercentage.toLocaleString();
+
+  var tooltipInnerHTML;
+  switch (extConfig.tooltipPercentageMode) {
+    case "dash_like":
+      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`;
+      break;
+    case "dash_dislike":
+      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`;
+      break;
+    case "both":
+      tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`;
+      break;
+    case "only_like":
+      tooltipInnerHTML = `${likePercentage}%`;
+      break;
+    case "only_dislike":
+      tooltipInnerHTML = `${dislikePercentage}%`;
+      break;
+    default:
+      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+  }
+
   if (!rateBar && !isMobile) {
     let colorLikeStyle = "";
     let colorDislikeStyle = "";
@@ -269,7 +303,7 @@ function createRateBar(likes, dislikes) {
       colorLikeStyle = "; background-color: " + getColorFromTheme(true);
       colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
     }
-    
+
     document.getElementById("menu-container").insertAdjacentHTML(
       "beforeend",
       `
@@ -286,7 +320,7 @@ function createRateBar(likes, dislikes) {
            </div>
         </div>
         <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-           <!--css-build:shady-->${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}
+           <!--css-build:shady-->${tooltipInnerHTML}
         </tp-yt-paper-tooltip>
         </div>
 `
@@ -298,15 +332,16 @@ function createRateBar(likes, dislikes) {
     document.getElementById("return-youtube-dislike-bar").style.width =
       widthPercent + "%";
 
-    document.querySelector(
-      "#ryd-dislike-tooltip > #tooltip"
-    ).innerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
-    
+    document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML =
+      tooltipInnerHTML;
+
     if (extConfig.coloredBar) {
-      document.getElementById("return-youtube-dislike-bar-container").style.backgroundColor =
-        getColorFromTheme(false);
-      document.getElementById("return-youtube-dislike-bar").style.backgroundColor =
-        getColorFromTheme(true);
+      document.getElementById(
+        "return-youtube-dislike-bar-container"
+      ).style.backgroundColor = getColorFromTheme(false);
+      document.getElementById(
+        "return-youtube-dislike-bar"
+      ).style.backgroundColor = getColorFromTheme(true);
     }
   }
 }
@@ -333,17 +368,28 @@ function setState() {
         }
         createRateBar(likes, dislikes);
         if (extConfig.coloredThumbs === true) {
-          if (isShorts()) { // for shorts, leave deactived buttons in default color
-            let shortLikeButton = getLikeButton().querySelector('tp-yt-paper-button#button');
-            let shortDislikeButton = getDislikeButton().querySelector('tp-yt-paper-button#button');
-            if (shortLikeButton.getAttribute('aria-pressed') === 'true') {
+          if (isShorts()) {
+            // for shorts, leave deactived buttons in default color
+            let shortLikeButton = getLikeButton().querySelector(
+              "tp-yt-paper-button#button"
+            );
+            let shortDislikeButton = getDislikeButton().querySelector(
+              "tp-yt-paper-button#button"
+            );
+            if (shortLikeButton.getAttribute("aria-pressed") === "true") {
               shortLikeButton.style.color = getColorFromTheme(true);
             }
-            if (shortDislikeButton.getAttribute('aria-pressed') === 'true') {
+            if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
               shortDislikeButton.style.color = getColorFromTheme(false);
             }
-            mutationObserver.observer.observe(shortLikeButton, mutationObserver.options);
-            mutationObserver.observer.observe(shortDislikeButton, mutationObserver.options);
+            mutationObserver.observer.observe(
+              shortLikeButton,
+              mutationObserver.options
+            );
+            mutationObserver.observer.observe(
+              shortDislikeButton,
+              mutationObserver.options
+            );
           } else {
             getLikeButton().style.color = getColorFromTheme(true);
             getDislikeButton().style.color = getColorFromTheme(false);
@@ -372,6 +418,12 @@ function likeClicked() {
       createRateBar(likesvalue, dislikesvalue);
       previousState = 1;
     }
+    if (extConfig.numberDisplayReformatLikes === true) {
+      const nativeLikes = getLikeCountFromButton();
+      if (nativeLikes !== false) {
+        setLikes(numberFormat(nativeLikes));
+      }
+    }
   }
 }
 
@@ -393,6 +445,12 @@ function dislikeClicked() {
       setDislikes(numberFormat(dislikesvalue));
       createRateBar(likesvalue, dislikesvalue);
       previousState = 2;
+      if (extConfig.numberDisplayReformatLikes === true) {
+        const nativeLikes = getLikeCountFromButton();
+        if (nativeLikes !== false) {
+          setLikes(numberFormat(nativeLikes));
+        }
+      }
     }
   }
 }
@@ -434,32 +492,40 @@ function roundDown(num) {
 }
 
 function numberFormat(numberState) {
-  let userLocales;
-  try {
-    userLocales = new URL(
-      Array.from(document.querySelectorAll("head > link[rel='search']"))
-        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-        ?.getAttribute("href")
-    )?.searchParams?.get("locale");
-  } catch {
-    userLocales = document.documentElement.lang;
-  }
-
   let numberDisplay;
   if (extConfig.numberDisplayRoundDown === false) {
     numberDisplay = numberState;
   } else {
     numberDisplay = roundDown(numberState);
   }
-  return getNumberFormatter(extConfig.numberDisplayFormat, userLocales).format(
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(
     numberDisplay
   );
 }
 
-function getNumberFormatter(optionSelect, userLocales) {
+function getNumberFormatter(optionSelect) {
+  let userLocales;
+  if (document.documentElement.lang) {
+    userLocales = document.documentElement.lang;
+  } else if (navigator.language) {
+    userLocales = navigator.language;
+  } else {
+    try {
+      userLocales = new URL(
+        Array.from(document.querySelectorAll("head > link[rel='search']"))
+          ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+          ?.getAttribute("href")
+      )?.searchParams?.get("locale");
+    } catch {
+      cLog(
+        "Cannot find browser locale. Use en as default for number formatting."
+      );
+      userLocales = "en";
+    }
+  }
+
   let formatterNotation;
   let formatterCompactDisplay;
-
   switch (optionSelect) {
     case "compactLong":
       formatterNotation = "compact";
@@ -475,13 +541,10 @@ function getNumberFormatter(optionSelect, userLocales) {
       formatterCompactDisplay = "short";
   }
 
-  const formatter = Intl.NumberFormat(
-    document.documentElement.lang || userLocales || navigator.language,
-    {
-      notation: formatterNotation,
-      compactDisplay: formatterCompactDisplay,
-    }
-  );
+  const formatter = Intl.NumberFormat(userLocales, {
+    notation: formatterNotation,
+    compactDisplay: formatterCompactDisplay,
+  });
   return formatter;
 }
 
@@ -516,7 +579,7 @@ function getColorFromTheme(voteIsLike) {
 function setEventListeners(evt) {
   let jsInitChecktimer;
 
-  function checkForJS_Finish(check) {
+  function checkForJS_Finish() {
     console.log();
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
