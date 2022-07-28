@@ -80,11 +80,13 @@ api.runtime.onInstalled.addListener((details) => {
     details.reason === "chrome_update" ||
     // No need to show changelog if developer just reloaded the extension
     details.reason === "update"
-  )
+  ) {
     return;
-  api.tabs.create({
-    url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
-  });
+  } else if (details.reason == "install") {
+    api.tabs.create({
+      url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
+    });
+  }
 });
 
 // api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
@@ -369,7 +371,6 @@ function initializeColoredThumbs() {
     }
   });
 }
-
 
 function initializeColoredBar() {
   api.storage.sync.get(["coloredBar"], (res) => {
