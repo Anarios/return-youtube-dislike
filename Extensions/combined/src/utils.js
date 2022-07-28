@@ -1,22 +1,8 @@
 import { extConfig } from "./state";
 
-function roundDown(num) {
-  if (num < 1000) return num;
-  const int = Math.floor(Math.log10(num) - 2);
-  const decimal = int + (int % 3 ? 1 : 0);
-  const value = Math.floor(num / 10 ** decimal);
-  return value * 10 ** decimal;
-}
-
 function numberFormat(numberState) {
-  let numberDisplay;
-  if (extConfig.numberDisplayRoundDown === false) {
-    numberDisplay = numberState;
-  } else {
-    numberDisplay = roundDown(numberState);
-  }
   return getNumberFormatter(extConfig.numberDisplayFormat).format(
-    numberDisplay
+    numberState
   );
 }
 

@@ -108,12 +108,6 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
-
-  if (changes.numberDisplayRoundDown !== undefined) {
-    handleNumberDisplayRoundDownChangeEvent(
-      changes.numberDisplayRoundDown.newValue
-    );
-  }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
@@ -143,10 +137,6 @@ function handleColorThemeChangeEvent(value) {
 
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
-}
-
-function handleNumberDisplayRoundDownChangeEvent(value) {
-  extConfig.numberDisplayRoundDown = value;
 }
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {

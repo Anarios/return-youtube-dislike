@@ -22,7 +22,6 @@ let extConfig = {
   coloredBar: false,
   colorTheme: "classic",
   numberDisplayFormat: "compactShort",
-  numberDisplayRoundDown: true,
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
@@ -260,7 +259,6 @@ function initExtConfig() {
   initializeColoredBar();
   initializeColorTheme();
   initializeNumberDisplayFormat();
-  initializeNumberDisplayRoundDown();
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
@@ -292,16 +290,6 @@ function initializeColoredBar() {
       getBrowser().storage.sync.set({ coloredBar: false });
     } else {
       extConfig.coloredBar = res.coloredBar;
-    }
-  });
-}
-
-function initializeNumberDisplayRoundDown() {
-  getBrowser().storage.sync.get(["numberDisplayRoundDown"], (res) => {
-    if (res.numberDisplayRoundDown === undefined) {
-      getBrowser().storage.sync.set({ numberDisplayRoundDown: true });
-    } else {
-      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
     }
   });
 }

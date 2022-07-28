@@ -8,7 +8,6 @@ const config = {
   coloredBar: false,
   colorTheme: "classic",
   numberDisplayFormat: "compactShort",
-  numberDisplayRoundDown: true,
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
@@ -81,10 +80,6 @@ document.getElementById("color_theme").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ colorTheme: ev.target.value });
 });
 
-document.getElementById("number_round_down").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ numberDisplayRoundDown: ev.target.checked });
-  updateNumberDisplayFormatContent(ev.target.checked);
-});
 
 document.getElementById("number_format").addEventListener("change", (ev) => {
   chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
@@ -135,7 +130,6 @@ function initConfig() {
   initializeColoredBar();
   initializeColorTheme();
   initializeNumberDisplayFormat();
-  initializeNumberDisplayRoundDown();
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
@@ -203,11 +197,6 @@ function initializeColorTheme() {
   });
 }
 
-function initializeNumberDisplayRoundDown() {
-  chrome.storage.sync.get(["numberDisplayRoundDown"], (res) => {
-    handleNumberDisplayRoundDownChangeEvent(res.numberDisplayRoundDown);
-  });
-}
 
 function initializeTooltipPercentage() {
   chrome.storage.sync.get(["showTooltipPercentage"], (res) => {
@@ -228,13 +217,8 @@ function initializeNumberDisplayFormat() {
   updateNumberDisplayFormatContent();
 }
 
-function updateNumberDisplayFormatContent(roundDown) {
-  let testValue;
-  if (roundDown) {
-    testValue = 123000;
-  } else {
-    testValue = 123456;
-  }
+function updateNumberDisplayFormatContent() {
+  let testValue = 123456;
   document.getElementById("number_format_compactShort").innerHTML =
     getNumberFormatter("compactShort").format(testValue);
   document.getElementById("number_format_compactLong").innerHTML =
@@ -265,11 +249,6 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
-  }
-  if (changes.numberDisplayRoundDown !== undefined) {
-    handleNumberDisplayRoundDownChangeEvent(
-      changes.numberDisplayRoundDown.newValue
-    );
   }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
@@ -319,10 +298,7 @@ function updateColorThemePreviewContent(themeName) {
     getColorFromTheme(themeName, false);
 }
 
-function handleNumberDisplayRoundDownChangeEvent(value) {
-  config.numberDisplayRoundDown = value;
-  document.getElementById("number_round_down").checked = value;
-}
+
 
 function handleNumberDisplayFormatChangeEvent(value) {
   config.numberDisplayFormat = value;

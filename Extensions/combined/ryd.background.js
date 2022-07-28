@@ -10,7 +10,6 @@ let extConfig = {
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
-  numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
   numberDisplayReformatLikes: false, // use existing (native) likes number
 };
 
@@ -266,11 +265,6 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
-  if (changes.numberDisplayRoundDown !== undefined) {
-    handleNumberDisplayRoundDownChangeEvent(
-      changes.numberDisplayRoundDown.newValue
-    );
-  }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
@@ -315,10 +309,6 @@ function handleTooltipPercentageModeChangeEvent(value) {
   extConfig.tooltipPercentageMode = value;
 }
 
-function handleNumberDisplayRoundDownChangeEvent(value) {
-  extConfig.numberDisplayRoundDown = value;
-}
-
 function changeIcon(iconName) {
   if (api.action !== undefined)
     api.action.setIcon({ path: "/icons/" + iconName });
@@ -354,7 +344,6 @@ function initExtConfig() {
   initializeColoredBar();
   initializeColorTheme();
   initializeNumberDisplayFormat();
-  initializeNumberDisplayRoundDown();
   initializeNumberDisplayReformatLikes();
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
@@ -381,15 +370,6 @@ function initializeColoredThumbs() {
   });
 }
 
-function initializeNumberDisplayRoundDown() {
-  api.storage.sync.get(["numberDisplayRoundDown"], (res) => {
-    if (res.numberDisplayRoundDown === undefined) {
-      api.storage.sync.set({ numberDisplayRoundDown: true });
-    } else {
-      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
-    }
-  });
-}
 
 function initializeColoredBar() {
   api.storage.sync.get(["coloredBar"], (res) => {
