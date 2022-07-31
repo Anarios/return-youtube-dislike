@@ -155,7 +155,9 @@ function getColorFromTheme(voteIsLike) {
 }
 
 export {
+  roundDown,
   numberFormat,
+  getNumberFormatter,
   getBrowser,
   getVideoId,
   isInViewport,
