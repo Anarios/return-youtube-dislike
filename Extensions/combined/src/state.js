@@ -46,42 +46,46 @@ function isNewDesign() {
   return document.getElementById("comment-teaser") !== null;
 }
 
-let mutationObserver = new Object();
+function initMutationObserver() {
+  let mutationObserver = new Object();
 
-if (isShorts() && mutationObserver.exists !== true) {
-  cLog("initializing mutation observer");
-  mutationObserver.options = {
-    childList: false,
-    attributes: true,
-    subtree: false,
-  };
-  mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver(function (
-    mutationList,
-    observer
-  ) {
-    mutationList.forEach((mutation) => {
-      if (
-        mutation.type === "attributes" &&
-        mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
-        mutation.target.id === "button"
-      ) {
-        // cLog('Short thumb button status changed');
-        if (mutation.target.getAttribute("aria-pressed") === "true") {
-          mutation.target.style.color =
-            mutation.target.parentElement.parentElement.id === "like-button"
-              ? getColorFromTheme(true)
-              : getColorFromTheme(false);
-        } else {
-          mutation.target.style.color = "unset";
+  if (isShorts() && mutationObserver.exists !== true) {
+    cLog("initializing mutation observer");
+    mutationObserver.options = {
+      childList: false,
+      attributes: true,
+      subtree: false,
+    };
+    mutationObserver.exists = true;
+    mutationObserver.observer = new MutationObserver(function (
+      mutationList,
+      observer
+    ) {
+      mutationList.forEach((mutation) => {
+        if (
+          mutation.type === "attributes" &&
+          mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
+          mutation.target.id === "button"
+        ) {
+          // cLog('Short thumb button status changed');
+          if (mutation.target.getAttribute("aria-pressed") === "true") {
+            mutation.target.style.color =
+              mutation.target.parentElement.parentElement.id === "like-button"
+                ? getColorFromTheme(true)
+                : getColorFromTheme(false);
+          } else {
+            mutation.target.style.color = "unset";
+          }
+          return;
         }
-        return;
-      }
-      cLog(
-        "unexpected mutation observer event: " + mutation.target + mutation.type
-      );
+        cLog(
+          "unexpected mutation observer event: " +
+            mutation.target +
+            mutation.type
+        );
+      });
     });
-  });
+  }
 }
 
 function isLikesDisabled() {
@@ -373,6 +377,7 @@ export {
   NEUTRAL_STATE,
   extConfig,
   initExtConfig,
+  initMutationObserver,
   storedData,
   isLikesDisabled,
 };

@@ -22,6 +22,7 @@ import {
   DISLIKED_STATE,
   NEUTRAL_STATE,
   initExtConfig,
+  initMutationObserver,
 } from "./src/state";
 
 //---   Import Video & Browser Functions   ---//
@@ -41,6 +42,7 @@ import {
   storageChangeHandler,
 } from "./src/events";
 
+initMutationObserver();
 initExtConfig();
 
 let jsInitChecktimer = null;
