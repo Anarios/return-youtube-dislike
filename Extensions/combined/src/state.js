@@ -1,4 +1,4 @@
-import { getLikeButton, getDislikeButton, getButtons } from "./buttons";
+import { getLikeButton, getDislikeButton, getButtons, getLikeTextContainer, getDislikeTextContainer } from "./buttons";
 import { createRateBar } from "./bar";
 import {
   getBrowser,
@@ -127,7 +127,7 @@ function getState(storedData) {
 
 //---   Sets The Likes And Dislikes Values   ---//
 function setLikes(likesCount) {
-  getButtons().children[0].querySelector("#text").innerText = likesCount;
+  getLikeTextContainer().innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
@@ -138,7 +138,7 @@ function setDislikes(dislikesCount) {
       ).innerText = dislikesCount;
       return;
     }
-    getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+    getDislikeTextContainer().innerText = dislikesCount;
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {
@@ -147,8 +147,7 @@ function setDislikes(dislikesCount) {
       ).innerText = localize("TextLikesDisabled");
       return;
     }
-    getButtons().children[1].querySelector("#text").innerText =
-      localize("TextLikesDisabled");
+    getDislikeTextContainer().innerText = localize("TextLikesDisabled");
   }
 }
 

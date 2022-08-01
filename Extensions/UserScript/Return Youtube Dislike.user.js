@@ -94,9 +94,24 @@ function getLikeButton() {
   return getButtons().children[0];
 }
 
+function getLikeTextContainer() {
+  return (
+    getLikeButton().querySelector("#text") ??
+    getLikeButton().getElementsByTagName("yt-formatted-string")[0]
+  );
+}
+
 function getDislikeButton() {
   return getButtons().children[1];
 }
+
+function getDislikeTextContainer() {
+  return (
+    getDislikeButton().querySelector("#text") ??
+    getDislikeButton().getElementsByTagName("yt-formatted-string")[0]
+  );
+}
+
 
 let mutationObserver = new Object();
 
@@ -197,7 +212,7 @@ function setLikes(likesCount) {
       likesCount;
     return;
   }
-  getButtons().children[0].querySelector("#text").innerText = likesCount;
+  getLikeTextContainer().innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
@@ -205,7 +220,7 @@ function setDislikes(dislikesCount) {
     mobileDislikes = dislikesCount;
     return;
   }
-  getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+  getDislikeTextContainer().innerText = dislikesCount;
 }
 
 function getLikeCountFromButton() {
