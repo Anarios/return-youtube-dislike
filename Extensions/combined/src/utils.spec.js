@@ -100,7 +100,7 @@ describe("getNumberFormatter", () => {
     expect(getNumberFormatter()).toMatchSnapshot();
   });
 
-  it("should return a correct formatter when using the URL locale", () => {
+  it("should return a correct formatter when using the URL locale (possibly buggy)", () => {
     // Disclaimer: The case we are testing here is actually not correct and
     // am almost sure I found a bug in the actual implementation of
     // getNumberFormatter(). As I am currently writing acceptance tests only
@@ -109,6 +109,8 @@ describe("getNumberFormatter", () => {
     // for now and document how we should actually be testing down below.
     // The reason why this bug is not causing faulty behaviour is, that we
     // have a fallback for it, that is always triggered.
+
+    // This is how we make the test go green:
     Object.defineProperty(document.documentElement, "lang", {
       value: null,
       configurable: true,
@@ -119,13 +121,27 @@ describe("getNumberFormatter", () => {
     });
     const mockedNode = document.createElement("link");
 
-    // This is how we make the test go green:
     mockedNode.setAttribute(
       "href",
       "https://www.youtube.com/opensearch?locale=en"
     );
+
+    document.querySelectorAll = jest.fn().mockReturnValue([mockedNode]);
+    expect(getNumberFormatter()).toMatchSnapshot();
+  });
+
+  it.skip("should return a correct formatter when using the URL locale", () => {
     // But we actually want to test like so, which is the correct value of the locale attribute:
-    // mockedNode.setAttribute("href", "https://www.youtube.com/opensearch?locale=en_US");
+    Object.defineProperty(document.documentElement, "lang", {
+      value: null,
+      configurable: true,
+    });
+    Object.defineProperty(navigator, "language", {
+      value: null,
+      configurable: true,
+    });
+    const mockedNode = document.createElement("link");
+    mockedNode.setAttribute("href", "https://www.youtube.com/opensearch?locale=en_US");
 
     document.querySelectorAll = jest.fn().mockReturnValue([mockedNode]);
     expect(getNumberFormatter()).toMatchSnapshot();
