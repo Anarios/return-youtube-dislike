@@ -36,9 +36,24 @@ function getLikeButton() {
   return getButtons().children[0];
 }
 
+function getLikeTextContainer() {
+  return (
+    getLikeButton().querySelector("#text") ??
+    getLikeButton().getElementsByTagName("yt-formatted-string")[0]
+  );
+}
+
 function getDislikeButton() {
   return getButtons().children[1];
 }
+
+function getDislikeTextContainer() {
+  return (
+    getDislikeButton().querySelector("#text") ??
+    getDislikeButton().getElementsByTagName("yt-formatted-string")[0]
+  );
+}
+
 
 function checkForSignInButton() {
   if (
@@ -52,4 +67,4 @@ function checkForSignInButton() {
   }
 }
 
-export { getButtons, getLikeButton, getDislikeButton, checkForSignInButton };
+export { getButtons, getLikeButton, getDislikeButton, getLikeTextContainer, getDislikeTextContainer, checkForSignInButton };
