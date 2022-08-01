@@ -112,7 +112,6 @@ function getDislikeTextContainer() {
   );
 }
 
-
 let mutationObserver = new Object();
 
 if (isShorts() && mutationObserver.exists !== true) {

@@ -1,4 +1,10 @@
-import { getLikeButton, getDislikeButton, getButtons, getLikeTextContainer, getDislikeTextContainer } from "./buttons";
+import {
+  getLikeButton,
+  getDislikeButton,
+  getButtons,
+  getLikeTextContainer,
+  getDislikeTextContainer,
+} from "./buttons";
 import { createRateBar } from "./bar";
 import {
   getBrowser,

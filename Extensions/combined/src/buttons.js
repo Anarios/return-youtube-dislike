@@ -54,7 +54,6 @@ function getDislikeTextContainer() {
   );
 }
 
-
 function checkForSignInButton() {
   if (
     document.querySelector(
@@ -67,4 +66,11 @@ function checkForSignInButton() {
   }
 }
 
-export { getButtons, getLikeButton, getDislikeButton, getLikeTextContainer, getDislikeTextContainer, checkForSignInButton };
+export {
+  getButtons,
+  getLikeButton,
+  getDislikeButton,
+  getLikeTextContainer,
+  getDislikeTextContainer,
+  checkForSignInButton,
+};
