@@ -107,6 +107,10 @@ function storageChangeHandler(changes, area) {
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
   }
+
+  if (changes.ratioDisplay !== undefined) {
+    handleRatioDisplayChangeEvent(changes.ratioDisplay.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -136,6 +140,11 @@ function handleNumberDisplayRoundDownChangeEvent(value) {
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
   extConfig.numberDisplayReformatLikes = value;
+}
+
+function handleRatioDisplayChangeEvent(value) {
+  if (!value) value = "hover";
+  extConfig.ratioDisplay = value;
 }
 
 export {

@@ -1,7 +1,8 @@
 import { getVideoId } from "./utils";
-import { getApiData } from "./state";
+import { getApiData, extConfig } from "./state";
 
 let videos = [];
+let listeneningForHover = [];
 
 let cache = {};
 let cacheDuration = 60 * 10; // 10 minutes
@@ -20,41 +21,66 @@ async function showRatioPreviews() {
   currentVideos = currentVideos.concat([].slice.call(document.getElementsByTagName("ytd-grid-video-renderer")));
   // Get videos that are not already show the ratio
   currentVideos = currentVideos.filter(element => !videos.includes(element));
-  for (let video of currentVideos) {  // Iterate through all videos
-    // Check if video already has expired ratio preview
-    if (video.querySelector("#ratio-display")) {
-      video.querySelector("#ratio-display").remove();
+
+  // Show ratio preview for each video if state is set to "always"
+  if (extConfig.ratioPreview === "always") {
+    for (let video of currentVideos) {  // Iterate through all videos
+      showRatioPreview(video);
     }
-
-    // Get video data
-    let videoLink = video.querySelector("a").href;
-    let videoId = getVideoId(videoLink);
-    let data = await getData(videoId);
-
-    // Check if data was fetched
-    if (!data) {
-      return false;
+  }
+  // Add hover listener for each video if state is set to "hover"
+  if (extConfig.ratioPreview === "hover") {
+    for (let video of currentVideos) {  // Iterate through all videos
+      if (!listeneningForHover.includes(video)) { // Check if video already has hover listener
+        video.addEventListener("mouseenter", () => showRatioPreview(video));
+        video.addEventListener("mouseleave", () => removeRatioPreview(video));
+        listeneningForHover.push(video);
+      }
     }
+  }
+}
 
-    // Calculate like-dislike ratio
-    let likes = data["likes"];
-    let dislikes = data["dislikes"];
-    
-    // Calculate ratio
-    if (isNaN(likes) || isNaN(dislikes)) {
-      return 0;
-    } else {
-      let ratio = Math.round(likes / (likes + dislikes) * 100) || 0;
-    }
+async function showRatioPreview(video) {
+  // Check if video already has expired ratio preview
+  if (video.querySelector("#ratio-display")) {
+    video.querySelector("#ratio-display").remove();
+  }
 
-    // Set color depending on ratio
-    let color = (ratio >= 90 ? "#2ab92a" : ratio >= 70 ? "#ffca00" : "#d73131");
+  // Get video data
+  let videoLink = video.querySelector("a").href;
+  let videoId = getVideoId(videoLink);
+  let data = await getData(videoId);
 
-    // Add percentage to video
-    video.querySelector("#metadata-line").innerHTML += `<span id="ratio-display" style="color: ${color};">${ratio}%</span>`;
+  // Check if data was fetched
+  if (!data) {
+    return false;
+  }
 
-    // Add video to list of videos already shown
-    videos.push(video);
+  // Calculate like-dislike ratio
+  let likes = data["likes"]; // Need to take data from ryd-API to prevent additional request to official YouTube API
+  let dislikes = data["dislikes"];
+
+  // Calculate ratio
+  let ratio;
+  if (isNaN(likes) || isNaN(dislikes)) {
+    return 0;
+  } else {
+    ratio = Math.round(likes / (likes + dislikes) * 100) || 0;
+  }
+
+  // Set color depending on ratio
+  let color = (ratio >= 90 ? "#2ab92a" : ratio >= 70 ? "#ffca00" : "#d73131");
+
+  // Add percentage to video
+  video.querySelector("#metadata-line").innerHTML += `<span id="ratio-display" style="color: ${color};">${ratio}%</span>`;
+
+  // Add video to list of videos already shown
+  videos.push(video);
+}
+
+function removeRatioPreview(video) {
+  if (video.querySelector("#ratio-display")) {
+    video.querySelector("#ratio-display").remove();
   }
 }
 

@@ -24,7 +24,7 @@ let extConfig = {
   numberDisplayFormat: "compactShort",
   numberDisplayRoundDown: true,
   numberDisplayReformatLikes: false,
-  ratioPreview: "never",
+  ratioPreview: "hover",
 };
 
 let storedData = {
@@ -262,6 +262,7 @@ function initExtConfig() {
   initializeNumberDisplayFormat();
   initializeNumberDisplayRoundDown();
   initializeNumberDisplayReformatLikes();
+  initializeRatioDisplay();
 }
 
 function initializeDisableVoteSubmission() {
@@ -330,6 +331,16 @@ function initializeNumberDisplayReformatLikes() {
       getBrowser().storage.sync.set({ numberDisplayReformatLikes: false });
     } else {
       extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
+    }
+  });
+}
+
+function initializeRatioDisplay() {
+  getBrowser().storage.sync.get(["ratioPreview"], (res) => {
+    if (res.ratioPreview === undefined) {
+      getBrowser().storage.sync.set({ ratioPreview: "hover" });
+    } else {
+      extConfig.ratioPreview = res.ratioPreview;
     }
   });
 }
