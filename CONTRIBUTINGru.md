@@ -1,4 +1,4 @@
-Прочитать на других языках: [English](CONTRIBUTING.md)
+Прочитать на других языках: [English](CONTRIBUTING.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md)
 
 # Добро пожаловать в руководство по внесению вклада Return YouTube Dislikes
 

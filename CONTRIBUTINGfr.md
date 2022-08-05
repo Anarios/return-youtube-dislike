@@ -1,4 +1,4 @@
-Lisez ceci dans d'autres langues : [English](CONTRIBUTING.md)
+Lisez ceci dans d'autres langues : [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Türkçe](CONTRIBUTINGtr.md)
 
 # Bienvenue dans le guide de contribution à Return YouTube Dislikes
 
