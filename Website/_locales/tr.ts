@@ -112,7 +112,7 @@ export default {
     subtitle: "Projeye ve geliştiricilerine bağlantılar",
     contact: "Bana Ulaşın",
     translators: "Çevirmenler",
-    coolProjects: "Hoş Projeler",
+    coolProjects: "Havalı Projeler",
     sponsorBlockDescription: "Videolara gömülü reklamları pas geçer",
     filmotDescription: "YouTube videolarını alt yazılara göre aramanızı sağlar",
   },
