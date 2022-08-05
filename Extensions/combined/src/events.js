@@ -1,5 +1,5 @@
 import { getBrowser, getVideoId, numberFormat, cLog } from "./utils";
-import { checkForSignInButton, getButtons } from "./buttons";
+import { checkForSignInButton, getButtons, getDislikeButton, getLikeButton } from './buttons';
 import {
   NEUTRAL_STATE,
   LIKED_STATE,
@@ -83,12 +83,11 @@ function dislikeClicked() {
 }
 
 function addLikeDislikeEventListener() {
-  const buttons = getButtons();
   if (!window.returnDislikeButtonlistenersSet) {
-    buttons.children[0].addEventListener("click", likeClicked);
-    buttons.children[1].addEventListener("click", dislikeClicked);
-    buttons.children[0].addEventListener("touchstart", likeClicked);
-    buttons.children[1].addEventListener("touchstart", dislikeClicked);
+    getLikeButton().addEventListener("click", likeClicked);
+    getDislikeButton().addEventListener("click", dislikeClicked);
+    getLikeButton().addEventListener("touchstart", likeClicked);
+    getLikeButton().addEventListener("touchstart", dislikeClicked);
     window.returnDislikeButtonlistenersSet = true;
   }
 }

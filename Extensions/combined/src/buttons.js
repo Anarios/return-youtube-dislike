@@ -33,7 +33,10 @@ function getButtons() {
 }
 
 function getLikeButton() {
-  return getButtons().children[0];
+  return getButtons().children[0].tagName ===
+    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+    ? getButtons().children[0].children[0]
+    : getButtons().children[0];
 }
 
 function getLikeTextContainer() {
@@ -44,14 +47,24 @@ function getLikeTextContainer() {
 }
 
 function getDislikeButton() {
-  return getButtons().children[1];
+  return getButtons().children[0].tagName ===
+    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+    ? getButtons().children[0].children[1]
+    : getButtons().children[1];
 }
 
 function getDislikeTextContainer() {
-  return (
+  let result =
     getDislikeButton().querySelector("#text") ??
-    getDislikeButton().getElementsByTagName("yt-formatted-string")[0]
-  );
+    getDislikeButton().getElementsByTagName("yt-formatted-string")[0];
+  if (result == null) {
+    let textSpan = document.createElement("span");
+    textSpan.id = "text";
+    getDislikeButton().querySelector("button").appendChild(textSpan);
+    getDislikeButton().querySelector("button").style.width = "auto";
+    result = getDislikeButton().querySelector("#text");
+  }
+  return result;
 }
 
 function checkForSignInButton() {

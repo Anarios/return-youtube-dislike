@@ -97,7 +97,7 @@ function isLikesDisabled() {
     );
   }
   return /^\D*$/.test(
-    getButtons().children[0].querySelector("#text").innerText
+    getButtons().children[0].innerText
   );
 }
 
@@ -158,16 +158,22 @@ function setDislikes(dislikesCount) {
 }
 
 function getLikeCountFromButton() {
-  if (isShorts()) {
-    //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
-    //It should be possible to fix this function, but it's not critical to showing the dislike count.
-    return false;
-  }
-  let likesStr = getLikeButton()
+  try {
+    if (isShorts()) {
+      //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
+      //It should be possible to fix this function, but it's not critical to showing the dislike count.
+      return false;
+    }
+    let likesStr = getLikeButton()
     .querySelector("yt-formatted-string#text")
     .getAttribute("aria-label")
     .replace(/\D/g, "");
-  return likesStr.length > 0 ? parseInt(likesStr) : false;
+    return likesStr.length > 0 ? parseInt(likesStr) : false;
+  }
+  catch {
+    return false;
+  }
+
 }
 
 function processResponse(response, storedData) {
