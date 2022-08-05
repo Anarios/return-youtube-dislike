@@ -1,4 +1,4 @@
-import { getButtons } from "./buttons";
+import { getButtons, getDislikeButton, getLikeButton } from './buttons';
 import {
   extConfig,
   isMobile,
@@ -13,8 +13,8 @@ function createRateBar(likes, dislikes) {
     let rateBar = document.getElementById("ryd-bar-container");
 
     const widthPx =
-      getButtons().children[0].clientWidth +
-      getButtons().children[1].clientWidth +
+      getLikeButton().clientWidth +
+      getDislikeButton().clientWidth +
       8;
 
     const widthPercent =
