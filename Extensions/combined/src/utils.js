@@ -1,50 +1,34 @@
 import { extConfig } from "./state";
 
-function roundDown(num) {
-  if (num < 1000) return num;
-  const int = Math.floor(Math.log10(num) - 2);
-  const decimal = int + (int % 3 ? 1 : 0);
-  const value = Math.floor(num / 10 ** decimal);
-  return value * 10 ** decimal;
-}
-
 function numberFormat(numberState) {
-  let userLocales;
-  try {
-    userLocales = new URL(
-      Array.from(document.querySelectorAll("head > link[rel='search']"))
-        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-        ?.getAttribute("href")
-    )?.searchParams?.get("locale");
-  } catch {}
-
-  let numberDisplay;
-  if (extConfig.numberDisplayRoundDown === false) {
-    numberDisplay = numberState;
-  } else {
-    numberDisplay = roundDown(numberState);
-  }
   return getNumberFormatter(extConfig.numberDisplayFormat).format(
-    numberDisplay
+    numberState
   );
 }
 
-function localize(localeString) {
-  return chrome.i18n.getMessage(localeString);
-}
-
 function getNumberFormatter(optionSelect) {
+  let userLocales;
+  if (document.documentElement.lang) {
+    userLocales = document.documentElement.lang;
+  } else if (navigator.language) {
+    userLocales = navigator.language;
+  } else {
+    try {
+      userLocales = new URL(
+        Array.from(document.querySelectorAll("head > link[rel='search']"))
+          ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
+          ?.getAttribute("href")
+      )?.searchParams?.get("locale");
+    } catch {
+      cLog(
+        "Cannot find browser locale. Use en as default for number formatting."
+      );
+      userLocales = "en";
+    }
+  }
+
   let formatterNotation;
   let formatterCompactDisplay;
-  let userLocales;
-  try {
-    userLocales = new URL(
-      Array.from(document.querySelectorAll("head > link[rel='search']"))
-      ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-      ?.getAttribute("href")
-    )?.searchParams?.get("locale");
-  } catch {}
-
   switch (optionSelect) {
     case "compactLong":
       formatterNotation = "compact";
@@ -60,14 +44,15 @@ function getNumberFormatter(optionSelect) {
       formatterCompactDisplay = "short";
   }
 
-  const formatter = Intl.NumberFormat(
-    document.documentElement.lang || userLocales || navigator.language,
-    {
-      notation: formatterNotation,
-      compactDisplay: formatterCompactDisplay,
-    }
-  );
+  const formatter = Intl.NumberFormat(userLocales, {
+    notation: formatterNotation,
+    compactDisplay: formatterCompactDisplay,
+  });
   return formatter;
+}
+
+function localize(localeString) {
+  return chrome.i18n.getMessage(localeString);
 }
 
 function getBrowser() {

@@ -1,4 +1,10 @@
-import { getLikeButton, getDislikeButton, getButtons } from "./buttons";
+import {
+  getLikeButton,
+  getDislikeButton,
+  getButtons,
+  getLikeTextContainer,
+  getDislikeTextContainer,
+} from "./buttons";
 import { createRateBar } from "./bar";
 import {
   getBrowser,
@@ -8,6 +14,7 @@ import {
   getColorFromTheme,
 } from "./utils";
 import { localize } from "./utils";
+import { createStarRating } from "./starRating";
 
 //TODO: Do not duplicate here and in ryd.background.js
 const apiUrl = "https://returnyoutubedislikeapi.com";
@@ -22,7 +29,8 @@ let extConfig = {
   coloredBar: false,
   colorTheme: "classic",
   numberDisplayFormat: "compactShort",
-  numberDisplayRoundDown: true,
+  showTooltipPercentage: false,
+  tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
 };
 
@@ -38,6 +46,10 @@ function isMobile() {
 
 function isShorts() {
   return location.pathname.startsWith("/shorts");
+}
+
+function isNewDesign() {
+  return document.getElementById("comment-teaser") !== null;
 }
 
 let mutationObserver = new Object();
@@ -86,7 +98,7 @@ function isLikesDisabled() {
     );
   }
   return /^\D*$/.test(
-    getButtons().children[0].querySelector("#text").innerText
+    getButtons().children[0].innerText
   );
 }
 
@@ -122,7 +134,7 @@ function getState(storedData) {
 
 //---   Sets The Likes And Dislikes Values   ---//
 function setLikes(likesCount) {
-  getButtons().children[0].querySelector("#text").innerText = likesCount;
+  getLikeTextContainer().innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
@@ -133,7 +145,7 @@ function setDislikes(dislikesCount) {
       ).innerText = dislikesCount;
       return;
     }
-    getButtons().children[1].querySelector("#text").innerText = dislikesCount;
+    getDislikeTextContainer().innerText = dislikesCount;
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {
@@ -142,22 +154,27 @@ function setDislikes(dislikesCount) {
       ).innerText = localize("TextLikesDisabled");
       return;
     }
-    getButtons().children[1].querySelector("#text").innerText =
-      localize("TextLikesDisabled");
+    getDislikeTextContainer().innerText = localize("TextLikesDisabled");
   }
 }
 
 function getLikeCountFromButton() {
-  if (isShorts()) {
-    //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
-    //It should be possible to fix this function, but it's not critical to showing the dislike count.
-    return 0;
-  }
-  let likesStr = getLikeButton()
-    .querySelector("button")
+  try {
+    if (isShorts()) {
+      //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
+      //It should be possible to fix this function, but it's not critical to showing the dislike count.
+      return false;
+    }
+    let likesStr = getLikeButton()
+    .querySelector("yt-formatted-string#text")
     .getAttribute("aria-label")
     .replace(/\D/g, "");
-  return likesStr.length > 0 ? parseInt(likesStr) : false;
+    return likesStr.length > 0 ? parseInt(likesStr) : false;
+  }
+  catch {
+    return false;
+  }
+
 }
 
 function processResponse(response, storedData) {
@@ -200,6 +217,8 @@ function processResponse(response, storedData) {
       getDislikeButton().style.color = getColorFromTheme(false);
     }
   }
+  //Temporary disabling this - it breaks all places where getButtons()[1] is used
+  // createStarRating(response.rating, isMobile());
 }
 
 // Tells the user if the API is down
@@ -253,7 +272,8 @@ function initExtConfig() {
   initializeColoredBar();
   initializeColorTheme();
   initializeNumberDisplayFormat();
-  initializeNumberDisplayRoundDown();
+  initializeTooltipPercentage();
+  initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
 }
 
@@ -297,16 +317,6 @@ function initializeColoredBar() {
   });
 }
 
-function initializeNumberDisplayRoundDown() {
-  getBrowser().storage.sync.get(["numberDisplayRoundDown"], (res) => {
-    if (res.numberDisplayRoundDown === undefined) {
-      getBrowser().storage.sync.set({ numberDisplayRoundDown: true });
-    } else {
-      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
-    }
-  });
-}
-
 function initializeColorTheme() {
   getBrowser().storage.sync.get(["colorTheme"], (res) => {
     if (res.colorTheme === undefined) {
@@ -327,6 +337,26 @@ function initializeNumberDisplayFormat() {
   });
 }
 
+function initializeTooltipPercentage() {
+  getBrowser().storage.sync.get(["showTooltipPercentage"], (res) => {
+    if (res.showTooltipPercentage === undefined) {
+      getBrowser().storage.sync.set({ showTooltipPercentage: false });
+    } else {
+      extConfig.showTooltipPercentage = res.showTooltipPercentage;
+    }
+  });
+}
+
+function initializeTooltipPercentageMode() {
+  getBrowser().storage.sync.get(["tooltipPercentageMode"], (res) => {
+    if (res.tooltipPercentageMode === undefined) {
+      getBrowser().storage.sync.set({ tooltipPercentageMode: "dash_like" });
+    } else {
+      extConfig.tooltipPercentageMode = res.tooltipPercentageMode;
+    }
+  });
+}
+
 function initializeNumberDisplayReformatLikes() {
   getBrowser().storage.sync.get(["numberDisplayReformatLikes"], (res) => {
     if (res.numberDisplayReformatLikes === undefined) {
@@ -342,6 +372,7 @@ export {
   isShorts,
   isVideoDisliked,
   isVideoLiked,
+  isNewDesign,
   getState,
   setState,
   setInitialState,

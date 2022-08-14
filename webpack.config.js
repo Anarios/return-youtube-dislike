@@ -2,18 +2,23 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
 
-const entries = ['ryd.content-script', 'ryd.background', 'popup'];
+const entries = ["ryd.content-script", "ryd.background", "popup"];
 
 const ignorePatterns = [
   "**/manifest-**",
   "**/dist/**",
   "**/src/**",
   "**/readme.md",
-  ...entries.map(entry => `**/${entry}.js`)
+  ...entries.map((entry) => `**/${entry}.js`),
 ];
 
 module.exports = {
-  entry: Object.fromEntries(entries.map(entry => [entry, path.join(__dirname, './Extensions/combined/', `${entry}.js`)])),
+  entry: Object.fromEntries(
+    entries.map((entry) => [
+      entry,
+      path.join(__dirname, "./Extensions/combined/", `${entry}.js`),
+    ])
+  ),
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "Extensions/combined/dist"),
@@ -59,13 +64,11 @@ module.exports = {
           copy: [
             {
               source: "./Extensions/combined/dist/**.js",
-              destination:
-                "./Extensions/combined/dist/firefox/",
+              destination: "./Extensions/combined/dist/firefox/",
             },
             {
               source: "./Extensions/combined/dist/**.js",
-              destination:
-                "./Extensions/combined/dist/chrome/",
+              destination: "./Extensions/combined/dist/chrome/",
             },
           ],
         },

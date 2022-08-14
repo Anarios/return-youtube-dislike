@@ -11,7 +11,6 @@ let extConfig = {
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
-  numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
   numberDisplayReformatLikes: false, // use existing (native) likes number
 };
 
@@ -78,13 +77,17 @@ api.runtime.onInstalled.addListener((details) => {
   if (
     // No need to show changelog if its was a browser update (and not extension update)
     details.reason === "browser_update" ||
+    // Chromium (e.g., Google Chrome Cannary) uses this name instead of the one above for some reason
+    details.reason === "chrome_update" ||
     // No need to show changelog if developer just reloaded the extension
     details.reason === "update"
-  )
+  ) {
     return;
-  api.tabs.create({
-    url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
-  });
+  } else if (details.reason == "install") {
+    api.tabs.create({
+      url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
+    });
+  }
 });
 
 // api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
@@ -265,11 +268,6 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
-  if (changes.numberDisplayRoundDown !== undefined) {
-    handleNumberDisplayRoundDownChangeEvent(
-      changes.numberDisplayRoundDown.newValue
-    );
-  }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
@@ -280,6 +278,15 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.disableLogging !== undefined) {
     handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
+  if (changes.showTooltipPercentage !== undefined) {
+    handleShowTooltipPercentageChangeEvent(
+      changes.showTooltipPercentage.newValue
+    );
+  }
+  if (changes.numberDisplayReformatLikes !== undefined) {
+    handleNumberDisplayReformatLikesChangeEvent(
+      changes.numberDisplayReformatLikes.newValue
+    );
   }
 }
 
@@ -299,8 +306,15 @@ function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
 }
 
-function handleNumberDisplayRoundDownChangeEvent(value) {
-  extConfig.numberDisplayRoundDown = value;
+function handleShowTooltipPercentageChangeEvent(value) {
+  extConfig.showTooltipPercentage = value;
+}
+
+function handleTooltipPercentageModeChangeEvent(value) {
+  if (!value) {
+    value = "dash_like";
+  }
+  extConfig.tooltipPercentageMode = value;
 }
 
 function changeIcon(iconName) {
@@ -339,8 +353,9 @@ function initExtConfig() {
   initializeColoredBar();
   initializeColorTheme();
   initializeNumberDisplayFormat();
-  initializeNumberDisplayRoundDown();
   initializeNumberDisplayReformatLikes();
+  initializeTooltipPercentage();
+  initializeTooltipPercentageMode();
 }
 
 function initializeDisableVoteSubmission() {
@@ -374,16 +389,6 @@ function initializeColoredThumbs() {
   });
 }
 
-function initializeNumberDisplayRoundDown() {
-  api.storage.sync.get(["numberDisplayRoundDown"], (res) => {
-    if (res.numberDisplayRoundDown === undefined) {
-      api.storage.sync.set({ numberDisplayRoundDown: true });
-    } else {
-      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
-    }
-  });
-}
-
 function initializeColoredBar() {
   api.storage.sync.get(["coloredBar"], (res) => {
     if (res.coloredBar === undefined) {
@@ -410,6 +415,26 @@ function initializeNumberDisplayFormat() {
       api.storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
       extConfig.numberDisplayFormat = res.numberDisplayFormat;
+    }
+  });
+}
+
+function initializeTooltipPercentage() {
+  api.storage.sync.get(["showTooltipPercentage"], (res) => {
+    if (res.showTooltipPercentage === undefined) {
+      api.storage.sync.set({ showTooltipPercentage: false });
+    } else {
+      extConfig.showTooltipPercentage = res.showTooltipPercentage;
+    }
+  });
+}
+
+function initializeTooltipPercentageMode() {
+  api.storage.sync.get(["tooltipPercentageMode"], (res) => {
+    if (res.tooltipPercentageMode === undefined) {
+      api.storage.sync.set({ tooltipPercentageMode: "dash_like" });
+    } else {
+      extConfig.tooltipPercentageMode = res.tooltipPercentageMode;
     }
   });
 }

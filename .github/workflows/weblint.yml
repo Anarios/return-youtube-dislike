@@ -4,23 +4,22 @@ name: Website Lint
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
       - Website/**
 
   pull_request:
-    branches: [ main ]
+    branches: [main]
     paths:
       - Website/**
 
 jobs:
   weblint:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@main
-    - run: npm install
-      working-directory: Website
-    - run: npm run lint
-      working-directory: Website
+      - uses: actions/checkout@main
+      - run: npm install
+        working-directory: Website
+      - run: npm run lint
+        working-directory: Website

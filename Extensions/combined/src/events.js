@@ -1,5 +1,5 @@
 import { getBrowser, getVideoId, numberFormat, cLog } from "./utils";
-import { checkForSignInButton, getButtons } from "./buttons";
+import { checkForSignInButton, getButtons, getDislikeButton, getLikeButton } from './buttons';
 import {
   NEUTRAL_STATE,
   LIKED_STATE,
@@ -8,6 +8,7 @@ import {
   extConfig,
   storedData,
   setLikes,
+  getLikeCountFromButton,
 } from "./state";
 import { createRateBar } from "./bar";
 
@@ -41,6 +42,12 @@ function likeClicked() {
       createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = NEUTRAL_STATE;
     }
+    if (extConfig.numberDisplayReformatLikes === true) {
+      const nativeLikes = getLikeCountFromButton();
+      if (nativeLikes !== false) {
+        setLikes(numberFormat(nativeLikes));
+      }
+    }
   }
 }
 
@@ -65,17 +72,22 @@ function dislikeClicked() {
       setDislikes(numberFormat(storedData.dislikes));
       createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = DISLIKED_STATE;
+      if (extConfig.numberDisplayReformatLikes === true) {
+        const nativeLikes = getLikeCountFromButton();
+        if (nativeLikes !== false) {
+          setLikes(numberFormat(nativeLikes));
+        }
+      }
     }
   }
 }
 
 function addLikeDislikeEventListener() {
-  const buttons = getButtons();
   if (!window.returnDislikeButtonlistenersSet) {
-    buttons.children[0].addEventListener("click", likeClicked);
-    buttons.children[1].addEventListener("click", dislikeClicked);
-    buttons.children[0].addEventListener("touchstart", likeClicked);
-    buttons.children[1].addEventListener("touchstart", dislikeClicked);
+    getLikeButton().addEventListener("click", likeClicked);
+    getDislikeButton().addEventListener("click", dislikeClicked);
+    getLikeButton().addEventListener("touchstart", likeClicked);
+    getLikeButton().addEventListener("touchstart", dislikeClicked);
     window.returnDislikeButtonlistenersSet = true;
   }
 }
@@ -95,17 +107,13 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
-
-  if (changes.numberDisplayRoundDown !== undefined) {
-    handleNumberDisplayRoundDownChangeEvent(
-      changes.numberDisplayRoundDown.newValue
-    );
-  }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
-    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+    handleNumberDisplayReformatLikesChangeEvent(
+      changes.numberDisplayReformatLikes.newValue
+    );
   }
 }
 
@@ -128,10 +136,6 @@ function handleColorThemeChangeEvent(value) {
 
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
-}
-
-function handleNumberDisplayRoundDownChangeEvent(value) {
-  extConfig.numberDisplayRoundDown = value;
 }
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {

@@ -1,21 +1,21 @@
 {
   "extensionName": {
-    "message": "Devolver Dislikes do YouTube"
+    "message": "Voltar Dislikes do YouTube"
   },
   "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+    "message": "Voltar Dislikes do YouTube Beta"
   },
   "extensionDesc": {
-    "message": "A capacidade de ver os retornos de não gostos"
+    "message": "Voltar os Deslikes do YouTube"
   },
   "textDeveloper": {
-    "message": "por Dmitry Selivanov e a Comunidade"
+    "message": "por Dmitry Selivanov e Comunidade"
   },
   "linkWebsite": {
     "message": "Website"
   },
   "linkFAQ": {
-    "message": "FAQ"
+    "message": "Perguntas Frequentes"
   },
   "linkDonate": {
     "message": "Doe"
@@ -24,15 +24,39 @@
     "message": "Ajuda"
   },
   "legendSettings": {
-    "message": "Ajustes"
+    "message": "Configurações"
   },
   "textSettings": {
-    "message": "Desaproveitar as aversões"
+    "message": "Desativar envio de Curtidas/Não Curtidas"
+  },
+  "textLikesDisabled": {
+    "message": "Desativado pelo proprietário"
   },
   "textSettingsHover": {
-    "message": "Pare de contar as antipatias."
+    "message": "Parar de contar suas curtidas e não curtidas."
+  },
+  "textTempUnavailable": {
+    "message": "Temporariamente indisponível"
   },
   "textUpdate": {
-    "message": "atualização para"
+    "message": "Atualizar para"
+  },
+  "version30installed": {
+    "message": "Versão 3.0.0.1 instalada"
+  },
+  "whatsnew": {
+    "message": "O que há de novo?"
+  },
+  "shortsSupport": {
+    "message": "Suporte para Shorts"
+  },
+  "customColors": {
+    "message": "Cores personalizadas para barra de não curtidas e botões"
+  },
+  "customNumberFormats": {
+    "message": "Formato de números personalizados"
+  },
+  "considerDonating": {
+    "message": "A única coisa que mantém a extensão funcionando são suas doações, considere apoiar o projeto."
   }
 }

@@ -1,3 +1,5 @@
+Read this in other languages: [Français](readmefr.md)
+
 **Contents**
 
 - [Guides](#guides)
@@ -17,7 +19,6 @@
 <!-- - [How to update wiki](/) -->
 
 <br>
-
 
 ## FAQs
 
