@@ -5,8 +5,7 @@ export default {
   home: {
     name: "Ana Sayfa",
     title: "YouTube Dislike Sayısını Geri Getir",
-    subtitle:
-      "Tarayıcı uzantısı ve bir API, YouTube'daki dislike sayınızı geri getirir",
+    subtitle: "YouTube'daki dislike sayılarınızı geri getiren bir tarayıcı uzantısı ve API",
     ukraine: "Ukrayna'ya Destek Ol",
     sponsors: "Sponsorlar",
   },
@@ -15,11 +14,9 @@ export default {
     title: "Platformunuzu Seçin",
     subtitle: "Firefox ve bütün Chromium tabanlı tarayıcılarda kullanılabilir",
     title2: "Diğer Platformlar",
-    subtitle2:
-      "Tarayıcınız henüz desteklenmiyorsa UserScript yöntemini deneyin",
+    subtitle2: "Tarayıcınız henüz desteklenmiyorsa UserScript yöntemini deneyin",
     title3: "Üçüncü Parti Uygulamalar",
-    subtitle3:
-      "Riski tamamen size aittir, bizim tarafımızda sorumluluk kabul edilmemektedir",
+    subtitle3: "Riski tamamen size aittir, bizim tarafımızda sorumluluk kabul edilmemektedir",
   },
   api: {
     name: "API",
@@ -31,10 +28,10 @@ export default {
         "Herkese açık API'nin üçüncü parti kişilerin kullanımında aşağıdaki kısıtlamalara izin verir:",
       bullet1: "Atıf: ",
       bullet1text:
-        "Bu proje, bu depoya ya da returnyoutubedislike.com sitesine bir bağlantı ile açıkça atfedilmelidir",
+        "Bu proje, bu depoya ya da returnyoutubedislike.com sitesine bir bağlantı ile açıkça atfedilmelidir.",
       bullet2: "Hız Sınırlaması: ",
       bullet2text:
-        "Kullanıcı başına dakikada 100 ve günde 10.000 hız sınırlaması vardır. Bu, uygulamanızın geri çekilmesi gerektiğini belirten 429 durum kodunu döndürür",
+        "Kullanıcı başına dakikada 100 ve günde 10.000 hız sınırlaması vardır. Bu, uygulamanızın geri çekilmesi gerektiğini belirten 429 durum kodunu döndürür.",
     },
     url: {
       title: "URL Bilgisi",
@@ -46,16 +43,15 @@ export default {
     },
     fetching: {
       title: "Temel Veri Alma Eğitimi",
-      subtitle:
-        "Belirli bir YouTube ID'sinin oylamalarını elde etmek için bir örnek: ",
+      subtitle: "Belirli bir YouTube ID'sinin oylamalarını elde etmek için bir örnek: ",
       title2: "Örnek İstek: ",
       url: "İstek URL'si: ",
       method: "İstek Yöntemi: ",
       headers: "Header'lar: ",
       response: "Sonuç: ",
-      error1: 'Geçersiz bir YouTube ID\'si, 404 "Not Found" olarak döndürülür',
+      error1: 'Geçersiz bir YouTube ID\'si, 404 "Not Found" olarak döndürülür.',
       error2:
-        'Yanlış biçimlendirilmiş bir YouTube ID\'si, 400 "Bad Request" olarak döndürülür',
+        'Yanlış biçimlendirilmiş bir YouTube ID\'si, 400 "Bad Request" olarak döndürülür.',
     },
   },
   help: {
@@ -68,13 +64,11 @@ export default {
     bullet3: "Şu bağlantıyı açtığınızdan emin olun: ",
     bullet31: "şöyle bir düz metin görmelisiniz: ",
     bullet4: "Yukarıdakiler yardımcı olmadıysa - Discord sunucumuzdaki ",
-    bullet41:
-      " kanalından problemi bildirin (İngilizce bir şekilde) Discord sunucumuz: ",
-    bullet4a:
-      "Bize İşletim Sisteminizi, Tarayıcı Adınızı ve Tarayıcı Sürümünüzü söyleyin",
-    bullet4b: "Konsol açıkken (açmak için ",
-    bullet4b1:
-      " tuşuna basın) sorunu yaşadığınız sayfanın ekran görüntüsünü alın (yani YouTube watch sayfasının) - Ekran görüntüsü örneği aşağıdadır.",
+    bullet41: " kanalından problemi bildirin (İngilizce bir şekilde) Discord sunucumuz: ",
+    bullet4a: "Bize İşletim Sisteminizi, Tarayıcı Adınızı ve Tarayıcı Sürümünüzü söyleyin",
+    bullet4b:
+      "Konsol açıkken (açmak için ",
+    bullet4b1: " tuşuna basın) sorunu yaşadığınız sayfanın ekran görüntüsünü alın (yani YouTube watch sayfasının) - Ekran görüntüsü örneği aşağıdadır.",
     bullet4c:
       "Uzantı yüklüyken tarayıcınızın uzantılar sayfasının ekran görüntüsünü alın.",
     bullet4c1: "Uzantıları görmek için şu linki adres çubuğuna yapıştırın: ",
@@ -84,8 +78,7 @@ export default {
   faq: {
     name: "SSS",
     title: "Sıkça Sorulan Sorular",
-    subtitle:
-      "Hâlâ sorun mu yaşıyorsunuz? Discord sunucumuza katılmaktan çekinmeyin! (İngilizce)",
+    subtitle: "Hâlâ sorun mu yaşıyorsunuz? Discord sunucumuza katılmaktan çekinmeyin! (İngilizce)",
     bullet1: "Uzantı, verileri nereden alıyor?",
     bullet1text:
       "Resmî YouTube dislike sayısı API'si kapatılmadan önceki arşivlenmiş verilerden ve tahmin edilen uzantı kullanıcısı davranışının bir birleşimiyle.",
@@ -101,13 +94,12 @@ export default {
     bullet5: "Hangi verileri topluyorsunuz ve bunlar nasıl işleniyor?",
     bullet5text:
       "Uzantı, yalnızca izlediğiniz videonun IP adresi veya videonun ID'si gibi düzgün çalışması için kesinlikle gerekli olan verileri toplar. Verileriniz asla 3. taraflara satılmayacaktır. Güvenliği ve gizliliği nasıl ele aldığımız hakkında daha fazla bilgi için <a href=\"https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md\">security FAQ</a>'ya gidin.",
-    bullet6: "API/Yazılım(Backend) nasıl çalışıyor?",
+    bullet6: "API/Backend nasıl çalışıyor?",
     bullet6text:
       "Yazılım, YouTube API'sinin dislike sayısını ve uzantı kullanıcılarının like/dislike sayısı sonuçların genişletilmesinin döndürmeye devam ettiği zamana ait arşivlenmiş verileri kullanır. Yakın zamanda içerik üreticilerin dislike sayısını kolay ve güvenli bir şekilde göndermelerine izin vereceğiz ve ArchiveTeam'in arşivlenmiş verilerini (4,56 milyar video) veri tabanımıza ekleyeceğiz. Ayrıca konu ile ilgili videoyu da izleyebilirsiniz.",
-    bullet7:
-      "Dislike sayısı neden 'DISLIKES DISABLED'(DISLIKE'LAR AKTİF DEĞİL) olarak gözüküyor?",
+    bullet7: "Dislike sayısı neden 'DISLIKE'LAR KAPALI' olarak gözüküyor?",
     bullet7text:
-      "Yazma sırasında like ve dislike sayısını devre dışı bırakan videoların dislike sayılarını göstermiyoruz. Uzantı, bu videolar için 'DISLIKES DISABLED'(DISLIKE'LAR AKTİF DEĞİL) mesajını görüntüler. Yakında tüm videolarda dislike sayısını göstereceğiz. Bu, yalnızca geçici bir çözümdür. Bu nedenle insanlar uzantının bozuk olduğunu düşünmez (zaten iyi çalışmıyor). Bazen yakın zamanda yüklenen bir videoda, içerik üreticisi onu devre dışı bırakmamış olsa bile 'DISLIKES DISABLED' olarak gözükebilir. Bunun nedeni, dislike sayısını devre dışı bırakıp bırakmadığını tespit etmemizdir. Birkaç saat içinde videoyu like ya da dislike atarsanız veya sayfayı yenilerseniz kaybolması gerekir (umarız).",
+      "Yazma sırasında like ve dislike sayısını devre dışı bırakan videoların dislike sayılarını göstermiyoruz. Uzantı, bu videolar için 'DISLIKE'LAR KAPALI' mesajını görüntüler. Yakında tüm videolarda dislike sayısını göstereceğiz. Bu, yalnızca geçici bir çözümdür. Bu nedenle insanlar uzantının bozuk olduğunu düşünmez (zaten iyi çalışmıyor). Bazen yakın zamanda yüklenen bir videoda, içerik üreticisi onu devre dışı bırakmamış olsa bile 'DISLIKE'LAR KAPALI' olarak gözükebilir. Bunun nedeni, dislike sayısını devre dışı bırakıp bırakmadığını tespit etmemizdir. Birkaç saat içinde videoyu like ya da dislike atarsanız veya sayfayı yenilerseniz kaybolması gerekir (umarız).",
   },
   donate: {
     name: "Bağış Yap",
@@ -120,7 +112,7 @@ export default {
     subtitle: "Projeye ve geliştiricilerine bağlantılar",
     contact: "Bana Ulaşın",
     translators: "Çevirmenler",
-    coolProjects: "Hoş Projeler",
+    coolProjects: "Havalı Projeler",
     sponsorBlockDescription: "Videolara gömülü reklamları pas geçer",
     filmotDescription: "YouTube videolarını alt yazılara göre aramanızı sağlar",
   },

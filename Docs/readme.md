@@ -1,4 +1,4 @@
-Read this in other languages: [Français](readmefr.md)
+Read this in other languages: [Français](readmefr.md), [Türkçe](READMEtr.md)
 
 **Contents**
 

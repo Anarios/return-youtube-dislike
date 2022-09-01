@@ -1,4 +1,4 @@
-Read this in other languages: [Français](CONTRIBUTINGfr.md)
+Read this in other languages: [русский](CONTRIBUTINGru.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md)
 
 # Welcome To Return YouTube Dislikes contributing guide
 
