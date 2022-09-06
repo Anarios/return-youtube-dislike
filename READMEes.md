@@ -12,7 +12,7 @@ Leer en otros idiomas: [English](README.md), [русский](READMEru.md), [Fra
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike (recuperar los *dislikes* de YouTube) es una extensión de código abierto que reintroduce el contador de *dislikes* (o «No me gustas»).</b><br>
+    <b>Return YouTube Dislike (recuperar los *dislikes* de YouTube) es una extensión de código abierto que reintroduce el contador de *dislikes* (o «No me gusta»).</b><br>
     Está disponible para Chrome y Firefox como una extensión web.<br>
     También está disponible para otros navegadores como un *userscript* de JS.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
@@ -79,7 +79,7 @@ Rogamos que leas la [guía de contribución](https://github.com/Anarios/return-y
 
 ## ¡Apoya este proyecto!
 
-Puedes apoyar este proyecto enviando un donativo a través del enlace inferior:
+Puedes apoyar este proyecto enviando una donación a través del siguiente enlace:
 
 [Donar](https://returnyoutubedislike.com/donate)
 
