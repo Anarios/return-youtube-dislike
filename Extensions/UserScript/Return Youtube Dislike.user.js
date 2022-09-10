@@ -82,7 +82,10 @@ function getButtons() {
     return document.querySelector(".slim-video-action-bar-actions");
   }
   if (document.getElementById("menu-container")?.offsetParent === null) {
-    return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
+    return (
+      document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div") ??
+      document.querySelector("ytd-menu-renderer.ytd-video-primary-info-renderer > div")
+    )
   } else {
     return document
       .getElementById("menu-container")
@@ -108,7 +111,8 @@ function getDislikeButton() {
 function getDislikeTextContainer() {
   return (
     getDislikeButton().querySelector("#text") ??
-    getDislikeButton().getElementsByTagName("yt-formatted-string")[0]
+    getDislikeButton().getElementsByTagName("yt-formatted-string")[0] ??
+    getDislikeButton().querySelector("span[role='text']")
   );
 }
 
@@ -594,7 +598,7 @@ function setEventListeners(evt) {
   let jsInitChecktimer;
 
   function checkForJS_Finish() {
-    console.log();
+    //console.log();
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
 
