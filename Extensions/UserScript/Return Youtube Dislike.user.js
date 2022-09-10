@@ -639,7 +639,7 @@ if (isMobile) {
     return originalPush.apply(history, args);
   };
   setInterval(() => {
-    if (getDislikeButton().querySelector(".button-renderer-text") === null) {
+    if (getDislikeButton().querySelector(".button-renderer-text") === null && !isShorts()) {
       if (getDislikeButton().querySelector(".cbox span") === null) {
         let dislikeArea = document.createElement('div');
         dislikeArea.classList.add('cbox');
@@ -654,6 +654,9 @@ if (isMobile) {
         getDislikeButton().querySelector("button").style.width = "auto";
       }
       getDislikeButton().querySelector(".cbox span").innerText = mobileDislikes;
+    }
+    else if(getDislikeButton().querySelector(".button-renderer-text") === null && isShorts()){
+      getDislikeTextContainer().innerText = mobileDislikes;
     }
     else{
       getDislikeButton().querySelector(".button-renderer-text").innerText =
