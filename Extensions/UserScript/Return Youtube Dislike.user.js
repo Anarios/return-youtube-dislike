@@ -97,7 +97,10 @@ function getButtons() {
 }
 
 function getLikeButton() {
-  return getButtons().children[0];
+  return getButtons().children[0].tagName ===
+    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+    ? getButtons().children[0].children[0]
+    : getButtons().children[0];
 }
 
 function getLikeTextContainer() {
@@ -108,15 +111,26 @@ function getLikeTextContainer() {
 }
 
 function getDislikeButton() {
-  return getButtons().children[1];
+  return getButtons().children[0].tagName ===
+    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+    ? getButtons().children[0].children[1]
+    : getButtons().children[1];
 }
 
 function getDislikeTextContainer() {
-  return (
+  let result =
     getDislikeButton().querySelector("#text") ??
     getDislikeButton().getElementsByTagName("yt-formatted-string")[0] ??
     getDislikeButton().querySelector("span[role='text']")
-  );
+  if (result === null) {
+    let textSpan = document.createElement("span");
+    textSpan.id = "text";
+    textSpan.style.marginLeft = "2px";
+    getDislikeButton().querySelector("button").appendChild(textSpan);
+    getDislikeButton().querySelector("button").style.width = "auto";
+    result = getDislikeButton().querySelector("#text");
+  }
+  return result;
 }
 
 let mutationObserver = new Object();
@@ -639,23 +653,7 @@ if (isMobile) {
     return originalPush.apply(history, args);
   };
   setInterval(() => {
-    if (getDislikeButton().querySelector(".button-renderer-text") === null && !isShorts()) {
-      if (getDislikeButton().querySelector(".cbox span") === null) {
-        let dislikeArea = document.createElement('div');
-        dislikeArea.classList.add('cbox');
-        let dislikeAreaSpan = document.createElement('span');
-        dislikeAreaSpan.classList.add(
-          'yt-core-attributed-string',
-          'yt-core-attributed-string--white-space-no-wrap');
-        dislikeAreaSpan.innerText = "Dislike";
-        dislikeAreaSpan.style.marginLeft = "2px";
-        dislikeArea.appendChild(dislikeAreaSpan);
-        getDislikeButton().querySelector("button").appendChild(dislikeArea);
-        getDislikeButton().querySelector("button").style.width = "auto";
-      }
-      getDislikeButton().querySelector(".cbox span").innerText = mobileDislikes;
-    }
-    else if(getDislikeButton().querySelector(".button-renderer-text") === null && isShorts()){
+    if(getDislikeButton().querySelector(".button-renderer-text") === null){
       getDislikeTextContainer().innerText = mobileDislikes;
     }
     else{
