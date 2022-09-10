@@ -651,6 +651,7 @@ if (isMobile) {
         dislikeAreaSpan.style.marginLeft = "2px";
         dislikeArea.appendChild(dislikeAreaSpan);
         getDislikeButton().querySelector("button").appendChild(dislikeArea);
+        getDislikeButton().querySelector("button").style.width = "auto";
       }
       getDislikeButton().querySelector(".cbox span").innerText = mobileDislikes;
     }
