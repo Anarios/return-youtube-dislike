@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      3.0.1
+// @version      3.1.0
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -79,13 +79,16 @@ function getButtons() {
     }
   }
   if (isMobile) {
-    return document.querySelector(".slim-video-action-bar-actions");
+    return (
+      document.querySelector(".slim-video-action-bar-actions .segmented-buttons") ??
+      document.querySelector(".slim-video-action-bar-actions")
+    );
   }
   if (document.getElementById("menu-container")?.offsetParent === null) {
     return (
       document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div") ??
       document.querySelector("ytd-menu-renderer.ytd-video-primary-info-renderer > div")
-    )
+    );
   } else {
     return document
       .getElementById("menu-container")
@@ -636,7 +639,24 @@ if (isMobile) {
     return originalPush.apply(history, args);
   };
   setInterval(() => {
-    getDislikeButton().querySelector(".button-renderer-text").innerText =
-      mobileDislikes;
+    if (getDislikeButton().querySelector(".button-renderer-text") === null) {
+      if (getDislikeButton().querySelector(".cbox span") === null) {
+        let dislikeArea = document.createElement('div');
+        dislikeArea.classList.add('cbox');
+        let dislikeAreaSpan = document.createElement('span');
+        dislikeAreaSpan.classList.add(
+          'yt-core-attributed-string',
+          'yt-core-attributed-string--white-space-no-wrap');
+        dislikeAreaSpan.innerText = "Dislike";
+        dislikeAreaSpan.style.marginLeft = "2px";
+        dislikeArea.appendChild(dislikeAreaSpan);
+        getDislikeButton().querySelector("button").appendChild(dislikeArea);
+      }
+      getDislikeButton().querySelector(".cbox span").innerText = mobileDislikes;
+    }
+    else{
+      getDislikeButton().querySelector(".button-renderer-text").innerText =
+        mobileDislikes;
+    }
   }, 1000);
 }
