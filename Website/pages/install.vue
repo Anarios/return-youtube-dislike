@@ -88,6 +88,14 @@
       <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
       iOS &nbsp; <span style="font-size: 0.55rem">(Jailbroken)</span>
     </v-btn>
+    <v-btn class="mainAltButton" :href="iosuYouPlus" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
+      iOS &nbsp; <span style="font-size: 0.55rem">(uYou+)</span>
+    </v-btn>
+    <v-btn class="mainAltButton" :href="iosCercubePlus" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
+      iOS &nbsp; <span style="font-size: 0.55rem">(CercubePlus)</span>
+    </v-btn>
   </div>
 </template>
 
@@ -114,6 +122,8 @@ export default {
       iosJailbreakLink: "https://chariz.com/get/return-youtube-dislike/",
       androidNewPipe: "https://github.com/polymorphicshade/NewPipe",
       androidVueTube: "https://vuetube.app",
+      iosuYouPlus: "https://github.com/qnblackcat/uYouPlus",
+      iosCercubePlus: "https://github.com/qnblackcat/CercubePlus",
     };
   },
 };
