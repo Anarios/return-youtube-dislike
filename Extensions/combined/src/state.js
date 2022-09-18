@@ -137,6 +137,7 @@ function setLikes(likesCount) {
 }
 
 function setDislikes(dislikesCount) {
+  getDislikeTextContainer()?.removeAttribute('is-empty');
   if (!isLikesDisabled()) {
     if (isMobile()) {
       getButtons().children[1].querySelector(
