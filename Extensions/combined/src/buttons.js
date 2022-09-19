@@ -56,7 +56,8 @@ function getDislikeButton() {
 function getDislikeTextContainer() {
   let result =
     getDislikeButton().querySelector("#text") ??
-    getDislikeButton().getElementsByTagName("yt-formatted-string")[0];
+    getDislikeButton().getElementsByTagName("yt-formatted-string")[0] ??
+    getDislikeButton().querySelector("span[role='text']");
   if (result == null) {
     let textSpan = document.createElement("span");
     textSpan.id = "text";
