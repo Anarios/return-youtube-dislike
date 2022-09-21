@@ -222,6 +222,7 @@ function setDislikes(dislikesCount) {
     mobileDislikes = dislikesCount;
     return;
   }
+  getDislikeTextContainer()?.removeAttribute('is-empty');
   getDislikeTextContainer().innerText = dislikesCount;
 }
 
