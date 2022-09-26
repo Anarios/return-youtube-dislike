@@ -113,6 +113,10 @@ export default {
         tag: "NiniKo",
         lang: "Français",
       },
+      {
+        tag: "TubYoub#0069",
+        lang: "Deutsch",
+      },
     ],
     coolProjects: [
       {
