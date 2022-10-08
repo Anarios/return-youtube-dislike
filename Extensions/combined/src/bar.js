@@ -91,7 +91,7 @@ function createRateBar(likes, dislikes) {
             "1px solid var(--yt-spec-10-percent-layer)";
           descriptionAndActionsElement.style.paddingBottom = "10px";
 
-          // Fix bar offset in new UI
+          // Fix like/dislike ratio bar offset in new UI
           document.getElementById("actions-inner").style.width = "revert";
           if (isRoundedDesign()) {
             document.getElementById("actions").style.flexDirection =
