@@ -51,6 +51,10 @@ function isNewDesign() {
   return document.getElementById("comment-teaser") !== null;
 }
 
+function isRoundedDesign() {
+  return document.getElementById("segmented-like-button") !== null;
+}
+
 let mutationObserver = new Object();
 
 if (isShorts() && mutationObserver.exists !== true) {
@@ -96,9 +100,7 @@ function isLikesDisabled() {
       getButtons().children[0].querySelector(".button-renderer-text").innerText
     );
   }
-  return /^\D*$/.test(
-    getButtons().children[0].innerText
-  );
+  return /^\D*$/.test(getButtons().children[0].innerText);
 }
 
 function isVideoLiked() {
@@ -137,7 +139,7 @@ function setLikes(likesCount) {
 }
 
 function setDislikes(dislikesCount) {
-  getDislikeTextContainer()?.removeAttribute('is-empty');
+  getDislikeTextContainer()?.removeAttribute("is-empty");
   if (!isLikesDisabled()) {
     if (isMobile()) {
       getButtons().children[1].querySelector(
@@ -166,15 +168,13 @@ function getLikeCountFromButton() {
       return false;
     }
     let likesStr = getLikeButton()
-    .querySelector("yt-formatted-string#text")
-    .getAttribute("aria-label")
-    .replace(/\D/g, "");
+      .querySelector("yt-formatted-string#text")
+      .getAttribute("aria-label")
+      .replace(/\D/g, "");
     return likesStr.length > 0 ? parseInt(likesStr) : false;
-  }
-  catch {
+  } catch {
     return false;
   }
-
 }
 
 function processResponse(response, storedData) {
@@ -362,6 +362,7 @@ export {
   isVideoDisliked,
   isVideoLiked,
   isNewDesign,
+  isRoundedDesign,
   getState,
   setState,
   setInitialState,

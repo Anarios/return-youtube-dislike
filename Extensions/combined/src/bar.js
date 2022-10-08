@@ -1,9 +1,10 @@
-import { getButtons, getDislikeButton, getLikeButton } from './buttons';
+import { getButtons, getDislikeButton, getLikeButton } from "./buttons";
 import {
   extConfig,
   isMobile,
   isLikesDisabled,
   isNewDesign,
+  isRoundedDesign,
   isShorts,
 } from "./state";
 import { cLog, getColorFromTheme } from "./utils";
@@ -15,7 +16,7 @@ function createRateBar(likes, dislikes) {
     const widthPx =
       getLikeButton().clientWidth +
       getDislikeButton().clientWidth +
-      8;
+      (isRoundedDesign() ? 0 : 8);
 
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
@@ -80,15 +81,22 @@ function createRateBar(likes, dislikes) {
                 <!--css-build:shady-->${tooltipInnerHTML}
               </tp-yt-paper-tooltip>
               </div>
-      `
+      		`
         );
 
-        // Add border between info and comments
         if (isNewDesign()) {
+          // Add border between info and comments
           let descriptionAndActionsElement = document.getElementById("top-row");
           descriptionAndActionsElement.style.borderBottom =
             "1px solid var(--yt-spec-10-percent-layer)";
           descriptionAndActionsElement.style.paddingBottom = "10px";
+
+          // Fix bar offset in new UI
+          document.getElementById("actions-inner").style.width = "revert";
+          if (isRoundedDesign()) {
+            document.getElementById("actions").style.flexDirection =
+              "row-reverse";
+          }
         }
       } else {
         document.getElementById("ryd-bar-container").style.width =
