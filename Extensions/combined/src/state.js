@@ -133,10 +133,12 @@ function getState(storedData) {
 
 //---   Sets The Likes And Dislikes Values   ---//
 function setLikes(likesCount) {
+  cLog(`SET likes ${likesCount}`)
   getLikeTextContainer().innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
+  cLog(`SET dislikes ${dislikesCount}`)
   getDislikeTextContainer()?.removeAttribute('is-empty');
   if (!isLikesDisabled()) {
     if (isMobile()) {
@@ -161,13 +163,15 @@ function setDislikes(dislikesCount) {
 function getLikeCountFromButton() {
   try {
     if (isShorts()) {
-      //Youtube Shorts don't work with this query. It's not nessecary; we can skip it and still see the results.
+      //Youtube Shorts don't work with this query. It's not necessary; we can skip it and still see the results.
       //It should be possible to fix this function, but it's not critical to showing the dislike count.
       return false;
     }
-    let likesStr = getLikeButton()
-    .querySelector("yt-formatted-string#text")
-    .getAttribute("aria-label")
+    let likeButton = getLikeButton()
+    .querySelector("yt-formatted-string#text") ??
+    getLikeButton().querySelector("button");
+
+    let likesStr = likeButton.getAttribute("aria-label")
     .replace(/\D/g, "");
     return likesStr.length > 0 ? parseInt(likesStr) : false;
   }
@@ -191,7 +195,7 @@ function processResponse(response, storedData) {
   createRateBar(storedData.likes, storedData.dislikes);
   if (extConfig.coloredThumbs === true) {
     if (isShorts()) {
-      // for shorts, leave deactived buttons in default color
+      // for shorts, leave deactivated buttons in default color
       let shortLikeButton = getLikeButton().querySelector(
         "tp-yt-paper-button#button"
       );

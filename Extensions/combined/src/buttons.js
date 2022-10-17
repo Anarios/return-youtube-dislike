@@ -24,7 +24,7 @@ function getButtons() {
   //---   If Menu Element Is Displayed:   ---//
   if (document.getElementById("menu-container")?.offsetParent === null) {
     return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
-    //---   If Menu Element Isnt Displayed:   ---//
+    //---   If Menu Element Isn't Displayed:   ---//
   } else {
     return document
       .getElementById("menu-container")
@@ -42,7 +42,8 @@ function getLikeButton() {
 function getLikeTextContainer() {
   return (
     getLikeButton().querySelector("#text") ??
-    getLikeButton().getElementsByTagName("yt-formatted-string")[0]
+    getLikeButton().getElementsByTagName("yt-formatted-string")[0] ??
+    getLikeButton().querySelector("span[role='text']")
   );
 }
 
