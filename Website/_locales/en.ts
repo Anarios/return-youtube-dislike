@@ -93,7 +93,7 @@ export default {
       "Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability.",
     bullet5: "What data do you collect and how is it treated?",
     bullet5text:
-      'The extension only collects data that is strictly necessary for it to function properly, such as IP address or ID of the video you\'re watching. None of your data will ever be sold to 3rd parties. If you would like to know more about how we handle security and privacy check out our <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">security FAQ</a>.',
+      'The extension only collects data that is strictly necessary for it to function properly, such as the IP address or ID of the video you\'re watching. None of your data will ever be sold to 3rd parties. If you would like to know more about how we handle security and privacy check out our <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">security FAQ</a>.',
     bullet6: "How does the API/Backend work?",
     bullet6text:
       "The backend is using archived data from when the youtube api was still returning the dislike count, extension users like/dislike count and extrapolation. In the near future we will be allowing content creators to submit their dislike count easily and safely and we will be adding ArchiveTeam's archived data (4.56 billion videos) into our current database. You can also view a video on the topic.",
