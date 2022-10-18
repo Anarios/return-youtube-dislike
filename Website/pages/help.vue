@@ -94,10 +94,10 @@
             <br />
             {{ $vuetify.lang.t("$vuetify.help.bullet4c1") }}
             <br />
-            <a href="about:addons"><code>about:addons</code></a>
+            <code>about:addons</code>
             {{ $vuetify.lang.t("$vuetify.help.firefox") }}
             <br />
-            <a href="chrome://extensions/"><code>chrome://extensions</code></a>
+            <code>chrome://extensions</code>
             {{ $vuetify.lang.t("$vuetify.help.chrome") }}
           </li>
         </ol>

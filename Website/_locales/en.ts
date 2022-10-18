@@ -67,13 +67,13 @@ export default {
     bullet41: "in our",
     bullet4a: "Tell us your Operating System, Browser Name and Browser Version",
     bullet4b:
-      "Take screenshot of page with problem (i.e. youtube video page) with console open (press ",
+      "Take a screenshot of the page with the problem (i.e. youtube video page) with console open (press ",
     bullet4b1: ") - example screenshot below.",
     bullet4c:
       "Take screenshot of extensions page of your browser with extension installed.",
     bullet4c1: "To see extensions put this into address bar: ",
     firefox: "for Firefox",
-    chrome: "for Chrome, Edge, Brave, Opera, Vivaldi",
+    chrome: "for Chrome, Edge, Brave, Opera, and Vivaldi",
   },
   faq: {
     name: "FAQ",
@@ -87,7 +87,7 @@ export default {
       "Right now video dislikes are cached and they aren't updated very frequently. It varies depending on a video's popularity but can take anywhere between a few hours and a few days to update.",
     bullet3: "How does this work?",
     bullet3text:
-      "The extension collects the video ID of the video you are watching, and fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you like or dislike a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
+      "The extension collects the video ID of the video you are watching, and fetches the number of dislikes (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you like or dislike a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
     bullet4: "Can I share my dislike count with you?",
     bullet4text:
       "Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability.",
