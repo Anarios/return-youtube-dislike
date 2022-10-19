@@ -70,7 +70,7 @@ export default {
       "Take a screenshot of the page with the problem (i.e. Youtube video page) with console open (press ",
     bullet4b1: ") - example screenshot below.",
     bullet4c:
-      "Take screenshot of extensions page of your browser with extension installed.",
+      "Take a screenshot of the extensions page of your browser with the extension installed.",
     bullet4c1: "To see extensions put this into address bar: ",
     firefox: "for Firefox",
     chrome: "for Chrome, Edge, Brave, Opera, and Vivaldi",
