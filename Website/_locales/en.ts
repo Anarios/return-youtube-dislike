@@ -67,7 +67,7 @@ export default {
     bullet41: "in our",
     bullet4a: "Tell us your Operating System, Browser Name and Browser Version",
     bullet4b:
-      "Take a screenshot of the page with the problem (i.e. youtube video page) with console open (press ",
+      "Take a screenshot of the page with the problem (i.e. Youtube video page) with console open (press ",
     bullet4b1: ") - example screenshot below.",
     bullet4c:
       "Take screenshot of extensions page of your browser with extension installed.",
