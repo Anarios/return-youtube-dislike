@@ -63,5 +63,5 @@ Als je een functie hebt gevonden waarvan je denkt dat je die zou kunnen implemen
 
 - Probleemoplossingen.
 - Implementatie van functies.
-- Typfouten of betere en gemakkelijkere woorden om te gebruiken.
+- Typefouten of betere en gemakkelijkere woorden om te gebruiken.
 - Website bijdragen.

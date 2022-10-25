@@ -30,7 +30,7 @@ De extensie verzamelt de video-ID van de video die je aan het bekijken bent, haa
 
 ### **4. Wat gebeurt er nadat de YouTube API stopt met het teruggeven van het aantal dislikes?**
 
-De backend zal overschakelen naar het gebruik van een combinatie van gearchiveerde afkeerstatistieken, schattingen geëxtrapoleerd uit gebruikersgegevens van extensies en schattingen op basis van weergave/vind-ik-leuk-verhoudingen voor video's waarvan de afkeuren niet zijn gearchiveerd en voor verouderde afkeer-archieven.
+De backend zal overschakelen naar het gebruik van een combinatie van afkeer statistieken en afkeer archieven, schattingen geëxtrapoleerd uit gebruikersgegevens van extensies en schattingen op basis van weergave/vind-ik-leuk-verhoudingen voor video's waarvan de afkeuren niet zijn gearchiveerd en voor verouderde afkeer-archieven.
 
 <br>
 
@@ -56,6 +56,6 @@ Dit in videovorm
 
 <br>
 
-## Ik heb zorgen over beveiliging/privacy
+## Ik heb zorgen over de beveiliging/privacy
 
-See [this page](SECURITY-FAQ.md) for more info.
+Bekijk [deze pagina](SECURITY-FAQnl.md) voor meer informatie.
