@@ -122,6 +122,7 @@ function createDislikeTextContainer() {
   getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
   getDislikeButton().querySelector("button").classList.add("yt-spec-button-shape-next--icon-leading");
+  textNodeClone.querySelector("span[role='text']").innerText = "";
 }
 
 function getDislikeTextContainer() {
