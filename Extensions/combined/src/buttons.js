@@ -61,6 +61,7 @@ function getDislikeTextContainer() {
   if (result == null) {
     let textSpan = document.createElement("span");
     textSpan.id = "text";
+    textSpan.setAttribute("style", "margin-left: 1rem;");
     getDislikeButton().querySelector("button").appendChild(textSpan);
     getDislikeButton().querySelector("button").style.width = "auto";
     result = getDislikeButton().querySelector("#text");
