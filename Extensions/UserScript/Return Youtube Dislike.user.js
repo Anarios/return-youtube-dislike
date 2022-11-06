@@ -47,7 +47,6 @@ let dislikesvalue = 0;
 
 let isMobile = location.hostname == "m.youtube.com";
 let isShorts = () => location.pathname.startsWith("/shorts");
-let isRoundUI = () => document.querySelector("ytd-searchbox").getAttribute("desktop-searchbar-style") == "rounded_corner_borders_light_btn";
 let mobileDislikes = 0;
 function cLog(text, subtext = "") {
   subtext = subtext.trim() === "" ? "" : `(${subtext})`;
@@ -83,14 +82,16 @@ function getButtons() {
     }
   }
   if (isMobile) {
-    return document.querySelector(".slim-video-action-bar-actions");
+    return (
+      document.querySelector(".slim-video-action-bar-actions .segmented-buttons") ??
+      document.querySelector(".slim-video-action-bar-actions")
+    );
   }
   if (document.getElementById("menu-container")?.offsetParent === null) {
-    if (isRoundUI()) {
-      return document.querySelector("#top-level-buttons-computed > ytd-segmented-like-dislike-button-renderer");
-    } else {
-      return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
-    }
+    return (
+      document.querySelector("#top-level-buttons-computed > ytd-segmented-like-dislike-button-renderer") ??
+      document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div")
+    );
   } else {
     return document
       .getElementById("menu-container")
@@ -103,12 +104,10 @@ function getLikeButton() {
 }
 
 function getLikeTextContainer() {
-  if (isRoundUI()) {
-    return getLikeButton().querySelector("span[role='text']");
-  }
   return (
     getLikeButton().querySelector("#text") ??
-    getLikeButton().getElementsByTagName("yt-formatted-string")[0]
+    getLikeButton().getElementsByTagName("yt-formatted-string")[0] ??
+    getLikeButton().querySelector("span[role='text']")
   );
 }
 
@@ -123,18 +122,15 @@ function createDislikeTextContainer() {
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
   getDislikeButton().querySelector("button").classList.add("yt-spec-button-shape-next--icon-leading");
   textNodeClone.querySelector("span[role='text']").innerText = "";
+  return textNodeClone.querySelector("span[role='text']");
 }
 
 function getDislikeTextContainer() {
-  if (isRoundUI()) {
-    if (getDislikeButton().querySelector("span[role='text']") === null) {
-      createDislikeTextContainer();
-    }
-    return getDislikeButton().querySelector("span[role='text']");
-  }
   return (
     getDislikeButton().querySelector("#text") ??
-    getDislikeButton().getElementsByTagName("yt-formatted-string")[0]
+    getDislikeButton().getElementsByTagName("yt-formatted-string")[0] ??
+    getDislikeButton().querySelector("span[role='text']") ??
+    createDislikeTextContainer()
   );
 }
 
@@ -177,49 +173,19 @@ if (isShorts() && mutationObserver.exists !== true) {
 }
 
 function isVideoLiked() {
-  if (isMobile) {
-    return (
-      getLikeButton().querySelector("button").getAttribute("aria-label") ==
-      "true"
-    );
-  }
-  if (isRoundUI()) {
-    return (
-      getLikeButton().querySelector("button").getAttribute("aria-pressed") ==
-      "true"
-    );
-  }
-  return getLikeButton().classList.contains("style-default-active");
+  return getLikeButton().querySelector("button").getAttribute("aria-pressed") == "true";
 }
 
 function isVideoDisliked() {
-  if (isMobile) {
-    return (
-      getDislikeButton().querySelector("button").getAttribute("aria-label") ==
-      "true"
-    );
-  }
-  if (isRoundUI()) {
-    return (
-      getDislikeButton().querySelector("button").getAttribute("aria-pressed") ==
-      "true"
-    );
-  }
-  return getDislikeButton().classList.contains("style-default-active");
+  return getLikeButton().querySelector("button").getAttribute("aria-pressed") == "true";
 }
 
 function isVideoNotLiked() {
-  if (isMobile || isRoundUI()) {
-    return !isVideoLiked();
-  }
-  return getLikeButton().classList.contains("style-text");
+  return !isVideoLiked();
 }
 
 function isVideoNotDisliked() {
-  if (isMobile || isRoundUI()) {
-    return !isVideoDisliked();
-  }
-  return getDislikeButton().classList.contains("style-text");
+  return !isVideoDisliked();
 }
 
 function checkForUserAvatarButton() {
@@ -268,7 +234,7 @@ function getLikeCountFromButton() {
     return false;
   }
   let likesStr = getLikeButton()
-    .querySelector(isRoundUI() ? "button" : "yt-formatted-string#text")
+    .querySelector("button")
     .getAttribute("aria-label")
     .replace(/\D/g, "");
   return likesStr.length > 0 ? parseInt(likesStr) : false;
@@ -633,7 +599,6 @@ function setEventListeners(evt) {
   let jsInitChecktimer;
 
   function checkForJS_Finish() {
-    console.log();
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
 
@@ -671,7 +636,8 @@ if (isMobile) {
     return originalPush.apply(history, args);
   };
   setInterval(() => {
-    getDislikeButton().querySelector(".button-renderer-text").innerText =
-      mobileDislikes;
+    if (isVideoLoaded() && getDislikeTextContainer().innerText != mobileDislikes) {
+      getDislikeTextContainer().innerText = mobileDislikes;
+    }
   }, 1000);
 }
