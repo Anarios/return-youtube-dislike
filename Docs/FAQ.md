@@ -36,7 +36,7 @@ The backend will switch to using a combination of archived dislike stats, estima
 
 ### **5. How is the dislike count calculated?**
 
-RYD uses the votes from it's users to extrapolate the dislike count.
+RYD uses the votes from its users to extrapolate the dislike count.
 
 - If the video was uploaded after the API was shut down:
 
