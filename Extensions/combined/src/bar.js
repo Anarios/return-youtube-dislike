@@ -58,14 +58,12 @@ function createRateBar(likes, dislikes) {
 
         (
           document.getElementById(
-            isNewDesign() ? "actions-inner" : "menu-container"
+            isNewDesign() ? "top-level-buttons-computed" : "menu-container"
           ) || document.querySelector("ytm-slim-video-action-bar-renderer")
         ).insertAdjacentHTML(
           "beforeend",
           `
-              <div class="ryd-tooltip" style="width: ${widthPx}px${
-            isNewDesign() ? "; margin-bottom: -2px" : ""
-          }">
+              <div class="ryd-tooltip ryd-tooltip-${isNewDesign() ? "new" : "old"}-design" style="width: ${widthPx}px">
               <div class="ryd-tooltip-bar-container">
                 <div
                     id="ryd-bar-container"
