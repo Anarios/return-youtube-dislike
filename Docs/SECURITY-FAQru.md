@@ -1,4 +1,4 @@
-Прочитать на других языках: [English](SECURITY-FAQ.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md)
+Прочитать на других языках: [English](SECURITY-FAQ.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md)
 
 # Безопасность
 
