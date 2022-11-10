@@ -51,6 +51,10 @@ function isNewDesign() {
   return document.getElementById("comment-teaser") !== null;
 }
 
+function isRoundedDesign() {
+  return document.getElementById("segmented-like-button") !== null;
+}
+
 let mutationObserver = new Object();
 
 if (isShorts() && mutationObserver.exists !== true) {
@@ -96,9 +100,7 @@ function isLikesDisabled() {
       getButtons().children[0].querySelector(".button-renderer-text").innerText
     );
   }
-  return /^\D*$/.test(
-    getButtons().children[0].innerText
-  );
+  return /^\D*$/.test(getButtons().children[0].innerText);
 }
 
 function isVideoLiked() {
@@ -139,6 +141,7 @@ function setLikes(likesCount) {
 
 function setDislikes(dislikesCount) {
   cLog(`SET dislikes ${dislikesCount}`)
+  getDislikeTextContainer()?.removeAttribute("is-empty");
   getDislikeTextContainer()?.removeAttribute('is-empty');
   if (!isLikesDisabled()) {
     if (isMobile()) {
@@ -167,6 +170,7 @@ function getLikeCountFromButton() {
       //It should be possible to fix this function, but it's not critical to showing the dislike count.
       return false;
     }
+
     let likeButton = getLikeButton()
     .querySelector("yt-formatted-string#text") ??
     getLikeButton().querySelector("button");
@@ -174,11 +178,9 @@ function getLikeCountFromButton() {
     let likesStr = likeButton.getAttribute("aria-label")
     .replace(/\D/g, "");
     return likesStr.length > 0 ? parseInt(likesStr) : false;
-  }
-  catch {
+  } catch {
     return false;
   }
-
 }
 
 function processResponse(response, storedData) {
@@ -366,6 +368,7 @@ export {
   isVideoDisliked,
   isVideoLiked,
   isNewDesign,
+  isRoundedDesign,
   getState,
   setState,
   setInitialState,
