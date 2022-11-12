@@ -72,7 +72,7 @@ async function showRatioPreview(video) {
   let color = (ratio >= 90 ? "#2ab92a" : ratio >= 70 ? "#ffca00" : "#d73131");
 
   // Add percentage to video
-  video.querySelector("#metadata-line").innerHTML += `<span id="ratio-display" style="color: ${color};">${ratio}%</span>`;
+  video.querySelector("#metadata-line").innerHTML += `<span id="ratio-display" class="inline-metadata-item style-scope ytd-video-meta-block" style="color: ${color};">${ratio}%</span>`;
 
   // Add video to list of videos already shown
   videos.push(video);
