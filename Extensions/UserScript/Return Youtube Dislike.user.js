@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      3.0.1
+// @version      3.1.0
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -82,10 +82,16 @@ function getButtons() {
     }
   }
   if (isMobile) {
-    return document.querySelector(".slim-video-action-bar-actions");
+    return (
+      document.querySelector(".slim-video-action-bar-actions .segmented-buttons") ??
+      document.querySelector(".slim-video-action-bar-actions")
+    );
   }
   if (document.getElementById("menu-container")?.offsetParent === null) {
-    return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
+    return (
+      document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div") ??
+      document.querySelector("ytd-menu-renderer.ytd-video-primary-info-renderer > div")
+    );
   } else {
     return document
       .getElementById("menu-container")
@@ -94,7 +100,10 @@ function getButtons() {
 }
 
 function getLikeButton() {
-  return getButtons().children[0];
+  return getButtons().children[0].tagName ===
+    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+    ? getButtons().children[0].children[0]
+    : getButtons().children[0];
 }
 
 function getLikeTextContainer() {
@@ -106,14 +115,26 @@ function getLikeTextContainer() {
 }
 
 function getDislikeButton() {
-  return getButtons().children[1];
+  return getButtons().children[0].tagName ===
+    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+    ? getButtons().children[0].children[1]
+    : getButtons().children[1];
 }
 
 function getDislikeTextContainer() {
-  return (
+  let result =
     getDislikeButton().querySelector("#text") ??
-    getDislikeButton().getElementsByTagName("yt-formatted-string")[0]
-  );
+    getDislikeButton().getElementsByTagName("yt-formatted-string")[0] ??
+    getDislikeButton().querySelector("span[role='text']")
+  if (result === null) {
+    let textSpan = document.createElement("span");
+    textSpan.id = "text";
+    textSpan.style.marginLeft = "2px";
+    getDislikeButton().querySelector("button").appendChild(textSpan);
+    getDislikeButton().querySelector("button").style.width = "auto";
+    result = getDislikeButton().querySelector("#text");
+  }
+  return result;
 }
 
 let mutationObserver = new Object();
@@ -607,7 +628,7 @@ function setEventListeners(evt) {
   let jsInitChecktimer;
 
   function checkForJS_Finish() {
-    console.log();
+    //console.log();
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
 
@@ -645,7 +666,12 @@ if (isMobile) {
     return originalPush.apply(history, args);
   };
   setInterval(() => {
-    getDislikeButton().querySelector(".button-renderer-text").innerText =
-      mobileDislikes;
+    if(getDislikeButton().querySelector(".button-renderer-text") === null){
+      getDislikeTextContainer().innerText = mobileDislikes;
+    }
+    else{
+      getDislikeButton().querySelector(".button-renderer-text").innerText =
+        mobileDislikes;
+    }
   }, 1000);
 }
