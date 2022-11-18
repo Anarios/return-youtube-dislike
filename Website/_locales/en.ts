@@ -81,7 +81,7 @@ export default {
     subtitle: "Still have questions? Feel free to join our Discord!",
     bullet1: "Where does the extension get its data?",
     bullet1text:
-      "A combination of archived data from before the offical YouTube dislike API shut down, and extrapolated extension user behavior.",
+      "A combination of archived data from before the official YouTube dislike API shut down, and extrapolated extension user behavior.",
     bullet2: "Why isn't the dislike count updating?",
     bullet2text:
       "Right now video dislikes are cached and they aren't updated very frequently. It varies depending on a video's popularity but can take anywhere between a few hours and a few days to update.",
