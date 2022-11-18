@@ -229,7 +229,7 @@ function processResponse(response, storedData) {
 
 // Tells the user if the API is down
 function displayError(error) {
-  getButtons().children[1].querySelector("#text").innerText = localize(
+  getDislikeTextContainer().innerText = localize(
     "textTempUnavailable"
   );
 }
