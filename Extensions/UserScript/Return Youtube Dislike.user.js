@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      3.1.0
+// @version      3.1.1
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -635,10 +635,10 @@ function setEventListeners(evt) {
       if (!window.returnDislikeButtonlistenersSet) {
         cLog("Registering button listeners...");
         try {
-          buttons.children[0].addEventListener("click", likeClicked);
-          buttons.children[1].addEventListener("click", dislikeClicked);
-          buttons.children[0].addEventListener("touchstart", likeClicked);
-          buttons.children[1].addEventListener("touchstart", dislikeClicked);
+          buttons.children[0].children[0].addEventListener("click", likeClicked);
+          buttons.children[0].children[1].addEventListener("click", dislikeClicked);
+          buttons.children[0].children[0].addEventListener("touchstart", likeClicked);
+          buttons.children[0].children[1].addEventListener("touchstart", dislikeClicked);
         } catch {
           return;
         } //Don't spam errors into the console
