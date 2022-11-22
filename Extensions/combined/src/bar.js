@@ -10,9 +10,11 @@ import {
 import { cLog, getColorFromTheme } from "./utils";
 
 function createRateBar(likes, dislikes) {
+  let ratebar = document.getElementById("ryd-bar-container");
+  if (ratebar) {
+    ratebar.parentNode.removeChild(ratebar);
+  }
   if (!isLikesDisabled()) {
-    let rateBar = document.getElementById("ryd-bar-container");
-
     const widthPx =
       getLikeButton().clientWidth +
       getDislikeButton().clientWidth +
@@ -48,7 +50,7 @@ function createRateBar(likes, dislikes) {
     }
 
     if (!isShorts()) {
-      if (!rateBar && !isMobile()) {
+      if (!isMobile()) {
         let colorLikeStyle = "";
         let colorDislikeStyle = "";
         if (extConfig.coloredBar) {
@@ -109,12 +111,6 @@ function createRateBar(likes, dislikes) {
             getColorFromTheme(true);
         }
       }
-    }
-  } else {
-    cLog("removing bar");
-    let ratebar = document.getElementById("ryd-bar-container");
-    if (ratebar) {
-      ratebar.parentNode.removeChild(ratebar);
     }
   }
 }
