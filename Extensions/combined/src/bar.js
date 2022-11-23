@@ -7,11 +7,17 @@ import {
   isRoundedDesign,
   isShorts,
 } from "./state";
-import { cLog, getColorFromTheme } from "./utils";
+import { cLog, getColorFromTheme, isInViewport } from "./utils";
 
 function createRateBar(likes, dislikes) {
+  let rateBar = document.getElementById("ryd-bar-container");
   if (!isLikesDisabled()) {
-    let rateBar = document.getElementById("ryd-bar-container");
+    // sometimes rate bar is hidden
+    if(rateBar && !isInViewport(rateBar)){
+      cLog('create rateBar remove old')
+      rateBar.remove();
+      rateBar = null;
+    }
 
     const widthPx =
       getLikeButton().clientWidth +
@@ -55,11 +61,10 @@ function createRateBar(likes, dislikes) {
           colorLikeStyle = "; background-color: " + getColorFromTheme(true);
           colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
         }
-
+        let actions = isNewDesign() && getButtons().id === "top-level-buttons-computed" 
+          ? getButtons() : document.getElementById("menu-container");
         (
-          document.getElementById(
-            isNewDesign() ? "top-level-buttons-computed" : "menu-container"
-          ) || document.querySelector("ytm-slim-video-action-bar-renderer")
+          actions || document.querySelector("ytm-slim-video-action-bar-renderer")
         ).insertAdjacentHTML(
           "beforeend",
           `
@@ -112,9 +117,8 @@ function createRateBar(likes, dislikes) {
     }
   } else {
     cLog("removing bar");
-    let ratebar = document.getElementById("ryd-bar-container");
-    if (ratebar) {
-      ratebar.parentNode.removeChild(ratebar);
+    if (rateBar) {
+      rateBar.parentNode.removeChild(rateBar);
     }
   }
 }
