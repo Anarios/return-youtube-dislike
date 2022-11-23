@@ -14,7 +14,6 @@ function createRateBar(likes, dislikes) {
   if (!isLikesDisabled()) {
     // sometimes rate bar is hidden
     if(rateBar && !isInViewport(rateBar)){
-      cLog('create rateBar remove old')
       rateBar.remove();
       rateBar = null;
     }
