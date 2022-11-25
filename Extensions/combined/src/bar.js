@@ -14,8 +14,8 @@ function createRateBar(likes, dislikes) {
     let rateBar = document.getElementById("ryd-bar-container");
 
     const widthPx =
-      getLikeButton().clientWidth +
-      getDislikeButton().clientWidth +
+      parseFloat(window.getComputedStyle(getLikeButton()).width) +
+      parseFloat(window.getComputedStyle(getDislikeButton()).width) +
       (isRoundedDesign() ? 0 : 8);
 
     const widthPercent =
