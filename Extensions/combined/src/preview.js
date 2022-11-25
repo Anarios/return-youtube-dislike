@@ -72,15 +72,34 @@ async function showRatioPreview(video) {
   let color = (ratio >= 90 ? "#2ab92a" : ratio >= 70 ? "#ffca00" : "#d73131");
 
   // Add percentage to video
-  video.querySelector("#metadata-line").innerHTML += `<span id="ratio-display" class="inline-metadata-item style-scope ytd-video-meta-block" style="color: ${color};">${ratio}%</span>`;
+  video.querySelector("#metadata-line").innerHTML += `<span id="ratio-display" class="inline-metadata-item style-scope ytd-video-meta-block"><span style="color: ${color};"><i>${ratio}%</i></span></span>`;
 
   // Add video to list of videos already shown
   videos.push(video);
 }
 
 function removeRatioPreview(video) {
-  if (video.querySelector("#ratio-display")) {
-    video.querySelector("#ratio-display").remove();
+  function remove() {
+    if (video.querySelector("#ratio-display")) {
+      video.querySelector("#ratio-display").remove();
+      return true;
+    }
+    return false;
+  }
+  // Try to remove ratio preview continously for 3 seconds (in case ratio preview is not yet shown)
+  if (remove()) {
+    return;
+  } else {
+    let tries = 0;
+    let interval = setInterval(() => {
+      if (remove() || tries > 30) {
+        clearInterval(interval);
+      }
+      tries++;
+      if (tries >= 30) {
+        clearInterval(interval);
+      }
+    }, 10);
   }
 }
 
