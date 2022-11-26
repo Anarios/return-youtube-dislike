@@ -56,14 +56,21 @@ function createRateBar(likes, dislikes) {
           colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
         }
 
-        (
-          document.getElementById(
-            isNewDesign() ? "top-level-buttons-computed" : "menu-container"
-          ) || document.querySelector("ytm-slim-video-action-bar-renderer")
-        ).insertAdjacentHTML(
+        const parent = document
+          .getElementsByTagName("ytd-watch-flexy")[0]
+          .querySelector("#primary ytd-watch-metadata");
+
+        const elementForInjection =
+          parent.querySelector(
+            isNewDesign() ? "#top-level-buttons-computed" : "#menu-container"
+          ) || parent.querySelector("ytm-slim-video-action-bar-renderer");
+
+        elementForInjection.insertAdjacentHTML(
           "beforeend",
           `
-              <div class="ryd-tooltip ryd-tooltip-${isNewDesign() ? "new" : "old"}-design" style="width: ${widthPx}px">
+              <div class="ryd-tooltip ryd-tooltip-${
+                isNewDesign() ? "new" : "old"
+              }-design" style="width: ${widthPx}px">
               <div class="ryd-tooltip-bar-container">
                 <div
                     id="ryd-bar-container"
@@ -79,7 +86,7 @@ function createRateBar(likes, dislikes) {
                 <!--css-build:shady-->${tooltipInnerHTML}
               </tp-yt-paper-tooltip>
               </div>
-      		`
+          `
         );
 
         if (isNewDesign()) {
