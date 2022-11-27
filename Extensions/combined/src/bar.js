@@ -56,9 +56,9 @@ function createRateBar(likes, dislikes) {
           colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
         }
 
-        const parent = document
-          .getElementsByTagName("ytd-watch-flexy")[0]
-          .querySelector("#primary ytd-watch-metadata");
+        const parent = document.querySelector(
+          "ytd-watch-flexy #primary ytd-watch-metadata"
+        );
 
         const elementForInjection =
           parent.querySelector(
