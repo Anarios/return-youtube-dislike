@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      3.1.0
+// @version      3.1.1
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -129,7 +129,7 @@ function getDislikeTextContainer() {
   if (result === null) {
     let textSpan = document.createElement("span");
     textSpan.id = "text";
-    textSpan.style.marginLeft = "2px";
+    textSpan.style.marginLeft = "6px";
     getDislikeButton().querySelector("button").appendChild(textSpan);
     getDislikeButton().querySelector("button").style.width = "auto";
     result = getDislikeButton().querySelector("#text");
@@ -625,43 +625,41 @@ function getColorFromTheme(voteIsLike) {
 }
 
 function setEventListeners(evt) {
-  let jsInitChecktimer;
-
+  let jsInitChecktimer = setInterval(checkForJS_Finish, 111);
   function checkForJS_Finish() {
     //console.log();
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
-
-      if (!window.returnDislikeButtonlistenersSet) {
+      //if (!window.returnDislikeButtonlistenersSet) {
         cLog("Registering button listeners...");
         try {
-          buttons.children[0].addEventListener("click", likeClicked);
-          buttons.children[1].addEventListener("click", dislikeClicked);
-          buttons.children[0].addEventListener("touchstart", likeClicked);
-          buttons.children[1].addEventListener("touchstart", dislikeClicked);
+          buttons.children[0].children[0].addEventListener("click", likeClicked);
+          buttons.children[0].children[1].addEventListener("click", dislikeClicked);
+          buttons.children[0].children[0].addEventListener("touchstart", likeClicked);
+          buttons.children[0].children[1].addEventListener("touchstart", dislikeClicked);
         } catch {
           return;
         } //Don't spam errors into the console
-        window.returnDislikeButtonlistenersSet = true;
-      }
-      setInitialState();
+        //window.returnDislikeButtonlistenersSet = false;
+      //}
+        setInitialState();
       clearInterval(jsInitChecktimer);
     }
   }
-
   cLog("Setting up...");
-  jsInitChecktimer = setInterval(checkForJS_Finish, 111);
 }
 
 (function () {
   "use strict";
-  window.addEventListener("yt-navigate-finish", setEventListeners, true);
-  setEventListeners();
+    window.addEventListener("yt-navigate-finish", setEventListeners, true);
+    setEventListeners();
 })();
+
 if (isMobile) {
+
   let originalPush = history.pushState;
   history.pushState = function (...args) {
-    window.returnDislikeButtonlistenersSet = false;
+    //window.returnDislikeButtonlistenersSet = false;
     setEventListeners(args[2]);
     return originalPush.apply(history, args);
   };
