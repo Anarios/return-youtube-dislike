@@ -64,8 +64,8 @@ Exemple pour obtenir les likes d'une vidéo YouTube avec un ID donné:
 }
 ```
 
-Si aucunne vidéo YouTube à cet ID, il sera retourner le code d'erreur _404_ "Not Found".  
-Un ID YouTube invilide renverra _400_ "Bad Request".
+Si aucune vidéo YouTube n'a cet ID, le code d'erreur _404_ "Not Found" sera retourné.  
+Un ID YouTube invalide renverra le code d'erreur _400_ "Bad Request".
 
 <!---
 ## Documentation de l'API

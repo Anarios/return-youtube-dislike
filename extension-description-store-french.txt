@@ -11,7 +11,7 @@ Croissance active et reste à jour avec les uploads datant d'après le 13 décem
 
 Plus il y aura d'utilisateurs de l'extension, plus elle sera précise.
 
-Les vidéos impopulaires mises en ligne ultérieurement au 13 décembre 2021 peuvent présenter des données moins précises que les vidéos plus populaires.
+Les vidéos moins populaires mises en ligne ultérieurement au 13 décembre 2021 peuvent présenter des données moins précises que les vidéos plus populaires.
 
 Cette extension est actuellement en développement actif, donc si vous rencontrez des problèmes, n'hésitez pas à les signaler sur notre page GitHub ou sur notre serveur Discord.
 
