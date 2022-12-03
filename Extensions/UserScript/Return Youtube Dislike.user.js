@@ -438,7 +438,7 @@ function fetchingData () {
 }
 
 function setState () {
-  //fetchingData();
+  fetchingData()
   setDislikes(numberFormat(dislikesvalue))
   if (extConfig.numberDisplayReformatLikes === true) {
     const nativeLikes = getLikeCountFromButton()
