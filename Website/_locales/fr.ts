@@ -54,15 +54,15 @@ export default {
       headers: "En-têtes (headers) : ",
       response: "Réponse : ",
       error1:
-        'Si aucunne vidéo YouTube à cet ID, il sera retourner le code d\'erreur 404 "Not Found"',
-      error2: 'Un ID YouTube invilide renverra *400* "Bad Request"',
+        'Si aucunne vidéo YouTube à cet ID, il sera retourné le code d\'erreur 404 "Not Found"',
+      error2: 'Un ID YouTube invalide renverra *400* "Bad Request"',
     },
   },
   help: {
     name: "Aide",
     title: "Dépannage",
     bullet1:
-      "Assurez-vous que la dernière version de l'extension est installée, ",
+      "Assurez-vous que la dernière version de l'extension soit installée, ",
     bullet11: "à l'heure actuelle",
     bullet2:
       "Essayez de supprimer l'extension et de la réinstaller, puis redémarrez le navigateur (toutes les fenêtres actives, pas seulement un onglet).",
@@ -77,7 +77,7 @@ export default {
       "Faites une capture d'écran de la page présentant le problème (par exemple, la page de la vidéo youtube) avec la console ouverte (appuyez sur ",
     bullet4b1: ") - exemple de capture d'écran ci-dessous.",
     bullet4c:
-      "Faites une capture d'écran de la page des extensions de votre navigateur avec les extension installée.",
+      "Faites une capture d'écran de la page des extensions de votre navigateur avec les extensions installées.",
     bullet4c1:
       "Pour voir les extensions, mettez ceci dans la barre d'adresse : ",
     firefox: "pour Firefox",
