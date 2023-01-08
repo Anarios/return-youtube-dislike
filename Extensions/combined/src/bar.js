@@ -16,7 +16,7 @@ function createRateBar(likes, dislikes) {
     const widthPx =
       getLikeButton().clientWidth +
       getDislikeButton().clientWidth +
-      (isRoundedDesign() ? 0 : 8);
+      (isRoundedDesign() ? -46 : 8);
 
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
@@ -48,7 +48,7 @@ function createRateBar(likes, dislikes) {
     }
 
     if (!isShorts()) {
-      if (!rateBar && !isMobile()) {
+      if ((!rateBar || isNewDesign()) && !isMobile()) {
         let colorLikeStyle = "";
         let colorDislikeStyle = "";
         if (extConfig.coloredBar) {
@@ -57,17 +57,24 @@ function createRateBar(likes, dislikes) {
         }
 
         (
-          document.getElementById(
-            isNewDesign() ? "top-level-buttons-computed" : "menu-container"
-          ) || document.querySelector("ytm-slim-video-action-bar-renderer")
+          (isRoundedDesign()
+            ? document.querySelector(
+                "#actions-inner #top-level-buttons-computed"
+              )
+            : document.getElementById("menu-container")) ||
+          document.querySelector("ytm-slim-video-action-bar-renderer")
         ).insertAdjacentHTML(
           "beforeend",
           `
-              <div class="ryd-tooltip ryd-tooltip-${isNewDesign() ? "new" : "old"}-design" style="width: ${widthPx}px">
+              <div class="ryd-tooltip ryd-tooltip-${
+                isRoundedDesign() ? "new" : "old"
+              }-design" style="width: ${widthPx}px">
               <div class="ryd-tooltip-bar-container">
                 <div
                     id="ryd-bar-container"
-                    style="width: 100%; height: 2px;${colorDislikeStyle}"
+                    style="width: 100%; height: ${
+                      isNewDesign() ? 1 : 2
+                    }px; ${colorDislikeStyle}"
                     >
                     <div
                       id="ryd-bar"
