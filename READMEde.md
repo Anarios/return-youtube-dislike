@@ -7,13 +7,13 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Lesen sie dies in anderen Sprachen: [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md)
+Lesen sie dies in anderen Sprachen: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md)
 
 # Return YouTube Dislike
 
 <p align="center">
     <b>Return YouTube Dislike (Bring die YouTube Dislikes zurück) ist eine open-source Erweiterung die den Dislike-Zähler zurückbringt.</b><br>
-    Für Chrome und Firefox als Webbrowser Erweiterung verfügbar.<br>
+    Für [Chromium Browser](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/) und [Firefox](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/) als Webbrowser Erweiterung verfügbar.<br>
     Für andere Browsers auch als JS Userscript verfügbar.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
