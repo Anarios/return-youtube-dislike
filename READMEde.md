@@ -7,49 +7,49 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md)
+Lesen sie dies in anderen Sprachen: [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md)
 
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
-    Available for Chrome and Firefox as a Web Extension.<br>
-    Also available for other browsers as JS Userscript.<br><br>
+    <b>Return YouTube Dislike (Bring die YouTube Dislikes zurück) ist eine open-source Erweiterung die den Dislike-Zähler zurückbringt.</b><br>
+    Für Chrome und Firefox als Webbrowser Erweiterung verfügbar.<br>
+    Für andere Browsers auch als JS Userscript verfügbar.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## The Story
+## Die Geschichte <!-- ## The Story -->
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.
+Am 10. November, 2021, [kündigte Google an](https://blog.youtube/news-and-events/update-to-youtube/) das der YouTube Dislike-Zähler von der Platform entfernt werden sollte.
 
-Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+Zusätzlich, wurde das `dislike` Feld in der YouTube API am 13. December, 2021 [entfernt](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts), und damit auch jegliche möglichkeit die Qualität der Inhalte zu bewerten bevor man das Video sah.
 
-## What it Does
+## Was die Erweiterung macht <!-- ## What it Does -->
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+Mit der entfernung der Statistiken der YouTube API, wechselte unser Backend zu einer Kombination von archivierten Dislike Stats sowie den extrapoloerten schätzungen durch die Nutzerdaten dieser Erweiterung um die Dislike zahlen zu berechnen.
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
-## Why it Matters
+## Warum dies wichtig ist <!-- ## Why it Matters -->
 
-You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+Mehr erfährst du auf unserer Wensite unter: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-## API documentation
+## API Dokumentierung <!-- ## API documentation -->
 
-Third-party use of this open API is allowed with the following restrictions:
+Dritte dürfen diese öffentliche API mit folgenden restriktionen benützen:
 
-- **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a _429_ status code indicating that your application should back off.
+- **Namensnennung**: Dieses Projekt sollte klar und mit folgendem link [returnyoutubedislike.com](https://returnyoutubedislike.com/) versehen zugeortnet werden.
+- **Raten Limitierung**: Es bestehen pro nutzer limitierungen von 100 pro Minute sowie 10'000 pro Tag. Dies wird eine Statusmeldung von _429_ ausgeben, die darauf hinweist, dass sich Ihre Anwendung zurückziehen sollte.
 
-The API is accessible over the following base URL:  
+Die API ist unter der folgenden basis URL verfügbar:  
 https://returnyoutubedislikeapi.com
 
-List of available endpoints is available here:  
+Eine Liste aller verfügbaren endpunkten finden sie hier:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
+### Votum erhalten <!-- ### Get votes -->
 
-Example to get votes of a given YouTube video ID:  
+Beispiel um die Abstimmungen einer gegebenen YouTube ID zu erhalten:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -64,26 +64,26 @@ Example to get votes of a given YouTube video ID:
 }
 ```
 
-None existing YouTube ID will return status code _404_ "Not Found".  
-Wrong formed YouTube ID will return _400_ "Bad Request".
+Nicht existierende YouTube IDs werden den Statuscode _404_ "Not Found" zurückgeben.  
+Falsch geformte YouTube IDs werden den Statuscode _400_ "Bad Request" zurückgeben.
 
 <!---
-## API documentation
+## API Dokumentation
 
-You can view all documentation on our website.
+Sie können die gesamte Dokumentation auf unserer Website einsehen.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
-## Contributing
+## Beitragen <!-- ## Contributing -->
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Bitte lesen Sie das [Beitrags-Handbuch](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
 
-## Support this project!
+## Unterstütze dieses Projekt! <!-- ## Support this project! -->
 
-You can support this project by donating to us on the link below:
+Sie können das Projekt unterstützen indem sie unter den folgenden Link spenden:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[Spenden](https://returnyoutubedislike.com/donate)
 
-## Sponsors
+## Sponsoren <!-- ## Sponsors -->
 
 [Piepacker](https://piepacker.com)
 
@@ -91,4 +91,4 @@ You can support this project by donating to us on the link below:
 
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
-[Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
+[Werde unser Sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
