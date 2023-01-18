@@ -13,7 +13,7 @@ Lesen sie dies in anderen Sprachen: [English](README.md), [Español](READMEes.md
 
 <p align="center">
     <b>Return YouTube Dislike (Bring die YouTube Dislikes zurück) ist eine open-source Erweiterung die den Dislike-Zähler zurückbringt.</b><br>
-    Für [Chromium Browser](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/) und [Firefox](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/) als Webbrowser Erweiterung verfügbar.<br>
+    Für <a href="https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/">Chromium Browser</a> und <a href="https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/">Firefox</a> als Webbrowser Erweiterung verfügbar.<br>
     Für andere Browsers auch als JS Userscript verfügbar.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
