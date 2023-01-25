@@ -5,7 +5,7 @@ import ru from "./_locales/ru";
 import cs from "./_locales/cs";
 import ja from "./_locales/ja";
 import fr from "./_locales/fr";
-import de from "./_locales/uk";
+import uk from "./_locales/uk";
 // import de from "./_locales/de";
 // ...
 export default {
