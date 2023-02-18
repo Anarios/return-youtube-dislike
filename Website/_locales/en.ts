@@ -67,13 +67,13 @@ export default {
     bullet41: "in our",
     bullet4a: "Tell us your Operating System, Browser Name and Browser Version",
     bullet4b:
-      "Take screenshot of page with problem (i.e. youtube video page) with console open (press ",
+      "Take a screenshot of the page with the problem (i.e. Youtube video page) with the console open (press ",
     bullet4b1: ") - example screenshot below.",
     bullet4c:
-      "Take screenshot of extensions page of your browser with extension installed.",
+      "Take a screenshot of the extensions page of your browser with the extension installed.",
     bullet4c1: "To see extensions put this into address bar: ",
     firefox: "for Firefox",
-    chrome: "for Chrome, Edge, Brave, Opera, Vivaldi",
+    chrome: "for Chrome, Edge, Brave, Opera, and Vivaldi",
   },
   faq: {
     name: "FAQ",
@@ -81,19 +81,19 @@ export default {
     subtitle: "Still have questions? Feel free to join our Discord!",
     bullet1: "Where does the extension get its data?",
     bullet1text:
-      "A combination of archived data from before the offical YouTube dislike API shut down, and extrapolated extension user behavior.",
+      "A combination of archived data from before the official YouTube dislike API shut down, and extrapolated extension user behavior.",
     bullet2: "Why isn't the dislike count updating?",
     bullet2text:
       "Right now video dislikes are cached and they aren't updated very frequently. It varies depending on a video's popularity but can take anywhere between a few hours and a few days to update.",
     bullet3: "How does this work?",
     bullet3text:
-      "The extension collects the video ID of the video you are watching, and fetches the dislike (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you like or dislike a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
+      "The extension collects the video ID of the video you are watching, and fetches the number of dislikes (and other fields like views, likes etc) using our API. The extension then displays the dislike count and ratio on the page. If you like or dislike a video, that is recorded and sent to the database so an accurate dislike count can be extrapolated.",
     bullet4: "Can I share my dislike count with you?",
     bullet4text:
       "Coming soon. We are looking into using Oauth or a different read only API with a limited scope so creators can share their dislike counts verifiability.",
     bullet5: "What data do you collect and how is it treated?",
     bullet5text:
-      'The extension only collects data that is strictly necessary for it to function properly, such as IP address or ID of the video you\'re watching. None of your data will ever be sold to 3rd parties. If you would like to know more about how we handle security and privacy check out our <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">security FAQ</a>.',
+      'The extension only collects data that is strictly necessary for it to function properly, such as the IP address or ID of the video you\'re watching. None of your data will ever be sold to 3rd parties. If you would like to know more about how we handle security and privacy check out our <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">security FAQ</a>.',
     bullet6: "How does the API/Backend work?",
     bullet6text:
       "The backend is using archived data from when the youtube api was still returning the dislike count, extension users like/dislike count and extrapolation. In the near future we will be allowing content creators to submit their dislike count easily and safely and we will be adding ArchiveTeam's archived data (4.56 billion videos) into our current database. You can also view a video on the topic.",
