@@ -635,10 +635,10 @@ function setEventListeners(evt) {
       if (!window.returnDislikeButtonlistenersSet) {
         cLog("Registering button listeners...");
         try {
-          buttons.children[0].addEventListener("click", likeClicked);
-          buttons.children[1].addEventListener("click", dislikeClicked);
-          buttons.children[0].addEventListener("touchstart", likeClicked);
-          buttons.children[1].addEventListener("touchstart", dislikeClicked);
+          buttons.children[0].children[0].addEventListener("click", likeClicked);
+          buttons.children[0].children[1].addEventListener("click", dislikeClicked);
+          buttons.children[0].children[0].addEventListener("touchstart", likeClicked);
+          buttons.children[0].children[1].addEventListener("touchstart", dislikeClicked);
         } catch {
           return;
         } //Don't spam errors into the console
