@@ -54,17 +54,23 @@ function getDislikeButton() {
     : getButtons().children[1];
 }
 
+function createDislikeTextContainer() {
+  const textNodeClone = getLikeButton().querySelector("button > div[class*='cbox']").cloneNode(true);
+  const insertPreChild = getDislikeButton().querySelector("yt-touch-feedback-shape");
+  getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
+  getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
+  getDislikeButton().querySelector("button").classList.add("yt-spec-button-shape-next--icon-leading");
+  textNodeClone.querySelector("span[role='text']").innerText = "";
+  return textNodeClone.querySelector("span[role='text']");
+}
+
 function getDislikeTextContainer() {
   let result =
     getDislikeButton().querySelector("#text") ??
     getDislikeButton().getElementsByTagName("yt-formatted-string")[0] ??
     getDislikeButton().querySelector("span[role='text']");
   if (result == null) {
-    let textSpan = document.createElement("span");
-    textSpan.id = "text";
-    getDislikeButton().querySelector("button").appendChild(textSpan);
-    getDislikeButton().querySelector("button").style.width = "auto";
-    result = getDislikeButton().querySelector("#text");
+    result = createDislikeTextContainer();
   }
   return result;
 }
