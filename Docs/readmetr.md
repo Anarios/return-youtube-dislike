@@ -22,8 +22,8 @@ Read this in other languages: [English](readme.md), [Français](readmefr.md)
 
 ## SSS'ler
 
-- [Genel](https://github.com/Anarios/return-youtube-dislike/blob/main/Guides/FAQtr.md)
-- [Güvenlik](https://github.com/Anarios/return-youtube-dislike/blob/main/Guides/SECURITY-FAQtr.md)
+- [Genel](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQtr.md)
+- [Güvenlik](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQtr.md)
 
 <!-- - [Gizlilik](FAQ_Privacy.md)
 - [Teknik](FAQ_Technical.md)
