@@ -151,6 +151,17 @@ function setDislikes(dislikesCount) {
       return;
     }
     getDislikeTextContainer().innerText = dislikesCount;
+
+    try {
+      likeButton = document.querySelector("#segmented-like-button > ytd-toggle-button-renderer > yt-button-shape > button > div.cbox.yt-spec-button-shape-next--button-text-content > span")
+      dislikeButton = document.querySelector("#segmented-dislike-button > ytd-toggle-button-renderer > yt-button-shape > button")
+    }
+    finally {
+     dislikeButton.appendChild(likeButton.cloneNode(true))
+     document.querySelector('#segmented-dislike-button > ytd-toggle-button-renderer > yt-button-shape > button').classList.remove('yt-spec-button-shape-next--icon-button')
+    dislikeButton.lastChild.textContent = dislikesCount
+    }
+    
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {
