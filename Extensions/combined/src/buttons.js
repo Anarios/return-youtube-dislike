@@ -56,6 +56,7 @@ function getDislikeButton() {
 
 function createDislikeTextContainer() {
   const textNodeClone = getLikeButton().querySelector("button > div[class*='cbox']").cloneNode(true);
+  textNodeClone.setAttribute("style", "margin-left: 1rem;");
   const insertPreChild = getDislikeButton().querySelector("yt-touch-feedback-shape");
   getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
