@@ -30,10 +30,19 @@
 }
 
 .ryd-tooltip {
-  position: relative;
   display: block;
   height: 2px;
+}
+
+.ryd-tooltip-old-design {
+  position: relative;
   top: 9px;
+}
+
+.ryd-tooltip-new-design {
+  position: absolute;
+  bottom: -10px;
+  left: -4px;
 }
 
 .ryd-tooltip-bar-container {
@@ -43,4 +52,13 @@
   padding-top: 6px;
   padding-bottom: 12px;
   top: -6px;
+}
+
+/* required to make the ratio bar visible in the new design */
+ytd-menu-renderer.ytd-watch-metadata {
+  overflow-y: visible !important;
+}
+
+#top-level-buttons-computed {
+  position: relative !important;
 }
