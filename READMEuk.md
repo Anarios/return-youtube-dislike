@@ -7,14 +7,14 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md)
+Read this in other languages: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [Deutsch](READMEde.md)
 
 # Return YouTube Dislike
 
 <p align="center">
     <b>Return YouTube Dislike - це розширення з відкритим вихідним кодом, яке повертає лічильник відміток «Не подобається» на YouTube.</b><br>
     Доступно для Chrome та Firefox як веброзширення.<br>
-    Також доступний для інших браузерів як JS UserScript.<br><br>
+    Також доступно для інших браузерів як JS UserScript.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
@@ -41,7 +41,7 @@ Read this in other languages: [English](README.md), [Español](READMEes.md), [р
 - **Атрибуція**: Цей проєкт має бути чітко описано, використовуючи посилання на [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Обмеження**: Існують обмеження на швидкісті для кожного клієнта - 100 за хвилину і 10 000 за день. Це видасть код помилки 429, який вказує на те, що вашому додатку слід завершити роботу.
 
-API доступний за наступною URL-адресою: 
+API доступно за наступною URL-адресою: 
 https://returnyoutubedislikeapi.com
 
 Перелік доступних «ендпоінтів» можна переглянути тут:   

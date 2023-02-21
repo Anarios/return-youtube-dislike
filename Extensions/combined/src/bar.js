@@ -7,11 +7,16 @@ import {
   isRoundedDesign,
   isShorts,
 } from "./state";
-import { cLog, getColorFromTheme } from "./utils";
+import { cLog, getColorFromTheme, isInViewport } from "./utils";
 
 function createRateBar(likes, dislikes) {
+  let rateBar = document.getElementById("ryd-bar-container");
   if (!isLikesDisabled()) {
-    let rateBar = document.getElementById("ryd-bar-container");
+    // sometimes rate bar is hidden
+    if (rateBar && !isInViewport(rateBar)) {
+      rateBar.remove();
+      rateBar = null;
+    }
 
     const widthPx =
       getLikeButton().clientWidth +
@@ -119,9 +124,8 @@ function createRateBar(likes, dislikes) {
     }
   } else {
     cLog("removing bar");
-    let ratebar = document.getElementById("ryd-bar-container");
-    if (ratebar) {
-      ratebar.parentNode.removeChild(ratebar);
+    if (rateBar) {
+      rateBar.parentNode.removeChild(rateBar);
     }
   }
 }
