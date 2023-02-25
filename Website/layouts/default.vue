@@ -106,6 +106,7 @@ export default {
       { name: "Čeština", locale: "cs" },
       { name: "日本語", locale: "ja" },
       { name: "Français", locale: "fr" },
+      { name: "Português (Brasil)", locale: "pt_BR" },
       // { name: "Deutsch", locale: "de" },
       { name: "Українська", locale: "uk" },
       { name: "한국어", locale: "ko" },
