@@ -51,7 +51,7 @@ YDS, dislike sayısını tahmin etmek için kullanıcılarının oylarını kull
 
 Bu video şeklinde
 
-[![IReturn YouTube Dislike Explained](https://yt-embed.herokuapp.com/embed?v=GSmmtv-0yYQ)](https://www.youtube.com/watch?v=GSmmtv-0yYQ)
+[![Return YouTube Dislike Explained](https://yt-embed.live/embed?v=GSmmtv-0yYQ)](https://www.youtube.com/watch?v=GSmmtv-0yYQ)
 
 ---
 
