@@ -1,4 +1,4 @@
-Leia em outros idiomas: [Nederlands](READMEnl.md), [Türkçe](READMEtr.md)
+Leia em outros idiomas: [English](README.md), [Nederlands](READMEnl.md), [Türkçe](READMEtr.md)
 
 # return-youtube-dislike-site
 

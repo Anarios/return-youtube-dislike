@@ -1,4 +1,4 @@
-Read this in other languages: [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md)
+Read this in other languages: [Français](CONTRIBUTINGfr.md), [Nederlands](CONTRIBUTINGnl.md), [Português (Brasil)](CONTRIBUTINGpt-br.md), [русский](CONTRIBUTINGru.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md)
 
 
 # Welcome To Return YouTube Dislikes contributing guide

@@ -1,4 +1,4 @@
-Bunu diğer dillerde okuyun: [English](README.md)
+Bunu diğer dillerde okuyun: [English](READMEen.md), [Nederlands](READMEnl.md), [Português (Brasil)](READMEpt-br.md)
 
 # MAĞAZA
 

@@ -1,4 +1,4 @@
-Read this in other languages: [English](FAQ.md),  [Nederlands](FAQnl.md), Français](FAQfr.md), [Türkçe](FAQtr.md), [українська](FAQuk.md)
+Read this in other languages: [English](FAQ.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Português (Brasil)](FAQpt-br.md), [Türkçe](FAQtr.md), [українська](FAQuk.md)
 
 
 # Часто задаваемые вопросы

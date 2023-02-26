@@ -1,4 +1,4 @@
-Lees dit in andere talen: [English](SECURITY_FAQ.md), [русский](SECURITY-FAQru.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md)
+Lees dit in andere talen: [English](SECURITY-FAQ.md), [Français](SECURITY-FAQfr.md), [Português (Brasil)](SECURITY-FAQpt-br.md), [русский](SECURITY-FAQru.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md)
 
 # Veiligheid
 

@@ -1,4 +1,4 @@
-Bunu diğer dillerde okuyun: [English](README.md), [Nederlands](READMEnl.md)
+Bunu diğer dillerde okuyun: [English](README.md), [Nederlands](READMEnl.md), [Português (Brasil)](READMEpt-br.md)
 
 # youtube-dislike-sayısını-geri-getir-site
 

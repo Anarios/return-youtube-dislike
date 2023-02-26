@@ -1,4 +1,4 @@
-Leia isso em outros idiomas: [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md)
+Leia isso em outros idiomas: [English](SECURITY-FAQ.md), [Français](SECURITY-FAQfr.md), [Nederlands](SECURITY_FAQnl.md), [русский](SECURITY-FAQru.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md)
 
 
 # Segurança
