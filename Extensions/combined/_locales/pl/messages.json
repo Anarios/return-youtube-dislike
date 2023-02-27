@@ -36,7 +36,7 @@
     "message": "Wyłączone przez twórcę"
   },
   "textSettingsHover": {
-    "message": "Przestaje liczyć twoje łapki w górę/dół."
+    "message": "Przestaje liczyć Twoje łapki w górę/dół."
   },
   "textRoundingNumbers": {
     "message": "Zaokrąglaj łapki w górę/dół (domyślne zachowanie YouTube)"
@@ -45,16 +45,16 @@
     "message": "Pokaż zaokrąglone w dół statystyki."
   },
   "textConsistentFormat": {
-    "message": "Ujednolicić format łapek w górę/dół."
+    "message": "Ujednolica format liczbowy łapek w górę/dół."
   },
   "textConsistentFormatHover": {
-    "message": "Przeformatuj liczby łapek."
+    "message": "Zmień formatowanie liczby łapek."
   },
   "textNumberFormat": {
     "message": "Format liczbowy:"
   },
   "textColorizeRatioBar": {
-    "message": "Koloruj pasek łapek"
+    "message": "Koloruj pasek ocen"
   },
   "textColorizeRatioBarHover": {
     "message": "Użyj własnych kolorów paska."
@@ -108,16 +108,16 @@
     "message": "Zaokrąglaj w dół liczby (domyślne zachowanie YouTube)."
   },
   "reformatLikes": {
-    "message": "Przeformatuj liczby łapek."
+    "message": "Zmień formatowanie liczby łapek."
   },
   "reformatLikesHover": {
-    "message": "Ujednolicić format łapek w górę/dół."
+    "message": "Ujednolica format łapek w górę/dół."
   },
   "numberFormat": {
     "message": "Format liczbowy:"
   },
   "colorizeRatio": {
-    "message": "Koloruj pasek łapek"
+    "message": "Koloruj pasek ocen"
   },
   "colorizeRatioHover": {
     "message": "Użyj własnych kolorów paska."
