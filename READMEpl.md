@@ -20,9 +20,9 @@ Read this in other languages: [English](README.md), [русский](READMEru.md
 
 ## Historia
 
-Dnia 10 Listopada 2021, Google [ogłosiło](https://blog.youtube/news-and-events/update-to-youtube/), że licznik łapek w dół na YouTube zostanie usunięty.
+Dnia 10 listopada 2021, Google [ogłosiło](https://blog.youtube/news-and-events/update-to-youtube/), że licznik łapek w dół na YouTube zostanie usunięty.
 
-Dodatkowo, pole `dislike` w API YouTube zostało [usunięte](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 Grudnia 2021, usuwając przy tym jakąkolwiek możliwość oceny jakości zawartości przed obejrzeniem. 
+Dodatkowo, pole `dislike` w API YouTube zostało [usunięte](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 grudnia 2021, usuwając przy tym jakąkolwiek możliwość oceny jakości filmu przed obejrzeniem. 
 
 ## Co to robi
 
@@ -32,14 +32,14 @@ Wraz z usunięciem statystyk łapek w dół z YouTube API, nasz backend przełą
 
 ## Dlaczego to ma znaczenie
 
-Można dowiedzieć się więcej na naszej stronie: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+Można o tym przeczytać na naszej stronie: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
 ## Dokumentacja API
 
 Używanie tego otwartego API jest dozwolone z następującymi ograniczeniami:
 
 - **Przypisanie**: Ten projekt powinien być jawnie przypisany z linkiem do [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: Istnieją ograniczenia żądań do 100 na minutę i 10 000 na dzień. Przekroczenie zwróci kod _429_, mówiący aplikacji aby przyhamowała.
+- **Ograniczenie żądań**: Istnieją ograniczenia żądań do 100 na minutę i 10 000 na dzień. Przekroczenie zwróci kod _429_, mówiący aplikacji aby przyhamowała.
 
 API jest dostępne przez poniższe bazowe URL:  
 https://returnyoutubedislikeapi.com

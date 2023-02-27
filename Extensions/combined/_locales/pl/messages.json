@@ -30,13 +30,13 @@
     "message": "Ustawienia"
   },
   "textSettings": {
-    "message": "Wyłącz przesyłanie łapek w górę/dół"
+    "message": "Wyłącz przesyłanie łapek"
   },
   "textLikesDisabled": {
     "message": "Wyłączone przez twórcę"
   },
   "textSettingsHover": {
-    "message": "Przestaje liczyć Twoje łapki w górę/dół."
+    "message": "Przestaje liczyć Twoje łapki."
   },
   "textRoundingNumbers": {
     "message": "Zaokrąglaj łapki w górę/dół (domyślne zachowanie YouTube)"
@@ -45,7 +45,7 @@
     "message": "Pokaż zaokrąglone w dół statystyki."
   },
   "textConsistentFormat": {
-    "message": "Ujednolica format liczbowy łapek w górę/dół."
+    "message": "Ujednolica format liczbowy łapek."
   },
   "textConsistentFormatHover": {
     "message": "Zmień formatowanie liczby łapek."
@@ -111,7 +111,7 @@
     "message": "Zmień formatowanie liczby łapek."
   },
   "reformatLikesHover": {
-    "message": "Ujednolica format łapek w górę/dół."
+    "message": "Ujednolica format liczbowy łapek."
   },
   "numberFormat": {
     "message": "Format liczbowy:"

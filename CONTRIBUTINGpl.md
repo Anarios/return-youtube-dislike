@@ -1,9 +1,9 @@
-Read this in other languages: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md, [Polski](CONTRIBUTINGpl.md))
+Read this in other languages: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md)
 
 
 # Witamy w przewodniku współtworzenia Return YouTube Dislike
 
-Dziękujemy za zainwestowanie czasu w rozwój naszego projektu! Wszystkie Twoje zmiany znajdą się w następnej wersji rozszerzenia bądź ([strony](https://www.returnyoutubedislike.com/)).
+Dziękujemy za zainwestowanie czasu w rozwój naszego projektu! Wszystkie Twoje zmiany znajdą się w następnej wersji rozszerzenia ([bądź strony](https://www.returnyoutubedislike.com/)).
 
 ## Początek
 
