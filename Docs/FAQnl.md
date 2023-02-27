@@ -1,4 +1,4 @@
-Lees dit in andere talen: [Engels](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Türkçe](FAQtr.md)
+Lees dit in andere talen: [Engels](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md)
 
 # Veel Gestelde Vragen
 
