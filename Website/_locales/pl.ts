@@ -91,7 +91,7 @@ export default {
     bullet4: "Czy mogę Wam udostępnić liczbę łapek w dół na moich filmach?",
     bullet4text:
       "Wkrótce. Przyglądamy się możliwościom użycia OAuth lub innego klucza API tylko do odczytu z ograniczonym zakresem, aby twórcy mogli udostępniać zweryfikowaną liczbę swoich łapek w dół.",
-    bullet5: "Jakie dane zbieracie, i co z nimi robicie?",
+    bullet5: "Jakie dane zbieracie i co z nimi robicie?",
     bullet5text:
       'Rozszerzenie zbiera tylko dane wymagane do poprawnego działania, takie jak adres IP lub ID oglądanego filmu. Dane te nigdy nie będą sprzedane osobom trzecim. Jeżeli chcesz przeczytać więcej o tym, jak radzimy sobie z bezpieczeństwem i prywatnością, sprawdź nasze <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">FAQ bezpieczeństwa</a>.',
     bullet6: "Jak działa API/Backend?",

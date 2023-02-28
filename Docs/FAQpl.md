@@ -39,7 +39,7 @@ Backend przełączy się na używanie kombinacji zarchiwizowanych statystyk łap
 
 RYD używa głosów użytkowników, aby ekstrapolować liczbę łapek w dół.
 
-- Jeżeli film został wrzucony przez wyłączeniem API:
+- Jeżeli film został wrzucony przed wyłączeniem API:
 
   $$ \textup{Liczba łapek w dół RYD} = \left( \frac{\textup{Liczba łapek w dół użytkowników RYD}}{\textup{Liczba łapek w górę użytkowników RYD}} \right) \times \textup{Publiczna liczba łapek w górę} $$
 
