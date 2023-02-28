@@ -7,50 +7,50 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md)
+Læs dette på andre sprog: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md)
 
 
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
-    Available for Chrome and Firefox as a Web Extension.<br>
-    Also available for other browsers as JS Userscript.<br><br>
+    <b>Return YouTube Dislike er en open-source udvidelse, som bringer antallet af dislikes tilbage på YouTube.</b><br>
+    Den er tilgængelig til Chrome og Firefox som en webudvidelse.<br>
+    Den er også tilgængelig i andre browsere som et JS Userscript.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## The Story
+## Historien
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.
+Den 10. november 2021, [annoncerede Google](https://blog.youtube/news-and-events/update-to-youtube/) at Youtube dislike tælleren ville blive fjernet.
 
-Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+Desuden blev dislike-feltet i YouTube API'en [fjernet](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) den 13. december 2021, 2021, hvilket fjernede muligheden til at vurdere kvaliteten af indholdet før afspilning.
 
-## What it Does
+## Hvad den gør
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+Med fjernelsen af dislike stats fra Youtube API'en, har vores backend skiftet til at bruge en kombination af scraped dislike-statistic, hvor skøn er extrapoleret fra extension-brugerdata.   
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
-## Why it Matters
+## Hvorfor det betyder noget
 
-You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+Du kan lære mere på vores hjemmeside: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-## API documentation
+## API dokumentation
 
-Third-party use of this open API is allowed with the following restrictions:
+Tredjeparts brug af denne åbne API er tilladt under de følgende restriktioner:
 
-- **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a _429_ status code indicating that your application should back off.
+- **Tilskrivning**: Dette projekt skal tydeligt tilskrives med et link til [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **Rategrænse**: Der er en grænse på 100 anmodninger per minut og 10.000 per dag for hver klient. Dette vil returnere en statuskode på _429_, som indikerer, at din applikation skal trække sig tilbage.
 
-The API is accessible over the following base URL:  
+API'en er tilgængelig via følgende base-URL:  
 https://returnyoutubedislikeapi.com
 
-List of available endpoints is available here:  
+En liste over tilgængelige endpoints er tilgængelig her:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
+### Få stemmer 
 
-Example to get votes of a given YouTube video ID:  
+Eksempel på at få stemmer på en given YouTube-video-ID:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -65,26 +65,26 @@ Example to get votes of a given YouTube video ID:
 }
 ```
 
-None existing YouTube ID will return status code _404_ "Not Found".  
-Wrong formed YouTube ID will return _400_ "Bad Request".
+En ikke-eksisterende YouTube-ID vil returnere statuskoden _404_ "Not Found".  
+En forkert formet YouTube-ID vil returnere _400_ "Bad Request".
 
 <!---
 ## API documentation
 
-You can view all documentation on our website.
+Du kan se al dokumentation på vores hjemmeside.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
-## Contributing
+## Bidrag
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Læs venligst [bidragsvejledningen](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
 
-## Support this project!
+## Støt dette projekt!
 
-You can support this project by donating to us on the link below:
+Du kan støtte dette projekt ved at donere til os på nedenstående link:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[Doner](https://returnyoutubedislike.com/donate)
 
-## Sponsors
+## Sponsorer
 
 [Piepacker](https://piepacker.com)
 
@@ -92,4 +92,4 @@ You can support this project by donating to us on the link below:
 
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
-[Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
+[Bliv vores sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
