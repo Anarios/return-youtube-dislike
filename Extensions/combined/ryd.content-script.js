@@ -44,16 +44,24 @@ import {
 initExtConfig();
 
 let jsInitChecktimer = null;
+let isSetInitialStateDone = false;
 
 function setEventListeners(evt) {
   function checkForJS_Finish() {
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       addLikeDislikeEventListener();
       setInitialState();
+      isSetInitialStateDone = true;
       getBrowser().storage.onChanged.addListener(storageChangeHandler);
       clearInterval(jsInitChecktimer);
       jsInitChecktimer = null;
     }
+  }
+
+
+  if(!isSetInitialStateDone) {
+    cLog('init fallback solution for getting dislikes')
+    setInitialState();
   }
 
   jsInitChecktimer = setInterval(checkForJS_Finish, 111);
