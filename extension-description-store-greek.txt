@@ -1,20 +1,20 @@
-Return YouTube Dislike restores the ability to see dislikes on YouTube.
+Το Return YouTube Dislike είναι μια επέκταση ανοιχτού κώδικα η οποία επαναφέρει στο YouTube τον μετρητή dislike.
 
 If it doesn't work: open the Extensions tab (chrome://extensions/), disable this extension and enable it again. This should fix most of the problems, since there is a bug in Chromium that breaks the extension in some cases. Hopefully the Chromium team will fix this soon.
 
-Starting December 13th 2021, YouTube removed the ability to see dislikes from their API.
-This extension aims to restore power to users by using a combination of archived like and dislike data, as well as the likes and dislikes made by extension users to show the most accurate ratings.
+Στις 13 Δεκεμβρίου 2021, το YouTube αφαίρεσε απο το API την δυνατότητα να εμφανίζονται τα dislikes.
+Η επέκταση αυτή στοχεύει να επαναφέρει αυτή την δυνατότατα στους χρήστες. Ένας συνδυασμός αρχειοθετημένων δεδομένων like και dislike, καθώς και η χρήση των like και dislike των χρηστών της επέκτασης, προβάλουν με τον πιό ακριβή τρόπο την ακροαματικότητα των βίντεο.
 
-Currently has 200+ million videos likes/dislikes data stored before December 13th, 2021
+Αυτή την στιγμή υπάρχει μια βάση με 200+ εκατομμύρια καταχωρημένα βίντεο και τα likes/dislikes τους, προερχόμενα πριν απο τις 13 Δεκεμβρίου 2021. 
 
-Actively growing and keeping up to date with uploads after December 13th, 2021
+Αναπτύσσεται ενεργά και ενημερώνεται για τις μεταφορτώσεις βίντεο μετά τις 13 Δεκεμβρίου 2021.
 
-The more users that use the extension, the more accurate it will be.
+Όσο περισσότεροι χρήστες χρησιμοποιούν την επέκταση, τόσο πιο ακριβής θα είναι.
 
-Unpopular videos uploaded after December 13th, 2021 may have less accurate data shown than more popular videos.
+Μη δημοφιλή βίντεο που ανέβηκαν μετά τις 13 Δεκεμβρίου 2021 ενδέχεται να εμφανίζουν λιγότερο ακριβή δεδομένα από τα πιο δημοφιλή βίντεο.
 
-This extension is currently in an active development phase, so if you experience any issues, don’t hesitate to report them on our GitHub page or in our Discord server.
+Η επέκταση βρίσκεται επί του παρόντος σε ενεργό φάση ανάπτυξης, επομένως εάν αντιμετωπίζετε προβλήματα, μη διστάσετε να τα αναφέρετε στη σελίδα μας στο GitHub ή στον διακομιστή Discord.
 
-More features to come soon! 
+Σύντομα με περισσότερες δυνατότητες! 
 
 https://github.com/Anarios/return-youtube-dislike
