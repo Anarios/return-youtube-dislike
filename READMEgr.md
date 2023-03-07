@@ -7,50 +7,50 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md)
+Διαθέσιμο στις παρακάτω γλώσσες: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md)
 
 
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
-    Available for Chrome and Firefox as a Web Extension.<br>
-    Also available for other browsers as JS Userscript.<br><br>
+    <b>Return YouTube Dislike είναι μια επέκταση ανοιχτού κώδικα η οποία επαναφέρει στο YouTube το μετρητή dislike.</b><br>
+    Είναι διαθέσιμο για Chrome και Firefox ως πρόσθετη επέκταση.<br>
+    Επίσης είναι διαθέσιμο και σε άλλους φιλομετρητές ως JS Userscript.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## The Story
+## Ιστορικό
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.
+Στις 10 Νοεμβρίου 2021, η Google [ανακοίνωσε](https://blog.youtube/news-and-events/update-to-youtube/) ότι θα αφαιρέσει τον μετρητή dislike απο το YouTube.
 
-Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+Ακολούθως, το πεδίο `dislike` [αφαιρέθηκε](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) και απο το YouTube API στις 13 Δεκεμβρίου 2021, αφαιρώντας κάθε δυνατότητα να κρίνουμε την ποιότητα του περιεχομένου πριν από την παρακολούθηση.
 
-## What it Does
+## Πώς λειτουργεί
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+Έπειτα απο την αφάιρεση των στατιστικών dislike απο το YouTube API, άλλαξε στη χρήση ενός συνδυασμού συλλογής στατιστικών, και εκτιμήσεων με βάση τα δεδομένα χρήσης της επέκτασης.
 
-[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[Συχνές Ερωτήσεις](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
-## Why it Matters
+## Γιατί έχει σημασία
 
-You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+Μπορείτε να μάθετε περισσότερα στην ιστοσελίδα μας: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-## API documentation
+## Τεκμηρίωση του API
 
-Third-party use of this open API is allowed with the following restrictions:
+Η χρήση απο τρίτους αυτού του ανοιχτού API επιτρέπεται με τους παρακάτω περιορισμούς:
 
-- **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10'000 per day. This will return a _429_ status code indicating that your application should back off.
+- **Αναφορά**: Να υπάρχει καθαρή αναφορά στον κώδικα αυτού του έργου με την χρήση του παρακάτω συνδέσμου [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **Όριο Χρήσης**: Υπάρχει όριο χρήσης ανα χρήστη το οποίο είναι 100 το λεπτό και 10000 την μέρα. Σε αντίθετη περίπτωση επιστρέφεται μύνημα λάθους _429_ υποδυκνύοντας οτι η εφαρμογή του χρήστη θα πρέπει να περιορίσει την χρήση της.
 
-The API is accessible over the following base URL:  
+Το API είναι διαθέσιμο στον παρακάτω σύνδεσμο:  
 https://returnyoutubedislikeapi.com
 
-List of available endpoints is available here:  
+Λίστα με τα διαθέσιμα endpoints μπορείτε να βρείτε εδώ:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
+### Λήψη ψήφων
 
-Example to get votes of a given YouTube video ID:  
+Παράδειγμα ώστε να αντλήσετε τις ψήφους από συγκεκριμένο YouTube video ID:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -65,8 +65,8 @@ Example to get votes of a given YouTube video ID:
 }
 ```
 
-None existing YouTube ID will return status code _404_ "Not Found".  
-Wrong formed YouTube ID will return _400_ "Bad Request".
+Μή διαθέσιμο YouTube ID θα επιστρέψει κωδικό status _404_ "Not Found".  
+Λάνθασμένη δομή YouTube ID θα επιστρέψει _400_ "Bad Request".
 
 <!---
 ## API documentation
