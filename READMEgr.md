@@ -13,9 +13,9 @@
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Το Return YouTube Dislike είναι μια επέκταση ανοιχτού κώδικα η οποία επαναφέρει στο YouTube τον μετρητή dislike.</b><br>
+    <b>Το Return YouTube Dislike είναι μια επέκταση ανοιχτού κώδικα η οποία επαναφέρει τον μετρητή dislike στο YouTube.</b><br>
     Είναι διαθέσιμο για Chrome και Firefox ως πρόσθετη επέκταση.<br>
-    Επίσης είναι διαθέσιμο και σε άλλους φιλομετρητές ως JS Userscript.<br><br>
+    Επίσης είναι διαθέσιμο και σε άλλους φυλλομετρητές ως JS Userscript.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
@@ -23,7 +23,7 @@
 
 Στις 10 Νοεμβρίου 2021, η Google [ανακοίνωσε](https://blog.youtube/news-and-events/update-to-youtube/) ότι θα αφαιρέσει τον μετρητή dislike απο το YouTube.
 
-Ακολούθως, το πεδίο `dislike` [αφαιρέθηκε](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) και απο το YouTube API στις 13 Δεκεμβρίου 2021, αφαιρώντας κάθε δυνατότητα να κρίνουμε την ποιότητα του περιεχομένου πριν από την παρακολούθηση.
+Ακολούθως, στις 13 Δεκεμβρίου 2021 [αφαιρέθηκε](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) το πεδίο `dislike` και απο το YouTube API, στερώντας κάθε δυνατότητα να κρίνουμε την ποιότητα του περιεχομένου πριν από την παρακολούθηση.
 
 ## Πώς λειτουργεί
 
