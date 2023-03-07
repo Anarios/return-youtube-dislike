@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![Lisans](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Bunu diğer dillerde okuyun: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Français](READMEfr.md), [Nederlands](READMEnl.md), [日本語](READMEja.md), [українська](READMEuk.md), [Deutsch](READMEde.md)
+Bunu diğer dillerde okuyun: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Français](READMEfr.md), [Nederlands](READMEnl.md), [日本語](READMEja.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md)
 
 
 # YouTube Dislike Sayısını Geri Getir
