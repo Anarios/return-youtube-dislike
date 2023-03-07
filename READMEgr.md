@@ -13,7 +13,7 @@
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike είναι μια επέκταση ανοιχτού κώδικα η οποία επαναφέρει στο YouTube το μετρητή dislike.</b><br>
+    <b>Το Return YouTube Dislike είναι μια επέκταση ανοιχτού κώδικα η οποία επαναφέρει στο YouTube τον μετρητή dislike.</b><br>
     Είναι διαθέσιμο για Chrome και Firefox ως πρόσθετη επέκταση.<br>
     Επίσης είναι διαθέσιμο και σε άλλους φιλομετρητές ως JS Userscript.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
@@ -27,7 +27,7 @@
 
 ## Πώς λειτουργεί
 
-Έπειτα απο την αφάιρεση των στατιστικών dislike απο το YouTube API, άλλαξε στη χρήση ενός συνδυασμού συλλογής στατιστικών, και εκτιμήσεων με βάση τα δεδομένα χρήσης της επέκτασης.
+Έπειτα απο την αφάιρεση των στατιστικών dislike απο το YouTube API, το backend μας άλλαξε ώστε να χρησιμοποιεί ένα συνδυασμό συλλογής στατιστικών, και εκτιμήσεων με βάση τα δεδομένα χρήσης της επέκτασης.
 
 [Συχνές Ερωτήσεις](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
@@ -74,17 +74,17 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 You can view all documentation on our website.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
-## Contributing
+## Συνεισφορά
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Παρακαλώ διαβάστε τον [οδηγό συνεισφοράς](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
 
-## Support this project!
+## Υποστηρίξτε αυτό το project!
 
-You can support this project by donating to us on the link below:
+Μπορείτε να υποστηρίξετε αυτό το έργο κάνοντας δωρεά προς εμάς στον παρακάτω σύνδεσμο:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[Δωρεά](https://returnyoutubedislike.com/donate)
 
-## Sponsors
+## Χορηγοί
 
 [Piepacker](https://piepacker.com)
 
@@ -92,4 +92,4 @@ You can support this project by donating to us on the link below:
 
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
-[Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
+[Γίνεται χορηγός μας](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
