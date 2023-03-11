@@ -85,9 +85,11 @@ function dislikeClicked() {
 function addLikeDislikeEventListener() {
   if (!window.returnDislikeButtonlistenersSet) {
     getLikeButton().addEventListener("click", likeClicked);
-    getDislikeButton().addEventListener("click", dislikeClicked);
     getLikeButton().addEventListener("touchstart", likeClicked);
-    getLikeButton().addEventListener("touchstart", dislikeClicked);
+    if(getDislikeButton()) {
+      getDislikeButton().addEventListener("click", dislikeClicked);
+      getDislikeButton().addEventListener("touchstart", dislikeClicked);
+    }
     window.returnDislikeButtonlistenersSet = true;
   }
 }
