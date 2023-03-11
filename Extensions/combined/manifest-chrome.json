@@ -2,7 +2,7 @@
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDesc__",
   "default_locale": "en",
-  "version": "3.0.0.6",
+  "version": "3.0.0.8",
   "manifest_version": 3,
   "background": {
     "service_worker": "ryd.background.js"
@@ -36,5 +36,9 @@
       "resources": ["ryd.script.js"],
       "matches": ["*://*.youtube.com/*"]
     }
-  ]
+  ],
+  "options_ui": {
+    "page": "popup.html",
+    "open_in_tab": false
+  }
 }
