@@ -1,4 +1,4 @@
-Lees dit in andere talen: [Engels](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Türkçe](FAQtr.md)
+Lees dit in andere talen: [English](FAQ.md), [Français](FAQfr.md), [Português (Brasil)](FAQpt-br.md), [русский](FAQru.md), [Türkçe](FAQtr.md), [українська](FAQuk.md)
 
 # Veel Gestelde Vragen
 
@@ -50,7 +50,7 @@ RYD gebruikt de stemmen van zijn gebruikers om het aantal dislikes te extrapoler
 
 Dit in videovorm
 
-[![IReturn YouTube Dislike Uitgelegd (Engels)](https://yt-embed.herokuapp.com/embed?v=GSmmtv-0yYQ)](https://www.youtube.com/watch?v=GSmmtv-0yYQ)
+[![Return YouTube Dislike Uitgelegd (Engels)](https://yt-embed.live/embed?v=GSmmtv-0yYQ)](https://www.youtube.com/watch?v=GSmmtv-0yYQ)
 
 ---
 

@@ -1,4 +1,4 @@
-Read this in other languages: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Türkçe](FAQtr.md)
+Read this in other languages: [English](FAQ.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Português (Brasil)](FAQpt-br.md), [русский](FAQru.md), [Türkçe](FAQtr.md)
 
 # Часті питання
 
@@ -50,7 +50,7 @@ RYD використовує відмітки своїх користувачі�
 
 Це все, але у відео форматі
 
-[![IReturn YouTube Dislike Explained](https://yt-embed.herokuapp.com/embed?v=GSmmtv-0yYQ)](https://www.youtube.com/watch?v=GSmmtv-0yYQ)
+[![Return YouTube Dislike Explained](https://yt-embed.live/embed?v=GSmmtv-0yYQ)](https://www.youtube.com/watch?v=GSmmtv-0yYQ)
 
 ---
 

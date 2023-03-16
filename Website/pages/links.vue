@@ -117,6 +117,10 @@ export default {
         tag: "dsty#1614",
         lang: "Українська",
       },
+      {
+        tag: "Luz#5102",
+        lang: "Português (Brasil)",
+      },
     ],
     coolProjects: [
       {

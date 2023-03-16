@@ -1,4 +1,4 @@
-Bunu diğer dillerde okuyun: [English](FAQ.md), [русский](FAQru.md), ), [Nederlands](FAQnl.md), [Français](FAQfr.md), [українська](FAQuk.md)
+Bunu diğer dillerde okuyun: [English](FAQ.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Português (Brasil)](FAQpt-br.md), [русский](FAQru.md), [українська](FAQuk.md)
 
 
 # Sıkça Sorulan Sorular
@@ -51,7 +51,7 @@ YDS, dislike sayısını tahmin etmek için kullanıcılarının oylarını kull
 
 Bu video şeklinde
 
-[![IReturn YouTube Dislike Explained](https://yt-embed.herokuapp.com/embed?v=GSmmtv-0yYQ)](https://www.youtube.com/watch?v=GSmmtv-0yYQ)
+[![Return YouTube Dislike Explained](https://yt-embed.live/embed?v=GSmmtv-0yYQ)](https://www.youtube.com/watch?v=GSmmtv-0yYQ)
 
 ---
 

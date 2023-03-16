@@ -1,4 +1,4 @@
-Read this in other languages: [English](readme.md), [Nederlands](readmenl.md), [Français](readmefr.md)
+Read this in other languages: [English](readme.md), [Français](readmefr.md), [Nederlands](readmenl.md), [Português (Brasil)](readmept-br.md)
 
 **İçerikler**
 

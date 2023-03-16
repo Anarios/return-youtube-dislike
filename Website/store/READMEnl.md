@@ -1,4 +1,4 @@
-Read this in other languages: [English](READMEen.md), [Türkçe](READMEtr.md)
+Read this in other languages: [English](READMEen.md), [Português (Brasil)](READMEpt-br.md), [Türkçe](READMEtr.md)
 
 # OPSLAAN
 
