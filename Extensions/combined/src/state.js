@@ -151,6 +151,18 @@ function setDislikes(dislikesCount) {
       return;
     }
     getDislikeTextContainer().innerText = dislikesCount;
+
+    try {
+      let likeButton = document.querySelector("#segmented-like-button > ytd-toggle-button-renderer > yt-button-shape > button > div.cbox.yt-spec-button-shape-next--button-text-content > span")
+      let dislikeButton = document.querySelector("#segmented-dislike-button > ytd-toggle-button-renderer > yt-button-shape > button")
+      dislikeButton.appendChild(likeButton.cloneNode(true))
+      document.querySelector('#segmented-dislike-button > ytd-toggle-button-renderer > yt-button-shape > button').classList.remove('yt-spec-button-shape-next--icon-button')
+      dislikeButton.lastChild.textContent = dislikesCount
+    }
+    finally {
+      cLg("If you still don't see the dislike, please reach out to us on Github or Discord")
+    }
+    
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {
