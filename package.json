@@ -7,6 +7,7 @@
     "start": "echo To build for development, please use \"npm run dev\". To build for production, please use \"npm run build\".",
     "dev": "webpack --mode=production --watch",
     "build": "webpack --mode=production",
+    "build:safari": "webpack --mode=production && xcrun safari-web-extension-converter Extensions/combined/dist/safari --project-location Extensions/combined/dist --bundle-identifier com.returnyoutubedislike.safari-ext --force",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
