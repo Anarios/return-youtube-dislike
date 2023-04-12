@@ -27,7 +27,7 @@
 
 ## Πώς λειτουργεί
 
-Έπειτα απο την αφάιρεση των στατιστικών dislike απο το YouTube API, το backend μας άλλαξε ώστε να χρησιμοποιεί ένα συνδυασμό συλλογής στατιστικών, και εκτιμήσεων με βάση τα δεδομένα χρήσης της επέκτασης.
+Έπειτα απο την αφαίρεση των στατιστικών dislike απο το YouTube API, το backend μας άλλαξε ώστε να χρησιμοποιεί ένα συνδυασμό συλλογής στατιστικών, και εκτιμήσεων με βάση τα δεδομένα χρήσης της επέκτασης.
 
 [Συχνές Ερωτήσεις](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
@@ -39,8 +39,8 @@
 
 Η χρήση απο τρίτους αυτού του ανοιχτού API επιτρέπεται με τους παρακάτω περιορισμούς:
 
-- **Αναφορά**: Να υπάρχει καθαρή αναφορά στον κώδικα αυτού του έργου με την χρήση του παρακάτω συνδέσμου [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Όριο Χρήσης**: Υπάρχει όριο χρήσης ανα χρήστη το οποίο είναι 100 το λεπτό και 10000 την μέρα. Σε αντίθετη περίπτωση επιστρέφεται μύνημα λάθους _429_ υποδυκνύοντας οτι η εφαρμογή του χρήστη θα πρέπει να περιορίσει την χρήση της.
+- **Αναφορά**: Να υπάρχει καθαρή αναφορά στον κώδικα αυτού του έργου με τη χρήση του παρακάτω συνδέσμου [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **Όριο Χρήσης**: Υπάρχει όριο χρήσης ανα χρήστη το οποίο είναι 100 το λεπτό και 10000 τη μέρα. Σε αντίθετη περίπτωση επιστρέφεται μήνυμα λάθους _429_ υποδεικνύοντας οτι η εφαρμογή του χρήστη θα πρέπει να περιορίσει τη χρήση της.
 
 Το API είναι διαθέσιμο στον παρακάτω σύνδεσμο:  
 https://returnyoutubedislikeapi.com
@@ -66,7 +66,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 ```
 
 Μή διαθέσιμο YouTube ID θα επιστρέψει κωδικό status _404_ "Not Found".  
-Λάνθασμένη δομή YouTube ID θα επιστρέψει _400_ "Bad Request".
+Λανθασμένη δομή YouTube ID θα επιστρέψει _400_ "Bad Request".
 
 <!---
 ## API documentation
@@ -92,4 +92,4 @@ You can view all documentation on our website.
 
 [PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
-[Γίνεται χορηγός μας](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
+[Γίνετε χορηγός μας](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
