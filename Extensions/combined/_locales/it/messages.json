@@ -6,10 +6,10 @@
     "message": "Return YouTube Dislike Beta"
   },
   "extensionDesc": {
-    "message": "Riporta il contatore dei Non mi piace"
+    "message": "Riporta il numero di Non mi piace"
   },
   "textDeveloper": {
-    "message": "di Dmitry Selivanov e la comunità"
+    "message": "di Dmitry Selivanov insieme alla comunità"
   },
   "linkWebsite": {
     "message": "Sito web"
@@ -30,7 +30,7 @@
     "message": "Impostazioni"
   },
   "textSettings": {
-    "message": "Disattiva invio Mi piace/Non mi piace"
+    "message": "Disattiva invio di Mi piace/Non mi piace"
   },
   "textLikesDisabled": {
     "message": "Disattivati dal proprietario"
