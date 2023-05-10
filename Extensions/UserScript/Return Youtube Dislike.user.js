@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      3.1.1
+// @version      3.1.2
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -99,10 +99,17 @@ function getButtons() {
   }
 }
 
+function getDislikeButton() {
+  return getButtons().children[0].tagName ===
+  "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+    ? getButtons().children[0].children[1] === undefined ? document.querySelector("#segmented-dislike-button") : getButtons().children[0].children[1]
+    : getButtons().children[1];
+}
+
 function getLikeButton() {
   return getButtons().children[0].tagName ===
-    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? getButtons().children[0].children[0]
+  "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+    ? document.querySelector("#segmented-like-button") !== null ? document.querySelector("#segmented-like-button") : getButtons().children[0].children[0]
     : getButtons().children[0];
 }
 
@@ -114,12 +121,6 @@ function getLikeTextContainer() {
   );
 }
 
-function getDislikeButton() {
-  return getButtons().children[0].tagName ===
-    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? getButtons().children[0].children[1]
-    : getButtons().children[1];
-}
 
 function getDislikeTextContainer() {
   let result =
@@ -635,10 +636,10 @@ function setEventListeners(evt) {
       if (!window.returnDislikeButtonlistenersSet) {
         cLog("Registering button listeners...");
         try {
-          buttons.children[0].children[0].addEventListener("click", likeClicked);
-          buttons.children[0].children[1].addEventListener("click", dislikeClicked);
-          buttons.children[0].children[0].addEventListener("touchstart", likeClicked);
-          buttons.children[0].children[1].addEventListener("touchstart", dislikeClicked);
+          getLikeButton().addEventListener("click", likeClicked);
+          getDislikeButton().addEventListener("click", dislikeClicked);
+          getLikeButton().addEventListener("touchstart", likeClicked);
+          getDislikeButton().addEventListener("touchstart", dislikeClicked);
         } catch {
           return;
         } //Don't spam errors into the console

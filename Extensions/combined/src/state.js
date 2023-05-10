@@ -106,21 +106,19 @@ function isLikesDisabled() {
 function isVideoLiked() {
   if (isMobile()) {
     return (
-      getLikeButton().querySelector("button").getAttribute("aria-label") ==
-      "true"
+      getLikeButton().querySelector("button").getAttribute("aria-label") === "true"
     );
   }
-  return getLikeButton().classList.contains("style-default-active");
+  return getLikeButton().classList.contains("style-default-active") || getLikeButton().querySelector('button')?.getAttribute('aria-pressed') === 'true';
 }
 
 function isVideoDisliked() {
   if (isMobile()) {
     return (
-      getDislikeButton().querySelector("button").getAttribute("aria-label") ==
-      "true"
+      getDislikeButton().querySelector("button").getAttribute("aria-label") === "true"
     );
   }
-  return getDislikeButton().classList.contains("style-default-active");
+  return getDislikeButton().classList.contains("style-default-active") || getDislikeButton().querySelector('button')?.getAttribute('aria-pressed') === 'true';
 }
 
 function getState(storedData) {
@@ -152,17 +150,6 @@ function setDislikes(dislikesCount) {
     }
     getDislikeTextContainer().innerText = dislikesCount;
 
-    try {
-      let likeButton = document.querySelector("#segmented-like-button > ytd-toggle-button-renderer > yt-button-shape > button > div.cbox.yt-spec-button-shape-next--button-text-content > span")
-      let dislikeButton = document.querySelector("#segmented-dislike-button > ytd-toggle-button-renderer > yt-button-shape > button")
-      dislikeButton.appendChild(likeButton.cloneNode(true))
-      document.querySelector('#segmented-dislike-button > ytd-toggle-button-renderer > yt-button-shape > button').classList.remove('yt-spec-button-shape-next--icon-button')
-      dislikeButton.lastChild.textContent = dislikesCount
-    }
-    finally {
-      cLg("If you still don't see the dislike, please reach out to us on Github or Discord")
-    }
-    
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {

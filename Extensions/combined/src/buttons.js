@@ -35,7 +35,7 @@ function getButtons() {
 function getLikeButton() {
   return getButtons().children[0].tagName ===
     "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? getButtons().children[0].children[0]
+    ? document.querySelector("#segmented-like-button") !== null ? document.querySelector("#segmented-like-button") : getButtons().children[0].children[0]
     : getButtons().children[0];
 }
 
@@ -50,7 +50,7 @@ function getLikeTextContainer() {
 function getDislikeButton() {
   return getButtons().children[0].tagName ===
     "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? getButtons().children[0].children[1]
+    ? getButtons().children[0].children[1] === undefined ? document.querySelector("#segmented-dislike-button") : getButtons().children[0].children[1]
     : getButtons().children[1];
 }
 
