@@ -4,7 +4,7 @@ const defaultIconName = "icon128.png";
 let api;
 
 /** stores extension's global config */
-let extConfig = {
+const extConfig = {
   disableVoteSubmission: false,
   coloredThumbs: false,
   coloredBar: false,
@@ -29,8 +29,6 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.message === "log_off") {
     // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
   } else if (request.message == "set_state") {
-    // chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    let token = "";
     fetch(
       `${apiUrl}/votes?videoId=${request.videoId}&likeCount=${
         request.likeCount || ""
@@ -105,7 +103,7 @@ async function sendVote(videoId, vote) {
     if (!storageResult.userId || !storageResult.registrationConfirmed) {
       await register();
     }
-    let voteResponse = await fetch(`${apiUrl}/interact/vote`, {
+    const voteResponse = await fetch(`${apiUrl}/interact/vote`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -209,21 +207,21 @@ function countLeadingZeroes(uInt8View, limit) {
 }
 
 async function solvePuzzle(puzzle) {
-  let challenge = Uint8Array.from(atob(puzzle.challenge), (c) =>
+  const challenge = Uint8Array.from(atob(puzzle.challenge), (c) =>
     c.charCodeAt(0)
   );
-  let buffer = new ArrayBuffer(20);
-  let uInt8View = new Uint8Array(buffer);
-  let uInt32View = new Uint32Array(buffer);
-  let maxCount = Math.pow(2, puzzle.difficulty) * 3;
+  const buffer = new ArrayBuffer(20);
+  const uInt8View = new Uint8Array(buffer);
+  const uInt32View = new Uint32Array(buffer);
+  const maxCount = 2 ** puzzle.difficulty * 3;
   for (let i = 4; i < 20; i++) {
     uInt8View[i] = challenge[i - 4];
   }
 
   for (let i = 0; i < maxCount; i++) {
     uInt32View[0] = i;
-    let hash = await crypto.subtle.digest("SHA-512", buffer);
-    let hashUint8 = new Uint8Array(hash);
+    const hash = await crypto.subtle.digest("SHA-512", buffer);
+    const hashUint8 = new Uint8Array(hash);
     if (countLeadingZeroes(hashUint8) >= puzzle.difficulty) {
       return {
         solution: btoa(String.fromCharCode.apply(null, uInt8View.slice(0, 4))),
@@ -233,9 +231,10 @@ async function solvePuzzle(puzzle) {
   return {};
 }
 
+const charset =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
 function generateUserID(length = 36) {
-  const charset =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
   if (crypto && crypto.getRandomValues) {
     const values = new Uint32Array(length);
@@ -243,13 +242,12 @@ function generateUserID(length = 36) {
     for (let i = 0; i < length; i++) {
       result += charset[values[i] % charset.length];
     }
-    return result;
   } else {
     for (let i = 0; i < length; i++) {
       result += charset[Math.floor(Math.random() * charset.length)];
     }
-    return result;
   }
+  return result;
 }
 
 function storageChangeHandler(changes, area) {
@@ -313,9 +311,9 @@ function handleTooltipPercentageModeChangeEvent(value) {
 
 function changeIcon(iconName) {
   if (api.action !== undefined)
-    api.action.setIcon({ path: "/icons/" + iconName });
+    api.action.setIcon({ path: `/icons/${iconName}` });
   else if (api.browserAction !== undefined)
-    api.browserAction.setIcon({ path: "/icons/" + iconName });
+    api.browserAction.setIcon({ path: `/icons/${iconName}` });
   else console.log("changing icon is not supported");
 }
 

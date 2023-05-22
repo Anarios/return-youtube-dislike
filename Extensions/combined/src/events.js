@@ -16,7 +16,7 @@ function sendVote(vote) {
   if (extConfig.disableVoteSubmission !== true) {
     getBrowser().runtime.sendMessage({
       message: "send_vote",
-      vote: vote,
+      vote,
       videoId: getVideoId(window.location.href),
     });
   }
@@ -26,7 +26,9 @@ function likeClicked() {
   if (checkForSignInButton() === false) {
     if (storedData.previousState === DISLIKED_STATE) {
       sendVote(1);
-      if (storedData.dislikes > 0) storedData.dislikes--;
+      if (storedData.dislikes > 0) {
+        storedData.dislikes--;
+      }
       storedData.likes++;
       createRateBar(storedData.likes, storedData.dislikes);
       setDislikes(numberFormat(storedData.dislikes));
@@ -83,15 +85,16 @@ function dislikeClicked() {
 }
 
 function addLikeDislikeEventListener() {
-  if (!window.returnDislikeButtonlistenersSet) {
-    getLikeButton().addEventListener("click", likeClicked);
-    getLikeButton().addEventListener("touchstart", likeClicked);
-    if(getDislikeButton()) {
-      getDislikeButton().addEventListener("click", dislikeClicked);
-      getDislikeButton().addEventListener("touchstart", dislikeClicked);
-    }
-    window.returnDislikeButtonlistenersSet = true;
+  if (window.returnDislikeButtonlistenersSet) {
+    return;
   }
+  getLikeButton().addEventListener("click", likeClicked);
+  getLikeButton().addEventListener("touchstart", likeClicked);
+  if(getDislikeButton()) {
+    getDislikeButton().addEventListener("click", dislikeClicked);
+    getDislikeButton().addEventListener("touchstart", dislikeClicked);
+  }
+  window.returnDislikeButtonlistenersSet = true;
 }
 
 function storageChangeHandler(changes, area) {

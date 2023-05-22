@@ -22,7 +22,7 @@ const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
-let extConfig = {
+const extConfig = {
   disableVoteSubmission: false,
   coloredThumbs: false,
   coloredBar: false,
@@ -33,7 +33,7 @@ let extConfig = {
   numberDisplayReformatLikes: false,
 };
 
-let storedData = {
+const storedData = {
   likes: 0,
   dislikes: 0,
   previousState: NEUTRAL_STATE,
@@ -55,7 +55,7 @@ function isRoundedDesign() {
   return document.getElementById("segmented-like-button") !== null;
 }
 
-let mutationObserver = new Object();
+const mutationObserver = new Object();
 
 if (isShorts() && mutationObserver.exists !== true) {
   cLog("initializing mutation observer");
@@ -87,7 +87,7 @@ if (isShorts() && mutationObserver.exists !== true) {
         return;
       }
       cLog(
-        "unexpected mutation observer event: " + mutation.target + mutation.type
+        `unexpected mutation observer event: ${mutation.target}${mutation.type}`
       );
     });
   });
@@ -141,16 +141,7 @@ function setDislikes(dislikesCount) {
   cLog(`SET dislikes ${dislikesCount}`)
   getDislikeTextContainer()?.removeAttribute("is-empty");
   getDislikeTextContainer()?.removeAttribute('is-empty');
-  if (!isLikesDisabled()) {
-    if (isMobile()) {
-      getButtons().children[1].querySelector(
-        ".button-renderer-text"
-      ).innerText = dislikesCount;
-      return;
-    }
-    getDislikeTextContainer().innerText = dislikesCount;
-
-  } else {
+  if (isLikesDisabled()) {
     cLog("likes count disabled by creator");
     if (isMobile()) {
       getButtons().children[1].querySelector(
@@ -159,7 +150,15 @@ function setDislikes(dislikesCount) {
       return;
     }
     getDislikeTextContainer().innerText = localize("TextLikesDisabled");
+    return;
   }
+  if (isMobile()) {
+    getButtons().children[1].querySelector(
+      ".button-renderer-text"
+    ).innerText = dislikesCount;
+    return;
+  }
+  getDislikeTextContainer().innerText = dislikesCount;
 }
 
 function getLikeCountFromButton() {
@@ -170,11 +169,11 @@ function getLikeCountFromButton() {
       return false;
     }
 
-    let likeButton = getLikeButton()
+    const likeButton = getLikeButton()
     .querySelector("yt-formatted-string#text") ??
     getLikeButton().querySelector("button");
 
-    let likesStr = likeButton.getAttribute("aria-label")
+    const likesStr = likeButton.getAttribute("aria-label")
     .replace(/\D/g, "");
     return likesStr.length > 0 ? parseInt(likesStr) : false;
   } catch {
@@ -197,10 +196,10 @@ function processResponse(response, storedData) {
   if (extConfig.coloredThumbs === true) {
     if (isShorts()) {
       // for shorts, leave deactivated buttons in default color
-      let shortLikeButton = getLikeButton().querySelector(
+      const shortLikeButton = getLikeButton().querySelector(
         "tp-yt-paper-button#button"
       );
-      let shortDislikeButton = getDislikeButton().querySelector(
+      const shortDislikeButton = getDislikeButton().querySelector(
         "tp-yt-paper-button#button"
       );
       if (shortLikeButton.getAttribute("aria-pressed") === "true") {
@@ -233,18 +232,19 @@ function displayError(error) {
   );
 }
 
+const statsSet = false;
+
 async function setState(storedData) {
   storedData.previousState = isVideoDisliked()
     ? DISLIKED_STATE
     : isVideoLiked()
     ? LIKED_STATE
     : NEUTRAL_STATE;
-  let statsSet = false;
 
-  let videoId = getVideoId(window.location.href);
-  let likeCount = getLikeCountFromButton() || null;
+  const videoId = getVideoId(window.location.href);
+  const likeCount = getLikeCountFromButton() || null;
 
-  let response = await fetch(
+  const response = await fetch(
     `${apiUrl}/votes?videoId=${videoId}&likeCount=${likeCount || ""}`,
     {
       method: "GET",

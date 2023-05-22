@@ -4,12 +4,12 @@ import { isInViewport } from "./utils";
 function getButtons() {
   //---   If Watching Youtube Shorts:   ---//
   if (isShorts()) {
-    let elements = document.querySelectorAll(
+    const elements = document.querySelectorAll(
       isMobile()
         ? "ytm-like-button-renderer"
         : "#like-button > ytd-like-button-renderer"
     );
-    for (let element of elements) {
+    for (const element of elements) {
       //Youtube Shorts can have multiple like/dislike buttons when scrolling through videos
       //However, only one of them should be visible (no matter how you zoom)
       if (isInViewport(element)) {
@@ -22,14 +22,9 @@ function getButtons() {
     return document.querySelector(".slim-video-action-bar-actions");
   }
   //---   If Menu Element Is Displayed:   ---//
-  if (document.getElementById("menu-container")?.offsetParent === null) {
-    return document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div");
-    //---   If Menu Element Isn't Displayed:   ---//
-  } else {
-    return document
-      .getElementById("menu-container")
-      ?.querySelector("#top-level-buttons-computed");
-  }
+  return document.getElementById("menu-container")?.offsetParent === null ? document.querySelector("ytd-menu-renderer.ytd-watch-metadata > div") : document
+  .getElementById("menu-container")
+  ?.querySelector("#top-level-buttons-computed");
 }
 
 function getLikeButton() {
@@ -65,26 +60,20 @@ function createDislikeTextContainer() {
 }
 
 function getDislikeTextContainer() {
-  let result =
+  const result =
     getDislikeButton().querySelector("#text") ??
     getDislikeButton().getElementsByTagName("yt-formatted-string")[0] ??
     getDislikeButton().querySelector("span[role='text']");
   if (result == null) {
-    result = createDislikeTextContainer();
+    return createDislikeTextContainer();
   }
   return result;
 }
 
 function checkForSignInButton() {
-  if (
-    document.querySelector(
-      "a[href^='https://accounts.google.com/ServiceLogin']"
-    )
-  ) {
-    return true;
-  } else {
-    return false;
-  }
+  return document.querySelector(
+    "a[href^='https://accounts.google.com/ServiceLogin']"
+  ) ? true : false;
 }
 
 export {

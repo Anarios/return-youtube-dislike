@@ -26,7 +26,7 @@ function createRateBar(likes, dislikes) {
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
-    var likePercentage = parseFloat(widthPercent.toFixed(1));
+    let likePercentage = parseFloat(widthPercent.toFixed(1));
     const dislikePercentage = (100 - likePercentage).toLocaleString();
     likePercentage = likePercentage.toLocaleString();
 
@@ -57,10 +57,10 @@ function createRateBar(likes, dislikes) {
         let colorLikeStyle = "";
         let colorDislikeStyle = "";
         if (extConfig.coloredBar) {
-          colorLikeStyle = "; background-color: " + getColorFromTheme(true);
-          colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
+          colorLikeStyle = `; background-color: ${getColorFromTheme(true)}`;
+          colorDislikeStyle = `; background-color: ${getColorFromTheme(false)}`;
         }
-        let actions = isNewDesign() && getButtons().id === "top-level-buttons-computed" 
+        const actions = isNewDesign() && getButtons().id === "top-level-buttons-computed" 
           ? getButtons() : document.getElementById("menu-container");
         (
           actions || document.querySelector("ytm-slim-video-action-bar-renderer")
@@ -88,7 +88,7 @@ function createRateBar(likes, dislikes) {
 
         if (isNewDesign()) {
           // Add border between info and comments
-          let descriptionAndActionsElement = document.getElementById("top-row");
+          const descriptionAndActionsElement = document.getElementById("top-row");
           descriptionAndActionsElement.style.borderBottom =
             "1px solid var(--yt-spec-10-percent-layer)";
           descriptionAndActionsElement.style.paddingBottom = "10px";
@@ -102,8 +102,8 @@ function createRateBar(likes, dislikes) {
         }
       } else {
         document.getElementById("ryd-bar-container").style.width =
-          widthPx + "px";
-        document.getElementById("ryd-bar").style.width = widthPercent + "%";
+          `${widthPx}px`;
+        document.getElementById("ryd-bar").style.width = `${widthPercent}%`;
         document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML =
           tooltipInnerHTML;
         if (extConfig.coloredBar) {
@@ -114,11 +114,11 @@ function createRateBar(likes, dislikes) {
         }
       }
     }
-  } else {
-    cLog("removing bar");
-    if (rateBar) {
-      rateBar.parentNode.removeChild(rateBar);
-    }
+    return;
+  }
+  cLog("removing bar");
+  if (rateBar) {
+    rateBar.parentNode.removeChild(rateBar);
   }
 }
 

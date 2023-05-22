@@ -30,12 +30,12 @@ const config = {
 /*   Change language   */
 function localizeHtmlPage() {
   //Localize by replacing __MSG_***__ meta tags
-  var objects = document.getElementsByTagName("html");
-  for (var j = 0; j < objects.length; j++) {
-    var obj = objects[j];
+  const objects = document.getElementsByTagName("html");
+  for (let j = 0; j < objects.length; j++) {
+    const obj = objects[j];
 
-    var valStrH = obj.innerHTML.toString();
-    var valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (match, v1) {
+    const valStrH = obj.innerHTML.toString();
+    const valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (match, v1) {
       return v1 ? chrome.i18n.getMessage(v1) : "";
     });
 
@@ -58,7 +58,7 @@ createLink(config.links.changelog, "link_changelog");
 
 function createLink(url, id) {
   document.getElementById(id).addEventListener("click", () => {
-    chrome.tabs.create({ url: url });
+    chrome.tabs.create({ url });
   });
 }
 
@@ -136,8 +136,8 @@ function initConfig() {
 }
 
 function initializeVersionNumber() {
-  const version = chrome.runtime.getManifest().version;
-  document.getElementById("ext-version").innerHTML = "v" + version;
+  const { version } = chrome.runtime.getManifest();
+  document.getElementById("ext-version").innerHTML = `v${version}`;
 
   fetch(
     "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
@@ -146,7 +146,7 @@ function initializeVersionNumber() {
     .then((json) => {
       if (compareVersions(json.version, version)) {
         document.getElementById("ext-update").innerHTML =
-          chrome.i18n.getMessage("textUpdate") + " v" + json.version;
+          `${chrome.i18n.getMessage("textUpdate")} v${json.version}`;
         document.getElementById("ext-update").style.padding = ".25rem .5rem";
       }
     });
@@ -155,13 +155,13 @@ function initializeVersionNumber() {
 
 // returns whether current < latest
 function compareVersions(latestStr, currentStr) {
-  let latestarr = latestStr.split(".");
-  let currentarr = currentStr.split(".");
+  const latestarr = latestStr.split(".");
+  const currentarr = currentStr.split(".");
   let outdated = false;
   // goes through version numbers from left to right from greatest to least significant
   for (let i = 0; i < Math.max(latestarr.length, currentarr.length); i++) {
-    let latest = i < latestarr.length ? parseInt(latestarr[i]) : 0;
-    let current = i < currentarr.length ? parseInt(currentarr[i]) : 0;
+    const latest = i < latestarr.length ? parseInt(latestarr[i]) : 0;
+    const current = i < currentarr.length ? parseInt(currentarr[i]) : 0;
     if (latest > current) {
       outdated = true;
       break;
@@ -217,8 +217,9 @@ function initializeNumberDisplayFormat() {
   updateNumberDisplayFormatContent();
 }
 
+const testValue = 123_456;
+
 function updateNumberDisplayFormatContent() {
-  let testValue = 123456;
   document.getElementById("number_format_compactShort").innerHTML =
     getNumberFormatter("compactShort").format(testValue);
   document.getElementById("number_format_compactLong").innerHTML =
@@ -287,7 +288,7 @@ function handleColorThemeChangeEvent(value) {
   config.colorTheme = value;
   document
     .getElementById("color_theme")
-    .querySelector('option[value="' + value + '"]').selected = true;
+    .querySelector(`option[value="${value}"]`).selected = true;
   updateColorThemePreviewContent(value);
 }
 
@@ -304,7 +305,7 @@ function handleNumberDisplayFormatChangeEvent(value) {
   config.numberDisplayFormat = value;
   document
     .getElementById("number_format")
-    .querySelector('option[value="' + value + '"]').selected = true;
+    .querySelector(`option[value="${value}"]`).selected = true;
 }
 
 function handleShowTooltipPercentageChangeEvent(value) {
@@ -320,7 +321,7 @@ function handleTooltipPercentageModeChangeEvent(value) {
 
   document
     .getElementById("tooltip_percentage_mode")
-    .querySelector('option[value="' + value + '"]').selected = true;
+    .querySelector(`option[value="${value}"]`).selected = true;
 }
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
@@ -354,62 +355,45 @@ function getNumberFormatter(optionSelect) {
       formatterNotation = "compact";
       formatterCompactDisplay = "short";
   }
-  const formatter = Intl.NumberFormat(
+  return Intl.NumberFormat(
     document.documentElement.lang || userLocales || navigator.language,
     {
       notation: formatterNotation,
       compactDisplay: formatterCompactDisplay,
     }
   );
-  return formatter;
 }
 
 (async function getStatus() {
-  let status = document.getElementById("status");
-  let serverStatus = document.getElementById("server-status");
-  let resp = await fetch(
+  const status = document.getElementById("status");
+  const serverStatus = document.getElementById("server-status");
+  const resp = await fetch(
     "https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g"
   );
-  let result = await resp.status;
+  const result = await resp.status;
   if (result === 200) {
     status.innerText = "Online";
     status.style.color = "green";
     serverStatus.style.filter =
       "invert(58%) sepia(81%) saturate(2618%) hue-rotate(81deg) brightness(119%) contrast(129%)";
-  } else {
-    status.innerText = "Offline";
-    status.style.color = "red";
-    serverStatus.style.filter =
-      "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
+    return;
   }
+  status.innerText = "Offline";
+  status.style.color = "red";
+  serverStatus.style.filter =
+  "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
 })();
 
 function getColorFromTheme(colorTheme, voteIsLike) {
-  let colorString;
   switch (colorTheme) {
     case "accessible":
-      if (voteIsLike === true) {
-        colorString = "dodgerblue";
-      } else {
-        colorString = "gold";
-      }
-      break;
+      return voteIsLike === true ? "dodgerblue" : "gold";
     case "neon":
-      if (voteIsLike === true) {
-        colorString = "aqua";
-      } else {
-        colorString = "magenta";
-      }
-      break;
+      return voteIsLike === true ? "aqua" : "magenta";
     case "classic":
     default:
-      if (voteIsLike === true) {
-        colorString = "lime";
-      } else {
-        colorString = "red";
-      }
+      return voteIsLike === true ? "lime" : "red";
   }
-  return colorString;
 }
 
 /* popup-script.js

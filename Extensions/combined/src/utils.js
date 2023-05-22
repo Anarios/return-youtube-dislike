@@ -44,11 +44,10 @@ function getNumberFormatter(optionSelect) {
       formatterCompactDisplay = "short";
   }
 
-  const formatter = Intl.NumberFormat(userLocales, {
+  return Intl.NumberFormat(userLocales, {
     notation: formatterNotation,
     compactDisplay: formatterCompactDisplay,
   });
-  return formatter;
 }
 
 function localize(localeString) {
@@ -71,7 +70,7 @@ function getBrowser() {
 
 function getVideoId(url) {
   const urlObject = new URL(url);
-  const pathname = urlObject.pathname;
+  const { pathname } = urlObject;
   if (pathname.startsWith("/clip")) {
     return document.querySelector("meta[itemprop='videoId']").content;
   } else {
@@ -116,31 +115,15 @@ function cLog(message, writer) {
 }
 
 function getColorFromTheme(voteIsLike) {
-  let colorString;
   switch (extConfig.colorTheme) {
     case "accessible":
-      if (voteIsLike === true) {
-        colorString = "dodgerblue";
-      } else {
-        colorString = "gold";
-      }
-      break;
+      return voteIsLike === true ? "dodgerblue" : "gold";
     case "neon":
-      if (voteIsLike === true) {
-        colorString = "aqua";
-      } else {
-        colorString = "magenta";
-      }
-      break;
+      return voteIsLike === true ? "aqua" : "magenta";
     case "classic":
     default:
-      if (voteIsLike === true) {
-        colorString = "lime";
-      } else {
-        colorString = "red";
-      }
+      return voteIsLike === true ? "lime" : "red";
   }
-  return colorString;
 }
 
 export {
