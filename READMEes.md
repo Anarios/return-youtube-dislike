@@ -76,7 +76,7 @@ Puedes ver toda la documentación en nuestra página web.
 
 ## Contribuciones
 
-Rogamos que leas la [guía de contribución](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGes.md) antes de empezar.
+Rogamos que leas la [guía de contribución](CONTRIBUTINGes.md) antes de empezar.
 
 ## ¡Apoya este proyecto!
 
