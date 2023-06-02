@@ -80,7 +80,7 @@ Le solicitamos que lea la [guía de contribución](CONTRIBUTINGes.md) antes de e
 
 ## ¡Apoya este proyecto!
 
-Puedes apoyar este proyecto enviando un donativo a través siguiente enlace:
+Puedes apoyar este proyecto enviando un donativo a través del siguiente enlace:
 
 [Donar](https://returnyoutubedislike.com/donate)
 
