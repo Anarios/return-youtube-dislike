@@ -76,7 +76,7 @@ Tüm belgelemeleri sitemizden inceleyebilirsiniz.
 
 ## Katkıda Bulunma
 
-Lütfen [katkı kılavuzu](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGtr.md)nu okuyun.
+Lütfen [katkı kılavuzu](CONTRIBUTINGtr.md)nu okuyun.
 
 ## Bu Projeyi Destekle!
 
