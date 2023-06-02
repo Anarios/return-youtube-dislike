@@ -56,7 +56,7 @@ Si encontró un problema que crea que pueda resolver, no dude en hacerlo. Abra u
 
 If you have an idea for the extension, feel free to open a feature request, but please search it before to make sure the feature isn't already suggested. Using the feature form is highly recommended but not mandatory
 
-#### Implementing a feature request
+#### Implementando una solicitud de funcionalidad
 
 Si encontró una función que pueda implementar, no dude en hacerlo. Abra una solicitud de extracción (PR) con la solución y asegúrese de mencionar la función que está implementando
 
