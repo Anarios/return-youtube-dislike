@@ -49,7 +49,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Bewertung erhalten <!-- ### Get votes -->
 
-Beispiel um die Bewertung einer gegebenen YouTube ID zu erhalten:  
+Beispiel, um die Bewertung einer gegebenen YouTube ID zu erhalten:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
