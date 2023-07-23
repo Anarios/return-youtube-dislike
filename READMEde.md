@@ -39,7 +39,7 @@ Mehr erfahren Sie auf unserer Website unter: [returnyoutubedislike.com](https://
 Dritte dürfen diese öffentliche API mit folgenden Restriktionen benützen:
 
 - **Namensnennung**: Dieses Projekt sollte klar mit folgendem Link [returnyoutubedislike.com](https://returnyoutubedislike.com/) versehen werden.
-- **Ratenlimitierung**: Es bestehen pro Nutzer Limitierungen von 100 Anforderungen pro Minute sowie 10.000 pro Tag. Dies wird eine Statusmeldung von _429_ ausgeben, die darauf hinweist, dass sich Ihre Anwendung zurückziehen sollte.
+- **Ratenlimitierung**: Es bestehen pro Nutzer Limitierungen von 100 Anfragen pro Minute sowie 10.000 pro Tag. Dies wird eine Statusmeldung von _429_ ausgeben, die darauf hinweist, dass sich Ihre Anwendung zurückziehen sollte.
 
 Die API ist unter der folgenden Basis-URL verfügbar:  
 https://returnyoutubedislikeapi.com
