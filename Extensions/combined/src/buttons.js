@@ -55,6 +55,14 @@ function createDislikeTextContainer() {
   getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
   getDislikeButton().querySelector("button").classList.add("yt-spec-button-shape-next--icon-leading");
+  if(textNodeClone.querySelector("span[role='text']") === null) {
+    const span = document.createElement("span");
+    span.setAttribute("role", "text");
+    while(textNodeClone.firstChild){
+      textNodeClone.removeChild(textNodeClone.firstChild);
+    }
+    textNodeClone.appendChild(span);
+  }
   textNodeClone.querySelector("span[role='text']").innerText = "";
   return textNodeClone.querySelector("span[role='text']");
 }
