@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Lees dit in andere talen: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [Ελληνικά](READMEgr.md)
+Lees dit in andere talen: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md)
 
 # Return YouTube Dislike
 
@@ -44,7 +44,7 @@ Gebruik door derden van deze open API is toegestaan ​​met de volgende beperk
 De API is toegankelijk via de volgende basis-URL:
 https://returnyoutubedislikeapi.com
 
-Lijst met beschikbare eindpunten is hier beschikbaar: 
+Lijst met beschikbare eindpunten is hier beschikbaar:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Stemmen krijgen
