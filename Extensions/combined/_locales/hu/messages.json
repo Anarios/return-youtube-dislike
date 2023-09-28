@@ -1,0 +1,62 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Visszaállítja a dislike számlálót"
+  },
+  "textDeveloper": {
+    "message": "Készítő: Dmitry Selivanov & Community"
+  },
+  "linkWebsite": {
+    "message": "Weboldal"
+  },
+  "linkFAQ": {
+    "message": "GYIK"
+  },
+  "linkDonate": {
+    "message": "Támogatás"
+  },
+  "linkHelp": {
+    "message": "Segítség"
+  },
+  "legendSettings": {
+    "message": "Beállítások"
+  },
+  "textSettings": {
+    "message": "Like/Dislike beküldés kikapcsolása"
+  },
+  "textLikesDisabled": {
+    "message": "tulajdonos által kikapcsolva"
+  },
+  "textSettingsHover": {
+    "message": "Nem számolja tovább a like és dislike adataidat."
+  },
+  "textTempUnavailable": {
+    "message": "temp n/a"
+  },
+  "textUpdate": {
+    "message": "frissítés erre:"
+  },
+  "version30installed": {
+    "message": "3.0.0.1 verzió telepítve"
+  },
+  "whatsnew": {
+    "message": "Újdonságok"
+  },
+  "shortsSupport": {
+    "message": "YouTube Shorts támogatás"
+  },
+  "customColors": {
+    "message": "Egyéni színek a dislike csíkon és gombon"
+  },
+  "customNumberFormats": {
+    "message": "Egyéni számformátum"
+  },
+  "considerDonating": {
+    "message": "Ez a bővítmény kizárólag a támogatásoknak köszönhetően működik. Kérjük, támogasd a projektet!"
+  }
+}

@@ -1,0 +1,19 @@
+A Return YouTube Dislike visszaállítja a YouTube dislike számlálóját.
+
+Ha nem működik: nyisd meg a bővítmények oldalt (chrome://extensions/), majd kapcsold ki és be ezt a bővítményt. Ezzel megoldhatók a hibák, amik néha előfordulhatnak chromium böngészőkben. Remélhetőleg a chromium csapata hamarosan javítja ezt.
+
+2021. december 13-ától a YouTube törölte a dislike-ok számát a saját API-jából. Ennek a bővítménynek az a célja, hogy visszaadja a hatalmat a felhasználók kezébe. A legpontosabb értékeléshez archivált like és dislike adatok, valamint a bővítményt használók beküldött adatainak kombinációja járul hozzá.
+
+Jelenleg több, mint 200 millió videó like és dislike értékeit tároltuk el 2021. december 13. előtt.
+
+Folyamatosan bővítjük és követjük a feltöltéseket 2021. december 13. óta.
+
+Minél többen használják a bővítményt, annál pontosabbak lesznek az értékelések.
+
+Azoknál a videóknál, amelyeket 2021. december 13. óta töltöttek fel és kevésbé népszerűek, nem annyira pontos az értékelés, mint a népszerűbb tartalmak esetében.
+
+A bővítmény jelenleg aktív fejlesztés alatt áll, szóval ha bármilyen hibát találsz, jelentsd a Github oldalunkon vagy a Discord szerverünkön!
+
+Hamarosan további funkciókkal bővül!
+
+https://github.com/Anarios/return-youtube-dislike
