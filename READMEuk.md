@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Polski](READMEpl.md)
+Read this in other languages: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md)
 
 
 # Return YouTube Dislike
@@ -42,10 +42,10 @@ Read this in other languages: [English](README.md), [Español](READMEes.md), [р
 - **Атрибуція**: Цей проєкт має бути чітко описано, використовуючи посилання на [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Обмеження**: Існують обмеження на швидкісті для кожного клієнта - 100 за хвилину і 10 000 за день. Це видасть код помилки 429, який вказує на те, що вашому додатку слід завершити роботу.
 
-API доступно за наступною URL-адресою: 
+API доступно за наступною URL-адресою:
 https://returnyoutubedislikeapi.com
 
-Перелік доступних «ендпоінтів» можна переглянути тут:   
+Перелік доступних «ендпоінтів» можна переглянути тут:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Отримати оцінки
