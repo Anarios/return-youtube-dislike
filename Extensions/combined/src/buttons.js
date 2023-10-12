@@ -55,7 +55,7 @@ function getDislikeButton() {
 }
 
 function createDislikeTextContainer() {
-  const textNodeClone = getLikeButton().querySelector("button > div[class*='cbox']").cloneNode(true);
+  const textNodeClone = (getLikeButton().querySelector("button > div[class*='cbox']") || getLikeButton().querySelector('div > span[role="text"]').parentNode).cloneNode(true);
   const insertPreChild = getDislikeButton().querySelector("yt-touch-feedback-shape");
   getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
