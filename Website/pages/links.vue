@@ -114,6 +114,10 @@ export default {
         lang: "Français",
       },
       {
+        tag: "tubyoub",
+        lang: "Deutsch",
+      },
+      {
         tag: "dsty#1614",
         lang: "Українська",
       },
