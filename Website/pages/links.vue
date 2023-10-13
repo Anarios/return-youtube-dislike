@@ -121,6 +121,10 @@ export default {
         tag: "dsty#1614",
         lang: "Українська",
       },
+      {
+        tag: "liberaldev",
+        lang: "한국어",
+      },
     ],
     coolProjects: [
       {
