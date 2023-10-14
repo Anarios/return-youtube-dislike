@@ -38,8 +38,8 @@ export default {
       subtitle: "API jest dostępne przez następujące bazowe URL: ",
     },
     endpoints: {
-      title: "Dostępne punkty końcowe",
-      subtitle: "Lista dostępnych punktów końcowych znajduje się tutaj: ",
+      title: "Dostępne endpointy",
+      subtitle: "Lista dostępnych endpointów znajduje się tutaj: ",
     },
     fetching: {
       title: "Poradnik - Podstawowe pobieranie",

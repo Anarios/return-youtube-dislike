@@ -44,7 +44,7 @@ Używanie tego otwartego API jest dozwolone z następującymi ograniczeniami:
 API jest dostępne przez poniższe bazowe URL:  
 https://returnyoutubedislikeapi.com
 
-Lista dostępnych punktów końcowych jest dostępna tutaj:  
+Lista dostępnych endpointów jest dostępna tutaj:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Pobierz głosy
