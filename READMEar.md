@@ -27,7 +27,7 @@
 بالإضافة إلى ذلك، تمت [إزالة] حقل "عدم الإعجاب" في واجهة برمجة تطبيقات YouTube (https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) في 13 كانون الأول (ديسمبر) 2021، مما أدى إلى إزالة أي قدرة على الحكم على جودة المحتوى قبل المشاهدة.
 ## ماذا يفعل
 
-مع إزالة إحصائيات عدم الإعجاب من واجهة برمجة تطبيقات YouTube، تحولت الواجهة الخلفية لدينا إلى استخدام مجموعة من إحصائيات عدم الإعجاب المستخرجة، وهي تقديرات مستمدة من اضافة بيانات مستخدم .
+مع إزالة إحصائيات عدم الإعجاب من واجهة برمجة تطبيقات يوتيوب، تحولت الواجهة الخلفية لدينا إلى استخدام مجموعة من إحصائيات عدم الإعجاب المستخرجة، وهي تقديرات مستمدة من اضافة بيانات مستخدم .
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
@@ -69,24 +69,21 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 None existing YouTube ID will return status code _404_ "Not Found".  
 Wrong formed YouTube ID will return _400_ "Bad Request".
 
-أي معرف YouTube غير موجود سيؤدي الى رمز الحالة _404_ "غير موجود".
-تكوين YouTube بشكل خاطئ سيؤدي إلى عرض _400_ "طلب غير صالح".
-
 <!---
-## API documentation
+## وثائق واجهة برمجة التطبيقات
 
-You can view all documentation on our website.
+يمكنك الاطلاع على جميع الوثائق على موقعنا.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
 ## المساهمة
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+يرجى قراءة [دليل المساهمة](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
 
 ## ادعم المشروع!
 
 يمكنكم دعم هذا المشروع من خلال التبرع لنا على الرابط أدناه:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[تبرع](https://returnyoutubedislike.com/donate)
 
 ## الرعاة
 
