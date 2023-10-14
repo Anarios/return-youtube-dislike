@@ -8,7 +8,7 @@
 [![Lisans](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
 
-Bunu diğer dillerde okuyun: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Français](READMEfr.md), [Nederlands](READMEnl.md), [日本語](READMEja.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md)
+Bunu diğer dillerde okuyun: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Français](READMEfr.md), [Nederlands](READMEnl.md), [日本語](READMEja.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [العربية](READMEar.md)
 
 
 # YouTube Dislike Sayısını Geri Getir

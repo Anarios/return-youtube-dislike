@@ -8,33 +8,32 @@
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
 
-Read this in other languages: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md, [中文](READMEcn.md), [العربية](READMEar.md)
+اقرأ هذا بلغات أخرى: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md, [中文](READMEcn.md)
 
 
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
-    Available for Chrome and Firefox as a Web Extension.<br>
-    Also available for other browsers as JS Userscript.<br><br>
-    <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
+     <b>Return YouTube Dislike هو امتداد مفتوح المصدر يعرض عدد عدم الإعجاب على YouTube.</b><br>
+     متاح لمتصفح Chrome وFirefox كملحق ويب.<br>
+     متاح أيضًا للمتصفحات الأخرى مثل JS Userscript.<br><br>
+     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## The Story
+## القصة
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.
+في العاشر من نوفمبر، 2021، جوجل [أعلنت](https://blog.youtube/news-and-events/update-to-youtube/) أنه ستتم إزالة عدد عدم الإعجاب من على YouTube.
 
-Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+بالإضافة إلى ذلك، تمت [إزالة] حقل "عدم الإعجاب" في واجهة برمجة تطبيقات YouTube (https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) في 13 كانون الأول (ديسمبر) 2021، مما أدى إلى إزالة أي قدرة على الحكم على جودة المحتوى قبل المشاهدة.
+## ماذا يفعل
 
-## What it Does
-
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+مع إزالة إحصائيات عدم الإعجاب من واجهة برمجة تطبيقات YouTube، تحولت الواجهة الخلفية لدينا إلى استخدام مجموعة من إحصائيات عدم الإعجاب المستخرجة، وهي تقديرات مستمدة من اضافة بيانات مستخدم .
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
-## Why it Matters
+## لماذا مهم
 
-You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+تستطيع الحصول على معلومات أكثر من موقعنا: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
 ## API documentation
 
@@ -49,9 +48,22 @@ https://returnyoutubedislikeapi.com
 List of available endpoints is available here:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
+## وثائق واجهة برمجة التطبيقات API
 
-Example to get votes of a given YouTube video ID:  
+يُسمح باستخدام جهة خارجية لواجهة برمجة التطبيقات المفتوحة API هذه مع القيود التالية:
+
+- **الإسناد**: يجب أن يُنسب هذا المشروع بوضوح من خلال رابط إلى [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **حدود السعر**: توجد حدود للسعر لكل عميل بدلاً من 100 في الدقيقة و10,000 في اليوم. سيؤدي هذا إلى إرجاع رمز الحالة _429_ الذي يشير إلى أنه يجب التراجع عن تطبيقك.
+
+يمكن الوصول إلى واجهة برمجة التطبيقات API عبر عنوان URL الأساسي التالي:
+https://returnyoutubedislikeapi.com
+
+قائمة نقاط النهاية المتاحة متاحة هنا:
+https://returnyoutubedislikeapi.com/swagger/index.html
+
+### أحصل على أصوات
+
+مثال للحصول على أصوات لمعرف فيديو معين على YouTube:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -68,6 +80,9 @@ Example to get votes of a given YouTube video ID:
 
 None existing YouTube ID will return status code _404_ "Not Found".  
 Wrong formed YouTube ID will return _400_ "Bad Request".
+
+لن يعرض أي معرف YouTube الحالي رمز الحالة _404_ "غير موجود".
+سيؤدي معرف YouTube الذي تم تكوينه بشكل خاطئ إلى عرض _400_ "طلب غير صالح".
 
 <!---
 ## API documentation
