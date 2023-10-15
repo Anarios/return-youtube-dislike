@@ -35,7 +35,7 @@ function getButtons() {
 function getLikeButton() {
   return getButtons().children[0].tagName ===
     "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? getButtons().children[0].children[0]
+    ? document.querySelector("#segmented-like-button") !== null ? document.querySelector("#segmented-like-button") : getButtons().children[0].children[0]
     : getButtons().children[0];
 }
 
@@ -50,16 +50,24 @@ function getLikeTextContainer() {
 function getDislikeButton() {
   return getButtons().children[0].tagName ===
     "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? getButtons().children[0].children[1]
+    ? getButtons().children[0].children[1] === undefined ? document.querySelector("#segmented-dislike-button") : getButtons().children[0].children[1]
     : getButtons().children[1];
 }
 
 function createDislikeTextContainer() {
-  const textNodeClone = getLikeButton().querySelector("button > div[class*='cbox']").cloneNode(true);
+  const textNodeClone = (getLikeButton().querySelector("button > div[class*='cbox']") || getLikeButton().querySelector('div > span[role="text"]').parentNode).cloneNode(true);
   const insertPreChild = getDislikeButton().querySelector("yt-touch-feedback-shape");
   getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
   getDislikeButton().querySelector("button").classList.add("yt-spec-button-shape-next--icon-leading");
+  if(textNodeClone.querySelector("span[role='text']") === null) {
+    const span = document.createElement("span");
+    span.setAttribute("role", "text");
+    while(textNodeClone.firstChild){
+      textNodeClone.removeChild(textNodeClone.firstChild);
+    }
+    textNodeClone.appendChild(span);
+  }
   textNodeClone.querySelector("span[role='text']").innerText = "";
   return textNodeClone.querySelector("span[role='text']");
 }
