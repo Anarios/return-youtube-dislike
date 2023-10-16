@@ -9,20 +9,16 @@ const ignorePatterns = [
   "**/dist/**",
   "**/src/**",
   "**/readme.md",
-  "**/ryd.content-script.ts",
-  "**/popup.ts",
-  ...entries.map((entry) => `**/${entry}.js`),
+  // "**/ryd.content-script.ts",
+  // "**/popup.ts",
+  ...entries.map((entry) => `**/${entry}.ts`),
 ];
 
 module.exports = {
   entry: Object.fromEntries(
     entries.map((entry) => [
       entry,
-      path.join(
-        __dirname,
-        "./Extensions/combined/",
-        `${entry}${entry === "ryd.background" ? ".js" : ".ts"}`
-      ),
+      path.join(__dirname, "./Extensions/combined/", `${entry}.ts`),
     ])
   ),
   output: {

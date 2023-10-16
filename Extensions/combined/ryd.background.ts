@@ -13,11 +13,13 @@ let extConfig = {
   colorTheme: "classic", // classic, accessible, neon
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayReformatLikes: false, // use existing (native) likes number
+  showTooltipPercentage: undefined,
+  tooltipPercentageMode: undefined,
 };
 
 initExtConfig();
 
-api.runtime.onMessage.addListener((request, sender, sendResponse) => {
+api.runtime.onMessage.addListener((request, _, sendResponse) => {
   if (request.message === "get_auth_token") {
     chrome.identity.getAuthToken({ interactive: true }, function (token) {
       console.log(token);
@@ -68,6 +70,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     sendVote(request.videoId, request.vote);
     return true;
   }
+  return;
 });
 
 api.runtime.onInstalled.addListener((details) => {
@@ -168,10 +171,11 @@ api.storage.sync.get(null, async (res) => {
 const sentIds = new Set();
 let toSend = [];
 
-function countLeadingZeroes(uInt8View, limit) {
+function countLeadingZeroes(uInt8View: Uint8Array, limit?: number) {
   let zeroes = 0;
   let value = 0;
   for (let i = 0; i < uInt8View.length; i++) {
+    // @ts-ignore
     value = uInt8View[i];
     if (value === 0) {
       zeroes += 8;
@@ -188,7 +192,7 @@ function countLeadingZeroes(uInt8View, limit) {
       zeroes += count - (value >>> 7);
       break;
     }
-    if (zeroes >= limit) {
+    if (limit && zeroes >= limit) {
       break;
     }
   }
@@ -204,6 +208,7 @@ async function solvePuzzle(puzzle) {
   let uInt32View = new Uint32Array(buffer);
   let maxCount = Math.pow(2, puzzle.difficulty) * 3;
   for (let i = 4; i < 20; i++) {
+    //@ts-ignore
     uInt8View[i] = challenge[i - 4];
   }
 
@@ -228,7 +233,10 @@ function generateUserID(length = 36) {
     const values = new Uint32Array(length);
     crypto.getRandomValues(values);
     for (let i = 0; i < length; i++) {
-      result += charset[values[i] % charset.length];
+      const value = values[i]!;
+      const idx = value % charset.length;
+      const char = charset[idx];
+      result += char;
     }
     return result;
   } else {
@@ -239,7 +247,7 @@ function generateUserID(length = 36) {
   }
 }
 
-function storageChangeHandler(changes, area) {
+function storageChangeHandler(changes) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
@@ -289,13 +297,6 @@ function handleNumberDisplayFormatChangeEvent(value) {
 
 function handleShowTooltipPercentageChangeEvent(value) {
   extConfig.showTooltipPercentage = value;
-}
-
-function handleTooltipPercentageModeChangeEvent(value) {
-  if (!value) {
-    value = "dash_like";
-  }
-  extConfig.tooltipPercentageMode = value;
 }
 
 function changeIcon(iconName) {
@@ -417,14 +418,4 @@ function initializeNumberDisplayReformatLikes() {
       extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
     }
   });
-}
-
-function isChrome() {
-  return typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined";
-}
-
-function isFirefox() {
-  return (
-    typeof browser !== "undefined" && typeof browser.runtime !== "undefined"
-  );
 }

@@ -1,9 +1,7 @@
 import { extConfig } from "./state";
 
 function numberFormat(numberState) {
-  return getNumberFormatter(extConfig.numberDisplayFormat).format(
-    numberState
-  );
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(numberState);
 }
 
 function getNumberFormatter(optionSelect) {
