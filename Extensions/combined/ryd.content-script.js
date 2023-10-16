@@ -1,45 +1,15 @@
 //---   Import Button Functions   ---//
-import {
-  getButtons,
-  getLikeButton,
-  getDislikeButton,
-  checkForSignInButton,
-} from "./src/buttons";
+import { getButtons } from "./src/buttons";
 
 //---   Import State Functions   ---//
-import {
-  isMobile,
-  isShorts,
-  isVideoDisliked,
-  isVideoLiked,
-  getState,
-  setState,
-  setInitialState,
-  setLikes,
-  setDislikes,
-  getLikeCountFromButton,
-  LIKED_STATE,
-  DISLIKED_STATE,
-  NEUTRAL_STATE,
-  initExtConfig,
-} from "./src/state";
+import { initExtConfig, isShorts, setInitialState } from "./src/state";
 
 //---   Import Video & Browser Functions   ---//
 import {
-  numberFormat,
-  getBrowser,
-  getVideoId,
-  isVideoLoaded,
-  cLog,
-} from "./src/utils";
-import { createRateBar } from "./src/bar";
-import {
-  sendVote,
-  likeClicked,
-  dislikeClicked,
   addLikeDislikeEventListener,
   storageChangeHandler,
 } from "./src/events";
+import { getBrowser, isVideoLoaded } from "./src/utils";
 
 initExtConfig();
 
@@ -56,14 +26,13 @@ function setEventListeners(evt) {
         getBrowser().storage.onChanged.addListener(storageChangeHandler);
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
-      } 
-    } catch(exception) {
-      if(!isSetInitialStateDone) {
+      }
+    } catch (exception) {
+      if (!isSetInitialStateDone) {
         setInitialState();
       }
     }
   }
-
 
   jsInitChecktimer = setInterval(checkForJS_Finish, 111);
 }

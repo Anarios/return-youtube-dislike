@@ -13,7 +13,7 @@ function createRateBar(likes, dislikes) {
   let rateBar = document.getElementById("ryd-bar-container");
   if (!isLikesDisabled()) {
     // sometimes rate bar is hidden
-    if(rateBar && !isInViewport(rateBar)){
+    if (rateBar && !isInViewport(rateBar)) {
       rateBar.remove();
       rateBar = null;
     }
@@ -60,14 +60,19 @@ function createRateBar(likes, dislikes) {
           colorLikeStyle = "; background-color: " + getColorFromTheme(true);
           colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
         }
-        let actions = isNewDesign() && getButtons().id === "top-level-buttons-computed" 
-          ? getButtons() : document.getElementById("menu-container");
+        let actions =
+          isNewDesign() && getButtons().id === "top-level-buttons-computed"
+            ? getButtons()
+            : document.getElementById("menu-container");
         (
-          actions || document.querySelector("ytm-slim-video-action-bar-renderer")
+          actions ||
+          document.querySelector("ytm-slim-video-action-bar-renderer")
         ).insertAdjacentHTML(
           "beforeend",
           `
-              <div class="ryd-tooltip ryd-tooltip-${isNewDesign() ? "new" : "old"}-design" style="width: ${widthPx}px">
+              <div class="ryd-tooltip ryd-tooltip-${
+                isNewDesign() ? "new" : "old"
+              }-design" style="width: ${widthPx}px">
               <div class="ryd-tooltip-bar-container">
                 <div
                     id="ryd-bar-container"

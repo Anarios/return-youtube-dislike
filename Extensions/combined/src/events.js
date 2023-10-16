@@ -1,16 +1,20 @@
-import { getBrowser, getVideoId, numberFormat, cLog } from "./utils";
-import { checkForSignInButton, getButtons, getDislikeButton, getLikeButton } from './buttons';
-import {
-  NEUTRAL_STATE,
-  LIKED_STATE,
-  DISLIKED_STATE,
-  setDislikes,
-  extConfig,
-  storedData,
-  setLikes,
-  getLikeCountFromButton,
-} from "./state";
 import { createRateBar } from "./bar";
+import {
+  checkForSignInButton,
+  getDislikeButton,
+  getLikeButton,
+} from "./buttons";
+import {
+  DISLIKED_STATE,
+  LIKED_STATE,
+  NEUTRAL_STATE,
+  extConfig,
+  getLikeCountFromButton,
+  setDislikes,
+  setLikes,
+  storedData,
+} from "./state";
+import { getBrowser, getVideoId, numberFormat } from "./utils";
 
 function sendVote(vote) {
   if (extConfig.disableVoteSubmission !== true) {
@@ -86,7 +90,7 @@ function addLikeDislikeEventListener() {
   if (!window.returnDislikeButtonlistenersSet) {
     getLikeButton().addEventListener("click", likeClicked);
     getLikeButton().addEventListener("touchstart", likeClicked);
-    if(getDislikeButton()) {
+    if (getDislikeButton()) {
       getDislikeButton().addEventListener("click", dislikeClicked);
       getDislikeButton().addEventListener("touchstart", dislikeClicked);
     }
@@ -145,9 +149,9 @@ function handleNumberDisplayReformatLikesChangeEvent(value) {
 }
 
 export {
-  sendVote,
-  likeClicked,
-  dislikeClicked,
   addLikeDislikeEventListener,
+  dislikeClicked,
+  likeClicked,
+  sendVote,
   storageChangeHandler,
 };

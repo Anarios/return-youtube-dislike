@@ -1,20 +1,19 @@
-import {
-  getLikeButton,
-  getDislikeButton,
-  getButtons,
-  getLikeTextContainer,
-  getDislikeTextContainer,
-} from "./buttons";
 import { createRateBar } from "./bar";
 import {
-  getBrowser,
-  getVideoId,
+  getButtons,
+  getDislikeButton,
+  getDislikeTextContainer,
+  getLikeButton,
+  getLikeTextContainer,
+} from "./buttons";
+import {
   cLog,
-  numberFormat,
+  getBrowser,
   getColorFromTheme,
+  getVideoId,
+  localize,
+  numberFormat,
 } from "./utils";
-import { localize } from "./utils";
-import { createStarRating } from "./starRating";
 
 //TODO: Do not duplicate here and in ryd.background.js
 const apiUrl = "https://returnyoutubedislikeapi.com";
@@ -106,19 +105,29 @@ function isLikesDisabled() {
 function isVideoLiked() {
   if (isMobile()) {
     return (
-      getLikeButton().querySelector("button").getAttribute("aria-label") === "true"
+      getLikeButton().querySelector("button").getAttribute("aria-label") ===
+      "true"
     );
   }
-  return getLikeButton().classList.contains("style-default-active") || getLikeButton().querySelector('button')?.getAttribute('aria-pressed') === 'true';
+  return (
+    getLikeButton().classList.contains("style-default-active") ||
+    getLikeButton().querySelector("button")?.getAttribute("aria-pressed") ===
+      "true"
+  );
 }
 
 function isVideoDisliked() {
   if (isMobile()) {
     return (
-      getDislikeButton().querySelector("button").getAttribute("aria-label") === "true"
+      getDislikeButton().querySelector("button").getAttribute("aria-label") ===
+      "true"
     );
   }
-  return getDislikeButton().classList.contains("style-default-active") || getDislikeButton().querySelector('button')?.getAttribute('aria-pressed') === 'true';
+  return (
+    getDislikeButton().classList.contains("style-default-active") ||
+    getDislikeButton().querySelector("button")?.getAttribute("aria-pressed") ===
+      "true"
+  );
 }
 
 function getState(storedData) {
@@ -133,14 +142,14 @@ function getState(storedData) {
 
 //---   Sets The Likes And Dislikes Values   ---//
 function setLikes(likesCount) {
-  cLog(`SET likes ${likesCount}`)
+  cLog(`SET likes ${likesCount}`);
   getLikeTextContainer().innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
-  cLog(`SET dislikes ${dislikesCount}`)
+  cLog(`SET dislikes ${dislikesCount}`);
   getDislikeTextContainer()?.removeAttribute("is-empty");
-  getDislikeTextContainer()?.removeAttribute('is-empty');
+  getDislikeTextContainer()?.removeAttribute("is-empty");
   if (!isLikesDisabled()) {
     if (isMobile()) {
       getButtons().children[1].querySelector(
@@ -149,7 +158,6 @@ function setDislikes(dislikesCount) {
       return;
     }
     getDislikeTextContainer().innerText = dislikesCount;
-
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {
@@ -170,12 +178,11 @@ function getLikeCountFromButton() {
       return false;
     }
 
-    let likeButton = getLikeButton()
-    .querySelector("yt-formatted-string#text") ??
-    getLikeButton().querySelector("button");
+    let likeButton =
+      getLikeButton().querySelector("yt-formatted-string#text") ??
+      getLikeButton().querySelector("button");
 
-    let likesStr = likeButton.getAttribute("aria-label")
-    .replace(/\D/g, "");
+    let likesStr = likeButton.getAttribute("aria-label").replace(/\D/g, "");
     return likesStr.length > 0 ? parseInt(likesStr) : false;
   } catch {
     return false;
@@ -228,9 +235,7 @@ function processResponse(response, storedData) {
 
 // Tells the user if the API is down
 function displayError(error) {
-  getDislikeTextContainer().innerText = localize(
-    "textTempUnavailable"
-  );
+  getDislikeTextContainer().innerText = localize("textTempUnavailable");
 }
 
 async function setState(storedData) {
@@ -362,23 +367,23 @@ function initializeNumberDisplayReformatLikes() {
 }
 
 export {
+  DISLIKED_STATE,
+  LIKED_STATE,
+  NEUTRAL_STATE,
+  extConfig,
+  getLikeCountFromButton,
+  getState,
+  initExtConfig,
+  isLikesDisabled,
   isMobile,
+  isNewDesign,
+  isRoundedDesign,
   isShorts,
   isVideoDisliked,
   isVideoLiked,
-  isNewDesign,
-  isRoundedDesign,
-  getState,
-  setState,
+  setDislikes,
   setInitialState,
   setLikes,
-  setDislikes,
-  getLikeCountFromButton,
-  LIKED_STATE,
-  DISLIKED_STATE,
-  NEUTRAL_STATE,
-  extConfig,
-  initExtConfig,
+  setState,
   storedData,
-  isLikesDisabled,
 };
