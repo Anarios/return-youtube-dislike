@@ -1,5 +1,3 @@
-import { cLog } from "./src/utils";
-
 /*   Config   */
 const config = {
   advanced: false,
@@ -32,10 +30,10 @@ function localizeHtmlPage() {
   //Localize by replacing __MSG_***__ meta tags
   var objects = document.getElementsByTagName("html");
   for (var j = 0; j < objects.length; j++) {
-    var obj = objects[j];
+    var obj: any = objects[j];
 
     var valStrH = obj.innerHTML.toString();
-    var valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (match, v1) {
+    var valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (_, v1) {
       return v1 ? chrome.i18n.getMessage(v1) : "";
     });
 
@@ -56,63 +54,66 @@ createLink(config.links.donate, "link_donate");
 createLink(config.links.help, "link_help");
 createLink(config.links.changelog, "link_changelog");
 
-function createLink(url, id) {
-  document.getElementById(id).addEventListener("click", () => {
+function createLink(url: any, id: any) {
+  document.getElementById(id)?.addEventListener("click", () => {
     chrome.tabs.create({ url: url });
   });
 }
 
 document
   .getElementById("disable_vote_submission")
-  .addEventListener("click", (ev) => {
+  ?.addEventListener("click", (ev: any) => {
     chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
   });
 
-document.getElementById("colored_thumbs").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ coloredThumbs: ev.target.checked });
-});
+document
+  .getElementById("colored_thumbs")
+  ?.addEventListener("click", (ev: any) => {
+    chrome.storage.sync.set({ coloredThumbs: ev.target.checked });
+  });
 
-document.getElementById("colored_bar").addEventListener("click", (ev) => {
+document.getElementById("colored_bar")?.addEventListener("click", (ev: any) => {
   chrome.storage.sync.set({ coloredBar: ev.target.checked });
 });
 
-document.getElementById("color_theme").addEventListener("click", (ev) => {
+document.getElementById("color_theme")?.addEventListener("click", (ev: any) => {
   chrome.storage.sync.set({ colorTheme: ev.target.value });
 });
 
-
-document.getElementById("number_format").addEventListener("change", (ev) => {
-  chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
-});
+document
+  .getElementById("number_format")
+  ?.addEventListener("change", (ev: any) => {
+    chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
+  });
 
 document
   .getElementById("show_tooltip_percentage")
-  .addEventListener("click", (ev) => {
+  ?.addEventListener("click", (ev: any) => {
     chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
   });
 
 document
   .getElementById("tooltip_percentage_mode")
-  .addEventListener("change", (ev) => {
+  ?.addEventListener("change", (ev: any) => {
     chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
   });
 
 document
   .getElementById("number_reformat_likes")
-  .addEventListener("click", (ev) => {
+  ?.addEventListener("click", (ev: any) => {
     chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
   });
 
 /*   Advanced Toggle   */
 const advancedToggle = document.getElementById("advancedToggle");
-advancedToggle.addEventListener("click", () => {
+advancedToggle?.addEventListener("click", () => {
   const adv = document.getElementById("advancedSettings");
-  if (config.advanced) {
+  if (config.advanced && adv) {
     adv.style.transform = "scale(1.1)";
     adv.style.pointerEvents = "none";
     adv.style.opacity = "0";
     advancedToggle.innerHTML = config.showAdvancedMessage;
-  } else {
+  } else if (adv) {
     adv.style.transform = "scale(1)";
     adv.style.pointerEvents = "auto";
     adv.style.opacity = "1";
@@ -123,7 +124,7 @@ advancedToggle.addEventListener("click", () => {
 
 initConfig();
 
-function initConfig() {
+async function initConfig() {
   initializeDisableVoteSubmission();
   initializeVersionNumber();
   initializeColoredThumbs();
@@ -137,7 +138,10 @@ function initConfig() {
 
 function initializeVersionNumber() {
   const version = chrome.runtime.getManifest().version;
-  document.getElementById("ext-version").innerHTML = "v" + version;
+  const updateLink = document.getElementById("ext-update");
+  if (updateLink) {
+    updateLink.innerHTML = "v" + version;
+  }
 
   fetch(
     "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
@@ -145,9 +149,12 @@ function initializeVersionNumber() {
     .then((response) => response.json())
     .then((json) => {
       if (compareVersions(json.version, version)) {
-        document.getElementById("ext-update").innerHTML =
-          chrome.i18n.getMessage("textUpdate") + " v" + json.version;
-        document.getElementById("ext-update").style.padding = ".25rem .5rem";
+        const updateLink = document.getElementById("ext-update");
+        if (updateLink) {
+          updateLink.innerHTML =
+            chrome.i18n.getMessage("textUpdate") + " v" + json.version;
+          updateLink.style.padding = ".25rem .5rem";
+        }
       }
     });
   // .catch(console.error);
@@ -171,6 +178,12 @@ function compareVersions(latestStr, currentStr) {
     }
   }
   return outdated;
+}
+
+function initializeTooltipPercentage() {
+  chrome.storage.sync.get(["showTooltipPercentage"], (res) => {
+    handleShowTooltipPercentageChangeEvent(res);
+  });
 }
 
 function initializeDisableVoteSubmission() {
@@ -197,13 +210,6 @@ function initializeColorTheme() {
   });
 }
 
-
-function initializeTooltipPercentage() {
-  chrome.storage.sync.get(["showTooltipPercentage"], (res) => {
-    handleShowTooltipPercentageChangeEvent(res.showTooltipPercentage);
-  });
-}
-
 function initializeTooltipPercentageMode() {
   chrome.storage.sync.get(["tooltipPercentageMode"], (res) => {
     handleTooltipPercentageModeChangeEvent(res.tooltipPercentageMode);
@@ -219,12 +225,18 @@ function initializeNumberDisplayFormat() {
 
 function updateNumberDisplayFormatContent() {
   let testValue = 123456;
-  document.getElementById("number_format_compactShort").innerHTML =
-    getNumberFormatter("compactShort").format(testValue);
-  document.getElementById("number_format_compactLong").innerHTML =
-    getNumberFormatter("compactLong").format(testValue);
-  document.getElementById("number_format_standard").innerHTML =
-    getNumberFormatter("standard").format(testValue);
+  const short = document.getElementById("number_format_compactShort");
+  const long = document.getElementById("number_format_compactLong");
+  const standard = document.getElementById("number_format_standard");
+  if (short) {
+    short.innerHTML = getNumberFormatter("compactShort").format(testValue);
+  }
+  if (long) {
+    long.innerHTML = getNumberFormatter("compactLong").format(testValue);
+  }
+  if (standard) {
+    standard.innerHTML = getNumberFormatter("standard").format(testValue);
+  }
 }
 
 function initializeNumberDisplayReformatLikes() {
@@ -235,7 +247,7 @@ function initializeNumberDisplayReformatLikes() {
 
 chrome.storage.onChanged.addListener(storageChangeHandler);
 
-function storageChangeHandler(changes, area) {
+function storageChangeHandler(changes) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
@@ -267,17 +279,28 @@ function storageChangeHandler(changes, area) {
 
 function handleDisableVoteSubmissionChangeEvent(value) {
   config.disableVoteSubmission = value;
-  document.getElementById("disable_vote_submission").checked = value;
+  const disableVoteSubmission = document.getElementById(
+    "disable_vote_submission"
+  );
+  if (disableVoteSubmission) {
+    (disableVoteSubmission as any).checked = value;
+  }
 }
 
 function handleColoredThumbsChangeEvent(value) {
   config.coloredThumbs = value;
-  document.getElementById("colored_thumbs").checked = value;
+  const coloredThumbs = document.getElementById("colored_thumbs");
+  if (coloredThumbs) {
+    (coloredThumbs as any).checked = value;
+  }
 }
 
 function handleColoredBarChangeEvent(value) {
   config.coloredBar = value;
-  document.getElementById("colored_bar").checked = value;
+  const coloredBar = document.getElementById("colored_bar");
+  if (coloredBar) {
+    (coloredBar as any).checked = value;
+  }
 }
 
 function handleColorThemeChangeEvent(value) {
@@ -285,31 +308,56 @@ function handleColorThemeChangeEvent(value) {
     value = "classic";
   }
   config.colorTheme = value;
-  document
-    .getElementById("color_theme")
-    .querySelector('option[value="' + value + '"]').selected = true;
+  const colorTheme = document.getElementById("color_theme");
+  const themeOption = colorTheme?.querySelector(
+    'option[value="' + value + '"]'
+  );
+  if (themeOption) {
+    (themeOption as any).selected = true;
+  }
   updateColorThemePreviewContent(value);
 }
 
 function updateColorThemePreviewContent(themeName) {
-  document.getElementById("color_theme_example_like").style.backgroundColor =
-    getColorFromTheme(themeName, true);
-  document.getElementById("color_theme_example_dislike").style.backgroundColor =
-    getColorFromTheme(themeName, false);
+  const colorThemeExampleLike = document.getElementById(
+    "color_theme_example_like"
+  );
+  if (colorThemeExampleLike) {
+    colorThemeExampleLike.style.backgroundColor = getColorFromTheme(
+      themeName,
+      true
+    );
+  }
+  const colorThemeExampleDislike = document.getElementById(
+    "color_theme_example_dislike"
+  );
+  if (colorThemeExampleDislike) {
+    colorThemeExampleDislike.style.backgroundColor = getColorFromTheme(
+      themeName,
+      false
+    );
+  }
 }
-
-
 
 function handleNumberDisplayFormatChangeEvent(value) {
   config.numberDisplayFormat = value;
-  document
-    .getElementById("number_format")
-    .querySelector('option[value="' + value + '"]').selected = true;
+  const numberFormat = document.getElementById("number_format");
+  const formatOption = numberFormat?.querySelector(
+    'option[value="' + value + '"]'
+  );
+  if (formatOption) {
+    (formatOption as any).selected = true;
+  }
 }
 
 function handleShowTooltipPercentageChangeEvent(value) {
   config.showTooltipPercentage = value;
-  document.getElementById("show_tooltip_percentage").checked = value;
+  const showTooltipPercentage = document.getElementById(
+    "show_tooltip_percentage"
+  );
+  if (showTooltipPercentage) {
+    (showTooltipPercentage as any).checked = value;
+  }
 }
 
 function handleTooltipPercentageModeChangeEvent(value) {
@@ -317,15 +365,23 @@ function handleTooltipPercentageModeChangeEvent(value) {
     value = "dash_like";
   }
   config.tooltipPercentageMode = value;
-
-  document
-    .getElementById("tooltip_percentage_mode")
-    .querySelector('option[value="' + value + '"]').selected = true;
+  const tooltipPercentageMode = document.getElementById(
+    "tooltip_percentage_mode"
+  );
+  const modeOption = tooltipPercentageMode?.querySelector(
+    'option[value="' + value + '"]'
+  );
+  if (modeOption) {
+    (modeOption as any).selected = true;
+  }
 }
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
   config.numberDisplayReformatLikes = value;
-  document.getElementById("number_reformat_likes").checked = value;
+  const numberReformatLikes = document.getElementById("number_reformat_likes");
+  if (numberReformatLikes) {
+    (numberReformatLikes as any).checked = value;
+  }
 }
 
 function getNumberFormatter(optionSelect) {
@@ -333,11 +389,20 @@ function getNumberFormatter(optionSelect) {
   let formatterCompactDisplay;
   let userLocales;
   try {
-    userLocales = new URL(
-      Array.from(document.querySelectorAll("head > link[rel='search']"))
-        ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-        ?.getAttribute("href")
-    )?.searchParams?.get("locale");
+    const searchLinks = document.querySelectorAll("head > link[rel='search']");
+    const searchLink = Array.from(searchLinks).find((n) => {
+      return n?.getAttribute("href")?.includes("?locale=");
+    });
+    const href = searchLink?.getAttribute("href");
+    if (!href) {
+      throw new Error("No href found");
+    }
+    const url = new URL(href);
+    const searchParams = url.searchParams;
+    if (!searchParams) {
+      throw new Error("No searchParams found");
+    }
+    userLocales = searchParams.get("locale");
   } catch {}
 
   switch (optionSelect) {
@@ -372,15 +437,23 @@ function getNumberFormatter(optionSelect) {
   );
   let result = await resp.status;
   if (result === 200) {
-    status.innerText = "Online";
-    status.style.color = "green";
-    serverStatus.style.filter =
-      "invert(58%) sepia(81%) saturate(2618%) hue-rotate(81deg) brightness(119%) contrast(129%)";
+    if (status) {
+      status.innerText = "Online";
+      status.style.color = "green";
+    }
+    if (serverStatus) {
+      serverStatus.style.filter =
+        "invert(58%) sepia(81%) saturate(2618%) hue-rotate(81deg) brightness(119%) contrast(129%)";
+    }
   } else {
-    status.innerText = "Offline";
-    status.style.color = "red";
-    serverStatus.style.filter =
-      "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
+    if (status) {
+      status.innerText = "Offline";
+      status.style.color = "red";
+    }
+    if (serverStatus) {
+      serverStatus.style.filter =
+        "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";
+    }
   }
 })();
 
@@ -411,15 +484,3 @@ function getColorFromTheme(colorTheme, voteIsLike) {
   }
   return colorString;
 }
-
-/* popup-script.js
-document.querySelector('#login')
-.addEventListener('click', function () {
-  chrome.runtime.sendMessage({ message: 'get_auth_token' });
-});
-
-
-document.querySelector("#log_off").addEventListener("click", function () {
-  chrome.runtime.sendMessage({ message: "log_off" });
-});
-*/

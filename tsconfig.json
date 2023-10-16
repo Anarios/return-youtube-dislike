@@ -26,8 +26,10 @@
     "noImplicitReturns": true,
     "noUncheckedIndexedAccess": true, // accessing index must always check for undefined
     "noUnusedLocals": true, // Report errors on unused local variables.
-    "noUnusedParameters": true // Report errors on unused parameters in functions.
+    "noUnusedParameters": true, // Report errors on unused parameters in functions.
+
+    "types": ["@types/chrome", "./globals.d.ts"]
   },
-  "include": ["./**/*.ts", "globals.d.ts"],
+  "include": ["./**/*.ts"],
   "exclude": ["node_modules/**/*", "Website/**/*"]
 }

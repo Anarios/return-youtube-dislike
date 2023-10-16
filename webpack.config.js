@@ -10,6 +10,7 @@ const ignorePatterns = [
   "**/src/**",
   "**/readme.md",
   "**/ryd.content-script.ts",
+  "**/popup.ts",
   ...entries.map((entry) => `**/${entry}.js`),
 ];
 
@@ -20,7 +21,7 @@ module.exports = {
       path.join(
         __dirname,
         "./Extensions/combined/",
-        `${entry}${entry === "ryd.content-script" ? ".ts" : ".js"}`
+        `${entry}${entry === "ryd.background" ? ".js" : ".ts"}`
       ),
     ])
   ),
