@@ -1,5 +1,7 @@
 import { extConfig } from "./state";
 
+declare const browser: any;
+
 function numberFormat(numberState) {
   return getNumberFormatter(extConfig.numberDisplayFormat).format(numberState);
 }
@@ -12,11 +14,30 @@ function getNumberFormatter(optionSelect) {
     userLocales = navigator.language;
   } else {
     try {
-      userLocales = new URL(
-        Array.from(document.querySelectorAll("head > link[rel='search']"))
-          ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-          ?.getAttribute("href")
-      )?.searchParams?.get("locale");
+      const headLinks = document.querySelectorAll("head > link[rel='search']");
+      if (!headLinks || headLinks.length === 0) {
+        throw new Error("No head links found");
+      }
+
+      const localeLink = Array.from(headLinks).find((n) =>
+        n?.getAttribute("href")?.includes("?locale=")
+      );
+      if (!localeLink) {
+        throw new Error("No locale link found");
+      }
+
+      const localeLinkHref = localeLink.getAttribute("href");
+      if (!localeLinkHref) {
+        throw new Error("No locale link href found");
+      }
+
+      const url = new URL(localeLinkHref);
+      const searchParams = url.searchParams;
+      if (!searchParams) {
+        throw new Error("No search params found");
+      }
+
+      userLocales = searchParams.get("locale");
     } catch {
       cLog(
         "Cannot find browser locale. Use en as default for number formatting."
@@ -71,7 +92,9 @@ function getVideoId(url) {
   const urlObject = new URL(url);
   const pathname = urlObject.pathname;
   if (pathname.startsWith("/clip")) {
-    return document.querySelector("meta[itemprop='videoId']").content;
+    return (
+      document?.querySelector("meta[itemprop='videoId']") as HTMLMetaElement
+    )?.content;
   } else {
     if (pathname.startsWith("/shorts")) {
       return pathname.slice(8);
@@ -104,7 +127,7 @@ function isVideoLoaded() {
   );
 }
 
-function cLog(message, writer) {
+function cLog(message, writer?) {
   message = `[return youtube dislike]: ${message}`;
   if (writer) {
     writer(message);
