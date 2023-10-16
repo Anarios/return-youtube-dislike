@@ -1,7 +1,9 @@
+import { getBrowser } from "./src/utils";
+
 const apiUrl = "https://returnyoutubedislikeapi.com";
 const voteDisabledIconName = "icon_hold128.png";
 const defaultIconName = "icon128.png";
-let api;
+let api = getBrowser();
 
 /** stores extension's global config */
 let extConfig = {
@@ -12,9 +14,6 @@ let extConfig = {
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
   numberDisplayReformatLikes: false, // use existing (native) likes number
 };
-
-if (isChrome()) api = chrome;
-else if (isFirefox()) api = browser;
 
 initExtConfig();
 
@@ -30,7 +29,6 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
   } else if (request.message == "set_state") {
     // chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    let token = "";
     fetch(
       `${apiUrl}/votes?videoId=${request.videoId}&likeCount=${
         request.likeCount || ""
@@ -88,17 +86,6 @@ api.runtime.onInstalled.addListener((details) => {
     });
   }
 });
-
-// api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
-//   if (extConfig.showUpdatePopup === true &&
-//     details.lastShowChangelogVersion !== chrome.runtime.getManifest().version
-//     ) {
-//     // keep it inside get to avoid race condition
-//     api.storage.sync.set({'lastShowChangelogVersion ': chrome.runtime.getManifest().version});
-//     // wait until async get runs & don't steal tab focus
-//     api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
-//   }
-// });
 
 async function sendVote(videoId, vote) {
   api.storage.sync.get(null, async (storageResult) => {

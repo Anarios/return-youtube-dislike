@@ -9,6 +9,7 @@ const ignorePatterns = [
   "**/dist/**",
   "**/src/**",
   "**/readme.md",
+  "**/ryd.content-script.ts",
   ...entries.map((entry) => `**/${entry}.js`),
 ];
 
