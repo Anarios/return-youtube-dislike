@@ -13,21 +13,26 @@ import { getBrowser, isVideoLoaded } from "./src/utils";
 
 initExtConfig();
 
-let jsInitChecktimer = null;
-let isSetInitialStateDone = false;
+let jsInitChecktimer: any;
+let isSetInitialStateDone: boolean = false;
 
-function setEventListeners(evt) {
-  function checkForJS_Finish() {
+function setEventListeners(): void {
+  function checkForJS_Finish(): void {
     try {
-      if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
+      if (
+        isShorts() ||
+        ((getButtons() as HTMLElement)?.offsetParent && isVideoLoaded())
+      ) {
         addLikeDislikeEventListener();
         setInitialState();
         isSetInitialStateDone = true;
         getBrowser().storage.onChanged.addListener(storageChangeHandler);
-        clearInterval(jsInitChecktimer);
-        jsInitChecktimer = null;
+        if (jsInitChecktimer !== null) {
+          clearInterval(jsInitChecktimer);
+          jsInitChecktimer = null;
+        }
       }
-    } catch (exception) {
+    } catch (exception: unknown) {
       if (!isSetInitialStateDone) {
         setInitialState();
       }
@@ -39,8 +44,8 @@ function setEventListeners(evt) {
 
 setEventListeners();
 
-document.addEventListener("yt-navigate-finish", function (event) {
+document.addEventListener("yt-navigate-finish", function () {
   if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
-  window.returnDislikeButtonlistenersSet = false;
+  window.returnDislikeButtonlistenersSet = false; // Consider adding a type for `window.returnDislikeButtonlistenersSet`
   setEventListeners();
 });

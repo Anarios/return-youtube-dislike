@@ -16,7 +16,11 @@ module.exports = {
   entry: Object.fromEntries(
     entries.map((entry) => [
       entry,
-      path.join(__dirname, "./Extensions/combined/", `${entry}.js`),
+      path.join(
+        __dirname,
+        "./Extensions/combined/",
+        `${entry}${entry === "ryd.content-script" ? ".ts" : ".js"}`
+      ),
     ])
   ),
   output: {
@@ -29,6 +33,15 @@ module.exports = {
   },
   watchOptions: {
     ignored: "**/dist/**",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules|Website/,
+      },
+    ],
   },
   plugins: [
     // exclude locale files in moment
