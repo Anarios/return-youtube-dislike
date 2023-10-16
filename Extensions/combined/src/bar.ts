@@ -9,7 +9,7 @@ import {
 } from "./state";
 import { cLog, getColorFromTheme, isInViewport } from "./utils";
 
-function createRateBar(likes, dislikes) {
+function createRateBar(likes: number, dislikes: number) {
   let rateBar = document.getElementById("ryd-bar-container");
   if (!isLikesDisabled()) {
     // sometimes rate bar is hidden

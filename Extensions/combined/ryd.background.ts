@@ -1,3 +1,4 @@
+import { ColorTheme, ExtConfig, NumberDisplayFormat } from "./src/types";
 import { getBrowser } from "./src/utils";
 
 const apiUrl = "https://returnyoutubedislikeapi.com";
@@ -6,7 +7,7 @@ const defaultIconName = "icon128.png";
 let api = getBrowser();
 
 /** stores extension's global config */
-let extConfig = {
+let extConfig: ExtConfig = {
   disableVoteSubmission: false,
   coloredThumbs: false,
   coloredBar: false,
@@ -19,68 +20,78 @@ let extConfig = {
 
 initExtConfig();
 
-api.runtime.onMessage.addListener((request, _, sendResponse) => {
-  if (request.message === "get_auth_token") {
-    chrome.identity.getAuthToken({ interactive: true }, function (token) {
-      console.log(token);
-      chrome.identity.getProfileUserInfo(function (userInfo) {
-        console.log(JSON.stringify(userInfo));
+api.runtime.onMessage.addListener(
+  (
+    request: any,
+    _: chrome.runtime.MessageSender,
+    sendResponse: (response?: any) => void
+  ) => {
+    if (request.message === "get_auth_token") {
+      chrome.identity.getAuthToken({ interactive: true }, function (token) {
+        console.log(token);
+        chrome.identity.getProfileUserInfo(function (userInfo) {
+          console.log(JSON.stringify(userInfo));
+        });
       });
-    });
-  } else if (request.message === "log_off") {
-    // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
-  } else if (request.message == "set_state") {
-    // chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    fetch(
-      `${apiUrl}/votes?videoId=${request.videoId}&likeCount=${
-        request.likeCount || ""
-      }`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
+    } else if (request.message === "log_off") {
+      // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
+    } else if (request.message == "set_state") {
+      // chrome.identity.getAuthToken({ interactive: true }, function (token) {
+      fetch(
+        `${apiUrl}/votes?videoId=${request.videoId}&likeCount=${
+          request.likeCount || ""
+        }`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          sendResponse(response);
+        })
+        .catch();
+      return true;
+    } else if (request.message == "send_links") {
+      toSend = toSend.concat(
+        request.videoIds.filter((x: string) => !sentIds.has(x))
+      );
+      if (toSend.length >= 20) {
+        fetch(`${apiUrl}/votes`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(toSend),
+        });
+        for (const toSendUrl of toSend) {
+          sentIds.add(toSendUrl);
+        }
+        toSend = [];
       }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        sendResponse(response);
-      })
-      .catch();
-    return true;
-  } else if (request.message == "send_links") {
-    toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
-    if (toSend.length >= 20) {
-      fetch(`${apiUrl}/votes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(toSend),
-      });
-      for (const toSendUrl of toSend) {
-        sentIds.add(toSendUrl);
-      }
-      toSend = [];
+    } else if (request.message == "register") {
+      register();
+      return true;
+    } else if (request.message == "send_vote") {
+      sendVote(request.videoId, request.vote);
+      return true;
     }
-  } else if (request.message == "register") {
-    register();
-    return true;
-  } else if (request.message == "send_vote") {
-    sendVote(request.videoId, request.vote);
-    return true;
+    return;
   }
-  return;
-});
+);
 
-api.runtime.onInstalled.addListener((details) => {
+api.runtime.onInstalled.addListener((details: any) => {
+  const reason: chrome.runtime.InstalledDetails["reason"] | "browser_update" =
+    details.reason;
   if (
     // No need to show changelog if its was a browser update (and not extension update)
-    details.reason === "browser_update" ||
+    reason === "browser_update" ||
     // Chromium (e.g., Google Chrome Cannary) uses this name instead of the one above for some reason
-    details.reason === "chrome_update" ||
+    reason === "chrome_update" ||
     // No need to show changelog if developer just reloaded the extension
-    details.reason === "update"
+    reason === "update"
   ) {
     return;
   } else if (details.reason == "install") {
@@ -90,8 +101,8 @@ api.runtime.onInstalled.addListener((details) => {
   }
 });
 
-async function sendVote(videoId, vote) {
-  api.storage.sync.get(null, async (storageResult) => {
+async function sendVote(videoId: string, vote: 0 | 1 | -1) {
+  api.storage.sync.get(null, async (storageResult: { [key: string]: any }) => {
     if (!storageResult.userId || !storageResult.registrationConfirmed) {
       await register();
     }
@@ -162,14 +173,14 @@ async function register() {
   }
 }
 
-api.storage.sync.get(null, async (res) => {
+api.storage.sync.get(null, async (res: any) => {
   if (!res || !res.userId || !res.registrationConfirmed) {
     await register();
   }
 });
 
 const sentIds = new Set();
-let toSend = [];
+let toSend: any[] = [];
 
 function countLeadingZeroes(uInt8View: Uint8Array, limit?: number) {
   let zeroes = 0;
@@ -199,7 +210,7 @@ function countLeadingZeroes(uInt8View: Uint8Array, limit?: number) {
   return zeroes;
 }
 
-async function solvePuzzle(puzzle) {
+async function solvePuzzle(puzzle: { challenge: string; difficulty: number }) {
   let challenge = Uint8Array.from(atob(puzzle.challenge), (c) =>
     c.charCodeAt(0)
   );
@@ -247,7 +258,9 @@ function generateUserID(length = 36) {
   }
 }
 
-function storageChangeHandler(changes) {
+function storageChangeHandler(changes: {
+  [key: string]: chrome.storage.StorageChange;
+}) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
@@ -282,7 +295,7 @@ function storageChangeHandler(changes) {
   }
 }
 
-function handleDisableVoteSubmissionChangeEvent(value) {
+function handleDisableVoteSubmissionChangeEvent(value: boolean) {
   extConfig.disableVoteSubmission = value;
   if (value === true) {
     changeIcon(voteDisabledIconName);
@@ -291,15 +304,15 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   }
 }
 
-function handleNumberDisplayFormatChangeEvent(value) {
+function handleNumberDisplayFormatChangeEvent(value: NumberDisplayFormat) {
   extConfig.numberDisplayFormat = value;
 }
 
-function handleShowTooltipPercentageChangeEvent(value) {
+function handleShowTooltipPercentageChangeEvent(value: boolean | undefined) {
   extConfig.showTooltipPercentage = value;
 }
 
-function changeIcon(iconName) {
+function changeIcon(iconName: string) {
   if (api.action !== undefined)
     api.action.setIcon({ path: "/icons/" + iconName });
   else if (api.browserAction !== undefined)
@@ -307,22 +320,22 @@ function changeIcon(iconName) {
   else console.log("changing icon is not supported");
 }
 
-function handleColoredThumbsChangeEvent(value) {
+function handleColoredThumbsChangeEvent(value: boolean) {
   extConfig.coloredThumbs = value;
 }
 
-function handleColoredBarChangeEvent(value) {
+function handleColoredBarChangeEvent(value: boolean) {
   extConfig.coloredBar = value;
 }
 
-function handleColorThemeChangeEvent(value) {
+function handleColorThemeChangeEvent(value: ColorTheme) {
   if (!value) {
     value = "classic";
   }
   extConfig.colorTheme = value;
 }
 
-function handleNumberDisplayReformatLikesChangeEvent(value) {
+function handleNumberDisplayReformatLikesChangeEvent(value: boolean) {
   extConfig.numberDisplayReformatLikes = value;
 }
 
@@ -340,18 +353,21 @@ function initExtConfig() {
 }
 
 function initializeDisableVoteSubmission() {
-  api.storage.sync.get(["disableVoteSubmission"], (res) => {
-    if (res.disableVoteSubmission === undefined) {
-      api.storage.sync.set({ disableVoteSubmission: false });
-    } else {
-      extConfig.disableVoteSubmission = res.disableVoteSubmission;
-      if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
+  api.storage.sync.get(
+    ["disableVoteSubmission"],
+    (res: { [key: string]: any }) => {
+      if (res.disableVoteSubmission === undefined) {
+        api.storage.sync.set({ disableVoteSubmission: false });
+      } else {
+        extConfig.disableVoteSubmission = res.disableVoteSubmission;
+        if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
+      }
     }
-  });
+  );
 }
 
 function initializeColoredThumbs() {
-  api.storage.sync.get(["coloredThumbs"], (res) => {
+  api.storage.sync.get(["coloredThumbs"], (res: { [key: string]: any }) => {
     if (res.coloredThumbs === undefined) {
       api.storage.sync.set({ coloredThumbs: false });
     } else {
@@ -361,7 +377,7 @@ function initializeColoredThumbs() {
 }
 
 function initializeColoredBar() {
-  api.storage.sync.get(["coloredBar"], (res) => {
+  api.storage.sync.get(["coloredBar"], (res: { [key: string]: any }) => {
     if (res.coloredBar === undefined) {
       api.storage.sync.set({ coloredBar: false });
     } else {
@@ -371,7 +387,7 @@ function initializeColoredBar() {
 }
 
 function initializeColorTheme() {
-  api.storage.sync.get(["colorTheme"], (res) => {
+  api.storage.sync.get(["colorTheme"], (res: { [key: string]: any }) => {
     if (res.colorTheme === undefined) {
       api.storage.sync.set({ colorTheme: false });
     } else {
@@ -381,41 +397,53 @@ function initializeColorTheme() {
 }
 
 function initializeNumberDisplayFormat() {
-  api.storage.sync.get(["numberDisplayFormat"], (res) => {
-    if (res.numberDisplayFormat === undefined) {
-      api.storage.sync.set({ numberDisplayFormat: "compactShort" });
-    } else {
-      extConfig.numberDisplayFormat = res.numberDisplayFormat;
+  api.storage.sync.get(
+    ["numberDisplayFormat"],
+    (res: { [key: string]: any }) => {
+      if (res.numberDisplayFormat === undefined) {
+        api.storage.sync.set({ numberDisplayFormat: "compactShort" });
+      } else {
+        extConfig.numberDisplayFormat = res.numberDisplayFormat;
+      }
     }
-  });
+  );
 }
 
 function initializeTooltipPercentage() {
-  api.storage.sync.get(["showTooltipPercentage"], (res) => {
-    if (res.showTooltipPercentage === undefined) {
-      api.storage.sync.set({ showTooltipPercentage: false });
-    } else {
-      extConfig.showTooltipPercentage = res.showTooltipPercentage;
+  api.storage.sync.get(
+    ["showTooltipPercentage"],
+    (res: { [key: string]: any }) => {
+      if (res.showTooltipPercentage === undefined) {
+        api.storage.sync.set({ showTooltipPercentage: false });
+      } else {
+        extConfig.showTooltipPercentage = res.showTooltipPercentage;
+      }
     }
-  });
+  );
 }
 
 function initializeTooltipPercentageMode() {
-  api.storage.sync.get(["tooltipPercentageMode"], (res) => {
-    if (res.tooltipPercentageMode === undefined) {
-      api.storage.sync.set({ tooltipPercentageMode: "dash_like" });
-    } else {
-      extConfig.tooltipPercentageMode = res.tooltipPercentageMode;
+  api.storage.sync.get(
+    ["tooltipPercentageMode"],
+    (res: { [key: string]: any }) => {
+      if (res.tooltipPercentageMode === undefined) {
+        api.storage.sync.set({ tooltipPercentageMode: "dash_like" });
+      } else {
+        extConfig.tooltipPercentageMode = res.tooltipPercentageMode;
+      }
     }
-  });
+  );
 }
 
 function initializeNumberDisplayReformatLikes() {
-  api.storage.sync.get(["numberDisplayReformatLikes"], (res) => {
-    if (res.numberDisplayReformatLikes === undefined) {
-      api.storage.sync.set({ numberDisplayReformatLikes: false });
-    } else {
-      extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
+  api.storage.sync.get(
+    ["numberDisplayReformatLikes"],
+    (res: { [key: string]: any }) => {
+      if (res.numberDisplayReformatLikes === undefined) {
+        api.storage.sync.set({ numberDisplayReformatLikes: false });
+      } else {
+        extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
+      }
     }
-  });
+  );
 }

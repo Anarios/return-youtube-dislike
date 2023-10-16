@@ -6,6 +6,7 @@ import {
   getLikeButton,
   getLikeTextContainer,
 } from "./buttons";
+import { ExtConfig, StoredData } from "./types";
 import {
   cLog,
   getBrowser,
@@ -21,7 +22,7 @@ const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
 
-let extConfig = {
+let extConfig: ExtConfig = {
   disableVoteSubmission: false,
   coloredThumbs: false,
   coloredBar: false,
@@ -32,7 +33,7 @@ let extConfig = {
   numberDisplayReformatLikes: false,
 };
 
-let storedData = {
+let storedData: StoredData = {
   likes: 0,
   dislikes: 0,
   previousState: NEUTRAL_STATE,
@@ -143,7 +144,11 @@ function isVideoDisliked() {
   );
 }
 
-function getState(storedData) {
+function getState(storedData: {
+  likes: number;
+  dislikes: number;
+  previousState: string;
+}) {
   if (isVideoLiked()) {
     return { current: LIKED_STATE, previous: storedData.previousState };
   }
@@ -154,7 +159,7 @@ function getState(storedData) {
 }
 
 //---   Sets The Likes And Dislikes Values   ---//
-function setLikes(likesCount) {
+function setLikes(likesCount: string) {
   cLog(`SET likes ${likesCount}`);
   const likeTextContainer = getLikeTextContainer() as HTMLElement;
   if (!likeTextContainer) {
@@ -164,7 +169,7 @@ function setLikes(likesCount) {
   likeTextContainer.innerText = likesCount;
 }
 
-function setDislikes(dislikesCount) {
+function setDislikes(dislikesCount: string) {
   cLog(`SET dislikes ${dislikesCount}`);
   getDislikeTextContainer()?.removeAttribute("is-empty");
   getDislikeTextContainer()?.removeAttribute("is-empty");
@@ -275,7 +280,7 @@ function getLikeCountFromButton() {
   }
 }
 
-function processResponse(response, storedData) {
+function processResponse(response: any, storedData: StoredData) {
   const formattedDislike = numberFormat(response.dislikes);
   setDislikes(formattedDislike);
   if (extConfig.numberDisplayReformatLikes === true) {
@@ -352,7 +357,7 @@ function displayError() {
   dislikeTextContainer.innerText = localize("textTempUnavailable");
 }
 
-async function setState(storedData) {
+async function setState(storedData: StoredData) {
   storedData.previousState = isVideoDisliked()
     ? DISLIKED_STATE
     : isVideoLiked()
@@ -401,7 +406,7 @@ function initExtConfig() {
 }
 
 function initializeDisableVoteSubmission() {
-  getBrowser().storage.sync.get(["disableVoteSubmission"], (res) => {
+  getBrowser().storage.sync.get(["disableVoteSubmission"], (res: any) => {
     if (res.disableVoteSubmission === undefined) {
       getBrowser().storage.sync.set({ disableVoteSubmission: false });
     } else {
@@ -411,7 +416,7 @@ function initializeDisableVoteSubmission() {
 }
 
 function initializeColoredThumbs() {
-  getBrowser().storage.sync.get(["coloredThumbs"], (res) => {
+  getBrowser().storage.sync.get(["coloredThumbs"], (res: any) => {
     if (res.coloredThumbs === undefined) {
       getBrowser().storage.sync.set({ coloredThumbs: false });
     } else {
@@ -421,7 +426,7 @@ function initializeColoredThumbs() {
 }
 
 function initializeColoredBar() {
-  getBrowser().storage.sync.get(["coloredBar"], (res) => {
+  getBrowser().storage.sync.get(["coloredBar"], (res: any) => {
     if (res.coloredBar === undefined) {
       getBrowser().storage.sync.set({ coloredBar: false });
     } else {
@@ -431,7 +436,7 @@ function initializeColoredBar() {
 }
 
 function initializeColorTheme() {
-  getBrowser().storage.sync.get(["colorTheme"], (res) => {
+  getBrowser().storage.sync.get(["colorTheme"], (res: any) => {
     if (res.colorTheme === undefined) {
       getBrowser().storage.sync.set({ colorTheme: false });
     } else {
@@ -441,7 +446,7 @@ function initializeColorTheme() {
 }
 
 function initializeNumberDisplayFormat() {
-  getBrowser().storage.sync.get(["numberDisplayFormat"], (res) => {
+  getBrowser().storage.sync.get(["numberDisplayFormat"], (res: any) => {
     if (res.numberDisplayFormat === undefined) {
       getBrowser().storage.sync.set({ numberDisplayFormat: "compactShort" });
     } else {
@@ -451,7 +456,7 @@ function initializeNumberDisplayFormat() {
 }
 
 function initializeTooltipPercentage() {
-  getBrowser().storage.sync.get(["showTooltipPercentage"], (res) => {
+  getBrowser().storage.sync.get(["showTooltipPercentage"], (res: any) => {
     if (res.showTooltipPercentage === undefined) {
       getBrowser().storage.sync.set({ showTooltipPercentage: false });
     } else {
@@ -461,7 +466,7 @@ function initializeTooltipPercentage() {
 }
 
 function initializeTooltipPercentageMode() {
-  getBrowser().storage.sync.get(["tooltipPercentageMode"], (res) => {
+  getBrowser().storage.sync.get(["tooltipPercentageMode"], (res: any) => {
     if (res.tooltipPercentageMode === undefined) {
       getBrowser().storage.sync.set({ tooltipPercentageMode: "dash_like" });
     } else {
@@ -471,7 +476,7 @@ function initializeTooltipPercentageMode() {
 }
 
 function initializeNumberDisplayReformatLikes() {
-  getBrowser().storage.sync.get(["numberDisplayReformatLikes"], (res) => {
+  getBrowser().storage.sync.get(["numberDisplayReformatLikes"], (res: any) => {
     if (res.numberDisplayReformatLikes === undefined) {
       getBrowser().storage.sync.set({ numberDisplayReformatLikes: false });
     } else {

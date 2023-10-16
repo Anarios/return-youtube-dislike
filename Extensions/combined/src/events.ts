@@ -14,9 +14,10 @@ import {
   setLikes,
   storedData,
 } from "./state";
+import { ColorTheme, NumberDisplayFormat } from "./types";
 import { getBrowser, getVideoId, numberFormat } from "./utils";
 
-function sendVote(vote) {
+function sendVote(vote: 0 | 1 | -1) {
   if (extConfig.disableVoteSubmission !== true) {
     getBrowser().runtime.sendMessage({
       message: "send_vote",
@@ -98,7 +99,9 @@ function addLikeDislikeEventListener() {
   }
 }
 
-function storageChangeHandler(changes) {
+function storageChangeHandler(changes: {
+  [key: string]: chrome.storage.StorageChange;
+}) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
@@ -123,28 +126,28 @@ function storageChangeHandler(changes) {
   }
 }
 
-function handleDisableVoteSubmissionChangeEvent(value) {
+function handleDisableVoteSubmissionChangeEvent(value: boolean) {
   extConfig.disableVoteSubmission = value;
 }
 
-function handleColoredThumbsChangeEvent(value) {
+function handleColoredThumbsChangeEvent(value: boolean) {
   extConfig.coloredThumbs = value;
 }
 
-function handleColoredBarChangeEvent(value) {
+function handleColoredBarChangeEvent(value: boolean) {
   extConfig.coloredBar = value;
 }
 
-function handleColorThemeChangeEvent(value) {
+function handleColorThemeChangeEvent(value: ColorTheme) {
   if (!value) value = "classic";
   extConfig.colorTheme = value;
 }
 
-function handleNumberDisplayFormatChangeEvent(value) {
+function handleNumberDisplayFormatChangeEvent(value: NumberDisplayFormat) {
   extConfig.numberDisplayFormat = value;
 }
 
-function handleNumberDisplayReformatLikesChangeEvent(value) {
+function handleNumberDisplayReformatLikesChangeEvent(value: boolean) {
   extConfig.numberDisplayReformatLikes = value;
 }
 

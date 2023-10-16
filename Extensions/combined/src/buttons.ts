@@ -4,7 +4,7 @@ import { isInViewport } from "./utils";
 function getButtons() {
   //---   If Watching Youtube Shorts:   ---//
   if (isShorts()) {
-    let elements: NodeListOf<Element>;
+    let elements: NodeListOf<HTMLElement>;
     if (isMobile()) {
       elements = document.querySelectorAll("ytm-like-button-renderer");
     } else {

@@ -1,4 +1,9 @@
 import storage from "./src/storage";
+import {
+  ColorTheme,
+  NumberDisplayFormat,
+  TooltipPercentageMode,
+} from "./src/types";
 
 /*   Config   */
 const config = {
@@ -28,18 +33,27 @@ const config = {
 };
 
 /*   Change language   */
-function localizeHtmlPage() {
-  //Localize by replacing __MSG_***__ meta tags
-  var objects = document.getElementsByTagName("html");
-  for (var j = 0; j < objects.length; j++) {
-    var obj: any = objects[j];
+function localizeHtmlPage(): void {
+  // Localize by replacing __MSG_***__ meta tags
+  const objects: HTMLCollectionOf<HTMLHtmlElement> =
+    document.getElementsByTagName("html");
 
-    var valStrH = obj.innerHTML.toString();
-    var valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (_, v1) {
+  for (let j = 0; j < objects.length; j++) {
+    const obj = objects[j];
+
+    const valStrH = obj?.innerHTML;
+    const valNewH = valStrH?.replace(/__MSG_(\w+)__/g, (_, v1) => {
       return v1 ? chrome.i18n.getMessage(v1) : "";
     });
 
-    if (valNewH != valStrH) {
+    if (!valNewH) {
+      continue;
+    }
+
+    if (valNewH === valStrH) {
+      continue;
+    }
+    if (obj?.innerHTML) {
       obj.innerHTML = valNewH;
     }
   }
@@ -163,14 +177,14 @@ function initializeVersionNumber() {
 }
 
 // returns whether current < latest
-function compareVersions(latestStr, currentStr) {
+function compareVersions(latestStr: string, currentStr: string) {
   let latestarr = latestStr.split(".");
   let currentarr = currentStr.split(".");
   let outdated = false;
   // goes through version numbers from left to right from greatest to least significant
   for (let i = 0; i < Math.max(latestarr.length, currentarr.length); i++) {
-    let latest = i < latestarr.length ? parseInt(latestarr[i]) : 0;
-    let current = i < currentarr.length ? parseInt(currentarr[i]) : 0;
+    let latest = i < latestarr.length ? parseInt(latestarr[i] as string) : 0;
+    let current = i < currentarr.length ? parseInt(currentarr[i] as string) : 0;
     if (latest > current) {
       outdated = true;
       break;
@@ -183,7 +197,7 @@ function compareVersions(latestStr, currentStr) {
 }
 
 function initializeTooltipPercentage() {
-  storage.get(["showTooltipPercentage"], (res) => {
+  storage.get(["showTooltipPercentage"], (res: any) => {
     handleShowTooltipPercentageChangeEvent(res);
   });
 }
@@ -249,7 +263,9 @@ function initializeNumberDisplayReformatLikes() {
 
 storage.onChanged.addListener(storageChangeHandler);
 
-function storageChangeHandler(changes) {
+function storageChangeHandler(changes: {
+  [key: string]: chrome.storage.StorageChange;
+}) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
@@ -279,7 +295,7 @@ function storageChangeHandler(changes) {
   }
 }
 
-function handleDisableVoteSubmissionChangeEvent(value) {
+function handleDisableVoteSubmissionChangeEvent(value: boolean) {
   config.disableVoteSubmission = value;
   const disableVoteSubmission = document.getElementById(
     "disable_vote_submission"
@@ -289,7 +305,7 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   }
 }
 
-function handleColoredThumbsChangeEvent(value) {
+function handleColoredThumbsChangeEvent(value: boolean) {
   config.coloredThumbs = value;
   const coloredThumbs = document.getElementById("colored_thumbs");
   if (coloredThumbs) {
@@ -297,7 +313,7 @@ function handleColoredThumbsChangeEvent(value) {
   }
 }
 
-function handleColoredBarChangeEvent(value) {
+function handleColoredBarChangeEvent(value: boolean) {
   config.coloredBar = value;
   const coloredBar = document.getElementById("colored_bar");
   if (coloredBar) {
@@ -305,7 +321,7 @@ function handleColoredBarChangeEvent(value) {
   }
 }
 
-function handleColorThemeChangeEvent(value) {
+function handleColorThemeChangeEvent(value: "classic" | "neon" | "accessible") {
   if (!value) {
     value = "classic";
   }
@@ -320,13 +336,13 @@ function handleColorThemeChangeEvent(value) {
   updateColorThemePreviewContent(value);
 }
 
-function updateColorThemePreviewContent(themeName) {
+function updateColorThemePreviewContent(colorTheme: ColorTheme) {
   const colorThemeExampleLike = document.getElementById(
     "color_theme_example_like"
   );
   if (colorThemeExampleLike) {
     colorThemeExampleLike.style.backgroundColor = getColorFromTheme(
-      themeName,
+      colorTheme,
       true
     );
   }
@@ -335,13 +351,13 @@ function updateColorThemePreviewContent(themeName) {
   );
   if (colorThemeExampleDislike) {
     colorThemeExampleDislike.style.backgroundColor = getColorFromTheme(
-      themeName,
+      colorTheme,
       false
     );
   }
 }
 
-function handleNumberDisplayFormatChangeEvent(value) {
+function handleNumberDisplayFormatChangeEvent(value: NumberDisplayFormat) {
   config.numberDisplayFormat = value;
   const numberFormat = document.getElementById("number_format");
   const formatOption = numberFormat?.querySelector(
@@ -352,17 +368,17 @@ function handleNumberDisplayFormatChangeEvent(value) {
   }
 }
 
-function handleShowTooltipPercentageChangeEvent(value) {
+function handleShowTooltipPercentageChangeEvent(value: boolean) {
   config.showTooltipPercentage = value;
   const showTooltipPercentage = document.getElementById(
     "show_tooltip_percentage"
-  );
+  ) as HTMLInputElement;
   if (showTooltipPercentage) {
-    (showTooltipPercentage as any).checked = value;
+    showTooltipPercentage.checked = value;
   }
 }
 
-function handleTooltipPercentageModeChangeEvent(value) {
+function handleTooltipPercentageModeChangeEvent(value: TooltipPercentageMode) {
   if (!value) {
     value = "dash_like";
   }
@@ -378,7 +394,7 @@ function handleTooltipPercentageModeChangeEvent(value) {
   }
 }
 
-function handleNumberDisplayReformatLikesChangeEvent(value) {
+function handleNumberDisplayReformatLikesChangeEvent(value: boolean) {
   config.numberDisplayReformatLikes = value;
   const numberReformatLikes = document.getElementById("number_reformat_likes");
   if (numberReformatLikes) {
@@ -386,9 +402,11 @@ function handleNumberDisplayReformatLikesChangeEvent(value) {
   }
 }
 
-function getNumberFormatter(optionSelect) {
-  let formatterNotation;
-  let formatterCompactDisplay;
+function getNumberFormatter(
+  numberDisplayFormat: "compactShort" | "compactLong" | "standard"
+) {
+  let formatterNotation: Intl.NumberFormatOptions["notation"];
+  let formatterCompactDisplay: Intl.NumberFormatOptions["compactDisplay"];
   let userLocales;
   try {
     const searchLinks = document.querySelectorAll("head > link[rel='search']");
@@ -407,7 +425,7 @@ function getNumberFormatter(optionSelect) {
     userLocales = searchParams.get("locale");
   } catch {}
 
-  switch (optionSelect) {
+  switch (numberDisplayFormat) {
     case "compactLong":
       formatterNotation = "compact";
       formatterCompactDisplay = "long";
@@ -459,7 +477,10 @@ function getNumberFormatter(optionSelect) {
   }
 })();
 
-function getColorFromTheme(colorTheme, voteIsLike) {
+function getColorFromTheme(
+  colorTheme: "accessible" | "neon" | "classic",
+  voteIsLike: boolean
+) {
   let colorString;
   switch (colorTheme) {
     case "accessible":
