@@ -9,8 +9,6 @@ const ignorePatterns = [
   "**/dist/**",
   "**/src/**",
   "**/readme.md",
-  // "**/ryd.content-script.ts",
-  // "**/popup.ts",
   ...entries.map((entry) => `**/${entry}.ts`),
 ];
 
@@ -21,6 +19,9 @@ module.exports = {
       path.join(__dirname, "./Extensions/combined/", `${entry}.ts`),
     ])
   ),
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "Extensions/combined/dist"),

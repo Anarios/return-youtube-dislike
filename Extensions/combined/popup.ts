@@ -1,3 +1,5 @@
+import storage from "./src/storage";
+
 /*   Config   */
 const config = {
   advanced: false,
@@ -63,45 +65,45 @@ function createLink(url: any, id: any) {
 document
   .getElementById("disable_vote_submission")
   ?.addEventListener("click", (ev: any) => {
-    chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
+    storage.set({ disableVoteSubmission: ev.target.checked });
   });
 
 document
   .getElementById("colored_thumbs")
   ?.addEventListener("click", (ev: any) => {
-    chrome.storage.sync.set({ coloredThumbs: ev.target.checked });
+    storage.set({ coloredThumbs: ev.target.checked });
   });
 
 document.getElementById("colored_bar")?.addEventListener("click", (ev: any) => {
-  chrome.storage.sync.set({ coloredBar: ev.target.checked });
+  storage.set({ coloredBar: ev.target.checked });
 });
 
 document.getElementById("color_theme")?.addEventListener("click", (ev: any) => {
-  chrome.storage.sync.set({ colorTheme: ev.target.value });
+  storage.set({ colorTheme: ev.target.value });
 });
 
 document
   .getElementById("number_format")
   ?.addEventListener("change", (ev: any) => {
-    chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
+    storage.set({ numberDisplayFormat: ev.target.value });
   });
 
 document
   .getElementById("show_tooltip_percentage")
   ?.addEventListener("click", (ev: any) => {
-    chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
+    storage.set({ showTooltipPercentage: ev.target.checked });
   });
 
 document
   .getElementById("tooltip_percentage_mode")
   ?.addEventListener("change", (ev: any) => {
-    chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
+    storage.set({ tooltipPercentageMode: ev.target.value });
   });
 
 document
   .getElementById("number_reformat_likes")
   ?.addEventListener("click", (ev: any) => {
-    chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
+    storage.set({ numberDisplayReformatLikes: ev.target.checked });
   });
 
 /*   Advanced Toggle   */
@@ -181,43 +183,43 @@ function compareVersions(latestStr, currentStr) {
 }
 
 function initializeTooltipPercentage() {
-  chrome.storage.sync.get(["showTooltipPercentage"], (res) => {
+  storage.get(["showTooltipPercentage"], (res) => {
     handleShowTooltipPercentageChangeEvent(res);
   });
 }
 
 function initializeDisableVoteSubmission() {
-  chrome.storage.sync.get(["disableVoteSubmission"], (res) => {
+  storage.get(["disableVoteSubmission"], (res) => {
     handleDisableVoteSubmissionChangeEvent(res.disableVoteSubmission);
   });
 }
 
 function initializeColoredThumbs() {
-  chrome.storage.sync.get(["coloredThumbs"], (res) => {
+  storage.get(["coloredThumbs"], (res) => {
     handleColoredThumbsChangeEvent(res.coloredThumbs);
   });
 }
 
 function initializeColoredBar() {
-  chrome.storage.sync.get(["coloredBar"], (res) => {
+  storage.get(["coloredBar"], (res) => {
     handleColoredBarChangeEvent(res.coloredBar);
   });
 }
 
 function initializeColorTheme() {
-  chrome.storage.sync.get(["colorTheme"], (res) => {
+  storage.get(["colorTheme"], (res) => {
     handleColorThemeChangeEvent(res.colorTheme);
   });
 }
 
 function initializeTooltipPercentageMode() {
-  chrome.storage.sync.get(["tooltipPercentageMode"], (res) => {
+  storage.get(["tooltipPercentageMode"], (res) => {
     handleTooltipPercentageModeChangeEvent(res.tooltipPercentageMode);
   });
 }
 
 function initializeNumberDisplayFormat() {
-  chrome.storage.sync.get(["numberDisplayFormat"], (res) => {
+  storage.get(["numberDisplayFormat"], (res) => {
     handleNumberDisplayFormatChangeEvent(res.numberDisplayFormat);
   });
   updateNumberDisplayFormatContent();
@@ -240,12 +242,12 @@ function updateNumberDisplayFormatContent() {
 }
 
 function initializeNumberDisplayReformatLikes() {
-  chrome.storage.sync.get(["numberDisplayReformatLikes"], (res) => {
+  storage.get(["numberDisplayReformatLikes"], (res) => {
     handleNumberDisplayReformatLikesChangeEvent(res.numberDisplayReformatLikes);
   });
 }
 
-chrome.storage.onChanged.addListener(storageChangeHandler);
+storage.onChanged.addListener(storageChangeHandler);
 
 function storageChangeHandler(changes) {
   if (changes.disableVoteSubmission !== undefined) {
