@@ -1,6 +1,6 @@
 import { cLog } from "./utils";
 
-function createStarRating(rating, isMobile) {
+function createStarRating(rating: number, isMobile: boolean) {
   let starRating = document.createElement("label");
 
   let starSlider = document.createElement("input");
@@ -20,18 +20,18 @@ function createStarRating(rating, isMobile) {
   if (isMobile) {
     YTLikeButton = document.querySelector(
       "#app > div.page-container > ytm-watch > ytm-single-column-watch-next-results-renderer > ytm-slim-video-metadata-section-renderer > ytm-slim-video-action-bar-renderer > div > ytm-slim-metadata-toggle-button-renderer:nth-child(1)"
-    );
+    ) as HTMLElement;
   } else {
     YTLikeButton = document.querySelector(
       "#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(1)"
-    );
+    ) as HTMLElement;
   }
 
   YTLikeButton.insertAdjacentElement("afterend", starRating);
 
   try {
     let YTBar = document.querySelector("#ryd-bar-container");
-    YTBar.setAttribute("style", "width: 190%; height: 2px;");
+    YTBar?.setAttribute("style", "width: 190%; height: 2px;");
   } catch (err) {
     cLog("RateBar Not Present");
   }

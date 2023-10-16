@@ -2,7 +2,7 @@
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDesc__",
   "default_locale": "en",
-  "version": "3.0.0.0",
+  "version": "3.0.0.10",
   "manifest_version": 2,
   "background": {
     "scripts": ["ryd.background.js"]
@@ -28,8 +28,12 @@
       "css": ["content-style.css"],
       "js": ["ryd.content-script.js"]
     }
-  ]
-  //  ,
+  ],
+  "options_ui": {
+    "page": "popup.html",
+    "open_in_tab": false
+  }
+  // uncomment this section for local storage to work in firefox locally
   //  "browser_specific_settings": {
   //    "gecko": {
   //      "id": "addon@example.com",

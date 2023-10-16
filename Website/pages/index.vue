@@ -63,13 +63,13 @@
     <div id="support-ukraine" class="d-flex flex-column items-center py-2">
       <h3 class="mb-2">
         <v-img src="/ukraine-flag-xs.webp" width="42px" height="28px"></v-img>
-        <a href="https://helpukrainewin.org/">
+        <a href="https://u24.gov.ua/">
           {{ $vuetify.lang.t("$vuetify.home.ukraine") }}
         </a>
       </h3>
     </div>
 
-    <div id="biggest-supporters" class="d-flex flex-column items-center py-8">
+    <div id="top-donors" class="d-flex flex-column items-center py-8">
       <h3 class="mb-4">
         <v-icon class="mb-2">mdi-heart</v-icon>
         {{ $vuetify.lang.t("$vuetify.home.sponsors") }}
@@ -109,14 +109,6 @@ export default {
       discordLink: "https://discord.gg/mYnESY4Md5",
       sponsors: [
         { name: "Piepacker", link: "https://piepacker.com/" },
-        {
-          name: "Seed4.Me VPN",
-          link: "https://www.seed4.me/users/register?gift=ReturnYoutubeDislike",
-        },
-        {
-          name: "PocketTube",
-          link: "https://yousub.info/?utm_source=returnyoutubedislike",
-        },
         {
           name: "Become our sponsor",
           link: "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601",

@@ -9,16 +9,19 @@ const ignorePatterns = [
   "**/dist/**",
   "**/src/**",
   "**/readme.md",
-  ...entries.map((entry) => `**/${entry}.js`),
+  ...entries.map((entry) => `**/${entry}.ts`),
 ];
 
 module.exports = {
   entry: Object.fromEntries(
     entries.map((entry) => [
       entry,
-      path.join(__dirname, "./Extensions/combined/", `${entry}.js`),
+      path.join(__dirname, "./Extensions/combined/", `${entry}.ts`),
     ])
   ),
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "Extensions/combined/dist"),
@@ -29,6 +32,15 @@ module.exports = {
   },
   watchOptions: {
     ignored: "**/dist/**",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules|Website/,
+      },
+    ],
   },
   plugins: [
     // exclude locale files in moment
@@ -56,6 +68,17 @@ module.exports = {
           from: "./Extensions/combined/manifest-firefox.json",
           to: "./firefox/manifest.json",
         },
+        {
+          from: "./Extensions/combined",
+          to: "./safari",
+          globOptions: {
+            ignore: ignorePatterns,
+          },
+        },
+        {
+          from: "./Extensions/combined/manifest-safari.json",
+          to: "./safari/manifest.json",
+        },
       ],
     }),
     new FileManagerPlugin({
@@ -69,6 +92,10 @@ module.exports = {
             {
               source: "./Extensions/combined/dist/**.js",
               destination: "./Extensions/combined/dist/chrome/",
+            },
+            {
+              source: "./Extensions/combined/dist/**.js",
+              destination: "./Extensions/combined/dist/safari/",
             },
           ],
         },

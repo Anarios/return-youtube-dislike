@@ -1,18 +1,23 @@
-import { getBrowser, getVideoId, numberFormat, cLog } from "./utils";
-import { checkForSignInButton, getButtons } from "./buttons";
-import {
-  NEUTRAL_STATE,
-  LIKED_STATE,
-  DISLIKED_STATE,
-  setDislikes,
-  extConfig,
-  storedData,
-  setLikes,
-  getLikeCountFromButton,
-} from "./state";
 import { createRateBar } from "./bar";
+import {
+  checkForSignInButton,
+  getDislikeButton,
+  getLikeButton,
+} from "./buttons";
+import {
+  DISLIKED_STATE,
+  LIKED_STATE,
+  NEUTRAL_STATE,
+  extConfig,
+  getLikeCountFromButton,
+  setDislikes,
+  setLikes,
+  storedData,
+} from "./state";
+import { ColorTheme, NumberDisplayFormat } from "./types";
+import { getBrowser, getVideoId, numberFormat } from "./utils";
 
-function sendVote(vote) {
+function sendVote(vote: 0 | 1 | -1) {
   if (extConfig.disableVoteSubmission !== true) {
     getBrowser().runtime.sendMessage({
       message: "send_vote",
@@ -83,17 +88,20 @@ function dislikeClicked() {
 }
 
 function addLikeDislikeEventListener() {
-  const buttons = getButtons();
   if (!window.returnDislikeButtonlistenersSet) {
-    buttons.children[0].addEventListener("click", likeClicked);
-    buttons.children[1].addEventListener("click", dislikeClicked);
-    buttons.children[0].addEventListener("touchstart", likeClicked);
-    buttons.children[1].addEventListener("touchstart", dislikeClicked);
+    getLikeButton()?.addEventListener("click", likeClicked);
+    getLikeButton()?.addEventListener("touchstart", likeClicked);
+    if (getDislikeButton()) {
+      getDislikeButton()?.addEventListener("click", dislikeClicked);
+      getDislikeButton()?.addEventListener("touchstart", dislikeClicked);
+    }
     window.returnDislikeButtonlistenersSet = true;
   }
 }
 
-function storageChangeHandler(changes, area) {
+function storageChangeHandler(changes: {
+  [key: string]: chrome.storage.StorageChange;
+}) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
@@ -108,12 +116,6 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
-
-  if (changes.numberDisplayRoundDown !== undefined) {
-    handleNumberDisplayRoundDownChangeEvent(
-      changes.numberDisplayRoundDown.newValue
-    );
-  }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
@@ -124,39 +126,35 @@ function storageChangeHandler(changes, area) {
   }
 }
 
-function handleDisableVoteSubmissionChangeEvent(value) {
+function handleDisableVoteSubmissionChangeEvent(value: boolean) {
   extConfig.disableVoteSubmission = value;
 }
 
-function handleColoredThumbsChangeEvent(value) {
+function handleColoredThumbsChangeEvent(value: boolean) {
   extConfig.coloredThumbs = value;
 }
 
-function handleColoredBarChangeEvent(value) {
+function handleColoredBarChangeEvent(value: boolean) {
   extConfig.coloredBar = value;
 }
 
-function handleColorThemeChangeEvent(value) {
+function handleColorThemeChangeEvent(value: ColorTheme) {
   if (!value) value = "classic";
   extConfig.colorTheme = value;
 }
 
-function handleNumberDisplayFormatChangeEvent(value) {
+function handleNumberDisplayFormatChangeEvent(value: NumberDisplayFormat) {
   extConfig.numberDisplayFormat = value;
 }
 
-function handleNumberDisplayRoundDownChangeEvent(value) {
-  extConfig.numberDisplayRoundDown = value;
-}
-
-function handleNumberDisplayReformatLikesChangeEvent(value) {
+function handleNumberDisplayReformatLikesChangeEvent(value: boolean) {
   extConfig.numberDisplayReformatLikes = value;
 }
 
 export {
-  sendVote,
-  likeClicked,
-  dislikeClicked,
   addLikeDislikeEventListener,
+  dislikeClicked,
+  likeClicked,
+  sendVote,
   storageChangeHandler,
 };

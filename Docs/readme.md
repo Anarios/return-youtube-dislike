@@ -1,4 +1,4 @@
-Read this in other languages: [Français](readmefr.md)
+Read this in other languages: [Nederlands](readmenl.md), [Français](readmefr.md), [Türkçe](readmetr.md)
 
 **Contents**
 
@@ -22,8 +22,8 @@ Read this in other languages: [Français](readmefr.md)
 
 ## FAQs
 
-- [General](https://github.com/Anarios/return-youtube-dislike/blob/main/Guides/FAQ.md)
-- [Security](https://github.com/Anarios/return-youtube-dislike/blob/main/Guides/SECURITY-FAQ.md)
+- [General](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+- [Security](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md)
 
 <!-- - [Privacy](FAQ_Privacy.md)
 - [Technical](FAQ_Technical.md)

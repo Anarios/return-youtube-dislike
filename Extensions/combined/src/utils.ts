@@ -1,38 +1,45 @@
 import { extConfig } from "./state";
+import { NumberDisplayFormat } from "./types";
 
-function roundDown(num) {
-  if (num < 1000) return num;
-  const int = Math.floor(Math.log10(num) - 2);
-  const decimal = int + (int % 3 ? 1 : 0);
-  const value = Math.floor(num / 10 ** decimal);
-  return value * 10 ** decimal;
+declare const browser: any;
+
+function numberFormat(numberState: number) {
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(numberState);
 }
 
-function numberFormat(numberState) {
-  let numberDisplay;
-  if (extConfig.numberDisplayRoundDown === false) {
-    numberDisplay = numberState;
-  } else {
-    numberDisplay = roundDown(numberState);
-  }
-  return getNumberFormatter(extConfig.numberDisplayFormat).format(
-    numberDisplay
-  );
-}
-
-function getNumberFormatter(optionSelect) {
-  let userLocales;
+function getNumberFormatter(numberDisplayFormat: NumberDisplayFormat) {
+  let userLocales: string;
   if (document.documentElement.lang) {
     userLocales = document.documentElement.lang;
   } else if (navigator.language) {
     userLocales = navigator.language;
   } else {
     try {
-      userLocales = new URL(
-        Array.from(document.querySelectorAll("head > link[rel='search']"))
-          ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-          ?.getAttribute("href")
-      )?.searchParams?.get("locale");
+      const headLinks = document.querySelectorAll("head > link[rel='search']");
+      if (!headLinks || headLinks.length === 0) {
+        throw new Error("No head links found");
+      }
+
+      const localeLink = Array.from(headLinks).find((n) =>
+        n?.getAttribute("href")?.includes("?locale=")
+      );
+      if (!localeLink) {
+        throw new Error("No locale link found");
+      }
+
+      const localeLinkHref = localeLink.getAttribute("href");
+      if (!localeLinkHref) {
+        throw new Error("No locale link href found");
+      }
+
+      const url = new URL(localeLinkHref);
+      const searchParams = url.searchParams;
+      const locale = searchParams.get("locale");
+      if (!searchParams || typeof locale !== "string") {
+        throw new Error("No locale found");
+      }
+
+      userLocales = locale;
     } catch {
       cLog(
         "Cannot find browser locale. Use en as default for number formatting."
@@ -41,9 +48,9 @@ function getNumberFormatter(optionSelect) {
     }
   }
 
-  let formatterNotation;
-  let formatterCompactDisplay;
-  switch (optionSelect) {
+  let formatterNotation: Intl.NumberFormatOptions["notation"];
+  let formatterCompactDisplay: Intl.NumberFormatOptions["compactDisplay"];
+  switch (numberDisplayFormat) {
     case "compactLong":
       formatterNotation = "compact";
       formatterCompactDisplay = "long";
@@ -65,11 +72,11 @@ function getNumberFormatter(optionSelect) {
   return formatter;
 }
 
-function localize(localeString) {
+function localize(localeString: string) {
   return chrome.i18n.getMessage(localeString);
 }
 
-function getBrowser() {
+function getBrowser(): typeof chrome | typeof browser | false {
   if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
     return chrome;
   } else if (
@@ -83,11 +90,13 @@ function getBrowser() {
   }
 }
 
-function getVideoId(url) {
+function getVideoId(url: string) {
   const urlObject = new URL(url);
   const pathname = urlObject.pathname;
   if (pathname.startsWith("/clip")) {
-    return document.querySelector("meta[itemprop='videoId']").content;
+    return (
+      document?.querySelector("meta[itemprop='videoId']") as HTMLMetaElement
+    )?.content;
   } else {
     if (pathname.startsWith("/shorts")) {
       return pathname.slice(8);
@@ -96,11 +105,14 @@ function getVideoId(url) {
   }
 }
 
-function isInViewport(element) {
+function isInViewport(element: HTMLElement) {
   const rect = element.getBoundingClientRect();
   const height = innerHeight || document.documentElement.clientHeight;
   const width = innerWidth || document.documentElement.clientWidth;
   return (
+    // When short (channel) is ignored, the element (like/dislike AND short itself) is
+    // hidden with a 0 DOMRect. In this case, consider it outside of Viewport
+    !(rect.top == 0 && rect.left == 0 && rect.bottom == 0 && rect.right == 0) &&
     rect.top >= 0 &&
     rect.left >= 0 &&
     rect.bottom <= height &&
@@ -117,16 +129,12 @@ function isVideoLoaded() {
   );
 }
 
-function cLog(message, writer) {
+function cLog(message: string) {
   message = `[return youtube dislike]: ${message}`;
-  if (writer) {
-    writer(message);
-  } else {
-    console.log(message);
-  }
+  console.log(message);
 }
 
-function getColorFromTheme(voteIsLike) {
+function getColorFromTheme(voteIsLike: boolean) {
   let colorString;
   switch (extConfig.colorTheme) {
     case "accessible":
