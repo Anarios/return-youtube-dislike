@@ -266,11 +266,13 @@ function getLikeCountFromButton() {
 
     let likesStr = likeButton?.getAttribute("aria-label")?.replace(/\D/g, "");
     if (!likesStr) {
+      console.error("likesStr not found");
       return false;
     }
 
     const likeStrLength = likesStr?.length;
     if (!likeStrLength) {
+      console.error("likeStrLength not found");
       return false;
     }
 

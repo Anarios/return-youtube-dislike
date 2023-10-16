@@ -22,6 +22,7 @@ function createRateBar(likes: number, dislikes: number) {
     const dislikeButtonWidth = getDislikeButton()?.clientWidth;
 
     if (!likeButtonWidth || !dislikeButtonWidth) {
+      console.error("like or dislike button width is 0");
       return;
     }
 
@@ -100,6 +101,7 @@ function createRateBar(likes: number, dislikes: number) {
           // Add border between info and comments
           let descriptionAndActionsElement = document.getElementById("top-row");
           if (!descriptionAndActionsElement) {
+            console.error("descriptionAndActionsElement not found");
             return;
           }
           descriptionAndActionsElement.style.borderBottom =
@@ -109,12 +111,14 @@ function createRateBar(likes: number, dislikes: number) {
           // Fix like/dislike ratio bar offset in new UI
           const actionsInner = document.getElementById("actions-inner");
           if (!actionsInner) {
+            console.error("actionsInner not found");
             return;
           }
           actionsInner.style.width = "revert";
           if (isRoundedDesign()) {
             const actions = document.getElementById("actions");
             if (!actions) {
+              console.error("actions not found");
               return;
             }
             actions.style.flexDirection = "row-reverse";
@@ -123,12 +127,14 @@ function createRateBar(likes: number, dislikes: number) {
       } else {
         const barContainer = document.getElementById("ryd-bar-container");
         if (!barContainer) {
+          console.error("barContainer not found");
           return;
         }
         barContainer.style.width = widthPx + "px";
 
         const bar = document.getElementById("ryd-bar");
         if (!bar) {
+          console.error("bar not found");
           return;
         }
         bar.style.width = widthPercent + "%";
@@ -137,6 +143,7 @@ function createRateBar(likes: number, dislikes: number) {
           "#ryd-dislike-tooltip > #tooltip"
         );
         if (!tooltip) {
+          console.error("tooltip not found");
           return;
         }
         tooltip.innerHTML = tooltipInnerHTML;

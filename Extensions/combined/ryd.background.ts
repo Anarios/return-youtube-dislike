@@ -78,6 +78,7 @@ api.runtime.onMessage.addListener(
       sendVote(request.videoId, request.vote);
       return true;
     }
+    console.warn("Unknown message received", request);
     return;
   }
 );

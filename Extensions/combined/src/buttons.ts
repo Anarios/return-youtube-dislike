@@ -38,11 +38,13 @@ function getButtons() {
 function getLikeButton(): HTMLElement | undefined {
   const buttons = getButtons();
   if (!buttons) {
+    console.error("buttons not found");
     return;
   }
 
   const children = buttons.children;
   if (children.length === 0) {
+    console.error("like button not found");
     return;
   }
 
@@ -62,6 +64,7 @@ function getLikeButton(): HTMLElement | undefined {
   } else {
     return firstChild;
   }
+  console.error("like button not found");
   return;
 }
 
@@ -76,11 +79,13 @@ function getLikeTextContainer() {
 function getDislikeButton() {
   const buttons = getButtons();
   if (!buttons) {
+    console.error("buttons not found");
     return;
   }
 
   const children = buttons.children;
   if (children.length === 0) {
+    console.error("dislike button not found");
     return;
   }
 
@@ -100,6 +105,7 @@ function getDislikeButton() {
   } else {
     return children[1] as HTMLElement;
   }
+  console.error("dislike button not found");
   return;
 }
 
