@@ -31,7 +31,7 @@ function createStarRating(rating, isMobile) {
 
   try {
     let YTBar = document.querySelector("#ryd-bar-container");
-    YTBar.setAttribute("style", "width: 190%; height: 2px;");
+    YTBar?.setAttribute("style", "width: 190%; height: 2px;");
   } catch (err) {
     cLog("RateBar Not Present");
   }
