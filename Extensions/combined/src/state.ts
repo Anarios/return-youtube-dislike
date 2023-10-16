@@ -54,7 +54,13 @@ function isRoundedDesign() {
   return document.getElementById("segmented-like-button") !== null;
 }
 
-let mutationObserver = new Object();
+class MutationObserverWrapper extends Object {
+  options: MutationObserverInit;
+  exists: boolean;
+  observer: MutationObserver;
+}
+
+let mutationObserver = new MutationObserverWrapper();
 
 if (isShorts() && mutationObserver.exists !== true) {
   cLog("initializing mutation observer");
@@ -64,24 +70,25 @@ if (isShorts() && mutationObserver.exists !== true) {
     subtree: false,
   };
   mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver(function (
-    mutationList,
-    observer
-  ) {
+  mutationObserver.observer = new MutationObserver(function (mutationList) {
     mutationList.forEach((mutation) => {
       if (
         mutation.type === "attributes" &&
         mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
-        mutation.target.id === "button"
+        (mutation.target as HTMLElement).id === "button"
       ) {
         // cLog('Short thumb button status changed');
-        if (mutation.target.getAttribute("aria-pressed") === "true") {
-          mutation.target.style.color =
-            mutation.target.parentElement.parentElement.id === "like-button"
+        if (
+          (mutation.target as HTMLElement).getAttribute("aria-pressed") ===
+          "true"
+        ) {
+          (mutation.target as HTMLElement).style.color =
+            (mutation.target as HTMLElement)?.parentElement?.parentElement
+              ?.id === "like-button"
               ? getColorFromTheme(true)
               : getColorFromTheme(false);
         } else {
-          mutation.target.style.color = "unset";
+          (mutation.target as HTMLElement).style.color = "unset";
         }
         return;
       }
@@ -96,22 +103,26 @@ function isLikesDisabled() {
   // return true if the like button's text doesn't contain any number
   if (isMobile()) {
     return /^\D*$/.test(
-      getButtons().children[0].querySelector(".button-renderer-text").innerText
+      (
+        getButtons()?.children[0]?.querySelector(
+          ".button-renderer-text"
+        ) as HTMLElement
+      )?.innerText
     );
   }
-  return /^\D*$/.test(getButtons().children[0].innerText);
+  return /^\D*$/.test((getButtons()?.children[0] as HTMLElement)?.innerText);
 }
 
 function isVideoLiked() {
   if (isMobile()) {
     return (
-      getLikeButton().querySelector("button").getAttribute("aria-label") ===
+      getLikeButton()?.querySelector("button")?.getAttribute("aria-label") ===
       "true"
     );
   }
   return (
-    getLikeButton().classList.contains("style-default-active") ||
-    getLikeButton().querySelector("button")?.getAttribute("aria-pressed") ===
+    getLikeButton()?.classList.contains("style-default-active") ||
+    getLikeButton()?.querySelector("button")?.getAttribute("aria-pressed") ===
       "true"
   );
 }
@@ -119,14 +130,16 @@ function isVideoLiked() {
 function isVideoDisliked() {
   if (isMobile()) {
     return (
-      getDislikeButton().querySelector("button").getAttribute("aria-label") ===
-      "true"
+      getDislikeButton()
+        ?.querySelector("button")
+        ?.getAttribute("aria-label") === "true"
     );
   }
   return (
-    getDislikeButton().classList.contains("style-default-active") ||
-    getDislikeButton().querySelector("button")?.getAttribute("aria-pressed") ===
-      "true"
+    getDislikeButton()?.classList.contains("style-default-active") ||
+    getDislikeButton()
+      ?.querySelector("button")
+      ?.getAttribute("aria-pressed") === "true"
   );
 }
 
@@ -143,7 +156,12 @@ function getState(storedData) {
 //---   Sets The Likes And Dislikes Values   ---//
 function setLikes(likesCount) {
   cLog(`SET likes ${likesCount}`);
-  getLikeTextContainer().innerText = likesCount;
+  const likeTextContainer = getLikeTextContainer() as HTMLElement;
+  if (!likeTextContainer) {
+    console.error("likeTextContainer not found");
+    return;
+  }
+  likeTextContainer.innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
@@ -152,21 +170,80 @@ function setDislikes(dislikesCount) {
   getDislikeTextContainer()?.removeAttribute("is-empty");
   if (!isLikesDisabled()) {
     if (isMobile()) {
-      getButtons().children[1].querySelector(
+      const buttons = getButtons();
+      if (!buttons) {
+        console.error("buttons not found");
+        return;
+      }
+
+      const children = buttons.children;
+      if (children.length === 0) {
+        console.error("buttons children not found");
+        return;
+      }
+
+      const secondChild = children[1] as HTMLElement;
+      if (!secondChild) {
+        console.error("secondChild not found");
+        return;
+      }
+
+      const buttonRendererText = secondChild.querySelector(
         ".button-renderer-text"
-      ).innerText = dislikesCount;
+      ) as HTMLElement;
+      if (!buttonRendererText) {
+        console.error("buttonRendererText not found");
+        return;
+      }
+
+      buttonRendererText.innerText = dislikesCount;
       return;
     }
-    getDislikeTextContainer().innerText = dislikesCount;
+    const dislikeTextContainer = getDislikeTextContainer() as HTMLElement;
+    if (!dislikeTextContainer) {
+      console.error("dislikeTextContainer not found");
+      return;
+    }
+
+    dislikeTextContainer.innerText = dislikesCount;
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {
-      getButtons().children[1].querySelector(
+      const buttons = getButtons();
+      if (!buttons) {
+        console.error("buttons not found");
+        return;
+      }
+
+      const children = buttons.children;
+      if (children.length === 0) {
+        console.error("buttons children not found");
+        return;
+      }
+
+      const secondChild = children[1] as HTMLElement;
+      if (!secondChild) {
+        console.error("secondChild not found");
+        return;
+      }
+
+      const buttonRendererText = secondChild.querySelector(
         ".button-renderer-text"
-      ).innerText = localize("TextLikesDisabled");
+      ) as HTMLElement;
+      if (!buttonRendererText) {
+        console.error("buttonRendererText not found");
+        return;
+      }
+
+      buttonRendererText.innerText = localize("TextLikesDisabled");
       return;
     }
-    getDislikeTextContainer().innerText = localize("TextLikesDisabled");
+    const dislikeTextContainer = getDislikeTextContainer() as HTMLElement;
+    if (!dislikeTextContainer) {
+      console.error("dislikeTextContainer not found");
+      return;
+    }
+    dislikeTextContainer.innerText = localize("TextLikesDisabled");
   }
 }
 
@@ -179,11 +256,20 @@ function getLikeCountFromButton() {
     }
 
     let likeButton =
-      getLikeButton().querySelector("yt-formatted-string#text") ??
-      getLikeButton().querySelector("button");
+      getLikeButton()?.querySelector("yt-formatted-string#text") ??
+      getLikeButton()?.querySelector("button");
 
-    let likesStr = likeButton.getAttribute("aria-label").replace(/\D/g, "");
-    return likesStr.length > 0 ? parseInt(likesStr) : false;
+    let likesStr = likeButton?.getAttribute("aria-label")?.replace(/\D/g, "");
+    if (!likesStr) {
+      return false;
+    }
+
+    const likeStrLength = likesStr?.length;
+    if (!likeStrLength) {
+      return false;
+    }
+
+    return likeStrLength > 0 ? parseInt(likesStr) : false;
   } catch {
     return false;
   }
@@ -204,18 +290,29 @@ function processResponse(response, storedData) {
   if (extConfig.coloredThumbs === true) {
     if (isShorts()) {
       // for shorts, leave deactivated buttons in default color
-      let shortLikeButton = getLikeButton().querySelector(
+      const shortLikeButton = getLikeButton()?.querySelector(
         "tp-yt-paper-button#button"
-      );
-      let shortDislikeButton = getDislikeButton().querySelector(
+      ) as HTMLElement;
+      if (!shortLikeButton) {
+        console.error("shortLikeButton not found");
+        return;
+      }
+
+      const shortDislikeButton = getDislikeButton()?.querySelector(
         "tp-yt-paper-button#button"
-      );
-      if (shortLikeButton.getAttribute("aria-pressed") === "true") {
+      ) as HTMLElement;
+      if (!shortDislikeButton) {
+        console.error("shortDislikeButton not found");
+        return;
+      }
+
+      if (shortLikeButton?.getAttribute("aria-pressed") === "true") {
         shortLikeButton.style.color = getColorFromTheme(true);
       }
-      if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
+      if (shortDislikeButton?.getAttribute("aria-pressed") === "true") {
         shortDislikeButton.style.color = getColorFromTheme(false);
       }
+
       mutationObserver.observer.observe(
         shortLikeButton,
         mutationObserver.options
@@ -225,8 +322,20 @@ function processResponse(response, storedData) {
         mutationObserver.options
       );
     } else {
-      getLikeButton().style.color = getColorFromTheme(true);
-      getDislikeButton().style.color = getColorFromTheme(false);
+      const likeButton = getLikeButton();
+      if (!likeButton) {
+        console.error("likeButton not found");
+        return;
+      }
+
+      const dislikeButton = getDislikeButton();
+      if (!dislikeButton) {
+        console.error("dislikeButton not found");
+        return;
+      }
+
+      likeButton.style.color = getColorFromTheme(true);
+      dislikeButton.style.color = getColorFromTheme(false);
     }
   }
   //Temporary disabling this - it breaks all places where getButtons()[1] is used
@@ -234,8 +343,13 @@ function processResponse(response, storedData) {
 }
 
 // Tells the user if the API is down
-function displayError(error) {
-  getDislikeTextContainer().innerText = localize("textTempUnavailable");
+function displayError() {
+  const dislikeTextContainer = getDislikeTextContainer() as HTMLElement;
+  if (!dislikeTextContainer) {
+    console.error("dislikeTextContainer not found");
+    return;
+  }
+  dislikeTextContainer.innerText = localize("textTempUnavailable");
 }
 
 async function setState(storedData) {
@@ -259,7 +373,7 @@ async function setState(storedData) {
     }
   )
     .then((response) => {
-      if (!response.ok) displayError(response.error);
+      if (!response.ok) displayError();
       return response;
     })
     .then((response) => response.json())

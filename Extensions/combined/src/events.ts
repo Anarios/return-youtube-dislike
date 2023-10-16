@@ -88,17 +88,17 @@ function dislikeClicked() {
 
 function addLikeDislikeEventListener() {
   if (!window.returnDislikeButtonlistenersSet) {
-    getLikeButton().addEventListener("click", likeClicked);
-    getLikeButton().addEventListener("touchstart", likeClicked);
+    getLikeButton()?.addEventListener("click", likeClicked);
+    getLikeButton()?.addEventListener("touchstart", likeClicked);
     if (getDislikeButton()) {
-      getDislikeButton().addEventListener("click", dislikeClicked);
-      getDislikeButton().addEventListener("touchstart", dislikeClicked);
+      getDislikeButton()?.addEventListener("click", dislikeClicked);
+      getDislikeButton()?.addEventListener("touchstart", dislikeClicked);
     }
     window.returnDislikeButtonlistenersSet = true;
   }
 }
 
-function storageChangeHandler(changes, area) {
+function storageChangeHandler(changes) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
       changes.disableVoteSubmission.newValue
