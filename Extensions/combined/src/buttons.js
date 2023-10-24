@@ -55,7 +55,8 @@ function getDislikeButton() {
 }
 
 function createDislikeTextContainer() {
-  const textNodeClone = (getLikeButton() || getLikeButton().parentNode).cloneNode(true);
+  // const textNodeClone = (getLikeButton() || getLikeButton().parentNode).cloneNode(true);
+  const textNodeClone = (getLikeButton().querySelector("button > div[class*='cbox']") || (getLikeButton().querySelector('div > span[role="text"]') || document.querySelector('button > div.yt-spec-button-shape-next__button-text-content > span[role="text"]')).parentNode).cloneNode(true);
   const insertPreChild = getDislikeButton().querySelector("yt-touch-feedback-shape");
   getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
