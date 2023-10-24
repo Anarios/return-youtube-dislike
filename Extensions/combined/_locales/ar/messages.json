@@ -1,0 +1,134 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike تجريبي"
+  },
+  "extensionDesc": {
+    "message": "يُعيد القدرة على رؤية عدد عدم الإعجاب"
+  },
+  "textDeveloper": {
+    "message": "بواسطة Dmitry Selivanov & Community"
+  },
+  "linkWebsite": {
+    "message": "الموقع الإلكتروني"
+  },
+  "linkFAQ": {
+    "message": "الأسئلة المتكررة"
+  },
+  "linkDonate": {
+    "message": "تبرع"
+  },
+  "linkHelp": {
+    "message": "مساعدة"
+  },
+  "linkChangelog": {
+    "message": "سجل التغييرات"
+  },
+  "legendSettings": {
+    "message": "الإعدادات"
+  },
+  "textSettings": {
+    "message": "تعطيل إرسال الإعجاب/عدم الإعجاب"
+  },
+  "textLikesDisabled": {
+    "message": "تم تعطيله بواسطة المالك"
+  },
+  "textSettingsHover": {
+    "message": "يوقف عد أعداد الإعجاب وعدم الإعجاب الخاصة بك."
+  },
+  "textRoundingNumbers": {
+    "message": "تقريب إحصائيات الإعجاب/عدم الإعجاب (السلوك الافتراضي ليوتيوب)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "عرض الإحصائيات بعد التقريب."
+  },
+  "textConsistentFormat": {
+    "message": "جعل تنسيق الإعجاب وعدم الإعجاب متناسقًا"
+  },
+  "textConsistentFormatHover": {
+    "message": "إعادة تنسيق أرقام الإعجاب."
+  },
+  "textNumberFormat": {
+    "message": "تنسيق الرقم:"
+  },
+  "textColorizeRatioBar": {
+    "message": "لون شريط النسبة"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "استخدم ألوان مخصصة لشريط النسبة."
+  },
+  "textColorizeThumbs": {
+    "message": "لون الأيقونات"
+  },
+  "textColorizeThumbsHover": {
+    "message": "استخدم ألوان مخصصة لأيقونات الإعجاب."
+  },
+  "textColorTheme": {
+    "message": "نُسق اللون:"
+  },
+  "textColorTheme1": {
+    "message": "كلاسيكي"
+  },
+  "textColorTheme2": {
+    "message": "متاح"
+  },
+  "textColorTheme3": {
+    "message": "نيون"
+  },
+  "textTempUnavailable": {
+    "message": "غير متوفر مؤقتًا"
+  },
+  "textUpdate": {
+    "message": "تحديث إلى"
+  },
+  "version30installed": {
+    "message": "تم تثبيت الإصدار 3.0.0.12"
+  },
+  "whatsnew": {
+    "message": "ما الجديد"
+  },
+  "shortsSupport": {
+    "message": "دعم يوتيوب شورتس"
+  },
+  "customColors": {
+    "message": "ألوان مخصصة لشريط عدم الإعجاب والأزرار"
+  },
+  "customNumberFormats": {
+    "message": "تنسيقات أرقام مخصصة"
+  },
+  "considerDonating": {
+    "message": "الشيء الوحيد الذي يجعل الإضافة تعمل هو تبرعاتك، يرجى النظر في دعم المشروع."
+  },
+  "roundNumbers": {
+    "message": "عرض الأرقام بعد التقريب"
+  },
+  "roundNumbersHover": {
+    "message": "تقريب الأرقام (السلوك الافتراضي ليوتيوب)."
+  },
+  "reformatLikes": {
+    "message": "إعادة تنسيق أرقام الإعجاب"
+  },
+  "reformatLikesHover": {
+    "message": "جعل تنسيق الإعجاب وعدم الإعجاب متناسقًا."
+  },
+  "numberFormat": {
+    "message": "تنسيق الرقم:"
+  },
+  "colorizeRatio": {
+    "message": "لون شريط النسبة"
+  },
+  "colorizeRatioHover": {
+    "message": "استخدم ألوان مخصصة لشريط النسبة."
+  },
+  "colorizeThumbs": {
+    "message": "لون الأيقونات"
+  },
+  "colorizeThumbsHover": {
+    "message": "استخدم ألوان مخصصة لأيقونات الإعجاب."
+  },
+  "colorTheme": {
+    "message": "نُسق اللون:"
+  }
+}

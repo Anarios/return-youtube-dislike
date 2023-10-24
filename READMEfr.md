@@ -8,7 +8,7 @@
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](LICENSE)
 
 
-Lisez ceci dans d'autres langues : [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md),[日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md)
+Lisez ceci dans d'autres langues : [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md),[日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [العربية](READMEar.md)
 
 
 # Return YouTube Dislike

@@ -31,7 +31,7 @@
     "@babel/runtime": "^7.16.5",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.0",
-    "filemanager-webpack-plugin": "^6.1.7",
+    "filemanager-webpack-plugin": "^8.0.0",
     "webpack-cli": "^4.9.1"
   }
 }
