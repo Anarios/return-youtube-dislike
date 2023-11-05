@@ -48,14 +48,19 @@ function getLikeTextContainer() {
 }
 
 function getDislikeButton() {
-  return getButtons().children[0].tagName ===
-    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? getButtons().children[0].children[1] === undefined ? document.querySelector("#segmented-dislike-button") : getButtons().children[0].children[1]
-    : getButtons().children[1];
+  if (getButtons().children[0].tagName === 'YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER') {
+    if (getButtons().children[0].children[1] === undefined) {
+      return document.querySelector('#segmented-dislike-button');
+    } else {
+      return getButtons().children[0].children[1];
+    }
+  } else {
+    return getButtons().children[1];
+  }
 }
 
 function createDislikeTextContainer() {
-  const textNodeClone = getLikeButton().querySelector("button > div[class*='cbox']").cloneNode(true);
+  const textNodeClone = (getLikeButton().querySelector("button > div[class*='cbox']") || (getLikeButton().querySelector('div > span[role="text"]') || document.querySelector('button > div.yt-spec-button-shape-next__button-text-content > span[role="text"]')).parentNode).cloneNode(true);
   const insertPreChild = getDislikeButton().querySelector("yt-touch-feedback-shape");
   getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
