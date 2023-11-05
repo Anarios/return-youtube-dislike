@@ -48,13 +48,15 @@ function getLikeTextContainer() {
 }
 
 function getDislikeButton() {
-  return getButtons().children[0].tagName ===
-    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? (getButtons().children[0].children[1] === undefined ? document.querySelector("#segmented-dislike-button") : getButtons().children[0].children[1])
-    
-    : getButtons().children[0].tagName === "segmented-like-dislike-button-view-model"
-    ? getButtons().children[0].querySelector("dislike-button-view-model")
-    : getButtons().children[1];
+  if (getButtons().children[0].tagName === 'YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER') {
+    if (getButtons().children[0].children[1] === undefined) {
+      return document.querySelector('#segmented-dislike-button');
+    } else {
+      return getButtons().children[0].children[1];
+    }
+  } else {
+    return getButtons().children[1];
+  }
 }
 
 function createDislikeTextContainer() {
