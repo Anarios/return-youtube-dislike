@@ -7,52 +7,49 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-
-Read this in other languages: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md)
-
-
+Read this in other languages: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md)
 
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
-    Available for Chrome and Firefox as a Web Extension.<br>
-    Also available for other browsers as JS Userscript.<br><br>
+    <b>Return YouTube Dislike to otwarte rozszerzenie, które przywraca licznik łapek w dół na YouTube.</b><br>
+    Dostępne jako rozszerzenie dla Chrome i Firefox.<br>
+    Dostępne także dla innych przeglądarek jako JS UserScript.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## The Story
+## Historia
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.
+Dnia 10 listopada 2021, Google [ogłosiło](https://blog.youtube/news-and-events/update-to-youtube/), że licznik łapek w dół na YouTube zostanie usunięty.
 
-Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+Dodatkowo, pole `dislike` w API YouTube zostało [usunięte](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 grudnia 2021, usuwając przy tym jakąkolwiek możliwość oceny jakości filmu przed obejrzeniem. 
 
-## What it Does
+## Co to robi
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+Wraz z usunięciem statystyk łapek w dół z YouTube API, nasz backend przełączył się na kombinację scrape-owanych statystyk łapek w dół i szacunków ekstrapolowanych z danych użytkowników rozszerzenia.
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
-## Why it Matters
+## Dlaczego to ma znaczenie
 
-You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+Można o tym przeczytać na naszej stronie: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-## API documentation
+## Dokumentacja API
 
-Third-party use of this open API is allowed with the following restrictions:
+Używanie tego otwartego API jest dozwolone z następującymi ograniczeniami:
 
-- **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10,000 per day. This will return a _429_ status code indicating that your application should back off.
+- **Przypisanie**: Ten projekt powinien być jawnie przypisany z linkiem do [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **Ograniczenie żądań**: Istnieją ograniczenia żądań do 100 na minutę i 10 000 na dzień. Przekroczenie zwróci kod _429_, mówiący aplikacji aby przyhamowała.
 
-The API is accessible over the following base URL:  
+API jest dostępne przez poniższe bazowe URL:  
 https://returnyoutubedislikeapi.com
 
-List of available endpoints is available here:  
+Lista dostępnych endpointów jest dostępna tutaj:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
+### Pobierz głosy
 
-Example to get votes of a given YouTube video ID:  
+Przykład otrzymywania głosów z danego ID filmu YouTube:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -67,26 +64,26 @@ Example to get votes of a given YouTube video ID:
 }
 ```
 
-None existing YouTube ID will return status code _404_ "Not Found".  
-Wrong formed YouTube ID will return _400_ "Bad Request".
+Nieistniejący ID filmu zwróci _404_ "Not Found".  
+Niepoprawnie sformatowany ID filmu zwróci _400_ "Bad Request".
 
 <!---
 ## API documentation
 
-You can view all documentation on our website.
+Cała dokumentacja jest dostępna na naszej stronie.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
-## Contributing
+## Współtworzenie
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Prosimy przeczytać [przewodnik współtworzenia](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
 
-## Support this project!
+## Wesprzyj ten projekt!
 
-You can support this project by donating to us on the link below:
+Możesz wesprzeć ten projekt dotacjami poniżej:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[Wesprzyj](https://returnyoutubedislike.com/donate)
 
-## Sponsors
+## Sponsorzy
 
 [Piepacker](https://piepacker.com)
 
