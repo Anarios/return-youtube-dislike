@@ -1,20 +1,39 @@
 /* Variables */
 :root {
-  --primary: #cc2929;
-  --accent: #581111;
+  --primary: #f39090;
+  --secondary: #502e2e;
+  --tertiary: #221818;
+  --background: #352929;
 
-  --background: #111;
-  --secondary: #272727;
-  --tertiary: #424242;
+  --accent: #581111;
   --lightGrey: #999;
-  --white: #fff;
 }
+
+/***   MATERIAL 3   ***/
+.m3-primary {
+  background: var(--primary) !important;
+  color: var(--background) !important;
+}
+.m3-btn {
+  background: var(--tertiary);
+  color: var(--primary);
+  transition: 0.4s;
+  border-radius: 4px;
+  font-weight: 500;
+  border-radius: 100em;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.25);
+}
+.m3-btn:hover {
+  background: var(--secondary) !important;
+  color: var(--primary) !important;
+}
+/***   END MATERIAL 3   ***/
 
 /* Window Styling */
 html,
 body {
   background-color: var(--background);
-  color: var(--white);
+  color: var(--primary);
   min-width: 310px;
   min-height: 350px;
   padding: 0.5em;
@@ -26,30 +45,19 @@ h1 {
   font-size: 26px;
 }
 
-button {
-  color: var(--white);
-  background: var(--secondary);
-  cursor: pointer;
-  padding: 5px 16px;
-  border: none;
-  border-radius: 4px;
-  font-weight: 500;
-  /* box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%),
-    0 1px 10px 0 rgb(0 0 0 / 12%); */
-  transition: 0.4s;
-}
-
-button:hover {
-  background: #444;
-}
-
 #ext-version {
   padding: 0.25rem 0.5rem;
 }
 
+button {
+  cursor: pointer;
+  padding: 5px 16px;
+  border: none;
+}
+
 #ext-update {
   cursor: pointer;
-  color: var(--white);
+  color: var(--primary);
   text-decoration: none;
   background: var(--primary);
   border-radius: 0.25rem;
@@ -123,7 +131,7 @@ button:hover {
 }
 
 #advancedToggle:hover {
-  color: var(--white);
+  color: var(--primary);
   transform: rotate(-90deg);
 }
 
