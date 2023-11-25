@@ -23,17 +23,59 @@
   "linkHelp": {
     "message": "Nápověda"
   },
+  "linkChangelog": {
+    "message": "Seznam změn"
+  },
   "legendSettings": {
     "message": "Nastavení"
   },
   "textSettings": {
-    "message": "Zakázat odesílání like/dislike"
+    "message": "Zakázat odesílání palců nahoru/dolů"
   },
   "textLikesDisabled": {
     "message": "zakázáno majitelem"
   },
   "textSettingsHover": {
-    "message": "Zastaví počítání vašich liků a disliků."
+    "message": "Zastaví počítání vašich palců nahoru/dolů."
+  },
+  "textRoundingNumbers": {
+    "message": "Zaokrouhlit dolů statistiky palců nahoru/dolů (výchozí chování YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Zobrazit statistiky zaokrouhlené dolů."
+  },
+  "textConsistentFormat": {
+    "message": "Použít stejný formát čísel pro palce nahoru/dolů"
+  },
+  "textConsistentFormatHover": {
+    "message": "Přeformátovat počet palců nahoru."
+  },
+  "textNumberFormat": {
+    "message": "Formát čísel:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Obarvit pruh poměru"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Použít vlastní barvy pro pruh poměru."
+  },
+  "textColorizeThumbs": {
+    "message": "Obarvit ikony"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Použít vlastní barvy pro ikony."
+  },
+  "textColorTheme": {
+    "message": "Marevný motiv:"
+  },
+  "textColorTheme1": {
+    "message": "Klasický"
+  },
+  "textColorTheme2": {
+    "message": "Přístupný"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
   },
   "textTempUnavailable": {
     "message": "dočasně nedostupné"
@@ -58,5 +100,35 @@
   },
   "considerDonating": {
     "message": "Jediná věc, díky které rozšíření funguje, jsou vaše příspěvky. Zvažte prosím podpoření projektu."
+  },
+  "roundNumbers": {
+    "message": "Zobrazit čísla zaokrouhlená dolů"
+  },
+  "roundNumbersHover": {
+    "message": "Zaokrouhlit čísla dolů (výchozí chování YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Přeformátovat čísla palců nahoru"
+  },
+  "reformatLikesHover": {
+    "message": "Udělat formát palců nahoru/dolů konzistentní."
+  },
+  "numberFormat": {
+    "message": "Formát čísel:"
+  },
+  "colorizeRatio": {
+    "message": "Obarvit pruh poměru"
+  },
+  "colorizeRatioHover": {
+    "message": "Použít vlastní barvy pro pruh poměru."
+  },
+  "colorizeThumbs": {
+    "message": "Obarvit ikony"
+  },
+  "colorizeThumbsHover": {
+    "message": "Použít vlastní barvy pro ikony."
+  },
+  "colorTheme": {
+    "message": "Marevný motiv:"
   }
 }
