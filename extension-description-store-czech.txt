@@ -1,0 +1,20 @@
+Return YouTube Dislike obnoví možnost vidět palce dolů na YouTube.
+
+Pokud to nefunguje: otevřete kartu Rozšíření (chrome://extensions/), zakažte toto rozšíření a znovu jej povolte. To by mělo vyřešit většinu problémů, protože v Chromiu je bug, který v určitých případech rozbije rozšíření. Snad to tým Chromia brzy vyřeší.
+
+Od 13. prosince 2021, YouTube odebral možnost získat počet palců dolů z jejich API.
+Toto rozšíření cílí na obnovení moci uživatelů používáním kombinace archivovaných dat palců nahoru a dolů a také palci nahoru a dolů udělenými uživateli tohoto rozšíření pro co nejpřesnější hodnocení.
+
+V současnosti má data palců nahoru a dolů 200+ milionu videí, která byla uložena před 13. prosincem 2021
+
+Aktivně roste a zůstává v obraze s nahrávkami po 13. prosinci 2021
+
+Čím více lidí bude rozšíření používat, tím přesnější bude.
+
+Nepopulární videa nahraná po 13. prosinci 2021 mohou mít méně přesná data než populární videa.
+
+Toto rozšíření je ve fázi aktivního vývoje, pokud narazíte na jakékoliv problémy, nestyďte se je nahlásit na naší GitHub stránce nebo na Discord serveru.
+
+Další funkce přijdou brzy! 
+
+https://github.com/Anarios/return-youtube-dislike
