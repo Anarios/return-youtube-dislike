@@ -176,7 +176,7 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #333; /* color of the scroll thumb */
+  background-color: var(--primary); /* color of the scroll thumb */
   border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
   border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
   border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
@@ -243,7 +243,7 @@ button {
   width: 13px;
   left: 2px;
   bottom: 2px;
-  background: var(--lightGrey);
+  background: var(--primary);
   transition: 0.4s;
   border-radius: 50%;
 }
