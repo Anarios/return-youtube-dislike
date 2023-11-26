@@ -21,11 +21,21 @@
   border-radius: 4px;
   font-weight: 500;
   border-radius: 100em;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.25);
+  box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+  margin: 0.25em;
 }
 .m3-btn:hover {
   background: var(--secondary) !important;
   color: var(--primary) !important;
+}
+
+select {
+  border-radius: 1em;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: none;
+  outline: none;
+  padding: 3px 2px;
 }
 /***   END MATERIAL 3   ***/
 
@@ -121,17 +131,17 @@ button {
   position: fixed;
   background: none;
   box-shadow: none;
-  color: var(--lightGrey);
+  color: var(--primary);
   top: 26px;
   right: 26px;
   padding: 2px;
   z-index: 69;
   height: 2rem;
   width: 2rem;
+  transition-duration: .25s;
 }
 
 #advancedToggle:hover {
-  color: var(--primary);
   transform: rotate(-90deg);
 }
 
@@ -151,11 +161,10 @@ button {
   right: 14px;
   width: calc(100% - 65px);
   height: calc(100% - 58px);
-  border: 2px solid var(--secondary);
-  border-radius: 0.5rem;
   padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
+  border: none;
 }
 
 ::-webkit-scrollbar {
@@ -183,7 +192,7 @@ button {
 }
 
 #advancedLegend {
-  color: var(--tertiary) !important;
+  color: var(--secondary) !important;
   /* margin: auto; */ /* Center the label */
   /* padding: .25rem .5rem; */
   /* border-radius: .25rem; */
