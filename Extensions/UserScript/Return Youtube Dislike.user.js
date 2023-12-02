@@ -35,6 +35,7 @@ const extConfig = {
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
   tooltipPercentageMode: "none", // [none*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
   numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
+  rateBarEnabled: false // [true, false*] Enables ratio bar under like/dislike buttons
   // END USER OPTIONS
 };
 
@@ -290,10 +291,10 @@ function getLikeCountFromButton() {
     }
 
     .ryd-tooltip {
-      position: relative;
+      position: absolute;
       display: block;
       height: 2px;
-      top: 9px;
+      bottom: -10px;
     }
 
     .ryd-tooltip-bar-container {
@@ -301,21 +302,28 @@ function getLikeCountFromButton() {
       height: 2px;
       position: absolute;
       padding-top: 6px;
-      padding-bottom: 28px;
+      padding-bottom: 12px;
       top: -6px;
+    }
+
+    ytd-menu-renderer.ytd-watch-metadata {
+      overflow-y: visible !important;
+    }
+    
+    #top-level-buttons-computed {
+      position: relative !important;
     }
   `);
 
 function createRateBar(likes, dislikes) {
-  if (isMobile) {
+  if (isMobile || !extConfig.rateBarEnabled) {
     return;
   }
   let rateBar = document.getElementById("return-youtube-dislike-bar-container");
 
   const widthPx =
-    getButtons().children[0].clientWidth +
-    getButtons().children[1].clientWidth +
-    8;
+    getLikeButton().clientWidth +
+    getDislikeButton().clientWidth;
 
   const widthPercent =
     likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
@@ -353,7 +361,7 @@ function createRateBar(likes, dislikes) {
       colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
     }
 
-    document.getElementById("menu-container").insertAdjacentHTML(
+    getButtons().insertAdjacentHTML(
       "beforeend",
       `
         <div class="ryd-tooltip" style="width: ${widthPx}px">
@@ -374,15 +382,16 @@ function createRateBar(likes, dislikes) {
         </div>
 `
     );
+    let descriptionAndActionsElement = document.getElementById("top-row");
+    descriptionAndActionsElement.style.borderBottom =
+      "1px solid var(--yt-spec-10-percent-layer)";
+    descriptionAndActionsElement.style.paddingBottom = "10px";
   } else {
-    document.getElementById(
-      "return-youtube-dislike-bar-container"
+    document.querySelector(
+      ".ryd-tooltip"
     ).style.width = widthPx + "px";
     document.getElementById("return-youtube-dislike-bar").style.width =
       widthPercent + "%";
-
-    document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML =
-      tooltipInnerHTML;
 
     if (extConfig.coloredBar) {
       document.getElementById(
