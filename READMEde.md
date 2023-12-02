@@ -72,7 +72,7 @@ Falsch geformte YouTube IDs werden den Statuscode _400_ "Bad Request" zurückgeb
 ## API Dokumentation
 
 Sie können die gesamte Dokumentation auf unserer Website einsehen.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Beitragen <!-- ## Contributing -->
 

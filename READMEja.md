@@ -74,7 +74,7 @@ API を利用して YouTube video ID から評価を取得する例です:
 ## API ドキュメント
 
 APIの完全なドキュメントは公式サイトを参照してください。
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## 貢献する
 

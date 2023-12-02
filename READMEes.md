@@ -72,7 +72,7 @@ Un ID de YouTube mal estructurado mostrará el código _400_ "Bad Request" (soli
 ## Documentación de la API
 
 Puedes ver toda la documentación en nuestra página web.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Contribuciones
 

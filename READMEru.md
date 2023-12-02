@@ -72,7 +72,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 ## Документация по API
 
 Вы можете просмотреть всю документацию на нашем веб-сайте.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Участие/помощь в разработке
 

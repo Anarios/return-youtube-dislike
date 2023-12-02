@@ -71,7 +71,7 @@ Felaktigt formade YouTube-ID returnerar _400_ "Bad Request".
 ## API Dokumentation
 
 Du kommer åt all dokumentation på vår webbplats.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Bidra <!-- Contributing -->
 

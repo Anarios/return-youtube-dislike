@@ -72,7 +72,7 @@ YouTube ID у невірному форматі видасть код помил
 ## Документація API
 
 Ви можете переглянути всю документацію на нашому сайті.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Взяти участь у розробці
 

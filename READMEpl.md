@@ -71,7 +71,7 @@ Niepoprawnie sformatowany ID filmu zwróci _400_ "Bad Request".
 ## API documentation
 
 Cała dokumentacja jest dostępna na naszej stronie.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Współtworzenie
 

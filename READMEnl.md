@@ -72,7 +72,7 @@ Verkeerd gevormde YouTube-ID retourneert _400_ "Slecht verzoek".
 ## API documentation
 
 You can view all documentation on our website.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Bijdragen
 

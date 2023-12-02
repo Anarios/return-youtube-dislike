@@ -72,7 +72,7 @@ Un ID YouTube invalide renverra le code d'erreur _400_ "Bad Request".
 ## Documentation de l'API
 
 Vous pouvez consulter toute la documentation sur notre site web.
-[https://returnyoutubedislike.com/docs](https://returnyoutubedislike.com/docs) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Contribution
 

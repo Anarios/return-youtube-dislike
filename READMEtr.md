@@ -72,7 +72,7 @@ Yanlış oluşturulmuş bir YouTube ID'si _400_ "Bad Request" durum kodunu dönd
 ## API Belgelemesi
 
 Tüm belgelemeleri sitemizden inceleyebilirsiniz.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Katkıda Bulunma
 

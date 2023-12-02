@@ -74,7 +74,7 @@ Wrong formed YouTube ID will return _400_ "Bad Request".
 ## API documentation
 
 You can view all documentation on our website.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Contributing
 
