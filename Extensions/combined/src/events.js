@@ -34,11 +34,13 @@ function likeClicked() {
     } else if (storedData.previousState === NEUTRAL_STATE) {
       sendVote(1);
       storedData.likes++;
+      setDislikes(numberFormat(storedData.dislikes));
       createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = LIKED_STATE;
     } else if ((storedData.previousState = LIKED_STATE)) {
       sendVote(0);
       if (storedData.likes > 0) storedData.likes--;
+      setDislikes(numberFormat(storedData.dislikes));
       createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = NEUTRAL_STATE;
     }
