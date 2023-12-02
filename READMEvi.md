@@ -47,7 +47,7 @@ Bên thứ ba được phép sử dụng API mở này, với các hạn chế s
 API có thể được truy cập với đường dẫn cơ sở sau:  
 https://returnyoutubedislikeapi.com
 
-Danh sách các vĩ tố được liệt kê ở đây:  
+Danh sách các hậu tố được liệt kê ở đây:  
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Truy vấn đánh giá <!-- ### Get votes -->
