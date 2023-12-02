@@ -28,8 +28,8 @@ function likeClicked() {
       sendVote(1);
       if (storedData.dislikes > 0) storedData.dislikes--;
       storedData.likes++;
-      createRateBar(storedData.likes, storedData.dislikes);
       setDislikes(numberFormat(storedData.dislikes));
+      createRateBar(storedData.likes, storedData.dislikes);
       storedData.previousState = LIKED_STATE;
     } else if (storedData.previousState === NEUTRAL_STATE) {
       sendVote(1);

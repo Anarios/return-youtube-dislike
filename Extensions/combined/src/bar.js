@@ -101,7 +101,7 @@ function createRateBar(likes, dislikes) {
           }
         }
       } else {
-        document.getElementById("ryd-bar-container").style.width =
+        document.querySelector(`.ryd-tooltip`).style.width =
           widthPx + "px";
         document.getElementById("ryd-bar").style.width = widthPercent + "%";
         document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML =
