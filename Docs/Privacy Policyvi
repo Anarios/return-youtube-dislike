@@ -1,0 +1,7 @@
+Dữ liệu duy nhất được thu nhập: số lượt đánh giá "thích" và "không thích" trong thời gian tiện ích mở rộng này được cài.
+
+Dữ liệu không được thu thập cũng như không lưu trữ: thông tin cá nhân, tên tài khoản, lịch sử xem vi-đê-ô.
+
+Người dùng được gán cho một ID người dùng ngẫu nhiên. ID người dùng này không có bất kì mối liên hệ nào tới những tài khoản của người dùng. Mục đích duy nhất của việc dùng ID người dùng là để thực hiện chức năng đánh giá vi-đê-ô.
+
+Dữ liệu được lưu trữ không được chia sẻ với bất kì bên thứ ba nào.

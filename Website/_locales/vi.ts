@@ -85,7 +85,7 @@ export default {
     bullet2: 'Tại sao số lượt "không thích" không được cập nhật?',
     bullet2text:
       'Hiện tại, số lượt "không thích" được lưu vào cơ sở dữ liệu và số lượt được hiển thị không được cập nhật liên tục. Việc cập nhật số lượt được hiển thị tùy thuộc vào độ phổ biến của vi-đê-ô, có thể mất vài giờ tới vài ngày để cập nhật.',
-    bullet3: "Cách thức hoạt đọng của tiện ích mở rộng này?",
+    bullet3: "Cách thức hoạt động của tiện ích mở rộng này?",
     bullet3text:
       'Tiện ích này thu thập ID của vi-đê-ô mà bạn xem, rồi sử dụng API của chúng tôi để truy vấn số lượt "không thích" (cùng với các thông tin khác như lượt xem, số lượt "thích", v.v.). Sau đó, tiện ích sẽ hiển thị số lượt "không thích" và tỉ lệ "thích"/"không thích". Nếu bạn đánh giá "thích" hay "không thích" một vi-đê-ô, đánh giá này sẽ được ghi lại và gửi vào cơ sở dữ liệu, nhờ đó số lượt "không thích" có thể được ngoại suy chính xác.',
     bullet4: 'Tôi có thể chia sẻ số lượt "không thích" của mình cho nhóm phát triển không?',
