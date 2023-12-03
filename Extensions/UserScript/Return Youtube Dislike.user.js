@@ -45,6 +45,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 let previousState = 3; //1=LIKED, 2=DISLIKED, 3=NEUTRAL
 let likesvalue = 0;
 let dislikesvalue = 0;
+let preNavigateLikeButton = null;
 
 let isMobile = location.hostname == "m.youtube.com";
 let isShorts = () => location.pathname.startsWith("/shorts");
@@ -643,17 +644,17 @@ function setEventListeners(evt) {
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
 
-      if (!window.returnDislikeButtonlistenersSet) {
+      if (preNavigateLikeButton !== getLikeButton()) {
         cLog("Registering button listeners...");
         try {
           getLikeButton().addEventListener("click", likeClicked);
           getDislikeButton().addEventListener("click", dislikeClicked);
           getLikeButton().addEventListener("touchstart", likeClicked);
           getDislikeButton().addEventListener("touchstart", dislikeClicked);
+          preNavigateLikeButton = getLikeButton()
         } catch {
           return;
         } //Don't spam errors into the console
-        window.returnDislikeButtonlistenersSet = true;
       }
       setInitialState();
       clearInterval(jsInitChecktimer);
