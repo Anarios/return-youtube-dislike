@@ -468,19 +468,16 @@ function likeClicked() {
   if (checkForUserAvatarButton() == true) {
     if (previousState == 1) {
       likesvalue--;
-      setDislikes(numberFormat(dislikesvalue));
-      createRateBar(likesvalue, dislikesvalue);
+      updateDOMDislikes();
       previousState = 3;
     } else if (previousState == 2) {
       likesvalue++;
       dislikesvalue--;
-      setDislikes(numberFormat(dislikesvalue));
-      createRateBar(likesvalue, dislikesvalue);
+      updateDOMDislikes();
       previousState = 1;
     } else if (previousState == 3) {
       likesvalue++;
-      setDislikes(numberFormat(dislikesvalue));
-      createRateBar(likesvalue, dislikesvalue);
+      updateDOMDislikes();
       previousState = 1;
     }
     if (extConfig.numberDisplayReformatLikes === true) {
@@ -496,19 +493,16 @@ function dislikeClicked() {
   if (checkForUserAvatarButton() == true) {
     if (previousState == 3) {
       dislikesvalue++;
-      setDislikes(numberFormat(dislikesvalue));
-      createRateBar(likesvalue, dislikesvalue);
+      updateDOMDislikes();
       previousState = 2;
     } else if (previousState == 2) {
       dislikesvalue--;
-      setDislikes(numberFormat(dislikesvalue));
-      createRateBar(likesvalue, dislikesvalue);
+      updateDOMDislikes();
       previousState = 3;
     } else if (previousState == 1) {
       likesvalue--;
       dislikesvalue++;
-      setDislikes(numberFormat(dislikesvalue));
-      createRateBar(likesvalue, dislikesvalue);
+      updateDOMDislikes();
       previousState = 2;
       if (extConfig.numberDisplayReformatLikes === true) {
         const nativeLikes = getLikeCountFromButton();
