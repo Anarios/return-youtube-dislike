@@ -69,7 +69,7 @@
       </h3>
     </div>
 
-    <div id="top-donors" class="d-flex flex-column items-center py-8">
+    <div id="financiers" class="d-flex flex-column items-center py-8">
       <h3 class="mb-4">
         <v-icon class="mb-2">mdi-heart</v-icon>
         {{ $vuetify.lang.t("$vuetify.home.sponsors") }}
@@ -108,9 +108,8 @@ export default {
       githubLink: "https://github.com/Anarios/return-youtube-dislike",
       discordLink: "https://discord.gg/mYnESY4Md5",
       sponsors: [
-        { name: "Piepacker", link: "https://piepacker.com/" },
         {
-          name: "Become our sponsor",
+          name: "Become our sponsor and be listed here",
           link: "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601",
         },
       ],

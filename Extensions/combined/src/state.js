@@ -11,8 +11,8 @@ import {
   getVideoId,
   cLog,
   numberFormat,
-  getColorFromTheme,
-} from "./utils";
+  getColorFromTheme, querySelector
+} from './utils';
 import { localize } from "./utils";
 import { createStarRating } from "./starRating";
 
@@ -31,6 +31,33 @@ let extConfig = {
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
+  selectors: {
+    dislikeTextContainer: [],
+    likeTextContainer: [],
+    buttons: {
+      shorts: {
+        mobile: [],
+        desktop: [],
+      },
+      regular: {
+        mobile: [],
+        desktopMenu: [],
+        desktopNoMenu: [],
+      },
+      likeButton: {
+        segmented: [],
+        segmentedGetButtons: [],
+        notSegmented: []
+      },
+      dislikeButton: {
+        segmented: [],
+        segmentedGetButtons: [],
+        notSegmented: []
+      }
+    },
+    menuContainer: [],
+    roundedDesign: [],
+  }
 };
 
 let storedData = {
@@ -52,7 +79,7 @@ function isNewDesign() {
 }
 
 function isRoundedDesign() {
-  return document.getElementById("segmented-like-button") !== null;
+  return querySelector(extConfig.selectors.roundedDesign) !== null;
 }
 
 let mutationObserver = new Object();
@@ -240,6 +267,7 @@ async function setState(storedData) {
     ? LIKED_STATE
     : NEUTRAL_STATE;
   let statsSet = false;
+  cLog("Video is loaded. Adding buttons...");
 
   let videoId = getVideoId(window.location.href);
   let likeCount = getLikeCountFromButton() || null;
@@ -266,11 +294,11 @@ async function setState(storedData) {
   }
 }
 
-function setInitialState() {
-  setState(storedData);
+async function setInitialState () {
+  await setState(storedData);
 }
 
-function initExtConfig() {
+async function initExtConfig () {
   initializeDisableVoteSubmission();
   initializeColoredThumbs();
   initializeColoredBar();
@@ -279,6 +307,19 @@ function initExtConfig() {
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
+  await initializeSelectors();
+}
+
+async function initializeSelectors () {
+  console.log("initializing selectors")
+  let result = await fetch(`${apiUrl}/configs/selectors`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    }
+  }).then((response) => response.json()).catch((error) => {});
+  extConfig.selectors = result ?? extConfig.selectors;
+  console.log(result)
 }
 
 function initializeDisableVoteSubmission() {

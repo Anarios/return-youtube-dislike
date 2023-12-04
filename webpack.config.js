@@ -89,5 +89,10 @@ module.exports = {
         },
       },
     }),
+
   ],
+  experiments: {
+    topLevelAwait: true,
+  },
+  // devtool: 'inline-source-map',
 };

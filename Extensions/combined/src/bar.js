@@ -60,7 +60,7 @@ function createRateBar(likes, dislikes) {
           colorLikeStyle = "; background-color: " + getColorFromTheme(true);
           colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
         }
-        let actions = isNewDesign() && getButtons().id === "top-level-buttons-computed" 
+        let actions = isNewDesign() && getButtons().id === "top-level-buttons-computed"
           ? getButtons() : document.getElementById("menu-container");
         (
           actions || document.querySelector("ytm-slim-video-action-bar-renderer")
