@@ -459,6 +459,11 @@ function setState() {
   });
 }
 
+function updateDOMDislikes() {
+  setDislikes(numberFormat(dislikesvalue));
+  createRateBar(likesvalue, dislikesvalue);
+}
+
 function likeClicked() {
   if (checkForUserAvatarButton() == true) {
     if (previousState == 1) {
@@ -651,6 +656,8 @@ function setEventListeners(evt) {
           getDislikeButton().addEventListener("click", dislikeClicked);
           getLikeButton().addEventListener("touchstart", likeClicked);
           getDislikeButton().addEventListener("touchstart", dislikeClicked);
+          getDislikeButton().addEventListener("focusin", updateDOMDislikes);
+          getDislikeButton().addEventListener("focusout", updateDOMDislikes);
           preNavigateLikeButton = getLikeButton()
         } catch {
           return;
