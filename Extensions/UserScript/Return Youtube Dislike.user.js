@@ -661,7 +661,9 @@ function setEventListeners(evt) {
           }
 
           const smartimationContainer = buttons.querySelector('yt-smartimation');
-          if (smartimationObserver.container != smartimationContainer) {
+          if (smartimationContainer &&
+            smartimationObserver.container != smartimationContainer)
+          {
             cLog("Initializing smartimation mutation observer");
             smartimationObserver.disconnect();
             smartimationObserver.observe(smartimationContainer);
