@@ -57,6 +57,5 @@ await setEventListeners();
 
 document.addEventListener("yt-navigate-finish", async function (event) {
   if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
-  window.returnDislikeButtonlistenersSet = false;
   await setEventListeners();
 });

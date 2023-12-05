@@ -84,7 +84,7 @@ function dislikeClicked() {
 }
 
 function addLikeDislikeEventListener() {
-  if (!window.returnDislikeButtonlistenersSet) {
+  if (window.rydPreNavigateLikeButton !== getLikeButton()) {
     getLikeButton().addEventListener("click", likeClicked);
     getLikeButton().addEventListener("touchstart", likeClicked);
     if (getDislikeButton()) {
@@ -93,7 +93,7 @@ function addLikeDislikeEventListener() {
       getDislikeButton().addEventListener("focusin", updateDOMDislikes);
       getDislikeButton().addEventListener("focusout", updateDOMDislikes);
     }
-    window.returnDislikeButtonlistenersSet = true;
+    window.rydPreNavigateLikeButton = getLikeButton();
   }
 }
 
