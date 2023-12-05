@@ -22,26 +22,28 @@ function sendVote(vote) {
   }
 }
 
+function updateDOMDislikes() {
+  setDislikes(numberFormat(storedData.dislikes));
+  createRateBar(storedData.likes, storedData.dislikes);
+}
+
 function likeClicked() {
   if (checkForSignInButton() === false) {
     if (storedData.previousState === DISLIKED_STATE) {
       sendVote(1);
       if (storedData.dislikes > 0) storedData.dislikes--;
       storedData.likes++;
-      setDislikes(numberFormat(storedData.dislikes));
-      createRateBar(storedData.likes, storedData.dislikes);
+      updateDOMDislikes();
       storedData.previousState = LIKED_STATE;
     } else if (storedData.previousState === NEUTRAL_STATE) {
       sendVote(1);
       storedData.likes++;
-      setDislikes(numberFormat(storedData.dislikes));
-      createRateBar(storedData.likes, storedData.dislikes);
+      updateDOMDislikes();
       storedData.previousState = LIKED_STATE;
     } else if ((storedData.previousState = LIKED_STATE)) {
       sendVote(0);
       if (storedData.likes > 0) storedData.likes--;
-      setDislikes(numberFormat(storedData.dislikes));
-      createRateBar(storedData.likes, storedData.dislikes);
+      updateDOMDislikes();
       storedData.previousState = NEUTRAL_STATE;
     }
     if (extConfig.numberDisplayReformatLikes === true) {
@@ -58,21 +60,18 @@ function dislikeClicked() {
     if (storedData.previousState === NEUTRAL_STATE) {
       sendVote(-1);
       storedData.dislikes++;
-      setDislikes(numberFormat(storedData.dislikes));
-      createRateBar(storedData.likes, storedData.dislikes);
+      updateDOMDislikes();
       storedData.previousState = DISLIKED_STATE;
     } else if (storedData.previousState === DISLIKED_STATE) {
       sendVote(0);
       if (storedData.dislikes > 0) storedData.dislikes--;
-      setDislikes(numberFormat(storedData.dislikes));
-      createRateBar(storedData.likes, storedData.dislikes);
+      updateDOMDislikes();
       storedData.previousState = NEUTRAL_STATE;
     } else if (storedData.previousState === LIKED_STATE) {
       sendVote(-1);
       if (storedData.likes > 0) storedData.likes--;
       storedData.dislikes++;
-      setDislikes(numberFormat(storedData.dislikes));
-      createRateBar(storedData.likes, storedData.dislikes);
+      updateDOMDislikes();
       storedData.previousState = DISLIKED_STATE;
       if (extConfig.numberDisplayReformatLikes === true) {
         const nativeLikes = getLikeCountFromButton();
@@ -88,9 +87,11 @@ function addLikeDislikeEventListener() {
   if (!window.returnDislikeButtonlistenersSet) {
     getLikeButton().addEventListener("click", likeClicked);
     getLikeButton().addEventListener("touchstart", likeClicked);
-    if(getDislikeButton()) {
+    if (getDislikeButton()) {
       getDislikeButton().addEventListener("click", dislikeClicked);
       getDislikeButton().addEventListener("touchstart", dislikeClicked);
+      getDislikeButton().addEventListener("focusin", updateDOMDislikes);
+      getDislikeButton().addEventListener("focusout", updateDOMDislikes);
     }
     window.returnDislikeButtonlistenersSet = true;
   }
