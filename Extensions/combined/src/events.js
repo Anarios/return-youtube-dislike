@@ -1,4 +1,4 @@
-import { getBrowser, getVideoId, numberFormat, cLog } from "./utils";
+import { getBrowser, getVideoId, numberFormat, cLog, createObserver } from "./utils";
 import { checkForSignInButton, getButtons, getDislikeButton, getLikeButton } from './buttons';
 import {
   NEUTRAL_STATE,
@@ -97,6 +97,26 @@ function addLikeDislikeEventListener() {
   }
 }
 
+let smartimationObserver = null;
+
+function createSmartimationObserver() {
+  if (!smartimationObserver) {
+    smartimationObserver = createObserver({
+      attributes: true,
+      subtree: true
+    }, updateDOMDislikes);
+    smartimationObserver.container = null;
+  }
+
+  const smartimationContainer = getButtons().querySelector('yt-smartimation');
+  if (smartimationObserver.container != smartimationContainer) {
+    cLog("Initializing smartimation mutation observer");
+    smartimationObserver.disconnect();
+    smartimationObserver.observe(smartimationContainer);
+    smartimationObserver.container = smartimationContainer;
+  }
+}
+
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
@@ -152,5 +172,6 @@ export {
   likeClicked,
   dislikeClicked,
   addLikeDislikeEventListener,
+  createSmartimationObserver,
   storageChangeHandler,
 };

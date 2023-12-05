@@ -19,9 +19,9 @@ import {
   isVideoLoaded,
   cLog,
 } from "./src/utils";
-import { createRateBar } from "./src/bar";
 import {
   addLikeDislikeEventListener,
+  createSmartimationObserver,
   storageChangeHandler,
 } from "./src/events";
 
@@ -37,6 +37,7 @@ async function setEventListeners (evt) {
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
         addLikeDislikeEventListener();
+        createSmartimationObserver();
         await setInitialState();
         isSetInitialStateDone = true;
         getBrowser().storage.onChanged.addListener(storageChangeHandler);

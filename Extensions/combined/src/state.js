@@ -11,9 +11,11 @@ import {
   getVideoId,
   cLog,
   numberFormat,
-  getColorFromTheme, querySelector
+  getColorFromTheme,
+  querySelector,
+  localize,
+  createObserver
 } from './utils';
-import { localize } from "./utils";
 import { createStarRating } from "./starRating";
 
 //TODO: Do not duplicate here and in ryd.background.js
@@ -82,20 +84,13 @@ function isRoundedDesign() {
   return querySelector(extConfig.selectors.roundedDesign) !== null;
 }
 
-let mutationObserver = new Object();
+let shortsObserver = null;
 
-if (isShorts() && mutationObserver.exists !== true) {
-  cLog("initializing mutation observer");
-  mutationObserver.options = {
-    childList: false,
-    attributes: true,
-    subtree: false,
-  };
-  mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver(function (
-    mutationList,
-    observer
-  ) {
+if (isShorts() && !shortsObserver) {
+  cLog("Initializing shorts mutation observer");
+  shortsObserver = createObserver({
+    attributes: true
+  }, (mutationList) => {
     mutationList.forEach((mutation) => {
       if (
         mutation.type === "attributes" &&
@@ -114,7 +109,7 @@ if (isShorts() && mutationObserver.exists !== true) {
         return;
       }
       cLog(
-        "unexpected mutation observer event: " + mutation.target + mutation.type
+        "Unexpected mutation observer event: " + mutation.target + mutation.type
       );
     });
   });
@@ -236,14 +231,8 @@ function processResponse(response, storedData) {
       if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
         shortDislikeButton.style.color = getColorFromTheme(false);
       }
-      mutationObserver.observer.observe(
-        shortLikeButton,
-        mutationObserver.options
-      );
-      mutationObserver.observer.observe(
-        shortDislikeButton,
-        mutationObserver.options
-      );
+      shortsObserver.observe(shortLikeButton);
+      shortsObserver.observe(shortDislikeButton);
     } else {
       getLikeButton().style.color = getColorFromTheme(true);
       getDislikeButton().style.color = getColorFromTheme(false);
