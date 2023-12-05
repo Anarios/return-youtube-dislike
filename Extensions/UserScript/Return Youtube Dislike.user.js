@@ -140,20 +140,22 @@ function getDislikeTextContainer() {
   return result;
 }
 
-let mutationObserver = new Object();
+function createObserver(options, callback) {
+  const observerWrapper = new Object();
+  observerWrapper.options = options;
+  observerWrapper.observer = new MutationObserver(callback);
+  observerWrapper.observe = function (element) { this.observer.observe(element, this.options); }
+  observerWrapper.disconnect = function () { this.observer.disconnect(); }
+  return observerWrapper;
+}
 
-if (isShorts() && mutationObserver.exists !== true) {
-  cLog("initializing mutation observer");
-  mutationObserver.options = {
-    childList: false,
-    attributes: true,
-    subtree: false,
-  };
-  mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver(function (
-    mutationList,
-    observer
-  ) {
+let shortsObserver = null;
+
+if (isShorts() && !shortsObserver) {
+  cLog("Initializing shorts mutation observer");
+  shortsObserver = createObserver({
+    attributes: true
+  }, (mutationList) => {
     mutationList.forEach((mutation) => {
       if (
         mutation.type === "attributes" &&
@@ -172,7 +174,7 @@ if (isShorts() && mutationObserver.exists !== true) {
         return;
       }
       cLog(
-        "unexpected mutation observer event: " + mutation.target + mutation.type
+        "Unexpected mutation observer event: " + mutation.target + mutation.type
       );
     });
   });
@@ -441,14 +443,8 @@ function setState() {
             if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
               shortDislikeButton.style.color = getColorFromTheme(false);
             }
-            mutationObserver.observer.observe(
-              shortLikeButton,
-              mutationObserver.options
-            );
-            mutationObserver.observer.observe(
-              shortDislikeButton,
-              mutationObserver.options
-            );
+            shortsObserver.observe(shortLikeButton);
+            shortsObserver.observe(shortDislikeButton);
           } else {
             getLikeButton().style.color = getColorFromTheme(true);
             getDislikeButton().style.color = getColorFromTheme(false);
@@ -635,6 +631,8 @@ function getColorFromTheme(voteIsLike) {
   return colorString;
 }
 
+let smartimationObserver = null;
+
 function setEventListeners(evt) {
   let jsInitChecktimer;
 
@@ -652,7 +650,23 @@ function setEventListeners(evt) {
           getDislikeButton().addEventListener("touchstart", dislikeClicked);
           getDislikeButton().addEventListener("focusin", updateDOMDislikes);
           getDislikeButton().addEventListener("focusout", updateDOMDislikes);
-          preNavigateLikeButton = getLikeButton()
+          preNavigateLikeButton = getLikeButton();
+
+          if (!smartimationObserver) {
+            smartimationObserver = createObserver({
+              attributes: true,
+              subtree: true
+            }, updateDOMDislikes);
+            smartimationObserver.container = null;
+          }
+
+          const smartimationContainer = buttons.querySelector('yt-smartimation');
+          if (smartimationObserver.container != smartimationContainer) {
+            cLog("Initializing smartimation mutation observer");
+            smartimationObserver.disconnect();
+            smartimationObserver.observe(smartimationContainer);
+            smartimationObserver.container = smartimationContainer;
+          }
         } catch {
           return;
         } //Don't spam errors into the console
