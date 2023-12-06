@@ -102,10 +102,23 @@ function getButtons() {
 }
 
 function getDislikeButton() {
-  return getButtons().children[0].tagName ===
-  "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? getButtons().children[0].children[1] === undefined ? document.querySelector("#segmented-dislike-button") : getButtons().children[0].children[1]
-    : getButtons().querySelector("dislike-button-view-model") ?? getButtons().children[1];
+  if (getButtons().children[0].tagName ===
+    "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER")
+  {
+    if (getButtons().children[0].children[1] === undefined) {
+      return document.querySelector("#segmented-dislike-button");
+    } else {
+      return getButtons().children[0].children[1];
+    }
+  } else {
+    if (getButtons().querySelector("segmented-like-dislike-button-view-model")) {
+      const dislikeViewModel = getButtons().querySelector("dislike-button-view-model");
+      if (!dislikeViewModel) cLog("Dislike button wasn't added to DOM yet...");
+      return dislikeViewModel;
+    } else {
+      return getButtons().children[1];
+    }
+  }
 }
 
 function getLikeButton() {
@@ -125,17 +138,18 @@ function getLikeTextContainer() {
 
 
 function getDislikeTextContainer() {
+  const dislikeButton = getDislikeButton();
   let result =
-    getDislikeButton().querySelector("#text") ??
-    getDislikeButton().getElementsByTagName("yt-formatted-string")[0] ??
-    getDislikeButton().querySelector("span[role='text']")
+    dislikeButton?.querySelector("#text") ??
+    dislikeButton?.getElementsByTagName("yt-formatted-string")[0] ??
+    dislikeButton?.querySelector("span[role='text']")
   if (result === null) {
     let textSpan = document.createElement("span");
     textSpan.id = "text";
     textSpan.style.marginLeft = "6px";
-    getDislikeButton().querySelector("button").appendChild(textSpan);
-    getDislikeButton().querySelector("button").style.width = "auto";
-    result = getDislikeButton().querySelector("#text");
+    dislikeButton?.querySelector("button").appendChild(textSpan);
+    if (dislikeButton) dislikeButton.querySelector("button").style.width = "auto";
+    result = textSpan;
   }
   return result;
 }
@@ -193,11 +207,11 @@ function isVideoLiked() {
 function isVideoDisliked() {
   if (isMobile) {
     return (
-      getDislikeButton().querySelector("button").getAttribute("aria-label") ==
+      getDislikeButton()?.querySelector("button").getAttribute("aria-label") ==
       "true"
     );
   }
-  return getDislikeButton().classList.contains("style-default-active");
+  return getDislikeButton()?.classList.contains("style-default-active");
 }
 
 function isVideoNotLiked() {
@@ -211,7 +225,7 @@ function isVideoNotDisliked() {
   if (isMobile) {
     return !isVideoDisliked();
   }
-  return getDislikeButton().classList.contains("style-text");
+  return getDislikeButton()?.classList.contains("style-text");
 }
 
 function checkForUserAvatarButton() {
@@ -326,7 +340,7 @@ function createRateBar(likes, dislikes) {
 
   const widthPx =
     getLikeButton().clientWidth +
-    getDislikeButton().clientWidth;
+    (getDislikeButton()?.clientWidth ?? 52);
 
   const widthPercent =
     likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
@@ -429,25 +443,28 @@ function setState() {
         }
         createRateBar(likes, dislikes);
         if (extConfig.coloredThumbs === true) {
+          const dislikeButton = getDislikeButton();
           if (isShorts()) {
             // for shorts, leave deactived buttons in default color
-            let shortLikeButton = getLikeButton().querySelector(
+            const shortLikeButton = getLikeButton().querySelector(
               "tp-yt-paper-button#button"
             );
-            let shortDislikeButton = getDislikeButton().querySelector(
+            const shortDislikeButton = dislikeButton?.querySelector(
               "tp-yt-paper-button#button"
             );
             if (shortLikeButton.getAttribute("aria-pressed") === "true") {
               shortLikeButton.style.color = getColorFromTheme(true);
             }
-            if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
+            if (shortDislikeButton && 
+                shortDislikeButton.getAttribute("aria-pressed") === "true")
+            {
               shortDislikeButton.style.color = getColorFromTheme(false);
             }
             shortsObserver.observe(shortLikeButton);
             shortsObserver.observe(shortDislikeButton);
           } else {
             getLikeButton().style.color = getColorFromTheme(true);
-            getDislikeButton().style.color = getColorFromTheme(false);
+            if (dislikeButton) dislikeButton.style.color = getColorFromTheme(false);
           }
         }
       }
@@ -640,16 +657,17 @@ function setEventListeners(evt) {
     //console.log();
     if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
       const buttons = getButtons();
+      const dislikeButton = getDislikeButton();
 
-      if (preNavigateLikeButton !== getLikeButton()) {
+      if (preNavigateLikeButton !== getLikeButton() && dislikeButton) {
         cLog("Registering button listeners...");
         try {
           getLikeButton().addEventListener("click", likeClicked);
-          getDislikeButton().addEventListener("click", dislikeClicked);
+          dislikeButton?.addEventListener("click", dislikeClicked);
           getLikeButton().addEventListener("touchstart", likeClicked);
-          getDislikeButton().addEventListener("touchstart", dislikeClicked);
-          getDislikeButton().addEventListener("focusin", updateDOMDislikes);
-          getDislikeButton().addEventListener("focusout", updateDOMDislikes);
+          dislikeButton?.addEventListener("touchstart", dislikeClicked);
+          dislikeButton?.addEventListener("focusin", updateDOMDislikes);
+          dislikeButton?.addEventListener("focusout", updateDOMDislikes);
           preNavigateLikeButton = getLikeButton();
 
           if (!smartimationObserver) {
@@ -673,8 +691,10 @@ function setEventListeners(evt) {
           return;
         } //Don't spam errors into the console
       }
-      setInitialState();
-      clearInterval(jsInitChecktimer);
+      if (dislikeButton) {
+        setInitialState();
+        clearInterval(jsInitChecktimer);
+      }
     }
   }
 
@@ -695,11 +715,12 @@ if (isMobile) {
     return originalPush.apply(history, args);
   };
   setInterval(() => {
-    if(getDislikeButton().querySelector(".button-renderer-text") === null){
+    const dislikeButton = getDislikeButton();
+    if(dislikeButton?.querySelector(".button-renderer-text") === null){
       getDislikeTextContainer().innerText = mobileDislikes;
     }
     else{
-      getDislikeButton().querySelector(".button-renderer-text").innerText =
+      if (dislikeButton) dislikeButton.querySelector(".button-renderer-text").innerText =
         mobileDislikes;
     }
   }, 1000);
