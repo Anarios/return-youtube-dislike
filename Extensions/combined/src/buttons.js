@@ -44,13 +44,13 @@ function getDislikeButton() {
   return getButtons().children[0].tagName ===
   'YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER'
     ? querySelector(extConfig.selectors.buttons.dislikeButton.segmented) ?? querySelector(extConfig.selectors.buttons.dislikeButton.segmentedGetButtons, getButtons())
-    : querySelector(extConfig.selectors.buttons.dislikeButton.notSegmented, getButtons())
+    : isShorts() ? querySelector(['#dislike-button'], getButtons()) : querySelector(extConfig.selectors.buttons.dislikeButton.notSegmented, getButtons())
 }
 
 function createDislikeTextContainer() {
-  const textNodeClone = (getLikeButton().querySelector("button > div[class*='cbox']") || (getLikeButton().querySelector('div > span[role="text"]') || document.querySelector('button > div.yt-spec-button-shape-next__button-text-content > span[role="text"]')).parentNode).cloneNode(true);
-  const insertPreChild = getDislikeButton().querySelector("yt-touch-feedback-shape");
-  getDislikeButton().querySelector("button").insertBefore(textNodeClone, insertPreChild);
+  const textNodeClone =  (getLikeButton().querySelector('.yt-spec-button-shape-next__button-text-content') || (getLikeButton().querySelector("button > div[class*='cbox']") || (getLikeButton().querySelector('div > span[role="text"]') || document.querySelector('button > div.yt-spec-button-shape-next__button-text-content > span[role="text"]')).parentNode)).cloneNode(true);
+  const insertPreChild = getDislikeButton().querySelector("button");
+  insertPreChild.insertBefore(textNodeClone, null);
   getDislikeButton().querySelector("button").classList.remove("yt-spec-button-shape-next--icon-button");
   getDislikeButton().querySelector("button").classList.add("yt-spec-button-shape-next--icon-leading");
   if(textNodeClone.querySelector("span[role='text']") === null) {
@@ -61,8 +61,8 @@ function createDislikeTextContainer() {
     }
     textNodeClone.appendChild(span);
   }
-  textNodeClone.querySelector("span[role='text']").innerText = "";
-  return textNodeClone.querySelector("span[role='text']");
+  textNodeClone.innerText = "";
+  return textNodeClone;
 }
 
 function getDislikeTextContainer() {

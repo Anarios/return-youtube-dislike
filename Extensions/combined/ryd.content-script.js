@@ -36,8 +36,8 @@ async function setEventListeners (evt) {
       if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
-        addLikeDislikeEventListener();
         createSmartimationObserver();
+        addLikeDislikeEventListener();
         await setInitialState();
         isSetInitialStateDone = true;
         getBrowser().storage.onChanged.addListener(storageChangeHandler);

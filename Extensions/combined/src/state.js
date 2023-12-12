@@ -17,6 +17,7 @@ import {
   createObserver
 } from './utils';
 import { createStarRating } from "./starRating";
+import { dislikeClicked } from './events';
 
 //TODO: Do not duplicate here and in ryd.background.js
 const apiUrl = "https://returnyoutubedislikeapi.com";
@@ -122,7 +123,7 @@ function isLikesDisabled() {
       getButtons().children[0].querySelector(".button-renderer-text").innerText
     );
   }
-  return /^\D*$/.test(getButtons().children[0].innerText);
+  return /^\D*$/.test(getLikeTextContainer().innerText);
 }
 
 function isVideoLiked() {
@@ -162,7 +163,6 @@ function setLikes(likesCount) {
 function setDislikes(dislikesCount) {
   cLog(`SET dislikes ${dislikesCount}`)
   getDislikeTextContainer()?.removeAttribute("is-empty");
-  getDislikeTextContainer()?.removeAttribute('is-empty');
   if (!isLikesDisabled()) {
     if (isMobile()) {
       getButtons().children[1].querySelector(
