@@ -164,6 +164,15 @@ function querySelectorAll(selectors) {
   return result;
 }
 
+function createObserver(options, callback) {
+  const observerWrapper = new Object();
+  observerWrapper.options = options;
+  observerWrapper.observer = new MutationObserver(callback);
+  observerWrapper.observe = function (element) { this.observer.observe(element, this.options); }
+  observerWrapper.disconnect = function () { this.observer.disconnect(); }
+  return observerWrapper;
+}
+
 export {
   numberFormat,
   getBrowser,
@@ -174,5 +183,6 @@ export {
   getColorFromTheme,
   localize,
   querySelector,
-  querySelectorAll
+  querySelectorAll,
+  createObserver
 };
