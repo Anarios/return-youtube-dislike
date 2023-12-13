@@ -1,0 +1,134 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Phục hồi chức năng hiển thị số lượt \"không thích\""
+  },
+  "textDeveloper": {
+    "message": "bởi Dmitry Selivanov và Cộng đồng"
+  },
+  "linkWebsite": {
+    "message": "Trang mạng"
+  },
+  "linkFAQ": {
+    "message": "Hỏi-Đáp"
+  },
+  "linkDonate": {
+    "message": "Quyên góp"
+  },
+  "linkHelp": {
+    "message": "Trợ giúp"
+  },
+  "linkChangelog": {
+    "message": "Ghi chép Thay đổi"
+  },
+  "legendSettings": {
+    "message": "Cài đặt"
+  },
+  "textSettings": {
+    "message": "Tắt chức năng gửi đánh giá"
+  },
+  "textLikesDisabled": {
+    "message": "Chủ kênh đã Tắt Đánh giá"
+  },
+  "textSettingsHover": {
+    "message": "Ngừng đếm đánh giá của tôi."
+  },
+  "textRoundingNumbers": {
+    "message": "Làm tròn số lượt đánh giá (hành vi mặc định của YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Hiện số lượt đánh giá đã làm tròn."
+  },
+  "textConsistentFormat": {
+    "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\""
+  },
+  "textConsistentFormatHover": {
+    "message": "Định dạng lại số lượt đánh giá."
+  },
+  "textNumberFormat": {
+    "message": "Định dạng số:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Tô màu thanh tỉ lệ đánh giá"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Dùng màu tùy chọn cho thanh tỉ lệ đánh giá."
+  },
+  "textColorizeThumbs": {
+    "message": "Tô màu nút đánh giá"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Dùng màu tùy chọn cho nút đánh giá."
+  },
+  "textColorTheme": {
+    "message": "Chủ đề màu:"
+  },
+  "textColorTheme1": {
+    "message": "Cổ điển"
+  },
+  "textColorTheme2": {
+    "message": "Mù màu"
+  },
+  "textColorTheme3": {
+    "message": "Sáng chói"
+  },
+  "textTempUnavailable": {
+    "message": "Tạm thời Không sử dụng được"
+  },
+  "textUpdate": {
+    "message": "Cập nhật"
+  },
+  "version30installed": {
+    "message": "Đã cài Phiên bản 3.0.0.13"
+  },
+  "whatsnew": {
+    "message": "Điểm Mới"
+  },
+  "shortsSupport": {
+    "message": "Có hỗ trợ YouTube Shorts"
+  },
+  "customColors": {
+    "message": "Màu tùy chọn cho nút đánh giá và thanh tỉ lệ đánh giá"
+  },
+  "customNumberFormats": {
+    "message": "Định dạng số tùy chỉnh"
+  },
+  "considerDonating": {
+    "message": "Sự quyên góp của bạn giúp tiện ích mở rộng này duy trì hoạt động. Mong bạn hỗ trợ dự án này."
+  },
+  "roundNumbers": {
+    "message": "Hiện số lượt đánh giá đã làm tròn"
+  },
+  "roundNumbersHover": {
+    "message": "Làm tròn số lượt đánh giá (hành vi mặc định của YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Định dạng lại số lượt đánh giá"
+  },
+  "reformatLikesHover": {
+    "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\"."
+  },
+  "numberFormat": {
+    "message": "Định dạng số:"
+  },
+  "colorizeRatio": {
+    "message": "Tô màu thanh tỉ lệ đánh giá"
+  },
+  "colorizeRatioHover": {
+    "message": "Dùng màu tùy chọn cho thanh tỉ lệ đánh giá."
+  },
+  "colorizeThumbs": {
+    "message": "Tô màu nút đánh giá"
+  },
+  "colorizeThumbsHover": {
+    "message": "Dùng màu tùy chọn cho nút đánh giá."
+  },
+  "colorTheme": {
+    "message": "Chủ đề màu:"
+  }
+}

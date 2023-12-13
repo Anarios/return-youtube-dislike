@@ -120,6 +120,10 @@ export default {
       {
         tag: "itsbudyn#6502",
         lang: "Polski",
+      },
+      {
+        tag: "khangquangtran",
+        lang: "Tiếng Việt",
       }
     ],
     coolProjects: [

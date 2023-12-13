@@ -1,4 +1,4 @@
-Прочитать на других языках: [English](CONTRIBUTING.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md)
+Прочитать на других языках: [English](CONTRIBUTING.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Tiếng Việt](CONTRIBUTINGvi.md)
 
 
 # Добро пожаловать в руководство по внесению вклада Return YouTube Dislikes

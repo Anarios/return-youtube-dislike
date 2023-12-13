@@ -1,0 +1,21 @@
+Return YouTube Dislike (Trả lại số lượt Không thích trên YouTube) là một tiện ích mở rộng nhằm khôi phục chức năng hiển thị số lượt "không thích" trên YouTube.
+
+Nếu tiện ích này không hoạt động: Mở thẻ Tiện ích (chrome://extensions/), tắt tiện ích này và bật lại.
+Chromium có một lỗi có thể phá hỏng tiện ích này trong một số trường hợp. Cách làm nêu trên có thể giải quyết hầu hết các vấn đề do lỗi này gây ra. Hi vọng rằng nhóm phát triển Chromium sẽ sớm khắc phục lỗi này.
+
+Kể từ ngày 13 tháng 12 năm 2021, YouTube đã loại bỏ chức năng hiển thị số lượt "không thích" khỏi API của họ.
+Tiện ích mở rộng này nhằm mục đích phục hồi quyền lợi của người dùng bằng việc hiển thị số lượt đánh giá một cách chính xác nhất, nhờ vào việc kết hợp dữ liệu về số lượt "thích" và "không thích" đã được lưu trữ với số lượt "thích" và "không thích" từ người dùng của tiện ích.
+
+Tiện ích này hiện có dữ liệu được lưu trữ trước ngày 13 tháng 12 năm 2021 về số lượt "thích" và "không thích" của hơn 200 triệu vi-đê-ô.
+
+Tiện ích này đang được phát triển tích cực và duy trì cập nhật đối với các đăng tải sau ngày 13 tháng 12 năm 2021.
+
+Tiện ích này càng có nhiều người sử dụng, thì độ chính xác sẽ càng cao.
+
+Với những vi-đê-ô được đăng tải sau ngày 13 tháng 12 năm 2021, dữ liệu của những vi-đê-ô không phổ biến có thể kém chính xác so với dữ liệu của những vi-đê-ô phổ biến.
+
+Tiện ích này hiện đang được phát triển tích cực, vì vậy vui lòng báo cáo bất kì vấn đề nào bạn gặp phải bằng trang GitHub hoặc máy chủ Discord.
+
+Nhiều tính năng sắp được bổ sung! 
+
+https://github.com/Anarios/return-youtube-dislike
