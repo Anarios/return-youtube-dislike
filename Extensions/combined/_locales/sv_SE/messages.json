@@ -84,7 +84,7 @@
     "message": "Uppdatera till"
   },
   "version30installed": {
-    "message": "Version 3.0.0.13 installerad"
+    "message": "Version __RYD_VERSION__ installerad"
   },
   "whatsnew": {
     "message": "Vad är nytt"

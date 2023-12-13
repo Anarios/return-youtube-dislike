@@ -36,7 +36,7 @@
     "message": "aktualisieren auf"
   },
   "version30installed": {
-    "message": "Version 3.0.0.13 installiert"
+    "message": "Version __RYD_VERSION__ installiert"
   },
   "whatsnew": {
     "message": "Was ist neu"

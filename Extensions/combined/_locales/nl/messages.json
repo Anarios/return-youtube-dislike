@@ -84,7 +84,7 @@
     "message": "Update naar"
   },
   "version30installed": {
-    "message": "Versie 3.0.0.13 geïnstalleerd"
+    "message": "Versie __RYD_VERSION__ geïnstalleerd"
   },
   "whatsnew": {
     "message": "Wat is er nieuw"

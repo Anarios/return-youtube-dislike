@@ -84,7 +84,7 @@
     "message": "Ενημέρωση σε"
   },
   "version30installed": {
-    "message": "Εκδοση 3.0.0.13 εγκαταστάθηκε"
+    "message": "Εκδοση __RYD_VERSION__ εγκαταστάθηκε"
   },
   "whatsnew": {
     "message": "Τί νέο υπάρχει"

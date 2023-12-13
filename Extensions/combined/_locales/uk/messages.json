@@ -84,7 +84,7 @@
     "message": "Оновлення до"
   },
   "version30installed": {
-    "message": "Версію 3.0.0.13 встановлено"
+    "message": "Версію __RYD_VERSION__ встановлено"
   },
   "whatsnew": {
     "message": "Що нового"
