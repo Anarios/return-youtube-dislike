@@ -1,4 +1,4 @@
-Read this in other languages: [Nederlands](READMEnl.md), [Türkçe](READMEtr.md)
+Read this in other languages: [Nederlands](READMEnl.md), [Türkçe](READMEtr.md), [български](READMEbg.md)
 
 # STORE
 
