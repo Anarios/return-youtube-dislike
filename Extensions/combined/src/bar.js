@@ -60,7 +60,7 @@ function createRateBar(likes, dislikes) {
           colorLikeStyle = "; background-color: " + getColorFromTheme(true);
           colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
         }
-        let actions = isNewDesign() && getButtons().id === "top-level-buttons-computed" 
+        let actions = isNewDesign() && getButtons().id === "top-level-buttons-computed"
           ? getButtons() : document.getElementById("menu-container");
         (
           actions || document.querySelector("ytm-slim-video-action-bar-renderer")
@@ -101,7 +101,7 @@ function createRateBar(likes, dislikes) {
           }
         }
       } else {
-        document.getElementById("ryd-bar-container").style.width =
+        document.querySelector(`.ryd-tooltip`).style.width =
           widthPx + "px";
         document.getElementById("ryd-bar").style.width = widthPercent + "%";
         document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML =

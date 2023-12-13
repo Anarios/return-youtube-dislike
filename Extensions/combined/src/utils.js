@@ -143,6 +143,36 @@ function getColorFromTheme(voteIsLike) {
   return colorString;
 }
 
+function querySelector(selectors, element) {
+  let result;
+  for (const selector of selectors) {
+    result = (element ?? document).querySelector(selector);
+    if (result !== null) {
+      return result;
+    }
+  }
+}
+
+function querySelectorAll(selectors) {
+  let result;
+  for (const selector of selectors) {
+    result = document.querySelectorAll(selector);
+    if (result.length !== 0) {
+      return result;
+    }
+  }
+  return result;
+}
+
+function createObserver(options, callback) {
+  const observerWrapper = new Object();
+  observerWrapper.options = options;
+  observerWrapper.observer = new MutationObserver(callback);
+  observerWrapper.observe = function (element) { this.observer.observe(element, this.options); }
+  observerWrapper.disconnect = function () { this.observer.disconnect(); }
+  return observerWrapper;
+}
+
 export {
   numberFormat,
   getBrowser,
@@ -152,4 +182,7 @@ export {
   cLog,
   getColorFromTheme,
   localize,
+  querySelector,
+  querySelectorAll,
+  createObserver
 };

@@ -12,9 +12,12 @@ import {
   cLog,
   numberFormat,
   getColorFromTheme,
-} from "./utils";
-import { localize } from "./utils";
+  querySelector,
+  localize,
+  createObserver
+} from './utils';
 import { createStarRating } from "./starRating";
+import { dislikeClicked } from './events';
 
 //TODO: Do not duplicate here and in ryd.background.js
 const apiUrl = "https://returnyoutubedislikeapi.com";
@@ -31,6 +34,33 @@ let extConfig = {
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
+  selectors: {
+    dislikeTextContainer: [],
+    likeTextContainer: [],
+    buttons: {
+      shorts: {
+        mobile: [],
+        desktop: [],
+      },
+      regular: {
+        mobile: [],
+        desktopMenu: [],
+        desktopNoMenu: [],
+      },
+      likeButton: {
+        segmented: [],
+        segmentedGetButtons: [],
+        notSegmented: []
+      },
+      dislikeButton: {
+        segmented: [],
+        segmentedGetButtons: [],
+        notSegmented: []
+      }
+    },
+    menuContainer: [],
+    roundedDesign: [],
+  }
 };
 
 let storedData = {
@@ -52,23 +82,16 @@ function isNewDesign() {
 }
 
 function isRoundedDesign() {
-  return document.getElementById("segmented-like-button") !== null;
+  return querySelector(extConfig.selectors.roundedDesign) !== null;
 }
 
-let mutationObserver = new Object();
+let shortsObserver = null;
 
-if (isShorts() && mutationObserver.exists !== true) {
-  cLog("initializing mutation observer");
-  mutationObserver.options = {
-    childList: false,
-    attributes: true,
-    subtree: false,
-  };
-  mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver(function (
-    mutationList,
-    observer
-  ) {
+if (isShorts() && !shortsObserver) {
+  cLog("Initializing shorts mutation observer");
+  shortsObserver = createObserver({
+    attributes: true
+  }, (mutationList) => {
     mutationList.forEach((mutation) => {
       if (
         mutation.type === "attributes" &&
@@ -87,7 +110,7 @@ if (isShorts() && mutationObserver.exists !== true) {
         return;
       }
       cLog(
-        "unexpected mutation observer event: " + mutation.target + mutation.type
+        "Unexpected mutation observer event: " + mutation.target + mutation.type
       );
     });
   });
@@ -100,7 +123,7 @@ function isLikesDisabled() {
       getButtons().children[0].querySelector(".button-renderer-text").innerText
     );
   }
-  return /^\D*$/.test(getButtons().children[0].innerText);
+  return /^\D*$/.test(getLikeTextContainer().innerText);
 }
 
 function isVideoLiked() {
@@ -140,7 +163,6 @@ function setLikes(likesCount) {
 function setDislikes(dislikesCount) {
   cLog(`SET dislikes ${dislikesCount}`)
   getDislikeTextContainer()?.removeAttribute("is-empty");
-  getDislikeTextContainer()?.removeAttribute('is-empty');
   if (!isLikesDisabled()) {
     if (isMobile()) {
       getButtons().children[1].querySelector(
@@ -209,14 +231,8 @@ function processResponse(response, storedData) {
       if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
         shortDislikeButton.style.color = getColorFromTheme(false);
       }
-      mutationObserver.observer.observe(
-        shortLikeButton,
-        mutationObserver.options
-      );
-      mutationObserver.observer.observe(
-        shortDislikeButton,
-        mutationObserver.options
-      );
+      shortsObserver.observe(shortLikeButton);
+      shortsObserver.observe(shortDislikeButton);
     } else {
       getLikeButton().style.color = getColorFromTheme(true);
       getDislikeButton().style.color = getColorFromTheme(false);
@@ -240,6 +256,7 @@ async function setState(storedData) {
     ? LIKED_STATE
     : NEUTRAL_STATE;
   let statsSet = false;
+  cLog("Video is loaded. Adding buttons...");
 
   let videoId = getVideoId(window.location.href);
   let likeCount = getLikeCountFromButton() || null;
@@ -266,11 +283,11 @@ async function setState(storedData) {
   }
 }
 
-function setInitialState() {
-  setState(storedData);
+async function setInitialState () {
+  await setState(storedData);
 }
 
-function initExtConfig() {
+async function initExtConfig () {
   initializeDisableVoteSubmission();
   initializeColoredThumbs();
   initializeColoredBar();
@@ -279,6 +296,19 @@ function initExtConfig() {
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
+  await initializeSelectors();
+}
+
+async function initializeSelectors () {
+  console.log("initializing selectors")
+  let result = await fetch(`${apiUrl}/configs/selectors`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    }
+  }).then((response) => response.json()).catch((error) => {});
+  extConfig.selectors = result ?? extConfig.selectors;
+  console.log(result)
 }
 
 function initializeDisableVoteSubmission() {

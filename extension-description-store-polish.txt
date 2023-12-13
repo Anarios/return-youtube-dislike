@@ -1,0 +1,20 @@
+Return YouTube Dislike przywraca możliwość obejrzenia liczby łapek w dół na YouTube.
+
+Jeśli nie działa: otwórz kartę rozszerzeń (chrome://extensions/), wyłącz je i włącz ponownie. Powinno to naprawić większość problemów, ponieważ jest bug w Chromium, który psuje rozszerzenie w niektórych przypadkach. Miejmy nadzieję, że zespół Chromium naprawi to niedługo.
+
+Od 13 grudnia 2021, Youtube usunął możliwość obejrzenia liczby łapek w dół z ich API.
+Celem tego rozszerzenia jest przywrócenie mocy użytkownikom, używając kombinacji zarchiwizowanych danych o łapkach w górę i dół, a także tych oddanych przez użytkowników rozszerzenia, aby pokazać najdokładniejsze statystyki.
+
+Obecnie zawiera 200+ milionów łapek z filmów przechowanych przed 13 grudnia 2021. 
+
+Aktywnie rośnie i jest na czasie z filmami wrzucanymi po 13 grudnia 2021.
+
+Im więcej osób będzie korzystać z rozszerzenia, tym dokładniejsze ono będzie.
+
+Mniej oglądane filmy wrzucone po 13 grudnia 2021 mogą mieć mniej dokładne dane niż te popularniejsze.
+
+Rozszerzenie jest w fazie aktywnego rozwoju, więc jeżeli doświadczasz jakichkolwiek problemów, nie krępuj się i zgłoś je na naszej stronie na GitHub bądź na naszym serwerze Discord.
+
+Więcej funkcjonalności wkrótce!
+
+https://github.com/Anarios/return-youtube-dislike

@@ -125,6 +125,9 @@ export default {
         tag: "liberaldev",
         lang: "한국어",
       },
+        tag: "itsbudyn#6502",
+        lang: "Polski",
+      }
     ],
     coolProjects: [
       {
