@@ -6,7 +6,7 @@
       "message": "Return YouTube Dislike Beta"
     },
     "extensionDesc": {
-      "message": "Retourneert het vermogen om dislikes te zien"
+      "message": "Herstelt de functie om dislikes te kunnen zien"
     },
     "textDeveloper": {
       "message": "door Dmitry Selivanov & Gemeenschap"
@@ -24,7 +24,7 @@
       "message": "Help"
     },
     "linkChangelog": {
-      "message": "Wijzig-log"
+      "message": "Wijzigingslog"
     },
     "legendSettings": {
       "message": "Instellingen"
@@ -51,7 +51,7 @@
       "message": "Herformatteer als getallen."
     },
     "textNumberFormat": {
-      "message": "Nummer formaat:"
+      "message": "Getalnotatie:"
     },
     "textColorizeRatioBar": {
       "message": "Verhoudingsbalk inkleuren"
@@ -60,13 +60,13 @@
       "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
     },
     "textColorizeThumbs": {
-      "message": "Duimen inkleuren"
+      "message": "Duimpjes inkleuren"
     },
     "textColorizeThumbsHover": {
       "message": "Gebruik aangepaste kleuren voor duimpictogrammen."
     },
     "textColorTheme": {
-      "message": "Kleuren thema:"
+      "message": "Kleurenthema:"
     },
     "textColorTheme1": {
       "message": "Klassiek"
@@ -81,7 +81,7 @@
       "message": "Tijdelijk niet beschikbaar"
     },
     "textUpdate": {
-      "message": "Update naar"
+      "message": "Actualiseer naar"
     },
     "version30installed": {
       "message": "Versie 3.0.0.13 geïnstalleerd"
@@ -90,7 +90,7 @@
       "message": "Wat is er nieuw"
     },
     "shortsSupport": {
-      "message": "YouTube Shorts Ondersteuning"
+      "message": "Ondersteuning voor YouTube Shorts"
     },
     "customColors": {
       "message": "Aangepaste kleuren voor afkeerbalk en knoppen"
@@ -99,7 +99,7 @@
       "message": "Aangepaste getalnotaties"
     },
     "considerDonating": {
-      "message": "Het enige dat de extensie draaiende houdt, zijn uw donaties, overweeg alstublieft om het project te steunen."
+      "message": "Het enige dat de extensie draaiende houdt, zijn uw donaties. Overweeg alstublieft om het project te steunen."
     },
     "roundNumbers": {
       "message": "Afgeronde getallen weergeven"
@@ -114,7 +114,7 @@
       "message": "Maak het formaat voor leuk en niet leuk consistent."
     },
     "numberFormat": {
-      "message": "Nummer formaat:"
+      "message": "Getalnotatie:"
     },
     "colorizeRatio": {
       "message": "Verhoudingsbalk inkleuren"
@@ -123,12 +123,12 @@
       "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
     },
     "colorizeThumbs": {
-      "message": "Duimen inkleuren"
+      "message": "Duimpjes inkleuren"
     },
     "colorizeThumbsHover": {
       "message": "Gebruik aangepaste kleuren voor de duimpictogrammen."
     },
     "colorTheme": {
-      "message": "Kleuren thema:"
+      "message": "Kleurenthema:"
     }
   }
