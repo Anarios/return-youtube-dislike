@@ -13,7 +13,7 @@ function createRateBar(likes, dislikes) {
   let rateBar = document.getElementById("ryd-bar-container");
   if (!isLikesDisabled()) {
     // sometimes rate bar is hidden
-    if(rateBar && !isInViewport(rateBar)){
+    if (rateBar && !isInViewport(rateBar)) {
       rateBar.remove();
       rateBar = null;
     }
@@ -54,16 +54,19 @@ function createRateBar(likes, dislikes) {
 
     if (!isShorts()) {
       if (!rateBar && !isMobile()) {
-        let colorLikeStyle = "";
+        let colorLikeStyle = " ";
         let colorDislikeStyle = "";
         if (extConfig.coloredBar) {
           colorLikeStyle = "; background-color: " + getColorFromTheme(true);
           colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
         }
-        let actions = isNewDesign() && getButtons().id === "top-level-buttons-computed"
-          ? getButtons() : document.getElementById("menu-container");
+        let actions =
+          isNewDesign() && getButtons().id === "top-level-buttons-computed"
+            ? getButtons()
+            : document.getElementById("menu-container");
         (
-          actions || document.querySelector("ytm-slim-video-action-bar-renderer")
+          actions ||
+          document.querySelector("ytm-slim-video-action-bar-renderer")
         ).insertAdjacentHTML(
           "beforeend",
           `
@@ -83,7 +86,7 @@ function createRateBar(likes, dislikes) {
                 <!--css-build:shady-->${tooltipInnerHTML}
               </tp-yt-paper-tooltip>
               </div>
-      		`
+      		`,
         );
 
         if (isNewDesign()) {
@@ -101,8 +104,7 @@ function createRateBar(likes, dislikes) {
           }
         }
       } else {
-        document.querySelector(`.ryd-tooltip`).style.width =
-          widthPx + "px";
+        document.querySelector(`.ryd-tooltip`).style.width = widthPx + "px";
         document.getElementById("ryd-bar").style.width = widthPercent + "%";
         document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML =
           tooltipInnerHTML;
