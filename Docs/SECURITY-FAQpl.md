@@ -1,6 +1,5 @@
 Read this in other languages: [English](SECURITY-FAQ.md), [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md)
 
-
 # Security
 
 ### Czy śledzicie moją historię wyświetleń?

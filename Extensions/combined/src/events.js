@@ -1,5 +1,16 @@
-import { getBrowser, getVideoId, numberFormat, cLog, createObserver } from "./utils";
-import { checkForSignInButton, getButtons, getDislikeButton, getLikeButton } from './buttons';
+import {
+  getBrowser,
+  getVideoId,
+  numberFormat,
+  cLog,
+  createObserver,
+} from "./utils";
+import {
+  checkForSignInButton,
+  getButtons,
+  getDislikeButton,
+  getLikeButton,
+} from "./buttons";
 import {
   NEUTRAL_STATE,
   LIKED_STATE,
@@ -101,15 +112,21 @@ let smartimationObserver = null;
 
 function createSmartimationObserver() {
   if (!smartimationObserver) {
-    smartimationObserver = createObserver({
-      attributes: true,
-      subtree: true
-    }, updateDOMDislikes);
+    smartimationObserver = createObserver(
+      {
+        attributes: true,
+        subtree: true,
+      },
+      updateDOMDislikes,
+    );
     smartimationObserver.container = null;
   }
 
-  const smartimationContainer = getButtons().querySelector('yt-smartimation');
-  if (smartimationContainer && smartimationObserver.container != smartimationContainer) {
+  const smartimationContainer = getButtons().querySelector("yt-smartimation");
+  if (
+    smartimationContainer &&
+    smartimationObserver.container != smartimationContainer
+  ) {
     cLog("Initializing smartimation mutation observer");
     smartimationObserver.disconnect();
     smartimationObserver.observe(smartimationContainer);
@@ -120,7 +137,7 @@ function createSmartimationObserver() {
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
-      changes.disableVoteSubmission.newValue
+      changes.disableVoteSubmission.newValue,
     );
   }
   if (changes.coloredThumbs !== undefined) {
@@ -137,7 +154,7 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue
+      changes.numberDisplayReformatLikes.newValue,
     );
   }
 }

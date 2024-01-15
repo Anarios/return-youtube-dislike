@@ -74,7 +74,9 @@ button:hover {
   content: attr(data-hover);
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0.1s linear, opacity 0.1s linear;
+  transition:
+    visibility 0.1s linear,
+    opacity 0.1s linear;
   width: 250px;
   background-color: var(--secondary);
   border-radius: 0.5rem;

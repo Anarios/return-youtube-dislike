@@ -54,7 +54,7 @@ function createRateBar(likes, dislikes) {
 
     if (!isShorts()) {
       if (!rateBar && !isMobile()) {
-        let colorLikeStyle = " ";
+        let colorLikeStyle = "";
         let colorDislikeStyle = "";
         if (extConfig.coloredBar) {
           colorLikeStyle = "; background-color: " + getColorFromTheme(true);

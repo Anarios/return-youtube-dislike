@@ -1,6 +1,5 @@
 Bunu diğer dillerde okuyun: [English](FAQ.md), [русский](FAQru.md), ), [Nederlands](FAQnl.md), [Français](FAQfr.md), [українська](FAQuk.md), [Polski](FAQpl.md)
 
-
 # Sıkça Sorulan Sorular
 
 ## GitHub'da veya Discord'da bir soru sormadan önce, lütfen buraya göz atın.

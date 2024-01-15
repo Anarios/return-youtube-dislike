@@ -17,7 +17,7 @@ module.exports = {
     entries.map((entry) => [
       entry,
       path.join(__dirname, "./Extensions/combined/", `${entry}.js`),
-    ])
+    ]),
   ),
   output: {
     filename: "[name].js",
@@ -89,7 +89,6 @@ module.exports = {
         },
       },
     }),
-
   ],
   experiments: {
     topLevelAwait: true,

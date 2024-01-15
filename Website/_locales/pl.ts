@@ -5,7 +5,8 @@ export default {
   home: {
     name: "Strona główna",
     title: "Return YouTube Dislike",
-    subtitle: "Rozszerzenie do przeglądarki i API pokazujące ilość łapek w dół na YouTube",
+    subtitle:
+      "Rozszerzenie do przeglądarki i API pokazujące ilość łapek w dół na YouTube",
     ukraine: "Wesprzyj Ukrainę",
     sponsors: "Sponsorzy",
   },
@@ -14,9 +15,11 @@ export default {
     title: "Wybierz swoją platformę",
     subtitle: "Dostępne dla Firefox i wszystkich przeglądarek Chromium",
     title2: "Inne platformy",
-    subtitle2: "Jeżeli twoja przeglądarka nie jest wspierana, wypróbuj ten UserScript",
+    subtitle2:
+      "Jeżeli twoja przeglądarka nie jest wspierana, wypróbuj ten UserScript",
     title3: "Implementacje od stron trzecich",
-    subtitle3: "Nie ponosimy za nie odpowiedzialności, używasz na własne ryzyko",
+    subtitle3:
+      "Nie ponosimy za nie odpowiedzialności, używasz na własne ryzyko",
   },
   api: {
     name: "API",
@@ -43,7 +46,8 @@ export default {
     },
     fetching: {
       title: "Poradnik - Podstawowe pobieranie",
-      subtitle: "Przykład pozwalający otrzymać głosy z danego ID filmu na YouTube: ",
+      subtitle:
+        "Przykład pozwalający otrzymać głosy z danego ID filmu na YouTube: ",
       title2: "Przykładowe żądanie: ",
       url: "URL żądania: ",
       method: "Metoda żądania: ",
@@ -57,7 +61,8 @@ export default {
   help: {
     name: "Pomoc",
     title: "Rozwiązywanie problemów",
-    bullet1: "Upewnij się, że masz zainstalowaną najnowszą wersję rozszerzenia, ",
+    bullet1:
+      "Upewnij się, że masz zainstalowaną najnowszą wersję rozszerzenia, ",
     bullet11: "obecnie.",
     bullet2:
       "Spróbuj usunąć rozszerzenie i zainstalować je ponownie, a następnie zrestartować przeglądarkę (wszystkie aktywne okna, nie tylko jedną kartę)",
@@ -65,7 +70,8 @@ export default {
     bullet31: "powinno się wyświetlić w czystym tekście: ",
     bullet4: "Jeśli nic powyżej nie pomoże - zgłoś problem na",
     bullet41: "na naszym",
-    bullet4a: "Powiedz z jakiego systemu operacyjnego korzystasz, oraz podaj nazwę i wersję przeglądarki",
+    bullet4a:
+      "Powiedz z jakiego systemu operacyjnego korzystasz, oraz podaj nazwę i wersję przeglądarki",
     bullet4b:
       "Wykonaj zrzut ekranu problematycznej strony (tj. strony filmu na YouTube) z otwartą konsolą (naciśnij ",
     bullet4b1: ") - przykładowy zrzut poniżej.",

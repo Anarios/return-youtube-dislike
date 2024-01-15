@@ -1,6 +1,5 @@
 Read this in other languages: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md)
 
-
 # Frequently Asked Questions
 
 ## Before asking a question on GitHub or Discord, please refer to this.

@@ -1,6 +1,5 @@
 Прочитать на других языках: [English](CONTRIBUTING.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md)
 
-
 # Добро пожаловать в руководство по внесению вклада Return YouTube Dislikes
 
 Благодарим вас за то, что вы потратили своё время на участие в нашем проекте! Все ваши изменения будут отражены в следующей версии расширения (или на [сайте](https://www.returnyoutubedislike.com/)).

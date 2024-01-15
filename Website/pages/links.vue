@@ -120,7 +120,7 @@ export default {
       {
         tag: "itsbudyn#6502",
         lang: "Polski",
-      }
+      },
     ],
     coolProjects: [
       {
