@@ -41,5 +41,8 @@
     "prettier": "^3.2.2",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "prettier": {
+    "printWidth": 120
   }
 }
