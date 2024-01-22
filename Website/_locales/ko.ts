@@ -1,5 +1,5 @@
 import { ko } from "vuetify/src/locale";
-
+//libaraldev
 export default {
   ...ko,
   home: {
