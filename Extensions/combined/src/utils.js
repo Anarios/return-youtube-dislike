@@ -1,9 +1,7 @@
 import { extConfig } from "./state";
 
 function numberFormat(numberState) {
-  return getNumberFormatter(extConfig.numberDisplayFormat).format(
-    numberState
-  );
+  return getNumberFormatter(extConfig.numberDisplayFormat).format(numberState);
 }
 
 function getNumberFormatter(optionSelect) {
@@ -17,11 +15,11 @@ function getNumberFormatter(optionSelect) {
       userLocales = new URL(
         Array.from(document.querySelectorAll("head > link[rel='search']"))
           ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-          ?.getAttribute("href")
+          ?.getAttribute("href"),
       )?.searchParams?.get("locale");
     } catch {
       cLog(
-        "Cannot find browser locale. Use en as default for number formatting."
+        "Cannot find browser locale. Use en as default for number formatting.",
       );
       userLocales = "en";
     }
@@ -143,6 +141,40 @@ function getColorFromTheme(voteIsLike) {
   return colorString;
 }
 
+function querySelector(selectors, element) {
+  let result;
+  for (const selector of selectors) {
+    result = (element ?? document).querySelector(selector);
+    if (result !== null) {
+      return result;
+    }
+  }
+}
+
+function querySelectorAll(selectors) {
+  let result;
+  for (const selector of selectors) {
+    result = document.querySelectorAll(selector);
+    if (result.length !== 0) {
+      return result;
+    }
+  }
+  return result;
+}
+
+function createObserver(options, callback) {
+  const observerWrapper = new Object();
+  observerWrapper.options = options;
+  observerWrapper.observer = new MutationObserver(callback);
+  observerWrapper.observe = function (element) {
+    this.observer.observe(element, this.options);
+  };
+  observerWrapper.disconnect = function () {
+    this.observer.disconnect();
+  };
+  return observerWrapper;
+}
+
 export {
   numberFormat,
   getBrowser,
@@ -152,4 +184,7 @@ export {
   cLog,
   getColorFromTheme,
   localize,
+  querySelector,
+  querySelectorAll,
+  createObserver,
 };

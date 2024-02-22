@@ -69,7 +69,7 @@
       </h3>
     </div>
 
-    <div id="top-donors" class="d-flex flex-column items-center py-8">
+    <div id="financiers" class="d-flex flex-column items-center py-8">
       <h3 class="mb-4">
         <v-icon class="mb-2">mdi-heart</v-icon>
         {{ $vuetify.lang.t("$vuetify.home.sponsors") }}
@@ -108,9 +108,8 @@ export default {
       githubLink: "https://github.com/Anarios/return-youtube-dislike",
       discordLink: "https://discord.gg/mYnESY4Md5",
       sponsors: [
-        { name: "Piepacker", link: "https://piepacker.com/" },
         {
-          name: "Become our sponsor",
+          name: "Become our sponsor and be listed here",
           link: "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601",
         },
       ],
@@ -126,13 +125,13 @@ export default {
       if (videoId !== lastVideoId && videoId.length === 11) {
         fetch(
           "https://returnyoutubedislikeapi.com/votes?videoId=" +
-            (lastVideoId = videoId)
+            (lastVideoId = videoId),
         )
           .then((resp) => resp.json())
           .then(
             (data) =>
               (document.getElementById("output").innerText =
-                "Likes=" + data.likes + " Dislikes=" + data.dislikes)
+                "Likes=" + data.likes + " Dislikes=" + data.dislikes),
           );
       }
     };
@@ -163,7 +162,8 @@ input {
   stroke: #f44;
   transition-property: opacity, transform;
   transform: scale(0) rotate(180deg);
-  animation: popin 1s 0.3s ease-in-out 1 forwards,
+  animation:
+    popin 1s 0.3s ease-in-out 1 forwards,
     tap 0.3s 1.7s ease-in-out 1 forwards;
 }
 

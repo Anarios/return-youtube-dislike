@@ -40,7 +40,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         headers: {
           Accept: "application/json",
         },
-      }
+      },
     )
       .then((response) => response.json())
       .then((response) => {
@@ -153,7 +153,7 @@ async function register() {
       headers: {
         Accept: "application/json",
       },
-    }
+    },
   ).then((response) => response.json());
   const solvedPuzzle = await solvePuzzle(registrationResponse);
   if (!solvedPuzzle.solution) {
@@ -210,7 +210,7 @@ function countLeadingZeroes(uInt8View, limit) {
 
 async function solvePuzzle(puzzle) {
   let challenge = Uint8Array.from(atob(puzzle.challenge), (c) =>
-    c.charCodeAt(0)
+    c.charCodeAt(0),
   );
   let buffer = new ArrayBuffer(20);
   let uInt8View = new Uint8Array(buffer);
@@ -255,7 +255,7 @@ function generateUserID(length = 36) {
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
-      changes.disableVoteSubmission.newValue
+      changes.disableVoteSubmission.newValue,
     );
   }
   if (changes.coloredThumbs !== undefined) {
@@ -272,17 +272,17 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue
+      changes.numberDisplayReformatLikes.newValue,
     );
   }
   if (changes.showTooltipPercentage !== undefined) {
     handleShowTooltipPercentageChangeEvent(
-      changes.showTooltipPercentage.newValue
+      changes.showTooltipPercentage.newValue,
     );
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue
+      changes.numberDisplayReformatLikes.newValue,
     );
   }
 }
