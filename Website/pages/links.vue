@@ -121,6 +121,10 @@ export default {
         tag: "itsbudyn#6502",
         lang: "Polski",
       },
+      {
+        tag: "ArtisGraphics",
+        lang: "Deutsch"
+      }
     ],
     coolProjects: [
       {
