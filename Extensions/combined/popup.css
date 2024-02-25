@@ -1,5 +1,7 @@
 /* Variables */
 :root {
+  color-scheme: dark;
+  
   --primary: #cc2929;
   --accent: #581111;
 
