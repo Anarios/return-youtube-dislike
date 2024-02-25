@@ -6,81 +6,129 @@
     "message": "Return YouTube Dislike Beta"
   },
   "extensionDesc": {
-    "message": "Ripristina la possibilità di vedere i dislikes"
+    "message": "Riporta il numero di Non mi piace"
   },
   "textDeveloper": {
-    "message": "grazie a Dmitry Selivanov e alla Comunità"
+    "message": "di Dmitry Selivanov e della comunità"
   },
   "linkWebsite": {
     "message": "Sito web"
   },
   "linkFAQ": {
-    "message": "Domande frequenti"
+    "message": "FAQ"
   },
   "linkDonate": {
-    "message": "Fai una donazione"
+    "message": "Dona"
   },
   "linkHelp": {
     "message": "Aiuto"
+  },
+  "linkChangelog": {
+    "message": "Note di versione"
   },
   "legendSettings": {
     "message": "Impostazioni"
   },
   "textSettings": {
-    "message": "Disabilita l'invio dei like e dei dislike"
+    "message": "Disattiva invio di Mi piace/Non mi piace"
+  },
+  "textLikesDisabled": {
+    "message": "Disattivati dal proprietario"
   },
   "textSettingsHover": {
-    "message": "Interrompe il conteggio dei tuoi likes e dislikes da parte dell'estensione."
+    "message": "Smette di contare i tuoi Mi piace e Non mi piace."
+  },
+  "textRoundingNumbers": {
+    "message": "Arrotonda per difetto il numero di Mi Piace/Non mi piace (comportamento standard di YouTube)."
+  },
+  "textRoundingNumbersHover": {
+    "message": "Mostra stastistiche arrotondate per difetto."
+  },
+  "textConsistentFormat": {
+    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
+  },
+  "textConsistentFormatHover": {
+    "message": "Ri-formatta numero di Mi piace."
+  },
+  "textNumberFormat": {
+    "message": "Formato numeri:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colora barra di rapporto"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Usa colori personalizzati per la barra di rapporto."
+  },
+  "textColorizeThumbs": {
+    "message": "Colora pollici"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Usa colori personalizzati per le icone dei pollici."
+  },
+  "textColorTheme": {
+    "message": "Colore tema:"
+  },
+  "textColorTheme1": {
+    "message": "Classico"
+  },
+  "textColorTheme2": {
+    "message": "Accessibile"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textTempUnavailable": {
+    "message": "Temporaneamente non disponibile"
   },
   "textUpdate": {
-    "message": "aggiorna a"
+    "message": "Aggiorna a"
   },
   "version30installed": {
     "message": "Versione __RYD_VERSION__ installata"
   },
   "whatsnew": {
-    "message": "Quali sono le novità"
+    "message": "Novità"
   },
   "shortsSupport": {
     "message": "Supporto per YouTube Shorts"
   },
   "customColors": {
-    "message": "Colori personalizzati per la barra dei dislike e i bottoni"
+    "message": "Colori personalizzati per barra dei Non mi piace e bottoni"
   },
   "customNumberFormats": {
-    "message": "Formati numerici personalizzati"
+    "message": "Formato numeri personalizzato"
   },
   "considerDonating": {
-    "message": "Le uniche cosa che tengono in piedi il progetto sono le vostre donazioni. Per favore, considera di effettuare una donazione per supportarci. Grazie."
+    "message": "L'unica cosa che manda avanti questa estensione sono le tue donazioni, valuta se sostenere il progetto."
   },
   "roundNumbers": {
-    "message": "Mostra i numeri arrotondati"
+    "message": "Mostra numeri arrotondati per difetto"
   },
   "roundNumbersHover": {
-    "message": "Arrotonda il valore del conteggio (questa è l'opzione predefinita di YouTube)."
+    "message": "Arrotonda numeri per difetto (comportamento standard di YouTube)."
   },
   "reformatLikes": {
-    "message": "Formatta il numero di like"
+    "message": "Ri-formatta numero Mi piace"
   },
   "reformatLikesHover": {
-    "message": "Rende il valore delle statistiche più consistente."
+    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
   },
   "numberFormat": {
-    "message": "Formato numerico"
+    "message": "Formato numeri:"
   },
   "colorizeRatio": {
-    "message": "Colora la barra dei dislike"
+    "message": "Colora barra di rapporto"
   },
   "colorizeRatioHover": {
-    "message": "Colora la barra dei dislike con colori personalizzati."
+    "message": "Usa colori personalizzati per la barra di rapporto."
   },
   "colorizeThumbs": {
-    "message": "Colora i pulsanti"
+    "message": "Colora pollici"
   },
   "colorizeThumbsHover": {
-    "message": "Colora i pulsanti dei like e dei dislike con colori personalizzati."
+    "message": "Usa colori personalizzati per le icone dei pollici."
   },
   "colorTheme": {
-    "message": "Schema colori:"
+    "message": "Colore tema:"
   }
 }
