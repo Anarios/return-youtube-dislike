@@ -1,4 +1,4 @@
-Read this in other languages: [English](README.md), [Nederlands](READMEnl.md)
+Read this in other languages: [English](README.md), [Nederlands](READMEnl.md), [Deutsch](READMEde.md)
 
 # youtube-dislike-sayısını-geri-getir-site
 
