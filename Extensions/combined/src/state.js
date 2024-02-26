@@ -111,8 +111,8 @@ if (isShorts() && !shortsObserver) {
         }
         cLog(
           "Unexpected mutation observer event: " +
-            mutation.target +
-            mutation.type,
+          mutation.target +
+          mutation.type,
         );
       });
     },
@@ -139,7 +139,7 @@ function isVideoLiked() {
   return (
     getLikeButton().classList.contains("style-default-active") ||
     getLikeButton().querySelector("button")?.getAttribute("aria-pressed") ===
-      "true"
+    "true"
   );
 }
 
@@ -153,7 +153,7 @@ function isVideoDisliked() {
   return (
     getDislikeButton().classList.contains("style-default-active") ||
     getDislikeButton().querySelector("button")?.getAttribute("aria-pressed") ===
-      "true"
+    "true"
   );
 }
 
@@ -175,6 +175,11 @@ function setLikes(likesCount) {
 
 function setDislikes(dislikesCount) {
   cLog(`SET dislikes ${dislikesCount}`);
+
+  if (getDislikeTextContainer()?.innerText === dislikesCount) {
+    return;
+  }
+
   getDislikeTextContainer()?.removeAttribute("is-empty");
   if (!isLikesDisabled()) {
     if (isMobile()) {
@@ -317,7 +322,7 @@ async function initializeSelectors() {
     },
   })
     .then((response) => response.json())
-    .catch((error) => {});
+    .catch((error) => { });
   extConfig.selectors = result ?? extConfig.selectors;
   console.log(result);
 }
