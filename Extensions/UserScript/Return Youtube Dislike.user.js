@@ -6,7 +6,7 @@
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
-// @author       Anarios & JRWR
+// @author       Anarios & JRWR & Ethan
 // @match        *://*.youtube.com/*
 // @exclude      *://music.youtube.com/*
 // @exclude      *://*.music.youtube.com/*
@@ -136,7 +136,7 @@ function getLikeButton() {
       ? document.querySelector("#segmented-like-button")
       : getButtons().children[0].children[0]
     : getButtons().querySelector("like-button-view-model") ??
-        getButtons().children[0];
+    getButtons().children[0];
 }
 
 function getLikeTextContainer() {
@@ -206,12 +206,41 @@ if (isShorts() && !shortsObserver) {
         }
         cLog(
           "Unexpected mutation observer event: " +
-            mutation.target +
-            mutation.type,
+          mutation.target +
+          mutation.type,
         );
       });
     },
   );
+}
+
+let dislikeObserver = null;
+
+function createDislikeObserver() {
+  if (!dislikeObserver) {
+    dislikeObserver = createObserver(
+      {
+        attributes: true,
+        subtree: true,
+        childList: true,
+        subtree: true,
+        characterData: true
+      },
+      (updateDOMDislikes),
+    );
+    dislikeObserver.container = null;
+  }
+
+  const dislikeButtonContainer = getDislikeTextContainer();
+  if (
+    dislikeButtonContainer &&
+    dislikeObserver.container != dislikeButtonContainer
+  ) {
+    cLog("Initializing dislike mutation observer");
+    dislikeObserver.disconnect();
+    dislikeObserver.observe(dislikeButtonContainer);
+    dislikeObserver.container = dislikeButtonContainer;
+  }
 }
 
 function isVideoLiked() {
@@ -279,6 +308,10 @@ function setLikes(likesCount) {
 }
 
 function setDislikes(dislikesCount) {
+  if (getDislikeTextContainer()?.innerText === dislikesCount) {
+    return;
+  }
+
   if (isMobile) {
     mobileDislikes = dislikesCount;
     return;
@@ -308,11 +341,11 @@ function getLikeCountFromButton() {
 (typeof GM_addStyle != "undefined"
   ? GM_addStyle
   : (styles) => {
-      let styleNode = document.createElement("style");
-      styleNode.type = "text/css";
-      styleNode.innerText = styles;
-      document.head.appendChild(styleNode);
-    })(`
+    let styleNode = document.createElement("style");
+    styleNode.type = "text/css";
+    styleNode.innerText = styles;
+    document.head.appendChild(styleNode);
+  })(`
     #return-youtube-dislike-bar-container {
       background: var(--yt-spec-icon-disabled);
       border-radius: 2px;
@@ -716,6 +749,11 @@ function setEventListeners(evt) {
         setInitialState();
         clearInterval(jsInitChecktimer);
       }
+    }
+
+
+    if (isShorts() && !isMobile && getButtons()?.offsetParent) {
+      createDislikeObserver();
     }
   }
 

@@ -9,6 +9,7 @@ import {
   checkForSignInButton,
   getButtons,
   getDislikeButton,
+  getDislikeTextContainer,
   getLikeButton,
 } from "./buttons";
 import {
@@ -134,6 +135,35 @@ function createSmartimationObserver() {
   }
 }
 
+let dislikeObserver = null;
+
+function createDislikeObserver() {
+  if (!dislikeObserver) {
+    dislikeObserver = createObserver(
+      {
+        attributes: true,
+        subtree: true,
+        childList: true,
+        subtree: true,
+        characterData: true
+      },
+      (updateDOMDislikes),
+    );
+    dislikeObserver.container = null;
+  }
+
+  const dislikeButtonContainer = getDislikeTextContainer();
+  if (
+    dislikeButtonContainer &&
+    dislikeObserver.container != dislikeButtonContainer
+  ) {
+    cLog("Initializing dislike mutation observer");
+    dislikeObserver.disconnect();
+    dislikeObserver.observe(dislikeButtonContainer);
+    dislikeObserver.container = dislikeButtonContainer;
+  }
+}
+
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
@@ -190,5 +220,6 @@ export {
   dislikeClicked,
   addLikeDislikeEventListener,
   createSmartimationObserver,
+  createDislikeObserver,
   storageChangeHandler,
 };

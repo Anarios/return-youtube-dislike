@@ -2,13 +2,14 @@
 import { getButtons } from "./src/buttons";
 
 //---   Import State Functions   ---//
-import { isShorts, setInitialState, initExtConfig } from "./src/state";
+import { isShorts, isMobile, setInitialState, initExtConfig } from "./src/state";
 
 //---   Import Video & Browser Functions   ---//
 import { getBrowser, isVideoLoaded, cLog } from "./src/utils";
 import {
   addLikeDislikeEventListener,
   createSmartimationObserver,
+  createDislikeObserver,
   storageChangeHandler,
 } from "./src/events";
 
@@ -28,6 +29,10 @@ async function setEventListeners(evt) {
         await setInitialState();
         isSetInitialStateDone = true;
         getBrowser().storage.onChanged.addListener(storageChangeHandler);
+      }
+
+      if (isShorts() && !isMobile() && getButtons()?.offsetParent) {
+        createDislikeObserver();
       }
     } catch (exception) {
       if (!isSetInitialStateDone) {
