@@ -18,9 +18,7 @@ function getNumberFormatter(optionSelect) {
           ?.getAttribute("href"),
       )?.searchParams?.get("locale");
     } catch {
-      cLog(
-        "Cannot find browser locale. Use en as default for number formatting.",
-      );
+      cLog("Cannot find browser locale. Use en as default for number formatting.");
       userLocales = "en";
     }
   }
@@ -56,10 +54,7 @@ function localize(localeString) {
 function getBrowser() {
   if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
     return chrome;
-  } else if (
-    typeof browser !== "undefined" &&
-    typeof browser.runtime !== "undefined"
-  ) {
+  } else if (typeof browser !== "undefined" && typeof browser.runtime !== "undefined") {
     return browser;
   } else {
     console.log("browser is not supported");
