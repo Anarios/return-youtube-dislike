@@ -98,6 +98,9 @@ function isInViewport(element) {
 function isVideoLoaded() {
   const videoId = getVideoId(window.location.href);
   return (
+    // desktop: spring 2024 UI
+    document.querySelector(`ytd-watch-grid[video-id='${videoId}']`) !== null ||
+    // desktop: older UI
     document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null ||
     // mobile: no video-id attribute
     document.querySelector('#player[loading="false"]:not([hidden])') !== null
