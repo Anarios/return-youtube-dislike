@@ -18,9 +18,7 @@ function getNumberFormatter(optionSelect) {
           ?.getAttribute("href"),
       )?.searchParams?.get("locale");
     } catch {
-      cLog(
-        "Cannot find browser locale. Use en as default for number formatting.",
-      );
+      cLog("Cannot find browser locale. Use en as default for number formatting.");
       userLocales = "en";
     }
   }
@@ -56,10 +54,7 @@ function localize(localeString) {
 function getBrowser() {
   if (typeof chrome !== "undefined" && typeof chrome.runtime !== "undefined") {
     return chrome;
-  } else if (
-    typeof browser !== "undefined" &&
-    typeof browser.runtime !== "undefined"
-  ) {
+  } else if (typeof browser !== "undefined" && typeof browser.runtime !== "undefined") {
     return browser;
   } else {
     console.log("browser is not supported");
@@ -98,6 +93,9 @@ function isInViewport(element) {
 function isVideoLoaded() {
   const videoId = getVideoId(window.location.href);
   return (
+    // desktop: spring 2024 UI
+    document.querySelector(`ytd-watch-grid[video-id='${videoId}']`) !== null ||
+    // desktop: older UI
     document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null ||
     // mobile: no video-id attribute
     document.querySelector('#player[loading="false"]:not([hidden])') !== null
