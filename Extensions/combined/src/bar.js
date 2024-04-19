@@ -95,13 +95,6 @@ function createRateBar(likes, dislikes) {
           descriptionAndActionsElement.style.borderBottom =
             "1px solid var(--yt-spec-10-percent-layer)";
           descriptionAndActionsElement.style.paddingBottom = "10px";
-
-          // Fix like/dislike ratio bar offset in new UI
-          document.getElementById("actions-inner").style.width = "revert";
-          if (isRoundedDesign()) {
-            document.getElementById("actions").style.flexDirection =
-              "row-reverse";
-          }
         }
       } else {
         document.querySelector(`.ryd-tooltip`).style.width = widthPx + "px";
