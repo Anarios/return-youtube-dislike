@@ -66,7 +66,7 @@ function getVideoId(url) {
   const urlObject = new URL(url);
   const pathname = urlObject.pathname;
   if (pathname.startsWith("/clip")) {
-    return document.querySelector("meta[itemprop='videoId']").content;
+    return (document.querySelector("meta[itemprop='videoId']") || document.querySelector("meta[itemprop='identifier']")).content;
   } else {
     if (pathname.startsWith("/shorts")) {
       return pathname.slice(8);
