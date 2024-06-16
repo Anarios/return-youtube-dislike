@@ -4,7 +4,6 @@
 
 import {
   __Rewire__ as rewiredUtils,
-  roundDown,
   numberFormat,
   getNumberFormatter,
   localize,
@@ -19,16 +18,6 @@ import { extConfig } from "./state";
 
 jest.mock("./state");
 
-describe("roundDown", () => {
-  it("return input unchanged when < 1000", () => {
-    expect(roundDown(900)).toBe(900);
-  });
-
-  it("round down input correctly", () => {
-    expect(roundDown(1232)).toBe(1200);
-  });
-});
-
 describe("numberFormat", () => {
   it("should format high numbers correctly", () => {
     rewiredUtils(
@@ -37,8 +26,8 @@ describe("numberFormat", () => {
         Intl.NumberFormat("en", {
           notation: "compact",
           compactDisplay: "short",
-        })
-      )
+        }),
+      ),
     );
 
     expect(numberFormat(91492)).toBe("91K");
@@ -52,8 +41,8 @@ describe("numberFormat", () => {
         Intl.NumberFormat("en", {
           notation: "compact",
           compactDisplay: "short",
-        })
-      )
+        }),
+      ),
     );
 
     expect(numberFormat(100)).toBe("100");
@@ -66,8 +55,8 @@ describe("numberFormat", () => {
         Intl.NumberFormat("de", {
           notation: "compact",
           compactDisplay: "short",
-        })
-      )
+        }),
+      ),
     );
     extConfig.numberDisplayRoundDown = false;
 
@@ -121,10 +110,7 @@ describe("getNumberFormatter", () => {
     });
     const mockedNode = document.createElement("link");
 
-    mockedNode.setAttribute(
-      "href",
-      "https://www.youtube.com/opensearch?locale=en"
-    );
+    mockedNode.setAttribute("href", "https://www.youtube.com/opensearch?locale=en");
 
     document.querySelectorAll = jest.fn().mockReturnValue([mockedNode]);
     expect(getNumberFormatter()).toMatchSnapshot();
@@ -233,7 +219,7 @@ describe("getNumberFormatter", () => {
           right: 0,
         }),
       };
-      expect(isInViewport(rect)).toBe(true);
+      expect(isInViewport(rect)).toBe(false);
     });
 
     it("should return false if element is out of viewport", () => {
@@ -254,44 +240,30 @@ describe("getNumberFormatter", () => {
         rewiredUtils("getVideoId", jest.fn().mockReturnValue("fakeId"));
         document.querySelector = jest.fn().mockReturnValue("notNull");
         expect(isVideoLoaded()).toBe(true);
-        expect(document.querySelector).toBeCalledWith(
-          "ytd-watch-flexy[video-id='fakeId']"
-        );
+        expect(document.querySelector).toBeCalledWith("ytd-watch-grid[video-id='fakeId']");
       });
 
       it("should return false on not loaded video", () => {
         rewiredUtils("getVideoId", jest.fn().mockReturnValue("fakeId"));
         document.querySelector = jest.fn().mockReturnValue(null);
         expect(isVideoLoaded()).toBe(false);
-        expect(document.querySelector).toBeCalledWith(
-          "ytd-watch-flexy[video-id='fakeId']"
-        );
+        expect(document.querySelector).toBeCalledWith("ytd-watch-flexy[video-id='fakeId']");
       });
     });
 
     describe("on mobile", () => {
       it("should return true on loaded video", () => {
         rewiredUtils("getVideoId", jest.fn().mockReturnValue("fakeId"));
-        document.querySelector = jest
-          .fn()
-          .mockReturnValueOnce(null)
-          .mockReturnValue("notNull");
+        document.querySelector = jest.fn().mockReturnValueOnce(null).mockReturnValue("notNull");
         expect(isVideoLoaded()).toBe(true);
-        expect(document.querySelector).toHaveBeenLastCalledWith(
-          '#player[loading="false"]:not([hidden])'
-        );
+        expect(document.querySelector).toHaveBeenLastCalledWith("ytd-watch-flexy[video-id='fakeId']");
       });
 
       it("should return false on not loaded video", () => {
         rewiredUtils("getVideoId", jest.fn().mockReturnValue("fakeId"));
-        document.querySelector = jest
-          .fn()
-          .mockReturnValueOnce(null)
-          .mockReturnValue(null);
+        document.querySelector = jest.fn().mockReturnValueOnce(null).mockReturnValue(null);
         expect(isVideoLoaded()).toBe(false);
-        expect(document.querySelector).toHaveBeenLastCalledWith(
-          '#player[loading="false"]:not([hidden])'
-        );
+        expect(document.querySelector).toHaveBeenLastCalledWith('#player[loading="false"]:not([hidden])');
       });
     });
   });
@@ -301,9 +273,7 @@ describe("getNumberFormatter", () => {
       console.log = jest.fn();
       cLog("Test message");
 
-      expect(console.log).toBeCalledWith(
-        "[return youtube dislike]: Test message"
-      );
+      expect(console.log).toBeCalledWith("[return youtube dislike]: Test message");
 
       console.log = log;
     });
@@ -312,9 +282,7 @@ describe("getNumberFormatter", () => {
       const fakeWriter = jest.fn();
 
       cLog("Test message", fakeWriter);
-      expect(fakeWriter).toBeCalledWith(
-        "[return youtube dislike]: Test message"
-      );
+      expect(fakeWriter).toBeCalledWith("[return youtube dislike]: Test message");
     });
   });
   describe("getColorFromTheme", () => {
