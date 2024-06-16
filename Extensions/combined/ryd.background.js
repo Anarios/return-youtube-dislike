@@ -278,6 +278,7 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.disableLogging !== undefined) {
     handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
+  }
   if (changes.showTooltipPercentage !== undefined) {
     handleShowTooltipPercentageChangeEvent(
       changes.showTooltipPercentage.newValue,
