@@ -3,6 +3,12 @@ description: File a bug report!
 # title: "(Bug): "
 labels: ["bug"]
 body:
+  - type: checkboxes
+    attributes:
+      label: Have you tried to find similar issues (open or recently closed)?
+      options:
+        - label: "Yes, this issue is not a duplicate"
+          required: true
   - type: input
     attributes:
       label: Browser

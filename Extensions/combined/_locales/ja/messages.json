@@ -42,7 +42,7 @@
     "message": "アップデート："
   },
   "version30installed": {
-    "message": "バージョン 3.0.0.1 がインストールされました。"
+    "message": "バージョン __RYD_VERSION__ がインストールされました。"
   },
   "whatsnew": {
     "message": "新機能"

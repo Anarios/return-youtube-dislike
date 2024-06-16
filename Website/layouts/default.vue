@@ -102,12 +102,15 @@ export default {
       { name: "English", locale: "en" },
       { name: "Español", locale: "es" },
       { name: "Türkçe", locale: "tr" },
+      { name: "Português (Brasil)", locale: "pt_BR" },
       { name: "Русский", locale: "ru" },
       { name: "Čeština", locale: "cs" },
       { name: "日本語", locale: "ja" },
       { name: "Français", locale: "fr" },
-      // { name: "Deutsch", locale: "de" },
-      // ...
+      { name: "Deutsch", locale: "de" },
+      { name: "Українська", locale: "uk" },
+      { name: "한국어", locale: "ko" },
+      { name: "Polski", locale: "pl" },
     ],
     alert: {
       show: false,

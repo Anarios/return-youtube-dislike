@@ -1,0 +1,134 @@
+{
+  "extensionName": {
+    "message": "Επιστροφή του YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Επιστρέφει τα dislikes"
+  },
+  "textDeveloper": {
+    "message": "από τον Dmitry Selivanov & την κοινότητα"
+  },
+  "linkWebsite": {
+    "message": "Ιστοσελίδα"
+  },
+  "linkFAQ": {
+    "message": "Συχνές ερωτήσεις"
+  },
+  "linkDonate": {
+    "message": "Στηρίξτε"
+  },
+  "linkHelp": {
+    "message": "Βοήθεια"
+  },
+  "linkChangelog": {
+    "message": "Αρχείο αλλαγών"
+  },
+  "legendSettings": {
+    "message": "Ρυθμίσεις"
+  },
+  "textSettings": {
+    "message": "Διακοπή υποβολής like/dislike"
+  },
+  "textLikesDisabled": {
+    "message": "Απενεργοποιήθηκε από τον κάτοχο"
+  },
+  "textSettingsHover": {
+    "message": "Σταματάει να μετράει τα likes & dislikes που κάνεις."
+  },
+  "textRoundingNumbers": {
+    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (προεπιλεγμένη επιλογή του YouTube)."
+  },
+  "textRoundingNumbersHover": {
+    "message": "Εμφάνιση στρογγυλεμένων αριθμών."
+  },
+  "textConsistentFormat": {
+    "message": "Κάνει σταθερή την μορφοποίηση των likes & dislikes."
+  },
+  "textConsistentFormatHover": {
+    "message": "Μορφοποίηση του αριθμού των likes."
+  },
+  "textNumberFormat": {
+    "message": "Μορφή αριθμών:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Χρωματισμός μπάρας αναλογιών."
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Προσαρμοζόμενο χρώμα για την μπάρα αναλογιών."
+  },
+  "textColorizeThumbs": {
+    "message": "Χρωματισμός των thumbs"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Προσαρμοζόμενο χρώμα για τα thumb icons."
+  },
+  "textColorTheme": {
+    "message": "Θέματα χρωμάτων:"
+  },
+  "textColorTheme1": {
+    "message": "Classic"
+  },
+  "textColorTheme2": {
+    "message": "Accessible"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textTempUnavailable": {
+    "message": "Προσωρινά μη διαθέσιμο"
+  },
+  "textUpdate": {
+    "message": "Ενημέρωση σε"
+  },
+  "version30installed": {
+    "message": "Εκδοση __RYD_VERSION__ εγκαταστάθηκε"
+  },
+  "whatsnew": {
+    "message": "Τί νέο υπάρχει"
+  },
+  "shortsSupport": {
+    "message": "Υποστήριξη για YouTube Shorts"
+  },
+  "customColors": {
+    "message": "Προσαρμοζόμενα χρώματα για τα κουμπιά και την μπάρα dislike"
+  },
+  "customNumberFormats": {
+    "message": "Προσαρμοζόμενη μορφή αριθμών"
+  },
+  "considerDonating": {
+    "message": "Το μόνο πράγμα που διατηρεί την επέκταση σε λειτουργία είναι οι δωρεές σας, σκεφτείτε να υποστηρίξετε το έργο."
+  },
+  "roundNumbers": {
+    "message": "Εμφάνιση στρογγυλεμένων αριθμών"
+  },
+  "roundNumbersHover": {
+    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (προεπιλεγμένη επιλογή του YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Μορφοποίηση του αριθμού των likes"
+  },
+  "reformatLikesHover": {
+    "message": "Σταθερή μορφοποίηση των likes & dislikes."
+  },
+  "numberFormat": {
+    "message": "Μορφή αριθμών:"
+  },
+  "colorizeRatio": {
+    "message": "Χρωματισμός μπάρας σχέσης"
+  },
+  "colorizeRatioHover": {
+    "message": "Προσαρμοζόμενο χρώμα για την μπάρα αναλογιών."
+  },
+  "colorizeThumbs": {
+    "message": "Χρωματισμός των thumbs"
+  },
+  "colorizeThumbsHover": {
+    "message": "Προσαρμοζόμενο χρώμα για τα thumb icons."
+  },
+  "colorTheme": {
+    "message": "Χρωματικό θέμα:"
+  }
+}
