@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getNumberFormatter should return a correct formatter when falling back to default locale 1`] = `NumberFormat {}`;
+
+exports[`getNumberFormatter should return a correct formatter when using chrome 1`] = `NumberFormat {}`;
+
+exports[`getNumberFormatter should return a correct formatter when using firefox 1`] = `NumberFormat {}`;
+
+exports[`getNumberFormatter should return a correct formatter when using the URL locale (possibly buggy) 1`] = `NumberFormat {}`;
+
+exports[`getNumberFormatter should return a correct formatter when using the URL locale 1`] = `NumberFormat {}`;
+
+exports[`getNumberFormatter should return a correct formatter whith standard option 1`] = `NumberFormat {}`;
+
+exports[`getNumberFormatter should return a correct formatter with compactLong option 1`] = `NumberFormat {}`;

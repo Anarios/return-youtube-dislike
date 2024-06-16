@@ -66,7 +66,8 @@ function getVideoId(url) {
   const urlObject = new URL(url);
   const pathname = urlObject.pathname;
   if (pathname.startsWith("/clip")) {
-    return (document.querySelector("meta[itemprop='videoId']") || document.querySelector("meta[itemprop='identifier']")).content;
+    return (document.querySelector("meta[itemprop='videoId']") || document.querySelector("meta[itemprop='identifier']"))
+      .content;
   } else {
     if (pathname.startsWith("/shorts")) {
       return pathname.slice(8);
@@ -103,7 +104,7 @@ function isVideoLoaded() {
 }
 
 function cLog(message, writer) {
-  if (!extConfig.disableLogging){
+  if (!extConfig.disableLogging) {
     message = `[return youtube dislike]: ${message}`;
     if (writer) {
       writer(message);
@@ -177,6 +178,7 @@ function createObserver(options, callback) {
 
 export {
   numberFormat,
+  getNumberFormatter,
   getBrowser,
   getVideoId,
   isInViewport,
