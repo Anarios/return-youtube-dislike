@@ -284,6 +284,7 @@ function handleDisableVoteSubmissionChangeEvent(value) {
 function handleDisableLoggingChangeEvent(value) {
   extConfig.disableLogging = value;
 }
+
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
 }
@@ -358,6 +359,7 @@ function initializeDisableLogging() {
     }
   });
 }
+
 function initializeColoredThumbs() {
   api.storage.sync.get(["coloredThumbs"], (res) => {
     if (res.coloredThumbs === undefined) {

@@ -1,12 +1,12 @@
 {
   "extensionName": {
-    "message": "Voltar Dislikes do YouTube"
+    "message": "Volta Descurtidas do YouTube"
   },
   "extensionNameBeta": {
-    "message": "Voltar Dislikes do YouTube Beta"
+    "message": "Volta Descurtidas do YouTube Beta"
   },
   "extensionDesc": {
-    "message": "Retorna a capacidade de ver os não-gostados"
+    "message": "Retorna a capacidade de ver descurtidas"
   },
   "textDeveloper": {
     "message": "por Dmitry Selivanov & Comunidade"
@@ -18,55 +18,55 @@
     "message": "Perguntas Frequentes"
   },
   "linkDonate": {
-    "message": "Doe"
+    "message": "Doar"
   },
   "linkHelp": {
     "message": "Ajuda"
   },
   "linkChangelog": {
-    "message": "O que mudou?"
+    "message": "Registro de alterações"
   },
   "legendSettings": {
     "message": "Configurações"
   },
   "textSettings": {
-    "message": "Desativar envios de  Gostei/Não gostei"
+    "message": "Desativar envio de curtidas/descurtidas"
   },
   "textLikesDisabled": {
     "message": "Desativado pelo proprietário"
   },
   "textSettingsHover": {
-    "message": "Pare de contar os gostei e Não gostei."
+    "message": "Para de contar suas curtidas e descurtidas."
   },
   "textRoundingNumbers": {
-    "message": "Arredondar estatísticas gostei/não gostei (comportamento padrão do YouTube)"
+    "message": "Arredondar as estatísticas de curtidas/descurtidas para baixo (comportamento padrão do YouTube)"
   },
   "textRoundingNumbersHover": {
-    "message": "Mostrar números arredondados."
+    "message": "Mostrar estatísticas arredondadas"
   },
   "textConsistentFormat": {
-    "message": "Torna consistentes os Gostados e o formato não gostei"
+    "message": "Tornar o formato de curtidas e descurtidas consistente"
   },
   "textConsistentFormatHover": {
-    "message": "Reformatar números como."
+    "message": "Re-formatar número de curtidas."
   },
   "textNumberFormat": {
-    "message": "Formato do número:"
+    "message": "Formato numérico:"
   },
   "textColorizeRatioBar": {
     "message": "Colorir barra de proporção"
   },
   "textColorizeRatioBarHover": {
-    "message": "Use cores personalizadas para os ícones miniaturas."
+    "message": "Usar cores personalizadas para a barra de proporção."
   },
   "textColorizeThumbs": {
-    "message": "Colorir miniaturas"
+    "message": "Colorir botões"
   },
   "textColorizeThumbsHover": {
-    "message": "Use cores personalizadas para os ícones miniaturas."
+    "message": "Usar cores personalizadas para os botões de curtir e descurtir."
   },
   "textColorTheme": {
-    "message": "Tema de cor:"
+    "message": "Tema de cores:"
   },
   "textColorTheme1": {
     "message": "Clássico"
@@ -75,7 +75,7 @@
     "message": "Acessível"
   },
   "textColorTheme3": {
-    "message": "Neon"
+    "message": "Néon"
   },
   "textTempUnavailable": {
     "message": "Temporariamente Indisponível"
@@ -90,13 +90,13 @@
     "message": "O que há de novo?:"
   },
   "shortsSupport": {
-    "message": "Suporte ao Shorts do YouTube"
+    "message": "Suporte a curtas do YouTube"
   },
   "customColors": {
-    "message": "Cores personalizadas para exibir barra de não curtidas e botões"
+    "message": "Cores personalizadas para barra de proporção e botões"
   },
   "customNumberFormats": {
-    "message": "Formatos de números personalizados"
+    "message": "Formato numérico personalizado"
   },
   "considerDonating": {
     "message": "A única coisa que mantém a extensão funcionando são suas doações, considere apoiar o projeto."
@@ -105,30 +105,30 @@
     "message": "Mostrar números arredondados"
   },
   "roundNumbersHover": {
-    "message": "Arredondar estatísticas gostei/não gostei (comportamento padrão do YouTube)."
+    "message": "Arredondar os números para baixo (comportamento padrão do YouTube)."
   },
   "reformatLikes": {
-    "message": "Reformatar números como"
+    "message": "Re-formatar número de curtidas"
   },
   "reformatLikesHover": {
-    "message": "Torna consistentes os Gostados e o formato não gostei."
+    "message": "Tornar o formato de curtidas e descurtidas consistente."
   },
   "numberFormat": {
-    "message": "Formato do número:"
+    "message": "Formato numérico:"
   },
   "colorizeRatio": {
     "message": "Colorir barra de proporção"
   },
   "colorizeRatioHover": {
-    "message": "Use cores personalizadas para os ícones miniaturas."
+    "message": "Usar cores personalizadas para a barra de proporção."
   },
   "colorizeThumbs": {
-    "message": "Colorir miniaturas"
+    "message": "Colorir botões"
   },
   "colorizeThumbsHover": {
-    "message": "Use cores personalizadas para os ícones miniaturas."
+    "message": "Usar cores personalizadas para os botões de curtir e descurtir."
   },
   "colorTheme": {
-    "message": "Tema de cor:"
+    "message": "Tema de Cores:"
   }
 }
