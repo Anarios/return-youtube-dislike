@@ -23,20 +23,68 @@
   "linkHelp": {
     "message": "Hilfe"
   },
+  "linkChangelog": {
+    "message": "Änderungshistorie"
+  },
   "legendSettings": {
     "message": "Einstellungen"
   },
   "textSettings": {
     "message": "Deaktiviere Like/Dislike-Übermittlung"
   },
+  "textLikesDisabled": {
+    "message": "Deaktiviert vom Ersteller"
+  },
   "textSettingsHover": {
     "message": "Stoppt deine Likes und Dislikes zu zählen."
+  },
+  "textRoundingNumbers": {
+    "message": "Runde Likes/Dislikes ab (Standardverhalten von YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Zeige abgerundete Zahlen."
+  },
+  "textConsistentFormat": {
+    "message": "Mach das Format der Likes und Dislikes einheitlich."
+  },
+  "textConsistentFormatHover": {
+    "message": "Wie Zahlen neu formatieren"
+  },
+  "textNumberFormat": {
+    "message": "Zahlenformat:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Verhältnisbalken einfärben"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Benutzerdefinierte Farben für die Verhältnisleiste verwenden."
+  },
+  "textColorizeThumbs": {
+    "message": "Färbe Daumen-Icons"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Nutze benutzerdefinierte Farben für die Daumen-Icons."
+  },
+  "textColorTheme": {
+    "message": "Farbschema:"
+  },
+  "textColorTheme1": {
+    "message": "Klassisch"
+  },
+  "textColorTheme2": {
+    "message": "Zugänglich"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textTempUnavailable": {
+    "message": "Temporär nicht erreichbar"
   },
   "textUpdate": {
     "message": "aktualisieren auf"
   },
   "version30installed": {
-    "message": "Version 3.0.0.1 installiert"
+    "message": "Version __RYD_VERSION__ installiert"
   },
   "whatsnew": {
     "message": "Was ist neu"
@@ -63,7 +111,7 @@
     "message": "Wie Zahlen neu formatieren"
   },
   "reformatLikesHover": {
-    "message": "Machen Sie das Format der Vorlieben und Abneigungen konsistent."
+    "message": "Mach das Format der Likes und Dislikes einheitlich."
   },
   "numberFormat": {
     "message": "Zahlenformat:"

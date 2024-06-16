@@ -117,6 +117,18 @@ export default {
         tag: "dsty#1614",
         lang: "Українська",
       },
+      {
+        tag: "itsbudyn#6502",
+        lang: "Polski",
+      },
+      {
+        tag: "ArtisGraphics",
+        lang: "Deutsch"
+      },
+      {
+        tag: "gpap#3743",
+        lang: "Magyar",
+      },
     ],
     coolProjects: [
       {

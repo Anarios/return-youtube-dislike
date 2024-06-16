@@ -84,7 +84,7 @@
     "message": "Update to"
   },
   "version30installed": {
-    "message": "Version 3.0.0.1 installed"
+    "message": "Version __RYD_VERSION__ installed"
   },
   "whatsnew": {
     "message": "What's new"

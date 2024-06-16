@@ -42,7 +42,7 @@
     "message": "aktualizovat na"
   },
   "version30installed": {
-    "message": "Verze 3.0.0.1 nainstalována"
+    "message": "Verze __RYD_VERSION__ nainstalována"
   },
   "whatsnew": {
     "message": "Co je nového"
