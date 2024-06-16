@@ -80,7 +80,6 @@ document.getElementById("color_theme").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ colorTheme: ev.target.value });
 });
 
-
 document.getElementById("number_format").addEventListener("change", (ev) => {
   chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
 });
@@ -140,7 +139,7 @@ function initializeVersionNumber() {
   document.getElementById("ext-version").innerHTML = "v" + version;
 
   fetch(
-    "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
+    "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json",
   )
     .then((response) => response.json())
     .then((json) => {
@@ -197,7 +196,6 @@ function initializeColorTheme() {
   });
 }
 
-
 function initializeTooltipPercentage() {
   chrome.storage.sync.get(["showTooltipPercentage"], (res) => {
     handleShowTooltipPercentageChangeEvent(res.showTooltipPercentage);
@@ -238,7 +236,7 @@ chrome.storage.onChanged.addListener(storageChangeHandler);
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
-      changes.disableVoteSubmission.newValue
+      changes.disableVoteSubmission.newValue,
     );
   }
   if (changes.coloredThumbs !== undefined) {
@@ -255,12 +253,12 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.showTooltipPercentage !== undefined) {
     handleShowTooltipPercentageChangeEvent(
-      changes.showTooltipPercentage.newValue
+      changes.showTooltipPercentage.newValue,
     );
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue
+      changes.numberDisplayReformatLikes.newValue,
     );
   }
 }
@@ -298,8 +296,6 @@ function updateColorThemePreviewContent(themeName) {
     getColorFromTheme(themeName, false);
 }
 
-
-
 function handleNumberDisplayFormatChangeEvent(value) {
   config.numberDisplayFormat = value;
   document
@@ -336,7 +332,7 @@ function getNumberFormatter(optionSelect) {
     userLocales = new URL(
       Array.from(document.querySelectorAll("head > link[rel='search']"))
         ?.find((n) => n?.getAttribute("href")?.includes("?locale="))
-        ?.getAttribute("href")
+        ?.getAttribute("href"),
     )?.searchParams?.get("locale");
   } catch {}
 
@@ -359,7 +355,7 @@ function getNumberFormatter(optionSelect) {
     {
       notation: formatterNotation,
       compactDisplay: formatterCompactDisplay,
-    }
+    },
   );
   return formatter;
 }
@@ -368,7 +364,7 @@ function getNumberFormatter(optionSelect) {
   let status = document.getElementById("status");
   let serverStatus = document.getElementById("server-status");
   let resp = await fetch(
-    "https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g"
+    "https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g",
   );
   let result = await resp.status;
   if (result === 200) {

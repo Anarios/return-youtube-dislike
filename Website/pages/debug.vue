@@ -177,7 +177,7 @@ export default {
     setTimeout(() => {
       this.$axios
         .$get(
-          "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
+          "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json",
         )
         .then((res) => {
           this.userInformation.extension.latestExtensionVersion = res.version;

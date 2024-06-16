@@ -1,4 +1,5 @@
 {
+
     "extensionName": {
       "message": "Return YouTube Dislike"
     },
@@ -131,4 +132,4 @@
     "colorTheme": {
       "message": "Kleurenthema:"
     }
-  }
+}

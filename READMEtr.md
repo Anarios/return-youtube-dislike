@@ -9,7 +9,6 @@
 
 Bunu diğer dillerde okuyun: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Français](READMEfr.md), [Nederlands](READMEnl.md), [日本語](READMEja.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md)
 
-
 # YouTube Dislike Sayısını Geri Getir
 
 <p align="center">

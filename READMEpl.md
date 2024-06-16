@@ -22,7 +22,7 @@ Read this in other languages: [English](README.md), [русский](READMEru.md
 
 Dnia 10 listopada 2021, Google [ogłosiło](https://blog.youtube/news-and-events/update-to-youtube/), że licznik łapek w dół na YouTube zostanie usunięty.
 
-Dodatkowo, pole `dislike` w API YouTube zostało [usunięte](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 grudnia 2021, usuwając przy tym jakąkolwiek możliwość oceny jakości filmu przed obejrzeniem. 
+Dodatkowo, pole `dislike` w API YouTube zostało [usunięte](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 grudnia 2021, usuwając przy tym jakąkolwiek możliwość oceny jakości filmu przed obejrzeniem.
 
 ## Co to robi
 

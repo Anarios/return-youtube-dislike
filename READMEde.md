@@ -9,7 +9,6 @@
 
 Lesen sie dies in anderen Sprachen: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md)
 
-
 # Return YouTube Dislike
 
 <p align="center">
@@ -86,10 +85,6 @@ Sie können das Projekt unterstützen indem Sie unter den folgenden Link spenden
 
 ## Sponsoren <!-- ## Sponsors -->
 
-[Piepacker](https://piepacker.com)
-
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
-
-[PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
 [Werde unser Sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
