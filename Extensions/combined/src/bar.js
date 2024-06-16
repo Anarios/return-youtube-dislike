@@ -19,8 +19,8 @@ function createRateBar(likes, dislikes) {
     }
 
     const widthPx =
-      getLikeButton().clientWidth +
-      getDislikeButton().clientWidth +
+      parseFloat(window.getComputedStyle(getLikeButton()).width) +
+      parseFloat(window.getComputedStyle(getDislikeButton()).width) +
       (isRoundedDesign() ? 0 : 8);
 
     const widthPercent =
