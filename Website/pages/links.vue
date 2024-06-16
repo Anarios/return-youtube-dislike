@@ -124,7 +124,11 @@ export default {
       {
         tag: "ArtisGraphics",
         lang: "Deutsch"
-      }
+      },
+      {
+        tag: "gpap#3743",
+        lang: "Magyar",
+      },
     ],
     coolProjects: [
       {
