@@ -1,11 +1,12 @@
-import { sv_SE } from "vuetify/src/locale";
+import { sv } from "vuetify/src/locale";
 
 export default {
-  ...sv_SE,
+  ...sv,
   home: {
     name: "Hem",
     title: "Return YouTube Dislike",
-    subtitle: "Webbläsartillägg och ett API som visar antalet ogilla på Youtube",
+    subtitle:
+      "Webbläsartillägg och ett API som visar antalet ogilla på Youtube",
     ukraine: "Stöd Ukraina",
     sponsors: "Sponsorer",
   },
@@ -43,7 +44,8 @@ export default {
     },
     fetching: {
       title: "Grundläggande handledning för hämtning",
-      subtitle: "Exempel för att hämta röster för ett bestämt YouTubevideo-ID: ",
+      subtitle:
+        "Exempel för att hämta röster för ett bestämt YouTubevideo-ID: ",
       title2: "Example Request: ",
       url: "Request URL: ",
       method: "Request Method: ",
@@ -57,7 +59,8 @@ export default {
   help: {
     name: "Hjälp",
     title: "Felsökning",
-    bullet1: "Se till att du har den senaste versionen av tillägget installerat, ",
+    bullet1:
+      "Se till att du har den senaste versionen av tillägget installerat, ",
     bullet11: "just nu",
     bullet2:
       "Försök att avinstallera tillägget och installera det igen, starta sedan om webbläsaren (alla aktiva fönster, inte bara en flik)",
@@ -65,7 +68,8 @@ export default {
     bullet31: "du bör se vanlig text: ",
     bullet4: "Om inget av ovanstående hjälper - rapportera ditt problem i",
     bullet41: "i vår",
-    bullet4a: "Tala om för oss ditt operativsystem, webbläsarnamn och webbläsarversion",
+    bullet4a:
+      "Tala om för oss ditt operativsystem, webbläsarnamn och webbläsarversion",
     bullet4b:
       "Ta en skärmdump av sidan du har problem med (t.ex en youtube-videosida) med konsolfönstret öppet (tryck ",
     bullet4b1: ") - exempel på skärmdump nedan.",
@@ -97,7 +101,7 @@ export default {
     bullet6: "Hur fungerar API/Backend?",
     bullet6text:
       "Backend använder arkiverad data från när YouTubes API fortfarande returnerade antalet ogilla. Inom en snar framtid kommer vi att tillåta innehållsskapare att enkelt och säkert skicka in sina ogilla och vi kommer att lägga till ArchiveTeams arkiverade data (4,56 miljarder videor) i vår nuvarande databas. Du kan också se en video om ämnet.",
-    bullet7: "Varför visar antalet ogilla "OGILLA ÄR INAKTIVERAT"?",
+    bullet7: "Varför visar antalet ogilla 'OGILLA ÄR INAKTIVERAT'?",
     bullet7text:
       "I bland kan en nyligen uppladdad video visa 'OGILLA ÄR INAKTIVERAT' även om ägaren inte har inaktiverat den. Detta beror på hur informationen om ogilla är inaktiverat hämtas ut. Det bör försvinna inom några timmar eller genom att gilla eller ogilla videon och uppdatera sidan (förhoppningsvis).",
   },

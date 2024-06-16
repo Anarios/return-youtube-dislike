@@ -6,6 +6,7 @@ let api;
 /** stores extension's global config */
 let extConfig = {
   disableVoteSubmission: false,
+  disableLogging: true,
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
@@ -40,7 +41,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         headers: {
           Accept: "application/json",
         },
-      }
+      },
     )
       .then((response) => response.json())
       .then((response) => {
@@ -153,7 +154,7 @@ async function register() {
       headers: {
         Accept: "application/json",
       },
-    }
+    },
   ).then((response) => response.json());
   const solvedPuzzle = await solvePuzzle(registrationResponse);
   if (!solvedPuzzle.solution) {
@@ -210,7 +211,7 @@ function countLeadingZeroes(uInt8View, limit) {
 
 async function solvePuzzle(puzzle) {
   let challenge = Uint8Array.from(atob(puzzle.challenge), (c) =>
-    c.charCodeAt(0)
+    c.charCodeAt(0),
   );
   let buffer = new ArrayBuffer(20);
   let uInt8View = new Uint8Array(buffer);
@@ -255,7 +256,7 @@ function generateUserID(length = 36) {
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
-      changes.disableVoteSubmission.newValue
+      changes.disableVoteSubmission.newValue,
     );
   }
   if (changes.coloredThumbs !== undefined) {
@@ -272,17 +273,19 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue
+      changes.numberDisplayReformatLikes.newValue,
     );
   }
+  if (changes.disableLogging !== undefined) {
+    handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
   if (changes.showTooltipPercentage !== undefined) {
     handleShowTooltipPercentageChangeEvent(
-      changes.showTooltipPercentage.newValue
+      changes.showTooltipPercentage.newValue,
     );
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue
+      changes.numberDisplayReformatLikes.newValue,
     );
   }
 }
@@ -296,6 +299,9 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   }
 }
 
+function handleDisableLoggingChangeEvent(value) {
+  extConfig.disableLogging = value;
+}
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
 }
@@ -342,6 +348,7 @@ api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeDisableLogging();
   initializeColoredThumbs();
   initializeColoredBar();
   initializeColorTheme();
@@ -362,6 +369,16 @@ function initializeDisableVoteSubmission() {
   });
 }
 
+function initializeDisableLogging(){
+  api.storage.sync.get(['disableLogging'],(res)=>{
+    if (res.disableLogging === undefined) {
+      api.storage.sync.set({disableLogging:true});
+    }
+    else {
+      extConfig.disableLogging = res.disableLogging;
+    }
+  });
+}
 function initializeColoredThumbs() {
   api.storage.sync.get(["coloredThumbs"], (res) => {
     if (res.coloredThumbs === undefined) {

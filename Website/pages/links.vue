@@ -118,6 +118,14 @@ export default {
         lang: "Українська",
       },
       {
+        tag: "itsbudyn#6502",
+        lang: "Polski",
+      },
+      {
+        tag: "ArtisGraphics",
+        lang: "Deutsch"
+      },
+      {
         tag: "gpap#3743",
         lang: "Magyar",
       },

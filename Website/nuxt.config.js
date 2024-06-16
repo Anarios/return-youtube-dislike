@@ -7,8 +7,9 @@ import ja from "./_locales/ja";
 import fr from "./_locales/fr";
 import uk from "./_locales/uk";
 import ko from "./_locales/ko";
+import pl from "./_locales/pl";
+import de from "./_locales/de";
 import hu from "./_locales/hu";
-// import de from "./_locales/de";
 // ...
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -53,7 +54,7 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     lang: {
-      locales: { en, es, tr, ru, cs, ja, fr, uk, ko, hu /* de, ...*/ },
+      locales: { en, es, tr, ru, cs, ja, fr, uk, ko, pl, de, hu /*...*/ },
       current: "en",
     },
     theme: {

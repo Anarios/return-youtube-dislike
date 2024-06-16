@@ -12,9 +12,10 @@ import {
   cLog,
   numberFormat,
   getColorFromTheme,
+  querySelector,
+  localize,
+  createObserver,
 } from "./utils";
-import { localize } from "./utils";
-import { createStarRating } from "./starRating";
 
 //TODO: Do not duplicate here and in ryd.background.js
 const apiUrl = "https://returnyoutubedislikeapi.com";
@@ -24,6 +25,7 @@ const NEUTRAL_STATE = "NEUTRAL_STATE";
 
 let extConfig = {
   disableVoteSubmission: false,
+  disableLogging: true,
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic",
@@ -31,6 +33,33 @@ let extConfig = {
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
+  selectors: {
+    dislikeTextContainer: [],
+    likeTextContainer: [],
+    buttons: {
+      shorts: {
+        mobile: [],
+        desktop: [],
+      },
+      regular: {
+        mobile: [],
+        desktopMenu: [],
+        desktopNoMenu: [],
+      },
+      likeButton: {
+        segmented: [],
+        segmentedGetButtons: [],
+        notSegmented: [],
+      },
+      dislikeButton: {
+        segmented: [],
+        segmentedGetButtons: [],
+        notSegmented: [],
+      },
+    },
+    menuContainer: [],
+    roundedDesign: [],
+  },
 };
 
 let storedData = {
@@ -52,73 +81,81 @@ function isNewDesign() {
 }
 
 function isRoundedDesign() {
-  return document.getElementById("segmented-like-button") !== null;
+  return querySelector(extConfig.selectors.roundedDesign) !== null;
 }
 
-let mutationObserver = new Object();
+let shortsObserver = null;
 
-if (isShorts() && mutationObserver.exists !== true) {
-  cLog("initializing mutation observer");
-  mutationObserver.options = {
-    childList: false,
-    attributes: true,
-    subtree: false,
-  };
-  mutationObserver.exists = true;
-  mutationObserver.observer = new MutationObserver(function (
-    mutationList,
-    observer
-  ) {
-    mutationList.forEach((mutation) => {
-      if (
-        mutation.type === "attributes" &&
-        mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
-        mutation.target.id === "button"
-      ) {
-        // cLog('Short thumb button status changed');
-        if (mutation.target.getAttribute("aria-pressed") === "true") {
-          mutation.target.style.color =
-            mutation.target.parentElement.parentElement.id === "like-button"
-              ? getColorFromTheme(true)
-              : getColorFromTheme(false);
-        } else {
-          mutation.target.style.color = "unset";
+if (isShorts() && !shortsObserver) {
+  cLog("Initializing shorts mutation observer");
+  shortsObserver = createObserver(
+    {
+      attributes: true,
+    },
+    (mutationList) => {
+      mutationList.forEach((mutation) => {
+        if (
+          mutation.type === "attributes" &&
+          mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
+          mutation.target.id === "button"
+        ) {
+          // cLog('Short thumb button status changed');
+          if (mutation.target.getAttribute("aria-pressed") === "true") {
+            mutation.target.style.color =
+              mutation.target.parentElement.parentElement.id === "like-button"
+                ? getColorFromTheme(true)
+                : getColorFromTheme(false);
+          } else {
+            mutation.target.style.color = "unset";
+          }
+          return;
         }
-        return;
-      }
-      cLog(
-        "unexpected mutation observer event: " + mutation.target + mutation.type
-      );
-    });
-  });
+        cLog(
+          "Unexpected mutation observer event: " +
+            mutation.target +
+            mutation.type,
+        );
+      });
+    },
+  );
 }
 
 function isLikesDisabled() {
   // return true if the like button's text doesn't contain any number
   if (isMobile()) {
     return /^\D*$/.test(
-      getButtons().children[0].querySelector(".button-renderer-text").innerText
+      getButtons().children[0].querySelector(".button-renderer-text").innerText,
     );
   }
-  return /^\D*$/.test(getButtons().children[0].innerText);
+  return /^\D*$/.test(getLikeTextContainer().innerText);
 }
 
 function isVideoLiked() {
   if (isMobile()) {
     return (
-      getLikeButton().querySelector("button").getAttribute("aria-label") === "true"
+      getLikeButton().querySelector("button").getAttribute("aria-label") ===
+      "true"
     );
   }
-  return getLikeButton().classList.contains("style-default-active") || getLikeButton().querySelector('button')?.getAttribute('aria-pressed') === 'true';
+  return (
+    getLikeButton().classList.contains("style-default-active") ||
+    getLikeButton().querySelector("button")?.getAttribute("aria-pressed") ===
+      "true"
+  );
 }
 
 function isVideoDisliked() {
   if (isMobile()) {
     return (
-      getDislikeButton().querySelector("button").getAttribute("aria-label") === "true"
+      getDislikeButton().querySelector("button").getAttribute("aria-label") ===
+      "true"
     );
   }
-  return getDislikeButton().classList.contains("style-default-active") || getDislikeButton().querySelector('button')?.getAttribute('aria-pressed') === 'true';
+  return (
+    getDislikeButton().classList.contains("style-default-active") ||
+    getDislikeButton().querySelector("button")?.getAttribute("aria-pressed") ===
+      "true"
+  );
 }
 
 function getState(storedData) {
@@ -133,28 +170,26 @@ function getState(storedData) {
 
 //---   Sets The Likes And Dislikes Values   ---//
 function setLikes(likesCount) {
-  cLog(`SET likes ${likesCount}`)
+  cLog(`SET likes ${likesCount}`);
   getLikeTextContainer().innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
-  cLog(`SET dislikes ${dislikesCount}`)
+  cLog(`SET dislikes ${dislikesCount}`);
   getDislikeTextContainer()?.removeAttribute("is-empty");
-  getDislikeTextContainer()?.removeAttribute('is-empty');
   if (!isLikesDisabled()) {
     if (isMobile()) {
       getButtons().children[1].querySelector(
-        ".button-renderer-text"
+        ".button-renderer-text",
       ).innerText = dislikesCount;
       return;
     }
     getDislikeTextContainer().innerText = dislikesCount;
-
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {
       getButtons().children[1].querySelector(
-        ".button-renderer-text"
+        ".button-renderer-text",
       ).innerText = localize("TextLikesDisabled");
       return;
     }
@@ -170,12 +205,11 @@ function getLikeCountFromButton() {
       return false;
     }
 
-    let likeButton = getLikeButton()
-    .querySelector("yt-formatted-string#text") ??
-    getLikeButton().querySelector("button");
+    let likeButton =
+      getLikeButton().querySelector("yt-formatted-string#text") ??
+      getLikeButton().querySelector("button");
 
-    let likesStr = likeButton.getAttribute("aria-label")
-    .replace(/\D/g, "");
+    let likesStr = likeButton.getAttribute("aria-label").replace(/\D/g, "");
     return likesStr.length > 0 ? parseInt(likesStr) : false;
   } catch {
     return false;
@@ -198,10 +232,10 @@ function processResponse(response, storedData) {
     if (isShorts()) {
       // for shorts, leave deactivated buttons in default color
       let shortLikeButton = getLikeButton().querySelector(
-        "tp-yt-paper-button#button"
+        "tp-yt-paper-button#button",
       );
       let shortDislikeButton = getDislikeButton().querySelector(
-        "tp-yt-paper-button#button"
+        "tp-yt-paper-button#button",
       );
       if (shortLikeButton.getAttribute("aria-pressed") === "true") {
         shortLikeButton.style.color = getColorFromTheme(true);
@@ -209,14 +243,8 @@ function processResponse(response, storedData) {
       if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
         shortDislikeButton.style.color = getColorFromTheme(false);
       }
-      mutationObserver.observer.observe(
-        shortLikeButton,
-        mutationObserver.options
-      );
-      mutationObserver.observer.observe(
-        shortDislikeButton,
-        mutationObserver.options
-      );
+      shortsObserver.observe(shortLikeButton);
+      shortsObserver.observe(shortDislikeButton);
     } else {
       getLikeButton().style.color = getColorFromTheme(true);
       getDislikeButton().style.color = getColorFromTheme(false);
@@ -228,18 +256,17 @@ function processResponse(response, storedData) {
 
 // Tells the user if the API is down
 function displayError(error) {
-  getDislikeTextContainer().innerText = localize(
-    "textTempUnavailable"
-  );
+  getDislikeTextContainer().innerText = localize("textTempUnavailable");
 }
 
 async function setState(storedData) {
   storedData.previousState = isVideoDisliked()
     ? DISLIKED_STATE
     : isVideoLiked()
-    ? LIKED_STATE
-    : NEUTRAL_STATE;
+      ? LIKED_STATE
+      : NEUTRAL_STATE;
   let statsSet = false;
+  cLog("Video is loaded. Adding buttons...");
 
   let videoId = getVideoId(window.location.href);
   let likeCount = getLikeCountFromButton() || null;
@@ -251,7 +278,7 @@ async function setState(storedData) {
       headers: {
         Accept: "application/json",
       },
-    }
+    },
   )
     .then((response) => {
       if (!response.ok) displayError(response.error);
@@ -266,12 +293,13 @@ async function setState(storedData) {
   }
 }
 
-function setInitialState() {
-  setState(storedData);
+async function setInitialState() {
+  await setState(storedData);
 }
 
-function initExtConfig() {
+async function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeDisableLogging();
   initializeColoredThumbs();
   initializeColoredBar();
   initializeColorTheme();
@@ -279,6 +307,21 @@ function initExtConfig() {
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
+  await initializeSelectors();
+}
+
+async function initializeSelectors() {
+  console.log("initializing selectors");
+  let result = await fetch(`${apiUrl}/configs/selectors`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => {});
+  extConfig.selectors = result ?? extConfig.selectors;
+  console.log(result);
 }
 
 function initializeDisableVoteSubmission() {
@@ -287,6 +330,16 @@ function initializeDisableVoteSubmission() {
       getBrowser().storage.sync.set({ disableVoteSubmission: false });
     } else {
       extConfig.disableVoteSubmission = res.disableVoteSubmission;
+    }
+  });
+}
+
+function initializeDisableLogging() {
+  getBrowser().storage.sync.get(["disableLogging"], (res) => {
+    if (res.disableLogging === undefined) {
+      getBrowser().storage.sync.set({ disableLogging: true });
+    } else {
+      extConfig.disableLogging = res.disableLogging;
     }
   });
 }
