@@ -1,5 +1,8 @@
 /* Variables */
 :root {
+  color-scheme: dark;
+
+  --primary: #cc2929;
   --primary: #f39090;
   --secondary: #502e2e;
   --tertiary: #221818;
