@@ -133,7 +133,7 @@ export default {
   },
   mounted() {
     fetch(
-      "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json"
+      "https://raw.githubusercontent.com/Anarios/return-youtube-dislike/main/Extensions/combined/manifest-chrome.json",
     )
       .then((response) => response.json())
       .then((json) => {

@@ -1,4 +1,4 @@
-Bunu diğer dillerde okuyun: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Français](CONTRIBUTINGfr.md)
+Bunu diğer dillerde okuyun: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md)
 
 # "YouTube Dislike Sayısını Geri Getir"in katkı kılavuzuna Hoş Geldiniz
 

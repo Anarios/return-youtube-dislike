@@ -6,10 +6,10 @@
     "message": "Voltar Dislikes do YouTube Beta"
   },
   "extensionDesc": {
-    "message": "Voltar os Deslikes do YouTube"
+    "message": "Retorna a capacidade de ver os não-gostados"
   },
   "textDeveloper": {
-    "message": "por Dmitry Selivanov e Comunidade"
+    "message": "por Dmitry Selivanov & Comunidade"
   },
   "linkWebsite": {
     "message": "Website"
@@ -23,40 +23,112 @@
   "linkHelp": {
     "message": "Ajuda"
   },
+  "linkChangelog": {
+    "message": "O que mudou?"
+  },
   "legendSettings": {
     "message": "Configurações"
   },
   "textSettings": {
-    "message": "Desativar envio de Curtidas/Não Curtidas"
+    "message": "Desativar envios de  Gostei/Não gostei"
   },
   "textLikesDisabled": {
     "message": "Desativado pelo proprietário"
   },
   "textSettingsHover": {
-    "message": "Parar de contar suas curtidas e não curtidas."
+    "message": "Pare de contar os gostei e Não gostei."
+  },
+  "textRoundingNumbers": {
+    "message": "Arredondar estatísticas gostei/não gostei (comportamento padrão do YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Mostrar números arredondados."
+  },
+  "textConsistentFormat": {
+    "message": "Torna consistentes os Gostados e o formato não gostei"
+  },
+  "textConsistentFormatHover": {
+    "message": "Reformatar números como."
+  },
+  "textNumberFormat": {
+    "message": "Formato do número:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colorir barra de proporção"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Use cores personalizadas para os ícones miniaturas."
+  },
+  "textColorizeThumbs": {
+    "message": "Colorir miniaturas"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Use cores personalizadas para os ícones miniaturas."
+  },
+  "textColorTheme": {
+    "message": "Tema de cor:"
+  },
+  "textColorTheme1": {
+    "message": "Clássico"
+  },
+  "textColorTheme2": {
+    "message": "Acessível"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
   },
   "textTempUnavailable": {
-    "message": "Temporariamente indisponível"
+    "message": "Temporariamente Indisponível"
   },
   "textUpdate": {
     "message": "Atualizar para"
   },
   "version30installed": {
-    "message": "Versão 3.0.0.1 instalada"
+    "message": "Versão __RYD_VERSION__ instalada"
   },
   "whatsnew": {
-    "message": "O que há de novo?"
+    "message": "O que há de novo?:"
   },
   "shortsSupport": {
-    "message": "Suporte para Shorts"
+    "message": "Suporte ao Shorts do YouTube"
   },
   "customColors": {
-    "message": "Cores personalizadas para barra de não curtidas e botões"
+    "message": "Cores personalizadas para exibir barra de não curtidas e botões"
   },
   "customNumberFormats": {
-    "message": "Formato de números personalizados"
+    "message": "Formatos de números personalizados"
   },
   "considerDonating": {
     "message": "A única coisa que mantém a extensão funcionando são suas doações, considere apoiar o projeto."
+  },
+  "roundNumbers": {
+    "message": "Mostrar números arredondados"
+  },
+  "roundNumbersHover": {
+    "message": "Arredondar estatísticas gostei/não gostei (comportamento padrão do YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Reformatar números como"
+  },
+  "reformatLikesHover": {
+    "message": "Torna consistentes os Gostados e o formato não gostei."
+  },
+  "numberFormat": {
+    "message": "Formato do número:"
+  },
+  "colorizeRatio": {
+    "message": "Colorir barra de proporção"
+  },
+  "colorizeRatioHover": {
+    "message": "Use cores personalizadas para os ícones miniaturas."
+  },
+  "colorizeThumbs": {
+    "message": "Colorir miniaturas"
+  },
+  "colorizeThumbsHover": {
+    "message": "Use cores personalizadas para os ícones miniaturas."
+  },
+  "colorTheme": {
+    "message": "Tema de cor:"
   }
 }

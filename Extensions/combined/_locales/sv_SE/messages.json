@@ -1,0 +1,134 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Återställer förmågan att se ogilla"
+  },
+  "textDeveloper": {
+    "message": "av Dmitry Selivanov & Community"
+  },
+  "linkWebsite": {
+    "message": "Hemsida"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
+  "linkDonate": {
+    "message": "Donera"
+  },
+  "linkHelp": {
+    "message": "Hjälp"
+  },
+  "linkChangelog": {
+    "message": "Ändringslogg"
+  },
+  "legendSettings": {
+    "message": "Inställningar"
+  },
+  "textSettings": {
+    "message": "Inaktivera gilla-/ogilla-inskickningar"
+  },
+  "textLikesDisabled": {
+    "message": "Inaktiverad av ägaren"
+  },
+  "textSettingsHover": {
+    "message": "Slutar räkna dina gilla och ogilla."
+  },
+  "textRoundingNumbers": {
+    "message": "Avrunda statistiken neråt för gilla/ogilla (standard YouTube-beteende)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Visa avrundad statistik."
+  },
+  "textConsistentFormat": {
+    "message": "Gör formatet på gilla och ogilla konsekvent"
+  },
+  "textConsistentFormatHover": {
+    "message": "Omformatera som siffror."
+  },
+  "textNumberFormat": {
+    "message": "Sifforformat:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Färgsätt förhållandefältet"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Använd anpassade färger för förhållandefältet."
+  },
+  "textColorizeThumbs": {
+    "message": "Färglägg tummarna"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Använd anpassade färger för tumikoner."
+  },
+  "textColorTheme": {
+    "message": "Färgtema:"
+  },
+  "textColorTheme1": {
+    "message": "Klassisk"
+  },
+  "textColorTheme2": {
+    "message": "Tillgänglig"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textTempUnavailable": {
+    "message": "Tillfälligt otillgänglig"
+  },
+  "textUpdate": {
+    "message": "Uppdatera till"
+  },
+  "version30installed": {
+    "message": "Version __RYD_VERSION__ installerad"
+  },
+  "whatsnew": {
+    "message": "Vad är nytt"
+  },
+  "shortsSupport": {
+    "message": "YouTube Shorts Support"
+  },
+  "customColors": {
+    "message": "Anpassade färger för knappar och fältet ogilla"
+  },
+  "customNumberFormats": {
+    "message": "Anpassade sifforformat"
+  },
+  "considerDonating": {
+    "message": "Det enda som håller tillägget i gång är dina donationer, överväg att stöda projektet."
+  },
+  "roundNumbers": {
+    "message": "Visa avrundade siffror"
+  },
+  "roundNumbersHover": {
+    "message": "Avrunda siffrorna neråt (standard YouTube-beteende)."
+  },
+  "reformatLikes": {
+    "message": "Omformatera som siffror"
+  },
+  "reformatLikesHover": {
+    "message": "Gör formatet på gilla och ogilla konsekvent."
+  },
+  "numberFormat": {
+    "message": "Sifforformat:"
+  },
+  "colorizeRatio": {
+    "message": "Färgsätt förhållandefältet"
+  },
+  "colorizeRatioHover": {
+    "message": "Använd anpassade färger för förhållandefältet."
+  },
+  "colorizeThumbs": {
+    "message": "Färglägg tummarna"
+  },
+  "colorizeThumbsHover": {
+    "message": "Använd anpassade färger för tumikoner."
+  },
+  "colorTheme": {
+    "message": "Färgtema:"
+  }
+}

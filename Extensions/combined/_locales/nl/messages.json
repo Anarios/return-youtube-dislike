@@ -1,0 +1,135 @@
+{
+
+    "extensionName": {
+      "message": "Return YouTube Dislike"
+    },
+    "extensionNameBeta": {
+      "message": "Return YouTube Dislike Beta"
+    },
+    "extensionDesc": {
+      "message": "Herstelt de functie om dislikes te kunnen zien"
+    },
+    "textDeveloper": {
+      "message": "door Dmitry Selivanov & Gemeenschap"
+    },
+    "linkWebsite": {
+      "message": "Website"
+    },
+    "linkFAQ": {
+      "message": "FAQ"
+    },
+    "linkDonate": {
+      "message": "Doneer"
+    },
+    "linkHelp": {
+      "message": "Help"
+    },
+    "linkChangelog": {
+      "message": "Wijzigingslog"
+    },
+    "legendSettings": {
+      "message": "Instellingen"
+    },
+    "textSettings": {
+      "message": "Inzending voor leuk/niet leuk uitschakelen"
+    },
+    "textLikesDisabled": {
+      "message": "Uitgeschakeld door eigenaar"
+    },
+    "textSettingsHover": {
+      "message": "Stopt met het tellen van je leuks en niet leuks"
+    },
+    "textRoundingNumbers": {
+      "message": "Statistieken voor leuk/niet leuk naar beneden afronden (standaard YouTube-gedrag)"
+    },
+    "textRoundingNumbersHover": {
+      "message": "Afgeronde statistieken weergeven."
+    },
+    "textConsistentFormat": {
+      "message": "Maak het formaat voor likes en dislikes consistent"
+    },
+    "textConsistentFormatHover": {
+      "message": "Herformatteer als getallen."
+    },
+    "textNumberFormat": {
+      "message": "Getalnotatie:"
+    },
+    "textColorizeRatioBar": {
+      "message": "Verhoudingsbalk inkleuren"
+    },
+    "textColorizeRatioBarHover": {
+      "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
+    },
+    "textColorizeThumbs": {
+      "message": "Duimpjes inkleuren"
+    },
+    "textColorizeThumbsHover": {
+      "message": "Gebruik aangepaste kleuren voor duimpictogrammen."
+    },
+    "textColorTheme": {
+      "message": "Kleurenthema:"
+    },
+    "textColorTheme1": {
+      "message": "Klassiek"
+    },
+    "textColorTheme2": {
+      "message": "Beschikbaar"
+    },
+    "textColorTheme3": {
+      "message": "Neon"
+    },
+    "textTempUnavailable": {
+      "message": "Tijdelijk niet beschikbaar"
+    },
+    "textUpdate": {
+      "message": "Actualiseer naar"
+    },
+    "version30installed": {
+      "message": "Versie 3.0.0.13 geïnstalleerd"
+    },
+    "whatsnew": {
+      "message": "Wat is er nieuw"
+    },
+    "shortsSupport": {
+      "message": "Ondersteuning voor YouTube Shorts"
+    },
+    "customColors": {
+      "message": "Aangepaste kleuren voor afkeerbalk en knoppen"
+    },
+    "customNumberFormats": {
+      "message": "Aangepaste getalnotaties"
+    },
+    "considerDonating": {
+      "message": "Het enige dat de extensie draaiende houdt, zijn uw donaties. Overweeg alstublieft om het project te steunen."
+    },
+    "roundNumbers": {
+      "message": "Afgeronde getallen weergeven"
+    },
+    "roundNumbersHover": {
+      "message": "Rond getallen naar beneden af (standaard YouTube-gedrag)."
+    },
+    "reformatLikes": {
+      "message": "Opnieuw formatteren zoals getallen"
+    },
+    "reformatLikesHover": {
+      "message": "Maak het formaat voor leuk en niet leuk consistent."
+    },
+    "numberFormat": {
+      "message": "Getalnotatie:"
+    },
+    "colorizeRatio": {
+      "message": "Verhoudingsbalk inkleuren"
+    },
+    "colorizeRatioHover": {
+      "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
+    },
+    "colorizeThumbs": {
+      "message": "Duimpjes inkleuren"
+    },
+    "colorizeThumbsHover": {
+      "message": "Gebruik aangepaste kleuren voor de duimpictogrammen."
+    },
+    "colorTheme": {
+      "message": "Kleurenthema:"
+    }
+}

@@ -1,5 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+
+  <!---   HEADER   -->
   <head>
     <meta content="text/html; charset=utf-8" />
     <title title="__MSG_extensionName__">__MSG_extensionName__</title>
@@ -11,15 +13,10 @@
       rel="stylesheet"
     />
   </head>
+  <!--   END HEADER -->
   <body>
     <center>
-      <svg width="48" viewBox="0 0 24 24">
-        <path
-          d="M14.9 3H6c-.9 0-1.6.5-1.9 1.2l-3 7c-.1.3-.1.5-.1.7v2c0 1.1.9 2 2 2h6.3l-.9 4.5c-.1.5 0 1 .4 1.4l1.1 1.1 6.5-6.6c.4-.4.6-.9.6-1.4V5c-.1-1.1-1-2-2.1-2zm7.4 12.8h-2.9c-.4 0-.7-.3-.7-.7V3.9c0-.4.3-.7.7-.7h2.9c.4 0 .7.3.7.7V15c0 .4-.3.8-.7.8z"
-          fill="red"
-        />
-        <path d="m8 12.5 5.1-2.9L8 6.7v5.8z" fill="#fff" />
-      </svg>
+      <img src="icons/logo.svg" />
       <h1 style="margin-bottom: 0.75rem" title="__MSG_extensionName__">
         __MSG_extensionName__
       </h1>
@@ -27,27 +24,29 @@
         __MSG_textDeveloper__
       </p>
 
-      <button id="link_website" title="__MSG_linkWebsite__">
+      <button class="m3-btn" id="link_website" title="__MSG_linkWebsite__">
         __MSG_linkWebsite__
       </button>
       <button
-        style="margin-top: 0.3em; background: #ff0000"
+        class="m3-btn m3-primary"
+        style="margin-top: 0.3em;"
         id="link_donate"
         title="__MSG_linkDonate__"
       >
         __MSG_linkDonate__
       </button>
-      <button id="link_discord">Discord</button>
+      <button class="m3-btn" id="link_discord">Discord</button>
       <br />
-      <button style="margin-top: 0.3rem" id="link_faq" title="__MSG_linkFAQ__">
+      <button class="m3-btn" style="margin-top: 0.3rem" id="link_faq" title="__MSG_linkFAQ__">
         __MSG_linkFAQ__
       </button>
-      <button id="link_github">GitHub</button>
-      <button style="margin-top: 0.3em" id="link_help" title="__MSG_linkHelp__">
+      <button class="m3-btn" id="link_github">GitHub</button>
+      <button class="m3-btn" style="margin-top: 0.3em" id="link_help" title="__MSG_linkHelp__">
         __MSG_linkHelp__
       </button>
       <br />
       <button
+        class="m3-btn"
         style="margin-top: 0.3em"
         id="link_changelog"
         title="__MSG_linkChangelog__"
@@ -85,7 +84,6 @@
         />
       </svg>
     </button>
-
     <!-- bottom-right -->
     <div id="ext">
       <a
@@ -98,16 +96,17 @@
 
     <!-- dialog box -->
     <fieldset id="advancedSettings">
-      <legend id="advancedLegend" title="__MSG_legendSettings__">
-        __MSG_legendSettings__
-      </legend>
-
       <label class="switch" data-hover="Stop counting your likes and dislikes">
         <input type="checkbox" id="disable_vote_submission" />
         <span class="slider"></span>
         <span class="switchLabel" title="__MSG_textSettings__">
           __MSG_textSettings__
         </span>
+      </label>
+      <label class="switch" data-hover="Disable Logging API Response in JavaScript Console.">
+        <input type="checkbox" id="disable_logging"/>
+        <span class="slider"/>
+        <span class="switchLabel">Disable logging to console</span>
       </label>
       <br />
       <label class="switch" data-hover="__MSG_reformatLikesHover__">
@@ -142,13 +141,13 @@
         <label for="color_theme">__MSG_colorTheme__</label>
         <select name="color_theme" id="color_theme">
           <option value="classic" id="color_theme_classic">
-            "__MSG_textColorTheme1__"
+            __MSG_textColorTheme1__
           </option>
           <option value="accessible" id="color_theme_accessible">
-            "__MSG_textColorTheme2__"
+            __MSG_textColorTheme2__
           </option>
           <option value="neon" id="color_theme_neon">
-            "__MSG_textColorTheme3__"
+            __MSG_textColorTheme3__
           </option>
         </select>
         <span
