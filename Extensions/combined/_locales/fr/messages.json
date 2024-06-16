@@ -6,7 +6,7 @@
     "message": "Return YouTube Dislike Beta"
   },
   "extensionDesc": {
-    "message": "Ré-affiche les pouces rouges/dislikes des vidées"
+    "message": "Ré-affiche les pouces rouges/dislikes des vidéos"
   },
   "textDeveloper": {
     "message": "par Dmitry Selivanov & Communauté"
@@ -42,7 +42,7 @@
     "message": "mettre à jour vers"
   },
   "version30installed": {
-    "message": "Version 3.0.0.1 installée"
+    "message": "Version __RYD_VERSION__ installée"
   },
   "whatsnew": {
     "message": "Quoi de neuf"

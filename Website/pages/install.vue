@@ -66,23 +66,7 @@
     </p>
     <v-btn class="mainAltButton" :href="androidNewPipe" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
-      Android &nbsp; <span style="font-size: 0.55rem">(NewPipe fork)</span>
-    </v-btn>
-    <v-btn
-      class="mainAltButton"
-      style="color: #999"
-      :href="androidVueTube"
-      target="_blank"
-    >
-      <v-icon class="white--text">mdi-android</v-icon>
-      <v-icon>mdi-apple</v-icon>
-      <v-icon>mdi-linux</v-icon>
-      <v-icon style="margin-right: 0.5em">mdi-microsoft-windows</v-icon>
-      <div style="font-size: 0.75rem">
-        VueTube (WIP) <br />
-        <span style="font-size: 0.55rem">pre-alpha</span>
-      </div>
-      <v-icon style="margin-left: 0.5rem">mdi-hammer-wrench</v-icon>
+      Android &nbsp; <span style="font-size: 0.55rem">(Tubular - a Newpipe Fork)</span>
     </v-btn>
     <v-btn class="mainAltButton" :href="iosJailbreakLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
@@ -112,8 +96,7 @@ export default {
         "https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js",
 
       iosJailbreakLink: "https://chariz.com/get/return-youtube-dislike/",
-      androidNewPipe: "https://github.com/polymorphicshade/NewPipe",
-      androidVueTube: "https://vuetube.app",
+      androidNewPipe: "https://github.com/polymorphicshade/Tubular",
     };
   },
 };

@@ -1,21 +1,27 @@
-import { getButtons } from "./buttons";
+import { getButtons, getDislikeButton, getLikeButton } from "./buttons";
 import {
   extConfig,
   isMobile,
   isLikesDisabled,
   isNewDesign,
+  isRoundedDesign,
   isShorts,
 } from "./state";
-import { cLog, getColorFromTheme } from "./utils";
+import { cLog, getColorFromTheme, isInViewport } from "./utils";
 
 function createRateBar(likes, dislikes) {
+  let rateBar = document.getElementById("ryd-bar-container");
   if (!isLikesDisabled()) {
-    let rateBar = document.getElementById("ryd-bar-container");
+    // sometimes rate bar is hidden
+    if (rateBar && !isInViewport(rateBar)) {
+      rateBar.remove();
+      rateBar = null;
+    }
 
     const widthPx =
-      getButtons().children[0].clientWidth +
-      getButtons().children[1].clientWidth +
-      8;
+      getLikeButton().clientWidth +
+      getDislikeButton().clientWidth +
+      (isRoundedDesign() ? 0 : 8);
 
     const widthPercent =
       likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
@@ -54,17 +60,17 @@ function createRateBar(likes, dislikes) {
           colorLikeStyle = "; background-color: " + getColorFromTheme(true);
           colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
         }
-
+        let actions =
+          isNewDesign() && getButtons().id === "top-level-buttons-computed"
+            ? getButtons()
+            : document.getElementById("menu-container");
         (
-          document.getElementById(
-            isNewDesign() ? "actions-inner" : "menu-container"
-          ) || document.querySelector("ytm-slim-video-action-bar-renderer")
+          actions ||
+          document.querySelector("ytm-slim-video-action-bar-renderer")
         ).insertAdjacentHTML(
           "beforeend",
           `
-              <div class="ryd-tooltip" style="width: ${widthPx}px${
-            isNewDesign() ? "; margin-bottom: -2px" : ""
-          }">
+              <div class="ryd-tooltip ryd-tooltip-${isNewDesign() ? "new" : "old"}-design" style="width: ${widthPx}px">
               <div class="ryd-tooltip-bar-container">
                 <div
                     id="ryd-bar-container"
@@ -80,19 +86,25 @@ function createRateBar(likes, dislikes) {
                 <!--css-build:shady-->${tooltipInnerHTML}
               </tp-yt-paper-tooltip>
               </div>
-      `
+      		`,
         );
 
-        // Add border between info and comments
         if (isNewDesign()) {
+          // Add border between info and comments
           let descriptionAndActionsElement = document.getElementById("top-row");
           descriptionAndActionsElement.style.borderBottom =
             "1px solid var(--yt-spec-10-percent-layer)";
           descriptionAndActionsElement.style.paddingBottom = "10px";
+
+          // Fix like/dislike ratio bar offset in new UI
+          document.getElementById("actions-inner").style.width = "revert";
+          if (isRoundedDesign()) {
+            document.getElementById("actions").style.flexDirection =
+              "row-reverse";
+          }
         }
       } else {
-        document.getElementById("ryd-bar-container").style.width =
-          widthPx + "px";
+        document.querySelector(`.ryd-tooltip`).style.width = widthPx + "px";
         document.getElementById("ryd-bar").style.width = widthPercent + "%";
         document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML =
           tooltipInnerHTML;
@@ -106,9 +118,8 @@ function createRateBar(likes, dislikes) {
     }
   } else {
     cLog("removing bar");
-    let ratebar = document.getElementById("ryd-bar-container");
-    if (ratebar) {
-      ratebar.parentNode.removeChild(ratebar);
+    if (rateBar) {
+      rateBar.parentNode.removeChild(rateBar);
     }
   }
 }

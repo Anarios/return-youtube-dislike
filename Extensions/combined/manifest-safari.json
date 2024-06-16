@@ -1,0 +1,36 @@
+{
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDesc__",
+  "default_locale": "en",
+  "version": "__RYD_VERSION__",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["ryd.background.js"],
+    "persistent": false
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "*://*.youtube.com/*",
+    "storage",
+    "*://returnyoutubedislikeapi.com/*"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "exclude_matches": ["*://*.music.youtube.com/*"],
+      "run_at": "document_idle",
+      "css": ["content-style.css"],
+      "js": ["ryd.content-script.js"]
+    }
+  ],
+  "options_ui": {
+    "page": "popup.html"
+  }
+}

@@ -7,9 +7,9 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](LICENSE)
 
-# Return YouTube Dislike
+Lisez ceci dans d'autres langues : [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md),[日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md)
 
-Lisez ceci dans d'autres langues : [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Türkçe](READMEtr.md)
+# Return YouTube Dislike
 
 <p align="center">
     <b>Return YouTube Dislike est une extension open-source qui ré-affiche les dislikes (pouces rouges) sur YouTube.</b><br>
@@ -64,8 +64,8 @@ Exemple pour obtenir les likes d'une vidéo YouTube avec un ID donné:
 }
 ```
 
-Si aucunne vidéo YouTube à cet ID, il sera retourner le code d'erreur _404_ "Not Found".  
-Un ID YouTube invilide renverra _400_ "Bad Request".
+Si aucune vidéo YouTube n'a cet ID, le code d'erreur _404_ "Not Found" sera retourné.  
+Un ID YouTube invalide renverra le code d'erreur _400_ "Bad Request".
 
 <!---
 ## Documentation de l'API

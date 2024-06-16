@@ -1,4 +1,4 @@
-YouTube Dislike Sayısını Geri Getir, YouTube'da dislike durumlarını görme özelliğini geri getirir.
+YouTube Dislike Sayısını Geri Getir YouTube'da beğenmeme durumlarını görme özelliğini geri getirir.
 
 Eğer çalışmazsa: uzantılar sekmesini açın (chrome://extensions/) bu uzantıyı devre dışı bırakın ve yeniden aktifleştirin. Bu, chromium'daki bazı durumlarda uzantıyı bozan bir hatadır. Bu, sorunların çoğunu çözmelidir. Umarız chromium ekibi bunu yakın zamanda düzeltir.
 

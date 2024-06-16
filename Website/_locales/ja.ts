@@ -1,101 +1,121 @@
-import { en } from 'vuetify/src/locale'
+import { ja } from "vuetify/src/locale";
 
 export default {
-    ...ja,
-    home: {
-        name: '�z�[��',
-        title: 'Return YouTube Dislike',
-        subtitle: 'YouTube�̒�]�����̕\���𕜌�����u���E�U�g���@�\��API',
-        ukraine: '�E�N���C�i���T�|�[�g',
-        sponsors: '�X�|���T�[',
+  ...ja,
+  home: {
+    name: "ホーム",
+    title: "Return YouTube Dislike",
+    subtitle: "YouTubeの低評価数の表示を復元するブラウザ拡張機能とAPI",
+    ukraine: "ウクライナをサポート",
+    sponsors: "スポンサー",
+  },
+  install: {
+    name: "インストール",
+    title: "プラットフォームの選択",
+    subtitle: "FirefoxとすべてのChromiumブラウザに対応しています。",
+    title2: "その他のプラットフォーム",
+    subtitle2:
+      "未対応のブラウザをお使いの場合は、以下のUserScriptをお試しください。",
+    title3: "サードパーティーによる実装",
+    subtitle3:
+      "開発者では責任を負いかねますので、ご自身の判断にてご利用ください。",
+  },
+  api: {
+    name: "API",
+    title: "RYD公式ドキュメントへようこそ!",
+    subtitle: "まず、メニューからセクションを選択してください。",
+    rights: {
+      title: "使用権",
+      subtitle:
+        "このオープンAPIを第三者が使用することは、以下の制限付きで許可されています：",
+      bullet1: "属性：",
+      bullet1text:
+        "このレポ、もしくは returnyoutubedislike.com へのリンクのどちらかによって、明確に帰属させる必要があります。",
+      bullet2: "通信量制限：",
+      bullet2text:
+        "クライアントごとに、1分あたり100・1日あたり10,000という通信量制限が設けられています。これを超えた場合には、アプリケーションに通信を控えるよう促すステータスコード 429 を返します。",
     },
-    install: {
-        name: '�C���X�g�[��',
-        title: '�v���b�g�t�H�[���̑I��',
-        subtitle: 'Firefox�Ƃ��ׂĂ�Chromium�u���E�U�ɑΉ����Ă��܂��B',
-        title2: '���̑��̃v���b�g�t�H�[��',
-        subtitle2: '���Ή��̃u���E�U�����g���̏ꍇ�́A�ȉ���UserScript�����������������B',
-        title3: '�T�[�h�p�[�e�B�[�ɂ�����',
-        subtitle3: '�J���҂ł͐ӔC�𕉂����˂܂��̂ŁA�����g�̔��f�ɂĂ����p���������B',
+    url: {
+      title: "URL情報",
+      subtitle: "APIへのアクセスは、以下のベースURLから可能です：",
     },
-    api: {
-        name: 'API',
-        title: 'RYD�����h�L�������g�ւ悤����!',
-        subtitle: '�܂��A���j���[����Z�N�V������I�����Ă��������B,
-        rights: {
-            title: '�g�p��',
-            subtitle: '���̃I�[�v��API���O�҂��g�p���邱�Ƃ́A�ȉ��̐����t���ŋ�����Ă��܂��F',
-            bullet1: '�����F',
-            bullet1text: '���̃��|�A�������� returnyoutubedislike.com �ւ̃����N�̂ǂ��炩�ɂ���āA���m�ɋA��������K�v������܂��B',
-            bullet2: '�ʐM�ʐ����F',
-            bullet2text: '�N���C�A���g���ƂɁA1��������100�E1��������10,000�Ƃ����ʐM�ʐ������݂����Ă��܂��B����𒴂����ꍇ�ɂ́A�A�v���P�[�V�����ɒʐM���T����悤�����X�e�[�^�X�R�[�h 429 ��Ԃ��܂��B',
-        },
-        url: {
-            title: 'URL���',
-            subtitle: 'API�ւ̃A�N�Z�X�́A�ȉ��̃x�[�XURL����\�ł��F',
-        },
-        endpoints: {
-            title: '���p�\�ȃG���h�|�C���g',
-            subtitle: '���p�\�ȃG���h�|�C���g�̈ꗗ�͂�����ł������������܂��F',
-        },
-        fetching: {
-            title: '��{�I�ȃt�F�b�`����̃`���[�g���A��',
-            subtitle: '�ȉ���YouTube ID����]���������o�����ꍇ�̗�ł��F',
-            title2: '���N�G�X�g��F',
-            url: '���N�G�X�gURL�F',
-            method: '���N�G�X�g���@�F',
-            headers: '�w�b�_�[�F',
-            response: '���X�|���X�F',
-            error1: 'YouTube ID�������ȏꍇ�A�X�e�[�^�X�R�[�h 404 "Not Found" ���Ԃ���܂��B',
-            error2: 'YouTube ID�̃t�H�[�}�b�g���������Ȃ��ꍇ�A�X�e�[�^�X�R�[�h 400 "Bad Request" ���Ԃ���܂��B'
-        },
+    endpoints: {
+      title: "利用可能なエンドポイント",
+      subtitle: "利用可能なエンドポイントの一覧はこちらでご覧いただけます：",
     },
-    help: {
-        name: '�w���v',
-        title: '�g���u���V���[�e�B���O',
-        bullet1: '�ŐV�o�[�W�����̊g���@�\',
-        bullet11: '���C���X�g�[������Ă��邱�Ƃ��m�F���Ă��������B',
-        bullet2: '�g���@�\���폜���čăC���X�g�[�����A���ׂẴE�B���h�E�������Ńu���E�U���ċN�����Ă��������B',
-        bullet3: '�ȉ��̃����N���J�����Ƃ��m�F���Ă��������F',
-        bullet31: '�ȉ��̃v���[���e�L�X�g���\������܂��F',
-        bullet4: '��L�Ŗ�肪�������Ȃ��ꍇ�A�ȉ��̃`�����l���ɂĖ���񍐂��Ă��������B',
-        bullet41: '�Q�ƁF',
-        bullet4a: '���g����OS�A�u���E�U���ƃo�[�W�����������Ă��������B',
-        bullet4b: '�R���\�[�����J���i',
-        bullet4b1: '�L�[�j�A���̂���y�[�W�i��FYouTube�̓���y�[�W�j�̃X�N���[���V���b�g���B�e���܂��B',
-        bullet4c: '�g���@�\���C���X�g�[������Ă���u���E�U�̊g���@�\�y�[�W�̃X�N���[���V���b�g���B�e���܂��B',
-        bullet4c1: '�g���@�\�y�[�W��\������ɂ́A�ȉ��̂悤�ɓ��͂��Ă��������F',
-        firefox: '�FFirefox',
-        chrome: '�FChrome, Edge, Brave, Opera, Vivaldi',
+    fetching: {
+      title: "基本的なフェッチ操作のチュートリアル",
+      subtitle: "以下のYouTube IDから評価数を取り出した場合の例です：",
+      title2: "リクエスト例：",
+      url: "リクエストURL：",
+      method: "リクエスト方法：",
+      headers: "ヘッダー：",
+      response: "レスポンス：",
+      error1:
+        'YouTube IDが無効な場合、ステータスコード 404 "Not Found" が返されます。',
+      error2:
+        'YouTube IDのフォーマットが正しくない場合、ステータスコード 400 "Bad Request" が返されます。',
     },
-    faq: {
-        name: 'Q&A',
-        title: '�悭���鎿��',
-        subtitle: '���ɂ��������₪����܂����H��X��Discord�ɂ��C�y�ɂ��Q�����������B',
-        bullet1: '�g���@�\�̃f�[�^�͂ǂ�����擾���Ă���̂ł����H',
-        bullet1text: 'YouTube�����̒�]��API����~����O�ɕۑ������f�[�^�ƁA�g���@�\���[�U�[�̍��]��/��]���������ɂ�������l��g�ݍ��킹�Ď擾���Ă��܂��B',
-        bullet2: '��]�������X�V����Ȃ��̂͂Ȃ��ł����H',
-        bullet2text: '���݁A��]�����̓f�[�^�x�[�X������Ă��邽�߁A���܂�p�ɂɍX�V����܂���B����̍Đ����ɂ���ĈقȂ�܂����A�X�V�ɂ͐����Ԃ��琔�������邱�Ƃ�����܂��B',
-        bullet3: '�ǂ̂悤�Ȏd�g�݂œ��삵�Ă��܂����H',
-        bullet3text: '�܂��A�������̓����ID �����W���AAPI ���g�p���Ē�]�����A�Đ����A���]���Ȃǂ̍��ڂ��擾���܂��B���ɁA�y�[�W��ɒ�]�����Ɣ䗦��\�����܂��B����ɍ��]�����]��������ƁA���ꂪ�L�^����ăf�[�^�x�[�X�ɒ~�ς���邽�߁A���m�Ȓ�]�����𐄒肷�邱�Ƃ��ł��܂��B',
-        bullet4: '��]���������L���邱�Ƃ͂ł��܂����H',
-        bullet4text: '�ߓ����Ɍ��J�\��ł��B�@�\�̎����̂��߂ɁAOauth �܂��͔͈͂����肵���ʂ̓ǂݎ���pAPI���g�p���邱�Ƃ��������Ă��܂��B',
-        bullet5: '�ǂ̂悤�ȃf�[�^�����W���A�ǂ̂悤�Ɏ�舵���Ă��܂����H',
-        bullet5text: '�{�g���@�\�ł́AIP�A�h���X�⎋�����Ă��铮���ID�ȂǁA�������@�\���邽�߂ɕK�v�ȃf�[�^�݂̂����W���Ă��܂��B���Ȃ��̃f�[�^�́A��O�҂ɔ̔�����邱�Ƃ͌����Ă���܂���B�Z�L�����e�B�ƃv���C�o�V�[�̎�舵���ɂ��Ă����ƒm�肽���ꍇ�ɂ́A <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">�Z�L�����e�BFAQ</a> �����Q�Ƃ��������B ',
-        bullet6: 'API/�o�b�N�G���h�͂ǂ̂悤�Ȏd�g�݂œ��삵�Ă��܂����H',
-        bullet6text: '�o�b�N�G���h�́AYouTube�����̒�]��API����~����O�ɕۑ������f�[�^�Ɗg���@�\���[�U�[�̍��]��/��]���������ɂ�������l��g�ݍ��킹�Ď擾���Ă��܂��B�߂������A�R���e���c����҂��ȒP�����S�ɒ�]������񋟂ł���悤�ɂ��AArchive Team �̃A�[�J�C�u�f�[�^�i45��6000������j�����݂̃f�[�^�x�[�X�ɒǉ�����\��ł��B�܂��A���̃g�s�b�N�Ɋւ���r�f�I���������������܂��B',
-        bullet7: '��]�����Ɂu���e�҂ɂ�薳�����v�ƕ\�������̂͂Ȃ��ł����H',
-        bullet7text: '�ŋߓ��e���ꂽ����ł́A���e�҂ɂ���Ė����ɂ���Ă��Ȃ��Ă��u���e�҂ɂ�薳�����v�ƕ\������邱�Ƃ�����܂��B����́A�]�����̕\���������ɂȂ��Ă��邩�ǂ��������o����V�X�e���ɂ�镛��p�ŁA�����Ԍ�A�܂��͓���ɍ��]���Ȃ�����]�������ăy�[�W���X�V����Ə�������̂��Ǝv���܂��B',
-    },
-    donate: {
-        name: '��t',
-        subtitle: '�C���^�[�l�b�g�̎��R����邽�߂̉�X�̊������A��t�ɂ���ĉ������Ă��������I',
-    },
-    links: {
-        name: '�����N',
-        title: '�v���W�F�N�g�����N�W',
-        subtitle: '�v���W�F�N�g����ъJ���҂ւ̃����N',
-        contact: '���₢���킹��',
-        translators: '�|���',
-    },
-}
+  },
+  help: {
+    name: "ヘルプ",
+    title: "トラブルシューティング",
+    bullet1: "最新バージョンの拡張機能",
+    bullet11: "がインストールされていることを確認してください。",
+    bullet2:
+      "拡張機能を削除して再インストールし、すべてのウィンドウを閉じた上でブラウザを再起動してください。",
+    bullet3: "以下のリンクが開くことを確認してください：",
+    bullet31: "以下のプレーンテキストが表示されます：",
+    bullet4:
+      "上記で問題が解決しない場合、以下のチャンネルにて問題を報告してください。",
+    bullet41: "参照：",
+    bullet4a: "お使いのOS、ブラウザ名とバージョンを教えてください。",
+    bullet4b: "コンソールを開き（",
+    bullet4b1:
+      "キー）、問題のあるページ（例：YouTubeの動画ページ）のスクリーンショットを撮影します。",
+    bullet4c:
+      "拡張機能がインストールされているブラウザの拡張機能ページのスクリーンショットを撮影します。",
+    bullet4c1: "拡張機能ページを表示するには、以下のように入力してください：",
+    firefox: "：Firefox",
+    chrome: "：Chrome, Edge, Brave, Opera, Vivaldi",
+  },
+  faq: {
+    name: "Q&A",
+    title: "よくある質問",
+    subtitle:
+      "他にも何か質問がありますか？我々のDiscordにお気軽にご参加ください。",
+    bullet1: "拡張機能のデータはどこから取得しているのですか？",
+    bullet1text:
+      "YouTube公式の低評価APIが停止する前に保存したデータと、拡張機能ユーザーの高評価/低評価数を元にした推定値を組み合わせて取得しています。",
+    bullet2: "低評価数が更新されないのはなぜですか？",
+    bullet2text:
+      "現在、低評価数はデータベース化されているため、あまり頻繁に更新されません。動画の再生数によって異なりますが、更新には数時間から数日かかることがあります。",
+    bullet3: "どのような仕組みで動作していますか？",
+    bullet3text:
+      "まず、視聴中の動画のID を収集し、API を使用して低評価数、再生数、高評価などの項目を取得します。次に、ページ上に低評価数と比率を表示します。動画に高評価や低評価があると、それが記録されてデータベースに蓄積されるため、正確な低評価数を推定することができます。",
+    bullet4: "低評価数を共有することはできますか？",
+    bullet4text:
+      "近日中に公開予定です。機能の実装のために、Oauth または範囲を限定した別の読み取り専用APIを使用することを検討しています。",
+    bullet5: "どのようなデータを収集し、どのように取り扱っていますか？",
+    bullet5text:
+      '本拡張機能では、IPアドレスや視聴している動画のIDなど、正しく機能するために必要なデータのみを収集しています。あなたのデータは、第三者に販売されることは決してありません。セキュリティとプライバシーの取り扱いについてもっと知りたい場合には、 <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">セキュリティFAQ</a> をご参照ください。 ',
+    bullet6: "API/バックエンドはどのような仕組みで動作していますか？",
+    bullet6text:
+      "バックエンドは、YouTube公式の低評価APIが停止する前に保存したデータと拡張機能ユーザーの高評価/低評価数を元にした推定値を組み合わせて取得しています。近い将来、コンテンツ制作者が簡単かつ安全に低評価数を提供できるようにし、Archive Team のアーカイブデータ（45億6000万動画）も現在のデータベースに追加する予定です。また、このトピックに関するビデオもご覧いただけます。",
+    bullet7: "低評価数に「投稿者により無効化」と表示されるのはなぜですか？",
+    bullet7text:
+      "最近投稿された動画では、投稿者によって無効にされていなくても「投稿者により無効化」と表示されることがあります。これは、評価数の表示が無効になっているかどうかを検出するシステムによる副作用で、数時間後、または動画に高評価ないし低評価をしてページを更新すると消えるものだと思われます。",
+  },
+  donate: {
+    name: "寄付",
+    subtitle:
+      "インターネットの自由を守るための我々の活動を、寄付によって応援してください！",
+  },
+  links: {
+    name: "リンク",
+    title: "プロジェクトリンク集",
+    subtitle: "プロジェクトおよび開発者へのリンク",
+    contact: "お問い合わせ先",
+    translators: "翻訳者",
+  },
+};

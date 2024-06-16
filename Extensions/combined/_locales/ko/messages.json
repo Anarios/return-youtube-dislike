@@ -1,0 +1,134 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike 베타"
+  },
+  "extensionDesc": {
+    "message": "대략적인 싫어요 갯수를 볼 수 있게 합니다"
+  },
+  "textDeveloper": {
+    "message": "Dmitry Selivanov와 커뮤니티 제작"
+  },
+  "linkWebsite": {
+    "message": "웹사이트"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
+  "linkDonate": {
+    "message": "기부"
+  },
+  "linkHelp": {
+    "message": "도움말"
+  },
+  "linkChangelog": {
+    "message": "변경사항"
+  },
+  "legendSettings": {
+    "message": "설정"
+  },
+  "textSettings": {
+    "message": "좋아요/싫어요 제출 비활성화"
+  },
+  "textLikesDisabled": {
+    "message": "업로더가 비활성화함"
+  },
+  "textSettingsHover": {
+    "message": "당신의 좋아요와 싫어요 갯수 계산을 중지합니다."
+  },
+  "textRoundingNumbers": {
+    "message": "좋아요/싫어요 통계 비활성화(기본 YouTube 동작)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "반올림된 통계 보이기"
+  },
+  "textConsistentFormat": {
+    "message": "좋아요와 싫어요 형식을 일관되게 만듭니다"
+  },
+  "textConsistentFormatHover": {
+    "message": "좋아요 갯수 표시 형식 재정의"
+  },
+  "textNumberFormat": {
+    "message": "숫자 표시 형식:"
+  },
+  "textColorizeRatioBar": {
+    "message": "비율 막대 컬러화"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "비율 막대에 커스텀 색상을 사용합니다."
+  },
+  "textColorizeThumbs": {
+    "message": "엄지 컬러화"
+  },
+  "textColorizeThumbsHover": {
+    "message": "엄지 아이콘에 커스텀 색상을 사용합니다."
+  },
+  "textColorTheme": {
+    "message": "컬러 테마:"
+  },
+  "textColorTheme1": {
+    "message": "클래식"
+  },
+  "textColorTheme2": {
+    "message": "Accessible"
+  },
+  "textColorTheme3": {
+    "message": "네온"
+  },
+  "textTempUnavailable": {
+    "message": "일시적으로 사용할 수 없음"
+  },
+  "textUpdate": {
+    "message": "업데이트"
+  },
+  "version30installed": {
+    "message": "__RYD_VERSION__ 버전이 설치됨"
+  },
+  "whatsnew": {
+    "message": "새로운 점"
+  },
+  "shortsSupport": {
+    "message": "유튜브 쇼츠 지원"
+  },
+  "customColors": {
+    "message": "싫어요 바와 버튼의 색을 커스텀"
+  },
+  "customNumberFormats": {
+    "message": "숫자 표시 형식 커스텀"
+  },
+  "considerDonating": {
+    "message": "확장 프로그램을 계속 돌아가게 할 수 있는 유일한 방법은 당신의 기부이며, 프로젝트에 지원하는 것을 고려해 주세요."
+  },
+  "roundNumbers": {
+    "message": "반올림된 숫자 표시"
+  },
+  "roundNumbersHover": {
+    "message": "반올림된 숫자(기본 유튜브 동작)."
+  },
+  "reformatLikes": {
+    "message": "좋아요 갯수 표시 형식 재정의"
+  },
+  "reformatLikesHover": {
+    "message": "좋아요와 싫어요 형식을 일관되게 만듭니다."
+  },
+  "numberFormat": {
+    "message": "숫자 표시 형식:"
+  },
+  "colorizeRatio": {
+    "message": "비율 막대 컬러화"
+  },
+  "colorizeRatioHover": {
+    "message": "비율 막대에 커스텀 색상을 사용합니다."
+  },
+  "colorizeThumbs": {
+    "message": "엄지 컬러화"
+  },
+  "colorizeThumbsHover": {
+    "message": "엄지 아이콘에 커스텀 색상을 사용합니다."
+  },
+  "colorTheme": {
+    "message": "컬러 테마:"
+  }
+}

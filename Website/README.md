@@ -1,3 +1,5 @@
+Read this in other languages: [Nederlands](READMEnl.md), [Türkçe](READMEtr.md), [Deutsch](READMEde.md)
+
 # return-youtube-dislike-site
 
 ## Build Setup

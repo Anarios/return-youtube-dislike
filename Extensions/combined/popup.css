@@ -1,20 +1,49 @@
 /* Variables */
 :root {
-  --primary: #cc2929;
-  --accent: #581111;
+  --primary: #f39090;
+  --secondary: #502e2e;
+  --tertiary: #221818;
+  --background: #352929;
 
-  --background: #111;
-  --secondary: #272727;
-  --tertiary: #424242;
+  --accent: #581111;
   --lightGrey: #999;
-  --white: #fff;
 }
+
+/***   MATERIAL 3   ***/
+.m3-primary {
+  background: var(--primary) !important;
+  color: var(--background) !important;
+}
+.m3-btn {
+  background: var(--tertiary);
+  color: var(--primary);
+  transition: 0.4s;
+  border-radius: 4px;
+  font-weight: 500;
+  border-radius: 100em;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+  margin: 0.25em;
+}
+.m3-btn:hover {
+  background: var(--secondary) !important;
+  color: var(--primary) !important;
+}
+
+select {
+  border-radius: 1em;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: none;
+  outline: none;
+  padding: 3px 2px;
+}
+/***   END MATERIAL 3   ***/
 
 /* Window Styling */
 html,
 body {
   background-color: var(--background);
-  color: var(--white);
+  color: var(--primary);
   min-width: 310px;
   min-height: 350px;
   padding: 0.5em;
@@ -26,30 +55,19 @@ h1 {
   font-size: 26px;
 }
 
-button {
-  color: var(--white);
-  background: var(--secondary);
-  cursor: pointer;
-  padding: 5px 16px;
-  border: none;
-  border-radius: 4px;
-  font-weight: 500;
-  /* box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%),
-    0 1px 10px 0 rgb(0 0 0 / 12%); */
-  transition: 0.4s;
-}
-
-button:hover {
-  background: #444;
-}
-
 #ext-version {
   padding: 0.25rem 0.5rem;
 }
 
+button {
+  cursor: pointer;
+  padding: 5px 16px;
+  border: none;
+}
+
 #ext-update {
   cursor: pointer;
-  color: var(--white);
+  color: var(--primary);
   text-decoration: none;
   background: var(--primary);
   border-radius: 0.25rem;
@@ -74,7 +92,9 @@ button:hover {
   content: attr(data-hover);
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0.1s linear, opacity 0.1s linear;
+  transition:
+    visibility 0.1s linear,
+    opacity 0.1s linear;
   width: 250px;
   background-color: var(--secondary);
   border-radius: 0.5rem;
@@ -113,17 +133,17 @@ button:hover {
   position: fixed;
   background: none;
   box-shadow: none;
-  color: var(--lightGrey);
+  color: var(--primary);
   top: 26px;
   right: 26px;
   padding: 2px;
   z-index: 69;
   height: 2rem;
   width: 2rem;
+  transition-duration: .25s;
 }
 
 #advancedToggle:hover {
-  color: var(--white);
   transform: rotate(-90deg);
 }
 
@@ -143,11 +163,10 @@ button:hover {
   right: 14px;
   width: calc(100% - 65px);
   height: calc(100% - 58px);
-  border: 2px solid var(--secondary);
-  border-radius: 0.5rem;
   padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
+  border: none;
 }
 
 ::-webkit-scrollbar {
@@ -159,7 +178,7 @@ button:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #333; /* color of the scroll thumb */
+  background-color: var(--primary); /* color of the scroll thumb */
   border-radius: 1rem 0 0 1rem; /* roundness of the scroll thumb */
   border-bottom: 0.25rem solid #111; /* creates padding around scroll thumb */
   border-left: 0.25rem solid #111; /* creates padding around scroll thumb */
@@ -175,7 +194,7 @@ button:hover {
 }
 
 #advancedLegend {
-  color: var(--tertiary) !important;
+  color: var(--secondary) !important;
   /* margin: auto; */ /* Center the label */
   /* padding: .25rem .5rem; */
   /* border-radius: .25rem; */
@@ -226,7 +245,7 @@ button:hover {
   width: 13px;
   left: 2px;
   bottom: 2px;
-  background: var(--lightGrey);
+  background: var(--primary);
   transition: 0.4s;
   border-radius: 50%;
 }
