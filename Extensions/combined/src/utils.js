@@ -103,11 +103,13 @@ function isVideoLoaded() {
 }
 
 function cLog(message, writer) {
-  message = `[return youtube dislike]: ${message}`;
-  if (writer) {
-    writer(message);
-  } else {
-    console.log(message);
+  if (!extConfig.disableLogging){
+    message = `[return youtube dislike]: ${message}`;
+    if (writer) {
+      writer(message);
+    } else {
+      console.log(message);
+    }
   }
 }
 

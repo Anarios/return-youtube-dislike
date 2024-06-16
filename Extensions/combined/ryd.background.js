@@ -6,6 +6,7 @@ let api;
 /** stores extension's global config */
 let extConfig = {
   disableVoteSubmission: false,
+  disableLogging: true,
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
@@ -275,6 +276,8 @@ function storageChangeHandler(changes, area) {
       changes.numberDisplayReformatLikes.newValue,
     );
   }
+  if (changes.disableLogging !== undefined) {
+    handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
   if (changes.showTooltipPercentage !== undefined) {
     handleShowTooltipPercentageChangeEvent(
       changes.showTooltipPercentage.newValue,
@@ -296,6 +299,9 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   }
 }
 
+function handleDisableLoggingChangeEvent(value) {
+  extConfig.disableLogging = value;
+}
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
 }
@@ -342,6 +348,7 @@ api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeDisableLogging();
   initializeColoredThumbs();
   initializeColoredBar();
   initializeColorTheme();
@@ -362,6 +369,16 @@ function initializeDisableVoteSubmission() {
   });
 }
 
+function initializeDisableLogging(){
+  api.storage.sync.get(['disableLogging'],(res)=>{
+    if (res.disableLogging === undefined) {
+      api.storage.sync.set({disableLogging:true});
+    }
+    else {
+      extConfig.disableLogging = res.disableLogging;
+    }
+  });
+}
 function initializeColoredThumbs() {
   api.storage.sync.get(["coloredThumbs"], (res) => {
     if (res.coloredThumbs === undefined) {
