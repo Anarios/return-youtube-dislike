@@ -23,6 +23,9 @@
   "linkHelp": {
     "message": "Yardım"
   },
+  "linkChangelog": {
+    "message": "Değişim Günlüğü"
+  },
   "legendSettings": {
     "message": "Ayarlar"
   },
@@ -30,19 +33,58 @@
     "message": "Like/dislike gönderimini devre dışı bırak"
   },
   "textLikesDisabled": {
-    "message": "sahibi tarafından devre dışı bırakıldı"
+    "message": "Sahibi tarafından devre dışı bırakıldı"
   },
   "textSettingsHover": {
-    "message": "Like'larınızı ve dislike'larınızı saymayı bırakır."
+    "message": "Like ve dislike'larınızı saymayı bırakır."
+  },
+  "textRoundingNumbers": {
+    "message": "Like/dislike istatisliklerini aşağıya yuvarlar (varsayılan YouTube davranışı)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Yuvarlatılmış istatistikleri göster."
+  },
+  "textConsistentFormat": {
+    "message": "Like ve dislike tarzını tutarlı hâle getirir"
+  },
+  "textConsistentFormatHover": {
+    "message": "Like sayılarının tarzını yenileştir."
+  },
+  "textNumberFormat": {
+    "message": "Sayı tarzı:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Beğeni oranı çubuğunu renklendir"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Oran çubuğu için özel renkler kullanın."
+  },
+  "textColorizeThumbs": {
+    "message": "Butonları renklendir"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Buton simgeleri için özel renkler kullanın."
+  },
+  "textColorTheme": {
+    "message": "Renk teması:"
+  },
+  "textColorTheme1": {
+    "message": "Klasik"
+  },
+  "textColorTheme2": {
+    "message": "Anlaşılır"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
   },
   "textTempUnavailable": {
-    "message": "geçici olarak kullanım dışı"
+    "message": "Geçici Olarak Kullanım Dışı"
   },
   "textUpdate": {
-    "message": "şu sürüme güncelle"
+    "message": "Şu sürüme güncelle"
   },
   "version30installed": {
-    "message": "Sürüm 3.0.0.1 yüklendi"
+    "message": "Sürüm __RYD_VERSION__ yüklendi"
   },
   "whatsnew": {
     "message": "Yeni Ne Var"
@@ -58,5 +100,35 @@
   },
   "considerDonating": {
     "message": "Uzantının var olmasını sağlayan tek şey bağışlarınızdır, lütfen projeyi desteklemeyi düşünün."
+  },
+  "roundNumbers": {
+    "message": "Aşağı yuvarlanmış sayıları gösterir"
+  },
+  "roundNumbersHover": {
+    "message": "Sayıları aşağıya yuvarla (varsayılan YouTube davranışı)."
+  },
+  "reformatLikes": {
+    "message": "Like sayılarının tarzını yenileştir"
+  },
+  "reformatLikesHover": {
+    "message": "Like ve dislike tarzını tutarlı hâle getirir."
+  },
+  "numberFormat": {
+    "message": "Sayı tarzı:"
+  },
+  "colorizeRatio": {
+    "message": "Beğeni oranı çubuğunu renklendir"
+  },
+  "colorizeRatioHover": {
+    "message": "Beğeni oranı çubuğu için özel renkler kullanın."
+  },
+  "colorizeThumbs": {
+    "message": "Butonları renklendir"
+  },
+  "colorizeThumbsHover": {
+    "message": "Buton simgeleri için özel renkler kullan."
+  },
+  "colorTheme": {
+    "message": "Renk teması:"
   }
 }

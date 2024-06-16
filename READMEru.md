@@ -7,14 +7,14 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Прочитать на других языках: [English](README.md), [Español](READMEes.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md)
+Прочитать на других языках: [English](README.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md)
 
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike - это расширение с открытым исходным кодом, которое возвращает счётчик отметок «Не нравится» на YouTube.</b><br>
+    <b>Return YouTube Dislike — это расширение с открытым исходным кодом, которое возвращает счётчик отметок «Не нравится» на YouTube.</b><br>
     Доступно для Chrome и Firefox в качестве веб-расширения.<br>
-    Также доступен для других браузеров в виде пользовательского скрипта JS.<br><br>
+    Также доступен для других браузеров в виде пользовательского скрипта.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
@@ -22,13 +22,13 @@
 
 10 ноября 2021 года Google [объявили](https://blog.youtube/news-and-events/update-to-youtube/), что счётчик «Не нравится» на YouTube будет удален.
 
-Кроме того, поле отметок `dislike` в API YouTube было [удалено]](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 декабря 2021 года, удалив любую возможность судить о качестве контента перед просмотром.
+Кроме того, поле отметок `dislike` в API YouTube было [удалено](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 декабря 2021 года, убрав любую возможность судить о качестве контента перед просмотром.
 
 ## Как оно работает
 
-С удалением статистики отметок из API YouTube наш сервер переключился на использование комбинации собранной статистики отметок «Не нравится», оценок, экстраполированных из пользовательских данных расширения.
+С удалением статистики отметок из API YouTube наш сервер переключился на использование комбинации собранной статистики отметок «Не нравится» и оценок, экстраполированных из пользовательских данных расширения.
 
-[ЧаВО](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQru.md)
+[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQru.md)
 
 ## Почему это важно
 
@@ -39,7 +39,7 @@
 Стороннее использование этого открытого API разрешено со следующими ограничениями:
 
 - **Атрибуция**: Этот проект должен быть чётко описан со ссылкой на [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Ограничение**: Существуют ограничения скорости для каждого клиента - 100 в минуту и 10 000 в день. Это выдаст код ошибки _429_, указывающий на то, что ваше приложение должно быть отключено.
+- **Ограничение**: Существуют ограничения скорости для каждого клиента — 100 в минуту и 10 000 в день. Это выдаст код ошибки _429_, указывающий на то, что ваше приложение должно быть отключено.
 
 API доступен по следующему основному URL-адресу:  
 https://returnyoutubedislikeapi.com
@@ -49,7 +49,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Получить голоса
 
-Пример получения голосов за заданный идентификатор видео на YouTube:  
+Пример получения голосов для заданного идентификатора видео на YouTube:  
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -64,8 +64,8 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 }
 ```
 
-Неверный идентификатор YouTube выдаст код ошибки _404_ "Не найдено".  
-Неправильно отформатированный идентификатор YouTube выдаст код ошибки _400_ "Неверный запрос".
+Неверный идентификатор YouTube выдаст код ошибки _404_ «Не найдено».  
+Неправильно отформатированный идентификатор YouTube выдаст код ошибки _400_ «Неверный запрос».
 
 <!---
 ## Документация по API
@@ -81,7 +81,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 Вы можете поддержать этот проект, сделав нам пожертвование по ссылке ниже:
 
-[Пожертвование](https://returnyoutubedislike.com/donate)
+[Пожертвовать](https://returnyoutubedislike.com/donate)
 
 ## Спонсоры
 

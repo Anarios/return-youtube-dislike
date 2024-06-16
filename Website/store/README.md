@@ -1,3 +1,5 @@
+Read this in other languages: [Nederlands](READMEnl.md), [Türkçe](READMEtr.md), [Deutsch](READMEde.md)
+
 # STORE
 
 **This directory is not required, you can delete it if you don't want to use it.**

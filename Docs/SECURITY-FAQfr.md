@@ -1,8 +1,8 @@
-Lisez ceci dans d'autres langues : [English](SECURITY-FAQ.md)
+Lisez ceci dans d'autres langues : [English](SECURITY-FAQ.md), [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md)
 
 # Sécurité
 
-### Est-ce que vous traquer l'historique des vidéos que je visionne ?
+### Est-ce que vous traquez l'historique des vidéos que je visionne ?
 
 Non. Le code de l'extension est public et vous pouvez le voir par vous-même. La seule information envoyée est l'ID de la vidéo, qui est nécessaire pour récupérer le nombre de dislikes des vidéos. Aucun en-tête (headers) supplémentaire n'est envoyé. Sur la [couche de communication](https://fr.wikipedia.org/wiki/Mod%C3%A8le_OSI#Caract%C3%A9risation_r%C3%A9sum%C3%A9e_des_couches), votre adresse IP publique sera exposée au serveur, ainsi que l'heure à laquelle la demande a été faite. Toutefois, aucun de ces éléments ne permet de vous identifier de manière unique. Dans un environnement où vous ne pouvez avoir confiance en personne (zero-trust environment), le mieux que l'on puisse obtenir est une IP dynamique. Qui, aujourd'hui est la vôtre, demain est celle de votre voisin. Si vous êtes vraiment inquiet que votre IP soit tracée, vous utilisez probablement déjà un VPN.
 

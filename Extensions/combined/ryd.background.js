@@ -6,11 +6,11 @@ let api;
 /** stores extension's global config */
 let extConfig = {
   disableVoteSubmission: false,
+  disableLogging: true,
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic", // classic, accessible, neon
   numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
-  numberDisplayRoundDown: true, // locale 'de' shows exact numbers by default
   numberDisplayReformatLikes: false, // use existing (native) likes number
 };
 
@@ -41,7 +41,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         headers: {
           Accept: "application/json",
         },
-      }
+      },
     )
       .then((response) => response.json())
       .then((response) => {
@@ -81,11 +81,13 @@ api.runtime.onInstalled.addListener((details) => {
     details.reason === "chrome_update" ||
     // No need to show changelog if developer just reloaded the extension
     details.reason === "update"
-  )
+  ) {
     return;
-  api.tabs.create({
-    url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
-  });
+  } else if (details.reason == "install") {
+    api.tabs.create({
+      url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
+    });
+  }
 });
 
 // api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
@@ -152,7 +154,7 @@ async function register() {
       headers: {
         Accept: "application/json",
       },
-    }
+    },
   ).then((response) => response.json());
   const solvedPuzzle = await solvePuzzle(registrationResponse);
   if (!solvedPuzzle.solution) {
@@ -209,7 +211,7 @@ function countLeadingZeroes(uInt8View, limit) {
 
 async function solvePuzzle(puzzle) {
   let challenge = Uint8Array.from(atob(puzzle.challenge), (c) =>
-    c.charCodeAt(0)
+    c.charCodeAt(0),
   );
   let buffer = new ArrayBuffer(20);
   let uInt8View = new Uint8Array(buffer);
@@ -254,7 +256,7 @@ function generateUserID(length = 36) {
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(
-      changes.disableVoteSubmission.newValue
+      changes.disableVoteSubmission.newValue,
     );
   }
   if (changes.coloredThumbs !== undefined) {
@@ -266,27 +268,24 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
-  if (changes.numberDisplayRoundDown !== undefined) {
-    handleNumberDisplayRoundDownChangeEvent(
-      changes.numberDisplayRoundDown.newValue
-    );
-  }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue
+      changes.numberDisplayReformatLikes.newValue,
     );
   }
+  if (changes.disableLogging !== undefined) {
+    handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
   if (changes.showTooltipPercentage !== undefined) {
     handleShowTooltipPercentageChangeEvent(
-      changes.showTooltipPercentage.newValue
+      changes.showTooltipPercentage.newValue,
     );
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue
+      changes.numberDisplayReformatLikes.newValue,
     );
   }
 }
@@ -300,6 +299,9 @@ function handleDisableVoteSubmissionChangeEvent(value) {
   }
 }
 
+function handleDisableLoggingChangeEvent(value) {
+  extConfig.disableLogging = value;
+}
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
 }
@@ -313,10 +315,6 @@ function handleTooltipPercentageModeChangeEvent(value) {
     value = "dash_like";
   }
   extConfig.tooltipPercentageMode = value;
-}
-
-function handleNumberDisplayRoundDownChangeEvent(value) {
-  extConfig.numberDisplayRoundDown = value;
 }
 
 function changeIcon(iconName) {
@@ -350,11 +348,11 @@ api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
   initializeDisableVoteSubmission();
+  initializeDisableLogging();
   initializeColoredThumbs();
   initializeColoredBar();
   initializeColorTheme();
   initializeNumberDisplayFormat();
-  initializeNumberDisplayRoundDown();
   initializeNumberDisplayReformatLikes();
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
@@ -371,22 +369,22 @@ function initializeDisableVoteSubmission() {
   });
 }
 
+function initializeDisableLogging(){
+  api.storage.sync.get(['disableLogging'],(res)=>{
+    if (res.disableLogging === undefined) {
+      api.storage.sync.set({disableLogging:true});
+    }
+    else {
+      extConfig.disableLogging = res.disableLogging;
+    }
+  });
+}
 function initializeColoredThumbs() {
   api.storage.sync.get(["coloredThumbs"], (res) => {
     if (res.coloredThumbs === undefined) {
       api.storage.sync.set({ coloredThumbs: false });
     } else {
       extConfig.coloredThumbs = res.coloredThumbs;
-    }
-  });
-}
-
-function initializeNumberDisplayRoundDown() {
-  api.storage.sync.get(["numberDisplayRoundDown"], (res) => {
-    if (res.numberDisplayRoundDown === undefined) {
-      api.storage.sync.set({ numberDisplayRoundDown: true });
-    } else {
-      extConfig.numberDisplayRoundDown = res.numberDisplayRoundDown;
     }
   });
 }

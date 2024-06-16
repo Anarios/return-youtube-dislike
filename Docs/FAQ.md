@@ -1,4 +1,5 @@
-Read this in other languages: [Français](FAQfr.md)
+Read this in other languages: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [Português do Brasil](FAQpt_BRmd)
+
 
 # Frequently Asked Questions
 
@@ -36,11 +37,11 @@ The backend will switch to using a combination of archived dislike stats, estima
 
 ### **5. How is the dislike count calculated?**
 
-RYD uses the votes from it's users to extrapolate the dislike count.
+RYD uses the votes from its users to extrapolate the dislike count.
 
 - If the video was uploaded after the API was shut down:
 
-  $$ \textup{RYD Dislike Count} = \left( \frac{\textup{RYD Users Like Count}}{\textup{RYD Users Dislike Count}} \right) \times \textup{Public Like Count} $$
+  $$ \textup{RYD Dislike Count} = \left( \frac{\textup{RYD Users Dislike Count}}{\textup{RYD Users Like Count}} \right) \times \textup{Public Like Count} $$
 
 - If the RYD database somehow had the actual like and dislike count (provided by the uploader or from the archive), the dislike count will be calculated based on both - the users' votes and the archived value. The archived value will have less influence on the final count as it ages.
 

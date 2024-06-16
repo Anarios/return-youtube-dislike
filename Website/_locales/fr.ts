@@ -54,8 +54,9 @@ export default {
       headers: "En-têtes (headers) : ",
       response: "Réponse : ",
       error1:
-        'Si aucunne vidéo YouTube à cet ID, il sera retourner le code d\'erreur 404 "Not Found"',
-      error2: 'Un ID YouTube invilide renverra *400* "Bad Request"',
+        "Si aucune vidéo YouTube n'a cet ID, le code d'erreur 404 \"Not Found\" sera retourné",
+      error2:
+        'Un ID YouTube invalide renverra le code d\'erreur *400* "Bad Request"',
     },
   },
   help: {
@@ -123,7 +124,7 @@ export default {
     subtitle: "Liens vers le projet et ses développeurs",
     contact: "Contactez-moi",
     translators: "Traducteurs",
-    coolProjects: "Projets Cool",
+    coolProjects: "Projets Cools",
     sponsorBlockDescription:
       "Ignorer les publicités intégrées (sponso) dans la vidéo",
     filmotDescription: "Rechercher des vidéos YouTube par sous-titres",

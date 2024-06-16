@@ -3,11 +3,11 @@
 [![Mozilla oylaması](https://img.shields.io/amo/stars/return-youtube-dislikes?label=Firefox%20Rating&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
 [![Mozilla indirmeleri](https://img.shields.io/amo/users/return-youtube-dislikes?label=Firefox%20Users&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
 [![Commit sayısı](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
-[![Issue'ler](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=flat&label=Issues)](https://github.com/Anarios/return-youtube-dislike/issues)
+[![Issue'lar](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=flat&label=Issues)](https://github.com/Anarios/return-youtube-dislike/issues)
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![Lisans](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Bunu diğer dillerde okuyun: [English](README.md), [Español](READMEes.md), [Français](READMEfr.md), [русский](READMEru.md), [日本語](READMEja.md)
+Bunu diğer dillerde okuyun: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Français](READMEfr.md), [Nederlands](READMEnl.md), [日本語](READMEja.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md)
 
 # YouTube Dislike Sayısını Geri Getir
 
@@ -22,13 +22,13 @@ Bunu diğer dillerde okuyun: [English](README.md), [Español](READMEes.md), [Fra
 
 10 Kasım 2021 tarihinde Google, YouTube dislike sayısının kaldırılacağını [duyurdu](https://blog.youtube/news-and-events/update-to-youtube/).
 
-Ek olarak, YouTube API'sindeki "dislike" alanı 13 Aralık 2021 tarihinde [kaldırıldı](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) ve içeriğin kalitesini izlemeden önce yargılayabilme olanağı ortadan kaldırıldı.
+Ek olarak, YouTube API'sindeki `dislike` alanı 13 Aralık 2021 tarihinde [kaldırıldı](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) ve içeriğin kalitesini izlemeden önce yargılayabilme olanağı ortadan kaldırıldı.
 
 ## Ne İşe Yarar
 
 YouTube API'sinden dislike istatistiklerinin kaldırılmasıyla, backend'imiz, uzantı kullanıcı verilerinden tahmin edilen, toplanmış dislike istatistiklerinin bir birleşimini kullanmaya başladı.
 
-[SSS](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[SSS](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQtr.md)
 
 ## Neden Önemlidir
 
@@ -39,12 +39,12 @@ Sitemizden daha fazla bilgi edinebilirsiniz: [returnyoutubedislike.com](https://
 Bu açık API'nin üçüncü taraflarca kullanımına, aşağıdaki kısıtlamalarla izin verilir:
 
 - **Atfetme**: Bu proje, açık bir biçimde [returnyoutubedislike.com](https://returnyoutubedislike.com/) adresine yönlendirilmelidir.
-- **Hız Sınırlaması**: Kullanıcı başına dakikada 100 ve günde 10.000 hız sınırlaması vardır. Bu, uygulamanızın geri çekilmesi gerektiğini belirten 429 durum kodunu döndürür
+- **Hız Sınırlaması**: Kullanıcı başına dakikada 100 ve günde 10.000 hız sınırlaması vardır. Bu, uygulamanızın geri çekilmesi gerektiğini belirten _429_ durum kodunu döndürür.
 
 API'ye aşağıdaki temel URL üzerinden erişilebilir:
 https://returnyoutubedislikeapi.com
 
-Kullanılabilir endpoint'lerin listesi burada mevcuttur:
+Kullanılabilir endpoint'lerin bir listesi burada mevcuttur:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Oylamaları Elde Etme
@@ -75,13 +75,13 @@ Tüm belgelemeleri sitemizden inceleyebilirsiniz.
 
 ## Katkıda Bulunma
 
-Lütfen [katkı kılavuzu](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)nu okuyun.
+Lütfen [katkı kılavuzu](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGtr.md)nu okuyun.
 
 ## Bu Projeyi Destekle!
 
 Aşağıdaki bağlantıdan bize bağış yapabilir ve bu projeye destek olabilirsiniz:
 
-[Bağış Yapın](https://returnyoutubedislike.com/donate)
+[Bağış Yap](https://returnyoutubedislike.com/donate)
 
 ## Sponsorlar
 

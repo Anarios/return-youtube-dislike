@@ -10,10 +10,6 @@
       <v-icon style="margin-right: 0.5em">mdi-patreon</v-icon>
       Patreon
     </v-btn>
-    <v-btn class="mainAltButton mb-2" :to="yoomoneyLink">
-      <v-icon style="margin-right: 0.5em">mdi-cash-multiple</v-icon>
-      Yoomoney
-    </v-btn>
     <v-btn class="mainAltButton mb-2" :to="cryptoLink">
       <v-icon style="margin-right: 0.5em">mdi-bitcoin</v-icon>
       Crypto
@@ -34,7 +30,6 @@ export default {
   },
   data: () => ({
     patreonLink: "https://www.patreon.com/returnyoutubedislike",
-    yoomoneyLink: "/pay/yoomoney",
     cryptoLink: "/pay/crypto",
   }),
 };
