@@ -54,11 +54,13 @@ Example to get votes of a given YouTube video ID:
 ```json
 {
   "id": "kxOuG8jMIgI",
-  "dateCreated": "2021-12-20T12:25:54.418014Z",
-  "likes": 27326,
-  "dislikes": 498153,
-  "rating": 1.212014408444885,
-  "viewCount": 3149885,
+  "dateCreated": "2022-04-09T21:44:20.5103Z",
+  "likes": 31885,
+  "rawDislikes": 31946,
+  "rawLikes": 457,
+  "dislikes": 579721,
+  "rating": 1.2085329444119253,
+  "viewCount": 3762293,
   "deleted": false
 }
 ```
