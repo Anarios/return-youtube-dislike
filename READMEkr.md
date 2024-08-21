@@ -7,38 +7,37 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [Magyar](READMEhu.md), [Danish](READMEda.md)
+다른 언어로 확인하기: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [Magyar](READMEhu.md), [Danish](READMEda.md)
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike is an open-source extension that returns the YouTube dislike count.</b><br>
-    Available for Chrome and Firefox as a Web Extension.<br>
-    Also available for other browsers as JS Userscript.<br><br>
+    <b>Return YouTube Dislike는 YouTube 싫어요 수를 반환하는 오픈소스 확장 프로그램입니다.</b><br>
+    Chrome 및 Firefox에서 웹 확장 프로그램으로 제공됩니다.<br>
+    JS Userscript로 다른 브라우저에서도 제공됩니다.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## The Story
+## 배경
 
-On November 10th, 2021, Google [announced](https://blog.youtube/news-and-events/update-to-youtube/) that the YouTube dislike count would be removed.
+2021년 11월 10일, Google은 YouTube 싫어요 수를 [삭제한다고 발표](https://blog.youtube/news-and-events/update-to-youtube/)했습니다.
 
-Additionally, the `dislike` field in the YouTube API was [removed](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) on December 13th, 2021, removing any ability to judge the quality of content before watching.
+또한, 2021년 12월 13일에 Youtube API 에서 `dislike` 필드가 [제거](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts)되어 영상을 시청하기 전에 콘텐츠의 품질을 판단할 수 있는 기능이 삭제되었습니다.
+## 무엇을 하나요?
 
-## What it Does
+YouTube API에서 dislike 통계가 제거되면서 백엔드는 스크래핑된 싫어요 통계와 확장 프로그램 사용자 데이터에서 추정한 추정치를 조합하여 사용하도록 전환했습니다.
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+[자주 묻는 질문](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
-[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+## 왜 중요한가요?
 
-## Why it Matters
+자세한 내용은 [returnyoutubedislike.com](https://www.returnyoutubedislike.com/) 에서 확인할 수 있습니다.
 
-You can learn more at our website at: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+## API 문서
 
-## API documentation
+다음 제한 사항 하에 서드파티 앱이 이 Open API를 사용하는 것이 허용됩니다.
 
-Third-party use of this open API is allowed with the following restrictions:
-
-- **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10,000 per day. This will return a _429_ status code indicating that your application should back off.
+- **출처**: 서드파티 앱은 [returnyoutubedislike.com](https://returnyoutubedislike.com/) 링크와 함께 명확히 출처를 표시해야 합니다. 
+- **Rate Limiting**: 클라이언트당 분당 100개, 일당 10,000개의 Rate Limit이 있습니다. Rate Limit에 걸릴 시 서버에서 429 에러를 반환합니다.
 
 The API is accessible over the following base URL:  
 https://returnyoutubedislikeapi.com
