@@ -85,4 +85,4 @@ You can view all documentation on our website.
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
 
-[Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
+[우리의 스폰서가 되어주세요](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
