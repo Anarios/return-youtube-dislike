@@ -34,20 +34,20 @@ YouTube API에서 dislike 통계가 제거되면서 백엔드는 스크래핑된
 
 ## API 문서
 
-다음 제한 사항 하에 서드파티 앱이 이 Open API를 사용하는 것이 허용됩니다.
+다음 제한 사항 하에 서드파티 앱에서 이 Open API를 사용하는 것을 허용합니다.
 
 - **출처**: 서드파티 앱은 [returnyoutubedislike.com](https://returnyoutubedislike.com/) 링크와 함께 명확히 출처를 표시해야 합니다. 
-- **Rate Limiting**: 클라이언트당 분당 100개, 일당 10,000개의 Rate Limit이 있습니다. Rate Limit에 걸릴 시 서버에서 429 에러를 반환합니다.
+- **Rate Limiting**: 클라이언트당 분당 100개, 하루 당 10,000개의 요청 제한이 있습니다. 하루 할당량 초과 시, 서버에서 429 에러를 반환합니다.
 
-The API is accessible over the following base URL:  
+아래 Base URL 을 통해 API에 접근할 수 있습니다:  
 https://returnyoutubedislikeapi.com
 
-List of available endpoints is available here:  
+사용 가능한 엔드포인트 목록은 여기에서 확인할 수 있습니다:<br>
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Get votes
+### Vote 가져오기
 
-Example to get votes of a given YouTube video ID:  
+아래 예시 처럼 YouTube video ID에서 Vote를 가져올 수 있습니다. <br>
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -62,8 +62,8 @@ Example to get votes of a given YouTube video ID:
 }
 ```
 
-Non-existent YouTube ID will return status code _404_ "Not Found".  
-Wrong formed YouTube ID will return _400_ "Bad Request".
+존재하지 않는 YouTube ID는 상태 코드 _404_ "Not Found" 를 반환합니다.<br>
+잘못 구성된 YouTube ID는 상태 코드  _400_ "Bad Request" 를 반환합니다.
 
 <!---
 ## API documentation
@@ -71,17 +71,17 @@ Wrong formed YouTube ID will return _400_ "Bad Request".
 You can view all documentation on our website.
 [https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
 
-## Contributing
+## 프로젝트 기여 (Contributing)
 
-Please read the [contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+[기여 가이드](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md) 를 확인해보세요.
 
-## Support this project!
+## 프로젝트 후원
 
-You can support this project by donating to us on the link below:
+아래 링크를 통해 이 프로젝트를 지원해주세요!:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[후원하기](https://returnyoutubedislike.com/donate)
 
-## Sponsors
+## 스폰서
 
 [Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
 
