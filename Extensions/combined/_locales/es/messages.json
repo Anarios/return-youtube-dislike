@@ -132,10 +132,10 @@
     "message": "Combinación de colores:"
   },
   "showTooltipPercentage": {
-    "message": "Porcentaje en el tooltip de la barra de likes/dislikes."
+    "message": "Porcentaje en el tooltip de la barra de like/dislike."
   },
   "showTooltipPercentageHover": {
-    "message": "Mostrar porcentaje en el tooltip de la barra de likes/dislikes."
+    "message": "Mostrar porcentaje en el tooltip de la barra de like/dislike."
   },
   "tooltipPercentageMode": {
     "message": "Modo de porcentaje:"
