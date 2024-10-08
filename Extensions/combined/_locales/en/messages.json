@@ -130,5 +130,17 @@
   },
   "colorTheme": {
     "message": "Color theme:"
+  },
+  "showTooltipPercentage": {
+    "message": "Percentage in like/dislike bar tooltip."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Display percentage in like/dislike bar tooltip."
+  },
+  "tooltipPercentageMode": {
+    "message": "Percent mode:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Use custom percentage display on hover."
   }
 }
