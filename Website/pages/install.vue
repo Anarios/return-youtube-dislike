@@ -97,7 +97,7 @@ export default {
   data() {
     return {
       chromeLink:
-        "https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/",
+        "https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi",
       firefoxLink:
         "https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/",
       scriptLink:
