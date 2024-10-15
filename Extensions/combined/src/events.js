@@ -116,6 +116,7 @@ function createSmartimationObserver() {
       {
         attributes: true,
         subtree: true,
+        childList: true,
       },
       updateDOMDislikes,
     );
