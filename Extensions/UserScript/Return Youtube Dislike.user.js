@@ -258,8 +258,12 @@ function setDislikes(dislikesCount) {
     mobileDislikes = dislikesCount;
     return;
   }
-  getDislikeTextContainer()?.removeAttribute("is-empty");
-  getDislikeTextContainer().innerText = dislikesCount;
+
+  const _container = getDislikeTextContainer();
+  _container?.removeAttribute("is-empty");
+  if (_container?.innerText !== dislikesCount) {
+    _container.innerText = dislikesCount;
+  }
 }
 
 function getLikeCountFromButton() {
@@ -648,6 +652,7 @@ function setEventListeners(evt) {
               {
                 attributes: true,
                 subtree: true,
+                childList: true,
               },
               updateDOMDislikes,
             );
