@@ -1,17 +1,17 @@
-Read this in other languages: [Nederlands](readmenl.md), [Français](readmefr.md), [Türkçe](readmetr.md), [Bahasa Indonesia](readmeid.md)
+Baca ini dibahasa lain: [Nederlands](readmenl.md), [Français](readmefr.md), [Türkçe](readmetr.md)
 
-**Contents**
+**Isi**
 
-- [Guides](#guides)
-- [FAQs](#faqs)
+- [Petunjuk](#petunjuk)
+- [Pertanyaan yang Sering Ditanyakan](#pertanyaan-yang-sering-ditanyakan)
 <!-- - [FAQs](#faqs)
 - [Other Lists](#other-lists) -->
 
 <br>
 
-## Guides
+## Petunjuk
 
-- [Downloading, Installing & Using](https://github.com/Anarios/return-youtube-dislike/wiki/Downloading,-Installing-&-Using)
+- [Mengunduh, Menginstall, dan Menggunakan](https://github.com/Anarios/return-youtube-dislike/wiki/Downloading,-Installing-&-Using)
 - [Troubleshooting](https://github.com/Anarios/return-youtube-dislike/wiki/Troubleshooting-Guide)
 <!-- - [FAQ](FAQ.md)
 - [When & How to Report Bugs](Guide__Bug_Reporting.md)
@@ -20,10 +20,10 @@ Read this in other languages: [Nederlands](readmenl.md), [Français](readmefr.md
 
 <br>
 
-## FAQs
+## Pertanyaan yang Sering Ditanyakan
 
-- [General](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
-- [Security](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md)
+- [Umum](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+- [Keamanan](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md)
 
 <!-- - [Privacy](FAQ_Privacy.md)
 - [Technical](FAQ_Technical.md)

@@ -1,4 +1,4 @@
-Read this in other languages: [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md)
+Read this in other languages: [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Bahasa Indonesia](CONTRIBUTINGid.md)
 
 # Bem-vindo ao Guia de contribuição do Return YouTube Dislikes
 
@@ -32,7 +32,7 @@ npm start // to create the build file(s) and start a file watcher that hot-reloa
 
 // ou
 
-npm run build // para criar uma build para cria um arquivo de build 
+npm run build // para criar uma build para cria um arquivo de build
 ```
 
 Congratulations, You are now ready to develop!
