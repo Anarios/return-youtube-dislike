@@ -17,7 +17,7 @@ We save all available data to our DB for it to be available after Google shuts d
 
 ### **2. Video dislike count doesn't update**
 
-Right now video dislikes are cached, and aren't updated very frequenly. Once every 2-3 days, not more often.
+Right now video dislikes are cached, and aren't updated very frequently. Once every 2-3 days, not more often.
 
 Yeah, it's not ideal, but it is what it is. Working on improving how often we can update them.
 
