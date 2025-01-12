@@ -28,7 +28,7 @@
 
 随着 YouTube API 中不喜欢统计信息的移除，我们的后端切换到使用从扩展用户数据中抓取的不喜欢统计信息和估算数据的组合。
 
-[常见问题解答](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[常见问题解答](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQcn.md)
 
 ## 为什么重要
 
@@ -69,7 +69,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 ## 贡献
 
-请阅读[贡献指南](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)。
+请阅读[贡献指南](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGcn.md)。
 
 ## 支持这个项目！
 
