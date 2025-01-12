@@ -1,15 +1,15 @@
 {
   "extensionName": {
-    "message": "Voltar Dislikes do YouTube"
+    "message": "Volta Descurtidas do YouTube"
   },
   "extensionNameBeta": {
-    "message": "Voltar Dislikes do YouTube Beta"
+    "message": "Volta Descurtidas do YouTube Beta"
   },
   "extensionDesc": {
-    "message": "Voltar os Deslikes do YouTube"
+    "message": "Retorna a capacidade de ver descurtidas"
   },
   "textDeveloper": {
-    "message": "por Dmitry Selivanov e Comunidade"
+    "message": "por Dmitry Selivanov & Comunidade"
   },
   "linkWebsite": {
     "message": "Website"
@@ -18,45 +18,117 @@
     "message": "Perguntas Frequentes"
   },
   "linkDonate": {
-    "message": "Doe"
+    "message": "Doar"
   },
   "linkHelp": {
     "message": "Ajuda"
+  },
+  "linkChangelog": {
+    "message": "Registro de alterações"
   },
   "legendSettings": {
     "message": "Configurações"
   },
   "textSettings": {
-    "message": "Desativar envio de Curtidas/Não Curtidas"
+    "message": "Desativar envio de curtidas/descurtidas"
   },
   "textLikesDisabled": {
     "message": "Desativado pelo proprietário"
   },
   "textSettingsHover": {
-    "message": "Parar de contar suas curtidas e não curtidas."
+    "message": "Para de contar suas curtidas e descurtidas."
+  },
+  "textRoundingNumbers": {
+    "message": "Arredondar as estatísticas de curtidas/descurtidas para baixo (comportamento padrão do YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Mostrar estatísticas arredondadas"
+  },
+  "textConsistentFormat": {
+    "message": "Tornar o formato de curtidas e descurtidas consistente"
+  },
+  "textConsistentFormatHover": {
+    "message": "Re-formatar número de curtidas."
+  },
+  "textNumberFormat": {
+    "message": "Formato numérico:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colorir barra de proporção"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Usar cores personalizadas para a barra de proporção."
+  },
+  "textColorizeThumbs": {
+    "message": "Colorir botões"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Usar cores personalizadas para os botões de curtir e descurtir."
+  },
+  "textColorTheme": {
+    "message": "Tema de cores:"
+  },
+  "textColorTheme1": {
+    "message": "Clássico"
+  },
+  "textColorTheme2": {
+    "message": "Acessível"
+  },
+  "textColorTheme3": {
+    "message": "Néon"
   },
   "textTempUnavailable": {
-    "message": "Temporariamente indisponível"
+    "message": "Temporariamente Indisponível"
   },
   "textUpdate": {
     "message": "Atualizar para"
   },
   "version30installed": {
-    "message": "Versão 3.0.0.13 instalada"
+    "message": "Versão __RYD_VERSION__ instalada"
   },
   "whatsnew": {
-    "message": "O que há de novo?"
+    "message": "O que há de novo?:"
   },
   "shortsSupport": {
-    "message": "Suporte para Shorts"
+    "message": "Suporte a curtas do YouTube"
   },
   "customColors": {
-    "message": "Cores personalizadas para barra de não curtidas e botões"
+    "message": "Cores personalizadas para barra de proporção e botões"
   },
   "customNumberFormats": {
-    "message": "Formato de números personalizados"
+    "message": "Formato numérico personalizado"
   },
   "considerDonating": {
     "message": "A única coisa que mantém a extensão funcionando são suas doações, considere apoiar o projeto."
+  },
+  "roundNumbers": {
+    "message": "Mostrar números arredondados"
+  },
+  "roundNumbersHover": {
+    "message": "Arredondar os números para baixo (comportamento padrão do YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Re-formatar número de curtidas"
+  },
+  "reformatLikesHover": {
+    "message": "Tornar o formato de curtidas e descurtidas consistente."
+  },
+  "numberFormat": {
+    "message": "Formato numérico:"
+  },
+  "colorizeRatio": {
+    "message": "Colorir barra de proporção"
+  },
+  "colorizeRatioHover": {
+    "message": "Usar cores personalizadas para a barra de proporção."
+  },
+  "colorizeThumbs": {
+    "message": "Colorir botões"
+  },
+  "colorizeThumbsHover": {
+    "message": "Usar cores personalizadas para os botões de curtir e descurtir."
+  },
+  "colorTheme": {
+    "message": "Tema de Cores:"
   }
 }

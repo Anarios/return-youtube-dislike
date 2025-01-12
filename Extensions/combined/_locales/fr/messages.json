@@ -42,7 +42,7 @@
     "message": "mettre à jour vers"
   },
   "version30installed": {
-    "message": "Version 3.0.0.13 installée"
+    "message": "Version __RYD_VERSION__ installée"
   },
   "whatsnew": {
     "message": "Quoi de neuf"

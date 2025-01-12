@@ -1,5 +1,4 @@
-Read this in other languages: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md),  [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md)
-
+Read this in other languages: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Deutsch](FAQde.md)
 
 # Często zadawane pytania
 
@@ -17,7 +16,7 @@ Zapisujemy wszystkie dostępne dane do naszej bazy danych, żeby były dostępne
 
 ### **2. Licznik łapek w dół się nie aktualizuje**
 
-Na chwile obecną łapki w dół są buforowane i nie są bardzo często aktualizowane. Raz na 2-3 dni, nie częściej. 
+Na chwile obecną łapki w dół są buforowane i nie są bardzo często aktualizowane. Raz na 2-3 dni, nie częściej.
 
 No nie jest to idealne, ale tak już jest. Pracujemy nad tym jak częściej możemy to aktualizować.
 

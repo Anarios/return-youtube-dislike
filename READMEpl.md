@@ -1,5 +1,5 @@
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Rating&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/)
-[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Users&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Rating&style=flat&logo=google)](https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
+[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Users&style=flat&logo=google)](https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
 [![Mozilla rating](https://img.shields.io/amo/stars/return-youtube-dislikes?label=Firefox%20Rating&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
 [![Mozilla downloads](https://img.shields.io/amo/users/return-youtube-dislikes?label=Firefox%20Users&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
 [![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
@@ -22,7 +22,7 @@ Read this in other languages: [English](README.md), [русский](READMEru.md
 
 Dnia 10 listopada 2021, Google [ogłosiło](https://blog.youtube/news-and-events/update-to-youtube/), że licznik łapek w dół na YouTube zostanie usunięty.
 
-Dodatkowo, pole `dislike` w API YouTube zostało [usunięte](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 grudnia 2021, usuwając przy tym jakąkolwiek możliwość oceny jakości filmu przed obejrzeniem. 
+Dodatkowo, pole `dislike` w API YouTube zostało [usunięte](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) 13 grudnia 2021, usuwając przy tym jakąkolwiek możliwość oceny jakości filmu przed obejrzeniem.
 
 ## Co to robi
 

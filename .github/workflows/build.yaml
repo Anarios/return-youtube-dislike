@@ -1,0 +1,53 @@
+name: Test Build Extension
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - Extensions/combined/**
+
+  pull_request:
+    branches: [main]
+    paths:
+      - Extensions/combined/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./Extensions/combined
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build extension
+        run: npm run build
+
+      - name: 'Upload Chrome artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ryd-chrome
+          path: ./Extensions/combined/dist/chrome
+
+      - name: 'Upload Firefox artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ryd-firefox
+          path: ./Extensions/combined/dist/firefox
+
+      - name: 'Upload Safari artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ryd-safari
+          path: ./Extensions/combined/dist/safari
