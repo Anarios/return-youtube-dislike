@@ -77,7 +77,7 @@ APIの完全なドキュメントは公式サイトを参照してください�
 
 ## 貢献する
 
-こちらの[contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)を読んでください。
+こちらの[contribution guide](CONTRIBUTING.md)を読んでください。
 
 ## プロジェクトを支援!
 
