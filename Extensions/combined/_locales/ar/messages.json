@@ -1,0 +1,134 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike التجريبية"
+  },
+  "extensionDesc": {
+    "message": "إعادة القدرة على رؤية عدم الإعجابات"
+  },
+  "textDeveloper": {
+    "message": "بواسطة ديمتري سيليفانوف والمجتمع"
+  },
+  "linkWebsite": {
+    "message": "الموقع الإلكتروني"
+  },
+  "linkFAQ": {
+    "message": "الأسئلة المتكررة"
+  },
+  "linkDonate": {
+    "message": "التبرع"
+  },
+  "linkHelp": {
+    "message": "المساعدة"
+  },
+  "linkChangelog": {
+    "message": "سجل التغييرات"
+  },
+  "legendSettings": {
+    "message": "الإعدادات"
+  },
+  "textSettings": {
+    "message": "تعطيل إرسال الإعجابات/عدم الإعجابات"
+  },
+  "textLikesDisabled": {
+    "message": "معطل من القناة"
+  },
+  "textSettingsHover": {
+    "message": "إيقاف حساب الإعجابات وعدم الإعجابات الخاصتان بك."
+  },
+  "textRoundingNumbers": {
+    "message": "تقريب إحصائيات الإعجابات/عدم الإعجابات (سلوك YouTube الافتراضي)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "عرض الإحصائيات مقربة."
+  },
+  "textConsistentFormat": {
+    "message": "جعل تنسيق الإعجابات وعدم الإعجابات دقيقة"
+  },
+  "textConsistentFormatHover": {
+    "message": "إعادة التنسيق كأعداد."
+  },
+  "textNumberFormat": {
+    "message": "تنسيق العدد:"
+  },
+  "textColorizeRatioBar": {
+    "message": "تلوين شريط النسبة"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "استخدام ألوان مخصصة لشريط النسبة."
+  },
+  "textColorizeThumbs": {
+    "message": "تلوين الأيادي"
+  },
+  "textColorizeThumbsHover": {
+    "message": "استخدام ألوان مخصصة للأيادي."
+  },
+  "textColorTheme": {
+    "message": "سمة الألوان:"
+  },
+  "textColorTheme1": {
+    "message": "تقليدي"
+  },
+  "textColorTheme2": {
+    "message": "قابل للوصول"
+  },
+  "textColorTheme3": {
+    "message": "نيون"
+  },
+  "textTempUnavailable": {
+    "message": "غير متوفر مؤقتًا"
+  },
+  "textUpdate": {
+    "message": "تحديث إلى"
+  },
+  "version30installed": {
+    "message": "الإصدار __RYD_VERSION__ مثبت"
+  },
+  "whatsnew": {
+    "message": "ما الجديد"
+  },
+  "shortsSupport": {
+    "message": "دعم YouTube Shorts"
+  },
+  "customColors": {
+    "message": "ألوان مخصصة لشريط عدم الإعجاب والأزرار"
+  },
+  "customNumberFormats": {
+    "message": "تنسيقات أعداد مخصصة"
+  },
+  "considerDonating": {
+    "message": "الشيء الوحيد الذي يحافظ على استمرارية الإضافة هو تبرعاتكم، الرجاء النظر في دعم المشروع."
+  },
+  "roundNumbers": {
+    "message": "عرض الأعداد مقربة."
+  },
+  "roundNumbersHover": {
+    "message": "تقريب الأعداد (سلوك YouTube الافتراضي)"
+  },
+  "reformatLikes": {
+    "message": "إعادة التنسيق كأعداد."
+  },
+  "reformatLikesHover": {
+    "message": "جعل تنسيق الإعجابات وعدم الإعجابات دقيقة"
+  },
+  "numberFormat": {
+    "message": "تنسيق العدد:"
+  },
+  "colorizeRatio": {
+    "message": "تلوين شريط النسبة"
+  },
+  "colorizeRatioHover": {
+    "message": "استخدام ألوان مخصصة لشريط النسبة."
+  },
+  "colorizeThumbs": {
+    "message": "تلوين الأيادي"
+  },
+  "colorizeThumbsHover": {
+    "message": "استخدام ألوان مخصصة للأيادي."
+  },
+  "colorTheme": {
+    "message": "سمة الألوان:"
+  }
+}
