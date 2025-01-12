@@ -114,8 +114,27 @@ export default {
         lang: "Français",
       },
       {
+        tag: "tubyoub",
+        lang: "Deutsch",
+      },
+      {
         tag: "dsty#1614",
         lang: "Українська",
+      },
+      {
+        tag: "liberaldev",
+        lang: "한국어",
+      },
+        tag: "itsbudyn#6502",
+        lang: "Polski",
+      },
+      {
+        tag: "ArtisGraphics",
+        lang: "Deutsch"
+      },
+      {
+        tag: "gpap#3743",
+        lang: "Magyar",
       },
     ],
     coolProjects: [

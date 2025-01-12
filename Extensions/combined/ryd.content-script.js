@@ -1,77 +1,53 @@
 //---   Import Button Functions   ---//
-import {
-  getButtons,
-  getLikeButton,
-  getDislikeButton,
-  checkForSignInButton,
-} from "./src/buttons";
+import { getButtons } from "./src/buttons";
 
 //---   Import State Functions   ---//
-import {
-  isMobile,
-  isShorts,
-  isVideoDisliked,
-  isVideoLiked,
-  getState,
-  setState,
-  setInitialState,
-  setLikes,
-  setDislikes,
-  getLikeCountFromButton,
-  LIKED_STATE,
-  DISLIKED_STATE,
-  NEUTRAL_STATE,
-  initExtConfig,
-} from "./src/state";
+import { isShorts, setInitialState, initExtConfig } from "./src/state";
 
 //---   Import Video & Browser Functions   ---//
-import {
-  numberFormat,
-  getBrowser,
-  getVideoId,
-  isVideoLoaded,
-  cLog,
-} from "./src/utils";
-import { createRateBar } from "./src/bar";
-import {
-  sendVote,
-  likeClicked,
-  dislikeClicked,
-  addLikeDislikeEventListener,
-  storageChangeHandler,
-} from "./src/events";
+import { getBrowser, isVideoLoaded, cLog } from "./src/utils";
+import { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler } from "./src/events";
 
-initExtConfig();
+await initExtConfig();
 
 let jsInitChecktimer = null;
 let isSetInitialStateDone = false;
 
-function setEventListeners(evt) {
-  function checkForJS_Finish() {
+async function setEventListeners(evt) {
+  async function checkForJS_Finish() {
     try {
       if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
-        addLikeDislikeEventListener();
-        setInitialState();
-        isSetInitialStateDone = true;
-        getBrowser().storage.onChanged.addListener(storageChangeHandler);
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
-      } 
-    } catch(exception) {
-      if(!isSetInitialStateDone) {
-        setInitialState();
+        createSmartimationObserver();
+        addLikeDislikeEventListener();
+        await setInitialState();
+        isSetInitialStateDone = true;
+        getBrowser().storage.onChanged.addListener(storageChangeHandler);
+      }
+    } catch (exception) {
+      if (!isSetInitialStateDone) {
+        cLog("error");
+        await setInitialState();
       }
     }
   }
 
-
-  jsInitChecktimer = setInterval(checkForJS_Finish, 111);
+  if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
+  jsInitChecktimer = setInterval(await checkForJS_Finish, 111);
 }
 
-setEventListeners();
+await setEventListeners();
 
-document.addEventListener("yt-navigate-finish", function (event) {
+document.addEventListener("yt-navigate-finish", async function (event) {
   if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
-  window.returnDislikeButtonlistenersSet = false;
-  setEventListeners();
+  await setEventListeners();
 });
+
+const s = document.createElement("script");
+s.src = chrome.runtime.getURL("menu-fixer.js");
+s.onload = function () {
+  this.remove();
+};
+// see also "Dynamic values in the injected code" section in this answer
+(document.head || document.documentElement).appendChild(s);

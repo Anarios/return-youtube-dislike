@@ -1,12 +1,12 @@
 {
   "extensionName": {
-    "message": "Επιστροφή του YouTube Dislike"
+    "message": "Επαναφορά του YouTube Dislike"
   },
   "extensionNameBeta": {
     "message": "Return YouTube Dislike Beta"
   },
   "extensionDesc": {
-    "message": "Επιστρέφει τα dislikes"
+    "message": "Επαναφέρει τη δυνατότητα να βλέπετε τα dislikes"
   },
   "textDeveloper": {
     "message": "από τον Dmitry Selivanov & την κοινότητα"
@@ -84,7 +84,7 @@
     "message": "Ενημέρωση σε"
   },
   "version30installed": {
-    "message": "Εκδοση 3.0.0.9 εγκαταστάθηκε"
+    "message": "Εκδοση __RYD_VERSION__ εγκαταστάθηκε"
   },
   "whatsnew": {
     "message": "Τί νέο υπάρχει"
