@@ -30,7 +30,7 @@ Die Erweiterung sammelt die Video-ID des von Ihnen angesehenen Videos, ruft die 
 
 ### **4. Was passiert, wenn die YouTube-API aufhört, die Anzahl der Dislikes zurückzugeben?**
 
-Der Backend wird auf eine Kombination aus archivierten Dislike-Statistiken, Schätzungen, die aus den Daten der Erweiterungsnutzer extrapoliert werden, und Schätzungen basierend auf Ansichts-/Like-Verhältnissen für Videos, deren Dislikes nicht archiviert wurden, und veralteten Dislike-Archiven umstellen.
+Das Backend wird auf eine Kombination aus archivierten Dislike-Statistiken, Schätzungen, die aus den Daten der Erweiterungsnutzer extrapoliert werden, und Schätzungen basierend auf Ansichts-/Like-Verhältnissen für Videos, deren Dislikes nicht archiviert wurden, und veralteten Dislike-Archiven umstellen.
 
 <br>
 
