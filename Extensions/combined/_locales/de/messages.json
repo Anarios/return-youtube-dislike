@@ -9,7 +9,7 @@
     "message": "Macht Dislikes wieder sichtbar"
   },
   "textDeveloper": {
-    "message": "von Dmitry Selivanov & Community"
+    "message": "von Dmitry Selivanov & der Community"
   },
   "linkWebsite": {
     "message": "Website"
@@ -45,10 +45,10 @@
     "message": "Zeige abgerundete Zahlen."
   },
   "textConsistentFormat": {
-    "message": "Mach das Format der Likes und Dislikes einheitlich."
+    "message": "Das Format der Likes und Dislikes einheitlich machen."
   },
   "textConsistentFormatHover": {
-    "message": "Wie Zahlen neu formatieren"
+    "message": "Likes neu formatieren"
   },
   "textNumberFormat": {
     "message": "Zahlenformat:"
@@ -60,10 +60,10 @@
     "message": "Benutzerdefinierte Farben für die Verhältnisleiste verwenden."
   },
   "textColorizeThumbs": {
-    "message": "Färbe Daumen-Icons"
+    "message": "Like/Dislike-Icons eifärben"
   },
   "textColorizeThumbsHover": {
-    "message": "Nutze benutzerdefinierte Farben für die Daumen-Icons."
+    "message": "Benutzerdefinierte Farben für die Like/Dislike-Icons verwenden."
   },
   "textColorTheme": {
     "message": "Farbschema:"
@@ -72,16 +72,16 @@
     "message": "Klassisch"
   },
   "textColorTheme2": {
-    "message": "Zugänglich"
+    "message": "Barrierefrei"
   },
   "textColorTheme3": {
     "message": "Neon"
   },
   "textTempUnavailable": {
-    "message": "Temporär nicht erreichbar"
+    "message": "Temporär nicht verfügbar"
   },
   "textUpdate": {
-    "message": "aktualisieren auf"
+    "message": "Aktualisieren auf"
   },
   "version30installed": {
     "message": "Version __RYD_VERSION__ installiert"
@@ -93,7 +93,7 @@
     "message": "YouTube Shorts Unterstützung"
   },
   "customColors": {
-    "message": "Benutzerdefinierte Farben für Dislike-Leiste und Buttons"
+    "message": "Benutzerdefinierte Farben für die Dislike-Leiste und Knopf"
   },
   "customNumberFormats": {
     "message": "Benutzerdefinierte Zahlenformate"
@@ -108,10 +108,10 @@
     "message": "Zahlen abrunden (Standardverhalten von YouTube)."
   },
   "reformatLikes": {
-    "message": "Wie Zahlen neu formatieren"
+    "message": "Likes neu formatieren"
   },
   "reformatLikesHover": {
-    "message": "Mach das Format der Likes und Dislikes einheitlich."
+    "message": "Das Format der Likes und Dislikes einheitlich machen."
   },
   "numberFormat": {
     "message": "Zahlenformat:"
@@ -123,10 +123,10 @@
     "message": "Benutzerdefinierte Farben für die Verhältnisleiste verwenden."
   },
   "colorizeThumbs": {
-    "message": "Buttons einfärben"
+    "message": "Like/Dislike-Icons eifärben"
   },
   "colorizeThumbsHover": {
-    "message": "Benutzerdefinierte Farben für die Schaltflächensymbole verwenden."
+    "message": "Benutzerdefinierte Farben für die Like/Dislike-Icons verwenden."
   },
   "colorTheme": {
     "message": "Farbschema:"
