@@ -75,7 +75,7 @@ You can view all documentation on our website.
 
 ## Συνεισφορά
 
-Παρακαλώ διαβάστε τον [οδηγό συνεισφοράς](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Παρακαλώ διαβάστε τον [οδηγό συνεισφοράς](CONTRIBUTING.md).
 
 ## Υποστηρίξτε αυτό το project!
 
