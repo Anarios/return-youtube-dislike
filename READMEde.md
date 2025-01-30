@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Lesen sie dies in anderen Sprachen: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Danish](READMEda.md)
+Lesen sie dies in anderen Sprachen: [English](README.md), [Español](READMEes.md), [русский](READMEru.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Danish](READMEda.md), [Bahasa Indonesia](READMEid.md)
 
 # Return YouTube Dislike
 
@@ -41,15 +41,15 @@ Dritte dürfen diese öffentliche API mit folgenden Restriktionen benützen:
 - **Namensnennung**: Dieses Projekt sollte klar und mit folgendem Link [returnyoutubedislike.com](https://returnyoutubedislike.com/) versehen zugeordnet werden.
 - **Raten Limitierung**: Es bestehen pro Nutzer limitierungen von 100 pro Minute sowie 10'000 pro Tag. Dies wird eine Statusmeldung von _429_ ausgeben, die darauf hinweist, dass sich Ihre Anwendung zurückziehen sollte.
 
-Die API ist unter der folgenden basis URL verfügbar:  
+Die API ist unter der folgenden basis URL verfügbar:
 https://returnyoutubedislikeapi.com
 
-Eine Liste aller verfügbaren Endpunkten finden Sie hier:  
+Eine Liste aller verfügbaren Endpunkten finden Sie hier:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Votum erhalten <!-- ### Get votes -->
 
-Beispiel um die Abstimmungen einer gegebenen YouTube ID zu erhalten:  
+Beispiel um die Abstimmungen einer gegebenen YouTube ID zu erhalten:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -64,7 +64,7 @@ Beispiel um die Abstimmungen einer gegebenen YouTube ID zu erhalten:
 }
 ```
 
-Nicht existierende YouTube IDs werden den Statuscode _404_ "Not Found" zurückgeben.  
+Nicht existierende YouTube IDs werden den Statuscode _404_ "Not Found" zurückgeben.
 Falsch geformte YouTube IDs werden den Statuscode _400_ "Bad Request" zurückgeben.
 
 <!---

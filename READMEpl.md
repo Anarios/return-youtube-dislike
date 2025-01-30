@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md)
+Read this in other languages: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Bahasa Indonesia](READMEid.md)
 
 # Return YouTube Dislike
 
@@ -41,15 +41,15 @@ Używanie tego otwartego API jest dozwolone z następującymi ograniczeniami:
 - **Przypisanie**: Ten projekt powinien być jawnie przypisany z linkiem do [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Ograniczenie żądań**: Istnieją ograniczenia żądań do 100 na minutę i 10 000 na dzień. Przekroczenie zwróci kod _429_, mówiący aplikacji aby przyhamowała.
 
-API jest dostępne przez poniższe bazowe URL:  
+API jest dostępne przez poniższe bazowe URL:
 https://returnyoutubedislikeapi.com
 
-Lista dostępnych endpointów jest dostępna tutaj:  
+Lista dostępnych endpointów jest dostępna tutaj:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Pobierz głosy
 
-Przykład otrzymywania głosów z danego ID filmu YouTube:  
+Przykład otrzymywania głosów z danego ID filmu YouTube:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -64,7 +64,7 @@ Przykład otrzymywania głosów z danego ID filmu YouTube:
 }
 ```
 
-Nieistniejący ID filmu zwróci _404_ "Not Found".  
+Nieistniejący ID filmu zwróci _404_ "Not Found".
 Niepoprawnie sformatowany ID filmu zwróci _400_ "Bad Request".
 
 <!---

@@ -136,6 +136,10 @@ export default {
         tag: "gpap#3743",
         lang: "Magyar",
       },
+      {
+        tag: "naufalk25",
+        lang: "Bahasa Indonesia",
+      }
     ],
     coolProjects: [
       {
