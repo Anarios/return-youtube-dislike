@@ -2,29 +2,30 @@ name: Test Build Extension
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
     paths:
       - Extensions/combined/**
-
   pull_request:
-    branches: [main]
+    branches:
+      - main
     paths:
       - Extensions/combined/**
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     defaults:
       run:
         working-directory: ./Extensions/combined
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@main
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup Node 20
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
 
@@ -34,19 +35,19 @@ jobs:
       - name: Build extension
         run: npm run build
 
-      - name: 'Upload Chrome artifact'
+      - name: Upload Chrome artifact
         uses: actions/upload-artifact@v4
         with:
           name: ryd-chrome
           path: ./Extensions/combined/dist/chrome
 
-      - name: 'Upload Firefox artifact'
+      - name: Upload Firefox artifact
         uses: actions/upload-artifact@v4
         with:
           name: ryd-firefox
           path: ./Extensions/combined/dist/firefox
 
-      - name: 'Upload Safari artifact'
+      - name: Upload Safari artifact
         uses: actions/upload-artifact@v4
         with:
           name: ryd-safari
