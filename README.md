@@ -25,7 +25,7 @@ Additionally, the `dislike` field in the YouTube API was [removed](https://suppo
 
 ## What it Does
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats and estimates extrapolated from extension user data.
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
@@ -63,8 +63,8 @@ Example to get votes of a given YouTube video ID:
 }
 ```
 
-Non-existent YouTube ID will return status code _404_ "Not Found".  
-Wrong formed YouTube ID will return _400_ "Bad Request".
+A Non-existent YouTube ID will return status code _404_ "Not Found".  
+An incorrectly formatted YouTube ID will return _400_ "Bad Request".
 
 <!---
 ## API documentation
