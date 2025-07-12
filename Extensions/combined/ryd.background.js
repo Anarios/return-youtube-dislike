@@ -96,7 +96,7 @@ api.runtime.onInstalled.addListener((details) => {
 //   }
 // });
 
-async function sendVote(videoId, vote) {
+async function sendVote(videoId, vote, depth = 1) {
   api.storage.sync.get(null, async (storageResult) => {
     if (!storageResult.userId || !storageResult.registrationConfirmed) {
       await register();
@@ -113,11 +113,14 @@ async function sendVote(videoId, vote) {
       }),
     });
 
-    if (voteResponse.status == 401) {
+    if (voteResponse.status == 401 && depth > 0) {
       await register();
-      await sendVote(videoId, vote);
+      await sendVote(videoId, vote, depth-1);
+      return;
+    } else if (voteResponse.status == 401) { // We have already tried registering
       return;
     }
+
     const voteResponseJson = await voteResponse.json();
     const solvedPuzzle = await solvePuzzle(voteResponseJson);
     if (!solvedPuzzle.solution) {
