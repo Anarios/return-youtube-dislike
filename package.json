@@ -1,6 +1,6 @@
 {
   "name": "return-youtube-dislike",
-  "version": "3.0.0-17",
+  "version": "3.0.0-18",
   "description": "Chrome extension to return youtube dislikes",
   "main": "ryd.content-script.js",
   "scripts": {
@@ -33,17 +33,17 @@
     "@babel/core": "^7.23.5",
     "@babel/preset-env": "^7.23.5",
     "@babel/runtime": "^7.23.5",
-    "babel-loader": "^9.1.3",
+    "babel-loader": "^10.0.0",
     "babel-plugin-rewire": "^1.2.0",
     "copy-webpack-plugin": "^11.0.0",
-    "filemanager-webpack-plugin": "^8.0.0",
-    "husky": "^8.0.0",
+    "filemanager-webpack-plugin": "^9.0.1",
+    "husky": "^9.1.7",
     "jest": "^28.1.3",
-    "jest-environment-jsdom": "^28.1.3",
-    "lint-staged": "^15.2.0",
+    "jest-environment-jsdom": "^30.0.4",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.2.2",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.1"
   },
   "prettier": {
     "printWidth": 120

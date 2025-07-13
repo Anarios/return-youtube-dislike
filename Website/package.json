@@ -12,14 +12,14 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7",
+    "nuxt": "^3.17.6",
     "nuxt-user-agent": "^1.2.2",
-    "vuetify": "^2.5.5"
+    "vuetify": "^3.9.0"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.1",
+    "@nuxtjs/vuetify": "^1.12.3",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
+    "eslint": "^9.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.0.0",
