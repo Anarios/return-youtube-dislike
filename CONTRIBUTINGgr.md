@@ -1,4 +1,4 @@
-Διαβάστε το παρόν σε άλλες γλώσσες: [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [中文](CONTRIBUTINGcn.md)
+Διαβάστε το παρόν σε άλλες γλώσσες: [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [العربية](CONTRIBUTINGar.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [中文](CONTRIBUTINGcn.md)
 
 
 # Welcome To Return YouTube Dislikes contributing guide

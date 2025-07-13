@@ -1,4 +1,4 @@
-Leia isso em outros idiomas: [Nederlands](readmenl.md), [Français](readmefr.md), [Türkçe](readmetr.md), [中文](readmecn.md)
+Leia isso em outros idiomas: [Nederlands](readmenl.md), [Français](readmefr.md), [Türkçe](readmetr.md), [Bahasa Indonesia](readmeid.md), [中文](readmecn.md)
 
 **Contents**
 

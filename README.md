@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [Magyar](READMEhu.md), [Danish](READMEda.md)
+Read this in other languages: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [Magyar](READMEhu.md), [Danish](READMEda.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md)
 # Return YouTube Dislike
 
 <p align="center">
@@ -25,7 +25,7 @@ Additionally, the `dislike` field in the YouTube API was [removed](https://suppo
 
 ## What it Does
 
-With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats, estimates extrapolated from extension user data.
+With the removal of dislike stats from the YouTube API, our backend switched to using a combination of scraped dislike stats and estimates extrapolated from extension user data.
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
@@ -40,31 +40,33 @@ Third-party use of this open API is allowed with the following restrictions:
 - **Attribution**: This project should be clearly attributed with a link to [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Rate Limiting**: There are per client rate limits in place of 100 per minute and 10,000 per day. This will return a _429_ status code indicating that your application should back off.
 
-The API is accessible over the following base URL:  
+The API is accessible over the following base URL:
 https://returnyoutubedislikeapi.com
 
-List of available endpoints is available here:  
+List of available endpoints is available here:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Get votes
 
-Example to get votes of a given YouTube video ID:  
+Example to get votes of a given YouTube video ID:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
 {
   "id": "kxOuG8jMIgI",
-  "dateCreated": "2021-12-20T12:25:54.418014Z",
-  "likes": 27326,
-  "dislikes": 498153,
-  "rating": 1.212014408444885,
-  "viewCount": 3149885,
+  "dateCreated": "2022-04-09T21:44:20.5103Z",
+  "likes": 31885,
+  "rawDislikes": 31946,
+  "rawLikes": 457,
+  "dislikes": 579721,
+  "rating": 1.2085329444119253,
+  "viewCount": 3762293,
   "deleted": false
 }
 ```
 
-Non-existent YouTube ID will return status code _404_ "Not Found".  
-Wrong formed YouTube ID will return _400_ "Bad Request".
+A non-existent YouTube ID will return status code _404_ "Not Found".  
+An incorrectly formatted YouTube ID will return status code _400_ "Bad Request".
 
 <!---
 ## API documentation

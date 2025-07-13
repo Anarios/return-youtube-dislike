@@ -1,4 +1,5 @@
-Lees dit in andere talen: [English](CONTRIBUTINGen.md), [русский](CONTRIBUTINGru.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md), [中文](CONTRIBUTINGcn.md)
+Lees dit in andere talen: [English](CONTRIBUTINGen.md), [русский](CONTRIBUTINGru.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [العربية](CONTRIBUTINGar.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [中文](CONTRIBUTINGcn.md)
+
 
 # Welkom bij de YouTube Dislikes bijdragengids
 

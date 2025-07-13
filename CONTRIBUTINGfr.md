@@ -1,4 +1,5 @@
-Lisez ceci dans d'autres langues : [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), Nederlands](CONTRIBUTINGnl.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md), [中文](CONTRIBUTINGcn.md)
+Lisez ceci dans d'autres langues : [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), Nederlands](CONTRIBUTINGnl.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [العربية](CONTRIBUTINGar.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [中文](CONTRIBUTINGcn.md)
+
 
 # Bienvenue dans le guide de contribution à Return YouTube Dislikes
 

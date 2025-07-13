@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Прочитать на других языках: [English](README.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Magyar](READMEhu.md), [Danish](READMEda.md)
+Прочитать на других языках: [English](README.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Magyar](READMEhu.md), [Danish](READMEda.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md)
 
 # Return YouTube Dislike
 
@@ -41,15 +41,15 @@
 - **Атрибуция**: Этот проект должен быть чётко описан со ссылкой на [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Ограничение**: Существуют ограничения скорости для каждого клиента — 100 в минуту и 10 000 в день. Это выдаст код ошибки _429_, указывающий на то, что ваше приложение должно быть отключено.
 
-API доступен по следующему основному URL-адресу:  
+API доступен по следующему основному URL-адресу:
 https://returnyoutubedislikeapi.com
 
-Список доступных эндпоинтов доступен здесь:  
+Список доступных эндпоинтов доступен здесь:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Получить голоса
 
-Пример получения голосов для заданного идентификатора видео на YouTube:  
+Пример получения голосов для заданного идентификатора видео на YouTube:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -64,7 +64,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 }
 ```
 
-Неверный идентификатор YouTube выдаст код ошибки _404_ «Не найдено».  
+Неверный идентификатор YouTube выдаст код ошибки _404_ «Не найдено».
 Неправильно отформатированный идентификатор YouTube выдаст код ошибки _400_ «Неверный запрос».
 
 <!---

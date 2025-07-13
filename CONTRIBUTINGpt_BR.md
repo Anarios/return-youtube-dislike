@@ -1,67 +1,68 @@
-Read this in other languages: [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [中文](CONTRIBUTINGcn.md)
+Read this in other languages: [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Español](CONTRIBUTINGes.md), [العربية](CONTRIBUTINGar.md) ou [English (Para Melhor precisão!)](CONTRIBUTING.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [中文](CONTRIBUTINGcn.md)
 
-# Bem-vindo ao Guia de contribuição do Return YouTube Dislikes
 
-Thank you for investing your time in contributing to our project! All your changes will be reflected in the next version of the extension (or the [website](https://www.returnyoutubedislike.com/)).
+# Bem-vindo ao guia de contribuição do Return YouTube Dislikes
 
-## Vamos ao  começo
+Obrigado por investir seu tempo contribuindo para o nosso projeto! Todas as mudanças serão refletidas na próxima versão da extensão (ou do [website](https://www.returnyoutubedislike.com/)).
 
-Por favor use o Prettir com a configurações padrão de formatação.
+## Começando
 
-#### Prerequisites
+Por favor use o Prettier com as configurações padrão de formatação.
 
-vocÊ precisa ter node e npm instalado para criar um You need to have node and npm installed to create the bundled version of the source.
+#### Pré requisitos
 
-Versões que usará quando estiver trabalhando nisso:
+Você precisa ter o node e o npm instalados para criar o pacote a partir do código-fonte.
+
+Versões usadas na configuração:
 
 - node: 12.18.4
 - npm: 6.14.6
 
-To create the `bundled-content-script.js` that contains most of the business logic of this extension you have to install all dependencies first.
+Para criar o `bundled-content-script.js` que contém muita da lógica de negócio dessa extensão você precisará instalar todas as dependências primeiro.
 
-1. Vá para a raiz do repositorio e execute:
+1. Vá para a raiz do repositório e execute:
 
 ```
 npm install
 ```
 
-2. Execute o seguinte comando para criar `bundled-content-script.js` which (what is?) e usando no `manifest.json`
+2. Execute o comando a seguir para criar o `bundled-content-script.js` que será usado no `manifest.json`
 
 ```
-npm start // to create the build file(s) and start a file watcher that hot-reloads on save
+npm start // Para criar os arquivos de build e iniciar um file watcher que recarrega o conteúdo automaticamente ao salvar
 
 // ou
 
-npm run build // para criar uma build para cria um arquivo de build 
+npm run build // Para criar os arquivos de build apenas uma vez
 ```
 
-Congratulations, You are now ready to develop!
+Parabéns, agora você está pronto para desenvolver!
 
-If you are new to developing Chrome extensions, or need extra help, please see [this YouTube tutorial](https://www.youtube.com/watch?v=mdOj6HYE3_0)
+Se você é novo no desenvolvimento de extensões para o Chrome, ou precisa de ajuda extra, por favor dê uma olhada [nesse tutorial do YouTube](https://www.youtube.com/watch?v=mdOj6HYE3_0)
 
-### Problemas
+### Problemas(Issues)
 
-#### Abrindo um novo problema
+#### Abrindo uma nova issue
 
-Se voce tiver qualquer problema com a extensão, por favor pesquisa o que faz o problema antes de reporta-lo de fato. Se não houver, abra um probelma, usando o formulario de problema é recomendado mas não é uma obrigação.
+Se você tiver qualquer problema com a extensão, por favor pesquise nas issues do nosso repositório para ter certeza de que o problema já não foi reportado. Se não foi, abra uma issue, usar o formulário de issues é altamente recomendado mas não é obrigatório.
 
-#### Solucionando um problema
+#### Resolvendo issues
 
-Se você tiver um problema If you found an issue that you feel you might be able to solve, Não seja  "shy"? . Abra um PR(Pull Request)com a correção e faça uma menção do problema que está consertando.
+Se você encontrou uma issue que você sente que é capaz de corrigir, não tenha vergonha. Abra uma PR com a correção e certifique-se de mencionar a issue que você está corrigindo.
 
-### Requisitação de Recurso
+### Sugerir um nova funcionalidade(Feature request)
 
-#### Abrindo uma nova requisitação de recurso
+#### Abrindo uma feature request
 
-Se você tem alguma ideia para a extensão, sinta livre para abrir uma requisitação de recurso, mas por favor pesquise isso antes para não perder seu tempo com sua sugestão. Usando o formulario de recurso é altamente recomendado mas não é um obrigação.
+Se você tem uma ideia de funcionalidade para a extensão, sinta-se livre para abrir uma feature request no nosso repositório, mas por favor certifique-se de que a funcionalidade já não foi sugerida. Usar o formulário de features é altamente recomendado mas não é obrigatório.
 
-#### Implementando uma requisitação de recurso
+#### Implementando uma feature request
 
-If you found a feature that you feel you might be able to implement, don't be shy. Open a PR with the fix and make sure to mention the feature you are implementing.
+Se você encontrou uma feature request que você sente que é capaz de implementar, não tenha vergonha. Abra uma PR com a implementação e certifique-se de mencionar a feature request que você está implementando.
 
-### What PRs do we accept?
+### Quais PRs nós aceitamos?
 
-- Resolução de problemas.
-- Implementação de recurso.
-- Marcação, melhoria facilitação de palavras usadas.
-- Contribuição para o Website.
+- Correção de problemas.
+- Implementação de funcionalidades.
+- Erros de digitação e palavras melhores ou mais fáceis de entender.
+- Contribuições para o Website.

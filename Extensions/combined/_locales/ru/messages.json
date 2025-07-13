@@ -23,14 +23,62 @@
   "linkHelp": {
     "message": "Помощь"
   },
+  "linkChangelog": {
+    "message": "Журнал изменений"
+  },
   "legendSettings": {
     "message": "Настройки"
   },
   "textSettings": {
     "message": "Отключить отправку лайков/дизлайков"
   },
+  "textLikesDisabled": {
+    "message": "Отключено владельцем"
+  },
   "textSettingsHover": {
     "message": "Отключает отправку ваших отметок нравится/не нравится"
+  },
+  "textRoundingNumbers": {
+    "message": "Округлить статистику лайков/дизлайков (стандартное поведение YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Показывать округленные данные."
+  },
+  "textConsistentFormat": {
+    "message": "Привести формат лайков и дизлайков к единому виду"
+  },
+  "textConsistentFormatHover": {
+    "message": "Переформатировать число лайков."
+  },
+  "textNumberFormat": {
+    "message": "Числовой формат:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Раскрасьте полосу неприязни"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Используйте пользовательские цвета для полосы неприязни."
+  },
+  "textColorizeThumbs": {
+    "message": "Раскрасьте кнопки"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Раскрасьте кнопки нравится и не нравится с помощью пользовательских цветов."
+  },
+  "textColorTheme": {
+    "message": "Цветовая тема:"
+  },
+  "textColorTheme1": {
+    "message": "Классическая"
+  },
+  "textColorTheme2": {
+    "message": "Доступная"
+  },
+  "textColorTheme3": {
+    "message": "Неоновая"
+  },
+  "textTempUnavailable": {
+    "message": "Временно недоступно"
   },
   "textUpdate": {
     "message": "обновление до"

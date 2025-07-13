@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-阅读其他语言版本：[English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md)
+阅读其他语言版本：[English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md)
 
 # Return YouTube Dislike
 
@@ -41,15 +41,15 @@
 - **归因**: 该项目应清楚地归因于 [returnyoutubedislike.com](https://returnyoutubedislike.com/) 的链接。
 - **速率限制**: 客户端的速率限制为每分钟100次和每天10,000次。这将返回 _429_ 状态代码，表示您的应用程序应该减速。
 
-API 可以通过以下基本 URL 访问：  
+API 可以通过以下基本 URL 访问：
 https://returnyoutubedislikeapi.com
 
-可用端点列表在这里：  
+可用端点列表在这里：
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### 获取投票
 
-示例获取给定 YouTube 视频 ID 的投票：  
+示例获取给定 YouTube 视频 ID 的投票：
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -64,7 +64,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 }
 ```
 
-不存在的 YouTube ID 将返回状态码 _404_ "未找到"。  
+不存在的 YouTube ID 将返回状态码 _404_ "未找到"。
 格式错误的 YouTube ID 将返回 _400_ "请求无效"。
 
 ## 贡献

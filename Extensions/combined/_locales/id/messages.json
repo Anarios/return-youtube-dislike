@@ -1,0 +1,134 @@
+{
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "extensionDesc": {
+    "message": "Mengembalikan kemampuan untuk melihat jumlah dislike"
+  },
+  "textDeveloper": {
+    "message": "oleh Dmitry Selivanov & Komunitas"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "linkFAQ": {
+    "message": "Pertanyaan"
+  },
+  "linkDonate": {
+    "message": "Donasi"
+  },
+  "linkHelp": {
+    "message": "Bantuan"
+  },
+  "linkChangelog": {
+    "message": "Log Perubahan"
+  },
+  "legendSettings": {
+    "message": "Pengaturan"
+  },
+  "textSettings": {
+    "message": "Matikan pengiriman like/dislike"
+  },
+  "textLikesDisabled": {
+    "message": "Dimatikan oleh Pemilik"
+  },
+  "textSettingsHover": {
+    "message": "Memberhentikan penghitungan like dan dislikemu"
+  },
+  "textRoundingNumbers": {
+    "message": "Membulatkan data like/dislike kebawah (bawaan YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Munculkan data pembulatan kebawah."
+  },
+  "textConsistentFormat": {
+    "message": "Membuat format like dan dislike konsisten"
+  },
+  "textConsistentFormatHover": {
+    "message": "Format ulang jumlah like."
+  },
+  "textNumberFormat": {
+    "message": "Format angka:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Warnai bar rasio"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Gunakan warna kustom bar rasio."
+  },
+  "textColorizeThumbs": {
+    "message": "Warnai jempol"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Gunakan warna kustom untuk ikon jempol."
+  },
+  "textColorTheme": {
+    "message": "Warnai tema:"
+  },
+  "textColorTheme1": {
+    "message": "Klasik"
+  },
+  "textColorTheme2": {
+    "message": "Mudah diakses"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textTempUnavailable": {
+    "message": "Tidak Ada Untuk Sementara Waktu"
+  },
+  "textUpdate": {
+    "message": "Update ke"
+  },
+  "version30installed": {
+    "message": "Versi __RYD_VERSION__ terinstall"
+  },
+  "whatsnew": {
+    "message": "Apa yang baru"
+  },
+  "shortsSupport": {
+    "message": "Mendukung YouTube Short"
+  },
+  "customColors": {
+    "message": "Warna kustom untuk bar dislike dan tombol"
+  },
+  "customNumberFormats": {
+    "message": "Format angka kustom"
+  },
+  "considerDonating": {
+    "message": "Donasimulah yang hanya bisa membuat extension ini terus berjalan, tolong pertimbangkan untuk mendukung proyek ini."
+  },
+  "roundNumbers": {
+    "message": "Munculkan angka yang dibulatkan kebawah"
+  },
+  "roundNumbersHover": {
+    "message": "Bulatkan angka kebawah (bawaan YouTube)."
+  },
+  "reformatLikes": {
+    "message": "Format ulang jumlah like"
+  },
+  "reformatLikesHover": {
+    "message": "Membuat format like dan dislike konsisten."
+  },
+  "numberFormat": {
+    "message": "Format angka:"
+  },
+  "colorizeRatio": {
+    "message": "Warnai bar rasio"
+  },
+  "colorizeRatioHover": {
+    "message": "Gunakan warna kustom untuk rasio bar."
+  },
+  "colorizeThumbs": {
+    "message": "Warnai jempol"
+  },
+  "colorizeThumbsHover": {
+    "message": "Gunakan warna kustom untuk ikon jempol."
+  },
+  "colorTheme": {
+    "message": "Warnai tema:"
+  }
+}

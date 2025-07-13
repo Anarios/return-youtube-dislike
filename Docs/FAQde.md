@@ -1,4 +1,4 @@
-Read this in other languages: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [中文](FAqcn.md)
+Read this in other languages: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md)
 
 # Häufig gestellte Fragen
 
@@ -30,7 +30,7 @@ Die Erweiterung sammelt die Video-ID des von Ihnen angesehenen Videos, ruft die 
 
 ### **4. Was passiert, wenn die YouTube-API aufhört, die Anzahl der Dislikes zurückzugeben?**
 
-Der Backend wird auf eine Kombination aus archivierten Dislike-Statistiken, Schätzungen, die aus den Daten der Erweiterungsnutzer extrapoliert werden, und Schätzungen basierend auf Ansichts-/Like-Verhältnissen für Videos, deren Dislikes nicht archiviert wurden, und veralteten Dislike-Archiven umstellen.
+Das Backend wird auf eine Kombination aus archivierten Dislike-Statistiken, Schätzungen, die aus den Daten der Erweiterungsnutzer extrapoliert werden, und Schätzungen basierend auf Ansichts-/Like-Verhältnissen für Videos, deren Dislikes nicht archiviert wurden, und veralteten Dislike-Archiven umstellen.
 
 <br>
 
