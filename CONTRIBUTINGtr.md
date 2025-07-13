@@ -1,4 +1,4 @@
-Bunu diğer dillerde okuyun: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [العربية](CONTRIBUTINGar.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [中文](CONTRIBUTINGcn.md)
+Bunu diğer dillerde okuyun: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [العربية](CONTRIBUTINGar.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [中文](CONTRIBUTINGcn.md), [български](CONTRIBUTINGbg.md)
 
 # "YouTube Dislike Sayısını Geri Getir"in katkı kılavuzuna Hoş Geldiniz
 
