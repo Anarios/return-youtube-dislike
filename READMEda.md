@@ -1,5 +1,5 @@
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Rating&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/)
-[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Users&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Rating&style=flat&logo=google)](https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
+[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Users&style=flat&logo=google)](https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
 [![Mozilla rating](https://img.shields.io/amo/stars/return-youtube-dislikes?label=Firefox%20Rating&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
 [![Mozilla downloads](https://img.shields.io/amo/users/return-youtube-dislikes?label=Firefox%20Users&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
 [![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Læs dette på andre sprog: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md)
+Læs dette på andre sprog: [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md)
 
 
 # Return YouTube Dislike
@@ -27,7 +27,7 @@ Desuden blev dislike-feltet i YouTube API'en [fjernet](https://support.google.co
 
 ## Hvad den gør
 
-Med fjernelsen af dislike stats fra Youtube API'en, har vores backend skiftet til at bruge en kombination af scraped dislike-statistic, hvor skøn er extrapoleret fra extension-brugerdata.   
+Med fjernelsen af dislike stats fra Youtube API'en, har vores backend skiftet til at bruge en kombination af scraped dislike-statistic, hvor skøn er extrapoleret fra extension-brugerdata.
 
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
@@ -42,15 +42,15 @@ Tredjeparts brug af denne åbne API er tilladt under de følgende restriktioner:
 - **Tilskrivning**: Dette projekt skal tydeligt tilskrives med et link til [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Rategrænse**: Der er en grænse på 100 anmodninger per minut og 10.000 per dag for hver klient. Dette vil returnere en statuskode på _429_, som indikerer, at din applikation skal trække sig tilbage.
 
-API'en er tilgængelig via følgende base-URL:  
+API'en er tilgængelig via følgende base-URL:
 https://returnyoutubedislikeapi.com
 
-En liste over tilgængelige endpoints er tilgængelig her:  
+En liste over tilgængelige endpoints er tilgængelig her:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
-### Få stemmer 
+### Få stemmer
 
-Eksempel på at få stemmer på en given YouTube-video-ID:  
+Eksempel på at få stemmer på en given YouTube-video-ID:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -65,7 +65,7 @@ Eksempel på at få stemmer på en given YouTube-video-ID:
 }
 ```
 
-En ikke-eksisterende YouTube-ID vil returnere statuskoden _404_ "Not Found".  
+En ikke-eksisterende YouTube-ID vil returnere statuskoden _404_ "Not Found".
 En forkert formet YouTube-ID vil returnere _400_ "Bad Request".
 
 <!---

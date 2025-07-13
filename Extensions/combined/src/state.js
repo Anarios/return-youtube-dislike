@@ -156,20 +156,28 @@ function setLikes(likesCount) {
 
 function setDislikes(dislikesCount) {
   cLog(`SET dislikes ${dislikesCount}`);
-  getDislikeTextContainer()?.removeAttribute("is-empty");
+
+  const _container = getDislikeTextContainer();
+  _container?.removeAttribute("is-empty");
+
+  let _dislikeText
   if (!isLikesDisabled()) {
     if (isMobile()) {
       getButtons().children[1].querySelector(".button-renderer-text").innerText = dislikesCount;
       return;
     }
-    getDislikeTextContainer().innerText = dislikesCount;
+    _dislikeText = dislikesCount;
   } else {
     cLog("likes count disabled by creator");
     if (isMobile()) {
       getButtons().children[1].querySelector(".button-renderer-text").innerText = localize("TextLikesDisabled");
       return;
     }
-    getDislikeTextContainer().innerText = localize("TextLikesDisabled");
+    _dislikeText = localize("TextLikesDisabled");
+  }
+
+  if (_dislikeText != null && _container?.innerText !== _dislikeText) {
+    _container.innerText = _dislikeText;
   }
 }
 

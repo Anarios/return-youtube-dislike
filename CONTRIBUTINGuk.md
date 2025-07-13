@@ -1,4 +1,5 @@
-Read this in other languages: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md)
+Read this in other languages: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [العربية](CONTRIBUTINGar.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [中文](CONTRIBUTINGcn.md)
+
 
 # Вітаємо у посібнику внеску в Return YouTube Dislikes
 

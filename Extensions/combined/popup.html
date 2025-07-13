@@ -96,17 +96,18 @@
 
     <!-- dialog box -->
     <fieldset id="advancedSettings">
+      <label class="switch" data-hover="Disable Logging API Response in JavaScript Console.">
+        <input type="checkbox" id="disable_logging"/>
+        <span class="slider"/>
+        <span class="switchLabel">Disable logging to console</span>
+      </label>
+      <br />
       <label class="switch" data-hover="Stop counting your likes and dislikes">
         <input type="checkbox" id="disable_vote_submission" />
         <span class="slider"></span>
         <span class="switchLabel" title="__MSG_textSettings__">
           __MSG_textSettings__
         </span>
-      </label>
-      <label class="switch" data-hover="Disable Logging API Response in JavaScript Console.">
-        <input type="checkbox" id="disable_logging"/>
-        <span class="slider"/>
-        <span class="switchLabel">Disable logging to console</span>
       </label>
       <br />
       <label class="switch" data-hover="__MSG_reformatLikesHover__">
@@ -131,11 +132,14 @@
           <span class="switchLabel">__MSG_colorizeRatio__</span>
         </label>
       </div>
-      <label class="switch" data-hover="__MSG_colorizeThumbsHover__">
-        <input type="checkbox" id="colored_thumbs" />
-        <span class="slider"></span>
-        <span class="switchLabel">__MSG_colorizeThumbs__</span>
-      </label>
+      <br />
+      <div class="custom-select">
+        <label class="switch" data-hover="__MSG_colorizeThumbsHover__">
+          <input type="checkbox" id="colored_thumbs" />
+          <span class="slider"></span>
+          <span class="switchLabel">__MSG_colorizeThumbs__</span>
+        </label>
+      </div>
       <br />
       <div class="custom-select">
         <label for="color_theme">__MSG_colorTheme__</label>
@@ -174,17 +178,17 @@
       <br />
       <label
         class="switch"
-        data-hover="Display percentage in like/dislike bar tooltip."
+        data-hover="__MSG_showTooltipPercentageHover__"
       >
         <input type="checkbox" id="show_tooltip_percentage" />
         <span class="slider"></span>
-        <span class="switchLabel">Percentage in like/dislike bar tooltip.</span>
+        <span class="switchLabel">__MSG_showTooltipPercentage__</span>
       </label>
       <div class="custom-select">
         <label
           for="tooltip_percentage_mode"
-          data-hover="Use custom percentage display on hover."
-          >Percent mode:</label
+          data-hover="__MSG_tooltipPercentageModeHover__"
+          >__MSG_tooltipPercentageMode__</label
         >
         <select name="tooltip_percentage_mode" id="tooltip_percentage_mode">
           <option value="dash_like" id="tooltip_percentage_mode_dash_like">

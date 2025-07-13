@@ -5,7 +5,9 @@
   "version": "__RYD_VERSION__",
   "manifest_version": 2,
   "background": {
-    "scripts": ["ryd.background.js"]
+    "scripts": [
+      "ryd.background.js"
+    ]
   },
   "icons": {
     "48": "icons/icon48.png",
@@ -22,22 +24,34 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
-      "exclude_matches": ["*://*.music.youtube.com/*"],
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.music.youtube.com/*"
+      ],
       "run_at": "document_idle",
-      "css": ["content-style.css"],
-      "js": ["ryd.content-script.js"]
+      "css": [
+        "content-style.css"
+      ],
+      "js": [
+        "ryd.content-script.js"
+      ]
     }
   ],
   "options_ui": {
     "page": "popup.html",
     "open_in_tab": false
-  }
-  // uncomment this section for local storage to work in firefox locally
-  //    ,"browser_specific_settings": {
-  //      "gecko": {
-  //        "id": "addon@example.com",
-  //        "strict_min_version": "42.0"
-  //      }
+  },
+  "web_accessible_resources": [
+    "menu-fixer.js"
+  ]
+
+  // uncomment this section for local storage to work in firefox locally,
+  //  ,"browser_specific_settings": {
+  //    "gecko": {
+  //      "id": "addon@example.com",
+  //      "strict_min_version": "42.0"
   //    }
+  //  }
 }

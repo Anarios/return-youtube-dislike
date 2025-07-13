@@ -1,0 +1,20 @@
+Return YouTube Dislike mengembalikan kemampuan untuk melihat jumlah dislike di Youtube.
+
+Jika ini tidak bekerja: buka tab Extension (chrome://extension/), matikan lalu hidupkan lagi extension ini. Ini biasanya memperbaiki banyak masalah, ini terjadi karena terdapat bug pada Chromium yang dapat merusak extension pada kasus tertentu. Semoga tim Chromium akan segera memperbaikinya.
+
+Mulai 13 Desember 2021, Youtube menghapus kemampuan untuk melihat jumlah dislike dari API mereka.
+Extension ini bertujuan untuk mengembalikan kemampuan itu ke pengguna dengan menggunakan kombinasi data arsip like dan dislike, serta data like dan dislike dari pengguna extension untuk menunjukkan jumlah yang lebih akurat.
+
+Sekarang terdapat 200+ juta data like/dislike video yang tersimpan sebelum 13 Desember 2021
+
+Tumbuh secara aktif dan mengikuti perkembangan terbaru pada upload setelah 13 Desember 2021
+
+Semakin banyak pengguna menggunakan extension ini, semakin akurat datanya.
+
+Video yang tidak populer yang diupload setelah 13 Desember 2021 mungkin memiliki data yang kurang akurat dibandingkan dengan video yang populer.
+
+Extension ini sedang aktif dikembangkan, jadi jika kamu mengalami masalah, jangan malu untuk melaporkannya pada halaman GitHub atau server Discord kami.
+
+Lebih banyak fitur akan segera hadir!
+
+https://github.com/Anarios/return-youtube-dislike
