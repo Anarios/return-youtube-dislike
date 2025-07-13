@@ -1,4 +1,4 @@
-Read this in other languages: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Deutsch](CONTRIBUTINGde.md), [Bahasa Indonesia](CONTRIBUTINGid.md)
+Read this in other languages: [English](CONTRIBUTING.md), [русский](CONTRIBUTINGru.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Deutsch](CONTRIBUTINGde.md), [العربية](CONTRIBUTINGar.md), [Bahasa Indonesia](CONTRIBUTINGid.md)
 
 # Witamy w przewodniku współtworzenia Return YouTube Dislike
 

@@ -1,4 +1,4 @@
-Read this in other languages: [English](SECURITY-FAQ.md), [русский](SECURITY-FAQru.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [Bahasa Indonesia](SECURITY-FAQid.md)
+Read this in other languages: [English](SECURITY-FAQ.md), [русский](SECURITY-FAQru.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [العربية](SECURITY-FAQar.md), [Bahasa Indonesia](SECURITY-FAQid.md)
 
 # Безпека
 
