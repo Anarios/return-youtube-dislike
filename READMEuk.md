@@ -85,10 +85,6 @@ YouTube ID у невірному форматі видасть код помил
 
 ## Спонсори
 
-[Piepacker](https://piepacker.com)
 
-[Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
-
-[PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
 [Станьте нашим спонсором](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

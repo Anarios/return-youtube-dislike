@@ -85,6 +85,4 @@ Unterstütze gerne das Projekt mit einer Spende über den folgenden Link:
 
 ## Sponsoren <!-- ## Sponsors -->
 
-[Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
-
 [Werde unser Sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

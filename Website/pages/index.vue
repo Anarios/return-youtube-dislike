@@ -82,10 +82,6 @@ export default {
       discordLink: "https://discord.gg/mYnESY4Md5",
       sponsors: [
         {
-          link: "https://seed4.me/?utm_source=returnyoutubedislike",
-          name: "Check-out Seed4.Me VPN",
-        },
-        {
           name: "Become our sponsor",
           link: "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601",
         },

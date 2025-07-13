@@ -78,9 +78,3 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 [捐赠](https://returnyoutubedislike.com/donate)
 
 ## 赞助商
-
-[Piepacker](https://piepacker.com)
-
-[Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
-
-[PocketTube](https://yousub.info/?utm_source=return

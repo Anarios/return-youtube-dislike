@@ -83,6 +83,4 @@ Kamu dapat mendukung proyek ini dengan cara donasi melalui link dibawah ini:
 
 ## Sponsor
 
-[Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
-
 [Menjadi sponsor kami](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

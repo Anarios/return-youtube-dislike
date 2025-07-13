@@ -88,10 +88,6 @@ Bạn có thể hỗ trợ dự án này bằng cách quyên góp cho chúng tô
 
 ## Tài trợ <!-- ## Sponsors -->
 
-[Piepacker](https://piepacker.com)
 
-[Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
-
-[PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
 [Trở thành nhà tài trợ](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

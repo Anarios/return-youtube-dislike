@@ -85,10 +85,6 @@ Vous pouvez soutenir ce projet en faisant un don grâce au lien ci-dessous :
 
 ## Sponsors
 
-[Piepacker](https://piepacker.com)
 
-[Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
-
-[PocketTube](https://yousub.info/?utm_source=returnyoutubedislike)
 
 [Devenez notre sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

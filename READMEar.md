@@ -84,6 +84,4 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 ## الرعاة
 
-[Seed4.Me VPN](https://www.seed4.me/users/register?gift=ReturnYoutubeDislike)
-
 [كن راعينا](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
