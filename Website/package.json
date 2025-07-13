@@ -12,7 +12,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7",
+    "nuxt": "^3.17.6",
     "nuxt-user-agent": "^1.2.2",
     "vuetify": "^2.5.5"
   },
