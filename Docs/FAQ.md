@@ -1,4 +1,4 @@
-Read this in other languages: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Tiếng Việt](FAQvi.md)
+Read this in other languages: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [Português do Brasil](FAQpt_BRmd), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Tiếng Việt](FAQvi.md)
 
 
 # Frequently Asked Questions
@@ -17,7 +17,7 @@ We save all available data to our DB for it to be available after Google shuts d
 
 ### **2. Video dislike count doesn't update**
 
-Right now video dislikes are cached, and aren't updated very frequenly. Once every 2-3 days, not more often.
+Right now video dislikes are cached, and aren't updated very frequently. Once every 2-3 days, not more often.
 
 Yeah, it's not ideal, but it is what it is. Working on improving how often we can update them.
 

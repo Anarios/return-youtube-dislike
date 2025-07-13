@@ -5,7 +5,7 @@ labels: ["bug"]
 body:
   - type: checkboxes
     attributes:
-      label: Have you tried to find similar open issues?
+      label: Have you tried to find similar issues (open or recently closed)?
       options:
         - label: "Yes, this issue is not a duplicate"
           required: true

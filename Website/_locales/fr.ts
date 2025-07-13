@@ -54,8 +54,9 @@ export default {
       headers: "En-têtes (headers) : ",
       response: "Réponse : ",
       error1:
-        'Si aucune vidéo YouTube n\'a cet ID, le code d\'erreur 404 "Not Found" sera retourné',
-      error2: 'Un ID YouTube invalide renverra le code d\'erreur *400* "Bad Request"',
+        "Si aucune vidéo YouTube n'a cet ID, le code d'erreur 404 \"Not Found\" sera retourné",
+      error2:
+        'Un ID YouTube invalide renverra le code d\'erreur *400* "Bad Request"',
     },
   },
   help: {

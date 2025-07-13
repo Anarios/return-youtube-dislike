@@ -1,0 +1,17 @@
+Return YouTube Dislike, YouTube'daki beğenmeme sayısını tekrar görmenizi sağlar.
+
+**Çalışmıyorsa:** Eklenti sekmesini (chrome://extensions/) açın, bu uzantıyı devre dışı bırakın ve tekrar etkinleştirin. Bu işlem, çoğu sorunu çözmelidir çünkü Chromium'da, bazı durumlarda eklentinin çalışmasını bozan bir hata var. Umarız Chromium ekibi bu sorunu yakında düzeltir.
+
+13 Aralık 2021 itibarıyla YouTube, beğenmeme sayılarını API'den kaldırdı.  
+Bu uzantı, arşivlenmiş beğeni ve beğenmeme verilerini, ayrıca uzantıyı kullanan kullanıcıların yaptığı beğeni ve beğenmeme bilgilerini kullanarak en doğru değerlendirmeleri göstermek amacıyla kullanıcıların kontrolünü geri kazandırmayı hedefliyor.
+
+- **13 Aralık 2021'den önce** 200+ milyon videonun beğeni/beğenmeme verileri saklandı.  
+- **13 Aralık 2021'den sonraki yüklemeler** ile aktif olarak büyümekte ve güncel tutulmaktadır.  
+- **Daha fazla kullanıcı uzantıyı kullandıkça**, verilerin doğruluğu da artacaktır.  
+- 13 Aralık 2021'den sonra yüklenen popüler olmayan videoların verileri, daha popüler olanlara göre daha az doğru olabilir.
+
+Bu uzantı şu anda aktif geliştirme aşamasında olduğu için herhangi bir sorunla karşılaşırsanız GitHub sayfamızdan ya da Discord sunucumuzdan bildirmekten çekinmeyin.
+
+**Yakında daha fazla özellik eklenecek!**
+
+GitHub: [https://github.com/Anarios/return-youtube-dislike](https://github.com/Anarios/return-youtube-dislike)

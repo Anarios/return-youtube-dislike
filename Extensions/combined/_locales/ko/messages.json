@@ -84,7 +84,7 @@
     "message": "업데이트"
   },
   "version30installed": {
-    "message": "3.0.0.13 버전이 설치됨"
+    "message": "__RYD_VERSION__ 버전이 설치됨"
   },
   "whatsnew": {
     "message": "새로운 점"

@@ -1,30 +1,30 @@
-Lees dit in andere talen: [English](SECURITY_FAQ.md), [русский](SECURITY-FAQru.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Tiếng Việt](SECURITY-FAQvi.md)
+Lees dit in andere talen: [English](SECURITY_FAQ.md), [русский](SECURITY-FAQru.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [العربية](SECURITY-FAQar.md), [Bahasa Indonesia](SECURITY-FAQid.md), [中文](SECURITY-FAQcn.md), [български](SECURITY-FAQbg.md), [Tiếng Việt](SECURITY-FAQvi.md)
 
 # Veiligheid
 
 ### Houd je mijn kijkgeschiedenis bij?
 
-Nee. De code van de extensie is openbaar en u kunt deze zelf zien. De enige informatie die wordt verzonden, is de video-ID, die 
-nodig is om het aantal dislikes voor de video's op te halen. Er worden geen extra headers verzonden. Via de communicatielaag 
-wordt uw openbare IP-adres zichtbaar voor de server, evenals het tijdstip waarop het verzoek is gedaan. Geen van deze 
-identificeert u echter op enigerlei wijze uniek. Uitgaande van een zero-trust-omgeving, is het beste wat we kunnen krijgen een 
-dynamisch IP-adres. Wat vandaag van jou is, morgen van je buurman. Als u zich echt zorgen maakt dat uw IP-adres wordt 
+Nee. De code van de extensie is openbaar en u kunt deze zelf zien. De enige informatie die wordt verzonden, is de video-ID, die
+nodig is om het aantal dislikes voor de video's op te halen. Er worden geen extra headers verzonden. Via de communicatielaag
+wordt uw openbare IP-adres zichtbaar voor de server, evenals het tijdstip waarop het verzoek is gedaan. Geen van deze
+identificeert u echter op enigerlei wijze uniek. Uitgaande van een zero-trust-omgeving, is het beste wat we kunnen krijgen een
+dynamisch IP-adres. Wat vandaag van jou is, morgen van je buurman. Als u zich echt zorgen maakt dat uw IP-adres wordt
 getraceerd, gebruikt u waarschijnlijk al een VPN.
 
 ### Kun je me uniek identificeren als ik een hekel heb?
 
-Ja. Als je een video niet leuk vindt, maken we een willekeurig gegenereerde unieke ID voor je die niet is gekoppeld aan je 
-Google-account. Dit wordt gedaan om botting te voorkomen. Maar er is geen manier om deze willekeurige id aan jou of je 
+Ja. Als je een video niet leuk vindt, maken we een willekeurig gegenereerde unieke ID voor je die niet is gekoppeld aan je
+Google-account. Dit wordt gedaan om botting te voorkomen. Maar er is geen manier om deze willekeurige id aan jou of je
 persoonlijke YouTube-account te koppelen.
 
 ### Welke informatie heb je precies?
 
-Alleen de video-ID. Niet je opmerkingen, niet je gebruikersnaam, niet met wie je de video hebt gedeeld, geen aanvullende 
+Alleen de video-ID. Niet je opmerkingen, niet je gebruikersnaam, niet met wie je de video hebt gedeeld, geen aanvullende
 metadata. Niks. Alleen de video-ID.
 
 ### Hoe wordt mijn IP opgeslagen?
 
-De backend bewaart niet-gehashte IP-adressen alleen in vluchtig geheugen (RAM). Deze adressen worden niet opgeslagen op een 
+De backend bewaart niet-gehashte IP-adressen alleen in vluchtig geheugen (RAM). Deze adressen worden niet opgeslagen op een
 harde schijf en worden daarom niet gelogd. We hashen de IP-adressen en dat wordt in plaats daarvan opgeslagen. Dit wordt gedaan
 om databasevandalisme te voorkomen.
 

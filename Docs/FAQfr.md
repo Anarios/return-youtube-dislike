@@ -1,5 +1,4 @@
-Lisez ceci dans d'autres langues : [English](FAQ.md), [русский](FAQru.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Tiếng Việt](FAQvi.md)
-
+Lisez ceci dans d'autres langues : [English](FAQ.md), [русский](FAQru.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Tiếng Việt](FAQvi.md)
 
 # Foire Aux Questions
 

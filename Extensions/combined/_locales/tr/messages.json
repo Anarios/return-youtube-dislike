@@ -84,7 +84,7 @@
     "message": "Şu sürüme güncelle"
   },
   "version30installed": {
-    "message": "Sürüm 3.0.0.13 yüklendi"
+    "message": "Sürüm __RYD_VERSION__ yüklendi"
   },
   "whatsnew": {
     "message": "Yeni Ne Var"

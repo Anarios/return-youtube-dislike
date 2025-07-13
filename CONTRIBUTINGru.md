@@ -1,4 +1,4 @@
-Прочитать на других языках: [English](CONTRIBUTING.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Tiếng Việt](CONTRIBUTINGvi.md)
+Прочитать на других языках: [English](CONTRIBUTING.md), [Nederlands](CONTRIBUTINGnl.md), [Français](CONTRIBUTINGfr.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Polski](CONTRIBUTINGpl.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [العربية](CONTRIBUTINGar.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [中文](CONTRIBUTINGcn.md), [български](CONTRIBUTINGbg.md), [Tiếng Việt](CONTRIBUTINGvi.md)
 
 
 # Добро пожаловать в руководство по внесению вклада Return YouTube Dislikes

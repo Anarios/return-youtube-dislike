@@ -1,5 +1,5 @@
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Rating&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/)
-[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Users&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Rating&style=flat&logo=google)](https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
+[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Users&style=flat&logo=google)](https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
 [![Mozilla rating](https://img.shields.io/amo/stars/return-youtube-dislikes?label=Firefox%20Rating&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
 [![Mozilla downloads](https://img.shields.io/amo/users/return-youtube-dislikes?label=Firefox%20Users&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
 [![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
@@ -7,8 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-別の言語: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Tiếng Việt](READMEvi.md)
-
+別の言語: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Danish](READMEda.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md), [български](READMEbg.md), [Tiếng Việt](READMEvi.md)
 
 # Return YouTube Dislike
 
@@ -44,15 +43,15 @@ YouTube API から低評価が削除されたことにより、バックエン�
 - **帰属**: [returnyoutubedislike.com](https://returnyoutubedislike.com/) へのリンクを明確に表記してください。
 - **レート制限**: クライアントごとに 1 分あたり 100 回、1 日あたり 10000 回という制限があります。制限に達すると*429*コードが返されます。
 
-API は以下の Base URL でアクセスできます:  
+API は以下の Base URL でアクセスできます:
 https://returnyoutubedislikeapi.com
 
-利用可能なエンドポイントはこちらを参照してください:  
+利用可能なエンドポイントはこちらを参照してください:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### 評価を取得
 
-API を利用して YouTube video ID から評価を取得する例です:  
+API を利用して YouTube video ID から評価を取得する例です:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -78,7 +77,7 @@ APIの完全なドキュメントは公式サイトを参照してください�
 
 ## 貢献する
 
-こちらの[contribution guide](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md)を読んでください。
+こちらの[contribution guide](CONTRIBUTING.md)を読んでください。
 
 ## プロジェクトを支援!
 
