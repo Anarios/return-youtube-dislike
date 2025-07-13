@@ -33,7 +33,7 @@
     "@babel/core": "^7.23.5",
     "@babel/preset-env": "^7.23.5",
     "@babel/runtime": "^7.23.5",
-    "babel-loader": "^9.1.3",
+    "babel-loader": "^10.0.0",
     "babel-plugin-rewire": "^1.2.0",
     "copy-webpack-plugin": "^11.0.0",
     "filemanager-webpack-plugin": "^8.0.0",
