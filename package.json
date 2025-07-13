@@ -39,7 +39,7 @@
     "filemanager-webpack-plugin": "^8.0.0",
     "husky": "^8.0.0",
     "jest": "^28.1.3",
-    "jest-environment-jsdom": "^28.1.3",
+    "jest-environment-jsdom": "^30.0.4",
     "lint-staged": "^15.2.0",
     "prettier": "^3.2.2",
     "webpack": "^5.89.0",
