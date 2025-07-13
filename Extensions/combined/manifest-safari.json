@@ -2,7 +2,7 @@
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDesc__",
   "default_locale": "en",
-  "version": "3.0.0.8",
+  "version": "__RYD_VERSION__",
   "manifest_version": 2,
   "background": {
     "scripts": ["ryd.background.js"],

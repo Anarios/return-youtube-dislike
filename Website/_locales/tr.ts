@@ -5,7 +5,8 @@ export default {
   home: {
     name: "Ana Sayfa",
     title: "YouTube Dislike Sayısını Geri Getir",
-    subtitle: "YouTube'daki dislike sayılarınızı geri getiren bir tarayıcı uzantısı ve API",
+    subtitle:
+      "YouTube'daki dislike sayılarınızı geri getiren bir tarayıcı uzantısı ve API",
     ukraine: "Ukrayna'ya Destek Ol",
     sponsors: "Sponsorlar",
   },
@@ -14,9 +15,11 @@ export default {
     title: "Platformunuzu Seçin",
     subtitle: "Firefox ve bütün Chromium tabanlı tarayıcılarda kullanılabilir",
     title2: "Diğer Platformlar",
-    subtitle2: "Tarayıcınız henüz desteklenmiyorsa UserScript yöntemini deneyin",
+    subtitle2:
+      "Tarayıcınız henüz desteklenmiyorsa UserScript yöntemini deneyin",
     title3: "Üçüncü Parti Uygulamalar",
-    subtitle3: "Riski tamamen size aittir, bizim tarafımızda sorumluluk kabul edilmemektedir",
+    subtitle3:
+      "Riski tamamen size aittir, bizim tarafımızda sorumluluk kabul edilmemektedir",
   },
   api: {
     name: "API",
@@ -43,7 +46,8 @@ export default {
     },
     fetching: {
       title: "Temel Veri Alma Eğitimi",
-      subtitle: "Belirli bir YouTube ID'sinin oylamalarını elde etmek için bir örnek: ",
+      subtitle:
+        "Belirli bir YouTube ID'sinin oylamalarını elde etmek için bir örnek: ",
       title2: "Örnek İstek: ",
       url: "İstek URL'si: ",
       method: "İstek Yöntemi: ",
@@ -64,11 +68,13 @@ export default {
     bullet3: "Şu bağlantıyı açtığınızdan emin olun: ",
     bullet31: "şöyle bir düz metin görmelisiniz: ",
     bullet4: "Yukarıdakiler yardımcı olmadıysa - Discord sunucumuzdaki ",
-    bullet41: " kanalından problemi bildirin (İngilizce bir şekilde) Discord sunucumuz: ",
-    bullet4a: "Bize İşletim Sisteminizi, Tarayıcı Adınızı ve Tarayıcı Sürümünüzü söyleyin",
-    bullet4b:
-      "Konsol açıkken (açmak için ",
-    bullet4b1: " tuşuna basın) sorunu yaşadığınız sayfanın ekran görüntüsünü alın (yani YouTube watch sayfasının) - Ekran görüntüsü örneği aşağıdadır.",
+    bullet41:
+      " kanalından problemi bildirin (İngilizce bir şekilde) Discord sunucumuz: ",
+    bullet4a:
+      "Bize İşletim Sisteminizi, Tarayıcı Adınızı ve Tarayıcı Sürümünüzü söyleyin",
+    bullet4b: "Konsol açıkken (açmak için ",
+    bullet4b1:
+      " tuşuna basın) sorunu yaşadığınız sayfanın ekran görüntüsünü alın (yani YouTube watch sayfasının) - Ekran görüntüsü örneği aşağıdadır.",
     bullet4c:
       "Uzantı yüklüyken tarayıcınızın uzantılar sayfasının ekran görüntüsünü alın.",
     bullet4c1: "Uzantıları görmek için şu linki adres çubuğuna yapıştırın: ",
@@ -78,7 +84,8 @@ export default {
   faq: {
     name: "SSS",
     title: "Sıkça Sorulan Sorular",
-    subtitle: "Hâlâ sorun mu yaşıyorsunuz? Discord sunucumuza katılmaktan çekinmeyin! (İngilizce)",
+    subtitle:
+      "Hâlâ sorun mu yaşıyorsunuz? Discord sunucumuza katılmaktan çekinmeyin! (İngilizce)",
     bullet1: "Uzantı, verileri nereden alıyor?",
     bullet1text:
       "Resmî YouTube dislike sayısı API'si kapatılmadan önceki arşivlenmiş verilerden ve tahmin edilen uzantı kullanıcısı davranışının bir birleşimiyle.",

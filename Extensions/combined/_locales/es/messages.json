@@ -84,7 +84,7 @@
     "message": "actualizar a"
   },
   "version30installed": {
-    "message": "Versión 3.0.0.13 instalada"
+    "message": "Versión __RYD_VERSION__ instalada"
   },
   "whatsnew": {
     "message": "Novedades"
@@ -130,5 +130,17 @@
   },
   "colorTheme": {
     "message": "Combinación de colores:"
+  },
+  "showTooltipPercentage": {
+    "message": "Porcentaje en el tooltip de la barra de like/dislike."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Mostrar porcentaje en el tooltip de la barra de like/dislike."
+  },
+  "tooltipPercentageMode": {
+    "message": "Modo de porcentaje:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Usar visualización de porcentaje personalizada al pasar el puntero."
   }
 }

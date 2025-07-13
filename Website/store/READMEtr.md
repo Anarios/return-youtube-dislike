@@ -1,4 +1,4 @@
-Read this in other languages: [English](README.md), [Nederlands](READMEnl.md), [български](READMEbg.md)
+Read this in other languages: [English](README.md), [Nederlands](READMEnl.md), [Deutsch](READMEde.md), [български](READMEbg.md)
 
 # MAĞAZA
 

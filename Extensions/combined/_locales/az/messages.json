@@ -1,0 +1,135 @@
+{
+    "extensionName": {
+      "message": "YouTube Dislike Sayını Geri Qaytar"
+    },
+    "extensionNameBeta": {
+      "message": "YouTube Dislike Sayını Geri Qaytar Beta"
+    },
+    "extensionDesc": {
+      "message": "Dislike-ları görmə qabiliyyəti verir"
+    },
+    "textDeveloper": {
+      "message": "Dmitry Selivanov və İcma tərəfindən"
+    },
+    "linkWebsite": {
+      "message": "Sayt"
+    },
+    "linkFAQ": {
+      "message": "Tez-tez verilən suallar"
+    },
+    "linkDonate": {
+      "message": "Bağış Et"
+    },
+    "linkHelp": {
+      "message": "Kömək"
+    },
+    "linkChangelog": {
+      "message": "Dəyişiklik Jurnalı"
+    },
+    "legendSettings": {
+      "message": "Parametrlər"
+    },
+    "textSettings": {
+      "message": "Like/dislike göndərməsini deaktiv et"
+    },
+    "textLikesDisabled": {
+      "message": "Sahibi tərəfindən deaktiv edilib"
+    },
+    "textSettingsHover": {
+      "message": "Like və dislike-larınızı saymağı dayandırır."
+    },
+    "textRoundingNumbers": {
+      "message": "Like/dislike statistikasını aşağı yuvarlayır (standart YouTube davranışı)"
+    },
+    "textRoundingNumbersHover": {
+      "message": "Yuvarlanmış statistikaları göstər."
+    },
+    "textConsistentFormat": {
+      "message": "Like və dislike formatını uyğunlaşdırır"
+    },
+    "textConsistentFormatHover": {
+      "message": "Like sayılarının formatını yeniləyir."
+    },
+    "textNumberFormat": {
+      "message": "Sayı formatı:"
+    },
+    "textColorizeRatioBar": {
+      "message": "Bəyənmə nisbəti çubuğunu rəngləndir"
+    },
+    "textColorizeRatioBarHover": {
+      "message": "Nisbət çubuğu üçün xüsusi rənglər istifadə edin."
+    },
+    "textColorizeThumbs": {
+      "message": "Düymələri rəngləndir"
+    },
+    "textColorizeThumbsHover": {
+      "message": "Düymə simvolları üçün xüsusi rənglər istifadə edin."
+    },
+    "textColorTheme": {
+      "message": "Rəng mövzusu:"
+    },
+    "textColorTheme1": {
+      "message": "Klassik"
+    },
+    "textColorTheme2": {
+      "message": "Aydın"
+    },
+    "textColorTheme3": {
+      "message": "Neon"
+    },
+    "textTempUnavailable": {
+      "message": "Müvəqqəti olaraq istifadədən kənar"
+    },
+    "textUpdate": {
+      "message": "Bu versiyaya yenilə"
+    },
+    "version30installed": {
+      "message": "Versiya __RYD_VERSION__ yükləndi"
+    },
+    "whatsnew": {
+      "message": "Yeniliklər"
+    },
+    "shortsSupport": {
+      "message": "YouTube Shorts Dəstəyi"
+    },
+    "customColors": {
+      "message": "Dislike çubuğu və düymələr üçün xüsusi rənglər"
+    },
+    "customNumberFormats": {
+      "message": "Xüsusi say formatları"
+    },
+    "considerDonating": {
+      "message": "Uzantının mövcud olmasını təmin edən tək şey ianələrinizdir, lütfən layihəni dəstəkləməyi düşünün."
+    },
+    "roundNumbers": {
+      "message": "Aşağı yuvarlanmış sayıları göstərir"
+    },
+    "roundNumbersHover": {
+      "message": "Sayıları aşağıya yuvarla (standart YouTube davranışı)."
+    },
+    "reformatLikes": {
+      "message": "Like sayılarının formatını yeniləyir"
+    },
+    "reformatLikesHover": {
+      "message": "Like və dislike formatını uyğunlaşdırır."
+    },
+    "numberFormat": {
+      "message": "Sayı formatı:"
+    },
+    "colorizeRatio": {
+      "message": "Bəyənmə nisbəti çubuğunu rəngləndir"
+    },
+    "colorizeRatioHover": {
+      "message": "Bəyənmə nisbəti çubuğu üçün xüsusi rənglər istifadə edin."
+    },
+    "colorizeThumbs": {
+      "message": "Düymələri rəngləndir"
+    },
+    "colorizeThumbsHover": {
+      "message": "Düymə simvolları üçün xüsusi rənglər istifadə edin."
+    },
+    "colorTheme": {
+      "message": "Rəng mövzusu:"
+    }
+  }
+  

@@ -1,4 +1,4 @@
-Return YouTube Dislikes restaura la capacidad de ver los «dislikes» («No me gusta»), en YouTube.
+Return YouTube Dislikes restaura la capacidad de ver los «dislikes» ("No me gusta's"), en YouTube.
 
 En caso de que no funcione: abre la pestaña de Extensiones (chrome://extensions/), desactiva esta extensión y luego vuelve a activarla. Existe un fallo en Chromium que, en algunos casos, da problemas con la extensión. Esta solución debería arreglar la mayoría de los problemas. Con suerte, el equipo de Chromium resolverá el problema pronto.
 

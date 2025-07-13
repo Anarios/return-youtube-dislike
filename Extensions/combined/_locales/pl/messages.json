@@ -84,7 +84,7 @@
     "message": "Zaktualizuj do"
   },
   "version30installed": {
-    "message": "Zainstalowana wersja 3.0.0.1"
+    "message": "Zainstalowana wersja __RYD_VERSION__"
   },
   "whatsnew": {
     "message": "Co nowego"
