@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Leer en otros idiomas: [English](README.md), [русский](READMEru.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Magyar](READMEhu.md), [Danish](READMEda.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md), [български](READMEbg.md)
+Leer en otros idiomas: [English](README.md), [русский](READMEru.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Magyar](READMEhu.md), [Danish](READMEda.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md), [български](READMEbg.md), [Tiếng Việt](READMEvi.md)
 
 # Return YouTube Dislike
 
@@ -71,7 +71,7 @@ Un ID de YouTube mal estructurado mostrará el código _400_ "Bad Request" (soli
 ## Documentación de la API
 
 Puedes ver toda la documentación en nuestra página web.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## Contribuciones
 

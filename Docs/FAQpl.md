@@ -1,4 +1,4 @@
-Read this in other languages: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md)
+Read this in other languages: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Tiếng Việt](FAQvi.md)
 
 # Często zadawane pytania
 

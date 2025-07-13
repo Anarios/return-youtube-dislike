@@ -1,4 +1,4 @@
-Lees dit in andere talen: [Engels](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md)
+Lees dit in andere talen: [Engels](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Tiếng Việt](FAQvi.md)
 
 # Veel Gestelde Vragen
 

@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-別の言語: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Danish](READMEda.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md), [български](READMEbg.md)
+別の言語: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Danish](READMEda.md), [العربية](READMEar.md), [Bahasa Indonesia](READMEid.md), [български](READMEbg.md), [Tiếng Việt](READMEvi.md)
 
 # Return YouTube Dislike
 
@@ -73,7 +73,7 @@ API を利用して YouTube video ID から評価を取得する例です:
 ## API ドキュメント
 
 APIの完全なドキュメントは公式サイトを参照してください。
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## 貢献する
 
