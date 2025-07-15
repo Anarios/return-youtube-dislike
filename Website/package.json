@@ -20,7 +20,7 @@
     "@nuxtjs/vuetify": "^1.12.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^9.31.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.2.0",
