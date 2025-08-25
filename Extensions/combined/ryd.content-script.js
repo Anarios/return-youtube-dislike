@@ -16,7 +16,7 @@ let isSetInitialStateDone = false;
 async function setEventListeners(evt) {
   async function checkForJS_Finish() {
     try {
-      if (isShorts() || (getButtons()?.offsetParent && isVideoLoaded())) {
+      if ((isShorts() && isVideoLoaded()) || (getButtons()?.offsetParent && isVideoLoaded())) {
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
         createSmartimationObserver();

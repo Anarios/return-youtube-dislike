@@ -1,4 +1,4 @@
-import { extConfig } from "./state";
+import { extConfig, isShorts } from "./state";
 
 function numberFormat(numberState) {
   return getNumberFormatter(extConfig.numberDisplayFormat).format(numberState);
@@ -91,8 +91,48 @@ function isInViewport(element) {
   );
 }
 
+function isShortsLoaded(videoId) {
+  if (!videoId) return false;
+
+  // Find all reel containers
+  const reelContainers = document.querySelectorAll(".reel-video-in-sequence-new");
+
+  for (const container of reelContainers) {
+    // Check if this container's thumbnail matches our video ID
+    const thumbnail = container.querySelector(".reel-video-in-sequence-thumbnail");
+    if (thumbnail) {
+      const bgImage = thumbnail.style.backgroundImage;
+      // YouTube thumbnail URLs contain the video ID in the format: /vi/VIDEO_ID/
+      if ((bgImage && bgImage.includes(`/${videoId}/`)) || (!bgImage && isInViewport(container))) {
+        // Check if this container has the renderer with visible experiment-overlay
+        const renderer = container.querySelector("ytd-reel-video-renderer");
+        if (renderer) {
+          const experimentOverlay = renderer.querySelector("#experiment-overlay");
+          if (
+            experimentOverlay &&
+            !experimentOverlay.hidden &&
+            window.getComputedStyle(experimentOverlay).display !== "none" &&
+            experimentOverlay.hasChildNodes()
+          ) {
+            return true;
+          }
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
 function isVideoLoaded() {
   const videoId = getVideoId(window.location.href);
+
+  // Check if this is a Shorts URL
+  if (isShorts()) {
+    return isShortsLoaded(videoId);
+  }
+
+  // Regular video checks
   return (
     // desktop: spring 2024 UI
     document.querySelector(`ytd-watch-grid[video-id='${videoId}']`) !== null ||
