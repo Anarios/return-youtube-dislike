@@ -41,7 +41,14 @@ await setEventListeners();
 
 document.addEventListener("yt-navigate-finish", async function (event) {
   if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
+
   await setEventListeners();
+
+  // NotStrahinja
+  setTimeout(async () => {
+    console.log("RYD: forcing state refresh after navigation");
+    await setInitialState();
+  }, 500);
 });
 
 const s = document.createElement("script");
