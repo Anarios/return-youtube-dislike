@@ -48,7 +48,7 @@ document.addEventListener("yt-navigate-finish", async function (event) {
   setTimeout(async () => {
     console.log("RYD: forcing state refresh after navigation");
     await setInitialState();
-  }, 100);
+  }, 500);
 });
 
 const s = document.createElement("script");
