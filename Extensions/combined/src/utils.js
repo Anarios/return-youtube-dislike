@@ -18,7 +18,7 @@ function getNumberFormatter(optionSelect) {
           ?.getAttribute("href"),
       )?.searchParams?.get("locale");
     } catch {
-      cLog("Cannot find browser locale. Use en as default for number formatting.");
+      console.log("Cannot find browser locale. Use en as default for number formatting.");
       userLocales = "en";
     }
   }
@@ -40,11 +40,10 @@ function getNumberFormatter(optionSelect) {
       formatterCompactDisplay = "short";
   }
 
-  const formatter = Intl.NumberFormat(userLocales, {
+  return Intl.NumberFormat(userLocales, {
     notation: formatterNotation,
     compactDisplay: formatterCompactDisplay,
   });
-  return formatter;
 }
 
 function localize(localeString) {
@@ -143,14 +142,21 @@ function isVideoLoaded() {
   );
 }
 
-function cLog(message, writer) {
-  if (!extConfig.disableLogging) {
-    message = `[return youtube dislike]: ${message}`;
-    if (writer) {
-      writer(message);
-    } else {
-      console.log(message);
-    }
+const originalConsole = {
+  log: console.log.bind(console),
+  debug: console.debug.bind(console),
+  info: console.info.bind(console),
+  warn: console.warn.bind(console),
+  error: console.error.bind(console),
+};
+
+function initializeLogging() {
+  if (extConfig.disableLogging) {
+    console.log = () => {};
+    console.debug = () => {};
+  } else {
+    console.log = originalConsole.log;
+    console.debug = originalConsole.debug;
   }
 }
 
@@ -223,7 +229,7 @@ export {
   getVideoId,
   isInViewport,
   isVideoLoaded,
-  cLog,
+  initializeLogging,
   getColorFromTheme,
   localize,
   querySelector,

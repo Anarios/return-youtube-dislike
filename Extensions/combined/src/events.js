@@ -2,7 +2,6 @@ import {
   getBrowser,
   getVideoId,
   numberFormat,
-  cLog,
   createObserver,
 } from "./utils";
 import {
@@ -128,7 +127,7 @@ function createSmartimationObserver() {
     smartimationContainer &&
     smartimationObserver.container != smartimationContainer
   ) {
-    cLog("Initializing smartimation mutation observer");
+    console.log("Initializing smartimation mutation observer");
     smartimationObserver.disconnect();
     smartimationObserver.observe(smartimationContainer);
     smartimationObserver.container = smartimationContainer;

@@ -1,4 +1,3 @@
-import { cLog } from "./utils";
 
 function createStarRating(rating, isMobile) {
   let starRating = document.createElement("label");
@@ -33,7 +32,7 @@ function createStarRating(rating, isMobile) {
     let YTBar = document.querySelector("#ryd-bar-container");
     YTBar.setAttribute("style", "width: 190%; height: 2px;");
   } catch (err) {
-    cLog("RateBar Not Present");
+    console.log("RateBar Not Present");
   }
 
   let style = `<style>

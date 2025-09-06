@@ -1,5 +1,3 @@
-import { cLog } from "./src/utils";
-
 /*   Config   */
 const config = {
   advanced: false,
@@ -62,14 +60,12 @@ function createLink(url, id) {
   });
 }
 
-document
-  .getElementById("disable_vote_submission")
-  .addEventListener("click", (ev) => {
-    chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
-  });
+document.getElementById("disable_vote_submission").addEventListener("click", (ev) => {
+  chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
+});
 
 document.getElementById("disable_logging").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ disableLogging:ev.target.checked })
+  chrome.storage.sync.set({ disableLogging: ev.target.checked });
 });
 
 document.getElementById("colored_thumbs").addEventListener("click", (ev) => {
@@ -88,23 +84,17 @@ document.getElementById("number_format").addEventListener("change", (ev) => {
   chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
 });
 
-document
-  .getElementById("show_tooltip_percentage")
-  .addEventListener("click", (ev) => {
-    chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
-  });
+document.getElementById("show_tooltip_percentage").addEventListener("click", (ev) => {
+  chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
+});
 
-document
-  .getElementById("tooltip_percentage_mode")
-  .addEventListener("change", (ev) => {
-    chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
-  });
+document.getElementById("tooltip_percentage_mode").addEventListener("change", (ev) => {
+  chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
+});
 
-document
-  .getElementById("number_reformat_likes")
-  .addEventListener("click", (ev) => {
-    chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
-  });
+document.getElementById("number_reformat_likes").addEventListener("click", (ev) => {
+  chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
+});
 
 /*   Advanced Toggle   */
 const advancedToggle = document.getElementById("advancedToggle");
@@ -149,8 +139,7 @@ function initializeVersionNumber() {
     .then((response) => response.json())
     .then((json) => {
       if (compareVersions(json.version, version)) {
-        document.getElementById("ext-update").innerHTML =
-          chrome.i18n.getMessage("textUpdate") + " v" + json.version;
+        document.getElementById("ext-update").innerHTML = chrome.i18n.getMessage("textUpdate") + " v" + json.version;
         document.getElementById("ext-update").style.padding = ".25rem .5rem";
       }
     });
@@ -183,8 +172,8 @@ function initializeDisableVoteSubmission() {
   });
 }
 
-function initializeDisableLogging(){
-  chrome.storage.sync.get(['disableLogging'], (res) => {
+function initializeDisableLogging() {
+  chrome.storage.sync.get(["disableLogging"], (res) => {
     handleDisableLoggingChangeEvent(res.disableLogging);
   });
 }
@@ -230,10 +219,8 @@ function updateNumberDisplayFormatContent() {
   let testValue = 123456;
   document.getElementById("number_format_compactShort").innerHTML =
     getNumberFormatter("compactShort").format(testValue);
-  document.getElementById("number_format_compactLong").innerHTML =
-    getNumberFormatter("compactLong").format(testValue);
-  document.getElementById("number_format_standard").innerHTML =
-    getNumberFormatter("standard").format(testValue);
+  document.getElementById("number_format_compactLong").innerHTML = getNumberFormatter("compactLong").format(testValue);
+  document.getElementById("number_format_standard").innerHTML = getNumberFormatter("standard").format(testValue);
 }
 
 function initializeNumberDisplayReformatLikes() {
@@ -246,9 +233,7 @@ chrome.storage.onChanged.addListener(storageChangeHandler);
 
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
-    handleDisableVoteSubmissionChangeEvent(
-      changes.disableVoteSubmission.newValue,
-    );
+    handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }
   if (changes.disableLogging !== undefined) {
     handleDisableLoggingChangeEvent(changes.disableLogging.newValue);
@@ -266,14 +251,10 @@ function storageChangeHandler(changes, area) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
   if (changes.showTooltipPercentage !== undefined) {
-    handleShowTooltipPercentageChangeEvent(
-      changes.showTooltipPercentage.newValue,
-    );
+    handleShowTooltipPercentageChangeEvent(changes.showTooltipPercentage.newValue);
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
-    handleNumberDisplayReformatLikesChangeEvent(
-      changes.numberDisplayReformatLikes.newValue,
-    );
+    handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
   }
 }
 
@@ -302,24 +283,18 @@ function handleColorThemeChangeEvent(value) {
     value = "classic";
   }
   config.colorTheme = value;
-  document
-    .getElementById("color_theme")
-    .querySelector('option[value="' + value + '"]').selected = true;
+  document.getElementById("color_theme").querySelector('option[value="' + value + '"]').selected = true;
   updateColorThemePreviewContent(value);
 }
 
 function updateColorThemePreviewContent(themeName) {
-  document.getElementById("color_theme_example_like").style.backgroundColor =
-    getColorFromTheme(themeName, true);
-  document.getElementById("color_theme_example_dislike").style.backgroundColor =
-    getColorFromTheme(themeName, false);
+  document.getElementById("color_theme_example_like").style.backgroundColor = getColorFromTheme(themeName, true);
+  document.getElementById("color_theme_example_dislike").style.backgroundColor = getColorFromTheme(themeName, false);
 }
 
 function handleNumberDisplayFormatChangeEvent(value) {
   config.numberDisplayFormat = value;
-  document
-    .getElementById("number_format")
-    .querySelector('option[value="' + value + '"]').selected = true;
+  document.getElementById("number_format").querySelector('option[value="' + value + '"]').selected = true;
 }
 
 function handleShowTooltipPercentageChangeEvent(value) {
@@ -333,9 +308,7 @@ function handleTooltipPercentageModeChangeEvent(value) {
   }
   config.tooltipPercentageMode = value;
 
-  document
-    .getElementById("tooltip_percentage_mode")
-    .querySelector('option[value="' + value + '"]').selected = true;
+  document.getElementById("tooltip_percentage_mode").querySelector('option[value="' + value + '"]').selected = true;
 }
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
@@ -369,22 +342,17 @@ function getNumberFormatter(optionSelect) {
       formatterNotation = "compact";
       formatterCompactDisplay = "short";
   }
-  const formatter = Intl.NumberFormat(
-    document.documentElement.lang || userLocales || navigator.language,
-    {
-      notation: formatterNotation,
-      compactDisplay: formatterCompactDisplay,
-    },
-  );
+  const formatter = Intl.NumberFormat(document.documentElement.lang || userLocales || navigator.language, {
+    notation: formatterNotation,
+    compactDisplay: formatterCompactDisplay,
+  });
   return formatter;
 }
 
 (async function getStatus() {
   let status = document.getElementById("status");
   let serverStatus = document.getElementById("server-status");
-  let resp = await fetch(
-    "https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g",
-  );
+  let resp = await fetch("https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g");
   let result = await resp.status;
   if (result === 200) {
     status.innerText = "Online";

@@ -7,7 +7,7 @@ import {
   isRoundedDesign,
   isShorts,
 } from "./state";
-import { cLog, getColorFromTheme, isInViewport } from "./utils";
+import { getColorFromTheme, isInViewport } from "./utils";
 
 function createRateBar(likes, dislikes) {
   let rateBar = document.getElementById("ryd-bar-container");
@@ -117,7 +117,7 @@ function createRateBar(likes, dislikes) {
       }
     }
   } else {
-    cLog("removing bar");
+    console.log("removing bar");
     if (rateBar) {
       rateBar.parentNode.removeChild(rateBar);
     }

@@ -1,11 +1,6 @@
-//---   Import Button Functions   ---//
 import { getButtons } from "./src/buttons";
-
-//---   Import State Functions   ---//
 import { isShorts, setInitialState, initExtConfig } from "./src/state";
-
-//---   Import Video & Browser Functions   ---//
-import { getBrowser, isVideoLoaded, cLog } from "./src/utils";
+import { getBrowser, isVideoLoaded } from "./src/utils";
 import { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler } from "./src/events";
 
 await initExtConfig();
@@ -27,7 +22,7 @@ async function setEventListeners(evt) {
       }
     } catch (exception) {
       if (!isSetInitialStateDone) {
-        cLog("error");
+        console.log("error");
         await setInitialState();
       }
     }
@@ -49,5 +44,5 @@ s.src = chrome.runtime.getURL("menu-fixer.js");
 s.onload = function () {
   this.remove();
 };
-// see also "Dynamic values in the injected code" section in this answer
+
 (document.head || document.documentElement).appendChild(s);

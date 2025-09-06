@@ -11,7 +11,6 @@ import {
   getVideoId,
   isInViewport,
   isVideoLoaded,
-  cLog,
   getColorFromTheme,
 } from "./utils";
 import { extConfig } from "./state";
