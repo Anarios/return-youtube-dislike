@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Renk teması:"
+  },
+  "showTooltipPercentage": {
+    "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzde."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzdeyi göster."
+  },
+  "tooltipPercentageMode": {
+    "message": "Yüzde modu:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Üzerine gelindiğinde özel yüzde gösterimini kullan."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Premium özellikler Patreon destekçileri için kullanılabilir"
+  },
+  "patreonLogin": {
+    "message": "Patreon ile giriş yap"
+  },
+  "patreonLogout": {
+    "message": "Çıkış yap"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon kullanıcısı"
+  },
+  "patreonTierPremium": {
+    "message": "Premium Destekçi"
+  },
+  "patreonTierSupporter": {
+    "message": "Destekçi"
+  },
+  "patreonTierBasic": {
+    "message": "Temel Seviye"
+  },
+  "patreonTierNone": {
+    "message": "Etkin üyelik yok"
+  },
+  "patreonTierChecking": {
+    "message": "Üyelik kontrol ediliyor…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Oturum açmak için 'identity' izni gerekir. Devam etmek için lütfen izin verin."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Patreon oturum açma başlatılamadı. Lütfen tekrar deneyin."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Giriş tamamlanamadı. Lütfen tekrar deneyin."
+  },
+  "apiStatusLabel": {
+    "message": "API durumu:"
+  },
+  "apiStatusOnline": {
+    "message": "Çevrimiçi"
+  },
+  "apiStatusOffline": {
+    "message": "Çevrimdışı"
+  },
+  "disableLoggingLabel": {
+    "message": "Konsola günlüklemeyi kapat"
+  },
+  "disableLoggingHover": {
+    "message": "Konsolda API yanıtlarının günlüğe kaydını kapatır."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

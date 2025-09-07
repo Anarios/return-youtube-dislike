@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Tema de Cores:"
+  },
+  "showTooltipPercentage": {
+    "message": "Percentual na dica (tooltip) da barra de like/dislike."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Mostrar o percentual na dica (tooltip) da barra de like/dislike."
+  },
+  "tooltipPercentageMode": {
+    "message": "Modo de porcentagem:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Usar exibição personalizada de porcentagem ao passar o mouse."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Recursos premium disponíveis para apoiadores no Patreon"
+  },
+  "patreonLogin": {
+    "message": "Entrar com o Patreon"
+  },
+  "patreonLogout": {
+    "message": "Sair"
+  },
+  "patreonUserFallback": {
+    "message": "Usuário do Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Apoiador Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Apoiador"
+  },
+  "patreonTierBasic": {
+    "message": "Nível básico"
+  },
+  "patreonTierNone": {
+    "message": "Nenhuma assinatura ativa"
+  },
+  "patreonTierChecking": {
+    "message": "Verificando assinatura…"
+  },
+  "patreonPermissionRequired": {
+    "message": "O login requer a permissão \"identity\". Permita para continuar."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Falha ao iniciar o login do Patreon. Tente novamente."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Não foi possível concluir o login. Tente novamente."
+  },
+  "apiStatusLabel": {
+    "message": "Status da API:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Desativar logs no console"
+  },
+  "disableLoggingHover": {
+    "message": "Desativa o registro de respostas da API no console."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

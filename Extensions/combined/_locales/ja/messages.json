@@ -88,5 +88,119 @@
   },
   "colorTheme": {
     "message": "配色："
+  },
+  "linkChangelog": {
+    "message": "変更履歴"
+  },
+  "textRoundingNumbers": {
+    "message": "高評価/低評価の統計を切り下げ表示（YouTubeの既定）"
+  },
+  "textRoundingNumbersHover": {
+    "message": "切り下げた統計を表示します。"
+  },
+  "textConsistentFormat": {
+    "message": "高評価/低評価の表示形式を統一"
+  },
+  "textConsistentFormatHover": {
+    "message": "高評価数の表記を再フォーマットします。"
+  },
+  "textNumberFormat": {
+    "message": "数値の形式:"
+  },
+  "textColorizeRatioBar": {
+    "message": "比率バーを色付け"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "比率バーにカスタムカラーを使用します。"
+  },
+  "textColorizeThumbs": {
+    "message": "サムズアイコンを色付け"
+  },
+  "textColorizeThumbsHover": {
+    "message": "サムズアイコンにカスタムカラーを使用します。"
+  },
+  "textColorTheme": {
+    "message": "カラーテーマ:"
+  },
+  "textColorTheme1": {
+    "message": "クラシック"
+  },
+  "textColorTheme2": {
+    "message": "アクセシブル"
+  },
+  "textColorTheme3": {
+    "message": "ネオン"
+  },
+  "showTooltipPercentage": {
+    "message": "高評価/低評価バーのツールチップにパーセントを表示。"
+  },
+  "showTooltipPercentageHover": {
+    "message": "高評価/低評価バーのツールチップにパーセントを表示します。"
+  },
+  "tooltipPercentageMode": {
+    "message": "パーセント表示モード:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "ホバー時にカスタムのパーセント表示を使用する。"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "プレミアム機能はPatreonサポーター向けに提供されています。"
+  },
+  "patreonLogin": {
+    "message": "Patreonでログイン"
+  },
+  "patreonLogout": {
+    "message": "ログアウト"
+  },
+  "patreonUserFallback": {
+    "message": "Patreonユーザー"
+  },
+  "patreonTierPremium": {
+    "message": "プレミアム支援者"
+  },
+  "patreonTierSupporter": {
+    "message": "支援者"
+  },
+  "patreonTierBasic": {
+    "message": "ベーシックプラン"
+  },
+  "patreonTierNone": {
+    "message": "有効なメンバーシップはありません"
+  },
+  "patreonTierChecking": {
+    "message": "メンバーシップを確認中…"
+  },
+  "patreonPermissionRequired": {
+    "message": "ログインには「identity」権限が必要です。続行するには許可してください。"
+  },
+  "patreonLoginStartFailed": {
+    "message": "Patreonログインの開始に失敗しました。もう一度お試しください。"
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "ログインを完了できませんでした。もう一度お試しください。"
+  },
+  "apiStatusLabel": {
+    "message": "API の状態:"
+  },
+  "apiStatusOnline": {
+    "message": "オンライン"
+  },
+  "apiStatusOffline": {
+    "message": "オフライン"
+  },
+  "disableLoggingLabel": {
+    "message": "コンソールへのログ出力を無効化"
+  },
+  "disableLoggingHover": {
+    "message": "コンソールでの API 応答のログ記録を無効にします。"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

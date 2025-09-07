@@ -123,12 +123,84 @@
     "message": "Benutzerdefinierte Farben für die Verhältnisleiste verwenden."
   },
   "colorizeThumbs": {
-    "message": "Like/Dislike-Icons eifärben"
+    "message": "Like/Dislike-Icons einfärben"
   },
   "colorizeThumbsHover": {
     "message": "Benutzerdefinierte Farben für die Like/Dislike-Icons verwenden."
   },
   "colorTheme": {
     "message": "Farbschema:"
+  },
+  "showTooltipPercentage": {
+    "message": "Prozentangabe in der Like/Dislike‑Leiste (Tooltip)."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Prozentangabe im Tooltip der Like/Dislike‑Leiste anzeigen."
+  },
+  "tooltipPercentageMode": {
+    "message": "Prozentmodus:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Benutzerdefinierte Prozentanzeige beim Hover verwenden."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Premiumfunktionen sind für Patreon‑Unterstützer verfügbar"
+  },
+  "patreonLogin": {
+    "message": "Mit Patreon anmelden"
+  },
+  "patreonLogout": {
+    "message": "Abmelden"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon‑Nutzer"
+  },
+  "patreonTierPremium": {
+    "message": "Premium‑Unterstützer"
+  },
+  "patreonTierSupporter": {
+    "message": "Unterstützer"
+  },
+  "patreonTierBasic": {
+    "message": "Basis‑Stufe"
+  },
+  "patreonTierNone": {
+    "message": "Keine aktive Mitgliedschaft"
+  },
+  "patreonTierChecking": {
+    "message": "Mitgliedschaft wird geprüft …"
+  },
+  "patreonPermissionRequired": {
+    "message": "Für die Anmeldung ist die Berechtigung „identity“ erforderlich. Bitte erteilen Sie sie, um fortzufahren."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Patreon‑Anmeldung konnte nicht gestartet werden. Bitte versuche es erneut."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Anmeldung konnte nicht abgeschlossen werden. Bitte versuche es erneut."
+  },
+  "apiStatusLabel": {
+    "message": "API‑Status:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Protokollierung in Konsole deaktivieren"
+  },
+  "disableLoggingHover": {
+    "message": "Deaktiviert das Protokollieren von API‑Antworten in der Konsole."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

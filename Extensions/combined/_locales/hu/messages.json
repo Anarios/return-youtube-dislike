@@ -58,5 +58,149 @@
   },
   "considerDonating": {
     "message": "Ez a bővítmény kizárólag a támogatásoknak köszönhetően működik. Kérjük, támogasd a projektet!"
+  },
+  "roundNumbers": {
+    "message": "Lekerekített számok megjelenítése"
+  },
+  "roundNumbersHover": {
+    "message": "Számok lefelé kerekítése (YouTube alapértelmezett)."
+  },
+  "reformatLikes": {
+    "message": "Kedvelésszám újraformázása"
+  },
+  "reformatLikesHover": {
+    "message": "Tedd egységessé a kedvelés/nem tetszik formátumát."
+  },
+  "numberFormat": {
+    "message": "Számformátum:"
+  },
+  "colorizeRatio": {
+    "message": "Aránysáv színezése"
+  },
+  "colorizeRatioHover": {
+    "message": "Egyéni színek használata az aránysávhoz."
+  },
+  "colorizeThumbs": {
+    "message": "Tetszik/Nem tetszik gombok színezése"
+  },
+  "colorizeThumbsHover": {
+    "message": "Egyéni színek használata a gomb ikonokhoz."
+  },
+  "colorTheme": {
+    "message": "Színtéma:"
+  },
+  "textRoundingNumbers": {
+    "message": "Lekerekített kedvelés/nem tetszik statisztika (YouTube alapértelmezés)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Lekerekített statisztikák megjelenítése."
+  },
+  "textConsistentFormat": {
+    "message": "A kedvelések és nem tetszések formátumának egységesítése"
+  },
+  "textConsistentFormatHover": {
+    "message": "A kedvelésszám újraformázása."
+  },
+  "textNumberFormat": {
+    "message": "Számformátum:"
+  },
+  "textColorizeRatioBar": {
+    "message": "Aránysáv színezése"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Egyéni színek használata az aránysávhoz."
+  },
+  "textColorizeThumbs": {
+    "message": "Hüvelykujjas ikonok színezése"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Egyéni színek használata a hüvelykujjas ikonokhoz."
+  },
+  "textColorTheme": {
+    "message": "Színtéma:"
+  },
+  "textColorTheme1": {
+    "message": "Klasszikus"
+  },
+  "textColorTheme2": {
+    "message": "Akadálymentes"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "showTooltipPercentage": {
+    "message": "Százalék a like/dislike sáv buborékjában."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Százalék megjelenítése a tetszik/nem tetszik sáv buborékában."
+  },
+  "tooltipPercentageMode": {
+    "message": "Százalék mód:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Egyéni százalékos megjelenítés használata rámutatáskor."
+  },
+  "linkChangelog": {
+    "message": "Változásnapló"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Prémium funkciók Patreon‑támogatóknak érhetők el"
+  },
+  "patreonLogin": {
+    "message": "Bejelentkezés Patreonnal"
+  },
+  "patreonLogout": {
+    "message": "Kijelentkezés"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon felhasználó"
+  },
+  "patreonTierPremium": {
+    "message": "Prémium támogató"
+  },
+  "patreonTierSupporter": {
+    "message": "Támogató"
+  },
+  "patreonTierBasic": {
+    "message": "Alap szint"
+  },
+  "patreonTierNone": {
+    "message": "Nincs aktív tagság"
+  },
+  "patreonTierChecking": {
+    "message": "Tagság ellenőrzése…"
+  },
+  "patreonPermissionRequired": {
+    "message": "A bejelentkezéshez „identity” engedély szükséges. Kérjük, engedélyezd."
+  },
+  "patreonLoginStartFailed": {
+    "message": "A Patreon bejelentkezés indítása sikertelen. Próbáld újra."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "A bejelentkezés nem sikerült. Próbáld újra."
+  },
+  "apiStatusLabel": {
+    "message": "API állapot:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Konzolnaplózás letiltása"
+  },
+  "disableLoggingHover": {
+    "message": "Letiltja az API‑válaszok konzolos naplózását."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Χρωματικό θέμα:"
+  },
+  "showTooltipPercentage": {
+    "message": "Ποσοστό στο tooltip της μπάρας like/dislike."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Εμφάνιση ποσοστού στο tooltip της μπάρας like/dislike."
+  },
+  "tooltipPercentageMode": {
+    "message": "Λειτουργία ποσοστού:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Χρήση προσαρμοσμένης εμφάνισης ποσοστού κατά την αιώρηση."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Οι premium λειτουργίες είναι διαθέσιμες για υποστηρικτές στο Patreon"
+  },
+  "patreonLogin": {
+    "message": "Σύνδεση με Patreon"
+  },
+  "patreonLogout": {
+    "message": "Αποσύνδεση"
+  },
+  "patreonUserFallback": {
+    "message": "Χρήστης Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Υποστηρικτής Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Υποστηρικτής"
+  },
+  "patreonTierBasic": {
+    "message": "Βασικό επίπεδο"
+  },
+  "patreonTierNone": {
+    "message": "Καμία ενεργή συνδρομή"
+  },
+  "patreonTierChecking": {
+    "message": "Έλεγχος συνδρομής…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Η σύνδεση απαιτεί το δικαίωμα «identity». Παραχωρήστε το για να συνεχίσετε."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Αποτυχία έναρξης σύνδεσης μέσω Patreon. Δοκιμάστε ξανά."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Η σύνδεση δεν ολοκληρώθηκε. Δοκιμάστε ξανά."
+  },
+  "apiStatusLabel": {
+    "message": "Κατάσταση API:"
+  },
+  "apiStatusOnline": {
+    "message": "Σε λειτουργία"
+  },
+  "apiStatusOffline": {
+    "message": "Εκτός λειτουργίας"
+  },
+  "disableLoggingLabel": {
+    "message": "Απενεργοποίηση καταγραφής στην κονσόλα"
+  },
+  "disableLoggingHover": {
+    "message": "Απενεργοποιεί την καταγραφή των αποκρίσεων API στην κονσόλα."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

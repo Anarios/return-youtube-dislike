@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Chủ đề màu:"
+  },
+  "showTooltipPercentage": {
+    "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
+  },
+  "tooltipPercentageMode": {
+    "message": "Chế độ phần trăm:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Dùng hiển thị phần trăm tùy chỉnh khi di chuột."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Tính năng cao cấp dành cho người ủng hộ trên Patreon"
+  },
+  "patreonLogin": {
+    "message": "Đăng nhập bằng Patreon"
+  },
+  "patreonLogout": {
+    "message": "Đăng xuất"
+  },
+  "patreonUserFallback": {
+    "message": "Người dùng Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Người ủng hộ Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Người ủng hộ"
+  },
+  "patreonTierBasic": {
+    "message": "Cấp cơ bản"
+  },
+  "patreonTierNone": {
+    "message": "Không có gói thành viên đang hoạt động"
+  },
+  "patreonTierChecking": {
+    "message": "Đang kiểm tra tư cách thành viên…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Đăng nhập cần quyền \"identity\". Vui lòng cho phép để tiếp tục."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Không thể bắt đầu đăng nhập Patreon. Vui lòng thử lại."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Không thể hoàn tất đăng nhập. Vui lòng thử lại."
+  },
+  "apiStatusLabel": {
+    "message": "Trạng thái API:"
+  },
+  "apiStatusOnline": {
+    "message": "Trực tuyến"
+  },
+  "apiStatusOffline": {
+    "message": "Ngoại tuyến"
+  },
+  "disableLoggingLabel": {
+    "message": "Tắt ghi log ra bảng điều khiển"
+  },
+  "disableLoggingHover": {
+    "message": "Tắt ghi log phản hồi API trong bảng điều khiển."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Motyw kolorystyczny:"
+  },
+  "showTooltipPercentage": {
+    "message": "Procent w podpowiedzi paska polubień/niepolubień."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Wyświetl procent w podpowiedzi paska polubień/niepolubień."
+  },
+  "tooltipPercentageMode": {
+    "message": "Tryb procentów:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Użyj niestandardowego wyświetlania procentów po najechaniu."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Funkcje premium są dostępne dla wspierających na Patreon"
+  },
+  "patreonLogin": {
+    "message": "Zaloguj się przez Patreon"
+  },
+  "patreonLogout": {
+    "message": "Wyloguj się"
+  },
+  "patreonUserFallback": {
+    "message": "Użytkownik Patreona"
+  },
+  "patreonTierPremium": {
+    "message": "Wspierający Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Wspierający"
+  },
+  "patreonTierBasic": {
+    "message": "Poziom podstawowy"
+  },
+  "patreonTierNone": {
+    "message": "Brak aktywnego członkostwa"
+  },
+  "patreonTierChecking": {
+    "message": "Sprawdzanie członkostwa…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Logowanie wymaga uprawnienia „identity”. Zezwól, aby kontynuować."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Nie udało się rozpocząć logowania przez Patreon. Spróbuj ponownie."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Nie udało się dokończyć logowania. Spróbuj ponownie."
+  },
+  "apiStatusLabel": {
+    "message": "Status API:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Wyłącz logowanie do konsoli"
+  },
+  "disableLoggingHover": {
+    "message": "Wyłącza logowanie odpowiedzi API w konsoli."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

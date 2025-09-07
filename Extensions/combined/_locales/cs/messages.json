@@ -66,7 +66,7 @@
     "message": "Použít vlastní barvy pro ikony."
   },
   "textColorTheme": {
-    "message": "Marevný motiv:"
+    "message": "Barevný motiv:"
   },
   "textColorTheme1": {
     "message": "Klasický"
@@ -129,6 +129,78 @@
     "message": "Použít vlastní barvy pro ikony."
   },
   "colorTheme": {
-    "message": "Marevný motiv:"
+    "message": "Barevný motiv:"
+  },
+  "showTooltipPercentage": {
+    "message": "Procenta v nápovědě u lišty like/dislike."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Zobrazit procenta v nápovědě u lišty like/dislike."
+  },
+  "tooltipPercentageMode": {
+    "message": "Režim procent:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Použít vlastní zobrazení procent po najetí myší."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Prémiové funkce jsou dostupné pro podporovatele na Patreonu"
+  },
+  "patreonLogin": {
+    "message": "Přihlásit se pomocí Patreonu"
+  },
+  "patreonLogout": {
+    "message": "Odhlásit se"
+  },
+  "patreonUserFallback": {
+    "message": "Uživatel Patreonu"
+  },
+  "patreonTierPremium": {
+    "message": "Prémiový podporovatel"
+  },
+  "patreonTierSupporter": {
+    "message": "Podporovatel"
+  },
+  "patreonTierBasic": {
+    "message": "Základní úroveň"
+  },
+  "patreonTierNone": {
+    "message": "Žádné aktivní členství"
+  },
+  "patreonTierChecking": {
+    "message": "Kontrola členství…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Přihlášení vyžaduje oprávnění „identity“. Povolte ho, prosím."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Nepodařilo se zahájit přihlášení přes Patreon. Zkuste to znovu."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Přihlášení se nepodařilo dokončit. Zkuste to znovu."
+  },
+  "apiStatusLabel": {
+    "message": "Stav API:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Zakázat protokolování do konzole"
+  },
+  "disableLoggingHover": {
+    "message": "Vypnout zapisování odpovědí API do konzole."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

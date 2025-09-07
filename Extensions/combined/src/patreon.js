@@ -75,7 +75,19 @@ function showPremiumBadge() {
   badge.appendChild(icon);
   
   const text = document.createElement('span');
-  text.textContent = `Patreon ${patreonState.user.membershipTier}`;
+  try {
+    const prefix = (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonBadgePrefix') : 'Patreon';
+    const tierMap = {
+      premium: (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonTierPremium') : 'Premium Supporter',
+      supporter: (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonTierSupporter') : 'Supporter',
+      basic: (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonTierBasic') : 'Basic Tier',
+      none: (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonTierNone') : 'No Active Membership',
+    };
+    const tierLabel = tierMap[patreonState.user?.membershipTier] || '';
+    text.textContent = `${prefix} ${tierLabel}`.trim();
+  } catch (_) {
+    text.textContent = `Patreon ${patreonState.user?.membershipTier || ''}`.trim();
+  }
   badge.appendChild(text);
   
   document.body.appendChild(badge);

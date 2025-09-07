@@ -88,5 +88,119 @@
   },
   "colorTheme": {
     "message": "Schéma de couleur:"
+  },
+  "linkChangelog": {
+    "message": "Journal des modifications"
+  },
+  "textRoundingNumbers": {
+    "message": "Arrondir vers le bas les statistiques de like/dislike (comportement par défaut de YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Afficher les statistiques arrondies vers le bas."
+  },
+  "textConsistentFormat": {
+    "message": "Rendre le format des likes et des dislikes cohérent"
+  },
+  "textConsistentFormatHover": {
+    "message": "Reformater le nombre de likes."
+  },
+  "textNumberFormat": {
+    "message": "Format numérique :"
+  },
+  "textColorizeRatioBar": {
+    "message": "Coloriser la barre de ratio"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Utilisez des couleurs personnalisées pour la barre de ratio."
+  },
+  "textColorizeThumbs": {
+    "message": "Coloriser les pouces"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Utiliser des couleurs personnalisées pour les icônes des pouces."
+  },
+  "textColorTheme": {
+    "message": "Thème de couleur :"
+  },
+  "textColorTheme1": {
+    "message": "Classique"
+  },
+  "textColorTheme2": {
+    "message": "Accessible"
+  },
+  "textColorTheme3": {
+    "message": "Néon"
+  },
+  "showTooltipPercentage": {
+    "message": "Pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Afficher le pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
+  },
+  "tooltipPercentageMode": {
+    "message": "Mode de pourcentage :"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Utiliser un affichage de pourcentage personnalisé au survol."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Fonctionnalités premium disponibles pour les soutiens sur Patreon"
+  },
+  "patreonLogin": {
+    "message": "Se connecter avec Patreon"
+  },
+  "patreonLogout": {
+    "message": "Se déconnecter"
+  },
+  "patreonUserFallback": {
+    "message": "Utilisateur Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Soutien Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Soutien"
+  },
+  "patreonTierBasic": {
+    "message": "Niveau de base"
+  },
+  "patreonTierNone": {
+    "message": "Aucun abonnement actif"
+  },
+  "patreonTierChecking": {
+    "message": "Vérification de l'abonnement…"
+  },
+  "patreonPermissionRequired": {
+    "message": "La connexion nécessite l’autorisation «identity». Veuillez l’accorder pour continuer."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Échec du démarrage de la connexion Patreon. Veuillez réessayer."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Échec de la connexion. Veuillez réessayer."
+  },
+  "apiStatusLabel": {
+    "message": "État de l’API :"
+  },
+  "apiStatusOnline": {
+    "message": "En ligne"
+  },
+  "apiStatusOffline": {
+    "message": "Hors ligne"
+  },
+  "disableLoggingLabel": {
+    "message": "Désactiver la journalisation dans la console"
+  },
+  "disableLoggingHover": {
+    "message": "Désactive la journalisation des réponses de l’API dans la console."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

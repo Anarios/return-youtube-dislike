@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Кольорова схема:"
+  },
+  "showTooltipPercentage": {
+    "message": "Відсоток у підказці панелі вподобань/невподобань."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Показувати відсоток у підказці панелі вподобань/невподобань."
+  },
+  "tooltipPercentageMode": {
+    "message": "Режим відсотків:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Використовувати власне відображення відсотків при наведенні."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Преміум‑функції доступні прихильникам на Patreon"
+  },
+  "patreonLogin": {
+    "message": "Увійти через Patreon"
+  },
+  "patreonLogout": {
+    "message": "Вийти"
+  },
+  "patreonUserFallback": {
+    "message": "Користувач Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Преміум‑підтримувач"
+  },
+  "patreonTierSupporter": {
+    "message": "Підтримувач"
+  },
+  "patreonTierBasic": {
+    "message": "Базовий рівень"
+  },
+  "patreonTierNone": {
+    "message": "Немає активної підписки"
+  },
+  "patreonTierChecking": {
+    "message": "Перевірка підписки…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Для входу потрібен дозвіл «identity». Дозвольте, щоб продовжити."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Не вдалося розпочати вхід через Patreon. Спробуйте ще раз."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Не вдалося завершити вхід. Спробуйте ще раз."
+  },
+  "apiStatusLabel": {
+    "message": "Стан API:"
+  },
+  "apiStatusOnline": {
+    "message": "Онлайн"
+  },
+  "apiStatusOffline": {
+    "message": "Офлайн"
+  },
+  "disableLoggingLabel": {
+    "message": "Вимкнути журнал у консоль"
+  },
+  "disableLoggingHover": {
+    "message": "Вимикає журналювання відповідей API в консолі."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

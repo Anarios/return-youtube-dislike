@@ -142,5 +142,65 @@
   },
   "tooltipPercentageModeHover": {
     "message": "Usar visualización de porcentaje personalizada al pasar el puntero."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Funciones premium disponibles para patrocinadores en Patreon"
+  },
+  "patreonLogin": {
+    "message": "Iniciar sesión con Patreon"
+  },
+  "patreonLogout": {
+    "message": "Cerrar sesión"
+  },
+  "patreonUserFallback": {
+    "message": "Usuario de Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Patrocinador Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Patrocinador"
+  },
+  "patreonTierBasic": {
+    "message": "Nivel básico"
+  },
+  "patreonTierNone": {
+    "message": "Sin membresía activa"
+  },
+  "patreonTierChecking": {
+    "message": "Comprobando membresía…"
+  },
+  "patreonPermissionRequired": {
+    "message": "El inicio de sesión requiere el permiso «identity». Permítelo para continuar."
+  },
+  "patreonLoginStartFailed": {
+    "message": "No se pudo iniciar el inicio de sesión de Patreon. Inténtalo de nuevo."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "No se pudo completar el inicio de sesión. Inténtalo de nuevo."
+  },
+  "apiStatusLabel": {
+    "message": "Estado de la API:"
+  },
+  "apiStatusOnline": {
+    "message": "En línea"
+  },
+  "apiStatusOffline": {
+    "message": "Fuera de línea"
+  },
+  "disableLoggingLabel": {
+    "message": "Desactivar registro en la consola"
+  },
+  "disableLoggingHover": {
+    "message": "Desactiva el registro de respuestas de la API en la consola."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Warnai tema:"
+  },
+  "showTooltipPercentage": {
+    "message": "Persentase di tooltip bilah like/dislike."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Tampilkan persentase di tooltip bilah like/dislike."
+  },
+  "tooltipPercentageMode": {
+    "message": "Mode persentase:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Gunakan tampilan persentase kustom saat diarahkan."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Fitur premium tersedia bagi pendukung di Patreon"
+  },
+  "patreonLogin": {
+    "message": "Masuk dengan Patreon"
+  },
+  "patreonLogout": {
+    "message": "Keluar"
+  },
+  "patreonUserFallback": {
+    "message": "Pengguna Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Pendukung Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Pendukung"
+  },
+  "patreonTierBasic": {
+    "message": "Tingkat dasar"
+  },
+  "patreonTierNone": {
+    "message": "Tidak ada keanggotaan aktif"
+  },
+  "patreonTierChecking": {
+    "message": "Memeriksa keanggotaan…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Masuk memerlukan izin \"identity\". Mohon izinkan untuk melanjutkan."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Gagal memulai login Patreon. Coba lagi."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Gagal menyelesaikan login. Coba lagi."
+  },
+  "apiStatusLabel": {
+    "message": "Status API:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Nonaktifkan log ke konsol"
+  },
+  "disableLoggingHover": {
+    "message": "Menonaktifkan pencatatan respons API di konsol."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

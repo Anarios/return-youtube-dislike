@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Färgtema:"
+  },
+  "showTooltipPercentage": {
+    "message": "Procent i verktygstips för gilla/ogilla‑fältet."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Visa procent i verktygstipset för gilla/ogilla‑fältet."
+  },
+  "tooltipPercentageMode": {
+    "message": "Procentläge:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Använd anpassad procentvisning vid hovring."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Premiumfunktioner är tillgängliga för Patreon‑stödjare"
+  },
+  "patreonLogin": {
+    "message": "Logga in med Patreon"
+  },
+  "patreonLogout": {
+    "message": "Logga ut"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon‑användare"
+  },
+  "patreonTierPremium": {
+    "message": "Premium‑stödjare"
+  },
+  "patreonTierSupporter": {
+    "message": "Stödjare"
+  },
+  "patreonTierBasic": {
+    "message": "Grundnivå"
+  },
+  "patreonTierNone": {
+    "message": "Inget aktivt medlemskap"
+  },
+  "patreonTierChecking": {
+    "message": "Kontrollerar medlemskap…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Inloggning kräver behörigheten ”identity”. Tillåt för att fortsätta."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Det gick inte att starta Patreon‑inloggning. Försök igen."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Det gick inte att slutföra inloggningen. Försök igen."
+  },
+  "apiStatusLabel": {
+    "message": "API‑status:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Inaktivera loggning till konsolen"
+  },
+  "disableLoggingHover": {
+    "message": "Inaktiverar loggning av API‑svar i konsolen."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

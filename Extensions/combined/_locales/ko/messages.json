@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "컬러 테마:"
+  },
+  "showTooltipPercentage": {
+    "message": "좋아요/싫어요 막대 툴팁에 백분율 표시."
+  },
+  "showTooltipPercentageHover": {
+    "message": "좋아요/싫어요 막대 툴팁에 백분율을 표시합니다."
+  },
+  "tooltipPercentageMode": {
+    "message": "백분율 모드:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "호버 시 사용자 지정 백분율 표시 사용."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "프리미엄 기능은 Patreon 후원자에게 제공됩니다"
+  },
+  "patreonLogin": {
+    "message": "Patreon으로 로그인"
+  },
+  "patreonLogout": {
+    "message": "로그아웃"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon 사용자"
+  },
+  "patreonTierPremium": {
+    "message": "프리미엄 후원자"
+  },
+  "patreonTierSupporter": {
+    "message": "후원자"
+  },
+  "patreonTierBasic": {
+    "message": "기본 등급"
+  },
+  "patreonTierNone": {
+    "message": "활성 멤버십 없음"
+  },
+  "patreonTierChecking": {
+    "message": "멤버십 확인 중…"
+  },
+  "patreonPermissionRequired": {
+    "message": "로그인에는 'identity' 권한이 필요합니다. 계속하려면 허용하세요."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Patreon 로그인 시작에 실패했습니다. 다시 시도해 주세요."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "로그인을 완료하지 못했습니다. 다시 시도해 주세요."
+  },
+  "apiStatusLabel": {
+    "message": "API 상태:"
+  },
+  "apiStatusOnline": {
+    "message": "온라인"
+  },
+  "apiStatusOffline": {
+    "message": "오프라인"
+  },
+  "disableLoggingLabel": {
+    "message": "콘솔 로그 비활성화"
+  },
+  "disableLoggingHover": {
+    "message": "콘솔에서 API 응답 로깅을 비활성화합니다."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

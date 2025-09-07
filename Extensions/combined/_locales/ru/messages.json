@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Цветовая схема:"
+  },
+  "showTooltipPercentage": {
+    "message": "Процент в подсказке полосы лайков/дизлайков."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Показывать процент в подсказке полосы лайков/дизлайков."
+  },
+  "tooltipPercentageMode": {
+    "message": "Режим процентов:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Использовать кастомный показ процентов при наведении."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Премиум‑функции доступны подписчикам на Patreon"
+  },
+  "patreonLogin": {
+    "message": "Войти через Patreon"
+  },
+  "patreonLogout": {
+    "message": "Выйти"
+  },
+  "patreonUserFallback": {
+    "message": "Пользователь Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Премиум‑поддерживающий"
+  },
+  "patreonTierSupporter": {
+    "message": "Поддерживающий"
+  },
+  "patreonTierBasic": {
+    "message": "Базовый уровень"
+  },
+  "patreonTierNone": {
+    "message": "Нет активной подписки"
+  },
+  "patreonTierChecking": {
+    "message": "Проверка подписки…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Для входа требуется разрешение «identity». Разрешите, чтобы продолжить."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Не удалось начать вход через Patreon. Попробуйте еще раз."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Не удалось завершить вход. Попробуйте еще раз."
+  },
+  "apiStatusLabel": {
+    "message": "Состояние API:"
+  },
+  "apiStatusOnline": {
+    "message": "Онлайн"
+  },
+  "apiStatusOffline": {
+    "message": "Офлайн"
+  },
+  "disableLoggingLabel": {
+    "message": "Отключить логирование в консоль"
+  },
+  "disableLoggingHover": {
+    "message": "Отключает логирование ответов API в консоль."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

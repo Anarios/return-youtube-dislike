@@ -130,5 +130,77 @@
   },
   "colorTheme": {
     "message": "Colore tema:"
+  },
+  "showTooltipPercentage": {
+    "message": "Percentuale nel suggerimento della barra mi piace/non mi piace."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Mostra la percentuale nel suggerimento della barra mi piace/non mi piace."
+  },
+  "tooltipPercentageMode": {
+    "message": "Modalità percentuale:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Usa una visualizzazione personalizzata della percentuale al passaggio del mouse."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Funzionalità premium disponibili per i sostenitori su Patreon"
+  },
+  "patreonLogin": {
+    "message": "Accedi con Patreon"
+  },
+  "patreonLogout": {
+    "message": "Esci"
+  },
+  "patreonUserFallback": {
+    "message": "Utente Patreon"
+  },
+  "patreonTierPremium": {
+    "message": "Sostenitore Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Sostenitore"
+  },
+  "patreonTierBasic": {
+    "message": "Livello base"
+  },
+  "patreonTierNone": {
+    "message": "Nessuna iscrizione attiva"
+  },
+  "patreonTierChecking": {
+    "message": "Verifica dell'abbonamento…"
+  },
+  "patreonPermissionRequired": {
+    "message": "L’accesso richiede l’autorizzazione \"identity\". Concedila per continuare."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Impossibile avviare l’accesso con Patreon. Riprova."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Impossibile completare l’accesso. Riprova."
+  },
+  "apiStatusLabel": {
+    "message": "Stato API:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Disattiva log sulla console"
+  },
+  "disableLoggingHover": {
+    "message": "Disattiva la registrazione delle risposte API nella console."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

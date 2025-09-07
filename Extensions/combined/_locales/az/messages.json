@@ -130,6 +130,78 @@
     },
     "colorTheme": {
       "message": "Rəng mövzusu:"
+    },
+    "showTooltipPercentage": {
+      "message": "Bəyən/bəyənməmə çubuğu ipucunda faiz."
+    },
+    "showTooltipPercentageHover": {
+      "message": "Bəyən/bəyənməmə çubuğu ipucunda faizi göstər."
+    },
+    "tooltipPercentageMode": {
+      "message": "Faiz rejimi:"
+    },
+    "tooltipPercentageModeHover": {
+      "message": "Siçan üzərinə gətirərkən xüsusi faiz görünümünü istifadə et."
+    },
+    "linkDiscord": {
+      "message": "Discord"
+    },
+    "linkGithub": {
+      "message": "GitHub"
+    },
+    "patreonLoggedOutMessage": {
+      "message": "Premium xüsusiyyətlər Patreon dəstəkçiləri üçün mövcuddur"
+    },
+    "patreonLogin": {
+      "message": "Patreon ilə daxil ol"
+    },
+    "patreonLogout": {
+      "message": "Çıxış"
+    },
+    "patreonUserFallback": {
+      "message": "Patreon istifadəçisi"
+    },
+    "patreonTierPremium": {
+      "message": "Premium Dəstəkçi"
+    },
+    "patreonTierSupporter": {
+      "message": "Dəstəkçi"
+    },
+    "patreonTierBasic": {
+      "message": "Əsas Səviyyə"
+    },
+    "patreonTierNone": {
+      "message": "Aktiv üzvlük yoxdur"
+    },
+    "patreonTierChecking": {
+      "message": "Üzvlük yoxlanılır…"
+    },
+    "patreonPermissionRequired": {
+      "message": "Giriş üçün 'identity' icazəsi tələb olunur. Davam etmək üçün icazə verin."
+    },
+    "patreonLoginStartFailed": {
+      "message": "Patreon girişini başlatmaq alınmadı. Yenidən cəhd edin."
+    },
+    "patreonLoginCompleteFailed": {
+      "message": "Giriş tamamlanmadı. Yenidən cəhd edin."
+    },
+    "apiStatusLabel": {
+      "message": "API statusu:"
+    },
+    "apiStatusOnline": {
+      "message": "Onlayn"
+    },
+    "apiStatusOffline": {
+      "message": "Oflayn"
+    },
+    "disableLoggingLabel": {
+      "message": "Konsola yazmağı söndür"
+    },
+    "disableLoggingHover": {
+      "message": "API cavablarının konsolda qeydə alınmasını deaktiv et."
+    },
+    "patreonBadgePrefix": {
+      "message": "Patreon"
     }
   }
   

@@ -142,5 +142,65 @@
   },
   "tooltipPercentageModeHover": {
     "message": "Use custom percentage display on hover."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Premium features available for Patreon supporters"
+  },
+  "patreonLogin": {
+    "message": "Login with Patreon"
+  },
+  "patreonLogout": {
+    "message": "Logout"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon User"
+  },
+  "patreonTierPremium": {
+    "message": "Premium Supporter"
+  },
+  "patreonTierSupporter": {
+    "message": "Supporter"
+  },
+  "patreonTierBasic": {
+    "message": "Basic Tier"
+  },
+  "patreonTierNone": {
+    "message": "No Active Membership"
+  },
+  "patreonTierChecking": {
+    "message": "Checking membership..."
+  },
+  "patreonPermissionRequired": {
+    "message": "Login requires the 'identity' permission. Please allow it to continue."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Failed to initiate Patreon login. Please try again."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Failed to complete login. Please try again."
+  },
+  "apiStatusLabel": {
+    "message": "API Status:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Disable logging to console"
+  },
+  "disableLoggingHover": {
+    "message": "Disable logging API responses in console."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   }
 }

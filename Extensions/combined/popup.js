@@ -123,7 +123,7 @@ function initPatreonAuth() {
     loggedOutView.style.display = "none";
     loggedInView.style.display = "block";
 
-    userName.textContent = user.fullName || user.email || "Patreon User";
+    userName.textContent = user.fullName || user.email || chrome.i18n.getMessage("patreonUserFallback");
 
     if (user.imageUrl) {
       userAvatar.src = user.imageUrl;
@@ -131,13 +131,13 @@ function initPatreonAuth() {
     }
 
     const tierLabels = {
-      premium: "Premium Supporter",
-      supporter: "Supporter",
-      basic: "Basic Tier",
-      none: "No Active Membership",
+      premium: chrome.i18n.getMessage("patreonTierPremium"),
+      supporter: chrome.i18n.getMessage("patreonTierSupporter"),
+      basic: chrome.i18n.getMessage("patreonTierBasic"),
+      none: chrome.i18n.getMessage("patreonTierNone"),
     };
 
-    userTier.textContent = tierLabels[user.membershipTier] || "Checking membership...";
+    userTier.textContent = tierLabels[user.membershipTier] || chrome.i18n.getMessage("patreonTierChecking");
 
     if (user.hasActiveMembership) {
       userTier.style.color = "#f96854";
@@ -249,14 +249,14 @@ function initPatreonAuth() {
     ensureIdentityPermission(async (granted) => {
       const identityNow = getIdentityApi();
       if (!granted || !identityNow || typeof identityNow.getRedirectURL !== "function") {
-        alert("Login requires the 'identity' permission. Please allow it to continue.");
+        alert(chrome.i18n.getMessage("patreonPermissionRequired"));
         return;
       }
       // Delegate OAuth to background so it persists if the popup closes
       chrome.runtime.sendMessage({ message: "patreon_oauth_login" }, (resp) => {
         if (chrome.runtime && chrome.runtime.lastError) {
           console.error("Login failed:", chrome.runtime.lastError.message);
-          alert("Failed to initiate Patreon login. Please try again.");
+          alert(chrome.i18n.getMessage("patreonLoginStartFailed"));
           return;
         }
         if (resp && resp.success) {
@@ -264,7 +264,7 @@ function initPatreonAuth() {
           showLoggedInView(user);
         } else {
           console.error("Login failed:", resp && resp.error);
-          alert("Failed to complete login. Please try again.");
+          alert(chrome.i18n.getMessage("patreonLoginCompleteFailed"));
         }
       });
     });
@@ -539,12 +539,12 @@ function getNumberFormatter(optionSelect) {
   let resp = await fetch("https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g");
   let result = await resp.status;
   if (result === 200) {
-    status.innerText = "Online";
+    status.innerText = chrome.i18n.getMessage("apiStatusOnline");
     status.style.color = "green";
     serverStatus.style.filter =
       "invert(58%) sepia(81%) saturate(2618%) hue-rotate(81deg) brightness(119%) contrast(129%)";
   } else {
-    status.innerText = "Offline";
+    status.innerText = chrome.i18n.getMessage("apiStatusOffline");
     status.style.color = "red";
     serverStatus.style.filter =
       "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";

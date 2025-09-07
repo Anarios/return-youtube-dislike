@@ -35,20 +35,18 @@
       >
         __MSG_linkDonate__
       </button>
-      <button class="m3-btn" id="link_discord">Discord</button>
+      <button class="m3-btn" id="link_discord" title="__MSG_linkDiscord__">__MSG_linkDiscord__</button>
       <br />
       
       <!-- Patreon Login Section -->
       <div id="patreon-section" style="margin-top: 1rem; padding: 0.5rem; border-top: 1px solid var(--lightGrey);">
         <div id="patreon-logged-out" style="display: none;">
-          <p style="color: var(--lightGrey); font-size: 0.9rem; margin-bottom: 0.5rem;">
-            Premium features available for Patreon supporters
-          </p>
-          <button class="m3-btn m3-primary" id="patreon-login-btn">
+          <p style="color: var(--lightGrey); font-size: 0.9rem; margin-bottom: 0.5rem;" title="__MSG_patreonLoggedOutMessage__">__MSG_patreonLoggedOutMessage__</p>
+          <button class="m3-btn m3-primary" id="patreon-login-btn" title="__MSG_patreonLogin__">
             <svg style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;" viewBox="0 0 24 24" fill="currentColor">
               <path d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21c0 3.96-3.22 7.18-7.18 7.18c-3.97 0-7.21-3.22-7.21-7.18c0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"/>
             </svg>
-            Login with Patreon
+            __MSG_patreonLogin__
           </button>
         </div>
         <div id="patreon-logged-in" style="display: none;">
@@ -59,16 +57,14 @@
               <p id="patreon-tier" style="color: var(--lightGrey); font-size: 0.8rem; margin: 0;"></p>
             </div>
           </div>
-          <button class="m3-btn" id="patreon-logout-btn" style="font-size: 0.9rem;">
-            Logout
-          </button>
+          <button class="m3-btn" id="patreon-logout-btn" style="font-size: 0.9rem;" title="__MSG_patreonLogout__">__MSG_patreonLogout__</button>
         </div>
       </div>
       
       <button class="m3-btn" style="margin-top: 0.3rem" id="link_faq" title="__MSG_linkFAQ__">
         __MSG_linkFAQ__
       </button>
-      <button class="m3-btn" id="link_github">GitHub</button>
+      <button class="m3-btn" id="link_github" title="__MSG_linkGithub__">__MSG_linkGithub__</button>
       <button class="m3-btn" style="margin-top: 0.3em" id="link_help" title="__MSG_linkHelp__">
         __MSG_linkHelp__
       </button>
@@ -84,7 +80,7 @@
 
       <br />
       <br />
-      <p style="display: none">API Status: <b id="status"></b></p>
+      <p style="display: none">__MSG_apiStatusLabel__ <b id="status"></b></p>
       <img
         id="server-status"
         style="display: none; width: 0.75rem; height: 0.75rem"
@@ -124,13 +120,13 @@
 
     <!-- dialog box -->
     <fieldset id="advancedSettings">
-      <label class="switch" data-hover="Disable Logging API Response in JavaScript Console.">
+      <label class="switch" data-hover="__MSG_disableLoggingHover__">
         <input type="checkbox" id="disable_logging"/>
         <span class="slider"/>
-        <span class="switchLabel">Disable logging to console</span>
+        <span class="switchLabel">__MSG_disableLoggingLabel__</span>
       </label>
       <br />
-      <label class="switch" data-hover="Stop counting your likes and dislikes">
+      <label class="switch" data-hover="__MSG_textSettingsHover__">
         <input type="checkbox" id="disable_vote_submission" />
         <span class="slider"></span>
         <span class="switchLabel" title="__MSG_textSettings__">

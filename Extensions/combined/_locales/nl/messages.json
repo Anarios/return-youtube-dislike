@@ -129,7 +129,79 @@
     "colorizeThumbsHover": {
       "message": "Gebruik aangepaste kleuren voor de duimpictogrammen."
     },
-    "colorTheme": {
-      "message": "Kleurenthema:"
-    }
+  "colorTheme": {
+    "message": "Kleurenthema:"
+  },
+  "showTooltipPercentage": {
+    "message": "Percentage in de tooltip van de like/dislike‑balk."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Percentage in de tooltip van de like/dislike‑balk weergeven."
+  },
+  "tooltipPercentageMode": {
+    "message": "Percentage‑modus:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Aangepaste procentweergave bij hover gebruiken."
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Premiumfuncties zijn beschikbaar voor supporters op Patreon"
+  },
+  "patreonLogin": {
+    "message": "Inloggen met Patreon"
+  },
+  "patreonLogout": {
+    "message": "Afmelden"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon‑gebruiker"
+  },
+  "patreonTierPremium": {
+    "message": "Premium‑supporter"
+  },
+  "patreonTierSupporter": {
+    "message": "Supporter"
+  },
+  "patreonTierBasic": {
+    "message": "Basisniveau"
+  },
+  "patreonTierNone": {
+    "message": "Geen actief lidmaatschap"
+  },
+  "patreonTierChecking": {
+    "message": "Lidmaatschap controleren…"
+  },
+  "patreonPermissionRequired": {
+    "message": "Voor inloggen is de machtiging 'identity' vereist. Sta dit toe om door te gaan."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Patreon‑aanmelding kon niet worden gestart. Probeer het opnieuw."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Aanmelden kon niet worden voltooid. Probeer het opnieuw."
+  },
+  "apiStatusLabel": {
+    "message": "API‑status:"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "disableLoggingLabel": {
+    "message": "Loggen naar de console uitschakelen"
+  },
+  "disableLoggingHover": {
+    "message": "Schakelt het loggen van API‑antwoorden in de console uit."
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  }
 }
