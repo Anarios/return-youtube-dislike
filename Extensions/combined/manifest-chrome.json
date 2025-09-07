@@ -15,7 +15,9 @@
     "*://*.youtube.com/*"
   ],
   "permissions": [
-    "storage",
+    "storage"
+  ],
+  "optional_permissions": [
     "identity"
   ],
   "action": {

@@ -91,7 +91,6 @@ document.getElementById("number_reformat_likes").addEventListener("click", (ev) 
 });
 
 function initPatreonAuth() {
-  const patreonSection = document.getElementById("patreon-section");
   const loggedOutView = document.getElementById("patreon-logged-out");
   const loggedInView = document.getElementById("patreon-logged-in");
   const loginBtn = document.getElementById("patreon-login-btn");
@@ -192,56 +191,80 @@ function initPatreonAuth() {
     });
   }
 
-  loginBtn.addEventListener("click", async () => {
-    const identity = getIdentityApi();
-    if (!identity || typeof identity.getRedirectURL !== "function") {
-      alert("Browser identity API not available. Please use Chrome, Edge, or Firefox.");
-      return;
-    }
+  // Request identity permission immediately within the user click (no awaits prior)
+  function ensureIdentityPermission(onResult) {
     try {
-      const redirectUri = identity.getRedirectURL();
-      const startRes = await fetch(
-        getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`),
-      );
-      const startData = await startRes.json();
+      const perms =
+        (typeof chrome !== "undefined" && chrome.permissions) ||
+        (typeof browser !== "undefined" && browser.permissions);
+      if (!perms || !perms.contains) return onResult(false);
+      const afterContains = (has) => {
+        if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.lastError) has = false;
+        if (has) return onResult(true);
+        if (!perms.request) return onResult(false);
+        const reqResult = perms.request({ permissions: ["identity"] }, (granted) => {
+          if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.lastError) return onResult(false);
+          onResult(Boolean(granted));
+        });
+        // Firefox may return a promise
+        if (reqResult && typeof reqResult.then === "function") {
+          reqResult.then((granted) => onResult(Boolean(granted))).catch(() => onResult(false));
+        }
+      };
+      const result = perms.contains({ permissions: ["identity"] }, afterContains);
+      if (result && typeof result.then === "function") {
+        result.then(afterContains).catch(() => onResult(false));
+      }
+    } catch (_) {
+      onResult(false);
+    }
+  }
 
-      const responseUrl = await launchWebAuthFlow(startData.authUrl);
-      const url = new URL(responseUrl);
-      const code = url.searchParams.get("code");
-      const state = url.searchParams.get("state");
+  loginBtn.addEventListener("click", () => {
+    // Request permission immediately within this user gesture
+    ensureIdentityPermission(async (granted) => {
+      const identityNow = getIdentityApi();
+      if (!granted || !identityNow || typeof identityNow.getRedirectURL !== "function") {
+        alert("Login requires the 'identity' permission. Please allow it to continue.");
+        return;
+      }
+      try {
+        const redirectUri = identityNow.getRedirectURL();
+        const startRes = await fetch(
+          getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`),
+        );
+        const startData = await startRes.json();
 
-      if (!code) throw new Error("No authorization code received");
+        const responseUrl = await launchWebAuthFlow(startData.authUrl);
+        const url = new URL(responseUrl);
+        const code = url.searchParams.get("code");
+        const state = url.searchParams.get("state");
+        if (!code) throw new Error("No authorization code received");
 
-      const exchangeRes = await fetch(getApiEndpoint("/api/auth/oauth/exchange"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          code,
-          state,
-          expectedState: startData.state,
-          redirectUri: startData.redirectUri || redirectUri,
-        }),
-      });
-
-      const authData = await exchangeRes.json();
-      if (authData.success) {
-        chrome.storage.sync.set(
-          {
-            patreonUser: authData.user,
-            patreonSessionToken: authData.sessionToken,
-          },
-          () => {
+        const exchangeRes = await fetch(getApiEndpoint("/api/auth/oauth/exchange"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            code,
+            state,
+            expectedState: startData.state,
+            redirectUri: startData.redirectUri || redirectUri,
+          }),
+        });
+        const authData = await exchangeRes.json();
+        if (authData.success) {
+          chrome.storage.sync.set({ patreonUser: authData.user, patreonSessionToken: authData.sessionToken }, () => {
             showLoggedInView(authData.user);
             chrome.runtime.sendMessage({ message: "patreon_auth_complete", user: authData.user });
-          },
-        );
-      } else {
-        throw new Error(authData.error || "OAuth exchange failed");
+          });
+        } else {
+          throw new Error(authData.error || "OAuth exchange failed");
+        }
+      } catch (error) {
+        console.error("Login failed:", error);
+        alert("Failed to initiate Patreon login. Please try again.");
       }
-    } catch (error) {
-      console.error("Login failed:", error);
-      alert("Failed to initiate Patreon login. Please try again.");
-    }
+    });
   });
 
   logoutBtn.addEventListener("click", () => {

@@ -17,7 +17,9 @@
     "activeTab",
     "*://*.youtube.com/*",
     "storage",
-    "*://returnyoutubedislikeapi.com/*",
+    "*://returnyoutubedislikeapi.com/*"
+  ],
+  "optional_permissions": [
     "identity"
   ],
   "browser_action": {
@@ -48,11 +50,11 @@
     "menu-fixer.js"
   ]
 
-  // uncomment this section for local storage to work in firefox locally,
-  //  ,"browser_specific_settings": {
-  //    "gecko": {
-  //      "id": "addon@example.com",
-  //      "strict_min_version": "42.0"
-  //    }
-  //  }
+    // uncomment this section for local storage to work in firefox locally,
+    ,"browser_specific_settings": {
+      "gecko": {
+        "id": "addon@example.com",
+        "strict_min_version": "42.0"
+      }
+    }
 }
