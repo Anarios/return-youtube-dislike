@@ -2,8 +2,10 @@ import { getButtons } from "./src/buttons";
 import { isShorts, setInitialState, initExtConfig } from "./src/state";
 import { getBrowser, isVideoLoaded } from "./src/utils";
 import { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler } from "./src/events";
+import { initPatreonFeatures } from "./src/patreon";
 
 await initExtConfig();
+initPatreonFeatures();
 
 let jsInitChecktimer = null;
 let isSetInitialStateDone = false;

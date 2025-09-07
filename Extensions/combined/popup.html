@@ -37,6 +37,34 @@
       </button>
       <button class="m3-btn" id="link_discord">Discord</button>
       <br />
+      
+      <!-- Patreon Login Section -->
+      <div id="patreon-section" style="margin-top: 1rem; padding: 0.5rem; border-top: 1px solid var(--lightGrey);">
+        <div id="patreon-logged-out" style="display: none;">
+          <p style="color: var(--lightGrey); font-size: 0.9rem; margin-bottom: 0.5rem;">
+            Premium features available for Patreon supporters
+          </p>
+          <button class="m3-btn m3-primary" id="patreon-login-btn">
+            <svg style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21c0 3.96-3.22 7.18-7.18 7.18c-3.97 0-7.21-3.22-7.21-7.18c0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"/>
+            </svg>
+            Login with Patreon
+          </button>
+        </div>
+        <div id="patreon-logged-in" style="display: none;">
+          <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+            <img id="patreon-user-avatar" src="" alt="" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 8px; display: none;">
+            <div>
+              <p id="patreon-user-name" style="font-weight: 500; margin: 0;"></p>
+              <p id="patreon-tier" style="color: var(--lightGrey); font-size: 0.8rem; margin: 0;"></p>
+            </div>
+          </div>
+          <button class="m3-btn" id="patreon-logout-btn" style="font-size: 0.9rem;">
+            Logout
+          </button>
+        </div>
+      </div>
+      
       <button class="m3-btn" style="margin-top: 0.3rem" id="link_faq" title="__MSG_linkFAQ__">
         __MSG_linkFAQ__
       </button>

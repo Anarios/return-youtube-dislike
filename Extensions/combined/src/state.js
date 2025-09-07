@@ -10,9 +10,7 @@ import {
   localize,
   createObserver,
 } from "./utils";
-
-//TODO: Do not duplicate here and in ryd.background.js
-const apiUrl = "https://returnyoutubedislikeapi.com";
+import { getApiEndpoint } from "./config";
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
@@ -246,7 +244,7 @@ async function setState(storedData) {
   let videoId = getVideoId(window.location.href);
   let likeCount = getLikeCountFromButton() || null;
 
-  let response = await fetch(`${apiUrl}/votes?videoId=${videoId}&likeCount=${likeCount || ""}`, {
+  let response = await fetch(getApiEndpoint(`/votes?videoId=${videoId}&likeCount=${likeCount || ""}`), {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -283,7 +281,7 @@ async function initExtConfig() {
 }
 
 async function initializeSelectors() {
-  let result = await fetch(`${apiUrl}/configs/selectors`, {
+  let result = await fetch(getApiEndpoint('/configs/selectors'), {
     method: "GET",
     headers: {
       Accept: "application/json",

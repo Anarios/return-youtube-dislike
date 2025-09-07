@@ -1,18 +1,12 @@
-const apiUrl = "https://returnyoutubedislikeapi.com";
-const voteDisabledIconName = "icon_hold128.png";
-const defaultIconName = "icon128.png";
+import { config, getApiUrl, getApiEndpoint } from "./src/config";
+
+const apiUrl = getApiUrl();
+const voteDisabledIconName = config.voteDisabledIconName;
+const defaultIconName = config.defaultIconName;
 let api;
 
 /** stores extension's global config */
-let extConfig = {
-  disableVoteSubmission: false,
-  disableLogging: true,
-  coloredThumbs: false,
-  coloredBar: false,
-  colorTheme: "classic", // classic, accessible, neon
-  numberDisplayFormat: "compactShort", // compactShort, compactLong, standard
-  numberDisplayReformatLikes: false, // use existing (native) likes number
-};
+let extConfig = { ...config.defaultExtConfig };
 
 if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
@@ -29,10 +23,44 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     });
   } else if (request.message === "log_off") {
     // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
+  } else if (request.message === "patreon_auth_complete") {
+    // Store Patreon user info and notify content scripts
+    if (request.user) {
+      chrome.storage.sync.set({
+        patreonAuthenticated: true,
+        patreonUser: request.user,
+      });
+      // Notify all tabs about authentication
+      chrome.tabs.query({}, (tabs) => {
+        tabs.forEach((tab) => {
+          if (tab.url && tab.url.includes("youtube.com")) {
+            chrome.tabs.sendMessage(tab.id, {
+              message: "patreon_status_changed",
+              authenticated: true,
+              user: request.user,
+            });
+          }
+        });
+      });
+    }
+  } else if (request.message === "patreon_logout") {
+    // Clear Patreon authentication
+    chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"]);
+    // Notify all tabs about logout
+    chrome.tabs.query({}, (tabs) => {
+      tabs.forEach((tab) => {
+        if (tab.url && tab.url.includes("youtube.com")) {
+          chrome.tabs.sendMessage(tab.id, {
+            message: "patreon_status_changed",
+            authenticated: false,
+          });
+        }
+      });
+    });
   } else if (request.message == "set_state") {
     // chrome.identity.getAuthToken({ interactive: true }, function (token) {
     let token = "";
-    fetch(`${apiUrl}/votes?videoId=${request.videoId}&likeCount=${request.likeCount || ""}`, {
+    fetch(getApiEndpoint(`/votes?videoId=${request.videoId}&likeCount=${request.likeCount || ""}`), {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -47,7 +75,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.message == "send_links") {
     toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
     if (toSend.length >= 20) {
-      fetch(`${apiUrl}/votes`, {
+      fetch(getApiEndpoint('/votes'), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +129,7 @@ async function sendVote(videoId, vote, depth = 1) {
     if (!storageResult.userId || !storageResult.registrationConfirmed) {
       await register();
     }
-    let voteResponse = await fetch(`${apiUrl}/interact/vote`, {
+    let voteResponse = await fetch(getApiEndpoint('/interact/vote'), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -115,9 +143,10 @@ async function sendVote(videoId, vote, depth = 1) {
 
     if (voteResponse.status == 401 && depth > 0) {
       await register();
-      await sendVote(videoId, vote, depth-1);
+      await sendVote(videoId, vote, depth - 1);
       return;
-    } else if (voteResponse.status == 401) { // We have already tried registering
+    } else if (voteResponse.status == 401) {
+      // We have already tried registering
       return;
     }
 
@@ -128,7 +157,7 @@ async function sendVote(videoId, vote, depth = 1) {
       return;
     }
 
-    await fetch(`${apiUrl}/interact/confirmVote`, {
+    await fetch(getApiEndpoint('/interact/confirmVote'), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -145,7 +174,7 @@ async function sendVote(videoId, vote, depth = 1) {
 async function register() {
   const userId = generateUserID();
   api.storage.sync.set({ userId });
-  const registrationResponse = await fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
+  const registrationResponse = await fetch(getApiEndpoint(`/puzzle/registration?userId=${userId}`), {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -156,7 +185,7 @@ async function register() {
     await register();
     return;
   }
-  const result = await fetch(`${apiUrl}/puzzle/registration?userId=${userId}`, {
+  const result = await fetch(getApiEndpoint(`/puzzle/registration?userId=${userId}`), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
