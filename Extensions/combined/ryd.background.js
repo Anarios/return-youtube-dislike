@@ -13,6 +13,47 @@ else if (isFirefox()) api = browser;
 
 initExtConfig();
 
+function getIdentityApi() {
+  if (isFirefox() && browser.identity) return browser.identity;
+  if (isChrome() && chrome.identity) return chrome.identity;
+  return null;
+}
+
+function launchWebAuthFlow(url) {
+  try {
+    if (isFirefox() && browser.identity && typeof browser.identity.launchWebAuthFlow === "function") {
+      return browser.identity.launchWebAuthFlow({ url, interactive: true });
+    }
+  } catch (_) {}
+  return new Promise((resolve, reject) => {
+    if (!isChrome() || !chrome.identity || typeof chrome.identity.launchWebAuthFlow !== "function") {
+      reject(new Error("identity API not available"));
+      return;
+    }
+    chrome.identity.launchWebAuthFlow({ url, interactive: true }, (responseUrl) => {
+      const err = chrome.runtime && chrome.runtime.lastError;
+      if (err) reject(err);
+      else resolve(responseUrl);
+    });
+  });
+}
+
+function extractOAuthParams(responseUrl) {
+  try {
+    const u = new URL(responseUrl);
+    let code = u.searchParams.get("code");
+    let state = u.searchParams.get("state");
+    if (!code && u.hash) {
+      const hashParams = new URLSearchParams(u.hash.startsWith("#") ? u.hash.substring(1) : u.hash);
+      code = hashParams.get("code");
+      state = state || hashParams.get("state");
+    }
+    return { code, state };
+  } catch (_) {
+    return { code: null, state: null };
+  }
+}
+
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "get_auth_token") {
     chrome.identity.getAuthToken({ interactive: true }, function (token) {
@@ -92,6 +133,57 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   } else if (request.message == "send_vote") {
     sendVote(request.videoId, request.vote);
+    return true;
+  } else if (request.message === "patreon_oauth_login") {
+    (async () => {
+      try {
+        const idApi = getIdentityApi();
+        if (!idApi || typeof (idApi.getRedirectURL || (isChrome() && chrome.identity && chrome.identity.getRedirectURL)) !== "function") {
+          sendResponse({ success: false, error: "identity API not available" });
+          return;
+        }
+        const redirectUri = (isFirefox() && browser.identity.getRedirectURL)
+          ? browser.identity.getRedirectURL()
+          : (isChrome() && chrome.identity.getRedirectURL ? chrome.identity.getRedirectURL() : "");
+
+        const startRes = await fetch(getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`));
+        const startData = await startRes.json();
+
+        const responseUrl = await launchWebAuthFlow(startData.authUrl);
+        const { code, state } = extractOAuthParams(responseUrl);
+        if (!code) {
+          sendResponse({ success: false, error: "No authorization code received" });
+          return;
+        }
+
+        const exchangeRes = await fetch(getApiEndpoint("/api/auth/oauth/exchange"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            code,
+            state,
+            expectedState: startData.state,
+            redirectUri: startData.redirectUri || redirectUri,
+          }),
+        });
+        const authData = await exchangeRes.json();
+        if (authData && authData.success) {
+          api.storage.sync.set({
+            patreonAuthenticated: true,
+            patreonUser: authData.user,
+            patreonSessionToken: authData.sessionToken,
+          }, () => {
+            api.runtime.sendMessage({ message: "patreon_auth_complete", user: authData.user });
+            sendResponse({ success: true, user: authData.user });
+          });
+        } else {
+          sendResponse({ success: false, error: (authData && authData.error) || "OAuth exchange failed" });
+        }
+      } catch (e) {
+        console.error("patreon_oauth_login error", e);
+        sendResponse({ success: false, error: String(e && e.message || e) });
+      }
+    })();
     return true;
   }
 });

@@ -17,11 +17,10 @@
     "activeTab",
     "*://*.youtube.com/*",
     "storage",
-    "*://returnyoutubedislikeapi.com/*"
-  ],
-  "optional_permissions": [
+    "*://returnyoutubedislikeapi.com/*",
     "identity"
   ],
+  
   "browser_action": {
     "default_popup": "popup.html"
   },
