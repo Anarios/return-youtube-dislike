@@ -138,7 +138,6 @@ function initPatreonAuth() {
       none: "No Active Membership",
     };
 
-    debugger;
     userTier.textContent = tierLabels[user.membershipTier] || "Checking membership...";
 
     if (user.hasActiveMembership) {
@@ -172,9 +171,8 @@ function initPatreonAuth() {
       const authWindow = window.open(data.authUrl, "patreon_auth", "width=600,height=700");
 
       window.addEventListener("message", async (event) => {
-        // Allow messages from both production and development URLs
-        const allowedOrigins = ["https://returnyoutubedislikeapi.com", "https://localhost:7258"];
-        if (!allowedOrigins.includes(event.origin)) return;
+        // Validate origin matches our API URL
+        if (event.origin !== getApiUrl()) return;
 
         if (event.data.type === "patreon_auth_success") {
           authWindow.close();
@@ -186,7 +184,8 @@ function initPatreonAuth() {
             },
             body: JSON.stringify({
               code: event.data.code,
-              state: data.state,
+              state: event.data.state,
+              expectedState: data.state,
             }),
           });
 
