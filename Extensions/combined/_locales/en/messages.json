@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "API Status:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Returns ability to see dislikes"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "by Dmitry Selivanov & Community"
-  },
-  "linkWebsite": {
-    "message": "Website"
-  },
-  "linkFAQ": {
-    "message": "FAQ"
-  },
-  "linkDonate": {
-    "message": "Donate"
-  },
-  "linkHelp": {
-    "message": "Help"
-  },
-  "linkChangelog": {
-    "message": "Change Log"
-  },
-  "legendSettings": {
-    "message": "Settings"
-  },
-  "textSettings": {
-    "message": "Disable like/dislike submission"
-  },
-  "textLikesDisabled": {
-    "message": "Disabled by Owner"
-  },
-  "textSettingsHover": {
-    "message": "Stops counting your likes and dislikes."
-  },
-  "textRoundingNumbers": {
-    "message": "Round down like/dislike stats (default YouTube behavior)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Show rounded down stats."
-  },
-  "textConsistentFormat": {
-    "message": "Make likes and dislikes format consistent"
-  },
-  "textConsistentFormatHover": {
-    "message": "Re-format like numbers."
-  },
-  "textNumberFormat": {
-    "message": "Number format:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Colorize ratio bar"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Use custom colors for ratio bar."
-  },
-  "textColorizeThumbs": {
-    "message": "Colorize thumbs"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Use custom colors for thumb icons."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Color theme:"
-  },
-  "textColorTheme1": {
-    "message": "Classic"
-  },
-  "textColorTheme2": {
-    "message": "Accessible"
-  },
-  "textColorTheme3": {
-    "message": "Neon"
-  },
-  "textTempUnavailable": {
-    "message": "Temporarily Unavailable"
-  },
-  "textUpdate": {
-    "message": "Update to"
-  },
-  "version30installed": {
-    "message": "Version __RYD_VERSION__ installed"
-  },
-  "whatsnew": {
-    "message": "What's new"
-  },
-  "shortsSupport": {
-    "message": "YouTube Shorts Support"
-  },
-  "customColors": {
-    "message": "Custom colors for dislike bar and buttons"
-  },
-  "customNumberFormats": {
-    "message": "Custom number formats"
-  },
-  "considerDonating": {
-    "message": "The only thing that keeps the extension running is your donations, please consider supporting the project."
-  },
-  "roundNumbers": {
-    "message": "Show rounded down numbers"
-  },
-  "roundNumbersHover": {
-    "message": "Round down numbers (default YouTube behavior)."
-  },
-  "reformatLikes": {
-    "message": "Re-format like numbers"
-  },
-  "reformatLikesHover": {
-    "message": "Make likes and dislikes format consistent."
-  },
-  "numberFormat": {
-    "message": "Number format:"
   },
   "colorizeRatio": {
     "message": "Colorize ratio bar"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Use custom colors for the thumb icons."
   },
-  "colorTheme": {
-    "message": "Color theme:"
+  "considerDonating": {
+    "message": "The only thing that keeps the extension running is your donations, please consider supporting the project."
   },
-  "showTooltipPercentage": {
-    "message": "Percentage in like/dislike bar tooltip."
+  "customColors": {
+    "message": "Custom colors for dislike bar and buttons"
   },
-  "showTooltipPercentageHover": {
-    "message": "Display percentage in like/dislike bar tooltip."
+  "customNumberFormats": {
+    "message": "Custom number formats"
   },
-  "tooltipPercentageMode": {
-    "message": "Percent mode:"
+  "disableLoggingHover": {
+    "message": "Disable logging API responses in console."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Use custom percentage display on hover."
+  "disableLoggingLabel": {
+    "message": "Disable logging to console"
+  },
+  "extensionDesc": {
+    "message": "Returns ability to see dislikes"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Settings"
+  },
+  "linkChangelog": {
+    "message": "Change Log"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Donate"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Help"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "numberFormat": {
+    "message": "Number format:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premium features available for Patreon supporters"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Login with Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Failed to complete login. Please try again."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Failed to initiate Patreon login. Please try again."
+  },
   "patreonLogout": {
     "message": "Logout"
   },
-  "patreonUserFallback": {
-    "message": "Patreon User"
+  "patreonPermissionRequired": {
+    "message": "Login requires the 'identity' permission. Please allow it to continue."
+  },
+  "patreonTierBasic": {
+    "message": "Basic Tier"
+  },
+  "patreonTierChecking": {
+    "message": "Checking membership..."
+  },
+  "patreonTierNone": {
+    "message": "No Active Membership"
   },
   "patreonTierPremium": {
     "message": "Premium Supporter"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Supporter"
   },
-  "patreonTierBasic": {
-    "message": "Basic Tier"
+  "patreonUserFallback": {
+    "message": "Patreon User"
   },
-  "patreonTierNone": {
-    "message": "No Active Membership"
+  "reformatLikes": {
+    "message": "Re-format like numbers"
   },
-  "patreonTierChecking": {
-    "message": "Checking membership..."
+  "reformatLikesHover": {
+    "message": "Make likes and dislikes format consistent."
   },
-  "patreonPermissionRequired": {
-    "message": "Login requires the 'identity' permission. Please allow it to continue."
+  "roundNumbers": {
+    "message": "Show rounded down numbers"
   },
-  "patreonLoginStartFailed": {
-    "message": "Failed to initiate Patreon login. Please try again."
+  "roundNumbersHover": {
+    "message": "Round down numbers (default YouTube behavior)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Failed to complete login. Please try again."
+  "shortsSupport": {
+    "message": "YouTube Shorts Support"
   },
-  "apiStatusLabel": {
-    "message": "API Status:"
+  "showTooltipPercentage": {
+    "message": "Percentage in like/dislike bar tooltip."
   },
-  "apiStatusOnline": {
-    "message": "Online"
+  "showTooltipPercentageHover": {
+    "message": "Display percentage in like/dislike bar tooltip."
   },
-  "apiStatusOffline": {
-    "message": "Offline"
+  "textColorTheme": {
+    "message": "Color theme:"
   },
-  "disableLoggingLabel": {
-    "message": "Disable logging to console"
+  "textColorTheme1": {
+    "message": "Classic"
   },
-  "disableLoggingHover": {
-    "message": "Disable logging API responses in console."
+  "textColorTheme2": {
+    "message": "Accessible"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colorize ratio bar"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Use custom colors for ratio bar."
+  },
+  "textColorizeThumbs": {
+    "message": "Colorize thumbs"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Use custom colors for thumb icons."
+  },
+  "textConsistentFormat": {
+    "message": "Make likes and dislikes format consistent"
+  },
+  "textConsistentFormatHover": {
+    "message": "Re-format like numbers."
+  },
+  "textDeveloper": {
+    "message": "by Dmitry Selivanov & Community"
+  },
+  "textLikesDisabled": {
+    "message": "Disabled by Owner"
+  },
+  "textNumberFormat": {
+    "message": "Number format:"
+  },
+  "textRoundingNumbers": {
+    "message": "Round down like/dislike stats (default YouTube behavior)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Show rounded down stats."
+  },
+  "textSettings": {
+    "message": "Disable like/dislike submission"
+  },
+  "textSettingsHover": {
+    "message": "Stops counting your likes and dislikes."
+  },
+  "textTempUnavailable": {
+    "message": "Temporarily Unavailable"
+  },
+  "textUpdate": {
+    "message": "Update to"
+  },
+  "tooltipPercentageMode": {
+    "message": "Percent mode:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Use custom percentage display on hover."
+  },
+  "version30installed": {
+    "message": "Version __RYD_VERSION__ installed"
+  },
+  "whatsnew": {
+    "message": "What's new"
   }
 }

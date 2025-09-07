@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Επαναφορά του YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Κατάσταση API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Εκτός λειτουργίας"
   },
-  "extensionDesc": {
-    "message": "Επαναφέρει τη δυνατότητα να βλέπετε τα dislikes"
+  "apiStatusOnline": {
+    "message": "Σε λειτουργία"
   },
-  "textDeveloper": {
-    "message": "από τον Dmitry Selivanov & την κοινότητα"
-  },
-  "linkWebsite": {
-    "message": "Ιστοσελίδα"
-  },
-  "linkFAQ": {
-    "message": "Συχνές ερωτήσεις"
-  },
-  "linkDonate": {
-    "message": "Στηρίξτε"
-  },
-  "linkHelp": {
-    "message": "Βοήθεια"
-  },
-  "linkChangelog": {
-    "message": "Αρχείο αλλαγών"
-  },
-  "legendSettings": {
-    "message": "Ρυθμίσεις"
-  },
-  "textSettings": {
-    "message": "Διακοπή υποβολής like/dislike"
-  },
-  "textLikesDisabled": {
-    "message": "Απενεργοποιήθηκε από τον κάτοχο"
-  },
-  "textSettingsHover": {
-    "message": "Σταματάει να μετράει τα likes & dislikes που κάνεις."
-  },
-  "textRoundingNumbers": {
-    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (προεπιλεγμένη επιλογή του YouTube)."
-  },
-  "textRoundingNumbersHover": {
-    "message": "Εμφάνιση στρογγυλεμένων αριθμών."
-  },
-  "textConsistentFormat": {
-    "message": "Κάνει σταθερή την μορφοποίηση των likes & dislikes."
-  },
-  "textConsistentFormatHover": {
-    "message": "Μορφοποίηση του αριθμού των likes."
-  },
-  "textNumberFormat": {
-    "message": "Μορφή αριθμών:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Χρωματισμός μπάρας αναλογιών."
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Προσαρμοζόμενο χρώμα για την μπάρα αναλογιών."
-  },
-  "textColorizeThumbs": {
-    "message": "Χρωματισμός των thumbs"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Προσαρμοζόμενο χρώμα για τα thumb icons."
-  },
-  "textColorTheme": {
-    "message": "Θέματα χρωμάτων:"
-  },
-  "textColorTheme1": {
-    "message": "Classic"
-  },
-  "textColorTheme2": {
-    "message": "Accessible"
-  },
-  "textColorTheme3": {
-    "message": "Neon"
-  },
-  "textTempUnavailable": {
-    "message": "Προσωρινά μη διαθέσιμο"
-  },
-  "textUpdate": {
-    "message": "Ενημέρωση σε"
-  },
-  "version30installed": {
-    "message": "Εκδοση __RYD_VERSION__ εγκαταστάθηκε"
-  },
-  "whatsnew": {
-    "message": "Τί νέο υπάρχει"
-  },
-  "shortsSupport": {
-    "message": "Υποστήριξη για YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Προσαρμοζόμενα χρώματα για τα κουμπιά και την μπάρα dislike"
-  },
-  "customNumberFormats": {
-    "message": "Προσαρμοζόμενη μορφή αριθμών"
-  },
-  "considerDonating": {
-    "message": "Το μόνο πράγμα που διατηρεί την επέκταση σε λειτουργία είναι οι δωρεές σας, σκεφτείτε να υποστηρίξετε το έργο."
-  },
-  "roundNumbers": {
-    "message": "Εμφάνιση στρογγυλεμένων αριθμών"
-  },
-  "roundNumbersHover": {
-    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (προεπιλεγμένη επιλογή του YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Μορφοποίηση του αριθμού των likes"
-  },
-  "reformatLikesHover": {
-    "message": "Σταθερή μορφοποίηση των likes & dislikes."
-  },
-  "numberFormat": {
-    "message": "Μορφή αριθμών:"
+  "colorTheme": {
+    "message": "Χρωματικό θέμα:"
   },
   "colorizeRatio": {
     "message": "Χρωματισμός μπάρας σχέσης"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Προσαρμοζόμενο χρώμα για τα thumb icons."
   },
-  "colorTheme": {
-    "message": "Χρωματικό θέμα:"
+  "considerDonating": {
+    "message": "Το μόνο πράγμα που διατηρεί την επέκταση σε λειτουργία είναι οι δωρεές σας, σκεφτείτε να υποστηρίξετε το έργο."
   },
-  "showTooltipPercentage": {
-    "message": "Ποσοστό στο tooltip της μπάρας like/dislike."
+  "customColors": {
+    "message": "Προσαρμοζόμενα χρώματα για τα κουμπιά και την μπάρα dislike"
   },
-  "showTooltipPercentageHover": {
-    "message": "Εμφάνιση ποσοστού στο tooltip της μπάρας like/dislike."
+  "customNumberFormats": {
+    "message": "Προσαρμοζόμενη μορφή αριθμών"
   },
-  "tooltipPercentageMode": {
-    "message": "Λειτουργία ποσοστού:"
+  "disableLoggingHover": {
+    "message": "Απενεργοποιεί την καταγραφή των αποκρίσεων API στην κονσόλα."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Χρήση προσαρμοσμένης εμφάνισης ποσοστού κατά την αιώρηση."
+  "disableLoggingLabel": {
+    "message": "Απενεργοποίηση καταγραφής στην κονσόλα"
+  },
+  "extensionDesc": {
+    "message": "Επαναφέρει τη δυνατότητα να βλέπετε τα dislikes"
+  },
+  "extensionName": {
+    "message": "Επαναφορά του YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Ρυθμίσεις"
+  },
+  "linkChangelog": {
+    "message": "Αρχείο αλλαγών"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Στηρίξτε"
+  },
+  "linkFAQ": {
+    "message": "Συχνές ερωτήσεις"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Βοήθεια"
+  },
+  "linkWebsite": {
+    "message": "Ιστοσελίδα"
+  },
+  "numberFormat": {
+    "message": "Μορφή αριθμών:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Οι premium λειτουργίες είναι διαθέσιμες για υποστηρικτές στο Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Σύνδεση με Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Η σύνδεση δεν ολοκληρώθηκε. Δοκιμάστε ξανά."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Αποτυχία έναρξης σύνδεσης μέσω Patreon. Δοκιμάστε ξανά."
+  },
   "patreonLogout": {
     "message": "Αποσύνδεση"
   },
-  "patreonUserFallback": {
-    "message": "Χρήστης Patreon"
+  "patreonPermissionRequired": {
+    "message": "Η σύνδεση απαιτεί το δικαίωμα «identity». Παραχωρήστε το για να συνεχίσετε."
+  },
+  "patreonTierBasic": {
+    "message": "Βασικό επίπεδο"
+  },
+  "patreonTierChecking": {
+    "message": "Έλεγχος συνδρομής…"
+  },
+  "patreonTierNone": {
+    "message": "Καμία ενεργή συνδρομή"
   },
   "patreonTierPremium": {
     "message": "Υποστηρικτής Premium"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Υποστηρικτής"
   },
-  "patreonTierBasic": {
-    "message": "Βασικό επίπεδο"
+  "patreonUserFallback": {
+    "message": "Χρήστης Patreon"
   },
-  "patreonTierNone": {
-    "message": "Καμία ενεργή συνδρομή"
+  "reformatLikes": {
+    "message": "Μορφοποίηση του αριθμού των likes"
   },
-  "patreonTierChecking": {
-    "message": "Έλεγχος συνδρομής…"
+  "reformatLikesHover": {
+    "message": "Σταθερή μορφοποίηση των likes & dislikes."
   },
-  "patreonPermissionRequired": {
-    "message": "Η σύνδεση απαιτεί το δικαίωμα «identity». Παραχωρήστε το για να συνεχίσετε."
+  "roundNumbers": {
+    "message": "Εμφάνιση στρογγυλεμένων αριθμών"
   },
-  "patreonLoginStartFailed": {
-    "message": "Αποτυχία έναρξης σύνδεσης μέσω Patreon. Δοκιμάστε ξανά."
+  "roundNumbersHover": {
+    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (προεπιλεγμένη επιλογή του YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Η σύνδεση δεν ολοκληρώθηκε. Δοκιμάστε ξανά."
+  "shortsSupport": {
+    "message": "Υποστήριξη για YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "Κατάσταση API:"
+  "showTooltipPercentage": {
+    "message": "Ποσοστό στο tooltip της μπάρας like/dislike."
   },
-  "apiStatusOnline": {
-    "message": "Σε λειτουργία"
+  "showTooltipPercentageHover": {
+    "message": "Εμφάνιση ποσοστού στο tooltip της μπάρας like/dislike."
   },
-  "apiStatusOffline": {
-    "message": "Εκτός λειτουργίας"
+  "textColorTheme": {
+    "message": "Θέματα χρωμάτων:"
   },
-  "disableLoggingLabel": {
-    "message": "Απενεργοποίηση καταγραφής στην κονσόλα"
+  "textColorTheme1": {
+    "message": "Classic"
   },
-  "disableLoggingHover": {
-    "message": "Απενεργοποιεί την καταγραφή των αποκρίσεων API στην κονσόλα."
+  "textColorTheme2": {
+    "message": "Accessible"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Χρωματισμός μπάρας αναλογιών."
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Προσαρμοζόμενο χρώμα για την μπάρα αναλογιών."
+  },
+  "textColorizeThumbs": {
+    "message": "Χρωματισμός των thumbs"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Προσαρμοζόμενο χρώμα για τα thumb icons."
+  },
+  "textConsistentFormat": {
+    "message": "Κάνει σταθερή την μορφοποίηση των likes & dislikes."
+  },
+  "textConsistentFormatHover": {
+    "message": "Μορφοποίηση του αριθμού των likes."
+  },
+  "textDeveloper": {
+    "message": "από τον Dmitry Selivanov & την κοινότητα"
+  },
+  "textLikesDisabled": {
+    "message": "Απενεργοποιήθηκε από τον κάτοχο"
+  },
+  "textNumberFormat": {
+    "message": "Μορφή αριθμών:"
+  },
+  "textRoundingNumbers": {
+    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (προεπιλεγμένη επιλογή του YouTube)."
+  },
+  "textRoundingNumbersHover": {
+    "message": "Εμφάνιση στρογγυλεμένων αριθμών."
+  },
+  "textSettings": {
+    "message": "Διακοπή υποβολής like/dislike"
+  },
+  "textSettingsHover": {
+    "message": "Σταματάει να μετράει τα likes & dislikes που κάνεις."
+  },
+  "textTempUnavailable": {
+    "message": "Προσωρινά μη διαθέσιμο"
+  },
+  "textUpdate": {
+    "message": "Ενημέρωση σε"
+  },
+  "tooltipPercentageMode": {
+    "message": "Λειτουργία ποσοστού:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Χρήση προσαρμοσμένης εμφάνισης ποσοστού κατά την αιώρηση."
+  },
+  "version30installed": {
+    "message": "Εκδοση __RYD_VERSION__ εγκαταστάθηκε"
+  },
+  "whatsnew": {
+    "message": "Τί νέο υπάρχει"
   }
 }

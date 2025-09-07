@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Trạng thái API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Ngoại tuyến"
   },
-  "extensionDesc": {
-    "message": "Phục hồi chức năng hiển thị số lượt \"không thích\""
+  "apiStatusOnline": {
+    "message": "Trực tuyến"
   },
-  "textDeveloper": {
-    "message": "bởi Dmitry Selivanov và Cộng đồng"
-  },
-  "linkWebsite": {
-    "message": "Trang mạng"
-  },
-  "linkFAQ": {
-    "message": "Hỏi-Đáp"
-  },
-  "linkDonate": {
-    "message": "Quyên góp"
-  },
-  "linkHelp": {
-    "message": "Trợ giúp"
-  },
-  "linkChangelog": {
-    "message": "Ghi chép Thay đổi"
-  },
-  "legendSettings": {
-    "message": "Cài đặt"
-  },
-  "textSettings": {
-    "message": "Tắt chức năng gửi đánh giá"
-  },
-  "textLikesDisabled": {
-    "message": "Chủ kênh đã Tắt Đánh giá"
-  },
-  "textSettingsHover": {
-    "message": "Ngừng đếm đánh giá của tôi."
-  },
-  "textRoundingNumbers": {
-    "message": "Làm tròn số lượt đánh giá (hành vi mặc định của YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Hiện số lượt đánh giá đã làm tròn."
-  },
-  "textConsistentFormat": {
-    "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\""
-  },
-  "textConsistentFormatHover": {
-    "message": "Định dạng lại số lượt đánh giá."
-  },
-  "textNumberFormat": {
-    "message": "Định dạng số:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Tô màu thanh tỉ lệ đánh giá"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Dùng màu tùy chọn cho thanh tỉ lệ đánh giá."
-  },
-  "textColorizeThumbs": {
-    "message": "Tô màu nút đánh giá"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Dùng màu tùy chọn cho nút đánh giá."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Chủ đề màu:"
-  },
-  "textColorTheme1": {
-    "message": "Cổ điển"
-  },
-  "textColorTheme2": {
-    "message": "Mù màu"
-  },
-  "textColorTheme3": {
-    "message": "Sáng chói"
-  },
-  "textTempUnavailable": {
-    "message": "Tạm thời Không sử dụng được"
-  },
-  "textUpdate": {
-    "message": "Cập nhật"
-  },
-  "version30installed": {
-    "message": "Đã cài Phiên bản 3.0.0.13"
-  },
-  "whatsnew": {
-    "message": "Điểm Mới"
-  },
-  "shortsSupport": {
-    "message": "Có hỗ trợ YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Màu tùy chọn cho nút đánh giá và thanh tỉ lệ đánh giá"
-  },
-  "customNumberFormats": {
-    "message": "Định dạng số tùy chỉnh"
-  },
-  "considerDonating": {
-    "message": "Sự quyên góp của bạn giúp tiện ích mở rộng này duy trì hoạt động. Mong bạn hỗ trợ dự án này."
-  },
-  "roundNumbers": {
-    "message": "Hiện số lượt đánh giá đã làm tròn"
-  },
-  "roundNumbersHover": {
-    "message": "Làm tròn số lượt đánh giá (hành vi mặc định của YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Định dạng lại số lượt đánh giá"
-  },
-  "reformatLikesHover": {
-    "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\"."
-  },
-  "numberFormat": {
-    "message": "Định dạng số:"
   },
   "colorizeRatio": {
     "message": "Tô màu thanh tỉ lệ đánh giá"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Dùng màu tùy chọn cho nút đánh giá."
   },
-  "colorTheme": {
-    "message": "Chủ đề màu:"
+  "considerDonating": {
+    "message": "Sự quyên góp của bạn giúp tiện ích mở rộng này duy trì hoạt động. Mong bạn hỗ trợ dự án này."
   },
-  "showTooltipPercentage": {
-    "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
+  "customColors": {
+    "message": "Màu tùy chọn cho nút đánh giá và thanh tỉ lệ đánh giá"
   },
-  "showTooltipPercentageHover": {
-    "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
+  "customNumberFormats": {
+    "message": "Định dạng số tùy chỉnh"
   },
-  "tooltipPercentageMode": {
-    "message": "Chế độ phần trăm:"
+  "disableLoggingHover": {
+    "message": "Tắt ghi log phản hồi API trong bảng điều khiển."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Dùng hiển thị phần trăm tùy chỉnh khi di chuột."
+  "disableLoggingLabel": {
+    "message": "Tắt ghi log ra bảng điều khiển"
+  },
+  "extensionDesc": {
+    "message": "Phục hồi chức năng hiển thị số lượt \"không thích\""
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Cài đặt"
+  },
+  "linkChangelog": {
+    "message": "Ghi chép Thay đổi"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Quyên góp"
+  },
+  "linkFAQ": {
+    "message": "Hỏi-Đáp"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Trợ giúp"
+  },
+  "linkWebsite": {
+    "message": "Trang mạng"
+  },
+  "numberFormat": {
+    "message": "Định dạng số:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Tính năng cao cấp dành cho người ủng hộ trên Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Đăng nhập bằng Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Không thể hoàn tất đăng nhập. Vui lòng thử lại."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Không thể bắt đầu đăng nhập Patreon. Vui lòng thử lại."
+  },
   "patreonLogout": {
     "message": "Đăng xuất"
   },
-  "patreonUserFallback": {
-    "message": "Người dùng Patreon"
+  "patreonPermissionRequired": {
+    "message": "Đăng nhập cần quyền \"identity\". Vui lòng cho phép để tiếp tục."
+  },
+  "patreonTierBasic": {
+    "message": "Cấp cơ bản"
+  },
+  "patreonTierChecking": {
+    "message": "Đang kiểm tra tư cách thành viên…"
+  },
+  "patreonTierNone": {
+    "message": "Không có gói thành viên đang hoạt động"
   },
   "patreonTierPremium": {
     "message": "Người ủng hộ Premium"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Người ủng hộ"
   },
-  "patreonTierBasic": {
-    "message": "Cấp cơ bản"
+  "patreonUserFallback": {
+    "message": "Người dùng Patreon"
   },
-  "patreonTierNone": {
-    "message": "Không có gói thành viên đang hoạt động"
+  "reformatLikes": {
+    "message": "Định dạng lại số lượt đánh giá"
   },
-  "patreonTierChecking": {
-    "message": "Đang kiểm tra tư cách thành viên…"
+  "reformatLikesHover": {
+    "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\"."
   },
-  "patreonPermissionRequired": {
-    "message": "Đăng nhập cần quyền \"identity\". Vui lòng cho phép để tiếp tục."
+  "roundNumbers": {
+    "message": "Hiện số lượt đánh giá đã làm tròn"
   },
-  "patreonLoginStartFailed": {
-    "message": "Không thể bắt đầu đăng nhập Patreon. Vui lòng thử lại."
+  "roundNumbersHover": {
+    "message": "Làm tròn số lượt đánh giá (hành vi mặc định của YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Không thể hoàn tất đăng nhập. Vui lòng thử lại."
+  "shortsSupport": {
+    "message": "Có hỗ trợ YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "Trạng thái API:"
+  "showTooltipPercentage": {
+    "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
   },
-  "apiStatusOnline": {
-    "message": "Trực tuyến"
+  "showTooltipPercentageHover": {
+    "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
   },
-  "apiStatusOffline": {
-    "message": "Ngoại tuyến"
+  "textColorTheme": {
+    "message": "Chủ đề màu:"
   },
-  "disableLoggingLabel": {
-    "message": "Tắt ghi log ra bảng điều khiển"
+  "textColorTheme1": {
+    "message": "Cổ điển"
   },
-  "disableLoggingHover": {
-    "message": "Tắt ghi log phản hồi API trong bảng điều khiển."
+  "textColorTheme2": {
+    "message": "Mù màu"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Sáng chói"
+  },
+  "textColorizeRatioBar": {
+    "message": "Tô màu thanh tỉ lệ đánh giá"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Dùng màu tùy chọn cho thanh tỉ lệ đánh giá."
+  },
+  "textColorizeThumbs": {
+    "message": "Tô màu nút đánh giá"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Dùng màu tùy chọn cho nút đánh giá."
+  },
+  "textConsistentFormat": {
+    "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\""
+  },
+  "textConsistentFormatHover": {
+    "message": "Định dạng lại số lượt đánh giá."
+  },
+  "textDeveloper": {
+    "message": "bởi Dmitry Selivanov và Cộng đồng"
+  },
+  "textLikesDisabled": {
+    "message": "Chủ kênh đã Tắt Đánh giá"
+  },
+  "textNumberFormat": {
+    "message": "Định dạng số:"
+  },
+  "textRoundingNumbers": {
+    "message": "Làm tròn số lượt đánh giá (hành vi mặc định của YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Hiện số lượt đánh giá đã làm tròn."
+  },
+  "textSettings": {
+    "message": "Tắt chức năng gửi đánh giá"
+  },
+  "textSettingsHover": {
+    "message": "Ngừng đếm đánh giá của tôi."
+  },
+  "textTempUnavailable": {
+    "message": "Tạm thời Không sử dụng được"
+  },
+  "textUpdate": {
+    "message": "Cập nhật"
+  },
+  "tooltipPercentageMode": {
+    "message": "Chế độ phần trăm:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Dùng hiển thị phần trăm tùy chỉnh khi di chuột."
+  },
+  "version30installed": {
+    "message": "Đã cài Phiên bản 3.0.0.13"
+  },
+  "whatsnew": {
+    "message": "Điểm Mới"
   }
 }

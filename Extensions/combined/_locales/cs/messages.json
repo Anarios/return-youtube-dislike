@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Stav API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Navrátí možnost zobrazení počtu disliků"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "vytvořil Dmitry Selivanov & komunita"
-  },
-  "linkWebsite": {
-    "message": "Web"
-  },
-  "linkFAQ": {
-    "message": "FAQ"
-  },
-  "linkDonate": {
-    "message": "Přispějte"
-  },
-  "linkHelp": {
-    "message": "Nápověda"
-  },
-  "linkChangelog": {
-    "message": "Seznam změn"
-  },
-  "legendSettings": {
-    "message": "Nastavení"
-  },
-  "textSettings": {
-    "message": "Zakázat odesílání palců nahoru/dolů"
-  },
-  "textLikesDisabled": {
-    "message": "zakázáno majitelem"
-  },
-  "textSettingsHover": {
-    "message": "Zastaví počítání vašich palců nahoru/dolů."
-  },
-  "textRoundingNumbers": {
-    "message": "Zaokrouhlit dolů statistiky palců nahoru/dolů (výchozí chování YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Zobrazit statistiky zaokrouhlené dolů."
-  },
-  "textConsistentFormat": {
-    "message": "Použít stejný formát čísel pro palce nahoru/dolů"
-  },
-  "textConsistentFormatHover": {
-    "message": "Přeformátovat počet palců nahoru."
-  },
-  "textNumberFormat": {
-    "message": "Formát čísel:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Obarvit pruh poměru"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Použít vlastní barvy pro pruh poměru."
-  },
-  "textColorizeThumbs": {
-    "message": "Obarvit ikony"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Použít vlastní barvy pro ikony."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Barevný motiv:"
-  },
-  "textColorTheme1": {
-    "message": "Klasický"
-  },
-  "textColorTheme2": {
-    "message": "Přístupný"
-  },
-  "textColorTheme3": {
-    "message": "Neon"
-  },
-  "textTempUnavailable": {
-    "message": "dočasně nedostupné"
-  },
-  "textUpdate": {
-    "message": "aktualizovat na"
-  },
-  "version30installed": {
-    "message": "Verze __RYD_VERSION__ nainstalována"
-  },
-  "whatsnew": {
-    "message": "Co je nového"
-  },
-  "shortsSupport": {
-    "message": "Podpora YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Vlastní barvy pro lištu disliků a tlačítka"
-  },
-  "customNumberFormats": {
-    "message": "Vlastní formáty čísel"
-  },
-  "considerDonating": {
-    "message": "Jediná věc, díky které rozšíření funguje, jsou vaše příspěvky. Zvažte prosím podpoření projektu."
-  },
-  "roundNumbers": {
-    "message": "Zobrazit čísla zaokrouhlená dolů"
-  },
-  "roundNumbersHover": {
-    "message": "Zaokrouhlit čísla dolů (výchozí chování YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Přeformátovat čísla palců nahoru"
-  },
-  "reformatLikesHover": {
-    "message": "Udělat formát palců nahoru/dolů konzistentní."
-  },
-  "numberFormat": {
-    "message": "Formát čísel:"
   },
   "colorizeRatio": {
     "message": "Obarvit pruh poměru"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Použít vlastní barvy pro ikony."
   },
-  "colorTheme": {
-    "message": "Barevný motiv:"
+  "considerDonating": {
+    "message": "Jediná věc, díky které rozšíření funguje, jsou vaše příspěvky. Zvažte prosím podpoření projektu."
   },
-  "showTooltipPercentage": {
-    "message": "Procenta v nápovědě u lišty like/dislike."
+  "customColors": {
+    "message": "Vlastní barvy pro lištu disliků a tlačítka"
   },
-  "showTooltipPercentageHover": {
-    "message": "Zobrazit procenta v nápovědě u lišty like/dislike."
+  "customNumberFormats": {
+    "message": "Vlastní formáty čísel"
   },
-  "tooltipPercentageMode": {
-    "message": "Režim procent:"
+  "disableLoggingHover": {
+    "message": "Vypnout zapisování odpovědí API do konzole."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Použít vlastní zobrazení procent po najetí myší."
+  "disableLoggingLabel": {
+    "message": "Zakázat protokolování do konzole"
+  },
+  "extensionDesc": {
+    "message": "Navrátí možnost zobrazení počtu disliků"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Nastavení"
+  },
+  "linkChangelog": {
+    "message": "Seznam změn"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Přispějte"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Nápověda"
+  },
+  "linkWebsite": {
+    "message": "Web"
+  },
+  "numberFormat": {
+    "message": "Formát čísel:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Prémiové funkce jsou dostupné pro podporovatele na Patreonu"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Přihlásit se pomocí Patreonu"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Přihlášení se nepodařilo dokončit. Zkuste to znovu."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Nepodařilo se zahájit přihlášení přes Patreon. Zkuste to znovu."
+  },
   "patreonLogout": {
     "message": "Odhlásit se"
   },
-  "patreonUserFallback": {
-    "message": "Uživatel Patreonu"
+  "patreonPermissionRequired": {
+    "message": "Přihlášení vyžaduje oprávnění „identity“. Povolte ho, prosím."
+  },
+  "patreonTierBasic": {
+    "message": "Základní úroveň"
+  },
+  "patreonTierChecking": {
+    "message": "Kontrola členství…"
+  },
+  "patreonTierNone": {
+    "message": "Žádné aktivní členství"
   },
   "patreonTierPremium": {
     "message": "Prémiový podporovatel"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Podporovatel"
   },
-  "patreonTierBasic": {
-    "message": "Základní úroveň"
+  "patreonUserFallback": {
+    "message": "Uživatel Patreonu"
   },
-  "patreonTierNone": {
-    "message": "Žádné aktivní členství"
+  "reformatLikes": {
+    "message": "Přeformátovat čísla palců nahoru"
   },
-  "patreonTierChecking": {
-    "message": "Kontrola členství…"
+  "reformatLikesHover": {
+    "message": "Udělat formát palců nahoru/dolů konzistentní."
   },
-  "patreonPermissionRequired": {
-    "message": "Přihlášení vyžaduje oprávnění „identity“. Povolte ho, prosím."
+  "roundNumbers": {
+    "message": "Zobrazit čísla zaokrouhlená dolů"
   },
-  "patreonLoginStartFailed": {
-    "message": "Nepodařilo se zahájit přihlášení přes Patreon. Zkuste to znovu."
+  "roundNumbersHover": {
+    "message": "Zaokrouhlit čísla dolů (výchozí chování YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Přihlášení se nepodařilo dokončit. Zkuste to znovu."
+  "shortsSupport": {
+    "message": "Podpora YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "Stav API:"
+  "showTooltipPercentage": {
+    "message": "Procenta v nápovědě u lišty like/dislike."
   },
-  "apiStatusOnline": {
-    "message": "Online"
+  "showTooltipPercentageHover": {
+    "message": "Zobrazit procenta v nápovědě u lišty like/dislike."
   },
-  "apiStatusOffline": {
-    "message": "Offline"
+  "textColorTheme": {
+    "message": "Barevný motiv:"
   },
-  "disableLoggingLabel": {
-    "message": "Zakázat protokolování do konzole"
+  "textColorTheme1": {
+    "message": "Klasický"
   },
-  "disableLoggingHover": {
-    "message": "Vypnout zapisování odpovědí API do konzole."
+  "textColorTheme2": {
+    "message": "Přístupný"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Obarvit pruh poměru"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Použít vlastní barvy pro pruh poměru."
+  },
+  "textColorizeThumbs": {
+    "message": "Obarvit ikony"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Použít vlastní barvy pro ikony."
+  },
+  "textConsistentFormat": {
+    "message": "Použít stejný formát čísel pro palce nahoru/dolů"
+  },
+  "textConsistentFormatHover": {
+    "message": "Přeformátovat počet palců nahoru."
+  },
+  "textDeveloper": {
+    "message": "vytvořil Dmitry Selivanov & komunita"
+  },
+  "textLikesDisabled": {
+    "message": "zakázáno majitelem"
+  },
+  "textNumberFormat": {
+    "message": "Formát čísel:"
+  },
+  "textRoundingNumbers": {
+    "message": "Zaokrouhlit dolů statistiky palců nahoru/dolů (výchozí chování YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Zobrazit statistiky zaokrouhlené dolů."
+  },
+  "textSettings": {
+    "message": "Zakázat odesílání palců nahoru/dolů"
+  },
+  "textSettingsHover": {
+    "message": "Zastaví počítání vašich palců nahoru/dolů."
+  },
+  "textTempUnavailable": {
+    "message": "dočasně nedostupné"
+  },
+  "textUpdate": {
+    "message": "aktualizovat na"
+  },
+  "tooltipPercentageMode": {
+    "message": "Režim procent:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Použít vlastní zobrazení procent po najetí myší."
+  },
+  "version30installed": {
+    "message": "Verze __RYD_VERSION__ nainstalována"
+  },
+  "whatsnew": {
+    "message": "Co je nového"
   }
 }

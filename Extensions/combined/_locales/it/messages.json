@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Stato API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Riporta il numero di Non mi piace"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "di Dmitry Selivanov e della comunità"
-  },
-  "linkWebsite": {
-    "message": "Sito web"
-  },
-  "linkFAQ": {
-    "message": "FAQ"
-  },
-  "linkDonate": {
-    "message": "Dona"
-  },
-  "linkHelp": {
-    "message": "Aiuto"
-  },
-  "linkChangelog": {
-    "message": "Note di versione"
-  },
-  "legendSettings": {
-    "message": "Impostazioni"
-  },
-  "textSettings": {
-    "message": "Disattiva invio di Mi piace/Non mi piace"
-  },
-  "textLikesDisabled": {
-    "message": "Disattivati dal proprietario"
-  },
-  "textSettingsHover": {
-    "message": "Smette di contare i tuoi Mi piace e Non mi piace."
-  },
-  "textRoundingNumbers": {
-    "message": "Arrotonda per difetto il numero di Mi Piace/Non mi piace (comportamento standard di YouTube)."
-  },
-  "textRoundingNumbersHover": {
-    "message": "Mostra stastistiche arrotondate per difetto."
-  },
-  "textConsistentFormat": {
-    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
-  },
-  "textConsistentFormatHover": {
-    "message": "Ri-formatta numero di Mi piace."
-  },
-  "textNumberFormat": {
-    "message": "Formato numeri:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Colora barra di rapporto"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Usa colori personalizzati per la barra di rapporto."
-  },
-  "textColorizeThumbs": {
-    "message": "Colora pollici"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Usa colori personalizzati per le icone dei pollici."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Colore tema:"
-  },
-  "textColorTheme1": {
-    "message": "Classico"
-  },
-  "textColorTheme2": {
-    "message": "Accessibile"
-  },
-  "textColorTheme3": {
-    "message": "Neon"
-  },
-  "textTempUnavailable": {
-    "message": "Temporaneamente non disponibile"
-  },
-  "textUpdate": {
-    "message": "Aggiorna a"
-  },
-  "version30installed": {
-    "message": "Versione __RYD_VERSION__ installata"
-  },
-  "whatsnew": {
-    "message": "Novità"
-  },
-  "shortsSupport": {
-    "message": "Supporto per YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Colori personalizzati per barra dei Non mi piace e bottoni"
-  },
-  "customNumberFormats": {
-    "message": "Formato numeri personalizzato"
-  },
-  "considerDonating": {
-    "message": "L'unica cosa che manda avanti questa estensione sono le tue donazioni, valuta se sostenere il progetto."
-  },
-  "roundNumbers": {
-    "message": "Mostra numeri arrotondati per difetto"
-  },
-  "roundNumbersHover": {
-    "message": "Arrotonda numeri per difetto (comportamento standard di YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Ri-formatta numero Mi piace"
-  },
-  "reformatLikesHover": {
-    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
-  },
-  "numberFormat": {
-    "message": "Formato numeri:"
   },
   "colorizeRatio": {
     "message": "Colora barra di rapporto"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Usa colori personalizzati per le icone dei pollici."
   },
-  "colorTheme": {
-    "message": "Colore tema:"
+  "considerDonating": {
+    "message": "L'unica cosa che manda avanti questa estensione sono le tue donazioni, valuta se sostenere il progetto."
   },
-  "showTooltipPercentage": {
-    "message": "Percentuale nel suggerimento della barra mi piace/non mi piace."
+  "customColors": {
+    "message": "Colori personalizzati per barra dei Non mi piace e bottoni"
   },
-  "showTooltipPercentageHover": {
-    "message": "Mostra la percentuale nel suggerimento della barra mi piace/non mi piace."
+  "customNumberFormats": {
+    "message": "Formato numeri personalizzato"
   },
-  "tooltipPercentageMode": {
-    "message": "Modalità percentuale:"
+  "disableLoggingHover": {
+    "message": "Disattiva la registrazione delle risposte API nella console."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Usa una visualizzazione personalizzata della percentuale al passaggio del mouse."
+  "disableLoggingLabel": {
+    "message": "Disattiva log sulla console"
+  },
+  "extensionDesc": {
+    "message": "Riporta il numero di Non mi piace"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Impostazioni"
+  },
+  "linkChangelog": {
+    "message": "Note di versione"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Dona"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Aiuto"
+  },
+  "linkWebsite": {
+    "message": "Sito web"
+  },
+  "numberFormat": {
+    "message": "Formato numeri:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Funzionalità premium disponibili per i sostenitori su Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Accedi con Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Impossibile completare l’accesso. Riprova."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Impossibile avviare l’accesso con Patreon. Riprova."
+  },
   "patreonLogout": {
     "message": "Esci"
   },
-  "patreonUserFallback": {
-    "message": "Utente Patreon"
+  "patreonPermissionRequired": {
+    "message": "L’accesso richiede l’autorizzazione \"identity\". Concedila per continuare."
+  },
+  "patreonTierBasic": {
+    "message": "Livello base"
+  },
+  "patreonTierChecking": {
+    "message": "Verifica dell'abbonamento…"
+  },
+  "patreonTierNone": {
+    "message": "Nessuna iscrizione attiva"
   },
   "patreonTierPremium": {
     "message": "Sostenitore Premium"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Sostenitore"
   },
-  "patreonTierBasic": {
-    "message": "Livello base"
+  "patreonUserFallback": {
+    "message": "Utente Patreon"
   },
-  "patreonTierNone": {
-    "message": "Nessuna iscrizione attiva"
+  "reformatLikes": {
+    "message": "Ri-formatta numero Mi piace"
   },
-  "patreonTierChecking": {
-    "message": "Verifica dell'abbonamento…"
+  "reformatLikesHover": {
+    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
   },
-  "patreonPermissionRequired": {
-    "message": "L’accesso richiede l’autorizzazione \"identity\". Concedila per continuare."
+  "roundNumbers": {
+    "message": "Mostra numeri arrotondati per difetto"
   },
-  "patreonLoginStartFailed": {
-    "message": "Impossibile avviare l’accesso con Patreon. Riprova."
+  "roundNumbersHover": {
+    "message": "Arrotonda numeri per difetto (comportamento standard di YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Impossibile completare l’accesso. Riprova."
+  "shortsSupport": {
+    "message": "Supporto per YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "Stato API:"
+  "showTooltipPercentage": {
+    "message": "Percentuale nel suggerimento della barra mi piace/non mi piace."
   },
-  "apiStatusOnline": {
-    "message": "Online"
+  "showTooltipPercentageHover": {
+    "message": "Mostra la percentuale nel suggerimento della barra mi piace/non mi piace."
   },
-  "apiStatusOffline": {
-    "message": "Offline"
+  "textColorTheme": {
+    "message": "Colore tema:"
   },
-  "disableLoggingLabel": {
-    "message": "Disattiva log sulla console"
+  "textColorTheme1": {
+    "message": "Classico"
   },
-  "disableLoggingHover": {
-    "message": "Disattiva la registrazione delle risposte API nella console."
+  "textColorTheme2": {
+    "message": "Accessibile"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colora barra di rapporto"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Usa colori personalizzati per la barra di rapporto."
+  },
+  "textColorizeThumbs": {
+    "message": "Colora pollici"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Usa colori personalizzati per le icone dei pollici."
+  },
+  "textConsistentFormat": {
+    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
+  },
+  "textConsistentFormatHover": {
+    "message": "Ri-formatta numero di Mi piace."
+  },
+  "textDeveloper": {
+    "message": "di Dmitry Selivanov e della comunità"
+  },
+  "textLikesDisabled": {
+    "message": "Disattivati dal proprietario"
+  },
+  "textNumberFormat": {
+    "message": "Formato numeri:"
+  },
+  "textRoundingNumbers": {
+    "message": "Arrotonda per difetto il numero di Mi Piace/Non mi piace (comportamento standard di YouTube)."
+  },
+  "textRoundingNumbersHover": {
+    "message": "Mostra stastistiche arrotondate per difetto."
+  },
+  "textSettings": {
+    "message": "Disattiva invio di Mi piace/Non mi piace"
+  },
+  "textSettingsHover": {
+    "message": "Smette di contare i tuoi Mi piace e Non mi piace."
+  },
+  "textTempUnavailable": {
+    "message": "Temporaneamente non disponibile"
+  },
+  "textUpdate": {
+    "message": "Aggiorna a"
+  },
+  "tooltipPercentageMode": {
+    "message": "Modalità percentuale:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Usa una visualizzazione personalizzata della percentuale al passaggio del mouse."
+  },
+  "version30installed": {
+    "message": "Versione __RYD_VERSION__ installata"
+  },
+  "whatsnew": {
+    "message": "Novità"
   }
 }

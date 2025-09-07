@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Status API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Mengembalikan kemampuan untuk melihat jumlah dislike"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "oleh Dmitry Selivanov & Komunitas"
-  },
-  "linkWebsite": {
-    "message": "Website"
-  },
-  "linkFAQ": {
-    "message": "Pertanyaan"
-  },
-  "linkDonate": {
-    "message": "Donasi"
-  },
-  "linkHelp": {
-    "message": "Bantuan"
-  },
-  "linkChangelog": {
-    "message": "Log Perubahan"
-  },
-  "legendSettings": {
-    "message": "Pengaturan"
-  },
-  "textSettings": {
-    "message": "Matikan pengiriman like/dislike"
-  },
-  "textLikesDisabled": {
-    "message": "Dimatikan oleh Pemilik"
-  },
-  "textSettingsHover": {
-    "message": "Memberhentikan penghitungan like dan dislikemu"
-  },
-  "textRoundingNumbers": {
-    "message": "Membulatkan data like/dislike kebawah (bawaan YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Munculkan data pembulatan kebawah."
-  },
-  "textConsistentFormat": {
-    "message": "Membuat format like dan dislike konsisten"
-  },
-  "textConsistentFormatHover": {
-    "message": "Format ulang jumlah like."
-  },
-  "textNumberFormat": {
-    "message": "Format angka:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Warnai bar rasio"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Gunakan warna kustom bar rasio."
-  },
-  "textColorizeThumbs": {
-    "message": "Warnai jempol"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Gunakan warna kustom untuk ikon jempol."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Warnai tema:"
-  },
-  "textColorTheme1": {
-    "message": "Klasik"
-  },
-  "textColorTheme2": {
-    "message": "Mudah diakses"
-  },
-  "textColorTheme3": {
-    "message": "Neon"
-  },
-  "textTempUnavailable": {
-    "message": "Tidak Ada Untuk Sementara Waktu"
-  },
-  "textUpdate": {
-    "message": "Update ke"
-  },
-  "version30installed": {
-    "message": "Versi __RYD_VERSION__ terinstall"
-  },
-  "whatsnew": {
-    "message": "Apa yang baru"
-  },
-  "shortsSupport": {
-    "message": "Mendukung YouTube Short"
-  },
-  "customColors": {
-    "message": "Warna kustom untuk bar dislike dan tombol"
-  },
-  "customNumberFormats": {
-    "message": "Format angka kustom"
-  },
-  "considerDonating": {
-    "message": "Donasimulah yang hanya bisa membuat extension ini terus berjalan, tolong pertimbangkan untuk mendukung proyek ini."
-  },
-  "roundNumbers": {
-    "message": "Munculkan angka yang dibulatkan kebawah"
-  },
-  "roundNumbersHover": {
-    "message": "Bulatkan angka kebawah (bawaan YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Format ulang jumlah like"
-  },
-  "reformatLikesHover": {
-    "message": "Membuat format like dan dislike konsisten."
-  },
-  "numberFormat": {
-    "message": "Format angka:"
   },
   "colorizeRatio": {
     "message": "Warnai bar rasio"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Gunakan warna kustom untuk ikon jempol."
   },
-  "colorTheme": {
-    "message": "Warnai tema:"
+  "considerDonating": {
+    "message": "Donasimulah yang hanya bisa membuat extension ini terus berjalan, tolong pertimbangkan untuk mendukung proyek ini."
   },
-  "showTooltipPercentage": {
-    "message": "Persentase di tooltip bilah like/dislike."
+  "customColors": {
+    "message": "Warna kustom untuk bar dislike dan tombol"
   },
-  "showTooltipPercentageHover": {
-    "message": "Tampilkan persentase di tooltip bilah like/dislike."
+  "customNumberFormats": {
+    "message": "Format angka kustom"
   },
-  "tooltipPercentageMode": {
-    "message": "Mode persentase:"
+  "disableLoggingHover": {
+    "message": "Menonaktifkan pencatatan respons API di konsol."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Gunakan tampilan persentase kustom saat diarahkan."
+  "disableLoggingLabel": {
+    "message": "Nonaktifkan log ke konsol"
+  },
+  "extensionDesc": {
+    "message": "Mengembalikan kemampuan untuk melihat jumlah dislike"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Pengaturan"
+  },
+  "linkChangelog": {
+    "message": "Log Perubahan"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Donasi"
+  },
+  "linkFAQ": {
+    "message": "Pertanyaan"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Bantuan"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "numberFormat": {
+    "message": "Format angka:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Fitur premium tersedia bagi pendukung di Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Masuk dengan Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Gagal menyelesaikan login. Coba lagi."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Gagal memulai login Patreon. Coba lagi."
+  },
   "patreonLogout": {
     "message": "Keluar"
   },
-  "patreonUserFallback": {
-    "message": "Pengguna Patreon"
+  "patreonPermissionRequired": {
+    "message": "Masuk memerlukan izin \"identity\". Mohon izinkan untuk melanjutkan."
+  },
+  "patreonTierBasic": {
+    "message": "Tingkat dasar"
+  },
+  "patreonTierChecking": {
+    "message": "Memeriksa keanggotaan…"
+  },
+  "patreonTierNone": {
+    "message": "Tidak ada keanggotaan aktif"
   },
   "patreonTierPremium": {
     "message": "Pendukung Premium"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Pendukung"
   },
-  "patreonTierBasic": {
-    "message": "Tingkat dasar"
+  "patreonUserFallback": {
+    "message": "Pengguna Patreon"
   },
-  "patreonTierNone": {
-    "message": "Tidak ada keanggotaan aktif"
+  "reformatLikes": {
+    "message": "Format ulang jumlah like"
   },
-  "patreonTierChecking": {
-    "message": "Memeriksa keanggotaan…"
+  "reformatLikesHover": {
+    "message": "Membuat format like dan dislike konsisten."
   },
-  "patreonPermissionRequired": {
-    "message": "Masuk memerlukan izin \"identity\". Mohon izinkan untuk melanjutkan."
+  "roundNumbers": {
+    "message": "Munculkan angka yang dibulatkan kebawah"
   },
-  "patreonLoginStartFailed": {
-    "message": "Gagal memulai login Patreon. Coba lagi."
+  "roundNumbersHover": {
+    "message": "Bulatkan angka kebawah (bawaan YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Gagal menyelesaikan login. Coba lagi."
+  "shortsSupport": {
+    "message": "Mendukung YouTube Short"
   },
-  "apiStatusLabel": {
-    "message": "Status API:"
+  "showTooltipPercentage": {
+    "message": "Persentase di tooltip bilah like/dislike."
   },
-  "apiStatusOnline": {
-    "message": "Online"
+  "showTooltipPercentageHover": {
+    "message": "Tampilkan persentase di tooltip bilah like/dislike."
   },
-  "apiStatusOffline": {
-    "message": "Offline"
+  "textColorTheme": {
+    "message": "Warnai tema:"
   },
-  "disableLoggingLabel": {
-    "message": "Nonaktifkan log ke konsol"
+  "textColorTheme1": {
+    "message": "Klasik"
   },
-  "disableLoggingHover": {
-    "message": "Menonaktifkan pencatatan respons API di konsol."
+  "textColorTheme2": {
+    "message": "Mudah diakses"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Warnai bar rasio"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Gunakan warna kustom bar rasio."
+  },
+  "textColorizeThumbs": {
+    "message": "Warnai jempol"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Gunakan warna kustom untuk ikon jempol."
+  },
+  "textConsistentFormat": {
+    "message": "Membuat format like dan dislike konsisten"
+  },
+  "textConsistentFormatHover": {
+    "message": "Format ulang jumlah like."
+  },
+  "textDeveloper": {
+    "message": "oleh Dmitry Selivanov & Komunitas"
+  },
+  "textLikesDisabled": {
+    "message": "Dimatikan oleh Pemilik"
+  },
+  "textNumberFormat": {
+    "message": "Format angka:"
+  },
+  "textRoundingNumbers": {
+    "message": "Membulatkan data like/dislike kebawah (bawaan YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Munculkan data pembulatan kebawah."
+  },
+  "textSettings": {
+    "message": "Matikan pengiriman like/dislike"
+  },
+  "textSettingsHover": {
+    "message": "Memberhentikan penghitungan like dan dislikemu"
+  },
+  "textTempUnavailable": {
+    "message": "Tidak Ada Untuk Sementara Waktu"
+  },
+  "textUpdate": {
+    "message": "Update ke"
+  },
+  "tooltipPercentageMode": {
+    "message": "Mode persentase:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Gunakan tampilan persentase kustom saat diarahkan."
+  },
+  "version30installed": {
+    "message": "Versi __RYD_VERSION__ terinstall"
+  },
+  "whatsnew": {
+    "message": "Apa yang baru"
   }
 }

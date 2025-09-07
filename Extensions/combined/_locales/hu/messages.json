@@ -1,78 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "API állapot:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Visszaállítja a dislike számlálót"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "Készítő: Dmitry Selivanov & Community"
-  },
-  "linkWebsite": {
-    "message": "Weboldal"
-  },
-  "linkFAQ": {
-    "message": "GYIK"
-  },
-  "linkDonate": {
-    "message": "Támogatás"
-  },
-  "linkHelp": {
-    "message": "Segítség"
-  },
-  "legendSettings": {
-    "message": "Beállítások"
-  },
-  "textSettings": {
-    "message": "Like/Dislike beküldés kikapcsolása"
-  },
-  "textLikesDisabled": {
-    "message": "tulajdonos által kikapcsolva"
-  },
-  "textSettingsHover": {
-    "message": "Nem számolja tovább a like és dislike adataidat."
-  },
-  "textTempUnavailable": {
-    "message": "temp n/a"
-  },
-  "textUpdate": {
-    "message": "frissítés erre:"
-  },
-  "version30installed": {
-    "message": "3.0.0.1 verzió telepítve"
-  },
-  "whatsnew": {
-    "message": "Újdonságok"
-  },
-  "shortsSupport": {
-    "message": "YouTube Shorts támogatás"
-  },
-  "customColors": {
-    "message": "Egyéni színek a dislike csíkon és gombon"
-  },
-  "customNumberFormats": {
-    "message": "Egyéni számformátum"
-  },
-  "considerDonating": {
-    "message": "Ez a bővítmény kizárólag a támogatásoknak köszönhetően működik. Kérjük, támogasd a projektet!"
-  },
-  "roundNumbers": {
-    "message": "Lekerekített számok megjelenítése"
-  },
-  "roundNumbersHover": {
-    "message": "Számok lefelé kerekítése (YouTube alapértelmezett)."
-  },
-  "reformatLikes": {
-    "message": "Kedvelésszám újraformázása"
-  },
-  "reformatLikesHover": {
-    "message": "Tedd egységessé a kedvelés/nem tetszik formátumát."
-  },
-  "numberFormat": {
-    "message": "Számformátum:"
+  "colorTheme": {
+    "message": "Színtéma:"
   },
   "colorizeRatio": {
     "message": "Aránysáv színezése"
@@ -86,35 +23,116 @@
   "colorizeThumbsHover": {
     "message": "Egyéni színek használata a gomb ikonokhoz."
   },
-  "colorTheme": {
-    "message": "Színtéma:"
+  "considerDonating": {
+    "message": "Ez a bővítmény kizárólag a támogatásoknak köszönhetően működik. Kérjük, támogasd a projektet!"
   },
-  "textRoundingNumbers": {
-    "message": "Lekerekített kedvelés/nem tetszik statisztika (YouTube alapértelmezés)"
+  "customColors": {
+    "message": "Egyéni színek a dislike csíkon és gombon"
   },
-  "textRoundingNumbersHover": {
-    "message": "Lekerekített statisztikák megjelenítése."
+  "customNumberFormats": {
+    "message": "Egyéni számformátum"
   },
-  "textConsistentFormat": {
-    "message": "A kedvelések és nem tetszések formátumának egységesítése"
+  "disableLoggingHover": {
+    "message": "Letiltja az API‑válaszok konzolos naplózását."
   },
-  "textConsistentFormatHover": {
-    "message": "A kedvelésszám újraformázása."
+  "disableLoggingLabel": {
+    "message": "Konzolnaplózás letiltása"
   },
-  "textNumberFormat": {
+  "extensionDesc": {
+    "message": "Visszaállítja a dislike számlálót"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Beállítások"
+  },
+  "linkChangelog": {
+    "message": "Változásnapló"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "Támogatás"
+  },
+  "linkFAQ": {
+    "message": "GYIK"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Segítség"
+  },
+  "linkWebsite": {
+    "message": "Weboldal"
+  },
+  "numberFormat": {
     "message": "Számformátum:"
   },
-  "textColorizeRatioBar": {
-    "message": "Aránysáv színezése"
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
-  "textColorizeRatioBarHover": {
-    "message": "Egyéni színek használata az aránysávhoz."
+  "patreonLoggedOutMessage": {
+    "message": "Prémium funkciók Patreon‑támogatóknak érhetők el"
   },
-  "textColorizeThumbs": {
-    "message": "Hüvelykujjas ikonok színezése"
+  "patreonLogin": {
+    "message": "Bejelentkezés Patreonnal"
   },
-  "textColorizeThumbsHover": {
-    "message": "Egyéni színek használata a hüvelykujjas ikonokhoz."
+  "patreonLoginCompleteFailed": {
+    "message": "A bejelentkezés nem sikerült. Próbáld újra."
+  },
+  "patreonLoginStartFailed": {
+    "message": "A Patreon bejelentkezés indítása sikertelen. Próbáld újra."
+  },
+  "patreonLogout": {
+    "message": "Kijelentkezés"
+  },
+  "patreonPermissionRequired": {
+    "message": "A bejelentkezéshez „identity” engedély szükséges. Kérjük, engedélyezd."
+  },
+  "patreonTierBasic": {
+    "message": "Alap szint"
+  },
+  "patreonTierChecking": {
+    "message": "Tagság ellenőrzése…"
+  },
+  "patreonTierNone": {
+    "message": "Nincs aktív tagság"
+  },
+  "patreonTierPremium": {
+    "message": "Prémium támogató"
+  },
+  "patreonTierSupporter": {
+    "message": "Támogató"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon felhasználó"
+  },
+  "reformatLikes": {
+    "message": "Kedvelésszám újraformázása"
+  },
+  "reformatLikesHover": {
+    "message": "Tedd egységessé a kedvelés/nem tetszik formátumát."
+  },
+  "roundNumbers": {
+    "message": "Lekerekített számok megjelenítése"
+  },
+  "roundNumbersHover": {
+    "message": "Számok lefelé kerekítése (YouTube alapértelmezett)."
+  },
+  "shortsSupport": {
+    "message": "YouTube Shorts támogatás"
+  },
+  "showTooltipPercentage": {
+    "message": "Százalék a like/dislike sáv buborékjában."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Százalék megjelenítése a tetszik/nem tetszik sáv buborékában."
   },
   "textColorTheme": {
     "message": "Színtéma:"
@@ -128,11 +146,50 @@
   "textColorTheme3": {
     "message": "Neon"
   },
-  "showTooltipPercentage": {
-    "message": "Százalék a like/dislike sáv buborékjában."
+  "textColorizeRatioBar": {
+    "message": "Aránysáv színezése"
   },
-  "showTooltipPercentageHover": {
-    "message": "Százalék megjelenítése a tetszik/nem tetszik sáv buborékában."
+  "textColorizeRatioBarHover": {
+    "message": "Egyéni színek használata az aránysávhoz."
+  },
+  "textColorizeThumbs": {
+    "message": "Hüvelykujjas ikonok színezése"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Egyéni színek használata a hüvelykujjas ikonokhoz."
+  },
+  "textConsistentFormat": {
+    "message": "A kedvelések és nem tetszések formátumának egységesítése"
+  },
+  "textConsistentFormatHover": {
+    "message": "A kedvelésszám újraformázása."
+  },
+  "textDeveloper": {
+    "message": "Készítő: Dmitry Selivanov & Community"
+  },
+  "textLikesDisabled": {
+    "message": "tulajdonos által kikapcsolva"
+  },
+  "textNumberFormat": {
+    "message": "Számformátum:"
+  },
+  "textRoundingNumbers": {
+    "message": "Lekerekített kedvelés/nem tetszik statisztika (YouTube alapértelmezés)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Lekerekített statisztikák megjelenítése."
+  },
+  "textSettings": {
+    "message": "Like/Dislike beküldés kikapcsolása"
+  },
+  "textSettingsHover": {
+    "message": "Nem számolja tovább a like és dislike adataidat."
+  },
+  "textTempUnavailable": {
+    "message": "temp n/a"
+  },
+  "textUpdate": {
+    "message": "frissítés erre:"
   },
   "tooltipPercentageMode": {
     "message": "Százalék mód:"
@@ -140,67 +197,10 @@
   "tooltipPercentageModeHover": {
     "message": "Egyéni százalékos megjelenítés használata rámutatáskor."
   },
-  "linkChangelog": {
-    "message": "Változásnapló"
+  "version30installed": {
+    "message": "3.0.0.1 verzió telepítve"
   },
-  "linkDiscord": {
-    "message": "Discord"
-  },
-  "linkGithub": {
-    "message": "GitHub"
-  },
-  "patreonLoggedOutMessage": {
-    "message": "Prémium funkciók Patreon‑támogatóknak érhetők el"
-  },
-  "patreonLogin": {
-    "message": "Bejelentkezés Patreonnal"
-  },
-  "patreonLogout": {
-    "message": "Kijelentkezés"
-  },
-  "patreonUserFallback": {
-    "message": "Patreon felhasználó"
-  },
-  "patreonTierPremium": {
-    "message": "Prémium támogató"
-  },
-  "patreonTierSupporter": {
-    "message": "Támogató"
-  },
-  "patreonTierBasic": {
-    "message": "Alap szint"
-  },
-  "patreonTierNone": {
-    "message": "Nincs aktív tagság"
-  },
-  "patreonTierChecking": {
-    "message": "Tagság ellenőrzése…"
-  },
-  "patreonPermissionRequired": {
-    "message": "A bejelentkezéshez „identity” engedély szükséges. Kérjük, engedélyezd."
-  },
-  "patreonLoginStartFailed": {
-    "message": "A Patreon bejelentkezés indítása sikertelen. Próbáld újra."
-  },
-  "patreonLoginCompleteFailed": {
-    "message": "A bejelentkezés nem sikerült. Próbáld újra."
-  },
-  "apiStatusLabel": {
-    "message": "API állapot:"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "disableLoggingLabel": {
-    "message": "Konzolnaplózás letiltása"
-  },
-  "disableLoggingHover": {
-    "message": "Letiltja az API‑válaszok konzolos naplózását."
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "whatsnew": {
+    "message": "Újdonságok"
   }
 }

@@ -1,78 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "État de l’API :"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Hors ligne"
   },
-  "extensionDesc": {
-    "message": "Ré-affiche les pouces rouges/dislikes des vidéos"
+  "apiStatusOnline": {
+    "message": "En ligne"
   },
-  "textDeveloper": {
-    "message": "par Dmitry Selivanov & Communauté"
-  },
-  "linkWebsite": {
-    "message": "Site web"
-  },
-  "linkFAQ": {
-    "message": "Questions fréquentes"
-  },
-  "linkDonate": {
-    "message": "Faire un don"
-  },
-  "linkHelp": {
-    "message": "Aide"
-  },
-  "legendSettings": {
-    "message": "Paramètres"
-  },
-  "textLikesDisabled": {
-    "message": "Désactivé par le créateur"
-  },
-  "textSettings": {
-    "message": "Désactiver l'envoi des likes/dislikes"
-  },
-  "textSettingsHover": {
-    "message": "Arrête de compter les likes et les dislikes mis sur les vidéos."
-  },
-  "textTempUnavailable": {
-    "message": "temporairement indisponible"
-  },
-  "textUpdate": {
-    "message": "mettre à jour vers"
-  },
-  "version30installed": {
-    "message": "Version __RYD_VERSION__ installée"
-  },
-  "whatsnew": {
-    "message": "Quoi de neuf"
-  },
-  "shortsSupport": {
-    "message": "Prise en charge des YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Couleurs personnalisées pour la barre du dislike et les boutons"
-  },
-  "customNumberFormats": {
-    "message": "Formats numériques personnalisés"
-  },
-  "considerDonating": {
-    "message": "La seule chose qui permet à l'extension de fonctionner est vos dons, veuillez envisager de soutenir le projet."
-  },
-  "roundNumbers": {
-    "message": "Afficher les nombres arrondis"
-  },
-  "roundNumbersHover": {
-    "message": "Arrondir les nombres à la baisse (comportement par défaut de YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Formater le nombre de likes"
-  },
-  "reformatLikesHover": {
-    "message": "Rend la valeur des statistiques plus cohérente."
-  },
-  "numberFormat": {
-    "message": "Format numérique:"
+  "colorTheme": {
+    "message": "Schéma de couleur:"
   },
   "colorizeRatio": {
     "message": "Coloriser la barre de ratio"
@@ -86,38 +23,116 @@
   "colorizeThumbsHover": {
     "message": "Utiliser des couleurs personnalisées pour les boutons like et dislike."
   },
-  "colorTheme": {
-    "message": "Schéma de couleur:"
+  "considerDonating": {
+    "message": "La seule chose qui permet à l'extension de fonctionner est vos dons, veuillez envisager de soutenir le projet."
+  },
+  "customColors": {
+    "message": "Couleurs personnalisées pour la barre du dislike et les boutons"
+  },
+  "customNumberFormats": {
+    "message": "Formats numériques personnalisés"
+  },
+  "disableLoggingHover": {
+    "message": "Désactive la journalisation des réponses de l’API dans la console."
+  },
+  "disableLoggingLabel": {
+    "message": "Désactiver la journalisation dans la console"
+  },
+  "extensionDesc": {
+    "message": "Ré-affiche les pouces rouges/dislikes des vidéos"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Paramètres"
   },
   "linkChangelog": {
     "message": "Journal des modifications"
   },
-  "textRoundingNumbers": {
-    "message": "Arrondir vers le bas les statistiques de like/dislike (comportement par défaut de YouTube)"
+  "linkDiscord": {
+    "message": "Discord"
   },
-  "textRoundingNumbersHover": {
-    "message": "Afficher les statistiques arrondies vers le bas."
+  "linkDonate": {
+    "message": "Faire un don"
   },
-  "textConsistentFormat": {
-    "message": "Rendre le format des likes et des dislikes cohérent"
+  "linkFAQ": {
+    "message": "Questions fréquentes"
   },
-  "textConsistentFormatHover": {
-    "message": "Reformater le nombre de likes."
+  "linkGithub": {
+    "message": "GitHub"
   },
-  "textNumberFormat": {
-    "message": "Format numérique :"
+  "linkHelp": {
+    "message": "Aide"
   },
-  "textColorizeRatioBar": {
-    "message": "Coloriser la barre de ratio"
+  "linkWebsite": {
+    "message": "Site web"
   },
-  "textColorizeRatioBarHover": {
-    "message": "Utilisez des couleurs personnalisées pour la barre de ratio."
+  "numberFormat": {
+    "message": "Format numérique:"
   },
-  "textColorizeThumbs": {
-    "message": "Coloriser les pouces"
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
-  "textColorizeThumbsHover": {
-    "message": "Utiliser des couleurs personnalisées pour les icônes des pouces."
+  "patreonLoggedOutMessage": {
+    "message": "Fonctionnalités premium disponibles pour les soutiens sur Patreon"
+  },
+  "patreonLogin": {
+    "message": "Se connecter avec Patreon"
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Échec de la connexion. Veuillez réessayer."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Échec du démarrage de la connexion Patreon. Veuillez réessayer."
+  },
+  "patreonLogout": {
+    "message": "Se déconnecter"
+  },
+  "patreonPermissionRequired": {
+    "message": "La connexion nécessite l’autorisation «identity». Veuillez l’accorder pour continuer."
+  },
+  "patreonTierBasic": {
+    "message": "Niveau de base"
+  },
+  "patreonTierChecking": {
+    "message": "Vérification de l'abonnement…"
+  },
+  "patreonTierNone": {
+    "message": "Aucun abonnement actif"
+  },
+  "patreonTierPremium": {
+    "message": "Soutien Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Soutien"
+  },
+  "patreonUserFallback": {
+    "message": "Utilisateur Patreon"
+  },
+  "reformatLikes": {
+    "message": "Formater le nombre de likes"
+  },
+  "reformatLikesHover": {
+    "message": "Rend la valeur des statistiques plus cohérente."
+  },
+  "roundNumbers": {
+    "message": "Afficher les nombres arrondis"
+  },
+  "roundNumbersHover": {
+    "message": "Arrondir les nombres à la baisse (comportement par défaut de YouTube)."
+  },
+  "shortsSupport": {
+    "message": "Prise en charge des YouTube Shorts"
+  },
+  "showTooltipPercentage": {
+    "message": "Pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Afficher le pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
   },
   "textColorTheme": {
     "message": "Thème de couleur :"
@@ -131,11 +146,50 @@
   "textColorTheme3": {
     "message": "Néon"
   },
-  "showTooltipPercentage": {
-    "message": "Pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
+  "textColorizeRatioBar": {
+    "message": "Coloriser la barre de ratio"
   },
-  "showTooltipPercentageHover": {
-    "message": "Afficher le pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
+  "textColorizeRatioBarHover": {
+    "message": "Utilisez des couleurs personnalisées pour la barre de ratio."
+  },
+  "textColorizeThumbs": {
+    "message": "Coloriser les pouces"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Utiliser des couleurs personnalisées pour les icônes des pouces."
+  },
+  "textConsistentFormat": {
+    "message": "Rendre le format des likes et des dislikes cohérent"
+  },
+  "textConsistentFormatHover": {
+    "message": "Reformater le nombre de likes."
+  },
+  "textDeveloper": {
+    "message": "par Dmitry Selivanov & Communauté"
+  },
+  "textLikesDisabled": {
+    "message": "Désactivé par le créateur"
+  },
+  "textNumberFormat": {
+    "message": "Format numérique :"
+  },
+  "textRoundingNumbers": {
+    "message": "Arrondir vers le bas les statistiques de like/dislike (comportement par défaut de YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Afficher les statistiques arrondies vers le bas."
+  },
+  "textSettings": {
+    "message": "Désactiver l'envoi des likes/dislikes"
+  },
+  "textSettingsHover": {
+    "message": "Arrête de compter les likes et les dislikes mis sur les vidéos."
+  },
+  "textTempUnavailable": {
+    "message": "temporairement indisponible"
+  },
+  "textUpdate": {
+    "message": "mettre à jour vers"
   },
   "tooltipPercentageMode": {
     "message": "Mode de pourcentage :"
@@ -143,64 +197,10 @@
   "tooltipPercentageModeHover": {
     "message": "Utiliser un affichage de pourcentage personnalisé au survol."
   },
-  "linkDiscord": {
-    "message": "Discord"
+  "version30installed": {
+    "message": "Version __RYD_VERSION__ installée"
   },
-  "linkGithub": {
-    "message": "GitHub"
-  },
-  "patreonLoggedOutMessage": {
-    "message": "Fonctionnalités premium disponibles pour les soutiens sur Patreon"
-  },
-  "patreonLogin": {
-    "message": "Se connecter avec Patreon"
-  },
-  "patreonLogout": {
-    "message": "Se déconnecter"
-  },
-  "patreonUserFallback": {
-    "message": "Utilisateur Patreon"
-  },
-  "patreonTierPremium": {
-    "message": "Soutien Premium"
-  },
-  "patreonTierSupporter": {
-    "message": "Soutien"
-  },
-  "patreonTierBasic": {
-    "message": "Niveau de base"
-  },
-  "patreonTierNone": {
-    "message": "Aucun abonnement actif"
-  },
-  "patreonTierChecking": {
-    "message": "Vérification de l'abonnement…"
-  },
-  "patreonPermissionRequired": {
-    "message": "La connexion nécessite l’autorisation «identity». Veuillez l’accorder pour continuer."
-  },
-  "patreonLoginStartFailed": {
-    "message": "Échec du démarrage de la connexion Patreon. Veuillez réessayer."
-  },
-  "patreonLoginCompleteFailed": {
-    "message": "Échec de la connexion. Veuillez réessayer."
-  },
-  "apiStatusLabel": {
-    "message": "État de l’API :"
-  },
-  "apiStatusOnline": {
-    "message": "En ligne"
-  },
-  "apiStatusOffline": {
-    "message": "Hors ligne"
-  },
-  "disableLoggingLabel": {
-    "message": "Désactiver la journalisation dans la console"
-  },
-  "disableLoggingHover": {
-    "message": "Désactive la journalisation des réponses de l’API dans la console."
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "whatsnew": {
+    "message": "Quoi de neuf"
   }
 }

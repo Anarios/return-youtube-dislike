@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Estado de la API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Fuera de línea"
   },
-  "extensionDesc": {
-    "message": "Recupera la característica de los «dislikes» («No me gusta»)"
+  "apiStatusOnline": {
+    "message": "En línea"
   },
-  "textDeveloper": {
-    "message": "por Dmitry Selivanov y la comunidad"
-  },
-  "linkWebsite": {
-    "message": "Página web"
-  },
-  "linkFAQ": {
-    "message": "P+F"
-  },
-  "linkDonate": {
-    "message": "Donar"
-  },
-  "linkHelp": {
-    "message": "Ayuda"
-  },
-  "linkChangelog": {
-    "message": "Historial de cambios"
-  },
-  "legendSettings": {
-    "message": "Ajustes"
-  },
-  "textSettings": {
-    "message": "Desactivar envío de votos"
-  },
-  "textLikesDisabled": {
-    "message": "desactivado por el propietario"
-  },
-  "textSettingsHover": {
-    "message": "Deja de contar tus «Me gusta» y «No me gusta»."
-  },
-  "textRoundingNumbers": {
-    "message": "Redondear cifras (comportamiento original de YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Muestra las estadísticas redondeadas."
-  },
-  "textConsistentFormat": {
-    "message": "Unificar formato de votos"
-  },
-  "textConsistentFormatHover": {
-    "message": "Cambia el formato de las cifras de «Me gusta» y «No me gusta»."
-  },
-  "textNumberFormat": {
-    "message": "Formato de cifras:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Cambiar color de barra de votos"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Utiliza colores personalizados para la barra de votos."
-  },
-  "textColorizeThumbs": {
-    "message": "Cambiar color de iconos de pulgares"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Utiliza colores personalizados para los iconos de los pulgares."
-  },
-  "textColorTheme": {
-    "message": "Esquema de colores:"
-  },
-  "textColorTheme1": {
-    "message": "Clásico"
-  },
-  "textColorTheme2": {
-    "message": "Accesible"
-  },
-  "textColorTheme3": {
-    "message": "Neón"
-  },
-  "textTempUnavailable": {
-    "message": "no disponible temporalmente"
-  },
-  "textUpdate": {
-    "message": "actualizar a"
-  },
-  "version30installed": {
-    "message": "Versión __RYD_VERSION__ instalada"
-  },
-  "whatsnew": {
-    "message": "Novedades"
-  },
-  "shortsSupport": {
-    "message": "Soporte de YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Colores personalizados para la barra y los botones que no me gustan"
-  },
-  "customNumberFormats": {
-    "message": "Formatos de números personalizados"
-  },
-  "considerDonating": {
-    "message": "Lo único que mantiene la extensión en funcionamiento son sus donaciones, considere apoyar el proyecto."
-  },
-  "roundNumbers": {
-    "message": "Mostrar números redondeados hacia abajo"
-  },
-  "roundNumbersHover": {
-    "message": "Redondear números hacia abajo (comportamiento predeterminado de YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Reformatear como números"
-  },
-  "reformatLikesHover": {
-    "message": "Haz que el formato de like y dislike sea consistente."
-  },
-  "numberFormat": {
-    "message": "Formato de número:"
+  "colorTheme": {
+    "message": "Combinación de colores:"
   },
   "colorizeRatio": {
     "message": "Colorear barra de relación"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Usar colores personalizados para los íconos de los botones."
   },
-  "colorTheme": {
-    "message": "Combinación de colores:"
+  "considerDonating": {
+    "message": "Lo único que mantiene la extensión en funcionamiento son sus donaciones, considere apoyar el proyecto."
   },
-  "showTooltipPercentage": {
-    "message": "Porcentaje en el tooltip de la barra de like/dislike."
+  "customColors": {
+    "message": "Colores personalizados para la barra y los botones que no me gustan"
   },
-  "showTooltipPercentageHover": {
-    "message": "Mostrar porcentaje en el tooltip de la barra de like/dislike."
+  "customNumberFormats": {
+    "message": "Formatos de números personalizados"
   },
-  "tooltipPercentageMode": {
-    "message": "Modo de porcentaje:"
+  "disableLoggingHover": {
+    "message": "Desactiva el registro de respuestas de la API en la consola."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Usar visualización de porcentaje personalizada al pasar el puntero."
+  "disableLoggingLabel": {
+    "message": "Desactivar registro en la consola"
+  },
+  "extensionDesc": {
+    "message": "Recupera la característica de los «dislikes» («No me gusta»)"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Ajustes"
+  },
+  "linkChangelog": {
+    "message": "Historial de cambios"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Donar"
+  },
+  "linkFAQ": {
+    "message": "P+F"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Ayuda"
+  },
+  "linkWebsite": {
+    "message": "Página web"
+  },
+  "numberFormat": {
+    "message": "Formato de número:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Funciones premium disponibles para patrocinadores en Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Iniciar sesión con Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "No se pudo completar el inicio de sesión. Inténtalo de nuevo."
+  },
+  "patreonLoginStartFailed": {
+    "message": "No se pudo iniciar el inicio de sesión de Patreon. Inténtalo de nuevo."
+  },
   "patreonLogout": {
     "message": "Cerrar sesión"
   },
-  "patreonUserFallback": {
-    "message": "Usuario de Patreon"
+  "patreonPermissionRequired": {
+    "message": "El inicio de sesión requiere el permiso «identity». Permítelo para continuar."
+  },
+  "patreonTierBasic": {
+    "message": "Nivel básico"
+  },
+  "patreonTierChecking": {
+    "message": "Comprobando membresía…"
+  },
+  "patreonTierNone": {
+    "message": "Sin membresía activa"
   },
   "patreonTierPremium": {
     "message": "Patrocinador Premium"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Patrocinador"
   },
-  "patreonTierBasic": {
-    "message": "Nivel básico"
+  "patreonUserFallback": {
+    "message": "Usuario de Patreon"
   },
-  "patreonTierNone": {
-    "message": "Sin membresía activa"
+  "reformatLikes": {
+    "message": "Reformatear como números"
   },
-  "patreonTierChecking": {
-    "message": "Comprobando membresía…"
+  "reformatLikesHover": {
+    "message": "Haz que el formato de like y dislike sea consistente."
   },
-  "patreonPermissionRequired": {
-    "message": "El inicio de sesión requiere el permiso «identity». Permítelo para continuar."
+  "roundNumbers": {
+    "message": "Mostrar números redondeados hacia abajo"
   },
-  "patreonLoginStartFailed": {
-    "message": "No se pudo iniciar el inicio de sesión de Patreon. Inténtalo de nuevo."
+  "roundNumbersHover": {
+    "message": "Redondear números hacia abajo (comportamiento predeterminado de YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "No se pudo completar el inicio de sesión. Inténtalo de nuevo."
+  "shortsSupport": {
+    "message": "Soporte de YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "Estado de la API:"
+  "showTooltipPercentage": {
+    "message": "Porcentaje en el tooltip de la barra de like/dislike."
   },
-  "apiStatusOnline": {
-    "message": "En línea"
+  "showTooltipPercentageHover": {
+    "message": "Mostrar porcentaje en el tooltip de la barra de like/dislike."
   },
-  "apiStatusOffline": {
-    "message": "Fuera de línea"
+  "textColorTheme": {
+    "message": "Esquema de colores:"
   },
-  "disableLoggingLabel": {
-    "message": "Desactivar registro en la consola"
+  "textColorTheme1": {
+    "message": "Clásico"
   },
-  "disableLoggingHover": {
-    "message": "Desactiva el registro de respuestas de la API en la consola."
+  "textColorTheme2": {
+    "message": "Accesible"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neón"
+  },
+  "textColorizeRatioBar": {
+    "message": "Cambiar color de barra de votos"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Utiliza colores personalizados para la barra de votos."
+  },
+  "textColorizeThumbs": {
+    "message": "Cambiar color de iconos de pulgares"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Utiliza colores personalizados para los iconos de los pulgares."
+  },
+  "textConsistentFormat": {
+    "message": "Unificar formato de votos"
+  },
+  "textConsistentFormatHover": {
+    "message": "Cambia el formato de las cifras de «Me gusta» y «No me gusta»."
+  },
+  "textDeveloper": {
+    "message": "por Dmitry Selivanov y la comunidad"
+  },
+  "textLikesDisabled": {
+    "message": "desactivado por el propietario"
+  },
+  "textNumberFormat": {
+    "message": "Formato de cifras:"
+  },
+  "textRoundingNumbers": {
+    "message": "Redondear cifras (comportamiento original de YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Muestra las estadísticas redondeadas."
+  },
+  "textSettings": {
+    "message": "Desactivar envío de votos"
+  },
+  "textSettingsHover": {
+    "message": "Deja de contar tus «Me gusta» y «No me gusta»."
+  },
+  "textTempUnavailable": {
+    "message": "no disponible temporalmente"
+  },
+  "textUpdate": {
+    "message": "actualizar a"
+  },
+  "tooltipPercentageMode": {
+    "message": "Modo de porcentaje:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Usar visualización de porcentaje personalizada al pasar el puntero."
+  },
+  "version30installed": {
+    "message": "Versión __RYD_VERSION__ instalada"
+  },
+  "whatsnew": {
+    "message": "Novedades"
   }
 }

@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Состояние API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Офлайн"
   },
-  "extensionDesc": {
-    "message": "Возвращает способность видеть дизлайки"
+  "apiStatusOnline": {
+    "message": "Онлайн"
   },
-  "textDeveloper": {
-    "message": "Дмитрий Селиванов и сообщество"
-  },
-  "linkWebsite": {
-    "message": "Сайт"
-  },
-  "linkFAQ": {
-    "message": "ЧАВО"
-  },
-  "linkDonate": {
-    "message": "Пожертвовать"
-  },
-  "linkHelp": {
-    "message": "Помощь"
-  },
-  "linkChangelog": {
-    "message": "Журнал изменений"
-  },
-  "legendSettings": {
-    "message": "Настройки"
-  },
-  "textSettings": {
-    "message": "Отключить отправку лайков/дизлайков"
-  },
-  "textLikesDisabled": {
-    "message": "Отключено владельцем"
-  },
-  "textSettingsHover": {
-    "message": "Отключает отправку ваших отметок нравится/не нравится"
-  },
-  "textRoundingNumbers": {
-    "message": "Округлить статистику лайков/дизлайков (стандартное поведение YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Показывать округленные данные."
-  },
-  "textConsistentFormat": {
-    "message": "Привести формат лайков и дизлайков к единому виду"
-  },
-  "textConsistentFormatHover": {
-    "message": "Переформатировать число лайков."
-  },
-  "textNumberFormat": {
-    "message": "Числовой формат:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Раскрасьте полосу неприязни"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Используйте пользовательские цвета для полосы неприязни."
-  },
-  "textColorizeThumbs": {
-    "message": "Раскрасьте кнопки"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Раскрасьте кнопки нравится и не нравится с помощью пользовательских цветов."
-  },
-  "textColorTheme": {
-    "message": "Цветовая тема:"
-  },
-  "textColorTheme1": {
-    "message": "Классическая"
-  },
-  "textColorTheme2": {
-    "message": "Доступная"
-  },
-  "textColorTheme3": {
-    "message": "Неоновая"
-  },
-  "textTempUnavailable": {
-    "message": "Временно недоступно"
-  },
-  "textUpdate": {
-    "message": "обновление до"
-  },
-  "version30installed": {
-    "message": "Версия __RYD_VERSION__ установлена"
-  },
-  "whatsnew": {
-    "message": "Что нового"
-  },
-  "shortsSupport": {
-    "message": "Поддержка YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Выбор цветов панели дизлайков и кнопок"
-  },
-  "customNumberFormats": {
-    "message": "Выбор формата чисел"
-  },
-  "considerDonating": {
-    "message": "Единственный источник доходов позволяющий расширению продолжать работу - ваши пожертвования. Пожалуйста, поддержите нас и помогите нам развиваться."
-  },
-  "roundNumbers": {
-    "message": "Показывать округленные числа"
-  },
-  "roundNumbersHover": {
-    "message": "Округлить значение счетчика (это параметр YouTube по умолчанию)."
-  },
-  "reformatLikes": {
-    "message": "Форматировать количество лайков"
-  },
-  "reformatLikesHover": {
-    "message": "Делает значение статистики более последовательным."
-  },
-  "numberFormat": {
-    "message": "Числовой формат"
+  "colorTheme": {
+    "message": "Цветовая схема:"
   },
   "colorizeRatio": {
     "message": "Раскрасьте полосу неприязни"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Раскрасьте кнопки нравится и не нравится с помощью пользовательских цветов."
   },
-  "colorTheme": {
-    "message": "Цветовая схема:"
+  "considerDonating": {
+    "message": "Единственный источник доходов позволяющий расширению продолжать работу - ваши пожертвования. Пожалуйста, поддержите нас и помогите нам развиваться."
   },
-  "showTooltipPercentage": {
-    "message": "Процент в подсказке полосы лайков/дизлайков."
+  "customColors": {
+    "message": "Выбор цветов панели дизлайков и кнопок"
   },
-  "showTooltipPercentageHover": {
-    "message": "Показывать процент в подсказке полосы лайков/дизлайков."
+  "customNumberFormats": {
+    "message": "Выбор формата чисел"
   },
-  "tooltipPercentageMode": {
-    "message": "Режим процентов:"
+  "disableLoggingHover": {
+    "message": "Отключает логирование ответов API в консоль."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Использовать кастомный показ процентов при наведении."
+  "disableLoggingLabel": {
+    "message": "Отключить логирование в консоль"
+  },
+  "extensionDesc": {
+    "message": "Возвращает способность видеть дизлайки"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Настройки"
+  },
+  "linkChangelog": {
+    "message": "Журнал изменений"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Пожертвовать"
+  },
+  "linkFAQ": {
+    "message": "ЧАВО"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Помощь"
+  },
+  "linkWebsite": {
+    "message": "Сайт"
+  },
+  "numberFormat": {
+    "message": "Числовой формат"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Премиум‑функции доступны подписчикам на Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Войти через Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Не удалось завершить вход. Попробуйте еще раз."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Не удалось начать вход через Patreon. Попробуйте еще раз."
+  },
   "patreonLogout": {
     "message": "Выйти"
   },
-  "patreonUserFallback": {
-    "message": "Пользователь Patreon"
+  "patreonPermissionRequired": {
+    "message": "Для входа требуется разрешение «identity». Разрешите, чтобы продолжить."
+  },
+  "patreonTierBasic": {
+    "message": "Базовый уровень"
+  },
+  "patreonTierChecking": {
+    "message": "Проверка подписки…"
+  },
+  "patreonTierNone": {
+    "message": "Нет активной подписки"
   },
   "patreonTierPremium": {
     "message": "Премиум‑поддерживающий"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Поддерживающий"
   },
-  "patreonTierBasic": {
-    "message": "Базовый уровень"
+  "patreonUserFallback": {
+    "message": "Пользователь Patreon"
   },
-  "patreonTierNone": {
-    "message": "Нет активной подписки"
+  "reformatLikes": {
+    "message": "Форматировать количество лайков"
   },
-  "patreonTierChecking": {
-    "message": "Проверка подписки…"
+  "reformatLikesHover": {
+    "message": "Делает значение статистики более последовательным."
   },
-  "patreonPermissionRequired": {
-    "message": "Для входа требуется разрешение «identity». Разрешите, чтобы продолжить."
+  "roundNumbers": {
+    "message": "Показывать округленные числа"
   },
-  "patreonLoginStartFailed": {
-    "message": "Не удалось начать вход через Patreon. Попробуйте еще раз."
+  "roundNumbersHover": {
+    "message": "Округлить значение счетчика (это параметр YouTube по умолчанию)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Не удалось завершить вход. Попробуйте еще раз."
+  "shortsSupport": {
+    "message": "Поддержка YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "Состояние API:"
+  "showTooltipPercentage": {
+    "message": "Процент в подсказке полосы лайков/дизлайков."
   },
-  "apiStatusOnline": {
-    "message": "Онлайн"
+  "showTooltipPercentageHover": {
+    "message": "Показывать процент в подсказке полосы лайков/дизлайков."
   },
-  "apiStatusOffline": {
-    "message": "Офлайн"
+  "textColorTheme": {
+    "message": "Цветовая тема:"
   },
-  "disableLoggingLabel": {
-    "message": "Отключить логирование в консоль"
+  "textColorTheme1": {
+    "message": "Классическая"
   },
-  "disableLoggingHover": {
-    "message": "Отключает логирование ответов API в консоль."
+  "textColorTheme2": {
+    "message": "Доступная"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Неоновая"
+  },
+  "textColorizeRatioBar": {
+    "message": "Раскрасьте полосу неприязни"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Используйте пользовательские цвета для полосы неприязни."
+  },
+  "textColorizeThumbs": {
+    "message": "Раскрасьте кнопки"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Раскрасьте кнопки нравится и не нравится с помощью пользовательских цветов."
+  },
+  "textConsistentFormat": {
+    "message": "Привести формат лайков и дизлайков к единому виду"
+  },
+  "textConsistentFormatHover": {
+    "message": "Переформатировать число лайков."
+  },
+  "textDeveloper": {
+    "message": "Дмитрий Селиванов и сообщество"
+  },
+  "textLikesDisabled": {
+    "message": "Отключено владельцем"
+  },
+  "textNumberFormat": {
+    "message": "Числовой формат:"
+  },
+  "textRoundingNumbers": {
+    "message": "Округлить статистику лайков/дизлайков (стандартное поведение YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Показывать округленные данные."
+  },
+  "textSettings": {
+    "message": "Отключить отправку лайков/дизлайков"
+  },
+  "textSettingsHover": {
+    "message": "Отключает отправку ваших отметок нравится/не нравится"
+  },
+  "textTempUnavailable": {
+    "message": "Временно недоступно"
+  },
+  "textUpdate": {
+    "message": "обновление до"
+  },
+  "tooltipPercentageMode": {
+    "message": "Режим процентов:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Использовать кастомный показ процентов при наведении."
+  },
+  "version30installed": {
+    "message": "Версия __RYD_VERSION__ установлена"
+  },
+  "whatsnew": {
+    "message": "Что нового"
   }
 }

@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "YouTube Dislike Sayısını Geri Getir"
+  "apiStatusLabel": {
+    "message": "API durumu:"
   },
-  "extensionNameBeta": {
-    "message": "YouTube Dislike Sayısını Geri Getir Beta"
+  "apiStatusOffline": {
+    "message": "Çevrimdışı"
   },
-  "extensionDesc": {
-    "message": "Dislike'ları görebilme yeteneği verir"
+  "apiStatusOnline": {
+    "message": "Çevrimiçi"
   },
-  "textDeveloper": {
-    "message": "Dmitry Selivanov ve Topluluk tarafından"
-  },
-  "linkWebsite": {
-    "message": "Site"
-  },
-  "linkFAQ": {
-    "message": "SSS"
-  },
-  "linkDonate": {
-    "message": "Bağış Yap"
-  },
-  "linkHelp": {
-    "message": "Yardım"
-  },
-  "linkChangelog": {
-    "message": "Değişim Günlüğü"
-  },
-  "legendSettings": {
-    "message": "Ayarlar"
-  },
-  "textSettings": {
-    "message": "Like/dislike gönderimini devre dışı bırak"
-  },
-  "textLikesDisabled": {
-    "message": "Sahibi tarafından devre dışı bırakıldı"
-  },
-  "textSettingsHover": {
-    "message": "Like ve dislike'larınızı saymayı bırakır."
-  },
-  "textRoundingNumbers": {
-    "message": "Like/dislike istatisliklerini aşağıya yuvarlar (varsayılan YouTube davranışı)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Yuvarlatılmış istatistikleri göster."
-  },
-  "textConsistentFormat": {
-    "message": "Like ve dislike tarzını tutarlı hâle getirir"
-  },
-  "textConsistentFormatHover": {
-    "message": "Like sayılarının tarzını yenileştir."
-  },
-  "textNumberFormat": {
-    "message": "Sayı tarzı:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Beğeni oranı çubuğunu renklendir"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Oran çubuğu için özel renkler kullanın."
-  },
-  "textColorizeThumbs": {
-    "message": "Butonları renklendir"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Buton simgeleri için özel renkler kullanın."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Renk teması:"
-  },
-  "textColorTheme1": {
-    "message": "Klasik"
-  },
-  "textColorTheme2": {
-    "message": "Anlaşılır"
-  },
-  "textColorTheme3": {
-    "message": "Neon"
-  },
-  "textTempUnavailable": {
-    "message": "Geçici Olarak Kullanım Dışı"
-  },
-  "textUpdate": {
-    "message": "Şu sürüme güncelle"
-  },
-  "version30installed": {
-    "message": "Sürüm __RYD_VERSION__ yüklendi"
-  },
-  "whatsnew": {
-    "message": "Yeni Ne Var"
-  },
-  "shortsSupport": {
-    "message": "YouTube Shorts Desteği"
-  },
-  "customColors": {
-    "message": "Dislike çubuğu ve düğmeler için özel renkler"
-  },
-  "customNumberFormats": {
-    "message": "Özel sayı biçimleri"
-  },
-  "considerDonating": {
-    "message": "Uzantının var olmasını sağlayan tek şey bağışlarınızdır, lütfen projeyi desteklemeyi düşünün."
-  },
-  "roundNumbers": {
-    "message": "Aşağı yuvarlanmış sayıları gösterir"
-  },
-  "roundNumbersHover": {
-    "message": "Sayıları aşağıya yuvarla (varsayılan YouTube davranışı)."
-  },
-  "reformatLikes": {
-    "message": "Like sayılarının tarzını yenileştir"
-  },
-  "reformatLikesHover": {
-    "message": "Like ve dislike tarzını tutarlı hâle getirir."
-  },
-  "numberFormat": {
-    "message": "Sayı tarzı:"
   },
   "colorizeRatio": {
     "message": "Beğeni oranı çubuğunu renklendir"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Buton simgeleri için özel renkler kullan."
   },
-  "colorTheme": {
-    "message": "Renk teması:"
+  "considerDonating": {
+    "message": "Uzantının var olmasını sağlayan tek şey bağışlarınızdır, lütfen projeyi desteklemeyi düşünün."
   },
-  "showTooltipPercentage": {
-    "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzde."
+  "customColors": {
+    "message": "Dislike çubuğu ve düğmeler için özel renkler"
   },
-  "showTooltipPercentageHover": {
-    "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzdeyi göster."
+  "customNumberFormats": {
+    "message": "Özel sayı biçimleri"
   },
-  "tooltipPercentageMode": {
-    "message": "Yüzde modu:"
+  "disableLoggingHover": {
+    "message": "Konsolda API yanıtlarının günlüğe kaydını kapatır."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Üzerine gelindiğinde özel yüzde gösterimini kullan."
+  "disableLoggingLabel": {
+    "message": "Konsola günlüklemeyi kapat"
+  },
+  "extensionDesc": {
+    "message": "Dislike'ları görebilme yeteneği verir"
+  },
+  "extensionName": {
+    "message": "YouTube Dislike Sayısını Geri Getir"
+  },
+  "extensionNameBeta": {
+    "message": "YouTube Dislike Sayısını Geri Getir Beta"
+  },
+  "legendSettings": {
+    "message": "Ayarlar"
+  },
+  "linkChangelog": {
+    "message": "Değişim Günlüğü"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Bağış Yap"
+  },
+  "linkFAQ": {
+    "message": "SSS"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Yardım"
+  },
+  "linkWebsite": {
+    "message": "Site"
+  },
+  "numberFormat": {
+    "message": "Sayı tarzı:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premium özellikler Patreon destekçileri için kullanılabilir"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Patreon ile giriş yap"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Giriş tamamlanamadı. Lütfen tekrar deneyin."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Patreon oturum açma başlatılamadı. Lütfen tekrar deneyin."
+  },
   "patreonLogout": {
     "message": "Çıkış yap"
   },
-  "patreonUserFallback": {
-    "message": "Patreon kullanıcısı"
+  "patreonPermissionRequired": {
+    "message": "Oturum açmak için 'identity' izni gerekir. Devam etmek için lütfen izin verin."
+  },
+  "patreonTierBasic": {
+    "message": "Temel Seviye"
+  },
+  "patreonTierChecking": {
+    "message": "Üyelik kontrol ediliyor…"
+  },
+  "patreonTierNone": {
+    "message": "Etkin üyelik yok"
   },
   "patreonTierPremium": {
     "message": "Premium Destekçi"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Destekçi"
   },
-  "patreonTierBasic": {
-    "message": "Temel Seviye"
+  "patreonUserFallback": {
+    "message": "Patreon kullanıcısı"
   },
-  "patreonTierNone": {
-    "message": "Etkin üyelik yok"
+  "reformatLikes": {
+    "message": "Like sayılarının tarzını yenileştir"
   },
-  "patreonTierChecking": {
-    "message": "Üyelik kontrol ediliyor…"
+  "reformatLikesHover": {
+    "message": "Like ve dislike tarzını tutarlı hâle getirir."
   },
-  "patreonPermissionRequired": {
-    "message": "Oturum açmak için 'identity' izni gerekir. Devam etmek için lütfen izin verin."
+  "roundNumbers": {
+    "message": "Aşağı yuvarlanmış sayıları gösterir"
   },
-  "patreonLoginStartFailed": {
-    "message": "Patreon oturum açma başlatılamadı. Lütfen tekrar deneyin."
+  "roundNumbersHover": {
+    "message": "Sayıları aşağıya yuvarla (varsayılan YouTube davranışı)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Giriş tamamlanamadı. Lütfen tekrar deneyin."
+  "shortsSupport": {
+    "message": "YouTube Shorts Desteği"
   },
-  "apiStatusLabel": {
-    "message": "API durumu:"
+  "showTooltipPercentage": {
+    "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzde."
   },
-  "apiStatusOnline": {
-    "message": "Çevrimiçi"
+  "showTooltipPercentageHover": {
+    "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzdeyi göster."
   },
-  "apiStatusOffline": {
-    "message": "Çevrimdışı"
+  "textColorTheme": {
+    "message": "Renk teması:"
   },
-  "disableLoggingLabel": {
-    "message": "Konsola günlüklemeyi kapat"
+  "textColorTheme1": {
+    "message": "Klasik"
   },
-  "disableLoggingHover": {
-    "message": "Konsolda API yanıtlarının günlüğe kaydını kapatır."
+  "textColorTheme2": {
+    "message": "Anlaşılır"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Beğeni oranı çubuğunu renklendir"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Oran çubuğu için özel renkler kullanın."
+  },
+  "textColorizeThumbs": {
+    "message": "Butonları renklendir"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Buton simgeleri için özel renkler kullanın."
+  },
+  "textConsistentFormat": {
+    "message": "Like ve dislike tarzını tutarlı hâle getirir"
+  },
+  "textConsistentFormatHover": {
+    "message": "Like sayılarının tarzını yenileştir."
+  },
+  "textDeveloper": {
+    "message": "Dmitry Selivanov ve Topluluk tarafından"
+  },
+  "textLikesDisabled": {
+    "message": "Sahibi tarafından devre dışı bırakıldı"
+  },
+  "textNumberFormat": {
+    "message": "Sayı tarzı:"
+  },
+  "textRoundingNumbers": {
+    "message": "Like/dislike istatisliklerini aşağıya yuvarlar (varsayılan YouTube davranışı)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Yuvarlatılmış istatistikleri göster."
+  },
+  "textSettings": {
+    "message": "Like/dislike gönderimini devre dışı bırak"
+  },
+  "textSettingsHover": {
+    "message": "Like ve dislike'larınızı saymayı bırakır."
+  },
+  "textTempUnavailable": {
+    "message": "Geçici Olarak Kullanım Dışı"
+  },
+  "textUpdate": {
+    "message": "Şu sürüme güncelle"
+  },
+  "tooltipPercentageMode": {
+    "message": "Yüzde modu:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Üzerine gelindiğinde özel yüzde gösterimini kullan."
+  },
+  "version30installed": {
+    "message": "Sürüm __RYD_VERSION__ yüklendi"
+  },
+  "whatsnew": {
+    "message": "Yeni Ne Var"
   }
 }

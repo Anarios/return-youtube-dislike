@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Стан API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Офлайн"
   },
-  "extensionDesc": {
-    "message": "Повертає здатність бачити відмітки «Не подобається»"
+  "apiStatusOnline": {
+    "message": "Онлайн"
   },
-  "textDeveloper": {
-    "message": "від Дмитра Селіванова та спільноти"
-  },
-  "linkWebsite": {
-    "message": "Вебсайт"
-  },
-  "linkFAQ": {
-    "message": "ЧаПи"
-  },
-  "linkDonate": {
-    "message": "Підтримати"
-  },
-  "linkHelp": {
-    "message": "Допомога"
-  },
-  "linkChangelog": {
-    "message": "Журнал змін"
-  },
-  "legendSettings": {
-    "message": "Налаштування"
-  },
-  "textSettings": {
-    "message": "Вимкнути надсилання відміток"
-  },
-  "textLikesDisabled": {
-    "message": "Вимкнуто власником"
-  },
-  "textSettingsHover": {
-    "message": "Вимикає надсилання відміток «Подобається» та «Не подобається»."
-  },
-  "textRoundingNumbers": {
-    "message": "Округлює значення відміток (стандартний параметр YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Показувати заокруглені значення."
-  },
-  "textConsistentFormat": {
-    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
-  },
-  "textConsistentFormatHover": {
-    "message": "Форматувати як числа."
-  },
-  "textNumberFormat": {
-    "message": "Формат значень:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Обрати кольори стрічки співвідношення"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Змінює кольори стрічки співвідношення на обрані вами."
-  },
-  "textColorizeThumbs": {
-    "message": "Обрати кольори відміток"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Змінює кольори піктограм відміток на обрані вами."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Кольорова схема:"
-  },
-  "textColorTheme1": {
-    "message": "Класика"
-  },
-  "textColorTheme2": {
-    "message": "Доступність"
-  },
-  "textColorTheme3": {
-    "message": "Неон"
-  },
-  "textTempUnavailable": {
-    "message": "Тимчасово недоступно"
-  },
-  "textUpdate": {
-    "message": "Оновлення до"
-  },
-  "version30installed": {
-    "message": "Версію __RYD_VERSION__ встановлено"
-  },
-  "whatsnew": {
-    "message": "Що нового"
-  },
-  "shortsSupport": {
-    "message": "Підтримка YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Користувальницькі кольори стрічки співвідношення та кнопок"
-  },
-  "customNumberFormats": {
-    "message": "Користувацькі формати значень"
-  },
-  "considerDonating": {
-    "message": "Розширення досі існує лише за допомогою ваших пожертв, будь ласка, підтримайте проєкт."
-  },
-  "roundNumbers": {
-    "message": "Показувати заокруглені значення"
-  },
-  "roundNumbersHover": {
-    "message": "Округлює значення відміток (стандартний параметр YouTube)"
-  },
-  "reformatLikes": {
-    "message": "Форматувати як числа"
-  },
-  "reformatLikesHover": {
-    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
-  },
-  "numberFormat": {
-    "message": "Формат значень:"
   },
   "colorizeRatio": {
     "message": "Обрати кольори стрічки співвідношення"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Змінює кольори піктограм відміток на обрані вами."
   },
-  "colorTheme": {
-    "message": "Кольорова схема:"
+  "considerDonating": {
+    "message": "Розширення досі існує лише за допомогою ваших пожертв, будь ласка, підтримайте проєкт."
   },
-  "showTooltipPercentage": {
-    "message": "Відсоток у підказці панелі вподобань/невподобань."
+  "customColors": {
+    "message": "Користувальницькі кольори стрічки співвідношення та кнопок"
   },
-  "showTooltipPercentageHover": {
-    "message": "Показувати відсоток у підказці панелі вподобань/невподобань."
+  "customNumberFormats": {
+    "message": "Користувацькі формати значень"
   },
-  "tooltipPercentageMode": {
-    "message": "Режим відсотків:"
+  "disableLoggingHover": {
+    "message": "Вимикає журналювання відповідей API в консолі."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Використовувати власне відображення відсотків при наведенні."
+  "disableLoggingLabel": {
+    "message": "Вимкнути журнал у консоль"
+  },
+  "extensionDesc": {
+    "message": "Повертає здатність бачити відмітки «Не подобається»"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Налаштування"
+  },
+  "linkChangelog": {
+    "message": "Журнал змін"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Підтримати"
+  },
+  "linkFAQ": {
+    "message": "ЧаПи"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Допомога"
+  },
+  "linkWebsite": {
+    "message": "Вебсайт"
+  },
+  "numberFormat": {
+    "message": "Формат значень:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Преміум‑функції доступні прихильникам на Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Увійти через Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Не вдалося завершити вхід. Спробуйте ще раз."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Не вдалося розпочати вхід через Patreon. Спробуйте ще раз."
+  },
   "patreonLogout": {
     "message": "Вийти"
   },
-  "patreonUserFallback": {
-    "message": "Користувач Patreon"
+  "patreonPermissionRequired": {
+    "message": "Для входу потрібен дозвіл «identity». Дозвольте, щоб продовжити."
+  },
+  "patreonTierBasic": {
+    "message": "Базовий рівень"
+  },
+  "patreonTierChecking": {
+    "message": "Перевірка підписки…"
+  },
+  "patreonTierNone": {
+    "message": "Немає активної підписки"
   },
   "patreonTierPremium": {
     "message": "Преміум‑підтримувач"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Підтримувач"
   },
-  "patreonTierBasic": {
-    "message": "Базовий рівень"
+  "patreonUserFallback": {
+    "message": "Користувач Patreon"
   },
-  "patreonTierNone": {
-    "message": "Немає активної підписки"
+  "reformatLikes": {
+    "message": "Форматувати як числа"
   },
-  "patreonTierChecking": {
-    "message": "Перевірка підписки…"
+  "reformatLikesHover": {
+    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
   },
-  "patreonPermissionRequired": {
-    "message": "Для входу потрібен дозвіл «identity». Дозвольте, щоб продовжити."
+  "roundNumbers": {
+    "message": "Показувати заокруглені значення"
   },
-  "patreonLoginStartFailed": {
-    "message": "Не вдалося розпочати вхід через Patreon. Спробуйте ще раз."
+  "roundNumbersHover": {
+    "message": "Округлює значення відміток (стандартний параметр YouTube)"
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Не вдалося завершити вхід. Спробуйте ще раз."
+  "shortsSupport": {
+    "message": "Підтримка YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "Стан API:"
+  "showTooltipPercentage": {
+    "message": "Відсоток у підказці панелі вподобань/невподобань."
   },
-  "apiStatusOnline": {
-    "message": "Онлайн"
+  "showTooltipPercentageHover": {
+    "message": "Показувати відсоток у підказці панелі вподобань/невподобань."
   },
-  "apiStatusOffline": {
-    "message": "Офлайн"
+  "textColorTheme": {
+    "message": "Кольорова схема:"
   },
-  "disableLoggingLabel": {
-    "message": "Вимкнути журнал у консоль"
+  "textColorTheme1": {
+    "message": "Класика"
   },
-  "disableLoggingHover": {
-    "message": "Вимикає журналювання відповідей API в консолі."
+  "textColorTheme2": {
+    "message": "Доступність"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Неон"
+  },
+  "textColorizeRatioBar": {
+    "message": "Обрати кольори стрічки співвідношення"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Змінює кольори стрічки співвідношення на обрані вами."
+  },
+  "textColorizeThumbs": {
+    "message": "Обрати кольори відміток"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Змінює кольори піктограм відміток на обрані вами."
+  },
+  "textConsistentFormat": {
+    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
+  },
+  "textConsistentFormatHover": {
+    "message": "Форматувати як числа."
+  },
+  "textDeveloper": {
+    "message": "від Дмитра Селіванова та спільноти"
+  },
+  "textLikesDisabled": {
+    "message": "Вимкнуто власником"
+  },
+  "textNumberFormat": {
+    "message": "Формат значень:"
+  },
+  "textRoundingNumbers": {
+    "message": "Округлює значення відміток (стандартний параметр YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Показувати заокруглені значення."
+  },
+  "textSettings": {
+    "message": "Вимкнути надсилання відміток"
+  },
+  "textSettingsHover": {
+    "message": "Вимикає надсилання відміток «Подобається» та «Не подобається»."
+  },
+  "textTempUnavailable": {
+    "message": "Тимчасово недоступно"
+  },
+  "textUpdate": {
+    "message": "Оновлення до"
+  },
+  "tooltipPercentageMode": {
+    "message": "Режим відсотків:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Використовувати власне відображення відсотків при наведенні."
+  },
+  "version30installed": {
+    "message": "Версію __RYD_VERSION__ встановлено"
+  },
+  "whatsnew": {
+    "message": "Що нового"
   }
 }

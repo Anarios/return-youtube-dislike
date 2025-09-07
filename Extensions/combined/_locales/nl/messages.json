@@ -1,154 +1,81 @@
 {
-
-    "extensionName": {
-      "message": "Return YouTube Dislike"
-    },
-    "extensionNameBeta": {
-      "message": "Return YouTube Dislike Beta"
-    },
-    "extensionDesc": {
-      "message": "Herstelt de functie om dislikes te kunnen zien"
-    },
-    "textDeveloper": {
-      "message": "door Dmitry Selivanov & Gemeenschap"
-    },
-    "linkWebsite": {
-      "message": "Website"
-    },
-    "linkFAQ": {
-      "message": "FAQ"
-    },
-    "linkDonate": {
-      "message": "Doneer"
-    },
-    "linkHelp": {
-      "message": "Help"
-    },
-    "linkChangelog": {
-      "message": "Wijzigingslog"
-    },
-    "legendSettings": {
-      "message": "Instellingen"
-    },
-    "textSettings": {
-      "message": "Inzending voor leuk/niet leuk uitschakelen"
-    },
-    "textLikesDisabled": {
-      "message": "Uitgeschakeld door eigenaar"
-    },
-    "textSettingsHover": {
-      "message": "Stopt met het tellen van je leuks en niet leuks"
-    },
-    "textRoundingNumbers": {
-      "message": "Statistieken voor leuk/niet leuk naar beneden afronden (standaard YouTube-gedrag)"
-    },
-    "textRoundingNumbersHover": {
-      "message": "Afgeronde statistieken weergeven."
-    },
-    "textConsistentFormat": {
-      "message": "Maak het formaat voor likes en dislikes consistent"
-    },
-    "textConsistentFormatHover": {
-      "message": "Herformatteer als getallen."
-    },
-    "textNumberFormat": {
-      "message": "Getalnotatie:"
-    },
-    "textColorizeRatioBar": {
-      "message": "Verhoudingsbalk inkleuren"
-    },
-    "textColorizeRatioBarHover": {
-      "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
-    },
-    "textColorizeThumbs": {
-      "message": "Duimpjes inkleuren"
-    },
-    "textColorizeThumbsHover": {
-      "message": "Gebruik aangepaste kleuren voor duimpictogrammen."
-    },
-    "textColorTheme": {
-      "message": "Kleurenthema:"
-    },
-    "textColorTheme1": {
-      "message": "Klassiek"
-    },
-    "textColorTheme2": {
-      "message": "Beschikbaar"
-    },
-    "textColorTheme3": {
-      "message": "Neon"
-    },
-    "textTempUnavailable": {
-      "message": "Tijdelijk niet beschikbaar"
-    },
-    "textUpdate": {
-      "message": "Actualiseer naar"
-    },
-    "version30installed": {
-      "message": "Versie 3.0.0.13 geïnstalleerd"
-    },
-    "whatsnew": {
-      "message": "Wat is er nieuw"
-    },
-    "shortsSupport": {
-      "message": "Ondersteuning voor YouTube Shorts"
-    },
-    "customColors": {
-      "message": "Aangepaste kleuren voor afkeerbalk en knoppen"
-    },
-    "customNumberFormats": {
-      "message": "Aangepaste getalnotaties"
-    },
-    "considerDonating": {
-      "message": "Het enige dat de extensie draaiende houdt, zijn uw donaties. Overweeg alstublieft om het project te steunen."
-    },
-    "roundNumbers": {
-      "message": "Afgeronde getallen weergeven"
-    },
-    "roundNumbersHover": {
-      "message": "Rond getallen naar beneden af (standaard YouTube-gedrag)."
-    },
-    "reformatLikes": {
-      "message": "Opnieuw formatteren zoals getallen"
-    },
-    "reformatLikesHover": {
-      "message": "Maak het formaat voor leuk en niet leuk consistent."
-    },
-    "numberFormat": {
-      "message": "Getalnotatie:"
-    },
-    "colorizeRatio": {
-      "message": "Verhoudingsbalk inkleuren"
-    },
-    "colorizeRatioHover": {
-      "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
-    },
-    "colorizeThumbs": {
-      "message": "Duimpjes inkleuren"
-    },
-    "colorizeThumbsHover": {
-      "message": "Gebruik aangepaste kleuren voor de duimpictogrammen."
-    },
+  "apiStatusLabel": {
+    "message": "API‑status:"
+  },
+  "apiStatusOffline": {
+    "message": "Offline"
+  },
+  "apiStatusOnline": {
+    "message": "Online"
+  },
   "colorTheme": {
     "message": "Kleurenthema:"
   },
-  "showTooltipPercentage": {
-    "message": "Percentage in de tooltip van de like/dislike‑balk."
+  "colorizeRatio": {
+    "message": "Verhoudingsbalk inkleuren"
   },
-  "showTooltipPercentageHover": {
-    "message": "Percentage in de tooltip van de like/dislike‑balk weergeven."
+  "colorizeRatioHover": {
+    "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
   },
-  "tooltipPercentageMode": {
-    "message": "Percentage‑modus:"
+  "colorizeThumbs": {
+    "message": "Duimpjes inkleuren"
   },
-  "tooltipPercentageModeHover": {
-    "message": "Aangepaste procentweergave bij hover gebruiken."
+  "colorizeThumbsHover": {
+    "message": "Gebruik aangepaste kleuren voor de duimpictogrammen."
+  },
+  "considerDonating": {
+    "message": "Het enige dat de extensie draaiende houdt, zijn uw donaties. Overweeg alstublieft om het project te steunen."
+  },
+  "customColors": {
+    "message": "Aangepaste kleuren voor afkeerbalk en knoppen"
+  },
+  "customNumberFormats": {
+    "message": "Aangepaste getalnotaties"
+  },
+  "disableLoggingHover": {
+    "message": "Schakelt het loggen van API‑antwoorden in de console uit."
+  },
+  "disableLoggingLabel": {
+    "message": "Loggen naar de console uitschakelen"
+  },
+  "extensionDesc": {
+    "message": "Herstelt de functie om dislikes te kunnen zien"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Instellingen"
+  },
+  "linkChangelog": {
+    "message": "Wijzigingslog"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Doneer"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Help"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "numberFormat": {
+    "message": "Getalnotatie:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premiumfuncties zijn beschikbaar voor supporters op Patreon"
@@ -156,11 +83,26 @@
   "patreonLogin": {
     "message": "Inloggen met Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Aanmelden kon niet worden voltooid. Probeer het opnieuw."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Patreon‑aanmelding kon niet worden gestart. Probeer het opnieuw."
+  },
   "patreonLogout": {
     "message": "Afmelden"
   },
-  "patreonUserFallback": {
-    "message": "Patreon‑gebruiker"
+  "patreonPermissionRequired": {
+    "message": "Voor inloggen is de machtiging 'identity' vereist. Sta dit toe om door te gaan."
+  },
+  "patreonTierBasic": {
+    "message": "Basisniveau"
+  },
+  "patreonTierChecking": {
+    "message": "Lidmaatschap controleren…"
+  },
+  "patreonTierNone": {
+    "message": "Geen actief lidmaatschap"
   },
   "patreonTierPremium": {
     "message": "Premium‑supporter"
@@ -168,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Supporter"
   },
-  "patreonTierBasic": {
-    "message": "Basisniveau"
+  "patreonUserFallback": {
+    "message": "Patreon‑gebruiker"
   },
-  "patreonTierNone": {
-    "message": "Geen actief lidmaatschap"
+  "reformatLikes": {
+    "message": "Opnieuw formatteren zoals getallen"
   },
-  "patreonTierChecking": {
-    "message": "Lidmaatschap controleren…"
+  "reformatLikesHover": {
+    "message": "Maak het formaat voor leuk en niet leuk consistent."
   },
-  "patreonPermissionRequired": {
-    "message": "Voor inloggen is de machtiging 'identity' vereist. Sta dit toe om door te gaan."
+  "roundNumbers": {
+    "message": "Afgeronde getallen weergeven"
   },
-  "patreonLoginStartFailed": {
-    "message": "Patreon‑aanmelding kon niet worden gestart. Probeer het opnieuw."
+  "roundNumbersHover": {
+    "message": "Rond getallen naar beneden af (standaard YouTube-gedrag)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Aanmelden kon niet worden voltooid. Probeer het opnieuw."
+  "shortsSupport": {
+    "message": "Ondersteuning voor YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "API‑status:"
+  "showTooltipPercentage": {
+    "message": "Percentage in de tooltip van de like/dislike‑balk."
   },
-  "apiStatusOnline": {
-    "message": "Online"
+  "showTooltipPercentageHover": {
+    "message": "Percentage in de tooltip van de like/dislike‑balk weergeven."
   },
-  "apiStatusOffline": {
-    "message": "Offline"
+  "textColorTheme": {
+    "message": "Kleurenthema:"
   },
-  "disableLoggingLabel": {
-    "message": "Loggen naar de console uitschakelen"
+  "textColorTheme1": {
+    "message": "Klassiek"
   },
-  "disableLoggingHover": {
-    "message": "Schakelt het loggen van API‑antwoorden in de console uit."
+  "textColorTheme2": {
+    "message": "Beschikbaar"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Verhoudingsbalk inkleuren"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
+  },
+  "textColorizeThumbs": {
+    "message": "Duimpjes inkleuren"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Gebruik aangepaste kleuren voor duimpictogrammen."
+  },
+  "textConsistentFormat": {
+    "message": "Maak het formaat voor likes en dislikes consistent"
+  },
+  "textConsistentFormatHover": {
+    "message": "Herformatteer als getallen."
+  },
+  "textDeveloper": {
+    "message": "door Dmitry Selivanov & Gemeenschap"
+  },
+  "textLikesDisabled": {
+    "message": "Uitgeschakeld door eigenaar"
+  },
+  "textNumberFormat": {
+    "message": "Getalnotatie:"
+  },
+  "textRoundingNumbers": {
+    "message": "Statistieken voor leuk/niet leuk naar beneden afronden (standaard YouTube-gedrag)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Afgeronde statistieken weergeven."
+  },
+  "textSettings": {
+    "message": "Inzending voor leuk/niet leuk uitschakelen"
+  },
+  "textSettingsHover": {
+    "message": "Stopt met het tellen van je leuks en niet leuks"
+  },
+  "textTempUnavailable": {
+    "message": "Tijdelijk niet beschikbaar"
+  },
+  "textUpdate": {
+    "message": "Actualiseer naar"
+  },
+  "tooltipPercentageMode": {
+    "message": "Percentage‑modus:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Aangepaste procentweergave bij hover gebruiken."
+  },
+  "version30installed": {
+    "message": "Versie 3.0.0.13 geïnstalleerd"
+  },
+  "whatsnew": {
+    "message": "Wat is er nieuw"
   }
 }

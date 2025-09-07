@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "API‑Status:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Macht Dislikes wieder sichtbar"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "von Dmitry Selivanov & der Community"
-  },
-  "linkWebsite": {
-    "message": "Website"
-  },
-  "linkFAQ": {
-    "message": "FAQ"
-  },
-  "linkDonate": {
-    "message": "Spenden"
-  },
-  "linkHelp": {
-    "message": "Hilfe"
-  },
-  "linkChangelog": {
-    "message": "Änderungshistorie"
-  },
-  "legendSettings": {
-    "message": "Einstellungen"
-  },
-  "textSettings": {
-    "message": "Deaktiviere Like/Dislike-Übermittlung"
-  },
-  "textLikesDisabled": {
-    "message": "Deaktiviert vom Ersteller"
-  },
-  "textSettingsHover": {
-    "message": "Stoppt deine Likes und Dislikes zu zählen."
-  },
-  "textRoundingNumbers": {
-    "message": "Runde Likes/Dislikes ab (Standardverhalten von YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Zeige abgerundete Zahlen."
-  },
-  "textConsistentFormat": {
-    "message": "Das Format der Likes und Dislikes einheitlich machen."
-  },
-  "textConsistentFormatHover": {
-    "message": "Likes neu formatieren"
-  },
-  "textNumberFormat": {
-    "message": "Zahlenformat:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Verhältnisbalken einfärben"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Benutzerdefinierte Farben für die Verhältnisleiste verwenden."
-  },
-  "textColorizeThumbs": {
-    "message": "Like/Dislike-Icons einfärben"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Benutzerdefinierte Farben für die Like/Dislike-Icons verwenden."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Farbschema:"
-  },
-  "textColorTheme1": {
-    "message": "Klassisch"
-  },
-  "textColorTheme2": {
-    "message": "Barrierefrei"
-  },
-  "textColorTheme3": {
-    "message": "Neon"
-  },
-  "textTempUnavailable": {
-    "message": "Temporär nicht verfügbar"
-  },
-  "textUpdate": {
-    "message": "Aktualisieren auf"
-  },
-  "version30installed": {
-    "message": "Version __RYD_VERSION__ installiert"
-  },
-  "whatsnew": {
-    "message": "Was ist neu"
-  },
-  "shortsSupport": {
-    "message": "YouTube Shorts Unterstützung"
-  },
-  "customColors": {
-    "message": "Benutzerdefinierte Farben für die Dislike-Leiste und Knopf"
-  },
-  "customNumberFormats": {
-    "message": "Benutzerdefinierte Zahlenformate"
-  },
-  "considerDonating": {
-    "message": "Das Einzige, was die Erweiterung am Laufen hält, sind Ihre Spenden, bitte erwägen Sie, das Projekt zu unterstützen."
-  },
-  "roundNumbers": {
-    "message": "Zeige abgerundete Zahlen"
-  },
-  "roundNumbersHover": {
-    "message": "Zahlen abrunden (Standardverhalten von YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Likes neu formatieren"
-  },
-  "reformatLikesHover": {
-    "message": "Das Format der Likes und Dislikes einheitlich machen."
-  },
-  "numberFormat": {
-    "message": "Zahlenformat:"
   },
   "colorizeRatio": {
     "message": "Verhältnisbalken einfärben"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Benutzerdefinierte Farben für die Like/Dislike-Icons verwenden."
   },
-  "colorTheme": {
-    "message": "Farbschema:"
+  "considerDonating": {
+    "message": "Das Einzige, was die Erweiterung am Laufen hält, sind Ihre Spenden, bitte erwägen Sie, das Projekt zu unterstützen."
   },
-  "showTooltipPercentage": {
-    "message": "Prozentangabe in der Like/Dislike‑Leiste (Tooltip)."
+  "customColors": {
+    "message": "Benutzerdefinierte Farben für die Dislike-Leiste und Knopf"
   },
-  "showTooltipPercentageHover": {
-    "message": "Prozentangabe im Tooltip der Like/Dislike‑Leiste anzeigen."
+  "customNumberFormats": {
+    "message": "Benutzerdefinierte Zahlenformate"
   },
-  "tooltipPercentageMode": {
-    "message": "Prozentmodus:"
+  "disableLoggingHover": {
+    "message": "Deaktiviert das Protokollieren von API‑Antworten in der Konsole."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Benutzerdefinierte Prozentanzeige beim Hover verwenden."
+  "disableLoggingLabel": {
+    "message": "Protokollierung in Konsole deaktivieren"
+  },
+  "extensionDesc": {
+    "message": "Macht Dislikes wieder sichtbar"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Einstellungen"
+  },
+  "linkChangelog": {
+    "message": "Änderungshistorie"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Spenden"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Hilfe"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "numberFormat": {
+    "message": "Zahlenformat:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premiumfunktionen sind für Patreon‑Unterstützer verfügbar"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Mit Patreon anmelden"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Anmeldung konnte nicht abgeschlossen werden. Bitte versuche es erneut."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Patreon‑Anmeldung konnte nicht gestartet werden. Bitte versuche es erneut."
+  },
   "patreonLogout": {
     "message": "Abmelden"
   },
-  "patreonUserFallback": {
-    "message": "Patreon‑Nutzer"
+  "patreonPermissionRequired": {
+    "message": "Für die Anmeldung ist die Berechtigung „identity“ erforderlich. Bitte erteilen Sie sie, um fortzufahren."
+  },
+  "patreonTierBasic": {
+    "message": "Basis‑Stufe"
+  },
+  "patreonTierChecking": {
+    "message": "Mitgliedschaft wird geprüft …"
+  },
+  "patreonTierNone": {
+    "message": "Keine aktive Mitgliedschaft"
   },
   "patreonTierPremium": {
     "message": "Premium‑Unterstützer"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Unterstützer"
   },
-  "patreonTierBasic": {
-    "message": "Basis‑Stufe"
+  "patreonUserFallback": {
+    "message": "Patreon‑Nutzer"
   },
-  "patreonTierNone": {
-    "message": "Keine aktive Mitgliedschaft"
+  "reformatLikes": {
+    "message": "Likes neu formatieren"
   },
-  "patreonTierChecking": {
-    "message": "Mitgliedschaft wird geprüft …"
+  "reformatLikesHover": {
+    "message": "Das Format der Likes und Dislikes einheitlich machen."
   },
-  "patreonPermissionRequired": {
-    "message": "Für die Anmeldung ist die Berechtigung „identity“ erforderlich. Bitte erteilen Sie sie, um fortzufahren."
+  "roundNumbers": {
+    "message": "Zeige abgerundete Zahlen"
   },
-  "patreonLoginStartFailed": {
-    "message": "Patreon‑Anmeldung konnte nicht gestartet werden. Bitte versuche es erneut."
+  "roundNumbersHover": {
+    "message": "Zahlen abrunden (Standardverhalten von YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Anmeldung konnte nicht abgeschlossen werden. Bitte versuche es erneut."
+  "shortsSupport": {
+    "message": "YouTube Shorts Unterstützung"
   },
-  "apiStatusLabel": {
-    "message": "API‑Status:"
+  "showTooltipPercentage": {
+    "message": "Prozentangabe in der Like/Dislike‑Leiste (Tooltip)."
   },
-  "apiStatusOnline": {
-    "message": "Online"
+  "showTooltipPercentageHover": {
+    "message": "Prozentangabe im Tooltip der Like/Dislike‑Leiste anzeigen."
   },
-  "apiStatusOffline": {
-    "message": "Offline"
+  "textColorTheme": {
+    "message": "Farbschema:"
   },
-  "disableLoggingLabel": {
-    "message": "Protokollierung in Konsole deaktivieren"
+  "textColorTheme1": {
+    "message": "Klassisch"
   },
-  "disableLoggingHover": {
-    "message": "Deaktiviert das Protokollieren von API‑Antworten in der Konsole."
+  "textColorTheme2": {
+    "message": "Barrierefrei"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Verhältnisbalken einfärben"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Benutzerdefinierte Farben für die Verhältnisleiste verwenden."
+  },
+  "textColorizeThumbs": {
+    "message": "Like/Dislike-Icons einfärben"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Benutzerdefinierte Farben für die Like/Dislike-Icons verwenden."
+  },
+  "textConsistentFormat": {
+    "message": "Das Format der Likes und Dislikes einheitlich machen."
+  },
+  "textConsistentFormatHover": {
+    "message": "Likes neu formatieren"
+  },
+  "textDeveloper": {
+    "message": "von Dmitry Selivanov & der Community"
+  },
+  "textLikesDisabled": {
+    "message": "Deaktiviert vom Ersteller"
+  },
+  "textNumberFormat": {
+    "message": "Zahlenformat:"
+  },
+  "textRoundingNumbers": {
+    "message": "Runde Likes/Dislikes ab (Standardverhalten von YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Zeige abgerundete Zahlen."
+  },
+  "textSettings": {
+    "message": "Deaktiviere Like/Dislike-Übermittlung"
+  },
+  "textSettingsHover": {
+    "message": "Stoppt deine Likes und Dislikes zu zählen."
+  },
+  "textTempUnavailable": {
+    "message": "Temporär nicht verfügbar"
+  },
+  "textUpdate": {
+    "message": "Aktualisieren auf"
+  },
+  "tooltipPercentageMode": {
+    "message": "Prozentmodus:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Benutzerdefinierte Prozentanzeige beim Hover verwenden."
+  },
+  "version30installed": {
+    "message": "Version __RYD_VERSION__ installiert"
+  },
+  "whatsnew": {
+    "message": "Was ist neu"
   }
 }

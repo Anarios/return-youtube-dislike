@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Status API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Przywraca licznik łapek w dół"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "przez Dmitry Selivanov & Społeczność"
-  },
-  "linkWebsite": {
-    "message": "Strona"
-  },
-  "linkFAQ": {
-    "message": "FAQ"
-  },
-  "linkDonate": {
-    "message": "Wesprzyj"
-  },
-  "linkHelp": {
-    "message": "Pomoc"
-  },
-  "linkChangelog": {
-    "message": "Zmiany"
-  },
-  "legendSettings": {
-    "message": "Ustawienia"
-  },
-  "textSettings": {
-    "message": "Wyłącz przesyłanie łapek"
-  },
-  "textLikesDisabled": {
-    "message": "Wyłączone przez twórcę"
-  },
-  "textSettingsHover": {
-    "message": "Przestaje liczyć Twoje łapki."
-  },
-  "textRoundingNumbers": {
-    "message": "Zaokrąglaj łapki w górę/dół (domyślne zachowanie YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Pokaż zaokrąglone w dół statystyki."
-  },
-  "textConsistentFormat": {
-    "message": "Ujednolica format liczbowy łapek."
-  },
-  "textConsistentFormatHover": {
-    "message": "Zmień formatowanie liczby łapek."
-  },
-  "textNumberFormat": {
-    "message": "Format liczbowy:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Koloruj pasek ocen"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Użyj własnych kolorów paska."
-  },
-  "textColorizeThumbs": {
-    "message": "Koloruj łapki"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Użyj własnych kolorów łapek."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Motyw kolorystyczny:"
-  },
-  "textColorTheme1": {
-    "message": "Klasyczny"
-  },
-  "textColorTheme2": {
-    "message": "Dostępny"
-  },
-  "textColorTheme3": {
-    "message": "Neonowy"
-  },
-  "textTempUnavailable": {
-    "message": "Tymczasowo niedostępny"
-  },
-  "textUpdate": {
-    "message": "Zaktualizuj do"
-  },
-  "version30installed": {
-    "message": "Zainstalowana wersja __RYD_VERSION__"
-  },
-  "whatsnew": {
-    "message": "Co nowego"
-  },
-  "shortsSupport": {
-    "message": "Wsparcie dla YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Własne kolory paska łapek i guzików"
-  },
-  "customNumberFormats": {
-    "message": "Własne formaty liczbowe"
-  },
-  "considerDonating": {
-    "message": "Jedyne co napędza ten projekt to wasze dotacje, prosimy o rozważenie wsparcia tego projektu."
-  },
-  "roundNumbers": {
-    "message": "Pokaż zaokrąglone w dół liczby"
-  },
-  "roundNumbersHover": {
-    "message": "Zaokrąglaj w dół liczby (domyślne zachowanie YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Zmień formatowanie liczby łapek."
-  },
-  "reformatLikesHover": {
-    "message": "Ujednolica format liczbowy łapek."
-  },
-  "numberFormat": {
-    "message": "Format liczbowy:"
   },
   "colorizeRatio": {
     "message": "Koloruj pasek ocen"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Użyj własnych kolorów łapek."
   },
-  "colorTheme": {
-    "message": "Motyw kolorystyczny:"
+  "considerDonating": {
+    "message": "Jedyne co napędza ten projekt to wasze dotacje, prosimy o rozważenie wsparcia tego projektu."
   },
-  "showTooltipPercentage": {
-    "message": "Procent w podpowiedzi paska polubień/niepolubień."
+  "customColors": {
+    "message": "Własne kolory paska łapek i guzików"
   },
-  "showTooltipPercentageHover": {
-    "message": "Wyświetl procent w podpowiedzi paska polubień/niepolubień."
+  "customNumberFormats": {
+    "message": "Własne formaty liczbowe"
   },
-  "tooltipPercentageMode": {
-    "message": "Tryb procentów:"
+  "disableLoggingHover": {
+    "message": "Wyłącza logowanie odpowiedzi API w konsoli."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Użyj niestandardowego wyświetlania procentów po najechaniu."
+  "disableLoggingLabel": {
+    "message": "Wyłącz logowanie do konsoli"
+  },
+  "extensionDesc": {
+    "message": "Przywraca licznik łapek w dół"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Ustawienia"
+  },
+  "linkChangelog": {
+    "message": "Zmiany"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Wesprzyj"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Pomoc"
+  },
+  "linkWebsite": {
+    "message": "Strona"
+  },
+  "numberFormat": {
+    "message": "Format liczbowy:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Funkcje premium są dostępne dla wspierających na Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Zaloguj się przez Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Nie udało się dokończyć logowania. Spróbuj ponownie."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Nie udało się rozpocząć logowania przez Patreon. Spróbuj ponownie."
+  },
   "patreonLogout": {
     "message": "Wyloguj się"
   },
-  "patreonUserFallback": {
-    "message": "Użytkownik Patreona"
+  "patreonPermissionRequired": {
+    "message": "Logowanie wymaga uprawnienia „identity”. Zezwól, aby kontynuować."
+  },
+  "patreonTierBasic": {
+    "message": "Poziom podstawowy"
+  },
+  "patreonTierChecking": {
+    "message": "Sprawdzanie członkostwa…"
+  },
+  "patreonTierNone": {
+    "message": "Brak aktywnego członkostwa"
   },
   "patreonTierPremium": {
     "message": "Wspierający Premium"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Wspierający"
   },
-  "patreonTierBasic": {
-    "message": "Poziom podstawowy"
+  "patreonUserFallback": {
+    "message": "Użytkownik Patreona"
   },
-  "patreonTierNone": {
-    "message": "Brak aktywnego członkostwa"
+  "reformatLikes": {
+    "message": "Zmień formatowanie liczby łapek."
   },
-  "patreonTierChecking": {
-    "message": "Sprawdzanie członkostwa…"
+  "reformatLikesHover": {
+    "message": "Ujednolica format liczbowy łapek."
   },
-  "patreonPermissionRequired": {
-    "message": "Logowanie wymaga uprawnienia „identity”. Zezwól, aby kontynuować."
+  "roundNumbers": {
+    "message": "Pokaż zaokrąglone w dół liczby"
   },
-  "patreonLoginStartFailed": {
-    "message": "Nie udało się rozpocząć logowania przez Patreon. Spróbuj ponownie."
+  "roundNumbersHover": {
+    "message": "Zaokrąglaj w dół liczby (domyślne zachowanie YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Nie udało się dokończyć logowania. Spróbuj ponownie."
+  "shortsSupport": {
+    "message": "Wsparcie dla YouTube Shorts"
   },
-  "apiStatusLabel": {
-    "message": "Status API:"
+  "showTooltipPercentage": {
+    "message": "Procent w podpowiedzi paska polubień/niepolubień."
   },
-  "apiStatusOnline": {
-    "message": "Online"
+  "showTooltipPercentageHover": {
+    "message": "Wyświetl procent w podpowiedzi paska polubień/niepolubień."
   },
-  "apiStatusOffline": {
-    "message": "Offline"
+  "textColorTheme": {
+    "message": "Motyw kolorystyczny:"
   },
-  "disableLoggingLabel": {
-    "message": "Wyłącz logowanie do konsoli"
+  "textColorTheme1": {
+    "message": "Klasyczny"
   },
-  "disableLoggingHover": {
-    "message": "Wyłącza logowanie odpowiedzi API w konsoli."
+  "textColorTheme2": {
+    "message": "Dostępny"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Neonowy"
+  },
+  "textColorizeRatioBar": {
+    "message": "Koloruj pasek ocen"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Użyj własnych kolorów paska."
+  },
+  "textColorizeThumbs": {
+    "message": "Koloruj łapki"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Użyj własnych kolorów łapek."
+  },
+  "textConsistentFormat": {
+    "message": "Ujednolica format liczbowy łapek."
+  },
+  "textConsistentFormatHover": {
+    "message": "Zmień formatowanie liczby łapek."
+  },
+  "textDeveloper": {
+    "message": "przez Dmitry Selivanov & Społeczność"
+  },
+  "textLikesDisabled": {
+    "message": "Wyłączone przez twórcę"
+  },
+  "textNumberFormat": {
+    "message": "Format liczbowy:"
+  },
+  "textRoundingNumbers": {
+    "message": "Zaokrąglaj łapki w górę/dół (domyślne zachowanie YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Pokaż zaokrąglone w dół statystyki."
+  },
+  "textSettings": {
+    "message": "Wyłącz przesyłanie łapek"
+  },
+  "textSettingsHover": {
+    "message": "Przestaje liczyć Twoje łapki."
+  },
+  "textTempUnavailable": {
+    "message": "Tymczasowo niedostępny"
+  },
+  "textUpdate": {
+    "message": "Zaktualizuj do"
+  },
+  "tooltipPercentageMode": {
+    "message": "Tryb procentów:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Użyj niestandardowego wyświetlania procentów po najechaniu."
+  },
+  "version30installed": {
+    "message": "Zainstalowana wersja __RYD_VERSION__"
+  },
+  "whatsnew": {
+    "message": "Co nowego"
   }
 }

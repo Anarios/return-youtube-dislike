@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Volta Descurtidas do YouTube"
+  "apiStatusLabel": {
+    "message": "Status da API:"
   },
-  "extensionNameBeta": {
-    "message": "Volta Descurtidas do YouTube Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Retorna a capacidade de ver descurtidas"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "por Dmitry Selivanov & Comunidade"
-  },
-  "linkWebsite": {
-    "message": "Website"
-  },
-  "linkFAQ": {
-    "message": "Perguntas Frequentes"
-  },
-  "linkDonate": {
-    "message": "Doar"
-  },
-  "linkHelp": {
-    "message": "Ajuda"
-  },
-  "linkChangelog": {
-    "message": "Registro de alterações"
-  },
-  "legendSettings": {
-    "message": "Configurações"
-  },
-  "textSettings": {
-    "message": "Desativar envio de curtidas/descurtidas"
-  },
-  "textLikesDisabled": {
-    "message": "Desativado pelo proprietário"
-  },
-  "textSettingsHover": {
-    "message": "Para de contar suas curtidas e descurtidas."
-  },
-  "textRoundingNumbers": {
-    "message": "Arredondar as estatísticas de curtidas/descurtidas para baixo (comportamento padrão do YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Mostrar estatísticas arredondadas"
-  },
-  "textConsistentFormat": {
-    "message": "Tornar o formato de curtidas e descurtidas consistente"
-  },
-  "textConsistentFormatHover": {
-    "message": "Re-formatar número de curtidas."
-  },
-  "textNumberFormat": {
-    "message": "Formato numérico:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Colorir barra de proporção"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Usar cores personalizadas para a barra de proporção."
-  },
-  "textColorizeThumbs": {
-    "message": "Colorir botões"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Usar cores personalizadas para os botões de curtir e descurtir."
-  },
-  "textColorTheme": {
-    "message": "Tema de cores:"
-  },
-  "textColorTheme1": {
-    "message": "Clássico"
-  },
-  "textColorTheme2": {
-    "message": "Acessível"
-  },
-  "textColorTheme3": {
-    "message": "Néon"
-  },
-  "textTempUnavailable": {
-    "message": "Temporariamente Indisponível"
-  },
-  "textUpdate": {
-    "message": "Atualizar para"
-  },
-  "version30installed": {
-    "message": "Versão __RYD_VERSION__ instalada"
-  },
-  "whatsnew": {
-    "message": "O que há de novo?:"
-  },
-  "shortsSupport": {
-    "message": "Suporte a curtas do YouTube"
-  },
-  "customColors": {
-    "message": "Cores personalizadas para barra de proporção e botões"
-  },
-  "customNumberFormats": {
-    "message": "Formato numérico personalizado"
-  },
-  "considerDonating": {
-    "message": "A única coisa que mantém a extensão funcionando são suas doações, considere apoiar o projeto."
-  },
-  "roundNumbers": {
-    "message": "Mostrar números arredondados"
-  },
-  "roundNumbersHover": {
-    "message": "Arredondar os números para baixo (comportamento padrão do YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Re-formatar número de curtidas"
-  },
-  "reformatLikesHover": {
-    "message": "Tornar o formato de curtidas e descurtidas consistente."
-  },
-  "numberFormat": {
-    "message": "Formato numérico:"
+  "colorTheme": {
+    "message": "Tema de Cores:"
   },
   "colorizeRatio": {
     "message": "Colorir barra de proporção"
@@ -128,26 +23,59 @@
   "colorizeThumbsHover": {
     "message": "Usar cores personalizadas para os botões de curtir e descurtir."
   },
-  "colorTheme": {
-    "message": "Tema de Cores:"
+  "considerDonating": {
+    "message": "A única coisa que mantém a extensão funcionando são suas doações, considere apoiar o projeto."
   },
-  "showTooltipPercentage": {
-    "message": "Percentual na dica (tooltip) da barra de like/dislike."
+  "customColors": {
+    "message": "Cores personalizadas para barra de proporção e botões"
   },
-  "showTooltipPercentageHover": {
-    "message": "Mostrar o percentual na dica (tooltip) da barra de like/dislike."
+  "customNumberFormats": {
+    "message": "Formato numérico personalizado"
   },
-  "tooltipPercentageMode": {
-    "message": "Modo de porcentagem:"
+  "disableLoggingHover": {
+    "message": "Desativa o registro de respostas da API no console."
   },
-  "tooltipPercentageModeHover": {
-    "message": "Usar exibição personalizada de porcentagem ao passar o mouse."
+  "disableLoggingLabel": {
+    "message": "Desativar logs no console"
+  },
+  "extensionDesc": {
+    "message": "Retorna a capacidade de ver descurtidas"
+  },
+  "extensionName": {
+    "message": "Volta Descurtidas do YouTube"
+  },
+  "extensionNameBeta": {
+    "message": "Volta Descurtidas do YouTube Beta"
+  },
+  "legendSettings": {
+    "message": "Configurações"
+  },
+  "linkChangelog": {
+    "message": "Registro de alterações"
   },
   "linkDiscord": {
     "message": "Discord"
   },
+  "linkDonate": {
+    "message": "Doar"
+  },
+  "linkFAQ": {
+    "message": "Perguntas Frequentes"
+  },
   "linkGithub": {
     "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Ajuda"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "numberFormat": {
+    "message": "Formato numérico:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Recursos premium disponíveis para apoiadores no Patreon"
@@ -155,11 +83,26 @@
   "patreonLogin": {
     "message": "Entrar com o Patreon"
   },
+  "patreonLoginCompleteFailed": {
+    "message": "Não foi possível concluir o login. Tente novamente."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Falha ao iniciar o login do Patreon. Tente novamente."
+  },
   "patreonLogout": {
     "message": "Sair"
   },
-  "patreonUserFallback": {
-    "message": "Usuário do Patreon"
+  "patreonPermissionRequired": {
+    "message": "O login requer a permissão \"identity\". Permita para continuar."
+  },
+  "patreonTierBasic": {
+    "message": "Nível básico"
+  },
+  "patreonTierChecking": {
+    "message": "Verificando assinatura…"
+  },
+  "patreonTierNone": {
+    "message": "Nenhuma assinatura ativa"
   },
   "patreonTierPremium": {
     "message": "Apoiador Premium"
@@ -167,40 +110,97 @@
   "patreonTierSupporter": {
     "message": "Apoiador"
   },
-  "patreonTierBasic": {
-    "message": "Nível básico"
+  "patreonUserFallback": {
+    "message": "Usuário do Patreon"
   },
-  "patreonTierNone": {
-    "message": "Nenhuma assinatura ativa"
+  "reformatLikes": {
+    "message": "Re-formatar número de curtidas"
   },
-  "patreonTierChecking": {
-    "message": "Verificando assinatura…"
+  "reformatLikesHover": {
+    "message": "Tornar o formato de curtidas e descurtidas consistente."
   },
-  "patreonPermissionRequired": {
-    "message": "O login requer a permissão \"identity\". Permita para continuar."
+  "roundNumbers": {
+    "message": "Mostrar números arredondados"
   },
-  "patreonLoginStartFailed": {
-    "message": "Falha ao iniciar o login do Patreon. Tente novamente."
+  "roundNumbersHover": {
+    "message": "Arredondar os números para baixo (comportamento padrão do YouTube)."
   },
-  "patreonLoginCompleteFailed": {
-    "message": "Não foi possível concluir o login. Tente novamente."
+  "shortsSupport": {
+    "message": "Suporte a curtas do YouTube"
   },
-  "apiStatusLabel": {
-    "message": "Status da API:"
+  "showTooltipPercentage": {
+    "message": "Percentual na dica (tooltip) da barra de like/dislike."
   },
-  "apiStatusOnline": {
-    "message": "Online"
+  "showTooltipPercentageHover": {
+    "message": "Mostrar o percentual na dica (tooltip) da barra de like/dislike."
   },
-  "apiStatusOffline": {
-    "message": "Offline"
+  "textColorTheme": {
+    "message": "Tema de cores:"
   },
-  "disableLoggingLabel": {
-    "message": "Desativar logs no console"
+  "textColorTheme1": {
+    "message": "Clássico"
   },
-  "disableLoggingHover": {
-    "message": "Desativa o registro de respostas da API no console."
+  "textColorTheme2": {
+    "message": "Acessível"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
+  "textColorTheme3": {
+    "message": "Néon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colorir barra de proporção"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Usar cores personalizadas para a barra de proporção."
+  },
+  "textColorizeThumbs": {
+    "message": "Colorir botões"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Usar cores personalizadas para os botões de curtir e descurtir."
+  },
+  "textConsistentFormat": {
+    "message": "Tornar o formato de curtidas e descurtidas consistente"
+  },
+  "textConsistentFormatHover": {
+    "message": "Re-formatar número de curtidas."
+  },
+  "textDeveloper": {
+    "message": "por Dmitry Selivanov & Comunidade"
+  },
+  "textLikesDisabled": {
+    "message": "Desativado pelo proprietário"
+  },
+  "textNumberFormat": {
+    "message": "Formato numérico:"
+  },
+  "textRoundingNumbers": {
+    "message": "Arredondar as estatísticas de curtidas/descurtidas para baixo (comportamento padrão do YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Mostrar estatísticas arredondadas"
+  },
+  "textSettings": {
+    "message": "Desativar envio de curtidas/descurtidas"
+  },
+  "textSettingsHover": {
+    "message": "Para de contar suas curtidas e descurtidas."
+  },
+  "textTempUnavailable": {
+    "message": "Temporariamente Indisponível"
+  },
+  "textUpdate": {
+    "message": "Atualizar para"
+  },
+  "tooltipPercentageMode": {
+    "message": "Modo de porcentagem:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Usar exibição personalizada de porcentagem ao passar o mouse."
+  },
+  "version30installed": {
+    "message": "Versão __RYD_VERSION__ instalada"
+  },
+  "whatsnew": {
+    "message": "O que há de novo?:"
   }
 }
