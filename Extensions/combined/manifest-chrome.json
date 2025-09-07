@@ -15,7 +15,8 @@
     "*://*.youtube.com/*"
   ],
   "permissions": [
-    "storage"
+    "storage",
+    "identity"
   ],
   "action": {
     "default_popup": "popup.html"

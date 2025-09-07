@@ -163,52 +163,81 @@ function initPatreonAuth() {
     }
   }
 
-  loginBtn.addEventListener("click", async () => {
-    try {
-      const response = await fetch(getApiEndpoint("/api/auth/patreon/login"));
-      const data = await response.json();
+  // Wrapper for cross-browser identity API
+  function getIdentityApi() {
+    if (typeof chrome !== "undefined" && chrome.identity) return chrome.identity;
+    if (typeof browser !== "undefined" && browser.identity) return browser.identity;
+    return null;
+  }
 
-      const authWindow = window.open(data.authUrl, "patreon_auth", "width=600,height=700");
-
-      window.addEventListener("message", async (event) => {
-        // Validate origin matches our API URL
-        if (event.origin !== getApiUrl()) return;
-
-        if (event.data.type === "patreon_auth_success") {
-          authWindow.close();
-
-          const callbackResponse = await fetch(getApiEndpoint("/api/auth/patreon/callback"), {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              code: event.data.code,
-              state: event.data.state,
-              expectedState: data.state,
-            }),
+  function launchWebAuthFlow(url) {
+    const identity = getIdentityApi();
+    if (!identity) return Promise.reject(new Error("identity API not available"));
+    return new Promise((resolve, reject) => {
+      try {
+        if (identity.launchWebAuthFlow.length === 1) {
+          // Promise-based (Firefox)
+          identity.launchWebAuthFlow({ url, interactive: true }).then(resolve, reject);
+        } else {
+          // Callback-based (Chrome)
+          identity.launchWebAuthFlow({ url, interactive: true }, (responseUrl) => {
+            const err = chrome.runtime && chrome.runtime.lastError;
+            if (err) reject(err);
+            else resolve(responseUrl);
           });
-
-          const authData = await callbackResponse.json();
-
-          if (authData.success) {
-            chrome.storage.sync.set(
-              {
-                patreonUser: authData.user,
-                patreonSessionToken: authData.sessionToken,
-              },
-              () => {
-                showLoggedInView(authData.user);
-
-                chrome.runtime.sendMessage({
-                  message: "patreon_auth_complete",
-                  user: authData.user,
-                });
-              },
-            );
-          }
         }
+      } catch (e) {
+        reject(e);
+      }
+    });
+  }
+
+  loginBtn.addEventListener("click", async () => {
+    const identity = getIdentityApi();
+    if (!identity || typeof identity.getRedirectURL !== "function") {
+      alert("Browser identity API not available. Please use Chrome, Edge, or Firefox.");
+      return;
+    }
+    try {
+      const redirectUri = identity.getRedirectURL();
+      const startRes = await fetch(
+        getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`),
+      );
+      const startData = await startRes.json();
+
+      const responseUrl = await launchWebAuthFlow(startData.authUrl);
+      const url = new URL(responseUrl);
+      const code = url.searchParams.get("code");
+      const state = url.searchParams.get("state");
+
+      if (!code) throw new Error("No authorization code received");
+
+      const exchangeRes = await fetch(getApiEndpoint("/api/auth/oauth/exchange"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code,
+          state,
+          expectedState: startData.state,
+          redirectUri: startData.redirectUri || redirectUri,
+        }),
       });
+
+      const authData = await exchangeRes.json();
+      if (authData.success) {
+        chrome.storage.sync.set(
+          {
+            patreonUser: authData.user,
+            patreonSessionToken: authData.sessionToken,
+          },
+          () => {
+            showLoggedInView(authData.user);
+            chrome.runtime.sendMessage({ message: "patreon_auth_complete", user: authData.user });
+          },
+        );
+      } else {
+        throw new Error(authData.error || "OAuth exchange failed");
+      }
     } catch (error) {
       console.error("Login failed:", error);
       alert("Failed to initiate Patreon login. Please try again.");
