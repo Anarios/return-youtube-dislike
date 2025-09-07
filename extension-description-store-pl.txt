@@ -18,3 +18,4 @@ Rozszerzenie jest w fazie aktywnego rozwoju, więc jeżeli doświadczasz jakichk
 Więcej funkcjonalności wkrótce!
 
 https://github.com/Anarios/return-youtube-dislike
+

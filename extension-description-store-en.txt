@@ -18,3 +18,4 @@ This extension is currently in an active development phase, so if you experience
 More features to come soon! 
 
 https://github.com/Anarios/return-youtube-dislike
+

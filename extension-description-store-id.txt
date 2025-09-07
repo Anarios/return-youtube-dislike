@@ -1,6 +1,6 @@
 Return YouTube Dislike mengembalikan kemampuan untuk melihat jumlah dislike di Youtube.
 
-Jika ini tidak bekerja: buka tab Extension (chrome://extension/), matikan lalu hidupkan lagi extension ini. Ini biasanya memperbaiki banyak masalah, ini terjadi karena terdapat bug pada Chromium yang dapat merusak extension pada kasus tertentu. Semoga tim Chromium akan segera memperbaikinya.
+Jika ini tidak bekerja: buka tab Extension (chrome://extensions/), matikan lalu hidupkan lagi extension ini. Ini biasanya memperbaiki banyak masalah, ini terjadi karena terdapat bug pada Chromium yang dapat merusak extension pada kasus tertentu. Semoga tim Chromium akan segera memperbaikinya.
 
 Mulai 13 Desember 2021, Youtube menghapus kemampuan untuk melihat jumlah dislike dari API mereka.
 Extension ini bertujuan untuk mengembalikan kemampuan itu ke pengguna dengan menggunakan kombinasi data arsip like dan dislike, serta data like dan dislike dari pengguna extension untuk menunjukkan jumlah yang lebih akurat.

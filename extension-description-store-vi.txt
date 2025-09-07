@@ -19,3 +19,4 @@ Tiện ích này hiện đang được phát triển tích cực, vì vậy vui 
 Nhiều tính năng sắp được bổ sung! 
 
 https://github.com/Anarios/return-youtube-dislike
+

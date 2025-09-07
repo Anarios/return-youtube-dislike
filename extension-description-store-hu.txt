@@ -17,3 +17,4 @@ A bővítmény jelenleg aktív fejlesztés alatt áll, szóval ha bármilyen hib
 Hamarosan további funkciókkal bővül!
 
 https://github.com/Anarios/return-youtube-dislike
+

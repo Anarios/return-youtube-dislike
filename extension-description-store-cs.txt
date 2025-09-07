@@ -18,3 +18,4 @@ Toto rozšíření je ve fázi aktivního vývoje, pokud narazíte na jakékoliv
 Další funkce přijdou brzy! 
 
 https://github.com/Anarios/return-youtube-dislike
+

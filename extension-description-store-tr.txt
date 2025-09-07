@@ -18,3 +18,4 @@ Bu uzantı şu anda aktif bir geliştirme aşamasındadır, bu nedenle herhangi 
 Daha fazla özellik yakında geliyor!
 
 https://github.com/Anarios/return-youtube-dislike
+

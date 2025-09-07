@@ -18,3 +18,4 @@ Return YouTube Dislike は、YouTubeの「低評価」数を表示する機能�
 近日中にさらに新機能を追加する予定です！
 
 https://github.com/Anarios/return-youtube-dislike
+
