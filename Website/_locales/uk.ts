@@ -9,6 +9,7 @@ export default {
       "Браузерне розширення та API, що дозволяє вам бачити відмітки «Не подобається» на YouTube",
     ukraine: "Підтримати Україну",
     sponsors: "Спонсори",
+    becomeSponsor: "Станьте нашим спонсором",
   },
   install: {
     name: "Завантажити",
@@ -19,6 +20,17 @@ export default {
     title3: "Стороннє ПЗ",
     subtitle3:
       "Ми не маємо відношення до цього, використовуйте на свій страх і ризик",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Користувацький скрипт",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular — форк NewPipe)",
+    iosJailbroken: "iOS (джейлбрейк)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -78,6 +90,8 @@ export default {
     bullet4c1: "Щоб побачити розширення, напишіть це в адресний рядок: ",
     firefox: "для Firefox",
     chrome: "для Chrome, Edge, Brave, Opera, Vivaldi",
+    detected: "Виявлено:",
+    altExampleScreenshot: "приклад знімка екрана",
   },
   faq: {
     name: "ЧаПи",
@@ -111,6 +125,8 @@ export default {
     name: "Підтримати",
     subtitle:
       "Ви можете підтримати пожертвою наші зусилля зробити Інтернет вільнішим!",
+    patreon: "Patreon",
+    crypto: "Крипто",
   },
   links: {
     name: "Посилання",
@@ -121,5 +137,11 @@ export default {
     coolProjects: "Круті проєкти",
     sponsorBlockDescription: "пропускає вбудовану у відео рекламу",
     filmotDescription: "пошук відео на YouTube по субтитрах",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "не підтримується.",
+    considerUpgrade: "Розгляньте оновлення до останньої версії.",
   },
 };

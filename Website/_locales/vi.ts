@@ -8,6 +8,7 @@ export default {
     subtitle: 'Tiện ích mở rộng cho trình duyệt và API hiển thị số lượt "Không thích" trên YouTube',
     ukraine: "Ủng hộ U-crai-na",
     sponsors: "Tài trợ",
+    becomeSponsor: "Trở thành nhà tài trợ của chúng tôi",
   },
   install: {
     name: "Cài Đặt",
@@ -17,6 +18,17 @@ export default {
     subtitle2: "Nếu trình duyệt của bạn chưa được hỗ trợ, hãy thử dùng Tập lệnh Người dùng",
     title3: "Thực hiện bởi Bên Thứ ba",
     subtitle3: "Nhóm phát triển không chịu trách nhiệm cho bất kì rủi ro nào bạn gặp phải khi sử dụng",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Tập lệnh người dùng",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular - một fork của NewPipe)",
+    iosJailbroken: "iOS (đã jailbreak)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -74,6 +86,8 @@ export default {
     bullet4c1: "Để mở trang quản lí tiện ích, nhập nội dung sau vào thanh địa chỉ: ",
     firefox: "đối với trình duyệt Firefox",
     chrome: "đối với các trình duyệt Chrome, Edge, Brave, Opera, và Vivaldi",
+    detected: "Phát hiện:",
+    altExampleScreenshot: "ảnh chụp màn hình ví dụ",
   },
   faq: {
     name: "Hỏi-Đáp",
@@ -105,6 +119,8 @@ export default {
     name: "Quyên Góp",
     subtitle:
       "Bằng cách quyên góp, bạn có thể hỗ trợ nỗ lực của chúng tôi trong việc giữ cho Internet được miễn phí!",
+    patreon: "Patreon",
+    crypto: "Tiền mã hóa",
   },
   links: {
     name: "Đường Dẫn",
@@ -115,5 +131,11 @@ export default {
     coolProjects: "Các Dự án Thú vị",
     sponsorBlockDescription: "Lướt qua quảng cáo được chèn trong nội dung vi-đê-ô",
     filmotDescription: "Tìm vi-đê-ô YouTube bằng phụ đề",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "không được hỗ trợ.",
+    considerUpgrade: "Hãy cân nhắc nâng cấp lên phiên bản mới nhất.",
   },
 };

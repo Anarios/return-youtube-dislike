@@ -8,6 +8,7 @@ export default {
     subtitle: "YouTubeの低評価数の表示を復元するブラウザ拡張機能とAPI",
     ukraine: "ウクライナをサポート",
     sponsors: "スポンサー",
+    becomeSponsor: "スポンサーになる",
   },
   install: {
     name: "インストール",
@@ -19,6 +20,17 @@ export default {
     title3: "サードパーティーによる実装",
     subtitle3:
       "開発者では責任を負いかねますので、ご自身の判断にてご利用ください。",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "ユーザースクリプト",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android（Tubular - NewPipeのフォーク）",
+    iosJailbroken: "iOS（脱獄）",
+    iosUYouPlus: "iOS（uYou+）",
   },
   api: {
     name: "API",
@@ -78,6 +90,8 @@ export default {
     bullet4c1: "拡張機能ページを表示するには、以下のように入力してください：",
     firefox: "：Firefox",
     chrome: "：Chrome, Edge, Brave, Opera, Vivaldi",
+    detected: "検出:",
+    altExampleScreenshot: "例のスクリーンショット",
   },
   faq: {
     name: "Q&A",
@@ -110,6 +124,8 @@ export default {
     name: "寄付",
     subtitle:
       "インターネットの自由を守るための我々の活動を、寄付によって応援してください！",
+    patreon: "Patreon",
+    crypto: "暗号資産",
   },
   links: {
     name: "リンク",
@@ -117,5 +133,11 @@ export default {
     subtitle: "プロジェクトおよび開発者へのリンク",
     contact: "お問い合わせ先",
     translators: "翻訳者",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "はサポートされていません。",
+    considerUpgrade: "最新バージョンへのアップグレードを検討してください。",
   },
 };

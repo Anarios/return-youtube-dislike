@@ -8,6 +8,7 @@ export default {
     subtitle: "Eine Browsererwiterung und eine API, welche dir die YouTube dislikes zeigt",
     ukraine: "Unterstützt die Ukraine",
     sponsors: "Sponsoren",
+    becomeSponsor: "Werde unser Sponsor",
   },
   install: {
     name: "Installieren",
@@ -17,6 +18,17 @@ export default {
     subtitle2: "Wenn dein Browser noch nicht unterstützt wird, versuche dieses UserSript",
     title3: "Implementierungen von Drittanbietern",
     subtitle3: "Keine Garantie von unserer Seite, Nutzung auf eigene Gefahr",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Benutzerskript",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular – ein Fork von NewPipe)",
+    iosJailbroken: "iOS (Jailbreak)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -71,6 +83,8 @@ export default {
     bullet4c1: "Um diese Seite zu sehen, gib das in dei Adressleiste ein: ",
     firefox: "für Firefox und",
     chrome: "für Chrome, Edge, Brave, Opera und Vivaldi",
+    detected: "Erkannt:",
+    altExampleScreenshot: "Beispiel-Screenshot",
   },
   faq: {
     name: "FAQ",
@@ -101,6 +115,8 @@ export default {
   donate: {
     name: "Spenden",
     subtitle: "Du kannst unsere Bemühungen, das Internet frei zu halten, mit einer Spende unterstützen!",
+    patreon: "Patreon",
+    crypto: "Krypto",
   },
   links: {
     name: "Links",
@@ -111,5 +127,11 @@ export default {
     coolProjects: "Coole Projekte",
     sponsorBlockDescription: "Überspringe integrierte Werbung in Videos",
     filmotDescription: "Suche nach YouTube-Videos über ihre Untertitel",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "wird nicht unterstützt.",
+    considerUpgrade: "Bitte auf die neueste Version aktualisieren.",
   },
 };

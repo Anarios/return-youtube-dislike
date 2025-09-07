@@ -9,6 +9,7 @@ export default {
       "Browser-extensie en een API die je antipathieën op YouTube laat zien",
     ukraine: "Support Ukraine",
     sponsors: "Sponsors",
+    becomeSponsor: "Word onze sponsor",
   },
   install: {
     name: "Installeren",
@@ -19,6 +20,17 @@ export default {
       "Als uw browser nog niet wordt ondersteund, probeer dan dit UserScript",
     title3: "Implementaties van derden",
     subtitle3: "Geen aansprakelijkheid aan onze kant, gebruik op eigen risico",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Gebruikersscript",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular - een fork van NewPipe)",
+    iosJailbroken: "iOS (jailbreak)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -79,6 +91,8 @@ export default {
     bullet4c1: "Om extensies te zien, plaats dit in de adresbalk: ",
     firefox: "voor Firefox",
     chrome: "voor Chrome, Edge, Brave, Opera, Vivaldi",
+    detected: "Gedetecteerd:",
+    altExampleScreenshot: "voorbeeldscreenshot",
   },
   faq: {
     name: "FAQ",
@@ -112,6 +126,8 @@ export default {
     name: "Doneer",
     subtitle:
       "Met een donatie kunt u onze inspanningen om het internet gratis te houden steunen!",
+    patreon: "Patreon",
+    crypto: "Crypto",
   },
   links: {
     name: "Linken",
@@ -122,5 +138,11 @@ export default {
     coolProjects: "Coole Projecten",
     sponsorBlockDescription: "In video geïntegreerde advertenties overslaan",
     filmotDescription: "Zoek YouTube-video's op ondertiteling",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "wordt niet ondersteund.",
+    considerUpgrade: "Overweeg te updaten naar de nieuwste versie.",
   },
 };

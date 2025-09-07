@@ -8,6 +8,7 @@ export default {
     subtitle: "Estensione per browser e un API che ti mostra il numero di Non mi piace su YouTube",
     ukraine: "Sostieni l'Ucraina",
     sponsors: "Sponsor",
+    becomeSponsor: "Diventa nostro sponsor",
   },
   install: {
     name: "Installa",
@@ -17,6 +18,17 @@ export default {
     subtitle2: "Se il tuo browser non è ancora supportato, prova questo script utente",
     title3: "Implementazioni di terze parti",
     subtitle3: "Nessuna responsabilità da parte nostra, usa a tuo rischio e pericolo",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Script utente",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular - un fork di NewPipe)",
+    iosJailbroken: "iOS (con jailbreak)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -74,6 +86,8 @@ export default {
     bullet4c1: "Per vedere le estensioni inserisci questo nella barra di ricerca: ",
     firefox: "per Firefox",
     chrome: "per Chrome, Edge, Brave, Opera e Vivaldi",
+    detected: "Rilevato:",
+    altExampleScreenshot: "screenshot di esempio",
   },
   faq: {
     name: "FAQ",
@@ -105,6 +119,8 @@ export default {
     name: "Dona",
     subtitle:
       "Puoi sostenere il nostro lavoro per mantenere l'internet libero con una donazione!",
+    patreon: "Patreon",
+    crypto: "Cripto",
   },
   links: {
     name: "Link",
@@ -115,5 +131,11 @@ export default {
     coolProjects: "Progetti interessanti",
     sponsorBlockDescription: "Salta gli annunci integrati nei video",
     filmotDescription: "Cerca video su YouTube tramite i sottotitoli",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "non è supportato.",
+    considerUpgrade: "Considera l’aggiornamento all’ultima versione.",
   },
 };

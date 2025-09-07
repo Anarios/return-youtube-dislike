@@ -136,9 +136,7 @@ export default {
         (this.$ua._parsed.name == "Firefox" &&
           parseInt(this.$ua._parsed.version.split(".")[0]) < 60)
       ) {
-        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .25rem .25rem .5rem; margin: 0 .25rem;">
-        ${this.$ua._parsed.name} ${this.$ua._parsed.version.split(".")[0]}
-        </b> is not supported. Consider upgrading to the latest version.`;
+        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .25rem .25rem .5rem; margin: 0 .25rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version.split(".")[0]}</b> ${this.$vuetify.lang.t("$vuetify.layout.notSupported")} ${this.$vuetify.lang.t("$vuetify.layout.considerUpgrade")}`;
         this.alert.show = true;
       }
     }, 1000);
