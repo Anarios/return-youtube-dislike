@@ -12,16 +12,29 @@ import {
   setFooterMessage,
   setLoadingState,
 } from "./premiumAnalytics.panel";
-import { renderActivityChart, resetChartZoom, resizeActivityChart, disposeActivityChart } from "./premiumAnalytics.activity";
+import {
+  renderActivityChart,
+  resetChartZoom,
+  resizeActivityChart,
+  disposeActivityChart,
+  registerZoomSelectionListener,
+} from "./premiumAnalytics.activity";
 import { ensureMapChart, renderMap, resizeMapChart, disposeMapChart } from "./premiumAnalytics.map";
 import { debounce, safeJson, toEpoch } from "./premiumAnalytics.utils";
 import { logFetchRequest } from "./premiumAnalytics.logging";
 
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
 let resizeListener = null;
+const debounceSelectionFetch = debounce(commitSelectionFetch, 400);
 
 function initPremiumAnalytics() {
   if (analyticsState.initialized) return;
   analyticsState.initialized = true;
+
+  if (!analyticsState.zoomListenerRegistered) {
+    registerZoomSelectionListener(handleChartSelection);
+    analyticsState.zoomListenerRegistered = true;
+  }
 
   configurePanelCallbacks({
     onRangePreset: handleRangePreset,
@@ -61,6 +74,9 @@ function handleRangePreset(rangeDays) {
   if (samePreset) {
     return;
   }
+  state.usingCustomRange = false;
+  state.customSelection = null;
+  state.selectionRange = { from: null, to: null };
   state.currentRange = rangeDays;
   updateRangeButtons();
   resetChartZoom();
@@ -74,7 +90,7 @@ function handleModeChange(mode) {
   renderMap();
 }
 
-function requestAnalytics() {
+function requestAnalytics({ selection } = {}) {
   const state = analyticsState;
 
   if (!state.currentVideoId || !state.sessionToken || !state.sessionActive) {
@@ -89,9 +105,34 @@ function requestAnalytics() {
   const params = new URLSearchParams();
   params.set("bucket", BUCKET);
   params.set("countryLimit", `${COUNTRY_LIMIT}`);
-  params.set("rangeDays", `${state.currentRange}`);
+  const effectiveSelection = normalizeSelection(selection ?? state.customSelection);
 
-  const requestKey = `${state.currentVideoId}:${state.currentRange}`;
+  let requestKey;
+  if (effectiveSelection) {
+    const startIso = msToIso(effectiveSelection.from);
+    const endIso = msToIso(effectiveSelection.to);
+    if (startIso && endIso) {
+      params.set("selectedRangeStartUtc", startIso);
+      params.set("selectedRangeEndUtc", endIso);
+      requestKey = `${state.currentVideoId}:${startIso}:${endIso}`;
+      state.usingCustomRange = true;
+      state.currentRange = Math.max(0, Math.round((effectiveSelection.to - effectiveSelection.from) / MS_PER_DAY));
+      state.customSelection = { ...effectiveSelection };
+      state.selectionRange = { ...effectiveSelection };
+    } else {
+      params.set("rangeDays", `${state.currentRange}`);
+      requestKey = `${state.currentVideoId}:${state.currentRange}`;
+      state.usingCustomRange = false;
+      state.customSelection = null;
+    }
+  } else {
+    params.set("rangeDays", `${state.currentRange}`);
+    requestKey = `${state.currentVideoId}:${state.currentRange}`;
+    state.usingCustomRange = false;
+    state.customSelection = null;
+  }
+
+  state.pendingSelection = effectiveSelection || null;
   state.activeRequestKey = requestKey;
 
   logFetchRequest(state.currentVideoId, params);
@@ -138,14 +179,29 @@ function renderAnalytics(data) {
   }
 
   analyticsState.availableRange = {
-    min: toEpoch(data?.timeSeries?.rangeStartUtc),
-    max: toEpoch(data?.timeSeries?.rangeEndUtc),
+    min: toEpoch(data?.timeSeries?.totalRangeStartUtc),
+    max: toEpoch(data?.timeSeries?.totalRangeEndUtc),
   };
 
   analyticsState.selectionRange = {
-    from: toEpoch(data?.timeSeries?.windowStartUtc),
-    to: toEpoch(data?.timeSeries?.windowEndUtc),
+    from: toEpoch(data?.timeSeries?.selectedRangeStartUtc),
+    to: toEpoch(data?.timeSeries?.selectedRangeEndUtc),
   };
+
+  analyticsState.customSelection = analyticsState.usingCustomRange
+    ? { ...analyticsState.selectionRange }
+    : null;
+  analyticsState.usingCustomRange = analyticsState.customSelection != null;
+  analyticsState.pendingSelection = null;
+
+  if (analyticsState.selectionRange.from != null && analyticsState.selectionRange.to != null) {
+    analyticsState.currentRange = Math.max(
+      0,
+      Math.round((analyticsState.selectionRange.to - analyticsState.selectionRange.from) / MS_PER_DAY),
+    );
+  }
+
+  analyticsState.suppressZoomEvents = true;
 
   renderActivityChart(data?.timeSeries);
 
@@ -159,6 +215,48 @@ function renderAnalytics(data) {
 
   ensureMapChart();
   renderMap(analyticsState.latestCountries);
+}
+
+function handleChartSelection(range) {
+  const normalized = normalizeSelection(range);
+  if (!normalized) {
+    return;
+  }
+
+  const sameAsCurrent =
+    analyticsState.selectionRange.from === normalized.from &&
+    analyticsState.selectionRange.to === normalized.to;
+
+  analyticsState.selectionRange = normalized;
+  analyticsState.customSelection = { ...normalized };
+  analyticsState.usingCustomRange = true;
+  analyticsState.currentRange = Math.max(0, Math.round((normalized.to - normalized.from) / MS_PER_DAY));
+  updateRangeButtons();
+
+  if (!sameAsCurrent) {
+    debounceSelectionFetch(normalized);
+  }
+}
+
+function commitSelectionFetch(selection) {
+  requestAnalytics({ selection });
+}
+
+function normalizeSelection(selection) {
+  if (!selection) return null;
+  const from = Number(selection.from);
+  const to = Number(selection.to);
+  if (!Number.isFinite(from) || !Number.isFinite(to) || to <= from) {
+    return null;
+  }
+  return { from, to };
+}
+
+function msToIso(ms) {
+  if (!Number.isFinite(ms)) return null;
+  const date = new Date(ms);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toISOString();
 }
 
 function handleError(status, code) {

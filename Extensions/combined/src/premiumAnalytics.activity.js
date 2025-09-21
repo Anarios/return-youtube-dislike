@@ -6,6 +6,8 @@ import { toEpoch } from "./premiumAnalytics.utils";
 import { getTextColor, getMutedTextColor, getBorderColor } from "./premiumAnalytics.theme";
 import { logRangeSelection, logTimeBounds } from "./premiumAnalytics.logging";
 
+const zoomListeners = new Set();
+
 function pickFirstFinite(...values) {
   for (const value of values) {
     if (Number.isFinite(value)) {
@@ -22,6 +24,7 @@ export function ensureActivityChart() {
     const container = state.panelElement.querySelector("#ryd-analytics-activity");
     if (!container) return null;
     state.activityChart = echarts.init(container);
+    state.activityChart.on("dataZoom", handleDataZoom);
   }
   return state.activityChart;
 }
@@ -44,8 +47,8 @@ export function renderActivityChart(timeSeries) {
   const computedBounds = computeChartBounds(seriesPoints, state.latestTimeAxis, state.latestBucketMs);
 
   const availableBounds = {
-    min: state.availableRange.min ?? toEpoch(timeSeries?.rangeStartUtc),
-    max: state.availableRange.max ?? toEpoch(timeSeries?.rangeEndUtc),
+    min: state.availableRange.min ?? toEpoch(timeSeries?.totalRangeStartUtc),
+    max: state.availableRange.max ?? toEpoch(timeSeries?.totalRangeEndUtc),
   };
 
   const sliderBounds = combineBounds(availableBounds, computedBounds);
@@ -62,8 +65,8 @@ export function renderActivityChart(timeSeries) {
   logTimeBounds("global", state.globalTimeBounds);
 
   const requestedSelection = {
-    from: state.selectionRange.from ?? toEpoch(timeSeries?.windowStartUtc),
-    to: state.selectionRange.to ?? toEpoch(timeSeries?.windowEndUtc),
+    from: state.selectionRange.from ?? toEpoch(timeSeries?.selectedRangeStartUtc),
+    to: state.selectionRange.to ?? toEpoch(timeSeries?.selectedRangeEndUtc),
   };
 
   const selectionBounds = clampRangeToBounds(requestedSelection, sliderBounds)
@@ -91,6 +94,7 @@ export function renderActivityChart(timeSeries) {
 
   const dataZoom = createDataZoom(sliderBounds, selectionBounds);
 
+  analyticsState.suppressZoomEvents = true;
   activityChart.setOption({
     backgroundColor: "transparent",
     tooltip: { trigger: "axis" },
@@ -145,12 +149,14 @@ export function resetChartZoom() {
   };
   const { min, max } = bounds;
   if (min != null && max != null) {
+    analyticsState.suppressZoomEvents = true;
     chart.dispatchAction({
       type: "dataZoom",
       startValue: min,
       endValue: max,
     });
   } else {
+    analyticsState.suppressZoomEvents = true;
     chart.dispatchAction({ type: "dataZoom", start: 0, end: 100 });
   }
 }
@@ -161,9 +167,20 @@ export function resizeActivityChart() {
 
 export function disposeActivityChart() {
   if (analyticsState.activityChart) {
+    analyticsState.activityChart.off?.("dataZoom", handleDataZoom);
     analyticsState.activityChart.dispose();
     analyticsState.activityChart = null;
   }
+}
+
+export function registerZoomSelectionListener(listener) {
+  if (typeof listener === "function") {
+    zoomListeners.add(listener);
+  }
+}
+
+export function unregisterZoomSelectionListener(listener) {
+  zoomListeners.delete(listener);
 }
 
 function createDataZoom(bounds, selection) {
@@ -207,4 +224,33 @@ function createDataZoom(bounds, selection) {
   }
 
   return [slider, inside];
+}
+
+function handleDataZoom(event) {
+  if (analyticsState.suppressZoomEvents) {
+    analyticsState.suppressZoomEvents = false;
+    return;
+  }
+
+  const payload = Array.isArray(event?.batch) && event.batch.length ? event.batch[0] : event;
+  const startValue = Number(payload?.startValue);
+  const endValue = Number(payload?.endValue);
+
+  if (!Number.isFinite(startValue) || !Number.isFinite(endValue)) {
+    return;
+  }
+
+  const range = {
+    from: startValue,
+    to: endValue,
+    source: payload?.type ?? event?.type ?? "dataZoom",
+  };
+
+  zoomListeners.forEach((listener) => {
+    try {
+      listener(range);
+    } catch (error) {
+      console.error("premium analytics zoom listener failed", error);
+    }
+  });
 }

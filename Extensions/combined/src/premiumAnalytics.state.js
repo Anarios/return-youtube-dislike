@@ -23,6 +23,11 @@ export const analyticsState = {
   globalTimeBounds: { min: null, max: null },
   availableRange: { min: null, max: null },
   selectionRange: { from: null, to: null },
+  customSelection: null,
+  suppressZoomEvents: false,
+  zoomListenerRegistered: false,
+  usingCustomRange: false,
+  pendingSelection: null,
 };
 
 export function resetStateForVideo() {
@@ -33,6 +38,10 @@ export function resetStateForVideo() {
   analyticsState.globalTimeBounds = { min: null, max: null };
   analyticsState.availableRange = { min: null, max: null };
   analyticsState.selectionRange = { from: null, to: null };
+  analyticsState.customSelection = null;
+  analyticsState.suppressZoomEvents = false;
+  analyticsState.pendingSelection = null;
+  analyticsState.usingCustomRange = false;
 }
 
 export function resetSessionState() {

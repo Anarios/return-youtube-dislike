@@ -47,6 +47,7 @@ import {
   resetChartZoom,
   resizeActivityChart,
   disposeActivityChart,
+  registerZoomSelectionListener,
 } from "./premiumAnalytics.activity";
 import * as timeModule from "./premiumAnalytics.time";
 import * as logging from "./premiumAnalytics.logging";
@@ -102,16 +103,17 @@ describe("premiumAnalytics.activity", () => {
     expect(echarts.init).toHaveBeenCalled();
     expect(chart).toBe(chartInstance);
     expect(ensureActivityChart()).toBe(chartInstance);
+    expect(chartInstance.on).toHaveBeenCalledWith("dataZoom", expect.any(Function));
   });
 
   it("renders series data and updates state", () => {
     jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 0, max: 1000 });
 
     renderActivityChart({
-      rangeStartUtc: "2025-01-01T00:00:00Z",
-      rangeEndUtc: "2025-01-02T00:00:00Z",
-      windowStartUtc: "2025-01-01T00:00:00Z",
-      windowEndUtc: "2025-01-02T00:00:00Z",
+      totalRangeStartUtc: "2025-01-01T00:00:00Z",
+      totalRangeEndUtc: "2025-01-02T00:00:00Z",
+      selectedRangeStartUtc: "2025-01-01T00:00:00Z",
+      selectedRangeEndUtc: "2025-01-02T00:00:00Z",
       points: [
         { timestampUtc: "2025-01-01T12:00:00Z", likes: 10, dislikes: 2 },
         { timestampUtc: "2025-01-01T13:00:00Z", likes: 20, dislikes: 4 },
@@ -128,10 +130,10 @@ describe("premiumAnalytics.activity", () => {
   it("configures slider bounds from declared range", () => {
     jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 100, max: 200 });
     renderActivityChart({
-      rangeStartUtc: "2025-01-01T00:00:00Z",
-      rangeEndUtc: "2025-01-02T00:00:00Z",
-      windowStartUtc: "2025-01-01T00:00:00Z",
-      windowEndUtc: "2025-01-01T12:00:00Z",
+      totalRangeStartUtc: "2025-01-01T00:00:00Z",
+      totalRangeEndUtc: "2025-01-02T00:00:00Z",
+      selectedRangeStartUtc: "2025-01-01T00:00:00Z",
+      selectedRangeEndUtc: "2025-01-01T12:00:00Z",
       points: [],
     });
 
@@ -160,8 +162,10 @@ describe("premiumAnalytics.activity", () => {
   it("clamps selection to available bounds", () => {
     analyticsState.availableRange = { min: 0, max: 100 };
     renderActivityChart({
-      windowStartUtc: "2025-01-01T00:00:00Z",
-      windowEndUtc: "2025-02-01T00:00:00Z",
+      totalRangeStartUtc: "2025-01-01T00:00:00Z",
+      totalRangeEndUtc: "2025-03-01T00:00:00Z",
+      selectedRangeStartUtc: "2025-01-01T00:00:00Z",
+      selectedRangeEndUtc: "2025-02-01T00:00:00Z",
       points: [],
     });
 
@@ -192,5 +196,45 @@ describe("premiumAnalytics.activity", () => {
     disposeActivityChart();
     expect(chartInstance.dispose).toHaveBeenCalled();
     expect(analyticsState.activityChart).toBeNull();
+  });
+
+  it("notifies zoom listeners when selection changes", () => {
+    const listener = jest.fn();
+    registerZoomSelectionListener(listener);
+    ensureActivityChart();
+    jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 0, max: 1_000_000 });
+    renderActivityChart({
+      totalRangeStartUtc: "2025-01-01T00:00:00Z",
+      totalRangeEndUtc: "2025-02-01T00:00:00Z",
+      selectedRangeStartUtc: "2025-01-01T00:00:00Z",
+      selectedRangeEndUtc: "2025-01-05T00:00:00Z",
+      points: [],
+    });
+
+    const handler = chartInstance.on.mock.calls.find(([event]) => event === "dataZoom")[1];
+    analyticsState.suppressZoomEvents = false;
+    handler({ startValue: 1000, endValue: 2000 });
+
+    expect(listener).toHaveBeenCalledWith(expect.objectContaining({ from: 1000, to: 2000 }));
+  });
+
+  it("ignores zoom events when suppression flag is set", () => {
+    const listener = jest.fn();
+    registerZoomSelectionListener(listener);
+    ensureActivityChart();
+    renderActivityChart({
+      totalRangeStartUtc: "2025-01-01T00:00:00Z",
+      totalRangeEndUtc: "2025-01-02T00:00:00Z",
+      selectedRangeStartUtc: "2025-01-01T00:00:00Z",
+      selectedRangeEndUtc: "2025-01-01T12:00:00Z",
+      points: [],
+    });
+
+    const handler = chartInstance.on.mock.calls.find(([event]) => event === "dataZoom")[1];
+    analyticsState.suppressZoomEvents = true;
+    handler({ startValue: 100, endValue: 200 });
+
+    expect(listener).not.toHaveBeenCalled();
+    expect(analyticsState.suppressZoomEvents).toBe(false);
   });
 });

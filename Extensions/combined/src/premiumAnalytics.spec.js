@@ -28,6 +28,7 @@ jest.mock("./premiumAnalytics.activity", () => ({
   resetChartZoom: jest.fn(),
   resizeActivityChart: jest.fn(),
   disposeActivityChart: jest.fn(),
+  registerZoomSelectionListener: jest.fn(),
 }));
 
 jest.mock("./premiumAnalytics.map", () => ({
@@ -58,6 +59,7 @@ const activityMocks = jest.requireMock("./premiumAnalytics.activity");
 const mapMocks = jest.requireMock("./premiumAnalytics.map");
 const utilsMocks = jest.requireMock("./premiumAnalytics.utils");
 const loggingMocks = jest.requireMock("./premiumAnalytics.logging");
+const configMocks = jest.requireMock("./config");
 
 const {
   configurePanelCallbacks: mockConfigurePanelCallbacks,
@@ -75,6 +77,7 @@ const {
   resetChartZoom: mockResetChartZoom,
   resizeActivityChart: mockResizeActivityChart,
   disposeActivityChart: mockDisposeActivityChart,
+  registerZoomSelectionListener: mockRegisterZoomSelectionListener,
 } = activityMocks;
 
 const {
@@ -91,6 +94,7 @@ const {
 } = utilsMocks;
 
 const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
+const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
 
 jest.mock("./utils", () => ({
   getVideoId: jest.fn(() => "video1234567"),
@@ -111,6 +115,8 @@ describe("premiumAnalytics", () => {
     analyticsState.sessionActive = true;
     analyticsState.currentRange = 7;
     analyticsState.currentVideoId = "video1234567";
+    analyticsState.zoomListenerRegistered = false;
+    analyticsState.initialized = false;
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
@@ -118,10 +124,10 @@ describe("premiumAnalytics", () => {
           Promise.resolve({
             timeSeries: {
               points: [],
-              rangeStartUtc: "2025-01-01T00:00:00Z",
-              rangeEndUtc: "2025-01-10T00:00:00Z",
-              windowStartUtc: "2025-01-01T00:00:00Z",
-              windowEndUtc: "2025-01-07T00:00:00Z",
+              totalRangeStartUtc: "2025-01-01T00:00:00Z",
+              totalRangeEndUtc: "2025-01-10T00:00:00Z",
+              selectedRangeStartUtc: "2025-01-01T00:00:00Z",
+              selectedRangeEndUtc: "2025-01-07T00:00:00Z",
             },
             geo: { topLikes: [], topDislikes: [], countries: [] },
             summary: {
@@ -148,9 +154,13 @@ describe("premiumAnalytics", () => {
   it("initializes only once and wires listeners", () => {
     initPremiumAnalytics();
     expect(mockConfigurePanelCallbacks).toHaveBeenCalled();
+    expect(mockRegisterZoomSelectionListener).toHaveBeenCalledTimes(1);
+    const listener = mockRegisterZoomSelectionListener.mock.calls.at(-1)?.[0];
+    expect(typeof listener).toBe("function");
 
     initPremiumAnalytics();
     expect(mockConfigurePanelCallbacks).toHaveBeenCalledTimes(1);
+    expect(mockRegisterZoomSelectionListener).toHaveBeenCalledTimes(1);
   });
 
   it("requests analytics and renders results", async () => {
@@ -229,8 +239,8 @@ describe("premiumAnalytics", () => {
     expect(mockLogFetchRequest).toHaveBeenCalled();
     const [, params] = mockLogFetchRequest.mock.calls.at(-1);
     expect(params.get("rangeDays")).toBe("30");
-    expect(params.has("fromUtc")).toBe(false);
-    expect(params.has("toUtc")).toBe(false);
+    expect(params.has("selectedRangeStartUtc")).toBe(false);
+    expect(params.has("selectedRangeEndUtc")).toBe(false);
   });
 
   it("supports all-time range by passing zero days", async () => {
@@ -254,5 +264,30 @@ describe("premiumAnalytics", () => {
 
     const secondUrl = fetch.mock.calls[fetch.mock.calls.length - 1][0];
     expect(firstUrl).toBe(secondUrl);
+  });
+
+  it("refetches analytics when zoom selection changes", async () => {
+    initPremiumAnalytics();
+    requestAnalytics();
+    await flushPromises();
+
+    const previousKey = analyticsState.activeRequestKey;
+
+    const from = Date.UTC(2025, 0, 2);
+    const to = Date.UTC(2025, 0, 5);
+    analyticsState.sessionActive = true;
+    analyticsState.sessionToken = "token";
+    analyticsState.currentVideoId = "video1234567";
+    const initialApiCalls = mockGetApiEndpoint.mock.calls.length;
+
+    requestAnalytics({ selection: { from, to } });
+    await flushPromises();
+
+    expect(mockGetApiEndpoint.mock.calls.length).toBeGreaterThan(initialApiCalls);
+    const lastCall = mockGetApiEndpoint.mock.calls.at(-1)?.[0];
+    expect(lastCall).toContain(encodeURIComponent(new Date(from).toISOString()));
+    expect(lastCall).toContain(encodeURIComponent(new Date(to).toISOString()));
+    expect(analyticsState.activeRequestKey).not.toBe(previousKey);
+    expect(analyticsState.activeRequestKey).toContain(new Date(from).toISOString());
   });
 });

@@ -33,6 +33,11 @@ function resetGlobals() {
   analyticsState.globalTimeBounds = { min: null, max: null };
   analyticsState.availableRange = { min: null, max: null };
   analyticsState.selectionRange = { from: null, to: null };
+  analyticsState.customSelection = null;
+  analyticsState.suppressZoomEvents = false;
+  analyticsState.zoomListenerRegistered = false;
+  analyticsState.usingCustomRange = false;
+  analyticsState.pendingSelection = null;
 }
 
 describe("premiumAnalytics.state", () => {
@@ -53,6 +58,10 @@ describe("premiumAnalytics.state", () => {
       analyticsState.globalTimeBounds = { min: 3, max: 4 };
       analyticsState.availableRange = { min: 5, max: 6 };
       analyticsState.selectionRange = { from: 7, to: 8 };
+      analyticsState.customSelection = { from: 7, to: 8 };
+      analyticsState.suppressZoomEvents = true;
+      analyticsState.pendingSelection = { from: 1, to: 2 };
+      analyticsState.usingCustomRange = true;
 
       resetStateForVideo();
 
@@ -63,6 +72,10 @@ describe("premiumAnalytics.state", () => {
       expect(analyticsState.globalTimeBounds).toEqual({ min: null, max: null });
       expect(analyticsState.availableRange).toEqual({ min: null, max: null });
       expect(analyticsState.selectionRange).toEqual({ from: null, to: null });
+      expect(analyticsState.customSelection).toBeNull();
+      expect(analyticsState.suppressZoomEvents).toBe(false);
+      expect(analyticsState.pendingSelection).toBeNull();
+      expect(analyticsState.usingCustomRange).toBe(false);
     });
   });
 

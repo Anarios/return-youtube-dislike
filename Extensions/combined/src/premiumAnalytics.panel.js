@@ -46,7 +46,8 @@ export function updateRangeButtons() {
   panel.querySelectorAll(".ryd-range").forEach((btn) => {
     const value = btn.dataset.range;
     const numeric = parseInt(value ?? "", 10);
-    btn.classList.toggle("is-active", numeric === analyticsState.currentRange);
+    const shouldHighlight = !analyticsState.usingCustomRange;
+    btn.classList.toggle("is-active", shouldHighlight && numeric === analyticsState.currentRange);
   });
 }
 
