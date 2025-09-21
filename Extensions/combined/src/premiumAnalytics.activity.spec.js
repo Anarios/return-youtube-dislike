@@ -237,4 +237,32 @@ describe("premiumAnalytics.activity", () => {
     expect(listener).not.toHaveBeenCalled();
     expect(analyticsState.suppressZoomEvents).toBe(false);
   });
+
+  it("derives zoom values from percentage payloads", () => {
+    const listener = jest.fn();
+    registerZoomSelectionListener(listener);
+    ensureActivityChart();
+    jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 0, max: 1000 });
+    renderActivityChart({
+      totalRangeStartUtc: "2025-01-01T00:00:00Z",
+      totalRangeEndUtc: "2025-01-02T00:00:00Z",
+      selectedRangeStartUtc: "2025-01-01T00:00:00Z",
+      selectedRangeEndUtc: "2025-01-01T12:00:00Z",
+      points: [],
+    });
+
+    const handler = chartInstance.on.mock.calls.find(([event]) => event === "dataZoom")[1];
+    analyticsState.suppressZoomEvents = false;
+    handler({ start: 10, end: 60 });
+
+    expect(listener).toHaveBeenCalled();
+    const call = listener.mock.calls.at(-1)[0];
+    const bounds = analyticsState.chartTimeBounds;
+    const min = bounds.min;
+    const max = bounds.max;
+    const expectedFrom = min + 0.1 * (max - min);
+    const expectedTo = min + 0.6 * (max - min);
+    expect(call.from).toBeCloseTo(expectedFrom, 0);
+    expect(call.to).toBeCloseTo(expectedTo, 0);
+  });
 });

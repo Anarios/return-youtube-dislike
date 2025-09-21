@@ -132,6 +132,7 @@ export function renderActivityChart(timeSeries) {
     ],
     dataZoom,
   });
+  analyticsState.suppressZoomEvents = false;
 }
 
 export function clearActivityChart() {
@@ -233,10 +234,14 @@ function handleDataZoom(event) {
   }
 
   const payload = Array.isArray(event?.batch) && event.batch.length ? event.batch[0] : event;
-  const startValue = Number(payload?.startValue);
-  const endValue = Number(payload?.endValue);
+  const bounds = analyticsState.chartTimeBounds;
+  const minBound = bounds?.min ?? analyticsState.availableRange.min;
+  const maxBound = bounds?.max ?? analyticsState.availableRange.max;
 
-  if (!Number.isFinite(startValue) || !Number.isFinite(endValue)) {
+  const startValue = resolveZoomValue(payload, "startValue", "start", minBound, maxBound);
+  const endValue = resolveZoomValue(payload, "endValue", "end", minBound, maxBound);
+
+  if (!Number.isFinite(startValue) || !Number.isFinite(endValue) || startValue === endValue) {
     return;
   }
 
@@ -253,4 +258,24 @@ function handleDataZoom(event) {
       console.error("premium analytics zoom listener failed", error);
     }
   });
+}
+
+function resolveZoomValue(payload, valueKey, percentKey, minBound, maxBound) {
+  const direct = Number(payload?.[valueKey]);
+  if (Number.isFinite(direct)) {
+    return direct;
+  }
+
+  const percent = Number(payload?.[percentKey]);
+  if (!Number.isFinite(percent) || minBound == null || maxBound == null) {
+    return null;
+  }
+
+  const clampedPercent = Math.min(Math.max(percent, 0), 100);
+  const span = maxBound - minBound;
+  if (!Number.isFinite(span) || span <= 0) {
+    return null;
+  }
+
+  return minBound + (clampedPercent / 100) * span;
 }
