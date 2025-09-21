@@ -127,7 +127,8 @@ ytd-menu-renderer.ytd-watch-metadata {
 .ryd-analytics__modes {
   display: inline-flex;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: 999px;
   padding: 2px;
 }
@@ -136,23 +137,49 @@ ytd-menu-renderer.ytd-watch-metadata {
 .ryd-analytics__modes button {
   border: none;
   background: transparent;
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: #1f2937;
   font-size: 12px;
   padding: 6px 12px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .ryd-analytics__ranges button.is-active,
 .ryd-analytics__modes button.is-active {
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--yt-spec-text-primary, #ffffff);
+  background: rgba(59, 130, 246, 0.28);
+  color: #0f172a;
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.35);
 }
 
 .ryd-analytics__ranges button:hover,
 .ryd-analytics__modes button:hover {
+  background: rgba(59, 130, 246, 0.18);
+  color: #0f172a;
+}
+
+html[dark] .ryd-analytics__ranges,
+html[dark] .ryd-analytics__modes {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+}
+
+html[dark] .ryd-analytics__ranges button,
+html[dark] .ryd-analytics__modes button {
+  color: var(--yt-spec-text-secondary, #bbbbbb);
+}
+
+html[dark] .ryd-analytics__ranges button.is-active,
+html[dark] .ryd-analytics__modes button.is-active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--yt-spec-text-primary, #ffffff);
+  box-shadow: none;
+}
+
+html[dark] .ryd-analytics__ranges button:hover,
+html[dark] .ryd-analytics__modes button:hover {
   background: rgba(255, 255, 255, 0.1);
+  color: var(--yt-spec-text-primary, #ffffff);
 }
 
 .ryd-analytics__body {
