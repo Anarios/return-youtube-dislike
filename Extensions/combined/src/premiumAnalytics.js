@@ -90,7 +90,9 @@ function handleModeChange(mode) {
   if (!mode || mode === analyticsState.currentMode) return;
   analyticsState.currentMode = mode;
   updateModeButtons();
-  renderMap();
+  if (previous === "map" || next === "map") {
+    renderMap();
+  }
 }
 
 function requestAnalytics({ selection } = {}) {
@@ -237,6 +239,7 @@ function handleChartExpand(chartKey) {
   }
 
   const state = analyticsState;
+  const previous = state.expandedChart;
   const next = state.expandedChart === chartKey ? null : chartKey;
   state.expandedChart = next;
   applyChartExpansionState();
@@ -252,6 +255,10 @@ function handleChartExpand(chartKey) {
   } else {
     resizeActivityChart();
     resizeMapChart();
+  }
+
+  if (previous === "map" || next === "map") {
+    renderMap();
   }
 }
 

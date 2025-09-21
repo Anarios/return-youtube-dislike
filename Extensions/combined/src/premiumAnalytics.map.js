@@ -188,7 +188,7 @@ export function renderMap(countries) {
         data: mapData,
       },
     ],
-  });
+  }, true);
 }
 
 export function disposeMapChart() {
