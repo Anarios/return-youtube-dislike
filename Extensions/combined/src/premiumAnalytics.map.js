@@ -11,6 +11,18 @@ const worldFeatures = feature(worldData, worldData.objects.countries).features ?
 const NORMALIZED_WORLD_FEATURES = normalizeWorldFeatures(worldFeatures);
 const WORLD_FEATURE_COLLECTION = { type: "FeatureCollection", features: NORMALIZED_WORLD_FEATURES };
 echarts.registerMap("world", WORLD_FEATURE_COLLECTION);
+const CANONICAL_SYNONYM_GROUPS = [
+  [
+    "unitedstatesofamerica",
+    "unitedstates",
+    "unitedstatesus",
+    "unitedstatesusa",
+    "usa",
+    "us",
+    "unitedstatesunitedstates",
+  ],
+];
+const CANONICAL_SYNONYM_LOOKUP = buildSynonymLookup(CANONICAL_SYNONYM_GROUPS);
 const FEATURE_NAME_BY_CANONICAL = buildFeatureCanonicalMap(NORMALIZED_WORLD_FEATURES);
 const ISO_TO_FEATURE_NAME = buildIsoToFeatureNameMap(FEATURE_NAME_BY_CANONICAL);
 
@@ -164,14 +176,33 @@ function resolveVisualMapConfig(values, mode) {
 
   const fallbackMax = values.length ? Math.max(...values, 0) : 0;
   const max = fallbackMax <= 0 ? 1 : fallbackMax;
-  const labelBase = capitalize(mode);
+
+  if (mode === "likes") {
+    return {
+      min: 0,
+      max,
+      colors: ["#bbf7d0", "#15803d"],
+      highLabel: "Higher Likes",
+      lowLabel: "Lower Likes",
+    };
+  }
+
+  if (mode === "dislikes") {
+    return {
+      min: 0,
+      max,
+      colors: ["#fecaca", "#b91c1c"],
+      highLabel: "Higher Dislikes",
+      lowLabel: "Lower Dislikes",
+    };
+  }
 
   return {
     min: 0,
     max,
     colors: ["#e2e8f0", "#3b82f6"],
-    highLabel: `Higher ${labelBase}`,
-    lowLabel: `Lower ${labelBase}`,
+    highLabel: `Higher ${capitalize(mode)}`,
+    lowLabel: `Lower ${capitalize(mode)}`,
   };
 }
 
@@ -219,10 +250,14 @@ function resolveMapRegionName(countryCode, fallbackName) {
 
   if (trimmedName) {
     const lookupMatch = countryCodeLookup.byCountry(trimmedName);
-    const lookupName = lookupMatch?.country ?? lookupMatch?.officialName;
-    const resolved = findFeatureNameByCanonical(lookupName, FEATURE_NAME_BY_CANONICAL);
-    if (resolved) {
-      return resolved;
+    if (lookupMatch) {
+      const candidates = [lookupMatch.country, lookupMatch.officialName].filter(Boolean);
+      for (const candidate of candidates) {
+        const resolved = findFeatureNameByCanonical(candidate, FEATURE_NAME_BY_CANONICAL);
+        if (resolved) {
+          return resolved;
+        }
+      }
     }
   }
 
@@ -239,7 +274,39 @@ function buildFeatureCanonicalMap(features) {
       map.set(canonical, featureItem.properties.name);
     }
   });
+  CANONICAL_SYNONYM_GROUPS.forEach((group) => {
+    if (!Array.isArray(group) || group.length === 0) {
+      return;
+    }
+    const [primary] = group;
+    const canonicalPrimary = primary ?? "";
+    const primaryName = map.get(canonicalPrimary);
+    if (!primaryName) {
+      return;
+    }
+    group.forEach((alias) => {
+      if (alias && !map.has(alias)) {
+        map.set(alias, primaryName);
+      }
+    });
+  });
   return map;
+}
+
+function buildSynonymLookup(groups) {
+  const lookup = new Map();
+  for (const group of groups) {
+    if (!Array.isArray(group) || group.length === 0) {
+      continue;
+    }
+    const [primary] = group;
+    for (const alias of group) {
+      if (alias) {
+        lookup.set(alias, primary);
+      }
+    }
+  }
+  return lookup;
 }
 
 function buildIsoToFeatureNameMap(featureCanonicalMap) {
@@ -267,26 +334,28 @@ function findFeatureNameByCanonical(name, featureCanonicalMap) {
 
 function canonicalizeName(name) {
   if (!name) return "";
-  return expandAbbreviations(name)
+  const canonical = expandAbbreviations(name)
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^A-Za-z0-9]+/g, "")
     .replace(/ofthe|the|and/gi, "")
     .toLowerCase();
+
+  return CANONICAL_SYNONYM_LOOKUP.get(canonical) ?? canonical;
 }
 
 function expandAbbreviations(name) {
   return name
     .replace(/\(([^)]+)\)/g, " $1 ")
-    .replace(/Dem\./gi, "Democratic ")
-    .replace(/Rep\./gi, "Republic ")
-    .replace(/UAE/gi, "United Arab Emirates")
-    .replace(/UK/gi, "United Kingdom")
-    .replace(/USA/gi, "United States")
-    .replace(/U\.S\./gi, "United States")
-    .replace(/St\.?/gi, "Saint ")
-    .replace(/Nat\.?/gi, "National ")
-    .replace(/Is\.?/gi, "Islands ")
+    .replace(/\bDem\.(?=\s|$)/gi, "Democratic ")
+    .replace(/\bRep\.(?=\s|$)/gi, "Republic ")
+    .replace(/\bUAE\b/gi, "United Arab Emirates")
+    .replace(/\bUK\b/gi, "United Kingdom")
+    .replace(/\bUSA\b/gi, "United States")
+    .replace(/\bU\.S\.?\b/gi, "United States")
+    .replace(/\bSt\.?\b/gi, "Saint ")
+    .replace(/\bNat\.?\b/gi, "National ")
+    .replace(/\bIs\.?\b/gi, "Islands ")
     .replace(/DemocraticRepublic/gi, "Democratic Republic")
     .replace(/Republicof/gi, "Republic of ")
     .replace(/FederalRepublic/gi, "Federal Republic ");

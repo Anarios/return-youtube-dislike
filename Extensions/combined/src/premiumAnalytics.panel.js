@@ -11,9 +11,10 @@ export function configurePanelCallbacks(newCallbacks) {
 }
 
 export function ensurePanel() {
-  const state = analyticsState;
-  if (state.panelElement) {
-    return state.panelElement;
+  if (analyticsState.panelElement && analyticsState.panelElement.isConnected) {
+    applyExpansionState();
+    applyLoadingState();
+    return analyticsState.panelElement;
   }
 
   const secondaryInner =
@@ -27,44 +28,62 @@ export function ensurePanel() {
   panel.className = "ryd-premium-analytics ryd-premium-feature";
   panel.innerHTML = createPanelMarkup();
   secondaryInner.insertBefore(panel, secondaryInner.firstChild);
+  analyticsState.panelElement = panel;
+
   bindUiControls(panel);
-  state.panelElement = panel;
   updateRangeButtons();
   updateModeButtons();
+  applyExpansionState();
+  applyLoadingState();
+
   return panel;
 }
 
 export function updateRangeButtons() {
-  const state = analyticsState;
-  const panel = state.panelElement;
+  const panel = analyticsState.panelElement;
   if (!panel) return;
+
   panel.querySelectorAll(".ryd-range").forEach((btn) => {
     const value = btn.dataset.range;
-    if (value === "custom") {
-      btn.classList.toggle("is-active", !!state.customRange);
-    } else {
-      const numeric = parseInt(value, 10);
-      btn.classList.toggle("is-active", !state.customRange && numeric === state.currentRange);
-    }
+    const numeric = parseInt(value ?? "", 10);
+    btn.classList.toggle("is-active", numeric === analyticsState.currentRange);
   });
 }
 
 export function updateModeButtons() {
-  const state = analyticsState;
-  const panel = state.panelElement;
+  const panel = analyticsState.panelElement;
   if (!panel) return;
+
   panel.querySelectorAll(".ryd-mode").forEach((btn) => {
-    btn.classList.toggle("is-active", btn.dataset.mode === state.currentMode);
+    btn.classList.toggle("is-active", btn.dataset.mode === analyticsState.currentMode);
   });
 }
 
 export function setListsLoading() {
   const panel = analyticsState.panelElement;
   if (!panel) return;
-  const likesList = panel.querySelector("#ryd-analytics-top-likes");
-  const dislikesList = panel.querySelector("#ryd-analytics-top-dislikes");
-  if (likesList) likesList.innerHTML = `<li class="ryd-analytics__placeholder">Loading…</li>`;
-  if (dislikesList) dislikesList.innerHTML = `<li class="ryd-analytics__placeholder">Loading…</li>`;
+  panel.classList.add("is-loading");
+}
+
+export function setFooterMessage(text) {
+  const footer = analyticsState.panelElement?.querySelector("#ryd-analytics-footer");
+  if (footer) {
+    footer.textContent = text || "";
+  }
+}
+
+export function setPanelExpanded(expanded) {
+  analyticsState.panelExpanded = expanded;
+  applyExpansionState();
+}
+
+export function togglePanelExpanded() {
+  setPanelExpanded(!analyticsState.panelExpanded);
+}
+
+export function setLoadingState(isLoading) {
+  analyticsState.isLoading = isLoading;
+  applyLoadingState();
 }
 
 export function updateCountryList(container, entries, type) {
@@ -96,19 +115,11 @@ export function renderSummary(summary) {
   footer.textContent = `Captured ${totalInteractions.toLocaleString()} interactions from ${summary.countriesRepresented} countries (${summary.uniqueIps.toLocaleString()} unique IPs)`;
 }
 
-export function setFooterMessage(text) {
-  const footer = analyticsState.panelElement?.querySelector("#ryd-analytics-footer");
-  if (footer) {
-    footer.textContent = text || "";
-  }
-}
-
 function bindUiControls(container) {
   container.querySelectorAll(".ryd-range").forEach((btn) => {
     btn.addEventListener("click", () => {
       const value = btn.dataset.range;
-      if (!value) return;
-      if (value === "custom") return;
+      if (!value || value === "custom") return;
       const numeric = parseInt(value, 10);
       if (Number.isNaN(numeric)) return;
       callbacks.onRangePreset(numeric);
@@ -122,23 +133,32 @@ function bindUiControls(container) {
       callbacks.onModeChange(mode);
     });
   });
+
+  const expandButton = container.querySelector(".ryd-analytics__expand");
+  if (expandButton) {
+    expandButton.addEventListener("click", () => {
+      togglePanelExpanded();
+    });
+  }
 }
 
 function createPanelMarkup() {
-  const state = analyticsState;
   const rangeControls = RANGE_OPTIONS.map((days) => {
     const label = formatRangeLabel(days);
-    const isActive = days === state.currentRange;
+    const isActive = days === analyticsState.currentRange;
     return `<button class="ryd-range${isActive ? " is-active" : ""}" data-range="${days}">${label}</button>`;
   }).join("");
-  const customChip = `<button class="ryd-range ryd-range--custom${state.customRange ? " is-active" : ""}" data-range="custom" disabled>Custom</button>`;
   const modeControls = createModeControls();
+
   return `
     <header class="ryd-analytics__header">
       <div class="ryd-analytics__title">Premium Video Insights</div>
       <div class="ryd-analytics__controls">
-        <div class="ryd-analytics__ranges">${rangeControls}${customChip}</div>
+        <div class="ryd-analytics__ranges">${rangeControls}</div>
       </div>
+      <button class="ryd-analytics__expand" type="button" aria-expanded="${analyticsState.panelExpanded}">${
+        analyticsState.panelExpanded ? "Collapse" : "Extend"
+      }</button>
     </header>
     <div class="ryd-analytics__body">
       <div class="ryd-analytics__chart" id="ryd-analytics-activity"></div>
@@ -165,7 +185,6 @@ function createPanelMarkup() {
 }
 
 function createModeControls() {
-  const state = analyticsState;
   const modes = [
     { key: "likes", label: "Likes" },
     { key: "dislikes", label: "Dislikes" },
@@ -174,15 +193,59 @@ function createModeControls() {
 
   return modes
     .map(({ key, label }) => {
-      const isActive = state.currentMode === key;
+      const isActive = analyticsState.currentMode === key;
       return `<button class="ryd-mode${isActive ? " is-active" : ""}" data-mode="${key}">${label}</button>`;
     })
     .join("");
 }
 
 function formatRangeLabel(days) {
-  if (days === 0) {
-    return "All time";
+  return days === 0 ? "All time" : `${days}d`;
+}
+
+function applyExpansionState() {
+  const panel = analyticsState.panelElement;
+  if (!panel) return;
+
+  panel.classList.toggle("is-expanded", analyticsState.panelExpanded);
+  const expandButton = panel.querySelector(".ryd-analytics__expand");
+  if (analyticsState.panelExpanded) {
+    positionExpandedPanel(panel, expandButton);
+  } else {
+    resetPanelPosition(panel, expandButton);
   }
-  return `${days}d`;
+}
+
+function positionExpandedPanel(panel, button) {
+  const primary = document.querySelector("#primary") || document.querySelector("ytd-watch-flexy");
+  const rect = primary?.getBoundingClientRect();
+  panel.style.position = "fixed";
+  panel.style.top = "72px";
+  panel.style.left = rect ? `${rect.left}px` : "50%";
+  panel.style.width = rect ? `${rect.width}px` : "min(960px, calc(100vw - 48px))";
+  panel.style.maxHeight = "calc(100vh - 96px)";
+  panel.style.overflowY = "auto";
+  panel.style.transform = rect ? "" : "translateX(-50%)";
+  panel.style.zIndex = "2147483646";
+  if (button) {
+    button.textContent = "Collapse";
+    button.setAttribute("aria-expanded", "true");
+    button.classList.add("is-active");
+  }
+}
+
+function resetPanelPosition(panel, button) {
+  panel.removeAttribute("style");
+  if (button) {
+    button.textContent = "Extend";
+    button.setAttribute("aria-expanded", "false");
+    button.classList.remove("is-active");
+  }
+}
+
+function applyLoadingState() {
+  const panel = analyticsState.panelElement;
+  if (!panel) return;
+  panel.classList.toggle("is-loading", analyticsState.isLoading);
+  panel.setAttribute("aria-busy", analyticsState.isLoading ? "true" : "false");
 }

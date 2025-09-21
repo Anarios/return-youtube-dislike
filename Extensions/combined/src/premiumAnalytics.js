@@ -1,43 +1,23 @@
 import { getApiEndpoint } from "./config";
 import { getVideoId } from "./utils";
 
-import {
-  analyticsState,
-  COUNTRY_LIMIT,
-  BUCKET,
-  resetStateForVideo,
-  setSession,
-} from "./premiumAnalytics.state";
+import { analyticsState, COUNTRY_LIMIT, BUCKET, resetStateForVideo, setSession } from "./premiumAnalytics.state";
 import {
   configurePanelCallbacks,
   ensurePanel,
   updateRangeButtons,
   updateModeButtons,
-  setListsLoading,
   updateCountryList,
   renderSummary,
   setFooterMessage,
+  setLoadingState,
 } from "./premiumAnalytics.panel";
-import {
-  configureActivityHandlers,
-  renderActivityChart,
-  clearActivityChart,
-  resetChartZoom,
-  resizeActivityChart,
-  disposeActivityChart,
-} from "./premiumAnalytics.activity";
-import {
-  ensureMapChart,
-  renderMap,
-  clearMapChart,
-  resizeMapChart,
-  disposeMapChart,
-} from "./premiumAnalytics.map";
+import { renderActivityChart, resetChartZoom, resizeActivityChart, disposeActivityChart } from "./premiumAnalytics.activity";
+import { ensureMapChart, renderMap, resizeMapChart, disposeMapChart } from "./premiumAnalytics.map";
 import { debounce, safeJson, toEpoch } from "./premiumAnalytics.utils";
 import { logFetchRequest } from "./premiumAnalytics.logging";
 
 let resizeListener = null;
-const DAY_MS = 24 * 60 * 60 * 1000;
 
 function initPremiumAnalytics() {
   if (analyticsState.initialized) return;
@@ -46,11 +26,6 @@ function initPremiumAnalytics() {
   configurePanelCallbacks({
     onRangePreset: handleRangePreset,
     onModeChange: handleModeChange,
-  });
-
-  configureActivityHandlers({
-    onZoomCommit: handleZoomCommit,
-    onZoomReset: handleZoomReset,
   });
 
   document.addEventListener("yt-navigate-finish", handleNavigation, { passive: true });
@@ -74,23 +49,22 @@ function handleNavigation() {
 
   analyticsState.currentVideoId = videoId;
   resetStateForVideo();
-  ensurePanel();
-  requestAnalytics({ resetCustom: true });
+  if (analyticsState.initialized) {
+    ensurePanel();
+  }
+  requestAnalytics();
 }
 
 function handleRangePreset(rangeDays) {
   const state = analyticsState;
   const samePreset = rangeDays === state.currentRange;
-  const customActive = !!state.customRange;
-  if (!customActive && samePreset) {
+  if (samePreset) {
     return;
   }
-
-  state.customRange = null;
   state.currentRange = rangeDays;
   updateRangeButtons();
   resetChartZoom();
-  requestAnalytics({ resetCustom: true });
+  requestAnalytics();
 }
 
 function handleModeChange(mode) {
@@ -100,38 +74,8 @@ function handleModeChange(mode) {
   renderMap();
 }
 
-function handleZoomCommit(range) {
-  if (!range) return;
-  const fromUtc = new Date(range.from).toISOString();
-  const toUtc = new Date(range.to).toISOString();
-
-  if (analyticsState.customRange && analyticsState.customRange.fromUtc === fromUtc && analyticsState.customRange.toUtc === toUtc) {
-    return;
-  }
-
-  analyticsState.customRange = { fromUtc, toUtc };
-  updateRangeButtons();
-  requestAnalytics({ custom: analyticsState.customRange });
-}
-
-function handleZoomReset() {
-  if (!analyticsState.customRange) {
-    return;
-  }
-  analyticsState.customRange = null;
-  updateRangeButtons();
-  requestAnalytics({ resetCustom: true });
-}
-
-function requestAnalytics(options = {}) {
+function requestAnalytics() {
   const state = analyticsState;
-
-  if (options.custom) {
-    state.customRange = options.custom;
-  }
-  if (options.resetCustom) {
-    state.customRange = null;
-  }
 
   if (!state.currentVideoId || !state.sessionToken || !state.sessionActive) {
     return;
@@ -139,53 +83,15 @@ function requestAnalytics(options = {}) {
 
   ensurePanel();
   setFooterMessage("Loading insights…");
-  setListsLoading();
-  clearActivityChart();
-  clearMapChart();
+  setLoadingState(true);
   updateRangeButtons();
 
   const params = new URLSearchParams();
   params.set("bucket", BUCKET);
   params.set("countryLimit", `${COUNTRY_LIMIT}`);
+  params.set("rangeDays", `${state.currentRange}`);
 
-  let fromUtc;
-  let toUtc;
-
-  if (state.customRange && state.customRange.fromUtc && state.customRange.toUtc) {
-    fromUtc = state.customRange.fromUtc;
-    toUtc = state.customRange.toUtc;
-  } else {
-    const globalMin = Number.isFinite(state.globalTimeBounds.min) ? state.globalTimeBounds.min : null;
-    const globalMax = Number.isFinite(state.globalTimeBounds.max) ? state.globalTimeBounds.max : null;
-    const referenceTo = globalMax ?? Date.now();
-
-    if (state.currentRange === 0) {
-      fromUtc = new Date(0).toISOString();
-    } else {
-      let referenceFrom;
-      const presetFrom = referenceTo - state.currentRange * DAY_MS;
-      referenceFrom = globalMin != null ? Math.max(globalMin, presetFrom) : presetFrom;
-
-      if (!Number.isFinite(referenceFrom) || referenceFrom >= referenceTo) {
-        referenceFrom = referenceTo - Math.max(state.latestBucketMs || 60 * 60 * 1000, DAY_MS);
-      }
-
-      fromUtc = new Date(referenceFrom).toISOString();
-    }
-
-    toUtc = new Date(referenceTo).toISOString();
-  }
-
-  state.lastRequestedBounds = {
-    from: toEpoch(fromUtc),
-    to: toEpoch(toUtc),
-  };
-
-  params.set("fromUtc", fromUtc);
-  params.set("toUtc", toUtc);
-
-  const queryKey = `${fromUtc}:${toUtc}`;
-  const requestKey = `${state.currentVideoId}:${queryKey}`;
+  const requestKey = `${state.currentVideoId}:${state.currentRange}`;
   state.activeRequestKey = requestKey;
 
   logFetchRequest(state.currentVideoId, params);
@@ -216,6 +122,11 @@ function requestAnalytics(options = {}) {
       if (analyticsState.activeRequestKey === requestKey) {
         handleError(0, "network_error");
       }
+    })
+    .finally(() => {
+      if (analyticsState.activeRequestKey === requestKey) {
+        setLoadingState(false);
+      }
     });
 }
 
@@ -226,8 +137,17 @@ function renderAnalytics(data) {
     return;
   }
 
-  renderActivityChart(data?.timeSeries, analyticsState.lastRequestedBounds);
-  analyticsState.lastRequestedBounds = null;
+  analyticsState.availableRange = {
+    min: toEpoch(data?.timeSeries?.rangeStartUtc),
+    max: toEpoch(data?.timeSeries?.rangeEndUtc),
+  };
+
+  analyticsState.selectionRange = {
+    from: toEpoch(data?.timeSeries?.windowStartUtc),
+    to: toEpoch(data?.timeSeries?.windowEndUtc),
+  };
+
+  renderActivityChart(data?.timeSeries);
 
   analyticsState.latestCountries = data?.geo?.countries ?? [];
   updateCountryList(panel.querySelector("#ryd-analytics-top-likes"), data?.geo?.topLikes ?? [], "likes");
@@ -257,10 +177,8 @@ function handleError(status, code) {
     message = "Unable to load premium analytics.";
   }
 
-  clearActivityChart();
-  clearMapChart();
-  setListsLoading();
   setFooterMessage(message);
+  setLoadingState(false);
 }
 
 function teardownPanel() {
@@ -268,8 +186,9 @@ function teardownPanel() {
   state.currentVideoId = null;
   state.activeRequestKey = null;
   state.latestCountries = [];
-  state.customRange = null;
   resetStateForVideo();
+  state.panelExpanded = false;
+  state.isLoading = false;
 
   if (state.panelElement) {
     state.panelElement.remove();
@@ -290,12 +209,22 @@ function teardownPremiumAnalytics() {
 }
 
 function updatePremiumSession({ token, active }) {
+  const previousToken = analyticsState.sessionToken;
+  const wasActive = analyticsState.sessionActive;
+
   setSession(token || null, active);
+
   if (!analyticsState.sessionActive) {
     teardownPanel();
     return;
   }
-  if (analyticsState.currentVideoId) {
+
+  ensurePanel();
+
+  const tokenChanged = analyticsState.sessionToken && analyticsState.sessionToken !== previousToken;
+  const activated = !wasActive && analyticsState.sessionActive;
+
+  if ((tokenChanged || activated) && analyticsState.currentVideoId) {
     requestAnalytics();
   }
 }

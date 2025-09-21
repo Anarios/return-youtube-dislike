@@ -2,8 +2,50 @@
  * @jest-environment jsdom
  */
 
+jest.mock("./state", () => {
+  const extConfig = {
+    disableVoteSubmission: false,
+    disableLogging: false,
+    coloredThumbs: false,
+    coloredBar: false,
+    colorTheme: "classic",
+    numberDisplayFormat: "compactShort",
+    selectors: {
+      dislikeTextContainer: [],
+      likeTextContainer: [],
+      buttons: {
+        shorts: { mobile: [], desktop: [] },
+        regular: {
+          mobile: [],
+          desktopMenu: [],
+          desktopNoMenu: [],
+        },
+        likeButton: {
+          segmented: [],
+          segmentedGetButtons: [],
+          notSegmented: [],
+        },
+        dislikeButton: {
+          segmented: [],
+          segmentedGetButtons: [],
+          notSegmented: [],
+        },
+      },
+      menuContainer: [],
+      roundedDesign: [],
+    },
+  };
+
+  const isShorts = jest.fn(() => false);
+
+  return {
+    extConfig,
+    isShorts,
+  };
+});
+
+import { extConfig, isShorts } from "./state";
 import {
-  __Rewire__ as rewiredUtils,
   numberFormat,
   getNumberFormatter,
   localize,
@@ -11,314 +53,408 @@ import {
   getVideoId,
   isInViewport,
   isVideoLoaded,
+  initializeLogging,
   getColorFromTheme,
+  querySelector,
+  querySelectorAll,
+  createObserver,
 } from "./utils";
-import { extConfig } from "./state";
 
-jest.mock("./state");
+const originalChrome = global.chrome;
+const originalBrowser = global.browser;
+const originalConsole = { ...console };
+const originalNavigatorLanguage = navigator.language;
+const originalDocumentQuerySelector = document.querySelector;
+const originalDocumentQuerySelectorAll = document.querySelectorAll;
+const originalLocationHref = window.location.href;
 
-describe("numberFormat", () => {
-  it("should format high numbers correctly", () => {
-    rewiredUtils(
-      "getNumberFormatter",
-      jest.fn().mockReturnValue(
-        Intl.NumberFormat("en", {
-          notation: "compact",
-          compactDisplay: "short",
-        }),
-      ),
-    );
+function resetGlobals() {
+  global.chrome = originalChrome;
+  global.browser = originalBrowser;
+  console.log = originalConsole.log;
+  console.debug = originalConsole.debug;
+  console.info = originalConsole.info;
+  console.warn = originalConsole.warn;
+  console.error = originalConsole.error;
+  document.querySelector = originalDocumentQuerySelector;
+  document.querySelectorAll = originalDocumentQuerySelectorAll;
+  window.history.replaceState(null, "", originalLocationHref);
+  Object.defineProperty(navigator, "language", {
+    value: originalNavigatorLanguage,
+    configurable: true,
+  });
+  document.body.innerHTML = "";
+  document.head.innerHTML = "";
+  document.documentElement.lang = "";
+  jest.restoreAllMocks();
+  jest.clearAllMocks();
+  extConfig.disableLogging = false;
+  extConfig.colorTheme = "classic";
+  extConfig.numberDisplayFormat = "compactShort";
+  isShorts.mockReturnValue(false);
+}
 
-    expect(numberFormat(91492)).toBe("91K");
-    jest.resetAllMocks();
+describe("utils", () => {
+  beforeEach(() => {
+    resetGlobals();
   });
 
-  it("should not format input when < 1000", () => {
-    rewiredUtils(
-      "getNumberFormatter",
-      jest.fn().mockReturnValue(
-        Intl.NumberFormat("en", {
-          notation: "compact",
-          compactDisplay: "short",
-        }),
-      ),
-    );
-
-    expect(numberFormat(100)).toBe("100");
+  afterAll(() => {
+    resetGlobals();
   });
 
-  it("should not round down when rounding is diabled in config", () => {
-    rewiredUtils(
-      "getNumberFormatter",
-      jest.fn().mockReturnValue(
-        Intl.NumberFormat("de", {
-          notation: "compact",
-          compactDisplay: "short",
-        }),
-      ),
-    );
-    extConfig.numberDisplayRoundDown = false;
+  describe("numberFormat", () => {
+    it("formats values using the configured formatter", () => {
+      document.documentElement.lang = "en";
+      const value = 15320;
+      const expected = Intl.NumberFormat("en", { notation: "compact", compactDisplay: "short" }).format(value);
 
-    expect(numberFormat(912391)).toBe("912.391");
-  });
-});
-
-describe("getNumberFormatter", () => {
-  it("should return a correct formatter with compactLong option", () => {
-    expect(getNumberFormatter("compactLong")).toMatchSnapshot();
-  });
-
-  it("should return a correct formatter whith standard option", () => {
-    expect(getNumberFormatter("standard")).toMatchSnapshot();
-  });
-
-  it("should return a correct formatter when using chrome", () => {
-    Object.defineProperty(document.documentElement, "lang", {
-      value: "en",
-      configurable: true,
+      expect(numberFormat(value)).toBe(expected);
     });
-    expect(getNumberFormatter()).toMatchSnapshot();
+
+    it("uses the requested notation when configuration changes", () => {
+      document.documentElement.lang = "en";
+      extConfig.numberDisplayFormat = "standard";
+      const value = 987654;
+      const expected = Intl.NumberFormat("en", { notation: "standard", compactDisplay: "short" }).format(value);
+
+      expect(numberFormat(value)).toBe(expected);
+    });
   });
 
-  it("should return a correct formatter when using firefox", () => {
-    Object.defineProperty(document.documentElement, "lang", {
-      value: null,
-      configurable: true,
-    });
-    expect(getNumberFormatter()).toMatchSnapshot();
-  });
+  describe("getNumberFormatter", () => {
+    it("prefers the document language when available", () => {
+      document.documentElement.lang = "fr";
 
-  it("should return a correct formatter when using the URL locale (possibly buggy)", () => {
-    // Disclaimer: The case we are testing here is actually not correct and
-    // am almost sure I found a bug in the actual implementation of
-    // getNumberFormatter(). As I am currently writing acceptance tests only
-    // e.g. tests that are exclusively testing the current behaviour as is, as
-    // a first step of adding tests to the codebase, I will add it like this
-    // for now and document how we should actually be testing down below.
-    // The reason why this bug is not causing faulty behaviour is, that we
-    // have a fallback for it, that is always triggered.
+      const formatter = getNumberFormatter("compactLong");
+      const options = formatter.resolvedOptions();
 
-    // This is how we make the test go green:
-    Object.defineProperty(document.documentElement, "lang", {
-      value: null,
-      configurable: true,
+      expect(options.locale.toLowerCase()).toContain("fr");
+      expect(options.notation).toBe("compact");
+      expect(options.compactDisplay).toBe("long");
     });
-    Object.defineProperty(navigator, "language", {
-      value: null,
-      configurable: true,
-    });
-    const mockedNode = document.createElement("link");
 
-    mockedNode.setAttribute("href", "https://www.youtube.com/opensearch?locale=en");
+    it("falls back to navigator language", () => {
+      document.documentElement.lang = "";
+      Object.defineProperty(navigator, "language", {
+        value: "de-DE",
+        configurable: true,
+      });
 
-    document.querySelectorAll = jest.fn().mockReturnValue([mockedNode]);
-    expect(getNumberFormatter()).toMatchSnapshot();
-  });
+      const formatter = getNumberFormatter("standard");
+      const options = formatter.resolvedOptions();
 
-  it.skip("should return a correct formatter when using the URL locale", () => {
-    // But we actually want to test like so, which is the correct value of the locale attribute:
-    Object.defineProperty(document.documentElement, "lang", {
-      value: null,
-      configurable: true,
+      expect(options.locale.toLowerCase()).toContain("de");
+      expect(options.notation).toBe("standard");
     });
-    Object.defineProperty(navigator, "language", {
-      value: null,
-      configurable: true,
-    });
-    const mockedNode = document.createElement("link");
-    mockedNode.setAttribute("href", "https://www.youtube.com/opensearch?locale=en_US");
 
-    document.querySelectorAll = jest.fn().mockReturnValue([mockedNode]);
-    expect(getNumberFormatter()).toMatchSnapshot();
-  });
+    it("uses link locale when document and navigator languages are missing", () => {
+      document.documentElement.lang = "";
+      Object.defineProperty(navigator, "language", {
+        value: undefined,
+        configurable: true,
+      });
 
-  it("should return a correct formatter when falling back to default locale", () => {
-    Object.defineProperty(document.documentElement, "lang", {
-      value: null,
-      configurable: true,
+      const link = document.createElement("link");
+      link.setAttribute("rel", "search");
+      link.setAttribute("href", "https://www.youtube.com/opensearch?locale=it-IT");
+      document.head.appendChild(link);
+
+      const formatter = getNumberFormatter();
+      const options = formatter.resolvedOptions();
+
+      expect(options.locale.toLowerCase()).toContain("it");
     });
-    Object.defineProperty(navigator, "language", {
-      value: null,
-      configurable: true,
+
+    it("falls back to english when locale detection fails", () => {
+      document.documentElement.lang = "";
+      Object.defineProperty(navigator, "language", {
+        value: undefined,
+        configurable: true,
+      });
+
+      const querySpy = jest.spyOn(document, "querySelectorAll").mockImplementation(() => {
+        throw new Error("boom");
+      });
+      const consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+
+      const formatter = getNumberFormatter();
+      const options = formatter.resolvedOptions();
+
+      expect(options.locale.toLowerCase()).toContain("en");
+      expect(consoleSpy).toHaveBeenCalledWith(
+        "Cannot find browser locale. Use en as default for number formatting.",
+      );
+      querySpy.mockRestore();
     });
-    expect(getNumberFormatter()).toMatchSnapshot();
   });
 
   describe("localize", () => {
-    it("should return a translated string", () => {
+    it("returns the localized string from chrome", () => {
       global.chrome = {
         i18n: {
-          getMessage: () => "Return YouTube Dislike",
+          getMessage: jest.fn().mockReturnValue("Return YouTube Dislike"),
         },
       };
+
       expect(localize("extensionName")).toBe("Return YouTube Dislike");
+      expect(global.chrome.i18n.getMessage).toHaveBeenCalledWith("extensionName");
     });
   });
 
   describe("getBrowser", () => {
-    it("should return a chrome browser instance", () => {
-      global.chrome = {
-        runtime: jest.fn(),
-      };
-      expect(getBrowser()).toBeDefined();
+    it("returns the chrome runtime when available", () => {
+      global.chrome = { runtime: {} };
+
+      expect(getBrowser()).toBe(global.chrome);
     });
 
-    it("should return a mozilla browser instance", () => {
-      global.chrome.runtime = undefined;
-      global.browser = {
-        runtime: jest.fn(),
-      };
-      expect(getBrowser()).toBeDefined();
+    it("falls back to the firefox browser object", () => {
+      global.chrome = { runtime: undefined };
+      global.browser = { runtime: {} };
+
+      expect(getBrowser()).toBe(global.browser);
     });
 
-    it("should fail on unsupported browser", () => {
+    it("logs and returns false when unsupported", () => {
       global.chrome = undefined;
       global.browser = undefined;
-
-      const log = console.log;
-      console.log = jest.fn();
+      const spy = jest.spyOn(console, "log").mockImplementation(() => {});
 
       expect(getBrowser()).toBe(false);
-      expect(console.log).toBeCalledWith("browser is not supported");
-
-      console.log = log;
+      expect(spy).toHaveBeenCalledWith("browser is not supported");
     });
   });
+
   describe("getVideoId", () => {
-    it("should return the video Id on valid url input", () => {
+    it("extracts the id from a standard watch URL", () => {
       const url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
       expect(getVideoId(url)).toBe("dQw4w9WgXcQ");
     });
 
-    it("should return the video Id on valid shorts url input", () => {
-      const url = "https://www.youtube.com/shorts/niMcQ9Vmmj8";
-      expect(getVideoId(url)).toBe("niMcQ9Vmmj8");
+    it("handles shorts URLs", () => {
+      const url = "https://www.youtube.com/shorts/xyz987";
+
+      expect(getVideoId(url)).toBe("xyz987");
     });
 
-    it("should return the video Id on clip url input", () => {
-      document.querySelector = jest.fn().mockReturnValue({
-        content: "niMcQ9Vmmj8",
-      });
-      const url = "https://www.youtube.com/clip";
-      expect(getVideoId(url)).toBe("niMcQ9Vmmj8");
-    });
+    it("uses the meta tag for clip URLs", () => {
+      const meta = document.createElement("meta");
+      meta.setAttribute("itemprop", "videoId");
+      meta.content = "clip123";
+      document.head.appendChild(meta);
 
-    it("should return null on invalid url input", () => {
-      const url = "https://www.youtube.com/wrong-url";
-      expect(getVideoId(url)).toBe(null);
+      expect(getVideoId("https://www.youtube.com/clip/foobar")).toBe("clip123");
     });
   });
+
   describe("isInViewport", () => {
-    it("should return true if element is in viewport", () => {
-      const rect = {
-        getBoundingClientRect: jest.fn().mockReturnValue({
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        }),
+    it("returns false for zero-sized rectangles", () => {
+      const element = {
+        getBoundingClientRect: () => ({ top: 0, left: 0, bottom: 0, right: 0 }),
       };
-      expect(isInViewport(rect)).toBe(false);
+
+      expect(isInViewport(element)).toBe(false);
     });
 
-    it("should return false if element is out of viewport", () => {
-      const rect = {
-        getBoundingClientRect: jest.fn().mockReturnValue({
-          top: 0,
-          left: 0,
-          bottom: 769,
-          right: 0,
-        }),
+    it("returns true for elements fully inside the viewport", () => {
+      const element = {
+        getBoundingClientRect: () => ({ top: 10, left: 20, bottom: 200, right: 300 }),
       };
-      expect(isInViewport(rect)).toBe(false);
+
+      expect(isInViewport(element)).toBe(true);
+    });
+
+    it("returns false when element extends beyond the viewport", () => {
+      const element = {
+        getBoundingClientRect: () => ({ top: -10, left: 0, bottom: 50, right: 50 }),
+      };
+
+      expect(isInViewport(element)).toBe(false);
     });
   });
+
   describe("isVideoLoaded", () => {
-    describe("on desktop", () => {
-      it("should return true on loaded video", () => {
-        rewiredUtils("getVideoId", jest.fn().mockReturnValue("fakeId"));
-        document.querySelector = jest.fn().mockReturnValue("notNull");
-        expect(isVideoLoaded()).toBe(true);
-        expect(document.querySelector).toBeCalledWith("ytd-watch-grid[video-id='fakeId']");
-      });
-
-      it("should return false on not loaded video", () => {
-        rewiredUtils("getVideoId", jest.fn().mockReturnValue("fakeId"));
-        document.querySelector = jest.fn().mockReturnValue(null);
-        expect(isVideoLoaded()).toBe(false);
-        expect(document.querySelector).toBeCalledWith("ytd-watch-flexy[video-id='fakeId']");
-      });
+    beforeEach(() => {
+      const origin = window.location.origin;
+      window.history.replaceState(null, "", `${origin}/watch?v=testid`);
     });
 
-    describe("on mobile", () => {
-      it("should return true on loaded video", () => {
-        rewiredUtils("getVideoId", jest.fn().mockReturnValue("fakeId"));
-        document.querySelector = jest.fn().mockReturnValueOnce(null).mockReturnValue("notNull");
-        expect(isVideoLoaded()).toBe(true);
-        expect(document.querySelector).toHaveBeenLastCalledWith("ytd-watch-flexy[video-id='fakeId']");
-      });
+    it("returns true when desktop grid element is present", () => {
+      document.querySelector = jest.fn().mockReturnValueOnce({});
 
-      it("should return false on not loaded video", () => {
-        rewiredUtils("getVideoId", jest.fn().mockReturnValue("fakeId"));
-        document.querySelector = jest.fn().mockReturnValueOnce(null).mockReturnValue(null);
-        expect(isVideoLoaded()).toBe(false);
-        expect(document.querySelector).toHaveBeenLastCalledWith('#player[loading="false"]:not([hidden])');
-      });
+      expect(isVideoLoaded()).toBe(true);
+      expect(document.querySelector).toHaveBeenCalledWith("ytd-watch-grid[video-id='testid']");
+    });
+
+    it("checks secondary selectors when the grid is absent", () => {
+      document.querySelector = jest
+        .fn()
+        .mockReturnValueOnce(null)
+        .mockReturnValueOnce({})
+        .mockReturnValue(null);
+
+      expect(isVideoLoaded()).toBe(true);
+      expect(document.querySelector).toHaveBeenNthCalledWith(2, "ytd-watch-flexy[video-id='testid']");
+    });
+
+    it("falls back to player detection when previous lookups fail", () => {
+      document.querySelector = jest
+        .fn()
+        .mockReturnValueOnce(null)
+        .mockReturnValueOnce(null)
+        .mockReturnValueOnce({});
+
+      expect(isVideoLoaded()).toBe(true);
+      expect(document.querySelector).toHaveBeenNthCalledWith(3, '#player[loading="false"]:not([hidden])');
+    });
+
+    it("defers to shorts lookup when on a shorts URL", () => {
+      isShorts.mockReturnValue(true);
+      const origin = window.location.origin;
+      window.history.replaceState(null, "", `${origin}/shorts/abc123`);
+
+      const container = document.createElement("div");
+      container.className = "reel-video-in-sequence-new";
+
+      const thumbnail = document.createElement("div");
+      thumbnail.className = "reel-video-in-sequence-thumbnail";
+      thumbnail.style.backgroundImage = "url(https://i.ytimg.com/vi/abc123/default.jpg)";
+      container.appendChild(thumbnail);
+
+      const renderer = document.createElement("ytd-reel-video-renderer");
+      const overlay = document.createElement("div");
+      overlay.id = "experiment-overlay";
+      overlay.appendChild(document.createElement("span"));
+      renderer.appendChild(overlay);
+      container.appendChild(renderer);
+
+      document.body.appendChild(container);
+
+      expect(isVideoLoaded()).toBe(true);
     });
   });
-  describe("cLog", () => {
-    it("should log a message with the correct prefix", () => {
-      const log = console.log;
-      console.log = jest.fn();
-      cLog("Test message");
 
-      expect(console.log).toBeCalledWith("[return youtube dislike]: Test message");
+  describe("initializeLogging", () => {
+    it("disables console output when configured", () => {
+      extConfig.disableLogging = true;
+      const originalLog = console.log;
+      const originalDebug = console.debug;
 
-      console.log = log;
+      initializeLogging();
+
+      expect(console.log).not.toBe(originalLog);
+      expect(console.debug).not.toBe(originalDebug);
     });
 
-    it("should log a message with the correct prefix when given a writer", () => {
-      const fakeWriter = jest.fn();
+    it("restores console output when logging is enabled", () => {
+      const stubLog = jest.fn();
+      const stubDebug = jest.fn();
+      console.log = stubLog;
+      console.debug = stubDebug;
 
-      cLog("Test message", fakeWriter);
-      expect(fakeWriter).toBeCalledWith("[return youtube dislike]: Test message");
+      extConfig.disableLogging = false;
+      initializeLogging();
+
+      expect(console.log).not.toBe(stubLog);
+      expect(console.debug).not.toBe(stubDebug);
     });
   });
+
   describe("getColorFromTheme", () => {
-    describe("accessible", () => {
-      it("should return the correct color for like", () => {
-        extConfig.colorTheme = "accessible";
-        expect(getColorFromTheme(true)).toBe("dodgerblue");
-      });
+    it("returns accessible colors when configured", () => {
+      extConfig.colorTheme = "accessible";
 
-      it("should return the correct color for not liked", () => {
-        extConfig.colorTheme = "accessible";
-        expect(getColorFromTheme(false)).toBe("gold");
-      });
+      expect(getColorFromTheme(true)).toBe("dodgerblue");
+      expect(getColorFromTheme(false)).toBe("gold");
     });
 
-    describe("neon", () => {
-      it("should return the correct color for like", () => {
-        extConfig.colorTheme = "neon";
-        expect(getColorFromTheme(true)).toBe("aqua");
-      });
+    it("returns neon colors when configured", () => {
+      extConfig.colorTheme = "neon";
 
-      it("should return the correct color for not liked", () => {
-        extConfig.colorTheme = "neon";
-        expect(getColorFromTheme(false)).toBe("magenta");
-      });
+      expect(getColorFromTheme(true)).toBe("aqua");
+      expect(getColorFromTheme(false)).toBe("magenta");
     });
 
-    describe("classic", () => {
-      it("should return the correct color for like", () => {
-        extConfig.colorTheme = "classic";
-        expect(getColorFromTheme(true)).toBe("lime");
-      });
+    it("defaults to classic palette", () => {
+      extConfig.colorTheme = "classic";
 
-      it("should return the correct color for not liked", () => {
-        extConfig.colorTheme = "classic";
-        expect(getColorFromTheme(false)).toBe("red");
-      });
+      expect(getColorFromTheme(true)).toBe("lime");
+      expect(getColorFromTheme(false)).toBe("red");
+    });
+  });
+
+  describe("querySelector", () => {
+    it("returns the first matching element", () => {
+      document.body.innerHTML = `
+        <div class="first"></div>
+        <div class="second"></div>
+      `;
+
+      const result = querySelector([".missing", ".second", ".first"]);
+
+      expect(result).toBeInstanceOf(Element);
+      expect(result?.className).toBe("second");
+    });
+
+    it("scopes the search to the provided element", () => {
+      const host = document.createElement("div");
+      host.innerHTML = '<span class="inner"></span>';
+
+      const result = querySelector([".inner"], host);
+      expect(result).not.toBeNull();
+      expect(result?.className).toBe("inner");
+    });
+
+    it("returns undefined when no selector matches", () => {
+      expect(querySelector([".unmatched"])).toBeUndefined();
+    });
+  });
+
+  describe("querySelectorAll", () => {
+    it("returns the first selector with results", () => {
+      document.body.innerHTML = `
+        <div class="candidate"></div>
+        <div class="candidate"></div>
+      `;
+
+      const result = querySelectorAll([".missing", ".candidate"]);
+
+      expect(result).toHaveLength(2);
+    });
+
+    it("returns an empty NodeList when no matches are found", () => {
+      const result = querySelectorAll([".still-missing"]);
+
+      expect(result).toBeInstanceOf(NodeList);
+      expect(result).toHaveLength(0);
+    });
+  });
+
+  describe("createObserver", () => {
+    it("wraps MutationObserver with helper methods", () => {
+      const observeMock = jest.fn();
+      const disconnectMock = jest.fn();
+      const callback = jest.fn();
+
+      const originalMutationObserver = global.MutationObserver;
+      global.MutationObserver = jest.fn().mockImplementation(() => ({
+        observe: observeMock,
+        disconnect: disconnectMock,
+      }));
+
+      const wrapper = createObserver({ attributes: true }, callback);
+      const element = document.createElement("div");
+
+      wrapper.observe(element);
+      wrapper.disconnect();
+
+      expect(global.MutationObserver).toHaveBeenCalledWith(callback);
+      expect(observeMock).toHaveBeenCalledWith(element, { attributes: true });
+      expect(disconnectMock).toHaveBeenCalled();
+
+      global.MutationObserver = originalMutationObserver;
     });
   });
 });

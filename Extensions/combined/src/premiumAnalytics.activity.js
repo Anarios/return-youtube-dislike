@@ -1,16 +1,10 @@
 import * as echarts from "echarts";
 
 import { analyticsState } from "./premiumAnalytics.state";
-import {
-  clampRangeToBounds,
-  combineBounds,
-  computeChartBounds,
-  resolveZoomBounds,
-  updateGlobalBounds,
-} from "./premiumAnalytics.time";
+import { clampRangeToBounds, combineBounds, computeChartBounds, updateGlobalBounds } from "./premiumAnalytics.time";
 import { toEpoch } from "./premiumAnalytics.utils";
 import { getTextColor, getMutedTextColor, getBorderColor } from "./premiumAnalytics.theme";
-import { logRangeSelection, logTimeBounds, logZoomPreview } from "./premiumAnalytics.logging";
+import { logRangeSelection, logTimeBounds } from "./premiumAnalytics.logging";
 
 function pickFirstFinite(...values) {
   for (const value of values) {
@@ -19,15 +13,6 @@ function pickFirstFinite(...values) {
     }
   }
   return null;
-}
-
-let activityHandlers = {
-  onZoomCommit: () => {},
-  onZoomReset: () => {},
-};
-
-export function configureActivityHandlers(newHandlers) {
-  activityHandlers = { ...activityHandlers, ...newHandlers };
 }
 
 export function ensureActivityChart() {
@@ -41,7 +26,7 @@ export function ensureActivityChart() {
   return state.activityChart;
 }
 
-export function renderActivityChart(timeSeries, requestedBounds) {
+export function renderActivityChart(timeSeries) {
   const state = analyticsState;
   const activityChart = ensureActivityChart();
   if (!activityChart) return;
@@ -58,98 +43,53 @@ export function renderActivityChart(timeSeries, requestedBounds) {
 
   const computedBounds = computeChartBounds(seriesPoints, state.latestTimeAxis, state.latestBucketMs);
 
-  const declaredBounds = {
-    min: toEpoch(timeSeries?.rangeStartUtc),
-    max: toEpoch(timeSeries?.rangeEndUtc),
+  const availableBounds = {
+    min: state.availableRange.min ?? toEpoch(timeSeries?.rangeStartUtc),
+    max: state.availableRange.max ?? toEpoch(timeSeries?.rangeEndUtc),
   };
 
-  const selectionEpoch = state.customRange
-    ? {
-        min: toEpoch(state.customRange.fromUtc),
-        max: toEpoch(state.customRange.toUtc),
-      }
-    : null;
+  const sliderBounds = combineBounds(availableBounds, computedBounds);
 
-  const requestedEpoch = requestedBounds ? { min: requestedBounds.from, max: requestedBounds.to } : null;
-
-  const globalBounds = {
-    min: pickFirstFinite(declaredBounds.min, requestedEpoch?.min, computedBounds.min),
-    max: pickFirstFinite(declaredBounds.max, requestedEpoch?.max, computedBounds.max),
+  state.globalTimeBounds = {
+    min: availableBounds.min ?? sliderBounds.min ?? state.globalTimeBounds.min,
+    max: availableBounds.max ?? sliderBounds.max ?? state.globalTimeBounds.max,
   };
 
-  updateGlobalBounds(globalBounds);
+  updateGlobalBounds(state.globalTimeBounds);
 
-  const combinedFallback = combineBounds(requestedBounds ?? {}, declaredBounds);
-  let chartBounds = combineBounds(computedBounds, combinedFallback);
-  if (selectionEpoch) {
-    chartBounds = combineBounds(selectionEpoch, chartBounds);
-  }
-
-  state.chartTimeBounds = chartBounds;
+  state.chartTimeBounds = sliderBounds;
   logTimeBounds("chart", state.chartTimeBounds);
   logTimeBounds("global", state.globalTimeBounds);
 
-  const sliderMin = pickFirstFinite(
-    declaredBounds.min,
-    requestedEpoch?.min,
-    state.globalTimeBounds.min,
-    state.chartTimeBounds.min,
-    state.latestTimeAxis[0],
-  );
-  const sliderMax = pickFirstFinite(
-    declaredBounds.max,
-    requestedEpoch?.max,
-    state.globalTimeBounds.max,
-    state.chartTimeBounds.max,
-    state.latestTimeAxis[state.latestTimeAxis.length - 1],
-  );
-
-  const sliderBounds = { min: sliderMin, max: sliderMax };
-
-  let selectionBounds;
-  if (state.customRange) {
-    selectionBounds = clampRangeToBounds(
-      {
-        from: toEpoch(state.customRange.fromUtc),
-        to: toEpoch(state.customRange.toUtc),
-      },
-      sliderBounds,
-    );
-  } else if (state.currentRange === 0) {
-    selectionBounds = clampRangeToBounds(
-      {
-        from: sliderMin,
-        to: sliderMax,
-      },
-      sliderBounds,
-    );
-  } else {
-    selectionBounds = clampRangeToBounds(
-      {
-        from: pickFirstFinite(state.chartTimeBounds.min, sliderMin),
-        to: pickFirstFinite(state.chartTimeBounds.max, sliderMax),
-      },
-      sliderBounds,
-    );
-  }
-
-  if (!selectionBounds) {
-    selectionBounds = {
-      from: sliderMin ?? Date.now() - state.latestBucketMs,
-      to: sliderMax ?? Date.now(),
-    };
-  }
-
-  const effectiveSliderBounds = {
-    min: Number.isFinite(sliderBounds.min) ? sliderBounds.min : selectionBounds.from,
-    max: Number.isFinite(sliderBounds.max) ? sliderBounds.max : selectionBounds.to,
+  const requestedSelection = {
+    from: state.selectionRange.from ?? toEpoch(timeSeries?.windowStartUtc),
+    to: state.selectionRange.to ?? toEpoch(timeSeries?.windowEndUtc),
   };
 
-  logRangeSelection("selection", selectionBounds);
+  const selectionBounds = clampRangeToBounds(requestedSelection, sliderBounds)
+    ?? (Number.isFinite(sliderBounds.min) && Number.isFinite(sliderBounds.max)
+      ? { from: sliderBounds.min, to: sliderBounds.max }
+      : null);
 
-  const dataZoom = createDataZoom(effectiveSliderBounds, selectionBounds);
+  if (selectionBounds) {
+    state.selectionRange = selectionBounds;
+    logRangeSelection("selection", selectionBounds);
+  }
 
-  state.suppressZoomEvents = true;
+  const viewStart = selectionBounds?.from ?? sliderBounds.min;
+  const viewEnd = selectionBounds?.to ?? sliderBounds.max;
+
+  const axisBounds = {
+    min: pickFirstFinite(viewStart, sliderBounds.min, state.latestTimeAxis[0], Date.now() - state.latestBucketMs),
+    max: pickFirstFinite(
+      viewEnd,
+      sliderBounds.max,
+      state.latestTimeAxis[state.latestTimeAxis.length - 1],
+      Date.now(),
+    ),
+  };
+
+  const dataZoom = createDataZoom(sliderBounds, selectionBounds);
 
   activityChart.setOption({
     backgroundColor: "transparent",
@@ -158,8 +98,8 @@ export function renderActivityChart(timeSeries, requestedBounds) {
     grid: { left: 40, right: 20, top: 30, bottom: 70 },
     xAxis: {
       type: "time",
-      min: effectiveSliderBounds.min,
-      max: effectiveSliderBounds.max,
+      min: axisBounds.min,
+      max: axisBounds.max,
       axisLabel: { color: getMutedTextColor() },
       axisLine: { lineStyle: { color: getBorderColor() } },
     },
@@ -188,12 +128,6 @@ export function renderActivityChart(timeSeries, requestedBounds) {
     ],
     dataZoom,
   });
-
-  setTimeout(() => {
-    state.suppressZoomEvents = false;
-  }, 0);
-
-  bindChartInteractions();
 }
 
 export function clearActivityChart() {
@@ -205,7 +139,6 @@ export function resetChartZoom() {
   const state = analyticsState;
   const chart = state.activityChart;
   if (!chart) return;
-  state.suppressZoomEvents = true;
   const bounds = {
     min: state.globalTimeBounds.min ?? state.chartTimeBounds.min,
     max: state.globalTimeBounds.max ?? state.chartTimeBounds.max,
@@ -220,9 +153,6 @@ export function resetChartZoom() {
   } else {
     chart.dispatchAction({ type: "dataZoom", start: 0, end: 100 });
   }
-  setTimeout(() => {
-    state.suppressZoomEvents = false;
-  }, 0);
 }
 
 export function resizeActivityChart() {
@@ -277,96 +207,4 @@ function createDataZoom(bounds, selection) {
   }
 
   return [slider, inside];
-}
-
-function bindChartInteractions() {
-  const state = analyticsState;
-  const activityChart = state.activityChart;
-  if (!activityChart || activityChart.__rydZoomBound) return;
-
-  const scheduleZoomCommit = () => {
-    if (state.pendingZoomTimer) {
-      clearTimeout(state.pendingZoomTimer);
-    }
-    state.pendingZoomTimer = setTimeout(() => {
-      commitPendingZoom(true);
-    }, 500);
-  };
-
-  activityChart.on("dataZoom", (event) => {
-    if (state.suppressZoomEvents) return;
-
-    const sliderBounds = {
-      min: state.globalTimeBounds.min ?? state.chartTimeBounds.min,
-      max: state.globalTimeBounds.max ?? state.chartTimeBounds.max,
-    };
-
-    if (sliderBounds.min == null || sliderBounds.max == null) {
-      return;
-    }
-
-    const bounds = resolveZoomBounds(event, sliderBounds, state.latestTimeAxis);
-    if (!bounds) return;
-
-    const [startTime, endTime] = bounds;
-    if (!Number.isFinite(startTime) || !Number.isFinite(endTime)) return;
-
-    const tolerance = Math.max(state.latestBucketMs, 5 * 60 * 1000);
-    const isFullRange =
-      Math.abs(startTime - sliderBounds.min) <= tolerance && Math.abs(endTime - sliderBounds.max) <= tolerance;
-
-    if (isFullRange) {
-      if (Number.isFinite(sliderBounds.min) && Number.isFinite(sliderBounds.max)) {
-        const fullRange = { from: sliderBounds.min, to: sliderBounds.max };
-        state.pendingZoomReset = false;
-        state.pendingZoomRange = fullRange;
-        logZoomPreview("preview", fullRange);
-        scheduleZoomCommit();
-      } else {
-        state.pendingZoomRange = null;
-      }
-      return;
-    }
-
-    if (endTime - startTime < state.latestBucketMs) {
-      return;
-    }
-
-    const clamped = clampRangeToBounds({ from: startTime, to: endTime }, sliderBounds);
-    if (!clamped) return;
-
-    state.pendingZoomReset = false;
-    state.pendingZoomRange = clamped;
-    logZoomPreview("preview", clamped);
-    scheduleZoomCommit();
-  });
-
-  function commitPendingZoom(force = false) {
-    if (state.pendingZoomTimer) {
-      clearTimeout(state.pendingZoomTimer);
-      state.pendingZoomTimer = null;
-    }
-
-    if (state.pendingZoomReset) {
-      state.pendingZoomReset = false;
-      state.pendingZoomRange = null;
-      activityHandlers.onZoomReset();
-      if (!force) {
-        return;
-      }
-    }
-
-    if (!state.pendingZoomRange) return;
-
-    const range = state.pendingZoomRange;
-    state.pendingZoomRange = null;
-
-    activityHandlers.onZoomCommit(range);
-  }
-
-  const zr = activityChart.getZr();
-  zr.on("mouseup", () => commitPendingZoom(false));
-  zr.on("touchend", () => commitPendingZoom(false));
-  zr.on("globalout", () => commitPendingZoom(false));
-  activityChart.__rydZoomBound = true;
 }

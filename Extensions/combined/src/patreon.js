@@ -37,14 +37,13 @@ function initPatreonFeatures() {
 
 function enablePremiumFeatures() {
   const tier = patreonState.user?.membershipTier;
-  
+
   if (tier === 'premium' || tier === 'supporter') {
     enableDetailedStats();
     enableHistoricalData();
     enableCustomThemes();
     if (patreonState.user?.hasActiveMembership) {
       initPremiumAnalytics();
-      requestAnalytics();
     }
   }
 

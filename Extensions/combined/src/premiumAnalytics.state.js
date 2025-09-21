@@ -5,6 +5,8 @@ export const BUCKET = "hour";
 export const analyticsState = {
   initialized: false,
   panelElement: null,
+  panelExpanded: false,
+  isLoading: false,
   activityChart: null,
   mapChart: null,
   currentVideoId: null,
@@ -17,30 +19,20 @@ export const analyticsState = {
   latestSeriesPoints: [],
   latestTimeAxis: [],
   latestBucketMs: 60 * 60 * 1000,
-  customRange: null,
-  suppressZoomEvents: false,
   chartTimeBounds: { min: null, max: null },
   globalTimeBounds: { min: null, max: null },
-  pendingZoomRange: null,
-  pendingZoomReset: false,
-  pendingZoomTimer: null,
-  lastRequestedBounds: null,
+  availableRange: { min: null, max: null },
+  selectionRange: { from: null, to: null },
 };
 
 export function resetStateForVideo() {
-  analyticsState.customRange = null;
   analyticsState.latestSeriesPoints = [];
   analyticsState.latestTimeAxis = [];
   analyticsState.latestBucketMs = 60 * 60 * 1000;
   analyticsState.chartTimeBounds = { min: null, max: null };
   analyticsState.globalTimeBounds = { min: null, max: null };
-  analyticsState.pendingZoomRange = null;
-  analyticsState.pendingZoomReset = false;
-  if (analyticsState.pendingZoomTimer) {
-    clearTimeout(analyticsState.pendingZoomTimer);
-    analyticsState.pendingZoomTimer = null;
-  }
-  analyticsState.lastRequestedBounds = null;
+  analyticsState.availableRange = { min: null, max: null };
+  analyticsState.selectionRange = { from: null, to: null };
 }
 
 export function resetSessionState() {

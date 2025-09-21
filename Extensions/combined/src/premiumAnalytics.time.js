@@ -61,55 +61,10 @@ export function clampRangeToBounds(range, bounds) {
   return { from: clampedStart, to: clampedEnd };
 }
 
-export function resolveZoomBounds(event, sliderBounds, timeline) {
-  const payload = Array.isArray(event?.batch) ? event.batch[0] : event;
-  if (!payload) return null;
-
-  const startTime = resolveZoomValue(payload.startValue, payload.start, sliderBounds, timeline, 0);
-  const endTime = resolveZoomValue(payload.endValue, payload.end, sliderBounds, timeline, timeline.length - 1);
-
-  if (!Number.isFinite(startTime) || !Number.isFinite(endTime)) {
-    return null;
-  }
-
-  return [startTime, endTime];
-}
-
 export function combineBounds(primary = {}, fallback = {}) {
   const min = resolvePreferredLower(primary?.min, fallback?.min);
   const max = resolvePreferredUpper(primary?.max, fallback?.max);
   return { min, max };
-}
-
-function resolveZoomValue(value, percent, sliderBounds, timeline, fallbackIndex) {
-  const numeric = normalizeZoomNumeric(value);
-  if (Number.isFinite(numeric)) {
-    return numeric;
-  }
-
-  const { min, max } = sliderBounds;
-  if (Number.isFinite(min) && Number.isFinite(max) && max > min && typeof percent === "number") {
-    const clampedPercent = Math.max(0, Math.min(100, percent));
-    return min + ((max - min) * clampedPercent) / 100;
-  }
-
-  if (timeline.length) {
-    const index = typeof percent === "number"
-      ? Math.max(0, Math.min(timeline.length - 1, Math.round((percent / 100) * (timeline.length - 1))))
-      : fallbackIndex;
-    return timeline[index] ?? null;
-  }
-
-  return null;
-}
-
-function normalizeZoomNumeric(value) {
-  if (value == null) return null;
-  if (typeof value === "number") {
-    return Number.isFinite(value) ? value : null;
-  }
-  const ms = new Date(value).getTime();
-  return Number.isFinite(ms) ? ms : null;
 }
 
 function resolvePreferredLower(primary, fallback) {
