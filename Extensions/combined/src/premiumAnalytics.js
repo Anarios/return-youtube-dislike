@@ -224,6 +224,10 @@ function renderAnalytics(data) {
     resizeActivityChart();
   } else if (analyticsState.expandedChart === "map") {
     resizeMapChart();
+    resizeActivityChart();
+  } else if (analyticsState.expandedChart === "lists") {
+    resizeActivityChart();
+    resizeMapChart();
   }
 }
 
@@ -241,6 +245,7 @@ function handleChartExpand(chartKey) {
     resizeActivityChart();
   } else if (next === "map") {
     resizeMapChart();
+    resizeActivityChart();
   } else if (next === "lists") {
     resizeActivityChart();
     resizeMapChart();

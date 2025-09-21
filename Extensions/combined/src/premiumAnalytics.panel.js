@@ -294,32 +294,12 @@ function resetPanelPosition(panel, button) {
 function positionExpandedSection(section, button) {
   const primary = document.querySelector("#primary") || document.querySelector("ytd-watch-flexy");
   const rect = primary?.getBoundingClientRect();
-  const hasRect = rect && Number.isFinite(rect.width) && rect.width > 0;
-  const viewportWidth = window.innerWidth || document.documentElement?.clientWidth || 0;
-  const maxViewportWidth = viewportWidth > 0 ? Math.max(viewportWidth - 48, 360) : 960;
-  const primaryWidth = hasRect ? rect.width : NaN;
-  const baseWidth = Number.isFinite(primaryWidth) && primaryWidth > 0 ? primaryWidth : maxViewportWidth;
-  const safeWidth = Math.max(360, Math.min(baseWidth, maxViewportWidth, 960));
   section.style.position = "fixed";
   section.style.top = "72px";
-  let left;
-  if (hasRect) {
-    const primaryLeft = Number.isFinite(rect.left) ? rect.left : 0;
-    left = primaryLeft + (rect.width - safeWidth) / 2;
-  } else if (viewportWidth > 0) {
-    left = (viewportWidth - safeWidth) / 2;
-  }
-  if (!Number.isFinite(left)) {
-    left = 24;
-  }
-  const maxLeft = viewportWidth > 0 ? viewportWidth - safeWidth - 24 : left;
-  if (Number.isFinite(maxLeft)) {
-    left = Math.max(24, Math.min(left, maxLeft));
-  }
-  section.style.left = `${Math.round(left)}px`;
-  section.style.width = `${Math.round(safeWidth)}px`;
+  section.style.left = rect ? `${rect.left}px` : "50%";
+  section.style.width = rect ? `${rect.width}px` : "min(960px, calc(100vw - 48px))";
   section.style.maxHeight = "calc(100vh - 120px)";
-  section.style.transform = "";
+  section.style.transform = rect ? "" : "translateX(-50%)";
   section.style.zIndex = "2147483647";
   section.style.background = "var(--yt-spec-base-background, #202020)";
   section.style.boxShadow = "0 30px 60px rgba(0, 0, 0, 0.45)";

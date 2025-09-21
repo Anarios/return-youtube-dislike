@@ -303,17 +303,17 @@ describe("premiumAnalytics", () => {
 
     expand("map");
     expect(analyticsState.expandedChart).toBe("map");
-    expect(mockResizeActivityChart).toHaveBeenCalledTimes(1);
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(2);
     expect(mockResizeMapChart).toHaveBeenCalledTimes(1);
 
     expand("lists");
     expect(analyticsState.expandedChart).toBe("lists");
-    expect(mockResizeActivityChart).toHaveBeenCalledTimes(2);
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(3);
     expect(mockResizeMapChart).toHaveBeenCalledTimes(2);
 
     expand("lists");
     expect(analyticsState.expandedChart).toBeNull();
-    expect(mockResizeActivityChart).toHaveBeenCalledTimes(3);
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(4);
     expect(mockResizeMapChart).toHaveBeenCalledTimes(3);
   });
 

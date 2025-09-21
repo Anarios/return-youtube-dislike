@@ -44,6 +44,7 @@ export function renderMap(countries) {
 
   const dataset = Array.isArray(countries) ? countries : state.latestCountries;
   const mode = state.currentMode;
+  const showLegend = state.expandedChart === "map";
 
   const processed = dataset.map((entry) => {
     const likes = sanitizeCount(entry.likes);
@@ -120,6 +121,7 @@ export function renderMap(countries) {
       itemWidth: 14,
       itemHeight: 120,
       align: "left",
+      show: showLegend,
     },
     geo: {
       map: "world",

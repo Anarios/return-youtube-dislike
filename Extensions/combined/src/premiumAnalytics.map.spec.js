@@ -210,6 +210,38 @@ describe("premiumAnalytics.map", () => {
     expect(chart.setOption).toHaveBeenCalled();
   });
 
+  it("hides the visual map legend when the section is collapsed", () => {
+    const chart = {
+      setOption: jest.fn(),
+      clear: jest.fn(),
+      resize: jest.fn(),
+      dispose: jest.fn(),
+    };
+    analyticsState.mapChart = chart;
+    analyticsState.expandedChart = null;
+
+    renderMap([{ countryCode: "US", likes: 1, dislikes: 0 }]);
+
+    const option = chart.setOption.mock.calls[0][0];
+    expect(option.visualMap.show).toBe(false);
+  });
+
+  it("shows the visual map legend when the section is expanded", () => {
+    const chart = {
+      setOption: jest.fn(),
+      clear: jest.fn(),
+      resize: jest.fn(),
+      dispose: jest.fn(),
+    };
+    analyticsState.mapChart = chart;
+    analyticsState.expandedChart = "map";
+
+    renderMap([{ countryCode: "US", likes: 1, dislikes: 0 }]);
+
+    const option = chart.setOption.mock.calls[0][0];
+    expect(option.visualMap.show).toBe(true);
+  });
+
   it("clears, resizes, and disposes the chart", () => {
     const chart = {
       setOption: jest.fn(),
