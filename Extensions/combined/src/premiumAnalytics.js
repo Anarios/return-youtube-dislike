@@ -37,6 +37,7 @@ import { debounce, safeJson, toEpoch } from "./premiumAnalytics.utils";
 import { logFetchRequest } from "./premiumAnalytics.logging";
 
 let resizeListener = null;
+const DAY_MS = 24 * 60 * 60 * 1000;
 
 function initPremiumAnalytics() {
   if (analyticsState.initialized) return;
@@ -147,24 +148,43 @@ function requestAnalytics(options = {}) {
   params.set("bucket", BUCKET);
   params.set("countryLimit", `${COUNTRY_LIMIT}`);
 
-  if (state.customRange && state.customRange.fromUtc && state.customRange.toUtc) {
-    state.lastRequestedBounds = {
-      from: toEpoch(state.customRange.fromUtc),
-      to: toEpoch(state.customRange.toUtc),
-    };
-  } else {
-    state.lastRequestedBounds = null;
-  }
+  let fromUtc;
+  let toUtc;
 
   if (state.customRange && state.customRange.fromUtc && state.customRange.toUtc) {
-    params.set("fromUtc", state.customRange.fromUtc);
-    params.set("toUtc", state.customRange.toUtc);
+    fromUtc = state.customRange.fromUtc;
+    toUtc = state.customRange.toUtc;
   } else {
-    const rangeParam = state.currentRange > 0 ? state.currentRange : 0;
-    params.set("rangeDays", `${rangeParam}`);
+    const globalMin = Number.isFinite(state.globalTimeBounds.min) ? state.globalTimeBounds.min : null;
+    const globalMax = Number.isFinite(state.globalTimeBounds.max) ? state.globalTimeBounds.max : null;
+    const referenceTo = globalMax ?? Date.now();
+
+    if (state.currentRange === 0) {
+      fromUtc = new Date(0).toISOString();
+    } else {
+      let referenceFrom;
+      const presetFrom = referenceTo - state.currentRange * DAY_MS;
+      referenceFrom = globalMin != null ? Math.max(globalMin, presetFrom) : presetFrom;
+
+      if (!Number.isFinite(referenceFrom) || referenceFrom >= referenceTo) {
+        referenceFrom = referenceTo - Math.max(state.latestBucketMs || 60 * 60 * 1000, DAY_MS);
+      }
+
+      fromUtc = new Date(referenceFrom).toISOString();
+    }
+
+    toUtc = new Date(referenceTo).toISOString();
   }
 
-  const queryKey = state.customRange ? `${state.customRange.fromUtc}:${state.customRange.toUtc}` : `${state.currentRange}`;
+  state.lastRequestedBounds = {
+    from: toEpoch(fromUtc),
+    to: toEpoch(toUtc),
+  };
+
+  params.set("fromUtc", fromUtc);
+  params.set("toUtc", toUtc);
+
+  const queryKey = `${fromUtc}:${toUtc}`;
   const requestKey = `${state.currentVideoId}:${queryKey}`;
   state.activeRequestKey = requestKey;
 

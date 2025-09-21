@@ -63,24 +63,46 @@ export function renderActivityChart(timeSeries, requestedBounds) {
     max: toEpoch(timeSeries?.rangeEndUtc),
   };
 
+  const selectionEpoch = state.customRange
+    ? {
+        min: toEpoch(state.customRange.fromUtc),
+        max: toEpoch(state.customRange.toUtc),
+      }
+    : null;
+
+  const requestedEpoch = requestedBounds
+    ? { min: requestedBounds.from, max: requestedBounds.to }
+    : null;
+
+  const globalBounds = {
+    min: pickFirstFinite(declaredBounds.min, requestedEpoch?.min, computedBounds.min),
+    max: pickFirstFinite(declaredBounds.max, requestedEpoch?.max, computedBounds.max),
+  };
+
+  updateGlobalBounds(globalBounds);
+
   const combinedFallback = combineBounds(requestedBounds ?? {}, declaredBounds);
-  state.chartTimeBounds = combineBounds(computedBounds, combinedFallback);
-  updateGlobalBounds(state.chartTimeBounds);
+  let chartBounds = combineBounds(computedBounds, combinedFallback);
+  if (selectionEpoch) {
+    chartBounds = combineBounds(selectionEpoch, chartBounds);
+  }
+
+  state.chartTimeBounds = chartBounds;
   logTimeBounds("chart", state.chartTimeBounds);
   logTimeBounds("global", state.globalTimeBounds);
 
   const sliderMin = pickFirstFinite(
+    declaredBounds.min,
+    requestedEpoch?.min,
     state.globalTimeBounds.min,
     state.chartTimeBounds.min,
-    combinedFallback.min,
-    declaredBounds.min,
     state.latestTimeAxis[0],
   );
   const sliderMax = pickFirstFinite(
+    declaredBounds.max,
+    requestedEpoch?.max,
     state.globalTimeBounds.max,
     state.chartTimeBounds.max,
-    combinedFallback.max,
-    declaredBounds.max,
     state.latestTimeAxis[state.latestTimeAxis.length - 1],
   );
 
