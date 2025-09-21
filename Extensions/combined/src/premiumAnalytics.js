@@ -239,7 +239,6 @@ function renderAnalytics(data) {
 
   ensureMapChart();
   renderMap(analyticsState.latestCountries);
-  setFooterMessage("");
 }
 
 function handleError(status, code) {

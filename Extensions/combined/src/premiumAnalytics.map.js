@@ -82,7 +82,7 @@ export function renderMap(countries) {
     .map((d) => (typeof d.value === "number" && Number.isFinite(d.value) ? d.value : null))
     .filter((v) => v !== null);
 
-  const { min, max, colors, text } = resolveVisualMapConfig(numericValues, mode);
+  const visualConfig = resolveVisualMapConfig(numericValues, mode);
 
   mapChart.setOption({
     backgroundColor: "transparent",
@@ -91,17 +91,23 @@ export function renderMap(countries) {
       formatter: (params) => formatMapTooltip(params, mode),
     },
     visualMap: {
-      min,
-      max,
-      text,
+      min: visualConfig.min,
+      max: visualConfig.max,
+      text: [visualConfig.highLabel, visualConfig.lowLabel],
       realtime: true,
       calculable: false,
       inRange: {
-        color: colors,
+        color: visualConfig.colors,
       },
       textStyle: { color: getMutedTextColor() },
       formatter: mode === "ratio" ? (value) => `${Math.round((value ?? 0) * 100)}%` : undefined,
       precision: mode === "ratio" ? 2 : 0,
+      orient: "vertical",
+      left: "left",
+      bottom: 20,
+      itemWidth: 14,
+      itemHeight: 120,
+      align: "left",
     },
     geo: {
       map: "world",
@@ -151,18 +157,21 @@ function resolveVisualMapConfig(values, mode) {
       min: 0,
       max: 1,
       colors: ["#ef4444", "#fde047", "#22c55e"],
-      text: ["Higher like ratio", "Lower"],
+      highLabel: "Higher like ratio",
+      lowLabel: "Lower like ratio",
     };
   }
 
   const fallbackMax = values.length ? Math.max(...values, 0) : 0;
   const max = fallbackMax <= 0 ? 1 : fallbackMax;
+  const labelBase = capitalize(mode);
 
   return {
     min: 0,
     max,
     colors: ["#e2e8f0", "#3b82f6"],
-    text: [capitalize(mode), ""],
+    highLabel: `Higher ${labelBase}`,
+    lowLabel: `Lower ${labelBase}`,
   };
 }
 

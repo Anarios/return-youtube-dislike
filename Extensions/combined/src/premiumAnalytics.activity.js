@@ -70,9 +70,7 @@ export function renderActivityChart(timeSeries, requestedBounds) {
       }
     : null;
 
-  const requestedEpoch = requestedBounds
-    ? { min: requestedBounds.from, max: requestedBounds.to }
-    : null;
+  const requestedEpoch = requestedBounds ? { min: requestedBounds.from, max: requestedBounds.to } : null;
 
   const globalBounds = {
     min: pickFirstFinite(declaredBounds.min, requestedEpoch?.min, computedBounds.min),
@@ -286,6 +284,15 @@ function bindChartInteractions() {
   const activityChart = state.activityChart;
   if (!activityChart || activityChart.__rydZoomBound) return;
 
+  const scheduleZoomCommit = () => {
+    if (state.pendingZoomTimer) {
+      clearTimeout(state.pendingZoomTimer);
+    }
+    state.pendingZoomTimer = setTimeout(() => {
+      commitPendingZoom(true);
+    }, 500);
+  };
+
   activityChart.on("dataZoom", (event) => {
     if (state.suppressZoomEvents) return;
 
@@ -309,9 +316,15 @@ function bindChartInteractions() {
       Math.abs(startTime - sliderBounds.min) <= tolerance && Math.abs(endTime - sliderBounds.max) <= tolerance;
 
     if (isFullRange) {
-      state.pendingZoomRange = null;
-      state.pendingZoomReset = true;
-      logZoomPreview("zoom", { from: sliderBounds.min, to: sliderBounds.max });
+      if (Number.isFinite(sliderBounds.min) && Number.isFinite(sliderBounds.max)) {
+        const fullRange = { from: sliderBounds.min, to: sliderBounds.max };
+        state.pendingZoomReset = false;
+        state.pendingZoomRange = fullRange;
+        logZoomPreview("preview", fullRange);
+        scheduleZoomCommit();
+      } else {
+        state.pendingZoomRange = null;
+      }
       return;
     }
 
@@ -325,14 +338,22 @@ function bindChartInteractions() {
     state.pendingZoomReset = false;
     state.pendingZoomRange = clamped;
     logZoomPreview("preview", clamped);
+    scheduleZoomCommit();
   });
 
-  const commitPendingZoom = () => {
+  function commitPendingZoom(force = false) {
+    if (state.pendingZoomTimer) {
+      clearTimeout(state.pendingZoomTimer);
+      state.pendingZoomTimer = null;
+    }
+
     if (state.pendingZoomReset) {
       state.pendingZoomReset = false;
       state.pendingZoomRange = null;
       activityHandlers.onZoomReset();
-      return;
+      if (!force) {
+        return;
+      }
     }
 
     if (!state.pendingZoomRange) return;
@@ -341,11 +362,11 @@ function bindChartInteractions() {
     state.pendingZoomRange = null;
 
     activityHandlers.onZoomCommit(range);
-  };
+  }
 
   const zr = activityChart.getZr();
-  zr.on("mouseup", commitPendingZoom);
-  zr.on("touchend", commitPendingZoom);
-  zr.on("globalout", commitPendingZoom);
+  zr.on("mouseup", () => commitPendingZoom(false));
+  zr.on("touchend", () => commitPendingZoom(false));
+  zr.on("globalout", () => commitPendingZoom(false));
   activityChart.__rydZoomBound = true;
 }
