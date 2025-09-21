@@ -21,6 +21,48 @@ const CANONICAL_SYNONYM_GROUPS = [
     "us",
     "unitedstatesunitedstates",
   ],
+  [
+    "ssudan",
+    "southsudan",
+    "southsudanrepublic",
+  ],
+  [
+    "wsahara",
+    "westernsahara",
+  ],
+  [
+    "democraticrepubliccongo",
+    "democraticrepublicofthecongo",
+    "drcongo",
+    "drc",
+    "congokinshasa",
+  ],
+  [
+    "cotedivoire",
+    "ivorycoast",
+  ],
+  [
+    "czechia",
+    "czechrepublic",
+  ],
+  [
+    "eswatini",
+    "swaziland",
+    "swazil",
+  ],
+  [
+    "eqguinea",
+    "equatorialguinea",
+  ],
+  [
+    "timorleste",
+    "easttimor",
+  ],
+  [
+    "solomonisls",
+    "solomonislands",
+    "solomonis",
+  ],
 ];
 const CANONICAL_SYNONYM_LOOKUP = buildSynonymLookup(CANONICAL_SYNONYM_GROUPS);
 const FEATURE_NAME_BY_CANONICAL = buildFeatureCanonicalMap(NORMALIZED_WORLD_FEATURES);
