@@ -90,9 +90,7 @@ function handleModeChange(mode) {
   if (!mode || mode === analyticsState.currentMode) return;
   analyticsState.currentMode = mode;
   updateModeButtons();
-  if (previous === "map" || next === "map") {
-    renderMap();
-  }
+  renderMap();
 }
 
 function requestAnalytics({ selection } = {}) {

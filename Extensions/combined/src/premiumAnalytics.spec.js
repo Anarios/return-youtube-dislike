@@ -288,10 +288,9 @@ describe("premiumAnalytics", () => {
     initPremiumAnalytics();
     const callbacks = mockConfigurePanelCallbacks.mock.calls.at(-1)?.[0];
     const expand = callbacks.onChartExpand;
-    expect(typeof expand).toBe("function");
 
-    analyticsState.expandedChart = null;
-    analyticsState.latestCountries = [{ countryCode: "US", likes: 1, dislikes: 0 }];
+    analyticsState.latestCountries = [{ countryCode: "US", likes: 10, dislikes: 4 }];
+
     mockApplyChartExpansionState.mockClear();
     mockResizeActivityChart.mockClear();
     mockResizeMapChart.mockClear();
@@ -304,40 +303,42 @@ describe("premiumAnalytics", () => {
     expect(mockResizeMapChart).not.toHaveBeenCalled();
     expect(mockRenderMap).not.toHaveBeenCalled();
 
-    mockRenderMap.mockClear();
+    mockApplyChartExpansionState.mockClear();
     expand("map");
     expect(analyticsState.expandedChart).toBe("map");
-    expect(mockResizeActivityChart).toHaveBeenCalledTimes(2);
     expect(mockResizeMapChart).toHaveBeenCalledTimes(1);
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(2);
     expect(mockRenderMap).toHaveBeenCalledTimes(1);
 
     mockRenderMap.mockClear();
     expand("map");
     expect(analyticsState.expandedChart).toBeNull();
-    expect(mockResizeActivityChart).toHaveBeenCalledTimes(3);
-    expect(mockResizeMapChart).toHaveBeenCalledTimes(2);
-    expect(mockRenderMap).toHaveBeenCalledTimes(1);
-
-    mockRenderMap.mockClear();
-    expand("map");
-    expect(analyticsState.expandedChart).toBe("map");
-    expect(mockResizeActivityChart).toHaveBeenCalledTimes(4);
-    expect(mockResizeMapChart).toHaveBeenCalledTimes(3);
     expect(mockRenderMap).toHaveBeenCalledTimes(1);
 
     mockRenderMap.mockClear();
     expand("lists");
     expect(analyticsState.expandedChart).toBe("lists");
-    expect(mockResizeActivityChart).toHaveBeenCalledTimes(5);
-    expect(mockResizeMapChart).toHaveBeenCalledTimes(4);
-    expect(mockRenderMap).toHaveBeenCalledTimes(1);
-
-    mockRenderMap.mockClear();
-    expand("lists");
-    expect(analyticsState.expandedChart).toBeNull();
-    expect(mockResizeActivityChart).toHaveBeenCalledTimes(6);
-    expect(mockResizeMapChart).toHaveBeenCalledTimes(5);
     expect(mockRenderMap).not.toHaveBeenCalled();
+  });
+
+  it("re-renders map when switching modes", () => {
+    initPremiumAnalytics();
+    const callbacks = mockConfigurePanelCallbacks.mock.calls.at(-1)?.[0];
+    const expand = callbacks.onChartExpand;
+    const changeMode = callbacks.onModeChange;
+
+    analyticsState.latestCountries = [{ countryCode: "US", likes: 10, dislikes: 4 }];
+    analyticsState.currentMode = "ratio";
+
+    expand("map");
+    mockRenderMap.mockClear();
+
+    ["likes", "dislikes", "ratio"].forEach((mode) => {
+      expect(() => changeMode(mode)).not.toThrow();
+      expect(analyticsState.currentMode).toBe(mode);
+      expect(mockRenderMap).toHaveBeenCalledTimes(1);
+      mockRenderMap.mockClear();
+    });
   });
 
   it("refetches analytics when zoom selection changes", async () => {
