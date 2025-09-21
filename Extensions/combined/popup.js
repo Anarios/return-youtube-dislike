@@ -227,7 +227,11 @@ function initPatreonAuth() {
 
   function launchWebAuthFlow(url) {
     try {
-      if (typeof browser !== "undefined" && browser.identity && typeof browser.identity.launchWebAuthFlow === "function") {
+      if (
+        typeof browser !== "undefined" &&
+        browser.identity &&
+        typeof browser.identity.launchWebAuthFlow === "function"
+      ) {
         // Promise-based API (Firefox)
         return browser.identity.launchWebAuthFlow({ url, interactive: true });
       }
