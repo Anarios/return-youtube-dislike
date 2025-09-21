@@ -52,7 +52,6 @@ function enablePremiumFeatures() {
     enableExportFeatures();
   }
   
-  showPremiumBadge();
 }
 
 function disablePremiumFeatures() {
@@ -61,52 +60,6 @@ function disablePremiumFeatures() {
   teardownPremiumAnalytics();
 }
 
-function showPremiumBadge() {
-  const badge = document.createElement('div');
-  badge.className = 'ryd-premium-badge ryd-premium-feature';
-  badge.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #f96854 0%, #ff6b6b 100%);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    z-index: 9999;
-    box-shadow: 0 2px 10px rgba(249, 104, 84, 0.3);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  `;
-  
-  const icon = document.createElement('svg');
-  icon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21c0 3.96-3.22 7.18-7.18 7.18c-3.97 0-7.21-3.22-7.21-7.18c0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"/></svg>';
-  badge.appendChild(icon);
-  
-  const text = document.createElement('span');
-  try {
-    const prefix = (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonBadgePrefix') : 'Patreon';
-    const tierMap = {
-      premium: (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonTierPremium') : 'Premium Supporter',
-      supporter: (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonTierSupporter') : 'Supporter',
-      basic: (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonTierBasic') : 'Basic Tier',
-      none: (typeof chrome !== 'undefined' && chrome.i18n) ? chrome.i18n.getMessage('patreonTierNone') : 'No Active Membership',
-    };
-    const tierLabel = tierMap[patreonState.user?.membershipTier] || '';
-    text.textContent = `${prefix} ${tierLabel}`.trim();
-  } catch (_) {
-    text.textContent = `Patreon ${patreonState.user?.membershipTier || ''}`.trim();
-  }
-  badge.appendChild(text);
-  
-  document.body.appendChild(badge);
-  
-  setTimeout(() => {
-    badge.style.opacity = '0.7';
-  }, 3000);
-}
 
 function enableDetailedStats() {
   console.log('Premium feature: Detailed stats enabled');
