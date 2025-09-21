@@ -70,6 +70,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
       chrome.storage.sync.set({
         patreonAuthenticated: true,
         patreonUser: request.user,
+        patreonSessionToken: request.sessionToken,
       });
       // Notify all tabs about authentication
       chrome.tabs.query({}, (tabs) => {
@@ -79,6 +80,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
               message: "patreon_status_changed",
               authenticated: true,
               user: request.user,
+              sessionToken: request.sessionToken,
             });
           }
         });
@@ -116,7 +118,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.message == "send_links") {
     toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
     if (toSend.length >= 20) {
-      fetch(getApiEndpoint('/votes'), {
+      fetch(getApiEndpoint("/votes"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -138,15 +140,24 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     (async () => {
       try {
         const idApi = getIdentityApi();
-        if (!idApi || typeof (idApi.getRedirectURL || (isChrome() && chrome.identity && chrome.identity.getRedirectURL)) !== "function") {
+        if (
+          !idApi ||
+          typeof (idApi.getRedirectURL || (isChrome() && chrome.identity && chrome.identity.getRedirectURL)) !==
+            "function"
+        ) {
           sendResponse({ success: false, error: "identity API not available" });
           return;
         }
-        const redirectUri = (isFirefox() && browser.identity.getRedirectURL)
-          ? browser.identity.getRedirectURL()
-          : (isChrome() && chrome.identity.getRedirectURL ? chrome.identity.getRedirectURL() : "");
+        const redirectUri =
+          isFirefox() && browser.identity.getRedirectURL
+            ? browser.identity.getRedirectURL()
+            : isChrome() && chrome.identity.getRedirectURL
+              ? chrome.identity.getRedirectURL()
+              : "";
 
-        const startRes = await fetch(getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`));
+        const startRes = await fetch(
+          getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`),
+        );
         const startData = await startRes.json();
 
         const responseUrl = await launchWebAuthFlow(startData.authUrl);
@@ -168,20 +179,27 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
         const authData = await exchangeRes.json();
         if (authData && authData.success) {
-          api.storage.sync.set({
-            patreonAuthenticated: true,
-            patreonUser: authData.user,
-            patreonSessionToken: authData.sessionToken,
-          }, () => {
-            api.runtime.sendMessage({ message: "patreon_auth_complete", user: authData.user });
-            sendResponse({ success: true, user: authData.user });
-          });
+          api.storage.sync.set(
+            {
+              patreonAuthenticated: true,
+              patreonUser: authData.user,
+              patreonSessionToken: authData.sessionToken,
+            },
+            () => {
+              api.runtime.sendMessage({
+                message: "patreon_auth_complete",
+                user: authData.user,
+                sessionToken: authData.sessionToken,
+              });
+              sendResponse({ success: true, user: authData.user });
+            },
+          );
         } else {
           sendResponse({ success: false, error: (authData && authData.error) || "OAuth exchange failed" });
         }
       } catch (e) {
         console.error("patreon_oauth_login error", e);
-        sendResponse({ success: false, error: String(e && e.message || e) });
+        sendResponse({ success: false, error: String((e && e.message) || e) });
       }
     })();
     return true;
@@ -221,7 +239,7 @@ async function sendVote(videoId, vote, depth = 1) {
     if (!storageResult.userId || !storageResult.registrationConfirmed) {
       await register();
     }
-    let voteResponse = await fetch(getApiEndpoint('/interact/vote'), {
+    let voteResponse = await fetch(getApiEndpoint("/interact/vote"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -249,7 +267,7 @@ async function sendVote(videoId, vote, depth = 1) {
       return;
     }
 
-    await fetch(getApiEndpoint('/interact/confirmVote'), {
+    await fetch(getApiEndpoint("/interact/confirmVote"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

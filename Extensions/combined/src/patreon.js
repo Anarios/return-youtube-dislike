@@ -1,3 +1,5 @@
+import { initPremiumAnalytics, requestAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./premiumAnalytics";
+
 let patreonState = {
   authenticated: false,
   user: null,
@@ -10,6 +12,7 @@ function initPatreonFeatures() {
       patreonState.authenticated = true;
       patreonState.user = data.patreonUser;
       patreonState.sessionToken = data.patreonSessionToken;
+      updatePremiumSession({ token: patreonState.sessionToken, active: patreonState.user?.hasActiveMembership });
       enablePremiumFeatures();
     }
   });
@@ -20,8 +23,12 @@ function initPatreonFeatures() {
       patreonState.user = request.user || null;
       
       if (request.authenticated) {
+        patreonState.sessionToken = request.sessionToken ?? patreonState.sessionToken;
+        updatePremiumSession({ token: patreonState.sessionToken, active: patreonState.user?.hasActiveMembership });
         enablePremiumFeatures();
       } else {
+        patreonState.sessionToken = null;
+        updatePremiumSession({ token: null, active: false });
         disablePremiumFeatures();
       }
     }
@@ -35,8 +42,12 @@ function enablePremiumFeatures() {
     enableDetailedStats();
     enableHistoricalData();
     enableCustomThemes();
+    if (patreonState.user?.hasActiveMembership) {
+      initPremiumAnalytics();
+      requestAnalytics();
+    }
   }
-  
+
   if (tier === 'premium') {
     enableAdvancedAnalytics();
     enableExportFeatures();
@@ -48,6 +59,7 @@ function enablePremiumFeatures() {
 function disablePremiumFeatures() {
   const premiumElements = document.querySelectorAll('.ryd-premium-feature');
   premiumElements.forEach(el => el.remove());
+  teardownPremiumAnalytics();
 }
 
 function showPremiumBadge() {

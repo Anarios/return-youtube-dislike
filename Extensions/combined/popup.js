@@ -100,10 +100,34 @@ function initPatreonAuth() {
   const userTier = document.getElementById("patreon-tier");
 
   chrome.storage.sync.get(["patreonUser", "patreonSessionToken"], (data) => {
-    if (data.patreonSessionToken && data.patreonUser) {
-      verifySession(data.patreonSessionToken).then((isValid) => {
-        if (isValid) {
-          showLoggedInView(data.patreonUser);
+    const cachedUser = data.patreonUser;
+    const sessionToken = data.patreonSessionToken;
+
+    if (sessionToken && cachedUser) {
+      // Show cached state immediately to avoid flicker on popup reopen.
+      showLoggedInView(cachedUser);
+
+      verifySession(sessionToken).then((result) => {
+        if (result.status === "valid") {
+          if (result.membershipTier && result.membershipTier !== cachedUser.membershipTier) {
+            const updatedUser = { ...cachedUser, membershipTier: result.membershipTier, hasActiveMembership: true };
+            showLoggedInView(updatedUser);
+            chrome.storage.sync.set({ patreonUser: updatedUser });
+          } else if (cachedUser.hasActiveMembership !== true) {
+            const updatedUser = { ...cachedUser, hasActiveMembership: true };
+            showLoggedInView(updatedUser);
+            chrome.storage.sync.set({ patreonUser: updatedUser });
+          }
+        } else if (result.status === "inactive") {
+          const updatedUser = {
+            ...cachedUser,
+            hasActiveMembership: false,
+            membershipTier: result.membershipTier || cachedUser.membershipTier || "none",
+          };
+          showLoggedInView(updatedUser);
+          chrome.storage.sync.set({ patreonUser: updatedUser });
+        } else if (result.status === "error") {
+          console.warn("Patreon session verification skipped:", result.reason || "network_error");
         } else {
           showLoggedOutView();
           chrome.storage.sync.remove(["patreonUser", "patreonSessionToken"]);
@@ -128,6 +152,9 @@ function initPatreonAuth() {
     if (user.imageUrl) {
       userAvatar.src = user.imageUrl;
       userAvatar.style.display = "block";
+    } else {
+      userAvatar.src = "";
+      userAvatar.style.display = "none";
     }
 
     const tierLabels = {
@@ -141,6 +168,8 @@ function initPatreonAuth() {
 
     if (user.hasActiveMembership) {
       userTier.style.color = "#f96854";
+    } else {
+      userTier.style.color = "var(--lightGrey)";
     }
   }
 
@@ -154,11 +183,38 @@ function initPatreonAuth() {
         body: JSON.stringify({ sessionToken: token }),
       });
 
-      const data = await response.json();
-      return data.valid === true;
+      const data = await response.json().catch(() => null);
+      if (!data) {
+        return { status: "error", reason: "invalid_response" };
+      }
+
+      const failureReason = typeof data.failureReason === "string" ? data.failureReason : null;
+      const membershipTier = typeof data.membershipTier === "string" ? data.membershipTier : null;
+
+      if (data.valid === true) {
+        return { status: "valid", membershipTier };
+      }
+
+      if (failureReason === "membershipinactive") {
+        return { status: "inactive", membershipTier };
+      }
+
+      if (failureReason === "expired" || failureReason === "legacyformat") {
+        return { status: "expired", membershipTier };
+      }
+
+      if (failureReason === "invalid") {
+        return { status: "invalid", membershipTier, failureReason };
+      }
+
+      if (!failureReason) {
+        return { status: "error", reason: "unknown_failure" };
+      }
+
+      return { status: "error", reason: failureReason };
     } catch (error) {
       console.error("Session verification failed:", error);
-      return false;
+      return { status: "error", reason: "network_error" };
     }
   }
 
