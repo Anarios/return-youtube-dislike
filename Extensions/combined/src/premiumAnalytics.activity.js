@@ -79,14 +79,18 @@ export function renderActivityChart(timeSeries) {
     logRangeSelection("selection", selectionBounds);
   }
 
-  const viewStart = selectionBounds?.from ?? sliderBounds.min;
-  const viewEnd = selectionBounds?.to ?? sliderBounds.max;
-
   const axisBounds = {
-    min: pickFirstFinite(viewStart, sliderBounds.min, state.latestTimeAxis[0], Date.now() - state.latestBucketMs),
+    min: pickFirstFinite(
+      sliderBounds.min,
+      computedBounds.min,
+      selectionBounds?.from,
+      state.latestTimeAxis[0],
+      Date.now() - state.latestBucketMs,
+    ),
     max: pickFirstFinite(
-      viewEnd,
       sliderBounds.max,
+      computedBounds.max,
+      selectionBounds?.to,
       state.latestTimeAxis[state.latestTimeAxis.length - 1],
       Date.now(),
     ),

@@ -4,6 +4,7 @@ import { sanitizeCount } from "./premiumAnalytics.utils";
 let callbacks = {
   onRangePreset: () => {},
   onModeChange: () => {},
+  onChartExpand: () => {},
 };
 
 export function configurePanelCallbacks(newCallbacks) {
@@ -35,6 +36,7 @@ export function ensurePanel() {
   updateModeButtons();
   applyExpansionState();
   applyLoadingState();
+  applyChartExpansionState();
 
   return panel;
 }
@@ -135,12 +137,14 @@ function bindUiControls(container) {
     });
   });
 
-  const expandButton = container.querySelector(".ryd-analytics__expand");
-  if (expandButton) {
-    expandButton.addEventListener("click", () => {
-      togglePanelExpanded();
+  container.querySelectorAll(".ryd-analytics__section-expand").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const chart = btn.dataset.chart;
+      if (!chart) return;
+      callbacks.onChartExpand(chart);
     });
-  }
+  });
+
 }
 
 function createPanelMarkup() {
@@ -157,29 +161,50 @@ function createPanelMarkup() {
       <div class="ryd-analytics__controls">
         <div class="ryd-analytics__ranges">${rangeControls}</div>
       </div>
-      <button class="ryd-analytics__expand" type="button" aria-expanded="${analyticsState.panelExpanded}">${
-        analyticsState.panelExpanded ? "Collapse" : "Extend"
-      }</button>
     </header>
     <div class="ryd-analytics__body">
-      <div class="ryd-analytics__chart" id="ryd-analytics-activity"></div>
-      <div class="ryd-analytics__lists">
-        <div class="ryd-analytics__list" data-type="likes">
-          <h4>Top Like Countries</h4>
-          <ul class="ryd-analytics__list-items" id="ryd-analytics-top-likes"></ul>
+      <section class="ryd-analytics__section" data-chart="activity">
+        <div class="ryd-analytics__section-header">
+          <h3 class="ryd-analytics__section-title">Engagement over time</h3>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="activity" aria-expanded="false">Extend</button>
         </div>
-        <div class="ryd-analytics__list" data-type="dislikes">
-          <h4>Top Dislike Countries</h4>
-          <ul class="ryd-analytics__list-items" id="ryd-analytics-top-dislikes"></ul>
+        <div class="ryd-analytics__section-content">
+          <div class="ryd-analytics__chart" id="ryd-analytics-activity"></div>
         </div>
-      </div>
-      <div class="ryd-analytics__map-block">
-        <div class="ryd-analytics__map-controls">
-          <span class="ryd-analytics__map-label">Map metric</span>
-          <div class="ryd-analytics__modes" role="tablist">${modeControls}</div>
+      </section>
+      <section class="ryd-analytics__section" data-chart="lists">
+        <div class="ryd-analytics__section-header">
+          <h3 class="ryd-analytics__section-title">Top countries</h3>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="lists" aria-expanded="false">Extend</button>
         </div>
-        <div class="ryd-analytics__map" id="ryd-analytics-map"></div>
-      </div>
+        <div class="ryd-analytics__section-content">
+          <div class="ryd-analytics__lists">
+            <div class="ryd-analytics__list" data-type="likes">
+              <h4>Top Like Countries</h4>
+              <ul class="ryd-analytics__list-items" id="ryd-analytics-top-likes"></ul>
+            </div>
+            <div class="ryd-analytics__list" data-type="dislikes">
+              <h4>Top Dislike Countries</h4>
+              <ul class="ryd-analytics__list-items" id="ryd-analytics-top-dislikes"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="ryd-analytics__section" data-chart="map">
+        <div class="ryd-analytics__section-header">
+          <h3 class="ryd-analytics__section-title">Geography</h3>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="map" aria-expanded="false">Extend</button>
+        </div>
+        <div class="ryd-analytics__section-content">
+          <div class="ryd-analytics__map-block">
+            <div class="ryd-analytics__map-controls">
+              <span class="ryd-analytics__map-label">Map metric</span>
+              <div class="ryd-analytics__modes" role="tablist">${modeControls}</div>
+            </div>
+            <div class="ryd-analytics__map" id="ryd-analytics-map"></div>
+          </div>
+        </div>
+      </section>
       <div class="ryd-analytics__footer" id="ryd-analytics-footer"></div>
     </div>
   `;
@@ -217,6 +242,28 @@ function applyExpansionState() {
   }
 }
 
+export function applyChartExpansionState() {
+  const panel = analyticsState.panelElement;
+  if (!panel) return;
+
+  const expandedChart = analyticsState.expandedChart;
+  const sections = panel.querySelectorAll(".ryd-analytics__section");
+
+  sections.forEach((section) => {
+    const chartKey = section.dataset.chart;
+    const button = section.querySelector(".ryd-analytics__section-expand");
+    const isMatch = expandedChart && chartKey === expandedChart;
+
+    section.classList.toggle("is-expanded", isMatch);
+
+    if (isMatch) {
+      positionExpandedSection(section, button);
+    } else {
+      resetSectionPosition(section, button);
+    }
+  });
+}
+
 function positionExpandedPanel(panel, button) {
   const primary = document.querySelector("#primary") || document.querySelector("ytd-watch-flexy");
   const rect = primary?.getBoundingClientRect();
@@ -237,6 +284,71 @@ function positionExpandedPanel(panel, button) {
 
 function resetPanelPosition(panel, button) {
   panel.removeAttribute("style");
+  if (button) {
+    button.textContent = "Extend";
+    button.setAttribute("aria-expanded", "false");
+    button.classList.remove("is-active");
+  }
+}
+
+function positionExpandedSection(section, button) {
+  const primary = document.querySelector("#primary") || document.querySelector("ytd-watch-flexy");
+  const rect = primary?.getBoundingClientRect();
+  const hasRect = rect && Number.isFinite(rect.width) && rect.width > 0;
+  const viewportWidth = window.innerWidth || document.documentElement?.clientWidth || 0;
+  const maxViewportWidth = viewportWidth > 0 ? Math.max(viewportWidth - 48, 360) : 960;
+  const primaryWidth = hasRect ? rect.width : NaN;
+  const baseWidth = Number.isFinite(primaryWidth) && primaryWidth > 0 ? primaryWidth : maxViewportWidth;
+  const safeWidth = Math.max(360, Math.min(baseWidth, maxViewportWidth, 960));
+  section.style.position = "fixed";
+  section.style.top = "72px";
+  let left;
+  if (hasRect) {
+    const primaryLeft = Number.isFinite(rect.left) ? rect.left : 0;
+    left = primaryLeft + (rect.width - safeWidth) / 2;
+  } else if (viewportWidth > 0) {
+    left = (viewportWidth - safeWidth) / 2;
+  }
+  if (!Number.isFinite(left)) {
+    left = 24;
+  }
+  const maxLeft = viewportWidth > 0 ? viewportWidth - safeWidth - 24 : left;
+  if (Number.isFinite(maxLeft)) {
+    left = Math.max(24, Math.min(left, maxLeft));
+  }
+  section.style.left = `${Math.round(left)}px`;
+  section.style.width = `${Math.round(safeWidth)}px`;
+  section.style.maxHeight = "calc(100vh - 120px)";
+  section.style.transform = "";
+  section.style.zIndex = "2147483647";
+  section.style.background = "var(--yt-spec-base-background, #202020)";
+  section.style.boxShadow = "0 30px 60px rgba(0, 0, 0, 0.45)";
+  section.style.padding = "16px";
+  section.style.overflowY = "auto";
+
+  const viewportHeight = window.innerHeight || 0;
+  const computed = viewportHeight > 0 ? Math.min(viewportHeight * 0.8, viewportHeight - 160) : NaN;
+  const targetHeight = Math.max(360, Number.isFinite(computed) && computed > 0 ? computed : 560);
+  section.style.height = `${Math.round(targetHeight)}px`;
+
+  section
+    .querySelectorAll(".ryd-analytics__chart, .ryd-analytics__map")
+    .forEach((element) => {
+      const chartHeight = Math.max(320, Math.round(targetHeight - 120));
+      element.style.height = `${chartHeight}px`;
+    });
+  if (button) {
+    button.textContent = "Collapse";
+    button.setAttribute("aria-expanded", "true");
+    button.classList.add("is-active");
+  }
+}
+
+function resetSectionPosition(section, button) {
+  section.removeAttribute("style");
+  section
+    .querySelectorAll(".ryd-analytics__chart, .ryd-analytics__map")
+    .forEach((element) => element.removeAttribute("style"));
   if (button) {
     button.textContent = "Extend";
     button.setAttribute("aria-expanded", "false");

@@ -20,6 +20,7 @@ jest.mock("./premiumAnalytics.panel", () => ({
   showPanel: jest.fn(),
   hidePanel: jest.fn(),
   togglePanel: jest.fn(),
+  applyChartExpansionState: jest.fn(),
 }));
 
 jest.mock("./premiumAnalytics.activity", () => ({
@@ -70,6 +71,7 @@ const {
   renderSummary: mockRenderSummary,
   setFooterMessage: mockSetFooterMessage,
   setLoadingState: mockSetLoadingState,
+  applyChartExpansionState: mockApplyChartExpansionState,
 } = panelMocks;
 
 const {
@@ -157,6 +159,9 @@ describe("premiumAnalytics", () => {
     expect(mockRegisterZoomSelectionListener).toHaveBeenCalledTimes(1);
     const listener = mockRegisterZoomSelectionListener.mock.calls.at(-1)?.[0];
     expect(typeof listener).toBe("function");
+
+    const callbacks = mockConfigurePanelCallbacks.mock.calls.at(-1)?.[0];
+    expect(typeof callbacks?.onChartExpand).toBe("function");
 
     initPremiumAnalytics();
     expect(mockConfigurePanelCallbacks).toHaveBeenCalledTimes(1);
@@ -264,6 +269,52 @@ describe("premiumAnalytics", () => {
 
     const secondUrl = fetch.mock.calls[fetch.mock.calls.length - 1][0];
     expect(firstUrl).toBe(secondUrl);
+  });
+
+  it("defers chart zoom resets until preset data arrives", () => {
+    initPremiumAnalytics();
+    const callbacks = mockConfigurePanelCallbacks.mock.calls.at(-1)?.[0];
+    expect(typeof callbacks?.onRangePreset).toBe("function");
+
+    mockResetChartZoom.mockClear();
+    analyticsState.currentRange = 30;
+
+    callbacks.onRangePreset(7);
+
+    expect(mockResetChartZoom).not.toHaveBeenCalled();
+  });
+
+  it("toggles chart expansion via callback", () => {
+    initPremiumAnalytics();
+    const callbacks = mockConfigurePanelCallbacks.mock.calls.at(-1)?.[0];
+    const expand = callbacks.onChartExpand;
+    expect(typeof expand).toBe("function");
+
+    analyticsState.expandedChart = null;
+    mockApplyChartExpansionState.mockClear();
+    mockResizeActivityChart.mockClear();
+    mockResizeMapChart.mockClear();
+
+    expand("activity");
+    expect(analyticsState.expandedChart).toBe("activity");
+    expect(mockApplyChartExpansionState).toHaveBeenCalled();
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(1);
+    expect(mockResizeMapChart).not.toHaveBeenCalled();
+
+    expand("map");
+    expect(analyticsState.expandedChart).toBe("map");
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(1);
+    expect(mockResizeMapChart).toHaveBeenCalledTimes(1);
+
+    expand("lists");
+    expect(analyticsState.expandedChart).toBe("lists");
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(2);
+    expect(mockResizeMapChart).toHaveBeenCalledTimes(2);
+
+    expand("lists");
+    expect(analyticsState.expandedChart).toBeNull();
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(3);
+    expect(mockResizeMapChart).toHaveBeenCalledTimes(3);
   });
 
   it("refetches analytics when zoom selection changes", async () => {

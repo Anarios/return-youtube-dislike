@@ -11,6 +11,7 @@ import {
   renderSummary,
   setFooterMessage,
   setLoadingState,
+  applyChartExpansionState,
 } from "./premiumAnalytics.panel";
 import {
   renderActivityChart,
@@ -24,6 +25,7 @@ import { debounce, safeJson, toEpoch } from "./premiumAnalytics.utils";
 import { logFetchRequest } from "./premiumAnalytics.logging";
 
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
+const EXPANDABLE_SECTIONS = new Set(["activity", "map", "lists"]);
 let resizeListener = null;
 const debounceSelectionFetch = debounce(commitSelectionFetch, 400);
 
@@ -39,6 +41,7 @@ function initPremiumAnalytics() {
   configurePanelCallbacks({
     onRangePreset: handleRangePreset,
     onModeChange: handleModeChange,
+    onChartExpand: handleChartExpand,
   });
 
   document.addEventListener("yt-navigate-finish", handleNavigation, { passive: true });
@@ -62,6 +65,7 @@ function handleNavigation() {
 
   analyticsState.currentVideoId = videoId;
   resetStateForVideo();
+  applyChartExpansionState();
   if (analyticsState.initialized) {
     ensurePanel();
   }
@@ -79,7 +83,6 @@ function handleRangePreset(rangeDays) {
   state.selectionRange = { from: null, to: null };
   state.currentRange = rangeDays;
   updateRangeButtons();
-  resetChartZoom();
   requestAnalytics();
 }
 
@@ -203,6 +206,7 @@ function renderAnalytics(data) {
 
   analyticsState.suppressZoomEvents = true;
 
+  applyChartExpansionState();
   renderActivityChart(data?.timeSeries);
 
   analyticsState.latestCountries = data?.geo?.countries ?? [];
@@ -215,6 +219,35 @@ function renderAnalytics(data) {
 
   ensureMapChart();
   renderMap(analyticsState.latestCountries);
+
+  if (analyticsState.expandedChart === "activity") {
+    resizeActivityChart();
+  } else if (analyticsState.expandedChart === "map") {
+    resizeMapChart();
+  }
+}
+
+function handleChartExpand(chartKey) {
+  if (!EXPANDABLE_SECTIONS.has(chartKey)) {
+    return;
+  }
+
+  const state = analyticsState;
+  const next = state.expandedChart === chartKey ? null : chartKey;
+  state.expandedChart = next;
+  applyChartExpansionState();
+
+  if (next === "activity") {
+    resizeActivityChart();
+  } else if (next === "map") {
+    resizeMapChart();
+  } else if (next === "lists") {
+    resizeActivityChart();
+    resizeMapChart();
+  } else {
+    resizeActivityChart();
+    resizeMapChart();
+  }
 }
 
 function handleChartSelection(range) {
@@ -334,6 +367,7 @@ function resolveVideoId() {
 }
 
 function resizeCharts() {
+  applyChartExpansionState();
   resizeActivityChart();
   resizeMapChart();
 }

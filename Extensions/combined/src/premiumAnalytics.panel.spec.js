@@ -14,6 +14,7 @@ import {
   setFooterMessage,
   setPanelExpanded,
   setLoadingState,
+  applyChartExpansionState,
 } from "./premiumAnalytics.panel";
 
 describe("premiumAnalytics.panel", () => {
@@ -43,8 +44,9 @@ describe("premiumAnalytics.panel", () => {
   it("configures callbacks and triggers them via UI interactions", () => {
     const rangeSpy = jest.fn();
     const modeSpy = jest.fn();
+    const expandSpy = jest.fn();
 
-    configurePanelCallbacks({ onRangePreset: rangeSpy, onModeChange: modeSpy });
+    configurePanelCallbacks({ onRangePreset: rangeSpy, onModeChange: modeSpy, onChartExpand: expandSpy });
     const panel = ensurePanel();
 
     const rangeButton = panel.querySelector(".ryd-range[data-range='7']");
@@ -54,6 +56,14 @@ describe("premiumAnalytics.panel", () => {
     const modeButton = panel.querySelector(".ryd-mode[data-mode='likes']");
     modeButton.click();
     expect(modeSpy).toHaveBeenCalledWith("likes");
+
+    const activityExpand = panel.querySelector(".ryd-analytics__section-expand[data-chart='activity']");
+    activityExpand.click();
+    expect(expandSpy).toHaveBeenCalledWith("activity");
+
+    const listsExpand = panel.querySelector(".ryd-analytics__section-expand[data-chart='lists']");
+    listsExpand.click();
+    expect(expandSpy).toHaveBeenCalledWith("lists");
   });
 
   it("creates the analytics panel inside the secondary column", () => {
@@ -61,7 +71,8 @@ describe("premiumAnalytics.panel", () => {
 
     expect(panel).not.toBeNull();
     expect(document.querySelector("#secondary-inner").firstChild).toBe(panel);
-    expect(panel.querySelector(".ryd-analytics__expand")).toBeTruthy();
+    expect(panel.querySelector(".ryd-analytics__expand")).toBeNull();
+    expect(panel.querySelectorAll(".ryd-analytics__section-expand")).toHaveLength(3);
   });
 
   it("renders preset range buttons without custom toggle", () => {
@@ -93,22 +104,6 @@ describe("premiumAnalytics.panel", () => {
     const ratioBtn = panel.querySelector(".ryd-mode[data-mode='ratio']");
     expect(likesBtn.classList.contains("is-active")).toBe(true);
     expect(ratioBtn.classList.contains("is-active")).toBe(false);
-  });
-
-  it("toggles expanded state when pressing expand button", () => {
-    const panel = ensurePanel();
-
-    const expand = panel.querySelector(".ryd-analytics__expand");
-    expect(expand.textContent).toBe("Extend");
-    expand.click();
-    expect(analyticsState.panelExpanded).toBe(true);
-    expect(panel.classList.contains("is-expanded")).toBe(true);
-    expect(expand.textContent).toBe("Collapse");
-
-    expand.click();
-    expect(analyticsState.panelExpanded).toBe(false);
-    expect(panel.classList.contains("is-expanded")).toBe(false);
-    expect(expand.textContent).toBe("Extend");
   });
 
   it("applies loading styles", () => {
@@ -179,5 +174,36 @@ describe("premiumAnalytics.panel", () => {
     expect(panel.classList.contains("is-expanded")).toBe(true);
     setPanelExpanded(false);
     expect(panel.classList.contains("is-expanded")).toBe(false);
+  });
+
+  it("applies chart expansion state exclusively", () => {
+    const panel = ensurePanel();
+    const activitySection = panel.querySelector(".ryd-analytics__section[data-chart='activity']");
+    const listsSection = panel.querySelector(".ryd-analytics__section[data-chart='lists']");
+    const mapSection = panel.querySelector(".ryd-analytics__section[data-chart='map']");
+
+    analyticsState.expandedChart = "activity";
+    applyChartExpansionState();
+    expect(activitySection.classList.contains("is-expanded")).toBe(true);
+    expect(listsSection.classList.contains("is-expanded")).toBe(false);
+    expect(mapSection.classList.contains("is-expanded")).toBe(false);
+
+    analyticsState.expandedChart = "lists";
+    applyChartExpansionState();
+    expect(activitySection.classList.contains("is-expanded")).toBe(false);
+    expect(listsSection.classList.contains("is-expanded")).toBe(true);
+    expect(mapSection.classList.contains("is-expanded")).toBe(false);
+
+    analyticsState.expandedChart = "map";
+    applyChartExpansionState();
+    expect(activitySection.classList.contains("is-expanded")).toBe(false);
+    expect(listsSection.classList.contains("is-expanded")).toBe(false);
+    expect(mapSection.classList.contains("is-expanded")).toBe(true);
+
+    analyticsState.expandedChart = null;
+    applyChartExpansionState();
+    expect(activitySection.classList.contains("is-expanded")).toBe(false);
+    expect(listsSection.classList.contains("is-expanded")).toBe(false);
+    expect(mapSection.classList.contains("is-expanded")).toBe(false);
   });
 });

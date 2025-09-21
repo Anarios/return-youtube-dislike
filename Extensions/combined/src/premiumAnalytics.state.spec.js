@@ -38,6 +38,7 @@ function resetGlobals() {
   analyticsState.zoomListenerRegistered = false;
   analyticsState.usingCustomRange = false;
   analyticsState.pendingSelection = null;
+  analyticsState.expandedChart = null;
 }
 
 describe("premiumAnalytics.state", () => {
@@ -62,6 +63,7 @@ describe("premiumAnalytics.state", () => {
       analyticsState.suppressZoomEvents = true;
       analyticsState.pendingSelection = { from: 1, to: 2 };
       analyticsState.usingCustomRange = true;
+      analyticsState.expandedChart = "map";
 
       resetStateForVideo();
 
@@ -76,6 +78,7 @@ describe("premiumAnalytics.state", () => {
       expect(analyticsState.suppressZoomEvents).toBe(false);
       expect(analyticsState.pendingSelection).toBeNull();
       expect(analyticsState.usingCustomRange).toBe(false);
+      expect(analyticsState.expandedChart).toBeNull();
     });
   });
 

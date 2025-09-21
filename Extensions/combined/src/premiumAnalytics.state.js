@@ -28,6 +28,7 @@ export const analyticsState = {
   zoomListenerRegistered: false,
   usingCustomRange: false,
   pendingSelection: null,
+  expandedChart: null,
 };
 
 export function resetStateForVideo() {
@@ -42,6 +43,7 @@ export function resetStateForVideo() {
   analyticsState.suppressZoomEvents = false;
   analyticsState.pendingSelection = null;
   analyticsState.usingCustomRange = false;
+  analyticsState.expandedChart = null;
 }
 
 export function resetSessionState() {

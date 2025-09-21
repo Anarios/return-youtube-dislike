@@ -172,6 +172,37 @@ describe("premiumAnalytics.activity", () => {
     expect(analyticsState.selectionRange.to).toBe(100);
   });
 
+  it("keeps the slider bounds anchored to the total range after render", () => {
+    const totalRangeStart = "2025-01-01T00:00:00Z";
+    const totalRangeEnd = "2025-03-01T00:00:00Z";
+    const selectedRangeStart = "2025-02-01T00:00:00Z";
+    const selectedRangeEnd = "2025-02-15T00:00:00Z";
+
+    jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({
+      min: new Date(selectedRangeStart).getTime(),
+      max: new Date(selectedRangeEnd).getTime(),
+    });
+
+    renderActivityChart({
+      totalRangeStartUtc: totalRangeStart,
+      totalRangeEndUtc: totalRangeEnd,
+      selectedRangeStartUtc: selectedRangeStart,
+      selectedRangeEndUtc: selectedRangeEnd,
+      points: [
+        { timestampUtc: selectedRangeStart, likes: 1, dislikes: 0 },
+        { timestampUtc: selectedRangeEnd, likes: 2, dislikes: 1 },
+      ],
+    });
+
+    const chartOptions = chartInstance.setOption.mock.calls.at(-1)[0];
+    const slider = chartOptions.dataZoom[0];
+
+    expect(chartOptions.xAxis.min).toBe(new Date(totalRangeStart).getTime());
+    expect(chartOptions.xAxis.max).toBe(new Date(totalRangeEnd).getTime());
+    expect(slider.startValue).toBe(new Date(selectedRangeStart).getTime());
+    expect(slider.endValue).toBe(new Date(selectedRangeEnd).getTime());
+  });
+
   it("clears the chart", () => {
     ensureActivityChart();
     clearActivityChart();
