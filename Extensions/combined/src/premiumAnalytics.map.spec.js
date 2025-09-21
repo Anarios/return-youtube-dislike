@@ -63,6 +63,8 @@ jest.mock("./premiumAnalytics.utils", () => ({
 jest.mock("./premiumAnalytics.theme", () => ({
   getMutedTextColor: jest.fn(() => "#aaaaaa"),
   getBorderColor: jest.fn(() => "#bbbbbb"),
+  getSurfaceColor: jest.fn(() => "rgba(0,0,0,0.04)"),
+  getHoverFillColor: jest.fn(() => "rgba(0,0,0,0.18)"),
 }));
 
 import echarts from "echarts";

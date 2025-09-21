@@ -5,7 +5,7 @@ import worldData from "world-atlas/countries-110m.json";
 
 import { analyticsState } from "./premiumAnalytics.state";
 import { sanitizeCount, capitalize } from "./premiumAnalytics.utils";
-import { getMutedTextColor, getBorderColor } from "./premiumAnalytics.theme";
+import { getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor } from "./premiumAnalytics.theme";
 
 const worldFeatures = feature(worldData, worldData.objects.countries).features ?? [];
 const NORMALIZED_WORLD_FEATURES = normalizeWorldFeatures(worldFeatures);
@@ -172,11 +172,11 @@ export function renderMap(countries) {
       itemStyle: {
         borderColor: getBorderColor(0.4),
         borderWidth: 0.6,
-        areaColor: "rgba(255,255,255,0.02)",
+        areaColor: getSurfaceColor(0.06, 0.02),
       },
       emphasis: {
         itemStyle: {
-          areaColor: "rgba(255,255,255,0.18)",
+          areaColor: getHoverFillColor(0.18, 0.18),
         },
       },
     },
