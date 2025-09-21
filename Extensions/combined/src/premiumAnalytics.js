@@ -33,7 +33,7 @@ import {
   resizeMapChart,
   disposeMapChart,
 } from "./premiumAnalytics.map";
-import { debounce, safeJson } from "./premiumAnalytics.utils";
+import { debounce, safeJson, toEpoch } from "./premiumAnalytics.utils";
 import { logFetchRequest } from "./premiumAnalytics.logging";
 
 let resizeListener = null;
@@ -148,6 +148,15 @@ function requestAnalytics(options = {}) {
   params.set("countryLimit", `${COUNTRY_LIMIT}`);
 
   if (state.customRange && state.customRange.fromUtc && state.customRange.toUtc) {
+    state.lastRequestedBounds = {
+      from: toEpoch(state.customRange.fromUtc),
+      to: toEpoch(state.customRange.toUtc),
+    };
+  } else {
+    state.lastRequestedBounds = null;
+  }
+
+  if (state.customRange && state.customRange.fromUtc && state.customRange.toUtc) {
     params.set("fromUtc", state.customRange.fromUtc);
     params.set("toUtc", state.customRange.toUtc);
   } else {
@@ -197,7 +206,8 @@ function renderAnalytics(data) {
     return;
   }
 
-  renderActivityChart(data?.timeSeries);
+  renderActivityChart(data?.timeSeries, analyticsState.lastRequestedBounds);
+  analyticsState.lastRequestedBounds = null;
 
   analyticsState.latestCountries = data?.geo?.countries ?? [];
   updateCountryList(panel.querySelector("#ryd-analytics-top-likes"), data?.geo?.topLikes ?? [], "likes");

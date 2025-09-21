@@ -23,6 +23,7 @@ export const analyticsState = {
   globalTimeBounds: { min: null, max: null },
   pendingZoomRange: null,
   pendingZoomReset: false,
+  lastRequestedBounds: null,
 };
 
 export function resetStateForVideo() {
@@ -34,6 +35,7 @@ export function resetStateForVideo() {
   analyticsState.globalTimeBounds = { min: null, max: null };
   analyticsState.pendingZoomRange = null;
   analyticsState.pendingZoomReset = false;
+  analyticsState.lastRequestedBounds = null;
 }
 
 export function resetSessionState() {

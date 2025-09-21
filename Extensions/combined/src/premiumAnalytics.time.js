@@ -75,6 +75,12 @@ export function resolveZoomBounds(event, sliderBounds, timeline) {
   return [startTime, endTime];
 }
 
+export function combineBounds(primary = {}, fallback = {}) {
+  const min = resolvePreferredLower(primary?.min, fallback?.min);
+  const max = resolvePreferredUpper(primary?.max, fallback?.max);
+  return { min, max };
+}
+
 function resolveZoomValue(value, percent, sliderBounds, timeline, fallbackIndex) {
   const numeric = normalizeZoomNumeric(value);
   if (Number.isFinite(numeric)) {
@@ -104,4 +110,24 @@ function normalizeZoomNumeric(value) {
   }
   const ms = new Date(value).getTime();
   return Number.isFinite(ms) ? ms : null;
+}
+
+function resolvePreferredLower(primary, fallback) {
+  if (Number.isFinite(primary)) {
+    return primary;
+  }
+  if (Number.isFinite(fallback)) {
+    return fallback;
+  }
+  return null;
+}
+
+function resolvePreferredUpper(primary, fallback) {
+  if (Number.isFinite(primary)) {
+    return primary;
+  }
+  if (Number.isFinite(fallback)) {
+    return fallback;
+  }
+  return null;
 }
