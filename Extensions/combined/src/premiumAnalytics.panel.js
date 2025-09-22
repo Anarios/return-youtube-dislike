@@ -165,16 +165,16 @@ function createPanelMarkup() {
       <section class="ryd-analytics__section" data-chart="activity">
         <div class="ryd-analytics__section-header">
           <h3 class="ryd-analytics__section-title">Engagement over time</h3>
-          <button class="ryd-analytics__section-expand" type="button" data-chart="activity" aria-expanded="false">Exsand</button>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="activity" aria-expanded="false">Expand</button>
         </div>
         <div class="ryd-analytics__section-content">
-          <div class="ryd-analytics__chart" id="ryd-analytics-activity"></div>
+          <div class="ryd-analytics__chart" id="ryd-analytics-activity"></div>  
         </div>
       </section>
       <section class="ryd-analytics__section" data-chart="lists">
         <div class="ryd-analytics__section-header">
           <h3 class="ryd-analytics__section-title">Top countries</h3>
-          <button class="ryd-analytics__section-expand" type="button" data-chart="lists" aria-expanded="false">Expand</button>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="lists" aria-expanded="false">Expand</button> 
         </div>
         <div class="ryd-analytics__section-content">
           <div class="ryd-analytics__lists">
