@@ -89,11 +89,7 @@ const {
   disposeMapChart: mockDisposeMapChart,
 } = mapMocks;
 
-const {
-  debounce: mockDebounce,
-  safeJson: mockSafeJson,
-  toEpoch: mockToEpoch,
-} = utilsMocks;
+const { debounce: mockDebounce, safeJson: mockSafeJson, toEpoch: mockToEpoch } = utilsMocks;
 
 const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
@@ -103,7 +99,12 @@ jest.mock("./utils", () => ({
 }));
 
 import { analyticsState, resetSessionState, resetStateForVideo } from "./premiumAnalytics.state";
-import { initPremiumAnalytics, requestAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./premiumAnalytics";
+import {
+  initPremiumAnalytics,
+  requestAnalytics,
+  teardownPremiumAnalytics,
+  updatePremiumSession,
+} from "./premiumAnalytics";
 const premiumAnalyticsModule = require("./premiumAnalytics");
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
@@ -194,9 +195,7 @@ describe("premiumAnalytics", () => {
     requestAnalytics();
     await flushPromises();
 
-    expect(mockSetFooterMessage).toHaveBeenCalledWith(
-      "Premium analytics are available for active Patreon supporters.",
-    );
+    expect(mockSetFooterMessage).toHaveBeenCalledWith("Premium analytics are available for active Patreon supporters.");
     expect(mockSetLoadingState).toHaveBeenCalledWith(true);
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
   });

@@ -144,7 +144,6 @@ function bindUiControls(container) {
       callbacks.onChartExpand(chart);
     });
   });
-
 }
 
 function createPanelMarkup() {
@@ -166,7 +165,7 @@ function createPanelMarkup() {
       <section class="ryd-analytics__section" data-chart="activity">
         <div class="ryd-analytics__section-header">
           <h3 class="ryd-analytics__section-title">Engagement over time</h3>
-          <button class="ryd-analytics__section-expand" type="button" data-chart="activity" aria-expanded="false">Extend</button>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="activity" aria-expanded="false">Exsand</button>
         </div>
         <div class="ryd-analytics__section-content">
           <div class="ryd-analytics__chart" id="ryd-analytics-activity"></div>
@@ -175,7 +174,7 @@ function createPanelMarkup() {
       <section class="ryd-analytics__section" data-chart="lists">
         <div class="ryd-analytics__section-header">
           <h3 class="ryd-analytics__section-title">Top countries</h3>
-          <button class="ryd-analytics__section-expand" type="button" data-chart="lists" aria-expanded="false">Extend</button>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="lists" aria-expanded="false">Expand</button>
         </div>
         <div class="ryd-analytics__section-content">
           <div class="ryd-analytics__lists">
@@ -193,7 +192,7 @@ function createPanelMarkup() {
       <section class="ryd-analytics__section" data-chart="map">
         <div class="ryd-analytics__section-header">
           <h3 class="ryd-analytics__section-title">Geography</h3>
-          <button class="ryd-analytics__section-expand" type="button" data-chart="map" aria-expanded="false">Extend</button>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="map" aria-expanded="false">Expand</button>
         </div>
         <div class="ryd-analytics__section-content">
           <div class="ryd-analytics__map-block">
@@ -282,7 +281,7 @@ function positionExpandedPanel(panel, button) {
 function resetPanelPosition(panel, button) {
   panel.removeAttribute("style");
   if (button) {
-    button.textContent = "Extend";
+    button.textContent = "Expand";
     button.setAttribute("aria-expanded", "false");
     button.classList.remove("is-active");
   }
@@ -305,12 +304,10 @@ function positionExpandedSection(section, button) {
   const targetHeight = Math.max(360, Number.isFinite(computed) && computed > 0 ? computed : 560);
   section.style.height = `${Math.round(targetHeight)}px`;
 
-  section
-    .querySelectorAll(".ryd-analytics__chart, .ryd-analytics__map")
-    .forEach((element) => {
-      const chartHeight = Math.max(320, Math.round(targetHeight - 120));
-      element.style.height = `${chartHeight}px`;
-    });
+  section.querySelectorAll(".ryd-analytics__chart, .ryd-analytics__map").forEach((element) => {
+    const chartHeight = Math.max(320, Math.round(targetHeight - 120));
+    element.style.height = `${chartHeight}px`;
+  });
   if (button) {
     button.textContent = "Collapse";
     button.setAttribute("aria-expanded", "true");
@@ -324,7 +321,7 @@ function resetSectionPosition(section, button) {
     .querySelectorAll(".ryd-analytics__chart, .ryd-analytics__map")
     .forEach((element) => element.removeAttribute("style"));
   if (button) {
-    button.textContent = "Extend";
+    button.textContent = "Expand";
     button.setAttribute("aria-expanded", "false");
     button.classList.remove("is-active");
   }
