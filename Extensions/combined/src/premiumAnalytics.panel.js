@@ -265,15 +265,12 @@ export function applyChartExpansionState() {
 }
 
 function positionExpandedPanel(panel, button) {
-  const primary = document.querySelector("#primary") || document.querySelector("ytd-watch-flexy");
-  const rect = primary?.getBoundingClientRect();
+  const anchorRect = resolveAnchorRect();
   panel.style.position = "fixed";
   panel.style.top = "72px";
-  panel.style.left = rect ? `${rect.left}px` : "50%";
-  panel.style.width = rect ? `${rect.width}px` : "min(960px, calc(100vw - 48px))";
+  applyAnchorPosition(panel, anchorRect, { maxWidthFallback: "min(960px, calc(100vw - 48px))" });
   panel.style.maxHeight = "calc(100vh - 96px)";
   panel.style.overflowY = "auto";
-  panel.style.transform = rect ? "" : "translateX(-50%)";
   panel.style.zIndex = "2147483646";
   if (button) {
     button.textContent = "Collapse";
@@ -292,14 +289,11 @@ function resetPanelPosition(panel, button) {
 }
 
 function positionExpandedSection(section, button) {
-  const primary = document.querySelector("#primary") || document.querySelector("ytd-watch-flexy");
-  const rect = primary?.getBoundingClientRect();
+  const anchorRect = resolveAnchorRect();
   section.style.position = "fixed";
   section.style.top = "72px";
-  section.style.left = rect ? `${rect.left}px` : "50%";
-  section.style.width = rect ? `${rect.width}px` : "min(960px, calc(100vw - 48px))";
+  applyAnchorPosition(section, anchorRect, { maxWidthFallback: "min(960px, calc(100vw - 48px))" });
   section.style.maxHeight = "calc(100vh - 120px)";
-  section.style.transform = rect ? "" : "translateX(-50%)";
   section.style.zIndex = "2147483647";
   section.style.background = "var(--yt-spec-base-background, #202020)";
   section.style.boxShadow = "0 30px 60px rgba(0, 0, 0, 0.45)";
@@ -341,4 +335,40 @@ function applyLoadingState() {
   if (!panel) return;
   panel.classList.toggle("is-loading", analyticsState.isLoading);
   panel.setAttribute("aria-busy", analyticsState.isLoading ? "true" : "false");
+}
+
+function resolveAnchorRect() {
+  const selectors = [
+    "#primary-inner",
+    "#columns #primary-inner",
+    "#primary",
+    "#columns #primary",
+    "ytd-watch-flexy #primary",
+    "#columns",
+    "ytd-watch-flexy",
+  ];
+
+  for (const selector of selectors) {
+    const element = document.querySelector(selector);
+    if (!element || typeof element.getBoundingClientRect !== "function") continue;
+    const rect = element.getBoundingClientRect();
+    if (rect && typeof rect.width === "number" && rect.width > 1) {
+      return rect;
+    }
+  }
+
+  return null;
+}
+
+function applyAnchorPosition(target, rect, { maxWidthFallback }) {
+  if (rect) {
+    target.style.left = `${Math.round(rect.left)}px`;
+    target.style.width = `${Math.round(rect.width)}px`;
+    target.style.transform = "";
+    return;
+  }
+
+  target.style.left = "50%";
+  target.style.width = maxWidthFallback;
+  target.style.transform = "translateX(-50%)";
 }

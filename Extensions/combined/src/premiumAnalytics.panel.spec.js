@@ -206,4 +206,32 @@ describe("premiumAnalytics.panel", () => {
     expect(listsSection.classList.contains("is-expanded")).toBe(false);
     expect(mapSection.classList.contains("is-expanded")).toBe(false);
   });
+
+  it("positions expanded sections using the first anchor with a valid width", () => {
+    const columns = document.querySelector("#columns");
+    const primary = document.querySelector("#primary");
+    const primaryInner = document.createElement("div");
+    primaryInner.id = "primary-inner";
+    columns.insertBefore(primaryInner, primary);
+
+    Object.defineProperty(primary, "getBoundingClientRect", {
+      value: jest.fn(() => ({ left: 0, top: 0, width: 0, height: 720 })),
+      configurable: true,
+    });
+
+    Object.defineProperty(primaryInner, "getBoundingClientRect", {
+      value: jest.fn(() => ({ left: 120, top: 72, width: 960, height: 720 })),
+      configurable: true,
+    });
+
+    const panel = ensurePanel();
+    analyticsState.expandedChart = "activity";
+    applyChartExpansionState();
+
+    const section = panel.querySelector(".ryd-analytics__section[data-chart='activity']");
+    expect(section.classList.contains("is-expanded")).toBe(true);
+    expect(section.style.left).toBe("120px");
+    expect(section.style.width).toBe("960px");
+    expect(section.style.transform).toBe("");
+  });
 });
