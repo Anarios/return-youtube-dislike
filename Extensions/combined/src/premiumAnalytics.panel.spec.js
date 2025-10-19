@@ -138,7 +138,7 @@ describe("premiumAnalytics.panel", () => {
     expect(container.textContent).toContain("1,000");
   });
 
-  it("renders summary footer", () => {
+  it("renders summary footer with totals and selected period", () => {
     ensurePanel();
     renderSummary({
       totalLikes: 1200,
@@ -148,9 +148,17 @@ describe("premiumAnalytics.panel", () => {
     });
 
     const footer = document.querySelector("#ryd-analytics-footer");
-    expect(footer.textContent).toContain("1,500");
-    expect(footer.textContent).toContain("12 countries");
-    expect(footer.textContent).toContain("45 unique IPs");
+    const likes = footer.querySelector(".ryd-analytics__totals-likes");
+    const dislikes = footer.querySelector(".ryd-analytics__totals-dislikes");
+    const summaryMeta = footer.querySelector(".ryd-analytics__summary-meta");
+    const periodLabel = footer.querySelector(".ryd-analytics__period-label");
+
+    expect(likes?.textContent).toBe("1,200 likes");
+    expect(dislikes?.textContent).toBe("300 dislikes");
+    expect(summaryMeta?.textContent).toContain("1,500 interactions");
+    expect(summaryMeta?.textContent).toContain("12 countries");
+    expect(summaryMeta?.textContent).toContain("45 unique IPs");
+    expect(periodLabel?.textContent).toBe("Selected period: Last 30 days");
   });
 
   it("sets footer message directly", () => {

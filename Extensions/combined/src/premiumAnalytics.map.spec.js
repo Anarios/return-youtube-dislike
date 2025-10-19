@@ -124,6 +124,30 @@ describe("premiumAnalytics.map", () => {
     expect(option.visualMap.max).toBe(1);
   });
 
+  it("formats tooltip with likes, dislikes, and ratio regardless of mode", () => {
+    const chart = {
+      setOption: jest.fn(),
+      clear: jest.fn(),
+      resize: jest.fn(),
+      dispose: jest.fn(),
+    };
+    analyticsState.mapChart = chart;
+    analyticsState.currentMode = "likes";
+
+    renderMap([{ countryCode: "US", countryName: "United States", likes: 75, dislikes: 25 }]);
+
+    const option = chart.setOption.mock.calls[0][0];
+    const formatter = option.tooltip.formatter;
+    const formatted = formatter({
+      name: "United States",
+      data: option.series[0].data[0],
+    });
+
+    expect(formatted).toContain("Likes: 75");
+    expect(formatted).toContain("Dislikes: 25");
+    expect(formatted).toContain("Like ratio: 75.0%");
+  });
+
   it("normalizes United States naming differences", () => {
     const chart = {
       setOption: jest.fn(),

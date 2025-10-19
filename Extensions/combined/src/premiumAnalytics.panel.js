@@ -114,8 +114,33 @@ export function renderSummary(summary) {
   const footer = panel.querySelector("#ryd-analytics-footer");
   if (!footer) return;
 
-  const totalInteractions = summary.totalLikes + summary.totalDislikes;
-  footer.textContent = `Captured ${totalInteractions.toLocaleString()} interactions from ${summary.countriesRepresented} countries (${summary.uniqueIps.toLocaleString()} unique IPs)`;
+  const likes = sanitizeCount(summary.totalLikes);
+  const dislikes = sanitizeCount(summary.totalDislikes);
+  const totalInteractions = likes + dislikes;
+  const countries = sanitizeCount(summary.countriesRepresented);
+  const uniqueIps = sanitizeCount(summary.uniqueIps);
+  const periodLabel = formatSelectedPeriod();
+
+  const periodMarkup = periodLabel
+    ? `<span class="ryd-analytics__period-label">Selected period: ${periodLabel}</span>`
+    : "";
+
+  footer.innerHTML = `
+    <div class="ryd-analytics__totals" role="status" aria-live="polite">
+      <div class="ryd-analytics__totals-header">
+        <span class="ryd-analytics__totals-label">Extension users</span>
+        ${periodMarkup}
+      </div>
+      <div class="ryd-analytics__totals-values">
+        <span class="ryd-analytics__totals-value ryd-analytics__totals-likes">${likes.toLocaleString()} likes</span>
+        <span class="ryd-analytics__totals-divider" aria-hidden="true">•</span>
+        <span class="ryd-analytics__totals-value ryd-analytics__totals-dislikes">${dislikes.toLocaleString()} dislikes</span>
+      </div>
+    </div>
+    <div class="ryd-analytics__summary-meta">
+      Captured ${totalInteractions.toLocaleString()} interactions from ${countries.toLocaleString()} countries (${uniqueIps.toLocaleString()} unique IPs)
+    </div>
+  `;
 }
 
 function bindUiControls(container) {
@@ -332,6 +357,30 @@ function applyLoadingState() {
   if (!panel) return;
   panel.classList.toggle("is-loading", analyticsState.isLoading);
   panel.setAttribute("aria-busy", analyticsState.isLoading ? "true" : "false");
+}
+
+function formatSelectedPeriod() {
+  const { usingCustomRange, selectionRange, currentRange } = analyticsState;
+
+  if (usingCustomRange && selectionRange?.from && selectionRange?.to) {
+    const from = formatDate(selectionRange.from);
+    const to = formatDate(selectionRange.to);
+    if (from && to) {
+      return from === to ? from : `${from} – ${to}`;
+    }
+  }
+
+  if (currentRange === 0) return "All time";
+  if (currentRange === 1) return "Last 1 day";
+  if (currentRange > 0) return `Last ${currentRange} days`;
+  return null;
+}
+
+function formatDate(ms) {
+  if (!Number.isFinite(ms)) return null;
+  const date = new Date(ms);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
 }
 
 function resolveAnchorRect() {

@@ -342,3 +342,48 @@ html[dark] .ryd-analytics__section-expand:hover {
   font-size: 12px;
   color: var(--yt-spec-text-secondary, #bbbbbb);
 }
+
+.ryd-analytics__totals {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.ryd-analytics__totals-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.ryd-analytics__totals-values {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.ryd-analytics__totals-label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  font-size: 10px;
+  color: var(--yt-spec-text-secondary, #bbbbbb);
+}
+
+.ryd-analytics__totals-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--yt-spec-text-primary, #f1f1f1);
+}
+
+.ryd-analytics__period-label {
+  font-size: 11px;
+  color: var(--yt-spec-text-secondary, #bbbbbb);
+}
+
+.ryd-analytics__summary-meta {
+  color: var(--yt-spec-text-secondary, #bbbbbb);
+  line-height: 1.4;
+}

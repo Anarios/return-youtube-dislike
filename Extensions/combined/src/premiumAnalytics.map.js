@@ -143,7 +143,7 @@ export function renderMap(countries) {
     backgroundColor: "transparent",
     tooltip: {
       trigger: "item",
-      formatter: (params) => formatMapTooltip(params, mode),
+      formatter: (params) => formatMapTooltip(params),
     },
     visualMap: {
       min: visualConfig.min,
@@ -250,7 +250,7 @@ function resolveVisualMapConfig(values, mode) {
   };
 }
 
-function formatMapTooltip(params, mode) {
+function formatMapTooltip(params) {
   const data = params.data;
   if (!data) {
     return `${params.name}`;
@@ -260,14 +260,9 @@ function formatMapTooltip(params, mode) {
   const code = data.code ? ` (${data.code})` : "";
   const likes = Number.isFinite(data.likes) ? data.likes : 0;
   const dislikes = Number.isFinite(data.dislikes) ? data.dislikes : 0;
+  const percent = data.ratio != null ? (data.ratio * 100).toFixed(1) : "0.0";
 
-  if (mode === "ratio") {
-    const percent = data.ratio != null ? (data.ratio * 100).toFixed(1) : "0.0";
-    return `${name}${code}<br/>Likes: ${likes.toLocaleString()}<br/>Dislikes: ${dislikes.toLocaleString()}<br/>Like ratio: ${percent}%`;
-  }
-
-  const metric = mode === "likes" ? likes : dislikes;
-  return `${name}${code}<br/>Likes: ${likes.toLocaleString()}<br/>Dislikes: ${dislikes.toLocaleString()}<br/>${capitalize(mode)}: ${metric.toLocaleString()}`;
+  return `${name}${code}<br/>Likes: ${likes.toLocaleString()}<br/>Dislikes: ${dislikes.toLocaleString()}<br/>Like ratio: ${percent}%`;
 }
 
 function resolveMapRegionName(countryCode, fallbackName) {
