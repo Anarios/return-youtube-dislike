@@ -52,6 +52,11 @@ export function renderActivityChart(timeSeries) {
   }
 
   const seriesPoints = normalizeSeriesPoints(timeSeries?.points ?? [], bucketMs);
+  const isSinglePoint = seriesPoints.length === 1;
+  const shouldShowSymbols = !isSinglePoint && seriesPoints.length <= 2;
+  const seriesType = isSinglePoint ? "scatter" : "line";
+  const symbol = isSinglePoint || shouldShowSymbols ? "circle" : "none";
+  const symbolSize = isSinglePoint ? 14 : shouldShowSymbols ? 8 : 0;
   const likesSeries = seriesPoints.map((p) => [p.timestampUtc, p.likes]);
   const dislikesSeries = seriesPoints.map((p) => [p.timestampUtc, p.dislikes]);
 
@@ -70,13 +75,64 @@ export function renderActivityChart(timeSeries) {
     max: state.availableRange.max ?? toEpoch(timeSeries?.totalRangeEndUtc),
   };
 
-  const sliderBounds = combineBounds(availableBounds, computedBounds);
+  let sliderBounds = combineBounds(availableBounds, computedBounds);
 
-  state.globalTimeBounds = {
-    min: availableBounds.min ?? sliderBounds.min ?? state.globalTimeBounds.min,
-    max: availableBounds.max ?? sliderBounds.max ?? state.globalTimeBounds.max,
+  if (Number.isFinite(computedBounds.min)) {
+    sliderBounds.min = Number.isFinite(sliderBounds.min)
+      ? Math.min(sliderBounds.min, computedBounds.min)
+      : computedBounds.min;
+  }
+
+  if (Number.isFinite(computedBounds.max)) {
+    sliderBounds.max = Number.isFinite(sliderBounds.max)
+      ? Math.max(sliderBounds.max, computedBounds.max)
+      : computedBounds.max;
+  }
+
+  if (
+    Number.isFinite(sliderBounds.min) &&
+    Number.isFinite(sliderBounds.max) &&
+    sliderBounds.max <= sliderBounds.min
+  ) {
+    const fallbackMin = Number.isFinite(computedBounds.min) ? computedBounds.min : sliderBounds.min;
+    const fallbackMax = Number.isFinite(computedBounds.max) ? computedBounds.max : null;
+    if (Number.isFinite(fallbackMin) && Number.isFinite(fallbackMax) && fallbackMax > fallbackMin) {
+      sliderBounds = { min: fallbackMin, max: fallbackMax };
+    } else if (Number.isFinite(sliderBounds.min)) {
+      const span = Math.max(Number.isFinite(state.latestBucketMs) ? state.latestBucketMs : 0, MS_PER_MINUTE);
+      sliderBounds = {
+        min: sliderBounds.min,
+        max: sliderBounds.min + (span > 0 ? span : MS_PER_MINUTE),
+      };
+    }
+  }
+
+  let globalBounds = {
+    min: pickFirstFinite(availableBounds.min, sliderBounds.min, state.globalTimeBounds.min),
+    max: pickFirstFinite(availableBounds.max, sliderBounds.max, state.globalTimeBounds.max),
   };
 
+  if (
+    Number.isFinite(globalBounds.min) &&
+    Number.isFinite(globalBounds.max) &&
+    globalBounds.max <= globalBounds.min
+  ) {
+    if (
+      Number.isFinite(sliderBounds.min) &&
+      Number.isFinite(sliderBounds.max) &&
+      sliderBounds.max > sliderBounds.min
+    ) {
+      globalBounds = { ...sliderBounds };
+    } else if (Number.isFinite(globalBounds.min)) {
+      const span = Math.max(Number.isFinite(state.latestBucketMs) ? state.latestBucketMs : 0, MS_PER_MINUTE);
+      globalBounds = {
+        min: globalBounds.min,
+        max: globalBounds.min + (span > 0 ? span : MS_PER_MINUTE),
+      };
+    }
+  }
+
+  state.globalTimeBounds = globalBounds;
   updateGlobalBounds(state.globalTimeBounds);
 
   state.chartTimeBounds = sliderBounds;
@@ -88,10 +144,19 @@ export function renderActivityChart(timeSeries) {
     to: state.selectionRange.to ?? toEpoch(timeSeries?.selectedRangeEndUtc),
   };
 
-  const selectionBounds = clampRangeToBounds(requestedSelection, sliderBounds)
+  let selectionBounds = clampRangeToBounds(requestedSelection, sliderBounds)
     ?? (Number.isFinite(sliderBounds.min) && Number.isFinite(sliderBounds.max)
       ? { from: sliderBounds.min, to: sliderBounds.max }
       : null);
+
+  if (
+    selectionBounds &&
+    Number.isFinite(computedBounds.min) &&
+    selectionBounds.from != null &&
+    selectionBounds.from > computedBounds.min
+  ) {
+    selectionBounds = { ...selectionBounds, from: computedBounds.min };
+  }
 
   if (selectionBounds) {
     state.selectionRange = selectionBounds;
@@ -138,17 +203,21 @@ export function renderActivityChart(timeSeries) {
     series: [
       {
         name: "Likes",
-        type: "line",
-        smooth: true,
-        symbol: "none",
+        type: seriesType,
+        smooth: seriesType === "line",
+        symbol,
+        symbolSize,
+        showSymbol: isSinglePoint || shouldShowSymbols,
         itemStyle: { color: "#55c759" },
         data: likesSeries,
       },
       {
         name: "Dislikes",
-        type: "line",
-        smooth: true,
-        symbol: "none",
+        type: seriesType,
+        smooth: seriesType === "line",
+        symbol,
+        symbolSize,
+        showSymbol: isSinglePoint || shouldShowSymbols,
         itemStyle: { color: "#f87171" },
         data: dislikesSeries,
       },

@@ -220,6 +220,7 @@ function createPanelMarkup() {
             <div class="ryd-analytics__map-controls">
               <span class="ryd-analytics__map-label">Map metric</span>
               <div class="ryd-analytics__modes" role="tablist">${modeControls}</div>
+              <button class="ryd-analytics__map-reset" type="button" id="ryd-analytics-map-reset" hidden>Back to world map</button>
             </div>
             <div class="ryd-analytics__map" id="ryd-analytics-map"></div>
           </div>

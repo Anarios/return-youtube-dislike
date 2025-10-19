@@ -3,34 +3,52 @@
  */
 
 jest.mock("echarts", () => {
-  return {
-    registerMap: jest.fn(),
-    init: jest.fn(() => ({
+  const registerMap = jest.fn();
+  const init = jest.fn(() => {
+    const listeners = {};
+    return {
       setOption: jest.fn(),
       clear: jest.fn(),
       resize: jest.fn(),
       dispose: jest.fn(),
-    })),
-  };
+      on: jest.fn((event, handler) => {
+        listeners[event] = handler;
+      }),
+      __listeners: listeners,
+    };
+  });
+  return { registerMap, init };
 });
 
-jest.mock("topojson-client", () => ({
-  feature: jest.fn(() => ({
-    features: [
-      { properties: { name: "United States of America" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "Canada" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "S. Sudan" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "Côte d'Ivoire" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "Czechia" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "eSwatini" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "Dem. Rep. Congo" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "Eq. Guinea" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "Solomon Is." }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "Timor-Leste" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-      { properties: { name: "W. Sahara" }, geometry: { type: "Polygon", coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]] } },
-    ],
-  })),
-}));
+jest.mock("topojson-client", () => {
+  const polygon = { type: "Polygon", coordinates: [[[0, 0],[1, 0],[1, 1],[0, 1],[0, 0]]] };
+  const worldFeatures = [
+    { properties: { name: "United States of America" }, geometry: polygon },
+    { properties: { name: "Canada" }, geometry: polygon },
+    { properties: { name: "S. Sudan" }, geometry: polygon },
+    { properties: { name: "Côte d'Ivoire" }, geometry: polygon },
+    { properties: { name: "Czechia" }, geometry: polygon },
+    { properties: { name: "eSwatini" }, geometry: polygon },
+    { properties: { name: "Dem. Rep. Congo" }, geometry: polygon },
+    { properties: { name: "Eq. Guinea" }, geometry: polygon },
+    { properties: { name: "Solomon Is." }, geometry: polygon },
+    { properties: { name: "Timor-Leste" }, geometry: polygon },
+    { properties: { name: "W. Sahara" }, geometry: polygon },
+  ];
+  const stateFeatures = [
+    { properties: { name: "California" }, geometry: polygon },
+    { properties: { name: "Texas" }, geometry: polygon },
+    { properties: { name: "New York" }, geometry: polygon },
+  ];
+  let callIndex = 0;
+  return {
+    feature: jest.fn(() => {
+      const result = callIndex === 0 ? worldFeatures : stateFeatures;
+      callIndex += 1;
+      return { features: result };
+    }),
+  };
+});
 
 jest.mock("country-code-lookup", () => {
   const countries = [
@@ -73,10 +91,31 @@ import { ensureMapChart, renderMap, disposeMapChart, clearMapChart, resizeMapCha
 
 const { sanitizeCount } = jest.requireMock("../utils");
 
+function createChartStub() {
+  const listeners = {};
+  return {
+    setOption: jest.fn(),
+    clear: jest.fn(),
+    resize: jest.fn(),
+    dispose: jest.fn(),
+    on: jest.fn((event, handler) => {
+      listeners[event] = handler;
+    }),
+    __listeners: listeners,
+  };
+}
+
 function setupPanel() {
   const panel = document.createElement("section");
+  const controls = document.createElement("div");
+  const resetButton = document.createElement("button");
+  resetButton.id = "ryd-analytics-map-reset";
+  resetButton.type = "button";
+  resetButton.hidden = true;
+  controls.appendChild(resetButton);
   const mapHost = document.createElement("div");
   mapHost.id = "ryd-analytics-map";
+  panel.appendChild(controls);
   panel.appendChild(mapHost);
   analyticsState.panelElement = panel;
   document.body.appendChild(panel);
@@ -85,11 +124,15 @@ function setupPanel() {
 
 describe("premiumAnalytics.map", () => {
   beforeEach(() => {
+    jest.clearAllMocks();
     document.body.innerHTML = "";
     analyticsState.panelElement = null;
     analyticsState.mapChart = null;
     analyticsState.currentMode = "ratio";
     analyticsState.latestCountries = [];
+    analyticsState.latestSubdivisions = [];
+    analyticsState.mapView = "world";
+    analyticsState.mapFocusCountry = null;
     analyticsState.expandedChart = null;
     setupPanel();
     sanitizeCount.mockReset();
@@ -103,12 +146,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("renders processed map data for ratio mode", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     sanitizeCount.mockImplementation((value) => Number(value));
 
@@ -125,12 +163,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("formats tooltip with likes, dislikes, and ratio regardless of mode", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     analyticsState.currentMode = "likes";
 
@@ -149,12 +182,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("normalizes United States naming differences", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     sanitizeCount.mockImplementation((value) => Number(value));
 
@@ -167,12 +195,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("falls back to synonyms when only country name present", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
 
     renderMap([{ countryCode: "", countryName: "United States", likes: 4, dislikes: 1 }]);
@@ -182,12 +205,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("handles grouped synonyms including parenthetical abbreviations", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
 
     renderMap([{ countryCode: null, countryName: "United States (USA)", likes: 2, dislikes: 0 }]);
@@ -197,12 +215,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("maps additional synonyms to their feature names", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     const cases = [
       { name: "South Sudan", expected: "S. Sudan" },
@@ -227,12 +240,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("handles grouped synonyms including parenthetical abbreviations", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
 
     renderMap([{ countryCode: null, countryName: "United States (USA)", likes: 2, dislikes: 0 }]);
@@ -242,12 +250,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("switches metric based on mode", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     analyticsState.currentMode = "likes";
 
@@ -261,12 +264,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("uses red palette for dislikes mode", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     analyticsState.currentMode = "dislikes";
 
@@ -280,12 +278,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("supports internal state dataset fallback", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     analyticsState.latestCountries = [{ countryCode: "US", likes: 3, dislikes: 1 }];
 
@@ -295,12 +288,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("hides the visual map legend when the section is collapsed", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     analyticsState.expandedChart = null;
 
@@ -311,12 +299,7 @@ describe("premiumAnalytics.map", () => {
   });
 
   it("shows the visual map legend when the section is expanded", () => {
-    const chart = {
-      setOption: jest.fn(),
-      clear: jest.fn(),
-      resize: jest.fn(),
-      dispose: jest.fn(),
-    };
+    const chart = createChartStub();
     analyticsState.mapChart = chart;
     analyticsState.expandedChart = "map";
 
@@ -324,6 +307,74 @@ describe("premiumAnalytics.map", () => {
 
     const option = chart.setOption.mock.calls[0][0];
     expect(option.visualMap.show).toBe(true);
+  });
+
+  it("renders the US state map when the United States is selected", () => {
+    const chart = createChartStub();
+    analyticsState.mapChart = chart;
+    analyticsState.latestCountries = [{ countryCode: "US", countryName: "United States", likes: 10, dislikes: 4 }];
+    analyticsState.latestSubdivisions = [
+      { countryCode: "US", subdivisionCode: "CA", subdivisionName: "California", likes: 7, dislikes: 3 },
+      { countryCode: "US", subdivisionCode: "TX", subdivisionName: "Texas", likes: 2, dislikes: 1 },
+    ];
+
+    renderMap();
+
+    const initialOption = chart.setOption.mock.calls[0][0];
+    expect(initialOption.geo.map).toBe("world");
+
+    const clickHandler = chart.__listeners.click;
+    expect(typeof clickHandler).toBe("function");
+    clickHandler({ data: { code: "US" }, name: "United States of America" });
+
+    const latestOption = chart.setOption.mock.calls[chart.setOption.mock.calls.length - 1][0];
+    expect(latestOption.geo.map).toBe("usa-states");
+    const regionNames = latestOption.series[0].data.map((entry) => entry.name);
+    expect(regionNames).toContain("California");
+    expect(regionNames).toContain("Texas");
+    const resetButton = document.getElementById("ryd-analytics-map-reset");
+    expect(resetButton.hidden).toBe(false);
+    expect(analyticsState.mapView).toBe("subdivision");
+    expect(analyticsState.mapFocusCountry).toBe("US");
+  });
+
+  it("returns to the world map when the reset button is clicked", () => {
+    const chart = createChartStub();
+    analyticsState.mapChart = chart;
+    analyticsState.latestCountries = [{ countryCode: "US", countryName: "United States", likes: 3, dislikes: 1 }];
+    analyticsState.latestSubdivisions = [
+      { countryCode: "US", subdivisionCode: "CA", subdivisionName: "California", likes: 2, dislikes: 0 },
+    ];
+    analyticsState.mapView = "subdivision";
+    analyticsState.mapFocusCountry = "US";
+
+    renderMap();
+
+    const resetButton = document.getElementById("ryd-analytics-map-reset");
+    expect(resetButton.hidden).toBe(false);
+
+    resetButton.click();
+
+    const latestOption = chart.setOption.mock.calls[chart.setOption.mock.calls.length - 1][0];
+    expect(latestOption.geo.map).toBe("world");
+    expect(analyticsState.mapView).toBe("world");
+    expect(resetButton.hidden).toBe(true);
+  });
+
+  it("falls back to the world map when no subdivisions are available", () => {
+    const chart = createChartStub();
+    analyticsState.mapChart = chart;
+    analyticsState.latestCountries = [{ countryCode: "CA", countryName: "Canada", likes: 5, dislikes: 1 }];
+    analyticsState.latestSubdivisions = [];
+    analyticsState.mapView = "subdivision";
+    analyticsState.mapFocusCountry = "US";
+
+    renderMap();
+
+    const option = chart.setOption.mock.calls[0][0];
+    expect(option.geo.map).toBe("world");
+    const resetButton = document.getElementById("ryd-analytics-map-reset");
+    expect(resetButton.hidden).toBe(true);
   });
 
   it("clears, resizes, and disposes the chart", () => {

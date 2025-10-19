@@ -13,6 +13,7 @@ export const analyticsState = {
   currentMode: "ratio",
   activeRequestKey: null,
   latestCountries: [],
+  latestSubdivisions: [],
   sessionToken: null,
   sessionActive: false,
   latestSeriesPoints: [],
@@ -29,6 +30,8 @@ export const analyticsState = {
   usingCustomRange: false,
   pendingSelection: null,
   expandedChart: null,
+  mapView: "world",
+  mapFocusCountry: null,
 };
 
 export function resetStateForVideo() {
@@ -45,6 +48,10 @@ export function resetStateForVideo() {
   analyticsState.pendingSelection = null;
   analyticsState.usingCustomRange = false;
   analyticsState.expandedChart = null;
+  analyticsState.latestCountries = [];
+  analyticsState.latestSubdivisions = [];
+  analyticsState.mapView = "world";
+  analyticsState.mapFocusCountry = null;
 }
 
 export function resetSessionState() {

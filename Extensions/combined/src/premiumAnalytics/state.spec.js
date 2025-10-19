@@ -23,6 +23,7 @@ function resetGlobals() {
   analyticsState.currentMode = "ratio";
   analyticsState.activeRequestKey = null;
   analyticsState.latestCountries = [];
+  analyticsState.latestSubdivisions = [];
   analyticsState.sessionToken = null;
   analyticsState.sessionActive = false;
   analyticsState.latestSeriesPoints = [];
@@ -38,6 +39,8 @@ function resetGlobals() {
   analyticsState.usingCustomRange = false;
   analyticsState.pendingSelection = null;
   analyticsState.expandedChart = null;
+  analyticsState.mapView = "world";
+  analyticsState.mapFocusCountry = null;
 }
 
 describe("premiumAnalytics.state", () => {
@@ -62,6 +65,10 @@ describe("premiumAnalytics.state", () => {
       analyticsState.pendingSelection = { from: 1, to: 2 };
       analyticsState.usingCustomRange = true;
       analyticsState.expandedChart = "map";
+      analyticsState.latestCountries = [{ countryCode: "US" }];
+      analyticsState.latestSubdivisions = [{ subdivisionCode: "CA" }];
+      analyticsState.mapView = "subdivision";
+      analyticsState.mapFocusCountry = "US";
 
       resetStateForVideo();
 
@@ -77,6 +84,10 @@ describe("premiumAnalytics.state", () => {
       expect(analyticsState.pendingSelection).toBeNull();
       expect(analyticsState.usingCustomRange).toBe(false);
       expect(analyticsState.expandedChart).toBeNull();
+      expect(analyticsState.latestCountries).toEqual([]);
+      expect(analyticsState.latestSubdivisions).toEqual([]);
+      expect(analyticsState.mapView).toBe("world");
+      expect(analyticsState.mapFocusCountry).toBeNull();
     });
   });
 

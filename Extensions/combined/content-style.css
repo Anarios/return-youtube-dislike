@@ -290,6 +290,33 @@ html[dark] .ryd-analytics__section-expand:hover {
   color: var(--yt-spec-text-secondary, #bbbbbb);
 }
 
+.ryd-analytics__map-reset {
+  border: none;
+  background: rgba(59, 130, 246, 0.18);
+  color: #0f172a;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ryd-analytics__map-reset:hover {
+  background: rgba(59, 130, 246, 0.28);
+  color: #0b1120;
+  box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.35);
+}
+
+html[dark] .ryd-analytics__map-reset {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--yt-spec-text-secondary, #bbbbbb);
+}
+
+html[dark] .ryd-analytics__map-reset:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--yt-spec-text-primary, #ffffff);
+}
+
 .ryd-analytics__map {
   width: 100%;
   height: 260px;

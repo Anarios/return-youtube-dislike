@@ -181,6 +181,10 @@ describe("premiumAnalytics.activity", () => {
 
     expect(analyticsState.latestSeriesPoints).toHaveLength(3);
     expect(analyticsState.latestBucketMs).toBe(60 * 60 * 1000);
+    const options = chartInstance.setOption.mock.calls.at(-1)[0];
+    expect(options.series[0].type).toBe("line");
+    expect(options.series[0].showSymbol).toBe(false);
+    expect(options.series[0].symbol).toBe("none");
   });
 
   it("configures slider bounds from declared range", () => {
@@ -198,6 +202,54 @@ describe("premiumAnalytics.activity", () => {
     expect(slider.startValue).toBeLessThan(slider.endValue);
     expect(slider.startValue).toBe(new Date("2025-01-01T00:00:00Z").getTime());
     expect(slider.rangeMode).toBe("value");
+  });
+
+  it("extends slider bounds to include bucket-aligned points before declared range", () => {
+    jest.spyOn(timeModule, "computeChartBounds").mockRestore();
+    renderActivityChart({
+      bucket: "day",
+      totalRangeStartUtc: "2025-01-01T06:00:00Z",
+      totalRangeEndUtc: "2025-01-02T00:00:00Z",
+      selectedRangeStartUtc: "2025-01-01T06:00:00Z",
+      selectedRangeEndUtc: "2025-01-02T00:00:00Z",
+      points: [{ timestampUtc: "2025-01-01T00:00:00Z", likes: 5, dislikes: 1 }],
+    });
+
+    const chartOptions = chartInstance.setOption.mock.calls.at(-1)[0];
+    const pointMs = new Date("2025-01-01T00:00:00Z").getTime();
+    expect(chartOptions.xAxis.min).toBeLessThanOrEqual(pointMs);
+    expect(chartOptions.dataZoom[0].startValue).toBe(pointMs);
+    expect(analyticsState.chartTimeBounds.min).toBeLessThanOrEqual(pointMs);
+    expect(analyticsState.selectionRange.from).toBe(pointMs);
+  });
+
+  it("expands collapsed ranges for single-bucket day series", () => {
+    renderActivityChart({
+      bucket: "day",
+      totalRangeStartUtc: "2025-01-01T12:00:00Z",
+      totalRangeEndUtc: "2025-01-01T12:00:00Z",
+      selectedRangeStartUtc: "2025-01-01T12:00:00Z",
+      selectedRangeEndUtc: "2025-01-01T12:00:00Z",
+      points: [{ timestampUtc: "2025-01-01T12:00:00Z", likes: 3, dislikes: 1 }],
+    });
+
+    const chartOptions = chartInstance.setOption.mock.calls.at(-1)[0];
+    const slider = chartOptions.dataZoom[0];
+    const inside = chartOptions.dataZoom[1];
+
+    expect(slider.startValue).toBeLessThan(slider.endValue);
+    expect(inside.startValue).toBeLessThan(inside.endValue);
+    expect(analyticsState.selectionRange.from).toBeLessThan(analyticsState.selectionRange.to);
+    expect(analyticsState.chartTimeBounds.min).toBeLessThan(analyticsState.chartTimeBounds.max);
+    expect(analyticsState.globalTimeBounds.min).toBeLessThan(analyticsState.globalTimeBounds.max);
+    expect(chartOptions.series[0].type).toBe("scatter");
+    expect(chartOptions.series[0].showSymbol).toBe(true);
+    expect(chartOptions.series[0].symbol).toBe("circle");
+    expect(chartOptions.series[0].symbolSize).toBe(14);
+    expect(chartOptions.series[1].type).toBe("scatter");
+    expect(chartOptions.series[1].showSymbol).toBe(true);
+    expect(chartOptions.series[1].symbol).toBe("circle");
+    expect(chartOptions.series[1].symbolSize).toBe(14);
   });
 
   it("derives bounds from data when range metadata is missing", () => {

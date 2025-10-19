@@ -1,4 +1,4 @@
-import { initPremiumAnalytics, requestAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./premiumAnalytics";
+import { initPremiumAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./premiumAnalytics";
 
 let patreonState = {
   authenticated: false,
@@ -37,21 +37,11 @@ function initPatreonFeatures() {
 
 function enablePremiumFeatures() {
   const tier = patreonState.user?.membershipTier;
+  const hasActiveMembership = patreonState.user?.hasActiveMembership;
 
-  if (tier === 'premium' || tier === 'supporter') {
-    enableDetailedStats();
-    enableHistoricalData();
-    enableCustomThemes();
-    if (patreonState.user?.hasActiveMembership) {
-      initPremiumAnalytics();
-    }
+  if (hasActiveMembership && (tier === 'premium' || tier === 'supporter')) {
+    initPremiumAnalytics();
   }
-
-  if (tier === 'premium') {
-    enableAdvancedAnalytics();
-    enableExportFeatures();
-  }
-  
 }
 
 function disablePremiumFeatures() {
@@ -60,26 +50,6 @@ function disablePremiumFeatures() {
   teardownPremiumAnalytics();
 }
 
-
-function enableDetailedStats() {
-  console.log('Premium feature: Detailed stats enabled');
-}
-
-function enableHistoricalData() {
-  console.log('Premium feature: Historical data enabled');
-}
-
-function enableCustomThemes() {
-  console.log('Premium feature: Custom themes enabled');
-}
-
-function enableAdvancedAnalytics() {
-  console.log('Premium feature: Advanced analytics enabled');
-}
-
-function enableExportFeatures() {
-  console.log('Premium feature: Export features enabled');
-}
 
 function isPatreonUser() {
   return patreonState.authenticated && patreonState.user?.hasActiveMembership;

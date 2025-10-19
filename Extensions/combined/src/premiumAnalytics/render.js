@@ -49,6 +49,21 @@ function renderAnalytics(data) {
   renderActivityChart(data?.timeSeries);
 
   analyticsState.latestCountries = data?.geo?.countries ?? [];
+  analyticsState.latestSubdivisions = data?.geo?.subdivisions ?? [];
+
+  if (analyticsState.mapView === "subdivision") {
+    const focusCode = typeof analyticsState.mapFocusCountry === "string" ? analyticsState.mapFocusCountry.toUpperCase() : "";
+    const hasFocusedSubdivisions =
+      focusCode &&
+      analyticsState.latestSubdivisions.some(
+        (entry) => typeof entry?.countryCode === "string" && entry.countryCode.toUpperCase() === focusCode,
+      );
+    if (!hasFocusedSubdivisions) {
+      analyticsState.mapView = "world";
+      analyticsState.mapFocusCountry = null;
+    }
+  }
+
   updateCountryList(panel.querySelector("#ryd-analytics-top-likes"), data?.geo?.topLikes ?? [], "likes");
   updateCountryList(panel.querySelector("#ryd-analytics-top-dislikes"), data?.geo?.topDislikes ?? [], "dislikes");
 
@@ -57,7 +72,7 @@ function renderAnalytics(data) {
   updateModeButtons();
 
   ensureMapChart();
-  renderMap(analyticsState.latestCountries);
+  renderMap();
 
   if (analyticsState.expandedChart === "activity") {
     resizeActivityChart();

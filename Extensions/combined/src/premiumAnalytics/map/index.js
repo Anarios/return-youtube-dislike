@@ -2,6 +2,7 @@ import * as echarts from "echarts";
 import { feature } from "topojson-client";
 import countryCodeLookup from "country-code-lookup";
 import worldData from "world-atlas/countries-110m.json";
+import usStatesData from "us-atlas/states-10m.json";
 
 import { analyticsState } from "../state";
 import { sanitizeCount, capitalize } from "../utils";
@@ -11,6 +12,68 @@ const worldFeatures = feature(worldData, worldData.objects.countries).features ?
 const NORMALIZED_WORLD_FEATURES = normalizeWorldFeatures(worldFeatures);
 const WORLD_FEATURE_COLLECTION = { type: "FeatureCollection", features: NORMALIZED_WORLD_FEATURES };
 echarts.registerMap("world", WORLD_FEATURE_COLLECTION);
+const usStateFeatures = feature(usStatesData, usStatesData.objects.states).features ?? [];
+const NORMALIZED_US_STATE_FEATURES = normalizeWorldFeatures(usStateFeatures);
+const US_STATE_FEATURE_COLLECTION = { type: "FeatureCollection", features: NORMALIZED_US_STATE_FEATURES };
+echarts.registerMap("usa-states", US_STATE_FEATURE_COLLECTION);
+const US_STATE_NAME_BY_CODE = {
+  AL: "Alabama",
+  AK: "Alaska",
+  AZ: "Arizona",
+  AR: "Arkansas",
+  CA: "California",
+  CO: "Colorado",
+  CT: "Connecticut",
+  DE: "Delaware",
+  FL: "Florida",
+  GA: "Georgia",
+  HI: "Hawaii",
+  ID: "Idaho",
+  IL: "Illinois",
+  IN: "Indiana",
+  IA: "Iowa",
+  KS: "Kansas",
+  KY: "Kentucky",
+  LA: "Louisiana",
+  ME: "Maine",
+  MD: "Maryland",
+  MA: "Massachusetts",
+  MI: "Michigan",
+  MN: "Minnesota",
+  MS: "Mississippi",
+  MO: "Missouri",
+  MT: "Montana",
+  NE: "Nebraska",
+  NV: "Nevada",
+  NH: "New Hampshire",
+  NJ: "New Jersey",
+  NM: "New Mexico",
+  NY: "New York",
+  NC: "North Carolina",
+  ND: "North Dakota",
+  OH: "Ohio",
+  OK: "Oklahoma",
+  OR: "Oregon",
+  PA: "Pennsylvania",
+  RI: "Rhode Island",
+  SC: "South Carolina",
+  SD: "South Dakota",
+  TN: "Tennessee",
+  TX: "Texas",
+  UT: "Utah",
+  VT: "Vermont",
+  VA: "Virginia",
+  WA: "Washington",
+  WV: "West Virginia",
+  WI: "Wisconsin",
+  WY: "Wyoming",
+  DC: "District of Columbia",
+  PR: "Puerto Rico",
+  GU: "Guam",
+  VI: "U.S. Virgin Islands",
+  AS: "American Samoa",
+  MP: "Northern Mariana Islands",
+};
 const CANONICAL_SYNONYM_GROUPS = [
   [
     "unitedstatesofamerica",
@@ -67,6 +130,7 @@ const CANONICAL_SYNONYM_GROUPS = [
 const CANONICAL_SYNONYM_LOOKUP = buildSynonymLookup(CANONICAL_SYNONYM_GROUPS);
 const FEATURE_NAME_BY_CANONICAL = buildFeatureCanonicalMap(NORMALIZED_WORLD_FEATURES);
 const ISO_TO_FEATURE_NAME = buildIsoToFeatureNameMap(FEATURE_NAME_BY_CANONICAL);
+const US_STATE_FEATURE_CANONICAL_MAP = buildStateCanonicalMap(NORMALIZED_US_STATE_FEATURES);
 
 export function ensureMapChart() {
   const state = analyticsState;
@@ -76,39 +140,24 @@ export function ensureMapChart() {
     if (!container) return null;
     state.mapChart = echarts.init(container);
   }
+  initializeMapInteractions(state.mapChart);
   return state.mapChart;
 }
 
 export function renderMap(countries) {
   const state = analyticsState;
+  if (Array.isArray(countries)) {
+    state.latestCountries = countries;
+  }
+
   const mapChart = ensureMapChart();
   if (!mapChart) return;
 
-  const dataset = Array.isArray(countries) ? countries : state.latestCountries;
+  const context = resolveMapContext(state);
   const mode = state.currentMode;
   const showLegend = state.expandedChart === "map";
 
-  const processed = dataset.map((entry) => {
-    const likes = sanitizeCount(entry.likes);
-    const dislikes = sanitizeCount(entry.dislikes);
-    const total = likes + dislikes;
-    const ratio = total > 0 ? likes / total : null;
-    const countryCode = typeof entry.countryCode === "string" ? entry.countryCode.toUpperCase() : "";
-    const displayName = entry.countryName || countryCode || "Unknown";
-    const mapName = resolveMapRegionName(countryCode, displayName);
-
-    return {
-      displayName,
-      mapName,
-      code: countryCode,
-      likes,
-      dislikes,
-      ratio,
-      total,
-    };
-  });
-
-  const mapData = processed.map((entry) => {
+  const mapData = context.entries.map((entry) => {
     let value;
     if (mode === "ratio") {
       value = entry.ratio ?? null;
@@ -139,56 +188,253 @@ export function renderMap(countries) {
 
   const visualConfig = resolveVisualMapConfig(numericValues, mode);
 
-  mapChart.setOption({
-    backgroundColor: "transparent",
-    tooltip: {
-      trigger: "item",
-      formatter: (params) => formatMapTooltip(params),
-    },
-    visualMap: {
-      min: visualConfig.min,
-      max: visualConfig.max,
-      text: [visualConfig.highLabel, visualConfig.lowLabel],
-      realtime: true,
-      calculable: false,
-      inRange: {
-        color: visualConfig.colors,
+  mapChart.setOption(
+    {
+      backgroundColor: "transparent",
+      tooltip: {
+        trigger: "item",
+        formatter: (params) => formatMapTooltip(params),
       },
-      textStyle: { color: getMutedTextColor() },
-      formatter: mode === "ratio" ? (value) => `${Math.round((value ?? 0) * 100)}%` : undefined,
-      precision: mode === "ratio" ? 2 : 0,
-      orient: "vertical",
-      left: "left",
-      bottom: 20,
-      itemWidth: 14,
-      itemHeight: 120,
-      align: "left",
-      show: showLegend,
-    },
-    geo: {
-      map: "world",
-      roam: true,
-      nameProperty: "name",
-      itemStyle: {
-        borderColor: getBorderColor(0.4),
-        borderWidth: 0.6,
-        areaColor: getSurfaceColor(0.06, 0.02),
-      },
-      emphasis: {
-        itemStyle: {
-          areaColor: getHoverFillColor(0.18, 0.18),
+      visualMap: {
+        min: visualConfig.min,
+        max: visualConfig.max,
+        text: [visualConfig.highLabel, visualConfig.lowLabel],
+        realtime: true,
+        calculable: false,
+        inRange: {
+          color: visualConfig.colors,
         },
+        textStyle: { color: getMutedTextColor() },
+        formatter: mode === "ratio" ? (value) => `${Math.round((value ?? 0) * 100)}%` : undefined,
+        precision: mode === "ratio" ? 2 : 0,
+        orient: "vertical",
+        left: "left",
+        bottom: 20,
+        itemWidth: 14,
+        itemHeight: 120,
+        align: "left",
+        show: showLegend,
       },
+      geo: {
+        map: context.mapKey,
+        roam: true,
+        nameProperty: "name",
+        itemStyle: {
+          borderColor: getBorderColor(0.4),
+          borderWidth: 0.6,
+          areaColor: getSurfaceColor(0.06, 0.02),
+        },
+        emphasis: {
+          itemStyle: {
+            areaColor: getHoverFillColor(0.18, 0.18),
+          },
+        },
+        ...context.geoOverrides,
+      },
+      series: [
+        {
+          name: "Activity",
+          type: "map",
+          geoIndex: 0,
+          data: mapData,
+        },
+      ],
     },
-    series: [
-      {
-        name: "Activity",
-        type: "map",
-        geoIndex: 0,
-        data: mapData,
+    true,
+  );
+
+  updateMapResetButtonVisibility();
+}
+
+function resolveMapContext(state) {
+  const focusCode = typeof state.mapFocusCountry === "string" ? normalizeIsoCode(state.mapFocusCountry) : "";
+  const subdivisions = Array.isArray(state.latestSubdivisions) ? state.latestSubdivisions : [];
+  const focusSubdivisions = focusCode ? filterSubdivisionsForCountry(subdivisions, focusCode) : [];
+
+  if (state.mapView === "subdivision" && focusCode === "US" && focusSubdivisions.length > 0) {
+    return {
+      mapKey: "usa-states",
+      entries: buildSubdivisionEntries(focusSubdivisions, focusCode),
+      geoOverrides: {
+        zoom: 1.15,
+        center: [-98.5795, 39.8283],
+        layoutCenter: ["50%", "48%"],
+        layoutSize: "120%",
+        scaleLimit: { min: 1, max: 12 },
       },
-    ],
-  }, true);
+    };
+  }
+
+  if (state.mapView === "subdivision") {
+    state.mapView = "world";
+    state.mapFocusCountry = null;
+  }
+
+  return {
+    mapKey: "world",
+    entries: buildCountryEntries(Array.isArray(state.latestCountries) ? state.latestCountries : []),
+    geoOverrides: {
+      scaleLimit: { min: 1, max: 10 },
+    },
+  };
+}
+
+function buildCountryEntries(entries) {
+  return entries.map((entry) => {
+    const likes = sanitizeCount(entry.likes);
+    const dislikes = sanitizeCount(entry.dislikes);
+    const total = likes + dislikes;
+    const ratio = total > 0 ? likes / total : null;
+    const countryCode = typeof entry.countryCode === "string" ? entry.countryCode.toUpperCase() : "";
+    const displayName = entry.countryName || countryCode || "Unknown";
+    const mapName = resolveMapRegionName(countryCode, displayName);
+
+    return {
+      displayName,
+      mapName,
+      code: countryCode,
+      likes,
+      dislikes,
+      ratio,
+      total,
+    };
+  });
+}
+
+function buildSubdivisionEntries(entries, countryCode) {
+  const isoCountry = normalizeIsoCode(countryCode);
+  if (!isoCountry) {
+    return [];
+  }
+
+  return entries
+    .filter((entry) => normalizeIsoCode(entry?.countryCode) === isoCountry)
+    .map((entry) => {
+      const likes = sanitizeCount(entry.likes);
+      const dislikes = sanitizeCount(entry.dislikes);
+      const total = likes + dislikes;
+      const ratio = total > 0 ? likes / total : null;
+      const subdivisionCode = typeof entry.subdivisionCode === "string" ? entry.subdivisionCode.toUpperCase() : "";
+      const displayName = entry.subdivisionName || subdivisionCode || "Unknown";
+      const mapName = resolveSubdivisionFeatureName(isoCountry, subdivisionCode, displayName);
+
+      return {
+        displayName,
+        mapName,
+        code: subdivisionCode || `${isoCountry}:${displayName}`,
+        likes,
+        dislikes,
+        ratio,
+        total,
+      };
+    })
+    .filter((entry) => !!entry.mapName);
+}
+
+function resolveSubdivisionFeatureName(countryCode, subdivisionCode, fallbackName) {
+  const normalizedCountry = normalizeIsoCode(countryCode);
+  const normalizedCode = typeof subdivisionCode === "string" ? subdivisionCode.trim().toUpperCase() : "";
+
+  if (normalizedCountry === "US") {
+    if (normalizedCode && US_STATE_NAME_BY_CODE[normalizedCode]) {
+      return US_STATE_NAME_BY_CODE[normalizedCode];
+    }
+
+    const resolved = findFeatureNameByCanonical(fallbackName, US_STATE_FEATURE_CANONICAL_MAP);
+    if (resolved) {
+      return resolved;
+    }
+
+    if (normalizedCode && US_STATE_NAME_BY_CODE[normalizedCode]) {
+      return US_STATE_NAME_BY_CODE[normalizedCode];
+    }
+  }
+
+  const fallbackResolved = findFeatureNameByCanonical(fallbackName, US_STATE_FEATURE_CANONICAL_MAP);
+  if (fallbackResolved) {
+    return fallbackResolved;
+  }
+
+  if (normalizedCode && US_STATE_NAME_BY_CODE[normalizedCode]) {
+    return US_STATE_NAME_BY_CODE[normalizedCode];
+  }
+
+  return fallbackName || normalizedCode || "Unknown";
+}
+
+function filterSubdivisionsForCountry(subdivisions, countryCode) {
+  const normalizedCountry = normalizeIsoCode(countryCode);
+  if (!normalizedCountry) {
+    return [];
+  }
+
+  return subdivisions.filter((entry) => normalizeIsoCode(entry?.countryCode) === normalizedCountry);
+}
+
+function initializeMapInteractions(mapChart) {
+  if (!mapChart) return;
+
+  if (!mapChart.__rydClickBound) {
+    mapChart.on("click", handleMapClick);
+    mapChart.__rydClickBound = true;
+  }
+
+  bindMapResetButton();
+}
+
+function handleMapClick(params) {
+  if (!params) return;
+  const state = analyticsState;
+
+  if (state.mapView === "subdivision") {
+    return;
+  }
+
+  const dataCode = typeof params.data?.code === "string" ? params.data.code.toUpperCase() : "";
+  const canonicalName = canonicalizeName(params.name);
+
+  let resolvedCode = dataCode;
+  if (!resolvedCode && canonicalName === canonicalizeName("United States of America")) {
+    resolvedCode = "US";
+  }
+
+  if (resolvedCode !== "US") {
+    return;
+  }
+
+  const subdivisions = filterSubdivisionsForCountry(state.latestSubdivisions ?? [], resolvedCode);
+  if (subdivisions.length === 0) {
+    return;
+  }
+
+  state.mapFocusCountry = resolvedCode;
+  state.mapView = "subdivision";
+  renderMap();
+}
+
+function bindMapResetButton() {
+  const panel = analyticsState.panelElement;
+  if (!panel) return;
+
+  const button = panel.querySelector("#ryd-analytics-map-reset");
+  if (!button || button.__rydBound) return;
+
+  button.addEventListener("click", () => {
+    analyticsState.mapView = "world";
+    analyticsState.mapFocusCountry = null;
+    renderMap();
+  });
+  button.__rydBound = true;
+}
+
+function updateMapResetButtonVisibility() {
+  const panel = analyticsState.panelElement;
+  if (!panel) return;
+
+  const button = panel.querySelector("#ryd-analytics-map-reset");
+  if (!button) return;
+
+  button.hidden = analyticsState.mapView !== "subdivision";
 }
 
 export function disposeMapChart() {
@@ -197,6 +443,7 @@ export function disposeMapChart() {
     state.mapChart.dispose();
     state.mapChart = null;
   }
+  updateMapResetButtonVisibility();
 }
 
 export function clearMapChart() {
@@ -301,6 +548,17 @@ function resolveMapRegionName(countryCode, fallbackName) {
   }
 
   return trimmedName || "Unknown";
+}
+
+function buildStateCanonicalMap(features) {
+  const map = new Map();
+  features.forEach((featureItem) => {
+    if (!featureItem?.properties?.name) return;
+    const canonical = canonicalizeName(featureItem.properties.name);
+    if (!canonical || map.has(canonical)) return;
+    map.set(canonical, featureItem.properties.name);
+  });
+  return map;
 }
 
 function buildFeatureCanonicalMap(features) {
