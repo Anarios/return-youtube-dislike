@@ -9,8 +9,7 @@ import {
   setSession,
   RANGE_OPTIONS,
   COUNTRY_LIMIT,
-  BUCKET,
-} from "./premiumAnalytics.state";
+} from "./state";
 
 function resetGlobals() {
   analyticsState.initialized = false;
@@ -47,7 +46,6 @@ describe("premiumAnalytics.state", () => {
   it("exposes configuration constants", () => {
     expect(RANGE_OPTIONS).toEqual([7, 30, 90, 0]);
     expect(COUNTRY_LIMIT).toBe(12);
-    expect(BUCKET).toBe("hour");
   });
 
   describe("resetStateForVideo", () => {

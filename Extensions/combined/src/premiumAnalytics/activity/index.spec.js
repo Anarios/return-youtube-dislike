@@ -26,20 +26,20 @@ jest.mock("echarts", () => {
   };
 });
 
-jest.mock("./premiumAnalytics.theme", () => ({
+jest.mock("../theme", () => ({
   getTextColor: jest.fn(() => "#111111"),
   getMutedTextColor: jest.fn(() => "#222222"),
   getBorderColor: jest.fn(() => "#333333"),
 }));
 
-jest.mock("./premiumAnalytics.logging", () => ({
+jest.mock("../logging", () => ({
   logRangeSelection: jest.fn(),
   logTimeBounds: jest.fn(),
   logZoomPreview: jest.fn(),
 }));
 
 import echarts from "echarts";
-import { analyticsState, resetStateForVideo } from "./premiumAnalytics.state";
+import { analyticsState, resetStateForVideo } from "../state";
 import {
   ensureActivityChart,
   renderActivityChart,
@@ -48,9 +48,9 @@ import {
   resizeActivityChart,
   disposeActivityChart,
   registerZoomSelectionListener,
-} from "./premiumAnalytics.activity";
-import * as timeModule from "./premiumAnalytics.time";
-import * as logging from "./premiumAnalytics.logging";
+} from "./index";
+import * as timeModule from "./time";
+import * as logging from "../logging";
 
 function createPanel() {
   const panel = document.createElement("section");
@@ -110,6 +110,7 @@ describe("premiumAnalytics.activity", () => {
     jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 0, max: 1000 });
 
     renderActivityChart({
+      bucket: "hour",
       totalRangeStartUtc: "2025-01-01T00:00:00Z",
       totalRangeEndUtc: "2025-01-02T00:00:00Z",
       selectedRangeStartUtc: "2025-01-01T00:00:00Z",
@@ -125,6 +126,37 @@ describe("premiumAnalytics.activity", () => {
     expect(analyticsState.latestSeriesPoints).toHaveLength(2);
     expect(analyticsState.selectionRange.from).toBeLessThanOrEqual(analyticsState.selectionRange.to);
 
+  });
+
+  it("fills missing buckets with zero counts", () => {
+    jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 0, max: 3 * 60 * 60 * 1000 });
+
+    renderActivityChart({
+      bucket: "hour",
+      points: [
+        { timestampUtc: "2025-01-01T00:00:00Z", likes: 5, dislikes: 1 },
+        { timestampUtc: "2025-01-01T02:00:00Z", likes: 2, dislikes: 0 },
+      ],
+    });
+
+    const options = chartInstance.setOption.mock.calls.at(-1)[0];
+    const likesSeries = options.series[0].data;
+    const dislikesSeries = options.series[1].data;
+
+    expect(likesSeries).toEqual([
+      ["2025-01-01T00:00:00Z", 5],
+      ["2025-01-01T01:00:00Z", 0],
+      ["2025-01-01T02:00:00Z", 2],
+    ]);
+
+    expect(dislikesSeries).toEqual([
+      ["2025-01-01T00:00:00Z", 1],
+      ["2025-01-01T01:00:00Z", 0],
+      ["2025-01-01T02:00:00Z", 0],
+    ]);
+
+    expect(analyticsState.latestSeriesPoints).toHaveLength(3);
+    expect(analyticsState.latestBucketMs).toBe(60 * 60 * 1000);
   });
 
   it("configures slider bounds from declared range", () => {

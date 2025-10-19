@@ -1,10 +1,10 @@
 import * as echarts from "echarts";
 
-import { analyticsState } from "./premiumAnalytics.state";
-import { clampRangeToBounds, combineBounds, computeChartBounds, updateGlobalBounds } from "./premiumAnalytics.time";
-import { toEpoch } from "./premiumAnalytics.utils";
-import { getTextColor, getMutedTextColor, getBorderColor } from "./premiumAnalytics.theme";
-import { logRangeSelection, logTimeBounds } from "./premiumAnalytics.logging";
+import { analyticsState } from "../state";
+import { clampRangeToBounds, combineBounds, computeChartBounds, updateGlobalBounds } from "./time";
+import { toEpoch, sanitizeCount } from "../utils";
+import { getTextColor, getMutedTextColor, getBorderColor } from "../theme";
+import { logRangeSelection, logTimeBounds } from "../logging";
 
 const zoomListeners = new Set();
 
@@ -34,13 +34,18 @@ export function renderActivityChart(timeSeries) {
   const activityChart = ensureActivityChart();
   if (!activityChart) return;
 
-  const seriesPoints = timeSeries?.points ?? [];
+  const bucketLabel = timeSeries?.bucket;
+  const bucketMs = resolveBucketSize(bucketLabel) ?? state.latestBucketMs;
+
+  const seriesPoints = normalizeSeriesPoints(timeSeries?.points ?? [], bucketMs);
   const likesSeries = seriesPoints.map((p) => [p.timestampUtc, p.likes]);
   const dislikesSeries = seriesPoints.map((p) => [p.timestampUtc, p.dislikes]);
 
   state.latestSeriesPoints = seriesPoints;
   state.latestTimeAxis = seriesPoints.map((p) => toEpoch(p.timestampUtc)).filter((ms) => ms != null);
-  if (state.latestTimeAxis.length > 1) {
+  if (Number.isFinite(bucketMs) && bucketMs > 0) {
+    state.latestBucketMs = bucketMs;
+  } else if (state.latestTimeAxis.length > 1) {
     state.latestBucketMs = Math.max(1, state.latestTimeAxis[1] - state.latestTimeAxis[0]);
   }
 
@@ -230,6 +235,70 @@ function createDataZoom(bounds, selection) {
 
   return [slider, inside];
 }
+
+function resolveBucketSize(label) {
+  switch (label) {
+    case "hour":
+      return 60 * 60 * 1000;
+    case "day":
+      return 24 * 60 * 60 * 1000;
+    case "week":
+      return 7 * 24 * 60 * 60 * 1000;
+    default:
+      return null;
+  }
+}
+
+function normalizeSeriesPoints(points, bucketMs) {
+  if (!Array.isArray(points) || !points.length) {
+    return [];
+  }
+
+  if (!Number.isFinite(bucketMs) || bucketMs <= 0) {
+    return [...points].sort((a, b) => toEpoch(a.timestampUtc) - toEpoch(b.timestampUtc));
+  }
+
+  const sorted = [...points]
+    .map((p) => ({
+      timestampUtc: p.timestampUtc,
+      likes: sanitizeCount(p.likes),
+      dislikes: sanitizeCount(p.dislikes),
+    }))
+    .filter((p) => toEpoch(p.timestampUtc) != null)
+    .sort((a, b) => toEpoch(a.timestampUtc) - toEpoch(b.timestampUtc));
+
+  if (!sorted.length) {
+    return [];
+  }
+
+  const filled = [];
+  for (let i = 0; i < sorted.length; i += 1) {
+    const current = sorted[i];
+    filled.push(current);
+    const currentMs = toEpoch(current.timestampUtc);
+    const next = sorted[i + 1];
+    if (!next) {
+      continue;
+    }
+    const nextMs = toEpoch(next.timestampUtc);
+    if (!Number.isFinite(currentMs) || !Number.isFinite(nextMs)) {
+      continue;
+    }
+
+    let cursor = currentMs + bucketMs;
+    while (cursor < nextMs) {
+      filled.push({
+        timestampUtc: new Date(cursor).toISOString(),
+        likes: 0,
+        dislikes: 0,
+      });
+      cursor += bucketMs;
+    }
+  }
+
+  return filled;
+}
+
 
 function handleDataZoom(event) {
   if (analyticsState.suppressZoomEvents) {

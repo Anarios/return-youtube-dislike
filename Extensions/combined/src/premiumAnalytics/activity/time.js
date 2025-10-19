@@ -1,5 +1,5 @@
-import { sanitizeCount, toEpoch } from "./premiumAnalytics.utils";
-import { analyticsState } from "./premiumAnalytics.state";
+import { sanitizeCount, toEpoch } from "../utils";
+import { analyticsState } from "../state";
 
 export function computeChartBounds(points, timeline, bucketSizeMs) {
   if (!timeline.length) {

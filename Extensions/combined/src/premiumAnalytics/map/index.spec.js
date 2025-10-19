@@ -55,12 +55,12 @@ jest.mock("country-code-lookup", () => {
   };
 });
 
-jest.mock("./premiumAnalytics.utils", () => ({
+jest.mock("../utils", () => ({
   sanitizeCount: jest.fn((value) => Number(value) || 0),
-  capitalize: jest.requireActual("./premiumAnalytics.utils").capitalize,
+  capitalize: jest.requireActual("../utils").capitalize,
 }));
 
-jest.mock("./premiumAnalytics.theme", () => ({
+jest.mock("../theme", () => ({
   getMutedTextColor: jest.fn(() => "#aaaaaa"),
   getBorderColor: jest.fn(() => "#bbbbbb"),
   getSurfaceColor: jest.fn(() => "rgba(0,0,0,0.04)"),
@@ -68,10 +68,10 @@ jest.mock("./premiumAnalytics.theme", () => ({
 }));
 
 import echarts from "echarts";
-import { analyticsState } from "./premiumAnalytics.state";
-import { ensureMapChart, renderMap, disposeMapChart, clearMapChart, resizeMapChart } from "./premiumAnalytics.map";
+import { analyticsState } from "../state";
+import { ensureMapChart, renderMap, disposeMapChart, clearMapChart, resizeMapChart } from "./index";
 
-const { sanitizeCount } = jest.requireMock("./premiumAnalytics.utils");
+const { sanitizeCount } = jest.requireMock("../utils");
 
 function setupPanel() {
   const panel = document.createElement("section");

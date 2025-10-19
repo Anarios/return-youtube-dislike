@@ -2,18 +2,17 @@
  * @jest-environment jsdom
  */
 
-jest.mock("./config", () => ({
+jest.mock("../config", () => ({
   __esModule: true,
   getApiEndpoint: jest.fn((path) => `https://api.example${path}`),
 }));
 
-jest.mock("./premiumAnalytics.panel", () => ({
+jest.mock("./panel", () => ({
   configurePanelCallbacks: jest.fn(),
   ensurePanel: jest.fn(() => ({})),
   updateRangeButtons: jest.fn(),
   updateModeButtons: jest.fn(),
   setListsLoading: jest.fn(),
-  updateCountryList: jest.fn(),
   renderSummary: jest.fn(),
   setFooterMessage: jest.fn(),
   setLoadingState: jest.fn(),
@@ -23,7 +22,7 @@ jest.mock("./premiumAnalytics.panel", () => ({
   applyChartExpansionState: jest.fn(),
 }));
 
-jest.mock("./premiumAnalytics.activity", () => ({
+jest.mock("./activity", () => ({
   renderActivityChart: jest.fn(),
   clearActivityChart: jest.fn(),
   resetChartZoom: jest.fn(),
@@ -32,7 +31,7 @@ jest.mock("./premiumAnalytics.activity", () => ({
   registerZoomSelectionListener: jest.fn(),
 }));
 
-jest.mock("./premiumAnalytics.map", () => ({
+jest.mock("./map", () => ({
   ensureMapChart: jest.fn(),
   renderMap: jest.fn(),
   clearMapChart: jest.fn(),
@@ -40,8 +39,12 @@ jest.mock("./premiumAnalytics.map", () => ({
   disposeMapChart: jest.fn(),
 }));
 
-jest.mock("./premiumAnalytics.utils", () => {
-  const actual = jest.requireActual("./premiumAnalytics.utils");
+jest.mock("./lists", () => ({
+  updateCountryList: jest.fn(),
+}));
+
+jest.mock("./utils", () => {
+  const actual = jest.requireActual("./utils");
   return {
     __esModule: true,
     ...actual,
@@ -51,28 +54,30 @@ jest.mock("./premiumAnalytics.utils", () => {
   };
 });
 
-jest.mock("./premiumAnalytics.logging", () => ({
+jest.mock("./logging", () => ({
   logFetchRequest: jest.fn(),
 }));
 
-const panelMocks = jest.requireMock("./premiumAnalytics.panel");
-const activityMocks = jest.requireMock("./premiumAnalytics.activity");
-const mapMocks = jest.requireMock("./premiumAnalytics.map");
-const utilsMocks = jest.requireMock("./premiumAnalytics.utils");
-const loggingMocks = jest.requireMock("./premiumAnalytics.logging");
-const configMocks = jest.requireMock("./config");
+const panelMocks = jest.requireMock("./panel");
+const activityMocks = jest.requireMock("./activity");
+const mapMocks = jest.requireMock("./map");
+const listsMocks = jest.requireMock("./lists");
+const utilsMocks = jest.requireMock("./utils");
+const loggingMocks = jest.requireMock("./logging");
+const configMocks = jest.requireMock("../config");
 
 const {
   configurePanelCallbacks: mockConfigurePanelCallbacks,
   ensurePanel: mockEnsurePanel,
   updateRangeButtons: mockUpdateRangeButtons,
   updateModeButtons: mockUpdateModeButtons,
-  updateCountryList: mockUpdateCountryList,
   renderSummary: mockRenderSummary,
   setFooterMessage: mockSetFooterMessage,
   setLoadingState: mockSetLoadingState,
   applyChartExpansionState: mockApplyChartExpansionState,
 } = panelMocks;
+
+const { updateCountryList: mockUpdateCountryList } = listsMocks;
 
 const {
   renderActivityChart: mockRenderActivityChart,
@@ -94,18 +99,18 @@ const { debounce: mockDebounce, safeJson: mockSafeJson, toEpoch: mockToEpoch } =
 const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
 
-jest.mock("./utils", () => ({
+jest.mock("../utils", () => ({
   getVideoId: jest.fn(() => "video1234567"),
 }));
 
-import { analyticsState, resetSessionState, resetStateForVideo } from "./premiumAnalytics.state";
+import { analyticsState, resetSessionState, resetStateForVideo } from "./state";
 import {
   initPremiumAnalytics,
   requestAnalytics,
   teardownPremiumAnalytics,
   updatePremiumSession,
-} from "./premiumAnalytics";
-const premiumAnalyticsModule = require("./premiumAnalytics");
+} from "./index";
+const premiumAnalyticsModule = require("./index");
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 

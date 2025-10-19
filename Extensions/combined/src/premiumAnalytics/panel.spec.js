@@ -2,20 +2,19 @@
  * @jest-environment jsdom
  */
 
-import { analyticsState, resetStateForVideo } from "./premiumAnalytics.state";
+import { analyticsState, resetStateForVideo } from "./state";
 import {
   configurePanelCallbacks,
   ensurePanel,
   updateRangeButtons,
   updateModeButtons,
   setListsLoading,
-  updateCountryList,
   renderSummary,
   setFooterMessage,
   setPanelExpanded,
   setLoadingState,
   applyChartExpansionState,
-} from "./premiumAnalytics.panel";
+} from "./panel";
 
 describe("premiumAnalytics.panel", () => {
   function mountSecondaryContainer() {
@@ -125,19 +124,6 @@ describe("premiumAnalytics.panel", () => {
     expect(panel.classList.contains("is-loading")).toBe(true);
   });
 
-  it("renders country list entries", () => {
-    ensurePanel();
-    const container = document.querySelector("#ryd-analytics-top-likes");
-    updateCountryList(container, [
-      { countryCode: "US", countryName: "United States", likes: 1000, dislikes: 20 },
-      { countryCode: "CA", countryName: "Canada", likes: 500, dislikes: 10 },
-    ], "likes");
-
-    expect(container.querySelectorAll("li")).toHaveLength(2);
-    expect(container.textContent).toContain("United States");
-    expect(container.textContent).toContain("1,000");
-  });
-
   it("renders summary footer with totals and selected period", () => {
     ensurePanel();
     renderSummary({
@@ -166,14 +152,6 @@ describe("premiumAnalytics.panel", () => {
     setFooterMessage("Custom message");
 
     expect(document.querySelector("#ryd-analytics-footer").textContent).toBe("Custom message");
-  });
-
-  it("handles empty entries in updateCountryList", () => {
-    ensurePanel();
-    const container = document.querySelector("#ryd-analytics-top-dislikes");
-    updateCountryList(container, [], "dislikes");
-
-    expect(container.textContent).toContain("No data yet");
   });
 
   it("setPanelExpanded respects provided state", () => {

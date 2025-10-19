@@ -3,9 +3,9 @@ import { feature } from "topojson-client";
 import countryCodeLookup from "country-code-lookup";
 import worldData from "world-atlas/countries-110m.json";
 
-import { analyticsState } from "./premiumAnalytics.state";
-import { sanitizeCount, capitalize } from "./premiumAnalytics.utils";
-import { getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor } from "./premiumAnalytics.theme";
+import { analyticsState } from "../state";
+import { sanitizeCount, capitalize } from "../utils";
+import { getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor } from "../theme";
 
 const worldFeatures = feature(worldData, worldData.objects.countries).features ?? [];
 const NORMALIZED_WORLD_FEATURES = normalizeWorldFeatures(worldFeatures);

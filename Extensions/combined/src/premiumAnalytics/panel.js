@@ -1,5 +1,5 @@
-import { analyticsState, RANGE_OPTIONS } from "./premiumAnalytics.state";
-import { sanitizeCount } from "./premiumAnalytics.utils";
+import { analyticsState, RANGE_OPTIONS } from "./state";
+import { sanitizeCount } from "./utils";
 
 let callbacks = {
   onRangePreset: () => {},
@@ -87,24 +87,6 @@ export function togglePanelExpanded() {
 export function setLoadingState(isLoading) {
   analyticsState.isLoading = isLoading;
   applyLoadingState();
-}
-
-export function updateCountryList(container, entries, type) {
-  if (!container) return;
-  if (!entries?.length) {
-    container.innerHTML = `<li class="ryd-analytics__placeholder">No data yet</li>`;
-    return;
-  }
-
-  container.innerHTML = entries
-    .map(({ countryCode, countryName, likes, dislikes }) => {
-      const value = type === "likes" ? likes : dislikes;
-      const safeValue = sanitizeCount(value);
-      const name = countryName || countryCode || "Unknown";
-      const codeSuffix = countryCode ? ` (${countryCode})` : "";
-      return `<li><span class="ryd-analytics__country">${name}${codeSuffix}</span><span class="ryd-analytics__value">${safeValue.toLocaleString()}</span></li>`;
-    })
-    .join("");
 }
 
 export function renderSummary(summary) {

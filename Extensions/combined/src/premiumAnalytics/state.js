@@ -1,6 +1,5 @@
 export const RANGE_OPTIONS = [7, 30, 90, 0];
 export const COUNTRY_LIMIT = 12;
-export const BUCKET = "hour";
 
 export const analyticsState = {
   initialized: false,

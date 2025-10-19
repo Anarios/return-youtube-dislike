@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { getTextColor, getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor, isDarkTheme } from "./premiumAnalytics.theme";
+import { getTextColor, getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor, isDarkTheme } from "./theme";
 
 describe("premiumAnalytics.theme", () => {
   const originalGetComputedStyle = window.getComputedStyle;

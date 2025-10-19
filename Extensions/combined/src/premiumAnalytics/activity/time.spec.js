@@ -2,13 +2,13 @@
  * @jest-environment jsdom
  */
 
-import { analyticsState, resetStateForVideo } from "./premiumAnalytics.state";
+import { analyticsState, resetStateForVideo } from "../state";
 import {
   computeChartBounds,
   updateGlobalBounds,
   clampRangeToBounds,
   combineBounds,
-} from "./premiumAnalytics.time";
+} from "./time";
 
 function initializeState() {
   resetStateForVideo();

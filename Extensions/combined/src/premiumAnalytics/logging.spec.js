@@ -7,7 +7,7 @@ import {
   logRangeSelection,
   logFetchRequest,
   logZoomPreview,
-} from "./premiumAnalytics.logging";
+} from "./logging";
 
 describe("premiumAnalytics.logging", () => {
   let consoleSpy;

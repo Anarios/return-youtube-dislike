@@ -8,7 +8,7 @@ import {
   capitalize,
   debounce,
   safeJson,
-} from "./premiumAnalytics.utils";
+} from "./utils";
 
 describe("premiumAnalytics.utils", () => {
   describe("sanitizeCount", () => {
