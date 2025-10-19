@@ -54,8 +54,16 @@ import * as logging from "../logging";
 
 function createPanel() {
   const panel = document.createElement("section");
+  const meta = document.createElement("div");
+  meta.id = "ryd-analytics-activity-meta";
+  meta.className = "ryd-analytics__chart-meta";
+  meta.hidden = true;
+  const bucketLabel = document.createElement("span");
+  bucketLabel.id = "ryd-analytics-bucket-label";
+  meta.appendChild(bucketLabel);
   const chartHost = document.createElement("div");
   chartHost.id = "ryd-analytics-activity";
+  panel.appendChild(meta);
   panel.appendChild(chartHost);
   analyticsState.panelElement = panel;
   document.body.appendChild(panel);
@@ -126,6 +134,22 @@ describe("premiumAnalytics.activity", () => {
     expect(analyticsState.latestSeriesPoints).toHaveLength(2);
     expect(analyticsState.selectionRange.from).toBeLessThanOrEqual(analyticsState.selectionRange.to);
 
+  });
+
+  it("updates the bucket label when rendering", () => {
+    jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 0, max: 0 });
+    const meta = document.getElementById("ryd-analytics-activity-meta");
+    const label = document.getElementById("ryd-analytics-bucket-label");
+    expect(meta.hidden).toBe(true);
+    expect(label.textContent).toBe("");
+
+    renderActivityChart({
+      bucket: "day",
+      points: [],
+    });
+
+    expect(meta.hidden).toBe(false);
+    expect(label.textContent).toBe("Votes per day");
   });
 
   it("fills missing buckets with zero counts", () => {

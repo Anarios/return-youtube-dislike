@@ -1,12 +1,17 @@
 import * as echarts from "echarts";
 
 import { analyticsState } from "../state";
+import { setActivityBucketLabel } from "../panel";
 import { clampRangeToBounds, combineBounds, computeChartBounds, updateGlobalBounds } from "./time";
 import { toEpoch, sanitizeCount } from "../utils";
 import { getTextColor, getMutedTextColor, getBorderColor } from "../theme";
 import { logRangeSelection, logTimeBounds } from "../logging";
 
 const zoomListeners = new Set();
+const MS_PER_MINUTE = 60 * 1000;
+const MS_PER_HOUR = 60 * 60 * 1000;
+const MS_PER_DAY = 24 * MS_PER_HOUR;
+const MS_PER_WEEK = 7 * MS_PER_DAY;
 
 function pickFirstFinite(...values) {
   for (const value of values) {
@@ -36,6 +41,15 @@ export function renderActivityChart(timeSeries) {
 
   const bucketLabel = timeSeries?.bucket;
   const bucketMs = resolveBucketSize(bucketLabel) ?? state.latestBucketMs;
+  const bucketDescription = formatBucketDescription(bucketLabel, bucketMs);
+
+  if (bucketDescription) {
+    state.latestBucketLabel = bucketDescription;
+    setActivityBucketLabel(bucketDescription);
+  } else {
+    state.latestBucketLabel = null;
+    setActivityBucketLabel("");
+  }
 
   const seriesPoints = normalizeSeriesPoints(timeSeries?.points ?? [], bucketMs);
   const likesSeries = seriesPoints.map((p) => [p.timestampUtc, p.likes]);
@@ -247,6 +261,55 @@ function resolveBucketSize(label) {
     default:
       return null;
   }
+}
+
+function formatBucketDescription(label, bucketMs) {
+  const normalizedLabel = typeof label === "string" ? label.toLowerCase() : null;
+
+  switch (normalizedLabel) {
+    case "hour":
+      return "Votes per hour";
+    case "day":
+      return "Votes per day";
+    case "week":
+      return "Votes per week";
+    default:
+      break;
+  }
+
+  if (!Number.isFinite(bucketMs) || bucketMs <= 0) {
+    return null;
+  }
+
+  if (approximately(bucketMs, MS_PER_WEEK)) {
+    return "Votes per week";
+  }
+
+  if (bucketMs % MS_PER_DAY === 0) {
+    const days = bucketMs / MS_PER_DAY;
+    if (days === 1) return "Votes per day";
+    return `Votes per ${days} days`;
+  }
+
+  if (bucketMs % MS_PER_HOUR === 0) {
+    const hours = bucketMs / MS_PER_HOUR;
+    if (hours === 1) return "Votes per hour";
+    return `Votes per ${hours} hours`;
+  }
+
+  if (bucketMs % MS_PER_MINUTE === 0) {
+    const minutes = bucketMs / MS_PER_MINUTE;
+    if (minutes === 1) return "Votes per minute";
+    return `Votes per ${minutes} minutes`;
+  }
+
+  const seconds = Math.round(bucketMs / 1000);
+  if (seconds === 1) return "Votes per second";
+  return `Votes per ${seconds} seconds`;
+}
+
+function approximately(value, target) {
+  return Math.abs(value - target) < MS_PER_MINUTE;
 }
 
 function normalizeSeriesPoints(points, bucketMs) {

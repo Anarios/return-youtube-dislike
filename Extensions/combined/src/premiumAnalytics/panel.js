@@ -89,6 +89,17 @@ export function setLoadingState(isLoading) {
   applyLoadingState();
 }
 
+export function setActivityBucketLabel(text) {
+  const panel = analyticsState.panelElement;
+  if (!panel) return;
+  const container = panel.querySelector("#ryd-analytics-activity-meta");
+  const label = panel.querySelector("#ryd-analytics-bucket-label");
+  if (!container || !label) return;
+  const content = typeof text === "string" ? text.trim() : "";
+  label.textContent = content;
+  container.hidden = content.length === 0;
+}
+
 export function renderSummary(summary) {
   if (!summary) return;
   const panel = analyticsState.panelElement;
@@ -175,6 +186,9 @@ function createPanelMarkup() {
           <button class="ryd-analytics__section-expand" type="button" data-chart="activity" aria-expanded="false">Expand</button>
         </div>
         <div class="ryd-analytics__section-content">
+          <div class="ryd-analytics__chart-meta" id="ryd-analytics-activity-meta" hidden>
+            <span class="ryd-analytics__bucket-label" id="ryd-analytics-bucket-label"></span>
+          </div>
           <div class="ryd-analytics__chart" id="ryd-analytics-activity"></div>  
         </div>
       </section>

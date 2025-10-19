@@ -18,6 +18,7 @@ export const analyticsState = {
   latestSeriesPoints: [],
   latestTimeAxis: [],
   latestBucketMs: 60 * 60 * 1000,
+  latestBucketLabel: null,
   chartTimeBounds: { min: null, max: null },
   globalTimeBounds: { min: null, max: null },
   availableRange: { min: null, max: null },
@@ -34,6 +35,7 @@ export function resetStateForVideo() {
   analyticsState.latestSeriesPoints = [];
   analyticsState.latestTimeAxis = [];
   analyticsState.latestBucketMs = 60 * 60 * 1000;
+  analyticsState.latestBucketLabel = null;
   analyticsState.chartTimeBounds = { min: null, max: null };
   analyticsState.globalTimeBounds = { min: null, max: null };
   analyticsState.availableRange = { min: null, max: null };
