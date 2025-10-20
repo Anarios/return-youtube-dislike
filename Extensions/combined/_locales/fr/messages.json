@@ -1,78 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "État de l’API :"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Hors ligne"
   },
-  "extensionDesc": {
-    "message": "Ré-affiche les pouces rouges/dislikes des vidéos"
+  "apiStatusOnline": {
+    "message": "En ligne"
   },
-  "textDeveloper": {
-    "message": "par Dmitry Selivanov & Communauté"
-  },
-  "linkWebsite": {
-    "message": "Site web"
-  },
-  "linkFAQ": {
-    "message": "Questions fréquentes"
-  },
-  "linkDonate": {
-    "message": "Faire un don"
-  },
-  "linkHelp": {
-    "message": "Aide"
-  },
-  "legendSettings": {
-    "message": "Paramètres"
-  },
-  "textLikesDisabled": {
-    "message": "Désactivé par le créateur"
-  },
-  "textSettings": {
-    "message": "Désactiver l'envoi des likes/dislikes"
-  },
-  "textSettingsHover": {
-    "message": "Arrête de compter les likes et les dislikes mis sur les vidéos."
-  },
-  "textTempUnavailable": {
-    "message": "temporairement indisponible"
-  },
-  "textUpdate": {
-    "message": "mettre à jour vers"
-  },
-  "version30installed": {
-    "message": "Version __RYD_VERSION__ installée"
-  },
-  "whatsnew": {
-    "message": "Quoi de neuf"
-  },
-  "shortsSupport": {
-    "message": "Prise en charge des YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Couleurs personnalisées pour la barre du dislike et les boutons"
-  },
-  "customNumberFormats": {
-    "message": "Formats numériques personnalisés"
-  },
-  "considerDonating": {
-    "message": "La seule chose qui permet à l'extension de fonctionner est vos dons, veuillez envisager de soutenir le projet."
-  },
-  "roundNumbers": {
-    "message": "Afficher les nombres arrondis"
-  },
-  "roundNumbersHover": {
-    "message": "Arrondir les nombres à la baisse (comportement par défaut de YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Formater le nombre de likes"
-  },
-  "reformatLikesHover": {
-    "message": "Rend la valeur des statistiques plus cohérente."
-  },
-  "numberFormat": {
-    "message": "Format numérique:"
+  "colorTheme": {
+    "message": "Schéma de couleur:"
   },
   "colorizeRatio": {
     "message": "Coloriser la barre de ratio"
@@ -86,7 +23,517 @@
   "colorizeThumbsHover": {
     "message": "Utiliser des couleurs personnalisées pour les boutons like et dislike."
   },
-  "colorTheme": {
-    "message": "Schéma de couleur:"
+  "considerDonating": {
+    "message": "La seule chose qui permet à l'extension de fonctionner est vos dons, veuillez envisager de soutenir le projet."
+  },
+  "customColors": {
+    "message": "Couleurs personnalisées pour la barre du dislike et les boutons"
+  },
+  "customNumberFormats": {
+    "message": "Formats numériques personnalisés"
+  },
+  "disableLoggingHover": {
+    "message": "Désactive la journalisation des réponses de l’API dans la console."
+  },
+  "disableLoggingLabel": {
+    "message": "Désactiver la journalisation dans la console"
+  },
+  "extensionDesc": {
+    "message": "Ré-affiche les pouces rouges/dislikes des vidéos"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Paramètres"
+  },
+  "linkChangelog": {
+    "message": "Journal des modifications"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "Faire un don"
+  },
+  "linkFAQ": {
+    "message": "Questions fréquentes"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Aide"
+  },
+  "linkWebsite": {
+    "message": "Site web"
+  },
+  "numberFormat": {
+    "message": "Format numérique:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Fonctionnalités premium disponibles pour les soutiens sur Patreon"
+  },
+  "patreonLogin": {
+    "message": "Se connecter avec Patreon"
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Échec de la connexion. Veuillez réessayer."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Échec du démarrage de la connexion Patreon. Veuillez réessayer."
+  },
+  "patreonLogout": {
+    "message": "Se déconnecter"
+  },
+  "patreonPermissionRequired": {
+    "message": "La connexion nécessite l’autorisation «identity». Veuillez l’accorder pour continuer."
+  },
+  "patreonTierBasic": {
+    "message": "Niveau de base"
+  },
+  "patreonTierChecking": {
+    "message": "Vérification de l'abonnement…"
+  },
+  "patreonTierNone": {
+    "message": "Aucun abonnement actif"
+  },
+  "patreonTierPremium": {
+    "message": "Soutien Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Soutien"
+  },
+  "patreonUserFallback": {
+    "message": "Utilisateur Patreon"
+  },
+  "reformatLikes": {
+    "message": "Formater le nombre de likes"
+  },
+  "reformatLikesHover": {
+    "message": "Rend la valeur des statistiques plus cohérente."
+  },
+  "hidePremiumTeaser": {
+    "message": "Masquer le panneau d’aperçu Premium"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Ne pas afficher l’aperçu Premium sur les pages de lecture YouTube."
+  },
+  "roundNumbers": {
+    "message": "Afficher les nombres arrondis"
+  },
+  "roundNumbersHover": {
+    "message": "Arrondir les nombres à la baisse (comportement par défaut de YouTube)."
+  },
+  "shortsSupport": {
+    "message": "Prise en charge des YouTube Shorts"
+  },
+  "showTooltipPercentage": {
+    "message": "Pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Afficher le pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
+  },
+  "textColorTheme": {
+    "message": "Thème de couleur :"
+  },
+  "textColorTheme1": {
+    "message": "Classique"
+  },
+  "textColorTheme2": {
+    "message": "Accessible"
+  },
+  "textColorTheme3": {
+    "message": "Néon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Coloriser la barre de ratio"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Utilisez des couleurs personnalisées pour la barre de ratio."
+  },
+  "textColorizeThumbs": {
+    "message": "Coloriser les pouces"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Utiliser des couleurs personnalisées pour les icônes des pouces."
+  },
+  "textConsistentFormat": {
+    "message": "Rendre le format des likes et des dislikes cohérent"
+  },
+  "textConsistentFormatHover": {
+    "message": "Reformater le nombre de likes."
+  },
+  "textDeveloper": {
+    "message": "par Dmitry Selivanov & Communauté"
+  },
+  "textLikesDisabled": {
+    "message": "Désactivé par le créateur"
+  },
+  "textNumberFormat": {
+    "message": "Format numérique :"
+  },
+  "textRoundingNumbers": {
+    "message": "Arrondir vers le bas les statistiques de like/dislike (comportement par défaut de YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Afficher les statistiques arrondies vers le bas."
+  },
+  "textSettings": {
+    "message": "Désactiver l'envoi des likes/dislikes"
+  },
+  "textSettingsHover": {
+    "message": "Arrête de compter les likes et les dislikes mis sur les vidéos."
+  },
+  "textTempUnavailable": {
+    "message": "temporairement indisponible"
+  },
+  "textUpdate": {
+    "message": "mettre à jour vers"
+  },
+  "tooltipPercentageMode": {
+    "message": "Mode de pourcentage :"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Utiliser un affichage de pourcentage personnalisé au survol."
+  },
+  "version30installed": {
+    "message": "Version __RYD_VERSION__ installée"
+  },
+  "whatsnew": {
+    "message": "Quoi de neuf"
+  },
+  "premiumAnalytics_title": {
+    "message": "Analyses vidéo Premium"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Engagement dans le temps"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Pays principaux"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Pays avec le plus de mentions J’aime"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Pays avec le plus de mentions Je n’aime pas"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Géographie"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Développer"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Réduire"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Métrique de la carte"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Retour à la carte mondiale"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "J’aime"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Je n’aime pas"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Ratio"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Fenêtre de données"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Derniers jours"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Premiers jours"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Afficher les jours les plus récents dans la fenêtre sélectionnée"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Afficher les premiers jours dans la fenêtre sélectionnée"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Sélection personnalisée"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Depuis le début"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Derniers $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Premiers $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 jour"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 jours"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Depuis le début"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1j"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Période sélectionnée : $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Utilisateurs de l’extension"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 mentions J’aime"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 mentions Je n’aime pas"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "$1 interactions enregistrées depuis $2 pays ($3 adresses IP uniques)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Votes par heure"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Votes par jour"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Votes par semaine"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Votes toutes les $1 heures"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Votes tous les $1 jours"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Votes toutes les $1 minutes"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Votes par minute"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Votes toutes les $1 secondes"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Votes par seconde"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Pas encore de données"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Inconnu"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Chargement des analyses…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Veuillez réautoriser Patreon pour débloquer les analyses."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Les analyses premium sont disponibles pour les soutiens Patreon actifs."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Session expirée. Connectez-vous de nouveau avec Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Le service d’analyses est actuellement indisponible."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Impossible de se connecter au service d’analyses."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Impossible de charger les analyses premium."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Activité"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Ratio de J’aime"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Ratio de J’aime plus élevé"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Ratio de J’aime plus faible"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Plus de J’aime"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Moins de J’aime"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Plus de Je n’aime pas"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Moins de Je n’aime pas"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Plus de $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Moins de $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "J’aime : $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Je n’aime pas : $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Ratio de J’aime : $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Aperçu des insights des Je n’aime pas"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Les Je n’aime pas bruts sont les signalements directs des utilisateurs de l’extension qui regardent cette vidéo."
+  },
+  "premiumTeaser_cta": {
+    "message": "Débloquer Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Prévisualiser toutes les analyses"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Nombre de Je n’aime pas bruts"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Je n’aime pas estimés"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "J’aime estimés"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Récupération des derniers totaux de Je n’aime pas…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Impossible de charger les données de Je n’aime pas pour le moment. Veuillez recharger la page."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Comment débloquer les analyses Premium"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Débloquez les analyses vidéo Premium en trois étapes rapides :"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Connectez-vous avec Patreon depuis la fenêtre de l’extension Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Choisissez la formule Premium pour activer les chronologies d’activité, les classements par pays et la carte interactive."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Rechargez YouTube pour voir les tendances horaires, les pays principaux et le détail par États américains pour chaque vidéo."
+  },
+  "premiumTierNotice_title": {
+    "message": "Analyses Premium bloquées"
+  },
+  "premiumTierNotice_message": {
+    "message": "Votre adhésion Patreon n’inclut pas le niveau Premium. Améliorez votre soutien pour débloquer les analyses vidéo avancées."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Passer au niveau supérieur sur Patreon"
+  },
+  "changelog_title": {
+    "message": "Journal des nouveautés Analytics Premium · 20 octobre 2025"
+  },
+  "changelog_badge": {
+    "message": "Version Premium"
+  },
+  "changelog_heading": {
+    "message": "Des analyses Premium réinventées"
+  },
+  "changelog_subheading": {
+    "message": "Explorez la chronologie des activités en direct, le classement des principaux pays et la carte interactive inclus avec Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Publié le 20 octobre 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Passer à Patreon Premium"
+  },
+  "changelog_cta_secondary": {
+    "message": "Lire le guide d’installation"
+  },
+  "changelog_section_highlights": {
+    "message": "Nouveautés"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Chronologie des activités en direct"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Regardez les likes et les dégoûts en temps réel. Basculez entre les préréglages horaires, quotidiens ou permanents sans recharger, ancrez la fenêtre au premier jour ou aux derniers votes et éliminez chaque pic pour voir ce qui a déclenché l'engagement."
+  },
+  "changelog_feature_map_title": {
+    "message": "Carte thermique interactive du monde et des États-Unis"
+  },
+  "changelog_feature_map_body": {
+    "message": "Parcourez le monde ou plongez dans les États américains pour faire surface des points chauds. Comparez les goûts, les aversions et les ratios dans l'info-bulle mise à jour et mettez en évidence les régions qui réagissent en premier à vos téléchargements."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Classement des meilleurs pays"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Classez chaque pays par activité brute, goûts, dégoûts ou ratio. Filtrez avec les mêmes préréglages que la chronologie pour savoir où atterrissent les campagnes et planifier ce qu'il faut publier ensuite."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Capture à venir — enregistrez cette vue dans DevTools lorsque vous serez prêt."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Espace réservé : vue d’ensemble de la chronologie"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Espace réservé : carte d’activité mondiale"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Espace réservé : classement des pays"
+  },
+  "changelog_section_upgrade": {
+    "message": "Comment débloquer les analyses Premium"
+  },
+  "changelog_upgrade_body": {
+    "message": "Envie de vous lancer ? Suivez ces étapes et actualisez ensuite votre onglet YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Ouvrez le pop-up Return YouTube Dislike et connectez-vous avec Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Choisissez le palier Premium pour activer l’acheminement des données d’analyse vers votre compte."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Rechargez n’importe quelle page YouTube : la chronologie, la carte et les classements apparaissent instantanément."
+  },
+  "changelog_section_release": {
+    "message": "Points forts de la version"
+  },
+  "changelog_release_item1": {
+    "message": "Les préréglages de la chronologie des activités diffusent des données en direct avec des ancres de plage pour le premier et le dernier compartiment."
+  },
+  "changelog_release_item2": {
+    "message": "Le classement des pays s'actualise instantanément afin que vous puissiez repérer les régions en hausse sans quitter le panneau."
+  },
+  "changelog_release_item3": {
+    "message": "La carte interactive met en évidence les points chauds du monde et des États américains avec des info-bulles et des mesures plus claires."
+  },
+  "changelog_support_heading": {
+    "message": "Besoin d’aide ?"
+  },
+  "changelog_support_description": {
+    "message": "Nous sommes là en cas de blocage — consultez la documentation ou la communauté."
+  },
+  "changelog_support_contact": {
+    "message": "Demander à la communauté"
   }
 }

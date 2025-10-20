@@ -9,6 +9,7 @@ export default {
       "Una extensión de navegador y una API que muestra el número de «dislikes» («No me gusta») en YouTube",
     ukraine: "Apoya a Ucrania",
     sponsors: "Patrocinadores",
+    becomeSponsor: "Hazte nuestro patrocinador",
   },
   install: {
     name: "Instalación",
@@ -18,6 +19,17 @@ export default {
     subtitle2: "Si tu navegador aún no es compatible, usa este UserScript",
     title3: "Implementaciones de terceros",
     subtitle3: "No nos hacemos responsables, úsalas bajo tu cuenta y riesgo",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Script de usuario",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular - un fork de NewPipe)",
+    iosJailbroken: "iOS (con jailbreak)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -82,6 +94,8 @@ export default {
       "Para ver las extensiones, escribe el siguiente texto en la barra de dirección: ",
     firefox: "para Firefox",
     chrome: "para Chrome, Edge, Brave, Opera, Vivaldi",
+    detected: "Detectado:",
+    altExampleScreenshot: "captura de ejemplo",
   },
   faq: {
     name: "Preguntas",
@@ -114,6 +128,8 @@ export default {
     name: "Donar",
     subtitle:
       "¡Puedes apoyar nuestros esfuerzos para que Internet siga siendo con un donativo!",
+    patreon: "Patreon",
+    crypto: "Cripto",
   },
   links: {
     name: "Enlaces",
@@ -124,5 +140,11 @@ export default {
     coolProjects: "Proyectos interesantes",
     sponsorBlockDescription: "Omite los anuncios integrados en vídeos",
     filmotDescription: "Busca vídeos de YouTube a través de sus subtítulos",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "no es compatible.",
+    considerUpgrade: "Considera actualizar a la última versión.",
   },
 };

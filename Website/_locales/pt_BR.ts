@@ -8,6 +8,7 @@ export default {
     subtitle: "Esta extensão de navegador usando a nossa APU irá mostra seus Deslikes no Youtube",
     ukraine: "Ajuda a Ucrania",
     sponsors: "Patrocinaores",
+    becomeSponsor: "Torne-se nosso patrocinador",
   },
   install: {
     name: "Instalação",
@@ -17,6 +18,17 @@ export default {
     subtitle2: "Se seu navegador não suportar isso, tente usa um UserScript",
     title3: "Implementação de terceiro",
     subtitle3: "Não nós garantimos com isso, use por sua conta e risco!",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "UserScript",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular - um fork do NewPipe)",
+    iosJailbroken: "iOS (com jailbreak)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -72,6 +84,8 @@ export default {
     bullet4c1: "Veja as extensões put essa into barra de endereço: ",
     firefox: "para Firefox",
     chrome: "para Chrome, Edge, Brave, Opera e Vivaldi",
+    detected: "Detectado:",
+    altExampleScreenshot: "captura de tela de exemplo",
   },
   faq: {
     name: "FAQ",
@@ -103,6 +117,8 @@ export default {
     name: "Doe",
     subtitle:
       "Você pode nós ajuda a melhora sua experiencia na internet com uma doação!",
+    patreon: "Patreon",
+    crypto: "Cripto",
   },
   links: {
     name: "Links",
@@ -113,5 +129,11 @@ export default {
     coolProjects: "Projetos de Qualidade",
     sponsorBlockDescription: "Pule propagangas integradas nos videos",
     filmotDescription: "Pesquise videos do YouTube pelas Legandas",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "não é compatível.",
+    considerUpgrade: "Considere atualizar para a versão mais recente.",
   },
 };

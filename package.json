@@ -1,11 +1,11 @@
 {
   "name": "return-youtube-dislike",
-  "version": "3.0.0-19",
+  "version": "4.0.0",
   "description": "Chrome extension to return youtube dislikes",
   "main": "ryd.content-script.js",
   "scripts": {
     "start": "echo To build for development, please use \"npm run dev\". To build for production, please use \"npm run build\".",
-    "dev": "webpack --mode=production --watch",
+    "dev": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
     "test": "jest",
     "build:safari": "webpack --mode=production && xcrun safari-web-extension-converter Extensions/combined/dist/safari --project-location Extensions/combined/dist --bundle-identifier com.returnyoutubedislike.safari-ext --force",
@@ -29,6 +29,13 @@
     "url": "https://github.com/Anarios/return-youtube-dislike/issues"
   },
   "homepage": "https://github.com/Anarios/return-youtube-dislike#readme",
+  "dependencies": {
+    "country-code-lookup": "^0.1.3",
+    "echarts": "^5.5.0",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2",
+    "us-atlas": "^3.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.23.5",
     "@babel/preset-env": "^7.23.5",

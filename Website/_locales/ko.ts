@@ -8,6 +8,7 @@ export default {
     subtitle: "유튜브에서 싫어요를 표시해주는 브라우저 확장 프로그램 및 API",
     ukraine: "우크라이나 지원",
     sponsors: "스폰서",
+    becomeSponsor: "스폰서가 되어 주세요",
   },
   install: {
     name: "설치",
@@ -18,6 +19,17 @@ export default {
       "당신의 브라우저가 아직 지원하지 않는 경우, 이 유저스크립트를 시도할 수 있습니다",
     title3: "서드파티 구현",
     subtitle3: "우리 측의 책임이 없으며, 사용자의 책임하에 사용하십시오",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "사용자 스크립트",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular - NewPipe 포크)",
+    iosJailbroken: "iOS (탈옥)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -76,6 +88,8 @@ export default {
     bullet4c1: "확장 프로그램들을 보려면 이것을 주소창에 입력하세요",
     firefox: ": 파이어폭스의 경우",
     chrome: ": 크롬, 엣지, 브레이브, 오페라, 그리고 비발디의 경우",
+    detected: "감지됨:",
+    altExampleScreenshot: "예시 스크린샷",
   },
   faq: {
     name: "FAQ",
@@ -108,6 +122,8 @@ export default {
     name: "기부",
     subtitle:
       "기부를 통해 인터넷의 자유를 유지하려는 우리의 노력을 지원할 수 있습니다!",
+    patreon: "Patreon",
+    crypto: "암호화폐",
   },
   links: {
     name: "링크",
@@ -118,5 +134,11 @@ export default {
     coolProjects: "Cool Projects",
     sponsorBlockDescription: "동영상에 포함된 광고 건너뛰기",
     filmotDescription: "자막으로 유튜브 동영상 검색",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "은(는) 지원되지 않습니다.",
+    considerUpgrade: "최신 버전으로 업데이트하는 것을 권장합니다.",
   },
 };

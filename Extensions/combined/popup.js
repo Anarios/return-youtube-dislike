@@ -1,3 +1,5 @@
+import { config as appConfig, getApiUrl, getApiEndpoint } from "./src/config.js";
+
 /*   Config   */
 const config = {
   advanced: false,
@@ -10,19 +12,12 @@ const config = {
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
+  hidePremiumTeaser: false,
   showAdvancedMessage:
     '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><rect fill="none" height="24" width="24"/><path d="M19.5,12c0-0.23-0.01-0.45-0.03-0.68l1.86-1.41c0.4-0.3,0.51-0.86,0.26-1.3l-1.87-3.23c-0.25-0.44-0.79-0.62-1.25-0.42 l-2.15,0.91c-0.37-0.26-0.76-0.49-1.17-0.68l-0.29-2.31C14.8,2.38,14.37,2,13.87,2h-3.73C9.63,2,9.2,2.38,9.14,2.88L8.85,5.19 c-0.41,0.19-0.8,0.42-1.17,0.68L5.53,4.96c-0.46-0.2-1-0.02-1.25,0.42L2.41,8.62c-0.25,0.44-0.14,0.99,0.26,1.3l1.86,1.41 C4.51,11.55,4.5,11.77,4.5,12s0.01,0.45,0.03,0.68l-1.86,1.41c-0.4,0.3-0.51,0.86-0.26,1.3l1.87,3.23c0.25,0.44,0.79,0.62,1.25,0.42 l2.15-0.91c0.37,0.26,0.76,0.49,1.17,0.68l0.29,2.31C9.2,21.62,9.63,22,10.13,22h3.73c0.5,0,0.93-0.38,0.99-0.88l0.29-2.31 c0.41-0.19,0.8-0.42,1.17-0.68l2.15,0.91c0.46,0.2,1,0.02,1.25-0.42l1.87-3.23c0.25-0.44,0.14-0.99-0.26-1.3l-1.86-1.41 C19.49,12.45,19.5,12.23,19.5,12z M12.04,15.5c-1.93,0-3.5-1.57-3.5-3.5s1.57-3.5,3.5-3.5s3.5,1.57,3.5,3.5S13.97,15.5,12.04,15.5z"/></svg>',
   hideAdvancedMessage:
     '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" opacity=".87"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>',
-  links: {
-    website: "https://returnyoutubedislike.com",
-    github: "https://github.com/Anarios/return-youtube-dislike",
-    discord: "https://discord.gg/mYnESY4Md5",
-    donate: "https://returnyoutubedislike.com/donate",
-    faq: "https://returnyoutubedislike.com/faq",
-    help: "https://returnyoutubedislike.com/help",
-    changelog: "/changelog/3/changelog_3.0.html",
-  },
+  links: appConfig.links,
 };
 
 /*   Change language   */
@@ -96,6 +91,260 @@ document.getElementById("number_reformat_likes").addEventListener("click", (ev) 
   chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
 });
 
+document.getElementById("hide_premium_teaser").addEventListener("click", (ev) => {
+  chrome.storage.sync.set({ hidePremiumTeaser: ev.target.checked });
+});
+
+function initPatreonAuth() {
+  const loggedOutView = document.getElementById("patreon-logged-out");
+  const loggedInView = document.getElementById("patreon-logged-in");
+  const loginBtn = document.getElementById("patreon-login-btn");
+  const logoutBtn = document.getElementById("patreon-logout-btn");
+  const userAvatar = document.getElementById("patreon-user-avatar");
+  const userName = document.getElementById("patreon-user-name");
+  const userTier = document.getElementById("patreon-tier");
+
+  chrome.storage.sync.get(["patreonUser", "patreonSessionToken"], (data) => {
+    const cachedUser = data.patreonUser;
+    const sessionToken = data.patreonSessionToken;
+
+    if (sessionToken && cachedUser) {
+      // Show cached state immediately to avoid flicker on popup reopen.
+      showLoggedInView(cachedUser);
+
+      verifySession(sessionToken).then((result) => {
+        if (result.status === "valid") {
+          if (result.membershipTier && result.membershipTier !== cachedUser.membershipTier) {
+            const updatedUser = { ...cachedUser, membershipTier: result.membershipTier, hasActiveMembership: true };
+            showLoggedInView(updatedUser);
+            chrome.storage.sync.set({ patreonUser: updatedUser });
+          } else if (cachedUser.hasActiveMembership !== true) {
+            const updatedUser = { ...cachedUser, hasActiveMembership: true };
+            showLoggedInView(updatedUser);
+            chrome.storage.sync.set({ patreonUser: updatedUser });
+          }
+        } else if (result.status === "inactive") {
+          const updatedUser = {
+            ...cachedUser,
+            hasActiveMembership: false,
+            membershipTier: result.membershipTier || cachedUser.membershipTier || "none",
+          };
+          showLoggedInView(updatedUser);
+          chrome.storage.sync.set({ patreonUser: updatedUser });
+        } else if (result.status === "error") {
+          console.warn("Patreon session verification skipped:", result.reason || "network_error");
+        } else {
+          showLoggedOutView();
+          chrome.storage.sync.remove(["patreonUser", "patreonSessionToken"]);
+        }
+      });
+    } else {
+      showLoggedOutView();
+    }
+  });
+
+  function showLoggedOutView() {
+    loggedOutView.style.display = "block";
+    loggedInView.style.display = "none";
+  }
+
+  function showLoggedInView(user) {
+    loggedOutView.style.display = "none";
+    loggedInView.style.display = "block";
+
+    userName.textContent = user.fullName || user.email || chrome.i18n.getMessage("patreonUserFallback");
+
+    if (user.imageUrl) {
+      userAvatar.src = user.imageUrl;
+      userAvatar.style.display = "block";
+    } else {
+      userAvatar.src = "";
+      userAvatar.style.display = "none";
+    }
+
+    const tierLabels = {
+      premium: chrome.i18n.getMessage("patreonTierPremium"),
+      supporter: chrome.i18n.getMessage("patreonTierSupporter"),
+      basic: chrome.i18n.getMessage("patreonTierBasic"),
+      none: chrome.i18n.getMessage("patreonTierNone"),
+    };
+
+    userTier.textContent = tierLabels[user.membershipTier] || chrome.i18n.getMessage("patreonTierChecking");
+
+    if (user.hasActiveMembership) {
+      userTier.style.color = "#f96854";
+    } else {
+      userTier.style.color = "var(--lightGrey)";
+    }
+  }
+
+  async function verifySession(token) {
+    try {
+      const response = await fetch(getApiEndpoint("/api/auth/verify"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ sessionToken: token }),
+      });
+
+      const data = await response.json().catch(() => null);
+      if (!data) {
+        return { status: "error", reason: "invalid_response" };
+      }
+
+      const failureReason = typeof data.failureReason === "string" ? data.failureReason : null;
+      const membershipTier = typeof data.membershipTier === "string" ? data.membershipTier : null;
+
+      if (data.valid === true) {
+        return { status: "valid", membershipTier };
+      }
+
+      if (failureReason === "membershipinactive") {
+        return { status: "inactive", membershipTier };
+      }
+
+      if (failureReason === "expired" || failureReason === "legacyformat") {
+        return { status: "expired", membershipTier };
+      }
+
+      if (failureReason === "invalid") {
+        return { status: "invalid", membershipTier, failureReason };
+      }
+
+      if (!failureReason) {
+        return { status: "error", reason: "unknown_failure" };
+      }
+
+      return { status: "error", reason: failureReason };
+    } catch (error) {
+      console.error("Session verification failed:", error);
+      return { status: "error", reason: "network_error" };
+    }
+  }
+
+  // Wrapper for cross-browser identity API
+  function getIdentityApi() {
+    if (typeof browser !== "undefined" && browser.identity) return browser.identity; // prefer Firefox promise API
+    if (typeof chrome !== "undefined" && chrome.identity) return chrome.identity;
+    return null;
+  }
+
+  function launchWebAuthFlow(url) {
+    try {
+      if (
+        typeof browser !== "undefined" &&
+        browser.identity &&
+        typeof browser.identity.launchWebAuthFlow === "function"
+      ) {
+        // Promise-based API (Firefox)
+        return browser.identity.launchWebAuthFlow({ url, interactive: true });
+      }
+    } catch (_) {}
+
+    const chromeId = (typeof chrome !== "undefined" && chrome.identity) || null;
+    if (!chromeId || typeof chromeId.launchWebAuthFlow !== "function") {
+      return Promise.reject(new Error("identity API not available"));
+    }
+    // Callback-based API (Chrome)
+    return new Promise((resolve, reject) => {
+      chromeId.launchWebAuthFlow({ url, interactive: true }, (responseUrl) => {
+        const err = chrome.runtime && chrome.runtime.lastError;
+        if (err) reject(err);
+        else resolve(responseUrl);
+      });
+    });
+  }
+
+  function extractOAuthParams(responseUrl) {
+    try {
+      const u = new URL(responseUrl);
+      let code = u.searchParams.get("code");
+      let state = u.searchParams.get("state");
+      if (!code && u.hash) {
+        const hashParams = new URLSearchParams(u.hash.startsWith("#") ? u.hash.substring(1) : u.hash);
+        code = hashParams.get("code");
+        state = state || hashParams.get("state");
+      }
+      return { code, state };
+    } catch (_) {
+      return { code: null, state: null };
+    }
+  }
+
+  // Request identity permission immediately within the user click (no awaits prior)
+  function ensureIdentityPermission(onResult) {
+    try {
+      const mf = chrome && chrome.runtime && chrome.runtime.getManifest ? chrome.runtime.getManifest() : null;
+      // If manifest cannot request identity dynamically (e.g., Firefox), proceed if API is available
+      if (mf && (!Array.isArray(mf.optional_permissions) || !mf.optional_permissions.includes("identity"))) {
+        const id = getIdentityApi();
+        onResult(Boolean(id && typeof id.getRedirectURL === "function"));
+        return;
+      }
+
+      const perms =
+        (typeof chrome !== "undefined" && chrome.permissions) ||
+        (typeof browser !== "undefined" && browser.permissions);
+      if (!perms || !perms.contains) return onResult(false);
+      const afterContains = (has) => {
+        if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.lastError) has = false;
+        if (has) return onResult(true);
+        if (!perms.request) return onResult(false);
+        const reqResult = perms.request({ permissions: ["identity"] }, (granted) => {
+          if (typeof chrome !== "undefined" && chrome.runtime && chrome.runtime.lastError) return onResult(false);
+          onResult(Boolean(granted));
+        });
+        // Firefox may return a promise
+        if (reqResult && typeof reqResult.then === "function") {
+          reqResult.then((granted) => onResult(Boolean(granted))).catch(() => onResult(false));
+        }
+      };
+      const result = perms.contains({ permissions: ["identity"] }, afterContains);
+      if (result && typeof result.then === "function") {
+        result.then(afterContains).catch(() => onResult(false));
+      }
+    } catch (_) {
+      onResult(false);
+    }
+  }
+
+  loginBtn.addEventListener("click", () => {
+    // Request permission immediately within this user gesture
+    ensureIdentityPermission(async (granted) => {
+      const identityNow = getIdentityApi();
+      if (!granted || !identityNow || typeof identityNow.getRedirectURL !== "function") {
+        alert(chrome.i18n.getMessage("patreonPermissionRequired"));
+        return;
+      }
+      // Delegate OAuth to background so it persists if the popup closes
+      chrome.runtime.sendMessage({ message: "patreon_oauth_login" }, (resp) => {
+        if (chrome.runtime && chrome.runtime.lastError) {
+          console.error("Login failed:", chrome.runtime.lastError.message);
+          alert(chrome.i18n.getMessage("patreonLoginStartFailed"));
+          return;
+        }
+        if (resp && resp.success) {
+          const user = resp.user;
+          showLoggedInView(user);
+        } else {
+          console.error("Login failed:", resp && resp.error);
+          alert(chrome.i18n.getMessage("patreonLoginCompleteFailed"));
+        }
+      });
+    });
+  });
+
+  logoutBtn.addEventListener("click", () => {
+    chrome.storage.sync.remove(["patreonUser", "patreonSessionToken"], () => {
+      showLoggedOutView();
+      chrome.runtime.sendMessage({ message: "patreon_logout" });
+    });
+  });
+}
+
+initPatreonAuth();
+
 /*   Advanced Toggle   */
 const advancedToggle = document.getElementById("advancedToggle");
 advancedToggle.addEventListener("click", () => {
@@ -127,6 +376,7 @@ function initConfig() {
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
+  initializeHidePremiumTeaser();
 }
 
 function initializeVersionNumber() {
@@ -229,6 +479,12 @@ function initializeNumberDisplayReformatLikes() {
   });
 }
 
+function initializeHidePremiumTeaser() {
+  chrome.storage.sync.get(["hidePremiumTeaser"], (res) => {
+    handleHidePremiumTeaserChangeEvent(res.hidePremiumTeaser);
+  });
+}
+
 chrome.storage.onChanged.addListener(storageChangeHandler);
 
 function storageChangeHandler(changes, area) {
@@ -255,6 +511,9 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
+  }
+  if (changes.hidePremiumTeaser !== undefined) {
+    handleHidePremiumTeaserChangeEvent(changes.hidePremiumTeaser.newValue);
   }
 }
 
@@ -316,6 +575,12 @@ function handleNumberDisplayReformatLikesChangeEvent(value) {
   document.getElementById("number_reformat_likes").checked = value;
 }
 
+function handleHidePremiumTeaserChangeEvent(value) {
+  const normalized = value === true;
+  config.hidePremiumTeaser = normalized;
+  document.getElementById("hide_premium_teaser").checked = normalized;
+}
+
 function getNumberFormatter(optionSelect) {
   let formatterNotation;
   let formatterCompactDisplay;
@@ -355,12 +620,12 @@ function getNumberFormatter(optionSelect) {
   let resp = await fetch("https://returnyoutubedislikeapi.com/votes?videoId=YbJOTdZBX1g");
   let result = await resp.status;
   if (result === 200) {
-    status.innerText = "Online";
+    status.innerText = chrome.i18n.getMessage("apiStatusOnline");
     status.style.color = "green";
     serverStatus.style.filter =
       "invert(58%) sepia(81%) saturate(2618%) hue-rotate(81deg) brightness(119%) contrast(129%)";
   } else {
-    status.innerText = "Offline";
+    status.innerText = chrome.i18n.getMessage("apiStatusOffline");
     status.style.color = "red";
     serverStatus.style.filter =
       "invert(11%) sepia(100%) saturate(6449%) hue-rotate(3deg) brightness(116%) contrast(115%)";

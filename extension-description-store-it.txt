@@ -1,0 +1,21 @@
+Return YouTube Dislike ripristina la possibilità di vedere i Non mi piace su YouTube.
+
+Se non funziona: apri la scheda Estensioni (chrome://extensions/), disattiva questa estensione e riattivala. Questo dovrebbe risolvere la maggior parte dei problemi, poiché c’è un bug di Chromium che in alcuni casi interrompe l’estensione. Si spera che il team di Chromium lo risolva presto.
+
+A partire dal 13 dicembre 2021, YouTube ha rimosso dalla propria API la possibilità di vedere i Non mi piace.
+Questa estensione mira a restituire il controllo agli utenti utilizzando una combinazione di dati archiviati di Mi piace e Non mi piace, oltre ai Mi piace e Non mi piace effettuati dagli utenti dell’estensione, per mostrare valutazioni il più accurate possibile.
+
+Attualmente dispone di dati sui Mi piace/Non mi piace di oltre 200 milioni di video memorizzati prima del 13 dicembre 2021.
+
+In crescita attiva e costantemente aggiornata anche per i caricamenti successivi al 13 dicembre 2021.
+
+Più utenti utilizzano l’estensione, più accurati saranno i risultati.
+
+I video poco popolari caricati dopo il 13 dicembre 2021 possono mostrare dati meno accurati rispetto ai video più popolari.
+
+Questa estensione è attualmente in fase di sviluppo attivo; se riscontri problemi, segnalali senza esitazione sulla nostra pagina GitHub o nel nostro server Discord.
+
+Altre funzionalità in arrivo presto!
+
+https://github.com/Anarios/return-youtube-dislike
+

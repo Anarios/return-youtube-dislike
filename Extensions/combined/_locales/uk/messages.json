@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Стан API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Офлайн"
   },
-  "extensionDesc": {
-    "message": "Повертає здатність бачити відмітки «Не подобається»"
+  "apiStatusOnline": {
+    "message": "Онлайн"
   },
-  "textDeveloper": {
-    "message": "від Дмитра Селіванова та спільноти"
-  },
-  "linkWebsite": {
-    "message": "Вебсайт"
-  },
-  "linkFAQ": {
-    "message": "ЧаПи"
-  },
-  "linkDonate": {
-    "message": "Підтримати"
-  },
-  "linkHelp": {
-    "message": "Допомога"
-  },
-  "linkChangelog": {
-    "message": "Журнал змін"
-  },
-  "legendSettings": {
-    "message": "Налаштування"
-  },
-  "textSettings": {
-    "message": "Вимкнути надсилання відміток"
-  },
-  "textLikesDisabled": {
-    "message": "Вимкнуто власником"
-  },
-  "textSettingsHover": {
-    "message": "Вимикає надсилання відміток «Подобається» та «Не подобається»."
-  },
-  "textRoundingNumbers": {
-    "message": "Округлює значення відміток (стандартний параметр YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Показувати заокруглені значення."
-  },
-  "textConsistentFormat": {
-    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
-  },
-  "textConsistentFormatHover": {
-    "message": "Форматувати як числа."
-  },
-  "textNumberFormat": {
-    "message": "Формат значень:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Обрати кольори стрічки співвідношення"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Змінює кольори стрічки співвідношення на обрані вами."
-  },
-  "textColorizeThumbs": {
-    "message": "Обрати кольори відміток"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Змінює кольори піктограм відміток на обрані вами."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Кольорова схема:"
-  },
-  "textColorTheme1": {
-    "message": "Класика"
-  },
-  "textColorTheme2": {
-    "message": "Доступність"
-  },
-  "textColorTheme3": {
-    "message": "Неон"
-  },
-  "textTempUnavailable": {
-    "message": "Тимчасово недоступно"
-  },
-  "textUpdate": {
-    "message": "Оновлення до"
-  },
-  "version30installed": {
-    "message": "Версію __RYD_VERSION__ встановлено"
-  },
-  "whatsnew": {
-    "message": "Що нового"
-  },
-  "shortsSupport": {
-    "message": "Підтримка YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Користувальницькі кольори стрічки співвідношення та кнопок"
-  },
-  "customNumberFormats": {
-    "message": "Користувацькі формати значень"
-  },
-  "considerDonating": {
-    "message": "Розширення досі існує лише за допомогою ваших пожертв, будь ласка, підтримайте проєкт."
-  },
-  "roundNumbers": {
-    "message": "Показувати заокруглені значення"
-  },
-  "roundNumbersHover": {
-    "message": "Округлює значення відміток (стандартний параметр YouTube)"
-  },
-  "reformatLikes": {
-    "message": "Форматувати як числа"
-  },
-  "reformatLikesHover": {
-    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
-  },
-  "numberFormat": {
-    "message": "Формат значень:"
   },
   "colorizeRatio": {
     "message": "Обрати кольори стрічки співвідношення"
@@ -128,7 +23,517 @@
   "colorizeThumbsHover": {
     "message": "Змінює кольори піктограм відміток на обрані вами."
   },
-  "colorTheme": {
+  "considerDonating": {
+    "message": "Розширення досі існує лише за допомогою ваших пожертв, будь ласка, підтримайте проєкт."
+  },
+  "customColors": {
+    "message": "Користувальницькі кольори стрічки співвідношення та кнопок"
+  },
+  "customNumberFormats": {
+    "message": "Користувацькі формати значень"
+  },
+  "disableLoggingHover": {
+    "message": "Вимикає журналювання відповідей API в консолі."
+  },
+  "disableLoggingLabel": {
+    "message": "Вимкнути журнал у консоль"
+  },
+  "extensionDesc": {
+    "message": "Повертає здатність бачити відмітки «Не подобається»"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Налаштування"
+  },
+  "linkChangelog": {
+    "message": "Журнал змін"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "Підтримати"
+  },
+  "linkFAQ": {
+    "message": "ЧаПи"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Допомога"
+  },
+  "linkWebsite": {
+    "message": "Вебсайт"
+  },
+  "numberFormat": {
+    "message": "Формат значень:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Преміум‑функції доступні прихильникам на Patreon"
+  },
+  "patreonLogin": {
+    "message": "Увійти через Patreon"
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Не вдалося завершити вхід. Спробуйте ще раз."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Не вдалося розпочати вхід через Patreon. Спробуйте ще раз."
+  },
+  "patreonLogout": {
+    "message": "Вийти"
+  },
+  "patreonPermissionRequired": {
+    "message": "Для входу потрібен дозвіл «identity». Дозвольте, щоб продовжити."
+  },
+  "patreonTierBasic": {
+    "message": "Базовий рівень"
+  },
+  "patreonTierChecking": {
+    "message": "Перевірка підписки…"
+  },
+  "patreonTierNone": {
+    "message": "Немає активної підписки"
+  },
+  "patreonTierPremium": {
+    "message": "Преміум‑підтримувач"
+  },
+  "patreonTierSupporter": {
+    "message": "Підтримувач"
+  },
+  "patreonUserFallback": {
+    "message": "Користувач Patreon"
+  },
+  "reformatLikes": {
+    "message": "Форматувати як числа"
+  },
+  "reformatLikesHover": {
+    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
+  },
+  "hidePremiumTeaser": {
+    "message": "Приховати панель преміум-тизеру"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Не показувати преміум-тизер на сторінках перегляду YouTube."
+  },
+  "roundNumbers": {
+    "message": "Показувати заокруглені значення"
+  },
+  "roundNumbersHover": {
+    "message": "Округлює значення відміток (стандартний параметр YouTube)"
+  },
+  "shortsSupport": {
+    "message": "Підтримка YouTube Shorts"
+  },
+  "showTooltipPercentage": {
+    "message": "Відсоток у підказці панелі вподобань/невподобань."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Показувати відсоток у підказці панелі вподобань/невподобань."
+  },
+  "textColorTheme": {
     "message": "Кольорова схема:"
+  },
+  "textColorTheme1": {
+    "message": "Класика"
+  },
+  "textColorTheme2": {
+    "message": "Доступність"
+  },
+  "textColorTheme3": {
+    "message": "Неон"
+  },
+  "textColorizeRatioBar": {
+    "message": "Обрати кольори стрічки співвідношення"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Змінює кольори стрічки співвідношення на обрані вами."
+  },
+  "textColorizeThumbs": {
+    "message": "Обрати кольори відміток"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Змінює кольори піктограм відміток на обрані вами."
+  },
+  "textConsistentFormat": {
+    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
+  },
+  "textConsistentFormatHover": {
+    "message": "Форматувати як числа."
+  },
+  "textDeveloper": {
+    "message": "від Дмитра Селіванова та спільноти"
+  },
+  "textLikesDisabled": {
+    "message": "Вимкнуто власником"
+  },
+  "textNumberFormat": {
+    "message": "Формат значень:"
+  },
+  "textRoundingNumbers": {
+    "message": "Округлює значення відміток (стандартний параметр YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Показувати заокруглені значення."
+  },
+  "textSettings": {
+    "message": "Вимкнути надсилання відміток"
+  },
+  "textSettingsHover": {
+    "message": "Вимикає надсилання відміток «Подобається» та «Не подобається»."
+  },
+  "textTempUnavailable": {
+    "message": "Тимчасово недоступно"
+  },
+  "textUpdate": {
+    "message": "Оновлення до"
+  },
+  "tooltipPercentageMode": {
+    "message": "Режим відсотків:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Використовувати власне відображення відсотків при наведенні."
+  },
+  "version30installed": {
+    "message": "Версію __RYD_VERSION__ встановлено"
+  },
+  "whatsnew": {
+    "message": "Що нового"
+  },
+  "premiumAnalytics_title": {
+    "message": "Преміальна аналітика відео"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Залучення з часом"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Топ країн"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Країни з найбільшою кількістю лайків"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Країни з найбільшою кількістю дизлайків"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Географія"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Розгорнути"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Згорнути"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Показник карти"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Назад до карти світу"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Лайки"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Дизлайки"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Співвідношення"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Інтервал даних"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Останні дні"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Перші дні"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Показати найновіші дні у вибраному інтервалі"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Показати найперші дні у вибраному інтервалі"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Власний вибір"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "За весь час"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Останні $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Перші $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 день"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 днів"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "За весь час"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1д"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Обраний період: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Користувачі розширення"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 лайків"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 дизлайків"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Зафіксовано $1 взаємодій із $2 країн ($3 унікальних IP)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Голоси за годину"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Голоси за день"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Голоси за тиждень"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Голоси кожні $1 годин"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Голоси кожні $1 днів"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Голоси кожні $1 хвилин"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Голоси за хвилину"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Голоси кожні $1 секунд"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Голоси за секунду"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Даних ще немає"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Невідомо"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Завантаження аналітики…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Повторно авторизуйте Patreon, щоб розблокувати аналітику."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Преміальна аналітика доступна активним підтримувачам на Patreon."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Сесія завершилася. Увійдіть з Patreon ще раз."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Сервіс аналітики зараз недоступний."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Не вдалося підключитися до сервісу аналітики."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Не вдалося завантажити преміальну аналітику."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Активність"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Співвідношення лайків"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Вище співвідношення лайків"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Нижче співвідношення лайків"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Більше лайків"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Менше лайків"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Більше дизлайків"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Менше дизлайків"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Більше $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Менше $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Лайки: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Дизлайки: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Співвідношення лайків: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Короткий огляд дизлайків"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Необроблені дизлайки — це прямі звіти користувачів розширення, які дивляться це відео."
+  },
+  "premiumTeaser_cta": {
+    "message": "Відкрити Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Попередній перегляд повної аналітики"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Кількість необроблених дизлайків"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Орієнтовні дизлайки"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Орієнтовні лайки"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Отримуємо найсвіжіші суми дизлайків…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Наразі не вдалося завантажити дані про дизлайки. Спробуйте оновити сторінку."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Як розблокувати преміальну аналітику"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Розблокуйте преміальну відеоаналітику у три швидкі кроки:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Увійдіть через Patreon у спливаючому вікні розширення Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Виберіть рівень Premium, щоб увімкнути часові шкали активності, рейтинги країн та інтерактивну карту."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Перезавантажте YouTube, щоб переглянути погодинні тренди, провідні країни та деталізацію за штатами США для кожного відео."
+  },
+  "premiumTierNotice_title": {
+    "message": "Преміум-аналітика заблокована"
+  },
+  "premiumTierNotice_message": {
+    "message": "У вашому членстві Patreon немає рівня Premium. Оновіть свій внесок, щоб відкрити розширену відеоаналітику."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Оновити на Patreon"
+  },
+  "changelog_title": {
+    "message": "Журнал змін Premium Analytics · 20 жовтня 2025 р"
+  },
+  "changelog_badge": {
+    "message": "Преміум випуск"
+  },
+  "changelog_heading": {
+    "message": "Преміальна аналітика, переосмислена"
+  },
+  "changelog_subheading": {
+    "message": "Ознайомтеся з хронологією активності в реальному часі, таблицею лідерів із найпопулярнішими країнами та інтерактивною картою, включеною в Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Дата виходу 20 жовтня 2025 року"
+  },
+  "changelog_cta_primary": {
+    "message": "Оновлення на Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Прочитайте посібник із налаштування"
+  },
+  "changelog_section_highlights": {
+    "message": "Що нового"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Графік живої активності"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Переглядайте потоки лайків і нелайків у режимі реального часу. Перемикайте погодинні, щоденні або постійні налаштування без перезавантаження, прив’язуйте вікно до першого дня або останніх голосувань і прочищайте кожен сплеск, щоб побачити, що викликало залучення."
+  },
+  "changelog_feature_map_title": {
+    "message": "Інтерактивна теплова карта світу та США"
+  },
+  "changelog_feature_map_body": {
+    "message": "Панорамуйте земну кулю або занурюйтеся в штати США, щоб виявити гарячі точки. Порівняйте оцінки «подобається», «не подобається» та співвідношення в оновленій підказці та виділіть регіони, які першими реагують на ваші завантаження."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Таблиця лідерів найкращих країн"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Розташуйте кожну країну за чистою активністю, уподобаннями, невподобаннями або співвідношенням. Фільтруйте за допомогою тих самих попередніх налаштувань, що й хронологія, щоб дізнатися, куди потрапляють кампанії, і спланувати, що публікувати далі."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Знімок екрана незабаром — зафіксуйте це зображення в DevTools, коли будете готові."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Заповнювач: огляд часової шкали"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Заповнювач: глобальна карта діяльності"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Заповнювач: таблиця лідерів країн"
+  },
+  "changelog_section_upgrade": {
+    "message": "Як розблокувати преміум аналітику"
+  },
+  "changelog_upgrade_body": {
+    "message": "Готові зануритися? Виконайте ці швидкі дії та оновіть вкладку YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Відкрийте спливаюче вікно Return YouTube Dislike і ввійдіть за допомогою Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Виберіть рівень Premium, щоб увімкнути передачу аналітичних даних у свій обліковий запис."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Перезавантажте будь-яку сторінку перегляду YouTube — ваша хронологія, карта та таблиця лідерів з’являться миттєво."
+  },
+  "changelog_section_release": {
+    "message": "Основні моменти випуску"
+  },
+  "changelog_release_item1": {
+    "message": "Попередні налаштування шкали часу транслюють дані в реальному часі з прив’язками діапазону для першого та останнього сегментів."
+  },
+  "changelog_release_item2": {
+    "message": "Таблиця лідерів країни миттєво оновлюється, тож ви можете помітити регіони, що розвиваються, не залишаючи панелі."
+  },
+  "changelog_release_item3": {
+    "message": "Інтерактивна карта висвітлює гарячі точки світу та штатів США з більш чіткими підказками та показниками."
+  },
+  "changelog_support_heading": {
+    "message": "Потрібна допомога?"
+  },
+  "changelog_support_description": {
+    "message": "Ми готові, якщо ви зіткнетеся з труднощами — надішліть свої запитання до служби підтримки або до спільноти."
+  },
+  "changelog_support_contact": {
+    "message": "Запитайте у спільноти"
   }
 }

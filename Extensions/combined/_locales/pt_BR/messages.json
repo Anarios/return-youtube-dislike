@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Volta Descurtidas do YouTube"
+  "apiStatusLabel": {
+    "message": "Status da API:"
   },
-  "extensionNameBeta": {
-    "message": "Volta Descurtidas do YouTube Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Retorna a capacidade de ver descurtidas"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "por Dmitry Selivanov & Comunidade"
-  },
-  "linkWebsite": {
-    "message": "Website"
-  },
-  "linkFAQ": {
-    "message": "Perguntas Frequentes"
-  },
-  "linkDonate": {
-    "message": "Doar"
-  },
-  "linkHelp": {
-    "message": "Ajuda"
-  },
-  "linkChangelog": {
-    "message": "Registro de alterações"
-  },
-  "legendSettings": {
-    "message": "Configurações"
-  },
-  "textSettings": {
-    "message": "Desativar envio de curtidas/descurtidas"
-  },
-  "textLikesDisabled": {
-    "message": "Desativado pelo proprietário"
-  },
-  "textSettingsHover": {
-    "message": "Para de contar suas curtidas e descurtidas."
-  },
-  "textRoundingNumbers": {
-    "message": "Arredondar as estatísticas de curtidas/descurtidas para baixo (comportamento padrão do YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Mostrar estatísticas arredondadas"
-  },
-  "textConsistentFormat": {
-    "message": "Tornar o formato de curtidas e descurtidas consistente"
-  },
-  "textConsistentFormatHover": {
-    "message": "Re-formatar número de curtidas."
-  },
-  "textNumberFormat": {
-    "message": "Formato numérico:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Colorir barra de proporção"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Usar cores personalizadas para a barra de proporção."
-  },
-  "textColorizeThumbs": {
-    "message": "Colorir botões"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Usar cores personalizadas para os botões de curtir e descurtir."
-  },
-  "textColorTheme": {
-    "message": "Tema de cores:"
-  },
-  "textColorTheme1": {
-    "message": "Clássico"
-  },
-  "textColorTheme2": {
-    "message": "Acessível"
-  },
-  "textColorTheme3": {
-    "message": "Néon"
-  },
-  "textTempUnavailable": {
-    "message": "Temporariamente Indisponível"
-  },
-  "textUpdate": {
-    "message": "Atualizar para"
-  },
-  "version30installed": {
-    "message": "Versão __RYD_VERSION__ instalada"
-  },
-  "whatsnew": {
-    "message": "O que há de novo?:"
-  },
-  "shortsSupport": {
-    "message": "Suporte a curtas do YouTube"
-  },
-  "customColors": {
-    "message": "Cores personalizadas para barra de proporção e botões"
-  },
-  "customNumberFormats": {
-    "message": "Formato numérico personalizado"
-  },
-  "considerDonating": {
-    "message": "A única coisa que mantém a extensão funcionando são suas doações, considere apoiar o projeto."
-  },
-  "roundNumbers": {
-    "message": "Mostrar números arredondados"
-  },
-  "roundNumbersHover": {
-    "message": "Arredondar os números para baixo (comportamento padrão do YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Re-formatar número de curtidas"
-  },
-  "reformatLikesHover": {
-    "message": "Tornar o formato de curtidas e descurtidas consistente."
-  },
-  "numberFormat": {
-    "message": "Formato numérico:"
+  "colorTheme": {
+    "message": "Tema de Cores:"
   },
   "colorizeRatio": {
     "message": "Colorir barra de proporção"
@@ -128,7 +23,517 @@
   "colorizeThumbsHover": {
     "message": "Usar cores personalizadas para os botões de curtir e descurtir."
   },
-  "colorTheme": {
-    "message": "Tema de Cores:"
+  "considerDonating": {
+    "message": "A única coisa que mantém a extensão funcionando são suas doações, considere apoiar o projeto."
+  },
+  "customColors": {
+    "message": "Cores personalizadas para barra de proporção e botões"
+  },
+  "customNumberFormats": {
+    "message": "Formato numérico personalizado"
+  },
+  "disableLoggingHover": {
+    "message": "Desativa o registro de respostas da API no console."
+  },
+  "disableLoggingLabel": {
+    "message": "Desativar logs no console"
+  },
+  "extensionDesc": {
+    "message": "Retorna a capacidade de ver descurtidas"
+  },
+  "extensionName": {
+    "message": "Volta Descurtidas do YouTube"
+  },
+  "extensionNameBeta": {
+    "message": "Volta Descurtidas do YouTube Beta"
+  },
+  "legendSettings": {
+    "message": "Configurações"
+  },
+  "linkChangelog": {
+    "message": "Registro de alterações"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "Doar"
+  },
+  "linkFAQ": {
+    "message": "Perguntas Frequentes"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Ajuda"
+  },
+  "linkWebsite": {
+    "message": "Website"
+  },
+  "numberFormat": {
+    "message": "Formato numérico:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Recursos premium disponíveis para apoiadores no Patreon"
+  },
+  "patreonLogin": {
+    "message": "Entrar com o Patreon"
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Não foi possível concluir o login. Tente novamente."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Falha ao iniciar o login do Patreon. Tente novamente."
+  },
+  "patreonLogout": {
+    "message": "Sair"
+  },
+  "patreonPermissionRequired": {
+    "message": "O login requer a permissão \"identity\". Permita para continuar."
+  },
+  "patreonTierBasic": {
+    "message": "Nível básico"
+  },
+  "patreonTierChecking": {
+    "message": "Verificando assinatura…"
+  },
+  "patreonTierNone": {
+    "message": "Nenhuma assinatura ativa"
+  },
+  "patreonTierPremium": {
+    "message": "Apoiador Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Apoiador"
+  },
+  "patreonUserFallback": {
+    "message": "Usuário do Patreon"
+  },
+  "reformatLikes": {
+    "message": "Re-formatar número de curtidas"
+  },
+  "reformatLikesHover": {
+    "message": "Tornar o formato de curtidas e descurtidas consistente."
+  },
+  "hidePremiumTeaser": {
+    "message": "Ocultar painel do teaser Premium"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Não mostrar o teaser Premium nas páginas de exibição do YouTube."
+  },
+  "roundNumbers": {
+    "message": "Mostrar números arredondados"
+  },
+  "roundNumbersHover": {
+    "message": "Arredondar os números para baixo (comportamento padrão do YouTube)."
+  },
+  "shortsSupport": {
+    "message": "Suporte a curtas do YouTube"
+  },
+  "showTooltipPercentage": {
+    "message": "Percentual na dica (tooltip) da barra de like/dislike."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Mostrar o percentual na dica (tooltip) da barra de like/dislike."
+  },
+  "textColorTheme": {
+    "message": "Tema de cores:"
+  },
+  "textColorTheme1": {
+    "message": "Clássico"
+  },
+  "textColorTheme2": {
+    "message": "Acessível"
+  },
+  "textColorTheme3": {
+    "message": "Néon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colorir barra de proporção"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Usar cores personalizadas para a barra de proporção."
+  },
+  "textColorizeThumbs": {
+    "message": "Colorir botões"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Usar cores personalizadas para os botões de curtir e descurtir."
+  },
+  "textConsistentFormat": {
+    "message": "Tornar o formato de curtidas e descurtidas consistente"
+  },
+  "textConsistentFormatHover": {
+    "message": "Re-formatar número de curtidas."
+  },
+  "textDeveloper": {
+    "message": "por Dmitry Selivanov & Comunidade"
+  },
+  "textLikesDisabled": {
+    "message": "Desativado pelo proprietário"
+  },
+  "textNumberFormat": {
+    "message": "Formato numérico:"
+  },
+  "textRoundingNumbers": {
+    "message": "Arredondar as estatísticas de curtidas/descurtidas para baixo (comportamento padrão do YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Mostrar estatísticas arredondadas"
+  },
+  "textSettings": {
+    "message": "Desativar envio de curtidas/descurtidas"
+  },
+  "textSettingsHover": {
+    "message": "Para de contar suas curtidas e descurtidas."
+  },
+  "textTempUnavailable": {
+    "message": "Temporariamente Indisponível"
+  },
+  "textUpdate": {
+    "message": "Atualizar para"
+  },
+  "tooltipPercentageMode": {
+    "message": "Modo de porcentagem:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Usar exibição personalizada de porcentagem ao passar o mouse."
+  },
+  "version30installed": {
+    "message": "Versão __RYD_VERSION__ instalada"
+  },
+  "whatsnew": {
+    "message": "O que há de novo?:"
+  },
+  "premiumAnalytics_title": {
+    "message": "Insights premium do vídeo"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Engajamento ao longo do tempo"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Países em destaque"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Países com mais curtidas"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Países com mais dislikes"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Geografia"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Expandir"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Recolher"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Métrica do mapa"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Voltar ao mapa mundial"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Curtidas"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Dislikes"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Proporção"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Janela de dados"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Últimos dias"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Primeiros dias"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Mostrar os dias mais recentes dentro da janela selecionada"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Mostrar os primeiros dias dentro da janela selecionada"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Seleção personalizada"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Todo o período"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Últimos $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Primeiros $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 dia"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 dias"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Todo o período"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1d"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Período selecionado: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Usuários da extensão"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 curtidas"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 dislikes"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Capturamos $1 interações de $2 países ($3 IPs únicos)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Votos por hora"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Votos por dia"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Votos por semana"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Votos a cada $1 horas"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Votos a cada $1 dias"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Votos a cada $1 minutos"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Votos por minuto"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Votos a cada $1 segundos"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Votos por segundo"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Ainda não há dados"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Desconhecido"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Carregando insights…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Autorize o Patreon novamente para desbloquear as análises."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "As análises premium estão disponíveis para apoiadores ativos no Patreon."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Sessão expirada. Entre novamente com o Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "O serviço de análises não está disponível no momento."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Não foi possível acessar o serviço de análises."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Não foi possível carregar as análises premium."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Atividade"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Proporção de curtidas"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Proporção de curtidas mais alta"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Proporção de curtidas mais baixa"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Mais curtidas"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Menos curtidas"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Mais dislikes"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Menos dislikes"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Mais $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Menos $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Curtidas: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Dislikes: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Proporção de curtidas: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Resumo de insights de dislikes"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Os dislikes brutos são relatos diretos dos usuários da extensão que assistem a este vídeo."
+  },
+  "premiumTeaser_cta": {
+    "message": "Desbloquear Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Pré-visualizar todas as análises"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Contagem de dislikes brutos"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Dislikes estimados"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Curtidas estimadas"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Obtendo os últimos totais de dislikes…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Não conseguimos carregar os dados de dislikes agora. Tente recarregar a página."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Como desbloquear as análises Premium"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Desbloqueie os insights Premium do vídeo em três passos rápidos:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Entre com o Patreon a partir do pop-up da extensão Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Selecione o plano Premium para habilitar linhas do tempo de atividade, rankings por país e o mapa interativo."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Recarregue o YouTube para ver tendências por hora, países em destaque e o detalhamento por estado dos EUA para cada vídeo."
+  },
+  "premiumTierNotice_title": {
+    "message": "Analytics Premium bloqueados"
+  },
+  "premiumTierNotice_message": {
+    "message": "Sua assinatura no Patreon não inclui o nível Premium. Faça um upgrade do apoio para desbloquear análises avançadas de vídeos."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Fazer upgrade no Patreon"
+  },
+  "changelog_title": {
+    "message": "Registro de novidades do Analytics Premium · 20 de outubro de 2025"
+  },
+  "changelog_badge": {
+    "message": "Lançamento Premium"
+  },
+  "changelog_heading": {
+    "message": "Analytics Premium repensado"
+  },
+  "changelog_subheading": {
+    "message": "Explore o cronograma de atividades ao vivo, a tabela de classificação dos principais países e o mapa interativo incluídos no Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Lançado em 20 de outubro de 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Fazer upgrade no Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Ler o guia de configuração"
+  },
+  "changelog_section_highlights": {
+    "message": "Novidades"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Cronograma de atividades ao vivo"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Assista ao fluxo de gostos e desgostos em tempo real. Alterne as predefinições de hora em hora, diariamente ou de todos os tempos sem recarregar, fixe a janela no primeiro dia ou nas votações mais recentes e limpe cada pico para ver o que desencadeou o engajamento."
+  },
+  "changelog_feature_map_title": {
+    "message": "Mundo interativo e mapa de calor dos EUA"
+  },
+  "changelog_feature_map_body": {
+    "message": "Percorra o mundo ou mergulhe nos estados dos EUA para descobrir pontos críticos. Compare gostos, desgostos e proporções na dica atualizada e destaque as regiões que reagem primeiro aos seus uploads."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Tabela de classificação dos principais países"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Classifique cada país por atividade bruta, gostos, desgostos ou proporção. Filtre com as mesmas predefinições da linha do tempo para saber onde as campanhas chegam e planejar o que publicar em seguida."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Captura em breve — registre esta visualização no DevTools quando estiver pronto."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Marcador: visão geral da linha do tempo"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Marcador: mapa de atividade global"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Espaço reservado: tabela de classificação dos países"
+  },
+  "changelog_section_upgrade": {
+    "message": "Como desbloquear o Analytics Premium"
+  },
+  "changelog_upgrade_body": {
+    "message": "Pronto para começar? Siga estes passos e atualize sua guia do YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Abra o pop-up do Return YouTube Dislike e entre com o Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Escolha o nível Premium para ativar o envio dos dados de análise para a sua conta."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Recarregue qualquer página do YouTube — linha do tempo, mapa e rankings aparecem na hora."
+  },
+  "changelog_section_release": {
+    "message": "Destaques do lançamento"
+  },
+  "changelog_release_item1": {
+    "message": "As predefinições da linha do tempo de atividades transmitem dados ao vivo com âncoras de intervalo para os primeiros e mais recentes intervalos."
+  },
+  "changelog_release_item2": {
+    "message": "A tabela de classificação do país é atualizada instantaneamente para que você possa identificar regiões em ascensão sem sair do painel."
+  },
+  "changelog_release_item3": {
+    "message": "O mapa interativo destaca pontos de acesso globais e estaduais dos EUA com dicas e métricas mais claras."
+  },
+  "changelog_support_heading": {
+    "message": "Precisa de ajuda?"
+  },
+  "changelog_support_description": {
+    "message": "Conte conosco se algo der errado — consulte a documentação de suporte ou a comunidade."
+  },
+  "changelog_support_contact": {
+    "message": "Pergunte à comunidade"
   }
 }

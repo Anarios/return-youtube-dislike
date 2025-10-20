@@ -1,120 +1,15 @@
 {
-  "extensionName": {
-    "message": "Return YouTube Dislike"
+  "apiStatusLabel": {
+    "message": "Stato API:"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
+  "apiStatusOffline": {
+    "message": "Offline"
   },
-  "extensionDesc": {
-    "message": "Riporta il numero di Non mi piace"
+  "apiStatusOnline": {
+    "message": "Online"
   },
-  "textDeveloper": {
-    "message": "di Dmitry Selivanov e della comunità"
-  },
-  "linkWebsite": {
-    "message": "Sito web"
-  },
-  "linkFAQ": {
-    "message": "FAQ"
-  },
-  "linkDonate": {
-    "message": "Dona"
-  },
-  "linkHelp": {
-    "message": "Aiuto"
-  },
-  "linkChangelog": {
-    "message": "Note di versione"
-  },
-  "legendSettings": {
-    "message": "Impostazioni"
-  },
-  "textSettings": {
-    "message": "Disattiva invio di Mi piace/Non mi piace"
-  },
-  "textLikesDisabled": {
-    "message": "Disattivati dal proprietario"
-  },
-  "textSettingsHover": {
-    "message": "Smette di contare i tuoi Mi piace e Non mi piace."
-  },
-  "textRoundingNumbers": {
-    "message": "Arrotonda per difetto il numero di Mi Piace/Non mi piace (comportamento standard di YouTube)."
-  },
-  "textRoundingNumbersHover": {
-    "message": "Mostra stastistiche arrotondate per difetto."
-  },
-  "textConsistentFormat": {
-    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
-  },
-  "textConsistentFormatHover": {
-    "message": "Ri-formatta numero di Mi piace."
-  },
-  "textNumberFormat": {
-    "message": "Formato numeri:"
-  },
-  "textColorizeRatioBar": {
-    "message": "Colora barra di rapporto"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Usa colori personalizzati per la barra di rapporto."
-  },
-  "textColorizeThumbs": {
-    "message": "Colora pollici"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Usa colori personalizzati per le icone dei pollici."
-  },
-  "textColorTheme": {
+  "colorTheme": {
     "message": "Colore tema:"
-  },
-  "textColorTheme1": {
-    "message": "Classico"
-  },
-  "textColorTheme2": {
-    "message": "Accessibile"
-  },
-  "textColorTheme3": {
-    "message": "Neon"
-  },
-  "textTempUnavailable": {
-    "message": "Temporaneamente non disponibile"
-  },
-  "textUpdate": {
-    "message": "Aggiorna a"
-  },
-  "version30installed": {
-    "message": "Versione __RYD_VERSION__ installata"
-  },
-  "whatsnew": {
-    "message": "Novità"
-  },
-  "shortsSupport": {
-    "message": "Supporto per YouTube Shorts"
-  },
-  "customColors": {
-    "message": "Colori personalizzati per barra dei Non mi piace e bottoni"
-  },
-  "customNumberFormats": {
-    "message": "Formato numeri personalizzato"
-  },
-  "considerDonating": {
-    "message": "L'unica cosa che manda avanti questa estensione sono le tue donazioni, valuta se sostenere il progetto."
-  },
-  "roundNumbers": {
-    "message": "Mostra numeri arrotondati per difetto"
-  },
-  "roundNumbersHover": {
-    "message": "Arrotonda numeri per difetto (comportamento standard di YouTube)."
-  },
-  "reformatLikes": {
-    "message": "Ri-formatta numero Mi piace"
-  },
-  "reformatLikesHover": {
-    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
-  },
-  "numberFormat": {
-    "message": "Formato numeri:"
   },
   "colorizeRatio": {
     "message": "Colora barra di rapporto"
@@ -128,7 +23,517 @@
   "colorizeThumbsHover": {
     "message": "Usa colori personalizzati per le icone dei pollici."
   },
-  "colorTheme": {
+  "considerDonating": {
+    "message": "L'unica cosa che manda avanti questa estensione sono le tue donazioni, valuta se sostenere il progetto."
+  },
+  "customColors": {
+    "message": "Colori personalizzati per barra dei Non mi piace e bottoni"
+  },
+  "customNumberFormats": {
+    "message": "Formato numeri personalizzato"
+  },
+  "disableLoggingHover": {
+    "message": "Disattiva la registrazione delle risposte API nella console."
+  },
+  "disableLoggingLabel": {
+    "message": "Disattiva log sulla console"
+  },
+  "extensionDesc": {
+    "message": "Riporta il numero di Non mi piace"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Impostazioni"
+  },
+  "linkChangelog": {
+    "message": "Note di versione"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "Dona"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Aiuto"
+  },
+  "linkWebsite": {
+    "message": "Sito web"
+  },
+  "numberFormat": {
+    "message": "Formato numeri:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Funzionalità premium disponibili per i sostenitori su Patreon"
+  },
+  "patreonLogin": {
+    "message": "Accedi con Patreon"
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Impossibile completare l’accesso. Riprova."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Impossibile avviare l’accesso con Patreon. Riprova."
+  },
+  "patreonLogout": {
+    "message": "Esci"
+  },
+  "patreonPermissionRequired": {
+    "message": "L’accesso richiede l’autorizzazione \"identity\". Concedila per continuare."
+  },
+  "patreonTierBasic": {
+    "message": "Livello base"
+  },
+  "patreonTierChecking": {
+    "message": "Verifica dell'abbonamento…"
+  },
+  "patreonTierNone": {
+    "message": "Nessuna iscrizione attiva"
+  },
+  "patreonTierPremium": {
+    "message": "Sostenitore Premium"
+  },
+  "patreonTierSupporter": {
+    "message": "Sostenitore"
+  },
+  "patreonUserFallback": {
+    "message": "Utente Patreon"
+  },
+  "reformatLikes": {
+    "message": "Ri-formatta numero Mi piace"
+  },
+  "reformatLikesHover": {
+    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
+  },
+  "hidePremiumTeaser": {
+    "message": "Nascondi il pannello teaser Premium"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Non mostrare il teaser Premium nelle pagine di riproduzione di YouTube."
+  },
+  "roundNumbers": {
+    "message": "Mostra numeri arrotondati per difetto"
+  },
+  "roundNumbersHover": {
+    "message": "Arrotonda numeri per difetto (comportamento standard di YouTube)."
+  },
+  "shortsSupport": {
+    "message": "Supporto per YouTube Shorts"
+  },
+  "showTooltipPercentage": {
+    "message": "Percentuale nel suggerimento della barra mi piace/non mi piace."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Mostra la percentuale nel suggerimento della barra mi piace/non mi piace."
+  },
+  "textColorTheme": {
     "message": "Colore tema:"
+  },
+  "textColorTheme1": {
+    "message": "Classico"
+  },
+  "textColorTheme2": {
+    "message": "Accessibile"
+  },
+  "textColorTheme3": {
+    "message": "Neon"
+  },
+  "textColorizeRatioBar": {
+    "message": "Colora barra di rapporto"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Usa colori personalizzati per la barra di rapporto."
+  },
+  "textColorizeThumbs": {
+    "message": "Colora pollici"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Usa colori personalizzati per le icone dei pollici."
+  },
+  "textConsistentFormat": {
+    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
+  },
+  "textConsistentFormatHover": {
+    "message": "Ri-formatta numero di Mi piace."
+  },
+  "textDeveloper": {
+    "message": "di Dmitry Selivanov e della comunità"
+  },
+  "textLikesDisabled": {
+    "message": "Disattivati dal proprietario"
+  },
+  "textNumberFormat": {
+    "message": "Formato numeri:"
+  },
+  "textRoundingNumbers": {
+    "message": "Arrotonda per difetto il numero di Mi Piace/Non mi piace (comportamento standard di YouTube)."
+  },
+  "textRoundingNumbersHover": {
+    "message": "Mostra stastistiche arrotondate per difetto."
+  },
+  "textSettings": {
+    "message": "Disattiva invio di Mi piace/Non mi piace"
+  },
+  "textSettingsHover": {
+    "message": "Smette di contare i tuoi Mi piace e Non mi piace."
+  },
+  "textTempUnavailable": {
+    "message": "Temporaneamente non disponibile"
+  },
+  "textUpdate": {
+    "message": "Aggiorna a"
+  },
+  "tooltipPercentageMode": {
+    "message": "Modalità percentuale:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Usa una visualizzazione personalizzata della percentuale al passaggio del mouse."
+  },
+  "version30installed": {
+    "message": "Versione __RYD_VERSION__ installata"
+  },
+  "whatsnew": {
+    "message": "Novità"
+  },
+  "premiumAnalytics_title": {
+    "message": "Analisi video Premium"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Coinvolgimento nel tempo"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Paesi principali"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Paesi con più Mi piace"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Paesi con più Non mi piace"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Geografia"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Espandi"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Comprimi"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Metrica della mappa"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Torna alla mappa mondiale"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Mi piace"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Non mi piace"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Rapporto"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Finestra dati"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Ultimi giorni"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Primi giorni"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Mostra i giorni più recenti nella finestra selezionata"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Mostra i primi giorni nella finestra selezionata"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Selezione personalizzata"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Tutto il periodo"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Ultimi $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Primi $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 giorno"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 giorni"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Tutto il periodo"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1g"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Periodo selezionato: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Utenti dell’estensione"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 Mi piace"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 Non mi piace"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Registrate $1 interazioni da $2 paesi ($3 IP univoche)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Voti per ora"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Voti per giorno"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Voti per settimana"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Voti ogni $1 ore"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Voti ogni $1 giorni"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Voti ogni $1 minuti"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Voti al minuto"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Voti ogni $1 secondi"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Voti al secondo"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Nessun dato ancora"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Sconosciuto"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Caricamento delle analisi…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Autorizza nuovamente Patreon per sbloccare le analisi."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Le analisi premium sono disponibili per i sostenitori attivi su Patreon."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Sessione scaduta. Accedi di nuovo con Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Il servizio di analisi non è al momento disponibile."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Impossibile contattare il servizio di analisi."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Impossibile caricare le analisi premium."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Attività"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Rapporto Mi piace"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Rapporto Mi piace più alto"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Rapporto Mi piace più basso"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Più Mi piace"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Meno Mi piace"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Più Non mi piace"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Meno Non mi piace"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Più $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Meno $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Mi piace: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Non mi piace: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Rapporto Mi piace: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Panoramica delle analisi dei Non mi piace"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "I Non mi piace grezzi sono segnalazioni dirette degli utenti dell’estensione che guardano questo video."
+  },
+  "premiumTeaser_cta": {
+    "message": "Sblocca Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Anteprima delle analisi complete"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Conteggio Non mi piace grezzi"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Non mi piace stimati"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Mi piace stimati"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Recupero degli ultimi totali di Non mi piace…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Non è stato possibile caricare i dati dei Non mi piace. Prova a ricaricare la pagina."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Come sbloccare le analisi Premium"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Sblocca le analisi video Premium in tre semplici passaggi:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Accedi con Patreon dal popup dell’estensione Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Seleziona il livello Premium per attivare le cronologie di attività, le classifiche per paese e la mappa interattiva."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Ricarica YouTube per vedere le tendenze orarie, i principali paesi e i dettagli sugli stati USA per ogni video."
+  },
+  "premiumTierNotice_title": {
+    "message": "Analitiche Premium bloccate"
+  },
+  "premiumTierNotice_message": {
+    "message": "Il tuo abbonamento Patreon non include il livello Premium. Effettua un upgrade per sbloccare le analitiche video avanzate."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Esegui l’upgrade su Patreon"
+  },
+  "changelog_title": {
+    "message": "Registro delle novità di Analytics Premium · 20 ottobre 2025"
+  },
+  "changelog_badge": {
+    "message": "Versione Premium"
+  },
+  "changelog_heading": {
+    "message": "Analytics Premium reinventate"
+  },
+  "changelog_subheading": {
+    "message": "Esplora la sequenza temporale delle attività dal vivo, la classifica dei principali paesi e la mappa interattiva inclusa in Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Rilasciato il 20 ottobre 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Esegui l’upgrade su Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Leggi la guida di configurazione"
+  },
+  "changelog_section_highlights": {
+    "message": "Novità"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Cronologia delle attività dal vivo"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Guarda lo streaming di Mi piace e Non mi piace in tempo reale. Alterna le preimpostazioni orarie, giornaliere o di tutti i tempi senza ricaricare, ancora la finestra al primo giorno o agli ultimi voti e scorri ogni picco per vedere cosa ha attivato il coinvolgimento."
+  },
+  "changelog_feature_map_title": {
+    "message": "Mondo interattivo e mappa termica degli Stati Uniti"
+  },
+  "changelog_feature_map_body": {
+    "message": "Effettua una panoramica in tutto il mondo o tuffati negli stati degli Stati Uniti per individuare gli hotspot. Confronta Mi piace, Non mi piace e rapporti nella descrizione comando aggiornata e metti in evidenza le regioni che reagiscono per prime ai tuoi caricamenti."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Classifica dei principali paesi"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Classifica ogni paese in base all'attività grezza, alle preferenze, alle antipatie o al rapporto. Filtra con le stesse preimpostazioni della sequenza temporale per scoprire dove arrivano le campagne e pianificare cosa pubblicare successivamente."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Screenshot in arrivo: acquisisci questa vista con DevTools quando sarà pronta."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Segnaposto: panoramica della timeline"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Segnaposto: mappa dell’attività globale"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Segnaposto: classifica dei paesi"
+  },
+  "changelog_section_upgrade": {
+    "message": "Come sbloccare le Analytics Premium"
+  },
+  "changelog_upgrade_body": {
+    "message": "Pronto a iniziare? Segui questi passaggi e poi aggiorna la scheda di YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Apri il popup di Return YouTube Dislike e accedi con Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Scegli il livello Premium per attivare il flusso dei dati di analisi sul tuo account."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Ricarica una pagina video di YouTube: timeline, mappa e classifiche compaiono all’istante."
+  },
+  "changelog_section_release": {
+    "message": "Punti salienti della release"
+  },
+  "changelog_release_item1": {
+    "message": "Le preimpostazioni della sequenza temporale delle attività trasmettono dati in tempo reale con ancoraggi di intervallo per il primo e l'ultimo bucket."
+  },
+  "changelog_release_item2": {
+    "message": "La classifica dei paesi si aggiorna istantaneamente in modo da poter individuare le regioni in crescita senza uscire dal pannello."
+  },
+  "changelog_release_item3": {
+    "message": "La mappa interattiva evidenzia gli hotspot statali globali e statunitensi con descrizioni comandi e metriche più chiare."
+  },
+  "changelog_support_heading": {
+    "message": "Serve aiuto?"
+  },
+  "changelog_support_description": {
+    "message": "Siamo qui per te: consulta la documentazione di supporto o la community."
+  },
+  "changelog_support_contact": {
+    "message": "Chiedi alla community"
   }
 }

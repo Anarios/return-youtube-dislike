@@ -8,6 +8,7 @@ export default {
     subtitle: "Rozšíření prohlížeče a API, která zobrazí disliky na YouTube",
     ukraine: "Podpořte Ukrajinu",
     sponsors: "Sponzoři",
+    becomeSponsor: "Staňte se naším sponzorem",
   },
   install: {
     name: "Instalace",
@@ -19,6 +20,17 @@ export default {
     title3: "Implementace třetích stran",
     subtitle3:
       "Žádná odpovědnost na naší straně, používejte na vlastní nebezpečí",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Uživatelský skript",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular – fork NewPipe)",
+    iosJailbroken: "iOS (s jailbreakem)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -80,6 +92,8 @@ export default {
       "Pro zobrazení rozšíření zadejte následující adresu do adresního řádku: ",
     firefox: "pro Firefox",
     chrome: "pro Chrome, Edge, Brave, Opera, Vivaldi",
+    detected: "Zjištěno:",
+    altExampleScreenshot: "ukázkový snímek obrazovky",
   },
   faq: {
     name: "FAQ",
@@ -111,6 +125,8 @@ export default {
     name: "Přispět",
     subtitle:
       "Můžete podpořit naše úsilí ponechat internet bezplatný jakýmkoli darem!",
+    patreon: "Patreon",
+    crypto: "Kryptoměna",
   },
   links: {
     name: "Odkazy",
@@ -121,5 +137,11 @@ export default {
     coolProjects: "Bezva projekty",
     sponsorBlockDescription: "Přeskočte reklamy integrované ve videích",
     filmotDescription: "Prohledávejte YouTube videa pomocí titulků",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "není podporován.",
+    considerUpgrade: "Zvažte aktualizaci na nejnovější verzi.",
   },
 };

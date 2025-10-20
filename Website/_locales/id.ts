@@ -8,6 +8,7 @@ export default {
     subtitle: "Extension browser dan API yang memunculkan jumlah dislike di Youtube",
     ukraine: "Dukung Ukraina",
     sponsors: "Sponsor",
+    becomeSponsor: "Jadilah sponsor kami",
   },
   install: {
     name: "Install",
@@ -17,6 +18,17 @@ export default {
     subtitle2: "Jika kamu menggunakan browser yang belum support, coba gunakan UserScript",
     title3: "Implementasi Pihak Ketiga",
     subtitle3: "Kami tidak akan bertanggung jawab, gunakan dengan risiko sendiri",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Userscript",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidTubular: "Android (Tubular - fork NewPipe)",
+    iosJailbroken: "iOS (jailbreak)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -74,6 +86,8 @@ export default {
     bullet4c1: "Untuk melihat extension, masukkan ini pada address bar: ",
     firefox: "untuk Firefox",
     chrome: "untuk Chrome, Edge, Brave, Opera, dan Vivaldi",
+    detected: "Terdeteksi:",
+    altExampleScreenshot: "contoh tangkapan layar",
   },
   faq: {
     name: "Pertanyaan",
@@ -105,6 +119,8 @@ export default {
     name: "Donasi",
     subtitle:
       "Kamu dapat mendukung effort kami dengan donasi kalian!",
+    patreon: "Patreon",
+    crypto: "Kripto",
   },
   links: {
     name: "Link",
@@ -115,5 +131,11 @@ export default {
     coolProjects: "Proyek Keren Lainnya",
     sponsorBlockDescription: "Lewati iklan yang ada pada video",
     filmotDescription: "Mencari video Youtube menggunakan subtitle",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "tidak didukung.",
+    considerUpgrade: "Pertimbangkan untuk memperbarui ke versi terbaru.",
   },
 };

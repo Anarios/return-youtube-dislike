@@ -26,12 +26,12 @@
 
       <v-btn class="mainAltButton" :href="githubLink" target="_blank">
         <v-icon style="margin-right: 0.5em">mdi-github</v-icon>
-        GitHub
+        {{ $vuetify.lang.t("$vuetify.links.github") }}
       </v-btn>
 
       <v-btn class="mainAltButton" :href="discordLink" target="_blank">
         <v-icon style="margin-right: 0.5em">mdi-discord</v-icon>
-        Discord
+        {{ $vuetify.lang.t("$vuetify.links.discord") }}
       </v-btn>
     </div>
 
@@ -56,9 +56,9 @@
         {{ $vuetify.lang.t("$vuetify.home.sponsors") }}
       </h3>
       <v-row class="justify-center mx-auto">
-        <p v-for="sponsor in sponsors" :key="sponsor.name" class="sponsor">
+        <p v-for="sponsor in sponsors" :key="sponsor.nameKey" class="sponsor">
           <a :style="sponsor.link ? { cursor: 'pointer' } : { cursor: 'default' }" :href="sponsor.link" rel="sponsored">
-            {{ sponsor.name }}
+            {{ $vuetify.lang.t(`$vuetify.${sponsor.nameKey}`) }}
           </a>
         </p>
       </v-row>
@@ -82,7 +82,7 @@ export default {
       discordLink: "https://discord.gg/mYnESY4Md5",
       sponsors: [
         {
-          name: "Become our sponsor",
+          nameKey: "home.becomeSponsor",
           link: "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601",
         },
       ],
