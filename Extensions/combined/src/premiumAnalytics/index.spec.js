@@ -44,6 +44,10 @@ jest.mock("./lists", () => ({
   updateCountryList: jest.fn(),
 }));
 
+jest.mock("./teaser", () => ({
+  setTeaserSuppressed: jest.fn(),
+}));
+
 jest.mock("./utils", () => {
   const actual = jest.requireActual("./utils");
   return {
@@ -99,6 +103,7 @@ const { debounce: mockDebounce, safeJson: mockSafeJson, toEpoch: mockToEpoch } =
 
 const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
+const { setTeaserSuppressed: mockSetTeaserSuppressed } = jest.requireMock("./teaser");
 
 jest.mock("../utils", () => ({
   getVideoId: jest.fn(() => "video1234567"),
@@ -225,10 +230,12 @@ describe("premiumAnalytics", () => {
     expect(analyticsState.sessionToken).toBe("new");
     expect(global.fetch.mock.calls.length).toBeGreaterThan(initialFetchCalls);
     expect(mockSetLoadingState).toHaveBeenCalledWith(true);
+    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true);
 
     updatePremiumSession({ token: null, active: false });
     expect(mockDisposeActivityChart).toHaveBeenCalled();
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
+    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(false);
   });
 
   it("avoids duplicate fetch when session details unchanged", async () => {

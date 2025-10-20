@@ -13,6 +13,54 @@ else if (isFirefox()) api = browser;
 
 initExtConfig();
 
+function broadcastPatreonStatus(authenticated, user, sessionToken) {
+  chrome.tabs.query({}, (tabs) => {
+    tabs
+      .filter((tab) => tab.url && tab.url.includes("youtube.com"))
+      .forEach((tab) => {
+        const maybePromise = chrome.tabs.sendMessage(
+          tab.id,
+          {
+            message: "patreon_status_changed",
+            authenticated,
+            user: authenticated ? user : null,
+            sessionToken: authenticated ? sessionToken : null,
+          },
+          () => {
+            if (chrome.runtime.lastError) {
+              console.debug("Patreon status broadcast skipped:", chrome.runtime.lastError.message);
+            }
+          },
+        );
+
+        if (maybePromise && typeof maybePromise.catch === "function") {
+          maybePromise.catch((error) => {
+            console.debug("Patreon status broadcast skipped:", error?.message ?? error);
+          });
+        }
+      });
+  });
+}
+
+function handlePatreonAuthComplete(user, sessionToken, done) {
+  if (!user) {
+    done?.();
+    return;
+  }
+
+  chrome.storage.sync.set(
+    {
+      patreonAuthenticated: true,
+      patreonUser: user,
+      patreonSessionToken: sessionToken,
+    },
+    () => {
+      broadcastPatreonStatus(true, user, sessionToken);
+      done?.();
+    },
+  );
+}
+
 function getIdentityApi() {
   if (isFirefox() && browser.identity) return browser.identity;
   if (isChrome() && chrome.identity) return chrome.identity;
@@ -65,40 +113,11 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.message === "log_off") {
     // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
   } else if (request.message === "patreon_auth_complete") {
-    // Store Patreon user info and notify content scripts
-    if (request.user) {
-      chrome.storage.sync.set({
-        patreonAuthenticated: true,
-        patreonUser: request.user,
-        patreonSessionToken: request.sessionToken,
-      });
-      // Notify all tabs about authentication
-      chrome.tabs.query({}, (tabs) => {
-        tabs.forEach((tab) => {
-          if (tab.url && tab.url.includes("youtube.com")) {
-            chrome.tabs.sendMessage(tab.id, {
-              message: "patreon_status_changed",
-              authenticated: true,
-              user: request.user,
-              sessionToken: request.sessionToken,
-            });
-          }
-        });
-      });
-    }
+    handlePatreonAuthComplete(request.user, request.sessionToken);
   } else if (request.message === "patreon_logout") {
     // Clear Patreon authentication
-    chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"]);
-    // Notify all tabs about logout
-    chrome.tabs.query({}, (tabs) => {
-      tabs.forEach((tab) => {
-        if (tab.url && tab.url.includes("youtube.com")) {
-          chrome.tabs.sendMessage(tab.id, {
-            message: "patreon_status_changed",
-            authenticated: false,
-          });
-        }
-      });
+    chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], () => {
+      broadcastPatreonStatus(false, null, null);
     });
   } else if (request.message == "set_state") {
     // chrome.identity.getAuthToken({ interactive: true }, function (token) {
@@ -179,21 +198,9 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
         const authData = await exchangeRes.json();
         if (authData && authData.success) {
-          api.storage.sync.set(
-            {
-              patreonAuthenticated: true,
-              patreonUser: authData.user,
-              patreonSessionToken: authData.sessionToken,
-            },
-            () => {
-              api.runtime.sendMessage({
-                message: "patreon_auth_complete",
-                user: authData.user,
-                sessionToken: authData.sessionToken,
-              });
-              sendResponse({ success: true, user: authData.user });
-            },
-          );
+          handlePatreonAuthComplete(authData.user, authData.sessionToken, () => {
+            sendResponse({ success: true, user: authData.user });
+          });
         } else {
           sendResponse({ success: false, error: (authData && authData.error) || "OAuth exchange failed" });
         }

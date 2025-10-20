@@ -14,6 +14,7 @@ import { getVideoId } from "../utils";
 
 import { MS_PER_DAY, EXPANDABLE_SECTIONS } from "./constants";
 import { requestAnalytics, scheduleSelectionFetch, normalizeSelection } from "./requests";
+import { setTeaserSuppressed } from "./teaser";
 
 let resizeListener = null;
 
@@ -182,10 +183,12 @@ function updatePremiumSession({ token, active }) {
   setSession(token || null, active);
 
   if (!analyticsState.sessionActive) {
+    setTeaserSuppressed(false);
     teardownPanel();
     return;
   }
 
+  setTeaserSuppressed(true);
   ensurePanel();
 
   const tokenChanged = analyticsState.sessionToken && analyticsState.sessionToken !== previousToken;

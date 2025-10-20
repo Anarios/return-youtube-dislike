@@ -1,13 +1,16 @@
 import { initPremiumAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./premiumAnalytics";
+import { initPremiumTeaser, setTeaserSuppressed } from "./premiumAnalytics/teaser";
 
 let patreonState = {
   authenticated: false,
   user: null,
-  sessionToken: null
+  sessionToken: null,
 };
 
 function initPatreonFeatures() {
-  chrome.storage.sync.get(['patreonAuthenticated', 'patreonUser', 'patreonSessionToken'], (data) => {
+  initPremiumTeaser();
+
+  chrome.storage.sync.get(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], (data) => {
     if (data.patreonAuthenticated && data.patreonUser) {
       patreonState.authenticated = true;
       patreonState.user = data.patreonUser;
@@ -18,10 +21,10 @@ function initPatreonFeatures() {
   });
 
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.message === 'patreon_status_changed') {
+    if (request.message === "patreon_status_changed") {
       patreonState.authenticated = request.authenticated;
       patreonState.user = request.user || null;
-      
+
       if (request.authenticated) {
         patreonState.sessionToken = request.sessionToken ?? patreonState.sessionToken;
         updatePremiumSession({ token: patreonState.sessionToken, active: patreonState.user?.hasActiveMembership });
@@ -39,24 +42,25 @@ function enablePremiumFeatures() {
   const tier = patreonState.user?.membershipTier;
   const hasActiveMembership = patreonState.user?.hasActiveMembership;
 
-  if (hasActiveMembership && (tier === 'premium' || tier === 'supporter')) {
+  if (hasActiveMembership && (tier === "premium" || tier === "supporter")) {
+    setTeaserSuppressed(true);
     initPremiumAnalytics();
   }
 }
 
 function disablePremiumFeatures() {
-  const premiumElements = document.querySelectorAll('.ryd-premium-feature');
-  premiumElements.forEach(el => el.remove());
+  const premiumElements = document.querySelectorAll(".ryd-premium-feature");
+  premiumElements.forEach((el) => el.remove());
   teardownPremiumAnalytics();
+  setTeaserSuppressed(false);
 }
-
 
 function isPatreonUser() {
   return patreonState.authenticated && patreonState.user?.hasActiveMembership;
 }
 
 function getPatreonTier() {
-  return patreonState.user?.membershipTier || 'none';
+  return patreonState.user?.membershipTier || "none";
 }
 
 export { initPatreonFeatures, isPatreonUser, getPatreonTier, patreonState };
