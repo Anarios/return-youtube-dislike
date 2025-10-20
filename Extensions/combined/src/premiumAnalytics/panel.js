@@ -1,8 +1,9 @@
-import { analyticsState, RANGE_OPTIONS } from "./state";
+import { analyticsState, RANGE_OPTIONS, RANGE_ANCHORS } from "./state";
 import { sanitizeCount } from "./utils";
 
 let callbacks = {
   onRangePreset: () => {},
+  onRangeAnchorChange: () => {},
   onModeChange: () => {},
   onChartExpand: () => {},
 };
@@ -15,6 +16,7 @@ export function ensurePanel() {
   if (analyticsState.panelElement && analyticsState.panelElement.isConnected) {
     applyExpansionState();
     applyLoadingState();
+    updateRangeAnchorButtons();
     return analyticsState.panelElement;
   }
 
@@ -33,6 +35,7 @@ export function ensurePanel() {
 
   bindUiControls(panel);
   updateRangeButtons();
+  updateRangeAnchorButtons();
   updateModeButtons();
   applyExpansionState();
   applyLoadingState();
@@ -51,6 +54,21 @@ export function updateRangeButtons() {
     const shouldHighlight = !analyticsState.usingCustomRange;
     btn.classList.toggle("is-active", shouldHighlight && numeric === analyticsState.currentRange);
   });
+}
+
+export function updateRangeAnchorButtons() {
+  const panel = analyticsState.panelElement;
+  if (!panel) return;
+
+  const resolvedAnchor = resolveRangeAnchor();
+  panel.querySelectorAll(".ryd-range-anchor").forEach((btn) => {
+    btn.classList.toggle("is-active", btn.dataset.anchor === resolvedAnchor);
+  });
+
+  const descriptor = panel.querySelector("#ryd-analytics-range-window");
+  if (descriptor) {
+    descriptor.textContent = formatRangeWindowLabel(resolvedAnchor);
+  }
 }
 
 export function updateModeButtons() {
@@ -155,6 +173,14 @@ function bindUiControls(container) {
     });
   });
 
+  container.querySelectorAll(".ryd-range-anchor").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const anchor = btn.dataset.anchor;
+      if (!anchor) return;
+      callbacks.onRangeAnchorChange(anchor);
+    });
+  });
+
   container.querySelectorAll(".ryd-analytics__section-expand").forEach((btn) => {
     btn.addEventListener("click", () => {
       const chart = btn.dataset.chart;
@@ -170,6 +196,7 @@ function createPanelMarkup() {
     const isActive = days === analyticsState.currentRange;
     return `<button class="ryd-range${isActive ? " is-active" : ""}" data-range="${days}">${label}</button>`;
   }).join("");
+  const anchorControls = createRangeAnchorControls();
   const modeControls = createModeControls();
 
   return `
@@ -177,6 +204,7 @@ function createPanelMarkup() {
       <div class="ryd-analytics__title">Premium Video Insights</div>
       <div class="ryd-analytics__controls">
         <div class="ryd-analytics__ranges">${rangeControls}</div>
+        ${anchorControls}
       </div>
     </header>
     <div class="ryd-analytics__body">
@@ -246,8 +274,55 @@ function createModeControls() {
     .join("");
 }
 
+function createRangeAnchorControls() {
+  const resolvedAnchor = resolveRangeAnchor();
+  const buttons = RANGE_ANCHORS.map((anchor) => {
+    const label = anchor === "last" ? "Latest days" : "First days";
+    const isActive = anchor === resolvedAnchor;
+    const title =
+      anchor === "last"
+        ? "Show the most recent days within the selected window"
+        : "Show the earliest days within the selected window";
+    return `<button class="ryd-range-anchor${isActive ? " is-active" : ""}" type="button" data-anchor="${anchor}" title="${title}">${label}</button>`;
+  }).join("");
+
+  return `
+    <div class="ryd-analytics__window" role="group" aria-label="Data window">
+      <span class="ryd-analytics__window-label">Data window</span>
+      <div class="ryd-analytics__window-toggle">${buttons}</div>
+      <span class="ryd-analytics__window-hint" id="ryd-analytics-range-window">${formatRangeWindowLabel(resolvedAnchor)}</span>
+    </div>
+  `;
+}
+
 function formatRangeLabel(days) {
   return days === 0 ? "All time" : `${days}d`;
+}
+
+function resolveRangeAnchor() {
+  const anchor = typeof analyticsState.rangeAnchor === "string" ? analyticsState.rangeAnchor.toLowerCase() : "";
+  return anchor === "last" ? "last" : "first";
+}
+
+function formatRangeWindowLabel(anchor) {
+  if (
+    analyticsState.usingCustomRange &&
+    analyticsState.selectionRange?.from != null &&
+    analyticsState.selectionRange?.to != null
+  ) {
+    return "Custom selection";
+  }
+
+  const range = analyticsState.currentRange;
+  if (!Number.isFinite(range) || range <= 0) {
+    return "All time";
+  }
+  const absoluteRange = Math.max(0, Math.round(range));
+  if (absoluteRange <= 0) {
+    return "All time";
+  }
+  const unit = absoluteRange === 1 ? "day" : "days";
+  return anchor === "last" ? `Last ${absoluteRange} ${unit}` : `First ${absoluteRange} ${unit}`;
 }
 
 function applyExpansionState() {
@@ -367,10 +442,7 @@ function formatSelectedPeriod() {
     }
   }
 
-  if (currentRange === 0) return "All time";
-  if (currentRange === 1) return "Last 1 day";
-  if (currentRange > 0) return `Last ${currentRange} days`;
-  return null;
+  return formatRangeWindowLabel(resolveRangeAnchor());
 }
 
 function formatDate(ms) {

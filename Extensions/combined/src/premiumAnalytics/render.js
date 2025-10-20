@@ -3,6 +3,7 @@ import {
   ensurePanel,
   renderSummary,
   updateRangeButtons,
+  updateRangeAnchorButtons,
   updateModeButtons,
   applyChartExpansionState,
 } from "./panel";
@@ -20,6 +21,9 @@ function renderAnalytics(data) {
     return;
   }
 
+  const previousRangeDays = analyticsState.currentRange;
+  const wasUsingCustomRange = analyticsState.usingCustomRange;
+
   analyticsState.availableRange = {
     min: toEpoch(data?.timeSeries?.totalRangeStartUtc),
     max: toEpoch(data?.timeSeries?.totalRangeEndUtc),
@@ -30,17 +34,19 @@ function renderAnalytics(data) {
     to: toEpoch(data?.timeSeries?.selectedRangeEndUtc),
   };
 
-  analyticsState.customSelection = analyticsState.usingCustomRange
-    ? { ...analyticsState.selectionRange }
-    : null;
+  analyticsState.customSelection = wasUsingCustomRange ? { ...analyticsState.selectionRange } : null;
   analyticsState.usingCustomRange = analyticsState.customSelection != null;
   analyticsState.pendingSelection = null;
 
   if (analyticsState.selectionRange.from != null && analyticsState.selectionRange.to != null) {
-    analyticsState.currentRange = Math.max(
-      0,
-      Math.round((analyticsState.selectionRange.to - analyticsState.selectionRange.from) / MS_PER_DAY),
-    );
+    if (analyticsState.usingCustomRange) {
+      analyticsState.currentRange = Math.max(
+        0,
+        Math.round((analyticsState.selectionRange.to - analyticsState.selectionRange.from) / MS_PER_DAY),
+      );
+    } else {
+      analyticsState.currentRange = previousRangeDays;
+    }
   }
 
   analyticsState.suppressZoomEvents = true;
@@ -69,6 +75,7 @@ function renderAnalytics(data) {
 
   renderSummary(data?.summary);
   updateRangeButtons();
+  updateRangeAnchorButtons();
   updateModeButtons();
 
   ensureMapChart();

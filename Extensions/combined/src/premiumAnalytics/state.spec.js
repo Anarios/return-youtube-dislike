@@ -8,6 +8,7 @@ import {
   resetSessionState,
   setSession,
   RANGE_OPTIONS,
+  RANGE_ANCHORS,
   COUNTRY_LIMIT,
 } from "./state";
 
@@ -20,6 +21,7 @@ function resetGlobals() {
   analyticsState.mapChart = null;
   analyticsState.currentVideoId = null;
   analyticsState.currentRange = 30;
+  analyticsState.rangeAnchor = "first";
   analyticsState.currentMode = "ratio";
   analyticsState.activeRequestKey = null;
   analyticsState.latestCountries = [];
@@ -48,6 +50,7 @@ describe("premiumAnalytics.state", () => {
 
   it("exposes configuration constants", () => {
     expect(RANGE_OPTIONS).toEqual([7, 30, 90, 0]);
+    expect(RANGE_ANCHORS).toEqual(["first", "last"]);
     expect(COUNTRY_LIMIT).toBe(12);
   });
 

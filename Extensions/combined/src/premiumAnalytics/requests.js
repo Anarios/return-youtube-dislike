@@ -1,6 +1,6 @@
 import { getApiEndpoint } from "../config";
 import { analyticsState, COUNTRY_LIMIT } from "./state";
-import { ensurePanel, updateRangeButtons, setFooterMessage, setLoadingState } from "./panel";
+import { ensurePanel, updateRangeButtons, updateRangeAnchorButtons, setFooterMessage, setLoadingState } from "./panel";
 import { debounce, safeJson } from "./utils";
 import { logFetchRequest } from "./logging";
 
@@ -22,9 +22,12 @@ function requestAnalytics({ selection } = {}) {
   setFooterMessage("Loading insights…");
   setLoadingState(true);
   updateRangeButtons();
+  updateRangeAnchorButtons();
 
   const effectiveSelection = normalizeSelection(selection ?? state.customSelection);
   const bucket = resolveBucket(effectiveSelection, state.currentRange);
+  const rangeAnchor = resolveAnchor();
+  state.rangeAnchor = rangeAnchor;
 
   const params = new URLSearchParams();
   params.set("bucket", bucket);
@@ -44,13 +47,15 @@ function requestAnalytics({ selection } = {}) {
       state.selectionRange = { ...effectiveSelection };
     } else {
       params.set("rangeDays", `${state.currentRange}`);
-      requestKey = `${state.currentVideoId}:${state.currentRange}`;
+      params.set("rangeAnchor", rangeAnchor);
+      requestKey = `${state.currentVideoId}:${state.currentRange}:${rangeAnchor}`;
       state.usingCustomRange = false;
       state.customSelection = null;
     }
   } else {
     params.set("rangeDays", `${state.currentRange}`);
-    requestKey = `${state.currentVideoId}:${state.currentRange}`;
+    params.set("rangeAnchor", rangeAnchor);
+    requestKey = `${state.currentVideoId}:${state.currentRange}:${rangeAnchor}`;
     state.usingCustomRange = false;
     state.customSelection = null;
   }
@@ -143,6 +148,11 @@ function handleError(status, code) {
 }
 
 export { requestAnalytics, scheduleSelectionFetch, normalizeSelection };
+
+function resolveAnchor() {
+  const anchor = typeof analyticsState.rangeAnchor === "string" ? analyticsState.rangeAnchor.toLowerCase() : "";
+  return anchor === "last" ? "last" : "first";
+}
 
 function resolveBucket(selection, rangeDays) {
   if (selection) {

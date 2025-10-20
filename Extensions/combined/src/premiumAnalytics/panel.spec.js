@@ -7,6 +7,7 @@ import {
   configurePanelCallbacks,
   ensurePanel,
   updateRangeButtons,
+  updateRangeAnchorButtons,
   updateModeButtons,
   setListsLoading,
   renderSummary,
@@ -32,6 +33,7 @@ describe("premiumAnalytics.panel", () => {
     resetStateForVideo();
     analyticsState.panelElement = null;
     analyticsState.currentRange = 30;
+    analyticsState.rangeAnchor = "first";
     analyticsState.currentMode = "ratio";
     mountSecondaryContainer();
   });
@@ -42,15 +44,25 @@ describe("premiumAnalytics.panel", () => {
 
   it("configures callbacks and triggers them via UI interactions", () => {
     const rangeSpy = jest.fn();
+    const anchorSpy = jest.fn();
     const modeSpy = jest.fn();
     const expandSpy = jest.fn();
 
-    configurePanelCallbacks({ onRangePreset: rangeSpy, onModeChange: modeSpy, onChartExpand: expandSpy });
+    configurePanelCallbacks({
+      onRangePreset: rangeSpy,
+      onRangeAnchorChange: anchorSpy,
+      onModeChange: modeSpy,
+      onChartExpand: expandSpy,
+    });
     const panel = ensurePanel();
 
     const rangeButton = panel.querySelector(".ryd-range[data-range='7']");
     rangeButton.click();
     expect(rangeSpy).toHaveBeenCalledWith(7);
+
+    const anchorButton = panel.querySelector(".ryd-range-anchor[data-anchor='last']");
+    anchorButton.click();
+    expect(anchorSpy).toHaveBeenCalledWith("last");
 
     const modeButton = panel.querySelector(".ryd-mode[data-mode='likes']");
     modeButton.click();
@@ -80,6 +92,9 @@ describe("premiumAnalytics.panel", () => {
     const values = rangeButtons.map((btn) => btn.dataset.range);
     expect(values).toEqual(["7", "30", "90", "0"]);
     expect(rangeButtons.every((btn) => btn.dataset.range !== "custom")).toBe(true);
+    const anchorButtons = [...panel.querySelectorAll(".ryd-range-anchor")];
+    const anchors = anchorButtons.map((btn) => btn.dataset.anchor);
+    expect(anchors).toEqual(["first", "last"]);
   });
 
   it("updates range button active states based on state", () => {
@@ -144,7 +159,21 @@ describe("premiumAnalytics.panel", () => {
     expect(summaryMeta?.textContent).toContain("1,500 interactions");
     expect(summaryMeta?.textContent).toContain("12 countries");
     expect(summaryMeta?.textContent).toContain("45 unique IPs");
-    expect(periodLabel?.textContent).toBe("Selected period: Last 30 days");
+    expect(periodLabel?.textContent).toBe("Selected period: First 30 days");
+  });
+
+  it("updates anchor toggle state and descriptor", () => {
+    const panel = ensurePanel();
+    analyticsState.rangeAnchor = "last";
+    analyticsState.currentRange = 30;
+    analyticsState.usingCustomRange = false;
+
+    updateRangeAnchorButtons();
+
+    const activeAnchor = panel.querySelector(".ryd-range-anchor.is-active");
+    expect(activeAnchor?.dataset.anchor).toBe("last");
+    const descriptor = panel.querySelector("#ryd-analytics-range-window");
+    expect(descriptor?.textContent).toBe("Last 30 days");
   });
 
   it("sets footer message directly", () => {

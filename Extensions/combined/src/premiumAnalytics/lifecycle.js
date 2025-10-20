@@ -3,6 +3,7 @@ import {
   configurePanelCallbacks,
   ensurePanel,
   updateRangeButtons,
+  updateRangeAnchorButtons,
   updateModeButtons,
   applyChartExpansionState,
 } from "./panel";
@@ -27,6 +28,7 @@ function initPremiumAnalytics() {
 
   configurePanelCallbacks({
     onRangePreset: handleRangePreset,
+    onRangeAnchorChange: handleRangeAnchorChange,
     onModeChange: handleModeChange,
     onChartExpand: handleChartExpand,
   });
@@ -70,6 +72,21 @@ function handleRangePreset(rangeDays) {
   state.selectionRange = { from: null, to: null };
   state.currentRange = rangeDays;
   updateRangeButtons();
+  updateRangeAnchorButtons();
+  requestAnalytics();
+}
+
+function handleRangeAnchorChange(anchor) {
+  const normalized = anchor === "last" ? "last" : "first";
+  if (analyticsState.rangeAnchor === normalized) {
+    return;
+  }
+  analyticsState.rangeAnchor = normalized;
+  analyticsState.usingCustomRange = false;
+  analyticsState.customSelection = null;
+  analyticsState.selectionRange = { from: null, to: null };
+  updateRangeButtons();
+  updateRangeAnchorButtons();
   requestAnalytics();
 }
 
@@ -124,6 +141,7 @@ function handleChartSelection(range) {
   analyticsState.usingCustomRange = true;
   analyticsState.currentRange = Math.max(0, Math.round((normalized.to - normalized.from) / MS_PER_DAY));
   updateRangeButtons();
+  updateRangeAnchorButtons();
 
   if (!sameAsCurrent) {
     scheduleSelectionFetch(normalized);

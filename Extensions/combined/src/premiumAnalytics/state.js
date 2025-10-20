@@ -1,4 +1,5 @@
 export const RANGE_OPTIONS = [7, 30, 90, 0];
+export const RANGE_ANCHORS = ["first", "last"];
 export const COUNTRY_LIMIT = 12;
 
 export const analyticsState = {
@@ -10,6 +11,7 @@ export const analyticsState = {
   mapChart: null,
   currentVideoId: null,
   currentRange: 30,
+  rangeAnchor: "first",
   currentMode: "ratio",
   activeRequestKey: null,
   latestCountries: [],

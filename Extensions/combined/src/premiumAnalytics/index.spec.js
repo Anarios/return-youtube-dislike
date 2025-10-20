@@ -11,6 +11,7 @@ jest.mock("./panel", () => ({
   configurePanelCallbacks: jest.fn(),
   ensurePanel: jest.fn(() => ({})),
   updateRangeButtons: jest.fn(),
+  updateRangeAnchorButtons: jest.fn(),
   updateModeButtons: jest.fn(),
   setListsLoading: jest.fn(),
   renderSummary: jest.fn(),
@@ -122,6 +123,7 @@ describe("premiumAnalytics", () => {
     analyticsState.sessionToken = "token";
     analyticsState.sessionActive = true;
     analyticsState.currentRange = 7;
+    analyticsState.rangeAnchor = "first";
     analyticsState.currentVideoId = "video1234567";
     analyticsState.zoomListenerRegistered = false;
     analyticsState.initialized = false;
@@ -248,6 +250,7 @@ describe("premiumAnalytics", () => {
     expect(mockLogFetchRequest).toHaveBeenCalled();
     const [, params] = mockLogFetchRequest.mock.calls.at(-1);
     expect(params.get("rangeDays")).toBe("30");
+    expect(params.get("rangeAnchor")).toBe("first");
     expect(params.has("selectedRangeStartUtc")).toBe(false);
     expect(params.has("selectedRangeEndUtc")).toBe(false);
   });
@@ -261,6 +264,69 @@ describe("premiumAnalytics", () => {
 
     const [, params] = mockLogFetchRequest.mock.calls.at(-1);
     expect(params.get("rangeDays")).toBe("0");
+    expect(params.get("rangeAnchor")).toBe("first");
+  });
+
+  it("includes the selected range anchor when requesting presets", async () => {
+    analyticsState.currentRange = 90;
+    analyticsState.rangeAnchor = "last";
+
+    requestAnalytics();
+
+    await flushPromises();
+
+    const [, params] = mockLogFetchRequest.mock.calls.at(-1);
+    expect(params.get("rangeDays")).toBe("90");
+    expect(params.get("rangeAnchor")).toBe("last");
+  });
+
+  it("keeps the all-time preset anchored to the full history", async () => {
+    analyticsState.currentRange = 0;
+    analyticsState.rangeAnchor = "first";
+    mockLogFetchRequest.mockClear();
+
+    const longRangeResponse = {
+      timeSeries: {
+        points: [],
+        totalRangeStartUtc: "2024-01-01T00:00:00Z",
+        totalRangeEndUtc: "2024-12-31T00:00:00Z",
+        selectedRangeStartUtc: "2024-01-01T00:00:00Z",
+        selectedRangeEndUtc: "2024-12-31T00:00:00Z",
+      },
+      geo: { topLikes: [], topDislikes: [], countries: [], subdivisions: [] },
+      summary: {
+        totalLikes: 0,
+        totalDislikes: 0,
+        uniqueIps: 0,
+        countriesRepresented: 0,
+        peakLikes: { timestampUtc: "2024-01-01T00:00:00Z", count: 0 },
+        peakDislikes: { timestampUtc: "2024-01-01T00:00:00Z", count: 0 },
+      },
+    };
+
+    global.fetch.mockImplementationOnce(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(longRangeResponse),
+      }),
+    );
+
+    requestAnalytics();
+    await flushPromises();
+
+    expect(analyticsState.currentRange).toBe(0);
+
+    mockLogFetchRequest.mockClear();
+    analyticsState.rangeAnchor = "last";
+
+    requestAnalytics();
+    await flushPromises();
+
+    expect(analyticsState.currentRange).toBe(0);
+    expect(mockLogFetchRequest).toHaveBeenCalled();
+    const [, params] = mockLogFetchRequest.mock.calls.at(-1);
+    expect(params.get("rangeDays")).toBe("0");
+    expect(params.get("rangeAnchor")).toBe("last");
   });
 
   it("reuses existing session data when refreshing analytics", async () => {
