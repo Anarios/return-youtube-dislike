@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Membuat format like dan dislike konsisten."
   },
+  "hidePremiumTeaser": {
+    "message": "Sembunyikan panel teaser premium"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Jangan tampilkan teaser premium di halaman tonton YouTube."
+  },
   "roundNumbers": {
     "message": "Munculkan angka yang dibulatkan kebawah"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Apa yang baru"
+  },
+  "premiumAnalytics_title": {
+    "message": "Insight video premium"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Keterlibatan dari waktu ke waktu"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Negara teratas"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Negara dengan suka terbanyak"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Negara dengan tidak suka terbanyak"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Geografi"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Perluas"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Ciutkan"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Metrik peta"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Kembali ke peta dunia"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Suka"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Tidak suka"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Rasio"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Rentang data"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Hari terbaru"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Hari pertama"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Tampilkan hari terbaru dalam rentang yang dipilih"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Tampilkan hari paling awal dalam rentang yang dipilih"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Pilihan kustom"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Sepanjang waktu"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "$1 terakhir"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "$1 pertama"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 hari"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 hari"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Sepanjang waktu"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1h"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Periode yang dipilih: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Pengguna ekstensi"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 suka"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 tidak suka"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Tercatat $1 interaksi dari $2 negara ($3 IP unik)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Suara per jam"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Suara per hari"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Suara per minggu"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Suara setiap $1 jam"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Suara setiap $1 hari"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Suara setiap $1 menit"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Suara per menit"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Suara setiap $1 detik"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Suara per detik"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Belum ada data"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Tidak diketahui"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Memuat insight…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Otorisasi kembali Patreon untuk membuka analitik."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Analitik premium tersedia untuk pendukung Patreon aktif."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Sesi berakhir. Masuk lagi dengan Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Layanan analitik sedang tidak tersedia."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Tidak dapat terhubung ke layanan analitik."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Tidak dapat memuat analitik premium."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Aktivitas"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Rasio suka"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Rasio suka lebih tinggi"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Rasio suka lebih rendah"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Lebih banyak suka"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Lebih sedikit suka"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Lebih banyak tidak suka"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Lebih sedikit tidak suka"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Lebih banyak $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Lebih sedikit $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Suka: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Tidak suka: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Rasio suka: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Ringkasan insight tidak suka"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Tidak suka mentah adalah laporan langsung dari pengguna ekstensi yang menonton video ini."
+  },
+  "premiumTeaser_cta": {
+    "message": "Buka Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Pratinjau analitik lengkap"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Jumlah tidak suka mentah"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Perkiraan tidak suka"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Perkiraan suka"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Mengambil total tidak suka terbaru…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Data tidak suka tidak dapat dimuat saat ini. Coba muat ulang halaman."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Cara membuka analitik Premium"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Buka insight video Premium dalam tiga langkah cepat:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Masuk dengan Patreon dari pop-up ekstensi Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Pilih tingkat Premium untuk mengaktifkan linimasa aktivitas, peringkat negara, dan peta interaktif."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Muat ulang YouTube untuk melihat tren per jam, negara teratas, dan detail per negara bagian AS untuk setiap video."
+  },
+  "premiumTierNotice_title": {
+    "message": "Analitik premium terkunci"
+  },
+  "premiumTierNotice_message": {
+    "message": "Keanggotaan Patreon Anda belum mencakup tingkat Premium. Tingkatkan dukungan Anda untuk membuka analitik video lanjutan."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Tingkatkan di Patreon"
+  },
+  "changelog_title": {
+    "message": "Log Perubahan Analisis Premium · 20 Oktober 2025"
+  },
+  "changelog_badge": {
+    "message": "Rilis Premium"
+  },
+  "changelog_heading": {
+    "message": "Analisis premium, dirancang ulang"
+  },
+  "changelog_subheading": {
+    "message": "Jelajahi garis waktu aktivitas langsung, papan peringkat negara teratas, dan peta interaktif yang disertakan dengan Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Dirilis pada 20 Oktober 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Tingkatkan di Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Baca panduan pengaturan"
+  },
+  "changelog_section_highlights": {
+    "message": "Apa yang baru"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Garis waktu aktivitas langsung"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Tonton streaming suka dan tidak suka secara real-time. Alihkan preset per jam, harian, atau sepanjang waktu tanpa memuat ulang, jangkar jendela ke hari pertama atau pemungutan suara terbaru, dan bersihkan setiap lonjakan untuk melihat apa yang memicu keterlibatan."
+  },
+  "changelog_feature_map_title": {
+    "message": "Dunia interaktif & peta panas AS"
+  },
+  "changelog_feature_map_body": {
+    "message": "Jelajahi dunia atau jelajahi negara bagian AS untuk menemukan hotspot. Bandingkan suka, tidak suka, dan rasio di tooltip yang ditingkatkan dan soroti wilayah yang bereaksi pertama kali terhadap upload Anda."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Papan peringkat negara teratas"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Beri peringkat setiap negara berdasarkan aktivitas mentah, kesukaan, ketidaksukaan, atau rasio. Filter dengan preset yang sama dengan timeline untuk mempelajari lokasi kampanye dan merencanakan apa yang akan dipublikasikan selanjutnya."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Tangkapan layar segera hadir—ambil gambar ini di DevTools jika sudah siap."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Placeholder: ikhtisar garis waktu"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Placeholder: peta aktivitas global"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Placeholder: papan peringkat negara"
+  },
+  "changelog_section_upgrade": {
+    "message": "Cara membuka kunci analitik Premium"
+  },
+  "changelog_upgrade_body": {
+    "message": "Siap untuk terjun? Ikuti langkah cepat ini dan segarkan tab YouTube Anda."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Buka popup Kembalikan YouTube Dislike dan masuk dengan Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Pilih tingkat Premium untuk mengaktifkan streaming data analitik ke akun Anda."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Muat ulang laman tontonan YouTube mana pun—garis waktu, peta, dan papan peringkat Anda langsung muncul."
+  },
+  "changelog_section_release": {
+    "message": "Sorotan rilis"
+  },
+  "changelog_release_item1": {
+    "message": "Preset garis waktu aktivitas mengalirkan data langsung dengan jangkar rentang untuk keranjang pertama dan terbaru."
+  },
+  "changelog_release_item2": {
+    "message": "Papan peringkat negara langsung diperbarui sehingga Anda dapat melihat wilayah yang meningkat tanpa perlu keluar dari panel."
+  },
+  "changelog_release_item3": {
+    "message": "Peta interaktif menyoroti hotspot global dan negara bagian AS dengan tooltip dan metrik yang lebih jelas."
+  },
+  "changelog_support_heading": {
+    "message": "Butuh bantuan?"
+  },
+  "changelog_support_description": {
+    "message": "Kami siap membantu jika Anda mengalami kesulitan—sampaikan pertanyaan Anda ke dokumen atau komunitas dukungan."
+  },
+  "changelog_support_contact": {
+    "message": "Tanyakan pada komunitas"
   }
 }

@@ -1,8 +1,13 @@
-import { getApiEndpoint } from "../../config";
-import { getVideoId } from "../../utils";
+import { getApiEndpoint, getChangelogUrl } from "../../config";
+import { getBrowser, getVideoId, localize } from "../../utils";
+import { extConfig } from "../../state";
 
 const PATREON_JOIN_URL = "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649";
-const PREMIUM_INFO_URL = "https://returnyoutubedislike.com/premium";
+const CHANGELOG_URL = getChangelogUrl();
+
+export const TEASER_SUPPRESSION_REASON_LEGACY = "legacy";
+export const TEASER_SUPPRESSION_REASON_PREMIUM = "premium";
+export const TEASER_SUPPRESSION_REASON_SETTINGS = "settings";
 
 const teaserState = {
   initialized: false,
@@ -10,17 +15,30 @@ const teaserState = {
   panelElement: null,
   currentVideoId: null,
   abortController: null,
+  suppressionReasons: new Set(),
+  storageListener: null,
 };
 
 export function initPremiumTeaser() {
   if (teaserState.initialized) return;
   teaserState.initialized = true;
+
+  syncSuppressionWithSettings();
   document.addEventListener("yt-navigate-finish", handleNavigation, { passive: true });
   handleNavigation();
 }
 
-export function setTeaserSuppressed(shouldSuppress) {
-  const next = !!shouldSuppress;
+export function setTeaserSuppressed(shouldSuppress, reason = TEASER_SUPPRESSION_REASON_LEGACY) {
+  const normalizedReason = reason || TEASER_SUPPRESSION_REASON_LEGACY;
+  const reasons = teaserState.suppressionReasons;
+
+  if (shouldSuppress) {
+    reasons.add(normalizedReason);
+  } else {
+    reasons.delete(normalizedReason);
+  }
+
+  const next = reasons.size > 0;
 
   if (next === teaserState.suppressed) {
     if (next) {
@@ -37,6 +55,36 @@ export function setTeaserSuppressed(shouldSuppress) {
     resetState();
   } else {
     handleNavigation();
+  }
+}
+
+function syncSuppressionWithSettings() {
+  try {
+    const browser = getBrowser();
+    if (!browser?.storage?.sync) {
+      return;
+    }
+
+    browser.storage.sync.get(["hidePremiumTeaser"], (res) => {
+      const shouldHide = res?.hidePremiumTeaser === true;
+      extConfig.hidePremiumTeaser = shouldHide;
+      setTeaserSuppressed(shouldHide, TEASER_SUPPRESSION_REASON_SETTINGS);
+    });
+
+    if (!teaserState.storageListener) {
+      const listener = (changes, area) => {
+        if (area !== "sync" || !changes.hidePremiumTeaser) {
+          return;
+        }
+        const shouldHide = changes.hidePremiumTeaser.newValue === true;
+        extConfig.hidePremiumTeaser = shouldHide;
+        setTeaserSuppressed(shouldHide, TEASER_SUPPRESSION_REASON_SETTINGS);
+      };
+      teaserState.storageListener = listener;
+      browser.storage.onChanged.addListener(listener);
+    }
+  } catch {
+    // Ignore storage sync failures; teaser suppression will remain manual.
   }
 }
 
@@ -133,7 +181,7 @@ function ensurePanel() {
   const premiumPanel = document.querySelector(".ryd-premium-analytics");
   if (premiumPanel) {
     if (!teaserState.suppressed) {
-      setTeaserSuppressed(true);
+      setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_PREMIUM);
     } else {
       removePanel(true);
     }
@@ -159,7 +207,7 @@ function ensurePanel() {
   if (cta) {
     cta.addEventListener("click", (event) => {
       event.preventDefault();
-      window.open(PATREON_JOIN_URL, "_blank", "noopener");
+      openTab(PATREON_JOIN_URL);
     });
   }
 
@@ -167,7 +215,7 @@ function ensurePanel() {
   if (infoLink) {
     infoLink.addEventListener("click", (event) => {
       event.preventDefault();
-      window.open(PREMIUM_INFO_URL, "_blank", "noopener");
+      openTab(CHANGELOG_URL);
     });
   }
 
@@ -203,7 +251,7 @@ function setLoading(isLoading) {
   panel.classList.toggle("is-loading", !!isLoading);
   const status = panel.querySelector("#ryd-premium-teaser-status");
   if (status) {
-    status.textContent = isLoading ? "Getting the latest dislike totals…" : "";
+    status.textContent = isLoading ? localize("premiumTeaser_statusLoading") : "";
   }
 }
 
@@ -211,7 +259,7 @@ function showError() {
   setLoading(false);
   const status = teaserState.panelElement?.querySelector("#ryd-premium-teaser-status");
   if (status) {
-    status.textContent = "We could not load dislike data just now. Try reloading the page.";
+    status.textContent = localize("premiumTeaser_statusError");
   }
   updateCounts({ dislikes: null, rawDislikes: null, likes: null });
 }
@@ -245,42 +293,85 @@ function normalizeNumber(value) {
 }
 
 function createPanelMarkup() {
+  const extensionName = localize("extensionName");
+  const title = localize("premiumTeaser_title");
+  const subtitle = localize("premiumTeaser_subtitle");
+  const ctaText = localize("premiumTeaser_cta");
+  const secondaryText = localize("premiumTeaser_learn");
+  const statRaw = localize("premiumTeaser_statRaw");
+  const statDislikes = localize("premiumTeaser_statDislikes");
+  const statLikes = localize("premiumTeaser_statLikes");
+  const breadcrumbsAria = localize("premiumTeaser_breadcrumbsAria");
+  const breadcrumbsTitle = localize("premiumTeaser_breadcrumbsTitle");
+  const step1 = localize("premiumTeaser_breadcrumbStep1");
+  const step2 = localize("premiumTeaser_breadcrumbStep2");
+  const step3 = localize("premiumTeaser_breadcrumbStep3");
+
   return `
     <header class="ryd-premium-teaser__header">
       <div>
-        <span class="ryd-premium-teaser__badge">Return YouTube Dislike</span>
-        <h2 class="ryd-premium-teaser__title">Dislike insights snapshot</h2>
-        <p class="ryd-premium-teaser__subtitle">Raw dislikes are direct reports from extension users watching this video.</p>
+        <span class="ryd-premium-teaser__badge">${extensionName}</span>
+        <h2 class="ryd-premium-teaser__title">${title}</h2>
+        <p class="ryd-premium-teaser__subtitle">${subtitle}</p>
       </div>
       <div class="ryd-premium-teaser__actions">
-        <a href="${PATREON_JOIN_URL}" class="ryd-premium-teaser__cta" id="ryd-premium-teaser-cta">Unlock Premium</a>
-        <a href="${PREMIUM_INFO_URL}" class="ryd-premium-teaser__secondary" id="ryd-premium-teaser-learn">Preview full analytics</a>
+        <a href="${PATREON_JOIN_URL}" class="ryd-premium-teaser__cta" id="ryd-premium-teaser-cta">${ctaText}</a>
+        <a href="${CHANGELOG_URL}" class="ryd-premium-teaser__secondary" id="ryd-premium-teaser-learn">${secondaryText}</a>
       </div>
     </header>
     <div class="ryd-premium-teaser__body">
       <div class="ryd-premium-teaser__stats" role="status" aria-live="polite">
         <div class="ryd-premium-teaser__stat">
-          <span class="ryd-premium-teaser__stat-label">Raw dislike count</span>
+          <span class="ryd-premium-teaser__stat-label">${statRaw}</span>
           <span class="ryd-premium-teaser__stat-value" id="ryd-premium-teaser-raw">—</span>
         </div>
         <div class="ryd-premium-teaser__stat">
-          <span class="ryd-premium-teaser__stat-label">Estimated dislikes</span>
+          <span class="ryd-premium-teaser__stat-label">${statDislikes}</span>
           <span class="ryd-premium-teaser__stat-value" id="ryd-premium-teaser-dislikes">—</span>
         </div>
         <div class="ryd-premium-teaser__stat">
-          <span class="ryd-premium-teaser__stat-label">Estimated likes</span>
+          <span class="ryd-premium-teaser__stat-label">${statLikes}</span>
           <span class="ryd-premium-teaser__stat-value" id="ryd-premium-teaser-likes">—</span>
         </div>
       </div>
       <p class="ryd-premium-teaser__status" id="ryd-premium-teaser-status"></p>
-      <section class="ryd-premium-teaser__breadcrumbs" aria-label="How to unlock Premium analytics">
-        <h3 class="ryd-premium-teaser__breadcrumbs-title">Unlock Premium Video Insights in three quick steps:</h3>
+      <section class="ryd-premium-teaser__breadcrumbs" aria-label="${breadcrumbsAria}">
+        <h3 class="ryd-premium-teaser__breadcrumbs-title">${breadcrumbsTitle}</h3>
         <ol class="ryd-premium-teaser__breadcrumbs-list">
-          <li>Sign in with Patreon from the Return YouTube Dislike extension popup.</li>
-          <li>Select the Premium tier to enable activity timelines, country leaderboards, and the interactive map.</li>
-          <li>Reload YouTube to view hourly trends, top countries, and US state drill-downs for every video.</li>
+          <li>${step1}</li>
+          <li>${step2}</li>
+          <li>${step3}</li>
         </ol>
       </section>
     </div>
   `;
+}
+
+function openTab(url) {
+  if (!url) return;
+
+  const browser = getBrowser();
+  try {
+    if (browser && browser.tabs && typeof browser.tabs.create === "function") {
+      browser.tabs.create({ url });
+      return;
+    }
+  } catch {
+    // ignore and fall back to window.open
+  }
+
+  try {
+    if (browser?.runtime?.sendMessage) {
+      browser.runtime.sendMessage({ message: "ryd_open_tab", url });
+      return;
+    }
+  } catch {
+    // ignore and fall back to window.open
+  }
+
+  try {
+    window.open(url, "_blank", "noopener");
+  } catch {
+    // ignore navigation failures
+  }
 }

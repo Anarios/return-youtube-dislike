@@ -18,6 +18,8 @@
     "*://*.youtube.com/*",
     "storage",
     "*://returnyoutubedislikeapi.com/*",
+    "https://localhost:7258/*",
+    "http://localhost:7258/*",
     "identity"
   ],
   
@@ -50,10 +52,10 @@
   ]
 
     // uncomment this section for local storage to work in firefox locally,
-    ,"browser_specific_settings": {
-      "gecko": {
-        "id": "addon@example.com",
-        "strict_min_version": "42.0"
-      }
-    }
+//    ,"browser_specific_settings": {
+//      "gecko": {
+//        "id": "addon@example.com",
+//        "strict_min_version": "42.0"
+//      }
+//    }
 }

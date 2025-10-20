@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\"."
   },
+  "hidePremiumTeaser": {
+    "message": "Ẩn bảng giới thiệu Premium"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Không hiển thị bảng giới thiệu Premium trên trang xem YouTube."
+  },
   "roundNumbers": {
     "message": "Hiện số lượt đánh giá đã làm tròn"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Điểm Mới"
+  },
+  "premiumAnalytics_title": {
+    "message": "Phân tích video cao cấp"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Tương tác theo thời gian"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Quốc gia hàng đầu"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Quốc gia có nhiều lượt thích nhất"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Quốc gia có nhiều lượt không thích nhất"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Địa lý"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Mở rộng"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Thu gọn"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Chỉ số bản đồ"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Quay lại bản đồ thế giới"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Lượt thích"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Lượt không thích"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Tỷ lệ"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Khoảng dữ liệu"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Những ngày gần nhất"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Những ngày đầu"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Hiển thị những ngày mới nhất trong khoảng đã chọn"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Hiển thị những ngày sớm nhất trong khoảng đã chọn"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Tùy chọn riêng"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Toàn thời gian"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "$1 gần nhất"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "$1 đầu tiên"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 ngày"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 ngày"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Toàn thời gian"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1n"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Khoảng thời gian đã chọn: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Người dùng tiện ích"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 lượt thích"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 lượt không thích"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Đã ghi nhận $1 tương tác từ $2 quốc gia ($3 địa chỉ IP duy nhất)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Lượt đánh giá mỗi giờ"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Lượt đánh giá mỗi ngày"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Lượt đánh giá mỗi tuần"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Lượt đánh giá mỗi $1 giờ"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Lượt đánh giá mỗi $1 ngày"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Lượt đánh giá mỗi $1 phút"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Lượt đánh giá mỗi phút"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Lượt đánh giá mỗi $1 giây"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Lượt đánh giá mỗi giây"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Chưa có dữ liệu"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Không rõ"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Đang tải phân tích…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Vui lòng cấp quyền Patreon lại để mở khóa phân tích."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Phân tích cao cấp chỉ dành cho người ủng hộ Patreon đang hoạt động."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Phiên đã hết hạn. Hãy đăng nhập lại bằng Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Dịch vụ phân tích hiện không khả dụng."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Không thể kết nối với dịch vụ phân tích."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Không thể tải phân tích cao cấp."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Hoạt động"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Tỷ lệ lượt thích"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Tỷ lệ lượt thích cao hơn"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Tỷ lệ lượt thích thấp hơn"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Nhiều lượt thích hơn"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Ít lượt thích hơn"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Nhiều lượt không thích hơn"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Ít lượt không thích hơn"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Nhiều $1 hơn"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Ít $1 hơn"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Lượt thích: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Lượt không thích: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Tỷ lệ lượt thích: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Tổng quan nhanh về lượt không thích"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Lượt không thích thô là báo cáo trực tiếp từ người dùng tiện ích đang xem video này."
+  },
+  "premiumTeaser_cta": {
+    "message": "Mở khóa Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Xem thử toàn bộ phân tích"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Số lượt không thích thô"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Ước tính lượt không thích"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Ước tính lượt thích"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Đang lấy tổng lượt không thích mới nhất…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Không thể tải dữ liệu lượt không thích lúc này. Thử tải lại trang."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Cách mở khóa phân tích Premium"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Mở khóa phân tích video Premium trong ba bước nhanh:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Đăng nhập Patreon từ cửa sổ bật lên của tiện ích Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Chọn gói Premium để bật dòng thời gian hoạt động, bảng xếp hạng quốc gia và bản đồ tương tác."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Tải lại YouTube để xem xu hướng theo giờ, quốc gia hàng đầu và chi tiết từng bang của Hoa Kỳ cho mỗi video."
+  },
+  "premiumTierNotice_title": {
+    "message": "Phân tích Premium đã bị khóa"
+  },
+  "premiumTierNotice_message": {
+    "message": "Tư cách thành viên Patreon của bạn chưa bao gồm hạng Premium. Nâng cấp gói ủng hộ để mở khóa các số liệu phân tích video nâng cao."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Nâng cấp trên Patreon"
+  },
+  "changelog_title": {
+    "message": "Nhật ký thay đổi của Analytics cao cấp · Ngày 20 tháng 10 năm 2025"
+  },
+  "changelog_badge": {
+    "message": "Bản phát hành cao cấp"
+  },
+  "changelog_heading": {
+    "message": "Phân tích cao cấp, được mô phỏng lại"
+  },
+  "changelog_subheading": {
+    "message": "Khám phá dòng thời gian hoạt động trực tiếp, bảng xếp hạng các quốc gia hàng đầu và bản đồ tương tác đi kèm với Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Phát hành vào ngày 20 tháng 10 năm 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Nâng cấp trên Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Đọc hướng dẫn thiết lập"
+  },
+  "changelog_section_highlights": {
+    "message": "Có gì mới"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Dòng thời gian hoạt động trực tiếp"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Xem luồng lượt thích và không thích trong thời gian thực. Chuyển đổi các cài đặt trước hàng giờ, hàng ngày hoặc mọi thời điểm mà không cần tải lại, neo cửa sổ vào ngày đầu tiên hoặc phiếu bầu mới nhất và xem xét mọi mức tăng đột biến để xem điều gì đã kích hoạt sự tương tác."
+  },
+  "changelog_feature_map_title": {
+    "message": "Thế giới tương tác & bản đồ nhiệt của Hoa Kỳ"
+  },
+  "changelog_feature_map_body": {
+    "message": "Xoay khắp thế giới hoặc đi sâu vào các tiểu bang của Hoa Kỳ để tìm ra các điểm nóng. So sánh lượt thích, lượt không thích và tỷ lệ trong chú giải công cụ được nâng cấp và đánh dấu các khu vực phản ứng đầu tiên với video tải lên của bạn."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Bảng xếp hạng các quốc gia hàng đầu"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Xếp hạng mọi quốc gia theo hoạt động thô, lượt thích, lượt không thích hoặc tỷ lệ. Lọc với các giá trị đặt trước tương tự như dòng thời gian để tìm hiểu vị trí chiến dịch diễn ra và lên kế hoạch xuất bản nội dung tiếp theo."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Sắp có ảnh chụp màn hình—chụp chế độ xem này trong DevTools khi sẵn sàng."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Trình giữ chỗ: tổng quan về dòng thời gian"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Giữ chỗ: bản đồ hoạt động toàn cầu"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Trình giữ chỗ: bảng xếp hạng các quốc gia"
+  },
+  "changelog_section_upgrade": {
+    "message": "Cách mở khóa Phân tích cao cấp"
+  },
+  "changelog_upgrade_body": {
+    "message": "Sẵn sàng để đi sâu vào? Hãy làm theo các bước nhanh sau đây và làm mới tab YouTube của bạn."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Mở cửa sổ bật lên Trả lại lượt không thích trên YouTube và đăng nhập bằng Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Chọn cấp Premium để bật truyền dữ liệu phân tích tới tài khoản của bạn."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Tải lại bất kỳ trang xem YouTube nào—dòng thời gian, bản đồ và bảng xếp hạng của bạn sẽ xuất hiện ngay lập tức."
+  },
+  "changelog_section_release": {
+    "message": "Phát hành điểm nổi bật"
+  },
+  "changelog_release_item1": {
+    "message": "Giá trị đặt trước của dòng thời gian hoạt động truyền phát dữ liệu trực tiếp với các điểm cố định phạm vi cho các nhóm đầu tiên và mới nhất."
+  },
+  "changelog_release_item2": {
+    "message": "Bảng xếp hạng quốc gia làm mới ngay lập tức để bạn có thể phát hiện các khu vực đang phát triển mà không cần rời khỏi bảng điều khiển."
+  },
+  "changelog_release_item3": {
+    "message": "Bản đồ tương tác làm nổi bật các điểm nóng trên toàn cầu và tiểu bang Hoa Kỳ bằng các chú giải công cụ và số liệu rõ ràng hơn."
+  },
+  "changelog_support_heading": {
+    "message": "Cần một bàn tay?"
+  },
+  "changelog_support_description": {
+    "message": "Chúng tôi luôn sẵn sàng hỗ trợ nếu bạn gặp khó khăn—hãy đưa câu hỏi của bạn đến tài liệu hỗ trợ hoặc cộng đồng."
+  },
+  "changelog_support_contact": {
+    "message": "Hỏi cộng đồng"
   }
 }

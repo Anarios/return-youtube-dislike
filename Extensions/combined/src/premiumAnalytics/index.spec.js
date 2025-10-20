@@ -46,6 +46,12 @@ jest.mock("./lists", () => ({
 
 jest.mock("./teaser", () => ({
   setTeaserSuppressed: jest.fn(),
+  TEASER_SUPPRESSION_REASON_PREMIUM: "premium",
+}));
+
+jest.mock("./tierNotice", () => ({
+  showTierNotice: jest.fn(),
+  hideTierNotice: jest.fn(),
 }));
 
 jest.mock("./utils", () => {
@@ -103,11 +109,19 @@ const { debounce: mockDebounce, safeJson: mockSafeJson, toEpoch: mockToEpoch } =
 
 const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
-const { setTeaserSuppressed: mockSetTeaserSuppressed } = jest.requireMock("./teaser");
+const {
+  setTeaserSuppressed: mockSetTeaserSuppressed,
+  TEASER_SUPPRESSION_REASON_PREMIUM,
+} = jest.requireMock("./teaser");
+const { showTierNotice: mockShowTierNotice, hideTierNotice: mockHideTierNotice } = jest.requireMock("./tierNotice");
 
-jest.mock("../utils", () => ({
-  getVideoId: jest.fn(() => "video1234567"),
-}));
+jest.mock("../utils", () => {
+  const actual = jest.requireActual("../utils");
+  return {
+    ...actual,
+    getVideoId: jest.fn(() => "video1234567"),
+  };
+});
 
 import { analyticsState, resetSessionState, resetStateForVideo } from "./state";
 import {
@@ -120,6 +134,25 @@ const premiumAnalyticsModule = require("./index");
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 
+const enMessages = require("../../_locales/en/messages.json");
+
+function getMessage(key, substitutions) {
+  const entry = enMessages[key];
+  if (!entry) {
+    return key;
+  }
+  let message = entry.message ?? "";
+  if (substitutions == null) {
+    return message;
+  }
+  const values = Array.isArray(substitutions) ? substitutions : [substitutions];
+  values.forEach((value, index) => {
+    const replacement = value != null ? `${value}` : "";
+    message = message.replace(new RegExp(`\\$${index + 1}`, "g"), replacement);
+  });
+  return message;
+}
+
 describe("premiumAnalytics", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -127,11 +160,17 @@ describe("premiumAnalytics", () => {
     resetSessionState();
     analyticsState.sessionToken = "token";
     analyticsState.sessionActive = true;
+    analyticsState.membershipTier = "premium";
     analyticsState.currentRange = 7;
     analyticsState.rangeAnchor = "first";
     analyticsState.currentVideoId = "video1234567";
     analyticsState.zoomListenerRegistered = false;
     analyticsState.initialized = false;
+    global.chrome = {
+      i18n: {
+        getMessage,
+      },
+    };
     global.fetch = jest.fn(() =>
       Promise.resolve({
         ok: true,
@@ -164,7 +203,10 @@ describe("premiumAnalytics", () => {
     });
   });
 
-  afterEach(() => {});
+  afterEach(() => {
+    delete global.fetch;
+    delete global.chrome;
+  });
 
   it("initializes only once and wires listeners", () => {
     initPremiumAnalytics();
@@ -207,7 +249,7 @@ describe("premiumAnalytics", () => {
     requestAnalytics();
     await flushPromises();
 
-    expect(mockSetFooterMessage).toHaveBeenCalledWith("Premium analytics are available for active Patreon supporters.");
+    expect(mockSetFooterMessage).toHaveBeenCalledWith(getMessage("premiumAnalytics_errorInactive"));
     expect(mockSetLoadingState).toHaveBeenCalledWith(true);
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
   });
@@ -224,27 +266,37 @@ describe("premiumAnalytics", () => {
   it("updates session state and triggers refresh", async () => {
     const initialFetchCalls = global.fetch.mock.calls.length;
 
-    updatePremiumSession({ token: "new", active: true });
+    updatePremiumSession({ token: "new", active: true, membershipTier: "premium" });
     await flushPromises();
 
     expect(analyticsState.sessionToken).toBe("new");
     expect(global.fetch.mock.calls.length).toBeGreaterThan(initialFetchCalls);
     expect(mockSetLoadingState).toHaveBeenCalledWith(true);
-    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true);
+    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+    expect(mockHideTierNotice).toHaveBeenCalled();
 
     updatePremiumSession({ token: null, active: false });
     expect(mockDisposeActivityChart).toHaveBeenCalled();
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
-    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(false);
+    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(false, TEASER_SUPPRESSION_REASON_PREMIUM);
+    expect(mockHideTierNotice).toHaveBeenCalled();
   });
 
   it("avoids duplicate fetch when session details unchanged", async () => {
     const initialFetchCalls = global.fetch.mock.calls.length;
 
-    updatePremiumSession({ token: analyticsState.sessionToken, active: true });
+    updatePremiumSession({ token: analyticsState.sessionToken, active: true, membershipTier: "premium" });
     await flushPromises();
 
     expect(global.fetch.mock.calls.length).toBe(initialFetchCalls);
+  });
+
+  it("shows tier notice when membership is not premium", () => {
+    updatePremiumSession({ token: "token", active: true, membershipTier: "supporter" });
+
+    expect(mockShowTierNotice).toHaveBeenCalled();
+    expect(mockEnsurePanel).not.toHaveBeenCalled();
+    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true, TEASER_SUPPRESSION_REASON_PREMIUM);
   });
 
   it("sends the selected range in days without explicit timestamps", async () => {

@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Делает значение статистики более последовательным."
   },
+  "hidePremiumTeaser": {
+    "message": "Скрывать панель премиум-тизера"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Не показывать премиум-тизер на страницах просмотра YouTube."
+  },
   "roundNumbers": {
     "message": "Показывать округленные числа"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Что нового"
+  },
+  "premiumAnalytics_title": {
+    "message": "Премиальная аналитика по видео"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Вовлечённость во времени"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Топ стран"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Страны с наибольшим числом лайков"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Страны с наибольшим числом дизлайков"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "География"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Развернуть"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Свернуть"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Метрика карты"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Назад к карте мира"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Лайки"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Дизлайки"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Соотношение"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Диапазон данных"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Последние дни"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Первые дни"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Показать самые последние дни в выбранном диапазоне"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Показать самые ранние дни в выбранном диапазоне"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Пользовательский выбор"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "За всё время"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Последние $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Первые $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 день"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 дней"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "За всё время"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1д"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Выбранный период: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Пользователи расширения"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 лайков"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 дизлайков"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Зафиксировано $1 взаимодействий из $2 стран ($3 уникальных IP)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Голоса в час"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Голоса в день"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Голоса в неделю"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Голоса каждые $1 часов"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Голоса каждые $1 дней"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Голоса каждые $1 минут"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Голоса в минуту"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Голоса каждые $1 секунд"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Голоса в секунду"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Данных пока нет"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Неизвестно"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Загрузка аналитики…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Повторно авторизуйте Patreon, чтобы открыть аналитику."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Премиальная аналитика доступна активным подписчикам Patreon."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Сессия истекла. Войдите через Patreon ещё раз."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Сервис аналитики сейчас недоступен."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Не удалось подключиться к сервису аналитики."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Не удалось загрузить премиальную аналитику."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Активность"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Соотношение лайков"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Большее соотношение лайков"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Меньшее соотношение лайков"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Больше лайков"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Меньше лайков"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Больше дизлайков"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Меньше дизлайков"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Больше $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Меньше $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Лайки: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Дизлайки: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Соотношение лайков: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Краткий обзор дизлайков"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Необработанные дизлайки — это прямые сообщения пользователей расширения, смотрящих это видео."
+  },
+  "premiumTeaser_cta": {
+    "message": "Открыть Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Просмотреть полную аналитику"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Количество необработанных дизлайков"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Оценочные дизлайки"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Оценочные лайки"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Получаем последние суммы дизлайков…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Не удалось загрузить данные по дизлайкам. Попробуйте обновить страницу."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Как открыть премиальную аналитику"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Откройте премиальную аналитику видео в три быстрых шага:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Войдите через Patreon во всплывающем окне расширения Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Выберите уровень Premium, чтобы включить временные шкалы активности, рейтинги стран и интерактивную карту."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Перезагрузите YouTube, чтобы увидеть почасовые тренды, топ стран и детализацию по штатам США для каждого видео."
+  },
+  "premiumTierNotice_title": {
+    "message": "Премиальная аналитика заблокирована"
+  },
+  "premiumTierNotice_message": {
+    "message": "В вашей подписке на Patreon нет уровня Premium. Повышайте поддержку, чтобы получить доступ к расширенной видеоаналитике."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Обновить на Patreon"
+  },
+  "changelog_title": {
+    "message": "Журнал изменений Premium Analytics · 20 октября 2025 года"
+  },
+  "changelog_badge": {
+    "message": "Премиум-релиз"
+  },
+  "changelog_heading": {
+    "message": "Премиальная аналитика по-новому"
+  },
+  "changelog_subheading": {
+    "message": "Изучите хронологию событий в прямом эфире, таблицу лидеров лучших стран и интерактивную карту, включенную в состав Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Выпущено 20 октября 2025 года"
+  },
+  "changelog_cta_primary": {
+    "message": "Повысить уровень на Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Прочитать инструкцию по настройке"
+  },
+  "changelog_section_highlights": {
+    "message": "Что нового"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "График активности в прямом эфире"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Смотрите трансляцию лайков и антипатий в режиме реального времени. Переключайте ежечасные, ежедневные или постоянные настройки без перезагрузки, привязывайте окно к первому или последнему дню голосования и просматривайте каждый всплеск, чтобы увидеть, что вызвало взаимодействие."
+  },
+  "changelog_feature_map_title": {
+    "message": "Интерактивная тепловая карта мира и США"
+  },
+  "changelog_feature_map_body": {
+    "message": "Путешествуйте по всему земному шару или погрузитесь в штаты США, чтобы обнаружить горячие точки. Сравните соотношение лайков, антипатий и их соотношение в обновленной подсказке и выделите регионы, которые первыми реагируют на ваши загрузки."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Таблица лидеров лучших стран"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Проранжируйте каждую страну по показателям активности, симпатий, антипатий или соотношения. Фильтруйте с теми же настройками, что и на временной шкале, чтобы узнать, где будут проводиться кампании, и спланировать, что публиковать дальше."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Скриншот появится позже — сохраните этот вид через DevTools, когда будете готовы."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Заполнитель: обзор временной шкалы"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Заполнитель: карта глобальной активности"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Заполнитель: таблица лидеров стран"
+  },
+  "changelog_section_upgrade": {
+    "message": "Как открыть Premium Analytics"
+  },
+  "changelog_upgrade_body": {
+    "message": "Готовы погрузиться? Выполните эти шаги и обновите вкладку YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Откройте всплывающее окно Return YouTube Dislike и войдите через Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Выберите уровень Premium, чтобы аналитические данные поступали в ваш аккаунт."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Перезагрузите любую страницу просмотра YouTube — временная шкала, карта и рейтинги появятся сразу."
+  },
+  "changelog_section_release": {
+    "message": "Основные моменты релиза"
+  },
+  "changelog_release_item1": {
+    "message": "Предварительные настройки временной шкалы активности передают данные в реальном времени с привязкой к диапазону для первого и последнего сегментов."
+  },
+  "changelog_release_item2": {
+    "message": "Таблица лидеров стран обновляется мгновенно, поэтому вы можете видеть растущие регионы, не покидая панели."
+  },
+  "changelog_release_item3": {
+    "message": "На интерактивной карте обозначены горячие точки мира и штатов США с более четкими подсказками и показателями."
+  },
+  "changelog_support_heading": {
+    "message": "Нужна помощь?"
+  },
+  "changelog_support_description": {
+    "message": "Если возникли вопросы, загляните в справочные материалы или сообщество — мы рядом."
+  },
+  "changelog_support_contact": {
+    "message": "Спросить сообщество"
   }
 }

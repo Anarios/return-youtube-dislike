@@ -1,13 +1,21 @@
-const isDevelopment = !('update_url' in chrome.runtime.getManifest());
+const DEV_API_URL = "https://returnyoutubedislikeapi.com";
+const PROD_API_URL = "https://returnyoutubedislikeapi.com";
+
+const runtime = typeof chrome !== "undefined" ? chrome.runtime : null;
+const manifest = typeof runtime?.getManifest === "function" ? runtime.getManifest() : null;
+const isDevelopment = !manifest || !("update_url" in manifest);
+
+const extensionChangelogUrl =
+  runtime && typeof runtime.getURL === "function"
+    ? runtime.getURL("changelog/4/changelog_4.0.html")
+    : "https://returnyoutubedislike.com/changelog/4/changelog_4.0.html";
 
 const config = {
-  apiUrl: isDevelopment 
-    ? "https://localhost:7258" 
-    : "https://returnyoutubedislikeapi.com",
-  
+  apiUrl: isDevelopment ? DEV_API_URL : PROD_API_URL,
+
   voteDisabledIconName: "icon_hold128.png",
   defaultIconName: "icon128.png",
-  
+
   links: {
     website: "https://returnyoutubedislike.com",
     github: "https://github.com/Anarios/return-youtube-dislike",
@@ -15,9 +23,9 @@ const config = {
     donate: "https://returnyoutubedislike.com/donate",
     faq: "https://returnyoutubedislike.com/faq",
     help: "https://returnyoutubedislike.com/help",
-    changelog: "/changelog/3/changelog_3.0.html",
+    changelog: extensionChangelogUrl,
   },
-  
+
   defaultExtConfig: {
     disableVoteSubmission: false,
     disableLogging: true,
@@ -26,7 +34,8 @@ const config = {
     colorTheme: "classic",
     numberDisplayFormat: "compactShort",
     numberDisplayReformatLikes: false,
-  }
+    hidePremiumTeaser: false,
+  },
 };
 
 function getApiUrl() {
@@ -34,7 +43,11 @@ function getApiUrl() {
 }
 
 function getApiEndpoint(endpoint) {
-  return `${config.apiUrl}${endpoint.startsWith('/') ? '' : '/'}${endpoint}`;
+  return `${config.apiUrl}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
 }
 
-export { config, getApiUrl, getApiEndpoint };
+function getChangelogUrl() {
+  return config.links?.changelog ?? extensionChangelogUrl;
+}
+
+export { config, getApiUrl, getApiEndpoint, getChangelogUrl };

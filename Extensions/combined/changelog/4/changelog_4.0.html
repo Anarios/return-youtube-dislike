@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>__MSG_changelog_title__</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="changelog.css" />
+  </head>
+  <body>
+    <div class="ryd-changelog">
+      <header class="ryd-changelog__hero">
+        <div class="ryd-changelog__badge">__MSG_changelog_badge__</div>
+        <h1 class="ryd-changelog__title">__MSG_changelog_heading__</h1>
+        <p class="ryd-changelog__subtitle">__MSG_changelog_subheading__</p>
+        <div class="ryd-changelog__actions">
+          <button class="ryd-button ryd-button--primary" id="ryd-changelog-upgrade">
+            __MSG_changelog_cta_primary__
+          </button>
+          <button class="ryd-button ryd-button--ghost" id="ryd-changelog-support">
+            __MSG_changelog_cta_secondary__
+          </button>
+        </div>
+        <p class="ryd-changelog__meta">__MSG_changelog_releaseDate__</p>
+      </header>
+
+      <main class="ryd-changelog__main">
+        <section class="ryd-section">
+          <h2 class="ryd-section__heading">__MSG_changelog_section_highlights__</h2>
+          <div class="ryd-feature-grid">
+            <article class="ryd-feature-card">
+              <div class="ryd-feature-card__text">
+                <h3>__MSG_changelog_feature_timeline_title__</h3>
+                <p>__MSG_changelog_feature_timeline_body__</p>
+              </div>
+              <figure class="ryd-feature-card__visual">
+                <img
+                  src="../images/activity.jpg"
+                  alt="Screenshot of the premium activity timeline showing hourly likes and dislikes."
+                  loading="lazy"
+                />
+              </figure>
+            </article>
+
+            <article class="ryd-feature-card">
+              <div class="ryd-feature-card__text">
+                <h3>__MSG_changelog_feature_map_title__</h3>
+                <p>__MSG_changelog_feature_map_body__</p>
+              </div>
+              <figure class="ryd-feature-card__visual">
+                <img
+                  src="../images/map1.jpg"
+                  alt="Screenshot of the premium world heatmap with country level dislike insights."
+                  loading="lazy"
+                />
+              </figure>
+              <figure class="ryd-feature-card__visual">
+                <img
+                  src="../images/map2.jpg"
+                  alt="Screenshot of the premium United States heatmap with state level dislike insights."
+                  loading="lazy"
+                />
+              </figure>
+            </article>
+
+            <article class="ryd-feature-card">
+              <div class="ryd-feature-card__text">
+                <h3>__MSG_changelog_feature_quality_title__</h3>
+                <p>__MSG_changelog_feature_quality_body__</p>
+              </div>
+              <figure class="ryd-feature-card__visual">
+                <img
+                  src="../images/list.jpg"
+                  alt="Screenshot of the premium top countries leaderboard sorted by dislikes."
+                  loading="lazy"
+                />
+              </figure>
+            </article>
+          </div>
+        </section>
+
+        <section class="ryd-section">
+          <h2 class="ryd-section__heading">__MSG_changelog_section_upgrade__</h2>
+          <p class="ryd-section__intro">__MSG_changelog_upgrade_body__</p>
+          <ol class="ryd-list">
+            <li>__MSG_changelog_upgrade_step1__</li>
+            <li>__MSG_changelog_upgrade_step2__</li>
+            <li>__MSG_changelog_upgrade_step3__</li>
+          </ol>
+        </section>
+
+        <section class="ryd-section">
+          <h2 class="ryd-section__heading">__MSG_changelog_section_release__</h2>
+          <ul class="ryd-list ryd-list--bulleted">
+            <li>__MSG_changelog_release_item1__</li>
+            <li>__MSG_changelog_release_item2__</li>
+            <li>__MSG_changelog_release_item3__</li>
+          </ul>
+        </section>
+
+        <section class="ryd-section ryd-section--support">
+          <h2 class="ryd-section__heading">__MSG_changelog_support_heading__</h2>
+          <p class="ryd-section__intro">__MSG_changelog_support_description__</p>
+          <div class="ryd-support">
+            <button class="ryd-button ryd-button--outline" id="ryd-changelog-contact">
+              __MSG_changelog_support_contact__
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="ryd-changelog__footer">
+        <span>&copy; __MSG_extensionName__</span>
+        <span>__MSG_changelog_releaseDate__</span>
+      </footer>
+    </div>
+
+    <script type="module" src="../../ryd.changelog.js"></script>
+  </body>
+</html>

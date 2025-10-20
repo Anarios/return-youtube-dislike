@@ -3,7 +3,7 @@ const fs = require("fs");
 const CopyPlugin = require("copy-webpack-plugin");
 
 const extensionVersion = process.env.npm_package_version.replace("-", ".");
-const entries = ["ryd.content-script", "ryd.background", "popup"];
+const entries = ["ryd.content-script", "ryd.background", "popup", "ryd.changelog"];
 
 const ignorePatterns = [
   "**/manifest-**",

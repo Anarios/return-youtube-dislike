@@ -10,7 +10,7 @@ import {
   localize,
   createObserver,
 } from "./utils";
-import { getApiEndpoint } from "./config";
+import { config, getApiEndpoint, DEV_API_URL, PROD_API_URL, isDevelopment } from "./config";
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
@@ -25,6 +25,7 @@ let extConfig = {
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
+  hidePremiumTeaser: false,
   selectors: {
     dislikeTextContainer: [],
     likeTextContainer: [],
@@ -277,18 +278,21 @@ async function initExtConfig() {
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
+  initializeHidePremiumTeaser();
   await initializeSelectors();
 }
 
 async function initializeSelectors() {
-  let result = await fetch(getApiEndpoint('/configs/selectors'), {
+  let result = await fetch(getApiEndpoint("/configs/selectors"), {
     method: "GET",
     headers: {
       Accept: "application/json",
     },
   })
     .then((response) => response.json())
-    .catch((error) => {});
+    .catch((error) => {
+      console.error("Error fetching selectors:", error);
+    });
   extConfig.selectors = result ?? extConfig.selectors;
   console.log(result);
 }
@@ -382,6 +386,17 @@ function initializeNumberDisplayReformatLikes() {
       getBrowser().storage.sync.set({ numberDisplayReformatLikes: false });
     } else {
       extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
+    }
+  });
+}
+
+function initializeHidePremiumTeaser() {
+  getBrowser().storage.sync.get(["hidePremiumTeaser"], (res) => {
+    if (res.hidePremiumTeaser === undefined) {
+      getBrowser().storage.sync.set({ hidePremiumTeaser: false });
+      extConfig.hidePremiumTeaser = false;
+    } else {
+      extConfig.hidePremiumTeaser = res.hidePremiumTeaser === true;
     }
   });
 }

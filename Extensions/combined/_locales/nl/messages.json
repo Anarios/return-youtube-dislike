@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Maak het formaat voor leuk en niet leuk consistent."
   },
+  "hidePremiumTeaser": {
+    "message": "Premium-teaserpaneel verbergen"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Toon de premiumteaser niet op YouTube-kijkpagina’s."
+  },
   "roundNumbers": {
     "message": "Afgeronde getallen weergeven"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Wat is er nieuw"
+  },
+  "premiumAnalytics_title": {
+    "message": "Premium video-inzichten"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Betrokkenheid in de tijd"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Toplanden"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Landen met de meeste likes"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Landen met de meeste dislikes"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Geografie"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Uitklappen"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Inklappen"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Kaartmetriek"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Terug naar wereldkaart"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Likes"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Dislikes"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Verhouding"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Gegevensvenster"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Laatste dagen"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Eerste dagen"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Toon de meest recente dagen binnen het geselecteerde venster"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Toon de eerste dagen binnen het geselecteerde venster"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Aangepaste selectie"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Gehele periode"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Laatste $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Eerste $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 dag"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 dagen"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Gehele periode"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1d"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Geselecteerde periode: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Extensiegebruikers"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 likes"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 dislikes"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "$1 interacties vastgelegd uit $2 landen ($3 unieke IP's)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Stemmen per uur"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Stemmen per dag"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Stemmen per week"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Stemmen elke $1 uur"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Stemmen elke $1 dagen"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Stemmen elke $1 minuten"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Stemmen per minuut"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Stemmen elke $1 seconden"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Stemmen per seconde"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Nog geen gegevens"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Onbekend"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Inzichten laden…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Autoriseer Patreon opnieuw om de analyses te ontgrendelen."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Premium-analyses zijn beschikbaar voor actieve Patreon-supporters."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Sessie verlopen. Meld je opnieuw aan met Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "De analysedienst is nu niet beschikbaar."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Kan geen verbinding maken met de analysedienst."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Premium-analyses kunnen niet worden geladen."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Activiteit"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Like-verhouding"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Hogere like-verhouding"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Lagere like-verhouding"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Meer likes"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Minder likes"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Meer dislikes"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Minder dislikes"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Meer $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Minder $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Likes: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Dislikes: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Like-verhouding: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Momentopname van dislike-inzichten"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Ruwe dislikes zijn directe meldingen van extensiegebruikers die deze video bekijken."
+  },
+  "premiumTeaser_cta": {
+    "message": "Premium ontgrendelen"
+  },
+  "premiumTeaser_learn": {
+    "message": "Volledige analyses bekijken"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Aantal ruwe dislikes"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Geschatte dislikes"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Geschatte likes"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Nieuwste totalen van dislikes ophalen…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "De dislikegegevens konden nu niet worden geladen. Probeer de pagina te vernieuwen."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Premium-analyses ontgrendelen"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Ontgrendel Premium-video-inzichten in drie snelle stappen:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Meld je aan met Patreon vanuit het pop-upvenster van de Return YouTube Dislike-extensie."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Selecteer het Premium-abonnement om activiteitstijdlijnen, ranglijsten per land en de interactieve kaart te activeren."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Laad YouTube opnieuw om uurlijkse trends, toplanden en uitsplitsingen per Amerikaanse staat te bekijken voor elke video."
+  },
+  "premiumTierNotice_title": {
+    "message": "Premium-analyse vergrendeld"
+  },
+  "premiumTierNotice_message": {
+    "message": "Je Patreon-lidmaatschap bevat geen Premium-niveau. Upgrade je bijdrage om uitgebreide video-analyses te ontgrendelen."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Upgraden op Patreon"
+  },
+  "changelog_title": {
+    "message": "Wijzigingenlogboek voor Premium Analytics · 20 oktober 2025"
+  },
+  "changelog_badge": {
+    "message": "Premium-release"
+  },
+  "changelog_heading": {
+    "message": "Premium analyses, opnieuw uitgevonden"
+  },
+  "changelog_subheading": {
+    "message": "Ontdek de tijdlijn van live-activiteiten, het klassement van de beste landen en de interactieve kaart die bij Return YouTube Dislike Premium zijn inbegrepen."
+  },
+  "changelog_releaseDate": {
+    "message": "Uitgebracht op 20 oktober 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Upgraden op Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Lees de installatiehandleiding"
+  },
+  "changelog_section_highlights": {
+    "message": "Wat is er nieuw"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Tijdlijn voor live activiteiten"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Bekijk de likes en dislikes in realtime. Schakel tussen voorinstellingen per uur, per dag of altijd zonder opnieuw te laden, veranker het venster op dag één of de laatste stemmingen en scrub elke piek om te zien wat de betrokkenheid heeft veroorzaakt."
+  },
+  "changelog_feature_map_title": {
+    "message": "Interactieve wereld- en Amerikaanse heatmap"
+  },
+  "changelog_feature_map_body": {
+    "message": "Kijk over de hele wereld of duik in Amerikaanse staten om hotspots te ontdekken. Vergelijk de likes, dislikes en ratio's in de geüpgradede tooltip en breng de regio's onder de aandacht die het eerst op uw uploads reageren."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Leiderbord van toplanden"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Rangschik elk land op ruwe activiteit, voorkeuren, antipathieën of verhoudingen. Filter met dezelfde voorinstellingen als de tijdlijn om te zien waar campagnes terechtkomen en plan wat u vervolgens gaat publiceren."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Screenshot binnenkort beschikbaar: leg deze weergave vast in DevTools als u klaar bent."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Placeholder: tijdlijnoverzicht"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Tijdelijke aanduiding: mondiale activiteitenkaart"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Tijdelijke aanduiding: landenklassement"
+  },
+  "changelog_section_upgrade": {
+    "message": "Hoe Premium-analyses te ontgrendelen"
+  },
+  "changelog_upgrade_body": {
+    "message": "Klaar om erin te duiken? Volg deze snelle stappen en vernieuw uw YouTube-tabblad."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Open de pop-up Return YouTube Dislike en log in met Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Kies de Premium-laag om het streamen van analysegegevens naar uw account in te schakelen."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Laad elke YouTube-weergavepagina opnieuw: uw tijdlijn, kaart en klassementen verschijnen onmiddellijk."
+  },
+  "changelog_section_release": {
+    "message": "Hoogtepunten vrijgeven"
+  },
+  "changelog_release_item1": {
+    "message": "Voorinstellingen voor de tijdlijn van activiteiten streamen live gegevens met bereikankers voor de eerste en laatste buckets."
+  },
+  "changelog_release_item2": {
+    "message": "Het landenklassement wordt onmiddellijk vernieuwd, zodat u stijgende regio's kunt zien zonder het paneel te verlaten."
+  },
+  "changelog_release_item3": {
+    "message": "Interactieve kaart belicht hotspots in de wereld en de VS met duidelijkere tooltips en statistieken."
+  },
+  "changelog_support_heading": {
+    "message": "Handje nodig?"
+  },
+  "changelog_support_description": {
+    "message": "We zijn er als u een probleem tegenkomt: stel uw vragen aan de ondersteuningsdocumenten of community."
+  },
+  "changelog_support_contact": {
+    "message": "Vraag het aan de gemeenschap"
   }
 }

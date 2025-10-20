@@ -4,8 +4,32 @@ import { analyticsState } from "../state";
 import { setActivityBucketLabel } from "../panel";
 import { clampRangeToBounds, combineBounds, computeChartBounds, updateGlobalBounds } from "./time";
 import { toEpoch, sanitizeCount } from "../utils";
+import { localize } from "../../utils";
 import { getTextColor, getMutedTextColor, getBorderColor } from "../theme";
 import { logRangeSelection, logTimeBounds } from "../logging";
+
+let activityTranslator = (key, substitutions) => localize(key, substitutions);
+
+export function setActivityTranslator(translator) {
+  if (typeof translator === "function") {
+    activityTranslator = translator;
+  } else {
+    activityTranslator = (key, subs) => localize(key, subs);
+  }
+}
+
+export function resetActivityTranslator() {
+  activityTranslator = (key, subs) => localize(key, subs);
+}
+
+function translateActivity(key, substitutions) {
+  try {
+    return activityTranslator(key, substitutions);
+  } catch (error) {
+    console.warn("Activity translation failed for", key, error);
+    return localize(key, substitutions);
+  }
+}
 
 const zoomListeners = new Set();
 const MS_PER_MINUTE = 60 * 1000;
@@ -42,6 +66,8 @@ export function renderActivityChart(timeSeries) {
   const bucketLabel = timeSeries?.bucket;
   const bucketMs = resolveBucketSize(bucketLabel) ?? state.latestBucketMs;
   const bucketDescription = formatBucketDescription(bucketLabel, bucketMs);
+  const likesLabel = translateActivity("premiumAnalytics_modeLikes");
+  const dislikesLabel = translateActivity("premiumAnalytics_modeDislikes");
 
   if (bucketDescription) {
     state.latestBucketLabel = bucketDescription;
@@ -89,11 +115,7 @@ export function renderActivityChart(timeSeries) {
       : computedBounds.max;
   }
 
-  if (
-    Number.isFinite(sliderBounds.min) &&
-    Number.isFinite(sliderBounds.max) &&
-    sliderBounds.max <= sliderBounds.min
-  ) {
+  if (Number.isFinite(sliderBounds.min) && Number.isFinite(sliderBounds.max) && sliderBounds.max <= sliderBounds.min) {
     const fallbackMin = Number.isFinite(computedBounds.min) ? computedBounds.min : sliderBounds.min;
     const fallbackMax = Number.isFinite(computedBounds.max) ? computedBounds.max : null;
     if (Number.isFinite(fallbackMin) && Number.isFinite(fallbackMax) && fallbackMax > fallbackMin) {
@@ -112,16 +134,8 @@ export function renderActivityChart(timeSeries) {
     max: pickFirstFinite(availableBounds.max, sliderBounds.max, state.globalTimeBounds.max),
   };
 
-  if (
-    Number.isFinite(globalBounds.min) &&
-    Number.isFinite(globalBounds.max) &&
-    globalBounds.max <= globalBounds.min
-  ) {
-    if (
-      Number.isFinite(sliderBounds.min) &&
-      Number.isFinite(sliderBounds.max) &&
-      sliderBounds.max > sliderBounds.min
-    ) {
+  if (Number.isFinite(globalBounds.min) && Number.isFinite(globalBounds.max) && globalBounds.max <= globalBounds.min) {
+    if (Number.isFinite(sliderBounds.min) && Number.isFinite(sliderBounds.max) && sliderBounds.max > sliderBounds.min) {
       globalBounds = { ...sliderBounds };
     } else if (Number.isFinite(globalBounds.min)) {
       const span = Math.max(Number.isFinite(state.latestBucketMs) ? state.latestBucketMs : 0, MS_PER_MINUTE);
@@ -144,8 +158,9 @@ export function renderActivityChart(timeSeries) {
     to: state.selectionRange.to ?? toEpoch(timeSeries?.selectedRangeEndUtc),
   };
 
-  let selectionBounds = clampRangeToBounds(requestedSelection, sliderBounds)
-    ?? (Number.isFinite(sliderBounds.min) && Number.isFinite(sliderBounds.max)
+  let selectionBounds =
+    clampRangeToBounds(requestedSelection, sliderBounds) ??
+    (Number.isFinite(sliderBounds.min) && Number.isFinite(sliderBounds.max)
       ? { from: sliderBounds.min, to: sliderBounds.max }
       : null);
 
@@ -186,7 +201,7 @@ export function renderActivityChart(timeSeries) {
   activityChart.setOption({
     backgroundColor: "transparent",
     tooltip: { trigger: "axis" },
-    legend: { data: ["Likes", "Dislikes"], textStyle: { color: getTextColor() } },
+    legend: { data: [likesLabel, dislikesLabel], textStyle: { color: getTextColor() } },
     grid: { left: 40, right: 20, top: 30, bottom: 70 },
     xAxis: {
       type: "time",
@@ -202,7 +217,7 @@ export function renderActivityChart(timeSeries) {
     },
     series: [
       {
-        name: "Likes",
+        name: likesLabel,
         type: seriesType,
         smooth: seriesType === "line",
         symbol,
@@ -212,7 +227,7 @@ export function renderActivityChart(timeSeries) {
         data: likesSeries,
       },
       {
-        name: "Dislikes",
+        name: dislikesLabel,
         type: seriesType,
         smooth: seriesType === "line",
         symbol,
@@ -337,11 +352,11 @@ function formatBucketDescription(label, bucketMs) {
 
   switch (normalizedLabel) {
     case "hour":
-      return "Votes per hour";
+      return translateActivity("premiumAnalytics_bucketHour");
     case "day":
-      return "Votes per day";
+      return translateActivity("premiumAnalytics_bucketDay");
     case "week":
-      return "Votes per week";
+      return translateActivity("premiumAnalytics_bucketWeek");
     default:
       break;
   }
@@ -351,30 +366,35 @@ function formatBucketDescription(label, bucketMs) {
   }
 
   if (approximately(bucketMs, MS_PER_WEEK)) {
-    return "Votes per week";
+    return translateActivity("premiumAnalytics_bucketWeek");
   }
 
   if (bucketMs % MS_PER_DAY === 0) {
     const days = bucketMs / MS_PER_DAY;
-    if (days === 1) return "Votes per day";
-    return `Votes per ${days} days`;
+    if (days === 1) return translateActivity("premiumAnalytics_bucketDay");
+    return translateActivity("premiumAnalytics_bucketDays", [formatBucketNumber(days)]);
   }
 
   if (bucketMs % MS_PER_HOUR === 0) {
     const hours = bucketMs / MS_PER_HOUR;
-    if (hours === 1) return "Votes per hour";
-    return `Votes per ${hours} hours`;
+    if (hours === 1) return translateActivity("premiumAnalytics_bucketHour");
+    return translateActivity("premiumAnalytics_bucketHours", [formatBucketNumber(hours)]);
   }
 
   if (bucketMs % MS_PER_MINUTE === 0) {
     const minutes = bucketMs / MS_PER_MINUTE;
-    if (minutes === 1) return "Votes per minute";
-    return `Votes per ${minutes} minutes`;
+    if (minutes === 1) return translateActivity("premiumAnalytics_bucketMinute");
+    return translateActivity("premiumAnalytics_bucketMinutes", [formatBucketNumber(minutes)]);
   }
 
   const seconds = Math.round(bucketMs / 1000);
-  if (seconds === 1) return "Votes per second";
-  return `Votes per ${seconds} seconds`;
+  if (seconds === 1) return translateActivity("premiumAnalytics_bucketSecond");
+  return translateActivity("premiumAnalytics_bucketSeconds", [formatBucketNumber(seconds)]);
+}
+
+function formatBucketNumber(value) {
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric.toLocaleString() : `${value}`;
 }
 
 function approximately(value, target) {
@@ -430,7 +450,6 @@ function normalizeSeriesPoints(points, bucketMs) {
 
   return filled;
 }
-
 
 function handleDataZoom(event) {
   if (analyticsState.suppressZoomEvents) {

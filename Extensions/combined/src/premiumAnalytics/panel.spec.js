@@ -17,6 +17,25 @@ import {
   applyChartExpansionState,
 } from "./panel";
 
+const enMessages = require("../../_locales/en/messages.json");
+
+function getMessage(key, substitutions) {
+  const entry = enMessages[key];
+  if (!entry) {
+    return key;
+  }
+  let message = entry.message ?? "";
+  if (substitutions == null) {
+    return message;
+  }
+  const values = Array.isArray(substitutions) ? substitutions : [substitutions];
+  values.forEach((value, index) => {
+    const replacement = value != null ? `${value}` : "";
+    message = message.replace(new RegExp(`\\$${index + 1}`, "g"), replacement);
+  });
+  return message;
+}
+
 describe("premiumAnalytics.panel", () => {
   function mountSecondaryContainer() {
     document.body.innerHTML = `
@@ -30,6 +49,11 @@ describe("premiumAnalytics.panel", () => {
   }
 
   beforeEach(() => {
+    global.chrome = {
+      i18n: {
+        getMessage,
+      },
+    };
     resetStateForVideo();
     analyticsState.panelElement = null;
     analyticsState.currentRange = 30;
@@ -40,6 +64,7 @@ describe("premiumAnalytics.panel", () => {
 
   afterEach(() => {
     document.body.innerHTML = "";
+    delete global.chrome;
   });
 
   it("configures callbacks and triggers them via UI interactions", () => {
@@ -154,12 +179,12 @@ describe("premiumAnalytics.panel", () => {
     const summaryMeta = footer.querySelector(".ryd-analytics__summary-meta");
     const periodLabel = footer.querySelector(".ryd-analytics__period-label");
 
-    expect(likes?.textContent).toBe("1,200 likes");
-    expect(dislikes?.textContent).toBe("300 dislikes");
-    expect(summaryMeta?.textContent).toContain("1,500 interactions");
-    expect(summaryMeta?.textContent).toContain("12 countries");
-    expect(summaryMeta?.textContent).toContain("45 unique IPs");
-    expect(periodLabel?.textContent).toBe("Selected period: First 30 days");
+    expect(likes?.textContent).toBe(getMessage("premiumAnalytics_totalsLikes", ["1,200"]));
+    expect(dislikes?.textContent).toBe(getMessage("premiumAnalytics_totalsDislikes", ["300"]));
+    expect(summaryMeta?.textContent?.trim()).toBe(getMessage("premiumAnalytics_summaryMeta", ["1,500", "12", "45"]));
+    const dayLabel = getMessage("premiumAnalytics_daysPlural", ["30"]);
+    const windowLabel = getMessage("premiumAnalytics_windowSummaryFirst", [dayLabel]);
+    expect(periodLabel?.textContent).toBe(getMessage("premiumAnalytics_selectedPeriod", [windowLabel]));
   });
 
   it("updates anchor toggle state and descriptor", () => {
@@ -173,7 +198,8 @@ describe("premiumAnalytics.panel", () => {
     const activeAnchor = panel.querySelector(".ryd-range-anchor.is-active");
     expect(activeAnchor?.dataset.anchor).toBe("last");
     const descriptor = panel.querySelector("#ryd-analytics-range-window");
-    expect(descriptor?.textContent).toBe("Last 30 days");
+    const lastLabel = getMessage("premiumAnalytics_daysPlural", ["30"]);
+    expect(descriptor?.textContent).toBe(getMessage("premiumAnalytics_windowSummaryLast", [lastLabel]));
   });
 
   it("sets footer message directly", () => {

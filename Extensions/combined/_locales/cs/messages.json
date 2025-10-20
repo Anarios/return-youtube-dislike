@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Udělat formát palců nahoru/dolů konzistentní."
   },
+  "hidePremiumTeaser": {
+    "message": "Skrýt panel prémiové upoutávky"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Nezobrazovat prémiovou upoutávku na stránkách přehrávání na YouTube."
+  },
   "roundNumbers": {
     "message": "Zobrazit čísla zaokrouhlená dolů"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Co je nového"
+  },
+  "premiumAnalytics_title": {
+    "message": "Prémiové statistiky videa"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Zapojení v čase"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Nejlepší země"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Země s nejvíce lajky"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Země s nejvíce dislajky"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Geografie"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Rozbalit"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Sbalit"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Metrika mapy"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Zpět na mapu světa"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Lajky"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Dislajky"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Poměr"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Časové okno dat"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Poslední dny"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "První dny"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Zobrazit nejnovější dny v rámci vybraného okna"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Zobrazit nejstarší dny v rámci vybraného okna"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Vlastní výběr"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Celé období"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Posledních $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Prvních $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 den"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 dní"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Celé období"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1d"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Vybrané období: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Uživatelé rozšíření"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 lajků"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 dislajků"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Zaznamenáno $1 interakcí z $2 zemí ($3 unikátních IP)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Hlasy za hodinu"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Hlasy za den"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Hlasy za týden"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Hlasy každých $1 hodin"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Hlasy každých $1 dní"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Hlasy každých $1 minut"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Hlasy za minutu"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Hlasy každých $1 sekund"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Hlasy za sekundu"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Zatím žádná data"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Neznámé"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Načítání statistik…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Pro odemčení statistik znovu autorizujte Patreon."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Prémiové statistiky jsou dostupné aktivním podporovatelům na Patreonu."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Relace vypršela. Přihlaste se znovu přes Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Služba statistik je nyní nedostupná."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Nelze se připojit ke službě statistik."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Nelze načíst prémiové statistiky."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Aktivita"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Poměr lajků"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Vyšší poměr lajků"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Nižší poměr lajků"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Více lajků"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Méně lajků"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Více dislajků"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Méně dislajků"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Více $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Méně $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Lajky: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Dislajky: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Poměr lajků: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Přehled statistik dislajků"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Nezpracované dislajky jsou přímá hlášení uživatelů rozšíření sledujících toto video."
+  },
+  "premiumTeaser_cta": {
+    "message": "Odemknout Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Zobrazit náhled kompletních statistik"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Počet nezpracovaných dislajků"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Odhadované dislajky"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Odhadované lajky"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Získávání nejnovějších součtů dislajků…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Data dislajků se nepodařilo načíst. Zkuste stránku znovu načíst."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Jak odemknout prémiové statistiky"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Odemkněte prémiové statistiky videa ve třech krocích:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Přihlaste se přes Patreon v okně rozšíření Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Vyberte úroveň Premium pro aktivaci časových os aktivity, žebříčků zemí a interaktivní mapy."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Znovu načtěte YouTube a uvidíte hodinové trendy, hlavní země a detailní přehled států USA pro každé video."
+  },
+  "premiumTierNotice_title": {
+    "message": "Prémiová analytika je uzamčená"
+  },
+  "premiumTierNotice_message": {
+    "message": "Vaše členství na Patreonu nezahrnuje úroveň Premium. Povýšte svůj příspěvek a zpřístupněte si pokročilou video analytiku."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Povýšit na Patreonu"
+  },
+  "changelog_title": {
+    "message": "Přehled novinek Premium Analytics · 20. října 2025"
+  },
+  "changelog_badge": {
+    "message": "Premium vydání"
+  },
+  "changelog_heading": {
+    "message": "Prémiové analýzy v novém"
+  },
+  "changelog_subheading": {
+    "message": "Prozkoumejte časovou osu živých aktivit, žebříček nejlepších zemí a interaktivní mapu, které jsou součástí Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Vydáno 20. října 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Upgradovat na Patreonu"
+  },
+  "changelog_cta_secondary": {
+    "message": "Přečíst průvodce nastavením"
+  },
+  "changelog_section_highlights": {
+    "message": "Nové funkce"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Časová osa živé aktivity"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Sledujte streamy hodnocení Líbí se a Nelíbí se v reálném čase. Přepínejte hodinové, denní nebo trvalé předvolby bez opětovného načítání, ukotvte okno k prvnímu dni nebo posledním hlasům a procházejte každý bodec, abyste viděli, co vyvolalo zapojení."
+  },
+  "changelog_feature_map_title": {
+    "message": "Interaktivní mapa světa a USA"
+  },
+  "changelog_feature_map_body": {
+    "message": "Posouvejte se po celém světě nebo se ponořte do amerických států na povrch hotspotů. Porovnejte hodnocení Líbí se, Nelíbí se a poměry v upgradovaném popisku a zvýrazněte oblasti, které reagují na vaše nahraná videa jako první."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Žebříček nejlepších zemí"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Seřaďte každou zemi podle nezpracované aktivity, oblíbenosti, nelibosti nebo poměru. Filtrujte se stejnými předvolbami jako na časové ose, abyste zjistili, kde kampaně končí, a naplánujte si, co dále publikovat."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Screenshot doplníme – pořiďte tuto scénu v DevTools, až bude připravena."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Zástupný obrázek: přehled časové osy"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Zástupný obrázek: mapa globální aktivity"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Zástupný symbol: žebříček zemí"
+  },
+  "changelog_section_upgrade": {
+    "message": "Jak odemknout Premium Analytics"
+  },
+  "changelog_upgrade_body": {
+    "message": "Připraveni? Postupujte podle těchto kroků a obnovte kartu YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Otevřete popup Return YouTube Dislike a přihlaste se přes Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Zvolte úroveň Premium, aby se do vašeho účtu začala posílat analytická data."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Znovu načtěte libovolné video na YouTube – časová osa, mapa a žebříčky se zobrazí okamžitě."
+  },
+  "changelog_section_release": {
+    "message": "Hlavní novinky vydání"
+  },
+  "changelog_release_item1": {
+    "message": "Předvolby časové osy aktivity streamují živá data s ukotvením rozsahu pro první a poslední segmenty."
+  },
+  "changelog_release_item2": {
+    "message": "Žebříček zemí se okamžitě aktualizuje, takže můžete vidět rostoucí oblasti, aniž byste opustili panel."
+  },
+  "changelog_release_item3": {
+    "message": "Interaktivní mapa zvýrazňuje globální a americké státní hotspoty s jasnějšími popisky a metrikami."
+  },
+  "changelog_support_heading": {
+    "message": "Potřebujete pomoct?"
+  },
+  "changelog_support_description": {
+    "message": "Jsme tu pro vás – využijte dokumentaci podpory nebo komunitu."
+  },
+  "changelog_support_contact": {
+    "message": "Zeptejte se komunity"
   }
 }

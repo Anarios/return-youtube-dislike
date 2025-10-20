@@ -1,81 +1,539 @@
 {
-  "apiStatusLabel": { "message": "API 状态:" },
-  "apiStatusOffline": { "message": "离线" },
-  "apiStatusOnline": { "message": "在线" },
-  "colorTheme": { "message": "配色主题:" },
-  "colorizeRatio": { "message": "为比例条着色" },
-  "colorizeRatioHover": { "message": "为比例条使用自定义颜色。" },
-  "colorizeThumbs": { "message": "为点赞/点踩图标着色" },
-  "colorizeThumbsHover": { "message": "为点赞/点踩图标使用自定义颜色。" },
+  "apiStatusLabel": {
+    "message": "API 状态:"
+  },
+  "apiStatusOffline": {
+    "message": "离线"
+  },
+  "apiStatusOnline": {
+    "message": "在线"
+  },
+  "colorTheme": {
+    "message": "配色主题:"
+  },
+  "colorizeRatio": {
+    "message": "为比例条着色"
+  },
+  "colorizeRatioHover": {
+    "message": "为比例条使用自定义颜色。"
+  },
+  "colorizeThumbs": {
+    "message": "为点赞/点踩图标着色"
+  },
+  "colorizeThumbsHover": {
+    "message": "为点赞/点踩图标使用自定义颜色。"
+  },
   "considerDonating": {
     "message": "您的捐助是扩展得以持续运行的唯一动力，请考虑支持本项目。"
   },
-  "customColors": { "message": "为点踩进度条与按钮自定义颜色" },
-  "customNumberFormats": { "message": "自定义数字格式" },
-  "disableLoggingHover": { "message": "在控制台中禁用 API 响应日志。" },
-  "disableLoggingLabel": { "message": "禁用控制台日志" },
-  "extensionDesc": { "message": "恢复查看点踩数的能力" },
-  "extensionName": { "message": "Return YouTube Dislike" },
-  "extensionNameBeta": { "message": "Return YouTube Dislike Beta" },
-  "legendSettings": { "message": "设置" },
-  "linkChangelog": { "message": "更新日志" },
-  "linkDiscord": { "message": "Discord" },
-  "linkDonate": { "message": "捐赠" },
-  "linkFAQ": { "message": "常见问题" },
-  "linkGithub": { "message": "GitHub" },
-  "linkHelp": { "message": "帮助" },
-  "linkWebsite": { "message": "网站" },
-  "numberFormat": { "message": "数字格式:" },
-  "patreonBadgePrefix": { "message": "Patreon" },
-  "patreonLoggedOutMessage": { "message": "Patreon 赞助者可使用高级功能" },
-  "patreonLogin": { "message": "使用 Patreon 登录" },
-  "patreonLoginCompleteFailed": { "message": "登录未完成，请重试。" },
-  "patreonLoginStartFailed": { "message": "无法开始 Patreon 登录，请重试。" },
-  "patreonLogout": { "message": "退出登录" },
+  "customColors": {
+    "message": "为点踩进度条与按钮自定义颜色"
+  },
+  "customNumberFormats": {
+    "message": "自定义数字格式"
+  },
+  "disableLoggingHover": {
+    "message": "在控制台中禁用 API 响应日志。"
+  },
+  "disableLoggingLabel": {
+    "message": "禁用控制台日志"
+  },
+  "extensionDesc": {
+    "message": "恢复查看点踩数的能力"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "设置"
+  },
+  "linkChangelog": {
+    "message": "更新日志"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "捐赠"
+  },
+  "linkFAQ": {
+    "message": "常见问题"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "帮助"
+  },
+  "linkWebsite": {
+    "message": "网站"
+  },
+  "numberFormat": {
+    "message": "数字格式:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Patreon 赞助者可使用高级功能"
+  },
+  "patreonLogin": {
+    "message": "使用 Patreon 登录"
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "登录未完成，请重试。"
+  },
+  "patreonLoginStartFailed": {
+    "message": "无法开始 Patreon 登录，请重试。"
+  },
+  "patreonLogout": {
+    "message": "退出登录"
+  },
   "patreonPermissionRequired": {
     "message": "登录需要 'identity' 权限。请允许以继续。"
   },
-  "patreonTierBasic": { "message": "基础等级" },
-  "patreonTierChecking": { "message": "正在检查会员身份…" },
-  "patreonTierNone": { "message": "无有效会员" },
-  "patreonTierPremium": { "message": "高级赞助者" },
-  "patreonTierSupporter": { "message": "赞助者" },
-  "patreonUserFallback": { "message": "Patreon 用户" },
-  "reformatLikes": { "message": "重新格式化点赞数字" },
-  "reformatLikesHover": { "message": "使点赞/点踩的显示格式保持一致。" },
-  "roundNumbers": { "message": "显示取整后的数字" },
-  "roundNumbersHover": { "message": "对数字向下取整（YouTube 默认行为）。" },
-  "shortsSupport": { "message": "支持 YouTube Shorts" },
+  "patreonTierBasic": {
+    "message": "基础等级"
+  },
+  "patreonTierChecking": {
+    "message": "正在检查会员身份…"
+  },
+  "patreonTierNone": {
+    "message": "无有效会员"
+  },
+  "patreonTierPremium": {
+    "message": "高级赞助者"
+  },
+  "patreonTierSupporter": {
+    "message": "赞助者"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon 用户"
+  },
+  "reformatLikes": {
+    "message": "重新格式化点赞数字"
+  },
+  "reformatLikesHover": {
+    "message": "使点赞/点踩的显示格式保持一致。"
+  },
+  "hidePremiumTeaser": {
+    "message": "隐藏 Premium 推广面板"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "不要在 YouTube 播放页面显示 Premium 推广。"
+  },
+  "roundNumbers": {
+    "message": "显示取整后的数字"
+  },
+  "roundNumbersHover": {
+    "message": "对数字向下取整（YouTube 默认行为）。"
+  },
+  "shortsSupport": {
+    "message": "支持 YouTube Shorts"
+  },
   "showTooltipPercentage": {
     "message": "在点赞/点踩条的工具提示中显示百分比。"
   },
   "showTooltipPercentageHover": {
     "message": "在点赞/点踩条的工具提示中显示百分比。"
   },
-  "textColorTheme": { "message": "配色主题:" },
-  "textColorTheme1": { "message": "经典" },
-  "textColorTheme2": { "message": "无障碍" },
-  "textColorTheme3": { "message": "霓虹" },
-  "textColorizeRatioBar": { "message": "为比例条着色" },
-  "textColorizeRatioBarHover": { "message": "为比例条使用自定义颜色。" },
-  "textColorizeThumbs": { "message": "为点赞/点踩图标着色" },
-  "textColorizeThumbsHover": { "message": "为点赞/点踩图标使用自定义颜色。" },
-  "textConsistentFormat": { "message": "使点赞/点踩的显示格式保持一致" },
-  "textConsistentFormatHover": { "message": "重新格式化点赞数字。" },
-  "textDeveloper": { "message": "由 Dmitry Selivanov 与社区开发" },
-  "textLikesDisabled": { "message": "已被作者禁用" },
-  "textNumberFormat": { "message": "数字格式:" },
+  "textColorTheme": {
+    "message": "配色主题:"
+  },
+  "textColorTheme1": {
+    "message": "经典"
+  },
+  "textColorTheme2": {
+    "message": "无障碍"
+  },
+  "textColorTheme3": {
+    "message": "霓虹"
+  },
+  "textColorizeRatioBar": {
+    "message": "为比例条着色"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "为比例条使用自定义颜色。"
+  },
+  "textColorizeThumbs": {
+    "message": "为点赞/点踩图标着色"
+  },
+  "textColorizeThumbsHover": {
+    "message": "为点赞/点踩图标使用自定义颜色。"
+  },
+  "textConsistentFormat": {
+    "message": "使点赞/点踩的显示格式保持一致"
+  },
+  "textConsistentFormatHover": {
+    "message": "重新格式化点赞数字。"
+  },
+  "textDeveloper": {
+    "message": "由 Dmitry Selivanov 与社区开发"
+  },
+  "textLikesDisabled": {
+    "message": "已被作者禁用"
+  },
+  "textNumberFormat": {
+    "message": "数字格式:"
+  },
   "textRoundingNumbers": {
     "message": "对点赞/点踩统计取整（YouTube 默认行为）"
   },
-  "textRoundingNumbersHover": { "message": "显示取整后的统计。" },
-  "textSettings": { "message": "禁用点赞/点踩提交" },
-  "textSettingsHover": { "message": "停止统计您提交的点赞和点踩。" },
-  "textTempUnavailable": { "message": "暂时不可用" },
-  "textUpdate": { "message": "更新到" },
-  "tooltipPercentageMode": { "message": "百分比模式:" },
-  "tooltipPercentageModeHover": { "message": "悬停时使用自定义百分比显示。" },
-  "version30installed": { "message": "已安装版本 __RYD_VERSION__" },
-  "whatsnew": { "message": "新变化" }
+  "textRoundingNumbersHover": {
+    "message": "显示取整后的统计。"
+  },
+  "textSettings": {
+    "message": "禁用点赞/点踩提交"
+  },
+  "textSettingsHover": {
+    "message": "停止统计您提交的点赞和点踩。"
+  },
+  "textTempUnavailable": {
+    "message": "暂时不可用"
+  },
+  "textUpdate": {
+    "message": "更新到"
+  },
+  "tooltipPercentageMode": {
+    "message": "百分比模式:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "悬停时使用自定义百分比显示。"
+  },
+  "version30installed": {
+    "message": "已安装版本 __RYD_VERSION__"
+  },
+  "whatsnew": {
+    "message": "新变化"
+  },
+  "premiumAnalytics_title": {
+    "message": "高级视频洞察"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "随时间变化的互动"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "排名靠前的国家"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "点赞最多的国家"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "点踩最多的国家"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "地理分布"
+  },
+  "premiumAnalytics_expand": {
+    "message": "展开"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "收起"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "地图指标"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "返回世界地图"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "点赞"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "点踩"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "比率"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "数据窗口"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "最新天数"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "最早天数"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "显示所选时间范围内最新的天数"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "显示所选时间范围内最早的天数"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "自定义选择"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "全部时间"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "最近 $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "最初 $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 天"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 天"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "全部时间"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1天"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "已选时间段：$1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "扩展用户"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 次点赞"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 次点踩"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "记录了来自 $2 个国家的 $1 次互动（$3 个唯一 IP）"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "每小时投票数"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "每天投票数"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "每周投票数"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "每 $1 小时投票数"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "每 $1 天投票数"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "每 $1 分钟投票数"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "每分钟投票数"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "每 $1 秒投票数"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "每秒投票数"
+  },
+  "premiumAnalytics_noData": {
+    "message": "暂无数据"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "未知"
+  },
+  "premiumAnalytics_loading": {
+    "message": "正在加载洞察…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "请重新授权 Patreon 以解锁分析功能。"
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "高级分析仅向活跃的 Patreon 支持者开放。"
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "会话已过期，请重新使用 Patreon 登录。"
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "分析后端当前不可用。"
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "无法连接到分析服务。"
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "无法加载高级分析。"
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "活动"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "点赞比例"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "更高的点赞比例"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "更低的点赞比例"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "更多点赞"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "更少点赞"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "更多点踩"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "更少点踩"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "更多 $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "更少 $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "点赞：$1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "点踩：$1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "点赞比例：$1"
+  },
+  "premiumTeaser_title": {
+    "message": "点踩洞察速览"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "原始点踩来自正在观看此视频的扩展用户的直接反馈。"
+  },
+  "premiumTeaser_cta": {
+    "message": "解锁 Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "预览完整分析"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "原始点踩数"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "预计点踩数"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "预计点赞数"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "正在获取最新的点踩总数…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "暂时无法加载点踩数据，请尝试刷新页面。"
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "如何解锁高级分析"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "三步快速解锁高级视频洞察："
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "在 Return YouTube Dislike 扩展弹窗中使用 Patreon 登录。"
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "选择 Premium 等级以启用活动时间线、国家排行榜和交互式地图。"
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "重新加载 YouTube 以查看每个视频的小时趋势、热门国家和美国各州的详细数据。"
+  },
+  "premiumTierNotice_title": {
+    "message": "Premium 高级分析已锁定"
+  },
+  "premiumTierNotice_message": {
+    "message": "您的 Patreon 会员资格不包含 Premium 等级。升级支持即可解锁高级视频分析功能。"
+  },
+  "premiumTierNotice_cta": {
+    "message": "前往 Patreon 升级"
+  },
+  "changelog_title": {
+    "message": "高级分析变更日志 · 2025 年 10 月 20 日"
+  },
+  "changelog_badge": {
+    "message": "高级版"
+  },
+  "changelog_heading": {
+    "message": "重新构想的高级分析"
+  },
+  "changelog_subheading": {
+    "message": "探索 Return YouTube Dislike Premium 中包含的实时活动时间表、热门国家/地区排行榜和交互式地图。"
+  },
+  "changelog_releaseDate": {
+    "message": "发布于 2025 年 10 月 20 日"
+  },
+  "changelog_cta_primary": {
+    "message": "在 Patreon 上升级"
+  },
+  "changelog_cta_secondary": {
+    "message": "阅读设置指南"
+  },
+  "changelog_section_highlights": {
+    "message": "什么是新的"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "现场活动时间线"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "实时观看喜欢和不喜欢的内容。切换每小时、每天或所有时间预设，无需重新加载，将窗口锚定到第一天或最新投票，并擦洗每个峰值以查看触发参与度的因素。"
+  },
+  "changelog_feature_map_title": {
+    "message": "互动世界和美国热图"
+  },
+  "changelog_feature_map_body": {
+    "message": "平移全球或潜入美国各州以发现热点。在升级后的工具提示中比较喜欢、不喜欢和比率，并突出显示对您上传的内容首先做出反应的区域。"
+  },
+  "changelog_feature_quality_title": {
+    "message": "热门国家排行榜"
+  },
+  "changelog_feature_quality_body": {
+    "message": "根据原始活动、喜欢、不喜欢或比率对每个国家/地区进行排名。使用与时间线相同的预设进行过滤，以了解营销活动的落地位置并计划下一步要发布的内容。"
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "屏幕截图即将推出 - 准备好后在 DevTools 中捕获此视图。"
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "占位符：时间线概述"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "占位符：全球活动地图"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "占位符：国家排行榜"
+  },
+  "changelog_section_upgrade": {
+    "message": "如何解锁高级分析"
+  },
+  "changelog_upgrade_body": {
+    "message": "准备好潜入了吗？请按照以下快速步骤操作并刷新您的 YouTube 标签。"
+  },
+  "changelog_upgrade_step1": {
+    "message": "打开“返回 YouTube 不喜欢”弹出窗口并使用 Patreon 登录。"
+  },
+  "changelog_upgrade_step2": {
+    "message": "选择高级层以启用分析数据流式传输到您的帐户。"
+  },
+  "changelog_upgrade_step3": {
+    "message": "重新加载任何 YouTube 观看页面 - 您的时间线、地图和排行榜会立即显示。"
+  },
+  "changelog_section_release": {
+    "message": "发布亮点"
+  },
+  "changelog_release_item1": {
+    "message": "活动时间线预设使用第一个和最新存储桶的范围锚点来流式传输实时数据。"
+  },
+  "changelog_release_item2": {
+    "message": "国家/地区排行榜会立即刷新，因此您无需离开面板即可发现正在上升的地区。"
+  },
+  "changelog_release_item3": {
+    "message": "交互式地图通过更清晰的工具提示和指标突出显示全球和美国各州的热点。"
+  },
+  "changelog_support_heading": {
+    "message": "需要帮忙吗？"
+  },
+  "changelog_support_description": {
+    "message": "如果您遇到困难，我们会随时为您服务 - 将您的问题提交给支持文档或社区。"
+  },
+  "changelog_support_contact": {
+    "message": "询问社区"
+  }
 }
-

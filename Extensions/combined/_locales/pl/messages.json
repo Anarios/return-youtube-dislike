@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Ujednolica format liczbowy łapek."
   },
+  "hidePremiumTeaser": {
+    "message": "Ukryj panel zajawki Premium"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Nie pokazuj zajawki Premium na stronach odtwarzania YouTube."
+  },
   "roundNumbers": {
     "message": "Pokaż zaokrąglone w dół liczby"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Co nowego"
+  },
+  "premiumAnalytics_title": {
+    "message": "Premiumowe statystyki wideo"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Zaangażowanie w czasie"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Najlepsze kraje"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Kraje z największą liczbą polubień"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Kraje z największą liczbą negatywnych ocen"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Geografia"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Rozwiń"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Zwiń"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Metryka mapy"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Powrót do mapy świata"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Polubienia"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Niepolubienia"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Współczynnik"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Zakres danych"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Ostatnie dni"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Pierwsze dni"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Pokaż najnowsze dni w wybranym zakresie"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Pokaż najwcześniejsze dni w wybranym zakresie"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Własny wybór"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Cały okres"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Ostatnie $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Pierwsze $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 dzień"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 dni"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Cały okres"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1d"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Wybrany okres: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Użytkownicy rozszerzenia"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 polubień"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 niepolubień"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Zarejestrowano $1 interakcji z $2 krajów ($3 unikalnych adresów IP)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Głosy na godzinę"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Głosy na dzień"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Głosy na tydzień"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Głosy co $1 godzin"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Głosy co $1 dni"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Głosy co $1 minut"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Głosy na minutę"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Głosy co $1 sekund"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Głosy na sekundę"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Brak danych"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Nieznane"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Ładowanie statystyk…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Autoryzuj ponownie Patreon, aby odblokować statystyki."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Premiumowe statystyki są dostępne dla aktywnych wspierających na Patreonie."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Sesja wygasła. Zaloguj się ponownie przez Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Usługa statystyk jest teraz niedostępna."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Nie można połączyć się z usługą statystyk."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Nie można wczytać premiumowych statystyk."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Aktywność"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Współczynnik polubień"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Wyższy współczynnik polubień"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Niższy współczynnik polubień"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Więcej polubień"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Mniej polubień"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Więcej niepolubień"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Mniej niepolubień"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Więcej $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Mniej $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Polubienia: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Niepolubienia: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Współczynnik polubień: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Podgląd statystyk niepolubień"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Surowe niepolubienia to bezpośrednie zgłoszenia użytkowników rozszerzenia oglądających ten film."
+  },
+  "premiumTeaser_cta": {
+    "message": "Odblokuj Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Podgląd pełnych statystyk"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Liczba surowych niepolubień"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Szacowane niepolubienia"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Szacowane polubienia"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Pobieranie najnowszych sum niepolubień…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Nie udało się wczytać danych o niepolubieniach. Spróbuj odświeżyć stronę."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Jak odblokować premiumowe statystyki"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Odblokuj premiumowe statystyki wideo w trzech prostych krokach:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Zaloguj się przez Patreon w oknie rozszerzenia Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Wybierz poziom Premium, aby włączyć wykresy aktywności, rankingi krajów i interaktywną mapę."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Odśwież YouTube, aby zobaczyć trendy godzinowe, najlepsze kraje i szczegóły według stanów USA dla każdego filmu."
+  },
+  "premiumTierNotice_title": {
+    "message": "Analityka premium zablokowana"
+  },
+  "premiumTierNotice_message": {
+    "message": "Twoje członkostwo w Patreonie nie obejmuje poziomu Premium. Zwiększ wsparcie, aby odblokować zaawansowane analizy wideo."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Ulepsz na Patreonie"
+  },
+  "changelog_title": {
+    "message": "Dziennik zmian Premium Analytics · 20 października 2025 r"
+  },
+  "changelog_badge": {
+    "message": "Wydanie premium"
+  },
+  "changelog_heading": {
+    "message": "Analityka premium w nowym wydaniu"
+  },
+  "changelog_subheading": {
+    "message": "Przeglądaj oś czasu aktywności na żywo, tabelę wyników najlepszych krajów i interaktywną mapę dołączoną do usługi Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Wydany 20 października 2025 r"
+  },
+  "changelog_cta_primary": {
+    "message": "Uaktualnij na Patreonie"
+  },
+  "changelog_cta_secondary": {
+    "message": "Przeczytaj przewodnik konfiguracji"
+  },
+  "changelog_section_highlights": {
+    "message": "Co nowego"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Oś czasu aktywności na żywo"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Oglądaj transmisję polubień i antypatii w czasie rzeczywistym. Przełączaj wstępne ustawienia godzinowe, dzienne lub wszechczasowe bez ponownego ładowania, zakotwicz okno na pierwszym dniu lub najnowszych głosach i przeglądaj każdy skok, aby zobaczyć, co wywołało zaangażowanie."
+  },
+  "changelog_feature_map_title": {
+    "message": "Interaktywna mapa cieplna świata i USA"
+  },
+  "changelog_feature_map_body": {
+    "message": "Podróżuj po całym świecie lub zanurz się w stanach USA, aby wydobyć na powierzchnię gorące punkty. Porównaj polubienia, antypatie i współczynniki w ulepszonej podpowiedzi i zwróć uwagę na regiony, które jako pierwsze reagują na przesłane przez Ciebie treści."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Tabela liderów najlepszych krajów"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Uszereguj każdy kraj według surowej aktywności, upodobań, antypatii lub współczynnika. Filtruj przy użyciu tych samych ustawień co na osi czasu, aby dowiedzieć się, dokąd dotrą kampanie i zaplanować, co opublikować w następnej kolejności."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Zrzut ekranu wkrótce — przechwyć ten widok w DevTools, gdy będzie gotowy."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Symbol zastępczy: przegląd osi czasu"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Symbol zastępczy: globalna mapa aktywności"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Symbol zastępczy: tabela wyników krajów"
+  },
+  "changelog_section_upgrade": {
+    "message": "Jak odblokować analitykę Premium"
+  },
+  "changelog_upgrade_body": {
+    "message": "Gotowy do nurkowania? Wykonaj te krótkie kroki i odśwież kartę YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Otwórz wyskakujące okienko „Zwróć niechęć do YouTube” i zaloguj się na Patreonie."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Wybierz warstwę Premium, aby umożliwić przesyłanie strumieniowe danych analitycznych na swoje konto."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Załaduj ponownie dowolną stronę odtwarzania w YouTube — Twoja oś czasu, mapa i tabele wyników pojawią się natychmiast."
+  },
+  "changelog_section_release": {
+    "message": "Wydaj najważniejsze informacje"
+  },
+  "changelog_release_item1": {
+    "message": "Gotowe ustawienia osi czasu aktywności przesyłają strumieniowo dane na żywo z kotwicami zakresu dla pierwszego i najnowszego segmentu."
+  },
+  "changelog_release_item2": {
+    "message": "Tablica liderów krajów odświeża się natychmiast, dzięki czemu możesz wykryć regiony o wzroście popularności bez opuszczania panelu."
+  },
+  "changelog_release_item3": {
+    "message": "Interaktywna mapa wyróżnia hotspoty na całym świecie i w stanach USA za pomocą wyraźniejszych podpowiedzi i wskaźników."
+  },
+  "changelog_support_heading": {
+    "message": "Potrzebujesz pomocy?"
+  },
+  "changelog_support_description": {
+    "message": "Jesteśmy tu, jeśli napotkasz przeszkodę — zadaj swoje pytania pracownikom pomocy technicznej lub społeczności."
+  },
+  "changelog_support_contact": {
+    "message": "Zapytaj społeczność"
   }
 }

@@ -1,5 +1,9 @@
 import { initPremiumAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./premiumAnalytics";
-import { initPremiumTeaser, setTeaserSuppressed } from "./premiumAnalytics/teaser";
+import {
+  initPremiumTeaser,
+  setTeaserSuppressed,
+  TEASER_SUPPRESSION_REASON_PREMIUM,
+} from "./premiumAnalytics/teaser";
 
 let patreonState = {
   authenticated: false,
@@ -15,7 +19,11 @@ function initPatreonFeatures() {
       patreonState.authenticated = true;
       patreonState.user = data.patreonUser;
       patreonState.sessionToken = data.patreonSessionToken;
-      updatePremiumSession({ token: patreonState.sessionToken, active: patreonState.user?.hasActiveMembership });
+      updatePremiumSession({
+        token: patreonState.sessionToken,
+        active: patreonState.user?.hasActiveMembership,
+        membershipTier: patreonState.user?.membershipTier,
+      });
       enablePremiumFeatures();
     }
   });
@@ -27,7 +35,11 @@ function initPatreonFeatures() {
 
       if (request.authenticated) {
         patreonState.sessionToken = request.sessionToken ?? patreonState.sessionToken;
-        updatePremiumSession({ token: patreonState.sessionToken, active: patreonState.user?.hasActiveMembership });
+        updatePremiumSession({
+          token: patreonState.sessionToken,
+          active: patreonState.user?.hasActiveMembership,
+          membershipTier: patreonState.user?.membershipTier,
+        });
         enablePremiumFeatures();
       } else {
         patreonState.sessionToken = null;
@@ -42,8 +54,8 @@ function enablePremiumFeatures() {
   const tier = patreonState.user?.membershipTier;
   const hasActiveMembership = patreonState.user?.hasActiveMembership;
 
-  if (hasActiveMembership && (tier === "premium" || tier === "supporter")) {
-    setTeaserSuppressed(true);
+  if (hasActiveMembership && tier === "premium") {
+    setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_PREMIUM);
     initPremiumAnalytics();
   }
 }
@@ -52,7 +64,7 @@ function disablePremiumFeatures() {
   const premiumElements = document.querySelectorAll(".ryd-premium-feature");
   premiumElements.forEach((el) => el.remove());
   teardownPremiumAnalytics();
-  setTeaserSuppressed(false);
+  setTeaserSuppressed(false, TEASER_SUPPRESSION_REASON_PREMIUM);
 }
 
 function isPatreonUser() {

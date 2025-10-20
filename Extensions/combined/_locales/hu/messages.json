@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Tedd egységessé a kedvelés/nem tetszik formátumát."
   },
+  "hidePremiumTeaser": {
+    "message": "Prémium előnézeti panel elrejtése"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Ne jelenjen meg a prémium előnézet a YouTube lejátszó oldalain."
+  },
   "roundNumbers": {
     "message": "Lekerekített számok megjelenítése"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Újdonságok"
+  },
+  "premiumAnalytics_title": {
+    "message": "Prémium videóelemzések"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Elköteleződés időben"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Legjobb országok"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Legtöbb kedveléssel rendelkező országok"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Legtöbb nem tetszéssel rendelkező országok"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Földrajz"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Kibontás"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Összecsukás"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Térképmutató"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Vissza a világtérképre"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Kedvelések"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Nem tetszések"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Arány"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Adat időablak"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Legutóbbi napok"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Első napok"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "A kiválasztott időablak legfrissebb napjainak megjelenítése"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "A kiválasztott időablak legkorábbi napjainak megjelenítése"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Egyéni választás"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Teljes időszak"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Utolsó $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Első $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 nap"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 nap"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Teljes időszak"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1n"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Kiválasztott időszak: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Bővítmény felhasználói"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 kedvelés"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 nem tetszés"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "$2 országból $3 egyedi IP-vel $1 interakció rögzítve"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Szavazatok óránként"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Szavazatok naponta"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Szavazatok hetente"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Szavazatok $1 óránként"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Szavazatok $1 naponként"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Szavazatok $1 percenként"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Szavazatok percenként"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Szavazatok $1 másodpercenként"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Szavazatok másodpercenként"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Még nincs adat"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Ismeretlen"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Elemzések betöltése…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Az elemzések feloldásához engedélyezze újra a Patreont."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "A prémium elemzések az aktív Patreon-támogatók számára érhetők el."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "A munkamenet lejárt. Jelentkezzen be újra a Patreonnal."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Az elemzőszolgáltatás jelenleg nem elérhető."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Nem sikerült elérni az elemzőszolgáltatást."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Nem sikerült betölteni a prémium elemzéseket."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Aktivitás"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Kedvelési arány"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Magasabb kedvelési arány"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Alacsonyabb kedvelési arány"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Több kedvelés"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Kevesebb kedvelés"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Több nem tetszés"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Kevesebb nem tetszés"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Több $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Kevesebb $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Kedvelések: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Nem tetszések: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Kedvelési arány: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Nem tetszések összefoglalója"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "A nyers nem tetszések az ezt a videót néző bővítményfelhasználók közvetlen jelentései."
+  },
+  "premiumTeaser_cta": {
+    "message": "Prémium feloldása"
+  },
+  "premiumTeaser_learn": {
+    "message": "Teljes elemzés megtekintése"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Nyers nem tetszések száma"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Becsült nem tetszések"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Becsült kedvelések"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Legfrissebb nemtetszés-összegek lekérése…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "A nemtetszés-adatok betöltése most nem sikerült. Próbálja meg újratölteni az oldalt."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Hogyan oldhatók fel a prémium elemzések"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Három gyors lépésben oldja fel a prémium videóelemzéseket:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Jelentkezzen be Patreon-fiókkal a Return YouTube Dislike bővítmény felugró ablakából."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Válassza a Premium szintet az aktivitási idővonalak, az országos ranglisták és az interaktív térkép bekapcsolásához."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Töltse újra a YouTube-ot, hogy minden videónál lássa az óránkénti trendeket, a vezető országokat és az amerikai államok lebontását."
+  },
+  "premiumTierNotice_title": {
+    "message": "A prémium analitika zárolva"
+  },
+  "premiumTierNotice_message": {
+    "message": "A Patreon tagságod nem tartalmazza a Premium szintet. Frissítsd a támogatásodat, hogy elérd a fejlett videóanalitikát."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Frissítés a Patreonon"
+  },
+  "changelog_title": {
+    "message": "Premium Analytics változásnapló · 2025. október 20"
+  },
+  "changelog_badge": {
+    "message": "Prémium kiadás"
+  },
+  "changelog_heading": {
+    "message": "Prémium elemzés, újragondolva"
+  },
+  "changelog_subheading": {
+    "message": "Fedezze fel az élő tevékenységek idővonalát, a legjobb országok ranglistáját és az interaktív térképet, amely a Return YouTube Dislike Premiumhoz tartozik."
+  },
+  "changelog_releaseDate": {
+    "message": "Megjelenés: 2025. október 20"
+  },
+  "changelog_cta_primary": {
+    "message": "Frissítés a Patreonon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Olvassa el a beállítási útmutatót"
+  },
+  "changelog_section_highlights": {
+    "message": "Újdonságok"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Élő tevékenység idővonala"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Nézze meg a tetszésnyilvánításokat és a nemtetszéseket valós időben. Változtassa meg az óránkénti, napi vagy minden idők előre beállított értékeit újratöltés nélkül, rögzítse az ablakot az első naphoz vagy a legutóbbi szavazatokhoz, és súrolja meg az összes tüskét, hogy megtudja, mi váltotta ki az elköteleződést."
+  },
+  "changelog_feature_map_title": {
+    "message": "Interaktív világ és amerikai hőtérkép"
+  },
+  "changelog_feature_map_body": {
+    "message": "Pásztázzon szerte a világon, vagy merüljön el az Egyesült Államok államaiba, hogy felszínre kerüljön a hotspotok. Hasonlítsa össze a kedveléseket, nemtetszéseket és arányokat a frissített elemleírásban, és emelje ki azokat a régiókat, amelyek először reagálnak a feltöltéseire."
+  },
+  "changelog_feature_quality_title": {
+    "message": "A legjobb országok ranglistája"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Rangsoroljon minden országot nyers tevékenység, tetszésnyilvánítás, nemtetszés vagy arány szerint. Szűrjön ugyanazokkal az előre beállított értékekkel, mint az idővonalon, hogy megtudja, hol érnek el a kampányok, és megtervezheti, mit tegyen közzé legközelebb."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Képernyőkép hamarosan – rögzítse ezt a nézetet a DevToolsban, ha készen áll."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Helyőrző: idővonal áttekintése"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Helyőrző: globális tevékenységtérkép"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Helyőrző: országok ranglista"
+  },
+  "changelog_section_upgrade": {
+    "message": "A Premium Analytics feloldása"
+  },
+  "changelog_upgrade_body": {
+    "message": "Készen állsz a merülésre? Kövesse ezeket a gyors lépéseket, és frissítse a YouTube lapot."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Nyissa meg a YouTube Nem tetszik visszaküldése előugró ablakot, és jelentkezzen be a Patreonnal."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Válassza a prémium szintet, hogy engedélyezze az analitikai adatok streamelését a fiókjába."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Töltse be újra bármelyik YouTube-videóoldalt – az idővonal, a térkép és a ranglisták azonnal megjelennek."
+  },
+  "changelog_section_release": {
+    "message": "Kiemelések kiadása"
+  },
+  "changelog_release_item1": {
+    "message": "A tevékenység idővonala előre beállítja az élő adatok közvetítését az első és a legújabb gyűjtőcsoportokhoz tartozó tartományhorgonyokkal."
+  },
+  "changelog_release_item2": {
+    "message": "Az ország ranglistája azonnal frissül, így a panel elhagyása nélkül is észreveheti az emelkedő régiókat."
+  },
+  "changelog_release_item3": {
+    "message": "Az interaktív térkép világosabb eszközleírásokkal és mérőszámokkal kiemeli a globális és az Egyesült Államok államainak hotspotjait."
+  },
+  "changelog_support_heading": {
+    "message": "Kézre van szüksége?"
+  },
+  "changelog_support_description": {
+    "message": "Itt vagyunk, ha akadozik – forduljon kérdéseit a támogatási dokumentumokhoz vagy a közösséghez."
+  },
+  "changelog_support_contact": {
+    "message": "Kérdezd meg a közösséget"
   }
 }

@@ -5,8 +5,32 @@ import worldData from "world-atlas/countries-110m.json";
 import usStatesData from "us-atlas/states-10m.json";
 
 import { analyticsState } from "../state";
-import { sanitizeCount, capitalize } from "../utils";
+import { sanitizeCount } from "../utils";
+import { localize } from "../../utils";
 import { getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor } from "../theme";
+
+let mapTranslator = (key, substitutions) => localize(key, substitutions);
+
+export function setMapTranslator(translator) {
+  if (typeof translator === "function") {
+    mapTranslator = translator;
+  } else {
+    mapTranslator = (key, substitutions) => localize(key, substitutions);
+  }
+}
+
+export function resetMapTranslator() {
+  mapTranslator = (key, substitutions) => localize(key, substitutions);
+}
+
+function translateMessage(key, substitutions) {
+  try {
+    return mapTranslator(key, substitutions);
+  } catch (error) {
+    console.warn("Map translation failed for", key, error);
+    return localize(key, substitutions);
+  }
+}
 
 const worldFeatures = feature(worldData, worldData.objects.countries).features ?? [];
 const NORMALIZED_WORLD_FEATURES = normalizeWorldFeatures(worldFeatures);
@@ -84,48 +108,15 @@ const CANONICAL_SYNONYM_GROUPS = [
     "us",
     "unitedstatesunitedstates",
   ],
-  [
-    "ssudan",
-    "southsudan",
-    "southsudanrepublic",
-  ],
-  [
-    "wsahara",
-    "westernsahara",
-  ],
-  [
-    "democraticrepubliccongo",
-    "democraticrepublicofthecongo",
-    "drcongo",
-    "drc",
-    "congokinshasa",
-  ],
-  [
-    "cotedivoire",
-    "ivorycoast",
-  ],
-  [
-    "czechia",
-    "czechrepublic",
-  ],
-  [
-    "eswatini",
-    "swaziland",
-    "swazil",
-  ],
-  [
-    "eqguinea",
-    "equatorialguinea",
-  ],
-  [
-    "timorleste",
-    "easttimor",
-  ],
-  [
-    "solomonisls",
-    "solomonislands",
-    "solomonis",
-  ],
+  ["ssudan", "southsudan", "southsudanrepublic"],
+  ["wsahara", "westernsahara"],
+  ["democraticrepubliccongo", "democraticrepublicofthecongo", "drcongo", "drc", "congokinshasa"],
+  ["cotedivoire", "ivorycoast"],
+  ["czechia", "czechrepublic"],
+  ["eswatini", "swaziland", "swazil"],
+  ["eqguinea", "equatorialguinea"],
+  ["timorleste", "easttimor"],
+  ["solomonisls", "solomonislands", "solomonis"],
 ];
 const CANONICAL_SYNONYM_LOOKUP = buildSynonymLookup(CANONICAL_SYNONYM_GROUPS);
 const FEATURE_NAME_BY_CANONICAL = buildFeatureCanonicalMap(NORMALIZED_WORLD_FEATURES);
@@ -187,6 +178,7 @@ export function renderMap(countries) {
     .filter((v) => v !== null);
 
   const visualConfig = resolveVisualMapConfig(numericValues, mode);
+  const mapSeriesLabel = translateMessage("premiumAnalytics_mapSeriesLabel");
 
   mapChart.setOption(
     {
@@ -233,7 +225,7 @@ export function renderMap(countries) {
       },
       series: [
         {
-          name: "Activity",
+          name: mapSeriesLabel,
           type: "map",
           geoIndex: 0,
           data: mapData,
@@ -256,7 +248,7 @@ function resolveMapContext(state) {
       mapKey: "usa-states",
       entries: buildSubdivisionEntries(focusSubdivisions, focusCode),
       geoOverrides: {
-        zoom: 1.15,
+        zoom: 2.35,
         center: [-98.5795, 39.8283],
         layoutCenter: ["50%", "48%"],
         layoutSize: "120%",
@@ -286,7 +278,8 @@ function buildCountryEntries(entries) {
     const total = likes + dislikes;
     const ratio = total > 0 ? likes / total : null;
     const countryCode = typeof entry.countryCode === "string" ? entry.countryCode.toUpperCase() : "";
-    const displayName = entry.countryName || countryCode || "Unknown";
+    const fallbackName = translateMessage("premiumAnalytics_unknownRegion");
+    const displayName = entry.countryName || countryCode || fallbackName;
     const mapName = resolveMapRegionName(countryCode, displayName);
 
     return {
@@ -315,7 +308,8 @@ function buildSubdivisionEntries(entries, countryCode) {
       const total = likes + dislikes;
       const ratio = total > 0 ? likes / total : null;
       const subdivisionCode = typeof entry.subdivisionCode === "string" ? entry.subdivisionCode.toUpperCase() : "";
-      const displayName = entry.subdivisionName || subdivisionCode || "Unknown";
+      const fallbackName = translateMessage("premiumAnalytics_unknownRegion");
+      const displayName = entry.subdivisionName || subdivisionCode || fallbackName;
       const mapName = resolveSubdivisionFeatureName(isoCountry, subdivisionCode, displayName);
 
       return {
@@ -359,7 +353,7 @@ function resolveSubdivisionFeatureName(countryCode, subdivisionCode, fallbackNam
     return US_STATE_NAME_BY_CODE[normalizedCode];
   }
 
-  return fallbackName || normalizedCode || "Unknown";
+  return fallbackName || normalizedCode || translateMessage("premiumAnalytics_unknownRegion");
 }
 
 function filterSubdivisionsForCountry(subdivisions, countryCode) {
@@ -455,26 +449,29 @@ export function resizeMapChart() {
 }
 
 function resolveVisualMapConfig(values, mode) {
+  const fallbackMax = values.length ? Math.max(...values, 0) : 0;
+  const max = fallbackMax <= 0 ? 1 : fallbackMax;
+  const likesLabel = translateMessage("premiumAnalytics_modeLikes");
+  const dislikesLabel = translateMessage("premiumAnalytics_modeDislikes");
+  const ratioLabel = translateMessage("premiumAnalytics_likeRatio");
+
   if (mode === "ratio") {
     return {
       min: 0,
       max: 1,
       colors: ["#ef4444", "#fde047", "#22c55e"],
-      highLabel: "Higher like ratio",
-      lowLabel: "Lower like ratio",
+      highLabel: translateMessage("premiumAnalytics_visualHighRatio"),
+      lowLabel: translateMessage("premiumAnalytics_visualLowRatio"),
     };
   }
-
-  const fallbackMax = values.length ? Math.max(...values, 0) : 0;
-  const max = fallbackMax <= 0 ? 1 : fallbackMax;
 
   if (mode === "likes") {
     return {
       min: 0,
       max,
       colors: ["#bbf7d0", "#15803d"],
-      highLabel: "Higher Likes",
-      lowLabel: "Lower Likes",
+      highLabel: translateMessage("premiumAnalytics_visualHighLikes"),
+      lowLabel: translateMessage("premiumAnalytics_visualLowLikes"),
     };
   }
 
@@ -483,17 +480,19 @@ function resolveVisualMapConfig(values, mode) {
       min: 0,
       max,
       colors: ["#fecaca", "#b91c1c"],
-      highLabel: "Higher Dislikes",
-      lowLabel: "Lower Dislikes",
+      highLabel: translateMessage("premiumAnalytics_visualHighDislikes"),
+      lowLabel: translateMessage("premiumAnalytics_visualLowDislikes"),
     };
   }
+
+  const label = mode === "likes" ? likesLabel : mode === "dislikes" ? dislikesLabel : ratioLabel;
 
   return {
     min: 0,
     max,
     colors: ["#e2e8f0", "#3b82f6"],
-    highLabel: `Higher ${capitalize(mode)}`,
-    lowLabel: `Lower ${capitalize(mode)}`,
+    highLabel: translateMessage("premiumAnalytics_visualHighGeneric", [label]),
+    lowLabel: translateMessage("premiumAnalytics_visualLowGeneric", [label]),
   };
 }
 
@@ -508,8 +507,11 @@ function formatMapTooltip(params) {
   const likes = Number.isFinite(data.likes) ? data.likes : 0;
   const dislikes = Number.isFinite(data.dislikes) ? data.dislikes : 0;
   const percent = data.ratio != null ? (data.ratio * 100).toFixed(1) : "0.0";
+  const likesText = translateMessage("premiumAnalytics_tooltipLikes", [likes.toLocaleString()]);
+  const dislikesText = translateMessage("premiumAnalytics_tooltipDislikes", [dislikes.toLocaleString()]);
+  const ratioText = translateMessage("premiumAnalytics_tooltipRatio", [`${percent}%`]);
 
-  return `${name}${code}<br/>Likes: ${likes.toLocaleString()}<br/>Dislikes: ${dislikes.toLocaleString()}<br/>Like ratio: ${percent}%`;
+  return `${name}${code}<br/>${likesText}<br/>${dislikesText}<br/>${ratioText}`;
 }
 
 function resolveMapRegionName(countryCode, fallbackName) {
@@ -547,7 +549,7 @@ function resolveMapRegionName(countryCode, fallbackName) {
     }
   }
 
-  return trimmedName || "Unknown";
+  return trimmedName || translateMessage("premiumAnalytics_unknownRegion");
 }
 
 function buildStateCanonicalMap(features) {

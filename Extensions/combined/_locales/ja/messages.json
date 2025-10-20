@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "統計値の一貫性を高めます。"
   },
+  "hidePremiumTeaser": {
+    "message": "プレミアムティーザーパネルを非表示にする"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "YouTube の再生ページにプレミアムティーザーを表示しません。"
+  },
   "roundNumbers": {
     "message": "四捨五入された数値を表示"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "新機能"
+  },
+  "premiumAnalytics_title": {
+    "message": "プレミアム動画インサイト"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "時間別エンゲージメント"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "上位の国"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "高評価が最も多い国"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "低評価が最も多い国"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "地域"
+  },
+  "premiumAnalytics_expand": {
+    "message": "展開"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "折りたたむ"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "マップ指標"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "世界地図に戻る"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "高評価"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "低評価"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "比率"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "データ期間"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "直近の日数"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "初期の日数"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "選択した期間内の直近の日を表示"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "選択した期間内の最初の日を表示"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "カスタム選択"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "全期間"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "直近$1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "最初の$1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1日"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1日"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "全期間"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1日"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "選択期間: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "拡張機能ユーザー"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1件の高評価"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1件の低評価"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "$2か国から$3個の一意IPで$1件のインタラクションを取得"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "1時間あたりの投票数"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "1日あたりの投票数"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "1週間あたりの投票数"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "$1時間ごとの投票数"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "$1日ごとの投票数"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "$1分ごとの投票数"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "1分あたりの投票数"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "$1秒ごとの投票数"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "1秒あたりの投票数"
+  },
+  "premiumAnalytics_noData": {
+    "message": "データはまだありません"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "不明"
+  },
+  "premiumAnalytics_loading": {
+    "message": "インサイトを読み込み中…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "分析を有効にするにはPatreonの認証を再実行してください。"
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "プレミアム分析はアクティブなPatreon支援者が利用できます。"
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "セッションの有効期限が切れました。Patreonで再ログインしてください。"
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "分析バックエンドは現在利用できません。"
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "分析サービスに接続できません。"
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "プレミアム分析を読み込めませんでした。"
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "アクティビティ"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "高評価率"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "高評価率が高い"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "高評価率が低い"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "高評価が多い"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "高評価が少ない"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "低評価が多い"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "低評価が少ない"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "$1が多い"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "$1が少ない"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "高評価: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "低評価: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "高評価率: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "低評価インサイトの概要"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "未加工の低評価は、この動画を視聴している拡張機能ユーザーからの直接報告です。"
+  },
+  "premiumTeaser_cta": {
+    "message": "Premiumを有効化"
+  },
+  "premiumTeaser_learn": {
+    "message": "すべての分析をプレビュー"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "未加工の低評価数"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "推定低評価"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "推定高評価"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "最新の低評価合計を取得中…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "低評価データを読み込めませんでした。ページを更新してください。"
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Premium分析の有効化方法"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "3つのステップですぐにPremium動画インサイトを有効化:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Return YouTube Dislike拡張機能のポップアップからPatreonにサインインします。"
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Premiumティアを選択して、アクティビティタイムライン、国別ランキング、インタラクティブマップを利用します。"
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "YouTubeを再読み込みして、各動画の時間帯トレンド、上位国、米国州別の詳細を確認してください。"
+  },
+  "premiumTierNotice_title": {
+    "message": "プレミアム分析はロックされています"
+  },
+  "premiumTierNotice_message": {
+    "message": "ご利用中のPatreonメンバーシップにはプレミアム階層が含まれていません。上位プランにアップグレードして高度な動画分析を開放してください。"
+  },
+  "premiumTierNotice_cta": {
+    "message": "Patreonでアップグレード"
+  },
+  "changelog_title": {
+    "message": "プレミアム分析変更ログ · 2025 年 10 月 20 日"
+  },
+  "changelog_badge": {
+    "message": "プレミアムリリース"
+  },
+  "changelog_heading": {
+    "message": "再考されたプレミアム分析"
+  },
+  "changelog_subheading": {
+    "message": "Return YouTube Dislike Premium に含まれるライブ アクティビティ タイムライン、上位国のリーダーボード、インタラクティブ マップを探索してください。"
+  },
+  "changelog_releaseDate": {
+    "message": "2025 年 10 月 20 日発売"
+  },
+  "changelog_cta_primary": {
+    "message": "Patreonでアップグレードする"
+  },
+  "changelog_cta_secondary": {
+    "message": "セットアップガイドを読む"
+  },
+  "changelog_section_highlights": {
+    "message": "新着情報"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "ライブアクティビティのタイムライン"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "リアルタイムで好き嫌いのストリーミングを視聴します。リロードせずに時間ごと、毎日、または常時のプリセットを切り替え、ウィンドウを初日または最新の投票に固定し、すべてのスパイクをスクラブしてエンゲージメントのきっかけとなったものを確認します。"
+  },
+  "changelog_feature_map_title": {
+    "message": "インタラクティブな世界と米国のヒートマップ"
+  },
+  "changelog_feature_map_body": {
+    "message": "世界中を移動したり、米国の州に飛び込み、ホットスポットを表面化します。アップグレードされたツールチップでいいね、嫌い、比率を比較し、アップロードに最初に反応した地域にスポットライトを当てます。"
+  },
+  "changelog_feature_quality_title": {
+    "message": "上位国のリーダーボード"
+  },
+  "changelog_feature_quality_body": {
+    "message": "生のアクティビティ、好き嫌い、比率によってすべての国をランク付けします。タイムラインと同じプリセットでフィルタリングして、キャンペーンがどこに到達するかを確認し、次に何を公開するかを計画します。"
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "スクリーンショットは近日公開予定です。準備ができたら、DevTools でこのビューをキャプチャしてください。"
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "プレースホルダー: タイムラインの概要"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "プレースホルダー: グローバル アクティビティ マップ"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "プレースホルダー: 各国のリーダーボード"
+  },
+  "changelog_section_upgrade": {
+    "message": "プレミアム分析のロックを解除する方法"
+  },
+  "changelog_upgrade_body": {
+    "message": "飛び込む準備はできていますか?次の簡単な手順に従って、YouTube タブを更新します。"
+  },
+  "changelog_upgrade_step1": {
+    "message": "「Return YouTube Dislike」ポップアップを開き、Patreon にサインインします。"
+  },
+  "changelog_upgrade_step2": {
+    "message": "アカウントへの分析データのストリーミングを有効にするには、プレミアム レベルを選択します。"
+  },
+  "changelog_upgrade_step3": {
+    "message": "YouTube 再生ページをリロードすると、タイムライン、地図、リーダーボードが即座に表示されます。"
+  },
+  "changelog_section_release": {
+    "message": "リリースのハイライト"
+  },
+  "changelog_release_item1": {
+    "message": "アクティビティ タイムライン プリセットは、最初と最新のバケットの範囲アンカーを使用してライブ データをストリーミングします。"
+  },
+  "changelog_release_item2": {
+    "message": "国のリーダーボードは即座に更新されるため、パネルから離れることなく上昇している地域を見つけることができます。"
+  },
+  "changelog_release_item3": {
+    "message": "インタラクティブなマップは、より明確なツールチップと指標を使用して、世界および米国の州のホットスポットを強調表示します。"
+  },
+  "changelog_support_heading": {
+    "message": "手が必要ですか?"
+  },
+  "changelog_support_description": {
+    "message": "問題が発生した場合は、サポート ドキュメントまたはコミュニティに質問してください。"
+  },
+  "changelog_support_contact": {
+    "message": "コミュニティに質問する"
   }
 }

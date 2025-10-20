@@ -14,7 +14,8 @@ import { getVideoId } from "../utils";
 
 import { MS_PER_DAY, EXPANDABLE_SECTIONS } from "./constants";
 import { requestAnalytics, scheduleSelectionFetch, normalizeSelection } from "./requests";
-import { setTeaserSuppressed } from "./teaser";
+import { setTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } from "./teaser";
+import { showTierNotice, hideTierNotice } from "./tierNotice";
 
 let resizeListener = null;
 
@@ -173,26 +174,40 @@ function teardownPremiumAnalytics() {
     window.removeEventListener("resize", resizeListener);
   }
   document.removeEventListener("yt-navigate-finish", handleNavigation);
+  hideTierNotice();
   analyticsState.initialized = false;
 }
 
-function updatePremiumSession({ token, active }) {
+function updatePremiumSession({ token, active, membershipTier }) {
   const previousToken = analyticsState.sessionToken;
   const wasActive = analyticsState.sessionActive;
+  const previousTier = analyticsState.membershipTier;
 
-  setSession(token || null, active);
+  setSession(token || null, active, membershipTier);
 
   if (!analyticsState.sessionActive) {
-    setTeaserSuppressed(false);
+    setTeaserSuppressed(false, TEASER_SUPPRESSION_REASON_PREMIUM);
+    hideTierNotice();
     teardownPanel();
     return;
   }
 
-  setTeaserSuppressed(true);
+  const hasPremiumTier = analyticsState.membershipTier === "premium";
+
+  if (!hasPremiumTier) {
+    setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+    showTierNotice();
+    teardownPanel();
+    return;
+  }
+
+  hideTierNotice();
+  setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_PREMIUM);
   ensurePanel();
 
   const tokenChanged = analyticsState.sessionToken && analyticsState.sessionToken !== previousToken;
-  const activated = !wasActive && analyticsState.sessionActive;
+  const tierUpgraded = previousTier !== "premium" && analyticsState.membershipTier === "premium";
+  const activated = (!wasActive && analyticsState.sessionActive) || tierUpgraded;
 
   if ((tokenChanged || activated) && analyticsState.currentVideoId) {
     requestAnalytics();

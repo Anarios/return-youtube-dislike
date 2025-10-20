@@ -1,81 +1,539 @@
 {
-  "apiStatusLabel": { "message": "API 狀態:" },
-  "apiStatusOffline": { "message": "離線" },
-  "apiStatusOnline": { "message": "線上" },
-  "colorTheme": { "message": "配色主題:" },
-  "colorizeRatio": { "message": "為比例條著色" },
-  "colorizeRatioHover": { "message": "為比例條使用自訂顏色。" },
-  "colorizeThumbs": { "message": "為按讚/不喜歡圖示著色" },
-  "colorizeThumbsHover": { "message": "為按讚/不喜歡圖示使用自訂顏色。" },
+  "apiStatusLabel": {
+    "message": "API 狀態:"
+  },
+  "apiStatusOffline": {
+    "message": "離線"
+  },
+  "apiStatusOnline": {
+    "message": "線上"
+  },
+  "colorTheme": {
+    "message": "配色主題:"
+  },
+  "colorizeRatio": {
+    "message": "為比例條著色"
+  },
+  "colorizeRatioHover": {
+    "message": "為比例條使用自訂顏色。"
+  },
+  "colorizeThumbs": {
+    "message": "為按讚/不喜歡圖示著色"
+  },
+  "colorizeThumbsHover": {
+    "message": "為按讚/不喜歡圖示使用自訂顏色。"
+  },
   "considerDonating": {
     "message": "您的贊助是此擴充功能持續運作的唯一動力，請考慮支持本專案。"
   },
-  "customColors": { "message": "自訂不喜歡進度條與按鈕顏色" },
-  "customNumberFormats": { "message": "自訂數字格式" },
-  "disableLoggingHover": { "message": "在主控台中停用 API 回應記錄。" },
-  "disableLoggingLabel": { "message": "停用主控台記錄" },
-  "extensionDesc": { "message": "恢復顯示不喜歡數" },
-  "extensionName": { "message": "Return YouTube Dislike" },
-  "extensionNameBeta": { "message": "Return YouTube Dislike Beta" },
-  "legendSettings": { "message": "設定" },
-  "linkChangelog": { "message": "變更記錄" },
-  "linkDiscord": { "message": "Discord" },
-  "linkDonate": { "message": "贊助" },
-  "linkFAQ": { "message": "常見問題" },
-  "linkGithub": { "message": "GitHub" },
-  "linkHelp": { "message": "說明" },
-  "linkWebsite": { "message": "網站" },
-  "numberFormat": { "message": "數字格式:" },
-  "patreonBadgePrefix": { "message": "Patreon" },
-  "patreonLoggedOutMessage": { "message": "Patreon 贊助者可使用進階功能" },
-  "patreonLogin": { "message": "使用 Patreon 登入" },
-  "patreonLoginCompleteFailed": { "message": "無法完成登入，請再試一次。" },
-  "patreonLoginStartFailed": { "message": "無法啟動 Patreon 登入，請再試一次。" },
-  "patreonLogout": { "message": "登出" },
+  "customColors": {
+    "message": "自訂不喜歡進度條與按鈕顏色"
+  },
+  "customNumberFormats": {
+    "message": "自訂數字格式"
+  },
+  "disableLoggingHover": {
+    "message": "在主控台中停用 API 回應記錄。"
+  },
+  "disableLoggingLabel": {
+    "message": "停用主控台記錄"
+  },
+  "extensionDesc": {
+    "message": "恢復顯示不喜歡數"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "設定"
+  },
+  "linkChangelog": {
+    "message": "變更記錄"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "贊助"
+  },
+  "linkFAQ": {
+    "message": "常見問題"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "說明"
+  },
+  "linkWebsite": {
+    "message": "網站"
+  },
+  "numberFormat": {
+    "message": "數字格式:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Patreon 贊助者可使用進階功能"
+  },
+  "patreonLogin": {
+    "message": "使用 Patreon 登入"
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "無法完成登入，請再試一次。"
+  },
+  "patreonLoginStartFailed": {
+    "message": "無法啟動 Patreon 登入，請再試一次。"
+  },
+  "patreonLogout": {
+    "message": "登出"
+  },
   "patreonPermissionRequired": {
     "message": "登入需要 'identity' 權限。請允許以繼續。"
   },
-  "patreonTierBasic": { "message": "基礎等級" },
-  "patreonTierChecking": { "message": "正在檢查會員身分…" },
-  "patreonTierNone": { "message": "沒有有效會員" },
-  "patreonTierPremium": { "message": "進階贊助者" },
-  "patreonTierSupporter": { "message": "贊助者" },
-  "patreonUserFallback": { "message": "Patreon 使用者" },
-  "reformatLikes": { "message": "重新格式化按讚數" },
-  "reformatLikesHover": { "message": "使按讚/不喜歡的顯示格式一致。" },
-  "roundNumbers": { "message": "顯示取整後的數字" },
-  "roundNumbersHover": { "message": "對數字向下取整（YouTube 預設行為）。" },
-  "shortsSupport": { "message": "支援 YouTube Shorts" },
+  "patreonTierBasic": {
+    "message": "基礎等級"
+  },
+  "patreonTierChecking": {
+    "message": "正在檢查會員身分…"
+  },
+  "patreonTierNone": {
+    "message": "沒有有效會員"
+  },
+  "patreonTierPremium": {
+    "message": "進階贊助者"
+  },
+  "patreonTierSupporter": {
+    "message": "贊助者"
+  },
+  "patreonUserFallback": {
+    "message": "Patreon 使用者"
+  },
+  "reformatLikes": {
+    "message": "重新格式化按讚數"
+  },
+  "reformatLikesHover": {
+    "message": "使按讚/不喜歡的顯示格式一致。"
+  },
+  "hidePremiumTeaser": {
+    "message": "隱藏 Premium 宣傳面板"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "不要在 YouTube 觀看頁面顯示 Premium 宣傳。"
+  },
+  "roundNumbers": {
+    "message": "顯示取整後的數字"
+  },
+  "roundNumbersHover": {
+    "message": "對數字向下取整（YouTube 預設行為）。"
+  },
+  "shortsSupport": {
+    "message": "支援 YouTube Shorts"
+  },
   "showTooltipPercentage": {
     "message": "在按讚/不喜歡列的工具提示中顯示百分比。"
   },
   "showTooltipPercentageHover": {
     "message": "在按讚/不喜歡列的工具提示中顯示百分比。"
   },
-  "textColorTheme": { "message": "配色主題:" },
-  "textColorTheme1": { "message": "經典" },
-  "textColorTheme2": { "message": "無障礙" },
-  "textColorTheme3": { "message": "霓虹" },
-  "textColorizeRatioBar": { "message": "為比例條著色" },
-  "textColorizeRatioBarHover": { "message": "為比例條使用自訂顏色。" },
-  "textColorizeThumbs": { "message": "為按讚/不喜歡圖示著色" },
-  "textColorizeThumbsHover": { "message": "為按讚/不喜歡圖示使用自訂顏色。" },
-  "textConsistentFormat": { "message": "使按讚/不喜歡的顯示格式一致" },
-  "textConsistentFormatHover": { "message": "重新格式化按讚數。" },
-  "textDeveloper": { "message": "由 Dmitry Selivanov 與社群開發" },
-  "textLikesDisabled": { "message": "由擁有者停用" },
-  "textNumberFormat": { "message": "數字格式:" },
+  "textColorTheme": {
+    "message": "配色主題:"
+  },
+  "textColorTheme1": {
+    "message": "經典"
+  },
+  "textColorTheme2": {
+    "message": "無障礙"
+  },
+  "textColorTheme3": {
+    "message": "霓虹"
+  },
+  "textColorizeRatioBar": {
+    "message": "為比例條著色"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "為比例條使用自訂顏色。"
+  },
+  "textColorizeThumbs": {
+    "message": "為按讚/不喜歡圖示著色"
+  },
+  "textColorizeThumbsHover": {
+    "message": "為按讚/不喜歡圖示使用自訂顏色。"
+  },
+  "textConsistentFormat": {
+    "message": "使按讚/不喜歡的顯示格式一致"
+  },
+  "textConsistentFormatHover": {
+    "message": "重新格式化按讚數。"
+  },
+  "textDeveloper": {
+    "message": "由 Dmitry Selivanov 與社群開發"
+  },
+  "textLikesDisabled": {
+    "message": "由擁有者停用"
+  },
+  "textNumberFormat": {
+    "message": "數字格式:"
+  },
   "textRoundingNumbers": {
     "message": "對按讚/不喜歡統計取整（YouTube 預設行為）"
   },
-  "textRoundingNumbersHover": { "message": "顯示取整後的統計。" },
-  "textSettings": { "message": "停用送出按讚/不喜歡" },
-  "textSettingsHover": { "message": "停止計入您送出的按讚與不喜歡。" },
-  "textTempUnavailable": { "message": "暫時無法使用" },
-  "textUpdate": { "message": "更新至" },
-  "tooltipPercentageMode": { "message": "百分比模式:" },
-  "tooltipPercentageModeHover": { "message": "游標懸停時使用自訂百分比顯示。" },
-  "version30installed": { "message": "已安裝版本 __RYD_VERSION__" },
-  "whatsnew": { "message": "最新變更" }
+  "textRoundingNumbersHover": {
+    "message": "顯示取整後的統計。"
+  },
+  "textSettings": {
+    "message": "停用送出按讚/不喜歡"
+  },
+  "textSettingsHover": {
+    "message": "停止計入您送出的按讚與不喜歡。"
+  },
+  "textTempUnavailable": {
+    "message": "暫時無法使用"
+  },
+  "textUpdate": {
+    "message": "更新至"
+  },
+  "tooltipPercentageMode": {
+    "message": "百分比模式:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "游標懸停時使用自訂百分比顯示。"
+  },
+  "version30installed": {
+    "message": "已安裝版本 __RYD_VERSION__"
+  },
+  "whatsnew": {
+    "message": "最新變更"
+  },
+  "premiumAnalytics_title": {
+    "message": "進階影片洞察"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "隨時間變化的互動"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "前幾大國家"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "最多按讚的國家"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "最多不喜歡的國家"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "地理分佈"
+  },
+  "premiumAnalytics_expand": {
+    "message": "展開"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "收合"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "地圖指標"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "返回世界地圖"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "按讚"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "不喜歡"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "比例"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "資料區間"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "最新天數"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "最早天數"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "顯示所選區間內最新的天數"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "顯示所選區間內最早的天數"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "自訂選取"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "全部期間"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "最近 $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "最初 $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 天"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 天"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "全部期間"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1天"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "選取期間：$1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "擴充功能使用者"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 次按讚"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 次不喜歡"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "已記錄 $1 次互動，來自 $2 個國家（$3 個唯一 IP）"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "每小時投票數"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "每天投票數"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "每週投票數"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "每 $1 小時投票數"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "每 $1 天投票數"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "每 $1 分鐘投票數"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "每分鐘投票數"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "每 $1 秒投票數"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "每秒投票數"
+  },
+  "premiumAnalytics_noData": {
+    "message": "尚無資料"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "未知"
+  },
+  "premiumAnalytics_loading": {
+    "message": "正在載入洞察…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "請重新授權 Patreon 以解鎖分析功能。"
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "進階分析僅提供給活躍的 Patreon 贊助者。"
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "工作階段已過期，請再次使用 Patreon 登入。"
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "分析後端目前無法使用。"
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "無法連線到分析服務。"
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "無法載入進階分析。"
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "活動"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "按讚比例"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "較高的按讚比例"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "較低的按讚比例"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "更多按讚"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "更少按讚"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "更多不喜歡"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "更少不喜歡"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "更多 $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "更少 $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "按讚：$1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "不喜歡：$1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "按讚比例：$1"
+  },
+  "premiumTeaser_title": {
+    "message": "不喜歡洞察快覽"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "原始不喜歡數來自觀看此影片的擴充功能使用者的直接回報。"
+  },
+  "premiumTeaser_cta": {
+    "message": "解鎖 Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "預覽完整分析"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "原始不喜歡數量"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "預估不喜歡數"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "預估按讚數"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "正在取得最新的不喜歡總數…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "目前無法載入不喜歡資料，請嘗試重新整理頁面。"
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "如何解鎖進階分析"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "三個步驟快速解鎖進階影片洞察："
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "在 Return YouTube Dislike 擴充功能的彈出視窗中使用 Patreon 登入。"
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "選擇 Premium 方案以啟用活動時間軸、國家排行榜和互動地圖。"
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "重新載入 YouTube，以查看每部影片的每小時趨勢、熱門國家與美國各州詳細資料。"
+  },
+  "premiumTierNotice_title": {
+    "message": "Premium 進階分析已鎖定"
+  },
+  "premiumTierNotice_message": {
+    "message": "您的 Patreon 會員資格未包含 Premium 等級。升級贊助即可解鎖進階影片分析功能。"
+  },
+  "premiumTierNotice_cta": {
+    "message": "前往 Patreon 升級"
+  },
+  "changelog_title": {
+    "message": "高級分析變更日誌 · 2025 年 10 月 20 日"
+  },
+  "changelog_badge": {
+    "message": "高級版"
+  },
+  "changelog_heading": {
+    "message": "重新構想的高級分析"
+  },
+  "changelog_subheading": {
+    "message": "探索 Return YouTube Dislike Premium 中包含的實時活動時間表、熱門國家/地區排行榜和交互式地圖。"
+  },
+  "changelog_releaseDate": {
+    "message": "發佈於 2025 年 10 月 20 日"
+  },
+  "changelog_cta_primary": {
+    "message": "在 Patreon 上升級"
+  },
+  "changelog_cta_secondary": {
+    "message": "閱讀設置指南"
+  },
+  "changelog_section_highlights": {
+    "message": "什麼是新的"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "現場活動時間線"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "實時觀看喜歡和不喜歡的內容。切換每小時、每天或所有時間預設，無需重新加載，將窗口錨定到第一天或最新投票，並擦洗每個峰值以查看觸發參與度的因素。"
+  },
+  "changelog_feature_map_title": {
+    "message": "互動世界和美國熱圖"
+  },
+  "changelog_feature_map_body": {
+    "message": "平移全球或潛入美國各州以發現熱點。在升級後的工具提示中比較喜歡、不喜歡和比率，並突出顯示對您上傳的內容首先做出反應的區域。"
+  },
+  "changelog_feature_quality_title": {
+    "message": "熱門國家排行榜"
+  },
+  "changelog_feature_quality_body": {
+    "message": "根據原始活動、喜歡、不喜歡或比率對每個國家/地區進行排名。使用與時間線相同的預設進行過濾，以了解營銷活動的落地位置併計劃下一步要發布的內容。"
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "屏幕截圖即將推出 - 準備好後在 DevTools 中捕獲此視圖。"
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "佔位符：時間線概述"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "佔位符：全球活動地圖"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "佔位符：國家排行榜"
+  },
+  "changelog_section_upgrade": {
+    "message": "如何解鎖高級分析"
+  },
+  "changelog_upgrade_body": {
+    "message": "準備好潛入了嗎？請按照以下快速步驟操作並刷新您的 YouTube 標籤。"
+  },
+  "changelog_upgrade_step1": {
+    "message": "打開“返回 YouTube 不喜歡”彈出窗口並使用 Patreon 登錄。"
+  },
+  "changelog_upgrade_step2": {
+    "message": "選擇高級層以啟用分析數據流式傳輸到您的帳戶。"
+  },
+  "changelog_upgrade_step3": {
+    "message": "重新加載任何 YouTube 觀看頁面 - 您的時間線、地圖和排行榜會立即顯示。"
+  },
+  "changelog_section_release": {
+    "message": "發布亮點"
+  },
+  "changelog_release_item1": {
+    "message": "活動時間線預設使用第一個和最新存儲桶的範圍錨點來流式傳輸實時數據。"
+  },
+  "changelog_release_item2": {
+    "message": "國家/地區排行榜會立即刷新，因此您無需離開面板即可發現正在上升的地區。"
+  },
+  "changelog_release_item3": {
+    "message": "交互式地圖通過更清晰的工具提示和指標突出顯示全球和美國各州的熱點。"
+  },
+  "changelog_support_heading": {
+    "message": "需要幫忙嗎？"
+  },
+  "changelog_support_description": {
+    "message": "如果您遇到困難，我們會隨時為您服務 - 將您的問題提交給支持文檔或社區。"
+  },
+  "changelog_support_contact": {
+    "message": "詢問社區"
+  }
 }
-

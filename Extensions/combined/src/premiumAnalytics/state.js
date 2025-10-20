@@ -18,6 +18,7 @@ export const analyticsState = {
   latestSubdivisions: [],
   sessionToken: null,
   sessionActive: false,
+  membershipTier: "none",
   latestSeriesPoints: [],
   latestTimeAxis: [],
   latestBucketMs: 60 * 60 * 1000,
@@ -59,9 +60,11 @@ export function resetStateForVideo() {
 export function resetSessionState() {
   analyticsState.sessionToken = null;
   analyticsState.sessionActive = false;
+  analyticsState.membershipTier = "none";
 }
 
-export function setSession(token, isActive) {
+export function setSession(token, isActive, membershipTier = "none") {
   analyticsState.sessionToken = token;
   analyticsState.sessionActive = !!isActive;
+  analyticsState.membershipTier = typeof membershipTier === "string" ? membershipTier : "none";
 }

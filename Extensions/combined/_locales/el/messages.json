@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Σταθερή μορφοποίηση των likes & dislikes."
   },
+  "hidePremiumTeaser": {
+    "message": "Απόκρυψη πίνακα προωθητικού Premium"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Να μην εμφανίζεται το προωθητικό Premium στις σελίδες αναπαραγωγής του YouTube."
+  },
   "roundNumbers": {
     "message": "Εμφάνιση στρογγυλεμένων αριθμών"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Τί νέο υπάρχει"
+  },
+  "premiumAnalytics_title": {
+    "message": "Στατιστικά Premium για το βίντεο"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Συμμετοχή με την πάροδο του χρόνου"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Κορυφαίες χώρες"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Χώρες με τα περισσότερα likes"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Χώρες με τα περισσότερα dislikes"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Γεωγραφία"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Ανάπτυξη"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Σύμπτυξη"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Μετρική χάρτη"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Επιστροφή στον παγκόσμιο χάρτη"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Likes"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Dislikes"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Αναλογία"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Παράθυρο δεδομένων"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Τελευταίες ημέρες"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Πρώτες ημέρες"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Εμφάνιση των πιο πρόσφατων ημερών στο επιλεγμένο διάστημα"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Εμφάνιση των πρώτων ημερών στο επιλεγμένο διάστημα"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Προσαρμοσμένη επιλογή"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Όλο το διάστημα"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Τελευταίες $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Πρώτες $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 ημέρα"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 ημέρες"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Όλο το διάστημα"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1η"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Επιλεγμένη περίοδος: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Χρήστες της επέκτασης"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 likes"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 dislikes"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Καταγράφηκαν $1 αλληλεπιδράσεις από $2 χώρες ($3 μοναδικές IP)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Ψήφοι ανά ώρα"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Ψήφοι ανά ημέρα"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Ψήφοι ανά εβδομάδα"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Ψήφοι κάθε $1 ώρες"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Ψήφοι κάθε $1 ημέρες"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Ψήφοι κάθε $1 λεπτά"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Ψήφοι ανά λεπτό"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Ψήφοι κάθε $1 δευτερόλεπτα"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Ψήφοι ανά δευτερόλεπτο"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Δεν υπάρχουν δεδομένα ακόμη"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Άγνωστο"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Φόρτωση στατιστικών…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Εξουσιοδοτήστε ξανά το Patreon για να ξεκλειδώσετε τα στατιστικά."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Τα premium στατιστικά είναι διαθέσιμα για ενεργούς υποστηρικτές στο Patreon."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Η συνεδρία έληξε. Συνδεθείτε ξανά με το Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Η υπηρεσία στατιστικών δεν είναι διαθέσιμη αυτή τη στιγμή."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Δεν είναι δυνατή η σύνδεση με την υπηρεσία στατιστικών."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Δεν είναι δυνατή η φόρτωση των premium στατιστικών."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Δραστηριότητα"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Αναλογία likes"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Υψηλότερη αναλογία likes"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Χαμηλότερη αναλογία likes"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Περισσότερα likes"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Λιγότερα likes"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Περισσότερα dislikes"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Λιγότερα dislikes"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Περισσότερα $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Λιγότερα $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Likes: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Dislikes: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Αναλογία likes: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Στιγμιότυπο στατιστικών dislikes"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Τα ανεπεξέργαστα dislikes είναι άμεσες αναφορές χρηστών της επέκτασης που βλέπουν αυτό το βίντεο."
+  },
+  "premiumTeaser_cta": {
+    "message": "Ξεκλείδωμα Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Προεπισκόπηση πλήρων στατιστικών"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Ανεπεξέργαστος αριθμός dislikes"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Εκτιμώμενα dislikes"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Εκτιμώμενα likes"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Λήψη των πιο πρόσφατων συνολικών dislikes…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Δεν ήταν δυνατή η φόρτωση των δεδομένων dislikes. Δοκιμάστε να ανανεώσετε τη σελίδα."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Πώς να ξεκλειδώσετε τα premium στατιστικά"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Ξεκλειδώστε τα premium στατιστικά βίντεο σε τρία γρήγορα βήματα:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Συνδεθείτε με το Patreon από το αναδυόμενο παράθυρο της επέκτασης Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Επιλέξτε το επίπεδο Premium για να ενεργοποιήσετε χρονολόγια δραστηριότητας, πίνακες κατάταξης χωρών και τον διαδραστικό χάρτη."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Ανανεώστε το YouTube για να δείτε ωριαίες τάσεις, κορυφαίες χώρες και ανάλυση πολιτειών των ΗΠΑ για κάθε βίντεο."
+  },
+  "premiumTierNotice_title": {
+    "message": "Οι premium αναλύσεις είναι κλειδωμένες"
+  },
+  "premiumTierNotice_message": {
+    "message": "Η συνδρομή σου στο Patreon δεν περιλαμβάνει το επίπεδο Premium. Αναβάθμισε τη στήριξή σου για να ξεκλειδώσεις προηγμένα στατιστικά βίντεο."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Αναβάθμιση στο Patreon"
+  },
+  "changelog_title": {
+    "message": "Ημερολόγιο αλλαγών Premium Analytics · 20 Οκτωβρίου 2025"
+  },
+  "changelog_badge": {
+    "message": "Κυκλοφορία Premium"
+  },
+  "changelog_heading": {
+    "message": "Premium αναλύσεις, επανασχεδιασμένες"
+  },
+  "changelog_subheading": {
+    "message": "Εξερευνήστε το χρονοδιάγραμμα της ζωντανής δραστηριότητας, τον πίνακα κορυφαίων χωρών και τον διαδραστικό χάρτη που περιλαμβάνονται στο Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Κυκλοφόρησε στις 20 Οκτωβρίου 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Αναβάθμιση στο Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Διαβάστε τον οδηγό ρύθμισης"
+  },
+  "changelog_section_highlights": {
+    "message": "Τι νέο υπάρχει"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Χρονοδιάγραμμα ζωντανής δραστηριότητας"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Παρακολουθήστε τη ροή \"μου αρέσει\" και \"δεν μου αρέσει\" σε πραγματικό χρόνο. Εναλλάξτε τις ωριαίες, ημερήσιες ή προεπιλογές όλων των εποχών χωρίς επαναφόρτωση, αγκυρώστε το παράθυρο στην πρώτη ημέρα ή τις πιο πρόσφατες ψηφοφορίες και σκουπίστε κάθε αιχμή για να δείτε τι ενεργοποίησε την αφοσίωση."
+  },
+  "changelog_feature_map_title": {
+    "message": "Διαδραστικός χάρτης θερμότητας κόσμου και ΗΠΑ"
+  },
+  "changelog_feature_map_body": {
+    "message": "Μετακινηθείτε σε όλο τον κόσμο ή βουτήξτε στις πολιτείες των ΗΠΑ για να εμφανίσετε hotspot. Συγκρίνετε τις επισημάνσεις \"μου αρέσει\", \"δεν μου αρέσει\" και τις αναλογίες στην αναβαθμισμένη επεξήγηση εργαλείου και δώστε έμφαση στις περιοχές που αντιδρούν πρώτες στις μεταφορτώσεις σας."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Κορυφαίος πίνακας κορυφαίων χωρών"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Κατατάξτε κάθε χώρα κατά ακατέργαστη δραστηριότητα, \"μου αρέσει\", \"δεν μου αρέσει\" ή αναλογία. Φιλτράρετε με τις ίδιες προεπιλογές με το χρονοδιάγραμμα για να μάθετε πού προέρχονται οι καμπάνιες και να σχεδιάσετε τι θα δημοσιεύσετε στη συνέχεια."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Το στιγμιότυπο θα προστεθεί — αποθηκεύστε αυτή την προβολή μέσω DevTools όταν είστε έτοιμοι."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Placeholder: επισκόπηση χρονογραμμής"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Placeholder: χάρτης παγκόσμιας δραστηριότητας"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Placeholder: leaderboard χωρών"
+  },
+  "changelog_section_upgrade": {
+    "message": "Πώς να ξεκλειδώσετε τα Premium analytics"
+  },
+  "changelog_upgrade_body": {
+    "message": "Έτοιμοι; Ακολουθήστε αυτά τα βήματα και ανανεώστε την καρτέλα YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Ανοίξτε το αναδυόμενο Return YouTube Dislike και συνδεθείτε με Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Επιλέξτε τη βαθμίδα Premium ώστε τα δεδομένα analytics να ρέουν στον λογαριασμό σας."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Ανανεώστε οποιαδήποτε σελίδα παρακολούθησης στο YouTube — χρονογραμμή, χάρτης και κατατάξεις εμφανίζονται άμεσα."
+  },
+  "changelog_section_release": {
+    "message": "Κύρια σημεία κυκλοφορίας"
+  },
+  "changelog_release_item1": {
+    "message": "Οι προκαθορισμένες ρυθμίσεις του χρονοδιαγράμματος δραστηριότητας μεταδίδουν ζωντανά δεδομένα με αγκυρώσεις εύρους για τον πρώτο και τον τελευταίο κάδο."
+  },
+  "changelog_release_item2": {
+    "message": "Ο πίνακας κορυφαίων χωρών ανανεώνεται αμέσως, ώστε να μπορείτε να εντοπίζετε ανερχόμενες περιοχές χωρίς να βγείτε από το πλαίσιο."
+  },
+  "changelog_release_item3": {
+    "message": "Ο διαδραστικός χάρτης υπογραμμίζει τα παγκόσμια και τις πολιτειακές εστίες των ΗΠΑ με σαφέστερες συμβουλές εργαλείων και μετρήσεις."
+  },
+  "changelog_support_heading": {
+    "message": "Χρειάζεστε βοήθεια;"
+  },
+  "changelog_support_description": {
+    "message": "Είμαστε εδώ αν συναντήσετε εμπόδιο — βρείτε απαντήσεις στη τεκμηρίωση ή στην κοινότητα."
+  },
+  "changelog_support_contact": {
+    "message": "Ρωτήστε την κοινότητα"
   }
 }

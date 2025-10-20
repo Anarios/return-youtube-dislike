@@ -28,6 +28,7 @@ function resetGlobals() {
   analyticsState.latestSubdivisions = [];
   analyticsState.sessionToken = null;
   analyticsState.sessionActive = false;
+  analyticsState.membershipTier = "none";
   analyticsState.latestSeriesPoints = [];
   analyticsState.latestTimeAxis = [];
   analyticsState.latestBucketMs = 60 * 60 * 1000;
@@ -98,24 +99,28 @@ describe("premiumAnalytics.state", () => {
     it("clears session token and status", () => {
       analyticsState.sessionToken = "token";
       analyticsState.sessionActive = true;
+      analyticsState.membershipTier = "supporter";
 
       resetSessionState();
 
       expect(analyticsState.sessionToken).toBeNull();
       expect(analyticsState.sessionActive).toBe(false);
+      expect(analyticsState.membershipTier).toBe("none");
     });
   });
 
   describe("setSession", () => {
     it("assigns session token and coerces active flag", () => {
-      setSession("token", "truthy");
+      setSession("token", "truthy", "premium");
 
       expect(analyticsState.sessionToken).toBe("token");
       expect(analyticsState.sessionActive).toBe(true);
+      expect(analyticsState.membershipTier).toBe("premium");
 
-      setSession(null, 0);
+      setSession(null, 0, null);
       expect(analyticsState.sessionToken).toBeNull();
       expect(analyticsState.sessionActive).toBe(false);
+      expect(analyticsState.membershipTier).toBe("none");
     });
   });
 });

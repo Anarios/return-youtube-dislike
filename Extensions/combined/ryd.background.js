@@ -1,9 +1,10 @@
-import { config, getApiUrl, getApiEndpoint } from "./src/config";
+import { config, getApiUrl, getApiEndpoint, getChangelogUrl } from "./src/config";
 
 const apiUrl = getApiUrl();
 const voteDisabledIconName = config.voteDisabledIconName;
 const defaultIconName = config.defaultIconName;
 let api;
+const CHANGELOG_STORAGE_KEY = "lastShownChangelogVersion";
 
 /** stores extension's global config */
 let extConfig = { ...config.defaultExtConfig };
@@ -119,6 +120,29 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], () => {
       broadcastPatreonStatus(false, null, null);
     });
+  } else if (request.message === "ryd_open_tab") {
+    const targetUrl = typeof request?.url === "string" ? request.url : null;
+    if (!targetUrl) {
+      sendResponse?.({ success: false, error: "invalid_url" });
+      return;
+    }
+
+    try {
+      if (api?.tabs?.create) {
+        api.tabs.create({ url: targetUrl }, () => {
+          if (api.runtime?.lastError) {
+            console.debug("Tab open failed:", api.runtime.lastError.message);
+          }
+        });
+        sendResponse?.({ success: true });
+        return;
+      }
+    } catch (error) {
+      console.debug("Tab open threw:", error?.message ?? error);
+    }
+
+    sendResponse?.({ success: false, error: "tabs_api_unavailable" });
+    return;
   } else if (request.message == "set_state") {
     // chrome.identity.getAuthToken({ interactive: true }, function (token) {
     let token = "";
@@ -213,21 +237,88 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
 });
 
-api.runtime.onInstalled.addListener((details) => {
-  if (
-    // No need to show changelog if its was a browser update (and not extension update)
-    details.reason === "browser_update" ||
-    // Chromium (e.g., Google Chrome Cannary) uses this name instead of the one above for some reason
-    details.reason === "chrome_update" ||
-    // No need to show changelog if developer just reloaded the extension
-    details.reason === "update"
-  ) {
-    return;
-  } else if (details.reason == "install") {
-    api.tabs.create({
-      url: api.runtime.getURL("/changelog/3/changelog_3.0.html"),
+function openChangelogTab(version) {
+  try {
+    const url = getChangelogUrl();
+    api.tabs.create({ url }, () => {
+      if (api.runtime.lastError) {
+        console.debug("Changelog tab could not open:", api.runtime.lastError.message);
+      }
+      persistChangelogVersion(version);
     });
+  } catch (error) {
+    console.debug("Failed to open changelog tab", error);
   }
+}
+
+function persistChangelogVersion(version) {
+  const storage = api?.storage?.local;
+  if (!storage || typeof storage.set !== "function") {
+    return;
+  }
+  try {
+    storage.set({ [CHANGELOG_STORAGE_KEY]: version }, () => {
+      if (api.runtime.lastError) {
+        console.debug("Failed to persist changelog version:", api.runtime.lastError.message);
+      }
+    });
+  } catch (error) {
+    console.debug("Storage set failed for changelog version", error);
+  }
+}
+
+function maybeShowChangelog(details) {
+  const reason = details?.reason;
+  if (!reason) {
+    return;
+  }
+
+  if (reason === "browser_update" || reason === "chrome_update") {
+    return;
+  }
+
+  const manifest = api.runtime.getManifest();
+  const currentVersion = manifest?.version;
+  if (!currentVersion) {
+    return;
+  }
+
+  const storage = api?.storage?.local;
+  if (reason === "install") {
+    openChangelogTab(currentVersion);
+    return;
+  }
+
+  if (reason === "update") {
+    if (!storage || typeof storage.get !== "function") {
+      openChangelogTab(currentVersion);
+      return;
+    }
+
+    try {
+      storage.get(CHANGELOG_STORAGE_KEY, (result) => {
+        if (api.runtime.lastError) {
+          console.debug("Changelog storage read failed:", api.runtime.lastError.message);
+          openChangelogTab(currentVersion);
+          return;
+        }
+
+        const lastShownVersion = result?.[CHANGELOG_STORAGE_KEY];
+        if (lastShownVersion === currentVersion) {
+          return;
+        }
+
+        openChangelogTab(currentVersion);
+      });
+    } catch (error) {
+      console.debug("Storage get failed for changelog version", error);
+      openChangelogTab(currentVersion);
+    }
+  }
+}
+
+api.runtime.onInstalled.addListener((details) => {
+  maybeShowChangelog(details);
 });
 
 // api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
@@ -237,7 +328,7 @@ api.runtime.onInstalled.addListener((details) => {
 //     // keep it inside get to avoid race condition
 //     api.storage.sync.set({'lastShowChangelogVersion ': chrome.runtime.getManifest().version});
 //     // wait until async get runs & don't steal tab focus
-//     api.tabs.create({url: api.runtime.getURL("/changelog/3/changelog_3.0.html"), active: false});
+//     api.tabs.create({url: api.runtime.getURL("/changelog/4/changelog_4.0.html"), active: false});
 //   }
 // });
 
@@ -419,6 +510,9 @@ function storageChangeHandler(changes, area) {
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
   }
+  if (changes.hidePremiumTeaser !== undefined) {
+    handleHidePremiumTeaserChangeEvent(changes.hidePremiumTeaser.newValue);
+  }
 }
 
 function handleDisableVoteSubmissionChangeEvent(value) {
@@ -474,6 +568,10 @@ function handleNumberDisplayReformatLikesChangeEvent(value) {
   extConfig.numberDisplayReformatLikes = value;
 }
 
+function handleHidePremiumTeaserChangeEvent(value) {
+  extConfig.hidePremiumTeaser = value === true;
+}
+
 api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
@@ -486,6 +584,7 @@ function initExtConfig() {
   initializeNumberDisplayReformatLikes();
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
+  initializeHidePremiumTeaser();
 }
 
 function initializeDisableVoteSubmission() {
@@ -575,6 +674,17 @@ function initializeNumberDisplayReformatLikes() {
       api.storage.sync.set({ numberDisplayReformatLikes: false });
     } else {
       extConfig.numberDisplayReformatLikes = res.numberDisplayReformatLikes;
+    }
+  });
+}
+
+function initializeHidePremiumTeaser() {
+  api.storage.sync.get(["hidePremiumTeaser"], (res) => {
+    if (res.hidePremiumTeaser === undefined) {
+      api.storage.sync.set({ hidePremiumTeaser: false });
+      extConfig.hidePremiumTeaser = false;
+    } else {
+      extConfig.hidePremiumTeaser = res.hidePremiumTeaser === true;
     }
   });
 }

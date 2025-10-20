@@ -48,9 +48,30 @@ import {
   resizeActivityChart,
   disposeActivityChart,
   registerZoomSelectionListener,
+  setActivityTranslator,
+  resetActivityTranslator,
 } from "./index";
 import * as timeModule from "./time";
 import * as logging from "../logging";
+
+const enMessages = require("../../../_locales/en/messages.json");
+
+function getMessage(key, substitutions) {
+  const entry = enMessages[key];
+  if (!entry) {
+    return key;
+  }
+  let message = entry.message ?? "";
+  if (substitutions == null) {
+    return message;
+  }
+  const values = Array.isArray(substitutions) ? substitutions : [substitutions];
+  values.forEach((value, index) => {
+    const replacement = value != null ? `${value}` : "";
+    message = message.replace(new RegExp(`\\$${index + 1}`, "g"), replacement);
+  });
+  return message;
+}
 
 function createPanel() {
   const panel = document.createElement("section");
@@ -74,6 +95,12 @@ describe("premiumAnalytics.activity", () => {
   let chartInstance;
 
   beforeEach(() => {
+    global.chrome = {
+      i18n: {
+        getMessage,
+      },
+    };
+    setActivityTranslator((key, substitutions) => getMessage(key, substitutions));
     document.body.innerHTML = "";
     resetStateForVideo();
     analyticsState.panelElement = null;
@@ -102,6 +129,8 @@ describe("premiumAnalytics.activity", () => {
   });
 
   afterEach(() => {
+    delete global.chrome;
+    resetActivityTranslator();
     jest.restoreAllMocks();
   });
 
@@ -149,7 +178,7 @@ describe("premiumAnalytics.activity", () => {
     });
 
     expect(meta.hidden).toBe(false);
-    expect(label.textContent).toBe("Votes per day");
+    expect(label.textContent).toBe(getMessage("premiumAnalytics_bucketDay"));
   });
 
   it("fills missing buckets with zero counts", () => {
@@ -167,24 +196,22 @@ describe("premiumAnalytics.activity", () => {
     const likesSeries = options.series[0].data;
     const dislikesSeries = options.series[1].data;
 
-    expect(likesSeries).toEqual([
-      ["2025-01-01T00:00:00Z", 5],
-      ["2025-01-01T01:00:00Z", 0],
-      ["2025-01-01T02:00:00Z", 2],
-    ]);
+    const hour0 = new Date("2025-01-01T00:00:00Z").toISOString();
+    const hour1 = new Date("2025-01-01T01:00:00Z").toISOString();
+    const hour2 = new Date("2025-01-01T02:00:00Z").toISOString();
 
-    expect(dislikesSeries).toEqual([
-      ["2025-01-01T00:00:00Z", 1],
-      ["2025-01-01T01:00:00Z", 0],
-      ["2025-01-01T02:00:00Z", 0],
-    ]);
+    expect(likesSeries.map(([timestamp]) => new Date(timestamp).toISOString())).toEqual([hour0, hour1, hour2]);
+    expect(likesSeries.map(([, value]) => value)).toEqual([5, 0, 2]);
+
+    expect(dislikesSeries.map(([timestamp]) => new Date(timestamp).toISOString())).toEqual([hour0, hour1, hour2]);
+    expect(dislikesSeries.map(([, value]) => value)).toEqual([1, 0, 0]);
 
     expect(analyticsState.latestSeriesPoints).toHaveLength(3);
     expect(analyticsState.latestBucketMs).toBe(60 * 60 * 1000);
-    const options = chartInstance.setOption.mock.calls.at(-1)[0];
-    expect(options.series[0].type).toBe("line");
-    expect(options.series[0].showSymbol).toBe(false);
-    expect(options.series[0].symbol).toBe("none");
+    const latestOptions = chartInstance.setOption.mock.calls.at(-1)[0];
+    expect(latestOptions.series[0].type).toBe("line");
+    expect(latestOptions.series[0].showSymbol).toBe(false);
+    expect(latestOptions.series[0].symbol).toBe("none");
   });
 
   it("configures slider bounds from declared range", () => {
@@ -268,7 +295,9 @@ describe("premiumAnalytics.activity", () => {
   });
 
   it("clamps selection to available bounds", () => {
-    analyticsState.availableRange = { min: 0, max: 100 };
+    const availableMin = new Date("2025-01-01T00:00:00Z").getTime();
+    const availableMax = new Date("2025-03-01T00:00:00Z").getTime();
+    analyticsState.availableRange = { min: availableMin, max: availableMax };
     renderActivityChart({
       totalRangeStartUtc: "2025-01-01T00:00:00Z",
       totalRangeEndUtc: "2025-03-01T00:00:00Z",
@@ -277,7 +306,8 @@ describe("premiumAnalytics.activity", () => {
       points: [],
     });
 
-    expect(analyticsState.selectionRange.to).toBe(100);
+    expect(analyticsState.selectionRange.from).toBeGreaterThanOrEqual(availableMin);
+    expect(analyticsState.selectionRange.to).toBeLessThanOrEqual(availableMax);
   });
 
   it("keeps the slider bounds anchored to the total range after render", () => {

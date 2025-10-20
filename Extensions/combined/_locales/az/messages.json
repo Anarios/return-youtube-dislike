@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Like və dislike formatını uyğunlaşdırır."
   },
+  "hidePremiumTeaser": {
+    "message": "Premium tanıtım panelini gizlət"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "YouTube izləmə səhifələrində premium tanıtım panelini göstərmə."
+  },
   "roundNumbers": {
     "message": "Aşağı yuvarlanmış sayıları göstərir"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Yeniliklər"
+  },
+  "premiumAnalytics_title": {
+    "message": "Premium video analitikası"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Zaman üzrə qarşılıqlı əlaqə"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Ən yaxşı ölkələr"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Ən çox bəyənən ölkələr"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Ən çox bəyənməyən ölkələr"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Coğrafiya"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Genişləndir"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Yığ"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Xəritə göstəricisi"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Dünya xəritəsinə qayıt"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Bəyənmələr"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Bəyənməmələr"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Nisbət"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Məlumat intervalı"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Son günlər"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "İlk günlər"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Seçilmiş intervalda ən son günləri göstər"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Seçilmiş intervalda ən erkən günləri göstər"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Fərdi seçim"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Bütün dövr"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Son $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "İlk $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 gün"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 gün"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Bütün dövr"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1g"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Seçilmiş period: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Uzantı istifadəçiləri"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 bəyənmə"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 bəyənməmə"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "$2 ölkədən $3 unikal IP ilə $1 qarşılıqlı əlaqə qeydə alındı"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Saatda səslər"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Gündə səslər"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Həftədə səslər"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Hər $1 saatda səslər"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Hər $1 gündə səslər"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Hər $1 dəqiqədə səslər"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Dəqiqədə səslər"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Hər $1 saniyədə səslər"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Saniyədə səslər"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Hələ məlumat yoxdur"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Naməlum"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Analitika yüklənir…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Analitikanı açmaq üçün Patreonu yenidən icazələndirin."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Premium analitika aktiv Patreon dəstəkçiləri üçün əlçatandır."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Sessiya bitdi. Yenidən Patreon ilə daxil olun."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Analitika serveri hazırda əlçatan deyil."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Analitika xidmətinə qoşulmaq mümkün olmadı."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Premium analitikanı yükləmək mümkün olmadı."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Fəaliyyət"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Bəyənmə nisbəti"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Yüksək bəyənmə nisbəti"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Aşağı bəyənmə nisbəti"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Daha çox bəyənmə"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Daha az bəyənmə"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Daha çox bəyənməmə"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Daha az bəyənməmə"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Daha çox $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Daha az $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Bəyənmələr: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Bəyənməmələr: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Bəyənmə nisbəti: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Bəyənməmə analitikasının xülasəsi"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Emal olunmamış bəyənməmələr bu videoya baxan uzantı istifadəçilərinin birbaşa hesabatlarıdır."
+  },
+  "premiumTeaser_cta": {
+    "message": "Premiumu aç"
+  },
+  "premiumTeaser_learn": {
+    "message": "Tam analitikaya baxış"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Emal olunmamış bəyənməmə sayı"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Təxmini bəyənməmələr"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Təxmini bəyənmələr"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Ən son bəyənməmə cəmləri alınır…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Hazırda bəyənməmə məlumatı yüklənmədi. Səhifəni yenidən yükləyin."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Premium analitikanı necə açmalı"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Premium video analitikasını üç sürətli addımda açın:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Return YouTube Dislike uzantısının pəncərəsindən Patreon ilə daxil olun."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Fəaliyyət qrafikləri, ölkə reytinqləri və interaktiv xəritə üçün Premium səviyyəsini seçin."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Hər video üçün saatlıq trendləri, aparıcı ölkələri və ABŞ ştatlarının detallı xəritəsini görmək üçün YouTube-u yenidən yükləyin."
+  },
+  "premiumTierNotice_title": {
+    "message": "Premium analitika bloklanıb"
+  },
+  "premiumTierNotice_message": {
+    "message": "Patreon üzvlüyünüzdə Premium səviyyə yoxdur. Təkmil video analitikasını açmaq üçün dəstəyinizi yüksəldin."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Patreonda yüksəldin"
+  },
+  "changelog_title": {
+    "message": "Premium Analytics dəyişiklik jurnalı · 20 oktyabr 2025"
+  },
+  "changelog_badge": {
+    "message": "Premium buraxılış"
+  },
+  "changelog_heading": {
+    "message": "Premium analitika yenidən quruldu"
+  },
+  "changelog_subheading": {
+    "message": "Canlı fəaliyyət qrafiki, ən yaxşı ölkələrin lider lövhəsi və qayıtma YouTube-ni bəyənilməyən premium daxil olan interaktiv xəritəni araşdırın."
+  },
+  "changelog_releaseDate": {
+    "message": "20 oktyabr 2025 tarixində buraxıldı"
+  },
+  "changelog_cta_primary": {
+    "message": "Patreonda yüksəlt"
+  },
+  "changelog_cta_secondary": {
+    "message": "Quraşdırma bələdçisini oxu"
+  },
+  "changelog_section_highlights": {
+    "message": "Yeniliklər"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Canlı fəaliyyət qrafiki"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Gelimi real vaxtda bəyənmə və bəyənməyənləri bəyənməyi izləyin. Saat, gündəlik, gündəlik və ya hər zaman hafızası dəyişdirin, pəncərəni gündən-günə və ya ən son səsləri birləşdirin və hər sıçrayışın nə olduğunu görməyə başladın."
+  },
+  "changelog_feature_map_title": {
+    "message": "İnteraktiv Dünya və ABŞ HeatMap"
+  },
+  "changelog_feature_map_body": {
+    "message": "Dünyada pan, və ya ABŞ-ın isti nöqtələrini yerüstü hissələrə daldırın. Yüksələn alətdə, bəyənilənləri və nisbətləri yüksəldilmiş alətdə və rəqəmləri ilə müqayisə edin və yükləmələrinizə ilk reaksiya verən bölgələrdə."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Ən yaxşı ölkələrin lider lövhəsi"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Hər ölkəni xam fəaliyyət, bəyənmə, bəyənmir və ya nisbətlə sıralayın. Kampaniyaların harada olduğunu öyrənmək və növbəti dərc etməyi planlaşdıran qrafiki kimi eyni hafızası ilə süzün."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Ekran görüntüsü tezliklə gələcək — hazır olduqda bu görünüşü DevTools ilə çəkin."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Yer tutucu: zaman cədvəli icmalı"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Yer tutucu: qlobal aktivlik xəritəsi"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Yerli yerləşdirən: Ölkələrin lider taxtası"
+  },
+  "changelog_section_upgrade": {
+    "message": "Premium analitikanı necə açmaq olar"
+  },
+  "changelog_upgrade_body": {
+    "message": "Hazırsınız? Bu addımları izləyin və YouTube vərəqənizi yeniləyin."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Return YouTube Dislike açılır pəncərəsini açın və Patreon ilə daxil olun."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Premium səviyyəsini seçin ki, analitika məlumatları hesabınıza axın etsin."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Hər hansı YouTube izləmə səhifəsini yeniləyin — zaman cədvəli, xəritə və lider lövhələri dərhal görünəcək."
+  },
+  "changelog_section_release": {
+    "message": "Buraxılışın əsas məqamları"
+  },
+  "changelog_release_item1": {
+    "message": "Fəaliyyət qrafiki, ilk və son çömçə üçün aralığı lövbərləri olan canlı məlumatlar yayımlanır."
+  },
+  "changelog_release_item2": {
+    "message": "Ölkə liderliyi paneli dərhal paneli tərk etmədən yüksələn bölgələri yerləşdirə biləcəyiniz üçün dərhal təravətləndirir."
+  },
+  "changelog_release_item3": {
+    "message": "İnteraktiv xəritə, daha aydın alət və ölçüləri olan qlobal və ABŞ dövlət qaynar nöqtələrini vurğulayır."
+  },
+  "changelog_support_heading": {
+    "message": "Kömək lazımdır?"
+  },
+  "changelog_support_description": {
+    "message": "Bir problem yaşasanız buradayıq — suallarınızı dəstək sənədlərinə və ya icmaya gətirin."
+  },
+  "changelog_support_contact": {
+    "message": "İcmadan soruş"
   }
 }

@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Das Format der Likes und Dislikes einheitlich machen."
   },
+  "hidePremiumTeaser": {
+    "message": "Premium-Teaser-Panel ausblenden"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Premium-Teaser auf YouTube-Wiedergabeseiten nicht anzeigen."
+  },
   "roundNumbers": {
     "message": "Zeige abgerundete Zahlen"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Was ist neu"
+  },
+  "premiumAnalytics_title": {
+    "message": "Premium-Video-Analyse"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Interaktion im Zeitverlauf"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Top-Länder"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Länder mit den meisten Likes"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Länder mit den meisten Dislikes"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Geografie"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Erweitern"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Einklappen"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Kartenmetrik"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Zur Weltkarte zurück"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Likes"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Dislikes"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Verhältnis"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Datenzeitraum"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Neueste Tage"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Erste Tage"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Neueste Tage im ausgewählten Zeitraum anzeigen"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Früheste Tage im ausgewählten Zeitraum anzeigen"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Benutzerdefinierte Auswahl"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Gesamter Zeitraum"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Letzte $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Erste $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 Tag"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 Tage"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Gesamter Zeitraum"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1 Tg"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Ausgewählter Zeitraum: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Extension-Nutzer"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 Likes"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 Dislikes"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "$1 Interaktionen aus $2 Ländern erfasst ($3 eindeutige IPs)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Stimmen pro Stunde"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Stimmen pro Tag"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Stimmen pro Woche"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Stimmen alle $1 Stunden"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Stimmen alle $1 Tage"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Stimmen alle $1 Minuten"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Stimmen pro Minute"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Stimmen alle $1 Sekunden"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Stimmen pro Sekunde"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Noch keine Daten"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Unbekannt"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Analysen werden geladen…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Bitte Patreon erneut autorisieren, um die Analysen freizuschalten."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Premium-Analysen sind für aktive Patreon-Unterstützer verfügbar."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Sitzung abgelaufen. Bitte erneut mit Patreon anmelden."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Analyse-Backend ist derzeit nicht verfügbar."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Analyse-Dienst kann nicht erreicht werden."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Premium-Analysen konnten nicht geladen werden."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Aktivität"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Like-Verhältnis"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Höheres Like-Verhältnis"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Niedrigeres Like-Verhältnis"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Mehr Likes"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Weniger Likes"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Mehr Dislikes"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Weniger Dislikes"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Mehr $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Weniger $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Likes: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Dislikes: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Like-Verhältnis: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Dislike-Insights auf einen Blick"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Roh-Dislikes sind direkte Meldungen von Erweiterungsnutzern, die dieses Video ansehen."
+  },
+  "premiumTeaser_cta": {
+    "message": "Premium freischalten"
+  },
+  "premiumTeaser_learn": {
+    "message": "Gesamte Analysen ansehen"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Rohzahl der Dislikes"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Geschätzte Dislikes"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Geschätzte Likes"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Neueste Dislike-Gesamtwerte werden abgerufen…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Dislike-Daten konnten gerade nicht geladen werden. Versuchen Sie, die Seite neu zu laden."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "So schalten Sie Premium-Analysen frei"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Schalten Sie Premium-Video-Insights in drei schnellen Schritten frei:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Melden Sie sich im Pop-up der Return YouTube Dislike-Erweiterung mit Patreon an."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Wählen Sie die Premium-Stufe, um Aktivitätsverläufe, Länderranglisten und die interaktive Karte zu aktivieren."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Laden Sie YouTube neu, um stündliche Trends, Top-Länder und Detailansichten der US-Bundesstaaten für jedes Video zu sehen."
+  },
+  "premiumTierNotice_title": {
+    "message": "Premium-Analysen gesperrt"
+  },
+  "premiumTierNotice_message": {
+    "message": "Deine Patreon-Mitgliedschaft enthält keine Premium-Stufe. Erhöhe deinen Beitrag, um die erweiterten Videoanalysen freizuschalten."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Auf Patreon upgraden"
+  },
+  "changelog_title": {
+    "message": "Premium-Analytics-Changelog · 20. Oktober 2025"
+  },
+  "changelog_badge": {
+    "message": "Premium-Release"
+  },
+  "changelog_heading": {
+    "message": "Premium-Analysen, neu gedacht"
+  },
+  "changelog_subheading": {
+    "message": "Entdecken Sie die Zeitleiste der Live-Aktivitäten, die Bestenliste der Top-Länder und die interaktive Karte, die in Return YouTube Dislike Premium enthalten sind."
+  },
+  "changelog_releaseDate": {
+    "message": "Veröffentlicht am 20. Oktober 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Auf Patreon upgraden"
+  },
+  "changelog_cta_secondary": {
+    "message": "Setup-Anleitung lesen"
+  },
+  "changelog_section_highlights": {
+    "message": "Das ist neu"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Zeitleiste der Live-Aktivität"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Sehen Sie sich den Stream von Vorlieben und Abneigungen in Echtzeit an. Schalten Sie ohne Neuladen zwischen stündlichen, täglichen oder Gesamtvoreinstellungen um, verankern Sie das Fenster auf dem ersten Tag oder den letzten Abstimmungen und scannen Sie jede Spitze, um zu sehen, was das Engagement ausgelöst hat."
+  },
+  "changelog_feature_map_title": {
+    "message": "Interaktive Welt- und US-Heatmap"
+  },
+  "changelog_feature_map_body": {
+    "message": "Schwenken Sie um den Globus oder tauchen Sie in US-Bundesstaaten ein, um Hotspots zu entdecken. Vergleichen Sie Vorlieben, Abneigungen und Verhältnisse im aktualisierten Tooltip und heben Sie die Regionen hervor, die zuerst auf Ihre Uploads reagieren."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Bestenliste der Top-Länder"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Ordnen Sie jedes Land nach Rohaktivität, Vorlieben, Abneigungen oder Verhältnis. Filtern Sie mit denselben Voreinstellungen wie in der Zeitleiste, um zu erfahren, wo Kampagnen landen, und um zu planen, was als Nächstes veröffentlicht werden soll."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Screenshot folgt – erstelle diese Ansicht bei Bedarf in den DevTools."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Platzhalter: Timeline-Übersicht"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Platzhalter: Globale Aktivitätskarte"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Platzhalter: Länder-Rangliste"
+  },
+  "changelog_section_upgrade": {
+    "message": "So schaltest du Premium-Analysen frei"
+  },
+  "changelog_upgrade_body": {
+    "message": "Bereit? Folge diesen Schritten und aktualisiere anschließend deinen YouTube-Tab."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Öffne das Return-YouTube-Dislike-Popup und melde dich mit Patreon an."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Wähle den Premium-Tarif, damit Analysedaten in dein Konto fließen."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Lade eine YouTube-Watch-Seite neu – Timeline, Karte und Bestenlisten erscheinen sofort."
+  },
+  "changelog_section_release": {
+    "message": "Highlights des Releases"
+  },
+  "changelog_release_item1": {
+    "message": "Aktivitätszeitleistenvoreinstellungen streamen Live-Daten mit Bereichsankern für den ersten und neuesten Bucket."
+  },
+  "changelog_release_item2": {
+    "message": "Die Länder-Bestenliste wird sofort aktualisiert, sodass Sie aufstrebende Regionen erkennen können, ohne das Panel zu verlassen."
+  },
+  "changelog_release_item3": {
+    "message": "Die interaktive Karte hebt globale und US-amerikanische Hotspots mit klareren Tooltips und Messwerten hervor."
+  },
+  "changelog_support_heading": {
+    "message": "Brauchst du Hilfe?"
+  },
+  "changelog_support_description": {
+    "message": "Wir unterstützen dich gern – nutze die Support-Dokus oder unsere Community."
+  },
+  "changelog_support_contact": {
+    "message": "Frag die Community"
   }
 }

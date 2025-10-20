@@ -4,16 +4,42 @@
 
 jest.mock("../../config", () => ({
   getApiEndpoint: jest.fn((path) => `https://api.test${path}`),
+  getChangelogUrl: jest.fn(() => "moz-extension://unit-test/changelog/4/changelog_4.0.html"),
 }));
 
-jest.mock("../../utils", () => ({
-  getVideoId: jest.fn(),
-}));
+jest.mock("../../utils", () => {
+  const actual = jest.requireActual("../../utils");
+  return {
+    ...actual,
+    getVideoId: jest.fn(),
+  };
+});
+
+const enMessages = require("../../../_locales/en/messages.json");
+
+function getMessage(key, substitutions) {
+  const entry = enMessages[key];
+  if (!entry) {
+    return key;
+  }
+  let message = entry.message ?? "";
+  if (substitutions == null) {
+    return message;
+  }
+  const values = Array.isArray(substitutions) ? substitutions : [substitutions];
+  values.forEach((value, index) => {
+    const replacement = value != null ? `${value}` : "";
+    message = message.replace(new RegExp(`\\$${index + 1}`, "g"), replacement);
+  });
+  return message;
+}
 
 describe("premiumAnalytics.teaser", () => {
   let initPremiumTeaser;
   let setTeaserSuppressed;
   let getVideoId;
+  let TEASER_SUPPRESSION_REASON_SETTINGS;
+  let TEASER_SUPPRESSION_REASON_PREMIUM;
 
   function mountSecondary() {
     document.body.innerHTML = `
@@ -30,9 +56,20 @@ describe("premiumAnalytics.teaser", () => {
     jest.resetModules();
     jest.clearAllMocks();
     mountSecondary();
+    global.chrome = {
+      i18n: {
+        getMessage,
+      },
+      runtime: {},
+    };
 
     ({ getVideoId } = require("../../utils"));
-    ({ initPremiumTeaser, setTeaserSuppressed } = require("./index"));
+    ({
+      initPremiumTeaser,
+      setTeaserSuppressed,
+      TEASER_SUPPRESSION_REASON_SETTINGS,
+      TEASER_SUPPRESSION_REASON_PREMIUM,
+    } = require("./index"));
 
     global.fetch = jest.fn().mockResolvedValue({
       ok: true,
@@ -48,11 +85,13 @@ describe("premiumAnalytics.teaser", () => {
   afterEach(() => {
     document.body.innerHTML = "";
     delete global.fetch;
+    delete global.chrome;
   });
 
   async function flushPromises() {
     await Promise.resolve();
     await Promise.resolve();
+    await new Promise((resolve) => setTimeout(resolve, 0));
   }
 
   it("renders the teaser panel with fetched dislike data", async () => {
@@ -119,6 +158,26 @@ describe("premiumAnalytics.teaser", () => {
     expect(document.querySelector(".ryd-premium-teaser")).toBeNull();
   });
 
+  it("keeps the teaser hidden while the settings suppression is active", async () => {
+    getVideoId.mockReturnValue("SETTI123456");
+
+    initPremiumTeaser();
+    await flushPromises();
+    expect(document.querySelector(".ryd-premium-teaser")).not.toBeNull();
+
+    setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_SETTINGS);
+    expect(document.querySelector(".ryd-premium-teaser")).toBeNull();
+
+    setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+    setTeaserSuppressed(false, TEASER_SUPPRESSION_REASON_PREMIUM);
+    await flushPromises();
+    expect(document.querySelector(".ryd-premium-teaser")).toBeNull();
+
+    setTeaserSuppressed(false, TEASER_SUPPRESSION_REASON_SETTINGS);
+    await flushPromises();
+    expect(document.querySelector(".ryd-premium-teaser")).not.toBeNull();
+  });
+
   it("displays an error message when the vote request fails", async () => {
     getVideoId.mockReturnValue("QWERTYUIOP1");
     global.fetch = jest.fn().mockRejectedValue(new Error("network down"));
@@ -127,6 +186,6 @@ describe("premiumAnalytics.teaser", () => {
     await flushPromises();
 
     const status = document.querySelector("#ryd-premium-teaser-status");
-    expect(status?.textContent).toContain("could not load dislike data");
+    expect(status?.textContent).toBe(getMessage("premiumTeaser_statusError"));
   });
 });

@@ -3,6 +3,7 @@ import { analyticsState, COUNTRY_LIMIT } from "./state";
 import { ensurePanel, updateRangeButtons, updateRangeAnchorButtons, setFooterMessage, setLoadingState } from "./panel";
 import { debounce, safeJson } from "./utils";
 import { logFetchRequest } from "./logging";
+import { localize } from "../utils";
 
 import { MS_PER_DAY } from "./constants";
 import { renderAnalytics } from "./render";
@@ -15,6 +16,10 @@ function requestAnalytics({ selection } = {}) {
   const state = analyticsState;
 
   if (!state.currentVideoId || !state.sessionToken || !state.sessionActive) {
+    return;
+  }
+
+  if (state.membershipTier !== "premium") {
     return;
   }
 
@@ -130,17 +135,19 @@ function msToIso(ms) {
 function handleError(status, code) {
   let message;
   if (status === 409 || code === "session_upgrade_required") {
-    message = "Please re-authorize Patreon to unlock analytics.";
+    message = localize("premiumAnalytics_errorReauth");
+  } else if (status === 403 && code === "membership_tier_insufficient") {
+    message = localize("premiumTierNotice_message");
   } else if (status === 403 || code === "membership_inactive") {
-    message = "Premium analytics are available for active Patreon supporters.";
+    message = localize("premiumAnalytics_errorInactive");
   } else if (status === 401 || code === "invalid_session") {
-    message = "Session expired. Sign in with Patreon again.";
+    message = localize("premiumAnalytics_errorSession");
   } else if (code === "analytics_failure") {
-    message = "Analytics backend unavailable right now.";
+    message = localize("premiumAnalytics_errorBackend");
   } else if (code === "network_error") {
-    message = "Unable to reach analytics service.";
+    message = localize("premiumAnalytics_errorNetwork");
   } else {
-    message = "Unable to load premium analytics.";
+    message = localize("premiumAnalytics_errorGeneric");
   }
 
   setFooterMessage(message);

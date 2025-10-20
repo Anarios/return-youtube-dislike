@@ -1,5 +1,6 @@
 import { analyticsState, RANGE_OPTIONS, RANGE_ANCHORS } from "./state";
 import { sanitizeCount } from "./utils";
+import { localize } from "../utils";
 
 let callbacks = {
   onRangePreset: () => {},
@@ -131,25 +132,34 @@ export function renderSummary(summary) {
   const countries = sanitizeCount(summary.countriesRepresented);
   const uniqueIps = sanitizeCount(summary.uniqueIps);
   const periodLabel = formatSelectedPeriod();
+  const formattedLikes = likes.toLocaleString();
+  const formattedDislikes = dislikes.toLocaleString();
+  const formattedInteractions = totalInteractions.toLocaleString();
+  const formattedCountries = countries.toLocaleString();
+  const formattedIps = uniqueIps.toLocaleString();
 
   const periodMarkup = periodLabel
-    ? `<span class="ryd-analytics__period-label">Selected period: ${periodLabel}</span>`
+    ? `<span class="ryd-analytics__period-label">${localize("premiumAnalytics_selectedPeriod", [periodLabel])}</span>`
     : "";
 
   footer.innerHTML = `
     <div class="ryd-analytics__totals" role="status" aria-live="polite">
       <div class="ryd-analytics__totals-header">
-        <span class="ryd-analytics__totals-label">Extension users</span>
+        <span class="ryd-analytics__totals-label">${localize("premiumAnalytics_totalsHeading")}</span>
         ${periodMarkup}
       </div>
       <div class="ryd-analytics__totals-values">
-        <span class="ryd-analytics__totals-value ryd-analytics__totals-likes">${likes.toLocaleString()} likes</span>
+        <span class="ryd-analytics__totals-value ryd-analytics__totals-likes">${localize("premiumAnalytics_totalsLikes", [formattedLikes])}</span>
         <span class="ryd-analytics__totals-divider" aria-hidden="true">•</span>
-        <span class="ryd-analytics__totals-value ryd-analytics__totals-dislikes">${dislikes.toLocaleString()} dislikes</span>
+        <span class="ryd-analytics__totals-value ryd-analytics__totals-dislikes">${localize("premiumAnalytics_totalsDislikes", [formattedDislikes])}</span>
       </div>
     </div>
     <div class="ryd-analytics__summary-meta">
-      Captured ${totalInteractions.toLocaleString()} interactions from ${countries.toLocaleString()} countries (${uniqueIps.toLocaleString()} unique IPs)
+      ${localize("premiumAnalytics_summaryMeta", [
+        formattedInteractions,
+        formattedCountries,
+        formattedIps,
+      ])}
     </div>
   `;
 }
@@ -198,10 +208,11 @@ function createPanelMarkup() {
   }).join("");
   const anchorControls = createRangeAnchorControls();
   const modeControls = createModeControls();
+  const expandLabel = localize("premiumAnalytics_expand");
 
   return `
     <header class="ryd-analytics__header">
-      <div class="ryd-analytics__title">Premium Video Insights</div>
+      <div class="ryd-analytics__title">${localize("premiumAnalytics_title")}</div>
       <div class="ryd-analytics__controls">
         <div class="ryd-analytics__ranges">${rangeControls}</div>
         ${anchorControls}
@@ -210,8 +221,8 @@ function createPanelMarkup() {
     <div class="ryd-analytics__body">
       <section class="ryd-analytics__section" data-chart="activity">
         <div class="ryd-analytics__section-header">
-          <h3 class="ryd-analytics__section-title">Engagement over time</h3>
-          <button class="ryd-analytics__section-expand" type="button" data-chart="activity" aria-expanded="false">Expand</button>
+          <h3 class="ryd-analytics__section-title">${localize("premiumAnalytics_activityTitle")}</h3>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="activity" aria-expanded="false">${expandLabel}</button>
         </div>
         <div class="ryd-analytics__section-content">
           <div class="ryd-analytics__chart-meta" id="ryd-analytics-activity-meta" hidden>
@@ -222,17 +233,17 @@ function createPanelMarkup() {
       </section>
       <section class="ryd-analytics__section" data-chart="lists">
         <div class="ryd-analytics__section-header">
-          <h3 class="ryd-analytics__section-title">Top countries</h3>
-          <button class="ryd-analytics__section-expand" type="button" data-chart="lists" aria-expanded="false">Expand</button> 
+          <h3 class="ryd-analytics__section-title">${localize("premiumAnalytics_listsTitle")}</h3>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="lists" aria-expanded="false">${expandLabel}</button> 
         </div>
         <div class="ryd-analytics__section-content">
           <div class="ryd-analytics__lists">
             <div class="ryd-analytics__list" data-type="likes">
-              <h4>Top Like Countries</h4>
+              <h4>${localize("premiumAnalytics_listLikesTitle")}</h4>
               <ul class="ryd-analytics__list-items" id="ryd-analytics-top-likes"></ul>
             </div>
             <div class="ryd-analytics__list" data-type="dislikes">
-              <h4>Top Dislike Countries</h4>
+              <h4>${localize("premiumAnalytics_listDislikesTitle")}</h4>
               <ul class="ryd-analytics__list-items" id="ryd-analytics-top-dislikes"></ul>
             </div>
           </div>
@@ -240,15 +251,17 @@ function createPanelMarkup() {
       </section>
       <section class="ryd-analytics__section" data-chart="map">
         <div class="ryd-analytics__section-header">
-          <h3 class="ryd-analytics__section-title">Geography</h3>
-          <button class="ryd-analytics__section-expand" type="button" data-chart="map" aria-expanded="false">Expand</button>
+          <h3 class="ryd-analytics__section-title">${localize("premiumAnalytics_mapTitle")}</h3>
+          <button class="ryd-analytics__section-expand" type="button" data-chart="map" aria-expanded="false">${expandLabel}</button>
         </div>
         <div class="ryd-analytics__section-content">
           <div class="ryd-analytics__map-block">
             <div class="ryd-analytics__map-controls">
-              <span class="ryd-analytics__map-label">Map metric</span>
+              <span class="ryd-analytics__map-label">${localize("premiumAnalytics_mapMetricLabel")}</span>
               <div class="ryd-analytics__modes" role="tablist">${modeControls}</div>
-              <button class="ryd-analytics__map-reset" type="button" id="ryd-analytics-map-reset" hidden>Back to world map</button>
+              <button class="ryd-analytics__map-reset" type="button" id="ryd-analytics-map-reset" hidden>${localize(
+                "premiumAnalytics_mapReset",
+              )}</button>
             </div>
             <div class="ryd-analytics__map" id="ryd-analytics-map"></div>
           </div>
@@ -261,9 +274,9 @@ function createPanelMarkup() {
 
 function createModeControls() {
   const modes = [
-    { key: "likes", label: "Likes" },
-    { key: "dislikes", label: "Dislikes" },
-    { key: "ratio", label: "Ratio" },
+    { key: "likes", label: localize("premiumAnalytics_modeLikes") },
+    { key: "dislikes", label: localize("premiumAnalytics_modeDislikes") },
+    { key: "ratio", label: localize("premiumAnalytics_modeRatio") },
   ];
 
   return modes
@@ -277,18 +290,19 @@ function createModeControls() {
 function createRangeAnchorControls() {
   const resolvedAnchor = resolveRangeAnchor();
   const buttons = RANGE_ANCHORS.map((anchor) => {
-    const label = anchor === "last" ? "Latest days" : "First days";
+    const label =
+      anchor === "last" ? localize("premiumAnalytics_windowLatest") : localize("premiumAnalytics_windowFirst");
     const isActive = anchor === resolvedAnchor;
     const title =
       anchor === "last"
-        ? "Show the most recent days within the selected window"
-        : "Show the earliest days within the selected window";
+        ? localize("premiumAnalytics_windowLatestTitle")
+        : localize("premiumAnalytics_windowFirstTitle");
     return `<button class="ryd-range-anchor${isActive ? " is-active" : ""}" type="button" data-anchor="${anchor}" title="${title}">${label}</button>`;
   }).join("");
 
   return `
-    <div class="ryd-analytics__window" role="group" aria-label="Data window">
-      <span class="ryd-analytics__window-label">Data window</span>
+    <div class="ryd-analytics__window" role="group" aria-label="${localize("premiumAnalytics_windowGroupLabel")}">
+      <span class="ryd-analytics__window-label">${localize("premiumAnalytics_windowGroupLabel")}</span>
       <div class="ryd-analytics__window-toggle">${buttons}</div>
       <span class="ryd-analytics__window-hint" id="ryd-analytics-range-window">${formatRangeWindowLabel(resolvedAnchor)}</span>
     </div>
@@ -296,7 +310,9 @@ function createRangeAnchorControls() {
 }
 
 function formatRangeLabel(days) {
-  return days === 0 ? "All time" : `${days}d`;
+  return days === 0
+    ? localize("premiumAnalytics_rangeLabelAllTime")
+    : localize("premiumAnalytics_rangeLabelDays", [`${days}`]);
 }
 
 function resolveRangeAnchor() {
@@ -310,19 +326,30 @@ function formatRangeWindowLabel(anchor) {
     analyticsState.selectionRange?.from != null &&
     analyticsState.selectionRange?.to != null
   ) {
-    return "Custom selection";
+    return localize("premiumAnalytics_windowSummaryCustom");
   }
 
   const range = analyticsState.currentRange;
   if (!Number.isFinite(range) || range <= 0) {
-    return "All time";
+    return localize("premiumAnalytics_windowSummaryAllTime");
   }
   const absoluteRange = Math.max(0, Math.round(range));
   if (absoluteRange <= 0) {
-    return "All time";
+    return localize("premiumAnalytics_windowSummaryAllTime");
   }
-  const unit = absoluteRange === 1 ? "day" : "days";
-  return anchor === "last" ? `Last ${absoluteRange} ${unit}` : `First ${absoluteRange} ${unit}`;
+  const dayLabel = formatDayCount(absoluteRange);
+  return anchor === "last"
+    ? localize("premiumAnalytics_windowSummaryLast", [dayLabel])
+    : localize("premiumAnalytics_windowSummaryFirst", [dayLabel]);
+}
+
+function formatDayCount(count) {
+  const numeric = Number(count);
+  const formatted = Number.isFinite(numeric) ? numeric.toLocaleString() : `${count}`;
+  if (numeric === 1) {
+    return localize("premiumAnalytics_daysSingular", [formatted]);
+  }
+  return localize("premiumAnalytics_daysPlural", [formatted]);
 }
 
 function applyExpansionState() {
@@ -369,7 +396,7 @@ function positionExpandedPanel(panel, button) {
   panel.style.overflowY = "auto";
   panel.style.zIndex = "2147483646";
   if (button) {
-    button.textContent = "Collapse";
+    button.textContent = localize("premiumAnalytics_collapse");
     button.setAttribute("aria-expanded", "true");
     button.classList.add("is-active");
   }
@@ -378,7 +405,7 @@ function positionExpandedPanel(panel, button) {
 function resetPanelPosition(panel, button) {
   panel.removeAttribute("style");
   if (button) {
-    button.textContent = "Expand";
+    button.textContent = localize("premiumAnalytics_expand");
     button.setAttribute("aria-expanded", "false");
     button.classList.remove("is-active");
   }
@@ -406,7 +433,7 @@ function positionExpandedSection(section, button) {
     element.style.height = `${chartHeight}px`;
   });
   if (button) {
-    button.textContent = "Collapse";
+    button.textContent = localize("premiumAnalytics_collapse");
     button.setAttribute("aria-expanded", "true");
     button.classList.add("is-active");
   }
@@ -418,7 +445,7 @@ function resetSectionPosition(section, button) {
     .querySelectorAll(".ryd-analytics__chart, .ryd-analytics__map")
     .forEach((element) => element.removeAttribute("style"));
   if (button) {
-    button.textContent = "Expand";
+    button.textContent = localize("premiumAnalytics_expand");
     button.setAttribute("aria-expanded", "false");
     button.classList.remove("is-active");
   }

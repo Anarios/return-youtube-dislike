@@ -119,6 +119,12 @@
   "reformatLikesHover": {
     "message": "Gör formatet på gilla och ogilla konsekvent."
   },
+  "hidePremiumTeaser": {
+    "message": "Dölj premiumteaser-panelen"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Visa inte premiumteasern på YouTubes tittarsidor."
+  },
   "roundNumbers": {
     "message": "Visa avrundade siffror"
   },
@@ -202,5 +208,332 @@
   },
   "whatsnew": {
     "message": "Vad är nytt"
+  },
+  "premiumAnalytics_title": {
+    "message": "Premium-videoinblickar"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Engagemang över tid"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Toppländer"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Länder med flest gilla-markeringar"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Länder med flest ogilla-markeringar"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Geografi"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Expandera"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Fäll ihop"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Kartmetrik"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Tillbaka till världskartan"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Gilla-markeringar"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Ogilla-markeringar"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Förhållande"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Datafönster"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Senaste dagarna"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Första dagarna"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Visa de senaste dagarna inom det valda intervallet"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Visa de första dagarna inom det valda intervallet"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Anpassat urval"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Hela perioden"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Senaste $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Första $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 dag"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 dagar"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Hela perioden"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1d"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Vald period: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Tilläggsanvändare"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 gilla-markeringar"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 ogilla-markeringar"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Registrerade $1 interaktioner från $2 länder ($3 unika IP-adresser)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Röster per timme"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Röster per dag"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Röster per vecka"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Röster var $1 timme"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Röster var $1 dag"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Röster var $1 minut"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Röster per minut"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Röster var $1 sekund"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Röster per sekund"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Inga data ännu"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Okänt"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Läser in insikter…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Auktorisera Patreon igen för att låsa upp analyserna."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Premiumanalyser är tillgängliga för aktiva Patreon-supportrar."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Sessionen har gått ut. Logga in igen med Patreon."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Analyssystemet är inte tillgängligt just nu."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Det går inte att nå analysetjänsten."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Det går inte att läsa in premiumanalyser."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Aktivitet"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Gilla-förhållande"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Högre gilla-förhållande"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Lägre gilla-förhållande"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Fler gilla-markeringar"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Färre gilla-markeringar"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Fler ogilla-markeringar"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Färre ogilla-markeringar"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Mer $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Mindre $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Gilla-markeringar: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Ogilla-markeringar: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Gilla-förhållande: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Översikt över ogilla-insikter"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Råa ogilla-markeringar är direkta rapporter från tilläggsanvändare som tittar på videon."
+  },
+  "premiumTeaser_cta": {
+    "message": "Lås upp Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Förhandsvisa alla analyser"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Antal råa ogilla-markeringar"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Beräknade ogilla-markeringar"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Beräknade gilla-markeringar"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Hämtar de senaste ogilla-summorna…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Ogilla-data kunde inte läsas in. Försök att ladda om sidan."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Så låser du upp Premiumanalyser"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Lås upp Premium-videoinblickar i tre snabba steg:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Logga in med Patreon via popup-fönstret i Return YouTube Dislike-tillägget."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Välj Premium-nivån för att aktivera aktivitetsgrafer, landstopplistor och den interaktiva kartan."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Ladda om YouTube för att se timvisa trender, toppländer och detaljer per delstat i USA för varje video."
+  },
+  "premiumTierNotice_title": {
+    "message": "Premiumanalys låst"
+  },
+  "premiumTierNotice_message": {
+    "message": "Ditt Patreon-medlemskap innehåller inte Premium-nivån. Uppgradera ditt stöd för att låsa upp avancerad videoanalys."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Uppgradera på Patreon"
+  },
+  "changelog_title": {
+    "message": "Ändringslogg för Premium Analytics · 20 oktober 2025"
+  },
+  "changelog_badge": {
+    "message": "Premiumversion"
+  },
+  "changelog_heading": {
+    "message": "Premiumanalys, omarbetad"
+  },
+  "changelog_subheading": {
+    "message": "Utforska liveaktivitetens tidslinje, topplistan över länder och den interaktiva kartan som ingår i Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Släppt den 20 oktober 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Uppgradera på Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Läs installationsguiden"
+  },
+  "changelog_section_highlights": {
+    "message": "Vad är nytt"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Tidslinje för liveaktivitet"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Se gilla- och ogilla-strömmar i realtid. Växla förinställningar per timme, dagligen eller genom tiderna utan att ladda om, förankra fönstret till dag ett eller de senaste rösterna och skrubba varje spik för att se vad som utlöste engagemang."
+  },
+  "changelog_feature_map_title": {
+    "message": "Interaktiv värld och USA värmekarta"
+  },
+  "changelog_feature_map_body": {
+    "message": "Panorera över hela världen eller dyk in i amerikanska delstater för att få ytan på hotspots. Jämför gillande, ogillar och förhållanden i det uppgraderade verktygstipset och lyft fram de regioner som reagerar först på dina uppladdningar."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Topplistan för länder"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Rangordna varje land efter rå aktivitet, gillar, ogillar eller förhållande. Filtrera med samma förinställningar som tidslinjen för att ta reda på var kampanjer landar och planera vad som ska publiceras härnäst."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Skärmdump kommer snart – ta den här vyn i DevTools när du är klar."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Platshållare: tidslinjeöversikt"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Platshållare: global aktivitetskarta"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Platshållare: länders topplista"
+  },
+  "changelog_section_upgrade": {
+    "message": "Hur man låser upp Premium Analytics"
+  },
+  "changelog_upgrade_body": {
+    "message": "Redo att dyka i? Följ dessa snabba steg och uppdatera din YouTube-flik."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Öppna popup-fönstret Returnera YouTube ogillar och logga in med Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Välj Premium-nivån för att aktivera analysdataströmning till ditt konto."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Ladda om vilken YouTube-visningssida som helst – din tidslinje, karta och topplistor visas direkt."
+  },
+  "changelog_section_release": {
+    "message": "Släpp höjdpunkter"
+  },
+  "changelog_release_item1": {
+    "message": "Förinställningar för aktivitetstidslinje streamar livedata med räckviddsankare för första och senaste hinkar."
+  },
+  "changelog_release_item2": {
+    "message": "Country leaderboard uppdateras omedelbart så att du kan upptäcka stigande regioner utan att lämna panelen."
+  },
+  "changelog_release_item3": {
+    "message": "Interaktiv karta framhäver globala och amerikanska delstaters hotspots med tydligare verktygstips och mätvärden."
+  },
+  "changelog_support_heading": {
+    "message": "Behöver du en hand?"
+  },
+  "changelog_support_description": {
+    "message": "Vi finns här om du har problem – ta med dina frågor till supportdokumenten eller communityn."
+  },
+  "changelog_support_contact": {
+    "message": "Fråga samhället"
   }
 }
