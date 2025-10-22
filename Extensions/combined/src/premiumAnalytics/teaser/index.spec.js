@@ -40,6 +40,9 @@ describe("premiumAnalytics.teaser", () => {
   let getVideoId;
   let TEASER_SUPPRESSION_REASON_SETTINGS;
   let TEASER_SUPPRESSION_REASON_PREMIUM;
+  let storageGetMock;
+  let storageSetMock;
+  let storageOnChangedAddListener;
 
   function mountSecondary() {
     document.body.innerHTML = `
@@ -56,11 +59,29 @@ describe("premiumAnalytics.teaser", () => {
     jest.resetModules();
     jest.clearAllMocks();
     mountSecondary();
+    storageGetMock = jest.fn((keys, callback) => {
+      callback({ hidePremiumTeaser: false });
+    });
+    storageSetMock = jest.fn((values, callback) => {
+      if (typeof callback === "function") {
+        callback();
+      }
+    });
+    storageOnChangedAddListener = jest.fn();
     global.chrome = {
       i18n: {
         getMessage,
       },
       runtime: {},
+      storage: {
+        sync: {
+          get: storageGetMock,
+          set: storageSetMock,
+        },
+        onChanged: {
+          addListener: storageOnChangedAddListener,
+        },
+      },
     };
 
     ({ getVideoId } = require("../../utils"));
@@ -97,7 +118,7 @@ describe("premiumAnalytics.teaser", () => {
   it("renders the teaser panel with fetched dislike data", async () => {
     getVideoId.mockReturnValue("abcdefghijk");
 
-    initPremiumTeaser();
+    await initPremiumTeaser();
     await flushPromises();
 
     const panel = document.querySelector(".ryd-premium-teaser");
@@ -116,7 +137,7 @@ describe("premiumAnalytics.teaser", () => {
   it("removes the panel when suppressed and restores it when unsuppressed", async () => {
     getVideoId.mockReturnValue("LMNOPQRSTUV");
 
-    initPremiumTeaser();
+    await initPremiumTeaser();
     await flushPromises();
     expect(document.querySelector(".ryd-premium-teaser")).not.toBeNull();
 
@@ -135,7 +156,7 @@ describe("premiumAnalytics.teaser", () => {
     premium.className = "ryd-premium-analytics";
     container.appendChild(premium);
 
-    initPremiumTeaser();
+    await initPremiumTeaser();
     await flushPromises();
 
     expect(document.querySelector(".ryd-premium-teaser")).toBeNull();
@@ -144,7 +165,7 @@ describe("premiumAnalytics.teaser", () => {
   it("cleans up stray teaser panels even when already suppressed", async () => {
     getVideoId.mockReturnValue("ZXCVBNMASDF");
 
-    initPremiumTeaser();
+    await initPremiumTeaser();
     await flushPromises();
 
     setTeaserSuppressed(true);
@@ -161,7 +182,7 @@ describe("premiumAnalytics.teaser", () => {
   it("keeps the teaser hidden while the settings suppression is active", async () => {
     getVideoId.mockReturnValue("SETTI123456");
 
-    initPremiumTeaser();
+    await initPremiumTeaser();
     await flushPromises();
     expect(document.querySelector(".ryd-premium-teaser")).not.toBeNull();
 
@@ -182,10 +203,29 @@ describe("premiumAnalytics.teaser", () => {
     getVideoId.mockReturnValue("QWERTYUIOP1");
     global.fetch = jest.fn().mockRejectedValue(new Error("network down"));
 
-    initPremiumTeaser();
+    await initPremiumTeaser();
     await flushPromises();
 
     const status = document.querySelector("#ryd-premium-teaser-status");
     expect(status?.textContent).toBe(getMessage("premiumTeaser_statusError"));
   });
+
+  it("persists the hide setting when the close button is clicked", async () => {
+    getVideoId.mockReturnValue("DISMISSME01");
+
+    await initPremiumTeaser();
+    await flushPromises();
+
+    const closeButton = document.querySelector("#ryd-premium-teaser-close");
+    expect(closeButton).not.toBeNull();
+
+    storageSetMock.mockClear();
+
+    closeButton.click();
+    await flushPromises();
+
+    expect(storageSetMock).toHaveBeenCalledWith({ hidePremiumTeaser: true });
+    expect(document.querySelector(".ryd-premium-teaser")).toBeNull();
+  });
+
 });

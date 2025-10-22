@@ -112,6 +112,7 @@ ytd-menu-renderer.ytd-watch-metadata {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
   font-family: Roboto, Arial, sans-serif;
   transition: box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  position: relative;
 }
 
 .ryd-premium-teaser.is-loading {
@@ -183,6 +184,8 @@ ytd-menu-renderer.ytd-watch-metadata {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+  position: relative;
+  padding-right: 48px;
 }
 
 .ryd-premium-teaser__badge {
@@ -217,6 +220,36 @@ ytd-menu-renderer.ytd-watch-metadata {
   align-items: flex-start;
   gap: 8px;
   text-align: left;
+}
+
+.ryd-premium-teaser__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--yt-spec-text-secondary, #94a3b8);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ryd-premium-teaser__close:hover,
+.ryd-premium-teaser__close:focus-visible {
+  background: rgba(148, 163, 184, 0.16);
+  color: var(--yt-spec-text-primary, #f8fafc);
+  outline: none;
+}
+
+.ryd-premium-teaser__close-icon {
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 600;
 }
 
 .ryd-premium-teaser__cta {

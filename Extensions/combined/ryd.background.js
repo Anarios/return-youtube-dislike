@@ -257,7 +257,8 @@ function persistChangelogVersion(version) {
     return;
   }
   try {
-    storage.set({ [CHANGELOG_STORAGE_KEY]: version }, () => {
+    const valueToStore = version || true;
+    storage.set({ [CHANGELOG_STORAGE_KEY]: valueToStore }, () => {
       if (api.runtime.lastError) {
         console.debug("Failed to persist changelog version:", api.runtime.lastError.message);
       }
@@ -277,43 +278,41 @@ function maybeShowChangelog(details) {
     return;
   }
 
+  if (reason !== "install" && reason !== "update") {
+    return;
+  }
+
   const manifest = api.runtime.getManifest();
   const currentVersion = manifest?.version;
-  if (!currentVersion) {
-    return;
-  }
-
   const storage = api?.storage?.local;
-  if (reason === "install") {
-    openChangelogTab(currentVersion);
+
+  const showChangelog = () => {
+    openChangelogTab(currentVersion || null);
+  };
+
+  if (!storage || typeof storage.get !== "function") {
+    showChangelog();
     return;
   }
 
-  if (reason === "update") {
-    if (!storage || typeof storage.get !== "function") {
-      openChangelogTab(currentVersion);
-      return;
-    }
+  try {
+    storage.get(CHANGELOG_STORAGE_KEY, (result) => {
+      if (api.runtime.lastError) {
+        console.debug("Changelog storage read failed:", api.runtime.lastError.message);
+        showChangelog();
+        return;
+      }
 
-    try {
-      storage.get(CHANGELOG_STORAGE_KEY, (result) => {
-        if (api.runtime.lastError) {
-          console.debug("Changelog storage read failed:", api.runtime.lastError.message);
-          openChangelogTab(currentVersion);
-          return;
-        }
+      const lastShownValue = result?.[CHANGELOG_STORAGE_KEY];
+      if (lastShownValue !== undefined && lastShownValue !== null && lastShownValue !== "") {
+        return;
+      }
 
-        const lastShownVersion = result?.[CHANGELOG_STORAGE_KEY];
-        if (lastShownVersion === currentVersion) {
-          return;
-        }
-
-        openChangelogTab(currentVersion);
-      });
-    } catch (error) {
-      console.debug("Storage get failed for changelog version", error);
-      openChangelogTab(currentVersion);
-    }
+      showChangelog();
+    });
+  } catch (error) {
+    console.debug("Storage get failed for changelog version", error);
+    showChangelog();
   }
 }
 
