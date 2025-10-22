@@ -14,7 +14,7 @@
     "core-js": "^3.44.0",
     "nuxt": "^2.15.7",
     "nuxt-user-agent": "^1.2.2",
-    "vuetify": "^2.5.5"
+    "vuetify": "^3.10.7"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.3",
