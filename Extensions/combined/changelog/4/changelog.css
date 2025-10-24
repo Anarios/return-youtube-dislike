@@ -59,6 +59,49 @@ body {
   gap: 1.25rem;
 }
 
+.ryd-changelog__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem 0.35rem 0.35rem;
+  align-self: flex-start;
+  border: 1px solid rgba(255, 66, 77, 0.2);
+  box-shadow: 0 12px 30px rgba(255, 66, 77, 0.22);
+}
+
+.ryd-changelog__brand-logo {
+  display: block;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.4), transparent 55%);
+  padding: 0.35rem;
+  box-sizing: border-box;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35));
+}
+
+.ryd-changelog__brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.ryd-changelog__brand-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.ryd-changelog__brand-label {
+  font-size: 0.85rem;
+  color: var(--ryd-text-secondary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
 .ryd-changelog__badge {
   display: inline-flex;
   align-self: flex-start;
@@ -187,6 +230,27 @@ body {
 @media (max-width: 720px) {
   .ryd-feature-grid {
     gap: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .ryd-changelog__brand {
+    gap: 0.65rem;
+    padding: 0.3rem 0.75rem 0.3rem 0.3rem;
+  }
+
+  .ryd-changelog__brand-logo {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ryd-changelog__brand-name {
+    font-size: 0.95rem;
+  }
+
+  .ryd-changelog__brand-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
   }
 }
 
