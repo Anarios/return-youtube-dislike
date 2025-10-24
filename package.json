@@ -42,7 +42,7 @@
     "@babel/runtime": "^7.23.5",
     "babel-loader": "^10.0.0",
     "babel-plugin-rewire": "^1.2.0",
-    "copy-webpack-plugin": "^11.0.0",
+    "copy-webpack-plugin": "^13.0.1",
     "filemanager-webpack-plugin": "^9.0.1",
     "husky": "^9.1.7",
     "jest": "^28.1.3",
