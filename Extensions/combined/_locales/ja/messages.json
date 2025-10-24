@@ -535,5 +535,8 @@
   },
   "changelog_support_contact": {
     "message": "コミュニティに質問する"
+  },
+  "changelog_brand_logo_alt": {
+    "message": "Return YouTube Dislike のロゴ"
   }
 }

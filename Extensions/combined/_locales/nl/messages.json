@@ -535,5 +535,8 @@
   },
   "changelog_support_contact": {
     "message": "Vraag het aan de gemeenschap"
+  },
+  "changelog_brand_logo_alt": {
+    "message": "Return YouTube Dislike-logo"
   }
 }

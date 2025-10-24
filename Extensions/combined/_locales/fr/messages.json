@@ -535,5 +535,8 @@
   },
   "changelog_support_contact": {
     "message": "Demander à la communauté"
+  },
+  "changelog_brand_logo_alt": {
+    "message": "Logo de Return YouTube Dislike"
   }
 }
