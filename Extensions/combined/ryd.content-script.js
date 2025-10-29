@@ -9,35 +9,105 @@ initPatreonFeatures();
 
 let jsInitChecktimer = null;
 let isSetInitialStateDone = false;
+let isStorageListenerRegistered = false;
+let shortsNavigationObserver = null;
+let shortsNavigationObserverTarget = null;
 
-async function setEventListeners(evt) {
-  async function checkForJS_Finish() {
-    try {
-      if ((isShorts() && isVideoLoaded()) || (getButtons()?.offsetParent && isVideoLoaded())) {
-        clearInterval(jsInitChecktimer);
-        jsInitChecktimer = null;
-        createSmartimationObserver();
-        addLikeDislikeEventListener();
-        await setInitialState();
-        isSetInitialStateDone = true;
-        getBrowser().storage.onChanged.addListener(storageChangeHandler);
-      }
-    } catch (exception) {
-      if (!isSetInitialStateDone) {
-        console.log("error");
-        await setInitialState();
-      }
-    }
+function ensureShortsNavigationObserver() {
+  if (!isShorts()) {
+    return;
   }
 
-  if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
-  jsInitChecktimer = setInterval(await checkForJS_Finish, 111);
+  const shortsRoot = document.querySelector("ytd-shorts");
+  if (!shortsRoot) {
+    return;
+  }
+
+  if (!shortsNavigationObserver) {
+    shortsNavigationObserver = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "is-active" &&
+          mutation.target.tagName === "YTD-REEL-VIDEO-RENDERER" &&
+          mutation.target.hasAttribute("is-active")
+        ) {
+          triggerInitializationCycle();
+          break;
+        }
+      }
+    });
+  }
+
+  if (shortsNavigationObserverTarget !== shortsRoot) {
+    shortsNavigationObserver.disconnect();
+    shortsNavigationObserver.observe(shortsRoot, {
+      attributes: true,
+      subtree: true,
+      attributeFilter: ["is-active"],
+    });
+    shortsNavigationObserverTarget = shortsRoot;
+  }
+}
+
+async function checkForInitialization() {
+  try {
+    if (isShorts()) {
+      ensureShortsNavigationObserver();
+    }
+
+    if ((isShorts() && isVideoLoaded()) || (getButtons()?.offsetParent && isVideoLoaded())) {
+      if (jsInitChecktimer !== null) {
+        clearInterval(jsInitChecktimer);
+        jsInitChecktimer = null;
+      }
+      createSmartimationObserver();
+      addLikeDislikeEventListener();
+      await setInitialState();
+      isSetInitialStateDone = true;
+      if (!isStorageListenerRegistered) {
+        getBrowser().storage.onChanged.addListener(storageChangeHandler);
+        isStorageListenerRegistered = true;
+      }
+    }
+  } catch (exception) {
+    if (!isSetInitialStateDone) {
+      console.log("error");
+      await setInitialState();
+    }
+  }
+}
+
+async function triggerInitializationCycle() {
+  isSetInitialStateDone = false;
+
+  if (jsInitChecktimer !== null) {
+    clearInterval(jsInitChecktimer);
+    jsInitChecktimer = null;
+  }
+
+  await checkForInitialization();
+
+  if (!isSetInitialStateDone) {
+    jsInitChecktimer = setInterval(() => {
+      checkForInitialization();
+    }, 111);
+
+    setTimeout(() => {
+      if (!isSetInitialStateDone) {
+        checkForInitialization();
+      }
+    }, 2000);
+  }
+}
+
+async function setEventListeners() {
+  await triggerInitializationCycle();
 }
 
 await setEventListeners();
 
 document.addEventListener("yt-navigate-finish", async function (event) {
-  if (jsInitChecktimer !== null) clearInterval(jsInitChecktimer);
   await setEventListeners();
 });
 

@@ -238,6 +238,9 @@ function displayError(error) {
 }
 
 async function setState(storedData) {
+  if (typeof window !== "undefined") {
+    window.__rydSetStateCalls = (window.__rydSetStateCalls || 0) + 1;
+  }
   storedData.previousState = isVideoDisliked() ? DISLIKED_STATE : isVideoLiked() ? LIKED_STATE : NEUTRAL_STATE;
   let statsSet = false;
   console.log("Video is loaded. Adding buttons...");

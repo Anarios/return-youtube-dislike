@@ -1,4 +1,4 @@
-const DEV_API_URL = "https://returnyoutubedislikeapi.com";
+const DEV_API_URL = "https://localhost:7258";
 const PROD_API_URL = "https://returnyoutubedislikeapi.com";
 
 const runtime = typeof chrome !== "undefined" ? chrome.runtime : null;

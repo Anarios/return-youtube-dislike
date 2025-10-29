@@ -15,6 +15,10 @@ function getButtons() {
         return element;
       }
     }
+
+    if (elements.length > 0) {
+      return elements[0];
+    }
   }
   //---   If Watching On Mobile:   ---//
   if (isMobile()) {
@@ -48,19 +52,33 @@ function getLikeTextContainer() {
 }
 
 function getDislikeButton() {
-  return getButtons().children[0].tagName ===
+  if (
+    getButtons().children[0].tagName ===
     "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
-    ? querySelector(extConfig.selectors.buttons.dislikeButton.segmented) ??
-        querySelector(
-          extConfig.selectors.buttons.dislikeButton.segmentedGetButtons,
-          getButtons(),
-        )
-    : isShorts()
-      ? querySelector(["#dislike-button"], getButtons())
-      : querySelector(
-          extConfig.selectors.buttons.dislikeButton.notSegmented,
-          getButtons(),
-        );
+  ) {
+    return (
+      querySelector(extConfig.selectors.buttons.dislikeButton.segmented) ??
+      querySelector(
+        extConfig.selectors.buttons.dislikeButton.segmentedGetButtons,
+        getButtons(),
+      )
+    );
+  }
+
+  const notSegmentedMatch = querySelector(
+    extConfig.selectors.buttons.dislikeButton.notSegmented,
+    getButtons(),
+  );
+
+  if (notSegmentedMatch != null) {
+    return notSegmentedMatch;
+  }
+
+  if (isShorts()) {
+    return querySelector(["#dislike-button"], getButtons());
+  }
+
+  return null;
 }
 
 function createDislikeTextContainer() {
