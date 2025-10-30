@@ -327,126 +327,191 @@ function getLikeCountFromButton() {
     }
   `);
 
-function createRateBar(likes, dislikes) {
-  if (isMobile || !extConfig.rateBarEnabled) {
-    return;
-  }
-  let rateBar = document.getElementById("return-youtube-dislike-bar-container");
-
-  const widthPx = getLikeButton().clientWidth + (getDislikeButton()?.clientWidth ?? 52);
-
-  const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
-
-  var likePercentage = parseFloat(widthPercent.toFixed(1));
-  const dislikePercentage = (100 - likePercentage).toLocaleString();
-  likePercentage = likePercentage.toLocaleString();
-
-  var tooltipInnerHTML;
-  switch (extConfig.tooltipPercentageMode) {
-    case "dash_like":
-      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`;
-      break;
-    case "dash_dislike":
-      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`;
-      break;
-    case "both":
-      tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`;
-      break;
-    case "only_like":
-      tooltipInnerHTML = `${likePercentage}%`;
-      break;
-    case "only_dislike":
-      tooltipInnerHTML = `${dislikePercentage}%`;
-      break;
-    default:
-      tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
-  }
-
-  if (!rateBar && !isMobile) {
-    let colorLikeStyle = "";
-    let colorDislikeStyle = "";
-    if (extConfig.coloredBar) {
-      colorLikeStyle = "; background-color: " + getColorFromTheme(true);
-      colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
+  function createRateBar(likes, dislikes, rawLikes, rawDislikes) {
+    if (isMobile || !extConfig.rateBarEnabled) {
+      return;
     }
-
-    getButtons().insertAdjacentHTML(
-      "beforeend",
-      `
-        <div class="ryd-tooltip" style="width: ${widthPx}px">
-        <div class="ryd-tooltip-bar-container">
-           <div
-              id="return-youtube-dislike-bar-container"
-              style="width: 100%; height: 2px;${colorDislikeStyle}"
-              >
+    let rateBar = document.getElementById("return-youtube-dislike-bar-container");
+  
+    const widthPx = getLikeButton().clientWidth + (getDislikeButton()?.clientWidth ?? 52);
+  
+    const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
+  
+    var likePercentage = parseFloat(widthPercent.toFixed(1));
+    const dislikePercentage = (100 - likePercentage).toLocaleString();
+    likePercentage = likePercentage.toLocaleString();
+  
+    var tooltipInnerHTML;
+    switch (extConfig.tooltipPercentageMode) {
+      case "dash_like":
+        tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`;
+        break;
+      case "dash_dislike":
+        tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`;
+        break;
+      case "both":
+        tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`;
+        break;
+      case "only_like":
+        tooltipInnerHTML = `${likePercentage}%`;
+        break;
+      case "only_dislike":
+        tooltipInnerHTML = `${dislikePercentage}%`;
+        break;
+      default:
+        // Modify default to include rawLikes and rawDislikes
+        tooltipInnerHTML = `
+          Likes: ${likes.toLocaleString()} (${rawLikes.toLocaleString()})<br>
+          Dislikes: ${dislikes.toLocaleString()} (${rawDislikes.toLocaleString()})
+        `;
+    }
+  
+    if (!rateBar && !isMobile) {
+      let colorLikeStyle = "";
+      let colorDislikeStyle = "";
+      if (extConfig.coloredBar) {
+        colorLikeStyle = "; background-color: " + getColorFromTheme(true);
+        colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
+      }
+  
+      getButtons().insertAdjacentHTML(
+        "beforeend",
+        `
+          <div class="ryd-tooltip" style="width: ${widthPx}px; position: relative;">
+            <div class="ryd-tooltip-bar-container">
               <div
-                 id="return-youtube-dislike-bar"
-                 style="width: ${widthPercent}%; height: 100%${colorDislikeStyle}"
-                 ></div>
-           </div>
-        </div>
-        <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-           <!--css-build:shady-->${tooltipInnerHTML}
-        </tp-yt-paper-tooltip>
-        </div>
-`,
-    );
-    let descriptionAndActionsElement = document.getElementById("top-row");
-    descriptionAndActionsElement.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer)";
-    descriptionAndActionsElement.style.paddingBottom = "10px";
-  } else {
-    document.querySelector(".ryd-tooltip").style.width = widthPx + "px";
-    document.getElementById("return-youtube-dislike-bar").style.width = widthPercent + "%";
-
-    if (extConfig.coloredBar) {
-      document.getElementById("return-youtube-dislike-bar-container").style.backgroundColor = getColorFromTheme(false);
-      document.getElementById("return-youtube-dislike-bar").style.backgroundColor = getColorFromTheme(true);
-    }
-  }
-}
-
-function setState() {
-  cLog("Fetching votes...");
-  let statsSet = false;
-
-  fetch(`https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`).then((response) => {
-    response.json().then((json) => {
-      if (json && !("traceId" in response) && !statsSet) {
-        const { dislikes, likes } = json;
-        cLog(`Received count: ${dislikes}`);
-        likesvalue = likes;
-        dislikesvalue = dislikes;
-        setDislikes(numberFormat(dislikes));
-        if (extConfig.numberDisplayReformatLikes === true) {
-          const nativeLikes = getLikeCountFromButton();
-          if (nativeLikes !== false) {
-            setLikes(numberFormat(nativeLikes));
-          }
+                id="return-youtube-dislike-bar-container"
+                style="width: 100%; height: 2px;${colorDislikeStyle}"
+              >
+                <div
+                  id="return-youtube-dislike-bar"
+                  style="width: ${widthPercent}%; height: 100%;${colorLikeStyle}"
+                ></div>
+              </div>
+            </div>
+            <!-- Tooltip -->
+            <div class="tooltip" style="display: none; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); background-color: #fff; border: 1px solid #ccc; padding: 8px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 100;">
+              ${tooltipInnerHTML}
+            </div>
+          </div>
+        `,
+      );
+      let descriptionAndActionsElement = document.getElementById("top-row");
+      if (descriptionAndActionsElement) {
+        descriptionAndActionsElement.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer)";
+        descriptionAndActionsElement.style.paddingBottom = "10px";
+      }
+  
+      // Add event listeners for hover
+      const tooltipContainer = document.querySelector(".ryd-tooltip");
+      const tooltip = tooltipContainer.querySelector(".tooltip");
+  
+      tooltipContainer.addEventListener("mouseover", () => {
+        tooltip.style.display = "block";
+      });
+  
+      tooltipContainer.addEventListener("mouseleave", () => {
+        tooltip.style.display = "none";
+      });
+    } else {
+      const tooltip = document.querySelector(".ryd-tooltip .tooltip");
+      if (tooltip) {
+        tooltip.innerHTML = `
+          Likes: ${likes.toLocaleString()} (${rawLikes.toLocaleString()})<br>
+          Dislikes: ${dislikes.toLocaleString()} (${rawDislikes.toLocaleString()})
+        `;
+        tooltip.style.display = "none"; // Reset display
+      }
+      const tooltipContainer = document.querySelector(".ryd-tooltip");
+      if (tooltipContainer) {
+        tooltipContainer.style.width = widthPx + "px";
+        const rateBarElement = document.getElementById("return-youtube-dislike-bar");
+        if (rateBarElement) {
+          rateBarElement.style.width = widthPercent + "%";
         }
-        createRateBar(likes, dislikes);
-        if (extConfig.coloredThumbs === true) {
-          const dislikeButton = getDislikeButton();
-          if (isShorts()) {
-            // for shorts, leave deactived buttons in default color
-            const shortLikeButton = getLikeButton().querySelector("tp-yt-paper-button#button");
-            const shortDislikeButton = dislikeButton?.querySelector("tp-yt-paper-button#button");
-            if (shortLikeButton.getAttribute("aria-pressed") === "true") {
-              shortLikeButton.style.color = getColorFromTheme(true);
-            }
-            if (shortDislikeButton && shortDislikeButton.getAttribute("aria-pressed") === "true") {
-              shortDislikeButton.style.color = getColorFromTheme(false);
-            }
-            shortsObserver.observe(shortLikeButton);
-            shortsObserver.observe(shortDislikeButton);
-          } else {
-            getLikeButton().style.color = getColorFromTheme(true);
-            if (dislikeButton) dislikeButton.style.color = getColorFromTheme(false);
-          }
+  
+        if (extConfig.coloredBar) {
+          document.getElementById("return-youtube-dislike-bar-container").style.backgroundColor = getColorFromTheme(false);
+          rateBarElement.style.backgroundColor = getColorFromTheme(true);
+        }
+  
+        // Update tooltip content
+        const tooltip = tooltipContainer.querySelector(".tooltip");
+        if (tooltip) {
+          tooltip.innerHTML = `
+            Likes: ${likes.toLocaleString()} (${rawLikes.toLocaleString()})<br>
+            Dislikes: ${dislikes.toLocaleString()} (${rawDislikes.toLocaleString()})
+          `;
         }
       }
-    });
-  });
-}
+    }
+  }
+  
+
+  function setState() {
+    cLog("Fetching votes...");
+    let statsSet = false;
+  
+    fetch(`https://returnyoutubedislikeapi.com/votes?videoId=${getVideoId()}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then((json) => {
+        // Corrected condition: Check for 'traceId' in 'json' instead of 'response'
+        if (json && !("traceId" in json) && !statsSet) {
+          const { dislikes, likes, rawLikes, rawDislikes } = json; // Extract rawLikes and rawDislikes
+          cLog(
+            `Received counts - Likes: ${likes}, Dislikes: ${dislikes}, Raw Likes: ${rawLikes}, Raw Dislikes: ${rawDislikes}`
+          );
+  
+          likesvalue = likes;
+          dislikesvalue = dislikes;
+  
+          setDislikes(numberFormat(dislikes));
+  
+          if (extConfig.numberDisplayReformatLikes === true) {
+            const nativeLikes = getLikeCountFromButton();
+            if (nativeLikes !== false) {
+              setLikes(numberFormat(nativeLikes));
+            }
+          }
+  
+          // Pass rawLikes and rawDislikes to createRateBar
+          createRateBar(likes, dislikes, rawLikes, rawDislikes);
+  
+          if (extConfig.coloredThumbs === true) {
+            const dislikeButton = getDislikeButton();
+            if (isShorts()) {
+              // For Shorts, leave deactivated buttons in default color
+              const shortLikeButton = getLikeButton().querySelector("tp-yt-paper-button#button");
+              const shortDislikeButton = dislikeButton?.querySelector("tp-yt-paper-button#button");
+  
+              if (shortLikeButton.getAttribute("aria-pressed") === "true") {
+                shortLikeButton.style.color = getColorFromTheme(true);
+              }
+              if (shortDislikeButton && shortDislikeButton.getAttribute("aria-pressed") === "true") {
+                shortDislikeButton.style.color = getColorFromTheme(false);
+              }
+  
+              shortsObserver.observe(shortLikeButton);
+              shortsObserver.observe(shortDislikeButton);
+            } else {
+              getLikeButton().style.color = getColorFromTheme(true);
+              if (dislikeButton) dislikeButton.style.color = getColorFromTheme(false);
+            }
+          }
+        }
+      })
+      .catch((error) => {
+        cLog("Error fetching or processing data:", error);
+      });
+  }
+  
+  
+
 
 function updateDOMDislikes() {
   setDislikes(numberFormat(dislikesvalue));
