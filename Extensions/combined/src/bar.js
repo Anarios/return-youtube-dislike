@@ -13,10 +13,7 @@ function createRateBar(likes, dislikes) {
   let rateBar = document.getElementById("ryd-bar-container");
   if (!isLikesDisabled()) {
     // sometimes rate bar is hidden
-    if (rateBar && !isInViewport(rateBar)) {
-      rateBar.remove();
-      rateBar = null;
-    }
+
 
     const widthPx =
       parseFloat(window.getComputedStyle(getLikeButton()).width) +
