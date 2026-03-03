@@ -54,5 +54,8 @@
   },
   "prettier": {
     "printWidth": 120
+  },
+  "overrides": {
+    "serialize-javascript": ">=7.0.3"
   }
 }
