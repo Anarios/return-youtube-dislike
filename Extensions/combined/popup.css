@@ -2,9 +2,9 @@
 :root {
   color-scheme: dark;
 
-  /* Primary color - improved contrast: #f39090 -> #ff9999 for better visibility */
+  /* Primary color - improved contrast: #ff9999 -> #ff8080 for WCAG AA compliance */
   --primary: #cc2929;
-  --primary: #ff9999;
+  --primary: #ff8080;
   --secondary: #502e2e;
   --tertiary: #221818;
   --background: #352929;
