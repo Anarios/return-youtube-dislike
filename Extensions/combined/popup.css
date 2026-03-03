@@ -2,16 +2,15 @@
 :root {
   color-scheme: dark;
 
-  /* Primary color - improved contrast: #f39090 -> #ff9999 for better visibility */
-  --primary: #cc2929;
-  --primary: #ff9999;
+  /* Primary color - improved contrast: #ff9999 -> #ffadad for better WCAG AA compliance */
+  --primary: #ffadad;
   --secondary: #502e2e;
   --tertiary: #221818;
   --background: #352929;
 
   --accent: #581111;
-  /* Light grey - improved contrast: #999 -> #b3b3b3 */
-  --lightGrey: #b3b3b3;
+  /* Light grey - improved contrast: #b3b3b3 -> #cccccc for better visibility */
+  --lightGrey: #cccccc;
 }
 
 /***   MATERIAL 3   ***/
@@ -32,6 +31,86 @@
 .m3-btn:hover {
   background: var(--secondary) !important;
   color: var(--primary) !important;
+}
+
+/* Accessibility: Visually hidden but screen reader accessible */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Popup container for semantic layout */
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 350px;
+}
+
+.popup-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.popup-header h1 {
+  margin-bottom: 0.75rem;
+}
+
+.developer-text {
+  color: var(--lightGrey);
+  margin-bottom: 1rem;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25em;
+}
+
+.button-group-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25em;
+  margin-top: 0.3em;
+}
+
+#patreon-section {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-top: 1px solid var(--lightGrey);
+  width: 100%;
+  text-align: center;
+}
+
+.patreon-message {
+  color: var(--lightGrey);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.patreon-user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+#patreon-tier {
+  color: var(--lightGrey);
+}
+
+.api-status {
+  margin-top: 1rem;
 }
 
 select {
@@ -75,7 +154,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 3px solid #fff;
   outline-offset: 2px;
 }
 

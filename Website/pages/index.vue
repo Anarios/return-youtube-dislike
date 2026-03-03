@@ -3,7 +3,7 @@
     <div class="col"></div>
 
     <div class="col">
-      <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24" overflow="visible">
+      <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24" overflow="visible" role="img" aria-label="Thumbs down logo">
         <path
           d="M14.9 3H6c-.9 0-1.6.5-1.9 1.2l-3 7c-.1.3-.1.5-.1.7v2c0 1.1.9 2 2 2h6.3l-.9 4.5c-.1.5 0 1 .4 1.4l1.1 1.1 6.5-6.6c.4-.4.6-.9.6-1.4V5c-.1-1.1-1-2-2.1-2zm7.4 12.8h-2.9c-.4 0-.7-.3-.7-.7V3.9c0-.4.3-.7.7-.7h2.9c.4 0 .7.3.7.7V15c0 .4-.3.8-.7.8z"
         />
@@ -13,24 +13,24 @@
       <h1 class="title-text">
         {{ $vuetify.lang.t("$vuetify.home.title") }}
       </h1>
-      <p class="mb-4" style="color: #999; margin-top: 0">
+      <p class="mb-4 subtitle-text">
         {{ $vuetify.lang.t("$vuetify.home.subtitle") }}
       </p>
 
-      <v-btn :to="installLink" color="primary px-6" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em">
-        <v-icon large class="mr-6">mdi-tray-arrow-down</v-icon>
+      <v-btn :to="installLink" color="primary px-6" style="font-size: 1.5em; padding: 1em; margin-bottom: 0.5em" aria-label="Install the extension">
+        <v-icon large class="mr-6" aria-hidden="true">mdi-tray-arrow-down</v-icon>
         {{ $vuetify.lang.t("$vuetify.install.name") }}
       </v-btn>
 
       <br />
 
-      <v-btn class="mainAltButton" :href="githubLink" target="_blank">
-        <v-icon style="margin-right: 0.5em">mdi-github</v-icon>
+      <v-btn class="mainAltButton" :href="githubLink" target="_blank" aria-label="View GitHub repository (opens in new tab)">
+        <v-icon style="margin-right: 0.5em" aria-hidden="true">mdi-github</v-icon>
         {{ $vuetify.lang.t("$vuetify.links.github") }}
       </v-btn>
 
-      <v-btn class="mainAltButton" :href="discordLink" target="_blank">
-        <v-icon style="margin-right: 0.5em">mdi-discord</v-icon>
+      <v-btn class="mainAltButton" :href="discordLink" target="_blank" aria-label="Join Discord server (opens in new tab)">
+        <v-icon style="margin-right: 0.5em" aria-hidden="true">mdi-discord</v-icon>
         {{ $vuetify.lang.t("$vuetify.links.discord") }}
       </v-btn>
     </div>
@@ -43,7 +43,7 @@
     <v-spacer />
     <div id="support-ukraine" class="d-flex flex-column items-center py-2">
       <h3 class="mb-2">
-        <v-img src="/ukraine-flag-xs.webp" width="42px" height="28px"></v-img>
+        <v-img src="/ukraine-flag-xs.webp" width="42px" height="28px" alt="Flag of Ukraine"></v-img>
         <a href="https://u24.gov.ua/">
           {{ $vuetify.lang.t("$vuetify.home.ukraine") }}
         </a>
@@ -52,7 +52,7 @@
 
     <div id="financiers" class="d-flex flex-column items-center py-8">
       <h3 class="mb-4">
-        <v-icon class="mb-2">mdi-heart</v-icon>
+        <v-icon class="mb-2" aria-hidden="true">mdi-heart</v-icon>
         {{ $vuetify.lang.t("$vuetify.home.sponsors") }}
       </h3>
       <v-row class="justify-center mx-auto">
@@ -111,6 +111,11 @@ export default {
 .sponsor {
   margin: 1rem;
   height: max-content;
+}
+
+.subtitle-text {
+  color: #b3b3b3;
+  margin-top: 0;
 }
 
 input {
