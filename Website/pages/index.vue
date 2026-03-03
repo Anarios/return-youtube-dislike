@@ -3,7 +3,7 @@
     <div class="col"></div>
 
     <div class="col">
-      <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24" overflow="visible">
+      <svg id="thumbslogo" class="mb-4" width="150" height="150" viewBox="0 0 24 24" overflow="visible" aria-label="Return YouTube Dislike logo">
         <path
           d="M14.9 3H6c-.9 0-1.6.5-1.9 1.2l-3 7c-.1.3-.1.5-.1.7v2c0 1.1.9 2 2 2h6.3l-.9 4.5c-.1.5 0 1 .4 1.4l1.1 1.1 6.5-6.6c.4-.4.6-.9.6-1.4V5c-.1-1.1-1-2-2.1-2zm7.4 12.8h-2.9c-.4 0-.7-.3-.7-.7V3.9c0-.4.3-.7.7-.7h2.9c.4 0 .7.3.7.7V15c0 .4-.3.8-.7.8z"
         />
@@ -13,7 +13,7 @@
       <h1 class="title-text">
         {{ $vuetify.lang.t("$vuetify.home.title") }}
       </h1>
-      <p class="mb-4" style="color: #999; margin-top: 0">
+      <p class="mb-4" style="color: #b3b3b3; margin-top: 0">
         {{ $vuetify.lang.t("$vuetify.home.subtitle") }}
       </p>
 
@@ -43,7 +43,7 @@
     <v-spacer />
     <div id="support-ukraine" class="d-flex flex-column items-center py-2">
       <h3 class="mb-2">
-        <v-img src="/ukraine-flag-xs.webp" width="42px" height="28px"></v-img>
+        <v-img src="/ukraine-flag-xs.webp" width="42px" height="28px" alt="Ukraine flag"></v-img>
         <a href="https://u24.gov.ua/">
           {{ $vuetify.lang.t("$vuetify.home.ukraine") }}
         </a>

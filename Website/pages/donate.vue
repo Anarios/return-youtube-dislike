@@ -3,7 +3,7 @@
     <h1 class="title-text">
       {{ $vuetify.lang.t("$vuetify.donate.name") }}
     </h1>
-    <p style="color: #999; margin-top: 0.5rem; margin-bottom: 1.5rem">
+    <p style="color: #b3b3b3; margin-top: 0.5rem; margin-bottom: 1.5rem">
       {{ $vuetify.lang.t("$vuetify.donate.subtitle") }}
     </p>
     <v-btn class="mainAltButton mb-2" :href="patreonLink" target="_blank">

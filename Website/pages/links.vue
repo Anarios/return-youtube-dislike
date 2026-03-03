@@ -4,7 +4,7 @@
       {{ $vuetify.lang.t("$vuetify.links.title") }}
     </h1>
 
-    <p style="color: #9999; margin-top: 0.5rem; margin-bottom: 1rem">
+    <p style="color: #b3b3b3; margin-top: 0.5rem; margin-bottom: 1rem">
       {{ $vuetify.lang.t("$vuetify.links.subtitle") }}
     </p>
 

@@ -17,10 +17,10 @@
   <body>
     <center>
       <img src="icons/logo.svg" alt="Return YouTube Dislike logo" />
-      <h1 style="margin-bottom: 0.75rem" title="__MSG_extensionName__">
+      <h1 style="margin-bottom: 0.75rem">
         __MSG_extensionName__
       </h1>
-      <p style="color: var(--lightGrey)" title="__MSG_textDeveloper__">
+      <p style="color: var(--lightGrey)">
         __MSG_textDeveloper__
       </p>
 
@@ -43,7 +43,7 @@
         <div id="patreon-logged-out" style="display: none;">
           <p style="color: var(--lightGrey); font-size: 0.9rem; margin-bottom: 0.5rem;" title="__MSG_patreonLoggedOutMessage__">__MSG_patreonLoggedOutMessage__</p>
           <button class="m3-btn m3-primary" id="patreon-login-btn" title="__MSG_patreonLogin__">
-            <svg style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;" viewBox="0 0 24 24" fill="currentColor">
+            <svg aria-hidden="true" style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;" viewBox="0 0 24 24" fill="currentColor">
               <path d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21c0 3.96-3.22 7.18-7.18 7.18c-3.97 0-7.21-3.22-7.21-7.18c0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"/>
             </svg>
             __MSG_patreonLogin__
@@ -80,13 +80,14 @@
 
       <br />
       <br />
-      <p style="display: none">__MSG_apiStatusLabel__ <b id="status"></b></p>
+      <p class="sr-only" style="display: none">__MSG_apiStatusLabel__ <b id="status"></b></p>
       <img
         id="server-status"
         style="display: none; width: 0.75rem; height: 0.75rem"
         src="./icons/server.svg"
-        alt="Server status indicator"
+        aria-hidden="true"
       />
+      <span class="sr-only" id="server-status-text">Server status indicator</span>
 
       <br />
       <br />
@@ -95,6 +96,7 @@
     <!-- top-right -->
     <button id="advancedToggle" aria-label="Toggle advanced settings">
       <svg
+        aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         enable-background="new 0 0 24 24"
         height="24px"
@@ -123,34 +125,34 @@
     <fieldset id="advancedSettings">
       <legend>Advanced Settings</legend>
       <label class="switch" data-hover="__MSG_disableLoggingHover__">
-        <input type="checkbox" id="disable_logging" role="switch" aria-checked="false"/>
-        <span class="slider"/>
+        <input type="checkbox" id="disable_logging" role="switch" aria-checked="false" aria-label="Disable logging"/>
+        <span class="slider" aria-hidden="true"/>
         <span class="switchLabel">__MSG_disableLoggingLabel__</span>
       </label>
       <br />
       <label class="switch" data-hover="__MSG_textSettingsHover__">
-        <input type="checkbox" id="disable_vote_submission" role="switch" aria-checked="false" />
-        <span class="slider"></span>
+        <input type="checkbox" id="disable_vote_submission" role="switch" aria-checked="false" aria-label="Disable vote submission"/>
+        <span class="slider" aria-hidden="true"></span>
         <span class="switchLabel" title="__MSG_textSettings__">
           __MSG_textSettings__
         </span>
       </label>
       <br />
       <label class="switch" data-hover="__MSG_reformatLikesHover__">
-        <input type="checkbox" id="number_reformat_likes" role="switch" aria-checked="false" />
-        <span class="slider"></span>
+        <input type="checkbox" id="number_reformat_likes" role="switch" aria-checked="false" aria-label="Reformat like count"/>
+        <span class="slider" aria-hidden="true"></span>
         <span class="switchLabel">__MSG_reformatLikes__</span>
       </label>
       <br />
       <label class="switch" data-hover="__MSG_hidePremiumTeaserHover__">
-        <input type="checkbox" id="hide_premium_teaser" role="switch" aria-checked="false" />
-        <span class="slider"></span>
+        <input type="checkbox" id="hide_premium_teaser" role="switch" aria-checked="false" aria-label="Hide premium teaser"/>
+        <span class="slider" aria-hidden="true"></span>
         <span class="switchLabel">__MSG_hidePremiumTeaser__</span>
       </label>
       <br />
       <div class="custom-select">
-        <label for="number_format">__MSG_numberFormat__</label>
-        <select name="number_format" id="number_format">
+        <label for="number_format" id="number_format_label">__MSG_numberFormat__</label>
+        <select name="number_format" id="number_format" aria-labelledby="number_format_label">
           <option value="compactShort" id="number_format_compactShort"></option>
           <option value="compactLong" id="number_format_compactLong"></option>
           <option value="standard" id="number_format_standard"></option>
@@ -159,23 +161,23 @@
       <br />
       <div class="custom-select">
         <label class="switch" data-hover="__MSG_colorizeRatioHover__">
-          <input type="checkbox" id="colored_bar" role="switch" aria-checked="false" />
-          <span class="slider"></span>
+          <input type="checkbox" id="colored_bar" role="switch" aria-checked="false" aria-label="Colorize ratio bar"/>
+          <span class="slider" aria-hidden="true"></span>
           <span class="switchLabel">__MSG_colorizeRatio__</span>
         </label>
       </div>
       <br />
       <div class="custom-select">
         <label class="switch" data-hover="__MSG_colorizeThumbsHover__">
-          <input type="checkbox" id="colored_thumbs" role="switch" aria-checked="false" />
-          <span class="slider"></span>
+          <input type="checkbox" id="colored_thumbs" role="switch" aria-checked="false" aria-label="Colorize thumbs"/>
+          <span class="slider" aria-hidden="true"></span>
           <span class="switchLabel">__MSG_colorizeThumbs__</span>
         </label>
       </div>
       <br />
       <div class="custom-select">
-        <label for="color_theme">__MSG_colorTheme__</label>
-        <select name="color_theme" id="color_theme">
+        <label for="color_theme" id="color_theme_label">__MSG_colorTheme__</label>
+        <select name="color_theme" id="color_theme" aria-labelledby="color_theme_label">
           <option value="classic" id="color_theme_classic">
             __MSG_textColorTheme1__
           </option>
@@ -188,6 +190,8 @@
         </select>
         <span
           id="color_theme_example_like"
+          aria-label="Like button color preview"
+          role="img"
           style="
             display: inline-block;
             vertical-align: text-top;
@@ -198,6 +202,8 @@
         >
         <span
           id="color_theme_example_dislike"
+          aria-label="Dislike button color preview"
+          role="img"
           style="
             display: inline-block;
             vertical-align: text-top;
@@ -212,17 +218,17 @@
         class="switch"
         data-hover="__MSG_showTooltipPercentageHover__"
       >
-        <input type="checkbox" id="show_tooltip_percentage" role="switch" aria-checked="false" />
-        <span class="slider"></span>
+        <input type="checkbox" id="show_tooltip_percentage" role="switch" aria-checked="false" aria-label="Show tooltip percentage"/>
+        <span class="slider" aria-hidden="true"></span>
         <span class="switchLabel">__MSG_showTooltipPercentage__</span>
       </label>
       <div class="custom-select">
         <label
           for="tooltip_percentage_mode"
-          data-hover="__MSG_tooltipPercentageModeHover__"
+          id="tooltip_percentage_mode_label"
           >__MSG_tooltipPercentageMode__</label
         >
-        <select name="tooltip_percentage_mode" id="tooltip_percentage_mode">
+        <select name="tooltip_percentage_mode" id="tooltip_percentage_mode" aria-labelledby="tooltip_percentage_mode_label">
           <option value="dash_like" id="tooltip_percentage_mode_dash_like">
             190&nbsp;/&nbsp;10&nbsp;&nbsp;-&nbsp;&nbsp;95%
           </option>
