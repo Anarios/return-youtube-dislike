@@ -74,7 +74,9 @@ function launchWebAuthFlow(url) {
     if (isFirefox() && browser.identity && typeof browser.identity.launchWebAuthFlow === "function") {
       return browser.identity.launchWebAuthFlow({ url, interactive: true });
     }
-  } catch (_) {}
+    } catch (err) {
+      console.debug("Return YouTube Dislike: Identity API check failed -", err?.message || err);
+    }
   return new Promise((resolve, reject) => {
     if (!isChrome() || !chrome.identity || typeof chrome.identity.launchWebAuthFlow !== "function") {
       reject(new Error("identity API not available"));
@@ -99,7 +101,8 @@ function extractOAuthParams(responseUrl) {
       state = state || hashParams.get("state");
     }
     return { code, state };
-  } catch (_) {
+  } catch (err) {
+    console.debug("Return YouTube Dislike: OAuth param extraction failed -", err?.message || err);
     return { code: null, state: null };
   }
 }
@@ -157,7 +160,10 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .then((response) => {
         sendResponse(response);
       })
-      .catch();
+      .catch((err) => {
+        console.error("Return YouTube Dislike: Vote fetch failed -", err?.message || err);
+        sendResponse({ error: "Failed to fetch votes" });
+      });
     return true;
   } else if (request.message == "send_links") {
     toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));

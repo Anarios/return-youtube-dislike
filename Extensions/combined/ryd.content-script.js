@@ -72,7 +72,7 @@ async function checkForInitialization() {
     }
   } catch (exception) {
     if (!isSetInitialStateDone) {
-      console.log("error");
+      console.error("Return YouTube Dislike: Failed to initialize -", exception?.message || exception);
       await setInitialState();
     }
   }

@@ -304,14 +304,21 @@ function initPatreonAuth() {
         });
         // Firefox may return a promise
         if (reqResult && typeof reqResult.then === "function") {
-          reqResult.then((granted) => onResult(Boolean(granted))).catch(() => onResult(false));
+          reqResult.then((granted) => onResult(Boolean(granted))).catch((err) => {
+            console.error("Return YouTube Dislike: Permission check failed -", err?.message || err);
+            onResult(false);
+          });
         }
       };
       const result = perms.contains({ permissions: ["identity"] }, afterContains);
       if (result && typeof result.then === "function") {
-        result.then(afterContains).catch(() => onResult(false));
+        result.then(afterContains).catch((err) => {
+          console.error("Return YouTube Dislike: Permission check failed -", err?.message || err);
+          onResult(false);
+        });
       }
-    } catch (_) {
+    } catch (err) {
+      console.error("Return YouTube Dislike: Permission check error -", err?.message || err);
       onResult(false);
     }
   }

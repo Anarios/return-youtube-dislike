@@ -666,9 +666,10 @@ function setEventListeners(evt) {
             smartimationObserver.observe(smartimationContainer);
             smartimationObserver.container = smartimationContainer;
           }
-        } catch {
+        } catch (err) {
+          cLog("Smartimation observer setup failed:", err?.message || err);
           return;
-        } //Don't spam errors into the console
+        }
       }
       if (dislikeButton) {
         setInitialState();
