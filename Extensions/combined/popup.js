@@ -247,7 +247,9 @@ function initPatreonAuth() {
         // Promise-based API (Firefox)
         return browser.identity.launchWebAuthFlow({ url, interactive: true });
       }
-    } catch (_) {}
+    } catch (err) {
+      console.warn("popup: Firefox identity API check failed, falling back to Chrome API:", err?.message ?? err);
+    }
 
     const chromeId = (typeof chrome !== "undefined" && chrome.identity) || null;
     if (!chromeId || typeof chromeId.launchWebAuthFlow !== "function") {
@@ -274,7 +276,8 @@ function initPatreonAuth() {
         state = state || hashParams.get("state");
       }
       return { code, state };
-    } catch (_) {
+    } catch (err) {
+      console.warn("popup: Failed to extract OAuth params from URL:", err?.message ?? err);
       return { code: null, state: null };
     }
   }
@@ -361,11 +364,18 @@ advancedToggle.addEventListener("click", () => {
     adv.style.pointerEvents = "none";
     adv.style.opacity = "0";
     advancedToggle.innerHTML = config.showAdvancedMessage;
+    advancedToggle.setAttribute("aria-expanded", "false");
   } else {
     adv.style.transform = "scale(1)";
     adv.style.pointerEvents = "auto";
     adv.style.opacity = "1";
     advancedToggle.innerHTML = config.hideAdvancedMessage;
+    advancedToggle.setAttribute("aria-expanded", "true");
+    // Focus the first focusable element in the advanced settings for accessibility
+    setTimeout(() => {
+      const firstSwitch = adv.querySelector('input[type="checkbox"]');
+      if (firstSwitch) firstSwitch.focus();
+    }, 150);
   }
   config.advanced = !config.advanced;
 });

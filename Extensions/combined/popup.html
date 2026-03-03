@@ -15,7 +15,7 @@
   </head>
   <!--   END HEADER -->
   <body>
-    <center>
+    <main class="popup-content" role="main">
       <img src="icons/logo.svg" alt="Return YouTube Dislike logo" />
       <h1 style="margin-bottom: 0.75rem" title="__MSG_extensionName__">
         __MSG_extensionName__
@@ -90,10 +90,10 @@
 
       <br />
       <br />
-    </center>
+    </main>
 
     <!-- top-right -->
-    <button id="advancedToggle" aria-label="Toggle advanced settings">
+    <button id="advancedToggle" aria-label="Toggle advanced settings" aria-expanded="false" aria-controls="advancedSettings">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         enable-background="new 0 0 24 24"
@@ -115,13 +115,13 @@
         target="_blank"
         id="ext-update"
         aria-label="Install or update the extension"
-      ></a>
+      ><span class="visually-hidden">Install or update the extension</span></a>
       <span id="ext-version"></span>
     </div>
 
     <!-- dialog box -->
-    <fieldset id="advancedSettings">
-      <legend>Advanced Settings</legend>
+    <fieldset id="advancedSettings" aria-labelledby="advanced-legend">
+      <legend id="advanced-legend">Advanced Settings</legend>
       <label class="switch" data-hover="__MSG_disableLoggingHover__">
         <input type="checkbox" id="disable_logging" role="switch" aria-checked="false"/>
         <span class="slider"/>

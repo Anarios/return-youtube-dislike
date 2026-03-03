@@ -56,6 +56,13 @@ body {
   font-size: 14px;
 }
 
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 h1 {
   font-size: 26px;
 }
@@ -291,4 +298,17 @@ input:checked + .slider::before {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Visually hidden but accessible to screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
