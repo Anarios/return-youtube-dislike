@@ -24,26 +24,26 @@
         __MSG_textDeveloper__
       </p>
 
-      <button class="m3-btn" id="link_website" title="__MSG_linkWebsite__">
+      <button class="m3-btn" id="link_website" aria-label="Visit website">
         __MSG_linkWebsite__
       </button>
       <button
         class="m3-btn m3-primary"
         style="margin-top: 0.3em;"
         id="link_donate"
-        title="__MSG_linkDonate__"
+        aria-label="Donate"
       >
         __MSG_linkDonate__
       </button>
-      <button class="m3-btn" id="link_discord" title="__MSG_linkDiscord__">__MSG_linkDiscord__</button>
+      <button class="m3-btn" id="link_discord" aria-label="Join Discord">__MSG_linkDiscord__</button>
       <br />
       
       <!-- Patreon Login Section -->
       <div id="patreon-section" style="margin-top: 1rem; padding: 0.5rem; border-top: 1px solid var(--lightGrey);">
         <div id="patreon-logged-out" style="display: none;">
           <p style="color: var(--lightGrey); font-size: 0.9rem; margin-bottom: 0.5rem;" title="__MSG_patreonLoggedOutMessage__">__MSG_patreonLoggedOutMessage__</p>
-          <button class="m3-btn m3-primary" id="patreon-login-btn" title="__MSG_patreonLogin__">
-            <svg style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;" viewBox="0 0 24 24" fill="currentColor">
+          <button class="m3-btn m3-primary" id="patreon-login-btn" aria-label="Login with Patreon">
+            <svg aria-hidden="true" style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;" viewBox="0 0 24 24" fill="currentColor">
               <path d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21c0 3.96-3.22 7.18-7.18 7.18c-3.97 0-7.21-3.22-7.21-7.18c0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"/>
             </svg>
             __MSG_patreonLogin__
@@ -57,15 +57,15 @@
               <p id="patreon-tier" style="color: var(--lightGrey); font-size: 0.8rem; margin: 0;"></p>
             </div>
           </div>
-          <button class="m3-btn" id="patreon-logout-btn" style="font-size: 0.9rem;" title="__MSG_patreonLogout__">__MSG_patreonLogout__</button>
+          <button class="m3-btn" id="patreon-logout-btn" style="font-size: 0.9rem;" aria-label="Logout of Patreon">__MSG_patreonLogout__</button>
         </div>
       </div>
       
-      <button class="m3-btn" style="margin-top: 0.3rem" id="link_faq" title="__MSG_linkFAQ__">
+      <button class="m3-btn" style="margin-top: 0.3rem" id="link_faq" aria-label="View FAQ">
         __MSG_linkFAQ__
       </button>
-      <button class="m3-btn" id="link_github" title="__MSG_linkGithub__">__MSG_linkGithub__</button>
-      <button class="m3-btn" style="margin-top: 0.3em" id="link_help" title="__MSG_linkHelp__">
+      <button class="m3-btn" id="link_github" aria-label="View on GitHub">__MSG_linkGithub__</button>
+      <button class="m3-btn" style="margin-top: 0.3em" id="link_help" aria-label="Get help">
         __MSG_linkHelp__
       </button>
       <br />
@@ -73,7 +73,7 @@
         class="m3-btn"
         style="margin-top: 0.3em"
         id="link_changelog"
-        title="__MSG_linkChangelog__"
+        aria-label="View changelog"
       >
         __MSG_linkChangelog__
       </button>
@@ -93,8 +93,8 @@
     </center>
 
     <!-- top-right -->
-    <button id="advancedToggle" aria-label="Toggle advanced settings">
-      <svg
+    <button id="advancedToggle" aria-label="Toggle advanced settings" aria-expanded="false" aria-controls="advancedSettings">
+      <svg aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         enable-background="new 0 0 24 24"
         height="24px"
@@ -120,8 +120,8 @@
     </div>
 
     <!-- dialog box -->
-    <fieldset id="advancedSettings">
-      <legend>Advanced Settings</legend>
+    <fieldset id="advancedSettings" role="group" aria-labelledby="advancedSettingsLegend">
+      <legend id="advancedSettingsLegend">Advanced Settings</legend>
       <label class="switch" data-hover="__MSG_disableLoggingHover__">
         <input type="checkbox" id="disable_logging" role="switch" aria-checked="false"/>
         <span class="slider"/>
