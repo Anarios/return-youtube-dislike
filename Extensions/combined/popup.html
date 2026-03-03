@@ -15,7 +15,7 @@
   </head>
   <!--   END HEADER -->
   <body>
-    <center>
+    <main class="popup-content" role="main">
       <img src="icons/logo.svg" alt="Return YouTube Dislike logo" />
       <h1 style="margin-bottom: 0.75rem" title="__MSG_extensionName__">
         __MSG_extensionName__
@@ -24,9 +24,10 @@
         __MSG_textDeveloper__
       </p>
 
-      <button class="m3-btn" id="link_website" aria-label="Visit website">
-        __MSG_linkWebsite__
-      </button>
+      <div class="button-group">
+        <button class="m3-btn" id="link_website" aria-label="Visit website">
+          __MSG_linkWebsite__
+        </button>
       <button
         class="m3-btn m3-primary"
         style="margin-top: 0.3em;"
@@ -90,7 +91,7 @@
 
       <br />
       <br />
-    </center>
+    </main>
 
     <!-- top-right -->
     <button id="advancedToggle" aria-label="Toggle advanced settings" aria-expanded="false" aria-controls="advancedSettings">

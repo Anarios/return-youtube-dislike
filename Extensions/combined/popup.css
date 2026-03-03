@@ -292,3 +292,31 @@ input:checked + .slider::before {
   flex-direction: column;
   align-items: center;
 }
+
+
+/* Accessibility: Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .m3-btn,
+  .switch,
+  .slider,
+  #advancedToggle,
+  .fade-in {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Accessibility: High contrast mode support */
+@media (prefers-contrast: high) {
+  .m3-btn,
+  .m3-primary {
+    border: 2px solid var(--primary);
+  }
+  
+  button:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  a:focus-visible {
+    outline-width: 3px;
+  }
+}
