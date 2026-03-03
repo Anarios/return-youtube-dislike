@@ -57,18 +57,22 @@ function createLink(url, id) {
 
 document.getElementById("disable_vote_submission").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
+  ev.target.setAttribute("aria-checked", ev.target.checked);
 });
 
 document.getElementById("disable_logging").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ disableLogging: ev.target.checked });
+  ev.target.setAttribute("aria-checked", ev.target.checked);
 });
 
 document.getElementById("colored_thumbs").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ coloredThumbs: ev.target.checked });
+  ev.target.setAttribute("aria-checked", ev.target.checked);
 });
 
 document.getElementById("colored_bar").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ coloredBar: ev.target.checked });
+  ev.target.setAttribute("aria-checked", ev.target.checked);
 });
 
 document.getElementById("color_theme").addEventListener("click", (ev) => {
@@ -81,6 +85,7 @@ document.getElementById("number_format").addEventListener("change", (ev) => {
 
 document.getElementById("show_tooltip_percentage").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
+  ev.target.setAttribute("aria-checked", ev.target.checked);
 });
 
 document.getElementById("tooltip_percentage_mode").addEventListener("change", (ev) => {
@@ -89,10 +94,12 @@ document.getElementById("tooltip_percentage_mode").addEventListener("change", (e
 
 document.getElementById("number_reformat_likes").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
+  ev.target.setAttribute("aria-checked", ev.target.checked);
 });
 
 document.getElementById("hide_premium_teaser").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ hidePremiumTeaser: ev.target.checked });
+  ev.target.setAttribute("aria-checked", ev.target.checked);
 });
 
 function initPatreonAuth() {
@@ -519,22 +526,30 @@ function storageChangeHandler(changes, area) {
 
 function handleDisableVoteSubmissionChangeEvent(value) {
   config.disableVoteSubmission = value;
-  document.getElementById("disable_vote_submission").checked = value;
+  const el = document.getElementById("disable_vote_submission");
+  el.checked = value;
+  el.setAttribute("aria-checked", value);
 }
 
 function handleDisableLoggingChangeEvent(value) {
   config.disableLogging = value;
-  document.getElementById("disable_logging").checked = value;
+  const el = document.getElementById("disable_logging");
+  el.checked = value;
+  el.setAttribute("aria-checked", value);
 }
 
 function handleColoredThumbsChangeEvent(value) {
   config.coloredThumbs = value;
-  document.getElementById("colored_thumbs").checked = value;
+  const el = document.getElementById("colored_thumbs");
+  el.checked = value;
+  el.setAttribute("aria-checked", value);
 }
 
 function handleColoredBarChangeEvent(value) {
   config.coloredBar = value;
-  document.getElementById("colored_bar").checked = value;
+  const el = document.getElementById("colored_bar");
+  el.checked = value;
+  el.setAttribute("aria-checked", value);
 }
 
 function handleColorThemeChangeEvent(value) {
@@ -558,7 +573,9 @@ function handleNumberDisplayFormatChangeEvent(value) {
 
 function handleShowTooltipPercentageChangeEvent(value) {
   config.showTooltipPercentage = value;
-  document.getElementById("show_tooltip_percentage").checked = value;
+  const el = document.getElementById("show_tooltip_percentage");
+  el.checked = value;
+  el.setAttribute("aria-checked", value);
 }
 
 function handleTooltipPercentageModeChangeEvent(value) {
@@ -572,13 +589,17 @@ function handleTooltipPercentageModeChangeEvent(value) {
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
   config.numberDisplayReformatLikes = value;
-  document.getElementById("number_reformat_likes").checked = value;
+  const el = document.getElementById("number_reformat_likes");
+  el.checked = value;
+  el.setAttribute("aria-checked", value);
 }
 
 function handleHidePremiumTeaserChangeEvent(value) {
   const normalized = value === true;
   config.hidePremiumTeaser = normalized;
-  document.getElementById("hide_premium_teaser").checked = normalized;
+  const el = document.getElementById("hide_premium_teaser");
+  el.checked = normalized;
+  el.setAttribute("aria-checked", normalized);
 }
 
 function getNumberFormatter(optionSelect) {

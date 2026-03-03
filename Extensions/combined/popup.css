@@ -2,14 +2,16 @@
 :root {
   color-scheme: dark;
 
+  /* Primary color - improved contrast: #f39090 -> #ff9999 for better visibility */
   --primary: #cc2929;
-  --primary: #f39090;
+  --primary: #ff9999;
   --secondary: #502e2e;
   --tertiary: #221818;
   --background: #352929;
 
   --accent: #581111;
-  --lightGrey: #999;
+  /* Light grey - improved contrast: #999 -> #b3b3b3 */
+  --lightGrey: #b3b3b3;
 }
 
 /***   MATERIAL 3   ***/
@@ -66,6 +68,15 @@ button {
   cursor: pointer;
   padding: 5px 16px;
   border: none;
+}
+
+/* Focus styles for keyboard navigation accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 #ext-update {
