@@ -312,7 +312,7 @@ But still - here are the steps:
 
 <!-- links -->
 
-[1]: https://chrome.google.com/webstore/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi
+[1]: https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi
 [2]: https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/
 [3]: https://github.com/Anarios/return-youtube-dislike/raw/main/Extensions/UserScript/Return%20Youtube%20Dislike.user.js
 [4]: https://en.wikipedia.org/wiki/Chromium_(web_browser)#Browsers_based_on_Chromium

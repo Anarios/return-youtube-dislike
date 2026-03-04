@@ -1,5 +1,5 @@
-[![Cửa hàng Chrome Trực tuyến](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Đánh%20giá%20Chrome&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/?hl=vi)
-[![Người dùng trên Cửa hàng Chrome Trực tuyến](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Người%20dùng%20Chrome&style=flat&logo=google)](https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/?hl=vi)
+[![Cửa hàng Chrome Trực tuyến](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Đánh%20giá%20Chrome&style=flat&logo=google)](https://chromewebstore.google.com/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/?hl=vi)
+[![Người dùng trên Cửa hàng Chrome Trực tuyến](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Người%20dùng%20Chrome&style=flat&logo=google)](https://chromewebstore.google.com/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/?hl=vi)
 [![Đánh giá trên Mozilla](https://img.shields.io/amo/stars/return-youtube-dislikes?label=Đánh%20giá%20Firefox&style=flat&logo=firefox)](https://addons.mozilla.org/vi/firefox/addon/return-youtube-dislikes/)
 [![Lượt tải trên Mozilla](https://img.shields.io/amo/users/return-youtube-dislikes?label=Người%20dùng%20Firefox&style=flat&logo=firefox)](https://addons.mozilla.org/vi/firefox/addon/return-youtube-dislikes/)
 [![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
@@ -16,7 +16,7 @@ Read this in other languages: [English](README.md), [العربية](READMEar.md
 
 <p align="center">
     <b>Return YouTube Dislike (Trả lại số lượt Không thích trên YouTube) là một tiện ích mở rộng mã nguồn mở nhằm phục hồi số lượt "không thích" trên YouTube.</b><br>
-    Tiện ích mở rộng dành cho <a href="https://chrome.google.com/webstore/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/?hl=vi">Chrome</a> và <a href="https://addons.mozilla.org/vi/firefox/addon/return-youtube-dislikes/">Firefox</a>.<br>
+    Tiện ích mở rộng dành cho <a href="https://chromewebstore.google.com/detail/youtube-dislike-button/gebbhagfogifgggkldgodflihgfeippi/?hl=vi">Chrome</a> và <a href="https://addons.mozilla.org/vi/firefox/addon/return-youtube-dislikes/">Firefox</a>.<br>
     Cũng có thể dùng như một JS Userscript (Tập lệnh người dùng JS) trong các trình duyệt khác.<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
