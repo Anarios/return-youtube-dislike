@@ -55,6 +55,7 @@ import {
   isVideoLoaded,
   initializeLogging,
   getColorFromTheme,
+  getElementWidth,
   querySelector,
   querySelectorAll,
   createObserver,
@@ -382,6 +383,27 @@ describe("utils", () => {
 
       expect(getColorFromTheme(true)).toBe("lime");
       expect(getColorFromTheme(false)).toBe("red");
+    });
+  });
+
+  describe("getElementWidth", () => {
+    it("returns 0 for a missing element", () => {
+      expect(getElementWidth(null)).toBe(0);
+    });
+
+    it("uses the computed style width when it is a finite number", () => {
+      const element = document.createElement("div");
+      jest.spyOn(window, "getComputedStyle").mockReturnValue({ width: "42px" });
+
+      expect(getElementWidth(element)).toBe(42);
+    });
+
+    it("falls back to the rendered box width when computed width is auto/NaN", () => {
+      const element = document.createElement("div");
+      jest.spyOn(window, "getComputedStyle").mockReturnValue({ width: "auto" });
+      element.getBoundingClientRect = () => ({ width: 88 });
+
+      expect(getElementWidth(element)).toBe(88);
     });
   });
 

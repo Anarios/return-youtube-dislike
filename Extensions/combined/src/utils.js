@@ -218,6 +218,18 @@ function getColorFromTheme(voteIsLike) {
   return colorString;
 }
 
+function getElementWidth(element) {
+  if (!element) return 0;
+  // getComputedStyle().width resolves to "auto"/"" (→ NaN) for inline
+  // elements such as YouTube's newer <like-button-view-model> /
+  // <dislike-button-view-model> wrappers. Fall back to the rendered box width
+  // so the ratio bar still gets a sensible size.
+  const styleWidth = parseFloat(window.getComputedStyle(element).width);
+  if (Number.isFinite(styleWidth)) return styleWidth;
+  const rect = element.getBoundingClientRect?.();
+  return rect ? rect.width : 0;
+}
+
 function querySelector(selectors, element) {
   let result;
   for (const selector of Array.isArray(selectors) ? selectors : [selectors]) {
@@ -263,6 +275,7 @@ export {
   isVideoLoaded,
   initializeLogging,
   getColorFromTheme,
+  getElementWidth,
   localize,
   querySelector,
   querySelectorAll,
