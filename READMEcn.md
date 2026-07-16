@@ -78,3 +78,4 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 [捐赠](https://returnyoutubedislike.com/donate)
 
 ## 赞助商
+[成为我们的赞助商，您的信息将在我们的资源库和网站上展示。](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
