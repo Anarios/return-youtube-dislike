@@ -12,43 +12,44 @@ Read this in other languages: [English](README.md), [العربية](READMEar.md
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return Youtube Dislike adalah extension open-source yang memunculkan jumlah dislike di Youtube.<br>
-    Juga ada pada browser lain sebagai JS Userscript.<br><br>
+    <b>Return YouTube Dislike 是一個開源的瀏覽器擴充功能，可以顯示 Youtube 的不喜歡數量。</b><br>
+    適用於 Chrome 和 Firefox 作為 Web 擴充功能。<br>
+    也可以作為 JS Userscript 在其他瀏覽器上使用。<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## Latar Belakang
+## 背景
 
-Pada 10 November 2021, Google [memberitakan](https://blog.youtube/news-and-events/update-to-youtube/) bahwa jumlah dislike di Youtube akan dihapus.
+在2021年11月10日，Google [宣布](https://blog.youtube/news-and-events/update-to-youtube/) 將會移除 YouTube 的不喜歡數量。
 
-Serta, data `dislike` pada API Youtube juga [dihapus](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts) pada 13 Desember 2021, sehingga menghilangkan kemampuan untuk menilai qualitas konten video sebelum ditonton.
+此外，YouTube API 中的 `dislike` 欄位於2021年12月13日 [被移除](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts)，移除了在觀看影片之前評估內容品質的依據。
 
-## Apa yang terjadi
+## 它是如何運作的
 
-Dengan dihapusnya data dislike dari API Youtube, kami mengubah backend kami sehingga menggunakan kombinasi scraping data dislike, dan estimasi perkiraan dari data pengguna.
+由於 YouTube API 不再提供不喜歡統計，我們的後端改為混合使用擴充功能所回傳的用戶數據，並配合估算模型來呈現不喜歡數量。
 
-[Pertanyaan yang Sering Ditanyakan](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQid.md)
+[常見問題解答](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQcn.md)
 
-## Mengapa ini Penting
+## 了解更多
 
-Kamu bisa mempelajari lebih lanjut pada website kami di: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+你可以在我們的網站上了解更多資訊：[returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
-## Dokumentasi API
+## API 文件
 
-Penggunaan pada pihak ketiga terhadap API ini diizinkan dengan beberapa batasan berikut:
+本專案允許第三方使用此公開 API，但有以下限制：
 
-- **Pereferensian**: Proyek ini harus jelas direferensikan menggunakan link ke [returnyoutubedislike.com](https://returnyoutubedislike.com/).
-- **Batas Penggunaan**: Terdapat batas penggunaan pada setiap client yaitu 100 per menit dan 10,000 per hari. Jika lebih dari ini, akan ada kode status _429_ yang menandakan kamu harus berhenti menggunakannya.
+### 來源標示
+- **標示出處**:　若使用本 API，請務必於明顯處註明來源：[returnyoutubedislike.com](https://www.returnyoutubedislike.com/)。
+- **速率限制**: 客户端的速率限制為每分鐘100次和每天10,000次。如果回傳 _429_ 狀態代碼，表示客戶端請求過於頻繁，請降低呼叫頻率。
 
-APInya bisa diakses melalui URL berikut:
+可以通過這個基本 URL 呼叫 API：
 https://returnyoutubedislikeapi.com
 
-Daftar semua endpoint yang ada:
-https://returnyoutubedislikeapi.com/swagger/index.html
+詳細 API 端點清單請參閱 [此處](https://returnyoutubedislikeapi.com/swagger/index.html)
 
-### Voting
+### 取得投票數據
 
-Contoh untuk melakukan voting terhadap suatu video Youtube menggunakan id:
+若要取得特定 YouTube 影片 ID 的投票數據，請呼叫以下端點：
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -63,25 +64,18 @@ Contoh untuk melakukan voting terhadap suatu video Youtube menggunakan id:
 }
 ```
 
-Akan muncul kode status _404_ "Not Found" jika Youtube id tidak ditemukan.
-Akan muncul kode status _400_ "Bad Request" jika Youtube id memiliki format yang salah.
+若該 YouTube ID 不存在，API 將回傳 404 狀態碼（Not Found）。
+若 YouTube ID 格式錯誤，API 將回傳 400 狀態碼（Bad Request）。
 
-<!---
-## API documentation
+## 貢獻
 
-You can view all documentation on our website.
-[https://returnyoutubedislike.com/documentation/](https://returnyoutubedislike.com/documentation/) -->
+請閱讀[貢獻指南](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGcn.md)。
 
-## Kontribusi
+## 支持本專案！
 
-Tolong baca [panduan kontribusi](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGid.md).
+你可以透過以下超連結向我們捐款以支持本專案：
 
-## Dukung proyek ini!
+[捐款](https://returnyoutubedislike.com/donate)
 
-Kamu dapat mendukung proyek ini dengan cara donasi melalui link dibawah ini:
-
-[Donasi](https://returnyoutubedislike.com/donate)
-
-## Sponsor
-
-[Menjadi sponsor kami](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
+## 贊助我們
+[贊助本專案，您的資訊將會顯示於我們的資源庫與官方網站。](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
