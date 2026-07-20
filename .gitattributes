@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Generated build artifact fetched raw from GitHub by every installed
+# userscript's @updateURL; has always used LF regardless of platform.
+Extensions/UserScript/*.user.js text eol=lf
