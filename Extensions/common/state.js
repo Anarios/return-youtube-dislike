@@ -10,7 +10,7 @@ import {
   localize,
   createObserver,
 } from "./utils";
-import { config, getApiEndpoint, DEV_API_URL, PROD_API_URL, isDevelopment } from "./config";
+import { config, getApiEndpoint } from "./config";
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";

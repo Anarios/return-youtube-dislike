@@ -64,8 +64,6 @@ ytd-menu-renderer.ytd-watch-metadata {
       document.head.appendChild(styleNode);
     })(CORE_STYLES);
 
-await initExtConfig();
-
 let jsInitChecktimer = null;
 let isSetInitialStateDone = false;
 let shortsNavigationObserver = null;
@@ -160,8 +158,11 @@ async function setEventListeners() {
   await triggerInitializationCycle();
 }
 
-await setEventListeners();
-
-document.addEventListener("yt-navigate-finish", async function () {
+(async function () {
+  "use strict";
+  await initExtConfig();
   await setEventListeners();
-});
+  document.addEventListener("yt-navigate-finish", async function () {
+    await setEventListeners();
+  });
+})();
