@@ -182,9 +182,7 @@ describe("utils", () => {
       const options = formatter.resolvedOptions();
 
       expect(options.locale.toLowerCase()).toContain("en");
-      expect(consoleSpy).toHaveBeenCalledWith(
-        "Cannot find browser locale. Use en as default for number formatting.",
-      );
+      expect(consoleSpy).toHaveBeenCalledWith("Cannot find browser locale. Use en as default for number formatting.");
       querySpy.mockRestore();
     });
   });
@@ -289,22 +287,14 @@ describe("utils", () => {
     });
 
     it("checks secondary selectors when the grid is absent", () => {
-      document.querySelector = jest
-        .fn()
-        .mockReturnValueOnce(null)
-        .mockReturnValueOnce({})
-        .mockReturnValue(null);
+      document.querySelector = jest.fn().mockReturnValueOnce(null).mockReturnValueOnce({}).mockReturnValue(null);
 
       expect(isVideoLoaded()).toBe(true);
       expect(document.querySelector).toHaveBeenNthCalledWith(2, "ytd-watch-flexy[video-id='testid']");
     });
 
     it("falls back to player detection when previous lookups fail", () => {
-      document.querySelector = jest
-        .fn()
-        .mockReturnValueOnce(null)
-        .mockReturnValueOnce(null)
-        .mockReturnValueOnce({});
+      document.querySelector = jest.fn().mockReturnValueOnce(null).mockReturnValueOnce(null).mockReturnValueOnce({});
 
       expect(isVideoLoaded()).toBe(true);
       expect(document.querySelector).toHaveBeenNthCalledWith(3, '#player[loading="false"]:not([hidden])');

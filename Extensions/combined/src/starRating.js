@@ -1,4 +1,3 @@
-
 function createStarRating(rating, isMobile) {
   let starRating = document.createElement("label");
 
@@ -21,9 +20,7 @@ function createStarRating(rating, isMobile) {
       "#app > div.page-container > ytm-watch > ytm-single-column-watch-next-results-renderer > ytm-slim-video-metadata-section-renderer > ytm-slim-video-action-bar-renderer > div > ytm-slim-metadata-toggle-button-renderer:nth-child(1)",
     );
   } else {
-    YTLikeButton = document.querySelector(
-      "#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(1)",
-    );
+    YTLikeButton = document.querySelector("#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(1)");
   }
 
   YTLikeButton.insertAdjacentElement("afterend", starRating);

@@ -252,5 +252,4 @@ describe("premiumAnalytics.teaser", () => {
     expect(storageSetMock).toHaveBeenCalledWith({ hidePremiumTeaser: true });
     expect(document.querySelector(".ryd-premium-teaser")).toBeNull();
   });
-
 });

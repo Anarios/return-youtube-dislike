@@ -2,7 +2,14 @@
  * @jest-environment jsdom
  */
 
-import { getTextColor, getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor, isDarkTheme } from "./theme";
+import {
+  getTextColor,
+  getMutedTextColor,
+  getBorderColor,
+  getSurfaceColor,
+  getHoverFillColor,
+  isDarkTheme,
+} from "./theme";
 
 describe("premiumAnalytics.theme", () => {
   const originalGetComputedStyle = window.getComputedStyle;
@@ -35,7 +42,7 @@ describe("premiumAnalytics.theme", () => {
   });
 
   it("derives surface colors based on theme", () => {
-    document.documentElement.setAttribute('dark', '');
+    document.documentElement.setAttribute("dark", "");
     window.getComputedStyle.mockImplementation(() => ({
       getPropertyValue: (name) => {
         if (name === "--yt-spec-text-primary") return "#fefefe";
@@ -44,11 +51,11 @@ describe("premiumAnalytics.theme", () => {
       },
     }));
     expect(isDarkTheme()).toBe(true);
-    expect(getSurfaceColor()).toBe('rgba(255,255,255,0.02)');
-    expect(getHoverFillColor()).toBe('rgba(255,255,255,0.18)');
+    expect(getSurfaceColor()).toBe("rgba(255,255,255,0.02)");
+    expect(getHoverFillColor()).toBe("rgba(255,255,255,0.18)");
 
-    document.documentElement.removeAttribute('dark');
-    document.documentElement.setAttribute('light', '');
+    document.documentElement.removeAttribute("dark");
+    document.documentElement.setAttribute("light", "");
     window.getComputedStyle.mockImplementation(() => ({
       getPropertyValue: (name) => {
         if (name === "--yt-spec-text-primary") return "#111111";
@@ -57,9 +64,9 @@ describe("premiumAnalytics.theme", () => {
       },
     }));
     expect(isDarkTheme()).toBe(false);
-    expect(getBorderColor(0.2)).toBe('rgba(15,23,42,0.2)');
-    expect(getSurfaceColor()).toBe('rgba(15,23,42,0.06)');
-    expect(getHoverFillColor()).toBe('rgba(15,23,42,0.18)');
-    document.documentElement.removeAttribute('light');
+    expect(getBorderColor(0.2)).toBe("rgba(15,23,42,0.2)");
+    expect(getSurfaceColor()).toBe("rgba(15,23,42,0.06)");
+    expect(getHoverFillColor()).toBe("rgba(15,23,42,0.18)");
+    document.documentElement.removeAttribute("light");
   });
 });

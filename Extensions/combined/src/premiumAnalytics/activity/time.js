@@ -28,14 +28,12 @@ export function computeChartBounds(points, timeline, bucketSizeMs) {
 export function updateGlobalBounds(bounds) {
   const state = analyticsState;
   if (bounds.min != null) {
-    state.globalTimeBounds.min = state.globalTimeBounds.min == null
-      ? bounds.min
-      : Math.min(state.globalTimeBounds.min, bounds.min);
+    state.globalTimeBounds.min =
+      state.globalTimeBounds.min == null ? bounds.min : Math.min(state.globalTimeBounds.min, bounds.min);
   }
   if (bounds.max != null) {
-    state.globalTimeBounds.max = state.globalTimeBounds.max == null
-      ? bounds.max
-      : Math.max(state.globalTimeBounds.max, bounds.max);
+    state.globalTimeBounds.max =
+      state.globalTimeBounds.max == null ? bounds.max : Math.max(state.globalTimeBounds.max, bounds.max);
   }
   if (state.globalTimeBounds.min == null && bounds.min != null) {
     state.globalTimeBounds.min = bounds.min;

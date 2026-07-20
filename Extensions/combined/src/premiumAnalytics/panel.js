@@ -155,11 +155,7 @@ export function renderSummary(summary) {
       </div>
     </div>
     <div class="ryd-analytics__summary-meta">
-      ${localize("premiumAnalytics_summaryMeta", [
-        formattedInteractions,
-        formattedCountries,
-        formattedIps,
-      ])}
+      ${localize("premiumAnalytics_summaryMeta", [formattedInteractions, formattedCountries, formattedIps])}
     </div>
   `;
 }

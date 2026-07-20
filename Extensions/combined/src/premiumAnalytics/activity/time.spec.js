@@ -3,12 +3,7 @@
  */
 
 import { analyticsState, resetStateForVideo } from "../state";
-import {
-  computeChartBounds,
-  updateGlobalBounds,
-  clampRangeToBounds,
-  combineBounds,
-} from "./time";
+import { computeChartBounds, updateGlobalBounds, clampRangeToBounds, combineBounds } from "./time";
 
 function initializeState() {
   resetStateForVideo();

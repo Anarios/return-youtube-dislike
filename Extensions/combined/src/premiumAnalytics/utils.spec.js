@@ -2,13 +2,7 @@
  * @jest-environment jsdom
  */
 
-import {
-  sanitizeCount,
-  toEpoch,
-  capitalize,
-  debounce,
-  safeJson,
-} from "./utils";
+import { sanitizeCount, toEpoch, capitalize, debounce, safeJson } from "./utils";
 
 describe("premiumAnalytics.utils", () => {
   describe("sanitizeCount", () => {

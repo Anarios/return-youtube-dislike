@@ -135,8 +135,7 @@ function handleChartSelection(range) {
   }
 
   const sameAsCurrent =
-    analyticsState.selectionRange.from === normalized.from &&
-    analyticsState.selectionRange.to === normalized.to;
+    analyticsState.selectionRange.from === normalized.from && analyticsState.selectionRange.to === normalized.to;
 
   analyticsState.selectionRange = normalized;
   analyticsState.customSelection = { ...normalized };

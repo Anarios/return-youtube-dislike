@@ -45,7 +45,7 @@ function parseColor(value) {
     return null;
   }
   const trimmed = value.trim();
-  if (trimmed.startsWith('#')) {
+  if (trimmed.startsWith("#")) {
     const hex = trimmed.slice(1);
     if (hex.length === 3) {
       const r = parseInt(hex[0] + hex[0], 16);
@@ -63,7 +63,7 @@ function parseColor(value) {
   }
   const rgbMatch = trimmed.match(/rgba?\(([^)]+)\)/i);
   if (rgbMatch) {
-    const parts = rgbMatch[1].split(',').map((part) => parseFloat(part.trim()));
+    const parts = rgbMatch[1].split(",").map((part) => parseFloat(part.trim()));
     if (parts.length >= 3) {
       return { r: parts[0], g: parts[1], b: parts[2] };
     }

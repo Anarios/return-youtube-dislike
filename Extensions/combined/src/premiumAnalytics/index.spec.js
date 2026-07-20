@@ -109,10 +109,8 @@ const { debounce: mockDebounce, safeJson: mockSafeJson, toEpoch: mockToEpoch } =
 
 const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
-const {
-  setTeaserSuppressed: mockSetTeaserSuppressed,
-  TEASER_SUPPRESSION_REASON_PREMIUM,
-} = jest.requireMock("./teaser");
+const { setTeaserSuppressed: mockSetTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } =
+  jest.requireMock("./teaser");
 const { showTierNotice: mockShowTierNotice, hideTierNotice: mockHideTierNotice } = jest.requireMock("./tierNotice");
 
 jest.mock("../../../common/utils", () => {
@@ -124,12 +122,7 @@ jest.mock("../../../common/utils", () => {
 });
 
 import { analyticsState, resetSessionState, resetStateForVideo } from "./state";
-import {
-  initPremiumAnalytics,
-  requestAnalytics,
-  teardownPremiumAnalytics,
-  updatePremiumSession,
-} from "./index";
+import { initPremiumAnalytics, requestAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./index";
 const premiumAnalyticsModule = require("./index");
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));

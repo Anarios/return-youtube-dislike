@@ -2,12 +2,7 @@
  * @jest-environment jsdom
  */
 
-import {
-  logTimeBounds,
-  logRangeSelection,
-  logFetchRequest,
-  logZoomPreview,
-} from "./logging";
+import { logTimeBounds, logRangeSelection, logFetchRequest, logZoomPreview } from "./logging";
 
 describe("premiumAnalytics.logging", () => {
   let consoleSpy;
@@ -23,7 +18,12 @@ describe("premiumAnalytics.logging", () => {
   it("logs time bounds when values are provided", () => {
     logTimeBounds("chart", { min: 0, max: 1 });
 
-    expect(consoleSpy).toHaveBeenCalledWith("[PremiumAnalytics] chart bounds:", new Date(0).toISOString(), "->", new Date(1).toISOString());
+    expect(consoleSpy).toHaveBeenCalledWith(
+      "[PremiumAnalytics] chart bounds:",
+      new Date(0).toISOString(),
+      "->",
+      new Date(1).toISOString(),
+    );
   });
 
   it("skips logging time bounds when null", () => {

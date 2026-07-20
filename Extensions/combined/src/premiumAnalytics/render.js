@@ -58,7 +58,8 @@ function renderAnalytics(data) {
   analyticsState.latestSubdivisions = data?.geo?.subdivisions ?? [];
 
   if (analyticsState.mapView === "subdivision") {
-    const focusCode = typeof analyticsState.mapFocusCountry === "string" ? analyticsState.mapFocusCountry.toUpperCase() : "";
+    const focusCode =
+      typeof analyticsState.mapFocusCountry === "string" ? analyticsState.mapFocusCountry.toUpperCase() : "";
     const hasFocusedSubdivisions =
       focusCode &&
       analyticsState.latestSubdivisions.some(

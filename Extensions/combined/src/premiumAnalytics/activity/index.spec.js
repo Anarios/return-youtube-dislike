@@ -162,7 +162,6 @@ describe("premiumAnalytics.activity", () => {
     expect(logging.logRangeSelection).toHaveBeenCalled();
     expect(analyticsState.latestSeriesPoints).toHaveLength(2);
     expect(analyticsState.selectionRange.from).toBeLessThanOrEqual(analyticsState.selectionRange.to);
-
   });
 
   it("updates the bucket label when rendering", () => {

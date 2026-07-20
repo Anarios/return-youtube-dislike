@@ -1,9 +1,5 @@
 import { initPremiumAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./premiumAnalytics";
-import {
-  initPremiumTeaser,
-  setTeaserSuppressed,
-  TEASER_SUPPRESSION_REASON_PREMIUM,
-} from "./premiumAnalytics/teaser";
+import { initPremiumTeaser, setTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } from "./premiumAnalytics/teaser";
 
 let patreonState = {
   authenticated: false,
