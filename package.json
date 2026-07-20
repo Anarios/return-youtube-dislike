@@ -6,7 +6,9 @@
   "scripts": {
     "start": "echo To build for development, please use \"npm run dev\". To build for production, please use \"npm run build\".",
     "dev": "webpack --mode=development --watch",
+    "dev:userscript": "webpack --mode=development --watch --config-name userscript",
     "build": "webpack --mode=production",
+    "build:userscript": "webpack --mode=production --config-name userscript",
     "test": "jest",
     "build:safari": "webpack --mode=production && xcrun safari-web-extension-converter Extensions/combined/dist/safari --project-location Extensions/combined/dist --bundle-identifier com.returnyoutubedislike.safari-ext --force",
     "prepare": "husky install"

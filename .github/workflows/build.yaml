@@ -6,11 +6,17 @@ on:
       - main
     paths:
       - Extensions/combined/**
+      - Extensions/common/**
+      - Extensions/UserScript/**
+      - webpack.config.js
   pull_request:
     branches:
       - main
     paths:
       - Extensions/combined/**
+      - Extensions/common/**
+      - Extensions/UserScript/**
+      - webpack.config.js
 
 jobs:
   build:
@@ -52,3 +58,11 @@ jobs:
         with:
           name: ryd-safari
           path: ./Extensions/combined/dist/safari
+
+      - name: Build userscript
+        working-directory: .
+        run: npm run build:userscript
+
+      - name: Verify committed userscript matches build output
+        working-directory: .
+        run: git diff --exit-code -- "Extensions/UserScript/Return Youtube Dislike.user.js"
