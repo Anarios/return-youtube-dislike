@@ -39,6 +39,20 @@ Congratulations, You are now ready to develop!
 
 If you are new to developing Chrome extensions, or need extra help, please see [this YouTube tutorial](https://www.youtube.com/watch?v=mdOj6HYE3_0)
 
+#### Project layout
+
+- `Extensions/combined` is the browser extension (Chrome/Firefox/Safari).
+- `Extensions/UserScript` is the Tampermonkey/Greasemonkey userscript.
+- `Extensions/common` holds the code shared between both of the above (button/state/formatting logic, etc.) - if you're fixing something that affects how likes/dislikes are read or displayed, it almost certainly lives here rather than in either of the two folders above.
+
+**`Extensions/UserScript/Return Youtube Dislike.user.js` is a generated file - do not edit it directly.** It's built from `Extensions/common` and `Extensions/UserScript/src` via:
+
+```
+npm run build:userscript
+```
+
+`npm run build` (and `npm start`'s watcher) already builds both the extension and the userscript together. If you change anything under `Extensions/common` or `Extensions/UserScript/src`, make sure to rebuild and commit the regenerated `.user.js` file along with your source change - CI will fail the build if the committed file doesn't match a fresh build.
+
 ### Issues
 
 #### Opening a new issue
