@@ -25,21 +25,33 @@
 (function () {
   'use strict';
 
-  const DEFAULT_SHORTS_LOADED_SELECTORS = {
-    containers: [".reel-video-in-sequence-new"],
-    thumbnail: [".reel-video-in-sequence-thumbnail"],
-    renderer: ["ytd-reel-video-renderer"],
-    overlay: ["#experiment-overlay"],
-  };
+  function getVideoId(url) {
+    const urlObject = new URL(url);
+    const pathname = urlObject.pathname;
+    if (pathname.startsWith("/clip")) {
+      return (document.querySelector("meta[itemprop='videoId']") || document.querySelector("meta[itemprop='identifier']"))
+        .content;
+    } else {
+      if (pathname.startsWith("/shorts")) {
+        return pathname.slice(8);
+      }
+      return urlObject.searchParams.get("v");
+    }
+  }
 
-  const DEFAULT_VIDEO_LOADED_SELECTORS = [
-    "ytd-watch-grid[video-id='{videoId}']",
-    "ytd-watch-flexy[video-id='{videoId}']",
-    '#player[loading="false"]:not([hidden])',
-  ];
-
-  function numberFormat$1(numberState) {
-    return getNumberFormatter(extConfig.numberDisplayFormat).format(numberState);
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    const height = innerHeight || document.documentElement.clientHeight;
+    const width = innerWidth || document.documentElement.clientWidth;
+    return (
+      // When short (channel) is ignored, the element (like/dislike AND short itself) is
+      // hidden with a 0 DOMRect. In this case, consider it outside of Viewport
+      !(rect.top == 0 && rect.left == 0 && rect.bottom == 0 && rect.right == 0) &&
+      rect.top >= 0 &&
+      rect.left >= 0 &&
+      rect.bottom <= height &&
+      rect.right <= width
+    );
   }
 
   function getNumberFormatter(optionSelect) {
@@ -104,130 +116,6 @@
     return localeString;
   }
 
-  function getVideoId(url) {
-    const urlObject = new URL(url);
-    const pathname = urlObject.pathname;
-    if (pathname.startsWith("/clip")) {
-      return (document.querySelector("meta[itemprop='videoId']") || document.querySelector("meta[itemprop='identifier']"))
-        .content;
-    } else {
-      if (pathname.startsWith("/shorts")) {
-        return pathname.slice(8);
-      }
-      return urlObject.searchParams.get("v");
-    }
-  }
-
-  function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    const height = innerHeight || document.documentElement.clientHeight;
-    const width = innerWidth || document.documentElement.clientWidth;
-    return (
-      // When short (channel) is ignored, the element (like/dislike AND short itself) is
-      // hidden with a 0 DOMRect. In this case, consider it outside of Viewport
-      !(rect.top == 0 && rect.left == 0 && rect.bottom == 0 && rect.right == 0) &&
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <= height &&
-      rect.right <= width
-    );
-  }
-
-  function isShortsLoaded(videoId) {
-    if (!videoId) return false;
-
-    const selectors = extConfig.selectors.shortsLoaded ?? DEFAULT_SHORTS_LOADED_SELECTORS;
-
-    // Find all reel containers
-    const reelContainers = querySelectorAll(selectors.containers);
-
-    for (const container of reelContainers) {
-      // Check if this container's thumbnail matches our video ID
-      const thumbnail = querySelector(selectors.thumbnail, container);
-      if (thumbnail) {
-        const bgImage = thumbnail.style.backgroundImage;
-        // YouTube thumbnail URLs contain the video ID in the format: /vi/VIDEO_ID/
-        if ((bgImage && bgImage.includes(`/${videoId}/`)) || (!bgImage && isInViewport(container))) {
-          // Check if this container has the renderer with visible experiment-overlay
-          const renderer = querySelector(selectors.renderer, container);
-          if (renderer) {
-            const experimentOverlay = querySelector(selectors.overlay, renderer);
-            if (
-              experimentOverlay &&
-              !experimentOverlay.hidden &&
-              window.getComputedStyle(experimentOverlay).display !== "none" &&
-              experimentOverlay.hasChildNodes()
-            ) {
-              return true;
-            }
-          }
-        }
-      }
-    }
-
-    return false;
-  }
-
-  function isVideoLoaded() {
-    const videoId = getVideoId(window.location.href);
-
-    // Check if this is a Shorts URL
-    if (isShorts()) {
-      return isShortsLoaded(videoId);
-    }
-
-    const videoLoadedSelectors = extConfig.selectors.videoLoaded ?? DEFAULT_VIDEO_LOADED_SELECTORS;
-
-    // Regular video checks
-    return querySelector(videoLoadedSelectors.map((selector) => selector.replace("{videoId}", videoId))) !== undefined;
-  }
-
-  const originalConsole = {
-    log: console.log.bind(console),
-    debug: console.debug.bind(console),
-    info: console.info.bind(console),
-    warn: console.warn.bind(console),
-    error: console.error.bind(console),
-  };
-
-  function initializeLogging() {
-    if (extConfig.disableLogging) {
-      console.log = () => {};
-      console.debug = () => {};
-    } else {
-      console.log = originalConsole.log;
-      console.debug = originalConsole.debug;
-    }
-  }
-
-  function getColorFromTheme(voteIsLike) {
-    let colorString;
-    switch (extConfig.colorTheme) {
-      case "accessible":
-        if (voteIsLike === true) {
-          colorString = "dodgerblue";
-        } else {
-          colorString = "gold";
-        }
-        break;
-      case "neon":
-        if (voteIsLike === true) {
-          colorString = "aqua";
-        } else {
-          colorString = "magenta";
-        }
-        break;
-      case "classic":
-      default:
-        if (voteIsLike === true) {
-          colorString = "lime";
-        } else {
-          colorString = "red";
-        }
-    }
-    return colorString;
-  }
-
   function querySelector(selectors, element) {
     let result;
     for (const selector of Array.isArray(selectors) ? selectors : [selectors]) {
@@ -262,235 +150,6 @@
       this.observer.disconnect();
     };
     return observerWrapper;
-  }
-
-  // This is the userscript's only user-facing configuration surface (there is
-  // no options UI, unlike the browser extension). Edit the values below, then
-  // run `npm run build:userscript` to regenerate the .user.js file.
-  const userConfig = {
-    // ==== BEGIN USER OPTIONS ====
-    // You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact.
-    disableVoteSubmission: false, // [true, false*] Unused: the userscript does not submit votes, kept only so shared code sees a consistent shape.
-    disableLogging: true, // [true*, false] Disable Logging API Response in JavaScript Console.
-    coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
-    coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
-    colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
-    numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
-    showTooltipPercentage: false, // [true, false*] Show percentage in like/dislike bar tooltip.
-    tooltipPercentageMode: "dash_like", // [dash_like*, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
-    numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
-    hidePremiumTeaser: false, // [true, false*] Hide the premium features teaser (the userscript has no premium features; kept for shape-compatibility with shared code)
-    numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers). Userscript-only: applied via utils.userscript.js, no equivalent in the shared extension code.
-    rateBarEnabled: false, // [true, false*] Enables ratio bar under like/dislike buttons. Userscript-only: applied via bar.userscript.js, no equivalent in the shared extension code.
-    // ==== END USER OPTIONS ====
-  };
-
-  function get(keys, callback) {
-    const list = Array.isArray(keys) ? keys : [keys];
-    const result = {};
-    for (const key of list) {
-      if (userConfig[key] !== undefined) {
-        result[key] = userConfig[key];
-      }
-    }
-    callback(result);
-  }
-
-  function set(values) {
-    Object.assign(userConfig, values);
-  }
-
-  // A minimal stand-in for the `chrome`/`browser` global that Extensions/common's
-  // shared modules call through getBrowser(). The userscript has no options UI
-  // and no background script, so every entry in userConfig is always already
-  // present: initializeX() in state.js only ever reads it back, it never falls
-  // through to storage.sync.set(); onChanged/runtime.sendMessage are inert
-  // because nothing in the userscript build ever registers a storage listener
-  // or submits votes.
-  const browserShim = {
-    storage: {
-      sync: { get, set },
-      onChanged: {
-        addListener() {},
-      },
-    },
-    runtime: {
-      sendMessage() {},
-      getURL() {
-        return undefined;
-      },
-      getManifest() {
-        return null;
-      },
-    },
-  };
-
-  // Alias target for Extensions/common/utils.js when bundling the userscript
-  // (see the webpack "userscript" config's resolve.alias). Everything except
-  // getBrowser and numberFormat is re-exported unchanged.
-  //
-  // getBrowser is overridden to return the userscript's storage shim instead of
-  // probing for a real chrome/browser global.
-  //
-  // numberFormat is wrapped to apply the userscript-only numberDisplayRoundDown
-  // option (see browser-shim.js) before delegating to the real numberFormat.
-  // This is the only reason a userscript-specific numberFormat needs to exist:
-  // Extensions/common/bar.js and events.js call numberFormat via their own
-  // `from "./utils"` import, which this alias transparently redirects here, so
-  // the pre-rounding step applies without touching any shared module.
-
-  function roundDown(num) {
-    if (num < 1000) return num;
-    const magnitude = Math.floor(Math.log10(num) - 2);
-    const decimalPlaces = magnitude + (magnitude % 3 ? 1 : 0);
-    return Math.floor(num / 10 ** decimalPlaces) * 10 ** decimalPlaces;
-  }
-
-  function numberFormat(numberState) {
-    const input = userConfig.numberDisplayRoundDown ? roundDown(numberState) : numberState;
-    return numberFormat$1(input);
-  }
-
-  function getBrowser() {
-    return browserShim;
-  }
-
-  function createRateBar$1(likes, dislikes) {
-    let rateBar = document.getElementById("ryd-bar-container");
-    if (!isLikesDisabled()) {
-      // sometimes rate bar is hidden
-      if (rateBar && !isInViewport(rateBar)) {
-        rateBar.remove();
-        rateBar = null;
-      }
-
-      const widthPx =
-        parseFloat(window.getComputedStyle(getLikeButton()).width) +
-        parseFloat(window.getComputedStyle(getDislikeButton()).width) +
-        (isRoundedDesign() ? 0 : 8);
-
-      const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
-
-      var likePercentage = parseFloat(widthPercent.toFixed(1));
-      const dislikePercentage = (100 - likePercentage).toLocaleString();
-      likePercentage = likePercentage.toLocaleString();
-
-      if (extConfig.showTooltipPercentage) {
-        var tooltipInnerHTML;
-        switch (extConfig.tooltipPercentageMode) {
-          case "dash_dislike":
-            tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`;
-            break;
-          case "both":
-            tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`;
-            break;
-          case "only_like":
-            tooltipInnerHTML = `${likePercentage}%`;
-            break;
-          case "only_dislike":
-            tooltipInnerHTML = `${dislikePercentage}%`;
-            break;
-          default: // dash_like
-            tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`;
-        }
-      } else {
-        tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
-      }
-
-      if (!isShorts()) {
-        if (!rateBar && !isMobile()) {
-          let colorLikeStyle = "";
-          let colorDislikeStyle = "";
-          if (extConfig.coloredBar) {
-            colorLikeStyle = "; background-color: " + getColorFromTheme(true);
-            colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
-          }
-          let actions =
-            isNewDesign() && getButtons() === querySelector(extConfig.selectors.rateBar.newDesignActions)
-              ? getButtons()
-              : querySelector(extConfig.selectors.rateBar.oldDesignActions);
-          (actions || querySelector(extConfig.selectors.rateBar.mobileActionBar)).insertAdjacentHTML(
-            "beforeend",
-            `
-              <div class="ryd-tooltip ryd-tooltip-${isNewDesign() ? "new" : "old"}-design" style="width: ${widthPx}px">
-              <div class="ryd-tooltip-bar-container">
-                <div
-                    id="ryd-bar-container"
-                    style="width: 100%; height: 2px;${colorDislikeStyle}"
-                    >
-                    <div
-                      id="ryd-bar"
-                      style="width: ${widthPercent}%; height: 100%${colorLikeStyle}"
-                      ></div>
-                </div>
-              </div>
-              <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
-                <!--css-build:shady-->${tooltipInnerHTML}
-              </tp-yt-paper-tooltip>
-              </div>
-      		`,
-          );
-
-          if (isNewDesign()) {
-            // Add border between info and comments
-            let descriptionAndActionsElement = querySelector(extConfig.selectors.rateBar.topRow);
-            descriptionAndActionsElement.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer)";
-            descriptionAndActionsElement.style.paddingBottom = "10px";
-
-            // Fix like/dislike ratio bar offset in new UI
-            querySelector(extConfig.selectors.rateBar.actionsInner).style.width = "revert";
-            if (isRoundedDesign()) {
-              querySelector(extConfig.selectors.rateBar.actions).style.flexDirection = "row-reverse";
-            }
-          }
-        } else {
-          document.querySelector(`.ryd-tooltip`).style.width = widthPx + "px";
-          document.getElementById("ryd-bar").style.width = widthPercent + "%";
-          document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML = tooltipInnerHTML;
-          if (extConfig.coloredBar) {
-            document.getElementById("ryd-bar-container").style.backgroundColor = getColorFromTheme(false);
-            document.getElementById("ryd-bar").style.backgroundColor = getColorFromTheme(true);
-          }
-        }
-      }
-    } else {
-      console.log("removing bar");
-      if (rateBar) {
-        rateBar.parentNode.removeChild(rateBar);
-      }
-    }
-  }
-
-  // Alias target for Extensions/common/bar.js when bundling the userscript
-  // (see the webpack "userscript" config's resolve.alias). Applies the
-  // userscript-only rateBarEnabled option (see browser-shim.js): when disabled,
-  // skip rendering the bar entirely instead of delegating to the shared
-  // createRateBar. The userscript has no live options UI, so this is a static,
-  // build-time choice - there is never an existing bar to tear down.
-
-  function createRateBar(likes, dislikes) {
-    if (!userConfig.rateBarEnabled) {
-      return;
-    }
-    return createRateBar$1(likes, dislikes);
-  }
-
-  const PROD_API_URL = "https://returnyoutubedislikeapi.com";
-  const DEV_API_URL = PROD_API_URL;
-
-  const runtime = typeof chrome !== "undefined" ? chrome.runtime : null;
-  const manifest = typeof runtime?.getManifest === "function" ? runtime.getManifest() : null;
-  const isDevelopment = !manifest || !("update_url" in manifest);
-
-  runtime && typeof runtime.getURL === "function"
-      ? runtime.getURL("changelog/4/changelog_4.0.html")
-      : "https://returnyoutubedislike.com/changelog/4/changelog_4.0.html";
-
-  const config = {
-    apiUrl: isDevelopment ? DEV_API_URL : PROD_API_URL};
-
-  function getApiEndpoint(endpoint) {
-    return `${config.apiUrl}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
   }
 
   const LIKED_STATE = "LIKED_STATE";
@@ -640,6 +299,488 @@
     return querySelector(extConfig.selectors.roundedDesign) !== null;
   }
 
+  const DEFAULT_SHORTS_LOADED_SELECTORS = {
+    containers: [".reel-video-in-sequence-new"],
+    thumbnail: [".reel-video-in-sequence-thumbnail"],
+    renderer: ["ytd-reel-video-renderer"],
+    overlay: ["#experiment-overlay"],
+  };
+
+  const DEFAULT_VIDEO_LOADED_SELECTORS = [
+    "ytd-watch-grid[video-id='{videoId}']",
+    "ytd-watch-flexy[video-id='{videoId}']",
+    '#player[loading="false"]:not([hidden])',
+  ];
+
+  function numberFormat$1(numberState) {
+    return getNumberFormatter(extConfig.numberDisplayFormat).format(numberState);
+  }
+
+  function isShortsLoaded(videoId) {
+    if (!videoId) return false;
+
+    const selectors = extConfig.selectors.shortsLoaded ?? DEFAULT_SHORTS_LOADED_SELECTORS;
+
+    // Find all reel containers
+    const reelContainers = querySelectorAll(selectors.containers);
+
+    for (const container of reelContainers) {
+      // Check if this container's thumbnail matches our video ID
+      const thumbnail = querySelector(selectors.thumbnail, container);
+      if (thumbnail) {
+        const bgImage = thumbnail.style.backgroundImage;
+        // YouTube thumbnail URLs contain the video ID in the format: /vi/VIDEO_ID/
+        if ((bgImage && bgImage.includes(`/${videoId}/`)) || (!bgImage && isInViewport(container))) {
+          // Check if this container has the renderer with visible experiment-overlay
+          const renderer = querySelector(selectors.renderer, container);
+          if (renderer) {
+            const experimentOverlay = querySelector(selectors.overlay, renderer);
+            if (
+              experimentOverlay &&
+              !experimentOverlay.hidden &&
+              window.getComputedStyle(experimentOverlay).display !== "none" &&
+              experimentOverlay.hasChildNodes()
+            ) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+
+    return false;
+  }
+
+  function isVideoLoaded() {
+    const videoId = getVideoId(window.location.href);
+
+    // Check if this is a Shorts URL
+    if (isShorts()) {
+      return isShortsLoaded(videoId);
+    }
+
+    const videoLoadedSelectors = extConfig.selectors.videoLoaded ?? DEFAULT_VIDEO_LOADED_SELECTORS;
+
+    // Regular video checks
+    return querySelector(videoLoadedSelectors.map((selector) => selector.replace("{videoId}", videoId))) !== undefined;
+  }
+
+  const originalConsole = {
+    log: console.log.bind(console),
+    debug: console.debug.bind(console),
+    info: console.info.bind(console),
+    warn: console.warn.bind(console),
+    error: console.error.bind(console),
+  };
+
+  function initializeLogging() {
+    if (extConfig.disableLogging) {
+      console.log = () => {};
+      console.debug = () => {};
+    } else {
+      console.log = originalConsole.log;
+      console.debug = originalConsole.debug;
+    }
+  }
+
+  function getColorFromTheme(voteIsLike) {
+    let colorString;
+    switch (extConfig.colorTheme) {
+      case "accessible":
+        if (voteIsLike === true) {
+          colorString = "dodgerblue";
+        } else {
+          colorString = "gold";
+        }
+        break;
+      case "neon":
+        if (voteIsLike === true) {
+          colorString = "aqua";
+        } else {
+          colorString = "magenta";
+        }
+        break;
+      case "classic":
+      default:
+        if (voteIsLike === true) {
+          colorString = "lime";
+        } else {
+          colorString = "red";
+        }
+    }
+    return colorString;
+  }
+
+  // This is the userscript's only user-facing configuration surface (there is
+  // no options UI, unlike the browser extension). Edit the values below, then
+  // run `npm run build:userscript` to regenerate the .user.js file.
+  const userConfig = {
+    // ==== BEGIN USER OPTIONS ====
+    // You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact.
+    disableVoteSubmission: false, // [true, false*] Unused: the userscript does not submit votes, kept only so shared code sees a consistent shape.
+    disableLogging: true, // [true*, false] Disable Logging API Response in JavaScript Console.
+    coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
+    coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
+    colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
+    numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
+    showTooltipPercentage: false, // [true, false*] Show percentage in like/dislike bar tooltip.
+    tooltipPercentageMode: "dash_like", // [dash_like*, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
+    numberDisplayReformatLikes: false, // [true, false*] Re-format like numbers (Make likes and dislikes format consistent)
+    hidePremiumTeaser: false, // [true, false*] Hide the premium features teaser (the userscript has no premium features; kept for shape-compatibility with shared code)
+    numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers). Userscript-only: applied via utils.userscript.js, no equivalent in the shared extension code.
+    rateBarEnabled: false, // [true, false*] Enables ratio bar under like/dislike buttons. Userscript-only: applied via bar.userscript.js, no equivalent in the shared extension code.
+    // ==== END USER OPTIONS ====
+  };
+
+  function get(keys, callback) {
+    const list = Array.isArray(keys) ? keys : [keys];
+    const result = {};
+    for (const key of list) {
+      if (userConfig[key] !== undefined) {
+        result[key] = userConfig[key];
+      }
+    }
+    callback(result);
+  }
+
+  function set(values) {
+    Object.assign(userConfig, values);
+  }
+
+  // A minimal stand-in for the `chrome`/`browser` global that Extensions/common's
+  // shared modules call through getBrowser(). The userscript has no options UI
+  // and no background script, so every entry in userConfig is always already
+  // present: initializeX() in state.js only ever reads it back, it never falls
+  // through to storage.sync.set(); onChanged/runtime.sendMessage are inert
+  // because nothing in the userscript build ever registers a storage listener
+  // or submits votes.
+  const browserShim = {
+    storage: {
+      sync: { get, set },
+      onChanged: {
+        addListener() {},
+      },
+    },
+    runtime: {
+      sendMessage() {},
+      getURL() {
+        return undefined;
+      },
+      getManifest() {
+        return null;
+      },
+    },
+  };
+
+  // Alias target for Extensions/common/utils.js when bundling the userscript
+  // (see the webpack "userscript" config's resolve.alias). Everything except
+  // getBrowser and numberFormat is re-exported unchanged.
+  //
+  // getBrowser is overridden to return the userscript's storage shim instead of
+  // probing for a real chrome/browser global.
+  //
+  // numberFormat is wrapped to apply the userscript-only numberDisplayRoundDown
+  // option (see browser-shim.js) before delegating to the real numberFormat.
+  // This is the only reason a userscript-specific numberFormat needs to exist:
+  // Extensions/common/bar.js and events.js call numberFormat via their own
+  // `from "./utils"` import, which this alias transparently redirects here, so
+  // the pre-rounding step applies without touching any shared module.
+
+  function roundDown(num) {
+    if (num < 1000) return num;
+    const magnitude = Math.floor(Math.log10(num) - 2);
+    const decimalPlaces = magnitude + (magnitude % 3 ? 1 : 0);
+    return Math.floor(num / 10 ** decimalPlaces) * 10 ** decimalPlaces;
+  }
+
+  function numberFormat(numberState) {
+    const input = userConfig.numberDisplayRoundDown ? roundDown(numberState) : numberState;
+    return numberFormat$1(input);
+  }
+
+  function getBrowser() {
+    return browserShim;
+  }
+
+  function getNativeButton(buttonContainer) {
+    return querySelector(extConfig.selectors.buttons.nativeButton, buttonContainer);
+  }
+
+  function isSegmentedButtonLayout() {
+    return querySelector(extConfig.selectors.buttons.segmentedContainer, getButtons()) !== undefined;
+  }
+
+  function getButtons() {
+    //---   If Watching Youtube Shorts:   ---//
+    if (isShorts()) {
+      let elements = isMobile()
+        ? querySelectorAll(extConfig.selectors.buttons.shorts.mobile)
+        : querySelectorAll(extConfig.selectors.buttons.shorts.desktop);
+
+      for (let element of elements) {
+        //YouTube Shorts can have multiple like/dislike buttons when scrolling through videos
+        //However, only one of them should be visible (no matter how you zoom)
+        if (isInViewport(element)) {
+          return element;
+        }
+      }
+
+      if (elements.length > 0) {
+        return elements[0];
+      }
+    }
+    //---   If Watching On Mobile:   ---//
+    if (isMobile()) {
+      return document.querySelector(extConfig.selectors.buttons.regular.mobile);
+    }
+    //---   If Menu Element Is Displayed:   ---//
+    if (querySelector(extConfig.selectors.menuContainer)?.offsetParent === null) {
+      return querySelector(extConfig.selectors.buttons.regular.desktopMenu);
+      //---   If Menu Element Isn't Displayed:   ---//
+    } else {
+      return querySelector(extConfig.selectors.buttons.regular.desktopNoMenu);
+    }
+  }
+
+  function getLikeButton() {
+    return isSegmentedButtonLayout()
+      ? querySelector(extConfig.selectors.buttons.likeButton.segmented) ??
+          querySelector(extConfig.selectors.buttons.likeButton.segmentedGetButtons, getButtons())
+      : querySelector(extConfig.selectors.buttons.likeButton.notSegmented, getButtons());
+  }
+
+  function getLikeTextContainer() {
+    return querySelector(extConfig.selectors.likeTextContainer, getLikeButton());
+  }
+
+  function getDislikeButton() {
+    if (isSegmentedButtonLayout()) {
+      return (
+        querySelector(extConfig.selectors.buttons.dislikeButton.segmented) ??
+        querySelector(extConfig.selectors.buttons.dislikeButton.segmentedGetButtons, getButtons())
+      );
+    }
+
+    const notSegmentedMatch = querySelector(extConfig.selectors.buttons.dislikeButton.notSegmented, getButtons());
+
+    if (notSegmentedMatch != null) {
+      return notSegmentedMatch;
+    }
+
+    if (isShorts()) {
+      return querySelector(extConfig.selectors.buttons.dislikeButton.shortsFallback, getButtons());
+    }
+
+    return null;
+  }
+
+  function getTextContainerTemplate() {
+    const likeButton = getLikeButton();
+    const parentTemplate =
+      querySelector(extConfig.selectors.likeTextContainerTemplateParent, likeButton) ??
+      querySelector(extConfig.selectors.likeTextContainerTemplateParent);
+
+    return querySelector(extConfig.selectors.likeTextContainerTemplate, likeButton) ?? parentTemplate?.parentNode;
+  }
+
+  function updateDislikeButtonShape(dislikeButton) {
+    for (const className of extConfig.selectors.buttonClasses.iconButton) {
+      dislikeButton.classList.remove(className);
+    }
+
+    for (const className of extConfig.selectors.buttonClasses.iconLeading) {
+      dislikeButton.classList.add(className);
+    }
+  }
+
+  function createDislikeTextContainer() {
+    const textNodeClone = getTextContainerTemplate().cloneNode(true);
+    const dislikeButton = getNativeButton(getDislikeButton());
+    const insertPreChild = dislikeButton;
+    insertPreChild.insertBefore(textNodeClone, null);
+    updateDislikeButtonShape(dislikeButton);
+    if (querySelector(extConfig.selectors.textContainerInner, textNodeClone) === undefined) {
+      const span = document.createElement("span");
+      span.setAttribute("role", "text");
+      while (textNodeClone.firstChild) {
+        textNodeClone.removeChild(textNodeClone.firstChild);
+      }
+      textNodeClone.appendChild(span);
+    }
+    textNodeClone.innerText = "";
+    return textNodeClone;
+  }
+
+  function getDislikeTextContainer() {
+    let result;
+    const nativeDislikeButton = getNativeButton(getDislikeButton());
+    for (const selector of extConfig.selectors.dislikeTextContainer) {
+      result = getDislikeButton().querySelector(selector);
+      if (result !== null && result !== nativeDislikeButton) {
+        break;
+      }
+      result = null;
+    }
+    if (result == null) {
+      result = createDislikeTextContainer();
+    }
+    return result;
+  }
+
+  function checkForSignInButton() {
+    if (querySelector(extConfig.selectors.signInButton)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function isLikesDisabled() {
+    // return true if the like button's text doesn't contain any number
+    if (isMobile()) {
+      return /^\D*$/.test(querySelector(extConfig.selectors.buttons.mobileText, getButtons().children[0]).innerText);
+    }
+    return /^\D*$/.test(getLikeTextContainer().innerText);
+  }
+
+  function createRateBar$1(likes, dislikes) {
+    let rateBar = document.getElementById("ryd-bar-container");
+    if (!isLikesDisabled()) {
+      // sometimes rate bar is hidden
+      if (rateBar && !isInViewport(rateBar)) {
+        rateBar.remove();
+        rateBar = null;
+      }
+
+      const widthPx =
+        parseFloat(window.getComputedStyle(getLikeButton()).width) +
+        parseFloat(window.getComputedStyle(getDislikeButton()).width) +
+        (isRoundedDesign() ? 0 : 8);
+
+      const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
+
+      var likePercentage = parseFloat(widthPercent.toFixed(1));
+      const dislikePercentage = (100 - likePercentage).toLocaleString();
+      likePercentage = likePercentage.toLocaleString();
+
+      if (extConfig.showTooltipPercentage) {
+        var tooltipInnerHTML;
+        switch (extConfig.tooltipPercentageMode) {
+          case "dash_dislike":
+            tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${dislikePercentage}%`;
+            break;
+          case "both":
+            tooltipInnerHTML = `${likePercentage}%&nbsp;/&nbsp;${dislikePercentage}%`;
+            break;
+          case "only_like":
+            tooltipInnerHTML = `${likePercentage}%`;
+            break;
+          case "only_dislike":
+            tooltipInnerHTML = `${dislikePercentage}%`;
+            break;
+          default: // dash_like
+            tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}&nbsp;&nbsp;-&nbsp;&nbsp;${likePercentage}%`;
+        }
+      } else {
+        tooltipInnerHTML = `${likes.toLocaleString()}&nbsp;/&nbsp;${dislikes.toLocaleString()}`;
+      }
+
+      if (!isShorts()) {
+        if (!rateBar && !isMobile()) {
+          let colorLikeStyle = "";
+          let colorDislikeStyle = "";
+          if (extConfig.coloredBar) {
+            colorLikeStyle = "; background-color: " + getColorFromTheme(true);
+            colorDislikeStyle = "; background-color: " + getColorFromTheme(false);
+          }
+          let actions =
+            isNewDesign() && getButtons() === querySelector(extConfig.selectors.rateBar.newDesignActions)
+              ? getButtons()
+              : querySelector(extConfig.selectors.rateBar.oldDesignActions);
+          (actions || querySelector(extConfig.selectors.rateBar.mobileActionBar)).insertAdjacentHTML(
+            "beforeend",
+            `
+              <div class="ryd-tooltip ryd-tooltip-${isNewDesign() ? "new" : "old"}-design" style="width: ${widthPx}px">
+              <div class="ryd-tooltip-bar-container">
+                <div
+                    id="ryd-bar-container"
+                    style="width: 100%; height: 2px;${colorDislikeStyle}"
+                    >
+                    <div
+                      id="ryd-bar"
+                      style="width: ${widthPercent}%; height: 100%${colorLikeStyle}"
+                      ></div>
+                </div>
+              </div>
+              <tp-yt-paper-tooltip position="top" id="ryd-dislike-tooltip" class="style-scope ytd-sentiment-bar-renderer" role="tooltip" tabindex="-1">
+                <!--css-build:shady-->${tooltipInnerHTML}
+              </tp-yt-paper-tooltip>
+              </div>
+      		`,
+          );
+
+          if (isNewDesign()) {
+            // Add border between info and comments
+            let descriptionAndActionsElement = querySelector(extConfig.selectors.rateBar.topRow);
+            descriptionAndActionsElement.style.borderBottom = "1px solid var(--yt-spec-10-percent-layer)";
+            descriptionAndActionsElement.style.paddingBottom = "10px";
+
+            // Fix like/dislike ratio bar offset in new UI
+            querySelector(extConfig.selectors.rateBar.actionsInner).style.width = "revert";
+            if (isRoundedDesign()) {
+              querySelector(extConfig.selectors.rateBar.actions).style.flexDirection = "row-reverse";
+            }
+          }
+        } else {
+          document.querySelector(`.ryd-tooltip`).style.width = widthPx + "px";
+          document.getElementById("ryd-bar").style.width = widthPercent + "%";
+          document.querySelector("#ryd-dislike-tooltip > #tooltip").innerHTML = tooltipInnerHTML;
+          if (extConfig.coloredBar) {
+            document.getElementById("ryd-bar-container").style.backgroundColor = getColorFromTheme(false);
+            document.getElementById("ryd-bar").style.backgroundColor = getColorFromTheme(true);
+          }
+        }
+      }
+    } else {
+      console.log("removing bar");
+      if (rateBar) {
+        rateBar.parentNode.removeChild(rateBar);
+      }
+    }
+  }
+
+  // Alias target for Extensions/common/bar.js when bundling the userscript
+  // (see the webpack "userscript" config's resolve.alias). Applies the
+  // userscript-only rateBarEnabled option (see browser-shim.js): when disabled,
+  // skip rendering the bar entirely instead of delegating to the shared
+  // createRateBar. The userscript has no live options UI, so this is a static,
+  // build-time choice - there is never an existing bar to tear down.
+
+  function createRateBar(likes, dislikes) {
+    if (!userConfig.rateBarEnabled) {
+      return;
+    }
+    return createRateBar$1(likes, dislikes);
+  }
+
+  const PROD_API_URL = "https://returnyoutubedislikeapi.com";
+  const DEV_API_URL = PROD_API_URL;
+
+  const runtime = typeof chrome !== "undefined" ? chrome.runtime : null;
+  const manifest = typeof runtime?.getManifest === "function" ? runtime.getManifest() : null;
+  const isDevelopment = !manifest || !("update_url" in manifest);
+
+  runtime && typeof runtime.getURL === "function"
+      ? runtime.getURL("changelog/4/changelog_4.0.html")
+      : "https://returnyoutubedislike.com/changelog/4/changelog_4.0.html";
+
+  const config = {
+    apiUrl: isDevelopment ? DEV_API_URL : PROD_API_URL};
+
+  function getApiEndpoint(endpoint) {
+    return `${config.apiUrl}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
+  }
+
   let shortsObserver = null;
 
   if (isShorts() && !shortsObserver) {
@@ -670,14 +811,6 @@
         });
       },
     );
-  }
-
-  function isLikesDisabled() {
-    // return true if the like button's text doesn't contain any number
-    if (isMobile()) {
-      return /^\D*$/.test(querySelector(extConfig.selectors.buttons.mobileText, getButtons().children[0]).innerText);
-    }
-    return /^\D*$/.test(getLikeTextContainer().innerText);
   }
 
   function isVideoLiked() {
@@ -957,139 +1090,6 @@
         extConfig.hidePremiumTeaser = res.hidePremiumTeaser === true;
       }
     });
-  }
-
-  function getNativeButton(buttonContainer) {
-    return querySelector(extConfig.selectors.buttons.nativeButton, buttonContainer);
-  }
-
-  function isSegmentedButtonLayout() {
-    return querySelector(extConfig.selectors.buttons.segmentedContainer, getButtons()) !== undefined;
-  }
-
-  function getButtons() {
-    //---   If Watching Youtube Shorts:   ---//
-    if (isShorts()) {
-      let elements = isMobile()
-        ? querySelectorAll(extConfig.selectors.buttons.shorts.mobile)
-        : querySelectorAll(extConfig.selectors.buttons.shorts.desktop);
-
-      for (let element of elements) {
-        //YouTube Shorts can have multiple like/dislike buttons when scrolling through videos
-        //However, only one of them should be visible (no matter how you zoom)
-        if (isInViewport(element)) {
-          return element;
-        }
-      }
-
-      if (elements.length > 0) {
-        return elements[0];
-      }
-    }
-    //---   If Watching On Mobile:   ---//
-    if (isMobile()) {
-      return document.querySelector(extConfig.selectors.buttons.regular.mobile);
-    }
-    //---   If Menu Element Is Displayed:   ---//
-    if (querySelector(extConfig.selectors.menuContainer)?.offsetParent === null) {
-      return querySelector(extConfig.selectors.buttons.regular.desktopMenu);
-      //---   If Menu Element Isn't Displayed:   ---//
-    } else {
-      return querySelector(extConfig.selectors.buttons.regular.desktopNoMenu);
-    }
-  }
-
-  function getLikeButton() {
-    return isSegmentedButtonLayout()
-      ? querySelector(extConfig.selectors.buttons.likeButton.segmented) ??
-          querySelector(extConfig.selectors.buttons.likeButton.segmentedGetButtons, getButtons())
-      : querySelector(extConfig.selectors.buttons.likeButton.notSegmented, getButtons());
-  }
-
-  function getLikeTextContainer() {
-    return querySelector(extConfig.selectors.likeTextContainer, getLikeButton());
-  }
-
-  function getDislikeButton() {
-    if (isSegmentedButtonLayout()) {
-      return (
-        querySelector(extConfig.selectors.buttons.dislikeButton.segmented) ??
-        querySelector(extConfig.selectors.buttons.dislikeButton.segmentedGetButtons, getButtons())
-      );
-    }
-
-    const notSegmentedMatch = querySelector(extConfig.selectors.buttons.dislikeButton.notSegmented, getButtons());
-
-    if (notSegmentedMatch != null) {
-      return notSegmentedMatch;
-    }
-
-    if (isShorts()) {
-      return querySelector(extConfig.selectors.buttons.dislikeButton.shortsFallback, getButtons());
-    }
-
-    return null;
-  }
-
-  function getTextContainerTemplate() {
-    const likeButton = getLikeButton();
-    const parentTemplate =
-      querySelector(extConfig.selectors.likeTextContainerTemplateParent, likeButton) ??
-      querySelector(extConfig.selectors.likeTextContainerTemplateParent);
-
-    return querySelector(extConfig.selectors.likeTextContainerTemplate, likeButton) ?? parentTemplate?.parentNode;
-  }
-
-  function updateDislikeButtonShape(dislikeButton) {
-    for (const className of extConfig.selectors.buttonClasses.iconButton) {
-      dislikeButton.classList.remove(className);
-    }
-
-    for (const className of extConfig.selectors.buttonClasses.iconLeading) {
-      dislikeButton.classList.add(className);
-    }
-  }
-
-  function createDislikeTextContainer() {
-    const textNodeClone = getTextContainerTemplate().cloneNode(true);
-    const dislikeButton = getNativeButton(getDislikeButton());
-    const insertPreChild = dislikeButton;
-    insertPreChild.insertBefore(textNodeClone, null);
-    updateDislikeButtonShape(dislikeButton);
-    if (querySelector(extConfig.selectors.textContainerInner, textNodeClone) === undefined) {
-      const span = document.createElement("span");
-      span.setAttribute("role", "text");
-      while (textNodeClone.firstChild) {
-        textNodeClone.removeChild(textNodeClone.firstChild);
-      }
-      textNodeClone.appendChild(span);
-    }
-    textNodeClone.innerText = "";
-    return textNodeClone;
-  }
-
-  function getDislikeTextContainer() {
-    let result;
-    const nativeDislikeButton = getNativeButton(getDislikeButton());
-    for (const selector of extConfig.selectors.dislikeTextContainer) {
-      result = getDislikeButton().querySelector(selector);
-      if (result !== null && result !== nativeDislikeButton) {
-        break;
-      }
-      result = null;
-    }
-    if (result == null) {
-      result = createDislikeTextContainer();
-    }
-    return result;
-  }
-
-  function checkForSignInButton() {
-    if (querySelector(extConfig.selectors.signInButton)) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   function sendVote(vote) {

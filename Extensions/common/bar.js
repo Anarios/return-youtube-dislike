@@ -1,5 +1,5 @@
-import { getButtons, getDislikeButton, getLikeButton } from "./buttons";
-import { extConfig, isMobile, isLikesDisabled, isNewDesign, isRoundedDesign, isShorts } from "./state";
+import { getButtons, getDislikeButton, getLikeButton, isLikesDisabled } from "./buttons";
+import { extConfig, isMobile, isNewDesign, isRoundedDesign, isShorts } from "./runtime-state";
 import { getColorFromTheme, isInViewport, querySelector } from "./utils";
 
 function createRateBar(likes, dislikes) {

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-jest.mock("../../common/state", () => ({
+jest.mock("../../common/runtime-state", () => ({
   extConfig: { numberDisplayFormat: "compactShort" },
 }));
 

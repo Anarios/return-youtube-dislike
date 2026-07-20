@@ -1,4 +1,4 @@
-import { isMobile, isShorts, extConfig } from "./state";
+import { isMobile, isShorts, extConfig } from "./runtime-state";
 import { isInViewport, querySelector, querySelectorAll } from "./utils";
 
 function getNativeButton(buttonContainer) {
@@ -134,6 +134,14 @@ function checkForSignInButton() {
   }
 }
 
+function isLikesDisabled() {
+  // return true if the like button's text doesn't contain any number
+  if (isMobile()) {
+    return /^\D*$/.test(querySelector(extConfig.selectors.buttons.mobileText, getButtons().children[0]).innerText);
+  }
+  return /^\D*$/.test(getLikeTextContainer().innerText);
+}
+
 export {
   getButtons,
   getLikeButton,
@@ -141,4 +149,5 @@ export {
   getLikeTextContainer,
   getDislikeTextContainer,
   checkForSignInButton,
+  isLikesDisabled,
 };

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-jest.mock("./state", () => {
+jest.mock("./runtime-state", () => {
   const extConfig = {
     disableVoteSubmission: false,
     disableLogging: false,
@@ -44,7 +44,7 @@ jest.mock("./state", () => {
   };
 });
 
-import { extConfig, isShorts } from "./state";
+import { extConfig, isShorts } from "./runtime-state";
 import {
   numberFormat,
   getNumberFormatter,
