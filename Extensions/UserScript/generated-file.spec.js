@@ -10,7 +10,10 @@ describe("generated userscript file", () => {
   });
 
   it("has a well-formed UserScript metadata block", () => {
-    const match = content.match(/^\/\/ ==UserScript==\n([\s\S]*?)\n\/\/ ==\/UserScript==\n/);
+    // This file's line endings aren't pinned to a specific convention (see
+    // .gitattributes: it's governed by the same blanket `text=auto` rule as
+    // everything else in the repo), so tolerate either \n or \r\n here.
+    const match = content.match(/^\/\/ ==UserScript==\r?\n([\s\S]*?)\r?\n\/\/ ==\/UserScript==\r?\n/);
     expect(match).not.toBeNull();
 
     const block = match[1];
@@ -22,7 +25,7 @@ describe("generated userscript file", () => {
   });
 
   it("parses as syntactically valid JavaScript after stripping the metadata block", () => {
-    const body = content.replace(/^\/\/ ==UserScript==\n[\s\S]*?\n\/\/ ==\/UserScript==\n/, "");
+    const body = content.replace(/^\/\/ ==UserScript==\r?\n[\s\S]*?\r?\n\/\/ ==\/UserScript==\r?\n/, "");
 
     // new Function only compiles the source, it never executes it, so this is
     // safe even though the script body runs top-level DOM/fetch calls.

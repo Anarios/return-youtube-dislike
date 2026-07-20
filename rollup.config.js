@@ -53,23 +53,6 @@ function redirectSharedModule(realRelPath, overrideRelPath) {
   };
 }
 
-// The committed userscript file is fetched raw from GitHub by every
-// Tampermonkey/Greasemonkey install's @updateURL, and has always used LF line
-// endings (see .gitattributes), unlike the rest of this repo's hand-written
-// sources (which use CRLF).
-function normalizeLineEndings() {
-  return {
-    name: "normalize-line-endings",
-    generateBundle(_, bundle) {
-      for (const file of Object.values(bundle)) {
-        if (typeof file.code === "string") {
-          file.code = file.code.replace(/\r\n/g, "\n");
-        }
-      }
-    },
-  };
-}
-
 module.exports = {
   input: "Extensions/UserScript/src/userscript-entry.js",
   output: {
@@ -80,6 +63,5 @@ module.exports = {
   plugins: [
     redirectSharedModule("Extensions/common/utils.js", "Extensions/UserScript/src/utils.userscript.js"),
     redirectSharedModule("Extensions/common/bar.js", "Extensions/UserScript/src/bar.userscript.js"),
-    normalizeLineEndings(),
   ],
 };
