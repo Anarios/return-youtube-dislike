@@ -1,6 +1,6 @@
-import { getApiEndpoint, getChangelogUrl } from "../../config";
-import { getBrowser, getVideoId, localize } from "../../utils";
-import { extConfig } from "../../state";
+import { getApiEndpoint, getChangelogUrl } from "../../../../common/config";
+import { getBrowser, getVideoId, localize } from "../../../../common/utils";
+import { extConfig } from "../../../../common/state";
 
 const PATREON_JOIN_URL = "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649";
 const CHANGELOG_URL = getChangelogUrl();

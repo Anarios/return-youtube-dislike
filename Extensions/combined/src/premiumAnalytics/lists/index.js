@@ -1,5 +1,5 @@
 import { sanitizeCount } from "../utils";
-import { localize } from "../../utils";
+import { localize } from "../../../../common/utils";
 
 function createPlaceholder() {
   return `<li class="ryd-analytics__placeholder">${localize("premiumAnalytics_noData")}</li>`;

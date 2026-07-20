@@ -1,7 +1,7 @@
-import { getButtons } from "./src/buttons";
-import { isShorts, setInitialState, initExtConfig } from "./src/state";
-import { getBrowser, isVideoLoaded } from "./src/utils";
-import { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler } from "./src/events";
+import { getButtons } from "../common/buttons";
+import { isShorts, setInitialState, initExtConfig } from "../common/state";
+import { getBrowser, isVideoLoaded } from "../common/utils";
+import { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler } from "../common/events";
 import { initPatreonFeatures } from "./src/patreon";
 
 await initExtConfig();

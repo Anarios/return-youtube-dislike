@@ -1,5 +1,5 @@
-import { config } from "../config";
-import { getBrowser, localize } from "../utils";
+import { config } from "../../../common/config";
+import { getBrowser, localize } from "../../../common/utils";
 
 const PATREON_JOIN_URL = "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649";
 const SUPPORT_DOC_URL = config.links?.help ?? "https://returnyoutubedislike.com/help";

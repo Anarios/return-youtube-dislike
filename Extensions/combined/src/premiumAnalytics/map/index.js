@@ -6,7 +6,7 @@ import usStatesData from "us-atlas/states-10m.json";
 
 import { analyticsState } from "../state";
 import { sanitizeCount } from "../utils";
-import { localize } from "../../utils";
+import { localize } from "../../../../common/utils";
 import { getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor } from "../theme";
 
 let mapTranslator = (key, substitutions) => localize(key, substitutions);

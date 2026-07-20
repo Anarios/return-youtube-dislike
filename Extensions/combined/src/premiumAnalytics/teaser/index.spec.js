@@ -2,13 +2,13 @@
  * @jest-environment jsdom
  */
 
-jest.mock("../../config", () => ({
+jest.mock("../../../../common/config", () => ({
   getApiEndpoint: jest.fn((path) => `https://api.test${path}`),
   getChangelogUrl: jest.fn(() => "moz-extension://unit-test/changelog/4/changelog_4.0.html"),
 }));
 
-jest.mock("../../utils", () => {
-  const actual = jest.requireActual("../../utils");
+jest.mock("../../../../common/utils", () => {
+  const actual = jest.requireActual("../../../../common/utils");
   return {
     ...actual,
     getVideoId: jest.fn(),
@@ -84,7 +84,7 @@ describe("premiumAnalytics.teaser", () => {
       },
     };
 
-    ({ getVideoId } = require("../../utils"));
+    ({ getVideoId } = require("../../../../common/utils"));
     ({
       initPremiumTeaser,
       setTeaserSuppressed,

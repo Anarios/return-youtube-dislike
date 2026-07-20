@@ -1,6 +1,6 @@
 import { analyticsState, RANGE_OPTIONS, RANGE_ANCHORS } from "./state";
 import { sanitizeCount } from "./utils";
-import { localize } from "../utils";
+import { localize } from "../../../common/utils";
 
 let callbacks = {
   onRangePreset: () => {},

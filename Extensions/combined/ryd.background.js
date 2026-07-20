@@ -1,4 +1,4 @@
-import { config, getApiUrl, getApiEndpoint, getChangelogUrl } from "./src/config";
+import { config, getApiUrl, getApiEndpoint, getChangelogUrl } from "../common/config";
 
 const apiUrl = getApiUrl();
 const voteDisabledIconName = config.voteDisabledIconName;

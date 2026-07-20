@@ -4,7 +4,7 @@ import { analyticsState } from "../state";
 import { setActivityBucketLabel } from "../panel";
 import { clampRangeToBounds, combineBounds, computeChartBounds, updateGlobalBounds } from "./time";
 import { toEpoch, sanitizeCount } from "../utils";
-import { localize } from "../../utils";
+import { localize } from "../../../../common/utils";
 import { getTextColor, getMutedTextColor, getBorderColor } from "../theme";
 import { logRangeSelection, logTimeBounds } from "../logging";
 

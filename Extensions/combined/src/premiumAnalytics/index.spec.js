@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-jest.mock("../config", () => ({
+jest.mock("../../../common/config", () => ({
   __esModule: true,
   getApiEndpoint: jest.fn((path) => `https://api.example${path}`),
 }));
@@ -75,7 +75,7 @@ const mapMocks = jest.requireMock("./map");
 const listsMocks = jest.requireMock("./lists");
 const utilsMocks = jest.requireMock("./utils");
 const loggingMocks = jest.requireMock("./logging");
-const configMocks = jest.requireMock("../config");
+const configMocks = jest.requireMock("../../../common/config");
 
 const {
   configurePanelCallbacks: mockConfigurePanelCallbacks,
@@ -115,8 +115,8 @@ const {
 } = jest.requireMock("./teaser");
 const { showTierNotice: mockShowTierNotice, hideTierNotice: mockHideTierNotice } = jest.requireMock("./tierNotice");
 
-jest.mock("../utils", () => {
-  const actual = jest.requireActual("../utils");
+jest.mock("../../../common/utils", () => {
+  const actual = jest.requireActual("../../../common/utils");
   return {
     ...actual,
     getVideoId: jest.fn(() => "video1234567"),

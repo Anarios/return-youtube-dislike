@@ -1,4 +1,4 @@
-import { localize } from "../utils";
+import { localize } from "../../../common/utils";
 
 const PATREON_UPGRADE_URL = "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649";
 

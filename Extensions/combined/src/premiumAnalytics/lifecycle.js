@@ -10,7 +10,7 @@ import {
 import { resizeActivityChart, disposeActivityChart, registerZoomSelectionListener } from "./activity";
 import { renderMap, resizeMapChart, disposeMapChart } from "./map";
 import { debounce } from "./utils";
-import { getVideoId } from "../utils";
+import { getVideoId } from "../../../common/utils";
 
 import { MS_PER_DAY, EXPANDABLE_SECTIONS } from "./constants";
 import { requestAnalytics, scheduleSelectionFetch, normalizeSelection } from "./requests";

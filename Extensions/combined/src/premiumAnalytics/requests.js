@@ -1,9 +1,9 @@
-import { getApiEndpoint } from "../config";
+import { getApiEndpoint } from "../../../common/config";
 import { analyticsState, COUNTRY_LIMIT } from "./state";
 import { ensurePanel, updateRangeButtons, updateRangeAnchorButtons, setFooterMessage, setLoadingState } from "./panel";
 import { debounce, safeJson } from "./utils";
 import { logFetchRequest } from "./logging";
-import { localize } from "../utils";
+import { localize } from "../../../common/utils";
 
 import { MS_PER_DAY } from "./constants";
 import { renderAnalytics } from "./render";

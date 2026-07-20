@@ -1,4 +1,4 @@
-import { config as appConfig, getApiUrl, getApiEndpoint } from "./src/config.js";
+import { config as appConfig, getApiUrl, getApiEndpoint } from "../common/config.js";
 
 /*   Config   */
 const config = {
