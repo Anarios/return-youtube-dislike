@@ -17,7 +17,7 @@ import {
   localize,
   createObserver,
 } from "./utils";
-import { config, getApiEndpoint } from "./config";
+import { getApiEndpoint } from "./config";
 import {
   LIKED_STATE,
   DISLIKED_STATE,
@@ -84,16 +84,6 @@ function isVideoDisliked() {
     extConfig.selectors.activeButtonClasses.some((className) => getDislikeButton().classList.contains(className)) ||
     dislikeButton?.getAttribute("aria-pressed") === "true"
   );
-}
-
-function getState(storedData) {
-  if (isVideoLiked()) {
-    return { current: LIKED_STATE, previous: storedData.previousState };
-  }
-  if (isVideoDisliked()) {
-    return { current: DISLIKED_STATE, previous: storedData.previousState };
-  }
-  return { current: NEUTRAL_STATE, previous: storedData.previousState };
 }
 
 //---   Sets The Likes And Dislikes Values   ---//
@@ -357,12 +347,8 @@ function initializeHidePremiumTeaser() {
 export {
   isMobile,
   isShorts,
-  isVideoDisliked,
-  isVideoLiked,
   isNewDesign,
   isRoundedDesign,
-  getState,
-  setState,
   setInitialState,
   setLikes,
   setDislikes,

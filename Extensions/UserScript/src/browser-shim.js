@@ -4,7 +4,7 @@
 const userConfig = {
   // ==== BEGIN USER OPTIONS ====
   // You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact.
-  disableVoteSubmission: false, // [true, false*] Unused: the userscript does not submit votes, kept only so shared code sees a consistent shape.
+  disableVoteSubmission: false, // [true, false*] Read by state.js's initExtConfig() like every other option here and copied into extConfig, but has no real effect: the userscript never submits votes, so events.js's sendVote() guard just skips an already-inert runtime.sendMessage() no-op either way.
   disableLogging: true, // [true*, false] Disable Logging API Response in JavaScript Console.
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)

@@ -114,5 +114,13 @@ function getColorFromTheme(voteIsLike) {
 }
 
 export { numberFormat, isVideoLoaded, initializeLogging, getColorFromTheme };
-export { querySelector, querySelectorAll, isInViewport, getVideoId, getNumberFormatter } from "./dom";
-export { createObserver, getBrowser, localize } from "./dom";
+export {
+  querySelector,
+  querySelectorAll,
+  isInViewport,
+  getVideoId,
+  getNumberFormatter,
+  createObserver,
+  getBrowser,
+  localize,
+} from "./dom";

@@ -421,7 +421,7 @@
   const userConfig = {
     // ==== BEGIN USER OPTIONS ====
     // You may change the following variables to allowed values listed in the corresponding brackets (* means default). Keep the style and keywords intact.
-    disableVoteSubmission: false, // [true, false*] Unused: the userscript does not submit votes, kept only so shared code sees a consistent shape.
+    disableVoteSubmission: false, // [true, false*] Read by state.js's initExtConfig() like every other option here and copied into extConfig, but has no real effect: the userscript never submits votes, so events.js's sendVote() guard just skips an already-inert runtime.sendMessage() no-op either way.
     disableLogging: true, // [true*, false] Disable Logging API Response in JavaScript Console.
     coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
     coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
@@ -486,7 +486,7 @@
   // numberFormat is wrapped to apply the userscript-only numberDisplayRoundDown
   // option (see browser-shim.js) before delegating to the real numberFormat.
   // This is the only reason a userscript-specific numberFormat needs to exist:
-  // Extensions/common/bar.js and events.js call numberFormat via their own
+  // Extensions/common/state.js and events.js call numberFormat via their own
   // `from "./utils"` import, which this alias transparently redirects here, so
   // the pre-rounding step applies without touching any shared module.
 

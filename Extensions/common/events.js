@@ -174,11 +174,4 @@ function handleHidePremiumTeaserChangeEvent(value) {
   extConfig.hidePremiumTeaser = value === true;
 }
 
-export {
-  sendVote,
-  likeClicked,
-  dislikeClicked,
-  addLikeDislikeEventListener,
-  createSmartimationObserver,
-  storageChangeHandler,
-};
+export { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler };

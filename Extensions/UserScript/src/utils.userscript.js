@@ -8,7 +8,7 @@
 // numberFormat is wrapped to apply the userscript-only numberDisplayRoundDown
 // option (see browser-shim.js) before delegating to the real numberFormat.
 // This is the only reason a userscript-specific numberFormat needs to exist:
-// Extensions/common/bar.js and events.js call numberFormat via their own
+// Extensions/common/state.js and events.js call numberFormat via their own
 // `from "./utils"` import, which this alias transparently redirects here, so
 // the pre-rounding step applies without touching any shared module.
 export {
