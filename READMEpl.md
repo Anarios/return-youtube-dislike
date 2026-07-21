@@ -85,6 +85,4 @@ Możesz wesprzeć ten projekt dotacjami poniżej:
 
 ## Sponsorzy
 
-
-
 [Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

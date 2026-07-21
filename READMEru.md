@@ -85,6 +85,4 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 ## Спонсоры
 
-
-
 [Станьте нашим спонсором](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

@@ -5,8 +5,7 @@ export default {
   home: {
     name: "Hem",
     title: "Return YouTube Dislike",
-    subtitle:
-      "Webbläsartillägg och ett API som visar antalet ogilla på Youtube",
+    subtitle: "Webbläsartillägg och ett API som visar antalet ogilla på Youtube",
     ukraine: "Stöd Ukraina",
     sponsors: "Sponsorer",
     becomeSponsor: "Bli vår sponsor",
@@ -37,8 +36,7 @@ export default {
     subtitle: "För att komma igång, välj ett avsnitt från menyn.",
     rights: {
       title: "Användningsrättigheter",
-      subtitle:
-        "Tredjepartsanvändning av detta öppna API är tillåtet med följande begränsningar:",
+      subtitle: "Tredjepartsanvändning av detta öppna API är tillåtet med följande begränsningar:",
       bullet1: "Tillskrivning: ",
       bullet1text:
         "Detta projekt bör tydligt tillskrivas med antingen en länk till denna repo eller en länk till returnyoutubedislike.com",
@@ -56,23 +54,20 @@ export default {
     },
     fetching: {
       title: "Grundläggande handledning för hämtning",
-      subtitle:
-        "Exempel för att hämta röster för ett bestämt YouTubevideo-ID: ",
+      subtitle: "Exempel för att hämta röster för ett bestämt YouTubevideo-ID: ",
       title2: "Example Request: ",
       url: "Request URL: ",
       method: "Request Method: ",
       headers: "Headers: ",
       response: "Response: ",
       error1: 'Ett ogiltigt YouTube-ID returnerar statuskoden 404 "Not Found"',
-      error2:
-        'Ett felaktigt formaterat YouTube-ID returnerar 400 "Bad Request"',
+      error2: 'Ett felaktigt formaterat YouTube-ID returnerar 400 "Bad Request"',
     },
   },
   help: {
     name: "Hjälp",
     title: "Felsökning",
-    bullet1:
-      "Se till att du har den senaste versionen av tillägget installerat, ",
+    bullet1: "Se till att du har den senaste versionen av tillägget installerat, ",
     bullet11: "just nu",
     bullet2:
       "Försök att avinstallera tillägget och installera det igen, starta sedan om webbläsaren (alla aktiva fönster, inte bara en flik)",
@@ -80,13 +75,11 @@ export default {
     bullet31: "du bör se vanlig text: ",
     bullet4: "Om inget av ovanstående hjälper - rapportera ditt problem i",
     bullet41: "i vår",
-    bullet4a:
-      "Tala om för oss ditt operativsystem, webbläsarnamn och webbläsarversion",
+    bullet4a: "Tala om för oss ditt operativsystem, webbläsarnamn och webbläsarversion",
     bullet4b:
       "Ta en skärmdump av sidan du har problem med (t.ex en youtube-videosida) med konsolfönstret öppet (tryck ",
     bullet4b1: ") - exempel på skärmdump nedan.",
-    bullet4c:
-      "Ta en skärmdump av tilläggssidan i din webbläsare med tillägg installerat.",
+    bullet4c: "Ta en skärmdump av tilläggssidan i din webbläsare med tillägg installerat.",
     bullet4c1: "För att se tilläggen skriv in detta i adressfältet: ",
     firefox: "för Firefox",
     chrome: "för Chrome, Edge, Brave, Opera och Vivaldi",
@@ -121,8 +114,7 @@ export default {
   },
   donate: {
     name: "Donera",
-    subtitle:
-      "Du kan stöda våra ansträngningar att hålla internet fritt med en donation!",
+    subtitle: "Du kan stöda våra ansträngningar att hålla internet fritt med en donation!",
     patreon: "Patreon",
     crypto: "Krypto",
   },

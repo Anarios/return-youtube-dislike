@@ -1,6 +1,5 @@
 Baca ini dibahasa lain: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [Português do Brasil](FAQpt_BRmd)
 
-
 # Pertayaan yang Sering Ditanyakan
 
 ## Sebelum bertanya di GitHub atau Discord, tolong lihat halaman ini.
@@ -16,7 +15,6 @@ Kami telah menyimpan semua data yang ada kedalam DB agar datanya tetap ada meski
 <br>
 
 ### **2. Jumlah dislike video tidak update**
-
 
 Sekarang jumlah dislike video dicache, dan tidak update selalu.
 Sekali setiap 2-3 hari, tidak lebih dari itu.

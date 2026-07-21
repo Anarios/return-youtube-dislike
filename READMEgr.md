@@ -85,6 +85,4 @@ You can view all documentation on our website.
 
 ## Χορηγοί
 
-
-
 [Γίνετε χορηγός μας](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

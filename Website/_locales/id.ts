@@ -36,8 +36,7 @@ export default {
     subtitle: "Mula-mula, pilih bagian dari menu.",
     rights: {
       title: "Hak Penggunaan",
-      subtitle:
-        "Penggunaan pada pihak ketiga terhadap API ini diizinkan dengan beberapa batasan berikut:",
+      subtitle: "Penggunaan pada pihak ketiga terhadap API ini diizinkan dengan beberapa batasan berikut:",
       bullet1: "Pereferensian: ",
       bullet1text:
         "Proyek ini harus jelas direferensikan menggunakan link ke repo ini atau ke returnyoutubedislike.com",
@@ -62,8 +61,7 @@ export default {
       headers: "Header: ",
       response: "Respon: ",
       error1: 'Akan muncul kode status 404 "Not Found" jika Youtube id tidak ditemukan',
-      error2:
-        'Akan muncul kode status 400 "Bad Request" jika Youtube id memiliki format yang salah',
+      error2: 'Akan muncul kode status 400 "Bad Request" jika Youtube id memiliki format yang salah',
     },
   },
   help: {
@@ -71,18 +69,15 @@ export default {
     title: "Troubleshooting",
     bullet1: "Pastikan kamu memiliki versi extension terbaru, ",
     bullet11: "sekarang",
-    bullet2:
-      "Coba hapus extension dan install ulang , lalu restart semua browser yang terbuka",
+    bullet2: "Coba hapus extension dan install ulang , lalu restart semua browser yang terbuka",
     bullet3: "Pastikan link berikut terbuka: ",
     bullet31: "kamu seharusnya dapat melihat teks berikut: ",
     bullet4: "Jika petunjuk sebelumnya masih belum membantu - laporkan masalah ini di",
     bullet41: "pada",
     bullet4a: "Beritahukan Sistem Operasi, Nama Browser, dan Versi Browser",
-    bullet4b:
-      "Tangkap layar halaman yang bermasalah (seperti halaman video Youtube) dengan membuka console (tekan ",
+    bullet4b: "Tangkap layar halaman yang bermasalah (seperti halaman video Youtube) dengan membuka console (tekan ",
     bullet4b1: ") - contoh tangkapan layar seperti dibawah ini.",
-    bullet4c:
-      "Tangkap layar halaman extension browser kamu dengan extension yang telah terinstall.",
+    bullet4c: "Tangkap layar halaman extension browser kamu dengan extension yang telah terinstall.",
     bullet4c1: "Untuk melihat extension, masukkan ini pada address bar: ",
     firefox: "untuk Firefox",
     chrome: "untuk Chrome, Edge, Brave, Opera, dan Vivaldi",
@@ -117,8 +112,7 @@ export default {
   },
   donate: {
     name: "Donasi",
-    subtitle:
-      "Kamu dapat mendukung effort kami dengan donasi kalian!",
+    subtitle: "Kamu dapat mendukung effort kami dengan donasi kalian!",
     patreon: "Patreon",
     crypto: "Kripto",
   },

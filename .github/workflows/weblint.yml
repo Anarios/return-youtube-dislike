@@ -4,12 +4,12 @@ name: Website Lint
 
 on:
   push:
-    branches: 
+    branches:
       - main
     paths:
       - Website/**
   pull_request:
-    branches: 
+    branches:
       - main
     paths:
       - Website/**

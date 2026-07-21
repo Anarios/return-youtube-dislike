@@ -9,7 +9,6 @@
 
 Read this in other languages: [English](README.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [български](READMEbg.md), [中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md)
 
-
 # Return YouTube Dislike
 
 <p align="center">
@@ -85,7 +84,5 @@ Du kan støtte dette projekt ved at donere til os på nedenstående link:
 [Doner](https://returnyoutubedislike.com/donate)
 
 ## Sponsorer
-
-
 
 [Bliv vores sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

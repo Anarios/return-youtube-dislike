@@ -7,10 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-
 Read this in other languages: [English](README.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [български](READMEbg.md), [中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md)
-
-
 
 # Return YouTube Dislike
 
@@ -44,15 +41,15 @@ Read this in other languages: [English](README.md), [العربية](READMEar.md
 - **Атрибуция**: Този проект трябва ясно да се атрибутира с връзка към [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Ограничение на скоростта**: Има ограничения на скоростта за клиента от 100 на минута и 10 000 на ден. Това ще върне статусен код 429, който показва, че вашето приложение трябва да се оттегли.
 
-API е достъпен на следния базов URL адрес: 
+API е достъпен на следния базов URL адрес:
 https://returnyoutubedislikeapi.com
 
-Списък на наличните крайща е достъпен тук: 
+Списък на наличните крайща е достъпен тук:
 https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### Получаване на гласове
 
-Пример за получаване на гласове за даден YouTube видео идентификатор: 
+Пример за получаване на гласове за даден YouTube видео идентификатор:
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
@@ -87,7 +84,5 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 [Дарение](https://returnyoutubedislike.com/donate)
 
 ## Спонсори
-
-
 
 [Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

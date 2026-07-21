@@ -85,6 +85,4 @@ U kunt dit project steunen door aan ons te doneren via onderstaande link:
 
 ## Sponsoren
 
-
-
 [Wordt een sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

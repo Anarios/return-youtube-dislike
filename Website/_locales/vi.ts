@@ -36,8 +36,7 @@ export default {
     subtitle: "Để bắt đầu, hãy chọn một mục trong danh sách.",
     rights: {
       title: "Quyền Sử dụng",
-      subtitle:
-        "Bên thứ ba được phép sử dụng API mở này, với các hạn chế sau:",
+      subtitle: "Bên thứ ba được phép sử dụng API mở này, với các hạn chế sau:",
       bullet1: "Ghi công: ",
       bullet1text:
         "Phải ghi công dự án này rõ ràng bằng đường dẫn tới kho mã nguồn hoặc đường dẫn tới trang returnyoutubedislike.com",
@@ -62,8 +61,7 @@ export default {
       headers: "Phần đầu: ",
       response: "Phản hồi: ",
       error1: 'Nếu ID không tồn tại, mã trạng thái 404 "Không Tìm thấy" sẽ được trả về"',
-      error2:
-        'Nếu ID có định dạng không hợp lệ, mã trạng thái 400 "Yêu cầu Không hợp lệ" sẽ được trả về',
+      error2: 'Nếu ID có định dạng không hợp lệ, mã trạng thái 400 "Yêu cầu Không hợp lệ" sẽ được trả về',
     },
   },
   help: {
@@ -74,15 +72,14 @@ export default {
     bullet2:
       "Thử gỡ bỏ và cài lại tiện ích mở rộng, rồi tắt và mở lại trình duyệt (tắt toàn bộ cửa sổ của trình duyệt, không phải tắt chỉ một thẻ)",
     bullet3: "Kiểm tra xem bạn có truy cập theo đường dẫn này được không: ",
-    bullet31: "và nếu truy cập được, kiểm tra xem bạn có thấy đoạn văn bản thô tương tự đoạn văn bản dưới đây hay không: ",
+    bullet31:
+      "và nếu truy cập được, kiểm tra xem bạn có thấy đoạn văn bản thô tương tự đoạn văn bản dưới đây hay không: ",
     bullet4: "Nếu các bước trên không khắc phục được sự cố, hãy gửi báo cáo sự cố của bạn tới kênh",
     bullet41: "trên",
     bullet4a: "Cung cấp thông tin Hệ điều hành, Tên Trình duyệt và Phiên bản Trình duyệt (xem thông tin bên dưới)",
-    bullet4b:
-      "Tại trang có sự cố (ví dụ như trang phát vi-đê-ô trên YouTube), mở bảng điều khiển (nhấn nút ",
+    bullet4b: "Tại trang có sự cố (ví dụ như trang phát vi-đê-ô trên YouTube), mở bảng điều khiển (nhấn nút ",
     bullet4b1: ") và chụp màn hình. Xem hình ví dụ ở bên dưới.",
-    bullet4c:
-      "Mở trang quản lí tiện ích mở rộng trong trình duyệt mà bạn cài tiện ích mở rộng này.",
+    bullet4c: "Mở trang quản lí tiện ích mở rộng trong trình duyệt mà bạn cài tiện ích mở rộng này.",
     bullet4c1: "Để mở trang quản lí tiện ích, nhập nội dung sau vào thanh địa chỉ: ",
     firefox: "đối với trình duyệt Firefox",
     chrome: "đối với các trình duyệt Chrome, Edge, Brave, Opera, và Vivaldi",
@@ -113,12 +110,11 @@ export default {
       'Đầu cuối sử dụng dữ liệu được lưu trữ từ thời API của YoutTube vẫn còn cung cấp số lượt "không thích", số lượt "thích"/"không thích" từ người dùng và ước tính ngoại suy. Trong tương lai gần, tiện ích sẽ cho phép các nhà sáng tạo nội dung gửi số lượt "không thích" về cho nhóm phát triển một cách dễ dàng và bảo mật và chúng tôi cũng sẽ gộp dữ liệu của ArchiveTeam (4,56 triệu vi-đê-ô) vào cơ sở dữ liệu của chúng tôi. Bạn có thể xem vi-đê-ô về chủ đề này để biết thêm thông tin.',
     bullet7: "Tại sao nút \"Không thích\" hiện nội dung 'Chủ kênh đã Tắt Đánh giá'?",
     bullet7text:
-      "Đôi khi vi-đê-ô mới được đăng tải sẽ hiển thị nút đánh giá với nội dung 'Chủ kênh đã Tắt Đánh giá' mặc dù chủ kênh không hề tắt chức năng đánh giá. Việc này là do cách thức mà tiện ích này xác định việc tắt đánh giá. Tình trạng này có thể sẽ biến mất sau vài giờ hoặc sau khi bạn đánh giá \"thích\" hay \"không thích\" vi-đê-ô này kèm theo việc tải lại trang.",
+      'Đôi khi vi-đê-ô mới được đăng tải sẽ hiển thị nút đánh giá với nội dung \'Chủ kênh đã Tắt Đánh giá\' mặc dù chủ kênh không hề tắt chức năng đánh giá. Việc này là do cách thức mà tiện ích này xác định việc tắt đánh giá. Tình trạng này có thể sẽ biến mất sau vài giờ hoặc sau khi bạn đánh giá "thích" hay "không thích" vi-đê-ô này kèm theo việc tải lại trang.',
   },
   donate: {
     name: "Quyên Góp",
-    subtitle:
-      "Bằng cách quyên góp, bạn có thể hỗ trợ nỗ lực của chúng tôi trong việc giữ cho Internet được miễn phí!",
+    subtitle: "Bằng cách quyên góp, bạn có thể hỗ trợ nỗ lực của chúng tôi trong việc giữ cho Internet được miễn phí!",
     patreon: "Patreon",
     crypto: "Tiền mã hóa",
   },

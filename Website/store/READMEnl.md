@@ -1,6 +1,5 @@
 Read this in other languages: [English](READMEen.md), [Türkçe](READMEtr.md), [Deutsch](READMEde.md), [български](READMEbg.md), [Tiếng Việt](READMEvi.md)
 
-
 # OPSLAAN
 
 **Deze map is niet vereist, u kunt deze verwijderen als u deze niet wilt gebruiken.**

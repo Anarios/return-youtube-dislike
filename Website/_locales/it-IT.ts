@@ -36,8 +36,7 @@ export default {
     subtitle: "Per iniziare, seleziona una sezione dal menu.",
     rights: {
       title: "Diritti di utilizzo",
-      subtitle:
-        "L'utilizzo di questo API da parte di terzi è consentito secondo le seguenti restrizioni",
+      subtitle: "L'utilizzo di questo API da parte di terzi è consentito secondo le seguenti restrizioni",
       bullet1: "Attribuzione: ",
       bullet1text:
         "Questo progetto deve venire chiaramente attribuito via un link a questa repo o a returnyoutubedislike.com",
@@ -62,8 +61,7 @@ export default {
       headers: "Intestazioni: ",
       response: "Risposta: ",
       error1: 'Un ID YouTube non valido restituirà un codice 404 "Not Found"',
-      error2:
-        'Un ID YouTube formattato incorrettamente restituirà 400 "Bad Request"',
+      error2: 'Un ID YouTube formattato incorrettamente restituirà 400 "Bad Request"',
     },
   },
   help: {
@@ -81,8 +79,7 @@ export default {
     bullet4b:
       "Fai uno screenshot della pagina con il problema (es. pagina video di YouTube) con la console aperta (premi ",
     bullet4b1: "), screenshot di esempio in basso.",
-    bullet4c:
-      "Fai uno screenshot della pagina delle estensioni del tuo browser con l'estensione installata.",
+    bullet4c: "Fai uno screenshot della pagina delle estensioni del tuo browser con l'estensione installata.",
     bullet4c1: "Per vedere le estensioni inserisci questo nella barra di ricerca: ",
     firefox: "per Firefox",
     chrome: "per Chrome, Edge, Brave, Opera e Vivaldi",
@@ -107,7 +104,7 @@ export default {
       "In arrivo a breve. Stiamo valutando l'utilizzo di Oauth o di un altro API in sola lettura con un'estensione limitata per permettere ai creatori di condividere la verificabilità del loro conteggio di Non mi piace.",
     bullet5: "Che dati raccogliete e come sono trattati?",
     bullet5text:
-      'L\'estensione raccoglie solo i dati strettamente necessari per funzionare in modo corretto, come l\'indirizzo IP o l\'ID del video che stai guardando. I tuoi dati non verranno mai venduti a terze parti. Se vuoi sapere di più su come gestiamo la sicurezza e la privacy dai un\'occhiata al nostro <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">security FAQ</a>.',
+      "L'estensione raccoglie solo i dati strettamente necessari per funzionare in modo corretto, come l'indirizzo IP o l'ID del video che stai guardando. I tuoi dati non verranno mai venduti a terze parti. Se vuoi sapere di più su come gestiamo la sicurezza e la privacy dai un'occhiata al nostro <a href=\"https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md\">security FAQ</a>.",
     bullet6: "Come funziona l'API/backend?",
     bullet6text:
       "Il backend utilizza dati archiviati da quando l'API di YouTube restituiva ancora il numero di Non mi piace e dati sui Mi Piace/Non mi piace estrapolati dall'utilizzo dell'estensione da parte degli utenti. Nel prossimo futuro permetteremo ai creatori di contenuti di presentare il loro numero di Non mi piace in modo semplice e sicuro e aggiungeremo i dati archiviati da ArchiveTeam (4,56 miliardi di video) al nostro database corrente. Puoi anche guardare un video a riguardo.",
@@ -117,8 +114,7 @@ export default {
   },
   donate: {
     name: "Dona",
-    subtitle:
-      "Puoi sostenere il nostro lavoro per mantenere l'internet libero con una donazione!",
+    subtitle: "Puoi sostenere il nostro lavoro per mantenere l'internet libero con una donazione!",
     patreon: "Patreon",
     crypto: "Cripto",
   },

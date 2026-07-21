@@ -27,14 +27,15 @@
 // and Extensions/UserScript/src - do not edit it directly, your changes will
 // be overwritten the next time it's rebuilt.
 (function () {
-  'use strict';
+  "use strict";
 
   function getVideoId(url) {
     const urlObject = new URL(url);
     const pathname = urlObject.pathname;
     if (pathname.startsWith("/clip")) {
-      return (document.querySelector("meta[itemprop='videoId']") || document.querySelector("meta[itemprop='identifier']"))
-        .content;
+      return (
+        document.querySelector("meta[itemprop='videoId']") || document.querySelector("meta[itemprop='identifier']")
+      ).content;
     } else {
       if (pathname.startsWith("/shorts")) {
         return pathname.slice(8);
@@ -775,11 +776,12 @@
   const isDevelopment = !manifest || !("update_url" in manifest);
 
   runtime && typeof runtime.getURL === "function"
-      ? runtime.getURL("changelog/4/changelog_4.0.html")
-      : "https://returnyoutubedislike.com/changelog/4/changelog_4.0.html";
+    ? runtime.getURL("changelog/4/changelog_4.0.html")
+    : "https://returnyoutubedislike.com/changelog/4/changelog_4.0.html";
 
   const config = {
-    apiUrl: isDevelopment ? DEV_API_URL : PROD_API_URL};
+    apiUrl: isDevelopment ? DEV_API_URL : PROD_API_URL,
+  };
 
   function getApiEndpoint(endpoint) {
     return `${config.apiUrl}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
@@ -1367,5 +1369,4 @@ ytd-menu-renderer.ytd-watch-metadata {
       await setEventListeners();
     });
   })();
-
 })();

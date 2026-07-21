@@ -5,8 +5,7 @@ export default {
   home: {
     name: "Inicio",
     title: "Return YouTube Dislike",
-    subtitle:
-      "Una extensión de navegador y una API que muestra el número de «dislikes» («No me gusta») en YouTube",
+    subtitle: "Una extensión de navegador y una API que muestra el número de «dislikes» («No me gusta») en YouTube",
     ukraine: "Apoya a Ucrania",
     sponsors: "Patrocinadores",
     becomeSponsor: "Hazte nuestro patrocinador",
@@ -37,8 +36,7 @@ export default {
     subtitle: "Para empezar, elige una sección del menú.",
     rights: {
       title: "Derechos de uso",
-      subtitle:
-        "Se permite el uso de terceros de esta API abierta bajo las siguientes restricciones: ",
+      subtitle: "Se permite el uso de terceros de esta API abierta bajo las siguientes restricciones: ",
       bullet1: "Atribución: ",
       bullet1text:
         "El proyecto debe estar claramente atribuido con un enlace a este repositorio o a returnyoutubedislike.com",
@@ -52,46 +50,37 @@ export default {
     },
     endpoints: {
       title: "«Endpoints» disponibles",
-      subtitle:
-        "La lista de los endpoints disponibles se puede consultar aquí: ",
+      subtitle: "La lista de los endpoints disponibles se puede consultar aquí: ",
     },
     fetching: {
       title: "Tutorial de consulta básica",
-      subtitle:
-        "Ejemplo para obtener los votos del ID de un vídeo de YouTube: ",
+      subtitle: "Ejemplo para obtener los votos del ID de un vídeo de YouTube: ",
       title2: "Consulta de ejemplo: ",
       url: "URL de la consulta: ",
       method: "Método de la consulta: ",
       headers: "Encabezados: ",
       response: "Respuesta: ",
-      error1:
-        'Un ID de YouTube no existente mostrará el código de estado 404 "Not Found" (no encontrado).',
-      error2:
-        'Un ID de YouTube mal estructurado mostrará el código 400 "Bad Request" (solicitud incorrecta).',
+      error1: 'Un ID de YouTube no existente mostrará el código de estado 404 "Not Found" (no encontrado).',
+      error2: 'Un ID de YouTube mal estructurado mostrará el código 400 "Bad Request" (solicitud incorrecta).',
     },
   },
   help: {
     name: "Ayuda",
     title: "Solución de problemas",
-    bullet1:
-      "Asegúrate de que tienes instalada la última versión de la extensión, ",
+    bullet1: "Asegúrate de que tienes instalada la última versión de la extensión, ",
     bullet11: "",
     bullet2:
       "Prueba a eliminar la extensión e instalarla de nuevo, después reinicia el navegador (todas las ventanas activas, no solo una pestaña)",
     bullet3: "Comprueba que puedes abrir este enlace: ",
     bullet31: "deberías ver este texto: ",
-    bullet4:
-      "Si nada de esto surte efecto, informa de tu problema (en inglés) en el canal",
+    bullet4: "Si nada de esto surte efecto, informa de tu problema (en inglés) en el canal",
     bullet41: "de nuestro",
-    bullet4a:
-      "Dinos cuáles son tu sistema operativo, el nombre y la versión de tu navegador",
+    bullet4a: "Dinos cuáles son tu sistema operativo, el nombre y la versión de tu navegador",
     bullet4b:
       "Haz una captura de pantalla de la página que contenga el problema (como una página de un vídeo de YouTube) con la consola abierta (pulsa ",
     bullet4b1: "). Aquí puedes ver una captura de pantalla de ejemplo:",
-    bullet4c:
-      "Haz una captura de la página de extensiones de tu navegador con la extensión instalada.",
-    bullet4c1:
-      "Para ver las extensiones, escribe el siguiente texto en la barra de dirección: ",
+    bullet4c: "Haz una captura de la página de extensiones de tu navegador con la extensión instalada.",
+    bullet4c1: "Para ver las extensiones, escribe el siguiente texto en la barra de dirección: ",
     firefox: "para Firefox",
     chrome: "para Chrome, Edge, Brave, Opera, Vivaldi",
     detected: "Detectado:",
@@ -100,8 +89,7 @@ export default {
   faq: {
     name: "Preguntas",
     title: "Preguntas más frecuentes",
-    subtitle:
-      "¿Sigues teniendo problemas? ¡Pásate por nuestro servidor de Discord (en inglés)!",
+    subtitle: "¿Sigues teniendo problemas? ¡Pásate por nuestro servidor de Discord (en inglés)!",
     bullet1: "¿De dónde obtiene sus datos la extensión?",
     bullet1text:
       "De una combinación de datos archivados antes de que la API oficial de «dislikes» de YouTube se apagase, extrapolada con las acciones realizadas por los usuarios de la extensión.",
@@ -126,8 +114,7 @@ export default {
   },
   donate: {
     name: "Donar",
-    subtitle:
-      "¡Puedes apoyar nuestros esfuerzos para que Internet siga siendo con un donativo!",
+    subtitle: "¡Puedes apoyar nuestros esfuerzos para que Internet siga siendo con un donativo!",
     patreon: "Patreon",
     crypto: "Cripto",
   },

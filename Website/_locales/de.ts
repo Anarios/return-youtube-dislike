@@ -76,8 +76,7 @@ export default {
     bullet4: "Wenn nichts von den oben gesagten Lösungen hilft - melde das Problem in",
     bullet41: "in unserem",
     bullet4a: "Gib uns den Namen deines Betriebssystems, deines Browsers und die Version des Browsers ",
-    bullet4b:
-      "Mache einen Screenshot der Seite mit dem Problem (von der YouTube-Seite) mit der Konsole offen (drücke ",
+    bullet4b: "Mache einen Screenshot der Seite mit dem Problem (von der YouTube-Seite) mit der Konsole offen (drücke ",
     bullet4b1: ") - wie in dem Screenshot unten.",
     bullet4c: "Mache ein Screenshot von deinen installierten Erweiterungen in deinem Browser.",
     bullet4c1: "Um diese Seite zu sehen, gib das in dei Adressleiste ein: ",

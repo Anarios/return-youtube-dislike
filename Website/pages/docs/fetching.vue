@@ -7,27 +7,16 @@
     <div class="ma-2">
       {{ $vuetify.lang.t("$vuetify.api.fetching.subtitle") }}
 
-      <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank">
-        kxOuG8jMIgI
-      </a>
+      <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank"> kxOuG8jMIgI </a>
     </div>
 
     <h3 class="mt-6">{{ $vuetify.lang.t("$vuetify.api.fetching.title2") }}</h3>
     <div class="ma-2">
       {{ $vuetify.lang.t("$vuetify.api.fetching.url") }}
-      <a
-        :href="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
-        target="_blank"
-        v-text="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
-      />
+      <a :href="apiUrl + '/votes?videoId=kxOuG8jMIgI'" target="_blank" v-text="apiUrl + '/votes?videoId=kxOuG8jMIgI'" />
       <br />
       {{ $vuetify.lang.t("$vuetify.api.fetching.method") }}
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET"
-        target="_blank"
-      >
-        HTTP/GET
-      </a>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET" target="_blank"> HTTP/GET </a>
     </div>
     <div class="mt-4 ml-2">
       {{ $vuetify.lang.t("$vuetify.api.fetching.headers") }}

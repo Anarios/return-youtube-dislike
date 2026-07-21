@@ -27,9 +27,8 @@
         {{ $vuetify.lang.t("$vuetify.help.bullet31") }}
         <br />
         <span style="color: #eee">
-          {"id":"QOFEgexls14", "dateCreated":"2021-12-15T16:54:12.250813Z",
-          "likes":2907, "dislikes":215, "rating":4.725641025641026,
-          "viewCount":28222, "deleted":false}
+          {"id":"QOFEgexls14", "dateCreated":"2021-12-15T16:54:12.250813Z", "likes":2907, "dislikes":215,
+          "rating":4.725641025641026, "viewCount":28222, "deleted":false}
         </span>
       </li>
       <li>
@@ -66,9 +65,7 @@
               target="_blank"
               @click="copyToClipboard(platform)"
             >
-              <v-icon size=".75rem" color="primary" style="margin-right: 0.5em"
-                >mdi-content-copy</v-icon
-              >
+              <v-icon size=".75rem" color="primary" style="margin-right: 0.5em">mdi-content-copy</v-icon>
               <span style="color: #f44"> {{ $vuetify.lang.t("$vuetify.help.detected") }} </span>
               &nbsp;
               {{ platform }}
@@ -113,9 +110,7 @@ export default {
     let routes = ["index", "install", "docs", "help", "faq", "donate", "links"];
     if (routes.indexOf(to.name) < 0) return "swoop-out";
     if (routes.indexOf(from.name) < 0) return "swoop-in";
-    return routes.indexOf(to.name) > routes.indexOf(from.name)
-      ? "swoop-left"
-      : "swoop-right";
+    return routes.indexOf(to.name) > routes.indexOf(from.name) ? "swoop-left" : "swoop-right";
   },
   data() {
     return {

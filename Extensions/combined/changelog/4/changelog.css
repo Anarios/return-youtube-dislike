@@ -15,7 +15,12 @@
   --ryd-radius-md: 24px;
   --ryd-radius-sm: 16px;
   --ryd-gap: clamp(1.75rem, 4vw, 2.5rem);
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Inter",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 body {
@@ -31,7 +36,12 @@ body {
 
 .ryd-changelog {
   width: min(100%, 1040px);
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.92) 70%, rgba(15, 23, 42, 0.98) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.9) 0%,
+    rgba(15, 23, 42, 0.92) 70%,
+    rgba(15, 23, 42, 0.98) 100%
+  );
   border-radius: var(--ryd-radius-lg);
   border: 1px solid rgba(148, 163, 184, 0.2);
   box-shadow: var(--ryd-shadow);
@@ -150,7 +160,10 @@ body {
   font-weight: 600;
   letter-spacing: 0.01em;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
 .ryd-button:focus-visible {

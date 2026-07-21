@@ -9,8 +9,7 @@
           <v-card-text style="height: 80px">
             {{ card.address }}
           </v-card-text>
-          <v-img :src="card.img" :contain="true" height="400px" position="top">
-          </v-img>
+          <v-img :src="card.img" :contain="true" height="400px" position="top"> </v-img>
         </v-card>
       </v-col>
     </v-row>

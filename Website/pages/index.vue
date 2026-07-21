@@ -99,7 +99,7 @@ export default {
           .then((resp) => resp.json())
           .then(
             (data) =>
-              (document.getElementById("output").innerText = "Likes=" + data.likes + " Dislikes=" + data.dislikes)
+              (document.getElementById("output").innerText = "Likes=" + data.likes + " Dislikes=" + data.dislikes),
           );
       }
     };
@@ -130,7 +130,9 @@ input {
   stroke: #f44;
   transition-property: opacity, transform;
   transform: scale(0) rotate(180deg);
-  animation: popin 1s 0.3s ease-in-out 1 forwards, tap 0.3s 1.7s ease-in-out 1 forwards;
+  animation:
+    popin 1s 0.3s ease-in-out 1 forwards,
+    tap 0.3s 1.7s ease-in-out 1 forwards;
 }
 
 #plarrow {

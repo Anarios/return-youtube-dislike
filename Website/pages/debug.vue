@@ -4,59 +4,33 @@
       <v-stepper-header>
         <v-stepper-step step="1" :complete="steps.one">Setup</v-stepper-step>
         <v-divider />
-        <v-stepper-step step="2" :complete="steps.two"
-          >Extension Status</v-stepper-step
-        >
+        <v-stepper-step step="2" :complete="steps.two">Extension Status</v-stepper-step>
         <v-divider />
-        <v-stepper-step step="3" :complete="steps.three"
-          >Server Connection</v-stepper-step
-        >
+        <v-stepper-step step="3" :complete="steps.three">Server Connection</v-stepper-step>
         <v-divider />
-        <v-stepper-step step="4" :complete="steps.four"
-          >Browser Support</v-stepper-step
-        >
+        <v-stepper-step step="4" :complete="steps.four">Browser Support</v-stepper-step>
         <v-divider />
         <v-stepper-step step="5" :complete="steps.five">Report</v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-content step="1">
         <h1>Getting Ready...</h1>
-        <v-progress-circular
-          indeterminate
-          size="50"
-          width="5"
-          color="primary"
-        />
+        <v-progress-circular indeterminate size="50" width="5" color="primary" />
       </v-stepper-content>
 
       <v-stepper-content step="2">
         <h1>Ensuring the Extension is Running...</h1>
-        <v-progress-circular
-          indeterminate
-          size="50"
-          width="5"
-          color="primary"
-        />
+        <v-progress-circular indeterminate size="50" width="5" color="primary" />
       </v-stepper-content>
 
       <v-stepper-content step="3">
         <h1>Testing Server Connection...</h1>
-        <v-progress-circular
-          indeterminate
-          size="50"
-          width="5"
-          color="primary"
-        />
+        <v-progress-circular indeterminate size="50" width="5" color="primary" />
       </v-stepper-content>
 
       <v-stepper-content step="4">
         <h1>Checking Browser Information...</h1>
-        <v-progress-circular
-          indeterminate
-          size="50"
-          width="5"
-          color="primary"
-        />
+        <v-progress-circular indeterminate size="50" width="5" color="primary" />
       </v-stepper-content>
 
       <v-stepper-content step="5" style="text-align: left">
@@ -64,12 +38,7 @@
           <h1>Browser</h1>
           <v-divider style="transform: translateY(1.5em)" />
         </div>
-        <v-alert
-          dense
-          outlined
-          :type="notices.browser.type"
-          v-text="notices.browser.text"
-        />
+        <v-alert dense outlined :type="notices.browser.type" v-text="notices.browser.text" />
         <span><b>BROWSER-</b> {{ userInformation.browser.name }}</span
         ><br />
         <span><b>VENDOR-</b> {{ userInformation.browser.vendor }} </span><br />
@@ -80,12 +49,7 @@
           <h1>System</h1>
           <v-divider style="transform: translateY(1.5em)" />
         </div>
-        <v-alert
-          dense
-          outlined
-          :type="notices.system.type"
-          v-text="notices.system.text"
-        />
+        <v-alert dense outlined :type="notices.system.type" v-text="notices.system.text" />
         <span><b>OS-</b> {{ userInformation.system.os }}</span
         ><br />
         <span><b>VERSION-</b> {{ userInformation.system.version }} </span><br />
@@ -96,26 +60,14 @@
           <h1>Extension</h1>
           <v-divider style="transform: translateY(1.5em)" />
         </div>
-        <v-alert
-          dense
-          outlined
-          :type="notices.extension.type"
-          v-text="notices.extension.text"
-        />
+        <v-alert dense outlined :type="notices.extension.type" v-text="notices.extension.text" />
         <span
           ><b>LATEST EXTENSION VERSION-</b>
-          {{
-            userInformation.extension.latestExtensionVersion ||
-            "Failed to lookup data"
-          }}</span
+          {{ userInformation.extension.latestExtensionVersion || "Failed to lookup data" }}</span
         ><br />
         <span
           ><b>SERVER CONNECTION-</b>
-          {{
-            userInformation.extension.serverConnection
-              ? "Working"
-              : "Failed to connect"
-          }}</span
+          {{ userInformation.extension.serverConnection ? "Working" : "Failed to connect" }}</span
         ><br />
       </v-stepper-content>
     </v-stepper>

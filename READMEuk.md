@@ -85,6 +85,4 @@ YouTube ID у невірному форматі видасть код помил
 
 ## Спонсори
 
-
-
 [Станьте нашим спонсором](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

@@ -21,9 +21,11 @@ Backend yalnız müvəqqəti yaddaşda (RAM) haşiyələnməmiş IP ünvanların
 ### OAuth vasitəsilə YouTube hesabıma daxil olmaq haqqında bəzi mübahisələr eşitdim!
 
 Bu xüsusiyyət istəyə bağlı olacaq və çox üstünlük təşkil edəcək. Əgər siz YouTube yaradıcısısınızsa və bəyənmədiyiniz statistikanı bizimlə bölüşmək istəyirsinizsə, bunu edə bilərsiniz. [OAuth](https://en.wikipedia.org/wiki/OAuth#:~:text=but%20without%20giving%20them%20the%20passwords.) Qurulma şəkli, əslində çox təhlükəsizdir. İstənilən vaxt hesabınıza girişi ləğv edə və bizə çox xüsusi icazələr verə bilərsiniz. Biz heç bir lazımsız icazə istəməyəcəyik. Biz yalnız video statistikanıza baxmaq üçün icazə istəyəcəyik.
+
 ### Bu sayda bəyənməmələrə necə etibar edə bilərəm??
 
 Biz bot hücumlarının qarşısını almaq üçün tədbirlər gördük və anti-bot sisteminin effektivliyini artırmaq üçün işi davam etdirəcəyik: bu, bəyənməmələrin sayını real rəqəmin yaxşı nümayəndəsi kimi saxlamağa kömək edəcək. Əlbəttə ki, bu, heç vaxt 100% dəqiq olmayacaq, ona görə də hesaba etibar edib etməmək sizə bağlıdır.
 
 ### Niyə backend kodunu paylaşmırsınız?
+
 Biz bunu nə vaxtsa paylaşacağıq - lakin hazırda paylaşmaq üçün həqiqətən heç bir səbəb yoxdur. Bu, yanlış təhlükəsizlik hissi verə bilər - çünki sıfır inamlı sistemdə biz bir versiyanı ifşa edə, digərini yerləşdirə bilərik. Kodu gizli saxlamağın bir çox səbəbi var, xüsusən də spamla necə mübarizə aparırıq. Spam emalı kodunu ört-basdır etmək/gizlətmək olduqca standart təcrübədir.

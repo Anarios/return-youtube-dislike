@@ -5,8 +5,7 @@ export default {
   home: {
     name: "Ana Sayfa",
     title: "YouTube Dislike Sayısını Geri Getir",
-    subtitle:
-      "YouTube'daki dislike sayılarınızı geri getiren bir tarayıcı uzantısı ve API",
+    subtitle: "YouTube'daki dislike sayılarınızı geri getiren bir tarayıcı uzantısı ve API",
     ukraine: "Ukrayna'ya Destek Ol",
     sponsors: "Sponsorlar",
     becomeSponsor: "Sponsorumuz olun",
@@ -16,11 +15,9 @@ export default {
     title: "Platformunuzu Seçin",
     subtitle: "Firefox ve bütün Chromium tabanlı tarayıcılarda kullanılabilir",
     title2: "Diğer Platformlar",
-    subtitle2:
-      "Tarayıcınız henüz desteklenmiyorsa UserScript yöntemini deneyin",
+    subtitle2: "Tarayıcınız henüz desteklenmiyorsa UserScript yöntemini deneyin",
     title3: "Üçüncü Parti Uygulamalar",
-    subtitle3:
-      "Riski tamamen size aittir, bizim tarafımızda sorumluluk kabul edilmemektedir",
+    subtitle3: "Riski tamamen size aittir, bizim tarafımızda sorumluluk kabul edilmemektedir",
     firefox: "Firefox",
     chrome: "Chrome",
     edge: "Edge",
@@ -39,8 +36,7 @@ export default {
     subtitle: "Başlamak için menüden bir bölüm seçin.",
     rights: {
       title: "Kullanım Hakları",
-      subtitle:
-        "Herkese açık API'nin üçüncü parti kişilerin kullanımında aşağıdaki kısıtlamalara izin verir:",
+      subtitle: "Herkese açık API'nin üçüncü parti kişilerin kullanımında aşağıdaki kısıtlamalara izin verir:",
       bullet1: "Atıf: ",
       bullet1text:
         "Bu proje, bu depoya ya da returnyoutubedislike.com sitesine bir bağlantı ile açıkça atfedilmelidir.",
@@ -58,16 +54,14 @@ export default {
     },
     fetching: {
       title: "Temel Veri Alma Eğitimi",
-      subtitle:
-        "Belirli bir YouTube ID'sinin oylamalarını elde etmek için bir örnek: ",
+      subtitle: "Belirli bir YouTube ID'sinin oylamalarını elde etmek için bir örnek: ",
       title2: "Örnek İstek: ",
       url: "İstek URL'si: ",
       method: "İstek Yöntemi: ",
       headers: "Header'lar: ",
       response: "Sonuç: ",
       error1: 'Geçersiz bir YouTube ID\'si, 404 "Not Found" olarak döndürülür.',
-      error2:
-        'Yanlış biçimlendirilmiş bir YouTube ID\'si, 400 "Bad Request" olarak döndürülür.',
+      error2: 'Yanlış biçimlendirilmiş bir YouTube ID\'si, 400 "Bad Request" olarak döndürülür.',
     },
   },
   help: {
@@ -80,15 +74,12 @@ export default {
     bullet3: "Şu bağlantıyı açtığınızdan emin olun: ",
     bullet31: "şöyle bir düz metin görmelisiniz: ",
     bullet4: "Yukarıdakiler yardımcı olmadıysa - Discord sunucumuzdaki ",
-    bullet41:
-      " kanalından problemi bildirin (İngilizce bir şekilde) Discord sunucumuz: ",
-    bullet4a:
-      "Bize İşletim Sisteminizi, Tarayıcı Adınızı ve Tarayıcı Sürümünüzü söyleyin",
+    bullet41: " kanalından problemi bildirin (İngilizce bir şekilde) Discord sunucumuz: ",
+    bullet4a: "Bize İşletim Sisteminizi, Tarayıcı Adınızı ve Tarayıcı Sürümünüzü söyleyin",
     bullet4b: "Konsol açıkken (açmak için ",
     bullet4b1:
       " tuşuna basın) sorunu yaşadığınız sayfanın ekran görüntüsünü alın (yani YouTube watch sayfasının) - Ekran görüntüsü örneği aşağıdadır.",
-    bullet4c:
-      "Uzantı yüklüyken tarayıcınızın uzantılar sayfasının ekran görüntüsünü alın.",
+    bullet4c: "Uzantı yüklüyken tarayıcınızın uzantılar sayfasının ekran görüntüsünü alın.",
     bullet4c1: "Uzantıları görmek için şu linki adres çubuğuna yapıştırın: ",
     firefox: "(Firefox için)",
     chrome: "(Chrome, Edge, Brave, Opera ve Vivaldi için)",
@@ -98,8 +89,7 @@ export default {
   faq: {
     name: "SSS",
     title: "Sıkça Sorulan Sorular",
-    subtitle:
-      "Hâlâ sorun mu yaşıyorsunuz? Discord sunucumuza katılmaktan çekinmeyin! (İngilizce)",
+    subtitle: "Hâlâ sorun mu yaşıyorsunuz? Discord sunucumuza katılmaktan çekinmeyin! (İngilizce)",
     bullet1: "Uzantı, verileri nereden alıyor?",
     bullet1text:
       "Resmî YouTube dislike sayısı API'si kapatılmadan önceki arşivlenmiş verilerden ve tahmin edilen uzantı kullanıcısı davranışının bir birleşimiyle.",
@@ -124,8 +114,7 @@ export default {
   },
   donate: {
     name: "Bağış Yap",
-    subtitle:
-      "İnterneti özgür bırakma çabamızda bize bağışınızla destek olabilirsiniz!",
+    subtitle: "İnterneti özgür bırakma çabamızda bize bağışınızla destek olabilirsiniz!",
     patreon: "Patreon",
     crypto: "Kripto",
   },

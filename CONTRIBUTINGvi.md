@@ -1,6 +1,5 @@
 Read this in other languages: [English](CONTRIBUTING.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [български](CONTRIBUTINGbg.md), [中文](CONTRIBUTINGcn.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md)
 
-
 # Chào mừng tới Hướng dẫn Đóng góp của Return YouTube Dislike (Trả lại số lượt Không thích trên YouTube) <!-- # Welcome To Return YouTube Dislikes contributing guide -->
 
 Cảm ơn bạn đã dành thời gian để đóng góp cho dự án của chúng tôi! Tất cả các thay đổi của bạn sẽ được hiển thị trong phiên bản tiếp theo của tiện ích mở rộng này (hoặc của [trang mạng](https://www.returnyoutubedislike.com/)).

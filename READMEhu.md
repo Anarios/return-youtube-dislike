@@ -37,8 +37,8 @@ Többet is megtudhatsz a weboldalunkon: [returnyoutubedislike.com](https://www.r
 
 Ennek az API-nak a third-party felhasználását az alábbiak mellett engedélyezzük:
 
--   **Forrásmegjelölés**: Egy erre a projektre mutató, jól látható [returnyoutubedislike.com](https://returnyoutubedislike.com/) linkkel.
--   **Rate Limiting**: Kliensoldalon gyakoriság-korlátozás van beállítva percenként 100, naponta maximum 10 000 lekérésre. Túllépés esetén _429_ státuszkód jelzi, hogy az alkalmazásod nem küldhet több lekérést.
+- **Forrásmegjelölés**: Egy erre a projektre mutató, jól látható [returnyoutubedislike.com](https://returnyoutubedislike.com/) linkkel.
+- **Rate Limiting**: Kliensoldalon gyakoriság-korlátozás van beállítva percenként 100, naponta maximum 10 000 lekérésre. Túllépés esetén _429_ státuszkód jelzi, hogy az alkalmazásod nem küldhet több lekérést.
 
 Az API ezen az URL-en érhető el:
 https://returnyoutubedislikeapi.com
@@ -53,13 +53,13 @@ Példa egy adott YouTube videó ID adatainak lekéréséhez:
 
 ```json
 {
-    "id": "kxOuG8jMIgI",
-    "dateCreated": "2021-12-20T12:25:54.418014Z",
-    "likes": 27326,
-    "dislikes": 498153,
-    "rating": 1.212014408444885,
-    "viewCount": 3149885,
-    "deleted": false
+  "id": "kxOuG8jMIgI",
+  "dateCreated": "2021-12-20T12:25:54.418014Z",
+  "likes": 27326,
+  "dislikes": 498153,
+  "rating": 1.212014408444885,
+  "viewCount": 3149885,
+  "deleted": false
 }
 ```
 
@@ -82,7 +82,5 @@ Támogathatod ezt a projektet adományokkal az alábbi linken:
 [Támogatás](https://returnyoutubedislike.com/donate)
 
 ## Szponzorok
-
-
 
 [Legyél szponzorunk!](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

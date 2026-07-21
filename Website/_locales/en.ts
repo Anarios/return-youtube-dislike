@@ -36,8 +36,7 @@ export default {
     subtitle: "To get started, select a section from the menu.",
     rights: {
       title: "Usage Rights",
-      subtitle:
-        "Third party use of this open API is allowed with the following restrictions:",
+      subtitle: "Third party use of this open API is allowed with the following restrictions:",
       bullet1: "Attribution: ",
       bullet1text:
         "This project should be clearly attributed with either a link to this repo or a link to returnyoutubedislike.com",
@@ -62,8 +61,7 @@ export default {
       headers: "Headers: ",
       response: "Response: ",
       error1: 'An invalid YouTube ID will return status code 404 "Not Found"',
-      error2:
-        'An incorrectly formatted YouTube ID will return 400 "Bad Request"',
+      error2: 'An incorrectly formatted YouTube ID will return 400 "Bad Request"',
     },
   },
   help: {
@@ -78,11 +76,9 @@ export default {
     bullet4: "If nothing of above helps - report your problem in",
     bullet41: "in our",
     bullet4a: "Tell us your Operating System, Browser Name and Browser Version",
-    bullet4b:
-      "Take a screenshot of the page with the problem (i.e. Youtube video page) with the console open (press ",
+    bullet4b: "Take a screenshot of the page with the problem (i.e. Youtube video page) with the console open (press ",
     bullet4b1: ") - example screenshot below.",
-    bullet4c:
-      "Take a screenshot of the extensions page of your browser with the extension installed.",
+    bullet4c: "Take a screenshot of the extensions page of your browser with the extension installed.",
     bullet4c1: "To see extensions put this into address bar: ",
     firefox: "for Firefox",
     chrome: "for Chrome, Edge, Brave, Opera, and Vivaldi",
@@ -117,8 +113,7 @@ export default {
   },
   donate: {
     name: "Donate",
-    subtitle:
-      "You can support our efforts to keep the internet free with a donation!",
+    subtitle: "You can support our efforts to keep the internet free with a donation!",
     patreon: "Patreon",
     crypto: "Crypto",
   },

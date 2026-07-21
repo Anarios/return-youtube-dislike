@@ -52,7 +52,7 @@ class MirrorJsOutputsPlugin {
           await Promise.all(
             existingFiles
               .filter((file) => file.endsWith(".js"))
-              .map((file) => fsp.rm(path.join(targetDir, file), { force: true }))
+              .map((file) => fsp.rm(path.join(targetDir, file), { force: true })),
           );
 
           await Promise.all(

@@ -1,6 +1,5 @@
 以其他语言阅读: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [Português do Brasil](FAQpt_BRmd)
 
-
 # 常见问题
 
 ## 在 GitHub 或 Discord 上提问之前，请先参阅此内容.

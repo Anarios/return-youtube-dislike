@@ -85,6 +85,4 @@ Du kan stödja detta projekt genom att donera till oss på länken nedan:
 
 ## Sponsorer <!-- Sponsors -->
 
-
-
 [Stöd oss på Patreon](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

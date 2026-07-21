@@ -85,6 +85,4 @@ Puedes apoyar este proyecto enviando un donativo a través del siguiente enlace:
 
 ## Patrocinadores
 
-
-
 [Patrocínanos](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

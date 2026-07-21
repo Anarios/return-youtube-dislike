@@ -72,7 +72,9 @@ ytd-menu-renderer.ytd-watch-metadata {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
   font-family: Roboto, Arial, sans-serif;
   position: relative;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .ryd-premium-analytics::before {
@@ -111,7 +113,11 @@ ytd-menu-renderer.ytd-watch-metadata {
   color: var(--yt-spec-text-primary, #ffffff);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
   font-family: Roboto, Arial, sans-serif;
-  transition: box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease, padding 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    padding 0.2s ease;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -179,7 +185,9 @@ ytd-menu-renderer.ytd-watch-metadata {
   font-weight: 600;
   font-size: 13px;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .ryd-premium-tier-notice__cta:hover {
@@ -238,7 +246,9 @@ ytd-menu-renderer.ytd-watch-metadata {
   background: rgba(148, 163, 184, 0.16);
   color: var(--yt-spec-text-secondary, #94a3b8);
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   align-self: center;
   margin: 8px auto 0;
   order: 3;
@@ -279,7 +289,9 @@ ytd-menu-renderer.ytd-watch-metadata {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   position: absolute;
   top: 0;
   right: 0;
@@ -356,7 +368,10 @@ ytd-menu-renderer.ytd-watch-metadata {
   border-radius: 999px;
   padding: 8px 18px;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ryd-premium-teaser__cta:hover {
@@ -431,7 +446,10 @@ html[dark] .ryd-premium-teaser__toggle:focus-visible {
   padding: 6px 12px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ryd-analytics__ranges button.is-active,
@@ -517,7 +535,9 @@ html[dark] .ryd-analytics__window-hint {
   flex-direction: column;
   gap: 12px;
   position: relative;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .ryd-analytics__section-header {
@@ -542,7 +562,11 @@ html[dark] .ryd-analytics__window-hint {
   padding: 4px 12px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .ryd-analytics__section-expand.is-active,
@@ -619,7 +643,10 @@ html[dark] .ryd-analytics__section-expand:hover {
   padding: 6px 14px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ryd-analytics__map-reset:hover {

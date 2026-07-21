@@ -1,6 +1,5 @@
 Read this in other languages: [English](CONTRIBUTING.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [български](CONTRIBUTINGbg.md), [中文](CONTRIBUTINGcn.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md)
 
-
 # Welcome To Return YouTube Dislikes contributing guide
 
 Σας ευχαριστούμε που αφιερώσατε χρόνο για να συνεισφέρετε στο έργο μας! Όλες οι αλλαγές σας θα εμφανιστούν στην επόμενη έκδοση της επέκτασης (ή στην [ιστοσελίδα](https://www.returnyoutubedislike.com/)).
@@ -18,7 +17,7 @@ Read this in other languages: [English](CONTRIBUTING.md), [العربية](CONTR
 - node: 12.18.4
 - npm: 6.14.6
 
-Για να δημιουργήσετε το `bundled-content-script.js` που περιέχει το περισσότερο business logic αυτής της επέκτασης πρέπει να εγκαταστήσετε όλα τα  dependencies πρώτα.
+Για να δημιουργήσετε το `bundled-content-script.js` που περιέχει το περισσότερο business logic αυτής της επέκτασης πρέπει να εγκαταστήσετε όλα τα dependencies πρώτα.
 
 1. Πηγαίντε στη ρίζα (root) του repo και εκτελέστε:
 

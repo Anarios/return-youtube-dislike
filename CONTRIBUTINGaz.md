@@ -14,8 +14,8 @@ Layihənin paketlənmiş versiyasını yaratmaq üçün node və npm quraşdır�
 
 Quraşdırma zamanı istifadə olunan versiyalar:
 
-- node: 12.18.4  
-- npm: 6.14.6  
+- node: 12.18.4
+- npm: 6.14.6
 
 Bu uzantının əsas məntiqini ehtiva edən `bundled-content-script.js` faylını yaratmaq üçün əvvəlcə bütün asılılıqları quraşdırmalısınız.
 
@@ -61,8 +61,11 @@ Tətbiq edə biləcəyinizi düşündüyünüz bir xüsusiyyət tapsanız, çək
 
 ### Hansı PR növlərini qəbul edirik?
 
-- Problem həlləri.  
-- Xüsusiyyət tətbiqləri.  
-- Yazı səhvləri və ya daha aydın ifadələr.  
+- Problem həlləri.
+- Xüsusiyyət tətbiqləri.
+- Yazı səhvləri və ya daha aydın ifadələr.
 - Sayt qatqıları.
+
+```
+
 ```

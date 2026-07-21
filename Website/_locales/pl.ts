@@ -5,8 +5,7 @@ export default {
   home: {
     name: "Strona główna",
     title: "Return YouTube Dislike",
-    subtitle:
-      "Rozszerzenie do przeglądarki i API pokazujące ilość łapek w dół na YouTube",
+    subtitle: "Rozszerzenie do przeglądarki i API pokazujące ilość łapek w dół na YouTube",
     ukraine: "Wesprzyj Ukrainę",
     sponsors: "Sponsorzy",
     becomeSponsor: "Zostań naszym sponsorem",
@@ -16,11 +15,9 @@ export default {
     title: "Wybierz swoją platformę",
     subtitle: "Dostępne dla Firefox i wszystkich przeglądarek Chromium",
     title2: "Inne platformy",
-    subtitle2:
-      "Jeżeli twoja przeglądarka nie jest wspierana, wypróbuj ten UserScript",
+    subtitle2: "Jeżeli twoja przeglądarka nie jest wspierana, wypróbuj ten UserScript",
     title3: "Implementacje od stron trzecich",
-    subtitle3:
-      "Nie ponosimy za nie odpowiedzialności, używasz na własne ryzyko",
+    subtitle3: "Nie ponosimy za nie odpowiedzialności, używasz na własne ryzyko",
     firefox: "Firefox",
     chrome: "Chrome",
     edge: "Edge",
@@ -39,8 +36,7 @@ export default {
     subtitle: "Aby rozpocząć, wybierz sekcję z menu.",
     rights: {
       title: "Prawa do użytku",
-      subtitle:
-        "Używanie tego otwartego API jest dozwolone z następującymi ograniczeniami:",
+      subtitle: "Używanie tego otwartego API jest dozwolone z następującymi ograniczeniami:",
       bullet1: "Przypisanie: ",
       bullet1text:
         "Ten projekt powinien być widocznie przypisany autorom za pomocą linku do tego repozytorium, albo do returnyoutubedislike.com",
@@ -58,23 +54,20 @@ export default {
     },
     fetching: {
       title: "Poradnik - Podstawowe pobieranie",
-      subtitle:
-        "Przykład pozwalający otrzymać głosy z danego ID filmu na YouTube: ",
+      subtitle: "Przykład pozwalający otrzymać głosy z danego ID filmu na YouTube: ",
       title2: "Przykładowe żądanie: ",
       url: "URL żądania: ",
       method: "Metoda żądania: ",
       headers: "Nagłówki: ",
       response: "Odpowiedź: ",
       error1: 'Nieprawidłowy ID filmu zwróci kod 404 "Not Found"',
-      error2:
-        'Nieprawidłowo sformatowany ID filmu zwróci kod 400 "Bad Request"',
+      error2: 'Nieprawidłowo sformatowany ID filmu zwróci kod 400 "Bad Request"',
     },
   },
   help: {
     name: "Pomoc",
     title: "Rozwiązywanie problemów",
-    bullet1:
-      "Upewnij się, że masz zainstalowaną najnowszą wersję rozszerzenia, ",
+    bullet1: "Upewnij się, że masz zainstalowaną najnowszą wersję rozszerzenia, ",
     bullet11: "obecnie.",
     bullet2:
       "Spróbuj usunąć rozszerzenie i zainstalować je ponownie, a następnie zrestartować przeglądarkę (wszystkie aktywne okna, nie tylko jedną kartę)",
@@ -82,13 +75,10 @@ export default {
     bullet31: "powinno się wyświetlić w czystym tekście: ",
     bullet4: "Jeśli nic powyżej nie pomoże - zgłoś problem na",
     bullet41: "na naszym",
-    bullet4a:
-      "Powiedz z jakiego systemu operacyjnego korzystasz, oraz podaj nazwę i wersję przeglądarki",
-    bullet4b:
-      "Wykonaj zrzut ekranu problematycznej strony (tj. strony filmu na YouTube) z otwartą konsolą (naciśnij ",
+    bullet4a: "Powiedz z jakiego systemu operacyjnego korzystasz, oraz podaj nazwę i wersję przeglądarki",
+    bullet4b: "Wykonaj zrzut ekranu problematycznej strony (tj. strony filmu na YouTube) z otwartą konsolą (naciśnij ",
     bullet4b1: ") - przykładowy zrzut poniżej.",
-    bullet4c:
-      "Wykonaj zrzut ekranu strony z rozszerzeniami Twojej przeglądarki, wraz z zainstalowanym rozszerzeniem.",
+    bullet4c: "Wykonaj zrzut ekranu strony z rozszerzeniami Twojej przeglądarki, wraz z zainstalowanym rozszerzeniem.",
     bullet4c1: "Aby zobaczyć rozszerzenia, wklej do paska adresowego: ",
     firefox: "dla Firefox",
     chrome: "dla Chrome, Edge, Brave, Opera oraz Vivaldi",
@@ -123,8 +113,7 @@ export default {
   },
   donate: {
     name: "Wesprzyj",
-    subtitle:
-      "Możesz wesprzeć pieniężnie nasze starania w utrzymaniu wolnego internetu!",
+    subtitle: "Możesz wesprzeć pieniężnie nasze starania w utrzymaniu wolnego internetu!",
     patreon: "Patreon",
     crypto: "Krypto",
   },

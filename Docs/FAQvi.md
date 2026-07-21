@@ -1,6 +1,5 @@
 Đọc bằng các ngôn ngữ khác: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md)
 
-
 # Câu Hỏi Thường Gặp <!-- # Frequently Asked Questions -->
 
 ## Trước khi đưa ra bất kì câu hỏi nào trên GitHub hay trên Discord, vui lòng đọc hết trang này. <!-- ## Before asking a question on GitHub or Discord, please refer to this. -->
@@ -31,7 +30,7 @@ Tiện ích này thu thập ID của vi-đê-ô mà bạn đang xem, truy vấn 
 
 ### **4. Việc gì sẽ diễn ra sau khi API của YouTube ngừng cung cấp số lượt "không thích"?** <!-- ### What will happen after the YouTube API stops returning the dislike count? -->
 
-Đầu sau của tiện ích sẽ chuyển sang sử dụng kết hợp dữ liệu đã được lưu trữ về số lượt đánh giá "không thích", những ước tính ngoại suy từ dữ liệu người dùng của tiện ích và những ước tính dựa trên tỉ lệ lượt xem/lượt "thích" đối với những vi-đê-ô chưa lưu được số lượt "không thích" và đối với các kho lưu trữ số lượt "không thích" lỗi thời. 
+Đầu sau của tiện ích sẽ chuyển sang sử dụng kết hợp dữ liệu đã được lưu trữ về số lượt đánh giá "không thích", những ước tính ngoại suy từ dữ liệu người dùng của tiện ích và những ước tính dựa trên tỉ lệ lượt xem/lượt "thích" đối với những vi-đê-ô chưa lưu được số lượt "không thích" và đối với các kho lưu trữ số lượt "không thích" lỗi thời.
 
 <br>
 

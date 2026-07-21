@@ -9,7 +9,6 @@
 
 Read this in other languages: [English](README.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [български](READMEbg.md), [中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md)
 
-
 # Return YouTube Dislike
 
 <p align="center">
@@ -32,6 +31,7 @@ Mit der entfernung der Statistiken der YouTube API wechselte unser Backend zu ei
 [FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
 
 ## Weshalb dies wichtig ist <!-- ## Why it Matters -->
+
 Erfahre mehr dazu auf unserer Website: [returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
 ## API Dokumentierung <!-- ## API documentation -->

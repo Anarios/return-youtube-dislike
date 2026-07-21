@@ -41,7 +41,7 @@ YDS bəyənməmələrin sayını hesablamaq üçün istifadəçilərinin səslə
   $$ \textup{YDS Bəyənməmə Sayısı} = \left( \frac{\textup{YDS İstifadəçiləri Saymağı Bəyənirlər}}{\textup{YDS İstifadəçilərinin Bəyənmədiyi Say}} \right) \times \textup{İctimai Bəyənmə Sayısı} $$
 
 - Əgər YDS verilənlər bazasında hansısa şəkildə real bəyənmə və bəyənməmə sayları varsa (yükləyən və ya arxivdən təqdim olunur), bəyənməmə sayı həm istifadəçilərin səsləri, həm də arxivləşdirilmiş dəyər əsasında hesablanacaq. Arxivləşdirilmiş dəyər yaşlandıqca son hesaba daha az təsir edəcək.
-<br>
+  <br>
 
 ---
 
@@ -54,4 +54,5 @@ Bu video formada
 <br>
 
 ## Məxfilik/təhlükəsizliklə bağlı narahatlıqlarım var
+
 Ətraflı məlumat üçün [bu səyfə](SECURITY-FAQtr.md)ya baxın.

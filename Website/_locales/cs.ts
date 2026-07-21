@@ -15,11 +15,9 @@ export default {
     title: "Vyberte svou platformu",
     subtitle: "Dostupné pro Firefox a všechny prohlížeče založené na Chromiu",
     title2: "Další platformy",
-    subtitle2:
-      "Pokud váš prohlížeč ještě není podporován, vyzkoušejte tento UserScript",
+    subtitle2: "Pokud váš prohlížeč ještě není podporován, vyzkoušejte tento UserScript",
     title3: "Implementace třetích stran",
-    subtitle3:
-      "Žádná odpovědnost na naší straně, používejte na vlastní nebezpečí",
+    subtitle3: "Žádná odpovědnost na naší straně, používejte na vlastní nebezpečí",
     firefox: "Firefox",
     chrome: "Chrome",
     edge: "Edge",
@@ -38,8 +36,7 @@ export default {
     subtitle: "Pro začátek vyberte sekci z menu.",
     rights: {
       title: "Práva k použití",
-      subtitle:
-        "Použití této API třetími stranami je povoleno s následujícími omezeními:",
+      subtitle: "Použití této API třetími stranami je povoleno s následujícími omezeními:",
       bullet1: "Uvedení: ",
       bullet1text:
         "Tento projekt by měl být viditelně uveden buď s odkazem na tento repozitář, nebo s odkazem na returnyoutubedislike.com",
@@ -64,32 +61,25 @@ export default {
       headers: "Hlavičky: ",
       response: "Odpověď: ",
       error1: 'Neplatné YouTube ID vrátí stavový kód 404 "Not Found"',
-      error2:
-        'Nesprávně formátované YouTube ID vrátí stavový kód 400 "Bad Request"',
+      error2: 'Nesprávně formátované YouTube ID vrátí stavový kód 400 "Bad Request"',
     },
   },
   help: {
     name: "Nápověda",
     title: "Řešení problémů",
-    bullet1:
-      "Ujistěte se, že používáte nejnovější verzi rozšíření. Momentálně je to verze ",
+    bullet1: "Ujistěte se, že používáte nejnovější verzi rozšíření. Momentálně je to verze ",
     bullet11: "",
     bullet2:
       "Zkuste odebrat a znovu nainstalovat rozšíření a poté restartovat váš prohlížeč (všechna aktivní okna, ne jen jednu kartu)",
     bullet3: "Ujistěte se, že se otevře následující odkaz: ",
     bullet31: "měli byste vidět tento text: ",
-    bullet4:
-      "Pokud nepomůže ani jedna z možností výše, nahlaste svůj problém do kanálu",
+    bullet4: "Pokud nepomůže ani jedna z možností výše, nahlaste svůj problém do kanálu",
     bullet41: "v našem",
-    bullet4a:
-      "Řekněte nám jaký máte operační systém, název prohlížeče a verzi prohlížeče",
-    bullet4b:
-      "Udělejte snímek obrazovky s problémem (např. stránka YouTube videa) s otevřenou konzolí (stiskněte ",
+    bullet4a: "Řekněte nám jaký máte operační systém, název prohlížeče a verzi prohlížeče",
+    bullet4b: "Udělejte snímek obrazovky s problémem (např. stránka YouTube videa) s otevřenou konzolí (stiskněte ",
     bullet4b1: ") - příkladný snímek viz níže.",
-    bullet4c:
-      "Udělejte snímek obrazovky stránky rozšíření vašeho prohlížeče s nainstalovaným rozšířením.",
-    bullet4c1:
-      "Pro zobrazení rozšíření zadejte následující adresu do adresního řádku: ",
+    bullet4c: "Udělejte snímek obrazovky stránky rozšíření vašeho prohlížeče s nainstalovaným rozšířením.",
+    bullet4c1: "Pro zobrazení rozšíření zadejte následující adresu do adresního řádku: ",
     firefox: "pro Firefox",
     chrome: "pro Chrome, Edge, Brave, Opera, Vivaldi",
     detected: "Zjištěno:",
@@ -123,8 +113,7 @@ export default {
   },
   donate: {
     name: "Přispět",
-    subtitle:
-      "Můžete podpořit naše úsilí ponechat internet bezplatný jakýmkoli darem!",
+    subtitle: "Můžete podpořit naše úsilí ponechat internet bezplatný jakýmkoli darem!",
     patreon: "Patreon",
     crypto: "Kryptoměna",
   },

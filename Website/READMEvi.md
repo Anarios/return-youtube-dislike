@@ -52,7 +52,7 @@ Thông tin về cách dùng thư mục này trong [tài liệu](https://nuxtjs.o
 
 ### `components` <!-- ### components -->
 
-Thư mục components chứa các thành phần Vue.js. Các thành phần này tạo nên các phần của trang và có thể được tái sử dụng và được nhập vào các trang, bố cục và kể cả thành phần khác. 
+Thư mục components chứa các thành phần Vue.js. Các thành phần này tạo nên các phần của trang và có thể được tái sử dụng và được nhập vào các trang, bố cục và kể cả thành phần khác.
 
 Thông tin về cách dùng thư mục này trong [tài liệu](https://nuxtjs.org/docs/2.x/directory-structure/components).
 

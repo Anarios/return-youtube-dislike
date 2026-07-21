@@ -1,19 +1,8 @@
 <template>
   <!-- min-height overrides vertical centering from the parent default.vue layout -->
-  <div
-    class="width-constraint flex-wrapper"
-    style="min-height: calc(100vh - 10rem); position: relative"
-  >
+  <div class="width-constraint flex-wrapper" style="min-height: calc(100vh - 10rem); position: relative">
     <!-- docs navigation  -->
-    <v-list
-      class="py-0 mr-3"
-      style="
-        background: transparent;
-        position: sticky;
-        top: 6rem;
-        align-self: flex-start;
-      "
-    >
+    <v-list class="py-0 mr-3" style="background: transparent; position: sticky; top: 6rem; align-self: flex-start">
       <v-list-item
         v-for="(link, i) in links"
         :key="i"
@@ -24,9 +13,7 @@
         style="overflow: hidden !important; border-radius: 0.75rem"
       >
         <v-list-item-title style="text-align: right">
-          <v-list-item-title
-            v-text="$vuetify.lang.t(`$vuetify.api.${link.name}.title`)"
-          />
+          <v-list-item-title v-text="$vuetify.lang.t(`$vuetify.api.${link.name}.title`)" />
         </v-list-item-title>
         <v-list-item-icon>
           <v-icon v-text="link.icon" />
@@ -37,12 +24,7 @@
     <!-- docs content -->
     <v-card
       class="text-left glass pa-6"
-      style="
-        flex-grow: 2;
-        height: max-content;
-        max-width: 90vw !important;
-        border-radius: 0.75rem;
-      "
+      style="flex-grow: 2; height: max-content; max-width: 90vw !important; border-radius: 0.75rem"
     >
       <NuxtChild />
     </v-card>
@@ -56,9 +38,7 @@ export default {
     let routes = ["index", "install", "docs", "help", "faq", "donate", "links"];
     if (routes.indexOf(to.name) < 0) return "swoop-out";
     if (routes.indexOf(from.name) < 0) return "swoop-in";
-    return routes.indexOf(to.name) > routes.indexOf(from.name)
-      ? "swoop-left"
-      : "swoop-right";
+    return routes.indexOf(to.name) > routes.indexOf(from.name) ? "swoop-left" : "swoop-right";
   },
   data() {
     return {

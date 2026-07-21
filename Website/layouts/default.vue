@@ -1,10 +1,7 @@
 <template>
   <v-app dark>
     <!-- height = 4rem, margin-y = 1rem -->
-    <v-app-bar
-      app
-      class="topBar glass elevation-0 fly-in-from-top my-4 mx-auto"
-    >
+    <v-app-bar app class="topBar glass elevation-0 fly-in-from-top my-4 mx-auto">
       <!-- Translator desktop -->
       <v-tabs centered center-active color="primary" router show-arrows>
         <v-tab v-for="link in links" :key="link.path" :to="link.path">
@@ -14,10 +11,7 @@
     </v-app-bar>
 
     <!-- abstract background -->
-    <v-img
-      src="/ui/abstract.svg"
-      style="position: fixed; left: 0; right: 0; width: 100vw; height: 100vh"
-    />
+    <v-img src="/ui/abstract.svg" style="position: fixed; left: 0; right: 0; width: 100vw; height: 100vh" />
 
     <v-main style="padding-top: 4rem !important">
       <!-- min-height helps keep content centered, use .debug to to see it -->
@@ -72,13 +66,7 @@
       <span class="my-auto" v-html="alert.html"></span>
 
       <template #action="{ attrs }">
-        <v-btn
-          v-bind="attrs"
-          color="primary"
-          text
-          icon
-          @click="alert.show = false"
-        >
+        <v-btn v-bind="attrs" color="primary" text icon @click="alert.show = false">
           <v-icon>mdi-close-circle-outline</v-icon>
         </v-btn>
       </template>
@@ -112,7 +100,7 @@ export default {
       { name: "한국어", locale: "ko" },
       { name: "Polski", locale: "pl" },
       { name: "Bahasa Indonesia", locale: "id" },
-      { name: "Tiếng Việt", locale: "vi"},
+      { name: "Tiếng Việt", locale: "vi" },
     ],
     alert: {
       show: false,
@@ -122,8 +110,7 @@ export default {
   created() {
     // fetch locale preference or browser default
     if (process.client && navigator.language) {
-      if (!("locale" in localStorage))
-        this.$vuetify.lang.current = navigator.language.slice(0, 2);
+      if (!("locale" in localStorage)) this.$vuetify.lang.current = navigator.language.slice(0, 2);
       else this.$vuetify.lang.current = localStorage.locale;
     }
   },
@@ -131,10 +118,8 @@ export default {
     setTimeout(() => {
       // Chrome < 70 or FF < 60 unsupported warning popup
       if (
-        (this.$ua._parsed.name == "Chrome" &&
-          parseInt(this.$ua._parsed.version.split(".")[0]) < 70) ||
-        (this.$ua._parsed.name == "Firefox" &&
-          parseInt(this.$ua._parsed.version.split(".")[0]) < 60)
+        (this.$ua._parsed.name == "Chrome" && parseInt(this.$ua._parsed.version.split(".")[0]) < 70) ||
+        (this.$ua._parsed.name == "Firefox" && parseInt(this.$ua._parsed.version.split(".")[0]) < 60)
       ) {
         this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .25rem .25rem .5rem; margin: 0 .25rem;">${this.$ua._parsed.name} ${this.$ua._parsed.version.split(".")[0]}</b> ${this.$vuetify.lang.t("$vuetify.layout.notSupported")} ${this.$vuetify.lang.t("$vuetify.layout.considerUpgrade")}`;
         this.alert.show = true;
@@ -238,9 +223,7 @@ body {
     font-size: 2rem;
   }
   .topBar {
-    width: calc(
-      100vw - 2rem
-    ) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
+    width: calc(100vw - 2rem) !important; /* (2rem = mx-4) 1rem on left, 1rem on right */
     padding: 0;
   }
   .flex-wrapper {

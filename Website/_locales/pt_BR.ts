@@ -36,8 +36,7 @@ export default {
     subtitle: "Para começar, selecione um seletor o menu.",
     rights: {
       title: "Direitos de uso",
-      subtitle:
-        "Third party use of this open API is allowed with the following restrictions:",
+      subtitle: "Third party use of this open API is allowed with the following restrictions:",
       bullet1: "Attribution: ",
       bullet1text:
         "This project should be clearly attributed with either a link to this repo or a link to returnyoutubedislike.com",
@@ -76,11 +75,9 @@ export default {
     bullet4: "Se não encontrou um ajuda - reporte seu problema no ",
     bullet41: "na nossa",
     bullet4a: "Diga-nós o seu sistema operacional, navegador e Versão do navegador",
-    bullet4b:
-      "Take a screenshot of the page with the problem (i.e. Youtube video page) with the console open (press ",
+    bullet4b: "Take a screenshot of the page with the problem (i.e. Youtube video page) with the console open (press ",
     bullet4b1: ") - example screenshot below.",
-    bullet4c:
-      "Take a screenshot of the extensions page of your browser with the extension installed.",
+    bullet4c: "Take a screenshot of the extensions page of your browser with the extension installed.",
     bullet4c1: "Veja as extensões put essa into barra de endereço: ",
     firefox: "para Firefox",
     chrome: "para Chrome, Edge, Brave, Opera e Vivaldi",
@@ -115,8 +112,7 @@ export default {
   },
   donate: {
     name: "Doe",
-    subtitle:
-      "Você pode nós ajuda a melhora sua experiencia na internet com uma doação!",
+    subtitle: "Você pode nós ajuda a melhora sua experiencia na internet com uma doação!",
     patreon: "Patreon",
     crypto: "Cripto",
   },

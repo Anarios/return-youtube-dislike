@@ -24,7 +24,7 @@
   border-radius: 4px;
   font-weight: 500;
   border-radius: 100em;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
   margin: 0.25em;
 }
 .m3-btn:hover {
@@ -143,7 +143,7 @@ button {
   z-index: 69;
   height: 2rem;
   width: 2rem;
-  transition-duration: .25s;
+  transition-duration: 0.25s;
 }
 
 #advancedToggle:hover {

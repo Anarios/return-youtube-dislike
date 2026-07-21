@@ -15,11 +15,9 @@ export default {
     title: "プラットフォームの選択",
     subtitle: "FirefoxとすべてのChromiumブラウザに対応しています。",
     title2: "その他のプラットフォーム",
-    subtitle2:
-      "未対応のブラウザをお使いの場合は、以下のUserScriptをお試しください。",
+    subtitle2: "未対応のブラウザをお使いの場合は、以下のUserScriptをお試しください。",
     title3: "サードパーティーによる実装",
-    subtitle3:
-      "開発者では責任を負いかねますので、ご自身の判断にてご利用ください。",
+    subtitle3: "開発者では責任を負いかねますので、ご自身の判断にてご利用ください。",
     firefox: "Firefox",
     chrome: "Chrome",
     edge: "Edge",
@@ -38,8 +36,7 @@ export default {
     subtitle: "まず、メニューからセクションを選択してください。",
     rights: {
       title: "使用権",
-      subtitle:
-        "このオープンAPIを第三者が使用することは、以下の制限付きで許可されています：",
+      subtitle: "このオープンAPIを第三者が使用することは、以下の制限付きで許可されています：",
       bullet1: "属性：",
       bullet1text:
         "このレポ、もしくは returnyoutubedislike.com へのリンクのどちらかによって、明確に帰属させる必要があります。",
@@ -63,10 +60,8 @@ export default {
       method: "リクエスト方法：",
       headers: "ヘッダー：",
       response: "レスポンス：",
-      error1:
-        'YouTube IDが無効な場合、ステータスコード 404 "Not Found" が返されます。',
-      error2:
-        'YouTube IDのフォーマットが正しくない場合、ステータスコード 400 "Bad Request" が返されます。',
+      error1: 'YouTube IDが無効な場合、ステータスコード 404 "Not Found" が返されます。',
+      error2: 'YouTube IDのフォーマットが正しくない場合、ステータスコード 400 "Bad Request" が返されます。',
     },
   },
   help: {
@@ -74,19 +69,15 @@ export default {
     title: "トラブルシューティング",
     bullet1: "最新バージョンの拡張機能",
     bullet11: "がインストールされていることを確認してください。",
-    bullet2:
-      "拡張機能を削除して再インストールし、すべてのウィンドウを閉じた上でブラウザを再起動してください。",
+    bullet2: "拡張機能を削除して再インストールし、すべてのウィンドウを閉じた上でブラウザを再起動してください。",
     bullet3: "以下のリンクが開くことを確認してください：",
     bullet31: "以下のプレーンテキストが表示されます：",
-    bullet4:
-      "上記で問題が解決しない場合、以下のチャンネルにて問題を報告してください。",
+    bullet4: "上記で問題が解決しない場合、以下のチャンネルにて問題を報告してください。",
     bullet41: "参照：",
     bullet4a: "お使いのOS、ブラウザ名とバージョンを教えてください。",
     bullet4b: "コンソールを開き（",
-    bullet4b1:
-      "キー）、問題のあるページ（例：YouTubeの動画ページ）のスクリーンショットを撮影します。",
-    bullet4c:
-      "拡張機能がインストールされているブラウザの拡張機能ページのスクリーンショットを撮影します。",
+    bullet4b1: "キー）、問題のあるページ（例：YouTubeの動画ページ）のスクリーンショットを撮影します。",
+    bullet4c: "拡張機能がインストールされているブラウザの拡張機能ページのスクリーンショットを撮影します。",
     bullet4c1: "拡張機能ページを表示するには、以下のように入力してください：",
     firefox: "：Firefox",
     chrome: "：Chrome, Edge, Brave, Opera, Vivaldi",
@@ -96,8 +87,7 @@ export default {
   faq: {
     name: "Q&A",
     title: "よくある質問",
-    subtitle:
-      "他にも何か質問がありますか？我々のDiscordにお気軽にご参加ください。",
+    subtitle: "他にも何か質問がありますか？我々のDiscordにお気軽にご参加ください。",
     bullet1: "拡張機能のデータはどこから取得しているのですか？",
     bullet1text:
       "YouTube公式の低評価APIが停止する前に保存したデータと、拡張機能ユーザーの高評価/低評価数を元にした推定値を組み合わせて取得しています。",
@@ -122,8 +112,7 @@ export default {
   },
   donate: {
     name: "寄付",
-    subtitle:
-      "インターネットの自由を守るための我々の活動を、寄付によって応援してください！",
+    subtitle: "インターネットの自由を守るための我々の活動を、寄付によって応援してください！",
     patreon: "Patreon",
     crypto: "暗号資産",
   },

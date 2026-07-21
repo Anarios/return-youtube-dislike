@@ -84,5 +84,4 @@ Aşağıdakı linkdən bizə ianə verə və bu layihəyə dəstək ola bilərsi
 
 ## Sponsorlar
 
-
 [Sponsorumuz olun](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

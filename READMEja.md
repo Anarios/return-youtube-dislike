@@ -87,6 +87,4 @@ APIの完全なドキュメントは公式サイトを参照してください�
 
 ## スポンサー
 
-
-
 [Become our sponsor](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
