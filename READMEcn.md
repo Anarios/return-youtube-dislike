@@ -7,74 +7,84 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [English](README.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [български](READMEbg.md), [繁體中文](READMEtw.md), [简体中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md)
+阅读其他语言版本：[English](README.md)、[العربية](READMEar.md)、[Azərbaycan dili](READMEaz.md)、[български](READMEbg.md)、[繁體中文](READMEtw.md)、[简体中文](READMEcn.md)、[Danish](READMEda.md)、[Deutsch](READMEde.md)、[Español](READMEes.md)、[Français](READMEfr.md)、[Ελληνικά](READMEgr.md)、[Magyar](READMEhu.md)、[Bahasa Indonesia](READMEid.md)、[日本語](READMEja.md)、[한국어](READMEkr.md)、[Nederlands](READMEnl.md)、[Polski](READMEpl.md)、[Português do Brasil](READMEpt_BR.md)、[русский](READMEru.md)、[Svenska](READMEsv.md)、[Türkçe](READMEtr.md)、[українська](READMEuk.md)、[Tiếng Việt](READMEvi.md)
 
 # Return YouTube Dislike
 
 <p align="center">
-    <b>Return YouTube Dislike 是一个开源的浏览器扩展，用于显示 YouTube 影片的不喜欢数量。</b><br>
-    适用于 Chrome 和 Firefox 等主流浏览器。<br>
-    同时也提供 JS Userscript 版本，可在其他浏览器上使用。<br><br>
+    <b>Return YouTube Dislike 是一款开源的浏览器扩展程序，可恢复显示 YouTube 的“不喜欢”数量。</b><br>
+    可作为 Web 扩展程序安装到 Chrome 和 Firefox。<br>
+    也提供适用于其他浏览器的 JavaScript 用户脚本（Userscript）。<br><br>
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## 专案缘起
+## 项目背景
 
-2021 年 11 月 10 日，Google [宣布](https://blog.youtube/news-and-events/update-to-youtube/) 将移除 YouTube 的不喜欢数量显示。
+2021 年 11 月 10 日，Google [宣布](https://blog.youtube/news-and-events/update-to-youtube/) YouTube 将移除“不喜欢”数量。
 
-随后，YouTube API 中的 `dislike` 字段于 2021 年 12 月 13 日 [正式移除](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts)，这使得用户无法在观看影片前通过不喜欢数评估内容质量。本专案即在此背景下诞生。
+此外，YouTube API 中的 `dislike` 字段也于 2021 年 12 月 13 日[被移除](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts)，导致用户无法在观看视频前判断内容质量。
 
-## 它是如何工作的
+## 工作原理
 
-由于 YouTube API 不再提供不喜欢统计信息，我们的后端改用了混合数据模型，结合了扩展收集的真实用户数据与估算模型来呈现不喜欢数量。
+YouTube API 移除“不喜欢”统计数据后，我们的后端改为结合抓取到的“不喜欢”统计数据，以及根据扩展程序用户数据推算出的估计值。
 
-[常见问题解答](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQcn.md)
+[常见问题](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQcn.md)
 
-## 了解更多
+## 为什么这很重要
 
-你可以在我们的官网了解更多信息：[returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
+如需了解更多信息，请访问我们的网站：[returnyoutubedislike.com](https://www.returnyoutubedislike.com/)
 
 ## API 文档
 
-本专案允许第三方使用此公开 API，使用需遵循以下限制：
+允许第三方使用此开放 API，但须遵守以下限制：
 
-- **来源标示 (Attribution)**: 若使用本 API，请务必于明显处注明来源：[returnyoutubedislike.com](https://www.returnyoutubedislike.com/)。
-- **速率限制**: 客户端限制为每分钟 100 次、每日 10,000 次。若超过限制，API 将回传 `429` 状态码，表示请求过于频繁，请降低呼叫频率。
+- **来源标注**：使用时必须明确标注本项目，并链接至 [returnyoutubedislike.com](https://returnyoutubedislike.com/)。
+- **速率限制**：每个客户端每分钟最多请求 100 次、每天最多请求 10,000 次。超出限制时会返回 _429_ 状态码，表示您的应用应降低请求频率。
 
-可透过以下 Base URL 呼叫 API：
+可通过以下基础 URL 访问 API：
 https://returnyoutubedislikeapi.com
 
-详细 API 端点清单请参阅 [此处](https://returnyoutubedislikeapi.com/swagger/index.html)。
+可用端点列表：
+https://returnyoutubedislikeapi.com/swagger/index.html
 
 ### 获取投票数据
 
-若要获取特定 YouTube 视频 ID 的投票数据，请呼叫以下端点：
+以下示例用于获取指定 YouTube 视频 ID 的投票数据：
 `/votes?videoId=kxOuG8jMIgI`
 
 ```json
 {
   "id": "kxOuG8jMIgI",
-  "dateCreated": "2021-12-20T12:25:54.418014Z",
-  "likes": 27326,
-  "dislikes": 498153,
-  "rating": 1.212014408444885,
-  "viewCount": 3149885,
+  "dateCreated": "2022-04-09T21:44:20.5103Z",
+  "likes": 31885,
+  "rawDislikes": 31946,
+  "rawLikes": 457,
+  "dislikes": 579721,
+  "rating": 1.2085329444119253,
+  "viewCount": 3762293,
   "deleted": false
 }
 ```
 
-若 YouTube ID 不存在，API 将回传 404 状态码 (Not Found)。
-若 YouTube ID 格式错误，API 将回传 400 状态码 (Bad Request)。
+如果 YouTube ID 不存在，将返回 _404_ “Not Found” 状态码。<br>
+如果 YouTube ID 格式不正确，将返回 _400_ “Bad Request” 状态码。
+
+<!---
+## API 文档
+
+您可以在我们的网站上查看完整文档。
+[https://returnyoutubedislike.com/docs/](https://returnyoutubedislike.com/docs/) -->
 
 ## 贡献
 
-请阅读 [贡献指南](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGcn.md)。
+请阅读[贡献指南](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGcn.md)。
 
-## 支持本专案！
+## 支持本项目！
 
-您可以通过以下链接向我们捐赠来支持这个专案：
+您可以通过下方链接捐款支持本项目：
 
-[捐赠](https://returnyoutubedislike.com/donate)
+[捐款](https://returnyoutubedislike.com/donate)
 
-## 赞助商
-[成为我们的赞助商，您的信息将在我们的资源库和网站上展示。](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
+## 赞助者
+
+[成为我们的赞助者，即可在本仓库和官方网站上展示](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
