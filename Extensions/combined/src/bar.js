@@ -1,6 +1,6 @@
 import { getButtons, getDislikeButton, getLikeButton } from "./buttons";
 import { extConfig, isMobile, isLikesDisabled, isNewDesign, isRoundedDesign, isShorts } from "./state";
-import { getColorFromTheme, isInViewport, querySelector } from "./utils";
+import { getColorFromTheme, getElementWidth, isInViewport, querySelector } from "./utils";
 
 function createRateBar(likes, dislikes) {
   let rateBar = document.getElementById("ryd-bar-container");
@@ -11,10 +11,7 @@ function createRateBar(likes, dislikes) {
       rateBar = null;
     }
 
-    const widthPx =
-      parseFloat(window.getComputedStyle(getLikeButton()).width) +
-      parseFloat(window.getComputedStyle(getDislikeButton()).width) +
-      (isRoundedDesign() ? 0 : 8);
+    const widthPx = getElementWidth(getLikeButton()) + getElementWidth(getDislikeButton()) + (isRoundedDesign() ? 0 : 8);
 
     const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 

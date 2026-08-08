@@ -18,15 +18,28 @@
   --yt-spec-brand-background-secondary: #000 !important;
 } */
 
+/* Fallback colors keep the ratio bar visible when YouTube's design tokens are
+   unavailable. The newer YouTube UI dropped these --yt-spec-* variables, which
+   left the bar fully transparent (invisible) even though its proportions were
+   correct. Light-theme fallbacks are defined here; dark-theme below. When the
+   tokens do exist, var() uses them and these fallbacks are ignored. */
 #ryd-bar-container {
-  background: var(--yt-spec-icon-disabled);
+  background: var(--yt-spec-icon-disabled, #909090);
   border-radius: 2px;
 }
 
 #ryd-bar {
-  background: var(--yt-spec-text-primary);
+  background: var(--yt-spec-text-primary, #0f0f0f);
   border-radius: 2px;
   transition: all 0.15s ease-in-out;
+}
+
+html[dark] #ryd-bar-container {
+  background: var(--yt-spec-icon-disabled, #717171);
+}
+
+html[dark] #ryd-bar {
+  background: var(--yt-spec-text-primary, #f1f1f1);
 }
 
 .ryd-tooltip {

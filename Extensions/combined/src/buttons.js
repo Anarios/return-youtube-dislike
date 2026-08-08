@@ -92,10 +92,25 @@ function updateDislikeButtonShape(dislikeButton) {
   }
 }
 
+// Removes text written directly into an element (i.e. non-empty direct text
+// node children), leaving child elements untouched. YouTube's server-side
+// "dirty fix" injects the dislike count straight into the icon button via
+// `innerText`, which both shows a stray number and wipes the icon; this lets us
+// strip that so our own text container is the single source of the count.
+function removeStrayButtonText(element) {
+  if (!element) return;
+  for (const node of Array.from(element.childNodes)) {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== "") {
+      element.removeChild(node);
+    }
+  }
+}
+
 function createDislikeTextContainer() {
   const textNodeClone = getTextContainerTemplate().cloneNode(true);
   const dislikeButton = getNativeButton(getDislikeButton());
   const insertPreChild = dislikeButton;
+  removeStrayButtonText(dislikeButton);
   insertPreChild.insertBefore(textNodeClone, null);
   updateDislikeButtonShape(dislikeButton);
   if (querySelector(extConfig.selectors.textContainerInner, textNodeClone) === undefined) {
@@ -122,6 +137,12 @@ function getDislikeTextContainer() {
   }
   if (result == null) {
     result = createDislikeTextContainer();
+  }
+  // If the count ends up in a dedicated child container, make sure no count
+  // also got written directly into the button (e.g. by the server-side dirty
+  // fix), which would render as a duplicate number beside our container.
+  if (nativeDislikeButton && result !== nativeDislikeButton) {
+    removeStrayButtonText(nativeDislikeButton);
   }
   return result;
 }
