@@ -550,5 +550,11 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
+  },
+  "shortsDislikeEstimate": {
+    "message": "Lượt không thích ước tính: $1"
+  },
+  "shortsDislikeActive": {
+    "message": "Bỏ không thích Short này (lượt không thích ước tính: $1)"
   }
 }

@@ -6,6 +6,7 @@
 Website/package-lock.json
 
 # AI assistant artifacts
+.superpowers/
 .claude/
 CLAUDE.md
 Website/.editorconfig

@@ -11,6 +11,7 @@ import {
   createObserver,
 } from "./utils";
 import { config, getApiEndpoint, DEV_API_URL, PROD_API_URL, isDevelopment } from "./config";
+import { getShortsDislikeControl, setShortsDislikeCount } from "./shortsDislike";
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
 const NEUTRAL_STATE = "NEUTRAL_STATE";
@@ -142,6 +143,17 @@ let storedData = {
   previousState: NEUTRAL_STATE,
 };
 
+let activeShortsInitializationGeneration = 0;
+let activeShortsInitializationVideoId = null;
+
+function resetShortsInitializationLifecycle() {
+  if (activeShortsInitializationVideoId !== null) activeShortsInitializationGeneration++;
+  activeShortsInitializationVideoId = null;
+  document.querySelectorAll("[data-ryd-shorts-dislike]").forEach((root) => {
+    delete root.dataset.rydPendingVoteDelta;
+  });
+}
+
 function isMobile() {
   return location.hostname == "m.youtube.com";
 }
@@ -168,17 +180,17 @@ if (isShorts() && !shortsObserver) {
     },
     (mutationList) => {
       mutationList.forEach((mutation) => {
-        if (
-          mutation.type === "attributes" &&
-          mutation.target.nodeName === "TP-YT-PAPER-BUTTON" &&
-          mutation.target.id === "button"
-        ) {
+        const owned = getShortsDislikeControl();
+        const isNativeShortsToggle =
+          mutation.target.nodeName === "TP-YT-PAPER-BUTTON" && mutation.target.id === "button";
+        const isOwnedShortsDislike = mutation.target === owned?.button;
+        if (mutation.type === "attributes" && (isNativeShortsToggle || isOwnedShortsDislike)) {
           // console.log('Short thumb button status changed');
           if (mutation.target.getAttribute("aria-pressed") === "true") {
             mutation.target.style.color =
-              mutation.target.parentElement.parentElement.id === "like-button"
-                ? getColorFromTheme(true)
-                : getColorFromTheme(false);
+              isOwnedShortsDislike || mutation.target.parentElement.parentElement.id !== "like-button"
+                ? getColorFromTheme(false)
+                : getColorFromTheme(true);
           } else {
             mutation.target.style.color = "unset";
           }
@@ -210,6 +222,10 @@ function isVideoLiked() {
 }
 
 function isVideoDisliked() {
+  if (isShorts()) {
+    return getShortsDislikeControl()?.button.getAttribute("aria-pressed") === "true";
+  }
+
   const dislikeButton = querySelector(extConfig.selectors.buttons.nativeButton, getDislikeButton());
   if (isMobile()) {
     return dislikeButton.getAttribute("aria-label") === "true";
@@ -238,6 +254,14 @@ function setLikes(likesCount) {
 
 function setDislikes(dislikesCount) {
   console.log(`SET dislikes ${dislikesCount}`);
+
+  if (isShorts()) {
+    const owned = getShortsDislikeControl();
+    if (owned) {
+      setShortsDislikeCount(owned, dislikesCount);
+      return;
+    }
+  }
 
   const _container = getDislikeTextContainer();
   _container?.removeAttribute("is-empty");
@@ -281,31 +305,38 @@ function getLikeCountFromButton() {
   }
 }
 
-function processResponse(response, storedData) {
-  const formattedDislike = numberFormat(response.dislikes);
-  setDislikes(formattedDislike);
+function processResponse(response, storedData, videoId) {
+  const owned = isShorts() ? getShortsDislikeControl() : null;
+  const pendingShortsVoteDelta = owned?.videoId === videoId ? parseInt(owned.root.dataset.rydPendingVoteDelta ?? "0") : 0;
+  const dislikes = Math.max(parseInt(response.dislikes) + pendingShortsVoteDelta, 0);
+  setDislikes(numberFormat(dislikes));
   if (extConfig.numberDisplayReformatLikes === true) {
     const nativeLikes = getLikeCountFromButton();
     if (nativeLikes !== false) {
       setLikes(numberFormat(nativeLikes));
     }
   }
-  storedData.dislikes = parseInt(response.dislikes);
+  storedData.dislikes = dislikes;
   storedData.likes = getLikeCountFromButton() || parseInt(response.likes);
+  if (owned?.videoId === videoId) delete owned.root.dataset.rydPendingVoteDelta;
   createRateBar(storedData.likes, storedData.dislikes);
   if (extConfig.coloredThumbs === true) {
     if (isShorts()) {
       // for shorts, leave deactivated buttons in default color
-      let shortLikeButton = querySelector(extConfig.selectors.buttons.shortsToggleButton, getLikeButton());
-      let shortDislikeButton = querySelector(extConfig.selectors.buttons.shortsToggleButton, getDislikeButton());
-      if (shortLikeButton.getAttribute("aria-pressed") === "true") {
+      const shortLikeButton = getLikeButton()
+        ? querySelector(extConfig.selectors.buttons.shortsToggleButton, getLikeButton())
+        : null;
+      const shortDislikeButton = getShortsDislikeControl()?.button;
+      if (shortLikeButton?.getAttribute("aria-pressed") === "true") {
         shortLikeButton.style.color = getColorFromTheme(true);
       }
-      if (shortDislikeButton.getAttribute("aria-pressed") === "true") {
+      if (shortDislikeButton?.getAttribute("aria-pressed") === "true") {
         shortDislikeButton.style.color = getColorFromTheme(false);
       }
-      shortsObserver.observe(shortLikeButton);
-      shortsObserver.observe(shortDislikeButton);
+      if (shortsObserver) {
+        if (shortLikeButton) shortsObserver.observe(shortLikeButton);
+        if (shortDislikeButton) shortsObserver.observe(shortDislikeButton);
+      }
     } else {
       getLikeButton().style.color = getColorFromTheme(true);
       getDislikeButton().style.color = getColorFromTheme(false);
@@ -317,11 +348,21 @@ function processResponse(response, storedData) {
 }
 
 // Tells the user if the API is down
-function displayError(error) {
-  getDislikeTextContainer().innerText = localize("textTempUnavailable");
+function displayError(error, videoId, shortsInitializationGeneration) {
+  if (
+    (videoId && videoId !== getVideoId(window.location.href)) ||
+    (shortsInitializationGeneration !== undefined && shortsInitializationGeneration !== activeShortsInitializationGeneration)
+  )
+    return;
+  setDislikes(localize("textTempUnavailable"));
 }
 
-async function setState(storedData) {
+async function setState(storedData, shortsInitializationGeneration) {
+  const initializingShorts = isShorts();
+  if (!initializingShorts) resetShortsInitializationLifecycle();
+  const requestShortsInitializationGeneration = initializingShorts
+    ? shortsInitializationGeneration ?? activeShortsInitializationGeneration
+    : undefined;
   if (typeof window !== "undefined") {
     window.__rydSetStateCalls = (window.__rydSetStateCalls || 0) + 1;
   }
@@ -339,20 +380,47 @@ async function setState(storedData) {
     },
   })
     .then((response) => {
-      if (!response.ok) displayError(response.error);
+      if (!response.ok) displayError(response.error, videoId, requestShortsInitializationGeneration);
       return response;
     })
     .then((response) => response.json())
-    .catch(displayError);
+    .catch((error) => displayError(error, videoId, requestShortsInitializationGeneration));
   console.log("response from api:");
   console.log(JSON.stringify(response));
-  if (response !== undefined && !("traceId" in response) && !statsSet) {
-    processResponse(response, storedData);
+  if (
+    response !== undefined &&
+    !("traceId" in response) &&
+    !statsSet &&
+    videoId === getVideoId(window.location.href) &&
+    (requestShortsInitializationGeneration === undefined ||
+      requestShortsInitializationGeneration === activeShortsInitializationGeneration)
+  ) {
+    processResponse(response, storedData, videoId);
   }
 }
 
-async function setInitialState() {
-  await setState(storedData);
+function initializeShortsStateForActiveVideo(videoId) {
+  if (!isShorts()) return undefined;
+
+  const generation = ++activeShortsInitializationGeneration;
+  const owned = getShortsDislikeControl();
+  const isDuplicateInitialization = activeShortsInitializationVideoId === videoId && owned?.videoId === videoId;
+  activeShortsInitializationVideoId = videoId;
+
+  if (isDuplicateInitialization) return generation;
+
+  if (owned?.videoId === videoId) {
+    owned.root.dataset.rydPendingVoteDelta = "0";
+  }
+  storedData.likes = 0;
+  storedData.dislikes = 0;
+  storedData.previousState = isVideoDisliked() ? DISLIKED_STATE : isVideoLiked() ? LIKED_STATE : NEUTRAL_STATE;
+  setDislikes(numberFormat(0));
+  return generation;
+}
+
+async function setInitialState(shortsInitializationGeneration) {
+  await setState(storedData, shortsInitializationGeneration);
 }
 
 async function initExtConfig() {
@@ -498,6 +566,7 @@ export {
   getState,
   setState,
   setInitialState,
+  initializeShortsStateForActiveVideo,
   setLikes,
   setDislikes,
   getLikeCountFromButton,

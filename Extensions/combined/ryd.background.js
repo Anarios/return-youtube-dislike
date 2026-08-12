@@ -1,4 +1,5 @@
 import { config, getApiUrl, getApiEndpoint, getChangelogUrl } from "./src/config";
+import { handleVoteMessage } from "./src/voteState";
 
 const apiUrl = getApiUrl();
 const voteDisabledIconName = config.voteDisabledIconName;
@@ -178,8 +179,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     register();
     return true;
   } else if (request.message == "send_vote") {
-    sendVote(request.videoId, request.vote);
-    return true;
+    return handleVoteMessage(request, { storageArea: api.storage.local, submitVote: sendVote }, sendResponse);
   } else if (request.message === "patreon_oauth_login") {
     (async () => {
       try {

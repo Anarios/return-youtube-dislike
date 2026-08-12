@@ -45,9 +45,7 @@
     "page": "popup.html",
     "open_in_tab": false
   },
-  "web_accessible_resources": [
-    "menu-fixer.js"
-  ]
+  "web_accessible_resources": ["menu-fixer.js"]
 
     // uncomment this section for local storage to work in firefox locally,
 //    ,"browser_specific_settings": {

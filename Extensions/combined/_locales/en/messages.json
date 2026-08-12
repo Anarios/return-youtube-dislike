@@ -550,5 +550,11 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike logo"
+  },
+  "shortsDislikeEstimate": {
+    "message": "Estimated dislikes: $1"
+  },
+  "shortsDislikeActive": {
+    "message": "Remove dislike from this Short (estimated dislikes: $1)"
   }
 }

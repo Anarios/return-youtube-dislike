@@ -1,8 +1,9 @@
 import { getButtons } from "./src/buttons";
-import { isShorts, setInitialState, initExtConfig } from "./src/state";
-import { getBrowser, isVideoLoaded } from "./src/utils";
+import { initializeShortsStateForActiveVideo, isShorts, setInitialState, initExtConfig } from "./src/state";
+import { getBrowser, getVideoId, isVideoLoaded } from "./src/utils";
 import { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler } from "./src/events";
 import { initPatreonFeatures } from "./src/patreon";
+import { ensureShortsDislikeControl, restoreShortsVoteState } from "./src/shortsDislike";
 
 await initExtConfig();
 initPatreonFeatures();
@@ -12,6 +13,12 @@ let isSetInitialStateDone = false;
 let isStorageListenerRegistered = false;
 let shortsNavigationObserver = null;
 let shortsNavigationObserverTarget = null;
+
+async function initializeShortsDislikeForActiveVideo(videoId) {
+  const control = ensureShortsDislikeControl({ videoId });
+  if (control) await restoreShortsVoteState(control);
+  return control;
+}
 
 function ensureShortsNavigationObserver() {
   if (!isShorts()) {
@@ -61,9 +68,16 @@ async function checkForInitialization() {
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
       }
+      let shortsInitializationGeneration;
+      if (isShorts()) {
+        const videoId = getVideoId(window.location.href);
+        await initializeShortsDislikeForActiveVideo(videoId);
+        if (getVideoId(window.location.href) !== videoId) return;
+        shortsInitializationGeneration = initializeShortsStateForActiveVideo(videoId);
+      }
       createSmartimationObserver();
       addLikeDislikeEventListener();
-      await setInitialState();
+      await setInitialState(shortsInitializationGeneration);
       isSetInitialStateDone = true;
       if (!isStorageListenerRegistered) {
         getBrowser().storage.onChanged.addListener(storageChangeHandler);
@@ -111,10 +125,31 @@ document.addEventListener("yt-navigate-finish", async function (event) {
   await setEventListeners();
 });
 
-const s = document.createElement("script");
-s.src = chrome.runtime.getURL("menu-fixer.js");
-s.onload = function () {
-  this.remove();
-};
+function injectPageScript(fileName, marker) {
+  const root = document.documentElement;
+  if (!root || root.hasAttribute(marker)) return null;
 
-(document.head || document.documentElement).appendChild(s);
+  let source;
+  try {
+    source = chrome.runtime.getURL(fileName);
+  } catch {
+    return null;
+  }
+
+  root.setAttribute(marker, "");
+  const script = document.createElement("script");
+  script.src = source;
+  script.onload = () => script.remove();
+  script.onerror = () => script.remove();
+  try {
+    (document.head || root).appendChild(script);
+  } catch {
+    script.remove();
+    return null;
+  }
+  return script;
+}
+
+injectPageScript("menu-fixer.js", "data-ryd-menu-fixer-installed");
+
+export { initializeShortsDislikeForActiveVideo };
