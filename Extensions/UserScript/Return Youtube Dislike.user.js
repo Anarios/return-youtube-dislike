@@ -101,36 +101,42 @@ function getButtons() {
 }
 
 function getDislikeButton() {
-  if (getButtons().children[0].tagName === "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER") {
-    if (getButtons().children[0].children[1] === undefined) {
+  const buttons = getButtons();
+  if (!buttons) return null;
+  if (buttons.children[0].tagName === "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER") {
+    if (buttons.children[0].children[1] === undefined) {
       return document.querySelector("#segmented-dislike-button");
     } else {
-      return getButtons().children[0].children[1];
+      return buttons.children[0].children[1];
     }
   } else {
-    if (getButtons().querySelector("segmented-like-dislike-button-view-model")) {
-      const dislikeViewModel = getButtons().querySelector("dislike-button-view-model");
+    if (buttons.querySelector("segmented-like-dislike-button-view-model")) {
+      const dislikeViewModel = buttons.querySelector("dislike-button-view-model");
       if (!dislikeViewModel) cLog("Dislike button wasn't added to DOM yet...");
       return dislikeViewModel;
     } else {
-      return getButtons().children[1];
+      return buttons.children[1];
     }
   }
 }
 
 function getLikeButton() {
-  return getButtons().children[0].tagName === "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
+  const buttons = getButtons();
+  if (!buttons) return null;
+  return buttons.children[0].tagName === "YTD-SEGMENTED-LIKE-DISLIKE-BUTTON-RENDERER"
     ? document.querySelector("#segmented-like-button") !== null
       ? document.querySelector("#segmented-like-button")
-      : getButtons().children[0].children[0]
-    : getButtons().querySelector("like-button-view-model") ?? getButtons().children[0];
+      : buttons.children[0].children[0]
+    : buttons.querySelector("like-button-view-model") ?? buttons.children[0];
 }
 
 function getLikeTextContainer() {
+  const likeButton = getLikeButton();
+  if (!likeButton) return null;
   return (
-    getLikeButton().querySelector("#text") ??
-    getLikeButton().getElementsByTagName("yt-formatted-string")[0] ??
-    getLikeButton().querySelector("span[role='text']")
+    likeButton.querySelector("#text") ??
+    likeButton.getElementsByTagName("yt-formatted-string")[0] ??
+    likeButton.querySelector("span[role='text']")
   );
 }
 
@@ -197,24 +203,26 @@ if (isShorts() && !shortsObserver) {
 }
 
 function isVideoLiked() {
+  const likeButton = getLikeButton();
   if (isMobile) {
-    return getLikeButton().querySelector("button").getAttribute("aria-label") == "true";
+    return likeButton?.querySelector("button")?.getAttribute("aria-label") == "true";
   }
-  return getLikeButton().classList.contains("style-default-active");
+  return likeButton?.classList.contains("style-default-active") ?? false;
 }
 
 function isVideoDisliked() {
   if (isMobile) {
-    return getDislikeButton()?.querySelector("button").getAttribute("aria-label") == "true";
+    return getDislikeButton()?.querySelector("button")?.getAttribute("aria-label") == "true";
   }
   return getDislikeButton()?.classList.contains("style-default-active");
 }
 
 function isVideoNotLiked() {
+  const likeButton = getLikeButton();
   if (isMobile) {
     return !isVideoLiked();
   }
-  return getLikeButton().classList.contains("style-text");
+  return likeButton?.classList.contains("style-text") ?? false;
 }
 
 function isVideoNotDisliked() {
@@ -247,25 +255,22 @@ function getState() {
 
 function setLikes(likesCount) {
   if (isMobile) {
-    getButtons().children[0].querySelector(".button-renderer-text").innerText = likesCount;
+    const btn = getButtons()?.children[0]?.querySelector(".button-renderer-text");
+    if (btn) btn.innerText = likesCount;
     return;
   }
-  getLikeTextContainer().innerText = likesCount;
+  const container = getLikeTextContainer();
+  if (container) container.innerText = likesCount;
 }
-
 function setDislikes(dislikesCount) {
-  if (isMobile) {
-    mobileDislikes = dislikesCount;
-    return;
-  }
-
+  if (isMobile) { mobileDislikes = dislikesCount; return; }
   const _container = getDislikeTextContainer();
-  _container?.removeAttribute("is-empty");
-  if (_container?.innerText !== dislikesCount) {
+  if (!_container) return;
+  _container.removeAttribute("is-empty");
+  if (_container.innerText !== dislikesCount) {
     _container.innerText = dislikesCount;
   }
 }
-
 function getLikeCountFromButton() {
   try {
     if (isShorts()) {
@@ -522,7 +527,8 @@ function getVideoId() {
 
 function isVideoLoaded() {
   if (isMobile) {
-    return document.getElementById("player").getAttribute("loading") == "false";
+    const player = document.getElementById("player");
+    return player !== null && player.getAttribute("loading") == "false";
   }
   const videoId = getVideoId();
 
