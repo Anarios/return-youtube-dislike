@@ -27,6 +27,7 @@ export default {
     userscript: "사용자 스크립트",
     tampermonkey: "Tampermonkey",
     androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
     androidTubular: "Android (Tubular - NewPipe 포크)",
     iosJailbroken: "iOS (탈옥)",
     iosUYouPlus: "iOS (uYou+)",

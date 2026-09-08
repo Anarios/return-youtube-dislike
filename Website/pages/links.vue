@@ -23,7 +23,7 @@
     </h1>
 
     <v-icon style="margin-right: 0.5em">mdi-email</v-icon>
-    selivano.d@gmail.com
+    <a class="attr-link" :href="emailLink" target="_blank">selivano.d@gmail.com</a>
 
     <p style="color: #555" class="my-8">
       Site by <v-icon color="#555">mdi-discord</v-icon>

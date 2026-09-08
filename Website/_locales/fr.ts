@@ -29,6 +29,7 @@ export default {
     userscript: "Script utilisateur",
     tampermonkey: "Tampermonkey",
     androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
     androidTubular: "Android (Tubular – un fork de NewPipe)",
     iosJailbroken: "iOS (jailbreak)",
     iosUYouPlus: "iOS (uYou+)",
