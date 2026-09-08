@@ -1,0 +1,19 @@
+Return YouTube Dislike gendanner muligheden for at se dislikes på YouTube.
+
+Hvis det ikke virker: åbn fanen Udvidelser (chrome://extensions/), deaktiver denne udvidelse, og aktiver den igen. Det bør løse de fleste problemer, da der er en fejl i Chromium, som i nogle tilfælde får udvidelsen til at holde op med at virke. Forhåbentlig retter Chromium-teamet snart dette.
+
+Fra og med den 13. december 2021 fjernede YouTube muligheden for at se dislikes via deres API.
+Denne udvidelse har til formål at give kontrollen tilbage til brugerne ved at bruge en kombination af arkiverede like- og dislike-data samt likes og dislikes fra udvidelsens brugere for at vise de mest præcise vurderinger.
+
+Der er i øjeblikket gemt like- og dislike-data for over 200 millioner videoer fra før den 13. december 2021.
+
+Databasen vokser aktivt og holdes opdateret med uploads efter den 13. december 2021.
+
+Jo flere brugere der bruger udvidelsen, desto mere præcis bliver den.
+Mindre populære videoer, der er uploadet efter den 13. december 2021, kan vise mindre præcise data end mere populære videoer.
+
+Denne udvidelse er i øjeblikket under aktiv udvikling. Hvis du oplever problemer, er du velkommen til at rapportere dem på vores GitHub-side eller i vores Discord-server.
+
+Flere funktioner kommer snart!
+
+https://github.com/Anarios/return-youtube-dislike
