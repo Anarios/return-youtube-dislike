@@ -9,7 +9,7 @@
     "message": "En ligne"
   },
   "colorTheme": {
-    "message": "Schéma de couleur:"
+    "message": "Schéma de couleur :"
   },
   "colorizeRatio": {
     "message": "Coloriser la barre de ratio"
@@ -33,7 +33,7 @@
     "message": "Formats numériques personnalisés"
   },
   "disableLoggingHover": {
-    "message": "Désactive la journalisation des réponses de l’API dans la console."
+    "message": "Désactiver la journalisation des réponses de l’API dans la console."
   },
   "disableLoggingLabel": {
     "message": "Désactiver la journalisation dans la console"
@@ -78,7 +78,7 @@
     "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
-    "message": "Fonctionnalités premium disponibles pour les soutiens sur Patreon"
+    "message": "Fonctionnalités premium disponibles pour les mécènes sur Patreon"
   },
   "patreonLogin": {
     "message": "Se connecter avec Patreon"
@@ -87,16 +87,16 @@
     "message": "Les informations sur votre abonnement Patreon servent à vérifier votre accès premium. Nous ne recevons pas les données de votre carte ni vos coordonnées bancaires."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Fonctionnalités premium disponibles pour les contributeurs sur Patreon"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Se connecter avec GitHub (contributeurs)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Échec du démarrage de la connexion GitHub. Veuillez réessayer."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Échec de la connexion. Veuillez réessayer."
   },
   "patreonLoginCompleteFailed": {
     "message": "Échec de la connexion. Veuillez réessayer."
@@ -120,10 +120,10 @@
     "message": "Aucun abonnement actif"
   },
   "patreonTierPremium": {
-    "message": "Soutien Premium"
+    "message": "Mécène Premium"
   },
   "patreonTierSupporter": {
-    "message": "Soutien"
+    "message": "Mécène"
   },
   "patreonUserFallback": {
     "message": "Utilisateur Patreon"
@@ -132,7 +132,7 @@
     "message": "Formater le nombre de likes"
   },
   "reformatLikesHover": {
-    "message": "Rend la valeur des statistiques plus cohérente."
+    "message": "Rendre la valeur des statistiques plus cohérente."
   },
   "hidePremiumTeaser": {
     "message": "Masquer le panneau d’aperçu Premium"
@@ -171,7 +171,7 @@
     "message": "Coloriser la barre de ratio"
   },
   "textColorizeRatioBarHover": {
-    "message": "Utilisez des couleurs personnalisées pour la barre de ratio."
+    "message": "Utiliser des couleurs personnalisées pour la barre de ratio."
   },
   "textColorizeThumbs": {
     "message": "Coloriser les pouces"
@@ -552,19 +552,19 @@
     "message": "Demander à la communauté"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Regroupper les autres boutons"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Afficher un exemple avant/après"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Garder uniquement les boutons Like/Dislike visible. Les boutons Partager, Enregistrer, Merci, et autres seront déplacés vers le menu Plus de Youtube."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Avant: Tous les boutons d'action sont visible"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Après: seuls les boutons Like et Dislike restent visibles"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo de Return YouTube Dislike"
