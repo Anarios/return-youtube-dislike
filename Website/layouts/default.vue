@@ -113,6 +113,7 @@ export default {
       { name: "Polski", locale: "pl" },
       { name: "Bahasa Indonesia", locale: "id" },
       { name: "Tiếng Việt", locale: "vi"},
+      { name: "Slovenščina", locale: "sl" },
     ],
     alert: {
       show: false,

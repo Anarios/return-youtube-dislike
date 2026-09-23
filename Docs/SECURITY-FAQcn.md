@@ -1,4 +1,4 @@
-阅读其他语言版本：[русский](SECURITY-FAQru.md)、[Nederlands](SECURITY_FAQnl.md)、[Français](SECURITY-FAQfr.md)、[Türkçe](SECURITY-FAQtr.md)、[українська](SECURITY-FAQk.md)、[Polski](SECURITY-FAQpl.md)、[Deutsch](SECURITY-FAQde.md)
+阅读其他语言版本：[русский](SECURITY-FAQru.md)、[Nederlands](SECURITY_FAQnl.md)、[Français](SECURITY-FAQfr.md)、[Türkçe](SECURITY-FAQtr.md)、[українська](SECURITY-FAQk.md)、[Polski](SECURITY-FAQpl.md)、[Deutsch](SECURITY-FAQde.md)、[Slovenščina](SECURITY-FAQsl.md)
 
 # 安全
 
