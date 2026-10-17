@@ -1189,7 +1189,10 @@ function createRateBar(likes, dislikes) {
     rateBar = null;
   }
 
-  const widthPx = likeButton.clientWidth + (dislikeButton?.clientWidth ?? 52);
+  // Inline view-model wrappers have no client width even when their children render.
+  const widthPx =
+    (likeButton.clientWidth || likeButton.getBoundingClientRect().width) +
+    (dislikeButton ? dislikeButton.clientWidth || dislikeButton.getBoundingClientRect().width : 52);
 
   const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 
