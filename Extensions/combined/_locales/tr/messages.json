@@ -162,7 +162,7 @@
     "message": "YouTube video izleme sayfalarında Premium tanıtımını gösterme."
   },
   "roundNumbers": {
-    "message": "Yuvarlanmış sayıları göster"
+    "message": "Aşağı yuvarlanmış sayıları göster"
   },
   "roundNumbersHover": {
     "message": "Sayıları aşağı yuvarla (YouTube'un varsayılan davranışı)."
@@ -348,19 +348,19 @@
     "message": "Haftalık oy"
   },
   "premiumAnalytics_bucketHours": {
-    "message": "$1 saatte bir oy"
+    "message": "$1 saat başına oy"
   },
   "premiumAnalytics_bucketDays": {
-    "message": "$1 günde bir oy"
+    "message": "$1 gün başına oy"
   },
   "premiumAnalytics_bucketMinutes": {
-    "message": "$1 dakikada bir oy"
+    "message": "$1 dakika başına oy"
   },
   "premiumAnalytics_bucketMinute": {
     "message": "Dakika başına oy"
   },
   "premiumAnalytics_bucketSeconds": {
-    "message": "$1 saniyede bir oy"
+    "message": "$1 saniye başına oy"
   },
   "premiumAnalytics_bucketSecond": {
     "message": "Saniye başına oy"
@@ -378,7 +378,7 @@
     "message": "İstatistiklerin kilidini açmak için Patreon yetkilendirmesini yeniden yapın."
   },
   "premiumAnalytics_errorInactive": {
-    "message": "Premium istatistikler yalnızca aktif Patreon destekçileri tarafından kullanılabilir."
+    "message": "Premium istatistikler aktif Patreon destekçileri tarafından kullanılabilir."
   },
   "premiumAnalytics_errorSession": {
     "message": "Oturumun süresi doldu. Patreon ile tekrar giriş yapın."
@@ -426,7 +426,7 @@
     "message": "Beğeniler: $1"
   },
   "premiumAnalytics_tooltipDislikes": {
-    "message": "Beğenmeler: $1"
+    "message": "Beğenmeme: $1"
   },
   "premiumAnalytics_tooltipRatio": {
     "message": "Beğeni oranı: $1"
@@ -516,7 +516,7 @@
     "message": "Etkileşimli dünya ve ABD ısı haritası"
   },
   "changelog_feature_map_body": {
-    "message": "Dünya üzerinde gezinin veya yoğunluk noktalarını görmek için ABD eyaletlerine ayrıntılı olarak bakın. Geliştirilmiş araç ipucunda beğenileri, beğenmeleri ve oranları karşılaştırın; yüklemelerinize ilk tepki veren bölgeleri öne çıkarın."
+    "message": "Dünya üzerinde gezinin veya yoğunluk noktalarını görmek için ABD eyaletlerine ayrıntılı olarak bakın. Geliştirilmiş araç ipucunda beğenileri, beğenmemeleri ve oranları karşılaştırın; yüklemelerinize ilk tepki veren bölgeleri öne çıkarın."
   },
   "changelog_feature_quality_title": {
     "message": "En aktif ülkeler sıralaması"
