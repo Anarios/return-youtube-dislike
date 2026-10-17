@@ -68,6 +68,10 @@
       <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
       {{ $vuetify.lang.t("$vuetify.install.androidReVanced") }}
     </v-btn>
+    <v-btn class="mainAltButton" :href="morphe" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
+      {{ $vuetify.lang.t("$vuetify.install.androidMorphe") }}
+    </v-btn>
     <v-btn class="mainAltButton" :href="androidNewPipe" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
       {{ $vuetify.lang.t("$vuetify.install.androidTubular") }}
@@ -111,6 +115,7 @@ export default {
 
       androidNewPipe: "https://github.com/polymorphicshade/Tubular",
       reVanced: "https://revanced.app/",
+      morphe: "https://morphe.software/",
 
     };
   },

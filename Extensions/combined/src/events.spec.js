@@ -32,6 +32,7 @@ jest.mock("./state", () => ({
   persistSyntheticShortsDislikeState: jest.fn(async () => undefined),
   setDislikes: jest.fn(),
   setLikes: jest.fn(),
+  refreshReactionPresentation: jest.fn(),
   storedData: { dislikes: 100, likes: 300, previousState: "neutral", videoId: "abcdefghijk" },
 }));
 

@@ -372,13 +372,24 @@ function overrideBooleanOption(source, optionName, value) {
 
 async function injectGeneratedUserscript(
   page,
-  { artifactPath = GENERATED_USERSCRIPT, coloredThumbs, disableVoteSubmission = false, rateBarEnabled } = {},
+  {
+    artifactPath = GENERATED_USERSCRIPT,
+    coloredThumbs,
+    disableVoteSubmission = false,
+    numberDisplayReformatLikes,
+    rateBarEnabled,
+  } = {},
 ) {
   if (!fs.existsSync(artifactPath)) {
     throw new Error(`Generated userscript is missing: ${artifactPath}`);
   }
 
-  if (!disableVoteSubmission && rateBarEnabled === undefined && coloredThumbs === undefined) {
+  if (
+    !disableVoteSubmission &&
+    rateBarEnabled === undefined &&
+    coloredThumbs === undefined &&
+    numberDisplayReformatLikes === undefined
+  ) {
     await page.addScriptTag({ path: artifactPath });
     return;
   }
@@ -392,6 +403,9 @@ async function injectGeneratedUserscript(
   }
   if (coloredThumbs !== undefined) {
     source = overrideBooleanOption(source, "coloredThumbs", coloredThumbs);
+  }
+  if (numberDisplayReformatLikes !== undefined) {
+    source = overrideBooleanOption(source, "numberDisplayReformatLikes", numberDisplayReformatLikes);
   }
   await page.addScriptTag({ content: source });
 }

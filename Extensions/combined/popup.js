@@ -1,5 +1,8 @@
 import { config as appConfig, getApiUrl, getApiEndpoint } from "./src/config.js";
 import { getGitHubLoginErrorMessage } from "./src/github-login-error";
+import { initDiscussionPopup } from "./src/discussion/popup";
+import { waitForCoreDataConsent } from "./src/consent-prompt";
+import { fetchWithCoreConsent, onCoreDataPermissionChanged } from "./src/core-data-consent";
 import {
   hasAuthenticationDataPermission,
   onAuthenticationDataPermissionRemoved,
@@ -47,6 +50,11 @@ function localizeHtmlPage() {
 }
 
 localizeHtmlPage();
+const coreConsentReady = waitForCoreDataConsent({ alwaysExplain: true });
+coreConsentReady.then(() => initDiscussionPopup());
+onCoreDataPermissionChanged((granted) => {
+  if (!granted) void waitForCoreDataConsent({ alwaysExplain: true });
+});
 
 /*   Links   */
 createLink(config.links.website, "link_website");
@@ -195,6 +203,7 @@ function initPatreonAuth() {
 
     const tierLabels = {
       premium: chrome.i18n.getMessage("patreonTierPremium"),
+      commenter: chrome.i18n.getMessage("patreonTierCommenter"),
       supporter: chrome.i18n.getMessage("patreonTierSupporter"),
       basic: chrome.i18n.getMessage("patreonTierBasic"),
       none: chrome.i18n.getMessage("patreonTierNone"),
@@ -215,7 +224,7 @@ function initPatreonAuth() {
         return { status: "consent_required" };
       }
 
-      const response = await fetch(getApiEndpoint("/api/auth/verify"), {
+      const response = await fetchWithCoreConsent(getApiEndpoint("/api/auth/verify"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -450,7 +459,7 @@ function initPatreonAuth() {
   });
 }
 
-initPatreonAuth();
+coreConsentReady.then(() => initPatreonAuth());
 
 /*   Advanced Toggle   */
 const advancedToggle = document.getElementById("advancedToggle");

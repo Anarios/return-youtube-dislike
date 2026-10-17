@@ -1,6 +1,6 @@
 import { getButtons, getDislikeButton, getLikeButton } from "./buttons";
 import { extConfig, isMobile, isLikesDisabled, isNewDesign, isRoundedDesign, isShorts } from "./state";
-import { getColorFromTheme, getVideoId, isInViewport, querySelector } from "./utils";
+import { getColorFromTheme, getElementWidth, getVideoId, isInViewport, querySelector } from "./utils";
 
 function closestConfigured(element, selectors) {
   for (const selector of Array.isArray(selectors) ? selectors : [selectors]) {
@@ -101,9 +101,7 @@ function createRateBar(likes, dislikes) {
     }
 
     const widthPx =
-      parseFloat(window.getComputedStyle(getLikeButton()).width) +
-      parseFloat(window.getComputedStyle(getDislikeButton()).width) +
-      (isRoundedDesign() ? 0 : 8);
+      getElementWidth(getLikeButton()) + getElementWidth(getDislikeButton()) + (isRoundedDesign() ? 0 : 8);
 
     const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 

@@ -1,4 +1,5 @@
 import { getApiEndpoint } from "../config";
+import { fetchWithCoreConsent } from "../core-data-consent";
 import { analyticsState, COUNTRY_LIMIT } from "./state";
 import { ensurePanel, updateRangeButtons, updateRangeAnchorButtons, setFooterMessage, setLoadingState } from "./panel";
 import { debounce, safeJson } from "./utils";
@@ -103,7 +104,7 @@ function requestAnalyticsWithConsent({ selection } = {}) {
     analyticsState.sessionToken === sessionToken &&
     analyticsState.sessionActive;
 
-  fetch(url, {
+  fetchWithCoreConsent(url, {
     headers: {
       Authorization: `Bearer ${sessionToken}`,
       "Content-Type": "application/json",

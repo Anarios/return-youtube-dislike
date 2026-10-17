@@ -1,6 +1,7 @@
 const assert = require("node:assert/strict");
 
 const API_METHODS_BY_PATH = Object.freeze({
+  "/api/discussion/capabilities": Object.freeze(["GET"]),
   "/configs/selectors": Object.freeze(["GET"]),
   "/interact/confirmVote": Object.freeze(["POST"]),
   "/interact/vote": Object.freeze(["POST"]),

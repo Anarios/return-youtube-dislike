@@ -311,7 +311,12 @@ function createVoteClient({
     return current;
   }
 
-  return { ensureRegistered, submitVote };
+  async function getRegisteredUser() {
+    const credential = await credentialStore.load();
+    return isConfirmedCredential(credential) ? { userId: credential.userId } : null;
+  }
+
+  return { ensureRegistered, getRegisteredUser, submitVote };
 }
 
 export { DEFAULT_API_BASE_URL, VoteClientError, countLeadingZeroes, generateUserId, solvePuzzle, createVoteClient };

@@ -2,6 +2,13 @@ import { config, getApiUrl, getApiEndpoint, getChangelogUrl } from "./src/config
 import { createVoteClient } from "../common/vote-client";
 import { createBrowserCredentialStore } from "./src/vote-client-adapter";
 import { loginWithGitHub } from "./src/github-auth";
+import { createDiscussionBackground } from "./src/discussion-background";
+import {
+  coreConsentError,
+  fetchWithCoreConsent,
+  hasCoreDataPermission,
+  onCoreDataPermissionChanged,
+} from "./src/core-data-consent";
 import {
   hasAuthenticationDataPermission,
   onAuthenticationDataPermissionRemoved,
@@ -19,6 +26,8 @@ const PENDING_CHANGELOG_STORAGE_KEY = "pendingChangelogVersion";
 let extConfig = { ...config.defaultExtConfig };
 let authenticationGeneration = 0;
 let accountStorageQueue = Promise.resolve();
+let consentPageOpening = null;
+let consentPageTabId = null;
 
 if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
@@ -31,15 +40,31 @@ if (__RYD_LIVE_TEST_BUILD__) {
   });
 }
 
+const credentialStore = createBrowserCredentialStore(api.storage.sync, () => api.runtime?.lastError);
 const voteClient = createVoteClient({
   apiBaseUrl: apiUrl,
-  fetchImpl: (...args) => fetch(...args),
-  credentialStore: createBrowserCredentialStore(api.storage.sync, () => api.runtime?.lastError),
+  fetchImpl: fetchWithCoreConsent,
+  credentialStore: {
+    ...credentialStore,
+    async save(value) {
+      await requireCoreConsent();
+      return credentialStore.save(value);
+    },
+  },
   cryptoImpl: globalThis.crypto,
 });
 
+const discussionBackground = createDiscussionBackground({
+  api,
+  voteClient,
+  fetchImpl: fetchWithCoreConsent,
+  hasConsent: async () =>
+    (await hasCoreDataPermission({ queryBackground: false })) &&
+    (!usesFirefoxDataCollectionConsent() || (await hasAuthenticationDataPermission({ queryBackground: false }))),
+});
+discussionBackground.initialize();
+
 initExtConfig();
-voteClient.ensureRegistered().catch((error) => console.error("Vote registration failed", error));
 
 function broadcastPatreonStatus(authenticated, user, sessionToken, generation = authenticationGeneration) {
   chrome.tabs.query({}, (tabs) => {
@@ -130,17 +155,38 @@ function queueAccountStorageMutation(operation) {
 
 function clearPatreonAuth(done) {
   const generation = ++authenticationGeneration;
+  discussionBackground.clearSession(true);
   broadcastPatreonStatus(false, null, null, generation);
   queueAccountStorageMutation((complete) => {
     chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], complete);
   })
-    .then(() => done?.())
+    .then(() => {
+      discussionBackground.resumeSession().catch(() => {});
+      done?.();
+    })
     .catch((error) => console.error("Account session cleanup failed", error));
 }
 
 onAuthenticationDataPermissionRemoved(() => clearPatreonAuth());
 
+onCoreDataPermissionChanged((granted) => {
+  if (!granted) clearPatreonAuth();
+  api.tabs.query({ url: "*://*.youtube.com/*" }, (tabs) => {
+    for (const tab of tabs) {
+      const result = api.tabs.sendMessage(tab.id, { message: "ryd_core_consent_changed", granted }, () => {
+        void api.runtime.lastError;
+      });
+      result?.catch?.(() => {});
+    }
+  });
+});
+
+async function requireCoreConsent() {
+  if (!(await hasCoreDataPermission({ queryBackground: false }))) throw coreConsentError();
+}
+
 async function requireCurrentAuthenticationConsent(generation) {
+  await requireCoreConsent();
   if (
     generation !== authenticationGeneration ||
     (usesFirefoxDataCollectionConsent() && !(await hasAuthenticationDataPermission({ queryBackground: false }))) ||
@@ -192,7 +238,46 @@ function extractOAuthParams(responseUrl) {
 }
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === "patreon_logout") {
+  if (request?.message === "ryd_open_consent") {
+    if (sender.id !== api.runtime.id || sender.url !== api.runtime.getURL("consent.html")) {
+      sendResponse({ success: false });
+      return;
+    }
+    if (!consentPageOpening) {
+      consentPageOpening = (async () => {
+        const tabs = (typeof browser !== "undefined" ? browser : api).tabs;
+        if (consentPageTabId !== null) {
+          try {
+            const existing = await tabs.get(consentPageTabId);
+            if (existing.url === api.runtime.getURL("consent.html")) {
+              await tabs.update(consentPageTabId, { active: true });
+              return;
+            }
+          } catch (_) {}
+        }
+        const tab = await tabs.create({ url: api.runtime.getURL("consent.html") });
+        consentPageTabId = tab.id;
+      })().finally(() => {
+        consentPageOpening = null;
+      });
+    }
+    consentPageOpening.then(
+      () => sendResponse({ success: true }),
+      () => sendResponse({ success: false }),
+    );
+    return true;
+  } else if (request?.message === "ryd_has_core_consent") {
+    hasCoreDataPermission({ queryBackground: false }).then((granted) => sendResponse({ granted }));
+    return true;
+  } else if (request?.message === "ryd_discussion") {
+    requireCoreConsent()
+      .then(() => discussionBackground.handleMessage(request, sender))
+      .then(sendResponse)
+      .catch(() =>
+        sendResponse({ ok: false, error: { code: "consent_required", message: "Enable RYD to continue." } }),
+      );
+    return true;
+  } else if (request.message === "patreon_logout") {
     clearPatreonAuth();
   } else if (request.message === "ryd_has_authentication_consent") {
     hasAuthenticationDataPermission({ queryBackground: false }).then((granted) => sendResponse({ granted }));
@@ -223,7 +308,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.message == "set_state") {
     // chrome.identity.getAuthToken({ interactive: true }, function (token) {
     let token = "";
-    fetch(getApiEndpoint(`/votes?videoId=${request.videoId}&likeCount=${request.likeCount || ""}`), {
+    fetchWithCoreConsent(getApiEndpoint(`/votes?videoId=${request.videoId}&likeCount=${request.likeCount || ""}`), {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -233,32 +318,37 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .then((response) => {
         sendResponse(response);
       })
-      .catch();
+      .catch(() => sendResponse({ error: "consent_required_or_request_failed" }));
     return true;
   } else if (request.message == "send_links") {
     toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
     if (toSend.length >= 20) {
-      fetch(getApiEndpoint("/votes"), {
+      fetchWithCoreConsent(getApiEndpoint("/votes"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(toSend),
-      });
+      }).catch(() => {});
       for (const toSendUrl of toSend) {
         sentIds.add(toSendUrl);
       }
       toSend = [];
     }
   } else if (request.message == "register") {
-    voteClient
-      .ensureRegistered()
-      .then(({ userId }) => sendResponse?.({ success: true, userId }))
+    requireCoreConsent()
+      .then(() => voteClient.getRegisteredUser())
+      .then((user) =>
+        sendResponse?.(user ? { success: true, userId: user.userId } : { success: false, error: "vote_required" }),
+      )
       .catch((error) => sendResponse?.({ success: false, error: error.message }));
     return true;
   } else if (request.message == "send_vote") {
-    voteClient
-      .submitVote(request.videoId, request.vote)
+    requireCoreConsent()
+      .then(() => {
+        if (extConfig.disableVoteSubmission) throw new Error("Vote submission is disabled.");
+        return voteClient.submitVote(request.videoId, request.vote);
+      })
       .then(() => sendResponse?.({ success: true }))
       .catch((error) => sendResponse?.({ success: false, error: error.message }));
     return true;
@@ -284,7 +374,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
               ? chrome.identity.getRedirectURL()
               : "";
 
-        const startRes = await fetch(
+        const startRes = await fetchWithCoreConsent(
           getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`),
         );
         const startData = await startRes.json();
@@ -299,7 +389,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         await requireCurrentAuthenticationConsent(generation);
 
-        const exchangeRes = await fetch(getApiEndpoint("/api/auth/oauth/exchange"), {
+        const exchangeRes = await fetchWithCoreConsent(getApiEndpoint("/api/auth/oauth/exchange"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -351,6 +441,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
               : "";
 
         const authData = await loginWithGitHub({
+          fetchImpl: fetchWithCoreConsent,
           redirectUri,
           launchWebAuthFlow,
           requireConsent: () => requireCurrentAuthenticationConsent(generation),
@@ -573,6 +664,7 @@ const sentIds = new Set();
 let toSend = [];
 
 function storageChangeHandler(changes, area) {
+  discussionBackground.onStorageChanged(changes, area);
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }

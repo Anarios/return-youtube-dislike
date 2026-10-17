@@ -1,4 +1,4 @@
-Read this in other languages: [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [العربية](SECURITY-FAQar.md), [Bahasa Indonesia](SECURITY-FAQid.md), [中文](SECURITY-FAQcn.md), [български](SECURITY-FAQbg.md), [Tiếng Việt](SECURITY-FAQvi.md)
+Read this in other languages: [беларуская](SECURITY-FAQbe.md), [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [العربية](SECURITY-FAQar.md), [Bahasa Indonesia](SECURITY-FAQid.md), [中文](SECURITY-FAQcn.md), [български](SECURITY-FAQbg.md), [Tiếng Việt](SECURITY-FAQvi.md), [Slovenščina](SECURITY-FAQsl.md)
 
 # Security
 
@@ -19,15 +19,16 @@ associate submitted votes with the same extension installation.
 ### What information do you have, exactly?
 
 For dislike-count requests: the current video ID and, when available, the visible like count. For registration and vote
-submission: the random extension user ID, video ID, selected vote, timestamp, and network address used for abuse
-controls. Optional premium features use the account ID, name, email address, profile image, membership information, and
-service session token returned by a Patreon or GitHub sign-in initiated by the user. For version 4.0.6 and its matching
+submission: the random extension user ID, video ID, selected vote, and timestamp. The API also receives your IP address.
+Raw addresses stay in RAM and hashes are stored for abuse controls. Optional premium features use the account ID, name,
+email address, profile image, membership information, and service session token returned by a Patreon or GitHub sign-in
+initiated by the user. For version 4.0.6 and its matching
 backend release, Patreon access is determined from currently entitled tier IDs rather than financial information.
 
 ### How is my IP stored?
 
-The API receives your network address with each request. Confirmed vote records retain the network address used for
-abuse prevention and aggregate analytics. It is not sold or used for advertising.
+Raw IP addresses stay in RAM and hashes are stored. This information is used for abuse prevention and aggregate
+analytics. It is not sold or used for advertising.
 
 ### I heard some discussion over OAuth, and access to my YouTube account!
 

@@ -26,6 +26,7 @@ export default {
     userscript: "Userscript",
     tampermonkey: "Tampermonkey",
     androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
     androidTubular: "Android (Tubular - fork NewPipe)",
     iosJailbroken: "iOS (jailbreak)",
     iosUYouPlus: "iOS (uYou+)",

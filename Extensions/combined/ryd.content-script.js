@@ -19,6 +19,7 @@ import {
   clearRenderedVoteState,
   restoreCurrentState,
   setInitialState,
+  storedData,
 } from "./src/state";
 import { getBrowser, getVideoId, isVideoLoaded } from "./src/utils";
 import { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler } from "./src/events";
@@ -31,6 +32,9 @@ import {
   reactionControlsCanInitialize,
 } from "./src/initialization-cycle";
 import { initPatreonFeatures } from "./src/patreon";
+import { initDiscussion } from "./src/discussion";
+import { waitForCoreDataConsent } from "./src/consent-prompt";
+import { onCoreDataPermissionChanged } from "./src/core-data-consent";
 import { cancelObsoleteVoteDataRequests, clearVoteDataRequestCache } from "./src/vote-data-request";
 import {
   actionBarHasHydratedData,
@@ -59,6 +63,7 @@ let initializationCheckRunning = false;
 let pendingShortsMutationSurface = null;
 let shortsRouteEpoch = 0;
 let observedRouteKey = null;
+let coreConsentGranted = false;
 const pendingNavigation = createPendingNavigationTracker();
 const SHORTS_HYDRATION_ATTRIBUTE = "data-ryd-shorts-action-bar-hydrated";
 const SHORTS_HYDRATION_REQUEST_EVENT = "ryd-shorts-action-bar-hydration-request";
@@ -90,10 +95,26 @@ function pageWorldActionBarHasHydratedData(actionBar) {
   return hydrated;
 }
 
+await waitForCoreDataConsent();
+coreConsentGranted = true;
+onCoreDataPermissionChanged((granted) => {
+  coreConsentGranted = granted;
+  if (!granted) {
+    clearVoteDataRequestCache();
+    storedData.videoId = null;
+    initializedVideoId = null;
+    isSetInitialStateDone = false;
+    clearRenderedVoteState();
+    void waitForCoreDataConsent().then(() => {
+      coreConsentGranted = true;
+    });
+  }
+});
 const pageWorldHelpersReady = injectPageWorldHelpers();
 await initExtConfig();
 await pageWorldHelpersReady;
 initPatreonFeatures();
+initDiscussion();
 
 // Settings that affect page-world helpers must continue to update even when
 // YouTube's reaction controls have not finished initializing.
@@ -277,6 +298,7 @@ function getStableShortsControls(videoId) {
 }
 
 async function checkForInitialization() {
+  if (!coreConsentGranted) return;
   if (initializationCheckRunning) return;
   initializationCheckRunning = true;
   try {
@@ -309,7 +331,7 @@ async function checkForInitialization() {
       } else {
         rendered = await setInitialState();
       }
-      if (rendered === false) return;
+      if (rendered === false || !coreConsentGranted) return;
       const currentControls = getButtonControls();
       if (
         videoId !== getVideoId(window.location.href) ||
@@ -373,6 +395,7 @@ const initializationCycle = createInitializationCycleRunner(async () => {
 });
 
 function triggerInitializationCycle() {
+  if (!coreConsentGranted) return Promise.resolve();
   return initializationCycle.request();
 }
 
@@ -490,6 +513,7 @@ function watchControlsNeedInitialization() {
 }
 
 setInterval(() => {
+  if (!coreConsentGranted) return;
   syncShortsRouteEpoch();
   if (isShorts()) ensureShortsNavigationObserver();
   if (watchControlsNeedInitialization()) void triggerInitializationCycle();

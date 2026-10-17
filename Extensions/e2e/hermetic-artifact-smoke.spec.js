@@ -37,6 +37,18 @@ const {
 const PRODUCTION_API_ORIGIN = "https://returnyoutubedislikeapi.com";
 const temporaryDirectories = [];
 
+test("the extension adapter honors the selected artifact even when a scenario uses its default", () => {
+  const previous = process.env.RYD_EXTENSION_ARTIFACT;
+  process.env.RYD_EXTENSION_ARTIFACT = path.join(os.tmpdir(), "selected-production-artifact");
+  try {
+    const adapter = new HermeticExtensionArtifactAdapter({ apiServer: { origin: "http://127.0.0.1:1234" } });
+    expect(adapter.artifactDirectory).toBe(path.resolve(process.env.RYD_EXTENSION_ARTIFACT));
+  } finally {
+    if (previous == null) delete process.env.RYD_EXTENSION_ARTIFACT;
+    else process.env.RYD_EXTENSION_ARTIFACT = previous;
+  }
+});
+
 function createExtensionFixture(lineEnding = "\n") {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "ryd-mv3-source-fixture-"));
   temporaryDirectories.push(directory);
@@ -275,6 +287,21 @@ test("the loopback backend records and rejects an OPTIONS request to an unknown 
       pathname: "/unexpected-preflight",
       responseStatus: 404,
     });
+  } finally {
+    await apiServer.close();
+  }
+});
+
+test("legacy artifact fixtures explicitly disable discussion and still reject discussion writes", async () => {
+  const apiServer = await startHermeticApiServer();
+  try {
+    const capabilities = await fetch(`${apiServer.origin}/api/discussion/capabilities`);
+    expect(capabilities.status).toBe(200);
+    expect(await capabilities.json()).toEqual({ enabled: false });
+    expect(apiServer.unexpectedRequests).toHaveLength(0);
+    const mutation = await fetch(`${apiServer.origin}/api/discussion/videos/abcdefghijk/comments`, { method: "POST" });
+    expect(mutation.status).toBe(404);
+    expect(apiServer.unexpectedRequests).toHaveLength(1);
   } finally {
     await apiServer.close();
   }

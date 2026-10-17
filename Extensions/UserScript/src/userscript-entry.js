@@ -817,10 +817,12 @@ function getLikeButton(buttons = getButtons()) {
 }
 
 function getLikeTextContainer() {
+  const likeButton = getLikeButton();
+  if (!likeButton) return null;
   return (
-    getLikeButton().querySelector("#text") ??
-    getLikeButton().getElementsByTagName("yt-formatted-string")[0] ??
-    getLikeButton().querySelector("span[role='text']")
+    likeButton.querySelector("#text") ??
+    likeButton.getElementsByTagName("yt-formatted-string")[0] ??
+    likeButton.querySelector("span[role='text']")
   );
 }
 
@@ -988,10 +990,12 @@ function getState() {
 
 function setLikes(likesCount) {
   if (isMobile) {
-    getButtons().children[0].querySelector(".button-renderer-text").innerText = likesCount;
+    const container = getButtons()?.children[0]?.querySelector(".button-renderer-text");
+    if (container) container.innerText = likesCount;
     return;
   }
-  getLikeTextContainer().innerText = likesCount;
+  const container = getLikeTextContainer();
+  if (container) container.innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
@@ -1046,7 +1050,7 @@ function getLikeCountFromButton() {
     }
 
     #return-youtube-dislike-bar {
-      background: var(--yt-spec-text-primary);
+      background: var(--yt-spec-text-primary, #f1f1f1);
       border-radius: 2px;
       transition: all 0.15s ease-in-out;
     }
@@ -1185,7 +1189,10 @@ function createRateBar(likes, dislikes) {
     rateBar = null;
   }
 
-  const widthPx = likeButton.clientWidth + (dislikeButton?.clientWidth ?? 52);
+  // Inline view-model wrappers have no client width even when their children render.
+  const widthPx =
+    (likeButton.clientWidth || likeButton.getBoundingClientRect().width) +
+    (dislikeButton ? dislikeButton.clientWidth || dislikeButton.getBoundingClientRect().width : 52);
 
   const widthPercent = likes + dislikes > 0 ? (likes / (likes + dislikes)) * 100 : 50;
 

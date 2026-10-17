@@ -28,6 +28,7 @@ export default {
     userscript: "ユーザースクリプト",
     tampermonkey: "Tampermonkey",
     androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
     androidTubular: "Android（Tubular - NewPipeのフォーク）",
     iosJailbroken: "iOS（脱獄）",
     iosUYouPlus: "iOS（uYou+）",

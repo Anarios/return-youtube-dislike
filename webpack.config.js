@@ -6,7 +6,7 @@ const { BUILD_RECEIPT_FILENAME, createExtensionBuildReceipt } = require("./exten
 const { LiveBuildMarkerPlugin, createLiveBuildId } = require("./webpack.live-build-marker");
 
 const extensionVersion = (process.env.npm_package_version || require("./package.json").version).replace("-", ".");
-const entries = ["ryd.content-script", "ryd.background", "popup", "ryd.changelog"];
+const entries = ["ryd.content-script", "ryd.background", "popup", "ryd.changelog", "consent"];
 
 const ignorePatterns = [
   "**/manifest-**",
@@ -20,7 +20,7 @@ const ignorePatterns = [
   ...entries.map((entry) => `**/${entry}.js`),
 ];
 
-const manifestTransform = (content, filename) => {
+const manifestTransform = (content, filename, discussionTestOrigin = "") => {
   const filteredContent = content
     .toString()
     .split("\n")
@@ -29,6 +29,12 @@ const manifestTransform = (content, filename) => {
 
   const manifestData = JSON.parse(filteredContent);
   manifestData.version = extensionVersion;
+  if (discussionTestOrigin) {
+    const testUrl = new URL(discussionTestOrigin);
+    const permission = `${testUrl.protocol}//${testUrl.hostname}/*`;
+    const permissionField = manifestData.manifest_version === 3 ? "host_permissions" : "permissions";
+    manifestData[permissionField] = [...new Set([...(manifestData[permissionField] || []), permission])];
+  }
   return JSON.stringify(manifestData, null, 2);
 };
 
@@ -103,6 +109,22 @@ class ExtensionBuildReceiptPlugin {
 
 module.exports = (env = {}, argv = {}) => {
   const liveTestBuild = env.liveTest === true || env.liveTest === "true";
+  let discussionTestOrigin = "";
+  if (env.discussionTestOrigin) {
+    if (!liveTestBuild) throw new Error("A local discussion origin requires the explicit live-test build.");
+    const origin = new URL(env.discussionTestOrigin);
+    if (
+      !["http:", "https:"].includes(origin.protocol) ||
+      !["127.0.0.1", "localhost", "[::1]"].includes(origin.hostname) ||
+      origin.username ||
+      origin.password ||
+      origin.pathname !== "/" ||
+      origin.search ||
+      origin.hash
+    )
+      throw new Error("The discussion test origin must be a loopback HTTP origin without credentials or a path.");
+    discussionTestOrigin = origin.origin;
+  }
   const liveBuildId = createLiveBuildId(liveTestBuild);
   const buildMode = argv.mode || "production";
 
@@ -127,6 +149,7 @@ module.exports = (env = {}, argv = {}) => {
       new webpack.DefinePlugin({
         __RYD_LIVE_BUILD_ID__: JSON.stringify(liveBuildId),
         __RYD_LIVE_TEST_BUILD__: JSON.stringify(liveTestBuild),
+        __RYD_DISCUSSION_TEST_ORIGIN__: JSON.stringify(discussionTestOrigin),
       }),
       ...(liveTestBuild
         ? [
@@ -151,7 +174,7 @@ module.exports = (env = {}, argv = {}) => {
           {
             from: "./Extensions/combined/manifest-chrome.json",
             to: "./chrome/manifest.json",
-            transform: manifestTransform,
+            transform: (content, filename) => manifestTransform(content, filename, discussionTestOrigin),
           },
           {
             from: "./Extensions/combined",
@@ -164,7 +187,7 @@ module.exports = (env = {}, argv = {}) => {
           {
             from: "./Extensions/combined/manifest-firefox.json",
             to: "./firefox/manifest.json",
-            transform: manifestTransform,
+            transform: (content, filename) => manifestTransform(content, filename, discussionTestOrigin),
           },
           {
             from: "./Extensions/combined",
@@ -177,7 +200,7 @@ module.exports = (env = {}, argv = {}) => {
           {
             from: "./Extensions/combined/manifest-safari.json",
             to: "./safari/manifest.json",
-            transform: manifestTransform,
+            transform: (content, filename) => manifestTransform(content, filename, discussionTestOrigin),
           },
         ],
       }),
