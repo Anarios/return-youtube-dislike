@@ -5,9 +5,17 @@
 
 jest.mock("./bar", () => ({ createRateBar: jest.fn() }));
 
+import { createRateBar } from "./bar";
 import { getButtonControls, getLikeTextContainer } from "./buttons";
 import { addLikeDislikeEventListener, storageChangeHandler } from "./events";
-import { extConfig, refreshReactionPresentation, setLikes, storedData, NEUTRAL_STATE } from "./state";
+import {
+  extConfig,
+  refreshReactionPresentation,
+  restoreCurrentState,
+  setLikes,
+  storedData,
+  NEUTRAL_STATE,
+} from "./state";
 
 const innerTextDescriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "innerText");
 
@@ -138,6 +146,62 @@ test("native count markup is untouched when reformatting is off", async () => {
   await flushMutations();
   expect(getLikeTextContainer().firstChild).toBe(node);
   expect(node.data).toBe("731");
+});
+
+test("later native labels refresh stored likes and the rate bar when reformatting is off", async () => {
+  const controls = mount();
+  refreshReactionPresentation();
+  createRateBar.mockClear();
+
+  controls.nativeLikeButton.setAttribute("aria-label", "731 likes");
+  await flushMutations();
+
+  expect(storedData.likes).toBe(731);
+  expect(createRateBar).toHaveBeenLastCalledWith(731, 12);
+});
+
+test("pressed-state mutations do not replace optimistic likes with an unchanged native label", async () => {
+  const controls = mount();
+  refreshReactionPresentation();
+  storedData.likes = 731;
+  createRateBar.mockClear();
+
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  await flushMutations();
+
+  expect(storedData.likes).toBe(731);
+  expect(createRateBar).not.toHaveBeenCalled();
+});
+
+test("restored controls preserve optimistic likes through a pressed-state mutation", async () => {
+  const controls = mount();
+  expect(restoreCurrentState()).toBe(true);
+  storedData.likes = 731;
+  createRateBar.mockClear();
+
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  await flushMutations();
+
+  expect(storedData.likes).toBe(731);
+  expect(createRateBar).not.toHaveBeenCalled();
+});
+
+test("a native label from the outgoing video cannot refresh destination likes", async () => {
+  const controls = mount();
+  refreshReactionPresentation();
+  history.replaceState({}, "", "/watch?v=zyxwvutsrqp");
+  Object.assign(storedData, { videoId: "zyxwvutsrqp", likes: 3591, dislikes: 1409 });
+  createRateBar.mockClear();
+
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  await flushMutations();
+  expect(storedData.likes).toBe(3591);
+  expect(createRateBar).not.toHaveBeenCalled();
+
+  controls.nativeLikeButton.setAttribute("aria-label", "3592 likes");
+  await flushMutations();
+  expect(storedData.likes).toBe(3592);
+  expect(createRateBar).toHaveBeenLastCalledWith(3592, 1409);
 });
 
 test("does not flatten native counters made of multiple text nodes", () => {

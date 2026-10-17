@@ -80,6 +80,7 @@ import { clearVoteDataRequestCache } from "./vote-data-request";
 import {
   clearRenderedVoteState,
   extConfig,
+  getLikeCountFromButton,
   initializeHideClutterButtons,
   initializeSelectors,
   restoreCurrentState,
@@ -103,6 +104,7 @@ function deferred() {
 
 beforeEach(() => {
   stateRewire.__set__("refreshReactionPresentation", jest.fn());
+  stateRewire.__set__("nativeLikeCounts", new WeakMap());
   clearVoteDataRequestCache();
   globalThis.__mockBrowser = undefined;
   globalThis.__mockControlsUnavailable = false;
@@ -121,6 +123,7 @@ beforeEach(() => {
 
 afterEach(() => {
   stateRewire.__ResetDependency__("refreshReactionPresentation");
+  stateRewire.__ResetDependency__("nativeLikeCounts");
   stateRewire.__ResetDependency__("isMobile");
   stateRewire.__ResetDependency__("syntheticDislikeStore");
 });
@@ -400,6 +403,74 @@ test.each([0, 100])("reads the current native count at render time with API like
 
   expect(createRateBar).toHaveBeenCalledWith(73, 65);
   expect(testState.likes).toBe(73);
+});
+
+test("ignores an unchanged outgoing native label when the same button is reused for another video", async () => {
+  fetch
+    .mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 65, likes: 100 }) })
+    .mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 12, likes: 73 }) });
+  const testState = { dislikes: 0, likes: 0, previousState: "NEUTRAL_STATE", videoId: null };
+  await setState(testState);
+  expect(testState.likes).toBe(35);
+
+  window.history.replaceState(null, "", "/watch?v=zyxwvutsrqp");
+  await expect(setState(testState)).resolves.toBe(true);
+
+  expect(fetch).toHaveBeenLastCalledWith("https://example.test/votes?videoId=zyxwvutsrqp", expect.any(Object));
+  expect(testState).toMatchObject({ dislikes: 12, likes: 73, videoId: "zyxwvutsrqp" });
+  expect(createRateBar).toHaveBeenLastCalledWith(73, 12);
+  expect(getLikeCountFromButton()).toBe(false);
+});
+
+test("accepts a reused button's destination label when it changes while the API request is pending", async () => {
+  const pending = deferred();
+  fetch
+    .mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 65, likes: 100 }) })
+    .mockReturnValueOnce(pending.promise);
+  const testState = { dislikes: 0, likes: 0, previousState: "NEUTRAL_STATE", videoId: null };
+  await setState(testState);
+
+  window.history.replaceState(null, "", "/watch?v=zyxwvutsrqp");
+  const initialization = setState(testState);
+  getLikeButton().native.ariaLabel = "92 likes";
+  pending.resolve({ ok: true, json: async () => ({ dislikes: 12, likes: 73 }) });
+  await expect(initialization).resolves.toBe(true);
+
+  expect(testState.likes).toBe(92);
+  expect(createRateBar).toHaveBeenLastCalledWith(92, 12);
+});
+
+test("accepts a replacement native button even when its label matches the outgoing count", () => {
+  expect(getLikeCountFromButton()).toBe(35);
+  window.history.replaceState(null, "", "/watch?v=zyxwvutsrqp");
+  expect(getLikeCountFromButton()).toBe(false);
+  const likeButton = getLikeButton();
+  const outgoingNativeButton = likeButton.native;
+  try {
+    likeButton.native = { ...outgoingNativeButton };
+    expect(getLikeCountFromButton()).toBe(35);
+  } finally {
+    likeButton.native = outgoingNativeButton;
+  }
+});
+
+test("restoration keeps destination API likes until a reused native label changes", async () => {
+  fetch
+    .mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 65, likes: 100 }) })
+    .mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 12, likes: 73 }) });
+  Object.assign(storedData, { dislikes: 0, likes: 0, previousState: "NEUTRAL_STATE", videoId: null });
+  await setState(storedData);
+
+  window.history.replaceState(null, "", "/watch?v=zyxwvutsrqp");
+  await setState(storedData);
+  expect(restoreCurrentState()).toBe(true);
+  expect(storedData.likes).toBe(73);
+  expect(createRateBar).toHaveBeenLastCalledWith(73, 12);
+
+  getLikeButton().native.ariaLabel = "92 likes";
+  expect(restoreCurrentState()).toBe(true);
+  expect(storedData.likes).toBe(92);
+  expect(createRateBar).toHaveBeenLastCalledWith(92, 12);
 });
 
 test.each([

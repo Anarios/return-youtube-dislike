@@ -281,8 +281,16 @@ function setLikes(likesCount) {
 }
 
 function refreshReactionPresentation() {
+  const nativeLikeCount = readNativeLikeCount();
+  const nativeLikes = nativeLikeCount?.likes ?? false;
+  if (nativeLikes > 0 && nativeLikeCount.videoId === storedData.videoId && !nativeLikeCount.presented) {
+    nativeLikeCount.presented = true;
+    if (storedData.likes !== nativeLikes) {
+      storedData.likes = nativeLikes;
+      createRateBar(storedData.likes, storedData.dislikes);
+    }
+  }
   if (extConfig.numberDisplayReformatLikes === true) {
-    const nativeLikes = getLikeCountFromButton();
     if (nativeLikes !== false) setLikes(numberFormat(nativeLikes));
   } else {
     const textNode = getLikeTextNode();
@@ -339,29 +347,52 @@ function setDislikes(dislikesCount) {
   return true;
 }
 
-function getLikeCountFromButton() {
+const nativeLikeCounts = new WeakMap();
+
+function readNativeLikeCount() {
   try {
     if (isShorts()) {
       //Youtube Shorts don't work with this query. It's not necessary; we can skip it and still see the results.
       //It should be possible to fix this function, but it's not critical to showing the dislike count.
-      return false;
+      return null;
     }
 
-    let likeButton = querySelector(extConfig.selectors.likeCountButton, getLikeButton());
+    const likeButton = querySelector(extConfig.selectors.likeCountButton, getLikeButton());
+    const nativeLabel = likeButton.getAttribute("aria-label");
+    const videoId = getVideoId(window.location.href);
+    const previous = nativeLikeCounts.get(likeButton);
+    // A reused button can retain the outgoing video's count after navigation.
+    // Trust it again only after YouTube changes the label or replaces the node.
+    if (previous && previous.videoId !== videoId && previous.nativeLabel === nativeLabel) return null;
+    if (previous?.videoId === videoId && previous.nativeLabel === nativeLabel) return previous;
 
-    let likesStr = likeButton.getAttribute("aria-label").replace(/\D/g, "");
-    return likesStr.length > 0 ? parseInt(likesStr) : false;
+    const likesStr = nativeLabel?.replace(/\D/g, "") ?? "";
+    const current = {
+      likes: likesStr.length > 0 ? parseInt(likesStr) : false,
+      nativeLabel,
+      presented: false,
+      videoId,
+    };
+    nativeLikeCounts.set(likeButton, current);
+    return current;
   } catch {
-    return false;
+    return null;
   }
+}
+
+function getLikeCountFromButton() {
+  return readNativeLikeCount()?.likes ?? false;
 }
 
 function processResponse(response, storedData) {
   const formattedDislike = numberFormat(response.dislikes);
   if (!setDislikes(formattedDislike)) return false;
   // Prefer YouTube's positive count, including updates made while the request was pending.
-  const nativeLikes = getLikeCountFromButton();
-  if (nativeLikes > 0) storedData.likes = nativeLikes;
+  const nativeLikeCount = readNativeLikeCount();
+  if (nativeLikeCount?.likes > 0) {
+    storedData.likes = nativeLikeCount.likes;
+    nativeLikeCount.presented = true;
+  }
   refreshReactionPresentation();
   createRateBar(storedData.likes, storedData.dislikes);
 
@@ -456,8 +487,11 @@ function restoreCurrentState() {
     storedData.previousState = isVideoDisliked() ? DISLIKED_STATE : isVideoLiked() ? LIKED_STATE : NEUTRAL_STATE;
   }
   if (!setDislikes(numberFormat(storedData.dislikes))) return false;
-  const nativeLikes = getLikeCountFromButton();
-  if (nativeLikes > 0) storedData.likes = nativeLikes;
+  const nativeLikeCount = readNativeLikeCount();
+  if (nativeLikeCount?.likes > 0) {
+    storedData.likes = nativeLikeCount.likes;
+    nativeLikeCount.presented = true;
+  }
   createRateBar(storedData.likes, storedData.dislikes);
   return true;
 }
