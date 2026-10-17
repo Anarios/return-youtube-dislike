@@ -1,5 +1,6 @@
 import { config as appConfig, getApiUrl, getApiEndpoint } from "./src/config.js";
 import { getGitHubLoginErrorMessage } from "./src/github-login-error";
+import { initDiscussionPopup } from "./src/discussion/popup";
 import {
   hasAuthenticationDataPermission,
   onAuthenticationDataPermissionRemoved,
@@ -47,6 +48,7 @@ function localizeHtmlPage() {
 }
 
 localizeHtmlPage();
+initDiscussionPopup();
 
 /*   Links   */
 createLink(config.links.website, "link_website");
@@ -195,6 +197,7 @@ function initPatreonAuth() {
 
     const tierLabels = {
       premium: chrome.i18n.getMessage("patreonTierPremium"),
+      commenter: chrome.i18n.getMessage("patreonTierCommenter"),
       supporter: chrome.i18n.getMessage("patreonTierSupporter"),
       basic: chrome.i18n.getMessage("patreonTierBasic"),
       none: chrome.i18n.getMessage("patreonTierNone"),

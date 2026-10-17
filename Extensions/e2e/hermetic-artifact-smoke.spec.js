@@ -277,6 +277,21 @@ test("the loopback backend records and rejects an OPTIONS request to an unknown 
   }
 });
 
+test("legacy artifact fixtures explicitly disable discussion and still reject discussion writes", async () => {
+  const apiServer = await startHermeticApiServer();
+  try {
+    const capabilities = await fetch(`${apiServer.origin}/api/discussion/capabilities`);
+    expect(capabilities.status).toBe(200);
+    expect(await capabilities.json()).toEqual({ enabled: false });
+    expect(apiServer.unexpectedRequests).toHaveLength(0);
+    const mutation = await fetch(`${apiServer.origin}/api/discussion/videos/abcdefghijk/comments`, { method: "POST" });
+    expect(mutation.status).toBe(404);
+    expect(apiServer.unexpectedRequests).toHaveLength(1);
+  } finally {
+    await apiServer.close();
+  }
+});
+
 function createPreflightRoute(pathname, requestedMethod) {
   const request = {
     headers: () => ({ "access-control-request-method": requestedMethod }),

@@ -8,6 +8,28 @@ const CHALLENGE = Buffer.alloc(16, 7).toString("base64");
 const ZERO_SOLUTION = "AAAAAA==";
 const GENERATED_USER_ID = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghij";
 
+test.each([null, { userId: GENERATED_USER_ID, registrationConfirmed: false }])(
+  "reading an existing voter does not create or register an identity: %s",
+  async (credentials) => {
+    const store = createCredentialStore(credentials);
+    const fetchImpl = jest.fn();
+    const cryptoImpl = createCryptoImpl();
+    const client = createClient({ credentialStore: store, fetchImpl, cryptoImpl });
+    expect(await client.getRegisteredUser()).toBe(null);
+    expect(fetchImpl).not.toHaveBeenCalled();
+    expect(store.save).not.toHaveBeenCalled();
+    expect(cryptoImpl.getRandomValues).not.toHaveBeenCalled();
+  },
+);
+
+test("reads a confirmed existing voter without registration", async () => {
+  const store = createCredentialStore({ userId: GENERATED_USER_ID, registrationConfirmed: true });
+  const fetchImpl = jest.fn();
+  const client = createClient({ credentialStore: store, fetchImpl });
+  expect(await client.getRegisteredUser()).toEqual({ userId: GENERATED_USER_ID });
+  expect(fetchImpl).not.toHaveBeenCalled();
+});
+
 function jsonResponse(body, status = 200) {
   return {
     ok: status >= 200 && status < 300,

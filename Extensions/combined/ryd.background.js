@@ -2,6 +2,7 @@ import { config, getApiUrl, getApiEndpoint, getChangelogUrl } from "./src/config
 import { createVoteClient } from "../common/vote-client";
 import { createBrowserCredentialStore } from "./src/vote-client-adapter";
 import { loginWithGitHub } from "./src/github-auth";
+import { createDiscussionBackground } from "./src/discussion-background";
 import {
   hasAuthenticationDataPermission,
   onAuthenticationDataPermissionRemoved,
@@ -37,6 +38,14 @@ const voteClient = createVoteClient({
   credentialStore: createBrowserCredentialStore(api.storage.sync, () => api.runtime?.lastError),
   cryptoImpl: globalThis.crypto,
 });
+
+const discussionBackground = createDiscussionBackground({
+  api,
+  voteClient,
+  hasConsent: async () =>
+    !usesFirefoxDataCollectionConsent() || (await hasAuthenticationDataPermission({ queryBackground: false })),
+});
+discussionBackground.initialize();
 
 initExtConfig();
 voteClient.ensureRegistered().catch((error) => console.error("Vote registration failed", error));
@@ -130,11 +139,15 @@ function queueAccountStorageMutation(operation) {
 
 function clearPatreonAuth(done) {
   const generation = ++authenticationGeneration;
+  discussionBackground.clearSession(true);
   broadcastPatreonStatus(false, null, null, generation);
   queueAccountStorageMutation((complete) => {
     chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], complete);
   })
-    .then(() => done?.())
+    .then(() => {
+      discussionBackground.resumeSession().catch(() => {});
+      done?.();
+    })
     .catch((error) => console.error("Account session cleanup failed", error));
 }
 
@@ -192,7 +205,10 @@ function extractOAuthParams(responseUrl) {
 }
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === "patreon_logout") {
+  if (request?.message === "ryd_discussion") {
+    discussionBackground.handleMessage(request, sender).then(sendResponse);
+    return true;
+  } else if (request.message === "patreon_logout") {
     clearPatreonAuth();
   } else if (request.message === "ryd_has_authentication_consent") {
     hasAuthenticationDataPermission({ queryBackground: false }).then((granted) => sendResponse({ granted }));
@@ -573,6 +589,7 @@ const sentIds = new Set();
 let toSend = [];
 
 function storageChangeHandler(changes, area) {
+  discussionBackground.onStorageChanged(changes, area);
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }

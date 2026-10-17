@@ -5,6 +5,7 @@
     <meta content="text/html; charset=utf-8" />
     <title title="__MSG_extensionName__">__MSG_extensionName__</title>
     <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="content-style.css" />
   </head>
   <!--   END HEADER -->
   <body>
@@ -85,9 +86,19 @@
       <button class="m3-btn" id="link_github" title="__MSG_linkGithub__">__MSG_linkGithub__</button>
       <button class="m3-btn" style="margin-top: 0.3em" id="link_help" title="__MSG_linkHelp__">__MSG_linkHelp__</button>
       <br />
+      <button
+        type="button"
+        id="ryd-discussion-inbox-toggle"
+        class="m3-btn"
+        aria-expanded="false"
+        aria-controls="ryd-discussion-popup"
+      >
+        __MSG_discussion_notifications__
+      </button>
       <button class="m3-btn" style="margin-top: 0.3em" id="link_changelog" title="__MSG_linkChangelog__">
         __MSG_linkChangelog__
       </button>
+      <section id="ryd-discussion-popup" class="ryd-discussion-popup"></section>
 
       <br />
       <br />

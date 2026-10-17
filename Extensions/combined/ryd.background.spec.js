@@ -189,7 +189,17 @@ describe("background account consent lifecycle", () => {
       await flushPromises();
       expect(stored).toEqual({});
       expect(chrome.storage.sync.remove).toHaveBeenCalledTimes(1);
-      expect(chrome.tabs.sendMessage.mock.calls.every(([, message]) => message.authenticated === false)).toBe(true);
+      expect(
+        chrome.tabs.sendMessage.mock.calls
+          .filter(([, message]) => message.message === "patreon_status_changed")
+          .every(([, message]) => message.authenticated === false),
+      ).toBe(true);
+      expect(
+        chrome.tabs.sendMessage.mock.calls
+          .filter(([, message]) => message.message === "ryd_discussion_event" && message.type === "session")
+          .every(([, message]) => message.data.authenticated === false),
+      ).toBe(true);
+
       expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
     },
   );

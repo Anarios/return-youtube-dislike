@@ -13,6 +13,26 @@
 }
 
 /***   MATERIAL 3   ***/
+.ryd-discussion-popup {
+  --yt-spec-base-background: var(--background);
+  --yt-spec-text-primary: #f5eded;
+  --yt-spec-text-secondary: #ccbebe;
+  --yt-spec-badge-chip-background: var(--tertiary);
+  --yt-spec-10-percent-layer: #624d4d;
+  --yt-spec-call-to-action: var(--primary);
+  margin: 0;
+  width: 100%;
+}
+.ryd-discussion-popup .ryd-discussion-inbox {
+  margin-top: 12px;
+  padding: 0 8px 12px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.ryd-discussion-popup .ryd-discussion-toolbar {
+  justify-content: flex-start;
+}
+
 .m3-primary {
   background: var(--primary) !important;
   color: var(--background) !important;

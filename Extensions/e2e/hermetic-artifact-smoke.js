@@ -619,6 +619,8 @@ async function startHermeticApiServer({ dislikes = 25, likes = 100 } = {}) {
     }
     let defaultBody;
     if (request.method === "GET" && url.pathname === "/configs/selectors") defaultBody = {};
+    else if (request.method === "GET" && url.pathname === "/api/discussion/capabilities")
+      defaultBody = { enabled: false };
     else if (request.method === "GET" && url.pathname === "/votes") {
       defaultBody = { dislikes, likes, rating: 4.5 };
     } else if (request.method === "GET" && url.pathname === "/puzzle/registration") {

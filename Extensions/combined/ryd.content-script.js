@@ -31,6 +31,7 @@ import {
   reactionControlsCanInitialize,
 } from "./src/initialization-cycle";
 import { initPatreonFeatures } from "./src/patreon";
+import { initDiscussion } from "./src/discussion";
 import { cancelObsoleteVoteDataRequests, clearVoteDataRequestCache } from "./src/vote-data-request";
 import {
   actionBarHasHydratedData,
@@ -94,6 +95,7 @@ const pageWorldHelpersReady = injectPageWorldHelpers();
 await initExtConfig();
 await pageWorldHelpersReady;
 initPatreonFeatures();
+initDiscussion();
 
 // Settings that affect page-world helpers must continue to update even when
 // YouTube's reaction controls have not finished initializing.

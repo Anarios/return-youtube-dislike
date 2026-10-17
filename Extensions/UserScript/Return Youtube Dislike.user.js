@@ -442,7 +442,12 @@ function createVoteClient({
     return current;
   }
 
-  return { ensureRegistered, submitVote };
+  async function getRegisteredUser() {
+    const credential = await credentialStore.load();
+    return isConfirmedCredential(credential) ? { userId: credential.userId } : null;
+  }
+
+  return { ensureRegistered, getRegisteredUser, submitVote };
 }
 
 

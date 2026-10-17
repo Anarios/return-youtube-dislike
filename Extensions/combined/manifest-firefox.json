@@ -12,7 +12,14 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["activeTab", "*://*.youtube.com/*", "storage", "*://returnyoutubedislikeapi.com/*", "identity"],
+  "permissions": [
+    "activeTab",
+    "*://*.youtube.com/*",
+    "storage",
+    "*://returnyoutubedislikeapi.com/*",
+    "identity",
+    "alarms"
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "{762f9885-5a13-4abd-9c77-433dcd38b8fd}",
@@ -23,7 +30,6 @@
       }
     }
   },
-
   "browser_action": {
     "default_popup": "popup.html"
   },
@@ -40,5 +46,5 @@
     "page": "popup.html",
     "open_in_tab": false
   },
-  "web_accessible_resources": ["menu-fixer.js"]
+  "web_accessible_resources": ["menu-fixer.js", "comments-bridge.js"]
 }
