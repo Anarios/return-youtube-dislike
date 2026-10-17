@@ -102,7 +102,7 @@
     "message": "Logowanie się kontrybutora GitHub jest w tej chwili niedostępne. Serwis potrzebuje aktualizacji lub zmiany konfiguracji."
   },
   "githubLoginNotContributor": {
-    "message": "Te konto GitHub nie jest kontrybutorem Return YouTube Dislike. Zaloguj się kontem kontrybutora. Niedawne kontrybucje mogą zająć kilka godziń, aby się wyświetlić."
+    "message": "To konto GitHub nie jest kontrybutorem Return YouTube Dislike. Zaloguj się kontem kontrybutora. Uwzględnienie nowych kontrybucji może potrwać kilka godzin."
   },
   "githubLoginBrowserUnavailable": {
     "message": "Logowanie się GitHub nie jest skonfigurowane na adres zwrotny (callback) tej przeglądarki. Skontaktuj się z deweloperem."
@@ -207,7 +207,7 @@
     "message": "Zmień formatowanie liczby łapek."
   },
   "textDeveloper": {
-    "message": "od Dmitry Selivanov i Społeczności"
+    "message": "Autorzy: Dmitrij Sieliwanow i społeczność"
   },
   "textLikesDisabled": {
     "message": "Wyłączone przez twórcę"
@@ -483,7 +483,7 @@
     "message": "Ulepsz na Patreonie"
   },
   "changelog_title": {
-    "message": "Dziennik zmian analityk premium · 20 października 2025 r."
+    "message": "Dziennik zmian analityki premium · 20 października 2025 r."
   },
   "changelog_badge": {
     "message": "Wydanie premium"
@@ -552,7 +552,7 @@
     "message": "Załaduj ponownie dowolną stronę odtwarzania w YouTube - Twoja oś czasu, mapa i rankingi pojawią się natychmiast."
   },
   "changelog_section_release": {
-    "message": "Pokaż najważniejsze informacje"
+    "message": "Najważniejsze zmiany w wydaniu"
   },
   "changelog_release_item1": {
     "message": "Gotowe ustawienia osi czasu aktywności przesyłają strumieniowo dane na żywo z punktami odniesienia zakresu dla pierwszego i najnowszego segmentu."
@@ -585,7 +585,7 @@
     "message": "Przed: wszystkie przyciski akcji są widoczne"
   },
   "hideClutterButtonsAfter": {
-    "message": "Po: tylko przycisk polubienia i łapkę w dół"
+    "message": "Po: widoczne są tylko łapki w górę i w dół"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

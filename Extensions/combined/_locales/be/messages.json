@@ -1,0 +1,593 @@
+{
+  "apiStatusLabel": {
+    "message": "Стан API:"
+  },
+  "apiStatusOffline": {
+    "message": "Афлайн"
+  },
+  "apiStatusOnline": {
+    "message": "Анлайн"
+  },
+  "colorTheme": {
+    "message": "Колеравая тэма:"
+  },
+  "colorizeRatio": {
+    "message": "Размаляваць паласу суадносін"
+  },
+  "colorizeRatioHover": {
+    "message": "Выкарыстоўваць уласныя колеры для паласы суадносін."
+  },
+  "colorizeThumbs": {
+    "message": "Размаляваць кнопкі"
+  },
+  "colorizeThumbsHover": {
+    "message": "Выкарыстоўваць уласныя колеры для значкоў падабаек і непадабаек."
+  },
+  "considerDonating": {
+    "message": "Адзінае, што дазваляе пашырэнню працягваць працу — гэта вашы ахвяраванні. Калі ласка, падтрымайце праект."
+  },
+  "customColors": {
+    "message": "Уласныя колеры для паласы непадабаек і кнопак"
+  },
+  "customNumberFormats": {
+    "message": "Уласныя фарматы лікаў"
+  },
+  "disableLoggingHover": {
+    "message": "Адключае вядзенне журнала адказаў API у кансолі."
+  },
+  "disableLoggingLabel": {
+    "message": "Адключыць вядзенне журнала ў кансолі"
+  },
+  "extensionDesc": {
+    "message": "Вяртае магчымасць бачыць непадабайкі"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Налады"
+  },
+  "linkChangelog": {
+    "message": "Журнал змен"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "Падтрымаць"
+  },
+  "linkFAQ": {
+    "message": "FAQ"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Дапамога"
+  },
+  "linkWebsite": {
+    "message": "Вэб-сайт"
+  },
+  "numberFormat": {
+    "message": "Фармат лікаў:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Прэміум-функцыі даступныя для падпісчыкаў на Patreon"
+  },
+  "patreonLogin": {
+    "message": "Увайсці праз Patreon"
+  },
+  "patreonPrivacyNote": {
+    "message": "Інфармацыя аб падпісцы на Patreon выкарыстоўваецца для праверкі прэміум-доступу. Мы не атрымліваем дадзеныя вашай карты або банкаўскага рахунку."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Прэміум-функцыі даступныя для ўдзельнікаў распрацоўкі на GitHub"
+  },
+  "githubLogin": {
+    "message": "Увайсці праз GitHub (удзельнік распрацоўкі)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Не ўдалося распачаць уваход праз GitHub. Калі ласка, паспрабуйце зноў."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Не ўдалося завяршыць уваход праз GitHub. Калі ласка, паспрабуйце зноў."
+  },
+  "githubLoginUnavailable": {
+    "message": "Уваход для ўдзельнікаў GitHub зараз недаступны. Сэрвіс патрабуе абнаўлення або змены канфігурацыі."
+  },
+  "githubLoginNotContributor": {
+    "message": "Гэты ўліковы запіс GitHub не пазначаны як удзельнік распрацоўкі Return YouTube Dislike. Увайдзіце з адпаведнага ўліковага запісу. Нядаўнія ўнёскі могуць адлюстравацца праз некалькі гадзін."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Уваход праз GitHub не наладжаны для гэтага адраса зваротнага выкліку браўзера. Калі ласка, звярніцеся ў службу падтрымкі."
+  },
+  "githubLoginExpired": {
+    "message": "Гэтая спроба ўваходу праз GitHub састарэла або не можа быць пацверджана. Калі ласка, пачніце новы ўваход."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Калі ласка, абнавіце пашырэнне, каб выкарыстоўваць уваход для ўдзельнікаў GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Занадта шмат спроб уваходу. Калі ласка, пачакайце хвіліну перад наступнай спробай."
+  },
+  "githubLoginDenied": {
+    "message": "Аўтарызацыя праз GitHub была адхілена. Для ўваходу ўдзельніка патрабуецца аўтарызацыя."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Не ўдалося завяршыць уваход. Калі ласка, паспрабуйце зноў."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Не ўдалося распачаць уваход праз Patreon. Калі ласка, паспрабуйце зноў."
+  },
+  "patreonLogout": {
+    "message": "Выйсці"
+  },
+  "patreonPermissionRequired": {
+    "message": "Для ўваходу патрабуецца дазвол «identity». Калі ласка, дазвольце яго, каб працягнуць."
+  },
+  "patreonTierBasic": {
+    "message": "Базавы ўзровень"
+  },
+  "patreonTierChecking": {
+    "message": "Праверка падпіскі…"
+  },
+  "patreonTierNone": {
+    "message": "Няма актыўнай падпіскі"
+  },
+  "patreonTierPremium": {
+    "message": "Прэміум-спонсар"
+  },
+  "patreonTierSupporter": {
+    "message": "Спонсар"
+  },
+  "patreonUserFallback": {
+    "message": "Карыстальнік Patreon"
+  },
+  "reformatLikes": {
+    "message": "Фарматаваць лік падабаек"
+  },
+  "reformatLikesHover": {
+    "message": "Прывесці фармат падабаек і непадабаек да адзінага выгляду."
+  },
+  "hidePremiumTeaser": {
+    "message": "Хаваць панэль прэміум-тызера"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Не паказваць прэміум-тызер на старонках прагляду YouTube."
+  },
+  "roundNumbers": {
+    "message": "Паказваць лікі, акругленыя ў меншы бок"
+  },
+  "roundNumbersHover": {
+    "message": "Акругляць лікі ў меншы бок (стандартныя паводзіны YouTube)."
+  },
+  "shortsSupport": {
+    "message": "Падтрымка YouTube Shorts"
+  },
+  "showTooltipPercentage": {
+    "message": "Працэнты ў падказцы паласы падабаек/непадабаек."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Адлюстроўваць працэнты ў падказцы паласы падабаек/непадабаек."
+  },
+  "textColorTheme": {
+    "message": "Колеравая тэма:"
+  },
+  "textColorTheme1": {
+    "message": "Класічная"
+  },
+  "textColorTheme2": {
+    "message": "Даступная"
+  },
+  "textColorTheme3": {
+    "message": "Неонавая"
+  },
+  "textColorizeRatioBar": {
+    "message": "Размаляваць паласу суадносін"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Выкарыстоўваць уласныя колеры для паласы суадносін."
+  },
+  "textColorizeThumbs": {
+    "message": "Размаляваць кнопкі"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Выкарыстоўваць уласныя колеры для значкоў падабаек і непадабаек."
+  },
+  "textConsistentFormat": {
+    "message": "Прывесці фармат падабаек і непадабаек да адзінага выгляду"
+  },
+  "textConsistentFormatHover": {
+    "message": "Перафарматаваць лік падабаек."
+  },
+  "textDeveloper": {
+    "message": "ад Дзмітрыя Селіванава і супольнасці"
+  },
+  "textLikesDisabled": {
+    "message": "Адключана аўтарам"
+  },
+  "textNumberFormat": {
+    "message": "Фармат лікаў:"
+  },
+  "textRoundingNumbers": {
+    "message": "Акругляць статыстыку падабаек/непадабаек у меншы бок (звычайныя паводзіны YouTube)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Паказваць значэнні, акругленыя ў меншы бок."
+  },
+  "textSettings": {
+    "message": "Адключыць адпраўку падабаек/непадабаек"
+  },
+  "textSettingsHover": {
+    "message": "Спыняе ўлік вашых падабаек і непадабаек."
+  },
+  "textTempUnavailable": {
+    "message": "Часова недаступна"
+  },
+  "textUpdate": {
+    "message": "Абнаўленне да"
+  },
+  "tooltipPercentageMode": {
+    "message": "Рэжым працэнтаў:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Выкарыстоўваць уласнае адлюстраванне працэнтаў пры навядзенні."
+  },
+  "version30installed": {
+    "message": "Версія __RYD_VERSION__ усталявана"
+  },
+  "whatsnew": {
+    "message": "Што новага"
+  },
+  "premiumAnalytics_title": {
+    "message": "Прэміум-аналітыка відэа"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Уцягнутасць у часе"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Топ краін"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Краіны з найбольшай колькасцю падабаек"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Краіны з найбольшай колькасцю непадабаек"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Геаграфія"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Разгарнуць"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Згарнуць"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Метрыка карты"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Назад да карты свету"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Падабайкі"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Непадабайкі"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Суадносіны"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Дыяпазон дадзеных"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Апошнія дні"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Першыя дні"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Паказаць апошнія дні ў абраным дыяпазоне"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Паказаць першыя дні ў абраным дыяпазоне"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Уласны выбар"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "За ўвесь час"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Апошні перыяд: $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Першы перыяд: $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 дз."
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 дз."
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "За ўвесь час"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1 дз."
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Абраны перыяд: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Карыстальнікі пашырэння"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "Падабайкі: $1"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "Непадабайкі: $1"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Зафіксаваныя ўзаемадзеянні: $1; краіны: $2; унікальныя IP-адрасы: $3"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Галасы за гадзіну"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Галасы за дзень"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Галасы за тыдзень"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Галасы за $1 гадз"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Галасы за $1 сут"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Галасы за $1 хв"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Галасы за хвіліну"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Галасы за $1 с"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Галасы за секунду"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Дадзеных пакуль няма"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Невядома"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Загрузка аналітыкі…"
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Калі ласка, паўторна аўтарызуйце Patreon, каб адкрыць аналітыку."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Прэміум-аналітыка даступная для актыўных падпісчыкаў Patreon."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Сесія скончылася. Увайдзіце праз Patreon зноў."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Сэрвіс аналітыкі зараз недаступны."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Не ўдалося падключыцца да сэрвісу аналітыкі."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Не ўдалося загрузіць прэміум-аналітыку."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Актыўнасць"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Суадносіны падабаек"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Большая доля падабаек"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Меншая доля падабаек"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Больш падабаек"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Менш падабаек"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Больш непадабаек"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Менш непадабаек"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Больш $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Менш $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Падабайкі: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Непадабайкі: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Суадносіны падабаек: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Аналітыка відэа"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Неапрацаваныя непадабайкі — гэта прамыя паведамленні карыстальнікаў пашырэння, якія глядзяць гэта відэа."
+  },
+  "premiumTeaser_cta": {
+    "message": "Адкрыць Premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Папярэдні прагляд поўнай аналітыкі"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Колькасць неапрацаваных непадабаек"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Разліковая колькасць непадабаек"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Колькасць неапрацаваных падабаек"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Атрымліваем апошнюю колькасць непадабаек…"
+  },
+  "premiumTeaser_statusError": {
+    "message": "Не ўдалося загрузіць дадзеныя аб непадабайках. Паспрабуйце абнавіць старонку."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Як адкрыць прэміум-аналітыку"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Адкрыйце прэміум-аналітыку відэа ў тры простыя крокі:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "Увайдзіце праз Patreon ва ўсплывальным акне пашырэння Return YouTube Dislike."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Абярыце ўзровень Premium, каб уключыць храналогію актыўнасці, рэйтынгі краін і інтэрактыўную карту."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Перазагрузіце YouTube, каб убачыць пагадзінныя трэнды, топ краін і дэталізацыю па штатах ЗША для кожнага відэа."
+  },
+  "premiumTierNotice_title": {
+    "message": "Прэміум-аналітыка заблакіравана"
+  },
+  "premiumTierNotice_message": {
+    "message": "У вашай падпісцы на Patreon няма ўзроўню Premium. Павысьце ўзровень падтрымкі, каб атрымаць доступ да пашыранай відэааналітыкі."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Павысіць узровень на Patreon"
+  },
+  "changelog_title": {
+    "message": "Журнал змен Premium Analytics · 20 кастрычніка 2025 года"
+  },
+  "changelog_badge": {
+    "message": "Прэміум-рэліз"
+  },
+  "changelog_heading": {
+    "message": "Прэміум-аналітыка па-новаму"
+  },
+  "changelog_subheading": {
+    "message": "Даследуйце храналогію актыўнасці ў рэальным часе, рэйтынг краін і інтэрактыўную карту, уключаныя ў Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Выпушчана 20 кастрычніка 2025 года"
+  },
+  "changelog_cta_primary": {
+    "message": "Павысіць узровень на Patreon"
+  },
+  "changelog_cta_secondary": {
+    "message": "Прачытаць інструкцыю па наладзе"
+  },
+  "changelog_section_highlights": {
+    "message": "Што новага"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Храналогія ўзаемадзеянняў у рэальным часе"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Назірайце, як падабайкі і непадабайкі паступаюць у рэальным часе. Выбірайце пагадзінны прагляд, штодзённы прагляд або прагляд за ўвесь час без перазагрузкі старонкі, прывязвайце дыяпазон да першага дня або апошніх галасоў і праглядайце кожны ўсплёск, каб зразумець, што выклікала актыўнасць."
+  },
+  "changelog_feature_map_title": {
+    "message": "Інтэрактыўная цеплавая карта свету і ЗША"
+  },
+  "changelog_feature_map_body": {
+    "message": "Перамяшчайцеся па карце свету або пераходзьце да штатаў ЗША, каб знаходзіць месцы найбольшай актыўнасці. Параўноўвайце падабайкі, непадабайкі і іх суадносіны ў палепшанай падказцы і вылучайце рэгіёны, якія першымі рэагуюць на вашы новыя відэа."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Рэйтынг лідараў сярод краін"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Ранжыруйце краіны паводле колькасці непасрэдна атрыманых узаемадзеянняў, падабаек, непадабаек або іх суадносін. Выкарыстоўвайце тыя ж фільтры, што і для храналогіі, каб даведацца, дзе вашы кампаніі знаходзяць водгук, і спланаваць наступныя публікацыі."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Скрыншот з’явіцца хутка — захавайце гэты выгляд праз DevTools, калі будзеце гатовыя."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Запаўняльнік: агляд храналогіі"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Запаўняльнік: карта сусветнай актыўнасці"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Запаўняльнік: рэйтынг краін"
+  },
+  "changelog_section_upgrade": {
+    "message": "Як адкрыць прэміум-аналітыку"
+  },
+  "changelog_upgrade_body": {
+    "message": "Гатовыя пачаць? Выканайце гэтыя простыя крокі і абнавіце ўкладку YouTube."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Адкрыйце ўсплывальнае акно Return YouTube Dislike і ўвайдзіце праз Patreon."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Абярыце ўзровень Premium, каб дадзеныя аналітыкі сталі даступнымі для вашага ўліковага запісу."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Абнавіце любую старонку прагляду YouTube — ваша храналогія, карта і рэйтынгі з’явяцца імгненна."
+  },
+  "changelog_section_release": {
+    "message": "Галоўнае ў рэлізе"
+  },
+  "changelog_release_item1": {
+    "message": "Прадвыбраныя налады храналогіі актыўнасці паказваюць даныя ў рэальным часе і дазваляюць прывязваць дыяпазон да першых або апошніх часавых інтэрвалаў."
+  },
+  "changelog_release_item2": {
+    "message": "Рэйтынг краін абнаўляецца імгненна, таму вы можаце заўважаць рэгіёны, дзе расце актыўнасць, не пакідаючы панэлі."
+  },
+  "changelog_release_item3": {
+    "message": "Інтэрактыўная карта адлюстроўвае гарачыя кропкі свету і штатаў ЗША з больш зразумелымі падказкамі і метрыкамі."
+  },
+  "changelog_support_heading": {
+    "message": "Патрэбна дапамога?"
+  },
+  "changelog_support_description": {
+    "message": "Мы гатовыя дапамагчы, калі ўзнікнуць цяжкасці: звяртайцеся да даведачнай дакументацыі або да супольнасці."
+  },
+  "changelog_support_contact": {
+    "message": "Спытаць у супольнасці"
+  },
+  "hideClutterButtons": {
+    "message": "Хаваць лішнія кнопкі"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Паказаць прыклады «да» і «пасля»"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Пакідаць бачнымі толькі «Падабаецца» і «Не падабаецца». Дзяліцца, Захаваць, Дзякуй і іншыя дзеянні застаюцца даступнымі ў меню YouTube з трыма кропкамі."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Да: усе кнопкі дзеянняў бачныя"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "Пасля: бачныя толькі «Падабаецца» і «Не падабаецца»"
+  },
+  "changelog_brand_logo_alt": {
+    "message": "Лагатып Return YouTube Dislike"
+  }
+}
