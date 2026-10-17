@@ -6,7 +6,7 @@ const { BUILD_RECEIPT_FILENAME, createExtensionBuildReceipt } = require("./exten
 const { LiveBuildMarkerPlugin, createLiveBuildId } = require("./webpack.live-build-marker");
 
 const extensionVersion = (process.env.npm_package_version || require("./package.json").version).replace("-", ".");
-const entries = ["ryd.content-script", "ryd.background", "popup", "ryd.changelog"];
+const entries = ["ryd.content-script", "ryd.background", "popup", "ryd.changelog", "consent"];
 
 const ignorePatterns = [
   "**/manifest-**",

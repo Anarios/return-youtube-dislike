@@ -12,7 +12,7 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["activeTab", "*://*.youtube.com/*", "storage", "*://returnyoutubedislikeapi.com/*", "alarms"],
+  "permissions": ["activeTab", "*://*.youtube.com/*", "storage", "alarms", "*://returnyoutubedislikeapi.com/*"],
   "browser_action": {
     "default_popup": "popup.html"
   },

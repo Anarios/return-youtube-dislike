@@ -1448,7 +1448,7 @@ class HermeticUserscriptArtifactAdapter {
 class HermeticExtensionArtifactAdapter {
   constructor({
     apiServer,
-    artifactDirectory = DEFAULT_EXTENSION_ARTIFACT,
+    artifactDirectory = process.env.RYD_EXTENSION_ARTIFACT || DEFAULT_EXTENSION_ARTIFACT,
     backendOptions = {},
     browserType = chromium,
     channel = "chromium",
@@ -1651,12 +1651,28 @@ class HermeticExtensionArtifactAdapter {
     const backgroundAfterActivation = this.apiServer.records
       .slice(interactionStartIndex)
       .filter((record) => record.method !== "OPTIONS");
-    assert.ok(
-      backgroundAfterActivation.every(
-        (record) => record.method === "POST" && ["/interact/vote", "/interact/confirmVote"].includes(record.pathname),
-      ),
-      `The extension background made unexpected requests after activation: ${JSON.stringify(backgroundAfterActivation)}`,
+    assert.equal(
+      this.apiServer.records
+        .slice(this.apiRecordStart, interactionStartIndex)
+        .filter((record) => record.pathname === "/puzzle/registration").length,
+      0,
+      "The extension registered a voter before the first activation.",
     );
+    assert.deepEqual(
+      backgroundAfterActivation.map(({ method, pathname }) => [method, pathname]),
+      [
+        ["GET", "/puzzle/registration"],
+        ["POST", "/puzzle/registration"],
+        ["POST", "/interact/vote"],
+        ["POST", "/interact/confirmVote"],
+      ],
+      "The first activation must register once before submitting the vote.",
+    );
+    const [registration, confirmation, vote] = backgroundAfterActivation;
+    assert.deepEqual(registration.query, { userId: vote.body.userId });
+    assert.deepEqual(confirmation.query, registration.query);
+    assert.equal(confirmation.responseStatus, 200);
+    assert.equal(confirmation.responseBody, true);
     assert.equal(this.apiServer.unexpectedRequests.length, 0, "The extension made an unexpected test-server request.");
     return stats;
   }

@@ -17,6 +17,9 @@ const BROWSER_ARTIFACTS = Object.freeze([
   Object.freeze({ directory: "safari", manifestVersion: 2 }),
 ]);
 const REQUIRED_FILES = Object.freeze([
+  "consent.html",
+  "consent.css",
+  "consent.js",
   "content-style.css",
   "manifest.json",
   "menu-fixer.js",
@@ -24,7 +27,13 @@ const REQUIRED_FILES = Object.freeze([
   "ryd.background.js",
   "ryd.content-script.js",
 ]);
-const EMITTED_JS_FILES = Object.freeze(["popup.js", "ryd.background.js", "ryd.changelog.js", "ryd.content-script.js"]);
+const EMITTED_JS_FILES = Object.freeze([
+  "consent.js",
+  "popup.js",
+  "ryd.background.js",
+  "ryd.changelog.js",
+  "ryd.content-script.js",
+]);
 const FORBIDDEN_DIRECTORY_NAMES = new Set(["e2e", "playwright-report", "test-results"]);
 const TEST_FILE_PATTERN = /(?:^|[.])(e2e|spec|test)\.[cm]?[jt]sx?$/i;
 

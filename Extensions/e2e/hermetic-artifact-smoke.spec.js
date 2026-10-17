@@ -37,6 +37,18 @@ const {
 const PRODUCTION_API_ORIGIN = "https://returnyoutubedislikeapi.com";
 const temporaryDirectories = [];
 
+test("the extension adapter honors the selected artifact even when a scenario uses its default", () => {
+  const previous = process.env.RYD_EXTENSION_ARTIFACT;
+  process.env.RYD_EXTENSION_ARTIFACT = path.join(os.tmpdir(), "selected-production-artifact");
+  try {
+    const adapter = new HermeticExtensionArtifactAdapter({ apiServer: { origin: "http://127.0.0.1:1234" } });
+    expect(adapter.artifactDirectory).toBe(path.resolve(process.env.RYD_EXTENSION_ARTIFACT));
+  } finally {
+    if (previous == null) delete process.env.RYD_EXTENSION_ARTIFACT;
+    else process.env.RYD_EXTENSION_ARTIFACT = previous;
+  }
+});
+
 function createExtensionFixture() {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "ryd-mv3-source-fixture-"));
   temporaryDirectories.push(directory);

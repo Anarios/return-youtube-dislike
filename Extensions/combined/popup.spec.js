@@ -1,6 +1,11 @@
 /** @jest-environment jsdom */
 const fs = require("fs");
 const path = require("path");
+jest.mock("./src/consent-prompt", () => ({ waitForCoreDataConsent: () => Promise.resolve() }));
+jest.mock("./src/core-data-consent", () => ({
+  fetchWithCoreConsent: (...args) => fetch(...args),
+  onCoreDataPermissionChanged: jest.fn(),
+}));
 
 jest.mock("./src/data-collection-permissions", () => ({
   hasAuthenticationDataPermission: jest.fn(),
@@ -17,7 +22,7 @@ describe("popup account consent lifecycle", () => {
   let removeConsent;
   let consent;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     jest.resetModules();
     consent = true;
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "popup.html"), "utf8");
@@ -43,6 +48,7 @@ describe("popup account consent lifecycle", () => {
     };
     global.fetch = jest.fn();
     require("./popup");
+    await flushPromises();
   });
 
   afterEach(() => {

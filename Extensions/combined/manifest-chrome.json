@@ -4,6 +4,7 @@
   "default_locale": "en",
   "version": "__RYD_VERSION__",
   "manifest_version": 3,
+  "minimum_chrome_version": "116",
   "background": {
     "service_worker": "ryd.background.js"
   },
@@ -37,6 +38,5 @@
   "options_ui": {
     "page": "popup.html",
     "open_in_tab": false
-  },
-  "minimum_chrome_version": "116"
+  }
 }

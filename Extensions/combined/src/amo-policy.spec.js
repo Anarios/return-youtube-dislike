@@ -16,8 +16,14 @@ describe("Firefox AMO policy declarations", () => {
     expect(gecko.id).toBe("{762f9885-5a13-4abd-9c77-433dcd38b8fd}");
     expect(gecko.strict_min_version).toBe("140.0");
     expect(gecko.data_collection_permissions).toEqual({
-      required: ["personallyIdentifyingInfo", "browsingActivity", "websiteContent", "websiteActivity"],
-      optional: ["authenticationInfo"],
+      required: ["none"],
+      optional: [
+        "personallyIdentifyingInfo",
+        "browsingActivity",
+        "websiteContent",
+        "websiteActivity",
+        "authenticationInfo",
+      ],
     });
     expect(manifest.browser_specific_settings.gecko_android).toBeUndefined();
   });

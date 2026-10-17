@@ -29,6 +29,7 @@ import { config, getApiEndpoint, DEV_API_URL, PROD_API_URL, isDevelopment } from
 import { LIKED_STATE, DISLIKED_STATE, NEUTRAL_STATE } from "../../common/vote-transition";
 import { createBrowserSyntheticDislikeStore } from "./vote-client-adapter";
 import { requestVoteData } from "./vote-data-request";
+import { fetchWithCoreConsent } from "./core-data-consent";
 
 const DEFAULT_SELECTORS = {
   dislikeTextContainer: [
@@ -484,7 +485,7 @@ async function initializeSelectors() {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), SELECTOR_REQUEST_TIMEOUT_MS);
   try {
-    const response = await fetch(getApiEndpoint("/configs/selectors"), {
+    const response = await fetchWithCoreConsent(getApiEndpoint("/configs/selectors"), {
       method: "GET",
       headers: {
         Accept: "application/json",

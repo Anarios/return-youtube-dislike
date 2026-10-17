@@ -1,4 +1,5 @@
 import { getApiEndpoint } from "./config";
+import { fetchWithCoreConsent } from "./core-data-consent";
 
 const WITHOUT_LIKE_COUNT = "without-like-count";
 const EXTENSION_ID_PATTERN = /^[a-p]{32}$/;
@@ -91,13 +92,17 @@ function requestVoteData(videoId, { fetchImpl = globalThis.fetch, likeCount = nu
 
   let fetchResult;
   try {
-    fetchResult = fetchImpl(url, {
-      method: "GET",
-      headers: {
-        Accept: createVoteDataAcceptHeader(),
+    fetchResult = fetchWithCoreConsent(
+      url,
+      {
+        method: "GET",
+        headers: {
+          Accept: createVoteDataAcceptHeader(),
+        },
+        signal,
       },
-      signal,
-    });
+      fetchImpl,
+    );
   } catch (error) {
     fetchResult = Promise.reject(error);
   }

@@ -1,6 +1,6 @@
 {
   "name": "return-youtube-dislike",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Chrome extension to return youtube dislikes",
   "main": "ryd.content-script.js",
   "packageManager": "npm@10.8.2",
