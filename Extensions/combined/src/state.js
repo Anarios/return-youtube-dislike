@@ -23,7 +23,6 @@ import {
   getColorFromTheme,
   querySelector,
   localize,
-  createObserver,
 } from "./utils";
 import { config, getApiEndpoint, DEV_API_URL, PROD_API_URL, isDevelopment } from "./config";
 import { LIKED_STATE, DISLIKED_STATE, NEUTRAL_STATE } from "../../common/vote-transition";
@@ -177,31 +176,7 @@ function isRoundedDesign() {
   return querySelector(extConfig.selectors.roundedDesign) !== null;
 }
 
-let shortsObserver = null;
 let syntheticDislikeStore = null;
-
-function getShortsObserver() {
-  if (shortsObserver) return shortsObserver;
-  console.log("Initializing shorts mutation observer");
-  shortsObserver = createObserver(
-    {
-      attributes: true,
-    },
-    (mutationList) => {
-      mutationList.forEach((mutation) => {
-        if (mutation.type === "attributes" && mutation.target.matches?.("button, tp-yt-paper-button#button")) {
-          if (mutation.target.getAttribute("aria-pressed") === "true") {
-            const isLike = mutation.target.closest("like-button-view-model, #like-button") !== null;
-            mutation.target.style.color = getColorFromTheme(isLike);
-          } else {
-            mutation.target.style.color = "unset";
-          }
-        }
-      });
-    },
-  );
-  return shortsObserver;
-}
 
 function getSyntheticDislikeStore() {
   if (syntheticDislikeStore) return syntheticDislikeStore;
@@ -274,12 +249,72 @@ function getState(storedData) {
 }
 
 //---   Sets The Likes And Dislikes Values   ---//
+const reformattedLikeText = new WeakMap();
+
+function getLikeTextNode() {
+  const container = getLikeTextContainer();
+  if (!container) return null;
+  const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+  let result = null;
+  while (walker.nextNode()) {
+    if (!walker.currentNode.data.trim()) continue;
+    // Do not flatten animated counters or other multi-node native content.
+    if (result) return null;
+    result = walker.currentNode;
+  }
+  return result;
+}
+
 function setLikes(likesCount) {
-  console.log(`SET likes ${likesCount}`);
-  const likeTextContainer = getLikeTextContainer();
-  if (!likeTextContainer) return false;
-  likeTextContainer.innerText = likesCount;
+  const textNode = getLikeTextNode();
+  if (!textNode) return false;
+  const previous = reformattedLikeText.get(textNode);
+  const formattedText = String(likesCount);
+  reformattedLikeText.set(textNode, {
+    nativeText: previous && textNode.data === previous.formattedText ? previous.nativeText : textNode.data,
+    formattedText,
+  });
+  // YouTube retains this node when updating its count. Replacing it with
+  // innerText leaves subsequent native updates writing to a detached node.
+  if (textNode.data !== formattedText) textNode.data = formattedText;
   return true;
+}
+
+function refreshReactionPresentation() {
+  if (extConfig.numberDisplayReformatLikes === true) {
+    const nativeLikes = getLikeCountFromButton();
+    if (nativeLikes !== false) setLikes(numberFormat(nativeLikes));
+  } else {
+    const textNode = getLikeTextNode();
+    const previous = textNode && reformattedLikeText.get(textNode);
+    if (previous) {
+      if (textNode.data === previous.formattedText) textNode.data = previous.nativeText;
+      reformattedLikeText.delete(textNode);
+    }
+  }
+
+  for (const [host, isLike] of [
+    [getLikeButton(), true],
+    [getDislikeButton(), false],
+  ]) {
+    if (!host) continue;
+    const button =
+      (isShorts() && querySelector(extConfig.selectors.buttons.shortsToggleButton, host)) ||
+      host?.querySelector("button") ||
+      host;
+    if (!button) continue;
+    const colored = extConfig.coloredThumbs === true && (!isShorts() || button.getAttribute("aria-pressed") === "true");
+    if (colored) {
+      const color = getColorFromTheme(isLike);
+      if (button.style.getPropertyValue("--ryd-thumb-color") !== color) {
+        button.style.setProperty("--ryd-thumb-color", color);
+      }
+      if (!button.hasAttribute("data-ryd-thumb-color")) button.setAttribute("data-ryd-thumb-color", "");
+    } else if (button.hasAttribute("data-ryd-thumb-color")) {
+      button.removeAttribute("data-ryd-thumb-color");
+      button.style.removeProperty("--ryd-thumb-color");
+    }
+  }
 }
 
 function setDislikes(dislikesCount) {
@@ -324,36 +359,11 @@ function getLikeCountFromButton() {
 function processResponse(response, storedData) {
   const formattedDislike = numberFormat(response.dislikes);
   if (!setDislikes(formattedDislike)) return false;
-  if (extConfig.numberDisplayReformatLikes === true) {
-    const nativeLikes = getLikeCountFromButton();
-    if (nativeLikes !== false) {
-      setLikes(numberFormat(nativeLikes));
-    }
-  }
+  // Prefer YouTube's positive count, including updates made while the request was pending.
+  const nativeLikes = getLikeCountFromButton();
+  if (nativeLikes > 0) storedData.likes = nativeLikes;
+  refreshReactionPresentation();
   createRateBar(storedData.likes, storedData.dislikes);
-  if (extConfig.coloredThumbs === true) {
-    if (isShorts()) {
-      // for shorts, leave deactivated buttons in default color
-      const shortLikeButton =
-        querySelector(extConfig.selectors.buttons.shortsToggleButton, getLikeButton()) ??
-        getLikeButton()?.querySelector("button");
-      const shortDislikeButton =
-        querySelector(extConfig.selectors.buttons.shortsToggleButton, getDislikeButton()) ??
-        getDislikeButton()?.querySelector("button");
-      if (shortLikeButton?.getAttribute("aria-pressed") === "true") {
-        shortLikeButton.style.color = getColorFromTheme(true);
-      }
-      if (shortDislikeButton?.getAttribute("aria-pressed") === "true") {
-        shortDislikeButton.style.color = getColorFromTheme(false);
-      }
-      const observer = getShortsObserver();
-      if (shortLikeButton) observer.observe(shortLikeButton);
-      if (shortDislikeButton) observer.observe(shortDislikeButton);
-    } else {
-      getLikeButton().style.color = getColorFromTheme(true);
-      getDislikeButton().style.color = getColorFromTheme(false);
-    }
-  }
 
   //Temporary disabling this - it breaks all places where getButtons()[1] is used
   // createStarRating(response.rating, isMobile());
@@ -446,6 +456,8 @@ function restoreCurrentState() {
     storedData.previousState = isVideoDisliked() ? DISLIKED_STATE : isVideoLiked() ? LIKED_STATE : NEUTRAL_STATE;
   }
   if (!setDislikes(numberFormat(storedData.dislikes))) return false;
+  const nativeLikes = getLikeCountFromButton();
+  if (nativeLikes > 0) storedData.likes = nativeLikes;
   createRateBar(storedData.likes, storedData.dislikes);
   return true;
 }
@@ -643,6 +655,7 @@ export {
   setState,
   setInitialState,
   setLikes,
+  refreshReactionPresentation,
   setDislikes,
   getLikeCountFromButton,
   LIKED_STATE,

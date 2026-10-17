@@ -9,6 +9,19 @@
   --yt-spec-brand-background-secondary: #000 !important; */
 }
 
+[data-ryd-thumb-color],
+[data-ryd-thumb-color] :is(.ytSpecButtonShapeNextIcon, .yt-spec-button-shape-next__icon, yt-icon, .ytIconWrapperHost) {
+  color: var(--ryd-thumb-color) !important;
+}
+
+[data-ryd-thumb-color] yt-animated-icon svg [fill]:not([fill="none"]) {
+  fill: var(--ryd-thumb-color) !important;
+}
+
+[data-ryd-thumb-color] yt-animated-icon svg [stroke]:not([stroke="none"]) {
+  stroke: var(--ryd-thumb-color) !important;
+}
+
 .ryd-discussion,
 .ryd-discussion-popup,
 .ryd-discussion-toast {

@@ -12,8 +12,9 @@ jest.mock("./buttons", () => {
     classList: { contains: () => false },
     native: {
       getAttribute(name) {
-        return name === "aria-label" ? "35 likes" : String(this.pressed);
+        return name === "aria-label" ? this.ariaLabel : String(this.pressed);
       },
+      ariaLabel: "35 likes",
       innerText: "35",
       pressed: false,
     },
@@ -81,6 +82,7 @@ import {
   extConfig,
   initializeHideClutterButtons,
   initializeSelectors,
+  restoreCurrentState,
   setDislikes,
   setState,
   storedData,
@@ -100,11 +102,13 @@ function deferred() {
 }
 
 beforeEach(() => {
+  stateRewire.__set__("refreshReactionPresentation", jest.fn());
   clearVoteDataRequestCache();
   globalThis.__mockBrowser = undefined;
   globalThis.__mockControlsUnavailable = false;
   const likeButton = getLikeButton();
   likeButton.native.innerText = "35";
+  likeButton.native.ariaLabel = "35 likes";
   likeButton.native.pressed = false;
   getDislikeButton().native.pressed = false;
   getDislikeButton().synthetic = false;
@@ -116,6 +120,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  stateRewire.__ResetDependency__("refreshReactionPresentation");
   stateRewire.__ResetDependency__("isMobile");
   stateRewire.__ResetDependency__("syntheticDislikeStore");
 });
@@ -346,7 +351,7 @@ test("mobile dislike rendering writes only to the semantic Dislike text containe
   expect(dislikeTextContainer.innerText).toBe("11");
 });
 
-test("uses destination API likes for the rate bar when reused native Like text is stale", async () => {
+test("prefers the current native like count over the API count for the rate bar", async () => {
   fetch.mockResolvedValueOnce({
     ok: true,
     json: jest.fn(async () => ({ dislikes: 65, likes: 100, rating: 3.5 })),
@@ -356,8 +361,83 @@ test("uses destination API likes for the rate bar when reused native Like text i
   await expect(setState(testState)).resolves.toBe(true);
 
   expect(fetch).toHaveBeenCalledWith("https://example.test/votes?videoId=abcdefghijk&likeCount=35", expect.any(Object));
-  expect(testState).toMatchObject({ dislikes: 65, likes: 100, videoId: "abcdefghijk" });
-  expect(createRateBar).toHaveBeenCalledWith(100, 65);
+  expect(testState).toMatchObject({ dislikes: 65, likes: 35, videoId: "abcdefghijk" });
+  expect(createRateBar).toHaveBeenCalledWith(35, 65);
+});
+
+test.each([
+  [0, "35 likes", 35],
+  ["0", "35 likes", 35],
+  [0, "0 likes", 0],
+  [0, "Like this video", 0],
+  [0, null, 0],
+  [100, "35 likes", 35],
+  [12, "35 likes", 35],
+  [100, "0 likes", 100],
+  [100, "Like this video", 100],
+  [100, null, 100],
+])("API likes=%s with native label=%s renders %s likes", async (apiLikes, nativeLabel, expectedLikes) => {
+  getLikeButton().native.ariaLabel = nativeLabel;
+  fetch.mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 65, likes: apiLikes }) });
+  const testState = { dislikes: 0, likes: 0, previousState: "NEUTRAL_STATE", videoId: null };
+
+  await expect(setState(testState)).resolves.toBe(true);
+
+  expect(testState).toMatchObject({ dislikes: 65, likes: expectedLikes, videoId: "abcdefghijk" });
+  expect(createRateBar).toHaveBeenCalledWith(expectedLikes, 65);
+  expect(fetch).toHaveBeenCalledTimes(1);
+});
+
+test.each([0, 100])("reads the current native count at render time with API likes=%s", async (apiLikes) => {
+  const pending = deferred();
+  fetch.mockReturnValueOnce(pending.promise);
+  const testState = { dislikes: 0, likes: 0, previousState: "NEUTRAL_STATE", videoId: null };
+
+  const initialization = setState(testState);
+  getLikeButton().native.ariaLabel = "73 likes";
+  pending.resolve({ ok: true, json: async () => ({ dislikes: 65, likes: apiLikes }) });
+  await expect(initialization).resolves.toBe(true);
+
+  expect(createRateBar).toHaveBeenCalledWith(73, 65);
+  expect(testState.likes).toBe(73);
+});
+
+test.each([
+  [0, "73 likes", 73],
+  [100, "73 likes", 73],
+  [100, "0 likes", 100],
+  [100, null, 100],
+])("restores API likes=%s with native label=%s as %s likes", async (apiLikes, nativeLabel, expectedLikes) => {
+  fetch.mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 65, likes: apiLikes }) });
+  Object.assign(storedData, { dislikes: 0, likes: 0, previousState: "NEUTRAL_STATE", videoId: null });
+  globalThis.__mockControlsUnavailable = true;
+
+  await expect(setState(storedData)).resolves.toBe(false);
+  expect(storedData.likes).toBe(apiLikes);
+  expect(createRateBar).not.toHaveBeenCalled();
+
+  globalThis.__mockControlsUnavailable = false;
+  getLikeButton().native.ariaLabel = nativeLabel;
+  expect(restoreCurrentState()).toBe(true);
+
+  expect(storedData.likes).toBe(expectedLikes);
+  expect(createRateBar).toHaveBeenCalledWith(expectedLikes, 65);
+  expect(fetch).toHaveBeenCalledTimes(1);
+});
+
+test("a zero-like outgoing response cannot apply its fallback after navigation", async () => {
+  const pending = deferred();
+  fetch.mockReturnValueOnce(pending.promise);
+  const testState = { dislikes: 0, likes: 0, previousState: "NEUTRAL_STATE", videoId: null };
+
+  const initialization = setState(testState);
+  window.history.replaceState(null, "", "/watch?v=zyxwvutsrqp");
+  getLikeButton().native.ariaLabel = "73 likes";
+  pending.resolve({ ok: true, json: async () => ({ dislikes: 65, likes: 0 }) });
+  await initialization;
+
+  expect(testState).toMatchObject({ likes: 0, videoId: null });
+  expect(createRateBar).not.toHaveBeenCalled();
 });
 
 test("falls back to bundled selectors when the remote selector request never settles", async () => {

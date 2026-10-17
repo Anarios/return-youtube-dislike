@@ -11,8 +11,7 @@ import {
   setDislikes,
   extConfig,
   storedData,
-  setLikes,
-  getLikeCountFromButton,
+  refreshReactionPresentation,
   persistSyntheticShortsDislikeState,
 } from "./state";
 import { publishHideClutterButtons } from "./clutter-button-setting";
@@ -88,13 +87,6 @@ function handleVoteAction(action) {
       );
     }
     updateDOMDislikes();
-
-    if (extConfig.numberDisplayReformatLikes === true) {
-      const nativeLikes = getLikeCountFromButton();
-      if (nativeLikes !== false) {
-        setLikes(numberFormat(nativeLikes));
-      }
-    }
   }
 }
 
@@ -109,6 +101,26 @@ function dislikeClicked() {
 
 const boundDislikeButtons = new WeakSet();
 let delegatedReactionListenerRegistered = false;
+let presentationObserver = null;
+let observedLikeButton = null;
+let observedDislikeButton = null;
+
+function observeReactionPresentation(likeButton, dislikeButton) {
+  if (observedLikeButton === likeButton && observedDislikeButton === dislikeButton) return;
+  if (!presentationObserver) presentationObserver = new MutationObserver(refreshReactionPresentation);
+  presentationObserver.disconnect();
+  const options = {
+    attributes: true,
+    attributeFilter: ["aria-label", "aria-pressed"],
+    characterData: true,
+    childList: true,
+    subtree: true,
+  };
+  presentationObserver.observe(likeButton, options);
+  presentationObserver.observe(dislikeButton, options);
+  observedLikeButton = likeButton;
+  observedDislikeButton = dislikeButton;
+}
 
 function delegatedReactionClicked(event) {
   const buttons = getButtons();
@@ -131,6 +143,7 @@ function ensureDelegatedReactionListener() {
 function addLikeDislikeEventListener(likeButton = getLikeButton(), dislikeButton = getDislikeButton()) {
   if (!likeButton || !dislikeButton) return;
   ensureDelegatedReactionListener();
+  observeReactionPresentation(likeButton, dislikeButton);
   if (!boundDislikeButtons.has(dislikeButton)) {
     dislikeButton.addEventListener("focusin", updateDOMDislikes);
     dislikeButton.addEventListener("focusout", updateDOMDislikes);
@@ -195,6 +208,7 @@ function handleDisableVoteSubmissionChangeEvent(value) {
 
 function handleColoredThumbsChangeEvent(value) {
   extConfig.coloredThumbs = value;
+  refreshReactionPresentation();
 }
 
 function handleColoredBarChangeEvent(value) {
@@ -204,14 +218,17 @@ function handleColoredBarChangeEvent(value) {
 function handleColorThemeChangeEvent(value) {
   if (!value) value = "classic";
   extConfig.colorTheme = value;
+  refreshReactionPresentation();
 }
 
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
+  refreshReactionPresentation();
 }
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
   extConfig.numberDisplayReformatLikes = value;
+  refreshReactionPresentation();
 }
 
 function handleHidePremiumTeaserChangeEvent(value) {
