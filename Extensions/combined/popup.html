@@ -1,96 +1,93 @@
 <!doctype html>
 <html>
-
   <!---   HEADER   -->
   <head>
     <meta content="text/html; charset=utf-8" />
     <title title="__MSG_extensionName__">__MSG_extensionName__</title>
     <link rel="stylesheet" href="popup.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <!--   END HEADER -->
   <body>
     <center>
       <img src="icons/logo.svg" />
-      <h1 style="margin-bottom: 0.75rem" title="__MSG_extensionName__">
-        __MSG_extensionName__
-      </h1>
-      <p style="color: var(--lightGrey)" title="__MSG_textDeveloper__">
-        __MSG_textDeveloper__
-      </p>
+      <h1 style="margin-bottom: 0.75rem" title="__MSG_extensionName__">__MSG_extensionName__</h1>
+      <p style="color: var(--lightGrey)" title="__MSG_textDeveloper__">__MSG_textDeveloper__</p>
 
-      <button class="m3-btn" id="link_website" title="__MSG_linkWebsite__">
-        __MSG_linkWebsite__
-      </button>
-      <button
-        class="m3-btn m3-primary"
-        style="margin-top: 0.3em;"
-        id="link_donate"
-        title="__MSG_linkDonate__"
-      >
+      <button class="m3-btn" id="link_website" title="__MSG_linkWebsite__">__MSG_linkWebsite__</button>
+      <button class="m3-btn m3-primary" style="margin-top: 0.3em" id="link_donate" title="__MSG_linkDonate__">
         __MSG_linkDonate__
       </button>
       <button class="m3-btn" id="link_discord" title="__MSG_linkDiscord__">__MSG_linkDiscord__</button>
       <br />
-      
+
       <!-- Patreon Login Section -->
-      <div id="patreon-section" style="margin-top: 1rem; padding: 0.5rem; border-top: 1px solid var(--lightGrey);">
-        <div id="patreon-logged-out" style="display: none;">
-          <p style="color: var(--lightGrey); font-size: 0.9rem; margin-bottom: 0.5rem;" title="__MSG_patreonLoggedOutMessage__">__MSG_patreonLoggedOutMessage__</p>
-          <button class="m3-btn m3-primary" id="patreon-login-btn" title="__MSG_patreonLogin__">
-            <svg style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle;" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21c0 3.96-3.22 7.18-7.18 7.18c-3.97 0-7.21-3.22-7.21-7.18c0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"/>
+      <div id="patreon-section" style="margin-top: 1rem; padding: 0.5rem; border-top: 1px solid var(--lightGrey)">
+        <div id="patreon-logged-out" style="display: none">
+          <p
+            style="color: var(--lightGrey); font-size: 0.9rem; margin-bottom: 0.5rem"
+            title="__MSG_patreonLoggedOutMessage__"
+          >
+            __MSG_patreonLoggedOutMessage__
+          </p>
+          <button
+            class="m3-btn m3-primary"
+            id="patreon-login-btn"
+            title="__MSG_patreonLogin__"
+            aria-describedby="patreon-privacy-note"
+          >
+            <svg
+              style="width: 16px; height: 16px; margin-right: 6px; vertical-align: middle"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M14.82 2.41c3.96 0 7.18 3.24 7.18 7.21c0 3.96-3.22 7.18-7.18 7.18c-3.97 0-7.21-3.22-7.21-7.18c0-3.97 3.24-7.21 7.21-7.21M2 21.6h3.5V2.41H2V21.6z"
+              />
             </svg>
             __MSG_patreonLogin__
           </button>
-          <p style="color: var(--lightGrey); font-size: 0.85rem; margin: 0.6rem 0 0.4rem;" title="__MSG_githubLoggedOutMessage__">__MSG_githubLoggedOutMessage__</p>
-          <button class="m3-btn m3-primary" style="margin-top: 0.1rem;" id="github-login-btn" title="__MSG_githubLogin__">
+          <p id="patreon-privacy-note">__MSG_patreonPrivacyNote__</p>
+          <p
+            style="color: var(--lightGrey); font-size: 0.85rem; margin: 0.6rem 0 0.4rem"
+            title="__MSG_githubLoggedOutMessage__"
+          >
+            __MSG_githubLoggedOutMessage__
+          </p>
+          <button
+            class="m3-btn m3-primary"
+            style="margin-top: 0.1rem"
+            id="github-login-btn"
+            title="__MSG_githubLogin__"
+          >
             __MSG_githubLogin__
           </button>
         </div>
-        <div id="patreon-logged-in" style="display: none;">
-          <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
-            <img id="patreon-user-avatar" src="" alt="" style="width: 32px; height: 32px; border-radius: 50%; margin-right: 8px; display: none;">
+        <div id="patreon-logged-in" style="display: none">
+          <div style="display: flex; align-items: center; margin-bottom: 0.5rem">
+            <img
+              id="patreon-user-avatar"
+              src=""
+              alt=""
+              style="width: 32px; height: 32px; border-radius: 50%; margin-right: 8px; display: none"
+            />
             <div>
-              <p id="patreon-user-name" style="font-weight: 500; margin: 0;"></p>
-              <p id="patreon-tier" style="color: var(--lightGrey); font-size: 0.8rem; margin: 0;"></p>
+              <p id="patreon-user-name" style="font-weight: 500; margin: 0"></p>
+              <p id="patreon-tier" style="color: var(--lightGrey); font-size: 0.8rem; margin: 0"></p>
             </div>
           </div>
-          <button class="m3-btn" id="patreon-logout-btn" style="font-size: 0.9rem;" title="__MSG_patreonLogout__">__MSG_patreonLogout__</button>
+          <button class="m3-btn" id="patreon-logout-btn" style="font-size: 0.9rem" title="__MSG_patreonLogout__">
+            __MSG_patreonLogout__
+          </button>
         </div>
       </div>
-      
-      <button class="m3-btn" style="margin-top: 0.3rem" id="link_faq" title="__MSG_linkFAQ__">
-        __MSG_linkFAQ__
-      </button>
+
+      <button class="m3-btn" style="margin-top: 0.3rem" id="link_faq" title="__MSG_linkFAQ__">__MSG_linkFAQ__</button>
       <button class="m3-btn" id="link_github" title="__MSG_linkGithub__">__MSG_linkGithub__</button>
-      <button class="m3-btn" style="margin-top: 0.3em" id="link_help" title="__MSG_linkHelp__">
-        __MSG_linkHelp__
-      </button>
+      <button class="m3-btn" style="margin-top: 0.3em" id="link_help" title="__MSG_linkHelp__">__MSG_linkHelp__</button>
       <br />
-      <button
-        class="m3-btn"
-        style="margin-top: 0.3em"
-        id="link_changelog"
-        title="__MSG_linkChangelog__"
-      >
+      <button class="m3-btn" style="margin-top: 0.3em" id="link_changelog" title="__MSG_linkChangelog__">
         __MSG_linkChangelog__
       </button>
-
-      <br />
-      <br />
-      <p style="display: none">__MSG_apiStatusLabel__ <b id="status"></b></p>
-      <img
-        id="server-status"
-        style="display: none; width: 0.75rem; height: 0.75rem"
-        src="./icons/server.svg"
-        alt=""
-      />
 
       <br />
       <br />
@@ -114,28 +111,22 @@
     </button>
     <!-- bottom-right -->
     <div id="ext">
-      <a
-        href="https://returnyoutubedislike.com/install"
-        target="_blank"
-        id="ext-update"
-      ></a>
+      <a href="https://returnyoutubedislike.com/install" target="_blank" id="ext-update"></a>
       <span id="ext-version"></span>
     </div>
 
     <!-- dialog box -->
     <fieldset id="advancedSettings">
       <label class="switch" data-hover="__MSG_disableLoggingHover__">
-        <input type="checkbox" id="disable_logging"/>
-        <span class="slider"/>
+        <input type="checkbox" id="disable_logging" />
+        <span class="slider" />
         <span class="switchLabel">__MSG_disableLoggingLabel__</span>
       </label>
       <br />
       <label class="switch" data-hover="__MSG_textSettingsHover__">
         <input type="checkbox" id="disable_vote_submission" />
         <span class="slider"></span>
-        <span class="switchLabel" title="__MSG_textSettings__">
-          __MSG_textSettings__
-        </span>
+        <span class="switchLabel" title="__MSG_textSettings__"> __MSG_textSettings__ </span>
       </label>
       <br />
       <label class="switch" data-hover="__MSG_reformatLikesHover__">
@@ -150,6 +141,43 @@
         <span class="switchLabel">__MSG_hidePremiumTeaser__</span>
       </label>
       <br />
+      <div class="setting-row setting-row-with-help">
+        <label class="switch" for="hide_clutter_buttons">
+          <input type="checkbox" id="hide_clutter_buttons" />
+          <span class="slider"></span>
+        </label>
+        <label class="setting-row-label" for="hide_clutter_buttons">__MSG_hideClutterButtons__</label>
+        <div class="setting-help">
+          <button
+            type="button"
+            id="hide_clutter_buttons_help"
+            aria-label="__MSG_hideClutterButtonsHelpLabel__"
+            aria-describedby="hide_clutter_buttons_tooltip"
+            title="__MSG_hideClutterButtonsHelpLabel__"
+          >
+            ?
+          </button>
+          <div id="hide_clutter_buttons_tooltip" class="setting-help-popover" role="tooltip">
+            <p>__MSG_hideClutterButtonsDescription__</p>
+            <figure>
+              <img
+                src="images/hide-clutter-before.png"
+                alt="__MSG_hideClutterButtonsBefore__"
+                data-hide-clutter-example="before"
+              />
+              <figcaption>__MSG_hideClutterButtonsBefore__</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="images/hide-clutter-after.png"
+                alt="__MSG_hideClutterButtonsAfter__"
+                data-hide-clutter-example="after"
+              />
+              <figcaption>__MSG_hideClutterButtonsAfter__</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
       <div class="custom-select">
         <label for="number_format">__MSG_numberFormat__</label>
         <select name="number_format" id="number_format">
@@ -178,74 +206,41 @@
       <div class="custom-select">
         <label for="color_theme">__MSG_colorTheme__</label>
         <select name="color_theme" id="color_theme">
-          <option value="classic" id="color_theme_classic">
-            __MSG_textColorTheme1__
-          </option>
-          <option value="accessible" id="color_theme_accessible">
-            __MSG_textColorTheme2__
-          </option>
-          <option value="neon" id="color_theme_neon">
-            __MSG_textColorTheme3__
-          </option>
+          <option value="classic" id="color_theme_classic">__MSG_textColorTheme1__</option>
+          <option value="accessible" id="color_theme_accessible">__MSG_textColorTheme2__</option>
+          <option value="neon" id="color_theme_neon">__MSG_textColorTheme3__</option>
         </select>
         <span
           id="color_theme_example_like"
-          style="
-            display: inline-block;
-            vertical-align: text-top;
-            width: 1em;
-            height: 1em;
-          "
+          style="display: inline-block; vertical-align: text-top; width: 1em; height: 1em"
           >&nbsp;</span
         >
         <span
           id="color_theme_example_dislike"
-          style="
-            display: inline-block;
-            vertical-align: text-top;
-            width: 1em;
-            height: 1em;
-          "
+          style="display: inline-block; vertical-align: text-top; width: 1em; height: 1em"
           >&nbsp;</span
         >
       </div>
       <br />
-      <label
-        class="switch"
-        data-hover="__MSG_showTooltipPercentageHover__"
-      >
+      <label class="switch" data-hover="__MSG_showTooltipPercentageHover__">
         <input type="checkbox" id="show_tooltip_percentage" />
         <span class="slider"></span>
         <span class="switchLabel">__MSG_showTooltipPercentage__</span>
       </label>
       <div class="custom-select">
-        <label
-          for="tooltip_percentage_mode"
-          data-hover="__MSG_tooltipPercentageModeHover__"
+        <label for="tooltip_percentage_mode" data-hover="__MSG_tooltipPercentageModeHover__"
           >__MSG_tooltipPercentageMode__</label
         >
         <select name="tooltip_percentage_mode" id="tooltip_percentage_mode">
           <option value="dash_like" id="tooltip_percentage_mode_dash_like">
             190&nbsp;/&nbsp;10&nbsp;&nbsp;-&nbsp;&nbsp;95%
           </option>
-          <option
-            value="dash_dislike"
-            id="tooltip_percentage_mode_dash_dislike"
-          >
+          <option value="dash_dislike" id="tooltip_percentage_mode_dash_dislike">
             190&nbsp;/&nbsp;10&nbsp;&nbsp;-&nbsp;&nbsp;5%
           </option>
-          <option value="both" id="tooltip_percentage_mode_both">
-            95%&nbsp;/&nbsp;5%
-          </option>
-          <option value="only_like" id="tooltip_percentage_mode_only_like">
-            95%
-          </option>
-          <option
-            value="only_dislike"
-            id="tooltip_percentage_mode_only_dislike"
-          >
-            5%
-          </option>
+          <option value="both" id="tooltip_percentage_mode_both">95%&nbsp;/&nbsp;5%</option>
+          <option value="only_like" id="tooltip_percentage_mode_only_like">95%</option>
+          <option value="only_dislike" id="tooltip_percentage_mode_only_dislike">5%</option>
         </select>
       </div>
     </fieldset>

@@ -24,7 +24,7 @@
   border-radius: 4px;
   font-weight: 500;
   border-radius: 100em;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
   margin: 0.25em;
 }
 .m3-btn:hover {
@@ -56,6 +56,14 @@ body {
 
 h1 {
   font-size: 26px;
+}
+
+#patreon-privacy-note {
+  max-width: 21rem;
+  margin: 0.5rem auto 1rem;
+  color: var(--lightGrey);
+  font-size: 0.875rem;
+  line-height: 1.45;
 }
 
 #ext-version {
@@ -143,7 +151,7 @@ button {
   z-index: 69;
   height: 2rem;
   width: 2rem;
-  transition-duration: .25s;
+  transition-duration: 0.25s;
 }
 
 #advancedToggle:hover {
@@ -269,11 +277,97 @@ input:checked + .slider::before {
   display: inline-block;
 }
 
-#server-status {
-  height: 72px;
-  width: 90px;
-  /* filter: invert(21%) sepia(100%) saturate(3618%) hue-rotate(102deg)
-    brightness(96%) contrast(108%); */
+.setting-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 24px;
+  column-gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.setting-row .switch {
+  margin-bottom: 0;
+}
+
+.setting-row-label {
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.setting-help {
+  position: relative;
+  z-index: 5;
+}
+
+.setting-help button {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid var(--primary);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--primary);
+  cursor: help;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  place-items: center;
+  user-select: none;
+}
+
+.setting-help button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.setting-help-popover {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  box-sizing: border-box;
+  width: min(270px, calc(100vw - 3rem));
+  padding: 0.75rem;
+  border: 1px solid var(--secondary);
+  border-radius: 0.5rem;
+  background: var(--tertiary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  color: var(--primary);
+}
+
+.setting-help:hover > .setting-help-popover,
+.setting-help:focus-within > .setting-help-popover {
+  display: block;
+}
+
+.setting-help-popover p {
+  margin: 0 0 0.75rem;
+  line-height: 1.35;
+}
+
+.setting-help-popover figure {
+  margin: 0 0 0.75rem;
+}
+
+.setting-help-popover figure:last-child {
+  margin-bottom: 0;
+}
+
+.setting-help-popover img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--secondary);
+  border-radius: 0.35rem;
+}
+
+.setting-help-popover figcaption {
+  margin-top: 0.25rem;
+  color: var(--lightGrey);
+  font-size: 0.8rem;
 }
 
 .container {

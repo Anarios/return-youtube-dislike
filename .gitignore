@@ -40,3 +40,7 @@ Extensions/combined/bundled-content-script.js
 # Dist Files
 Extensions/combined/dist/*
 Website/package-lock.json
+
+# Playwright output
+/playwright-report/
+/test-results/

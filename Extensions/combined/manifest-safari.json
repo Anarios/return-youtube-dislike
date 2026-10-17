@@ -12,12 +12,7 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": [
-    "activeTab",
-    "*://*.youtube.com/*",
-    "storage",
-    "*://returnyoutubedislikeapi.com/*"
-  ],
+  "permissions": ["activeTab", "*://*.youtube.com/*", "storage", "*://returnyoutubedislikeapi.com/*"],
   "browser_action": {
     "default_popup": "popup.html"
   },
@@ -32,5 +27,6 @@
   ],
   "options_ui": {
     "page": "popup.html"
-  }
+  },
+  "web_accessible_resources": ["menu-fixer.js"]
 }
