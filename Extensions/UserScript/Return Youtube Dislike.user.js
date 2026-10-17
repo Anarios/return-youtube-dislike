@@ -1655,10 +1655,12 @@ function getLikeButton(buttons = getButtons()) {
 }
 
 function getLikeTextContainer() {
+  const likeButton = getLikeButton();
+  if (!likeButton) return null;
   return (
-    getLikeButton().querySelector("#text") ??
-    getLikeButton().getElementsByTagName("yt-formatted-string")[0] ??
-    getLikeButton().querySelector("span[role='text']")
+    likeButton.querySelector("#text") ??
+    likeButton.getElementsByTagName("yt-formatted-string")[0] ??
+    likeButton.querySelector("span[role='text']")
   );
 }
 
@@ -1826,10 +1828,12 @@ function getState() {
 
 function setLikes(likesCount) {
   if (isMobile) {
-    getButtons().children[0].querySelector(".button-renderer-text").innerText = likesCount;
+    const container = getButtons()?.children[0]?.querySelector(".button-renderer-text");
+    if (container) container.innerText = likesCount;
     return;
   }
-  getLikeTextContainer().innerText = likesCount;
+  const container = getLikeTextContainer();
+  if (container) container.innerText = likesCount;
 }
 
 function setDislikes(dislikesCount) {
