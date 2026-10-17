@@ -87,7 +87,7 @@
     "message": "Les informations sur votre abonnement Patreon servent à vérifier votre accès premium. Nous ne recevons pas les données de votre carte ni vos coordonnées bancaires."
   },
   "githubLoggedOutMessage": {
-    "message": "Fonctionnalités premium disponibles pour les contributeurs sur Patreon"
+    "message": "Fonctionnalités premium disponibles pour les contributeurs sur GitHub"
   },
   "githubLogin": {
     "message": "Se connecter avec GitHub (contributeurs)"
@@ -97,6 +97,27 @@
   },
   "githubLoginCompleteFailed": {
     "message": "Échec de la connexion. Veuillez réessayer."
+  },
+  "githubLoginUnavailable": {
+    "message": "La connexion des contributeurs via GitHub est actuellement indisponible. Le service nécessite une mise à jour ou une modification de sa configuration."
+  },
+  "githubLoginNotContributor": {
+    "message": "Ce compte GitHub ne figure pas parmi les contributeurs à Return YouTube Dislike. Connectez-vous avec un compte ayant contribué au projet. Les contributions récentes peuvent mettre quelques heures à être prises en compte."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "La connexion via GitHub n’est pas configurée pour l’adresse de rappel de ce navigateur. Veuillez contacter l’assistance."
+  },
+  "githubLoginExpired": {
+    "message": "Cette tentative de connexion via GitHub a expiré ou n’a pas pu être vérifiée. Veuillez réessayer de vous connecter."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Veuillez mettre à jour l’extension pour vous connecter en tant que contributeur via GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Trop de tentatives de connexion. Veuillez patienter une minute avant de réessayer."
+  },
+  "githubLoginDenied": {
+    "message": "L’autorisation GitHub a été refusée. Une autorisation est nécessaire pour se connecter en tant que contributeur."
   },
   "patreonLoginCompleteFailed": {
     "message": "Échec de la connexion. Veuillez réessayer."
@@ -552,19 +573,19 @@
     "message": "Demander à la communauté"
   },
   "hideClutterButtons": {
-    "message": "Regroupper les autres boutons"
+    "message": "Regrouper les autres boutons"
   },
   "hideClutterButtonsHelpLabel": {
     "message": "Afficher un exemple avant/après"
   },
   "hideClutterButtonsDescription": {
-    "message": "Garder uniquement les boutons Like/Dislike visible. Les boutons Partager, Enregistrer, Merci, et autres seront déplacés vers le menu Plus de Youtube."
+    "message": "Garder uniquement les boutons Like/Dislike visibles. Les boutons Partager, Enregistrer, Merci, et autres seront déplacés vers le menu Plus de YouTube."
   },
   "hideClutterButtonsBefore": {
-    "message": "Avant: Tous les boutons d'action sont visible"
+    "message": "Avant : tous les boutons d’action sont visibles"
   },
   "hideClutterButtonsAfter": {
-    "message": "Après: seuls les boutons Like et Dislike restent visibles"
+    "message": "Après : seuls les boutons Like et Dislike restent visibles"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo de Return YouTube Dislike"
