@@ -15,19 +15,19 @@
     "message": "Koloruj pasek ocen"
   },
   "colorizeRatioHover": {
-    "message": "Użyj własnych kolorów paska."
+    "message": "Zmienia kolor paska ocen na wybrany przez Ciebie."
   },
   "colorizeThumbs": {
     "message": "Koloruj łapki"
   },
   "colorizeThumbsHover": {
-    "message": "Użyj własnych kolorów łapek."
+    "message": "Zmienia kolor łapek na wybrany przez Ciebie."
   },
   "considerDonating": {
     "message": "Jedyne co napędza ten projekt to wasze dotacje, prosimy o rozważenie wsparcia tego projektu."
   },
   "customColors": {
-    "message": "Własne kolory paska łapek i guzików"
+    "message": "Własne kolory przycisków oraz paska łapek"
   },
   "customNumberFormats": {
     "message": "Własne formaty liczbowe"
@@ -150,10 +150,10 @@
     "message": "Użytkownik Patreona"
   },
   "reformatLikes": {
-    "message": "Zmień formatowanie liczby łapek."
+    "message": "Zmień formatowanie liczby łapek w górę"
   },
   "reformatLikesHover": {
-    "message": "Ujednolica format liczbowy łapek."
+    "message": "Ujednolica format liczbowy łapek, aby był on taki sam zarówno dla łapek w górę, jak i w dół."
   },
   "hidePremiumTeaser": {
     "message": "Ukryj panel zwiastunu Premium"
@@ -174,7 +174,7 @@
     "message": "Procent w podpowiedzi paska polubień/łapek w dół."
   },
   "showTooltipPercentageHover": {
-    "message": "Wyświetl procent w podpowiedzi paska polubień/łapek w dół."
+    "message": "Wyświetla wartości procentowe po najechaniu na pasek wyświetlany pod łapkami."
   },
   "textColorTheme": {
     "message": "Motyw kolorystyczny:"
@@ -192,13 +192,13 @@
     "message": "Koloruj pasek ocen"
   },
   "textColorizeRatioBarHover": {
-    "message": "Użyj własnych kolorów paska."
+    "message": "Zmienia kolor paska ocen na wybrany przez Ciebie."
   },
   "textColorizeThumbs": {
     "message": "Koloruj łapki"
   },
   "textColorizeThumbsHover": {
-    "message": "Użyj własnych kolorów łapek."
+    "message": "Zmienia kolor łapek na wybrany przez Ciebie."
   },
   "textConsistentFormat": {
     "message": "Ujednolica format liczbowy łapek."
@@ -213,13 +213,13 @@
     "message": "Wyłączone przez twórcę"
   },
   "textNumberFormat": {
-    "message": "Format liczbowy:"
+    "message": "Format liczb:"
   },
   "textRoundingNumbers": {
     "message": "Zaokrąglaj łapki w górę/dół (domyślne zachowanie YouTube)"
   },
   "textRoundingNumbersHover": {
-    "message": "Pokaż zaokrąglone w dół statystyki."
+    "message": "Pokazuje zaokrągloną w dół liczbę łapek."
   },
   "textSettings": {
     "message": "Wyłącz przesyłanie łapek"
@@ -234,10 +234,10 @@
     "message": "Zaktualizuj do"
   },
   "tooltipPercentageMode": {
-    "message": "Tryb procentów:"
+    "message": "Rodzaj wyświetlania procentów:"
   },
   "tooltipPercentageModeHover": {
-    "message": "Użyj niestandardowego wyświetlania procentów po najechaniu."
+    "message": "Zmienia rodzaj wyświetlania statystyki procentowej po najechaniu na pasek pod łapkami."
   },
   "version30installed": {
     "message": "Zainstalowana wersja __RYD_VERSION__"
@@ -471,7 +471,7 @@
     "message": "Wybierz poziom Premium, aby włączyć wykresy aktywności, rankingi krajów i interaktywną mapę."
   },
   "premiumTeaser_breadcrumbStep3": {
-    "message": "Odśwież YouTube, aby zobaczyć trendy godzinowe, najlepsze kraje i szczegóły według stanów USA dla każdego filmu."
+    "message": "Odśwież YouTube, aby zobaczyć trendy godzinowe, ranking krajów i szczegółowe dane dotyczące poszczególnych stanów USA dla każdego filmu."
   },
   "premiumTierNotice_title": {
     "message": "Analityka premium zablokowana"
@@ -492,7 +492,7 @@
     "message": "Analityka premium w nowym wydaniu"
   },
   "changelog_subheading": {
-    "message": "Przeglądaj oś czasu aktywności na żywo, rankingi najlepszych krajów i interaktywną mapę dołączoną do usługi Return YouTube Dislike Premium."
+    "message": "Przeglądaj oś czasu aktywności na żywo, rankingi najlepszych krajów oraz interaktywną mapę dostępną w ramach Return YouTube Dislike Premium."
   },
   "changelog_releaseDate": {
     "message": "Wydany 20 października 2025 r."
@@ -510,19 +510,19 @@
     "message": "Oś czasu aktywności na żywo"
   },
   "changelog_feature_timeline_body": {
-    "message": "Oglądaj transmisję polubień i łapek w dół w czasie rzeczywistym. Przełączaj wstępne ustawienia godzinowe, dzienne lub z całego okresu bez ponownego ładowania, zakotwicz okno na pierwszym dniu lub najnowszych głosach i przeglądaj każdy skok, aby zobaczyć, co wywołało zaangażowanie."
+    "message": "Obserwuj zmiany liczby łapek w górę i w dół w czasie rzeczywistym. Przełączaj się między ustawieniami godzinnymi, dziennymi lub z całego okresu bez odświeżania strony, wybieraj zakres rozpoczynający się od pierwszego dnia albo kończący się na najnowszych głosach i prześledź każdy skok, aby sprawdzić, co wywołało zaangażowanie."
   },
   "changelog_feature_map_title": {
     "message": "Interaktywna mapa cieplna świata i USA"
   },
   "changelog_feature_map_body": {
-    "message": "Podróżuj po całym świecie lub szukaj w stanach USA, aby wydobyć na powierzchnię gorące punkty. Porównaj polubienia, łapki w dół i ich współczynniki w ulepszonej chmurce podpowiedzi i zwróć uwagę na regiony, które jako pierwsze reagują na przesłane przez Ciebie treści."
+    "message": "Przesuwaj mapę świata lub przyjrzyj się poszczególnym stanom USA, aby znaleźć miejsca największej aktywności. Porównuj łapki w górę, łapki w dół i ich współczynnik w ulepszonej podpowiedzi oraz wyróżniaj regiony, które jako pierwsze reagują na Twoje nowe filmy."
   },
   "changelog_feature_quality_title": {
     "message": "Ranking najlepszych krajów"
   },
   "changelog_feature_quality_body": {
-    "message": "Uszereguj każdy kraj według surowej aktywności, polubień, łapek w dół lub ich współczynnika. Filtruj przy użyciu tych samych ustawień co na osi czasu, aby dowiedzieć się, dokąd dotrą kampanie i zaplanować, co opublikować w następnej kolejności."
+    "message": "Uszereguj kraje według surowej aktywności, liczby łapek w górę, łapek w dół lub ich współczynnika. Filtruj wyniki przy użyciu tych samych ustawień co na osi czasu, aby sprawdzić, gdzie Twoje kampanie znajdują odbiorców, i zaplanować kolejne publikacje."
   },
   "changelog_screenshot_placeholder": {
     "message": "Zrzuty ekranu wkrótce - przechwyć ten widok w DevTools, gdy będzie gotowy."
@@ -534,22 +534,22 @@
     "message": "Symbol zastępczy: globalna mapa aktywności"
   },
   "changelog_screenshot_label_teaser": {
-    "message": "Symbol zastępczy: tabela wyników krajów"
+    "message": "Symbol zastępczy: ranking krajów"
   },
   "changelog_section_upgrade": {
     "message": "Jak odblokować analitykę Premium"
   },
   "changelog_upgrade_body": {
-    "message": "Gotowy, aby zacząć? Wykonaj te krótkie kroki i odśwież kartę YouTube."
+    "message": "Gotowy, by zacząć? Wykonaj poniższe proste kroki i odśwież kartę YouTube."
   },
   "changelog_upgrade_step1": {
-    "message": "Otwórz wyskakujące okienko „Return YouTube Dislike” i zaloguj się na Patreonie."
+    "message": "Otwórz okienko Return YouTube Dislike i zaloguj się przez Patreon."
   },
   "changelog_upgrade_step2": {
     "message": "Wybierz poziom Premium, aby umożliwić przesyłanie strumieniowe danych analitycznych na swoje konto."
   },
   "changelog_upgrade_step3": {
-    "message": "Załaduj ponownie dowolną stronę odtwarzania w YouTube - Twoja oś czasu, mapa i rankingi pojawią się natychmiast."
+    "message": "Odśwież dowolną stronę odtwarzania na YouTube — Twoja oś czasu, mapa i rankingi pojawią się natychmiast."
   },
   "changelog_section_release": {
     "message": "Najważniejsze zmiany w wydaniu"
@@ -561,7 +561,7 @@
     "message": "Ranking krajów odświeża się natychmiast, dzięki czemu możesz wykryć regiony o wzroście popularności bez opuszczania panelu."
   },
   "changelog_release_item3": {
-    "message": "Interaktywna mapa wyróżnia gorące punkty na całym świecie i w stanach USA za pomocą wyraźniejszych podpowiedzi i wskaźników."
+    "message": "Interaktywna mapa wyróżnia obszary największej aktywności na świecie i w poszczególnych stanach USA oraz oferuje czytelniejsze podpowiedzi i wskaźniki."
   },
   "changelog_support_heading": {
     "message": "Potrzebujesz pomocy?"
