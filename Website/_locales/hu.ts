@@ -29,6 +29,7 @@ export default {
         userscript: 'Felhasználói szkript',
         tampermonkey: 'Tampermonkey',
         androidReVanced: 'Android - ReVanced',
+        androidMorphe: "Android - Morphe",
         androidTubular: 'Android (Tubular – a NewPipe forkja)',
         iosJailbroken: 'iOS (jailbreakelt)',
         iosUYouPlus: 'iOS (uYou+)',

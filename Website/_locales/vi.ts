@@ -26,6 +26,7 @@ export default {
     userscript: "Tập lệnh người dùng",
     tampermonkey: "Tampermonkey",
     androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
     androidTubular: "Android (Tubular - một fork của NewPipe)",
     iosJailbroken: "iOS (đã jailbreak)",
     iosUYouPlus: "iOS (uYou+)",
