@@ -33,6 +33,7 @@ jest.mock("./state", () => ({
 
 jest.mock("./utils", () => ({
   getColorFromTheme: jest.fn(() => "red"),
+  getElementWidth: jest.fn(() => 96),
   getVideoId: jest.fn(() => "BBBBBBBBBBB"),
   isInViewport: jest.fn(() => true),
   querySelector: jest.fn((selectors, element) => {

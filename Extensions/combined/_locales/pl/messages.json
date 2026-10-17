@@ -36,10 +36,10 @@
     "message": "Wyłącza logowanie odpowiedzi API w konsoli."
   },
   "disableLoggingLabel": {
-    "message": "Wyłącz logi konsoli"
+    "message": "Wyłącz logowanie do konsoli"
   },
   "extensionDesc": {
-    "message": "Przywraca licznik łapek w dół."
+    "message": "Przywraca licznik łapek w dół"
   },
   "extensionName": {
     "message": "Return YouTube Dislike"
@@ -78,52 +78,52 @@
     "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
-    "message": "Funkcje premium są dostępne tylko dla wspierających na Patreonie"
+    "message": "Funkcje premium są dostępne dla wspierających na Patreon"
   },
   "patreonLogin": {
-    "message": "Zaloguj się przez Patreona"
+    "message": "Zaloguj się przez Patreon"
   },
   "patreonPrivacyNote": {
-    "message": "Informacje o członkostwie na Patreonie służą do weryfikacji dostępu do funkcji premium. Nie otrzymujemy danych Twojej karty ani konta bankowego."
+    "message": "Informacje o członkostwie w Patreon służą do weryfikacji dostępu do funkcji premium. Nie otrzymujemy danych Twojej karty ani konta bankowego."
   },
   "githubLoggedOutMessage": {
-    "message": "Funkcje premium dostępne dla współtwórców na GitHubie"
+    "message": "Funkcje premium są dostępne dla kontrybutorów projektu na GitHub."
   },
   "githubLogin": {
-    "message": "Zaloguj się przez GitHuba (Współtwórca)"
+    "message": "Zaloguj się przez GitHub (kontrybutor)"
   },
   "githubLoginStartFailed": {
-    "message": "Nie udało się rozpocząć logowania przez GitHuba. Spróbuj ponownie."
+    "message": "Nie udało się rozpocząć logowania przez GitHub. Spróbuj ponownie."
   },
   "githubLoginCompleteFailed": {
-    "message": "Nie udało się dokończyć logowania przez GitHuba. Spróbuj ponownie."
+    "message": "Nie udało się dokończyć logowania przez GitHub. Spróbuj ponownie."
   },
   "githubLoginUnavailable": {
-    "message": "Logowanie dla współtwórców na GitHubie jest obecnie niedostępne. Usługa wymaga aktualizacji lub zmiany konfiguracji."
+    "message": "Logowanie się kontrybutora GitHub jest w tej chwili niedostępne. Serwis potrzebuje aktualizacji lub zmiany konfiguracji."
   },
   "githubLoginNotContributor": {
-    "message": "To konto GitHub nie figuruje jako współtwórca projektu Return YouTube Dislike. Zaloguj się za pomocą konta współtwórcy. Wyświetlenie najnowszych zmian może potrwać kilka godzin."
+    "message": "To konto GitHub nie jest kontrybutorem Return YouTube Dislike. Zaloguj się kontem kontrybutora. Uwzględnienie nowych kontrybucji może potrwać kilka godzin."
   },
   "githubLoginBrowserUnavailable": {
-    "message": "Logowanie przez GitHuba nie zostało skonfigurowane dla adresu wywołania zwrotnego tej przeglądarki. Skontaktuj się z pomocą techniczną."
+    "message": "Logowanie się GitHub nie jest skonfigurowane na adres zwrotny (callback) tej przeglądarki. Skontaktuj się z deweloperem."
   },
   "githubLoginExpired": {
-    "message": "Ta próba logowania przez GitHuba wygasła lub nie udało się jej zweryfikować. Spróbuj zalogować się ponownie."
+    "message": "Ta próba zalogowania się wygasła lub nie mogła zostać zweryfikowana. Spróbuj ponownie."
   },
   "githubLoginUpdateRequired": {
-    "message": "Zaktualizuj rozszerzenie, aby umożliwić logowanie przez GitHuba."
+    "message": "Zaktualizuj rozszerzenie, aby użyć logowania się kontrybutora GitHub."
   },
   "githubLoginRateLimited": {
-    "message": "Zbyt wiele prób logowania. Odczekaj chwilę przed ponowną próbą."
+    "message": "Za dużo prób logowania się. Poczekaj chwilę przed ponownymi próbami."
   },
   "githubLoginDenied": {
-    "message": "Autoryzacja przez GitHuba została odrzucona. Zalogowanie się jako współtwórca wymaga autoryzacji."
+    "message": "Autoryzacja GitHub została odrzucona. Logowanie się kontrybutora wymaga autoryzacji."
   },
   "patreonLoginCompleteFailed": {
-    "message": "Nie udało się dokończyć logowania przez Patreona. Spróbuj ponownie."
+    "message": "Nie udało się dokończyć logowania. Spróbuj ponownie."
   },
   "patreonLoginStartFailed": {
-    "message": "Nie udało się rozpocząć logowania przez Patreona. Spróbuj ponownie."
+    "message": "Nie udało się rozpocząć logowania przez Patreon. Spróbuj ponownie."
   },
   "patreonLogout": {
     "message": "Wyloguj się"
@@ -156,22 +156,22 @@
     "message": "Ujednolica format liczbowy łapek, aby był on taki sam zarówno dla łapek w górę, jak i w dół."
   },
   "hidePremiumTeaser": {
-    "message": "Ukryj panel zajawki Premium"
+    "message": "Ukryj panel zwiastunu Premium"
   },
   "hidePremiumTeaserHover": {
-    "message": "Ukrywa zajawki Premium na stronach odtwarzania YouTube'a."
+    "message": "Nie pokazuj zwiastunu Premium na stronach odtwarzania YouTube."
   },
   "roundNumbers": {
-    "message": "Zaokrąglaj liczby w dół"
+    "message": "Pokaż zaokrąglone w dół liczby"
   },
   "roundNumbersHover": {
-    "message": "Zaokrągla liczbę łapek w dół, niżeli w górę (domyślne zachowanie YouTube'a)."
+    "message": "Zaokrąglaj w dół liczby (domyślne zachowanie YouTube)."
   },
   "shortsSupport": {
     "message": "Wsparcie dla YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Wartości procentowe dla paska pod łapkami"
+    "message": "Procent w podpowiedzi paska polubień/łapek w dół."
   },
   "showTooltipPercentageHover": {
     "message": "Wyświetla wartości procentowe po najechaniu na pasek wyświetlany pod łapkami."
@@ -204,10 +204,10 @@
     "message": "Ujednolica format liczbowy łapek."
   },
   "textConsistentFormatHover": {
-    "message": "Zmień formatowanie liczby łapek"
+    "message": "Zmień formatowanie liczby łapek."
   },
   "textDeveloper": {
-    "message": "przez Dmitrijego Selivanowa i społeczność"
+    "message": "Autorzy: Dmitrij Sieliwanow i społeczność"
   },
   "textLikesDisabled": {
     "message": "Wyłączone przez twórcę"
@@ -216,7 +216,7 @@
     "message": "Format liczb:"
   },
   "textRoundingNumbers": {
-    "message": "Zaokrąglaj łapki w górę/dół (domyślne zachowanie YouTube'a)"
+    "message": "Zaokrąglaj łapki w górę/dół (domyślne zachowanie YouTube)"
   },
   "textRoundingNumbersHover": {
     "message": "Pokazuje zaokrągloną w dół liczbę łapek."
@@ -246,7 +246,7 @@
     "message": "Co nowego"
   },
   "premiumAnalytics_title": {
-    "message": "Statystyki filmiku premium"
+    "message": "Premiumowe statystyki wideo"
   },
   "premiumAnalytics_activityTitle": {
     "message": "Zaangażowanie w czasie"
@@ -255,7 +255,7 @@
     "message": "Najlepsze kraje"
   },
   "premiumAnalytics_listLikesTitle": {
-    "message": "Kraje z największą liczbą łapek w górę"
+    "message": "Kraje z największą liczbą polubień"
   },
   "premiumAnalytics_listDislikesTitle": {
     "message": "Kraje z największą liczbą łapek w dół"
@@ -276,7 +276,7 @@
     "message": "Powrót do mapy świata"
   },
   "premiumAnalytics_modeLikes": {
-    "message": "Łapki w górę"
+    "message": "Polubienia"
   },
   "premiumAnalytics_modeDislikes": {
     "message": "Łapki w dół"
@@ -330,10 +330,10 @@
     "message": "Użytkownicy rozszerzenia"
   },
   "premiumAnalytics_totalsLikes": {
-    "message": "$1 łapek w górę"
+    "message": "$1 polubień"
   },
   "premiumAnalytics_totalsDislikes": {
-    "message": "$1 łapek w dół"
+    "message": "$1 niepolubień"
   },
   "premiumAnalytics_summaryMeta": {
     "message": "Zarejestrowano $1 interakcji z $2 krajów ($3 unikalnych adresów IP)"
@@ -375,13 +375,13 @@
     "message": "Ładowanie statystyk…"
   },
   "premiumAnalytics_errorReauth": {
-    "message": "Autoryzuj ponownie przez Patreona, aby odblokować statystyki."
+    "message": "Autoryzuj ponownie Patreon, aby odblokować statystyki."
   },
   "premiumAnalytics_errorInactive": {
-    "message": "Statystyki premium są dostępne jedynie dla aktywnych wspierających na Patreonie."
+    "message": "Statystyki premium są dostępne dla aktywnych wspierających na Patreonie."
   },
   "premiumAnalytics_errorSession": {
-    "message": "Sesja wygasła. Zaloguj się ponownie przez Patreona."
+    "message": "Sesja wygasła. Zaloguj się ponownie przez Patreon."
   },
   "premiumAnalytics_errorBackend": {
     "message": "Usługa statystyk jest teraz niedostępna."
@@ -396,19 +396,19 @@
     "message": "Aktywność"
   },
   "premiumAnalytics_likeRatio": {
-    "message": "Współczynnik łapek w górę"
+    "message": "Współczynnik polubień"
   },
   "premiumAnalytics_visualHighRatio": {
-    "message": "Wyższy współczynnik łapek w górę"
+    "message": "Wyższy współczynnik polubień"
   },
   "premiumAnalytics_visualLowRatio": {
-    "message": "Niższy współczynnik łapek w górę"
+    "message": "Niższy współczynnik polubień"
   },
   "premiumAnalytics_visualHighLikes": {
-    "message": "Więcej łapek w górę"
+    "message": "Więcej polubień"
   },
   "premiumAnalytics_visualLowLikes": {
-    "message": "Mniej łapek w górę"
+    "message": "Mniej polubień"
   },
   "premiumAnalytics_visualHighDislikes": {
     "message": "Więcej łapek w dół"
@@ -423,16 +423,16 @@
     "message": "Mniej $1"
   },
   "premiumAnalytics_tooltipLikes": {
-    "message": "Łapki w górę: $1"
+    "message": "Polubienia: $1"
   },
   "premiumAnalytics_tooltipDislikes": {
-    "message": "Lapki w dół: $1"
+    "message": "Łapki w dół: $1"
   },
   "premiumAnalytics_tooltipRatio": {
-    "message": "Współczynnik łapek w górę: $1"
+    "message": "Współczynnik polubień: $1"
   },
   "premiumTeaser_title": {
-    "message": "Analityka filmiku"
+    "message": "Analityka wideo"
   },
   "premiumTeaser_subtitle": {
     "message": "Surowe łapki w dół to bezpośrednie zgłoszenia użytkowników rozszerzenia oglądających ten film."
@@ -450,40 +450,40 @@
     "message": "Szacowane łapki w dół"
   },
   "premiumTeaser_statLikes": {
-    "message": "Surowa liczba łapek w górę"
+    "message": "Surowa liczba polubień"
   },
   "premiumTeaser_statusLoading": {
     "message": "Pobieranie najnowszych sum łapek w dół…"
   },
   "premiumTeaser_statusError": {
-    "message": "Nie udało się wczytać danych o łapkach w dół. Spróbuj odświeżyć witrynę."
+    "message": "Nie udało się wczytać danych o łapkach w dół. Spróbuj odświeżyć stronę."
   },
   "premiumTeaser_breadcrumbsAria": {
     "message": "Jak odblokować statystyki premium"
   },
   "premiumTeaser_breadcrumbsTitle": {
-    "message": "Odblokuj statystyki premium filmiku w trzech prostych krokach:"
+    "message": "Odblokuj statystyki premium wideo w trzech prostych krokach:"
   },
   "premiumTeaser_breadcrumbStep1": {
-    "message": "Zaloguj się przez Patreona w oknie rozszerzenia Return YouTube Dislike."
+    "message": "Zaloguj się przez Patreon w oknie rozszerzenia Return YouTube Dislike."
   },
   "premiumTeaser_breadcrumbStep2": {
     "message": "Wybierz poziom Premium, aby włączyć wykresy aktywności, rankingi krajów i interaktywną mapę."
   },
   "premiumTeaser_breadcrumbStep3": {
-    "message": "Odśwież witrynę YouTube, aby zobaczyć trendy godzinowe, popularność w kraju i szczegółowe dane dotyczące poszczególnych stanów USA dla każdego filmu."
+    "message": "Odśwież YouTube, aby zobaczyć trendy godzinowe, ranking krajów i szczegółowe dane dotyczące poszczególnych stanów USA dla każdego filmu."
   },
   "premiumTierNotice_title": {
     "message": "Analityka premium zablokowana"
   },
   "premiumTierNotice_message": {
-    "message": "Twoje członkostwo na Patreonie nie obejmuje poziomu Premium. Ulepsz wsparcie, aby odblokować zaawansowaną analitykę filmów."
+    "message": "Twoje członkostwo w Patreonie nie obejmuje poziomu Premium. Zwiększ wsparcie, aby odblokować zaawansowane analizy wideo."
   },
   "premiumTierNotice_cta": {
     "message": "Ulepsz na Patreonie"
   },
   "changelog_title": {
-    "message": "Dziennik zmian analityki premium · 20 października, 2025 r."
+    "message": "Dziennik zmian analityki premium · 20 października 2025 r."
   },
   "changelog_badge": {
     "message": "Wydanie premium"
@@ -495,10 +495,10 @@
     "message": "Przeglądaj oś czasu aktywności na żywo, rankingi najlepszych krajów oraz interaktywną mapę dostępną w ramach Return YouTube Dislike Premium."
   },
   "changelog_releaseDate": {
-    "message": "Wydany 20 października, 2025 r."
+    "message": "Wydany 20 października 2025 r."
   },
   "changelog_cta_primary": {
-    "message": "Ulepsz na Patreonie"
+    "message": "Uaktualnij na Patreonie"
   },
   "changelog_cta_secondary": {
     "message": "Przeczytaj przewodnik konfiguracji"
@@ -510,22 +510,22 @@
     "message": "Oś czasu aktywności na żywo"
   },
   "changelog_feature_timeline_body": {
-    "message": "Obserwuj liczbę łapek w górę/dół w czasie rzeczywistym. Przełączaj się między ustawieniami godzinnymi, dziennymi lub ogólnymi bez konieczności odświeżania strony, przymocuj okno do pierwszego dnia lub najnowszych głosów i prześledź każdy skok, aby sprawdzić, co wywołało zaangażowanie."
+    "message": "Obserwuj zmiany liczby łapek w górę i w dół w czasie rzeczywistym. Przełączaj się między ustawieniami godzinnymi, dziennymi lub z całego okresu bez odświeżania strony, wybieraj zakres rozpoczynający się od pierwszego dnia albo kończący się na najnowszych głosach i prześledź każdy skok, aby sprawdzić, co wywołało zaangażowanie."
   },
   "changelog_feature_map_title": {
     "message": "Interaktywna mapa cieplna świata i USA"
   },
   "changelog_feature_map_body": {
-    "message": "Podróżuj po całym świecie lub skup się na poszczególnych stanach USA, aby odkryć miejsca o największym zainteresowaniu. Porównaj łapki w górę/w dół i ich współczynniki w ulepszonej podpowiedzi i wyróżnij regiony, które jako pierwsze reagują na przesłane przez Ciebie treści."
+    "message": "Przesuwaj mapę świata lub przyjrzyj się poszczególnym stanom USA, aby znaleźć miejsca największej aktywności. Porównuj łapki w górę, łapki w dół i ich współczynnik w ulepszonej podpowiedzi oraz wyróżniaj regiony, które jako pierwsze reagują na Twoje nowe filmy."
   },
   "changelog_feature_quality_title": {
     "message": "Ranking najlepszych krajów"
   },
   "changelog_feature_quality_body": {
-    "message": "Uporządkuj każdy kraj według ogólnej aktywności, liczby łapek w górę/dół lub ich współczynnika. Filtruj wyniki przy użyciu tych samych ustawień, co na osi czasu, aby sprawdzić, jak radzą sobie kampanie, i zaplanować kolejne publikacje."
+    "message": "Uszereguj kraje według surowej aktywności, liczby łapek w górę, łapek w dół lub ich współczynnika. Filtruj wyniki przy użyciu tych samych ustawień co na osi czasu, aby sprawdzić, gdzie Twoje kampanie znajdują odbiorców, i zaplanować kolejne publikacje."
   },
   "changelog_screenshot_placeholder": {
-    "message": "Zrzut ekranu wkrótce — gdy wszystko będzie gotowe, zrób zrzut tego widoku w DevTools."
+    "message": "Zrzuty ekranu wkrótce - przechwyć ten widok w DevTools, gdy będzie gotowy."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Symbol zastępczy: przegląd osi czasu"
@@ -543,31 +543,31 @@
     "message": "Gotowy, by zacząć? Wykonaj poniższe proste kroki i odśwież kartę YouTube."
   },
   "changelog_upgrade_step1": {
-    "message": "Otwórz okienko Return YouTube Dislike i zaloguj się przez Patreona."
+    "message": "Otwórz okienko Return YouTube Dislike i zaloguj się przez Patreon."
   },
   "changelog_upgrade_step2": {
-    "message": "Wybierz plan Premium, aby włączyć przesyłanie danych analitycznych na swoje konto."
+    "message": "Wybierz poziom Premium, aby umożliwić przesyłanie strumieniowe danych analitycznych na swoje konto."
   },
   "changelog_upgrade_step3": {
-    "message": "Odśwież dowolną stronę odtwarzania na YouTube — Twoja oś czasu, mapa i tabele wyników pojawią się natychmiast."
+    "message": "Odśwież dowolną stronę odtwarzania na YouTube — Twoja oś czasu, mapa i rankingi pojawią się natychmiast."
   },
   "changelog_section_release": {
-    "message": "Najważniejsze informacje o wydaniu"
+    "message": "Najważniejsze zmiany w wydaniu"
   },
   "changelog_release_item1": {
-    "message": "Ustawienia domyślne osi czasu aktywności wyświetlają dane na żywo wraz z punktami odniesienia zakresu dla pierwszego i ostatniego przedziału."
+    "message": "Gotowe ustawienia osi czasu aktywności przesyłają strumieniowo dane na żywo z punktami odniesienia zakresu dla pierwszego i najnowszego segmentu."
   },
   "changelog_release_item2": {
-    "message": "Ranking krajów odświeża się natychmiestowo, dzięki czemu możesz dostrzec regiony zyskujące na znaczeniu bez opuszczania panelu."
+    "message": "Ranking krajów odświeża się natychmiast, dzięki czemu możesz wykryć regiony o wzroście popularności bez opuszczania panelu."
   },
   "changelog_release_item3": {
-    "message": "Interaktywna mapa wyróżnia miejsca o największym zainteresowaniu na całym świecie i w poszczególnych stanach USA, oferując bardziej przejrzyste opisy i współczynniki."
+    "message": "Interaktywna mapa wyróżnia obszary największej aktywności na świecie i w poszczególnych stanach USA oraz oferuje czytelniejsze podpowiedzi i wskaźniki."
   },
   "changelog_support_heading": {
     "message": "Potrzebujesz pomocy?"
   },
   "changelog_support_description": {
-    "message": "Jeśli napotkasz jakąś trudność, jesteśmy do Twojej dyspozycji — zadaj pytania, korzystając z dokumentacji lub społeczności."
+    "message": "Jesteśmy tu, jeśli napotkasz przeszkodę - zadaj swoje pytania pomocy technicznej lub społeczności."
   },
   "changelog_support_contact": {
     "message": "Zapytaj społeczność"
@@ -579,13 +579,13 @@
     "message": "Pokaż przykłady przed i po"
   },
   "hideClutterButtonsDescription": {
-    "message": "Wymusza wyświetlanie jedynie przycisków łapek. Przyciski udostępniania, zapisywania, dziękowania oraz inne pozostają dostępne w rozwijanym menu po prawej, oznaczonym trzema kropkami."
+    "message": "Zostawia tylko przycisk polubienia i łapki w dół. Udostępnij, Zapisz, Podziękuj, i inne opcjonalne opcje pozostaną dostępne w menu 3 kropek YouTube'a."
   },
   "hideClutterButtonsBefore": {
-    "message": "Przed: wszystkie przyciski są na wierzchu"
+    "message": "Przed: wszystkie przyciski akcji są widoczne"
   },
   "hideClutterButtonsAfter": {
-    "message": "Po: widoczne pozostają tylko przyciski łapek"
+    "message": "Po: widoczne są tylko łapki w górę i w dół"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
