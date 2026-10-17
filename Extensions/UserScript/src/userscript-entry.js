@@ -1046,7 +1046,7 @@ function getLikeCountFromButton() {
     }
 
     #return-youtube-dislike-bar {
-      background: var(--yt-spec-text-primary);
+      background: var(--yt-spec-text-primary, #f1f1f1);
       border-radius: 2px;
       transition: all 0.15s ease-in-out;
     }
