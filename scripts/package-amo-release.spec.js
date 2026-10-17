@@ -103,3 +103,35 @@ test("source allowlist includes the standalone build and packaging tools but exc
   );
   expect(files.some((name) => /\.spec\.|Extensions\/UserScript|node_modules|\.env/.test(name))).toBe(false);
 });
+
+test("source archive excludes private maintainer notes even when they exist beside public inputs", async () => {
+  const root = path.resolve(__dirname, "..");
+  const publicFiles = buildSourceFileList(root);
+  for (const name of publicFiles) {
+    const destination = path.join(temporary, name);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    fs.copyFileSync(path.join(root, name), destination);
+  }
+  const privateFiles = [
+    "AGENTS.md",
+    "AMO_SUBMISSION_NOTES.md",
+    "Docs/SSH_ACCESS.md",
+    "Docs/DiscussionApi.md",
+    "Docs/DiscussionValidation.md",
+    ".private/operations/SSH_ACCESS.md",
+    ".agents/local.md",
+  ];
+  for (const name of privateFiles) {
+    const destination = path.join(temporary, name);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    fs.writeFileSync(destination, "PRIVATE_MAINTAINER_FIXTURE");
+  }
+  const files = buildSourceFileList(temporary);
+  for (const name of privateFiles) expect(files).not.toContain(name);
+  const archive = path.join(temporary, "source.zip");
+  await createZip(archive, new Map(files.map((name) => [name, fs.readFileSync(path.join(temporary, name))])));
+  const entries = readZipFiles(archive);
+  for (const name of privateFiles) expect(entries.has(name)).toBe(false);
+  for (const content of entries.values())
+    expect(content.includes(Buffer.from("PRIVATE_MAINTAINER_FIXTURE"))).toBe(false);
+});
