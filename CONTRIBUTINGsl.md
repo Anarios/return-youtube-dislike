@@ -1,4 +1,4 @@
-Preberite to v drugih jezikih: [English](CONTRIBUTING.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [български](CONTRIBUTINGbg.md), [中文](CONTRIBUTINGcn.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Slovenščina](CONTRIBUTINGsl.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md)
+Preberite to v drugih jezikih: [English](CONTRIBUTING.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [български](CONTRIBUTINGbg.md), [中文](CONTRIBUTINGcn.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Slovenščina](CONTRIBUTINGsl.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md), [беларуская](CONTRIBUTINGbe.md)
 
 # Dobrodošli v navodilih za sodelovanje pri projektu Return YouTube Dislike
 
@@ -47,7 +47,7 @@ npm run build // enkrat ustvari datoteke gradnje
 
 #### Reševanje težave
 
-Če ste našli težavo, ki jo po svoje znate rešiti, ne oklevajte. Odprite zahtevo za združitev s popravkom in obvezno navedite težavo, ki jo odpravljate.
+Če ste našli težavo, za katero menite, da jo lahko rešite, ne oklevajte. Odprite zahtevo za združitev s popravkom in obvezno navedite težavo, ki jo odpravljate.
 
 ### Predlogi funkcij
 
@@ -57,7 +57,7 @@ npm run build // enkrat ustvari datoteke gradnje
 
 #### Implementacija predlagane funkcije
 
-Če ste našli funkcijo, ki jo po svoje znate implementirati, ne oklevajte. Odprite zahtevo za združitev in obvezno navedite funkcijo, ki jo implementirate.
+Če ste našli funkcijo, za katero menite, da jo lahko implementirate, ne oklevajte. Odprite zahtevo za združitev in obvezno navedite funkcijo, ki jo implementirate.
 
 ### Katere zahteve za združitev sprejemamo?
 

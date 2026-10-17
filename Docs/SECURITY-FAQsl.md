@@ -1,4 +1,4 @@
-Preberite to v drugih jezikih: [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [العربية](SECURITY-FAQar.md), [Bahasa Indonesia](SECURITY-FAQid.md), [中文](SECURITY-FAQcn.md), [български](SECURITY-FAQbg.md), [Slovenščina](SECURITY-FAQsl.md), [Tiếng Việt](SECURITY-FAQvi.md)
+Preberite to v drugih jezikih: [русский](SECURITY-FAQru.md), [Nederlands](SECURITY-FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [العربية](SECURITY_FAQar.md), [Bahasa Indonesia](SECURITY-FAQid.md), [中文](SECURITY-FAQcn.md), [български](SECURITY-FAQbg.md), [Slovenščina](SECURITY-FAQsl.md), [Tiếng Việt](SECURITY-FAQvi.md), [беларуская](SECURITY-FAQbe.md)
 
 # Varnost
 
@@ -34,7 +34,7 @@ preprečevanja zlorab in združene analitike. Naslova ne prodajamo in ga ne upor
 Prijava v premium analitiko je izbirna in se začne šele, ko uporabnik v razširitvi izbere prijavo s Patreonom ali GitHubom.
 Postopek OAuth vrne podatke o računu in žeton seje Return YouTube Dislike, ki se uporablja za overjanje premium zahtev
 API-ja. Pri različici 4.0.6 in pripadajoči izdaji zaledja se upravičenost prek Patreona določi iz trenutno dodeljenih ID-jev stopenj;
-storitev ne zahteva in ne uporablja zneskov članstva, datumov ali stanja bremenitev, skupnih plačil ali statusa podpornika.
+storitev ne zahteva in ne uporablja zneskov članstva, datumov ali stanja bremenitev, skupnega zneska vseh dosedanjih plačil ali statusa podpornika.
 Firefox pred začetkom prometa, povezanega z računom, zahteva ločeno privolitev za podatke za overjanje. Z odjavo se
 shranjeni podatki o računu in seja odstranijo iz razširitve. Preklic Firefoxovega dovoljenja za podatke za overjanje prav tako počisti
 sejo računa in prepreči nadaljnji promet, povezan z računom, dokler znova ne date privolitve in se ne prijavite. Sinhronizacija
@@ -46,4 +46,4 @@ Uvedli smo ukrepe za preprečevanje napadov botov in bomo še naprej izboljševa
 
 ### Zakaj ne objavite kode zaledja?
 
-Nekoč jo bomo objavili, a je zdaj za to res ni pravega razloga. Objava daje lažen občutek varnosti – v sistemu brez zaupanja bi lahko razkrili eno različico, uvedli pa povsem drugo. Obstaja veliko razlogov, da koda ostane skrita, predvsem to, kako se borimo proti neželeni vsebini. Skrivanje oziroma zakrivanje kode za obravnavo neželene vsebine je precej ustaljena praksa.
+Nekoč jo bomo objavili, a zdaj za to res ni pravega razloga. Objava daje lažen občutek varnosti – v sistemu brez zaupanja bi lahko razkrili eno različico, uvedli pa povsem drugo. Obstaja veliko razlogov, da koda ostane skrita, predvsem to, kako se borimo proti neželeni vsebini. Skrivanje oziroma zakrivanje kode za obravnavo neželene vsebine je precej ustaljena praksa.

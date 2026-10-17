@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Preberite to v drugih jezikih: [English](README.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [български](READMEbg.md), [繁體中文](READMEtw.md), [简体中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Slovenščina](READMEsl.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md)
+Preberite to v drugih jezikih: [English](README.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [български](READMEbg.md), [繁體中文](READMEtw.md), [简体中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Slovenščina](READMEsl.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md), [беларуская](READMEbe.md)
 
 # Return YouTube Dislike
 
@@ -28,7 +28,7 @@ Poleg tega je bilo 13. decembra 2021 iz YouTubovega API-ja [odstranjeno](https:/
 
 Po odstranitvi statistike nevšečkov iz YouTubovega API-ja naše zaledje uporablja kombinacijo postrgane statistike nevšečkov in ocen, ekstrapoliranih iz podatkov uporabnikov razširitve.
 
-[Pogosta vprašanja](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[Pogosta vprašanja](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQsl.md)
 
 ## Zakaj je to pomembno
 
@@ -66,7 +66,7 @@ Primer pridobivanja glasov za podani ID videa na YouTubu:
 }
 ```
 
-Neobstoječ ID videa na YouTubu vrne statusno kodo _404_ »Not Found«.  
+Neobstoječ ID videa na YouTubu vrne statusno kodo _404_ »Not Found«.
 Napačno oblikovan ID videa na YouTubu vrne statusno kodo _400_ »Bad Request«.
 
 <!---
@@ -77,7 +77,7 @@ Celotno dokumentacijo si lahko ogledate na naši spletni strani.
 
 ## Sodelovanje
 
-Preberite [navodila za sodelovanje](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Preberite [navodila za sodelovanje](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGsl.md).
 
 ## Podprite ta projekt!
 

@@ -1,4 +1,4 @@
-Read this in other languages: [English](SECURITY-FAQ.md), [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [Slovenščina](SECURITY-FAQsl.md)
+Read this in other languages: [беларуская](SECURITY-FAQbe.md), [English](SECURITY-FAQ.md), [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [Slovenščina](SECURITY-FAQsl.md)
 
 # Təhlükəsizlik
 

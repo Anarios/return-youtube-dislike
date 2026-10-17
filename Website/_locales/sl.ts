@@ -5,8 +5,7 @@ export default {
   home: {
     name: "Domov",
     title: "Return YouTube Dislike",
-    subtitle:
-      "Razširitev za brskalnik in API, ki prikazujeta nevšečke na YouTubu",
+    subtitle: "Razširitev za brskalnik in API, ki prikazujeta nevšečke na YouTubu",
     ukraine: "Podprite Ukrajino",
     sponsors: "Pokrovitelji",
     becomeSponsor: "Postanite naš pokrovitelj",
@@ -16,8 +15,7 @@ export default {
     title: "Izberite svojo platformo",
     subtitle: "Na voljo za Firefox in vse brskalnike na osnovi Chromiuma",
     title2: "Druge platforme",
-    subtitle2:
-      "Če vaš brskalnik še ni podprt, poskusite s tem uporabniškim skriptom",
+    subtitle2: "Če vaš brskalnik še ni podprt, poskusite s tem uporabniškim skriptom",
     title3: "Implementacije tretjih oseb",
     subtitle3: "Za te ne odgovarjamo, uporabljate jih na lastno odgovornost",
     firefox: "Firefox",
@@ -28,7 +26,8 @@ export default {
     userscript: "Uporabniški skript",
     tampermonkey: "Tampermonkey",
     androidReVanced: "Android – ReVanced",
-    androidTubular: "Android (Tubular – razvejitev NewPipe)",
+    androidMorphe: "Android – Morphe",
+    androidTubular: "Android (Tubular – fork NewPipe)",
     iosJailbroken: "iOS (z odklenjenim sistemom)",
     iosUYouPlus: "iOS (uYou+)",
   },
@@ -38,11 +37,9 @@ export default {
     subtitle: "Za začetek izberite razdelek v meniju.",
     rights: {
       title: "Pravice do uporabe",
-      subtitle:
-        "Uporaba tega odprtega API-ja s strani tretjih oseb je dovoljena z naslednjimi omejitvami:",
+      subtitle: "Uporaba tega odprtega API-ja s strani tretjih oseb je dovoljena z naslednjimi omejitvami:",
       bullet1: "Navedba vira: ",
-      bullet1text:
-        "Ta projekt mora biti jasno naveden s povezavo do tega repozitorija ali do returnyoutubedislike.com",
+      bullet1text: "Ta projekt mora biti jasno naveden s povezavo do tega repozitorija ali do returnyoutubedislike.com",
       bullet2: "Omejevanje pogostosti: ",
       bullet2text:
         "Za posameznega odjemalca veljata omejitvi 100 zahtev na minuto in 10.000 na dan. Ob prekoračitvi API vrne statusno kodo 429, kar pomeni, da mora vaša aplikacija zmanjšati pogostost zahtev",
@@ -56,23 +53,21 @@ export default {
       subtitle: "Seznam razpoložljivih končnih točk je na voljo tukaj: ",
     },
     fetching: {
-      title: "Osnovna navodila za pridobivanje podatkov",
+      title: "Osnove pridobivanja podatkov",
       subtitle: "Primer pridobivanja glasov za podani ID videa na YouTubu: ",
       title2: "Primer zahteve: ",
       url: "Naslov URL zahteve: ",
       method: "Metoda zahteve: ",
       headers: "Glave: ",
       response: "Odgovor: ",
-      error1:
-        "Neveljaven ID videa na YouTubu vrne statusno kodo 404 »Not Found«",
+      error1: "Neveljaven ID videa na YouTubu vrne statusno kodo 404 »Not Found«",
       error2: "Napačno oblikovan ID videa na YouTubu vrne 400 »Bad Request«",
     },
   },
   help: {
     name: "Pomoč",
     title: "Odpravljanje težav",
-    bullet1:
-      "Prepričajte se, da imate nameščeno najnovejšo različico razširitve, ",
+    bullet1: "Prepričajte se, da imate nameščeno najnovejšo različico razširitve, ",
     bullet11: "prav zdaj",
     bullet2:
       "Poskusite razširitev odstraniti in jo znova namestiti, nato pa znova zaženite brskalnik (vsa aktivna okna, ne le enega zavihka)",
@@ -80,13 +75,11 @@ export default {
     bullet31: "videti bi morali navadno besedilo: ",
     bullet4: "Če nič od naštetega ne pomaga, težavo prijavite v",
     bullet41: "na našem",
-    bullet4a:
-      "Sporočite nam svoj operacijski sistem, ime brskalnika in različico brskalnika",
+    bullet4a: "Sporočite nam svoj operacijski sistem, ime brskalnika in različico brskalnika",
     bullet4b:
       "Zajemite zaslonsko sliko strani s težavo (npr. strani z videom na YouTubu) z odprto konzolo (pritisnite ",
     bullet4b1: ") – primer zaslonske slike je spodaj.",
-    bullet4c:
-      "Zajemite zaslonsko sliko strani z razširitvami v svojem brskalniku, na kateri je razširitev nameščena.",
+    bullet4c: "Zajemite zaslonsko sliko strani z razširitvami v svojem brskalniku, na kateri je razširitev nameščena.",
     bullet4c1: "Za ogled razširitev v naslovno vrstico vnesite: ",
     firefox: "za Firefox",
     chrome: "za Chrome, Edge, Brave, Opero in Vivaldi",
@@ -121,8 +114,7 @@ export default {
   },
   donate: {
     name: "Donacije",
-    subtitle:
-      "Naša prizadevanja za svoboden internet lahko podprete z donacijo!",
+    subtitle: "Naša prizadevanja za svoboden internet lahko podprete z donacijo!",
     patreon: "Patreon",
     crypto: "Kriptovalute",
   },

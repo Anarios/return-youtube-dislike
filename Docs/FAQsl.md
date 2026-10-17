@@ -1,5 +1,4 @@
-Preberite to v drugih jezikih: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [Português do Brasil](FAQpt_BRmd), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Slovenščina](FAQsl.md), [Tiếng Việt](FAQvi.md)
-
+Preberite to v drugih jezikih: [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [Português do Brasil](FAQpt_BR.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAQcn.md), [български](FAQbg.md), [Slovenščina](FAQsl.md), [Tiếng Việt](FAQvi.md), [беларуская](FAQbe.md)
 
 # Pogosto zastavljena vprašanja
 
