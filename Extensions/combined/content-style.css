@@ -494,6 +494,299 @@ html[dark] .ryd-discussion-toast {
   }
 }
 
+.ryd-discussion {
+  container: ryd-comments / inline-size;
+}
+
+.ryd-discussion.ryd-discussion-watch {
+  margin-block: 24px 32px;
+  padding: 22px;
+  border: 1px solid var(--ryd-discussion-line);
+  border-radius: 16px;
+  background: var(--ryd-discussion-bg);
+}
+
+.ryd-discussion .ryd-discussion-header {
+  align-items: flex-start;
+  gap: 12px 20px;
+}
+
+.ryd-discussion .ryd-discussion-brand {
+  min-inline-size: 0;
+  gap: 10px;
+}
+
+.ryd-discussion .ryd-discussion-title {
+  font-size: 1.5em;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion .ryd-discussion-logo {
+  flex: 0 0 auto;
+  padding: 5px 7px;
+  border-radius: 7px;
+  font-size: 0.75em;
+  line-height: 1.2;
+}
+
+.ryd-discussion .ryd-discussion-header-actions {
+  gap: 4px;
+}
+
+.ryd-discussion .ryd-discussion-header-actions > .ryd-discussion-button[aria-pressed="true"] {
+  box-shadow: inset 0 -2px var(--ryd-discussion-accent);
+}
+
+.ryd-discussion .ryd-discussion-description {
+  max-inline-size: 78ch;
+  margin-block: 10px 0;
+  font-size: 0.93em;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion > .ryd-discussion-independent {
+  max-inline-size: 78ch;
+  margin-block: 4px 20px;
+  font-size: 0.86em;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion .ryd-discussion-composer {
+  margin-block-end: 18px;
+  padding: 16px;
+  border: 1px solid var(--ryd-discussion-line);
+  border-radius: 12px;
+}
+
+.ryd-discussion .ryd-discussion-gate {
+  margin-block: 0 8px;
+  font-size: 0.93em;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion .ryd-discussion-composer > .ryd-discussion-link {
+  display: inline-block;
+  max-inline-size: 100%;
+  font-size: 0.93em;
+  font-weight: 600;
+  line-height: 1.6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion .ryd-discussion-composer > .ryd-discussion-meta {
+  margin-block: 8px 0;
+}
+
+.ryd-discussion .ryd-discussion-account {
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+
+.ryd-discussion .ryd-discussion-form {
+  margin-block: 10px 0;
+}
+
+.ryd-discussion .ryd-discussion-label {
+  font-size: 0.93em;
+  line-height: 1.5;
+}
+
+.ryd-discussion .ryd-discussion-textarea,
+.ryd-discussion .ryd-discussion-input {
+  padding: 12px;
+  font-size: 1.08em;
+  line-height: 1.55;
+}
+
+.ryd-discussion .ryd-discussion-textarea {
+  min-block-size: 96px;
+}
+
+.ryd-discussion .ryd-discussion-form-actions {
+  gap: 8px;
+  margin-block-start: 10px;
+}
+
+.ryd-discussion .ryd-discussion-counter {
+  font-size: 0.86em;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion .ryd-discussion-toolbar {
+  gap: 8px 12px;
+  margin-block: 0 4px;
+  padding-block: 10px;
+  border-block: 1px solid var(--ryd-discussion-line);
+}
+
+.ryd-discussion .ryd-discussion-select {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 38px;
+  padding-block: 8px;
+  border: 1px solid var(--ryd-discussion-line);
+  border-radius: 9px;
+  background: var(--ryd-discussion-bg);
+  font-size: 0.93em;
+}
+
+.ryd-discussion .ryd-discussion-status {
+  margin-block: 12px;
+  font-size: 0.93em;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion .ryd-discussion-comment {
+  padding-block: 20px;
+}
+
+.ryd-discussion .ryd-discussion-comment-heading {
+  min-inline-size: 0;
+  gap: 4px 9px;
+}
+
+.ryd-discussion .ryd-discussion-avatar {
+  flex: 0 0 30px;
+  inline-size: 30px;
+  block-size: 30px;
+  min-inline-size: 30px;
+  font-size: 0.93em;
+}
+
+.ryd-discussion .ryd-discussion-author {
+  min-inline-size: 0;
+  font-size: 0.93em;
+  line-height: 1.5;
+}
+
+.ryd-discussion .ryd-discussion-meta {
+  min-inline-size: 0;
+  font-size: 0.86em;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion .ryd-discussion-comment-text {
+  max-inline-size: 78ch;
+  margin-block: 10px 8px;
+  font-size: 1em;
+  line-height: 1.65;
+}
+
+.ryd-discussion .ryd-discussion-button {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  min-block-size: 36px;
+  padding-block: 7px;
+  padding-inline: 12px;
+  border-radius: 9px;
+  font-size: 0.93em;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.ryd-discussion .ryd-discussion-primary {
+  padding-inline: 16px;
+}
+
+.ryd-discussion .ryd-discussion-comment-actions {
+  gap: 4px;
+}
+
+.ryd-discussion .ryd-discussion-comment-actions > .ryd-discussion-button {
+  padding-inline: 10px;
+}
+
+.ryd-discussion .ryd-discussion-reaction {
+  min-inline-size: 52px;
+  gap: 7px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.ryd-discussion .ryd-discussion-comment-actions > [data-action="reply"],
+.ryd-discussion .ryd-discussion-comment-actions > [data-action="load-replies"] {
+  color: var(--ryd-discussion-accent);
+}
+
+.ryd-discussion .ryd-discussion-replies {
+  margin-inline-start: 16px;
+  padding-inline-start: 16px;
+}
+
+.ryd-discussion .ryd-discussion-reply {
+  padding-block: 16px;
+}
+
+.ryd-discussion .ryd-discussion-more {
+  margin-block: 16px 0;
+  padding-inline: 18px;
+}
+
+.ryd-discussion.ryd-discussion-shorts {
+  padding-block: 22px;
+  padding-inline: 20px;
+}
+
+.ryd-discussion .ryd-discussion-close {
+  flex: 0 0 36px;
+  border: 1px solid var(--ryd-discussion-line);
+  border-radius: 50%;
+}
+
+.ryd-discussion
+  :is(
+    .ryd-discussion-button,
+    .ryd-discussion-close,
+    .ryd-discussion-select,
+    .ryd-discussion-textarea,
+    .ryd-discussion-input,
+    .ryd-discussion-link,
+    .ryd-discussion-notification-link
+  ):focus-visible {
+  outline: 3px solid var(--ryd-discussion-accent);
+  outline-offset: 3px;
+}
+
+@container ryd-comments (max-width: 380px) {
+  .ryd-discussion .ryd-discussion-title {
+    font-size: 1.36em;
+  }
+
+  .ryd-discussion .ryd-discussion-header-actions {
+    inline-size: 100%;
+  }
+
+  .ryd-discussion .ryd-discussion-composer {
+    padding: 12px;
+  }
+
+  .ryd-discussion .ryd-discussion-replies {
+    margin-inline-start: 6px;
+    padding-inline-start: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ryd-discussion.ryd-discussion-watch {
+    padding: 16px;
+  }
+
+  .ryd-discussion.ryd-discussion-shorts {
+    padding: 16px;
+  }
+}
+
 /* html:not(.style-scope)[dark], :not(.style-scope)[dark] {
   --yt-spec-general-background-a: #000 !important;
   --yt-spec-general-background-b: #000 !important;
