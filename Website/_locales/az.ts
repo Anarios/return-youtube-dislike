@@ -29,6 +29,7 @@ export default {
     userscript: "İstifadəçi skripti",
     tampermonkey: "Tampermonkey",
     androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
     androidTubular: "Android (Tubular - NewPipe çatalı)",
     iosJailbroken: "iOS (Jailbreakli)",
     iosUYouPlus: "iOS (uYou+)",

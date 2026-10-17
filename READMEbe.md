@@ -66,7 +66,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 }
 ```
 
-Неіснуючы ідэнтыфікатар YouTube верне код стану _404_ "Not Found".  
+Неіснуючы ідэнтыфікатар YouTube верне код стану _404_ "Not Found".<br>
 Няправільна адфарматаваны ідэнтыфікатар YouTube верне код стану _400_ "Bad Request".
 
 ## Удзел у распрацоўцы

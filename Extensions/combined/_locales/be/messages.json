@@ -141,10 +141,10 @@
     "message": "Няма актыўнай падпіскі"
   },
   "patreonTierPremium": {
-    "message": "Прэміум-падтрымліваючы"
+    "message": "Прэміум-спонсар"
   },
   "patreonTierSupporter": {
-    "message": "Падтрымліваючы"
+    "message": "Спонсар"
   },
   "patreonUserFallback": {
     "message": "Карыстальнік Patreon"
@@ -162,7 +162,7 @@
     "message": "Не паказваць прэміум-тызер на старонках прагляду YouTube."
   },
   "roundNumbers": {
-    "message": "Паказваць акругленыя лікі"
+    "message": "Паказваць лікі, акругленыя ў меншы бок"
   },
   "roundNumbersHover": {
     "message": "Акругляць лікі ў меншы бок (стандартныя паводзіны YouTube)."
@@ -216,10 +216,10 @@
     "message": "Фармат лікаў:"
   },
   "textRoundingNumbers": {
-    "message": "Акругляць статыстыку падабаек/непадабаек (звычайныя паводзіны YouTube)"
+    "message": "Акругляць статыстыку падабаек/непадабаек у меншы бок (звычайныя паводзіны YouTube)"
   },
   "textRoundingNumbersHover": {
-    "message": "Паказваць акругленыя значэнні."
+    "message": "Паказваць значэнні, акругленыя ў меншы бок."
   },
   "textSettings": {
     "message": "Адключыць адпраўку падабаек/непадабаек"
@@ -306,37 +306,37 @@
     "message": "За ўвесь час"
   },
   "premiumAnalytics_windowSummaryLast": {
-    "message": "Апошнія "
+    "message": "Апошні перыяд: $1"
   },
   "premiumAnalytics_windowSummaryFirst": {
-    "message": "Першыя "
+    "message": "Першы перыяд: $1"
   },
   "premiumAnalytics_daysSingular": {
-    "message": " дзень"
+    "message": "$1 дз."
   },
   "premiumAnalytics_daysPlural": {
-    "message": " дзён"
+    "message": "$1 дз."
   },
   "premiumAnalytics_rangeLabelAllTime": {
     "message": "За ўвесь час"
   },
   "premiumAnalytics_rangeLabelDays": {
-    "message": ""
+    "message": "$1 дз."
   },
   "premiumAnalytics_selectedPeriod": {
-    "message": "Абраны перыяд: "
+    "message": "Абраны перыяд: $1"
   },
   "premiumAnalytics_totalsHeading": {
     "message": "Карыстальнікі пашырэння"
   },
   "premiumAnalytics_totalsLikes": {
-    "message": " падабаек"
+    "message": "Падабайкі: $1"
   },
   "premiumAnalytics_totalsDislikes": {
-    "message": " непадабаек"
+    "message": "Непадабайкі: $1"
   },
   "premiumAnalytics_summaryMeta": {
-    "message": "Зафіксавана  узаемадзеянняў з  краін ( унікальных IP)"
+    "message": "Зафіксаваныя ўзаемадзеянні: $1; краіны: $2; унікальныя IP-адрасы: $3"
   },
   "premiumAnalytics_bucketHour": {
     "message": "Галасы за гадзіну"
@@ -348,19 +348,19 @@
     "message": "Галасы за тыдзень"
   },
   "premiumAnalytics_bucketHours": {
-    "message": "Галасы кожныя  гадзін"
+    "message": "Галасы за $1 гадз"
   },
   "premiumAnalytics_bucketDays": {
-    "message": "Галасы кожныя  дзён"
+    "message": "Галасы за $1 сут"
   },
   "premiumAnalytics_bucketMinutes": {
-    "message": "Галасы кожныя  хвілін"
+    "message": "Галасы за $1 хв"
   },
   "premiumAnalytics_bucketMinute": {
     "message": "Галасы за хвіліну"
   },
   "premiumAnalytics_bucketSeconds": {
-    "message": "Галасы кожныя  секунд"
+    "message": "Галасы за $1 с"
   },
   "premiumAnalytics_bucketSecond": {
     "message": "Галасы за секунду"
@@ -417,19 +417,19 @@
     "message": "Менш непадабаек"
   },
   "premiumAnalytics_visualHighGeneric": {
-    "message": "Больш "
+    "message": "Больш $1"
   },
   "premiumAnalytics_visualLowGeneric": {
-    "message": "Менш "
+    "message": "Менш $1"
   },
   "premiumAnalytics_tooltipLikes": {
-    "message": "Падабайкі: "
+    "message": "Падабайкі: $1"
   },
   "premiumAnalytics_tooltipDislikes": {
-    "message": "Непадабайкі: "
+    "message": "Непадабайкі: $1"
   },
   "premiumAnalytics_tooltipRatio": {
-    "message": "Суадносіны падабаек: "
+    "message": "Суадносіны падабаек: $1"
   },
   "premiumTeaser_title": {
     "message": "Аналітыка відэа"
@@ -441,7 +441,7 @@
     "message": "Адкрыць Premium"
   },
   "premiumTeaser_learn": {
-    "message": "Праглядзець поўную аналітыку"
+    "message": "Папярэдні прагляд поўнай аналітыкі"
   },
   "premiumTeaser_statRaw": {
     "message": "Колькасць неапрацаваных непадабаек"
@@ -480,7 +480,7 @@
     "message": "У вашай падпісцы на Patreon няма ўзроўню Premium. Павысьце ўзровень падтрымкі, каб атрымаць доступ да пашыранай відэааналітыкі."
   },
   "premiumTierNotice_cta": {
-    "message": "Павысіць на Patreon"
+    "message": "Павысіць узровень на Patreon"
   },
   "changelog_title": {
     "message": "Журнал змен Premium Analytics · 20 кастрычніка 2025 года"
@@ -492,13 +492,13 @@
     "message": "Прэміум-аналітыка па-новаму"
   },
   "changelog_subheading": {
-    "message": "Даследуйце храналогію падзей у прамым эфіры, рэйтынг лепшых краін і інтэрактыўную карту, уключаныя ў Return YouTube Dislike Premium."
+    "message": "Даследуйце храналогію актыўнасці ў рэальным часе, рэйтынг краін і інтэрактыўную карту, уключаныя ў Return YouTube Dislike Premium."
   },
   "changelog_releaseDate": {
     "message": "Выпушчана 20 кастрычніка 2025 года"
   },
   "changelog_cta_primary": {
-    "message": "Павысіць на Patreon"
+    "message": "Павысіць узровень на Patreon"
   },
   "changelog_cta_secondary": {
     "message": "Прачытаць інструкцыю па наладзе"
@@ -510,19 +510,19 @@
     "message": "Храналогія ўзаемадзеянняў у рэальным часе"
   },
   "changelog_feature_timeline_body": {
-    "message": "Назірайце, як развіваюцца адносіны да відэа: глядзіце суадносіны падабаек і непадабаек па днях, тыднях або гадзінах з пашыранымі часавымі фільтрамі."
+    "message": "Назірайце, як падабайкі і непадабайкі паступаюць у рэальным часе. Выбірайце пагадзінны прагляд, штодзённы прагляд або прагляд за ўвесь час без перазагрузкі старонкі, прывязвайце дыяпазон да першага дня або апошніх галасоў і праглядайце кожны ўсплёск, каб зразумець, што выклікала актыўнасць."
   },
   "changelog_feature_map_title": {
-    "message": "Інтэрактыўная геаграфічная карта"
+    "message": "Інтэрактыўная цеплавая карта свету і ЗША"
   },
   "changelog_feature_map_body": {
-    "message": "Вывучайце, дзе відэа набірае папулярнасць. Пераключайцеся паміж падабайкамі, непадабайкамі і суадносінамі, а таксама паглыбляйцеся ў аналітыку па штатах ЗША."
+    "message": "Перамяшчайцеся па карце свету або пераходзьце да штатаў ЗША, каб знаходзіць месцы найбольшай актыўнасці. Параўноўвайце падабайкі, непадабайкі і іх суадносіны ў палепшанай падказцы і вылучайце рэгіёны, якія першымі рэагуюць на вашы новыя відэа."
   },
   "changelog_feature_quality_title": {
     "message": "Рэйтынг лідараў сярод краін"
   },
   "changelog_feature_quality_body": {
-    "message": "Размяркоўвайце краіны па агульнай актыўнасці, падабайках, непадабайках або суадносінах. Выкарыстоўвайце тыя ж налады, што і для храналогіі, каб аналізаваць вынікі і планаваць наступныя публікацыі."
+    "message": "Ранжыруйце краіны паводле колькасці непасрэдна атрыманых узаемадзеянняў, падабаек, непадабаек або іх суадносін. Выкарыстоўвайце тыя ж фільтры, што і для храналогіі, каб даведацца, дзе вашы кампаніі знаходзяць водгук, і спланаваць наступныя публікацыі."
   },
   "changelog_screenshot_placeholder": {
     "message": "Скрыншот з’явіцца хутка — захавайце гэты выгляд праз DevTools, калі будзеце гатовыя."
@@ -555,10 +555,10 @@
     "message": "Галоўнае ў рэлізе"
   },
   "changelog_release_item1": {
-    "message": "Налады храналогіі актыўнасці перадаюць дадзеныя ў рэальным часе з прывязкай да дыяпазону для першага і апошняга сегментаў."
+    "message": "Прадвыбраныя налады храналогіі актыўнасці паказваюць даныя ў рэальным часе і дазваляюць прывязваць дыяпазон да першых або апошніх часавых інтэрвалаў."
   },
   "changelog_release_item2": {
-    "message": "Рэйтынг краін абнаўляецца імгненна, дазваляючы заўважаць расцелыя рэгіёны, не пакідаючы панэлі."
+    "message": "Рэйтынг краін абнаўляецца імгненна, таму вы можаце заўважаць рэгіёны, дзе расце актыўнасць, не пакідаючы панэлі."
   },
   "changelog_release_item3": {
     "message": "Інтэрактыўная карта адлюстроўвае гарачыя кропкі свету і штатаў ЗША з больш зразумелымі падказкамі і метрыкамі."
@@ -567,7 +567,7 @@
     "message": "Патрэбна дапамога?"
   },
   "changelog_support_description": {
-    "message": "Мы заўсёды гатовыя дапамагчы, калі ўзнікнуць цяжкасці — задавайце пытанні ў дакументацыі або ў супольнасці."
+    "message": "Мы гатовыя дапамагчы, калі ўзнікнуць цяжкасці: звяртайцеся да даведачнай дакументацыі або да супольнасці."
   },
   "changelog_support_contact": {
     "message": "Спытаць у супольнасці"
