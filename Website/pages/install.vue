@@ -109,7 +109,6 @@ export default {
 
       iosJailbreakLink: "https://chariz.com/get/return-youtube-dislike/",
 
-      androidNewPipe: "https://github.com/polymorphicshade/NewPipe",
       androidVueTube: "https://vuetube.app",
       iosuYouPlus: "https://github.com/qnblackcat/uYouPlus",
 

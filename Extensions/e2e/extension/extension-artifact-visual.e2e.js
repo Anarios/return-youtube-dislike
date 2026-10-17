@@ -85,9 +85,7 @@ async function withExtensionVisualFixture(testInfo, { initialState = "neutral", 
     await adapter.page.setViewportSize({ height: viewport.height, width: viewport.width });
     await adapter.openWatch(VIDEO_A);
     await adapter.waitForWatchResult(VIDEO_A);
-    await expect
-      .poll(() => apiServer.records.filter((record) => record.pathname === "/puzzle/registration").length)
-      .toBe(2);
+    expect(apiServer.records.filter((record) => record.pathname === "/puzzle/registration")).toHaveLength(0);
     await run({ adapter, apiServer, page: adapter.page, workerErrors });
   } catch (error) {
     caughtError = error;
@@ -169,6 +167,18 @@ registerWatchVisualContract({
       });
       expectNoStructuralLayoutShift(before, after);
       expectExactVoteHandshake(interactions, transition);
+      const backgroundRequests = nonPreflightRecords(runtime.apiServer.records, interactionStart);
+      expect(backgroundRequests.map(({ method, pathname }) => [method, pathname])).toEqual([
+        ["GET", "/puzzle/registration"],
+        ["POST", "/puzzle/registration"],
+        ["POST", "/interact/vote"],
+        ["POST", "/interact/confirmVote"],
+      ]);
+      const [registration, confirmation] = backgroundRequests;
+      expect(registration.query).toEqual({ userId: interactions[0].body.userId });
+      expect(confirmation.query).toEqual(registration.query);
+      expect(confirmation.responseStatus).toBe(200);
+      expect(confirmation.responseBody).toBe(true);
       expect(runtime.adapter.backend.requestsFor("GET", "/votes")).toHaveLength(1);
       expect(runtime.adapter.backend.requestsFor("POST", "/interact/vote")).toHaveLength(0);
       expect(runtime.adapter.backend.requestsFor("POST", "/interact/confirmVote")).toHaveLength(0);
