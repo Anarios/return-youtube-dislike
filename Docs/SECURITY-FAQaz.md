@@ -16,7 +16,7 @@ Sadəcə video identifikatoru. Şərhləriniz, istifadəçi adınız, videonu ki
 
 ### Mənim IP ünvanım necə saxlanılır?
 
-Backend yalnız müvəqqəti yaddaşda (RAM) haşiyələnməmiş IP ünvanlarını saxlayır. Bu ünvanlar sabit diskdə saxlanmır və buna görə də qeyd olunmur. Biz IP ünvanlarını hash edirik və əvəzinə onlar saxlanılır. Bu, verilənlər bazası vandalizminin qarşısını almaq üçün edilir.
+Server orijinal IP ünvanlarını yalnız operativ yaddaşda (RAM) saxlayır. Sui-istifadənin qarşısını almaq üçün orijinal ünvanların əvəzinə onların heş dəyərlərini saxlayırıq.
 
 ### OAuth vasitəsilə YouTube hesabıma daxil olmaq haqqında bəzi mübahisələr eşitdim!
 

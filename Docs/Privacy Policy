@@ -1,6 +1,6 @@
 # Return YouTube Dislike Privacy Policy
 
-Last updated: September 5, 2026
+Last updated: September 10, 2026
 
 This policy describes version 4.0.5 and its matching backend release.
 
@@ -46,8 +46,9 @@ user's Patreon or GitHub password.
 
 The identifier, settings, and optional account session use browser extension sync storage, which may be synchronized
 through the browser's sync service when the user enables it. The random installation identifier remains in extension storage until the extension data is cleared, registration is
-reset, or the extension is removed. Confirmed vote records contain the identifier, video ID, vote, timestamp, and the
-network address used for abuse controls. Registration and vote records are retained by the service while they are
+reset, or the extension is removed. Confirmed vote records contain the identifier, video ID, vote, timestamp, and an
+IP-address hash used for abuse controls. Raw IP addresses stay in RAM and hashes are stored.
+Registration and vote records are retained by the service while they are
 needed to calculate results, maintain vote integrity, and prevent abuse; no shorter automatic deletion period is
 promised.
 

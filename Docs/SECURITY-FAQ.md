@@ -19,15 +19,16 @@ associate submitted votes with the same extension installation.
 ### What information do you have, exactly?
 
 For dislike-count requests: the current video ID and, when available, the visible like count. For registration and vote
-submission: the random extension user ID, video ID, selected vote, timestamp, and network address used for abuse
-controls. Optional premium features use the account ID, name, email address, profile image, membership information, and
-service session token returned by a Patreon or GitHub sign-in initiated by the user. For version 4.0.5 and its matching
+submission: the random extension user ID, video ID, selected vote, and timestamp. The API also receives your IP address.
+Raw addresses stay in RAM and hashes are stored for abuse controls. Optional premium features use the account ID, name,
+email address, profile image, membership information, and service session token returned by a Patreon or GitHub sign-in
+initiated by the user. For version 4.0.5 and its matching
 backend release, Patreon access is determined from currently entitled tier IDs rather than financial information.
 
 ### How is my IP stored?
 
-The API receives your network address with each request. Confirmed vote records retain the network address used for
-abuse prevention and aggregate analytics. It is not sold or used for advertising.
+Raw IP addresses stay in RAM and hashes are stored. This information is used for abuse prevention and aggregate
+analytics. It is not sold or used for advertising.
 
 ### I heard some discussion over OAuth, and access to my YouTube account!
 
