@@ -4,6 +4,7 @@ const DEFAULT_SHORTS_LOADED_SELECTORS = {
   containers: [".reel-video-in-sequence-new"],
   thumbnail: [".reel-video-in-sequence-thumbnail"],
   renderer: ["ytd-reel-video-renderer"],
+  mobileRenderer: ["ytm-reel-video-renderer"],
   overlay: ["#experiment-overlay"],
 };
 
@@ -123,10 +124,78 @@ function isInViewport(element) {
   );
 }
 
+function getShortsRendererVideoId(renderer) {
+  const rendererVideoId = renderer?.getAttribute("video-id");
+  if (rendererVideoId) return rendererVideoId;
+
+  const href = renderer?.querySelector("a[href*='/shorts/']")?.getAttribute("href");
+  if (!href) return null;
+  try {
+    return getVideoId(new URL(href, window.location.href).href);
+  } catch {
+    return null;
+  }
+}
+
+function isRenderedInViewport(element) {
+  if (!element || element.closest("[hidden], [aria-hidden='true'], [inert]")) return false;
+
+  for (let current = element; current; current = current.parentElement) {
+    const style = window.getComputedStyle(current);
+    if (
+      style.display === "none" ||
+      style.visibility === "hidden" ||
+      style.visibility === "collapse" ||
+      Number.parseFloat(style.opacity || "1") === 0
+    ) {
+      return false;
+    }
+  }
+
+  const rect = element.getBoundingClientRect();
+  const height = innerHeight || document.documentElement.clientHeight;
+  const width = innerWidth || document.documentElement.clientWidth;
+  return (
+    rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.right > 0 && rect.top < height && rect.left < width
+  );
+}
+
 function isShortsLoaded(videoId) {
   if (!videoId) return false;
 
   const selectors = extConfig.selectors.shortsLoaded ?? DEFAULT_SHORTS_LOADED_SELECTORS;
+
+  // Mobile Shorts does not use the desktop sequence/thumbnail/experiment-overlay
+  // readiness tree. Its active renderer is the stable identity and visibility
+  // boundary; button readiness is validated separately before initialization.
+  for (const renderer of querySelectorAll(selectors.mobileRenderer ?? DEFAULT_SHORTS_LOADED_SELECTORS.mobileRenderer)) {
+    if (!renderer.hasAttribute("is-active")) continue;
+    if (getShortsRendererVideoId(renderer) !== videoId) continue;
+    if (renderer.closest("[hidden], [aria-hidden='true'], [inert]")) continue;
+
+    const style = window.getComputedStyle(renderer);
+    const rect = renderer.getBoundingClientRect();
+    if (
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      style.visibility !== "collapse" &&
+      Number.parseFloat(style.opacity || "1") !== 0 &&
+      rect.width > 0 &&
+      rect.height > 0
+    ) {
+      return true;
+    }
+  }
+
+  // On desktop the active reel can be partially clipped after YouTube scrolls
+  // its action controls into view. Current YouTube variants can also omit both
+  // `is-active` and `video-id`; in that topology the renderer's canonical
+  // /shorts/ link is the only stable identity. Full viewport containment and
+  // the active attribute are therefore not valid readiness requirements.
+  for (const renderer of querySelectorAll(selectors.renderer ?? DEFAULT_SHORTS_LOADED_SELECTORS.renderer)) {
+    if (getShortsRendererVideoId(renderer) !== videoId) continue;
+    if (isRenderedInViewport(renderer)) return true;
+  }
 
   // Find all reel containers
   const reelContainers = querySelectorAll(selectors.containers);

@@ -1,6 +1,7 @@
-import { getApiEndpoint, getChangelogUrl } from "../../config";
+import { getChangelogUrl } from "../../config";
 import { getBrowser, getVideoId, localize } from "../../utils";
 import { extConfig } from "../../state";
+import { requestVoteData } from "../../vote-data-request";
 
 const PATREON_JOIN_URL = "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649";
 const CHANGELOG_URL = getChangelogUrl();
@@ -150,7 +151,7 @@ function resolveVideoId() {
 }
 
 function fetchAndRender(videoId) {
-  if (teaserState.suppressed) {
+  if (teaserState.suppressed || teaserState.currentVideoId !== videoId || resolveVideoId() !== videoId) {
     return;
   }
 
@@ -174,28 +175,16 @@ function fetchAndRender(videoId) {
   const controller = new AbortController();
   teaserState.abortController = controller;
 
-  const url = getApiEndpoint(`/votes?videoId=${encodeURIComponent(videoId)}`);
-
-  fetch(url, {
-    method: "GET",
-    headers: { Accept: "application/json" },
-    signal: controller.signal,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Unexpected response: ${response.status}`);
-      }
-      return response.json();
-    })
+  requestVoteData(videoId)
     .then((payload) => {
-      if (teaserState.currentVideoId !== videoId || teaserState.suppressed) {
+      if (controller.signal.aborted || teaserState.currentVideoId !== videoId || teaserState.suppressed) {
         return;
       }
       updateCounts(payload);
       setLoading(false);
     })
     .catch((error) => {
-      if (error?.name === "AbortError") {
+      if (controller.signal.aborted || error?.name === "AbortError") {
         return;
       }
       if (teaserState.suppressed) {

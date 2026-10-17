@@ -83,6 +83,9 @@
   "patreonLogin": {
     "message": "Login with Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Patreon membership information is used to verify premium access. We do not receive your card or bank details."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -94,6 +97,27 @@
   },
   "githubLoginCompleteFailed": {
     "message": "Failed to complete GitHub login. Please try again."
+  },
+  "githubLoginUnavailable": {
+    "message": "GitHub contributor sign-in is currently unavailable. The service needs an update or configuration change."
+  },
+  "githubLoginNotContributor": {
+    "message": "This GitHub account is not listed as a contributor to Return YouTube Dislike. Sign in with a contributing account. Recent contributions may take a few hours to appear."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "GitHub sign-in is not configured for this browser's callback address. Please contact support."
+  },
+  "githubLoginExpired": {
+    "message": "This GitHub sign-in attempt expired or could not be verified. Please start a new sign-in."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Please update the extension to use GitHub contributor sign-in."
+  },
+  "githubLoginRateLimited": {
+    "message": "Too many sign-in attempts. Please wait a minute before trying again."
+  },
+  "githubLoginDenied": {
+    "message": "GitHub authorization was declined. Contributor sign-in requires authorization."
   },
   "patreonLoginCompleteFailed": {
     "message": "Failed to complete login. Please try again."
@@ -547,6 +571,21 @@
   },
   "changelog_support_contact": {
     "message": "Ask the community"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike logo"

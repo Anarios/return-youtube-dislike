@@ -83,6 +83,9 @@
   "patreonLogin": {
     "message": "Masuk dengan Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Informasi keanggotaan Patreon digunakan untuk memverifikasi akses premium. Kami tidak menerima detail kartu atau rekening bank Anda."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -547,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Tanyakan pada komunitas"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

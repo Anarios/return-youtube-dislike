@@ -1,7 +1,64 @@
-The only data collected from users is their likes and dislikes made while the extension is installed.
+# Return YouTube Dislike Privacy Policy
 
-No personal info, account name or watch history is collected or saved.
+Last updated: September 7, 2026
 
-Users are identified by a random user ID, which is not directly linked to any of their accounts, the only purpose of this user ID is to make voting process possible.
+This policy describes version 4.0.6 and its matching backend release.
 
-None of the saved data is shared with any third parties.
+Return YouTube Dislike transmits only the data needed to provide its dislike-count, voting, abuse-prevention, and
+optional premium features. It does not sell personal data or use it for advertising.
+
+## Data required for the extension to work
+
+- On registration, the extension generates a persistent random installation identifier and sends it to the Return
+  YouTube Dislike API. The identifier is not derived from or linked to a YouTube or Google account, but it is a
+  persistent identifier and is treated as personal data.
+- When a YouTube video is opened, the extension sends that video's ID and, when available, its visible like count to
+  retrieve and improve the dislike estimate.
+- When the user submits a Like, Dislike, or vote removal and vote submission is enabled, the extension sends the random
+  installation identifier, video ID, and selected action.
+- API requests necessarily expose the network IP address and request time. The service uses this information for
+  security, abuse prevention, aggregate analytics, and operation of the API.
+
+The extension does not send a YouTube account name, comments, private YouTube data, or the contents of unrelated web
+pages. It does not maintain a separate local list of videos watched.
+
+## Optional account and premium data
+
+Patreon and GitHub sign-in are optional. The account flow starts only after the user selects a sign-in button and, in
+Firefox, grants the separate authentication-data permission. The selected provider and the Return YouTube Dislike API
+process the OAuth authorization response. The API returns the provider account ID, name, profile image,
+account-access status, access tier, and a Return YouTube Dislike session token as applicable to that provider. GitHub
+sign-in may also return an email address. Patreon sign-in does not request or return email, account-status fields,
+or connected social accounts; the name and profile image identify the signed-in account in the popup. To
+determine Patreon access, the matching backend uses currently entitled tier IDs. It does not request or use membership
+amounts, charge dates or status, lifetime payments, or patron status. The extension does not receive payment-card or
+bank-account details.
+
+Those account details and the session token are stored in browser extension storage and used to authenticate premium
+analytics requests. The session token expires after 30 days. Signing out deletes the locally stored account details and
+session token. Revoking Firefox's authentication-data permission clears that local account session and prevents further
+account and premium requests. Pending responses cannot restore the session; the user must sign in again to resume it.
+
+Patreon and GitHub process sign-in information under their own privacy policies. The extension never receives the
+user's Patreon or GitHub password.
+
+## Storage, retention, and sharing
+
+The identifier, settings, and optional account session use browser extension sync storage, which may be synchronized
+through the browser's sync service when the user enables it. The random installation identifier remains in extension storage until the extension data is cleared, registration is
+reset, or the extension is removed. Confirmed vote records contain the identifier, video ID, vote, timestamp, and the
+network address used for abuse controls. Registration and vote records are retained by the service while they are
+needed to calculate results, maintain vote integrity, and prevent abuse; no shorter automatic deletion period is
+promised.
+
+Data is not sold or shared for advertising. It is processed by the Return YouTube Dislike service and its hosting and
+network infrastructure providers, and by Patreon or GitHub only when the user chooses the corresponding sign-in flow.
+
+## User controls
+
+Firefox displays its built-in consent prompt before the required data is transmitted. Refusing the required consent
+prevents installation or acceptance of the update. Vote submission can be disabled in the extension settings. Optional account access can be
+declined or revoked without disabling ordinary dislike counts. Firefox private-window access is disabled.
+
+Users can clear extension storage or remove the extension to delete locally stored data. Requests concerning service
+data can be made through the project's support channels at https://returnyoutubedislike.com/help.

@@ -496,10 +496,15 @@ function resolveVisualMapConfig(values, mode) {
   };
 }
 
+function escapeTooltipText(value) {
+  const entities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+  return String(value ?? "").replace(/[&<>"']/g, (character) => entities[character]);
+}
+
 function formatMapTooltip(params) {
   const data = params.data;
   if (!data) {
-    return `${params.name}`;
+    return escapeTooltipText(params.name);
   }
 
   const name = data.displayName || params.name;
@@ -511,7 +516,7 @@ function formatMapTooltip(params) {
   const dislikesText = translateMessage("premiumAnalytics_tooltipDislikes", [dislikes.toLocaleString()]);
   const ratioText = translateMessage("premiumAnalytics_tooltipRatio", [`${percent}%`]);
 
-  return `${name}${code}<br/>${likesText}<br/>${dislikesText}<br/>${ratioText}`;
+  return [`${name}${code}`, likesText, dislikesText, ratioText].map(escapeTooltipText).join("<br/>");
 }
 
 function resolveMapRegionName(countryCode, fallbackName) {

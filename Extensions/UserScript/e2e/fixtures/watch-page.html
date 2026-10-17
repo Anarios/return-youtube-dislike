@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Userscript browser-test fixture</title>
+    <style>
+      :root {
+        --yt-spec-10-percent-layer: rgba(255, 255, 255, 0.1);
+        --yt-spec-base-background: rgb(15, 15, 15);
+        --yt-spec-icon-disabled: rgba(255, 255, 255, 0.3);
+        --yt-spec-text-primary: rgb(241, 241, 241);
+        --yt-spec-text-secondary: rgb(170, 170, 170);
+      }
+
+      html,
+      body {
+        background: rgb(15, 15, 15);
+        width: 100%;
+        min-height: 768px;
+        margin: 0;
+      }
+
+      ytd-watch-flexy,
+      ytd-menu-renderer,
+      .slim-video-action-bar-actions,
+      .segmented-buttons,
+      segmented-like-dislike-button-view-model,
+      yt-smartimation,
+      toggle-button-view-model,
+      button-view-model,
+      like-button-view-model,
+      dislike-button-view-model {
+        display: block;
+      }
+
+      ytd-menu-renderer.ytd-watch-metadata > div {
+        display: block;
+        min-height: 36px;
+      }
+
+      #top-row {
+        width: min(500px, 100%);
+      }
+
+      ytd-menu-renderer.ytd-watch-metadata {
+        display: flex;
+        gap: 8px;
+        width: min(500px, 100%);
+      }
+
+      #top-level-buttons-computed {
+        position: relative;
+        width: 192px;
+      }
+
+      segmented-like-dislike-button-view-model {
+        display: block;
+        gap: 0;
+      }
+
+      [data-fixture-smartimation-content] {
+        display: flex;
+        gap: 0;
+        width: 192px;
+      }
+
+      .segmented-buttons {
+        display: flex;
+        gap: 8px;
+        width: 320px;
+        min-height: 48px;
+      }
+
+      [data-fixture-shell][hidden] {
+        display: none;
+      }
+
+      [__FIXTURE_ROLE_ATTRIBUTE__="like"],
+      [__FIXTURE_ROLE_ATTRIBUTE__="dislike"] {
+        box-sizing: border-box;
+        flex: 0 0 96px;
+        height: 36px;
+        margin: 0;
+        padding: 0;
+        width: 96px;
+      }
+
+      [__FIXTURE_ROLE_ATTRIBUTE__="like"] button,
+      [__FIXTURE_ROLE_ATTRIBUTE__="dislike"] button {
+        align-items: center;
+        background: rgb(39, 39, 39);
+        border: 0;
+        border-radius: 18px;
+        box-sizing: border-box;
+        color: rgb(241, 241, 241);
+        display: inline-flex;
+        font:
+          500 14px/20px Arial,
+          sans-serif;
+        gap: 6px;
+        height: 36px;
+        justify-content: center;
+        margin: 0;
+        min-height: 36px;
+        min-width: 96px;
+        padding: 0 12px;
+        width: 96px;
+      }
+
+      [__FIXTURE_ROLE_ATTRIBUTE__].style-default-active button {
+        background: rgb(241, 241, 241);
+        color: rgb(15, 15, 15);
+      }
+
+      [data-fixture-icon] {
+        display: block;
+        flex: 0 0 20px;
+        height: 20px;
+        margin: 0;
+        padding: 0;
+        width: 20px;
+      }
+
+      [__FIXTURE_ROLE_ATTRIBUTE__] #text,
+      [__FIXTURE_ROLE_ATTRIBUTE__] .ytSpecButtonShapeNextButtonTextContent {
+        display: block;
+        font:
+          500 14px/20px Arial,
+          sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      #flexible-item-buttons {
+        display: flex;
+        gap: 8px;
+        margin: 0;
+        width: 172px;
+      }
+
+      #flexible-item-buttons button {
+        background: rgb(39, 39, 39);
+        border: 0;
+        border-radius: 18px;
+        color: rgb(241, 241, 241);
+        height: 36px;
+        min-width: 82px;
+      }
+
+      #fixture-comment-action-surfaces #top-level-buttons-computed {
+        height: 0;
+        overflow: hidden;
+        width: 0;
+      }
+
+      [data-fixture-touch-feedback] {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- A hidden menu-container selects the desktop metadata layout used by the real page. -->
+    <div id="menu-container" style="display: none"></div>
+    <div id="fixture-account"></div>
+    <div id="player" loading="false"></div>
+    <ytd-watch-flexy id="fixture-watch" video-id="__VIDEO_ID__">
+      <div id="top-row" data-fixture-shell="desktop">
+        <ytd-menu-renderer class="ytd-watch-metadata">
+          <div id="top-level-buttons-computed"></div>
+          <div id="flexible-item-buttons" data-fixture-unrelated-actions>
+            <button-view-model
+              ><button type="button"><span role="text">Save</span></button></button-view-model
+            >
+            <button-view-model
+              ><button type="button"><span role="text">Download</span></button></button-view-model
+            >
+          </div>
+        </ytd-menu-renderer>
+      </div>
+    </ytd-watch-flexy>
+    <div id="fixture-comment-action-surfaces"></div>
+    <div class="slim-video-action-bar-actions" data-fixture-shell="mobile">
+      <div id="fixture-mobile-buttons-host" class="segmented-buttons"></div>
+    </div>
+
+    <script>
+      (() => {
+        const account = document.getElementById("fixture-account");
+        const watch = document.getElementById("fixture-watch");
+        const isMobile = location.hostname === "m.youtube.com";
+        const desktopHost = document.getElementById("top-level-buttons-computed");
+        const mobileHost = document.getElementById("fixture-mobile-buttons-host");
+        const host = isMobile ? mobileHost : desktopHost;
+
+        document.querySelector('[data-fixture-shell="desktop"]').hidden = isMobile;
+        document.querySelector('[data-fixture-shell="mobile"]').hidden = !isMobile;
+
+        function setSignedIn(signedIn) {
+          account.innerHTML = signedIn
+            ? '<button id="avatar-btn" aria-label="Account menu">Account</button>'
+            : '<a id="sign-in" href="https://accounts.google.com/ServiceLogin">Sign in</a>';
+        }
+
+        function desktopButtonMarkup() {
+          return `
+            <segmented-like-dislike-button-view-model __FIXTURE_ROLE_ATTRIBUTE__="buttons">
+              <yt-smartimation>
+                <div id="content" data-fixture-smartimation-content-shell>
+                  <div id="wrapper" data-fixture-smartimation-content>
+                    <like-button-view-model class="style-text" __FIXTURE_ROLE_ATTRIBUTE__="like">
+                      <toggle-button-view-model>
+                        <button-view-model>
+                          <button type="button" aria-label="__VIDEO_LIKES__ likes" aria-pressed="false">
+                            <svg data-fixture-icon="like" aria-hidden="true" viewBox="0 0 24 24">
+                              <path fill="currentColor" d="M8 21H5V9h3v12Zm2 0V9l4-7 2 1v5h5v5l-3 8h-8Z"></path>
+                            </svg>
+                            <div class="ytSpecButtonShapeNextButtonTextContent"><span id="text" role="text">__VIDEO_LIKES__</span></div>
+                            <span data-fixture-touch-feedback aria-hidden="true"></span>
+                          </button>
+                        </button-view-model>
+                      </toggle-button-view-model>
+                    </like-button-view-model>
+                    <dislike-button-view-model class="style-text" __FIXTURE_ROLE_ATTRIBUTE__="dislike">
+                      <toggle-button-view-model>
+                        <button-view-model>
+                          <button type="button" aria-label="Dislike this video" aria-pressed="false">
+                            <svg data-fixture-icon="dislike" aria-hidden="true" viewBox="0 0 24 24">
+                              <path fill="currentColor" d="M16 3h3v12h-3V3Zm-2 0v12l-4 7-2-1v-5H3v-5l3-8h8Z"></path>
+                            </svg>
+                            __DISLIKE_TEXT_MARKUP__
+                            <span data-fixture-touch-feedback aria-hidden="true"></span>
+                          </button>
+                        </button-view-model>
+                      </toggle-button-view-model>
+                    </dislike-button-view-model>
+                  </div>
+                </div>
+              </yt-smartimation>
+            </segmented-like-dislike-button-view-model>
+          `;
+        }
+
+        function mobileButtonMarkup() {
+          return `
+            <like-button-view-model class="style-text" __FIXTURE_ROLE_ATTRIBUTE__="like">
+              <button type="button" aria-label="__VIDEO_LIKES__ likes" aria-pressed="false">
+                <svg data-fixture-icon="like" aria-hidden="true" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M8 21H5V9h3v12Zm2 0V9l4-7 2 1v5h5v5l-3 8h-8Z"></path>
+                </svg>
+                <div class="ytSpecButtonShapeNextButtonTextContent"><span id="text" class="button-renderer-text" role="text">__VIDEO_LIKES__</span></div>
+              </button>
+            </like-button-view-model>
+            <dislike-button-view-model class="style-text" __FIXTURE_ROLE_ATTRIBUTE__="dislike">
+              <button type="button" aria-label="Dislike this video" aria-pressed="false">
+                <svg data-fixture-icon="dislike" aria-hidden="true" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M16 3h3v12h-3V3Zm-2 0v12l-4 7-2-1v-5H3v-5l3-8h8Z"></path>
+                </svg>
+                __DISLIKE_TEXT_MARKUP__
+              </button>
+            </dislike-button-view-model>
+          `;
+        }
+
+        function applyNativeState(state) {
+          const like = host.querySelector('[__FIXTURE_ROLE_ATTRIBUTE__="like"]');
+          const dislike = host.querySelector('[__FIXTURE_ROLE_ATTRIBUTE__="dislike"]');
+          if (!like || !dislike) return;
+
+          like.classList.toggle("style-default-active", state === "liked");
+          like.classList.toggle("style-text", state !== "liked");
+          dislike.classList.toggle("style-default-active", state === "disliked");
+          dislike.classList.toggle("style-text", state !== "disliked");
+          like.querySelector("button").setAttribute("aria-pressed", String(state === "liked"));
+          dislike.querySelector("button").setAttribute("aria-pressed", String(state === "disliked"));
+          host.dataset.nativeState = state;
+        }
+
+        function applyNativeLikeDelta(delta) {
+          const button = host.querySelector('[__FIXTURE_ROLE_ATTRIBUTE__="like"] button');
+          const text = button?.querySelector("#text, [role='text']");
+          if (!button || !text) return;
+
+          const current = Number(text.textContent.replace(/[^\d]/g, "")) || 0;
+          const next = Math.max(0, current + delta);
+          text.textContent = String(next);
+          button.setAttribute("aria-label", `${next} likes`);
+        }
+
+        function insertButtons(state = "neutral") {
+          host.innerHTML = isMobile ? mobileButtonMarkup() : desktopButtonMarkup();
+          applyNativeState(state);
+        }
+
+        function removeButtons() {
+          host.replaceChildren();
+          host.dataset.nativeState = "neutral";
+        }
+
+        function installCommentActionSurfaces() {
+          const comments = document.getElementById("fixture-comment-action-surfaces");
+          for (let index = 0; index < 20; index += 1) {
+            const duplicate = document.createElement("div");
+            duplicate.id = "top-level-buttons-computed";
+            duplicate.setAttribute("data-fixture-comment-action-surface", String(index));
+            duplicate.innerHTML = `
+              <like-button-view-model data-fixture-comment-like>
+                <button type="button" aria-label="Like comment" aria-pressed="false">
+                  <span role="text">1</span>
+                </button>
+              </like-button-view-model>
+              <dislike-button-view-model data-fixture-comment-dislike>
+                <button type="button" aria-label="Dislike comment" aria-pressed="false">
+                  <span data-fixture-touch-feedback aria-hidden="true"></span>
+                </button>
+              </dislike-button-view-model>
+            `;
+            comments.appendChild(duplicate);
+          }
+        }
+
+        function navigate(videoId, { state = "neutral", buttons = true } = {}) {
+          history.pushState({}, "", `/watch?v=${videoId}`);
+          watch.setAttribute("video-id", videoId);
+          if (buttons) insertButtons(state);
+          else removeButtons();
+          document.dispatchEvent(new Event("yt-navigate-finish", { bubbles: true }));
+        }
+
+        // Model the native YouTube toggle before userscript listeners observe the bubbled click.
+        host.addEventListener(
+          "click",
+          (event) => {
+            const like = event.target.closest('[__FIXTURE_ROLE_ATTRIBUTE__="like"]');
+            const dislike = event.target.closest('[__FIXTURE_ROLE_ATTRIBUTE__="dislike"]');
+            const current = host.dataset.nativeState || "neutral";
+            const next = like
+              ? current === "liked"
+                ? "neutral"
+                : "liked"
+              : dislike
+                ? current === "disliked"
+                  ? "neutral"
+                  : "disliked"
+                : current;
+            if (next !== current) {
+              applyNativeLikeDelta(Number(next === "liked") - Number(current === "liked"));
+              applyNativeState(next);
+            }
+          },
+          true,
+        );
+
+        window.__youtubeFixture = {
+          applyNativeState,
+          insertButtons,
+          navigate,
+          removeButtons,
+          setSignedIn,
+        };
+
+        setSignedIn(__SIGNED_IN__);
+        installCommentActionSurfaces();
+        if (__INITIAL_BUTTONS__) insertButtons("__INITIAL_STATE__");
+        window.__youtubeFixture.initialDislikeTextContainers = host.querySelectorAll(
+          '[__FIXTURE_ROLE_ATTRIBUTE__="dislike"] #text, [__FIXTURE_ROLE_ATTRIBUTE__="dislike"] .ytSpecButtonShapeNextButtonTextContent',
+        ).length;
+      })();
+    </script>
+  </body>
+</html>

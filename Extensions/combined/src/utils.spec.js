@@ -182,9 +182,7 @@ describe("utils", () => {
       const options = formatter.resolvedOptions();
 
       expect(options.locale.toLowerCase()).toContain("en");
-      expect(consoleSpy).toHaveBeenCalledWith(
-        "Cannot find browser locale. Use en as default for number formatting.",
-      );
+      expect(consoleSpy).toHaveBeenCalledWith("Cannot find browser locale. Use en as default for number formatting.");
       querySpy.mockRestore();
     });
   });
@@ -289,22 +287,14 @@ describe("utils", () => {
     });
 
     it("checks secondary selectors when the grid is absent", () => {
-      document.querySelector = jest
-        .fn()
-        .mockReturnValueOnce(null)
-        .mockReturnValueOnce({})
-        .mockReturnValue(null);
+      document.querySelector = jest.fn().mockReturnValueOnce(null).mockReturnValueOnce({}).mockReturnValue(null);
 
       expect(isVideoLoaded()).toBe(true);
       expect(document.querySelector).toHaveBeenNthCalledWith(2, "ytd-watch-flexy[video-id='testid']");
     });
 
     it("falls back to player detection when previous lookups fail", () => {
-      document.querySelector = jest
-        .fn()
-        .mockReturnValueOnce(null)
-        .mockReturnValueOnce(null)
-        .mockReturnValueOnce({});
+      document.querySelector = jest.fn().mockReturnValueOnce(null).mockReturnValueOnce(null).mockReturnValueOnce({});
 
       expect(isVideoLoaded()).toBe(true);
       expect(document.querySelector).toHaveBeenNthCalledWith(3, '#player[loading="false"]:not([hidden])');
@@ -333,6 +323,126 @@ describe("utils", () => {
       document.body.appendChild(container);
 
       expect(isVideoLoaded()).toBe(true);
+    });
+
+    it("recognizes the matching active desktop Short when it is partially clipped by the viewport", () => {
+      isShorts.mockReturnValue(true);
+      const origin = window.location.origin;
+      window.history.replaceState(null, "", `${origin}/shorts/desktop123`);
+
+      const renderer = document.createElement("ytd-reel-video-renderer");
+      renderer.setAttribute("is-active", "");
+      renderer.setAttribute("video-id", "desktop123");
+      renderer.getBoundingClientRect = jest.fn(() => ({
+        bottom: 566,
+        height: 640,
+        left: 0,
+        right: 420,
+        top: -74,
+        width: 420,
+      }));
+      document.body.appendChild(renderer);
+
+      expect(isVideoLoaded()).toBe(true);
+    });
+
+    it("recognizes a visible desktop Short identified only by its canonical link", () => {
+      isShorts.mockReturnValue(true);
+      const origin = window.location.origin;
+      window.history.replaceState(null, "", `${origin}/shorts/desktop123`);
+
+      const renderer = document.createElement("ytd-reel-video-renderer");
+      const link = document.createElement("a");
+      link.setAttribute("href", "/shorts/desktop123");
+      renderer.appendChild(link);
+      renderer.getBoundingClientRect = jest.fn(() => ({
+        bottom: 640,
+        height: 640,
+        left: 0,
+        right: 420,
+        top: 0,
+        width: 420,
+      }));
+      document.body.appendChild(renderer);
+
+      expect(renderer.hasAttribute("is-active")).toBe(false);
+      expect(renderer.hasAttribute("video-id")).toBe(false);
+      expect(isVideoLoaded()).toBe(true);
+    });
+
+    it("does not treat a mismatched active desktop Short as loaded", () => {
+      isShorts.mockReturnValue(true);
+      const origin = window.location.origin;
+      window.history.replaceState(null, "", `${origin}/shorts/desktop123`);
+
+      const renderer = document.createElement("ytd-reel-video-renderer");
+      renderer.setAttribute("is-active", "");
+      renderer.setAttribute("video-id", "another123");
+      renderer.getBoundingClientRect = jest.fn(() => ({
+        bottom: 566,
+        height: 640,
+        left: 0,
+        right: 420,
+        top: -74,
+        width: 420,
+      }));
+      document.body.appendChild(renderer);
+
+      expect(isVideoLoaded()).toBe(false);
+    });
+
+    it("recognizes the visible active mobile Shorts renderer for the current video", () => {
+      isShorts.mockReturnValue(true);
+      const origin = window.location.origin;
+      window.history.replaceState(null, "", `${origin}/shorts/mobile123`);
+
+      const renderer = document.createElement("ytm-reel-video-renderer");
+      renderer.setAttribute("is-active", "");
+      renderer.setAttribute("video-id", "mobile123");
+      renderer.getBoundingClientRect = jest.fn(() => ({
+        bottom: 640,
+        height: 640,
+        left: 0,
+        right: 390,
+        top: 0,
+        width: 390,
+      }));
+      document.body.appendChild(renderer);
+
+      expect(isVideoLoaded()).toBe(true);
+    });
+
+    it("does not treat an inactive or mismatched mobile Shorts renderer as loaded", () => {
+      isShorts.mockReturnValue(true);
+      const origin = window.location.origin;
+      window.history.replaceState(null, "", `${origin}/shorts/mobile123`);
+
+      const inactiveMatch = document.createElement("ytm-reel-video-renderer");
+      inactiveMatch.setAttribute("video-id", "mobile123");
+      inactiveMatch.getBoundingClientRect = jest.fn(() => ({
+        bottom: 640,
+        height: 640,
+        left: 0,
+        right: 390,
+        top: 0,
+        width: 390,
+      }));
+      document.body.appendChild(inactiveMatch);
+
+      const activeMismatch = document.createElement("ytm-reel-video-renderer");
+      activeMismatch.setAttribute("is-active", "");
+      activeMismatch.setAttribute("video-id", "another123");
+      activeMismatch.getBoundingClientRect = jest.fn(() => ({
+        bottom: 640,
+        height: 640,
+        left: 0,
+        right: 390,
+        top: 0,
+        width: 390,
+      }));
+      document.body.appendChild(activeMismatch);
+
+      expect(isVideoLoaded()).toBe(false);
     });
   });
 
