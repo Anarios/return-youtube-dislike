@@ -1,4 +1,4 @@
-Bunu digər dillərdə oxuyun: [English](FAQ.md), [русский](FAQru.md), [Nederlands](FAQnl.md), [Français](FAQfr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md)
+Bunu digər dillərdə oxuyun: [English](FAQ.md), [русский](FAQru.md), [Nederlands](FAQnl.md), [Français](FAQfr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [Slovenščina](FAQsl.md)
 
 # Tez-tez verilən suallar
 

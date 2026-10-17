@@ -1,4 +1,4 @@
-Read this in other languages: [беларуская](FAQbe.md), [English](FAQ.md), [Nederlands](FAQnl.md), [Français](FAQfr.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Tiếng Việt](FAQvi.md)
+Read this in other languages: [беларуская](FAQbe.md), [English](FAQ.md), [Nederlands](FAQnl.md), [Français](FAQfr.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Tiếng Việt](FAQvi.md), [Slovenščina](FAQsl.md)
 
 # Часто задаваемые вопросы
 

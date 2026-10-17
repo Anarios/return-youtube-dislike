@@ -1,0 +1,593 @@
+{
+  "apiStatusLabel": {
+    "message": "Stanje API-ja:"
+  },
+  "apiStatusOffline": {
+    "message": "Nedosegljiv"
+  },
+  "apiStatusOnline": {
+    "message": "Dosegljiv"
+  },
+  "colorTheme": {
+    "message": "Barvna tema:"
+  },
+  "colorizeRatio": {
+    "message": "Obarvaj vrstico razmerja"
+  },
+  "colorizeRatioHover": {
+    "message": "Uporabi lastne barve za vrstico razmerja."
+  },
+  "colorizeThumbs": {
+    "message": "Obarvaj palca"
+  },
+  "colorizeThumbsHover": {
+    "message": "Uporabi lastne barve za ikoni palcev."
+  },
+  "considerDonating": {
+    "message": "Razširitev deluje izključno zaradi vaših donacij, zato razmislite o podpori projektu."
+  },
+  "customColors": {
+    "message": "Lastne barve za vrstico nevšečkov in gumbe"
+  },
+  "customNumberFormats": {
+    "message": "Lastne oblike zapisa števil"
+  },
+  "disableLoggingHover": {
+    "message": "Onemogoči beleženje odgovorov API-ja v konzolo."
+  },
+  "disableLoggingLabel": {
+    "message": "Onemogoči beleženje v konzolo"
+  },
+  "extensionDesc": {
+    "message": "Vrne možnost ogleda nevšečkov"
+  },
+  "extensionName": {
+    "message": "Return YouTube Dislike"
+  },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
+  "legendSettings": {
+    "message": "Nastavitve"
+  },
+  "linkChangelog": {
+    "message": "Dnevnik sprememb"
+  },
+  "linkDiscord": {
+    "message": "Discord"
+  },
+  "linkDonate": {
+    "message": "Doniraj"
+  },
+  "linkFAQ": {
+    "message": "Pogosta vprašanja"
+  },
+  "linkGithub": {
+    "message": "GitHub"
+  },
+  "linkHelp": {
+    "message": "Pomoč"
+  },
+  "linkWebsite": {
+    "message": "Spletna stran"
+  },
+  "numberFormat": {
+    "message": "Oblika zapisa števil:"
+  },
+  "patreonBadgePrefix": {
+    "message": "Patreon"
+  },
+  "patreonLoggedOutMessage": {
+    "message": "Premium funkcije so na voljo podpornikom na Patreonu"
+  },
+  "patreonLogin": {
+    "message": "Prijava s Patreonom"
+  },
+  "patreonPrivacyNote": {
+    "message": "Podatke o članstvu na Patreonu uporabljamo za preverjanje dostopa do premium vsebin. Podatkov o vaši kartici ali banki ne prejmemo."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium funkcije so na voljo sodelavcem na GitHubu"
+  },
+  "githubLogin": {
+    "message": "Prijava z GitHubom (sodelavec)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Prijave z GitHubom ni bilo mogoče začeti. Poskusite znova."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Prijave z GitHubom ni bilo mogoče dokončati. Poskusite znova."
+  },
+  "githubLoginUnavailable": {
+    "message": "Prijava za sodelavce GitHuba trenutno ni na voljo. Storitev potrebuje posodobitev ali spremembo nastavitev."
+  },
+  "githubLoginNotContributor": {
+    "message": "Ta račun GitHub ni naveden med sodelavci projekta Return YouTube Dislike. Prijavite se z računom, ki je prispeval k projektu. Nedavni prispevki se lahko prikažejo šele čez nekaj ur."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Prijava z GitHubom ni nastavljena za povratni naslov tega brskalnika. Obrnite se na podporo."
+  },
+  "githubLoginExpired": {
+    "message": "Ta poskus prijave z GitHubom je potekel ali ga ni bilo mogoče preveriti. Začnite novo prijavo."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Za prijavo sodelavcev GitHuba posodobite razširitev."
+  },
+  "githubLoginRateLimited": {
+    "message": "Preveč poskusov prijave. Počakajte minuto, preden poskusite znova."
+  },
+  "githubLoginDenied": {
+    "message": "Avtorizacija GitHub je bila zavrnjena. Prijava sodelavcev zahteva avtorizacijo."
+  },
+  "patreonLoginCompleteFailed": {
+    "message": "Prijave ni bilo mogoče dokončati. Poskusite znova."
+  },
+  "patreonLoginStartFailed": {
+    "message": "Prijave s Patreonom ni bilo mogoče začeti. Poskusite znova."
+  },
+  "patreonLogout": {
+    "message": "Odjava"
+  },
+  "patreonPermissionRequired": {
+    "message": "Prijava zahteva dovoljenje »identity«. Dovolite ga za nadaljevanje."
+  },
+  "patreonTierBasic": {
+    "message": "Osnovna stopnja"
+  },
+  "patreonTierChecking": {
+    "message": "Preverjanje članstva ..."
+  },
+  "patreonTierNone": {
+    "message": "Ni aktivnega članstva"
+  },
+  "patreonTierPremium": {
+    "message": "Premium podpornik"
+  },
+  "patreonTierSupporter": {
+    "message": "Podpornik"
+  },
+  "patreonUserFallback": {
+    "message": "Uporabnik Patreona"
+  },
+  "reformatLikes": {
+    "message": "Preoblikuj števila všečkov"
+  },
+  "reformatLikesHover": {
+    "message": "Poenoti obliko zapisa všečkov in nevšečkov."
+  },
+  "hidePremiumTeaser": {
+    "message": "Skrij predstavitveno ploščo premiuma"
+  },
+  "hidePremiumTeaserHover": {
+    "message": "Ne prikazuj predstavitve premiuma na straneh za ogled videov na YouTubu."
+  },
+  "roundNumbers": {
+    "message": "Prikaži navzdol zaokrožena števila"
+  },
+  "roundNumbersHover": {
+    "message": "Zaokroži števila navzdol (privzeto vedenje YouTuba)."
+  },
+  "shortsSupport": {
+    "message": "Podpora za YouTube Shorts"
+  },
+  "showTooltipPercentage": {
+    "message": "Odstotek v opisu vrstice všečkov/nevšečkov."
+  },
+  "showTooltipPercentageHover": {
+    "message": "Prikaži odstotek v opisu vrstice všečkov/nevšečkov."
+  },
+  "textColorTheme": {
+    "message": "Barvna tema:"
+  },
+  "textColorTheme1": {
+    "message": "Klasična"
+  },
+  "textColorTheme2": {
+    "message": "Dostopna"
+  },
+  "textColorTheme3": {
+    "message": "Neonska"
+  },
+  "textColorizeRatioBar": {
+    "message": "Obarvaj vrstico razmerja"
+  },
+  "textColorizeRatioBarHover": {
+    "message": "Uporabi lastne barve za vrstico razmerja."
+  },
+  "textColorizeThumbs": {
+    "message": "Obarvaj palca"
+  },
+  "textColorizeThumbsHover": {
+    "message": "Uporabi lastne barve za ikoni palcev."
+  },
+  "textConsistentFormat": {
+    "message": "Poenoti obliko zapisa všečkov in nevšečkov"
+  },
+  "textConsistentFormatHover": {
+    "message": "Preoblikuj števila všečkov."
+  },
+  "textDeveloper": {
+    "message": "avtorja Dmitry Selivanov in skupnost"
+  },
+  "textLikesDisabled": {
+    "message": "Onemogočil lastnik"
+  },
+  "textNumberFormat": {
+    "message": "Oblika zapisa števil:"
+  },
+  "textRoundingNumbers": {
+    "message": "Zaokroži statistiko všečkov/nevšečkov navzdol (privzeto vedenje YouTuba)"
+  },
+  "textRoundingNumbersHover": {
+    "message": "Prikaži navzdol zaokroženo statistiko."
+  },
+  "textSettings": {
+    "message": "Onemogoči pošiljanje všečkov/nevšečkov"
+  },
+  "textSettingsHover": {
+    "message": "Preneha šteti vaše všečke in nevšečke."
+  },
+  "textTempUnavailable": {
+    "message": "Začasno nedosegljivo"
+  },
+  "textUpdate": {
+    "message": "Posodobi na"
+  },
+  "tooltipPercentageMode": {
+    "message": "Način odstotkov:"
+  },
+  "tooltipPercentageModeHover": {
+    "message": "Uporabi lasten prikaz odstotkov ob prehodu z miško."
+  },
+  "version30installed": {
+    "message": "Nameščena je različica __RYD_VERSION__"
+  },
+  "whatsnew": {
+    "message": "Kaj je novega"
+  },
+  "premiumAnalytics_title": {
+    "message": "Premium vpogledi v video"
+  },
+  "premiumAnalytics_activityTitle": {
+    "message": "Odzivi skozi čas"
+  },
+  "premiumAnalytics_listsTitle": {
+    "message": "Najodzivnejše države"
+  },
+  "premiumAnalytics_listLikesTitle": {
+    "message": "Države z največ všečki"
+  },
+  "premiumAnalytics_listDislikesTitle": {
+    "message": "Države z največ nevšečki"
+  },
+  "premiumAnalytics_mapTitle": {
+    "message": "Zemljepisna porazdelitev"
+  },
+  "premiumAnalytics_expand": {
+    "message": "Razširi"
+  },
+  "premiumAnalytics_collapse": {
+    "message": "Strni"
+  },
+  "premiumAnalytics_mapMetricLabel": {
+    "message": "Merilo zemljevida"
+  },
+  "premiumAnalytics_mapReset": {
+    "message": "Nazaj na zemljevid sveta"
+  },
+  "premiumAnalytics_modeLikes": {
+    "message": "Všečki"
+  },
+  "premiumAnalytics_modeDislikes": {
+    "message": "Nevšečki"
+  },
+  "premiumAnalytics_modeRatio": {
+    "message": "Razmerje"
+  },
+  "premiumAnalytics_windowGroupLabel": {
+    "message": "Časovno okno podatkov"
+  },
+  "premiumAnalytics_windowLatest": {
+    "message": "Zadnji dnevi"
+  },
+  "premiumAnalytics_windowFirst": {
+    "message": "Prvi dnevi"
+  },
+  "premiumAnalytics_windowLatestTitle": {
+    "message": "Prikaži najnovejše dneve znotraj izbranega okna"
+  },
+  "premiumAnalytics_windowFirstTitle": {
+    "message": "Prikaži najzgodnejše dneve znotraj izbranega okna"
+  },
+  "premiumAnalytics_windowSummaryCustom": {
+    "message": "Lasten izbor"
+  },
+  "premiumAnalytics_windowSummaryAllTime": {
+    "message": "Ves čas"
+  },
+  "premiumAnalytics_windowSummaryLast": {
+    "message": "Zadnjih $1"
+  },
+  "premiumAnalytics_windowSummaryFirst": {
+    "message": "Prvih $1"
+  },
+  "premiumAnalytics_daysSingular": {
+    "message": "$1 dan"
+  },
+  "premiumAnalytics_daysPlural": {
+    "message": "$1 dni"
+  },
+  "premiumAnalytics_rangeLabelAllTime": {
+    "message": "Ves čas"
+  },
+  "premiumAnalytics_rangeLabelDays": {
+    "message": "$1 d"
+  },
+  "premiumAnalytics_selectedPeriod": {
+    "message": "Izbrano obdobje: $1"
+  },
+  "premiumAnalytics_totalsHeading": {
+    "message": "Uporabniki razširitve"
+  },
+  "premiumAnalytics_totalsLikes": {
+    "message": "$1 všečkov"
+  },
+  "premiumAnalytics_totalsDislikes": {
+    "message": "$1 nevšečkov"
+  },
+  "premiumAnalytics_summaryMeta": {
+    "message": "Zajetih $1 odzivov iz $2 držav ($3 enoličnih naslovov IP)"
+  },
+  "premiumAnalytics_bucketHour": {
+    "message": "Glasov na uro"
+  },
+  "premiumAnalytics_bucketDay": {
+    "message": "Glasov na dan"
+  },
+  "premiumAnalytics_bucketWeek": {
+    "message": "Glasov na teden"
+  },
+  "premiumAnalytics_bucketHours": {
+    "message": "Glasov na $1 ur"
+  },
+  "premiumAnalytics_bucketDays": {
+    "message": "Glasov na $1 dni"
+  },
+  "premiumAnalytics_bucketMinutes": {
+    "message": "Glasov na $1 minut"
+  },
+  "premiumAnalytics_bucketMinute": {
+    "message": "Glasov na minuto"
+  },
+  "premiumAnalytics_bucketSeconds": {
+    "message": "Glasov na $1 sekund"
+  },
+  "premiumAnalytics_bucketSecond": {
+    "message": "Glasov na sekundo"
+  },
+  "premiumAnalytics_noData": {
+    "message": "Podatkov še ni"
+  },
+  "premiumAnalytics_unknownRegion": {
+    "message": "Neznano"
+  },
+  "premiumAnalytics_loading": {
+    "message": "Nalaganje vpogledov ..."
+  },
+  "premiumAnalytics_errorReauth": {
+    "message": "Za odklep analitike znova avtorizirajte Patreon."
+  },
+  "premiumAnalytics_errorInactive": {
+    "message": "Premium analitika je na voljo aktivnim podpornikom na Patreonu."
+  },
+  "premiumAnalytics_errorSession": {
+    "message": "Seja je potekla. Znova se prijavite s Patreonom."
+  },
+  "premiumAnalytics_errorBackend": {
+    "message": "Zaledje analitike trenutno ni dosegljivo."
+  },
+  "premiumAnalytics_errorNetwork": {
+    "message": "Do storitve analitike ni mogoče dostopati."
+  },
+  "premiumAnalytics_errorGeneric": {
+    "message": "Premium analitike ni mogoče naložiti."
+  },
+  "premiumAnalytics_mapSeriesLabel": {
+    "message": "Odzivnost"
+  },
+  "premiumAnalytics_likeRatio": {
+    "message": "Razmerje všečkov"
+  },
+  "premiumAnalytics_visualHighRatio": {
+    "message": "Višje razmerje všečkov"
+  },
+  "premiumAnalytics_visualLowRatio": {
+    "message": "Nižje razmerje všečkov"
+  },
+  "premiumAnalytics_visualHighLikes": {
+    "message": "Več všečkov"
+  },
+  "premiumAnalytics_visualLowLikes": {
+    "message": "Manj všečkov"
+  },
+  "premiumAnalytics_visualHighDislikes": {
+    "message": "Več nevšečkov"
+  },
+  "premiumAnalytics_visualLowDislikes": {
+    "message": "Manj nevšečkov"
+  },
+  "premiumAnalytics_visualHighGeneric": {
+    "message": "Več: $1"
+  },
+  "premiumAnalytics_visualLowGeneric": {
+    "message": "Manj: $1"
+  },
+  "premiumAnalytics_tooltipLikes": {
+    "message": "Všečki: $1"
+  },
+  "premiumAnalytics_tooltipDislikes": {
+    "message": "Nevšečki: $1"
+  },
+  "premiumAnalytics_tooltipRatio": {
+    "message": "Razmerje všečkov: $1"
+  },
+  "premiumTeaser_title": {
+    "message": "Analitika videa"
+  },
+  "premiumTeaser_subtitle": {
+    "message": "Neobdelani nevšečki so neposredna poročila uporabnikov razširitve, ki gledajo ta video."
+  },
+  "premiumTeaser_cta": {
+    "message": "Odkleni premium"
+  },
+  "premiumTeaser_learn": {
+    "message": "Predogled celotne analitike"
+  },
+  "premiumTeaser_statRaw": {
+    "message": "Neobdelano število nevšečkov"
+  },
+  "premiumTeaser_statDislikes": {
+    "message": "Ocenjeno število nevšečkov"
+  },
+  "premiumTeaser_statLikes": {
+    "message": "Neobdelano število všečkov"
+  },
+  "premiumTeaser_statusLoading": {
+    "message": "Pridobivanje najnovejših seštevkov nevšečkov ..."
+  },
+  "premiumTeaser_statusError": {
+    "message": "Podatkov o nevšečkih zdaj ni bilo mogoče naložiti. Poskusite znova naložiti stran."
+  },
+  "premiumTeaser_breadcrumbsAria": {
+    "message": "Kako odkleniti premium analitiko"
+  },
+  "premiumTeaser_breadcrumbsTitle": {
+    "message": "Odklenite premium vpoglede v video v treh hitrih korakih:"
+  },
+  "premiumTeaser_breadcrumbStep1": {
+    "message": "V pojavnem oknu razširitve Return YouTube Dislike se prijavite s Patreonom."
+  },
+  "premiumTeaser_breadcrumbStep2": {
+    "message": "Izberite stopnjo Premium, da omogočite časovnice odzivov, lestvice držav in interaktivni zemljevid."
+  },
+  "premiumTeaser_breadcrumbStep3": {
+    "message": "Znova naložite YouTube in si za vsak video oglejte urne trende, vodilne države in razčlenitev po zveznih državah ZDA."
+  },
+  "premiumTierNotice_title": {
+    "message": "Premium analitika je zaklenjena"
+  },
+  "premiumTierNotice_message": {
+    "message": "Vaše članstvo na Patreonu ne vključuje stopnje Premium. Nadgradite svoj prispevek in odklenite napredno analitiko videov."
+  },
+  "premiumTierNotice_cta": {
+    "message": "Nadgradi na Patreonu"
+  },
+  "changelog_title": {
+    "message": "Dnevnik sprememb premium analitike · 20. oktober 2025"
+  },
+  "changelog_badge": {
+    "message": "Premium izdaja"
+  },
+  "changelog_heading": {
+    "message": "Premium analitika na novo zasnovana"
+  },
+  "changelog_subheading": {
+    "message": "Raziščite časovnico odzivov v živo, lestvico vodilnih držav in interaktivni zemljevid, ki jih vključuje Return YouTube Dislike Premium."
+  },
+  "changelog_releaseDate": {
+    "message": "Izdano 20. oktobra 2025"
+  },
+  "changelog_cta_primary": {
+    "message": "Nadgradi na Patreonu"
+  },
+  "changelog_cta_secondary": {
+    "message": "Preberite navodila za nastavitev"
+  },
+  "changelog_section_highlights": {
+    "message": "Kaj je novega"
+  },
+  "changelog_feature_timeline_title": {
+    "message": "Časovnica odzivov v živo"
+  },
+  "changelog_feature_timeline_body": {
+    "message": "Opazujte, kako všečki in nevšečki pritekajo v realnem času. Preklapljajte med urnimi, dnevnimi in vseskozi trajajočimi prednastavitvami brez ponovnega nalaganja, zasidrajte okno na prvi dan ali na najnovejše glasove in preglejte vsak skok, da vidite, kaj je sprožilo odziv."
+  },
+  "changelog_feature_map_title": {
+    "message": "Interaktivni zemljevid sveta in ZDA"
+  },
+  "changelog_feature_map_body": {
+    "message": "Premikajte se po svetu ali se poglobite v zvezne države ZDA in odkrijte žarišča. V nadgrajenem opisu primerjajte všečke, nevšečke in razmerja ter izpostavite regije, ki se na vaše objave odzovejo prve."
+  },
+  "changelog_feature_quality_title": {
+    "message": "Lestvica vodilnih držav"
+  },
+  "changelog_feature_quality_body": {
+    "message": "Razvrstite države po neobdelani odzivnosti, všečkih, nevšečkih ali razmerju. Filtrirajte z enakimi prednastavitvami kot na časovnici in ugotovite, kje kampanje zaležejo ter kaj objaviti naslednjič."
+  },
+  "changelog_screenshot_placeholder": {
+    "message": "Zaslonska slika bo kmalu na voljo – zajemite ta pogled v razvijalskih orodjih, ko bo pripravljen."
+  },
+  "changelog_screenshot_label_timeline": {
+    "message": "Ograda: pregled časovnice"
+  },
+  "changelog_screenshot_label_map": {
+    "message": "Ograda: svetovni zemljevid odzivov"
+  },
+  "changelog_screenshot_label_teaser": {
+    "message": "Ograda: lestvica držav"
+  },
+  "changelog_section_upgrade": {
+    "message": "Kako odkleniti premium analitiko"
+  },
+  "changelog_upgrade_body": {
+    "message": "Ste pripravljeni na začetek? Sledite tem hitrim korakom in osvežite zavihek z YouTubom."
+  },
+  "changelog_upgrade_step1": {
+    "message": "Odprite pojavno okno Return YouTube Dislike in se prijavite s Patreonom."
+  },
+  "changelog_upgrade_step2": {
+    "message": "Izberite stopnjo Premium, da omogočite pretakanje analitičnih podatkov v svoj račun."
+  },
+  "changelog_upgrade_step3": {
+    "message": "Znova naložite katero koli stran za ogled videa na YouTubu – časovnica, zemljevid in lestvice se prikažejo takoj."
+  },
+  "changelog_section_release": {
+    "message": "Poudarki izdaje"
+  },
+  "changelog_release_item1": {
+    "message": "Prednastavitve časovnice odzivov pretakajo podatke v živo s sidri obsega za prvo in zadnje časovno okno."
+  },
+  "changelog_release_item2": {
+    "message": "Lestvica držav se osvežuje sproti, zato lahko opazite regije v vzponu, ne da bi zapustili ploščo."
+  },
+  "changelog_release_item3": {
+    "message": "Interaktivni zemljevid izpostavi svetovna žarišča in žarišča po zveznih državah ZDA z jasnejšimi opisi in merili."
+  },
+  "changelog_support_heading": {
+    "message": "Potrebujete pomoč?"
+  },
+  "changelog_support_description": {
+    "message": "Tu smo, če zataknete – vprašanja naslovite na dokumentacijo podpore ali na skupnost."
+  },
+  "changelog_support_contact": {
+    "message": "Vprašajte skupnost"
+  },
+  "hideClutterButtons": {
+    "message": "Skrij odvečne gumbe"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Prikaži primera prej in potem"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Vidna ostaneta samo gumba Všeč mi je in Ni mi všeč. Deli, Shrani, Zahvala in druga izbirna dejanja ostanejo na voljo v YouTubovem meniju s tremi pikami."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Prej: vidni so vsi gumbi za dejanja"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "Potem: vidna ostaneta samo Všeč mi je in Ni mi všeč"
+  },
+  "changelog_brand_logo_alt": {
+    "message": "Logotip Return YouTube Dislike"
+  }
+}
