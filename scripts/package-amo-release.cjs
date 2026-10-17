@@ -13,6 +13,7 @@ const EXPECTED_NODE = "v22.17.0";
 const EXPECTED_NPM = "10.8.2";
 const ARTIFACT_VERIFIER_PATH = "Extensions/e2e/verify-extension-artifact.js";
 const EXTRA_SOURCE_FILES = Object.freeze([
+  "AMO_RELEASE_NOTES.md",
   "Docs/Privacy Policy",
   ARTIFACT_VERIFIER_PATH,
   "README_AMO_SOURCE.md",
@@ -299,6 +300,7 @@ async function packageRelease(outputDirectory) {
     );
     verifyBuildReceipt();
     for (const [source, destination] of [
+      ["AMO_RELEASE_NOTES.md", "AMO_RELEASE_NOTES.md"],
       ["README_AMO_SOURCE.md", "README_AMO_SOURCE.md"],
       ["Docs/Privacy Policy", "PRIVACY_POLICY.md"],
     ])

@@ -21,18 +21,6 @@ function usesFirefoxDataCollectionConsent() {
   return Boolean(manifest?.browser_specific_settings?.gecko?.data_collection_permissions);
 }
 
-function callFirefoxPermissionMethod(methodName) {
-  const permissions = getPermissionsApi();
-  const method = permissions?.[methodName];
-  if (typeof method !== "function") return Promise.resolve(false);
-
-  try {
-    return Promise.resolve(method.call(permissions, AUTHENTICATION_DATA_DESCRIPTOR)).then(Boolean, () => false);
-  } catch (_) {
-    return Promise.resolve(false);
-  }
-}
-
 function queryBackgroundForAuthenticationDataPermission() {
   const runtime = getRuntimeApi();
   if (typeof runtime?.sendMessage !== "function") return Promise.resolve(false);
@@ -64,8 +52,22 @@ function queryBackgroundForAuthenticationDataPermission() {
 
 function hasAuthenticationDataPermission({ queryBackground = true } = {}) {
   if (!usesFirefoxDataCollectionConsent()) return Promise.resolve(true);
-  if (typeof getPermissionsApi()?.contains === "function") return callFirefoxPermissionMethod("contains");
-  return queryBackground ? queryBackgroundForAuthenticationDataPermission() : Promise.resolve(false);
+  const permissions = getPermissionsApi();
+  if (!permissions) {
+    return queryBackground ? queryBackgroundForAuthenticationDataPermission() : Promise.resolve(false);
+  }
+  if (typeof permissions.getAll !== "function") return Promise.resolve(false);
+
+  try {
+    return Promise.resolve(permissions.getAll()).then(
+      (granted) =>
+        Array.isArray(granted?.data_collection) &&
+        ACCOUNT_DATA_PERMISSIONS.every((permission) => granted.data_collection.includes(permission)),
+      () => false,
+    );
+  } catch (_) {
+    return Promise.resolve(false);
+  }
 }
 
 function requestAuthenticationDataPermission() {
@@ -73,7 +75,17 @@ function requestAuthenticationDataPermission() {
 
   // Keep this direct request as the first operation in the login click stack.
   // Firefox requires optional data-collection consent requests to originate from a user gesture.
-  return callFirefoxPermissionMethod("request");
+  const permissions = getPermissionsApi();
+  if (typeof permissions?.request !== "function") return Promise.resolve(false);
+
+  try {
+    return Promise.resolve(permissions.request(AUTHENTICATION_DATA_DESCRIPTOR)).then(
+      (granted) => granted === true && hasAuthenticationDataPermission({ queryBackground: false }),
+      () => false,
+    );
+  } catch (_) {
+    return Promise.resolve(false);
+  }
 }
 
 function authenticationDataPermissionWasRemoved(removedPermissions) {

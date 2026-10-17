@@ -255,6 +255,23 @@ describe("premiumAnalytics", () => {
     expect(analyticsState.sessionActive).toBe(false);
   });
 
+  it.each([[], undefined])("does not send a bearer token without an explicit Firefox grant: %j", async (granted) => {
+    const actualConsent = jest.requireActual("../data-collection-permissions");
+    chrome.runtime = { getManifest: () => require("../../manifest-firefox.json") };
+    chrome.permissions = {
+      contains: jest.fn().mockResolvedValue(true),
+      getAll: jest.fn().mockResolvedValue({ permissions: ["identity"], data_collection: granted }),
+    };
+    mockUsesFirefoxDataCollectionConsent.mockImplementationOnce(actualConsent.usesFirefoxDataCollectionConsent);
+    mockHasAuthenticationDataPermission.mockImplementationOnce(actualConsent.hasAuthenticationDataPermission);
+
+    await requestAnalytics();
+
+    expect(fetch).not.toHaveBeenCalled();
+    expect(analyticsState.sessionToken).toBeNull();
+    expect(analyticsState.sessionActive).toBe(false);
+  });
+
   it("ignores an analytics response from a session that was signed out", async () => {
     let completeRequest;
     const response = await fetch();

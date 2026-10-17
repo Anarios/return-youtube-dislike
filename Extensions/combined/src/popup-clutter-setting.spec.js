@@ -52,7 +52,7 @@ test("every shipped locale provides non-empty hide-clutter copy", () => {
   const localeRoot = path.join(extensionRoot, "_locales");
   const localeDirectories = fs.readdirSync(localeRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory());
 
-  expect(localeDirectories).toHaveLength(22);
+  expect(localeDirectories).toHaveLength(24);
   for (const locale of localeDirectories) {
     const messages = JSON.parse(fs.readFileSync(path.join(localeRoot, locale.name, "messages.json"), "utf8"));
     for (const key of messageKeys) {

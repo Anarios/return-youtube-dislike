@@ -2,7 +2,7 @@
 
 Last updated: September 10, 2026
 
-This policy describes version 4.0.5 and its matching backend release.
+This policy describes version 4.0.6 and its matching backend release.
 
 Return YouTube Dislike transmits only the data needed to provide its dislike-count, voting, abuse-prevention, and
 optional premium features. It does not sell personal data or use it for advertising.

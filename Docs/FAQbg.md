@@ -1,4 +1,4 @@
-Прочетете това на други езици:  [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md)
+Прочетете това на други езици:  [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Slovenščina](FAQsl.md)
 
 
 # Често задавани въпроси

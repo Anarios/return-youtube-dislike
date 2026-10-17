@@ -7,13 +7,6 @@ jest.mock("./src/core-data-consent", () => ({
   onCoreDataPermissionChanged: jest.fn(),
 }));
 
-jest.mock("./src/data-collection-permissions", () => ({
-  hasAuthenticationDataPermission: jest.fn(),
-  onAuthenticationDataPermissionRemoved: jest.fn(),
-  requestAuthenticationDataPermission: jest.fn(),
-  usesFirefoxDataCollectionConsent: jest.fn(),
-}));
-
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 const cachedUser = { fullName: "Test User", imageUrl: "https://example.org/avatar", membershipTier: "none" };
 
@@ -26,14 +19,19 @@ describe("popup account consent lifecycle", () => {
     jest.resetModules();
     consent = true;
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "popup.html"), "utf8");
-    const permissions = require("./src/data-collection-permissions");
-    permissions.usesFirefoxDataCollectionConsent.mockReturnValue(true);
-    permissions.hasAuthenticationDataPermission.mockImplementation(() => Promise.resolve(consent));
-    permissions.requestAuthenticationDataPermission.mockImplementation(() => Promise.resolve(consent));
-    permissions.onAuthenticationDataPermissionRemoved.mockImplementation((listener) => (removeConsent = listener));
     global.chrome = {
       i18n: { getMessage: () => "" },
-      runtime: { getManifest: () => ({ version: "4.0.5" }), sendMessage: jest.fn() },
+      runtime: { getManifest: () => require("./manifest-firefox.json"), sendMessage: jest.fn() },
+      permissions: {
+        getAll: jest.fn(() => Promise.resolve({ data_collection: consent ? ["authenticationInfo"] : [] })),
+        contains: jest.fn().mockResolvedValue(true),
+        request: jest.fn(() => Promise.resolve(consent)),
+        onRemoved: {
+          addListener: (listener) => {
+            removeConsent = () => listener({ data_collection: ["authenticationInfo"] });
+          },
+        },
+      },
       identity: { getRedirectURL: jest.fn() },
       storage: {
         sync: {
@@ -46,14 +44,17 @@ describe("popup account consent lifecycle", () => {
         onChanged: { addListener: jest.fn() },
       },
     };
+    global.browser = global.chrome;
     global.fetch = jest.fn();
     require("./popup");
     await flushPromises();
+    chrome.runtime.sendMessage.mockClear();
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
     delete global.chrome;
+    delete global.browser;
     delete global.fetch;
   });
 
@@ -87,6 +88,44 @@ describe("popup account consent lifecycle", () => {
     expect(document.getElementById("patreon-logged-in").style.display).toBe("none");
     expect(document.getElementById("patreon-user-avatar").hasAttribute("src")).toBe(false);
   }
+
+  test.each([[], undefined])("does not verify or display cached account data without a grant: %j", async (granted) => {
+    chrome.permissions.getAll.mockResolvedValue({ permissions: ["identity"], data_collection: granted });
+    readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
+    await flushPromises();
+    expect(fetch).not.toHaveBeenCalled();
+    expect(chrome.storage.sync.remove).toHaveBeenCalledWith([
+      "patreonAuthenticated",
+      "patreonUser",
+      "patreonSessionToken",
+    ]);
+    expectLoggedOut();
+  });
+
+  test.each(["patreon-login-btn", "github-login-btn"])(
+    "does not start %s when Firefox denies authentication consent",
+    async (button) => {
+      consent = false;
+      jest.spyOn(window, "alert").mockImplementation(() => {});
+      document.getElementById(button).click();
+      expect(chrome.permissions.request).toHaveBeenCalledWith({ data_collection: ["authenticationInfo"] });
+      await flushPromises();
+      expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+      expect(fetch).not.toHaveBeenCalled();
+    },
+  );
+
+  test.each(["patreon-login-btn", "github-login-btn"])(
+    "does not start %s after a request succeeds without a recorded grant",
+    async (button) => {
+      chrome.permissions.getAll.mockResolvedValue({ permissions: ["identity"], data_collection: [] });
+      jest.spyOn(window, "alert").mockImplementation(() => {});
+      document.getElementById(button).click();
+      await flushPromises();
+      expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+      expect(fetch).not.toHaveBeenCalled();
+    },
+  );
 
   test("does not verify or show a cached session whose storage read completes after revocation", async () => {
     revoke();

@@ -49,7 +49,7 @@ test("the extension adapter honors the selected artifact even when a scenario us
   }
 });
 
-function createExtensionFixture() {
+function createExtensionFixture(lineEnding = "\n") {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "ryd-mv3-source-fixture-"));
   temporaryDirectories.push(directory);
   fs.writeFileSync(
@@ -66,7 +66,10 @@ function createExtensionFixture() {
   );
   fs.writeFileSync(
     path.join(directory, "ryd.background.js"),
-    `fetch("${PRODUCTION_API_ORIGIN}/register")\napi.runtime.onInstalled.addListener((details) => {\n  maybeShowChangelog(details);\n});`,
+    `fetch("${PRODUCTION_API_ORIGIN}/register")\napi.runtime.onInstalled.addListener((details) => {\n  maybeShowChangelog(details);\n});`.replaceAll(
+      "\n",
+      lineEnding,
+    ),
   );
   fs.writeFileSync(path.join(directory, "ryd.content-script.js"), `fetch("${PRODUCTION_API_ORIGIN}/votes")`);
   fs.writeFileSync(path.join(directory, "content-style.css"), "#ryd-bar { display: block; }");
@@ -378,32 +381,54 @@ test("the routed fake backend records a valid preflight and blocks an unknown on
   ]);
 });
 
-test("redirects eager MV3 background traffic while leaving routed content-script traffic intact", () => {
-  const sourceDirectory = createExtensionFixture();
-  const prepared = prepareHermeticExtensionArtifact(sourceDirectory, "http://127.0.0.1:43127");
-  temporaryDirectories.push(prepared.temporaryRoot);
+test.each(["\n", "\r\n"])(
+  "redirects MV3 background traffic with %j line endings and preserves routed traffic",
+  (lineEnding) => {
+    const sourceDirectory = createExtensionFixture(lineEnding);
+    const prepared = prepareHermeticExtensionArtifact(sourceDirectory, "http://127.0.0.1:43127");
+    temporaryDirectories.push(prepared.temporaryRoot);
 
-  expect(prepared.replacements).toEqual({ "ryd.background.js": 1, firstInstallChangelogListener: 1 });
-  expect(prepared.routedBundles).toEqual(["ryd.content-script.js"]);
-  expect(fs.readFileSync(path.join(prepared.extensionDirectory, "ryd.background.js"), "utf8")).toContain(
-    "http://127.0.0.1:43127/register",
-  );
-  expect(fs.readFileSync(path.join(prepared.extensionDirectory, "ryd.background.js"), "utf8")).toContain(
-    "__rydArtifactWorkerSignals",
-  );
-  expect(prepared.workerSignalEndpoint).toBe(`http://127.0.0.1:43127${WORKER_SIGNAL_PATH}`);
-  expect(fs.readFileSync(path.join(prepared.extensionDirectory, "ryd.background.js"), "utf8")).toContain(
-    "api.runtime.onInstalled.addListener(() => {});",
-  );
-  expect(fs.readFileSync(path.join(prepared.extensionDirectory, "ryd.content-script.js"), "utf8")).toContain(
-    `${PRODUCTION_API_ORIGIN}/votes`,
-  );
-  expect(fs.readFileSync(path.join(prepared.extensionDirectory, "menu-fixer.js"), "utf8")).toContain("menuFixerLoaded");
-  expect(JSON.parse(fs.readFileSync(path.join(prepared.extensionDirectory, "manifest.json"), "utf8"))).toMatchObject({
-    host_permissions: expect.arrayContaining(["http://127.0.0.1/*"]),
-    manifest_version: 3,
-  });
-  expect(fs.readFileSync(path.join(sourceDirectory, "ryd.background.js"), "utf8")).toContain(PRODUCTION_API_ORIGIN);
+    expect(prepared.replacements).toEqual({ "ryd.background.js": 1, firstInstallChangelogListener: 1 });
+    expect(prepared.routedBundles).toEqual(["ryd.content-script.js"]);
+    expect(fs.readFileSync(path.join(prepared.extensionDirectory, "ryd.background.js"), "utf8")).toContain(
+      "http://127.0.0.1:43127/register",
+    );
+    expect(fs.readFileSync(path.join(prepared.extensionDirectory, "ryd.background.js"), "utf8")).toContain(
+      "__rydArtifactWorkerSignals",
+    );
+    expect(prepared.workerSignalEndpoint).toBe(`http://127.0.0.1:43127${WORKER_SIGNAL_PATH}`);
+    expect(fs.readFileSync(path.join(prepared.extensionDirectory, "ryd.background.js"), "utf8")).toContain(
+      "api.runtime.onInstalled.addListener(() => {});",
+    );
+    expect(fs.readFileSync(path.join(prepared.extensionDirectory, "ryd.content-script.js"), "utf8")).toContain(
+      `${PRODUCTION_API_ORIGIN}/votes`,
+    );
+    expect(fs.readFileSync(path.join(prepared.extensionDirectory, "menu-fixer.js"), "utf8")).toContain(
+      "menuFixerLoaded",
+    );
+    expect(JSON.parse(fs.readFileSync(path.join(prepared.extensionDirectory, "manifest.json"), "utf8"))).toMatchObject({
+      host_permissions: expect.arrayContaining(["http://127.0.0.1/*"]),
+      manifest_version: 3,
+    });
+    expect(fs.readFileSync(path.join(sourceDirectory, "ryd.background.js"), "utf8")).toContain(PRODUCTION_API_ORIGIN);
+  },
+);
+
+test.each([
+  [
+    "an unexpected listener body",
+    (source) => source.replace("maybeShowChangelog(details);", "showOtherPage(details);"),
+  ],
+  ["duplicate changelog listeners", (source) => `${source}\n${source}`],
+])("rejects %s instead of suppressing an unrecognized listener", (_label, mutateBackground) => {
+  const sourceDirectory = createExtensionFixture();
+  const backgroundPath = path.join(sourceDirectory, "ryd.background.js");
+  fs.writeFileSync(backgroundPath, mutateBackground(fs.readFileSync(backgroundPath, "utf8")));
+
+  expect(() => {
+    const prepared = prepareHermeticExtensionArtifact(sourceDirectory, "http://127.0.0.1:43127");
+    temporaryDirectories.push(prepared.temporaryRoot);
+  }).toThrow(/exactly one recognized first-install changelog listener/);
 });
 
 test("rejects an extension artifact whose injected auxiliary script was dropped by the build", () => {

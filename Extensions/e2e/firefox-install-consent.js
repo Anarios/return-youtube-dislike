@@ -182,7 +182,7 @@ async function validatePackagedConsent({ driver, derived, evidence, manifest, re
     "accepted packaged update",
   );
   await dismissFinishedNotice(driver);
-  result.scenarios.push("native required-consent update acceptance activates 4.0.5");
+  result.scenarios.push(`native required-consent update acceptance activates ${manifest.version}`);
   console.log("REQUIRED UPDATE ACCEPTANCE PASSED");
   result.validationDepth =
     "packaged Firefox Developer artifact with loopback API substitution, native required install/update and optional consent";

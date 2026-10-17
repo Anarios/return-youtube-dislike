@@ -4,7 +4,7 @@ This source package is provided for Mozilla Add-ons review. The extension is bui
 
 ## Build environment
 
-The 4.0.5 release was built with this exact toolchain:
+Build the 4.0.6 release with this exact toolchain:
 
 - Windows 11 (PowerShell); the build script also supports Linux and macOS
 - Node.js 22.17.0
@@ -49,7 +49,7 @@ The script performs all required technical build steps:
 1. Confirms Node.js 22.17.0 and npm 10.8.2 are in use.
 2. Installs the locked dependencies with `npm ci`.
 3. Builds the extension with the release-specific `npm run build-for-amo` hook.
-4. Verifies the generated Firefox manifest is version 4.0.5, retains the published AMO add-on ID, and declares the expected desktop data-collection permissions and minimum Firefox version.
+4. Verifies the generated Firefox manifest is version 4.0.6, retains the published AMO add-on ID, and declares the expected desktop data-collection permissions and minimum Firefox version.
 5. Verifies `menu-fixer.js` and the other required Firefox files were generated.
 6. Verifies `ryd.content-script.js` is below 5 MB.
 7. Verifies every generated JavaScript file has no source-map reference.

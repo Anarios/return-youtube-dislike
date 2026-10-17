@@ -95,6 +95,7 @@ test("source allowlist includes the standalone build and packaging tools but exc
   expect(files).toEqual(
     expect.arrayContaining([
       "package-lock.json",
+      "AMO_RELEASE_NOTES.md",
       "README_AMO_SOURCE.md",
       "scripts/build-firefox-source.mjs",
       "scripts/package-amo-release.cjs",

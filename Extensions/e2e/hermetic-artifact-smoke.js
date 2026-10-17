@@ -465,12 +465,11 @@ function prepareHermeticExtensionArtifact(sourceDirectory, apiOrigin) {
     false,
     "ryd.background.js still contains the production API origin after transformation.",
   );
-  const changelogListener = `api.runtime.onInstalled.addListener((details) => {
-  maybeShowChangelog(details);
-});`;
-  if (!transformedBackground.includes(changelogListener)) {
+  const changelogListener =
+    /api\.runtime\.onInstalled\.addListener\(\(details\) => \{\r?\n  maybeShowChangelog\(details\);\r?\n\}\);/g;
+  if ((transformedBackground.match(changelogListener) ?? []).length !== 1) {
     removeOwnedTemporaryDirectory(temporaryRoot, "ryd-mv3-e2e-");
-    throw new Error("ryd.background.js has no recognized first-install changelog listener to suppress.");
+    throw new Error("ryd.background.js must have exactly one recognized first-install changelog listener to suppress.");
   }
   const hermeticBackground = transformedBackground.replace(
     changelogListener,

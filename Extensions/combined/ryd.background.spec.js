@@ -5,11 +5,6 @@ jest.mock("./src/core-data-consent", () => ({
   coreConsentError: () => new Error("Data consent required"),
   onCoreDataPermissionChanged: jest.fn(),
 }));
-jest.mock("./src/data-collection-permissions", () => ({
-  hasAuthenticationDataPermission: jest.fn(),
-  onAuthenticationDataPermissionRemoved: jest.fn(),
-  usesFirefoxDataCollectionConsent: jest.fn(),
-}));
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 const startData = () => {
@@ -52,10 +47,6 @@ describe("background account consent lifecycle", () => {
         },
       },
     });
-    const permissions = require("./src/data-collection-permissions");
-    permissions.usesFirefoxDataCollectionConsent.mockReturnValue(true);
-    permissions.hasAuthenticationDataPermission.mockImplementation(() => Promise.resolve(consent));
-    permissions.onAuthenticationDataPermissionRemoved.mockImplementation((listener) => (removeConsent = listener));
     require("../common/vote-client").createVoteClient.mockReturnValue({
       ensureRegistered: jest.fn().mockResolvedValue({}),
       getRegisteredUser: jest.fn().mockResolvedValue(null),
@@ -66,9 +57,18 @@ describe("background account consent lifecycle", () => {
       runtime: {
         id: "extension-id",
         getURL: (path) => "moz-extension://fixture/" + path,
-        getManifest: () => ({ version: "4.0.5" }),
+        getManifest: () => require("./manifest-firefox.json"),
         onMessage: { addListener: (listener) => (messageListener = listener) },
         onInstalled: { addListener: jest.fn() },
+      },
+      permissions: {
+        getAll: jest.fn(() => Promise.resolve({ data_collection: consent ? ["authenticationInfo"] : [] })),
+        contains: jest.fn().mockResolvedValue(true),
+        onRemoved: {
+          addListener: (listener) => {
+            removeConsent = () => listener({ data_collection: ["authenticationInfo"] });
+          },
+        },
       },
       identity: {
         getRedirectURL: () => "https://extension.example/callback",
@@ -184,6 +184,19 @@ describe("background account consent lifecycle", () => {
     "%s sends nothing when consent is denied",
     async (message) => {
       consent = false;
+      const response = jest.fn();
+      messageListener({ message }, {}, response);
+      await flushPromises();
+      expect(fetch).not.toHaveBeenCalled();
+      expect(chrome.identity.launchWebAuthFlow).not.toHaveBeenCalled();
+      expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+    },
+  );
+
+  test.each(["patreon_oauth_login", "github_oauth_login"])(
+    "%s sends nothing when Firefox does not expose built-in data consent",
+    async (message) => {
+      chrome.permissions.getAll.mockResolvedValue({ permissions: ["identity"], origins: [] });
       const response = jest.fn();
       messageListener({ message }, {}, response);
       await flushPromises();

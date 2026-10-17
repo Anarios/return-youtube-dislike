@@ -103,7 +103,7 @@ describe("generated userscript artifact", () => {
       config.output = { ...config.output, path: temporaryDirectory };
       await compile(config);
       const rebuilt = fs.readFileSync(path.join(temporaryDirectory, config.output.filename), "utf8");
-      expect(rebuilt).toBe(artifact);
+      expect(rebuilt.replace(/\r\n/g, "\n")).toBe(artifact.replace(/\r\n/g, "\n"));
     } finally {
       expectFileUnchanged(receiptPath, receiptBefore);
       fs.rmSync(temporaryDirectory, { recursive: true, force: true });
