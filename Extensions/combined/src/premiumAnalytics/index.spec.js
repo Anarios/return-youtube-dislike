@@ -7,6 +7,11 @@ jest.mock("../config", () => ({
   getApiEndpoint: jest.fn((path) => `https://api.example${path}`),
 }));
 
+jest.mock("../data-collection-permissions", () => ({
+  hasAuthenticationDataPermission: jest.fn(),
+  usesFirefoxDataCollectionConsent: jest.fn(),
+}));
+
 jest.mock("./panel", () => ({
   configurePanelCallbacks: jest.fn(),
   ensurePanel: jest.fn(() => ({})),
@@ -76,6 +81,12 @@ const listsMocks = jest.requireMock("./lists");
 const utilsMocks = jest.requireMock("./utils");
 const loggingMocks = jest.requireMock("./logging");
 const configMocks = jest.requireMock("../config");
+const { hasAuthenticationDataPermission: mockHasAuthenticationDataPermission } = jest.requireMock(
+  "../data-collection-permissions",
+);
+const { usesFirefoxDataCollectionConsent: mockUsesFirefoxDataCollectionConsent } = jest.requireMock(
+  "../data-collection-permissions",
+);
 
 const {
   configurePanelCallbacks: mockConfigurePanelCallbacks,
@@ -109,10 +120,8 @@ const { debounce: mockDebounce, safeJson: mockSafeJson, toEpoch: mockToEpoch } =
 
 const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
-const {
-  setTeaserSuppressed: mockSetTeaserSuppressed,
-  TEASER_SUPPRESSION_REASON_PREMIUM,
-} = jest.requireMock("./teaser");
+const { setTeaserSuppressed: mockSetTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } =
+  jest.requireMock("./teaser");
 const { showTierNotice: mockShowTierNotice, hideTierNotice: mockHideTierNotice } = jest.requireMock("./tierNotice");
 
 jest.mock("../utils", () => {
@@ -124,12 +133,7 @@ jest.mock("../utils", () => {
 });
 
 import { analyticsState, resetSessionState, resetStateForVideo } from "./state";
-import {
-  initPremiumAnalytics,
-  requestAnalytics,
-  teardownPremiumAnalytics,
-  updatePremiumSession,
-} from "./index";
+import { initPremiumAnalytics, requestAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./index";
 const premiumAnalyticsModule = require("./index");
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
@@ -156,6 +160,8 @@ function getMessage(key, substitutions) {
 describe("premiumAnalytics", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockHasAuthenticationDataPermission.mockResolvedValue(true);
+    mockUsesFirefoxDataCollectionConsent.mockReturnValue(false);
     resetStateForVideo();
     resetSessionState();
     analyticsState.sessionToken = "token";
@@ -236,6 +242,61 @@ describe("premiumAnalytics", () => {
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
     expect(mockToEpoch).toHaveBeenCalledWith("2025-01-01T00:00:00Z");
     expect(mockToEpoch).toHaveBeenCalledWith("2025-01-07T00:00:00Z");
+  });
+
+  it("does not use a cached analytics token after authentication consent is removed", async () => {
+    mockUsesFirefoxDataCollectionConsent.mockReturnValueOnce(true);
+    mockHasAuthenticationDataPermission.mockResolvedValueOnce(false);
+
+    await requestAnalytics();
+
+    expect(fetch).not.toHaveBeenCalled();
+    expect(analyticsState.sessionToken).toBeNull();
+    expect(analyticsState.sessionActive).toBe(false);
+  });
+
+  it.each([[], undefined])("does not send a bearer token without an explicit Firefox grant: %j", async (granted) => {
+    const actualConsent = jest.requireActual("../data-collection-permissions");
+    chrome.runtime = { getManifest: () => require("../../manifest-firefox.json") };
+    chrome.permissions = {
+      contains: jest.fn().mockResolvedValue(true),
+      getAll: jest.fn().mockResolvedValue({ permissions: ["identity"], data_collection: granted }),
+    };
+    mockUsesFirefoxDataCollectionConsent.mockImplementationOnce(actualConsent.usesFirefoxDataCollectionConsent);
+    mockHasAuthenticationDataPermission.mockImplementationOnce(actualConsent.hasAuthenticationDataPermission);
+
+    await requestAnalytics();
+
+    expect(fetch).not.toHaveBeenCalled();
+    expect(analyticsState.sessionToken).toBeNull();
+    expect(analyticsState.sessionActive).toBe(false);
+  });
+
+  it("ignores an analytics response from a session that was signed out", async () => {
+    let completeRequest;
+    const response = await fetch();
+    fetch.mockClear();
+    fetch.mockReturnValueOnce(new Promise((resolve) => (completeRequest = resolve)));
+    requestAnalytics();
+    updatePremiumSession({ token: null, active: false });
+    completeRequest(response);
+    await flushPromises();
+    expect(mockRenderActivityChart).not.toHaveBeenCalled();
+    expect(mockRenderSummary).not.toHaveBeenCalled();
+  });
+
+  it("does not render a previous account response after a new account requests the same range", async () => {
+    let completeOldRequest;
+    const response = await fetch();
+    fetch.mockClear();
+    fetch.mockReturnValueOnce(new Promise((resolve) => (completeOldRequest = resolve)));
+    requestAnalytics();
+    updatePremiumSession({ token: "new-account-token", active: true, membershipTier: "premium" });
+    await flushPromises();
+    const renderCount = mockRenderSummary.mock.calls.length;
+    completeOldRequest(response);
+    await flushPromises();
+    expect(mockRenderSummary).toHaveBeenCalledTimes(renderCount);
   });
 
   it("handles error responses gracefully", async () => {

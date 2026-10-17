@@ -6,8 +6,9 @@
 [![Issues](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=flat&label=Issues)](https://github.com/Anarios/return-youtube-dislike/issues)
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
-Read this in other languages: [English](README.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [български](READMEbg.md), [中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md)
-다른 언어로 전환: [English](README.md), [русский](READMEru.md), [Español](READMEes.md), [Nederlands](READMEnl.md), [Français](READMEfr.md), [日本語](READMEja.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Deutsch](READMEde.md), [Ελληνικά](READMEgr.md), [Svenska](READMEsv.md), [中文](READMEcn.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [Magyar](READMEhu.md), [Danish](READMEda.md)
+
+다른 언어로 읽기: [English](README.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [български](READMEbg.md), [繁體中文](READMEtw.md), [简体中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md)
+
 # Return YouTube Dislike
 
 <p align="center">
@@ -22,6 +23,7 @@ Read this in other languages: [English](README.md), [العربية](READMEar.md
 2021년 11월 10일, Google은 YouTube 싫어요 수를 [삭제한다고 발표](https://blog.youtube/news-and-events/update-to-youtube/)했습니다.
 
 또한, 2021년 12월 13일에 Youtube API 에서 `dislike` 필드가 [제거](https://support.google.com/youtube/thread/134791097/update-to-youtube-dislike-counts)되어 영상을 시청하기 전에 콘텐츠의 품질을 판단할 수 있는 기능이 삭제되었습니다.
+
 ## 무엇을 하나요?
 
 YouTube API에서 dislike 통계가 제거되면서 백엔드는 스크래핑된 싫어요 통계와 확장 프로그램 사용자 데이터에서 추정한 추정치를 조합하여 사용하도록 전환했습니다.
@@ -36,7 +38,7 @@ YouTube API에서 dislike 통계가 제거되면서 백엔드는 스크래핑된
 
 다음 제한 사항 하에 서드파티 앱에서 이 Open API를 사용하는 것을 허용합니다.
 
-- **출처**: 서드파티 앱은 [returnyoutubedislike.com](https://returnyoutubedislike.com/) 링크와 함께 명확히 출처를 표시해야 합니다. 
+- **출처**: 서드파티 앱은 [returnyoutubedislike.com](https://returnyoutubedislike.com/) 링크와 함께 명확히 출처를 표시해야 합니다.
 - **Rate Limiting**: 클라이언트당 분당 100개, 하루 당 10,000개의 요청 제한이 있습니다. 하루 할당량 초과 시, 서버에서 429 에러를 반환합니다.
 
 아래 Base URL 을 통해 API에 접근할 수 있습니다:  
@@ -63,7 +65,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 ```
 
 존재하지 않는 YouTube ID는 상태 코드 _404_ "Not Found" 를 반환합니다.<br>
-잘못 구성된 YouTube ID는 상태 코드  _400_ "Bad Request" 를 반환합니다.
+잘못 구성된 YouTube ID는 상태 코드 _400_ "Bad Request" 를 반환합니다.
 
 <!---
 ## API documentation
@@ -82,6 +84,5 @@ You can view all documentation on our website.
 [후원하기](https://returnyoutubedislike.com/donate)
 
 ## 스폰서
-
 
 [우리의 스폰서가 되어주세요](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)

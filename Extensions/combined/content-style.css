@@ -18,28 +18,16 @@
   --yt-spec-brand-background-secondary: #000 !important;
 } */
 
-/* Fallback colors keep the ratio bar visible when YouTube's design tokens are
-   unavailable. The newer YouTube UI dropped these --yt-spec-* variables, which
-   left the bar fully transparent (invisible) even though its proportions were
-   correct. Light-theme fallbacks are defined here; dark-theme below. When the
-   tokens do exist, var() uses them and these fallbacks are ignored. */
 #ryd-bar-container {
-  background: var(--yt-spec-icon-disabled, #909090);
+  background: #737373;
+  background: color-mix(in srgb, var(--yt-spec-text-primary, #f1f1f1) 55%, var(--yt-spec-base-background, #0f0f0f) 45%);
   border-radius: 2px;
 }
 
 #ryd-bar {
-  background: var(--yt-spec-text-primary, #0f0f0f);
+  background: var(--yt-spec-text-primary, #f1f1f1);
   border-radius: 2px;
   transition: all 0.15s ease-in-out;
-}
-
-html[dark] #ryd-bar-container {
-  background: var(--yt-spec-icon-disabled, #717171);
-}
-
-html[dark] #ryd-bar {
-  background: var(--yt-spec-text-primary, #f1f1f1);
 }
 
 .ryd-tooltip {
@@ -55,6 +43,7 @@ html[dark] #ryd-bar {
 .ryd-tooltip-new-design {
   position: absolute;
   bottom: -10px;
+  inset-inline-start: 0;
 }
 
 .ryd-tooltip-bar-container {
@@ -75,6 +64,67 @@ ytd-menu-renderer.ytd-watch-metadata {
   position: relative !important;
 }
 
+/*
+ * YouTube can retain a desktop minimum width for the stacked Watch metadata
+ * row after the viewport becomes phone-sized. Its current 390px layout has
+ * been observed with a roughly 427px #top-row, which places the reaction group
+ * past the left edge even after every optional action has moved to More.
+ * Constrain and center each action-allocation wrapper so the native menu fitter
+ * measures the usable viewport width instead of that oversized ancestor.
+ */
+@media (max-width: 480px) {
+  :is(ytd-watch-flexy, ytd-watch-grid)[video-id] #top-row #actions,
+  :is(ytd-watch-flexy, ytd-watch-grid)[video-id] #top-row #actions-inner,
+  :is(ytd-watch-flexy, ytd-watch-grid)[video-id] #top-row ytd-menu-renderer.ytd-watch-metadata {
+    box-sizing: border-box;
+    margin-inline: auto !important;
+    max-width: calc(100vw - 24px) !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+}
+
+.ryd-synthetic-shorts-dislike {
+  box-sizing: content-box;
+  display: block;
+  flex: 0 0 auto;
+  height: 70px;
+  margin: 0 !important;
+  padding: 0 0 8px;
+  width: 100%;
+}
+
+.ryd-synthetic-shorts-dislike-label {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.ryd-synthetic-shorts-dislike svg {
+  display: block;
+  fill: currentColor;
+  height: 24px;
+  pointer-events: none;
+  width: 24px;
+}
+
+.ryd-synthetic-shorts-dislike .ytSpecButtonShapeNextIcon,
+.ryd-synthetic-shorts-dislike .yt-spec-button-shape-next__icon {
+  flex: 0 0 24px;
+  height: 24px;
+  min-width: 24px;
+  width: 24px;
+}
+
+.ryd-synthetic-shorts-dislike button {
+  color: inherit;
+  cursor: pointer;
+}
+
+.ryd-synthetic-shorts-dislike button[aria-pressed="true"] {
+  color: var(--yt-spec-call-to-action, #3ea6ff);
+}
+
 .ryd-premium-analytics {
   background: var(--yt-spec-base-background, #202020);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -85,7 +135,9 @@ ytd-menu-renderer.ytd-watch-metadata {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
   font-family: Roboto, Arial, sans-serif;
   position: relative;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .ryd-premium-analytics::before {
@@ -124,7 +176,11 @@ ytd-menu-renderer.ytd-watch-metadata {
   color: var(--yt-spec-text-primary, #ffffff);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
   font-family: Roboto, Arial, sans-serif;
-  transition: box-shadow 0.2s ease, transform 0.2s ease, opacity 0.2s ease, padding 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    padding 0.2s ease;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -192,7 +248,9 @@ ytd-menu-renderer.ytd-watch-metadata {
   font-weight: 600;
   font-size: 13px;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .ryd-premium-tier-notice__cta:hover {
@@ -251,7 +309,9 @@ ytd-menu-renderer.ytd-watch-metadata {
   background: rgba(148, 163, 184, 0.16);
   color: var(--yt-spec-text-secondary, #94a3b8);
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   align-self: center;
   margin: 8px auto 0;
   order: 3;
@@ -292,7 +352,9 @@ ytd-menu-renderer.ytd-watch-metadata {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   position: absolute;
   top: 0;
   right: 0;
@@ -369,7 +431,10 @@ ytd-menu-renderer.ytd-watch-metadata {
   border-radius: 999px;
   padding: 8px 18px;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ryd-premium-teaser__cta:hover {
@@ -444,7 +509,10 @@ html[dark] .ryd-premium-teaser__toggle:focus-visible {
   padding: 6px 12px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ryd-analytics__ranges button.is-active,
@@ -530,7 +598,9 @@ html[dark] .ryd-analytics__window-hint {
   flex-direction: column;
   gap: 12px;
   position: relative;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .ryd-analytics__section-header {
@@ -555,7 +625,11 @@ html[dark] .ryd-analytics__window-hint {
   padding: 4px 12px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .ryd-analytics__section-expand.is-active,
@@ -632,7 +706,10 @@ html[dark] .ryd-analytics__section-expand:hover {
   padding: 6px 14px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ryd-analytics__map-reset:hover {

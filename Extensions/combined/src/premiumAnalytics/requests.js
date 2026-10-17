@@ -4,6 +4,7 @@ import { ensurePanel, updateRangeButtons, updateRangeAnchorButtons, setFooterMes
 import { debounce, safeJson } from "./utils";
 import { logFetchRequest } from "./logging";
 import { localize } from "../utils";
+import { hasAuthenticationDataPermission, usesFirefoxDataCollectionConsent } from "../data-collection-permissions";
 
 import { MS_PER_DAY } from "./constants";
 import { renderAnalytics } from "./render";
@@ -11,8 +12,9 @@ import { renderAnalytics } from "./render";
 const HOURLY_THRESHOLD_DAYS = 7;
 const HOURLY_THRESHOLD_MS = HOURLY_THRESHOLD_DAYS * MS_PER_DAY;
 const MS_PER_HOUR = 60 * 60 * 1000;
+let requestSequence = 0;
 
-function requestAnalytics({ selection } = {}) {
+function requestAnalytics(options = {}) {
   const state = analyticsState;
 
   if (!state.currentVideoId || !state.sessionToken || !state.sessionActive) {
@@ -20,6 +22,28 @@ function requestAnalytics({ selection } = {}) {
   }
 
   if (state.membershipTier !== "premium") {
+    return;
+  }
+
+  if (!usesFirefoxDataCollectionConsent()) return requestAnalyticsWithConsent(options);
+
+  const sessionToken = state.sessionToken;
+  return hasAuthenticationDataPermission().then((granted) => {
+    if (state.sessionToken !== sessionToken) return;
+    if (!granted) {
+      state.sessionToken = null;
+      state.sessionActive = false;
+      return;
+    }
+
+    return requestAnalyticsWithConsent(options);
+  });
+}
+
+function requestAnalyticsWithConsent({ selection } = {}) {
+  const state = analyticsState;
+
+  if (!state.currentVideoId || !state.sessionToken || !state.sessionActive || state.membershipTier !== "premium") {
     return;
   }
 
@@ -66,40 +90,47 @@ function requestAnalytics({ selection } = {}) {
   }
 
   state.pendingSelection = effectiveSelection || null;
+  requestKey = `${requestKey}:${++requestSequence}`;
   state.activeRequestKey = requestKey;
   state.latestBucketMs = bucket === "hour" ? MS_PER_HOUR : MS_PER_DAY;
 
   logFetchRequest(state.currentVideoId, params);
 
   const url = getApiEndpoint(`/api/patreon/analytics/video/${state.currentVideoId}?${params.toString()}`);
+  const sessionToken = state.sessionToken;
+  const isCurrentRequest = () =>
+    analyticsState.activeRequestKey === requestKey &&
+    analyticsState.sessionToken === sessionToken &&
+    analyticsState.sessionActive;
 
   fetch(url, {
     headers: {
-      Authorization: `Bearer ${state.sessionToken}`,
+      Authorization: `Bearer ${sessionToken}`,
       "Content-Type": "application/json",
     },
     credentials: "omit",
   })
     .then(async (response) => {
+      if (!isCurrentRequest()) return null;
       if (!response.ok) {
         const payload = await safeJson(response);
-        handleError(response.status, payload?.error);
+        if (isCurrentRequest()) handleError(response.status, payload?.error);
         return null;
       }
       return response.json();
     })
     .then((data) => {
-      if (!data || analyticsState.activeRequestKey !== requestKey) return;
+      if (!data || !isCurrentRequest()) return;
       renderAnalytics(data);
     })
     .catch((error) => {
       console.error("Premium analytics failed", error);
-      if (analyticsState.activeRequestKey === requestKey) {
+      if (isCurrentRequest()) {
         handleError(0, "network_error");
       }
     })
     .finally(() => {
-      if (analyticsState.activeRequestKey === requestKey) {
+      if (isCurrentRequest()) {
         setLoadingState(false);
       }
     });

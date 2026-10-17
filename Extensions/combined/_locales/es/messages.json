@@ -83,6 +83,9 @@
   "patreonLogin": {
     "message": "Iniciar sesión con Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "La información de tu membresía de Patreon se usa para verificar el acceso premium. No recibimos los datos de tu tarjeta ni de tu cuenta bancaria."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -547,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Pregunta a la comunidad"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Logotipo de Return YouTube Dislike"

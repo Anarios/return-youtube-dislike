@@ -35,6 +35,7 @@ const config = {
     numberDisplayFormat: "compactShort",
     numberDisplayReformatLikes: false,
     hidePremiumTeaser: false,
+    hideClutterButtons: false,
   },
 };
 

@@ -83,6 +83,9 @@
   "patreonLogin": {
     "message": "Patreon으로 로그인"
   },
+  "patreonPrivacyNote": {
+    "message": "Patreon 멤버십 정보는 프리미엄 이용 자격을 확인하는 데 사용됩니다. 카드 또는 은행 계좌 정보는 전달받지 않습니다."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -547,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "커뮤니티에 물어보세요"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 로고"
