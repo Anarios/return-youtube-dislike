@@ -115,6 +115,7 @@ export default {
       { name: "Bahasa Indonesia", locale: "id" },
       { name: "Tiếng Việt", locale: "vi"},
       { name: "Slovenščina", locale: "sl" },
+      { name: "فارسی", locale: "fa" },
     ],
     alert: {
       show: false,
