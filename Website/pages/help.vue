@@ -49,7 +49,7 @@
           target="_blank"
         >
           <v-icon size="1rem" style="margin-right: 0.5em">mdi-discord</v-icon>
-          Discord
+          {{ $vuetify.lang.t("$vuetify.links.discord") }}
         </v-btn>
         <ol type="a">
           <li>
@@ -69,7 +69,7 @@
               <v-icon size=".75rem" color="primary" style="margin-right: 0.5em"
                 >mdi-content-copy</v-icon
               >
-              <span style="color: #f44"> Detected: </span>
+              <span style="color: #f44"> {{ $vuetify.lang.t("$vuetify.help.detected") }} </span>
               &nbsp;
               {{ platform }}
             </v-btn>
@@ -85,7 +85,7 @@
               width="100%"
               style="border-radius: 1rem; border: 2px solid #333"
               src="ui/troubleshooting.webp"
-              alt="example-screenshot"
+              :alt="$vuetify.lang.t('$vuetify.help.altExampleScreenshot')"
             />
           </li>
 

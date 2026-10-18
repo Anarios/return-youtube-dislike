@@ -1,0 +1,21 @@
+Return YouTube Dislike återställer möjligheten att se ogillningar på YouTube.
+
+Om det inte fungerar: öppna fliken Tillägg (chrome://extensions/), inaktivera detta tillägg och aktivera det igen. Detta åtgärdar de flesta problem eftersom det finns en bugg i Chromium som i vissa fall gör att tillägget slutar fungera. Förhoppningsvis åtgärdar Chromium-teamet detta snart.
+
+Från och med den 13 december 2021 tog YouTube bort möjligheten att se ogillningar från sitt API.
+Detta tillägg syftar till att ge makten tillbaka till användarna genom att använda en kombination av arkiverade gilla- och ogilladata samt gilla- och ogillamarkeringar från tilläggsanvändare för att visa så korrekta betyg som möjligt.
+
+Har för närvarande data om gilla/ogilla för över 200 miljoner videor lagrade från före den 13 december 2021.
+
+Växer aktivt och hålls uppdaterat även för uppladdningar efter den 13 december 2021.
+
+Ju fler som använder tillägget, desto mer träffsäkert blir resultatet.
+
+Opopulära videor som laddats upp efter den 13 december 2021 kan visa mindre korrekta data än mer populära videor.
+
+Detta tillägg är för närvarande under aktiv utveckling; om du stöter på problem får du gärna rapportera dem på vår GitHub-sida eller i vår Discord-server.
+
+Fler funktioner kommer snart!
+
+https://github.com/Anarios/return-youtube-dislike
+

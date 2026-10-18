@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Generated output must remain byte-for-byte stable across platforms.
+"Extensions/UserScript/Return Youtube Dislike.user.js" text eol=lf

@@ -9,6 +9,7 @@ export default {
             'Bővítmény és API, ami visszahozza a YouTube dislike számlálót.',
         ukraine: 'Támogatjuk Ukrajnát',
         sponsors: 'Szponzorok',
+        becomeSponsor: 'Legyél a szponzorunk',
     },
     install: {
         name: 'Telepítés',
@@ -20,6 +21,18 @@ export default {
         title3: 'Third Party implementációk',
         subtitle3:
             'Nem vállalunk érte felelősséget, használd saját belátásod szerint',
+        firefox: 'Firefox',
+        chrome: 'Chrome',
+        edge: 'Edge',
+        opera: 'Opera',
+        brave: 'Brave',
+        userscript: 'Felhasználói szkript',
+        tampermonkey: 'Tampermonkey',
+        androidReVanced: 'Android - ReVanced',
+        androidMorphe: "Android - Morphe",
+        androidTubular: 'Android (Tubular – a NewPipe forkja)',
+        iosJailbroken: 'iOS (jailbreakelt)',
+        iosUYouPlus: 'iOS (uYou+)',
     },
     api: {
         name: 'API',
@@ -78,6 +91,8 @@ export default {
         bullet4c1: 'A bővítmények listájához írd be a címsorba: ',
         firefox: 'Firefox esetén',
         chrome: 'Chrome, Edge, Brave, Opera és Vivaldi esetén',
+        detected: 'Észlelt:',
+        altExampleScreenshot: 'példa képernyőkép',
     },
     faq: {
         name: 'GYIK',
@@ -109,6 +124,8 @@ export default {
         name: 'Támogatás',
         subtitle:
             'Támogathatod a szabad internetért folytatott erőfeszítéseinket egy adománnyal.',
+        patreon: 'Patreon',
+        crypto: 'Kripto',
     },
     links: {
         name: 'Linkek',
@@ -119,5 +136,11 @@ export default {
         coolProjects: 'Hasonló projektek',
         sponsorBlockDescription: 'Átugorja a videókba épített reklámokat.',
         filmotDescription: 'YouTube videók keresése felirat alapján.',
+        github: 'GitHub',
+        discord: 'Discord',
+    },
+    layout: {
+        notSupported: 'nem támogatott.',
+        considerUpgrade: 'Fontold meg a frissítést a legújabb verzióra.',
     },
 };

@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Userscript Shorts browser-test fixture</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        min-height: 768px;
+        margin: 0;
+      }
+
+      #shorts-root,
+      [data-short-video],
+      ytd-reel-video-renderer,
+      reel-action-bar-view-model,
+      ytd-like-button-renderer,
+      ytm-like-button-renderer,
+      like-button-view-model,
+      dislike-button-view-model {
+        display: block;
+      }
+
+      [data-short-video][hidden] {
+        display: none;
+      }
+
+      ytd-like-button-renderer,
+      ytm-like-button-renderer {
+        width: 240px;
+        min-height: 96px;
+      }
+
+      ytd-reel-video-renderer {
+        display: block;
+        width: 420px;
+        min-height: 640px;
+      }
+
+      reel-action-bar-view-model {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        width: 48px;
+        min-height: 320px;
+      }
+
+      .ytwReelActionBarViewModelHostDesktopActionButton,
+      reel-action-bar-view-model > button-view-model {
+        box-sizing: content-box;
+        display: block;
+        height: 70px;
+        margin: 0;
+        padding: 0 0 8px;
+        width: 48px;
+      }
+
+      .ytSpecButtonShapeWithLabelHost {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 70px;
+        margin: 0;
+        padding: 0;
+        width: 48px;
+      }
+
+      reel-action-bar-view-model button {
+        align-items: center;
+        border: 0;
+        box-sizing: border-box;
+        display: flex;
+        height: 48px;
+        justify-content: center;
+        margin: 0;
+        min-height: 0;
+        min-width: 0;
+        padding: 12px;
+        width: 48px;
+      }
+
+      like-button-view-model .ytSpecButtonShapeNextIcon {
+        display: flex;
+        height: 24px;
+        width: 24px;
+      }
+
+      like-button-view-model .ytSpecButtonShapeNextIcon svg {
+        display: block;
+        height: 24px;
+        width: 24px;
+      }
+
+      .ytSpecButtonShapeWithLabelLabel {
+        align-items: center;
+        box-sizing: border-box;
+        display: flex;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        height: 22px;
+        justify-content: center;
+        line-height: 18px;
+        width: 48px;
+      }
+
+      ytm-like-button-renderer button,
+      ytd-like-button-renderer button {
+        min-height: 36px;
+        min-width: 96px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fixture-account"></div>
+    <div id="shorts-root"></div>
+
+    <script>
+      (() => {
+        const root = document.getElementById("shorts-root");
+        const isMobile = location.hostname === "m.youtube.com";
+
+        if (!customElements.get("like-button-view-model")) {
+          customElements.define(
+            "like-button-view-model",
+            class extends HTMLElement {
+              get className() {
+                return undefined;
+              }
+            },
+          );
+        }
+
+        document.getElementById("fixture-account").innerHTML = __SIGNED_IN__
+          ? '<button id="avatar-btn" aria-label="Account menu">Account</button>'
+          : '<a id="sign-in" href="https://accounts.google.com/ServiceLogin">Sign in</a>';
+
+        function controlsMarkup(videoId) {
+          if (!isMobile) {
+            return `
+              <section data-short-video="${videoId}" hidden>
+                <ytd-reel-video-renderer video-id="${videoId}">
+                  <a href="/shorts/${videoId}" aria-label="Short ${videoId}"></a>
+                  <reel-action-bar-view-model data-ryd-role="buttons">
+                    <like-button-view-model
+                      class="ytLikeButtonViewModelHost ytwReelActionBarViewModelHostDesktopActionButton"
+                      data-ryd-role="like"
+                    >
+                      <label class="ytSpecButtonShapeWithLabelHost">
+                        <button class="ytSpecButtonShapeNextHost" type="button" aria-label="100 likes" aria-pressed="false">
+                          <span class="ytSpecButtonShapeNextIcon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21"></path></svg></span>
+                        </button>
+                        <div class="ytSpecButtonShapeWithLabelLabel">
+                          <span
+                            id="text"
+                            class="ytAttributedStringHost ytAttributedStringTextAlignmentCenter"
+                            role="text"
+                          >100</span>
+                        </div>
+                      </label>
+                    </like-button-view-model>
+                    <button-view-model data-fixture-control="comments">
+                      <button type="button" aria-label="View comments"><span role="text">12</span></button>
+                    </button-view-model>
+                    <button-view-model data-fixture-control="share">
+                      <button type="button" aria-label="Share"><span role="text">Share</span></button>
+                    </button-view-model>
+                    <button-view-model data-fixture-control="remix">
+                      <button type="button" aria-label="Remix"><span role="text">Remix</span></button>
+                    </button-view-model>
+                  </reel-action-bar-view-model>
+                </ytd-reel-video-renderer>
+              </section>
+            `;
+          }
+          return `
+            <section data-short-video="${videoId}" hidden>
+              <div id="like-button">
+                <__SHORTS_RENDERER_TAG__ data-ryd-role="buttons">
+                  <like-button-view-model class="style-text" data-ryd-role="like">
+                    <button type="button" aria-label="100 likes" aria-pressed="false">
+                      <span id="text" class="button-renderer-text" role="text">100</span>
+                    </button>
+                  </like-button-view-model>
+                  <dislike-button-view-model class="style-text" data-ryd-role="dislike">
+                    <button type="button" aria-label="Dislike this video" aria-pressed="false">
+                      <span id="text" class="button-renderer-text" role="text"></span>
+                    </button>
+                  </dislike-button-view-model>
+                </__SHORTS_RENDERER_TAG__>
+              </div>
+            </section>
+          `;
+        }
+
+        function applyNativeState(section, state) {
+          const like = section.querySelector('[data-ryd-role="like"]');
+          const dislike = section.querySelector('[data-ryd-role="dislike"]');
+          if (isMobile) {
+            like.classList.toggle("style-default-active", state === "liked");
+            like.classList.toggle("style-text", state !== "liked");
+            dislike?.classList.toggle("style-default-active", state === "disliked");
+            dislike?.classList.toggle("style-text", state !== "disliked");
+          } else {
+            like.classList.toggle("style-default-active", state === "liked");
+            dislike?.classList.toggle("style-default-active", state === "disliked");
+          }
+          like.querySelector("button").setAttribute("aria-pressed", String(state === "liked"));
+          dislike?.querySelector("button")?.setAttribute("aria-pressed", String(state === "disliked"));
+          section.dataset.nativeState = state;
+        }
+
+        function ensureVideo(videoId) {
+          let section = root.querySelector(`[data-short-video="${videoId}"]`);
+          if (!section) {
+            root.insertAdjacentHTML("beforeend", controlsMarkup(videoId));
+            section = root.querySelector(`[data-short-video="${videoId}"]`);
+            applyNativeState(section, "neutral");
+          }
+          return section;
+        }
+
+        function activate(videoId, { dispatchNavigation = true, state = "neutral" } = {}) {
+          const active = ensureVideo(videoId);
+          for (const section of root.querySelectorAll("[data-short-video]")) {
+            section.hidden = section !== active;
+          }
+          applyNativeState(active, state);
+          history.pushState({}, "", `/shorts/${videoId}`);
+          if (dispatchNavigation) {
+            document.dispatchEvent(new Event("yt-navigate-finish", { bubbles: true }));
+          }
+        }
+
+        function activeSection() {
+          return root.querySelector("[data-short-video]:not([hidden])");
+        }
+
+        function removeSyntheticDislike() {
+          activeSection()?.querySelector("[data-ryd-synthetic-shorts-dislike]")?.remove();
+        }
+
+        function replaceActionBar() {
+          const section = activeSection();
+          const actionBar = section?.querySelector("reel-action-bar-view-model");
+          if (!actionBar) return;
+          const replacement = actionBar.cloneNode(true);
+          replacement.querySelector("[data-ryd-synthetic-shorts-dislike]")?.remove();
+          actionBar.replaceWith(replacement);
+          applyNativeState(section, section.dataset.nativeState || "neutral");
+        }
+
+        function installNativeDislike() {
+          const section = activeSection();
+          const actionBar = section?.querySelector("reel-action-bar-view-model");
+          if (!actionBar || actionBar.querySelector("dislike-button-view-model")) return;
+
+          const nativeDislike = document.createElement("dislike-button-view-model");
+          nativeDislike.className = "style-text";
+          nativeDislike.setAttribute("data-ryd-role", "dislike");
+          const button = document.createElement("button");
+          button.type = "button";
+          button.setAttribute("aria-label", "Dislike this video");
+          button.setAttribute("aria-pressed", "false");
+          const text = document.createElement("span");
+          text.id = "text";
+          text.setAttribute("role", "text");
+          button.appendChild(text);
+          nativeDislike.appendChild(button);
+          actionBar.insertBefore(nativeDislike, actionBar.children[1] ?? null);
+        }
+
+        function removeNativeDislike() {
+          activeSection()?.querySelector("dislike-button-view-model")?.remove();
+        }
+
+        function replaceInnerButton(role) {
+          const control = activeSection()?.querySelector(`[data-ryd-role="${role}"]`);
+          const button = control?.querySelector("button");
+          if (!button) return;
+          const replacement = button.cloneNode(true);
+          if (control.matches("[data-ryd-synthetic-shorts-dislike]")) {
+            replacement.disabled = true;
+            replacement.setAttribute("aria-disabled", "true");
+          }
+          button.replaceWith(replacement);
+        }
+
+        function recycleActiveRenderer(videoId, { state = "neutral" } = {}) {
+          const section = activeSection();
+          const renderer = section?.querySelector("ytd-reel-video-renderer");
+          if (!section || !renderer) return;
+          section.setAttribute("data-short-video", videoId);
+          renderer.setAttribute("video-id", videoId);
+          const link = renderer.querySelector('a[href*="/shorts/"]');
+          link?.setAttribute("href", `/shorts/${videoId}`);
+          applyNativeState(section, state);
+          history.pushState({}, "", `/shorts/${videoId}`);
+          document.dispatchEvent(new Event("yt-navigate-finish", { bubbles: true }));
+        }
+
+        function setClassOnlyLiked() {
+          const section = activeSection();
+          if (!section) return;
+          applyNativeState(section, "liked");
+          section.querySelector('[data-ryd-role="like"]').classList.add("style-default-active");
+          section.querySelector('[data-ryd-role="like"] button').setAttribute("aria-pressed", "false");
+        }
+
+        root.addEventListener(
+          "click",
+          (event) => {
+            const actionButton = event.target.closest("button");
+            if (!actionButton) return;
+            const section = event.target.closest("[data-short-video]");
+            if (!section) return;
+            const current = section.dataset.nativeState || "neutral";
+            if (actionButton.closest('[data-ryd-role="like"]')) {
+              applyNativeState(section, current === "liked" ? "neutral" : "liked");
+            }
+            if (
+              actionButton.closest('[data-ryd-role="dislike"]') &&
+              !actionButton.closest("[data-ryd-synthetic-shorts-dislike]")
+            ) {
+              applyNativeState(section, current === "disliked" ? "neutral" : "disliked");
+            }
+          },
+          true,
+        );
+
+        window.__shortsFixture = {
+          activate,
+          activeSection,
+          ensureVideo,
+          installNativeDislike,
+          recycleActiveRenderer,
+          replaceInnerButton,
+          removeNativeDislike,
+          removeSyntheticDislike,
+          replaceActionBar,
+          setClassOnlyLiked,
+        };
+        activate("__VIDEO_ID__", { dispatchNavigation: false, state: "__INITIAL_STATE__" });
+        ensureVideo("__SECOND_VIDEO_ID__");
+      })();
+    </script>
+  </body>
+</html>
