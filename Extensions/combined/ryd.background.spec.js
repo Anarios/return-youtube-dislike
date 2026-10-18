@@ -111,6 +111,111 @@ describe("background account consent lifecycle", () => {
     removeConsent();
   }
 
+  test.each(["patreon_oauth_login", "github_oauth_login"])(
+    "%s and logout broadcast only to parsed YouTube hostnames",
+    async (message) => {
+      const youtubeUrls = [
+        "https://youtube.com/watch?v=test",
+        "https://www.youtube.com/watch?v=test",
+        "https://m.youtube.com/watch?v=test",
+        "https://music.youtube.com/",
+        "https://studio.youtube.com/",
+        "https://nested.subdomain.youtube.com/",
+        "https://WWW.YOUTUBE.COM/watch?v=test",
+        "http://www.youtube.com/watch?v=test",
+        "https://www.youtube.com:8443/watch?v=test",
+      ];
+      const otherUrls = [
+        undefined,
+        null,
+        "",
+        "not a URL",
+        "youtube.com/watch?v=test",
+        "//www.youtube.com/watch?v=test",
+        "https://[youtube.com/",
+        "https://youtube.com:invalid/",
+        "https://example.com/",
+        "https://notyoutube.com/",
+        "https://youtube.com.example.com/",
+        "https://www.youtube.com.example.com/",
+        "https://youtube.com@example.com/",
+        "https://example.com/youtube.com/watch",
+        "https://example.com/?ref=youtube.com",
+        "https://example.com/#youtube.com",
+        "https://returnyoutubedislikeapi.com/?ref=youtube.com",
+        "about:blank#youtube.com",
+        "data:text/plain,youtube.com",
+        "blob:https://www.youtube.com/test",
+      ];
+      const youtubeTabs = youtubeUrls.map((url, id) => ({ id, url }));
+      const otherTabs = otherUrls.map((url, index) => ({ id: youtubeTabs.length + index, url }));
+      chrome.tabs.query.mockImplementation((query, callback) => callback([...otherTabs, ...youtubeTabs]));
+      const user = { fullName: "Test" };
+      fetch.mockResolvedValueOnce({ ok: true, json: async () => startData() }).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ success: true, user, sessionToken: "test-token" }),
+      });
+      const response = jest.fn();
+      const statusMessages = () =>
+        chrome.tabs.sendMessage.mock.calls.filter(([, payload]) => payload.message === "patreon_status_changed");
+
+      messageListener({ message }, {}, response);
+      await flushPromises();
+
+      expect(response).toHaveBeenCalledWith({ success: true, user });
+      expect(statusMessages()).toEqual(
+        youtubeTabs.map(({ id }) => [
+          id,
+          { message: "patreon_status_changed", authenticated: true, user, sessionToken: "test-token" },
+          expect.any(Function),
+        ]),
+      );
+
+      chrome.tabs.sendMessage.mockClear();
+      messageListener({ message: "patreon_logout" }, {}, jest.fn());
+      await flushPromises();
+
+      expect(statusMessages()).toEqual(
+        youtubeTabs.map(({ id }) => [
+          id,
+          { message: "patreon_status_changed", authenticated: false, user: null, sessionToken: null },
+          expect.any(Function),
+        ]),
+      );
+    },
+  );
+
+  test.each(["logout", "revocation"])(
+    "discards an authenticated broadcast when its tab query completes after %s",
+    async (event) => {
+      let completeQuery;
+      chrome.tabs.query.mockImplementationOnce((query, callback) => {
+        completeQuery = callback;
+      });
+      fetch.mockResolvedValueOnce({ ok: true, json: async () => startData() }).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ success: true, user: { fullName: "Test" }, sessionToken: "test-token" }),
+      });
+      messageListener({ message: "patreon_oauth_login" }, {}, jest.fn());
+      await flushPromises();
+      expect(completeQuery).toEqual(expect.any(Function));
+
+      if (event === "revocation") revoke();
+      else messageListener({ message: "patreon_logout" }, {}, jest.fn());
+      await flushPromises();
+      const callsBeforeCompletion = chrome.tabs.sendMessage.mock.calls.slice();
+
+      completeQuery([{ id: 1, url: "https://www.youtube.com/watch?v=test" }]);
+
+      expect(chrome.tabs.sendMessage.mock.calls).toEqual(callsBeforeCompletion);
+      expect(chrome.tabs.sendMessage).toHaveBeenCalledWith(
+        1,
+        { message: "patreon_status_changed", authenticated: false, user: null, sessionToken: null },
+        expect.any(Function),
+      );
+    },
+  );
+
   test("does not register a voter when the background starts", async () => {
     await flushPromises();
     const voteClient = require("../common/vote-client").createVoteClient.mock.results[0].value;

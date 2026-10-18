@@ -70,7 +70,14 @@ function broadcastPatreonStatus(authenticated, user, sessionToken, generation = 
   chrome.tabs.query({}, (tabs) => {
     if (generation !== authenticationGeneration) return;
     tabs
-      .filter((tab) => tab.url && tab.url.includes("youtube.com"))
+      .filter((tab) => {
+        try {
+          const hostname = new URL(tab.url).hostname;
+          return hostname === "youtube.com" || hostname.endsWith(".youtube.com");
+        } catch {
+          return false;
+        }
+      })
       .forEach((tab) => {
         const maybePromise = chrome.tabs.sendMessage(
           tab.id,
