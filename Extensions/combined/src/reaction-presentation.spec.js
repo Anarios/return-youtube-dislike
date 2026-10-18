@@ -17,6 +17,7 @@ import {
   NEUTRAL_STATE,
 } from "./state";
 
+const { createRateBar: renderRateBar } = jest.requireActual("./bar");
 const innerTextDescriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "innerText");
 
 beforeAll(() => {
@@ -146,6 +147,89 @@ test("native count markup is untouched when reformatting is off", async () => {
   await flushMutations();
   expect(getLikeTextContainer().firstChild).toBe(node);
   expect(node.data).toBe("731");
+});
+
+test("an initially liked video exposes its native state as soon as the bar is created", () => {
+  const controls = mount();
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+
+  renderRateBar(storedData.likes, storedData.dislikes);
+
+  expect(document.querySelector("#ryd-bar-container").getAttribute("data-ryd-liked")).toBe("true");
+});
+
+test("native like, unlike, and dislike transitions update the CSS hook without changing bar styling", async () => {
+  const controls = mount();
+  renderRateBar(storedData.likes, storedData.dislikes);
+  const bar = document.querySelector("#ryd-bar-container");
+  const barStyle = bar.getAttribute("style");
+  const fillStyle = bar.querySelector("#ryd-bar").getAttribute("style");
+  expect(bar.getAttribute("data-ryd-liked")).toBe("false");
+  refreshReactionPresentation();
+  createRateBar.mockClear();
+
+  for (const [liked, disliked] of [
+    [true, false],
+    [false, false],
+    [true, false],
+    [false, true],
+  ]) {
+    controls.nativeLikeButton.setAttribute("aria-pressed", String(liked));
+    controls.nativeDislikeButton.setAttribute("aria-pressed", String(disliked));
+    await flushMutations();
+
+    expect(bar.getAttribute("data-ryd-liked")).toBe(String(liked));
+    expect(bar.getAttribute("style")).toBe(barStyle);
+    expect(bar.querySelector("#ryd-bar").getAttribute("style")).toBe(fillStyle);
+  }
+  expect(storedData.likes).toBe(730);
+  expect(createRateBar).not.toHaveBeenCalled();
+});
+
+test("a replaced native like button refreshes the bar's liked hook", async () => {
+  const controls = mount();
+  renderRateBar(storedData.likes, storedData.dislikes);
+  const replacement = controls.nativeLikeButton.cloneNode(true);
+  replacement.setAttribute("aria-pressed", "true");
+
+  controls.nativeLikeButton.replaceWith(replacement);
+  await flushMutations();
+
+  expect(document.querySelector("#ryd-bar-container").getAttribute("data-ryd-liked")).toBe("true");
+});
+
+test("native active-class transitions refresh the bar's liked hook", async () => {
+  const controls = mount();
+  renderRateBar(storedData.likes, storedData.dislikes);
+  const bar = document.querySelector("#ryd-bar-container");
+
+  controls.likeButton.classList.add("style-default-active");
+  await flushMutations();
+  expect(bar.getAttribute("data-ryd-liked")).toBe("true");
+
+  controls.likeButton.classList.remove("style-default-active");
+  await flushMutations();
+  expect(bar.getAttribute("data-ryd-liked")).toBe("false");
+});
+
+test("navigation on reused controls replaces the outgoing bar's liked state", async () => {
+  const controls = mount();
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  renderRateBar(storedData.likes, storedData.dislikes);
+  const outgoingBar = document.querySelector("#ryd-bar-container");
+  expect(outgoingBar.getAttribute("data-ryd-liked")).toBe("true");
+
+  history.replaceState({}, "", "/watch?v=zyxwvutsrqp");
+  Object.assign(storedData, { videoId: "zyxwvutsrqp", likes: 3591, dislikes: 1409 });
+  controls.nativeLikeButton.setAttribute("aria-pressed", "false");
+  renderRateBar(storedData.likes, storedData.dislikes);
+  const destinationBar = document.querySelector("#ryd-bar-container");
+  expect(destinationBar).not.toBe(outgoingBar);
+  expect(destinationBar.getAttribute("data-ryd-liked")).toBe("false");
+
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  await flushMutations();
+  expect(destinationBar.getAttribute("data-ryd-liked")).toBe("true");
 });
 
 test("later native labels refresh stored likes and the rate bar when reformatting is off", async () => {

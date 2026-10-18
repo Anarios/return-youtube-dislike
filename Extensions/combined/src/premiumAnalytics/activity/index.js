@@ -201,7 +201,7 @@ export function renderActivityChart(timeSeries) {
   activityChart.setOption({
     backgroundColor: "transparent",
     tooltip: { trigger: "axis" },
-    legend: { data: [likesLabel, dislikesLabel], textStyle: { color: getTextColor() } },
+    legend: { top: 0, data: [likesLabel, dislikesLabel], textStyle: { color: getTextColor() } },
     grid: { left: 40, right: 20, top: 30, bottom: 70 },
     xAxis: {
       type: "time",
