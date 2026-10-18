@@ -43,6 +43,7 @@ jest.mock("./buttons", () => {
       return dislikeTextContainer;
     },
     getLikeButton: () => likeButton,
+    getNativeButton: (control) => control?.native,
     getLikeTextContainer: () => ({ innerText: "35" }),
     isSyntheticShortsDislike: (button) => button?.synthetic === true,
     setSyntheticShortsDislikeEnabled: jest.fn(),

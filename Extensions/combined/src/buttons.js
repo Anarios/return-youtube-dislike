@@ -139,6 +139,24 @@ function selectCurrentWatchButtons(candidates) {
 
 function getNativeButton(buttonContainer) {
   if (!buttonContainer) return undefined;
+  if (buttonContainer.matches("button, tp-yt-paper-button#button")) return buttonContainer;
+  const nativeToggle = buttonContainer.querySelector(":scope > toggle-button-view-model");
+  if (nativeToggle) {
+    return querySelector(extConfig.selectors.buttons.nativeButton, nativeToggle);
+  }
+  if (isShorts()) {
+    const legacyToggle = querySelector(extConfig.selectors.buttons.shortsToggleButton, buttonContainer);
+    if (legacyToggle) return legacyToggle;
+  }
+  const pressedButton = buttonContainer.querySelector("button[aria-pressed]");
+  if (pressedButton) return pressedButton;
+  if (isMobile()) {
+    const mobileToggle = buttonContainer.querySelector("button[aria-label='true'], button[aria-label='false']");
+    if (mobileToggle) return mobileToggle;
+  }
+  // Modern reaction hosts can contain unrelated controls before their native
+  // toggle hydrates. Keep the selector fallback for older/mobile layouts only.
+  if (buttonContainer.matches("like-button-view-model, dislike-button-view-model")) return undefined;
   return querySelector(extConfig.selectors.buttons.nativeButton, buttonContainer);
 }
 
@@ -353,7 +371,7 @@ function ensureSyntheticShortsDislikeButton(
   }
 
   const likeButton = buttons.querySelector("like-button-view-model");
-  const nativeLikeButton = likeButton?.querySelector("button");
+  const nativeLikeButton = getNativeButton(likeButton);
   if (!likeButton || !nativeLikeButton) return undefined;
 
   const dislikeButton = document.createElement("div");
@@ -708,6 +726,7 @@ export {
   getButtons,
   getButtonControls,
   getLikeButton,
+  getNativeButton,
   getDislikeButton,
   getLikeTextContainer,
   getDislikeTextContainer,

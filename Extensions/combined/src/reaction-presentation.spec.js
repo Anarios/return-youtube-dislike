@@ -6,15 +6,26 @@
 jest.mock("./bar", () => ({ createRateBar: jest.fn() }));
 
 import { createRateBar } from "./bar";
-import { getButtonControls, getLikeTextContainer } from "./buttons";
+import {
+  ensureSyntheticShortsDislikeButton,
+  getButtonControls,
+  getLikeTextContainer,
+  setSyntheticShortsDislikeEnabled,
+  __RewireAPI__ as buttonsRewire,
+} from "./buttons";
 import { addLikeDislikeEventListener, storageChangeHandler } from "./events";
 import {
   extConfig,
+  isVideoDisliked,
+  isVideoLiked,
   refreshReactionPresentation,
   restoreCurrentState,
   setLikes,
   storedData,
   NEUTRAL_STATE,
+  LIKED_STATE,
+  DISLIKED_STATE,
+  __RewireAPI__ as stateRewire,
 } from "./state";
 
 const { createRateBar: renderRateBar } = jest.requireActual("./bar");
@@ -340,4 +351,100 @@ test("Shorts only color pressed thumbs and restore native colors after toggling 
   await flushMutations();
   expect(controls.nativeLikeButton.hasAttribute("data-ryd-thumb-color")).toBe(false);
   expect(controls.nativeDislikeButton.style.getPropertyValue("--ryd-thumb-color")).toBe("red");
+});
+
+function prependSpeedControl(host) {
+  const speed = document.createElement("button");
+  speed.textContent = "1x";
+  host.prepend(speed);
+  return speed;
+}
+
+test.each([false, true])("reaction state and thumb colors ignore prepended controls (Shorts: %s)", (shorts) => {
+  const controls = mount({ shorts });
+  const likeSpeed = prependSpeedControl(controls.likeButton);
+  const dislikeSpeed = prependSpeedControl(controls.dislikeButton);
+  extConfig.coloredThumbs = true;
+
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  expect(isVideoLiked()).toBe(true);
+  expect(isVideoDisliked()).toBe(false);
+  refreshReactionPresentation();
+  expect(controls.nativeLikeButton.style.getPropertyValue("--ryd-thumb-color")).toBe("lime");
+  expect(likeSpeed.hasAttribute("data-ryd-thumb-color")).toBe(false);
+  expect(dislikeSpeed.hasAttribute("data-ryd-thumb-color")).toBe(false);
+
+  controls.nativeLikeButton.setAttribute("aria-pressed", "false");
+  controls.nativeDislikeButton.setAttribute("aria-pressed", "true");
+  expect(isVideoLiked()).toBe(false);
+  expect(isVideoDisliked()).toBe(true);
+  refreshReactionPresentation();
+  expect(controls.nativeDislikeButton.style.getPropertyValue("--ryd-thumb-color")).toBe("red");
+});
+
+test.each([false, true])("delegated votes activate native reactions and ignore speed clicks (Shorts: %s)", (shorts) => {
+  const controls = mount({ shorts });
+  const speed = prependSpeedControl(controls.likeButton);
+  speed.click();
+  expect(storedData.previousState).toBe(NEUTRAL_STATE);
+  expect(storedData.likes).toBe(730);
+
+  controls.nativeLikeButton.click();
+  expect(storedData.previousState).toBe(LIKED_STATE);
+  expect(storedData.likes).toBe(731);
+  speed.click();
+  expect(storedData.previousState).toBe(LIKED_STATE);
+  expect(storedData.likes).toBe(731);
+
+  controls.nativeDislikeButton.click();
+  expect(storedData.previousState).toBe(DISLIKED_STATE);
+  expect(storedData.likes).toBe(730);
+  expect(storedData.dislikes).toBe(13);
+});
+
+test("mobile boolean reaction labels still determine the current native vote", () => {
+  const controls = mount();
+  controls.buttons.classList.add("slim-video-action-bar-actions");
+  controls.nativeLikeButton.removeAttribute("aria-pressed");
+  controls.nativeDislikeButton.removeAttribute("aria-pressed");
+  controls.nativeLikeButton.setAttribute("aria-label", "true");
+  controls.nativeDislikeButton.setAttribute("aria-label", "false");
+  buttonsRewire.__set__("isMobile", () => true);
+  stateRewire.__set__("isMobile", () => true);
+  try {
+    expect(getButtonControls(controls.buttons).ready).toBe(true);
+    expect(isVideoLiked()).toBe(true);
+    expect(isVideoDisliked()).toBe(false);
+    controls.nativeLikeButton.setAttribute("aria-label", "false");
+    controls.nativeDislikeButton.setAttribute("aria-label", "true");
+    expect(isVideoLiked()).toBe(false);
+    expect(isVideoDisliked()).toBe(true);
+  } finally {
+    buttonsRewire.__ResetDependency__("isMobile");
+    stateRewire.__ResetDependency__("isMobile");
+  }
+});
+
+test("synthetic Shorts Dislike clears the native Like without activating a prepended speed control", () => {
+  const controls = mount({ shorts: true });
+  const speed = prependSpeedControl(controls.likeButton);
+  const speedClicked = jest.fn();
+  speed.addEventListener("click", speedClicked);
+  const nativeLikeClicked = jest.fn();
+  controls.nativeLikeButton.addEventListener("click", nativeLikeClicked);
+  controls.dislikeButton.remove();
+  const dislike = ensureSyntheticShortsDislikeButton(controls.buttons, { isHydrated: true, isStable: true });
+  setSyntheticShortsDislikeEnabled(true, dislike);
+  addLikeDislikeEventListener(controls.likeButton, dislike);
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  storedData.previousState = LIKED_STATE;
+
+  dislike.querySelector("button").click();
+
+  expect(nativeLikeClicked).toHaveBeenCalledTimes(1);
+  expect(speedClicked).not.toHaveBeenCalled();
+  expect(speed.hasAttribute("aria-pressed")).toBe(false);
+  expect(controls.nativeLikeButton.getAttribute("aria-pressed")).toBe("false");
+  expect(dislike.querySelector("button").getAttribute("aria-pressed")).toBe("true");
+  expect(storedData).toMatchObject({ previousState: DISLIKED_STATE, likes: 729, dislikes: 13 });
 });

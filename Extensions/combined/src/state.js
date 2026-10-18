@@ -1,6 +1,7 @@
 import {
   getButtonControls,
   getLikeButton,
+  getNativeButton,
   getDislikeButton,
   getButtons,
   getLikeTextContainer,
@@ -220,7 +221,7 @@ function isLikesDisabled(controls = getButtonControls()) {
 }
 
 function isVideoLiked() {
-  const likeButton = querySelector(extConfig.selectors.buttons.nativeButton, getLikeButton());
+  const likeButton = getNativeButton(getLikeButton());
   if (isMobile()) {
     return likeButton.getAttribute("aria-label") === "true";
   }
@@ -231,7 +232,7 @@ function isVideoLiked() {
 }
 
 function isVideoDisliked() {
-  const dislikeButton = querySelector(extConfig.selectors.buttons.nativeButton, getDislikeButton());
+  const dislikeButton = getNativeButton(getDislikeButton());
   if (isMobile()) {
     return dislikeButton.getAttribute("aria-label") === "true";
   }
@@ -315,10 +316,7 @@ function refreshReactionPresentation() {
     [getDislikeButton(), false],
   ]) {
     if (!host) continue;
-    const button =
-      (isShorts() && querySelector(extConfig.selectors.buttons.shortsToggleButton, host)) ||
-      host?.querySelector("button") ||
-      host;
+    const button = getNativeButton(host) || host;
     if (!button) continue;
     const colored = extConfig.coloredThumbs === true && (!isShorts() || button.getAttribute("aria-pressed") === "true");
     if (colored) {

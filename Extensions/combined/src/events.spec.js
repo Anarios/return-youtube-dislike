@@ -18,6 +18,7 @@ jest.mock("./buttons", () => ({
   getButtons: jest.fn(),
   getDislikeButton: jest.fn(),
   getLikeButton: jest.fn(),
+  getNativeButton: (control) => control?.querySelector("button[aria-pressed]"),
   isSyntheticShortsDislike: () => false,
   setSyntheticShortsDislikePressed: jest.fn(),
 }));

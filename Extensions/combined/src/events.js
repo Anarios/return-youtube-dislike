@@ -4,6 +4,7 @@ import {
   getButtons,
   getDislikeButton,
   getLikeButton,
+  getNativeButton,
   isSyntheticShortsDislike,
   setSyntheticShortsDislikePressed,
 } from "./buttons";
@@ -55,7 +56,7 @@ function clearNativeLikeForSyntheticDislike(action, stateBeforeActivation, synth
   if (!syntheticShortsDislike || action !== DISLIKE_ACTION || stateBeforeActivation !== LIKED_STATE) return;
 
   const likeButton = getLikeButton();
-  const nativeLikeButton = likeButton?.querySelector("button");
+  const nativeLikeButton = getNativeButton(likeButton);
   if (!nativeLikeButton) return;
   suppressNextLikeActivation = true;
   try {
@@ -127,7 +128,13 @@ function delegatedReactionClicked(event) {
   const buttons = getButtons();
   const likeButton = getLikeButton(buttons);
   const dislikeButton = getDislikeButton(buttons);
-  const activation = resolveDelegatedVoteActivation({ buttons, dislikeButton, event, likeButton });
+  const activation = resolveDelegatedVoteActivation({
+    buttons,
+    dislikeButton,
+    event,
+    getActivationTarget: getNativeButton,
+    likeButton,
+  });
   if (activation?.action === DISLIKE_ACTION) {
     dislikeClicked();
   } else if (activation?.action === LIKE_ACTION) {

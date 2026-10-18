@@ -670,14 +670,18 @@ function capturePaintedShortsIcon(button) {
 
 function captureShortsNativeControlInventory(
   actionBar,
-  { syntheticSelector = "[data-ryd-synthetic-shorts-dislike]" } = {},
+  { getNativeLikeButton, syntheticSelector = "[data-ryd-synthetic-shorts-dislike]" } = {},
 ) {
   const nativeChildren = Array.from(actionBar?.children ?? []).filter((child) => !child.matches(syntheticSelector));
   const likeButton = actionBar?.querySelector("like-button-view-model") ?? null;
-  const nativeLikeButton = likeButton?.querySelector("button") ?? null;
+  const nativeLikeButton = getNativeLikeButton
+    ? getNativeLikeButton(likeButton)
+    : likeButton?.querySelector("button") ?? null;
   const nativeLikeIcon = capturePaintedShortsIcon(nativeLikeButton);
   const activationTargets = nativeChildren.map((child) =>
-    child.querySelector("button, a[href], a[role='button'][tabindex='0'], tp-yt-paper-button#button"),
+    child === likeButton && getNativeLikeButton
+      ? nativeLikeButton
+      : child.querySelector("button, a[href], a[role='button'][tabindex='0'], tp-yt-paper-button#button"),
   );
   if (
     !likeButton?.isConnected ||

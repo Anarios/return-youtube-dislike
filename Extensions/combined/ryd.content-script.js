@@ -3,6 +3,7 @@ import {
   getButtonControls,
   getButtons,
   getDislikeTextContainer,
+  getNativeButton,
   getShortsCandidateVideoId,
   getShortsControlSurfaceSignature,
   hasRenderedBox,
@@ -203,7 +204,7 @@ function getStableShortsControls(videoId) {
     pendingShortsMutationSurface = null;
     return buttons ? getButtonControls(buttons) : null;
   }
-  const inventory = captureShortsNativeControlInventory(buttons);
+  const inventory = captureShortsNativeControlInventory(buttons, { getNativeLikeButton: getNativeButton });
   if (
     !buttons ||
     !inventory ||
@@ -253,7 +254,9 @@ function getStableShortsControls(videoId) {
 
   const allowUnhydratedFallback = !isHydrated;
   const preMutationButtons = getButtons();
-  const preMutationInventory = captureShortsNativeControlInventory(preMutationButtons);
+  const preMutationInventory = captureShortsNativeControlInventory(preMutationButtons, {
+    getNativeLikeButton: getNativeButton,
+  });
   const preMutationIsHydrated = pageWorldActionBarHasHydratedData(preMutationButtons);
   const preMutationAllowsFallback = !preMutationIsHydrated && allowUnhydratedFallback;
   if (
@@ -281,7 +284,9 @@ function getStableShortsControls(videoId) {
   }
 
   const confirmedButtons = getButtons();
-  const confirmedInventory = captureShortsNativeControlInventory(confirmedButtons);
+  const confirmedInventory = captureShortsNativeControlInventory(confirmedButtons, {
+    getNativeLikeButton: getNativeButton,
+  });
   const confirmedIsHydrated = pageWorldActionBarHasHydratedData(confirmedButtons);
   if (
     confirmedButtons !== buttons ||
