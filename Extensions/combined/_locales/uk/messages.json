@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Неон"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Власна"
+  },
+  "colorThemeLight": {
+    "message": "Світла тема YouTube"
+  },
+  "colorThemeDark": {
+    "message": "Темна тема YouTube"
+  },
+  "colorThemeLike": {
+    "message": "Подобається"
+  },
+  "colorThemeDislike": {
+    "message": "Не подобається"
+  },
   "textColorizeRatioBar": {
     "message": "Обрати кольори стрічки співвідношення"
   },

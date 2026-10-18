@@ -11,6 +11,24 @@
   "colorTheme": {
     "message": "Color theme:"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Custom"
+  },
+  "colorThemeLight": {
+    "message": "Light YouTube theme"
+  },
+  "colorThemeDark": {
+    "message": "Dark YouTube theme"
+  },
+  "colorThemeLike": {
+    "message": "Like"
+  },
+  "colorThemeDislike": {
+    "message": "Dislike"
+  },
   "colorizeRatio": {
     "message": "Colorize ratio bar"
   },

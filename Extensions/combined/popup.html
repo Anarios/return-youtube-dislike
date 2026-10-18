@@ -220,17 +220,49 @@
           <option value="classic" id="color_theme_classic">__MSG_textColorTheme1__</option>
           <option value="accessible" id="color_theme_accessible">__MSG_textColorTheme2__</option>
           <option value="neon" id="color_theme_neon">__MSG_textColorTheme3__</option>
+          <option value="hibiscus" id="color_theme_hibiscus">__MSG_textColorThemeHibiscus__</option>
+          <option value="custom" id="color_theme_custom">__MSG_textColorThemeCustom__</option>
         </select>
-        <span
-          id="color_theme_example_like"
-          style="display: inline-block; vertical-align: text-top; width: 1em; height: 1em"
-          >&nbsp;</span
-        >
-        <span
-          id="color_theme_example_dislike"
-          style="display: inline-block; vertical-align: text-top; width: 1em; height: 1em"
-          >&nbsp;</span
-        >
+      </div>
+      <div class="color-theme-previews">
+        <fieldset class="color-theme-preview color-theme-preview-light">
+          <legend>__MSG_colorThemeLight__</legend>
+          <div class="color-theme-preview-votes">
+            <span
+              ><span id="color_theme_example_light_like" class="color-theme-swatch" aria-hidden="true"></span
+              >__MSG_colorThemeLike__</span
+            >
+            <span
+              ><span id="color_theme_example_light_dislike" class="color-theme-swatch" aria-hidden="true"></span
+              >__MSG_colorThemeDislike__</span
+            >
+          </div>
+          <div id="custom_colors_light" class="custom-color-inputs" hidden>
+            <label for="custom_color_light_like">__MSG_colorThemeLike__</label>
+            <input type="color" id="custom_color_light_like" value="#008000" disabled />
+            <label for="custom_color_light_dislike">__MSG_colorThemeDislike__</label>
+            <input type="color" id="custom_color_light_dislike" value="#b300b3" disabled />
+          </div>
+        </fieldset>
+        <fieldset class="color-theme-preview color-theme-preview-dark">
+          <legend>__MSG_colorThemeDark__</legend>
+          <div class="color-theme-preview-votes">
+            <span
+              ><span id="color_theme_example_dark_like" class="color-theme-swatch" aria-hidden="true"></span
+              >__MSG_colorThemeLike__</span
+            >
+            <span
+              ><span id="color_theme_example_dark_dislike" class="color-theme-swatch" aria-hidden="true"></span
+              >__MSG_colorThemeDislike__</span
+            >
+          </div>
+          <div id="custom_colors_dark" class="custom-color-inputs" hidden>
+            <label for="custom_color_dark_like">__MSG_colorThemeLike__</label>
+            <input type="color" id="custom_color_dark_like" value="#00d000" disabled />
+            <label for="custom_color_dark_dislike">__MSG_colorThemeDislike__</label>
+            <input type="color" id="custom_color_dark_dislike" value="#ff66ff" disabled />
+          </div>
+        </fieldset>
       </div>
       <br />
       <label class="switch" data-hover="__MSG_showTooltipPercentageHover__">

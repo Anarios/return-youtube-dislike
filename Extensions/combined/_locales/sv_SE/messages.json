@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Neon"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Anpassat"
+  },
+  "colorThemeLight": {
+    "message": "Ljust YouTube-tema"
+  },
+  "colorThemeDark": {
+    "message": "Mörkt YouTube-tema"
+  },
+  "colorThemeLike": {
+    "message": "Gilla"
+  },
+  "colorThemeDislike": {
+    "message": "Ogilla"
+  },
   "textColorizeRatioBar": {
     "message": "Färgsätt förhållandefältet"
   },

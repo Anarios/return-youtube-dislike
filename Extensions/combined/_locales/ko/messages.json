@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "네온"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "사용자 지정"
+  },
+  "colorThemeLight": {
+    "message": "YouTube 밝은 테마"
+  },
+  "colorThemeDark": {
+    "message": "YouTube 어두운 테마"
+  },
+  "colorThemeLike": {
+    "message": "좋아요"
+  },
+  "colorThemeDislike": {
+    "message": "싫어요"
+  },
   "textColorizeRatioBar": {
     "message": "비율 막대 컬러화"
   },

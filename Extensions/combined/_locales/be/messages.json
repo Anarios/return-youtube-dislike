@@ -188,6 +188,24 @@
   "textColorTheme3": {
     "message": "Неонавая"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Уласная"
+  },
+  "colorThemeLight": {
+    "message": "Светлая тэма YouTube"
+  },
+  "colorThemeDark": {
+    "message": "Цёмная тэма YouTube"
+  },
+  "colorThemeLike": {
+    "message": "Падабаецца"
+  },
+  "colorThemeDislike": {
+    "message": "Не падабаецца"
+  },
   "textColorizeRatioBar": {
     "message": "Размаляваць паласу суадносін"
   },

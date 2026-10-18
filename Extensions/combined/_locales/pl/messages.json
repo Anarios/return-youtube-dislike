@@ -188,6 +188,24 @@
   "textColorTheme3": {
     "message": "Neonowy"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Niestandardowy"
+  },
+  "colorThemeLight": {
+    "message": "Jasny motyw YouTube"
+  },
+  "colorThemeDark": {
+    "message": "Ciemny motyw YouTube"
+  },
+  "colorThemeLike": {
+    "message": "Lubię to"
+  },
+  "colorThemeDislike": {
+    "message": "Nie podoba mi się"
+  },
   "textColorizeRatioBar": {
     "message": "Koloruj pasek ocen"
   },

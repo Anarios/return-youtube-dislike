@@ -188,6 +188,24 @@
   "textColorTheme3": {
     "message": "Neonska"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Po meri"
+  },
+  "colorThemeLight": {
+    "message": "Svetla tema YouTube"
+  },
+  "colorThemeDark": {
+    "message": "Temna tema YouTube"
+  },
+  "colorThemeLike": {
+    "message": "Všeč mi je"
+  },
+  "colorThemeDislike": {
+    "message": "Ni mi všeč"
+  },
   "textColorizeRatioBar": {
     "message": "Obarvaj vrstico razmerja"
   },

@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "ネオン"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "カスタム"
+  },
+  "colorThemeLight": {
+    "message": "YouTube のライトテーマ"
+  },
+  "colorThemeDark": {
+    "message": "YouTube のダークテーマ"
+  },
+  "colorThemeLike": {
+    "message": "高評価"
+  },
+  "colorThemeDislike": {
+    "message": "低評価"
+  },
   "textColorizeRatioBar": {
     "message": "比率バーを色付け"
   },

@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Neon"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Kustom"
+  },
+  "colorThemeLight": {
+    "message": "Tema YouTube terang"
+  },
+  "colorThemeDark": {
+    "message": "Tema YouTube gelap"
+  },
+  "colorThemeLike": {
+    "message": "Suka"
+  },
+  "colorThemeDislike": {
+    "message": "Tidak suka"
+  },
   "textColorizeRatioBar": {
     "message": "Warnai bar rasio"
   },

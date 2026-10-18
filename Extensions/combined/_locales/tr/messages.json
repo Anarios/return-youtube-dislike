@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Neon"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Özel"
+  },
+  "colorThemeLight": {
+    "message": "Açık YouTube teması"
+  },
+  "colorThemeDark": {
+    "message": "Koyu YouTube teması"
+  },
+  "colorThemeLike": {
+    "message": "Beğen"
+  },
+  "colorThemeDislike": {
+    "message": "Beğenme"
+  },
   "textColorizeRatioBar": {
     "message": "Beğeni oranı çubuğunu renklendir"
   },

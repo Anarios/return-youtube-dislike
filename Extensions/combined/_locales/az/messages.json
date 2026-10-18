@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Neon"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Fərdi"
+  },
+  "colorThemeLight": {
+    "message": "Açıq YouTube mövzusu"
+  },
+  "colorThemeDark": {
+    "message": "Tünd YouTube mövzusu"
+  },
+  "colorThemeLike": {
+    "message": "Bəyən"
+  },
+  "colorThemeDislike": {
+    "message": "Bəyənmə"
+  },
   "textColorizeRatioBar": {
     "message": "Bəyənmə nisbəti çubuğunu rəngləndir"
   },

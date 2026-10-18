@@ -3,6 +3,7 @@ import { getGitHubLoginErrorMessage } from "./src/github-login-error";
 import { initDiscussionPopup } from "./src/discussion/popup";
 import { waitForCoreDataConsent } from "./src/consent-prompt";
 import { fetchWithCoreConsent, onCoreDataPermissionChanged } from "./src/core-data-consent";
+import { DEFAULT_CUSTOM_COLORS, getThemeColor, normalizeCustomColors } from "../common/color-themes";
 import {
   hasAuthenticationDataPermission,
   onAuthenticationDataPermissionRemoved,
@@ -18,6 +19,7 @@ const config = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic",
+  customColors: normalizeCustomColors(DEFAULT_CUSTOM_COLORS),
   numberDisplayFormat: "compactShort",
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
@@ -30,6 +32,9 @@ const config = {
     '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" opacity=".87"/><path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41L10.59 12 7.7 9.11c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"/></svg>',
   links: appConfig.links,
 };
+let colorThemeRevision = 0;
+let customColorsRevision = 0;
+let customColorsReady = false;
 
 /*   Change language   */
 function localizeHtmlPage() {
@@ -87,9 +92,32 @@ document.getElementById("colored_bar").addEventListener("click", (ev) => {
   chrome.storage.sync.set({ coloredBar: ev.target.checked });
 });
 
-document.getElementById("color_theme").addEventListener("click", (ev) => {
+document.getElementById("color_theme").addEventListener("change", (ev) => {
+  colorThemeRevision++;
+  handleColorThemeChangeEvent(ev.target.value);
   chrome.storage.sync.set({ colorTheme: ev.target.value });
 });
+
+for (const mode of ["light", "dark"]) {
+  for (const vote of ["like", "dislike"]) {
+    const input = document.getElementById(`custom_color_${mode}_${vote}`);
+    input.addEventListener("input", () => {
+      if (!customColorsReady) return;
+      customColorsRevision++;
+      const colors = normalizeCustomColors(config.customColors);
+      colors[mode][vote] = input.value;
+      handleCustomColorsChangeEvent(colors);
+    });
+    input.addEventListener("change", () => {
+      if (!customColorsReady) return;
+      const colors = normalizeCustomColors(config.customColors);
+      colors[mode][vote] = input.value;
+      customColorsRevision++;
+      handleCustomColorsChangeEvent(colors);
+      chrome.storage.sync.set({ customColors: colors });
+    });
+  }
+}
 
 document.getElementById("number_format").addEventListener("change", (ev) => {
   chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
@@ -479,6 +507,7 @@ advancedToggle.addEventListener("click", () => {
   config.advanced = !config.advanced;
 });
 
+chrome.storage.onChanged.addListener(storageChangeHandler);
 initConfig();
 
 function initConfig() {
@@ -526,8 +555,14 @@ function initializeColoredBar() {
 }
 
 function initializeColorTheme() {
-  chrome.storage.sync.get(["colorTheme"], (res) => {
-    handleColorThemeChangeEvent(res.colorTheme);
+  const initialThemeRevision = colorThemeRevision;
+  const initialColorsRevision = customColorsRevision;
+  updateColorThemePreviewContent();
+  chrome.storage.sync.get(["colorTheme", "customColors"], (res) => {
+    if (initialColorsRevision === customColorsRevision) handleCustomColorsChangeEvent(res.customColors);
+    customColorsReady = true;
+    if (initialThemeRevision === colorThemeRevision) handleColorThemeChangeEvent(res.colorTheme);
+    updateColorThemePreviewContent();
   });
 }
 
@@ -579,8 +614,6 @@ function initializeHideClutterButtons() {
   });
 }
 
-chrome.storage.onChanged.addListener(storageChangeHandler);
-
 function storageChangeHandler(changes, area) {
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
@@ -594,7 +627,12 @@ function storageChangeHandler(changes, area) {
   if (changes.coloredBar !== undefined) {
     handleColoredBarChangeEvent(changes.coloredBar.newValue);
   }
-  if (changes.colorTheme !== undefined) {
+  if (area === "sync" && changes.customColors !== undefined) {
+    customColorsRevision++;
+    handleCustomColorsChangeEvent(changes.customColors.newValue);
+  }
+  if (area === "sync" && changes.colorTheme !== undefined) {
+    colorThemeRevision++;
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
   if (changes.numberDisplayFormat !== undefined) {
@@ -635,17 +673,32 @@ function handleColoredBarChangeEvent(value) {
 }
 
 function handleColorThemeChangeEvent(value) {
-  if (!value) {
-    value = "classic";
-  }
-  config.colorTheme = value;
-  document.getElementById("color_theme").querySelector('option[value="' + value + '"]').selected = true;
-  updateColorThemePreviewContent(value);
+  const select = document.getElementById("color_theme");
+  config.colorTheme = Array.from(select.options).some((option) => option.value === value) ? value : "classic";
+  select.value = config.colorTheme;
+  updateColorThemePreviewContent();
 }
 
-function updateColorThemePreviewContent(themeName) {
-  document.getElementById("color_theme_example_like").style.backgroundColor = getColorFromTheme(themeName, true);
-  document.getElementById("color_theme_example_dislike").style.backgroundColor = getColorFromTheme(themeName, false);
+function handleCustomColorsChangeEvent(value) {
+  config.customColors = normalizeCustomColors(value);
+  updateColorThemePreviewContent();
+}
+
+function updateColorThemePreviewContent() {
+  for (const mode of ["light", "dark"]) {
+    document.getElementById(`custom_colors_${mode}`).hidden = config.colorTheme !== "custom";
+    for (const vote of ["like", "dislike"]) {
+      const input = document.getElementById(`custom_color_${mode}_${vote}`);
+      input.value = config.customColors[mode][vote];
+      input.disabled = !customColorsReady;
+      document.getElementById(`color_theme_example_${mode}_${vote}`).style.backgroundColor = getThemeColor(
+        config.colorTheme,
+        vote === "like",
+        mode === "dark",
+        config.customColors,
+      );
+    }
+  }
 }
 
 function handleNumberDisplayFormatChangeEvent(value) {
@@ -715,32 +768,4 @@ function getNumberFormatter(optionSelect) {
     compactDisplay: formatterCompactDisplay,
   });
   return formatter;
-}
-
-function getColorFromTheme(colorTheme, voteIsLike) {
-  let colorString;
-  switch (colorTheme) {
-    case "accessible":
-      if (voteIsLike === true) {
-        colorString = "dodgerblue";
-      } else {
-        colorString = "gold";
-      }
-      break;
-    case "neon":
-      if (voteIsLike === true) {
-        colorString = "aqua";
-      } else {
-        colorString = "magenta";
-      }
-      break;
-    case "classic":
-    default:
-      if (voteIsLike === true) {
-        colorString = "lime";
-      } else {
-        colorString = "red";
-      }
-  }
-  return colorString;
 }

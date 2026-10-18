@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Neon"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Vlastní"
+  },
+  "colorThemeLight": {
+    "message": "Světlý motiv YouTube"
+  },
+  "colorThemeDark": {
+    "message": "Tmavý motiv YouTube"
+  },
+  "colorThemeLike": {
+    "message": "To se mi líbí"
+  },
+  "colorThemeDislike": {
+    "message": "To se mi nelíbí"
+  },
   "textColorizeRatioBar": {
     "message": "Obarvit pruh poměru"
   },

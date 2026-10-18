@@ -22,7 +22,12 @@ import {
   storedData,
 } from "./src/state";
 import { getBrowser, getVideoId, isVideoLoaded } from "./src/utils";
-import { addLikeDislikeEventListener, createSmartimationObserver, storageChangeHandler } from "./src/events";
+import {
+  addLikeDislikeEventListener,
+  createSmartimationObserver,
+  storageChangeHandler,
+  observeColorTheme,
+} from "./src/events";
 import { hasUsableRateBar } from "./src/bar";
 import {
   createInitializationCycleRunner,
@@ -111,15 +116,15 @@ onCoreDataPermissionChanged((granted) => {
   }
 });
 const pageWorldHelpersReady = injectPageWorldHelpers();
+// Listen before asynchronous initialization so settings changed in another tab
+// are applied while the page is still loading.
+getBrowser().storage.onChanged.addListener(storageChangeHandler);
+isStorageListenerRegistered = true;
 await initExtConfig();
+observeColorTheme();
 await pageWorldHelpersReady;
 initPatreonFeatures();
 initDiscussion();
-
-// Settings that affect page-world helpers must continue to update even when
-// YouTube's reaction controls have not finished initializing.
-getBrowser().storage.onChanged.addListener(storageChangeHandler);
-isStorageListenerRegistered = true;
 
 function ensureShortsNavigationObserver() {
   if (!isShorts()) {

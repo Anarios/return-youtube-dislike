@@ -188,6 +188,24 @@
   "textColorTheme3": {
     "message": "Néon"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Personnalisé"
+  },
+  "colorThemeLight": {
+    "message": "Thème clair de YouTube"
+  },
+  "colorThemeDark": {
+    "message": "Thème sombre de YouTube"
+  },
+  "colorThemeLike": {
+    "message": "J’aime"
+  },
+  "colorThemeDislike": {
+    "message": "Je n’aime pas"
+  },
   "textColorizeRatioBar": {
     "message": "Coloriser la barre de ratio"
   },

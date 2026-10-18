@@ -29,6 +29,7 @@ import { LIKED_STATE, DISLIKED_STATE, NEUTRAL_STATE } from "../../common/vote-tr
 import { createBrowserSyntheticDislikeStore } from "./vote-client-adapter";
 import { requestVoteData } from "./vote-data-request";
 import { fetchWithCoreConsent } from "./core-data-consent";
+import { normalizeCustomColors } from "../../common/color-themes";
 
 const DEFAULT_SELECTORS = {
   dislikeTextContainer: [
@@ -144,6 +145,7 @@ let extConfig = {
   coloredThumbs: false,
   coloredBar: false,
   colorTheme: "classic",
+  customColors: normalizeCustomColors(),
   numberDisplayFormat: "compactShort",
   showTooltipPercentage: false,
   tooltipPercentageMode: "dash_like",
@@ -517,7 +519,7 @@ async function initExtConfig() {
   initializeDisableLogging();
   initializeColoredThumbs();
   initializeColoredBar();
-  initializeColorTheme();
+  await initializeColorTheme();
   initializeNumberDisplayFormat();
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
@@ -598,12 +600,23 @@ function initializeColoredBar() {
 }
 
 function initializeColorTheme() {
-  getBrowser().storage.sync.get(["colorTheme"], (res) => {
-    if (res.colorTheme === undefined) {
-      getBrowser().storage.sync.set({ colorTheme: false });
-    } else {
-      extConfig.colorTheme = res.colorTheme;
-    }
+  return new Promise((resolve) => {
+    const storage = getBrowser().storage;
+    const changedPreferences = {};
+    const captureChanges = (changes, area) => {
+      if (area !== "sync") return;
+      for (const key of ["colorTheme", "customColors"]) {
+        if (changes[key]) changedPreferences[key] = changes[key].newValue;
+      }
+    };
+    storage.onChanged.addListener(captureChanges);
+    storage.sync.get(["colorTheme", "customColors"], (res = {}) => {
+      storage.onChanged.removeListener(captureChanges);
+      const preferences = { ...res, ...changedPreferences };
+      extConfig.colorTheme = preferences.colorTheme || "classic";
+      extConfig.customColors = normalizeCustomColors(preferences.customColors);
+      resolve();
+    });
   });
 }
 

@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Sáng chói"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Tùy chỉnh"
+  },
+  "colorThemeLight": {
+    "message": "Giao diện YouTube sáng"
+  },
+  "colorThemeDark": {
+    "message": "Giao diện YouTube tối"
+  },
+  "colorThemeLike": {
+    "message": "Thích"
+  },
+  "colorThemeDislike": {
+    "message": "Không thích"
+  },
   "textColorizeRatioBar": {
     "message": "Tô màu thanh tỉ lệ đánh giá"
   },

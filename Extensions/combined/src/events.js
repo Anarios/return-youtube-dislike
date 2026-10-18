@@ -26,6 +26,7 @@ import {
   shouldSubmitVote,
 } from "../../common/vote-transition";
 import { resolveDelegatedVoteActivation } from "../../common/delegated-vote-activation";
+import { normalizeCustomColors, observeYouTubeTheme } from "../../common/color-themes";
 
 function sendVote(vote) {
   if (shouldSubmitVote({ disableVoteSubmission: extConfig.disableVoteSubmission })) {
@@ -188,6 +189,10 @@ function storageChangeHandler(changes, area) {
   if (changes.colorTheme !== undefined) {
     handleColorThemeChangeEvent(changes.colorTheme.newValue);
   }
+  if (changes.customColors !== undefined && (!area || area === "sync")) {
+    extConfig.customColors = normalizeCustomColors(changes.customColors.newValue);
+    refreshColorPresentation();
+  }
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
@@ -213,12 +218,25 @@ function handleColoredThumbsChangeEvent(value) {
 
 function handleColoredBarChangeEvent(value) {
   extConfig.coloredBar = value;
+  refreshColorPresentation();
 }
 
 function handleColorThemeChangeEvent(value) {
   if (!value) value = "classic";
   extConfig.colorTheme = value;
+  refreshColorPresentation();
+}
+
+function refreshColorPresentation() {
   refreshReactionPresentation();
+  const videoId = getVideoId(window.location.href);
+  if (videoId && storedData.videoId === videoId) createRateBar(storedData.likes, storedData.dislikes);
+}
+
+let colorThemeObserver = null;
+
+function observeColorTheme() {
+  if (!colorThemeObserver) colorThemeObserver = observeYouTubeTheme(refreshColorPresentation);
 }
 
 function handleNumberDisplayFormatChangeEvent(value) {
@@ -247,4 +265,5 @@ export {
   createSmartimationObserver,
   storageChangeHandler,
   updateDOMDislikes,
+  observeColorTheme,
 };

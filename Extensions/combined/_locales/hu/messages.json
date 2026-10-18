@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Neon"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Egyéni"
+  },
+  "colorThemeLight": {
+    "message": "Világos YouTube-téma"
+  },
+  "colorThemeDark": {
+    "message": "Sötét YouTube-téma"
+  },
+  "colorThemeLike": {
+    "message": "Tetszik"
+  },
+  "colorThemeDislike": {
+    "message": "Nem tetszik"
+  },
   "textColorizeRatioBar": {
     "message": "Aránysáv színezése"
   },

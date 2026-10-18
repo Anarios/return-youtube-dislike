@@ -370,11 +370,26 @@ function overrideBooleanOption(source, optionName, value) {
   return source.replace(optionPattern, `${optionName}: ${value}`);
 }
 
+function overrideColorOption(source, optionName, value) {
+  const optionPattern =
+    optionName === "colorTheme"
+      ? /\bcolorTheme:\s*"[^"]*"/g
+      : /\bcustomColors:\s*\{\s*light:\s*\{[^{}]*\},\s*dark:\s*\{[^{}]*\},?\s*\}/g;
+  const matches = source.match(optionPattern) || [];
+  if (matches.length !== 1) {
+    throw new Error(`Expected one ${optionName} option in generated userscript, found ${matches.length}`);
+  }
+  return source.replace(optionPattern, `${optionName}: ${JSON.stringify(value)}`);
+}
+
 async function injectGeneratedUserscript(
   page,
   {
     artifactPath = GENERATED_USERSCRIPT,
+    coloredBar,
     coloredThumbs,
+    colorTheme,
+    customColors,
     disableVoteSubmission = false,
     numberDisplayReformatLikes,
     rateBarEnabled,
@@ -387,7 +402,10 @@ async function injectGeneratedUserscript(
   if (
     !disableVoteSubmission &&
     rateBarEnabled === undefined &&
+    coloredBar === undefined &&
     coloredThumbs === undefined &&
+    colorTheme === undefined &&
+    customColors === undefined &&
     numberDisplayReformatLikes === undefined
   ) {
     await page.addScriptTag({ path: artifactPath });
@@ -403,6 +421,15 @@ async function injectGeneratedUserscript(
   }
   if (coloredThumbs !== undefined) {
     source = overrideBooleanOption(source, "coloredThumbs", coloredThumbs);
+  }
+  if (coloredBar !== undefined) {
+    source = overrideBooleanOption(source, "coloredBar", coloredBar);
+  }
+  if (colorTheme !== undefined) {
+    source = overrideColorOption(source, "colorTheme", colorTheme);
+  }
+  if (customColors !== undefined) {
+    source = overrideColorOption(source, "customColors", customColors);
   }
   if (numberDisplayReformatLikes !== undefined) {
     source = overrideBooleanOption(source, "numberDisplayReformatLikes", numberDisplayReformatLikes);

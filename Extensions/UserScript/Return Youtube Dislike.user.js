@@ -527,6 +527,63 @@ function resolveDelegatedVoteActivation({
 
 
 
+;// CONCATENATED MODULE: ./Extensions/common/color-themes.js
+const DEFAULT_CUSTOM_COLORS = Object.freeze({
+  light: Object.freeze({ like: "#008000", dislike: "#b300b3" }),
+  dark: Object.freeze({ like: "#00d000", dislike: "#ff66ff" }),
+});
+
+function normalizeCustomColors(value) {
+  const colors = {};
+  for (const theme of ["light", "dark"]) {
+    colors[theme] = {};
+    for (const vote of ["like", "dislike"]) {
+      const color = value?.[theme]?.[vote];
+      colors[theme][vote] =
+        typeof color === "string" && /^#[0-9a-f]{6}$/i.test(color)
+          ? color.toLowerCase()
+          : DEFAULT_CUSTOM_COLORS[theme][vote];
+    }
+  }
+  return colors;
+}
+
+function getThemeColor(themeName, voteIsLike, isDark = false, customColors) {
+  const vote = voteIsLike ? "like" : "dislike";
+  const theme = isDark ? "dark" : "light";
+  switch (themeName) {
+    case "custom":
+      return normalizeCustomColors(customColors)[theme][vote];
+    case "hibiscus":
+      return DEFAULT_CUSTOM_COLORS[theme][vote];
+    case "accessible":
+      return voteIsLike ? "dodgerblue" : "gold";
+    case "neon":
+      return voteIsLike ? "aqua" : "magenta";
+    case "classic":
+    default:
+      return voteIsLike ? "lime" : "red";
+  }
+}
+
+function isYouTubeDarkTheme(ownerDocument = document) {
+  return ownerDocument.documentElement.hasAttribute("dark");
+}
+
+function observeYouTubeTheme(onChange, ownerDocument = document) {
+  let isDark = isYouTubeDarkTheme(ownerDocument);
+  const observer = new MutationObserver(() => {
+    const nextIsDark = isYouTubeDarkTheme(ownerDocument);
+    if (nextIsDark === isDark) return;
+    isDark = nextIsDark;
+    onChange(isDark);
+  });
+  observer.observe(ownerDocument.documentElement, { attributes: true, attributeFilter: ["dark"] });
+  return observer;
+}
+
+
+
 ;// CONCATENATED MODULE: ./Extensions/common/shorts-control-readiness.js
 const SHORTS_HYDRATED_SURFACE_STABILITY_MS = 250;
 const SHORTS_UNHYDRATED_SURFACE_STABILITY_MS = 1500;
@@ -869,6 +926,7 @@ const userscript_version_namespaceObject = "3.2.0";
 
 
 
+
 if (false) {}
 
 const API_BASE_URL = "https://returnyoutubedislikeapi.com";
@@ -889,7 +947,11 @@ const extConfig = {
   disableLogging: true, // [true*, false] Disable Logging API Response in JavaScript Console.
   coloredThumbs: false, // [true, false*] Colorize thumbs (Use custom colors for thumb icons)
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
-  colorTheme: "classic", // [classic*, accessible, neon] Color theme (red/green, blue/yellow, pink/cyan)
+  colorTheme: "classic", // [classic*, accessible, neon, hibiscus, custom] Color theme (red/green, blue/yellow, pink/cyan, green/magenta, custom)
+  customColors: {
+    light: { like: "#008000", dislike: "#b300b3" },
+    dark: { like: "#00d000", dislike: "#ff66ff" },
+  }, // Custom like/dislike colors for YouTube's light and dark themes (#rrggbb)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)
   tooltipPercentageMode: "none", // [none*, dash_like, dash_dislike, both, only_like, only_dislike] Mode of showing percentage in like/dislike bar tooltip.
@@ -1762,20 +1824,7 @@ function getShortsObserver() {
       attributes: true,
       attributeFilter: ["aria-pressed"],
     },
-    (mutationList) => {
-      mutationList.forEach((mutation) => {
-        if (mutation.type === "attributes") {
-          cLog("Short thumb button status changed");
-          if (mutation.target.getAttribute("aria-pressed") === "true") {
-            mutation.target.style.color = mutation.target.closest("like-button-view-model")
-              ? getColorFromTheme(true)
-              : getColorFromTheme(false);
-          } else {
-            mutation.target.style.color = "unset";
-          }
-        }
-      });
-    },
+    refreshColoredThumbs,
   );
   return shortsObserver;
 }
@@ -1882,6 +1931,19 @@ function getLikeCountFromButton() {
       styleNode.innerText = styles;
       document.head.appendChild(styleNode);
     })(`
+    [data-ryd-thumb-color],
+    [data-ryd-thumb-color] :is(.ytSpecButtonShapeNextIcon, .yt-spec-button-shape-next__icon, yt-icon, .ytIconWrapperHost) {
+      color: var(--ryd-thumb-color) !important;
+    }
+
+    [data-ryd-thumb-color] yt-animated-icon svg [fill]:not([fill="none"]) {
+      fill: var(--ryd-thumb-color) !important;
+    }
+
+    [data-ryd-thumb-color] yt-animated-icon svg [stroke]:not([stroke="none"]) {
+      stroke: var(--ryd-thumb-color) !important;
+    }
+
     #return-youtube-dislike-bar-container {
       background: #737373;
       background: color-mix(
@@ -2319,6 +2381,7 @@ function setState() {
   if (countStateVideoId === videoId && (activeCountRequest?.videoId === videoId || countStateLoaded)) {
     updateDOMDislikes();
     refreshFormattedLikes();
+    refreshColoredThumbs();
     return;
   }
   if (countStateVideoId !== videoId) {
@@ -2356,26 +2419,7 @@ function setState() {
           }
         }
         createRateBar(likesvalue, dislikesvalue);
-        if (extConfig.coloredThumbs === true) {
-          const dislikeButton = getDislikeButton();
-          if (isShorts()) {
-            // for shorts, leave deactived buttons in default color
-            const shortLikeButton = getLikeButton()?.querySelector("button, tp-yt-paper-button#button");
-            const shortDislikeButton = dislikeButton?.querySelector("button, tp-yt-paper-button#button");
-            if (shortLikeButton?.getAttribute("aria-pressed") === "true") {
-              shortLikeButton.style.color = getColorFromTheme(true);
-            }
-            if (shortDislikeButton?.getAttribute("aria-pressed") === "true") {
-              shortDislikeButton.style.color = getColorFromTheme(false);
-            }
-            const observer = getShortsObserver();
-            if (shortLikeButton) observer.observe(shortLikeButton);
-            if (shortDislikeButton) observer.observe(shortDislikeButton);
-          } else {
-            getLikeButton().style.color = getColorFromTheme(true);
-            if (dislikeButton) dislikeButton.style.color = getColorFromTheme(false);
-          }
-        }
+        refreshColoredThumbs();
       }
     })
     .catch((error) => cLog("Fetching votes failed", error instanceof Error ? error.message : String(error)))
@@ -2721,31 +2765,60 @@ function getNumberFormatter(optionSelect) {
 }
 
 function getColorFromTheme(voteIsLike) {
-  let colorString;
-  switch (extConfig.colorTheme) {
-    case "accessible":
-      if (voteIsLike === true) {
-        colorString = "dodgerblue";
-      } else {
-        colorString = "gold";
-      }
-      break;
-    case "neon":
-      if (voteIsLike === true) {
-        colorString = "aqua";
-      } else {
-        colorString = "magenta";
-      }
-      break;
-    case "classic":
-    default:
-      if (voteIsLike === true) {
-        colorString = "lime";
-      } else {
-        colorString = "red";
-      }
+  return getThemeColor(extConfig.colorTheme, voteIsLike, isYouTubeDarkTheme(document), extConfig.customColors);
+}
+
+let thumbColorObserver = null;
+let thumbColorObserverHosts = [];
+
+function observeThumbColorTargets(hosts) {
+  const currentHosts = extConfig.coloredThumbs ? hosts.filter(Boolean) : [];
+  if (
+    currentHosts.length === thumbColorObserverHosts.length &&
+    currentHosts.every((host, index) => host === thumbColorObserverHosts[index])
+  ) {
+    return;
   }
-  return colorString;
+  thumbColorObserver?.disconnect();
+  thumbColorObserverHosts = currentHosts;
+  if (!currentHosts.length) return;
+  if (!thumbColorObserver) thumbColorObserver = new MutationObserver(refreshColoredThumbs);
+  currentHosts.forEach((host) => thumbColorObserver.observe(host, { childList: true, subtree: true }));
+}
+
+function refreshColoredThumbs() {
+  const shorts = isShorts();
+  const observer = shorts && extConfig.coloredThumbs ? getShortsObserver() : null;
+  const buttons = [getLikeButton(), getDislikeButton()];
+  observeThumbColorTargets(buttons);
+  buttons.forEach((host, index) => {
+    const button = host?.querySelector("button, tp-yt-paper-button#button") ?? host;
+    if (!button) return;
+    if (extConfig.coloredThumbs && (!shorts || button.getAttribute("aria-pressed") === "true")) {
+      const color = getColorFromTheme(index === 0);
+      if (button.style.getPropertyValue("--ryd-thumb-color") !== color) {
+        button.style.setProperty("--ryd-thumb-color", color);
+      }
+      if (!button.hasAttribute("data-ryd-thumb-color")) button.setAttribute("data-ryd-thumb-color", "");
+    } else if (button.hasAttribute("data-ryd-thumb-color")) {
+      button.removeAttribute("data-ryd-thumb-color");
+      button.style.removeProperty("--ryd-thumb-color");
+    }
+    observer?.observe(button);
+  });
+}
+
+function refreshColorPresentation() {
+  refreshColoredThumbs();
+  if (extConfig.coloredBar) {
+    const buttons = getButtons();
+    const rateBar = buttons?.querySelector("#return-youtube-dislike-bar-container");
+    const rateBarFill = rateBar?.querySelector("#return-youtube-dislike-bar");
+    if (rateBar && rateBarFill) {
+      rateBar.style.backgroundColor = getColorFromTheme(false);
+      rateBarFill.style.backgroundColor = getColorFromTheme(true);
+    }
+  }
 }
 
 let smartimationObserver = null;
@@ -3414,6 +3487,7 @@ function handleNavigateFinish(event) {
 
 (function () {
   "use strict";
+  observeYouTubeTheme(refreshColorPresentation);
   void voteClient.ensureRegistered().catch(reportVoteFailure);
   document.addEventListener("click", handleDelegatedVoteClick, true);
   window.addEventListener("yt-navigate-start", handleNavigateStart, true);

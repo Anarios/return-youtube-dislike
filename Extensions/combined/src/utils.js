@@ -1,4 +1,5 @@
 import { extConfig, isShorts } from "./state";
+import { getThemeColor, isYouTubeDarkTheme } from "../../common/color-themes";
 
 const DEFAULT_SHORTS_LOADED_SELECTORS = {
   containers: [".reel-video-in-sequence-new"],
@@ -260,31 +261,7 @@ function initializeLogging() {
 }
 
 function getColorFromTheme(voteIsLike) {
-  let colorString;
-  switch (extConfig.colorTheme) {
-    case "accessible":
-      if (voteIsLike === true) {
-        colorString = "dodgerblue";
-      } else {
-        colorString = "gold";
-      }
-      break;
-    case "neon":
-      if (voteIsLike === true) {
-        colorString = "aqua";
-      } else {
-        colorString = "magenta";
-      }
-      break;
-    case "classic":
-    default:
-      if (voteIsLike === true) {
-        colorString = "lime";
-      } else {
-        colorString = "red";
-      }
-  }
-  return colorString;
+  return getThemeColor(extConfig.colorTheme, voteIsLike, isYouTubeDarkTheme(), extConfig.customColors);
 }
 
 function getElementWidth(element) {

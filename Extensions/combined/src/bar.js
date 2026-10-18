@@ -183,6 +183,9 @@ function createRateBar(likes, dislikes) {
         if (extConfig.coloredBar) {
           currentParts.rateBar.style.backgroundColor = getColorFromTheme(false);
           currentParts.fill.style.backgroundColor = getColorFromTheme(true);
+        } else {
+          currentParts.rateBar.style.removeProperty("background-color");
+          currentParts.fill.style.removeProperty("background-color");
         }
       }
     }

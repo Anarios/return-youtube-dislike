@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Неоновая"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Пользовательская"
+  },
+  "colorThemeLight": {
+    "message": "Светлая тема YouTube"
+  },
+  "colorThemeDark": {
+    "message": "Тёмная тема YouTube"
+  },
+  "colorThemeLike": {
+    "message": "Нравится"
+  },
+  "colorThemeDislike": {
+    "message": "Не нравится"
+  },
   "textColorizeRatioBar": {
     "message": "Раскрасьте полосу неприязни"
   },

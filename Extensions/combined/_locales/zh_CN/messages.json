@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "霓虹"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "自定义"
+  },
+  "colorThemeLight": {
+    "message": "YouTube 浅色主题"
+  },
+  "colorThemeDark": {
+    "message": "YouTube 深色主题"
+  },
+  "colorThemeLike": {
+    "message": "点赞"
+  },
+  "colorThemeDislike": {
+    "message": "点踩"
+  },
   "textColorizeRatioBar": {
     "message": "为比例条着色"
   },

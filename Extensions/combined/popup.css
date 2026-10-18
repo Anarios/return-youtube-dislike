@@ -194,6 +194,86 @@ select {
   outline: none;
   padding: 3px 2px;
 }
+
+.color-theme-previews {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.color-theme-preview {
+  min-width: 0;
+  margin: 0;
+  padding: 0.5rem 0.75rem 0.75rem;
+  border: 1px solid var(--lightGrey);
+  border-radius: 0.5rem;
+}
+
+.color-theme-preview-light {
+  color-scheme: light;
+  background: #fff;
+  color: #0f0f0f;
+}
+
+.color-theme-preview-dark {
+  color-scheme: dark;
+  background: #0f0f0f;
+  color: #f1f1f1;
+}
+
+.color-theme-preview legend {
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  background: inherit;
+  color: inherit;
+}
+
+.color-theme-preview-votes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.color-theme-preview-votes > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.color-theme-swatch {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+}
+
+.custom-color-inputs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.custom-color-inputs[hidden] {
+  display: none;
+}
+
+.custom-color-inputs input[type="color"] {
+  width: 3rem;
+  height: 2rem;
+  padding: 2px;
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+  background: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.custom-color-inputs input[type="color"]:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
 /***   END MATERIAL 3   ***/
 
 /* Window Styling */

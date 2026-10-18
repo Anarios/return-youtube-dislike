@@ -167,6 +167,24 @@
   "textColorTheme3": {
     "message": "Neon"
   },
+  "textColorThemeHibiscus": {
+    "message": "Hibiscus"
+  },
+  "textColorThemeCustom": {
+    "message": "Προσαρμοσμένο"
+  },
+  "colorThemeLight": {
+    "message": "Φωτεινό θέμα YouTube"
+  },
+  "colorThemeDark": {
+    "message": "Σκοτεινό θέμα YouTube"
+  },
+  "colorThemeLike": {
+    "message": "Μου αρέσει"
+  },
+  "colorThemeDislike": {
+    "message": "Δεν μου αρέσει"
+  },
   "textColorizeRatioBar": {
     "message": "Χρωματισμός μπάρας αναλογιών."
   },
