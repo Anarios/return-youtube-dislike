@@ -351,8 +351,9 @@ function setDislikes(dislikesCount) {
     _dislikeText = localize("TextLikesDisabled");
   }
 
-  if (_dislikeText != null && _container?.innerText !== _dislikeText) {
-    _container.innerText = _dislikeText;
+  // Compare raw text so CSS text transforms cannot retrigger the mutation observer indefinitely.
+  if (_dislikeText != null && _container.textContent !== String(_dislikeText)) {
+    _container.textContent = _dislikeText;
   }
   return true;
 }

@@ -6,6 +6,12 @@
 jest.mock("./buttons", () => {
   const dislikeTextContainer = {
     innerText: "native dislike",
+    get textContent() {
+      return this.innerText;
+    },
+    set textContent(value) {
+      this.innerText = String(value);
+    },
     removeAttribute: jest.fn(),
   };
   const likeButton = {
