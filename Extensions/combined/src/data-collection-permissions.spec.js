@@ -56,6 +56,21 @@ describe("Firefox data-collection permissions", () => {
     expect(request).not.toHaveBeenCalled();
   });
 
+  it("private windows cannot query or request account consent", async () => {
+    global.browser = {
+      extension: { inIncognitoContext: true },
+      runtime: { getManifest: () => firefoxManifest, sendMessage: jest.fn() },
+      permissions: { request: jest.fn(), getAll: jest.fn() },
+    };
+    await expect(hasAuthenticationDataPermission()).resolves.toBe(false);
+    await expect(requestAuthenticationDataPermission()).resolves.toBe(false);
+    expect(browser.permissions.getAll).not.toHaveBeenCalled();
+    expect(browser.permissions.request).not.toHaveBeenCalled();
+    delete browser.permissions;
+    await expect(hasAuthenticationDataPermission()).resolves.toBe(false);
+    expect(browser.runtime.sendMessage).not.toHaveBeenCalled();
+  });
+
   it.each([{}, { data_collection: [] }, { data_collection: ["financialAndPaymentInfo"] }])(
     "does not accept a successful request without a recorded authentication grant: %j",
     async (grantedPermissions) => {

@@ -1,6 +1,7 @@
 import { HubConnectionBuilder, HttpTransportType, LogLevel } from "@microsoft/signalr";
 import { createVoteClient, solvePuzzle } from "../../common/vote-client";
 import { discussionConfig } from "./discussion-config";
+import { isFirefoxExtension, isNormalMessageSender } from "./private-browsing";
 
 const ANONYMOUS_SESSION = Object.freeze({
   authenticated: false,
@@ -205,6 +206,7 @@ export function createDiscussionBackground({
   api,
   voteClient,
   fetchImpl = (...args) => fetch(...args),
+  accountFetchImpl = fetchImpl,
   hasConsent = async () => true,
   settings = discussionConfig,
   connectionFactory = createConnection,
@@ -303,7 +305,7 @@ export function createDiscussionBackground({
     scope?.controllers.add(controller);
     const timeout = setTimeout(() => controller.abort(), 20000);
     try {
-      const response = await fetchImpl(`${origin}/api/discussion${path}`, {
+      const response = await (auth ? accountFetchImpl : fetchImpl)(`${origin}/api/discussion${path}`, {
         method,
         credentials: "omit",
         cache: "no-store",
@@ -359,22 +361,58 @@ export function createDiscussionBackground({
       type === "toast" ? { active: true, lastFocusedWindow: true } : {},
     );
     if (expected !== generation || stopped) return;
-    const targets = (tabs || []).filter((tab) => isYouTubePage(tab.url));
+    const firefox = isFirefoxExtension(api);
+    const targets = (tabs || []).filter((tab) => isYouTubePage(tab.url) && (!firefox || tab.incognito === false));
     await Promise.allSettled(
       (type === "toast" ? targets.slice(0, 1) : targets).map((tab) =>
         callBrowser(api, api.tabs, "sendMessage", tab.id, message),
       ),
     );
     if (type !== "toast" && expected === generation) {
-      await callBrowser(api, api.runtime, "sendMessage", message).catch(() => {});
+      if (firefox) {
+        try {
+          const extensionUrl = api.runtime.getURL("");
+          for (const view of api.extension?.getViews?.() || []) {
+            try {
+              if (
+                view.browser?.extension?.inIncognitoContext === false &&
+                view.location?.href?.startsWith(extensionUrl)
+              )
+                view.dispatchEvent(new view.CustomEvent("ryd-discussion-event", { detail: structuredClone(message) }));
+            } catch (_) {}
+          }
+        } catch (_) {}
+      } else {
+        await callBrowser(api, api.runtime, "sendMessage", message).catch(() => {});
+      }
     }
+  }
+
+  function badgeText() {
+    return inbox.unreadCount ? String(Math.min(inbox.unreadCount, 99)) + (inbox.unreadCount > 99 ? "+" : "") : "";
+  }
+
+  async function updateTabBadge(tab, expected = generation) {
+    if (expected !== generation || stopped || tab?.incognito !== false || !Number.isInteger(tab.id)) return;
+    const action = api.action || api.browserAction;
+    await callBrowser(api, action, "setBadgeText", { tabId: tab.id, text: badgeText() }).catch(() => {});
+    if (expected === generation && !stopped)
+      await callBrowser(api, action, "setBadgeBackgroundColor", { tabId: tab.id, color: "#cc0000" }).catch(() => {});
   }
 
   async function updateBadge(expected = generation) {
     if (expected !== generation || stopped) return;
     const action = api.action || api.browserAction;
+    if (isFirefoxExtension(api)) {
+      await callBrowser(api, action, "setBadgeText", { text: "" }).catch(() => {});
+      if (expected !== generation || stopped) return;
+      const tabs = await callBrowser(api, api.tabs, "query", {});
+      if (expected !== generation || stopped) return;
+      await Promise.allSettled((tabs || []).map((tab) => updateTabBadge(tab, expected)));
+      return;
+    }
     await callBrowser(api, action, "setBadgeText", {
-      text: inbox.unreadCount ? String(Math.min(inbox.unreadCount, 99)) + (inbox.unreadCount > 99 ? "+" : "") : "",
+      text: badgeText(),
     }).catch(() => {});
     if (expected === generation)
       await callBrowser(api, action, "setBadgeBackgroundColor", { color: "#cc0000" }).catch(() => {});
@@ -706,6 +744,7 @@ export function createDiscussionBackground({
 
   async function handleMessage(requestMessage, sender) {
     try {
+      if (!isNormalMessageSender(api, sender)) throw new DiscussionError("private_browsing");
       const { operation, payload, scope: scopeValue } = validateRequest(api, requestMessage, sender);
       const scope = scopeFor(scopeValue, sender);
       if (operation === "cancelScope") {
@@ -745,6 +784,11 @@ export function createDiscussionBackground({
   }
 
   function initialize() {
+    if (isFirefoxExtension(api)) {
+      api.tabs?.onCreated?.addListener((tab) => updateTabBadge(tab).catch(() => {}));
+      api.tabs?.onUpdated?.addListener((tabId, change, tab) => updateTabBadge(tab).catch(() => {}));
+      updateBadge().catch(() => {});
+    }
     api.tabs?.onRemoved?.addListener((tabId) => {
       for (const [key, scope] of navigationScopes)
         if (scope.tabId === tabId) {

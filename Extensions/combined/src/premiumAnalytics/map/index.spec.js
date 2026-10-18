@@ -101,6 +101,7 @@ import { analyticsState } from "../state";
 import {
   ensureMapChart,
   renderMap,
+  refreshMapTheme,
   disposeMapChart,
   clearMapChart,
   resizeMapChart,
@@ -109,6 +110,25 @@ import {
 } from "./index";
 
 const enMessages = require("../../../_locales/en/messages.json");
+
+test("theme refresh merges only colors without replacing map data, center or zoom", () => {
+  const chart = { setOption: jest.fn() };
+  analyticsState.mapChart = chart;
+  try {
+    refreshMapTheme();
+    expect(chart.setOption).toHaveBeenCalledTimes(1);
+    expect(chart.setOption.mock.calls[0]).toHaveLength(1);
+    const update = chart.setOption.mock.calls[0][0];
+    expect(Object.keys(update).sort()).toEqual(["geo", "visualMap"]);
+    expect(Object.keys(update.geo).sort()).toEqual(["emphasis", "itemStyle"]);
+    expect(update.geo).not.toHaveProperty("center");
+    expect(update.geo).not.toHaveProperty("zoom");
+    expect(update.geo).not.toHaveProperty("map");
+    expect(update).not.toHaveProperty("series");
+  } finally {
+    analyticsState.mapChart = null;
+  }
+});
 
 function getMessage(key, substitutions) {
   const entry = enMessages[key];

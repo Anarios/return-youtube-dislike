@@ -1,5 +1,11 @@
 /** @jest-environment jsdom */
 
+jest.mock("./private-browsing", () => ({
+  ...jest.requireActual("./private-browsing"),
+  isPrivateBrowsingContext: jest.fn(),
+}));
+
+const { isPrivateBrowsingContext } = require("./private-browsing");
 const { extConfig, refreshReactionPresentation } = require("./state");
 const {
   ensureSyntheticShortsDislikeButton,
@@ -94,6 +100,7 @@ function setNativeTextBoxes() {
 
 describe("desktop watch button ownership", () => {
   beforeEach(() => {
+    isPrivateBrowsingContext.mockReturnValue(false);
     history.replaceState({}, "", "/watch?v=BBBBBBBBBBB");
     extConfig.selectors.buttons.regular.desktopMenu = ["ytd-menu-renderer.ytd-watch-metadata > div"];
     extConfig.selectors.buttons.regular.desktopNoMenu = ["#top-level-buttons-computed"];
@@ -684,6 +691,43 @@ describe("desktop watch button ownership", () => {
     expect(dislike.querySelector("button").getAttribute("aria-disabled")).toBe("false");
     expect(dislike.querySelector("button").getAttribute("aria-pressed")).toBe("true");
     expect(dislike.classList.contains("style-default-active")).toBe(true);
+  });
+
+  test("keeps a private synthetic Shorts count disabled and unpressed through direct setters", () => {
+    isPrivateBrowsingContext.mockReturnValue(true);
+    history.replaceState({}, "", "/shorts/BBBBBBBBBBB");
+    document.body.innerHTML = `
+      <ytd-reel-video-renderer video-id="BBBBBBBBBBB" is-active>
+        <reel-action-bar-view-model>
+          <like-button-view-model><button aria-pressed="true"><span role="text">100</span></button></like-button-view-model>
+          <button-view-model><button type="button">Comments</button></button-view-model>
+        </reel-action-bar-view-model>
+      </ytd-reel-video-renderer>`;
+    const actionBar = document.querySelector("reel-action-bar-view-model");
+    setBox(actionBar);
+    const dislike = ensureSyntheticShortsDislikeButton(actionBar, {
+      currentVideoId: "BBBBBBBBBBB",
+      isHydrated: true,
+      isStable: true,
+    });
+    const nativeLike = actionBar.querySelector("like-button-view-model button");
+    const nativeClick = jest.fn();
+    nativeLike.addEventListener("click", nativeClick);
+    const syntheticClick = jest.fn();
+    dislike.querySelector("button").addEventListener("click", syntheticClick);
+
+    setSyntheticShortsDislikeEnabled(true, dislike);
+    setSyntheticShortsDislikePressed(true, dislike);
+    dislike.querySelector("button").click();
+
+    expect(dislike.querySelector("button").disabled).toBe(true);
+    expect(dislike.querySelector("button").getAttribute("aria-disabled")).toBe("true");
+    expect(dislike.querySelector("button").getAttribute("aria-pressed")).toBe("false");
+    expect(dislike.classList.contains("style-default-active")).toBe(false);
+    expect(getButtonControls(actionBar).ready).toBe(true);
+    expect(syntheticClick).not.toHaveBeenCalled();
+    expect(nativeClick).not.toHaveBeenCalled();
+    expect(nativeLike.getAttribute("aria-pressed")).toBe("true");
   });
 
   test("does not mutate an offscreen URL-matching Shorts placeholder before activation", () => {

@@ -903,13 +903,33 @@ ytd-menu-renderer.ytd-watch-metadata {
   color: var(--yt-spec-call-to-action, #3ea6ff);
 }
 
+.ryd-premium-analytics,
+.ryd-premium-tier-notice {
+  --ryd-analytics-bg: var(--yt-spec-base-background, #fff);
+  --ryd-analytics-fg: var(--yt-spec-text-primary, #0f0f0f);
+  --ryd-analytics-muted: var(--yt-spec-text-secondary, #606060);
+  --ryd-analytics-border: rgba(0, 0, 0, 0.08);
+  --ryd-analytics-surface: rgba(15, 23, 42, 0.04);
+  --ryd-analytics-row: rgba(15, 23, 42, 0.03);
+}
+
+html[dark]:not([dark="false"]):not([light]) .ryd-premium-analytics,
+html[dark]:not([dark="false"]):not([light]) .ryd-premium-tier-notice {
+  --ryd-analytics-bg: var(--yt-spec-base-background, #202020);
+  --ryd-analytics-fg: var(--yt-spec-text-primary, #fff);
+  --ryd-analytics-muted: var(--yt-spec-text-secondary, #bbb);
+  --ryd-analytics-border: rgba(255, 255, 255, 0.08);
+  --ryd-analytics-surface: rgba(255, 255, 255, 0.02);
+  --ryd-analytics-row: rgba(255, 255, 255, 0.03);
+}
+
 .ryd-premium-analytics {
-  background: var(--yt-spec-base-background, #202020);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--ryd-analytics-bg);
+  border: 1px solid var(--ryd-analytics-border);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 16px;
-  color: var(--yt-spec-text-primary, #ffffff);
+  color: var(--ryd-analytics-fg);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
   font-family: Roboto, Arial, sans-serif;
   position: relative;
@@ -996,12 +1016,12 @@ html[dark] .ryd-premium-teaser {
 }
 
 .ryd-premium-tier-notice {
-  background: var(--yt-spec-base-background, #202020);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--ryd-analytics-bg);
+  border: 1px solid var(--ryd-analytics-border);
   border-radius: 16px;
   padding: 20px;
   margin-bottom: 16px;
-  color: var(--yt-spec-text-primary, #ffffff);
+  color: var(--ryd-analytics-fg);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
   font-family: Roboto, Arial, sans-serif;
   display: flex;
@@ -1026,7 +1046,7 @@ html[dark] .ryd-premium-teaser {
 .ryd-premium-tier-notice__message {
   margin: 0;
   font-size: 13px;
-  color: var(--yt-spec-text-secondary, #bcccdc);
+  color: var(--ryd-analytics-muted);
   line-height: 1.5;
 }
 
@@ -1282,6 +1302,7 @@ html[dark] .ryd-premium-teaser__toggle:focus-visible {
 
 .ryd-analytics__controls {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   align-items: center;
   flex: 1 1 auto;
@@ -1329,30 +1350,30 @@ html[dark] .ryd-premium-teaser__toggle:focus-visible {
   color: #0f172a;
 }
 
-html[dark] .ryd-analytics__ranges,
-html[dark] .ryd-analytics__modes,
-html[dark] .ryd-analytics__window-toggle {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__ranges,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__modes,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__window-toggle {
   background: rgba(255, 255, 255, 0.05);
   border: none;
 }
 
-html[dark] .ryd-analytics__ranges button,
-html[dark] .ryd-analytics__modes button,
-html[dark] .ryd-analytics__window-toggle button {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__ranges button,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__modes button,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__window-toggle button {
   color: var(--yt-spec-text-secondary, #bbbbbb);
 }
 
-html[dark] .ryd-analytics__ranges button.is-active,
-html[dark] .ryd-analytics__modes button.is-active,
-html[dark] .ryd-analytics__window-toggle button.is-active {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__ranges button.is-active,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__modes button.is-active,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__window-toggle button.is-active {
   background: rgba(255, 255, 255, 0.15);
   color: var(--yt-spec-text-primary, #ffffff);
   box-shadow: none;
 }
 
-html[dark] .ryd-analytics__ranges button:hover,
-html[dark] .ryd-analytics__modes button:hover,
-html[dark] .ryd-analytics__window-toggle button:hover {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__ranges button:hover,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__modes button:hover,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__window-toggle button:hover {
   background: rgba(255, 255, 255, 0.1);
   color: var(--yt-spec-text-primary, #ffffff);
 }
@@ -1375,11 +1396,11 @@ html[dark] .ryd-analytics__window-toggle button:hover {
   color: #4b5563;
 }
 
-html[dark] .ryd-analytics__window-label {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__window-label {
   color: var(--yt-spec-text-primary, #ffffff);
 }
 
-html[dark] .ryd-analytics__window-hint {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__window-hint {
   color: var(--yt-spec-text-secondary, #a3a3a3);
 }
 
@@ -1390,7 +1411,7 @@ html[dark] .ryd-analytics__window-hint {
 }
 
 .ryd-analytics__section {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--ryd-analytics-surface);
   border-radius: 16px;
   padding: 12px;
   display: flex;
@@ -1439,14 +1460,14 @@ html[dark] .ryd-analytics__window-hint {
   box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.4);
 }
 
-html[dark] .ryd-analytics__section-expand {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__section-expand {
   border: none;
   background: rgba(255, 255, 255, 0.08);
   color: var(--yt-spec-text-secondary, #cbd5f5);
 }
 
-html[dark] .ryd-analytics__section-expand.is-active,
-html[dark] .ryd-analytics__section-expand:hover {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__section-expand.is-active,
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__section-expand:hover {
   background: rgba(99, 102, 241, 0.25);
   color: #f8fafc;
   box-shadow: none;
@@ -1471,7 +1492,7 @@ html[dark] .ryd-analytics__section-expand:hover {
 
 .ryd-analytics__bucket-label {
   font-size: 12px;
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: var(--ryd-analytics-muted);
 }
 
 .ryd-analytics__chart {
@@ -1494,7 +1515,7 @@ html[dark] .ryd-analytics__section-expand:hover {
 
 .ryd-analytics__map-label {
   font-size: 12px;
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: var(--ryd-analytics-muted);
 }
 
 .ryd-analytics__map-reset {
@@ -1517,12 +1538,12 @@ html[dark] .ryd-analytics__section-expand:hover {
   box-shadow: inset 0 0 0 1px rgba(59, 130, 246, 0.35);
 }
 
-html[dark] .ryd-analytics__map-reset {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__map-reset {
   background: rgba(255, 255, 255, 0.08);
   color: var(--yt-spec-text-secondary, #bbbbbb);
 }
 
-html[dark] .ryd-analytics__map-reset:hover {
+html[dark]:not([dark="false"]):not([light]) .ryd-analytics__map-reset:hover {
   background: rgba(255, 255, 255, 0.18);
   color: var(--yt-spec-text-primary, #ffffff);
 }
@@ -1544,7 +1565,7 @@ html[dark] .ryd-analytics__map-reset:hover {
   margin: 0 0 6px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: var(--ryd-analytics-muted);
 }
 
 .ryd-analytics__list-items {
@@ -1561,8 +1582,8 @@ html[dark] .ryd-analytics__map-reset:hover {
   justify-content: space-between;
   align-items: center;
   font-size: 12px;
-  color: var(--yt-spec-text-primary, #ffffff);
-  background: rgba(255, 255, 255, 0.03);
+  color: var(--ryd-analytics-fg);
+  background: var(--ryd-analytics-row);
   border-radius: 6px;
   padding: 6px 8px;
 }
@@ -1580,7 +1601,7 @@ html[dark] .ryd-analytics__map-reset:hover {
 }
 
 .ryd-analytics__placeholder {
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: var(--ryd-analytics-muted);
   font-style: italic;
   background: transparent !important;
   justify-content: flex-start !important;
@@ -1588,7 +1609,7 @@ html[dark] .ryd-analytics__map-reset:hover {
 
 .ryd-analytics__footer {
   font-size: 12px;
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: var(--ryd-analytics-muted);
 }
 
 .ryd-analytics__totals {
@@ -1617,21 +1638,21 @@ html[dark] .ryd-analytics__map-reset:hover {
   letter-spacing: 0.08em;
   font-weight: 600;
   font-size: 10px;
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: var(--ryd-analytics-muted);
 }
 
 .ryd-analytics__totals-value {
   font-weight: 600;
   font-variant-numeric: tabular-nums;
-  color: var(--yt-spec-text-primary, #f1f1f1);
+  color: var(--ryd-analytics-fg);
 }
 
 .ryd-analytics__period-label {
   font-size: 11px;
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: var(--ryd-analytics-muted);
 }
 
 .ryd-analytics__summary-meta {
-  color: var(--yt-spec-text-secondary, #bbbbbb);
+  color: var(--ryd-analytics-muted);
   line-height: 1.4;
 }

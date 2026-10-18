@@ -2,8 +2,10 @@ import { requestDiscussion, subscribeDiscussionEvents } from "./client";
 import { createDiscussionInbox } from "./inbox";
 import { discussionText as t } from "./localize";
 import { button, element } from "./dom";
+import { isPrivateBrowsingContext } from "../private-browsing";
 
 export function initDiscussionPopup() {
+  if (isPrivateBrowsingContext()) return;
   const root = document.getElementById("ryd-discussion-popup");
   if (!root) return;
   if (!document.documentElement.lang && chrome.i18n?.getUILanguage)

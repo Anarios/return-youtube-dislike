@@ -4,10 +4,12 @@ import { discussionLanguage, discussionText as t } from "./localize";
 import { createDiscussionPanel } from "./panel";
 import { showDiscussionToast } from "./inbox";
 import { button, element, discussionLinkTarget, isDiscussionCommentId } from "./dom";
+import { isPrivateBrowsingContext } from "../private-browsing";
 
 let installed = null;
 
 export function initDiscussion({ request = requestDiscussion } = {}) {
+  if (isPrivateBrowsingContext()) return null;
   if (installed) return installed;
   let panel = null;
   let panelScope = null;

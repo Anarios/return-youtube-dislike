@@ -2,7 +2,9 @@ import { config as appConfig, getApiUrl, getApiEndpoint } from "./src/config.js"
 import { getGitHubLoginErrorMessage } from "./src/github-login-error";
 import { initDiscussionPopup } from "./src/discussion/popup";
 import { waitForCoreDataConsent } from "./src/consent-prompt";
-import { fetchWithCoreConsent, onCoreDataPermissionChanged } from "./src/core-data-consent";
+import { onCoreDataPermissionChanged } from "./src/core-data-consent";
+import { fetchWithAccountConsent } from "./src/account-data-consent";
+import { isPrivateBrowsingContext } from "./src/private-browsing";
 import { DEFAULT_CUSTOM_COLORS, getThemeColor, normalizeCustomColors } from "../common/color-themes";
 import {
   hasAuthenticationDataPermission,
@@ -38,6 +40,8 @@ let customColorsReady = false;
 
 /*   Change language   */
 function localizeHtmlPage() {
+  const direction = chrome.i18n.getMessage("@@bidi_dir");
+  if (direction === "rtl" || direction === "ltr") document.documentElement.dir = direction;
   //Localize by replacing __MSG_***__ meta tags
   var objects = document.getElementsByTagName("html");
   for (var j = 0; j < objects.length; j++) {
@@ -55,20 +59,35 @@ function localizeHtmlPage() {
 }
 
 localizeHtmlPage();
-const coreConsentReady = waitForCoreDataConsent({ alwaysExplain: true });
-coreConsentReady.then(() => initDiscussionPopup());
-onCoreDataPermissionChanged((granted) => {
-  if (!granted) void waitForCoreDataConsent({ alwaysExplain: true });
-});
+const privateBrowsing = isPrivateBrowsingContext();
+const coreConsentReady = privateBrowsing ? null : waitForCoreDataConsent({ alwaysExplain: true });
+if (privateBrowsing) {
+  const home = document.createElement("center");
+  const message = document.createElement("p");
+  message.id = "ryd-private-counts-message";
+  message.textContent =
+    "Counts only in private windows. Voting, sign-in, premium analytics and discussions are unavailable here.";
+  home.append(
+    document.querySelector("body > center > img").cloneNode(true),
+    document.querySelector("body > center > h1").cloneNode(true),
+    message,
+  );
+  document.body.replaceChildren(home);
+} else {
+  coreConsentReady.then(() => initDiscussionPopup());
+  onCoreDataPermissionChanged((granted) => {
+    if (!granted) void waitForCoreDataConsent({ alwaysExplain: true });
+  });
 
-/*   Links   */
-createLink(config.links.website, "link_website");
-createLink(config.links.github, "link_github");
-createLink(config.links.discord, "link_discord");
-createLink(config.links.faq, "link_faq");
-createLink(config.links.donate, "link_donate");
-createLink(config.links.help, "link_help");
-createLink(config.links.changelog, "link_changelog");
+  /*   Links   */
+  createLink(config.links.website, "link_website");
+  createLink(config.links.github, "link_github");
+  createLink(config.links.discord, "link_discord");
+  createLink(config.links.faq, "link_faq");
+  createLink(config.links.donate, "link_donate");
+  createLink(config.links.help, "link_help");
+  createLink(config.links.changelog, "link_changelog");
+}
 
 function createLink(url, id) {
   document.getElementById(id).addEventListener("click", () => {
@@ -76,72 +95,74 @@ function createLink(url, id) {
   });
 }
 
-document.getElementById("disable_vote_submission").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
-});
+if (!privateBrowsing) {
+  document.getElementById("disable_vote_submission").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ disableVoteSubmission: ev.target.checked });
+  });
 
-document.getElementById("disable_logging").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ disableLogging: ev.target.checked });
-});
+  document.getElementById("disable_logging").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ disableLogging: ev.target.checked });
+  });
 
-document.getElementById("colored_thumbs").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ coloredThumbs: ev.target.checked });
-});
+  document.getElementById("colored_thumbs").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ coloredThumbs: ev.target.checked });
+  });
 
-document.getElementById("colored_bar").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ coloredBar: ev.target.checked });
-});
+  document.getElementById("colored_bar").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ coloredBar: ev.target.checked });
+  });
 
-document.getElementById("color_theme").addEventListener("change", (ev) => {
-  colorThemeRevision++;
-  handleColorThemeChangeEvent(ev.target.value);
-  chrome.storage.sync.set({ colorTheme: ev.target.value });
-});
+  document.getElementById("color_theme").addEventListener("change", (ev) => {
+    colorThemeRevision++;
+    handleColorThemeChangeEvent(ev.target.value);
+    chrome.storage.sync.set({ colorTheme: ev.target.value });
+  });
 
-for (const mode of ["light", "dark"]) {
-  for (const vote of ["like", "dislike"]) {
-    const input = document.getElementById(`custom_color_${mode}_${vote}`);
-    input.addEventListener("input", () => {
-      if (!customColorsReady) return;
-      customColorsRevision++;
-      const colors = normalizeCustomColors(config.customColors);
-      colors[mode][vote] = input.value;
-      handleCustomColorsChangeEvent(colors);
-    });
-    input.addEventListener("change", () => {
-      if (!customColorsReady) return;
-      const colors = normalizeCustomColors(config.customColors);
-      colors[mode][vote] = input.value;
-      customColorsRevision++;
-      handleCustomColorsChangeEvent(colors);
-      chrome.storage.sync.set({ customColors: colors });
-    });
+  for (const mode of ["light", "dark"]) {
+    for (const vote of ["like", "dislike"]) {
+      const input = document.getElementById(`custom_color_${mode}_${vote}`);
+      input.addEventListener("input", () => {
+        if (!customColorsReady) return;
+        customColorsRevision++;
+        const colors = normalizeCustomColors(config.customColors);
+        colors[mode][vote] = input.value;
+        handleCustomColorsChangeEvent(colors);
+      });
+      input.addEventListener("change", () => {
+        if (!customColorsReady) return;
+        const colors = normalizeCustomColors(config.customColors);
+        colors[mode][vote] = input.value;
+        customColorsRevision++;
+        handleCustomColorsChangeEvent(colors);
+        chrome.storage.sync.set({ customColors: colors });
+      });
+    }
   }
+
+  document.getElementById("number_format").addEventListener("change", (ev) => {
+    chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
+  });
+
+  document.getElementById("show_tooltip_percentage").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
+  });
+
+  document.getElementById("tooltip_percentage_mode").addEventListener("change", (ev) => {
+    chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
+  });
+
+  document.getElementById("number_reformat_likes").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
+  });
+
+  document.getElementById("hide_premium_teaser").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ hidePremiumTeaser: ev.target.checked });
+  });
+
+  document.getElementById("hide_clutter_buttons").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ hideClutterButtons: ev.target.checked });
+  });
 }
-
-document.getElementById("number_format").addEventListener("change", (ev) => {
-  chrome.storage.sync.set({ numberDisplayFormat: ev.target.value });
-});
-
-document.getElementById("show_tooltip_percentage").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ showTooltipPercentage: ev.target.checked });
-});
-
-document.getElementById("tooltip_percentage_mode").addEventListener("change", (ev) => {
-  chrome.storage.sync.set({ tooltipPercentageMode: ev.target.value });
-});
-
-document.getElementById("number_reformat_likes").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ numberDisplayReformatLikes: ev.target.checked });
-});
-
-document.getElementById("hide_premium_teaser").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ hidePremiumTeaser: ev.target.checked });
-});
-
-document.getElementById("hide_clutter_buttons").addEventListener("click", (ev) => {
-  chrome.storage.sync.set({ hideClutterButtons: ev.target.checked });
-});
 
 function initPatreonAuth() {
   const loggedOutView = document.getElementById("patreon-logged-out");
@@ -252,7 +273,7 @@ function initPatreonAuth() {
         return { status: "consent_required" };
       }
 
-      const response = await fetchWithCoreConsent(getApiEndpoint("/api/auth/verify"), {
+      const response = await fetchWithAccountConsent(getApiEndpoint("/api/auth/verify"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -479,6 +500,13 @@ function initPatreonAuth() {
     showLoggedOutView();
   });
 
+  onCoreDataPermissionChanged((granted) => {
+    if (granted) return;
+    authenticationGeneration++;
+    chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"]);
+    showLoggedOutView();
+  });
+
   logoutBtn.addEventListener("click", () => {
     authenticationGeneration++;
     showLoggedOutView();
@@ -487,28 +515,30 @@ function initPatreonAuth() {
   });
 }
 
-coreConsentReady.then(() => initPatreonAuth());
+if (!privateBrowsing) {
+  coreConsentReady.then(() => initPatreonAuth());
 
-/*   Advanced Toggle   */
-const advancedToggle = document.getElementById("advancedToggle");
-advancedToggle.addEventListener("click", () => {
-  const adv = document.getElementById("advancedSettings");
-  if (config.advanced) {
-    adv.style.transform = "scale(1.1)";
-    adv.style.pointerEvents = "none";
-    adv.style.opacity = "0";
-    advancedToggle.innerHTML = config.showAdvancedMessage;
-  } else {
-    adv.style.transform = "scale(1)";
-    adv.style.pointerEvents = "auto";
-    adv.style.opacity = "1";
-    advancedToggle.innerHTML = config.hideAdvancedMessage;
-  }
-  config.advanced = !config.advanced;
-});
+  /*   Advanced Toggle   */
+  const advancedToggle = document.getElementById("advancedToggle");
+  advancedToggle.addEventListener("click", () => {
+    const adv = document.getElementById("advancedSettings");
+    if (config.advanced) {
+      adv.style.transform = "scale(1.1)";
+      adv.style.pointerEvents = "none";
+      adv.style.opacity = "0";
+      advancedToggle.innerHTML = config.showAdvancedMessage;
+    } else {
+      adv.style.transform = "scale(1)";
+      adv.style.pointerEvents = "auto";
+      adv.style.opacity = "1";
+      advancedToggle.innerHTML = config.hideAdvancedMessage;
+    }
+    config.advanced = !config.advanced;
+  });
 
-chrome.storage.onChanged.addListener(storageChangeHandler);
-initConfig();
+  chrome.storage.onChanged.addListener(storageChangeHandler);
+  initConfig();
+}
 
 function initConfig() {
   initializeDisableVoteSubmission();

@@ -1,3 +1,4 @@
+import { logger } from "./logging";
 import { getButtons, getDislikeButton, getLikeButton } from "./buttons";
 import { extConfig, isMobile, isLikesDisabled, isNewDesign, isRoundedDesign, isShorts, isVideoLiked } from "./state";
 import { getColorFromTheme, getElementWidth, getVideoId, isInViewport, querySelector } from "./utils";
@@ -192,7 +193,7 @@ function createRateBar(likes, dislikes) {
       }
     }
   } else {
-    console.log("removing bar");
+    logger.log("removing bar");
     if (rateBar) {
       (rateBar.closest(".ryd-tooltip") ?? rateBar).remove();
     }

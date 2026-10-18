@@ -1,5 +1,6 @@
 import { consentApi, hasCoreDataPermission, onCoreDataPermissionChanged } from "./core-data-consent";
 import { usesFirefoxDataCollectionConsent } from "./data-collection-permissions";
+import { isPrivateBrowsingContext } from "./private-browsing";
 
 let pendingConsent = null;
 
@@ -10,9 +11,11 @@ function waitForCoreDataConsent({ alwaysExplain = false } = {}) {
     if (await hasCoreDataPermission()) return;
     const api = consentApi();
     let dismissed = false;
-    try {
-      dismissed = (await api.storage.local.get("rydConsentDismissed"))?.rydConsentDismissed === true;
-    } catch (_) {}
+    if (!isPrivateBrowsingContext()) {
+      try {
+        dismissed = (await api.storage.local.get("rydConsentDismissed"))?.rydConsentDismissed === true;
+      } catch (_) {}
+    }
     await new Promise((resolve) => {
       const host = document.createElement("div");
       host.id = "ryd-consent-prompt";

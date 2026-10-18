@@ -1,5 +1,6 @@
 import { initPremiumAnalytics, teardownPremiumAnalytics, updatePremiumSession } from "./premiumAnalytics";
 import { initPremiumTeaser, setTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } from "./premiumAnalytics/teaser";
+import { isPrivateBrowsingContext } from "./private-browsing";
 import {
   hasAuthenticationDataPermission,
   onAuthenticationDataPermissionRemoved,
@@ -13,6 +14,7 @@ let patreonState = {
 };
 
 function initPatreonFeatures() {
+  if (isPrivateBrowsingContext()) return;
   initPremiumTeaser();
   let sessionGeneration = 0;
   const initialGeneration = sessionGeneration;

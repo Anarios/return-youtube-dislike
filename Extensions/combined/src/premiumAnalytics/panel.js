@@ -418,7 +418,7 @@ function positionExpandedSection(section, button) {
   applyAnchorPosition(section, anchorRect, { maxWidthFallback: "min(960px, calc(100vw - 48px))" });
   section.style.maxHeight = "calc(100vh - 120px)";
   section.style.zIndex = "2147483647";
-  section.style.background = "var(--yt-spec-base-background, #202020)";
+  section.style.background = "var(--ryd-analytics-bg)";
   section.style.boxShadow = "0 30px 60px rgba(0, 0, 0, 0.45)";
   section.style.padding = "16px";
   section.style.overflowY = "auto";

@@ -20,6 +20,12 @@ jest.mock("./data-collection-permissions", () => ({
   usesFirefoxDataCollectionConsent: jest.fn(),
 }));
 
+jest.mock("./private-browsing", () => ({
+  ...jest.requireActual("./private-browsing"),
+  isPrivateBrowsingContext: jest.fn(),
+}));
+import { isPrivateBrowsingContext } from "./private-browsing";
+
 import { initPatreonFeatures, patreonState } from "./patreon";
 
 const analyticsMocks = jest.requireMock("./premiumAnalytics");
@@ -32,6 +38,7 @@ describe("Patreon authentication consent", () => {
   let permissionRemovedListener;
 
   beforeEach(() => {
+    isPrivateBrowsingContext.mockReturnValue(false);
     jest.clearAllMocks();
     document.body.innerHTML = '<div class="ryd-premium-feature"></div>';
     patreonState.authenticated = false;
@@ -63,6 +70,19 @@ describe("Patreon authentication consent", () => {
 
   afterEach(() => {
     delete global.chrome;
+  });
+
+  it("skips all private account reads, teasers and session listeners even when initialized directly", async () => {
+    isPrivateBrowsingContext.mockReturnValue(true);
+    consentMocks.hasAuthenticationDataPermission.mockResolvedValue(true);
+    initPatreonFeatures();
+    await flushPromises();
+    expect(chrome.storage.sync.get).not.toHaveBeenCalled();
+    expect(chrome.runtime.onMessage.addListener).not.toHaveBeenCalled();
+    expect(consentMocks.hasAuthenticationDataPermission).not.toHaveBeenCalled();
+    expect(consentMocks.onAuthenticationDataPermissionRemoved).not.toHaveBeenCalled();
+    expect(jest.requireMock("./premiumAnalytics/teaser").initPremiumTeaser).not.toHaveBeenCalled();
+    expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
   });
 
   it("does not read a cached token without authentication consent", async () => {

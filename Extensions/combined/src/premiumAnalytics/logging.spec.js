@@ -2,6 +2,7 @@
  * @jest-environment jsdom
  */
 
+import { setLoggingDisabled } from "../logging";
 import {
   logTimeBounds,
   logRangeSelection,
@@ -17,7 +18,18 @@ describe("premiumAnalytics.logging", () => {
   });
 
   afterEach(() => {
+    setLoggingDisabled(false);
     consoleSpy.mockRestore();
+  });
+
+  it("suppresses analytics messages without replacing console.log", () => {
+    setLoggingDisabled(true);
+    logTimeBounds("chart", { min: 0, max: 1 });
+    logRangeSelection("selection", { from: 0, to: 1 });
+    logFetchRequest("video-id", new URLSearchParams({ a: "1" }));
+    logZoomPreview("preview", { from: 3, to: 4 });
+    expect(consoleSpy).not.toHaveBeenCalled();
+    expect(console.log).toBe(consoleSpy);
   });
 
   it("logs time bounds when values are provided", () => {

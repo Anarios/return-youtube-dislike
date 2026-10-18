@@ -135,6 +135,75 @@ describe("optional Firefox core data consent", () => {
     expect(browser.runtime.onMessage.size()).toBe(0);
   });
 
+  test("private counts strip credentials and headers and disable caching and redirects", async () => {
+    granted = [...CORE_DATA_PERMISSIONS];
+    browser.extension = { inIncognitoContext: true };
+    const fetchImpl = jest.fn(async () => new Response('{"dislikes":42}'));
+    for (const path of ["/votes?videoId=abcdefghijk&likeCount=100", "/configs/selectors"]) {
+      const result = await fetchWithCoreConsent(
+        `https://returnyoutubedislikeapi.com${path}`,
+        { credentials: "include", cache: "force-cache", headers: { Authorization: "synthetic-account-token" } },
+        fetchImpl,
+      );
+      expect(await result.json()).toEqual({ dislikes: 42 });
+      expect(fetchImpl.mock.calls.at(-1)[1]).toEqual(
+        expect.objectContaining({
+          method: "GET",
+          credentials: "omit",
+          cache: "no-store",
+          redirect: "error",
+          referrerPolicy: "no-referrer",
+          headers: { Accept: "application/json" },
+        }),
+      );
+    }
+    expect(await requestCoreDataPermission()).toBe(false);
+    expect(browser.permissions.request).not.toHaveBeenCalled();
+  });
+
+  test("private count checks work when Firefox blocks URLSearchParams iterators", async () => {
+    granted = [...CORE_DATA_PERMISSIONS];
+    browser.extension = { inIncognitoContext: true };
+    const keys = jest.spyOn(URLSearchParams.prototype, "keys").mockReturnValue({
+      [Symbol.iterator]() {
+        throw new TypeError("Iterator access denied");
+      },
+    });
+    try {
+      const fetchImpl = jest.fn(async () => new Response('{"dislikes":42}'));
+      const response = await fetchWithCoreConsent(
+        "https://returnyoutubedislikeapi.com/votes?videoId=abcdefghijk&likeCount=100",
+        {},
+        fetchImpl,
+      );
+      expect(await response.json()).toEqual({ dislikes: 42 });
+      await expect(
+        fetchWithCoreConsent(
+          "https://returnyoutubedislikeapi.com/votes?videoId=abcdefghijk&sessionToken=synthetic",
+          {},
+          fetchImpl,
+        ),
+      ).rejects.toThrow("count display");
+      expect(fetchImpl).toHaveBeenCalledTimes(1);
+    } finally {
+      keys.mockRestore();
+    }
+  });
+
+  test.each([
+    ["https://returnyoutubedislikeapi.com/send", {}],
+    ["https://returnyoutubedislikeapi.com/votes", { method: "POST" }],
+    ["https://returnyoutubedislikeapi.com/votes?sessionToken=synthetic", {}],
+    ["https://returnyoutubedislikeapi.com/configs/selectors?videoId=abcdefghijk", {}],
+    ["https://api.example/votes", {}],
+  ])("private requests reject non-display operations: %s", async (url, options) => {
+    granted = [...CORE_DATA_PERMISSIONS];
+    browser.extension = { inIncognitoContext: true };
+    const fetchImpl = jest.fn();
+    await expect(fetchWithCoreConsent(url, options, fetchImpl)).rejects.toThrow("count display");
+    expect(fetchImpl).not.toHaveBeenCalled();
+  });
+
   test("other browsers keep their normal fetch and do not request Firefox permissions", async () => {
     browser.runtime.getManifest = () => ({ manifest_version: 3 });
     const response = {};

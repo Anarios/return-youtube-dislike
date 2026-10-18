@@ -111,6 +111,29 @@ test("a shared inbox update preserves the current screen and its navigation", as
   expect(document.activeElement).toBe(toggle);
 });
 
+test("private Firefox popup initialization does not request or subscribe to account data", async () => {
+  await flush();
+  window.dispatchEvent(new Event("unload"));
+  document.body.innerHTML = new DOMParser().parseFromString(popupHtml, "text/html").body.innerHTML;
+  requestDiscussion.mockClear();
+  subscribeDiscussionEvents.mockClear();
+  global.browser = {
+    runtime: { getManifest: () => ({ browser_specific_settings: { gecko: {} } }) },
+    extension: { inIncognitoContext: true },
+  };
+  try {
+    initDiscussionPopup();
+    const privateRoot = document.getElementById("ryd-discussion-popup");
+    document.getElementById("ryd-discussion-inbox-toggle").click();
+    expect(privateRoot.hidden).toBe(true);
+    expect(privateRoot.childElementCount).toBe(0);
+    expect(requestDiscussion).not.toHaveBeenCalled();
+    expect(subscribeDiscussionEvents).not.toHaveBeenCalled();
+  } finally {
+    delete global.browser;
+  }
+});
+
 test("Escape on the home screen leaves the popup unchanged", () => {
   const event = new KeyboardEvent("keydown", { key: "Escape", cancelable: true });
   document.dispatchEvent(event);

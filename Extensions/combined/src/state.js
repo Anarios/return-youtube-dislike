@@ -1,3 +1,4 @@
+import { logger } from "./logging";
 import {
   getButtonControls,
   getLikeButton,
@@ -32,6 +33,7 @@ import { createBrowserSyntheticDislikeStore } from "./vote-client-adapter";
 import { requestVoteData } from "./vote-data-request";
 import { fetchWithCoreConsent } from "./core-data-consent";
 import { normalizeCustomColors } from "../../common/color-themes";
+import { isPrivateBrowsingContext } from "./private-browsing";
 
 const DEFAULT_SELECTORS = {
   dislikeTextContainer: [
@@ -183,6 +185,7 @@ function isRoundedDesign() {
 let syntheticDislikeStore = null;
 
 function getSyntheticDislikeStore() {
+  if (isPrivateBrowsingContext()) return null;
   if (syntheticDislikeStore) return syntheticDislikeStore;
   const browserApi = getBrowser();
   if (!browserApi?.storage?.local) return null;
@@ -199,7 +202,7 @@ async function readSyntheticShortsDislikeState(videoId) {
   try {
     return await store.isDisliked(videoId);
   } catch (error) {
-    console.debug("Could not restore the synthetic Shorts Dislike state.", error?.message ?? error);
+    logger.debug("Could not restore the synthetic Shorts Dislike state.", error?.message ?? error);
     return false;
   }
 }
@@ -333,7 +336,7 @@ function refreshReactionPresentation() {
 }
 
 function setDislikes(dislikesCount) {
-  console.log(`SET dislikes ${dislikesCount}`);
+  if (!isPrivateBrowsingContext()) logger.log(`SET dislikes ${dislikesCount}`);
 
   const controls = getButtonControls();
   const _container = getDislikeTextContainer(controls);
@@ -344,7 +347,7 @@ function setDislikes(dislikesCount) {
   if (!isLikesDisabled(controls)) {
     _dislikeText = dislikesCount;
   } else {
-    console.log("likes count disabled by creator");
+    logger.log("likes count disabled by creator");
     _dislikeText = localize("TextLikesDisabled");
   }
 
@@ -425,7 +428,7 @@ async function setState(storedData) {
   }
   const videoId = getVideoId(window.location.href);
   const dislikeButton = getDislikeButton();
-  if (isSyntheticShortsDislike(dislikeButton)) {
+  if (isSyntheticShortsDislike(dislikeButton) && !isPrivateBrowsingContext()) {
     const storedDisliked = await readSyntheticShortsDislikeState(videoId);
     if (getVideoId(window.location.href) !== videoId) return;
     const liked = isVideoLiked();
@@ -435,7 +438,7 @@ async function setState(storedData) {
   } else {
     storedData.previousState = isVideoDisliked() ? DISLIKED_STATE : isVideoLiked() ? LIKED_STATE : NEUTRAL_STATE;
   }
-  console.log("Video is loaded. Adding buttons...");
+  logger.log("Video is loaded. Adding buttons...");
 
   const likeCount = getLikeCountFromButton() || null;
   let response;
@@ -446,8 +449,10 @@ async function setState(storedData) {
     displayError(error, videoId);
     return;
   }
-  console.log("response from api:");
-  console.log(JSON.stringify(response));
+  if (!isPrivateBrowsingContext()) {
+    logger.log("response from api:");
+    logger.log(JSON.stringify(response));
+  }
   if (getVideoId(window.location.href) !== videoId) {
     return;
   }
@@ -520,6 +525,11 @@ function clearRenderedVoteState(controls = getButtonControls()) {
 }
 
 async function initExtConfig() {
+  if (isPrivateBrowsingContext()) {
+    await initializePrivateDisplayPreferences();
+    await initializeSelectors();
+    return;
+  }
   initializeDisableVoteSubmission();
   initializeDisableLogging();
   initializeColoredThumbs();
@@ -534,8 +544,39 @@ async function initExtConfig() {
   await initializeSelectors();
 }
 
+function initializePrivateDisplayPreferences() {
+  const preferences = [
+    "coloredThumbs",
+    "coloredBar",
+    "colorTheme",
+    "customColors",
+    "numberDisplayFormat",
+    "showTooltipPercentage",
+    "tooltipPercentageMode",
+    "numberDisplayReformatLikes",
+    HIDE_CLUTTER_BUTTONS_STORAGE_KEY,
+  ];
+  extConfig.disableLogging = true;
+  initializeLogging();
+  extConfig.hidePremiumTeaser = true;
+  return new Promise((resolve) => {
+    getBrowser().storage.sync.get(preferences, (values = {}) => {
+      for (const key of preferences) {
+        if (values[key] !== undefined) extConfig[key] = values[key];
+      }
+      extConfig.colorTheme = values.colorTheme || "classic";
+      extConfig.customColors = normalizeCustomColors(values.customColors);
+      extConfig.hideClutterButtons = publishHideClutterButtons(values[HIDE_CLUTTER_BUTTONS_STORAGE_KEY]);
+      resolve();
+    });
+  });
+}
+
 async function initializeSelectors() {
   const controller = new AbortController();
+  const privateContext = isPrivateBrowsingContext();
+  const abortOnPageHide = () => controller.abort();
+  if (privateContext) window.addEventListener("pagehide", abortOnPageHide, { once: true });
   const timeout = setTimeout(() => controller.abort(), SELECTOR_REQUEST_TIMEOUT_MS);
   try {
     const response = await fetchWithCoreConsent(getApiEndpoint("/configs/selectors"), {
@@ -544,20 +585,23 @@ async function initializeSelectors() {
         Accept: "application/json",
       },
       signal: controller.signal,
+      ...(privateContext ? { credentials: "omit", cache: "no-store" } : {}),
     });
     if (!response.ok) {
       throw new Error(`Selector request failed with HTTP ${response.status}`);
     }
     const result = await response.json();
+    if (privateContext && controller.signal.aborted) return false;
     extConfig.selectors = mergeConfig(DEFAULT_SELECTORS, result);
-    console.log(result);
+    if (!isPrivateBrowsingContext()) logger.log(result);
     return true;
   } catch (error) {
     extConfig.selectors = cloneConfig(DEFAULT_SELECTORS);
-    console.debug("Remote selectors unavailable; using bundled selectors.", error?.name ?? error);
+    logger.debug("Remote selectors unavailable; using bundled selectors.", error?.name ?? error);
     return false;
   } finally {
     clearTimeout(timeout);
+    if (privateContext) window.removeEventListener("pagehide", abortOnPageHide);
   }
 }
 
@@ -571,16 +615,22 @@ function initializeDisableVoteSubmission() {
   });
 }
 
+let loggingPreferenceRevision = 0;
+
+function updateDisableLogging(value) {
+  loggingPreferenceRevision += 1;
+  extConfig.disableLogging = value ?? true;
+  initializeLogging();
+}
+
 function initializeDisableLogging() {
+  const revision = loggingPreferenceRevision;
   getBrowser().storage.sync.get(["disableLogging"], (res) => {
+    if (revision !== loggingPreferenceRevision) return;
     if (res.disableLogging === undefined) {
       getBrowser().storage.sync.set({ disableLogging: true });
-      extConfig.disableLogging = true;
-    } else {
-      extConfig.disableLogging = res.disableLogging;
     }
-    // Initialize console methods based on logging config
-    initializeLogging();
+    updateDisableLogging(res.disableLogging);
   });
 }
 
@@ -688,7 +738,7 @@ function initializeHideClutterButtons() {
       const storedValue = res[HIDE_CLUTTER_BUTTONS_STORAGE_KEY];
       const normalized = normalizeHideClutterButtons(storedValue);
       extConfig.hideClutterButtons = publishHideClutterButtons(normalized);
-      if (storedValue === undefined) {
+      if (storedValue === undefined && !isPrivateBrowsingContext()) {
         storage.set({ [HIDE_CLUTTER_BUTTONS_STORAGE_KEY]: false });
       }
       resolve(normalized);
@@ -723,4 +773,5 @@ export {
   clearRenderedVoteState,
   persistSyntheticShortsDislikeState,
   initializeHideClutterButtons,
+  updateDisableLogging,
 };

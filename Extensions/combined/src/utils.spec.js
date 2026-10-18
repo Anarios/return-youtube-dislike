@@ -45,6 +45,7 @@ jest.mock("./state", () => {
 });
 
 import { extConfig, isShorts } from "./state";
+import { logger, setLoggingDisabled } from "./logging";
 import {
   numberFormat,
   getNumberFormatter,
@@ -90,6 +91,7 @@ function resetGlobals() {
   jest.restoreAllMocks();
   jest.clearAllMocks();
   extConfig.disableLogging = false;
+  setLoggingDisabled(false);
   extConfig.colorTheme = "classic";
   extConfig.numberDisplayFormat = "compactShort";
   isShorts.mockReturnValue(false);
@@ -448,28 +450,21 @@ describe("utils", () => {
   });
 
   describe("initializeLogging", () => {
-    it("disables console output when configured", () => {
-      extConfig.disableLogging = true;
-      const originalLog = console.log;
-      const originalDebug = console.debug;
-
-      initializeLogging();
-
-      expect(console.log).not.toBe(originalLog);
-      expect(console.debug).not.toBe(originalDebug);
-    });
-
-    it("restores console output when logging is enabled", () => {
-      const stubLog = jest.fn();
-      const stubDebug = jest.fn();
-      console.log = stubLog;
-      console.debug = stubDebug;
-
-      extConfig.disableLogging = false;
-      initializeLogging();
-
-      expect(console.log).not.toBe(stubLog);
-      expect(console.debug).not.toBe(stubDebug);
+    it("applies the preference to extension logging without replacing console methods", () => {
+      const log = jest.spyOn(console, "log").mockImplementation(() => {});
+      const debug = jest.spyOn(console, "debug").mockImplementation(() => {});
+      for (const disabled of [true, false, true]) {
+        log.mockClear();
+        debug.mockClear();
+        extConfig.disableLogging = disabled;
+        initializeLogging();
+        logger.log("extension log");
+        logger.debug("extension debug");
+        expect(console.log).toBe(log);
+        expect(console.debug).toBe(debug);
+        expect(log).toHaveBeenCalledTimes(disabled ? 0 : 1);
+        expect(debug).toHaveBeenCalledTimes(disabled ? 0 : 1);
+      }
     });
   });
 

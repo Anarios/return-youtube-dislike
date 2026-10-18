@@ -617,3 +617,25 @@ input:checked + .slider::before {
   flex-direction: column;
   align-items: center;
 }
+
+[dir="rtl"] .switch::before,
+[dir="rtl"] .label-with-hover-tip::before {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .switchLabel {
+  margin-left: 0;
+  margin-right: 0.5rem;
+  transform: translateX(-35px);
+}
+
+[dir="rtl"] #advancedToggle {
+  right: auto;
+  left: 26px;
+}
+
+[dir="rtl"] .setting-help-popover {
+  right: auto;
+  left: 0;
+}

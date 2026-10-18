@@ -3,6 +3,8 @@ import { createVoteClient } from "../common/vote-client";
 import { createBrowserCredentialStore } from "./src/vote-client-adapter";
 import { loginWithGitHub } from "./src/github-auth";
 import { createDiscussionBackground } from "./src/discussion-background";
+import { fetchWithAccountConsent } from "./src/account-data-consent";
+import { isFirefoxExtension, isNormalMessageSender } from "./src/private-browsing";
 import {
   coreConsentError,
   fetchWithCoreConsent,
@@ -58,6 +60,7 @@ const discussionBackground = createDiscussionBackground({
   api,
   voteClient,
   fetchImpl: fetchWithCoreConsent,
+  accountFetchImpl: fetchWithAccountConsent,
   hasConsent: async () =>
     (await hasCoreDataPermission({ queryBackground: false })) &&
     (!usesFirefoxDataCollectionConsent() || (await hasAuthenticationDataPermission({ queryBackground: false }))),
@@ -71,6 +74,7 @@ function broadcastPatreonStatus(authenticated, user, sessionToken, generation = 
     if (generation !== authenticationGeneration) return;
     tabs
       .filter((tab) => {
+        if (isFirefoxExtension(api) && tab.incognito !== false) return false;
         try {
           const hostname = new URL(tab.url).hostname;
           return hostname === "youtube.com" || hostname.endsWith(".youtube.com");
@@ -245,6 +249,18 @@ function extractOAuthParams(responseUrl) {
 }
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request?.message === "ryd_has_core_consent" || isNormalMessageSender(api, sender)) {
+    return handleMessage(request, sender, sendResponse);
+  }
+  sendResponse({
+    success: false,
+    ok: false,
+    granted: false,
+    error: { code: "private_browsing", message: "Only count display is available in private windows." },
+  });
+});
+
+function handleMessage(request, sender, sendResponse) {
   if (request?.message === "ryd_open_consent") {
     if (sender.id !== api.runtime.id || sender.url !== api.runtime.getURL("consent.html")) {
       sendResponse({ success: false });
@@ -256,13 +272,16 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         if (consentPageTabId !== null) {
           try {
             const existing = await tabs.get(consentPageTabId);
-            if (existing.url === api.runtime.getURL("consent.html")) {
+            if (existing.url === api.runtime.getURL("consent.html") && existing.incognito === false) {
               await tabs.update(consentPageTabId, { active: true });
               return;
             }
           } catch (_) {}
         }
-        const tab = await tabs.create({ url: api.runtime.getURL("consent.html") });
+        const tab = await tabs.create({
+          url: api.runtime.getURL("consent.html"),
+          ...(Number.isInteger(sender.tab?.windowId) ? { windowId: sender.tab.windowId } : {}),
+        });
         consentPageTabId = tab.id;
       })().finally(() => {
         consentPageOpening = null;
@@ -381,7 +400,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
               ? chrome.identity.getRedirectURL()
               : "";
 
-        const startRes = await fetchWithCoreConsent(
+        const startRes = await fetchWithAccountConsent(
           getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`),
         );
         const startData = await startRes.json();
@@ -396,7 +415,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         await requireCurrentAuthenticationConsent(generation);
 
-        const exchangeRes = await fetchWithCoreConsent(getApiEndpoint("/api/auth/oauth/exchange"), {
+        const exchangeRes = await fetchWithAccountConsent(getApiEndpoint("/api/auth/oauth/exchange"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -448,7 +467,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
               : "";
 
         const authData = await loginWithGitHub({
-          fetchImpl: fetchWithCoreConsent,
+          fetchImpl: fetchWithAccountConsent,
           redirectUri,
           launchWebAuthFlow,
           requireConsent: () => requireCurrentAuthenticationConsent(generation),
@@ -471,12 +490,12 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
     })();
     return true;
   }
-});
+}
 
-function openChangelogTab(version) {
+function openChangelogTab(version, { active } = {}) {
   try {
     const url = getChangelogUrl();
-    api.tabs.create({ url }, () => {
+    api.tabs.create({ url, ...(active === false ? { active: false } : {}) }, () => {
       if (api.runtime.lastError) {
         console.debug("Changelog tab could not open:", api.runtime.lastError.message);
         return;
@@ -574,7 +593,7 @@ function persistChangelogVersion(version) {
   }
 }
 
-function maybeShowChangelog(details) {
+function maybeShowChangelog(details, { active } = {}) {
   const reason = details?.reason;
   if (!reason) {
     return;
@@ -595,7 +614,7 @@ function maybeShowChangelog(details) {
   const showImmediately = reason === "install" || details.temporary === true;
 
   const showChangelog = () => {
-    openChangelogTab(currentVersion || null);
+    openChangelogTab(currentVersion || null, { active });
   };
 
   if (!storage || typeof storage.get !== "function") {
@@ -646,8 +665,26 @@ function maybeShowChangelog(details) {
   }
 }
 
+async function handleInstallation(details) {
+  const needsConsent =
+    details?.reason === "install" &&
+    usesFirefoxDataCollectionConsent() &&
+    !(await hasCoreDataPermission({ queryBackground: false }));
+  maybeShowChangelog(details, { active: needsConsent ? false : undefined });
+  if (!needsConsent) return;
+
+  try {
+    api.tabs.create({ url: api.runtime.getURL("consent.html") }, (tab) => {
+      if (api.runtime.lastError) return;
+      consentPageTabId = tab?.id ?? null;
+    });
+  } catch (error) {
+    console.debug("Failed to open permission setup", error);
+  }
+}
+
 api.runtime.onInstalled.addListener((details) => {
-  maybeShowChangelog(details);
+  void handleInstallation(details);
 });
 
 if (api?.runtime?.onStartup && typeof api.runtime.onStartup.addListener === "function") {

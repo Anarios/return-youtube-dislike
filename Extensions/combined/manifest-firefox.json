@@ -4,7 +4,7 @@
   "default_locale": "en",
   "version": "__RYD_VERSION__",
   "manifest_version": 2,
-  "incognito": "not_allowed",
+  "incognito": "spanning",
   "background": {
     "scripts": ["ryd.background.js"]
   },

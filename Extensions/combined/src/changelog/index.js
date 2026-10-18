@@ -26,6 +26,8 @@ function applyLocaleMetadata() {
     if (browserLocale) {
       document.documentElement.lang = browserLocale;
     }
+    const direction = chrome?.i18n?.getMessage?.("@@bidi_dir");
+    if (direction === "rtl" || direction === "ltr") document.documentElement.dir = direction;
   } catch (error) {
     console.debug("Unable to resolve UI locale", error);
   }

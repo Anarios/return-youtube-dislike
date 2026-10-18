@@ -1,4 +1,9 @@
 jest.mock("../common/vote-client", () => ({ createVoteClient: jest.fn() }));
+jest.mock("./src/core-data-consent", () => ({
+  hasCoreDataPermission: jest.fn(),
+  onCoreDataPermissionChanged: jest.fn(),
+  fetchWithCoreConsent: jest.fn(),
+}));
 jest.mock("./src/data-collection-permissions", () => ({
   hasAuthenticationDataPermission: jest.fn(),
   onAuthenticationDataPermissionRemoved: jest.fn(),
@@ -14,9 +19,11 @@ describe("background changelog lifecycle", () => {
   let startupListener;
   let stored;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     jest.resetModules();
     stored = {};
+    require("./src/data-collection-permissions").usesFirefoxDataCollectionConsent.mockReturnValue(false);
+    require("./src/core-data-consent").hasCoreDataPermission.mockResolvedValue(false);
     require("../common/vote-client").createVoteClient.mockReturnValue({ ensureRegistered: () => Promise.resolve({}) });
     global.__RYD_LIVE_TEST_BUILD__ = false;
     global.chrome = {
@@ -54,6 +61,8 @@ describe("background changelog lifecycle", () => {
     global.browser = global.chrome;
     jest.spyOn(console, "debug").mockImplementation(() => {});
     require("./ryd.background");
+    await flushCallbacks();
+    require("./src/core-data-consent").hasCoreDataPermission.mockClear();
   });
 
   afterEach(() => {
@@ -69,7 +78,67 @@ describe("background changelog lifecycle", () => {
     expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
     expect(chrome.tabs.create).toHaveBeenCalledWith({ url: CHANGELOG_URL }, expect.any(Function));
     expect(stored).toEqual({ lastShownChangelogVersion: VERSION });
+    expect(require("./src/core-data-consent").hasCoreDataPermission).not.toHaveBeenCalled();
   });
+
+  test.each([false, true])(
+    "opens Firefox setup on a fresh install with missing consent (temporary=%s)",
+    async (temporary) => {
+      require("./src/data-collection-permissions").usesFirefoxDataCollectionConsent.mockReturnValue(true);
+      installedListener({ reason: "install", temporary });
+      await flushCallbacks();
+      expect(chrome.tabs.create).toHaveBeenCalledTimes(2);
+      expect(chrome.tabs.create).toHaveBeenCalledWith({ url: CHANGELOG_URL, active: false }, expect.any(Function));
+      expect(chrome.tabs.create).toHaveBeenCalledWith(
+        { url: "moz-extension://test/consent.html" },
+        expect.any(Function),
+      );
+      expect(require("./src/core-data-consent").hasCoreDataPermission).toHaveBeenCalledWith({ queryBackground: false });
+      expect(stored).toEqual({ lastShownChangelogVersion: VERSION });
+    },
+  );
+
+  test("skips Firefox setup when core consent is already granted", async () => {
+    require("./src/data-collection-permissions").usesFirefoxDataCollectionConsent.mockReturnValue(true);
+    require("./src/core-data-consent").hasCoreDataPermission.mockResolvedValue(true);
+    installedListener({ reason: "install" });
+    await flushCallbacks();
+    expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
+    expect(chrome.tabs.create).toHaveBeenCalledWith({ url: CHANGELOG_URL }, expect.any(Function));
+  });
+
+  test("a delayed changelog storage read does not take focus from Firefox setup", async () => {
+    require("./src/data-collection-permissions").usesFirefoxDataCollectionConsent.mockReturnValue(true);
+    let readChangelogStorage;
+    chrome.storage.local.get.mockImplementationOnce((keys, callback) => {
+      readChangelogStorage = callback;
+    });
+    installedListener({ reason: "install" });
+    await flushCallbacks();
+    expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
+    expect(chrome.tabs.create).toHaveBeenLastCalledWith(
+      { url: "moz-extension://test/consent.html" },
+      expect.any(Function),
+    );
+    readChangelogStorage({});
+    await flushCallbacks();
+    expect(chrome.tabs.create).toHaveBeenLastCalledWith({ url: CHANGELOG_URL, active: false }, expect.any(Function));
+    expect(stored).toEqual({ lastShownChangelogVersion: VERSION });
+  });
+
+  test.each(["update", "browser_update", "chrome_update"])(
+    "does not open Firefox permission setup on %s or subsequent startup",
+    async (reason) => {
+      require("./src/data-collection-permissions").usesFirefoxDataCollectionConsent.mockReturnValue(true);
+      stored.lastShownChangelogVersion = VERSION;
+      installedListener({ reason, previousVersion: "3.0.0.18" });
+      await flushCallbacks();
+      startupListener();
+      await flushCallbacks();
+      expect(chrome.tabs.create).not.toHaveBeenCalled();
+      expect(require("./src/core-data-consent").hasCoreDataPermission).not.toHaveBeenCalled();
+    },
+  );
 
   test.each(["install", "update"])("preserves already-seen suppression on %s", async (reason) => {
     stored.lastShownChangelogVersion = "4.0.4";

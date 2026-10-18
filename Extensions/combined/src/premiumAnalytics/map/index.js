@@ -238,6 +238,20 @@ export function renderMap(countries) {
   updateMapResetButtonVisibility();
 }
 
+export function refreshMapTheme() {
+  analyticsState.mapChart?.setOption({
+    visualMap: { textStyle: { color: getMutedTextColor() } },
+    geo: {
+      itemStyle: {
+        borderColor: getBorderColor(0.4),
+        borderWidth: 0.6,
+        areaColor: getSurfaceColor(0.06, 0.02),
+      },
+      emphasis: { itemStyle: { areaColor: getHoverFillColor(0.18, 0.18) } },
+    },
+  });
+}
+
 function resolveMapContext(state) {
   const focusCode = typeof state.mapFocusCountry === "string" ? normalizeIsoCode(state.mapFocusCountry) : "";
   const subdivisions = Array.isArray(state.latestSubdivisions) ? state.latestSubdivisions : [];

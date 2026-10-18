@@ -1,4 +1,6 @@
 import { usesFirefoxDataCollectionConsent } from "./data-collection-permissions";
+import { getApiUrl } from "./config";
+import { isPrivateBrowsingContext } from "./private-browsing";
 
 const CORE_DATA_PERMISSIONS = Object.freeze([
   "personallyIdentifyingInfo",
@@ -32,6 +34,7 @@ async function hasCoreDataPermission({ queryBackground = true } = {}) {
 }
 
 function requestCoreDataPermission() {
+  if (isPrivateBrowsingContext()) return Promise.resolve(false);
   if (!usesFirefoxDataCollectionConsent()) return Promise.resolve(true);
   try {
     // Request directly in the explainer's click handler to preserve Firefox's user gesture.
@@ -72,6 +75,37 @@ function onCoreDataPermissionChanged(listener) {
 function fetchWithCoreConsent(input, options = {}, fetchImpl = globalThis.fetch) {
   if (!usesFirefoxDataCollectionConsent()) return fetchImpl(input, options);
   return (async () => {
+    if (isPrivateBrowsingContext()) {
+      const url = new URL(typeof input === "string" || input instanceof URL ? input : input.url);
+      const method = options.method ?? input?.method ?? "GET";
+      const allowedKeys = url.pathname === "/votes" ? ["videoId", "likeCount"] : [];
+      let allowedQuery = true;
+      // Firefox content-script wrappers do not expose URLSearchParams iterators.
+      url.searchParams.forEach((value, key) => {
+        if (!allowedKeys.includes(key)) allowedQuery = false;
+      });
+      if (
+        url.origin !== new URL(getApiUrl()).origin ||
+        !["/votes", "/configs/selectors"].includes(url.pathname) ||
+        method.toUpperCase() !== "GET" ||
+        url.username ||
+        url.password ||
+        !allowedQuery ||
+        options.body != null ||
+        input?.body != null
+      )
+        throw new Error("Only count display is available in private windows.");
+      input = url.href;
+      options = {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        credentials: "omit",
+        cache: "no-store",
+        redirect: "error",
+        referrerPolicy: "no-referrer",
+        signal: options.signal,
+      };
+    }
     const controller = new AbortController();
     const abort = () => controller.abort();
     const unsubscribe = onCoreDataPermissionChanged((granted) => {

@@ -32,6 +32,17 @@ const deferred = () => {
   return { promise, resolve };
 };
 
+function extensionView(incognito, url = "moz-extension://extension-id/popup.html") {
+  return {
+    browser: { extension: { inIncognitoContext: incognito } },
+    location: { href: url },
+    CustomEvent: jest.fn(function (type, options) {
+      return { type, detail: options.detail };
+    }),
+    dispatchEvent: jest.fn(),
+  };
+}
+
 function storageArea(data = {}) {
   return {
     data,
@@ -47,16 +58,27 @@ function storageArea(data = {}) {
   };
 }
 
-function harness({ authenticated = false, consent = true, fetchOverride, testMode = false, solveOverride } = {}) {
+function harness({
+  authenticated = false,
+  consent = true,
+  fetchOverride,
+  accountFetchImpl,
+  testMode = false,
+  solveOverride,
+  firefox = false,
+  views = [],
+} = {}) {
   const sync = storageArea(authenticated ? { patreonAuthenticated: true, patreonSessionToken: "account-token" } : {});
   const local = storageArea();
   let alarmListener;
   const api = {
     runtime: {
       id: "extension-id",
-      getURL: (path) => `chrome-extension://extension-id/${path}`,
+      getURL: (path) => `${firefox ? "moz" : "chrome"}-extension://extension-id/${path}`,
+      getManifest: () => (firefox ? { browser_specific_settings: { gecko: {} } } : {}),
       sendMessage: jest.fn((message, callback) => callback?.()),
     },
+    extension: { getViews: jest.fn(() => views) },
     storage: { sync, local },
     action: {
       setBadgeText: jest.fn((value, callback) => callback?.()),
@@ -65,12 +87,14 @@ function harness({ authenticated = false, consent = true, fetchOverride, testMod
     tabs: {
       query: jest.fn((query, callback) =>
         callback([
-          { id: 1, url: sender.url },
-          { id: 2, url: sender.url },
-          { id: 3, url: "https://example.com/" },
+          { id: 1, url: sender.url, incognito: false },
+          { id: 2, url: sender.url, incognito: false },
+          { id: 3, url: "https://example.com/", incognito: false },
         ]),
       ),
       sendMessage: jest.fn((id, message, callback) => callback?.()),
+      onCreated: { addListener: jest.fn() },
+      onUpdated: { addListener: jest.fn() },
     },
     alarms: {
       create: jest.fn(),
@@ -168,6 +192,7 @@ function harness({ authenticated = false, consent = true, fetchOverride, testMod
     api,
     voteClient,
     fetchImpl,
+    accountFetchImpl,
     hasConsent: async () => consent,
     connectionFactory,
     solve: solveOverride || jest.fn(async () => ({ solution: "AAAAAA==" })),
@@ -206,7 +231,242 @@ function harness({ authenticated = false, consent = true, fetchOverride, testMod
   };
 }
 
+describe("Firefox private discussion isolation", () => {
+  const normalSender = { ...sender, tab: { ...sender.tab, incognito: false } };
+
+  test.each(["session", "capabilities", "comments", "react", "notifications", "cancelScope"])(
+    "rejects private %s before validation, account reads, or shared work",
+    async (operation) => {
+      const h = harness({ authenticated: true, firefox: true });
+      const source = { ...normalSender, tab: { ...normalSender.tab, incognito: true } };
+      expect(await h.send(operation, { invalid: true }, source)).toMatchObject({
+        ok: false,
+        error: { code: "private_browsing" },
+      });
+      expect(h.sync.get).not.toHaveBeenCalled();
+      expect(h.local.get).not.toHaveBeenCalled();
+      expect(h.fetchImpl).not.toHaveBeenCalled();
+      expect(h.voteClient.getRegisteredUser).not.toHaveBeenCalled();
+      expect(h.voteClient.ensureRegistered).not.toHaveBeenCalled();
+      expect(h.api.tabs.sendMessage).not.toHaveBeenCalled();
+      expect(h.api.action.setBadgeText).not.toHaveBeenCalled();
+    },
+  );
+
+  test("rejects a tab whose normal browsing context cannot be verified", async () => {
+    const h = harness({ authenticated: true, firefox: true });
+    expect(await h.send("session", {}, sender)).toMatchObject({ error: { code: "private_browsing" } });
+    expect(h.sync.get).not.toHaveBeenCalled();
+    expect(h.fetchImpl).not.toHaveBeenCalled();
+  });
+
+  test.each([true, undefined])(
+    "rejects a private or unverified extension view (%s) before account reads",
+    async (incognito) => {
+      const url = "moz-extension://extension-id/popup.html?rydContext=private-test-context";
+      const h = harness({ authenticated: true, firefox: true, views: [extensionView(incognito, url)] });
+      expect(await h.send("session", {}, { id: sender.id, url })).toMatchObject({
+        ok: false,
+        error: { code: "private_browsing" },
+      });
+      expect(h.sync.get).not.toHaveBeenCalled();
+      expect(h.fetchImpl).not.toHaveBeenCalled();
+    },
+  );
+
+  test("preserves account requests from a verified normal Firefox extension view", async () => {
+    const url = "moz-extension://extension-id/popup.html?rydContext=normal-test-context";
+    const h = harness({ authenticated: true, firefox: true, views: [extensionView(false, url)] });
+    expect((await h.send("session", {}, { id: sender.id, url })).data.authenticated).toBe(true);
+    h.client.stop();
+  });
+
+  test("delivers shared account events only to normal YouTube tabs and verified extension views", async () => {
+    const normal = extensionView(false);
+    const privateView = extensionView(true);
+    const unknown = extensionView(undefined);
+    const foreign = extensionView(false, "https://www.youtube.com/watch?v=video123456");
+    const unavailable = extensionView(false);
+    unavailable.dispatchEvent.mockImplementation(() => {
+      throw new Error("View closed");
+    });
+    const h = harness({
+      authenticated: true,
+      firefox: true,
+      views: [privateView, unknown, foreign, unavailable, normal],
+    });
+    h.api.tabs.query.mockImplementation((query, done) =>
+      done([
+        { id: 2, url: sender.url, incognito: true },
+        { id: 1, url: sender.url, incognito: false },
+        { id: 3, url: sender.url },
+      ]),
+    );
+    expect((await h.send("session", {}, normalSender)).data.authenticated).toBe(true);
+    await flush();
+    expect(h.api.tabs.sendMessage.mock.calls.length).toBeGreaterThan(0);
+    expect(h.api.tabs.sendMessage.mock.calls.every(([tabId]) => tabId === 1)).toBe(true);
+    expect(
+      normal.dispatchEvent.mock.calls.some(
+        ([event]) => event.detail.type === "session" && event.detail.data.authenticated,
+      ),
+    ).toBe(true);
+    expect(
+      normal.dispatchEvent.mock.calls.some(
+        ([event]) => event.detail.type === "inbox" && event.detail.data.unreadCount === 1,
+      ),
+    ).toBe(true);
+    expect(normal.CustomEvent).toHaveBeenCalledWith(
+      "ryd-discussion-event",
+      expect.objectContaining({ detail: expect.any(Object) }),
+    );
+    for (const view of [privateView, unknown, foreign]) {
+      expect(view.CustomEvent).not.toHaveBeenCalled();
+      expect(view.dispatchEvent).not.toHaveBeenCalled();
+    }
+    expect(h.api.runtime.sendMessage).not.toHaveBeenCalled();
+    h.client.stop();
+  });
+
+  test("isolates each Firefox view's session and inbox mutations from the worker and other views", async () => {
+    const first = extensionView(false);
+    const second = extensionView(false);
+    first.dispatchEvent.mockImplementation(({ detail }) => {
+      if (detail.type === "session" && detail.data.profile) detail.data.profile.nickname = "Changed in one view";
+      if (detail.type === "inbox" && detail.data.items.length) {
+        detail.data.items[0].read = true;
+        detail.data.items[0].actorNickname = "Changed in one view";
+      }
+    });
+    const h = harness({ authenticated: true, firefox: true, views: [first, second] });
+    const response = await h.send("session", {}, normalSender);
+    await flush();
+    expect(response.data.profile.nickname).toBe("Tester");
+    expect((await h.send("session", {}, normalSender)).data.profile.nickname).toBe("Tester");
+    const sessionEvent = second.dispatchEvent.mock.calls.find(
+      ([event]) => event.detail.type === "session" && event.detail.data.authenticated,
+    )[0];
+    expect(sessionEvent.detail.data.profile.nickname).toBe("Tester");
+    const inboxEvent = second.dispatchEvent.mock.calls.find(
+      ([event]) => event.detail.type === "inbox" && event.detail.data.items.length,
+    )[0];
+    expect(inboxEvent.detail.data.items[0]).toMatchObject({ read: false, actorNickname: null });
+    expect(h.local.data.discussionState.items[0]).toMatchObject({ read: false, actorNickname: null });
+    h.client.stop();
+  });
+
+  test("never falls back to global runtime account events when extension views are unavailable", async () => {
+    const h = harness({ authenticated: true, firefox: true });
+    h.api.extension.getViews.mockImplementation(() => {
+      throw new Error("Unavailable");
+    });
+    expect((await h.send("session", {}, normalSender)).data.authenticated).toBe(true);
+    await flush();
+    expect(h.api.runtime.sendMessage).not.toHaveBeenCalled();
+    expect(h.api.tabs.sendMessage.mock.calls.some(([, event]) => event.type === "inbox")).toBe(true);
+    h.client.stop();
+  });
+
+  test("does not send account toasts to an active private YouTube tab", async () => {
+    const h = harness({ authenticated: true, firefox: true });
+    h.api.tabs.query.mockImplementation((query, done) =>
+      done(
+        query.active ? [{ id: 2, url: sender.url, incognito: true }] : [{ id: 1, url: sender.url, incognito: false }],
+      ),
+    );
+    await h.send("session", {}, normalSender);
+    await flush();
+    h.setInbox({
+      items: [{ ...h.notification, revision: "2", likeCount: 2 }],
+      unreadCount: 1,
+      revision: "2",
+      nextCursor: null,
+    });
+    h.sockets[0].handlers.NotificationsChanged({ revision: "2" });
+    await flush();
+    await flush();
+    expect(h.api.tabs.sendMessage.mock.calls.some(([, event]) => event.type === "toast")).toBe(false);
+    expect(h.api.tabs.sendMessage.mock.calls.some(([tabId]) => tabId === 2)).toBe(false);
+    h.client.stop();
+  });
+
+  test("keeps the default badge empty and applies account counts only to normal tabs, including new tabs", async () => {
+    const h = harness({ authenticated: true, firefox: true });
+    h.api.tabs.query.mockImplementation((query, done) =>
+      done([
+        { id: 1, url: sender.url, incognito: false },
+        { id: 2, url: sender.url, incognito: true },
+        { id: 3, url: "https://example.com/", incognito: false },
+        { id: 4, url: sender.url },
+      ]),
+    );
+    h.client.initialize();
+    await flush();
+    await flush();
+    const badgeValues = h.api.action.setBadgeText.mock.calls.map(([value]) => value);
+    expect(badgeValues).toContainEqual({ text: "" });
+    expect(badgeValues).toContainEqual({ tabId: 1, text: "1" });
+    expect(badgeValues).toContainEqual({ tabId: 3, text: "1" });
+    expect(
+      badgeValues.every((value) => (value.tabId === undefined ? value.text === "" : [1, 3].includes(value.tabId))),
+    ).toBe(true);
+    expect(h.api.action.setBadgeBackgroundColor.mock.calls.every(([value]) => [1, 3].includes(value.tabId))).toBe(true);
+
+    h.api.action.setBadgeText.mockClear();
+    h.api.action.setBadgeBackgroundColor.mockClear();
+    const created = h.api.tabs.onCreated.addListener.mock.calls[0][0];
+    const updated = h.api.tabs.onUpdated.addListener.mock.calls[0][0];
+    await created({ id: 5, incognito: true });
+    await updated(5, {}, { id: 5, incognito: true });
+    await created({ id: 6 });
+    expect(h.api.action.setBadgeText).not.toHaveBeenCalled();
+    expect(h.api.action.setBadgeBackgroundColor).not.toHaveBeenCalled();
+    await created({ id: 7, incognito: false });
+    await updated(8, {}, { id: 8, incognito: false });
+    expect(h.api.action.setBadgeText.mock.calls.map(([value]) => value)).toEqual([
+      { tabId: 7, text: "1" },
+      { tabId: 8, text: "1" },
+    ]);
+    h.client.clearSession();
+    await flush();
+    expect(h.api.action.setBadgeText).toHaveBeenCalledWith({ tabId: 1, text: "" }, expect.any(Function));
+    h.client.stop();
+  });
+
+  test("preserves non-Firefox incognito discussion requests and global account updates", async () => {
+    const h = harness({ authenticated: true });
+    const response = await h.send("session", {}, { ...sender, tab: { ...sender.tab, incognito: true } });
+    expect(response.data.authenticated).toBe(true);
+    await flush();
+    expect(
+      h.api.runtime.sendMessage.mock.calls.some(([event]) => event.type === "session" && event.data.authenticated),
+    ).toBe(true);
+    expect(h.api.action.setBadgeText).toHaveBeenCalledWith({ text: "1" }, expect.any(Function));
+    expect(h.api.extension.getViews).not.toHaveBeenCalled();
+    h.client.stop();
+  });
+});
+
 describe("discussion worker boundary", () => {
+  test("authenticated discussion traffic uses the account guard while anonymous reads keep their ordinary path", async () => {
+    const accountFetchImpl = jest.fn(async () => {
+      throw new Error("Authentication data consent required.");
+    });
+    const authenticated = harness({ authenticated: true, accountFetchImpl });
+    expect((await authenticated.send("session")).ok).toBe(false);
+    expect(accountFetchImpl).toHaveBeenCalledWith(
+      `${ORIGIN}/api/discussion/me`,
+      expect.objectContaining({ headers: expect.objectContaining({ Authorization: "Bearer account-token" }) }),
+    );
+    expect(authenticated.fetchImpl).not.toHaveBeenCalled();
+
+    accountFetchImpl.mockClear();
+    const anonymous = harness({ accountFetchImpl });
+    expect((await anonymous.send("comments", { videoId: VIDEO_ID, sort: "new" })).ok).toBe(true);
+    expect(anonymous.fetchImpl).toHaveBeenCalled();
+    expect(accountFetchImpl).not.toHaveBeenCalled();
+  });
+
   test("public comments do not create a voter identity before the first reaction", async () => {
     const h = harness();
     h.voteClient.getRegisteredUser.mockResolvedValue(null);

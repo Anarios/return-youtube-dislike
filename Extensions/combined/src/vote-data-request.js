@@ -1,5 +1,6 @@
 import { getApiEndpoint } from "./config";
 import { fetchWithCoreConsent } from "./core-data-consent";
+import { isPrivateBrowsingContext } from "./private-browsing";
 
 const WITHOUT_LIKE_COUNT = "without-like-count";
 const EXTENSION_ID_PATTERN = /^[a-p]{32}$/;
@@ -100,6 +101,7 @@ function requestVoteData(videoId, { fetchImpl = globalThis.fetch, likeCount = nu
           Accept: createVoteDataAcceptHeader(),
         },
         signal,
+        ...(isPrivateBrowsingContext() ? { credentials: "omit", cache: "no-store" } : {}),
       },
       fetchImpl,
     );

@@ -1,3 +1,5 @@
+import { isPrivateBrowsingContext } from "./private-browsing";
+
 const AUTHENTICATION_DATA_PERMISSION = "authenticationInfo";
 const ACCOUNT_DATA_PERMISSIONS = Object.freeze([AUTHENTICATION_DATA_PERMISSION]);
 const AUTHENTICATION_DATA_DESCRIPTOR = Object.freeze({
@@ -51,6 +53,7 @@ function queryBackgroundForAuthenticationDataPermission() {
 }
 
 function hasAuthenticationDataPermission({ queryBackground = true } = {}) {
+  if (isPrivateBrowsingContext()) return Promise.resolve(false);
   if (!usesFirefoxDataCollectionConsent()) return Promise.resolve(true);
   const permissions = getPermissionsApi();
   if (!permissions) {
@@ -71,6 +74,7 @@ function hasAuthenticationDataPermission({ queryBackground = true } = {}) {
 }
 
 function requestAuthenticationDataPermission() {
+  if (isPrivateBrowsingContext()) return Promise.resolve(false);
   if (!usesFirefoxDataCollectionConsent()) return Promise.resolve(true);
 
   // Keep this direct request as the first operation in the login click stack.

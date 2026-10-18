@@ -5,6 +5,7 @@ jest.mock("./core-data-consent", () => ({
   onCoreDataPermissionChanged: jest.fn(),
 }));
 jest.mock("./data-collection-permissions", () => ({ usesFirefoxDataCollectionConsent: jest.fn() }));
+jest.mock("./private-browsing", () => ({ isPrivateBrowsingContext: jest.fn() }));
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 describe("consent overlay lifecycle", () => {
@@ -16,7 +17,8 @@ describe("consent overlay lifecycle", () => {
     jest.resetModules();
     core = require("./core-data-consent");
     require("./data-collection-permissions").usesFirefoxDataCollectionConsent.mockReturnValue(true);
-    local = { get: jest.fn(async () => ({})) };
+    require("./private-browsing").isPrivateBrowsingContext.mockReturnValue(false);
+    local = { get: jest.fn(async () => ({})), set: jest.fn(), remove: jest.fn() };
     core.consentApi.mockReturnValue({
       storage: { local },
       runtime: { getURL: () => "moz-extension://fixture/consent.html" },
@@ -96,4 +98,43 @@ describe("consent overlay lifecycle", () => {
     changed(true);
     await pending;
   });
+
+  test("private setup skips stored dismissal state and dismisses only the current overlay", async () => {
+    require("./private-browsing").isPrivateBrowsingContext.mockReturnValue(true);
+    local.get.mockResolvedValue({ rydConsentDismissed: true });
+    const pending = waitForConsent();
+    let granted = false;
+    void pending.then(() => (granted = true));
+    const { frame, host } = await mounted();
+    expect(host.hasAttribute("collapsed")).toBe(false);
+    expect(local.get).not.toHaveBeenCalled();
+    message(frame, "ryd-consent-dismissed");
+    await flush();
+    expect(host.hasAttribute("collapsed")).toBe(true);
+    expect(granted).toBe(false);
+    host.shadowRoot.querySelector("button").click();
+    expect(host.hasAttribute("collapsed")).toBe(false);
+    expect(local.set).not.toHaveBeenCalled();
+    expect(local.remove).not.toHaveBeenCalled();
+    core.hasCoreDataPermission.mockResolvedValue(true);
+    changed(true);
+    await pending;
+    expect(host.isConnected).toBe(false);
+  });
+
+  test.each([false, true])(
+    "an existing grant skips setup and stored dismissal state (private=%s)",
+    async (privateBrowsing) => {
+      require("./private-browsing").isPrivateBrowsingContext.mockReturnValue(privateBrowsing);
+      local.get.mockResolvedValue({ rydConsentDismissed: true });
+      core.hasCoreDataPermission.mockResolvedValue(true);
+      await waitForConsent();
+      expect(document.querySelector("#ryd-consent-prompt")).toBeNull();
+      expect(core.consentApi).not.toHaveBeenCalled();
+      expect(core.onCoreDataPermissionChanged).not.toHaveBeenCalled();
+      expect(local.get).not.toHaveBeenCalled();
+      expect(local.set).not.toHaveBeenCalled();
+      expect(local.remove).not.toHaveBeenCalled();
+    },
+  );
 });

@@ -13,10 +13,18 @@ const cachedUser = { fullName: "Test User", imageUrl: "https://example.org/avata
 describe("popup account consent lifecycle", () => {
   let readCachedSession;
   let removeConsent;
+  let removeCoreConsent;
   let consent;
 
   beforeEach(async () => {
     jest.resetModules();
+    const permissionRemovedListeners = new Set();
+    const coreConsentListeners = new Set();
+    require("./src/core-data-consent").onCoreDataPermissionChanged.mockImplementation((listener) => {
+      coreConsentListeners.add(listener);
+      return () => coreConsentListeners.delete(listener);
+    });
+    removeCoreConsent = () => [...coreConsentListeners].forEach((listener) => listener(false));
     consent = true;
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "popup.html"), "utf8");
     global.chrome = {
@@ -28,8 +36,13 @@ describe("popup account consent lifecycle", () => {
         request: jest.fn(() => Promise.resolve(consent)),
         onRemoved: {
           addListener: (listener) => {
-            removeConsent = () => listener({ data_collection: ["authenticationInfo"] });
+            permissionRemovedListeners.add(listener);
+            removeConsent = () =>
+              [...permissionRemovedListeners].forEach((listener) =>
+                listener({ data_collection: ["authenticationInfo"] }),
+              );
           },
+          removeListener: (listener) => permissionRemovedListeners.delete(listener),
         },
       },
       identity: { getRedirectURL: jest.fn() },
@@ -132,6 +145,31 @@ describe("popup account consent lifecycle", () => {
     readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
     await flushPromises();
     expect(fetch).not.toHaveBeenCalled();
+    expectLoggedOut();
+  });
+
+  test("does not restore an account when core consent is removed during the final account-permission query", async () => {
+    let resolvePermission;
+    fetch.mockResolvedValue({
+      json: async () => {
+        chrome.permissions.getAll.mockImplementationOnce(() => new Promise((resolve) => (resolvePermission = resolve)));
+        return { valid: true, membershipTier: "premium" };
+      },
+    });
+    readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
+    await flushPromises();
+    expect(typeof resolvePermission).toBe("function");
+
+    removeCoreConsent();
+    resolvePermission({ data_collection: ["authenticationInfo"] });
+    await flushPromises();
+
+    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+    expect(chrome.storage.sync.remove).toHaveBeenCalledWith([
+      "patreonAuthenticated",
+      "patreonUser",
+      "patreonSessionToken",
+    ]);
     expectLoggedOut();
   });
 

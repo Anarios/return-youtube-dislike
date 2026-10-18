@@ -3,7 +3,13 @@
  * @jest-environment-options {"url":"https://www.youtube.com/watch?v=abcdefghijk"}
  */
 
+jest.mock("../private-browsing", () => ({
+  ...jest.requireActual("../private-browsing"),
+  isPrivateBrowsingContext: jest.fn(),
+}));
+
 import { initDiscussion } from "./index";
+import { isPrivateBrowsingContext } from "../private-browsing";
 import { NATIVE_STATE_REQUEST, NATIVE_STATE_ATTRIBUTE } from "./detector";
 import { threadUrl } from "./dom";
 import { discussionText } from "./localize";
@@ -20,6 +26,7 @@ let listener;
 let eventListener;
 
 beforeEach(() => {
+  isPrivateBrowsingContext.mockReturnValue(false);
   jest.useFakeTimers();
   document.body.innerHTML = `<ytd-watch-flexy video-id="${VIDEO}"><ytd-comments></ytd-comments></ytd-watch-flexy>`;
   window.history.replaceState({}, "", `/watch?v=${VIDEO}`);
@@ -41,6 +48,24 @@ beforeEach(() => {
       JSON.stringify({ videoId: event.target.getAttribute("video-id"), disabled: true, madeForKids: false }),
     );
   document.addEventListener(NATIVE_STATE_REQUEST, listener, true);
+});
+
+test("private discussion initialization creates no requests, bridge, UI or subscriptions", () => {
+  isPrivateBrowsingContext.mockReturnValue(true);
+  const privateRequest = jest.fn();
+  const append = jest.spyOn(document.head, "append");
+  const timer = jest.spyOn(global, "setInterval");
+  try {
+    expect(initDiscussion({ request: privateRequest })).toBeNull();
+    expect(privateRequest).not.toHaveBeenCalled();
+    expect(append).not.toHaveBeenCalled();
+    expect(timer).not.toHaveBeenCalled();
+    expect(document.querySelector(".ryd-discussion-panel")).toBeNull();
+    expect(eventListener).toBeUndefined();
+  } finally {
+    append.mockRestore();
+    timer.mockRestore();
+  }
 });
 afterEach(() => {
   feature?.destroy();

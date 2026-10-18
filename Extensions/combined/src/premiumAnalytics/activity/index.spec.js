@@ -30,6 +30,7 @@ jest.mock("../theme", () => ({
   getTextColor: jest.fn(() => "#111111"),
   getMutedTextColor: jest.fn(() => "#222222"),
   getBorderColor: jest.fn(() => "#333333"),
+  getSurfaceColor: jest.fn(() => "#444444"),
 }));
 
 jest.mock("../logging", () => ({
@@ -46,6 +47,7 @@ import {
   clearActivityChart,
   resetChartZoom,
   resizeActivityChart,
+  refreshActivityTheme,
   disposeActivityChart,
   registerZoomSelectionListener,
   setActivityTranslator,
@@ -134,6 +136,34 @@ describe("premiumAnalytics.activity", () => {
     jest.restoreAllMocks();
   });
 
+  it("refreshes only chart colors while keeping the selected range and series", () => {
+    const theme = jest.requireMock("../theme");
+    theme.getTextColor.mockReturnValue("#111111");
+    theme.getMutedTextColor.mockReturnValue("#222222");
+    theme.getBorderColor.mockReturnValue("#333333");
+    theme.getSurfaceColor.mockReturnValue("#444444");
+    const chart = ensureActivityChart();
+    analyticsState.selectionRange = { from: 10, to: 20 };
+    const points = [{ timestampUtc: "2026-01-01T00:00:00Z", likes: 4, dislikes: 1 }];
+    analyticsState.latestSeriesPoints = points;
+    refreshActivityTheme();
+    expect(chart.setOption).toHaveBeenCalledWith(
+      expect.objectContaining({
+        legend: { textStyle: { color: "#111111" } },
+        xAxis: expect.objectContaining({ axisLabel: { color: "#222222" } }),
+        yAxis: expect.objectContaining({ axisLabel: { color: "#222222" } }),
+        dataZoom: [expect.objectContaining({ backgroundColor: "#444444" })],
+      }),
+    );
+    const update = chart.setOption.mock.calls.at(-1)[0];
+    expect(update).not.toHaveProperty("series");
+    expect(update.dataZoom[0]).not.toHaveProperty("startValue");
+    expect(update.dataZoom[0]).not.toHaveProperty("endValue");
+    expect(analyticsState.selectionRange).toEqual({ from: 10, to: 20 });
+    expect(analyticsState.latestSeriesPoints).toBe(points);
+    expect(chart.dispatchAction).not.toHaveBeenCalled();
+  });
+
   it("initializes and caches the chart", () => {
     const chart = ensureActivityChart();
 
@@ -162,7 +192,6 @@ describe("premiumAnalytics.activity", () => {
     expect(logging.logRangeSelection).toHaveBeenCalled();
     expect(analyticsState.latestSeriesPoints).toHaveLength(2);
     expect(analyticsState.selectionRange.from).toBeLessThanOrEqual(analyticsState.selectionRange.to);
-
   });
 
   it("updates the bucket label when rendering", () => {

@@ -12,7 +12,7 @@ describe("Firefox AMO policy declarations", () => {
     const manifest = JSON.parse(readExtensionFile("manifest-firefox.json"));
     const gecko = manifest.browser_specific_settings.gecko;
 
-    expect(manifest.incognito).toBe("not_allowed");
+    expect(manifest.incognito).toBe("spanning");
     expect(gecko.id).toBe("{762f9885-5a13-4abd-9c77-433dcd38b8fd}");
     expect(gecko.strict_min_version).toBe("140.0");
     expect(gecko.data_collection_permissions).toEqual({

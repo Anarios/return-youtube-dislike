@@ -9,6 +9,7 @@ jest.mock("../config", () => ({
 
 jest.mock("../data-collection-permissions", () => ({
   hasAuthenticationDataPermission: jest.fn(),
+  onAuthenticationDataPermissionRemoved: () => () => {},
   usesFirefoxDataCollectionConsent: jest.fn(),
 }));
 
@@ -33,6 +34,7 @@ jest.mock("./activity", () => ({
   clearActivityChart: jest.fn(),
   resetChartZoom: jest.fn(),
   resizeActivityChart: jest.fn(),
+  refreshActivityTheme: jest.fn(),
   disposeActivityChart: jest.fn(),
   registerZoomSelectionListener: jest.fn(),
 }));
@@ -40,6 +42,7 @@ jest.mock("./activity", () => ({
 jest.mock("./map", () => ({
   ensureMapChart: jest.fn(),
   renderMap: jest.fn(),
+  refreshMapTheme: jest.fn(),
   clearMapChart: jest.fn(),
   resizeMapChart: jest.fn(),
   disposeMapChart: jest.fn(),
@@ -210,8 +213,34 @@ describe("premiumAnalytics", () => {
   });
 
   afterEach(() => {
+    teardownPremiumAnalytics();
+    document.documentElement.removeAttribute("dark");
     delete global.fetch;
     delete global.chrome;
+  });
+
+  it("repaints existing charts after a host theme toggle without fetching or changing the selected range", async () => {
+    document.documentElement.removeAttribute("dark");
+    initPremiumAnalytics();
+    await flushPromises();
+    analyticsState.selectionRange = { from: 10, to: 20 };
+    analyticsState.mapView = "us";
+    fetch.mockClear();
+    activityMocks.refreshActivityTheme.mockClear();
+    mapMocks.refreshMapTheme.mockClear();
+    mockRenderMap.mockClear();
+    document.documentElement.setAttribute("dark", "");
+    await flushPromises();
+    expect(activityMocks.refreshActivityTheme).toHaveBeenCalledTimes(1);
+    expect(mapMocks.refreshMapTheme).toHaveBeenCalledTimes(1);
+    expect(mockRenderMap).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+    expect(analyticsState.selectionRange).toEqual({ from: 10, to: 20 });
+    expect(analyticsState.mapView).toBe("us");
+    teardownPremiumAnalytics();
+    document.documentElement.removeAttribute("dark");
+    await flushPromises();
+    expect(activityMocks.refreshActivityTheme).toHaveBeenCalledTimes(1);
   });
 
   it("initializes only once and wires listeners", () => {
@@ -459,6 +488,27 @@ describe("premiumAnalytics", () => {
 
     const secondUrl = fetch.mock.calls[fetch.mock.calls.length - 1][0];
     expect(firstUrl).toBe(secondUrl);
+  });
+
+  it("restores a preset when a custom selection rounds to the same number of days", async () => {
+    mockGetApiEndpoint.mockImplementation((path) => `https://api.example${path}`);
+    initPremiumAnalytics();
+    const callbacks = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    analyticsState.currentVideoId = "abcdefghijk";
+    analyticsState.currentRange = 30;
+    analyticsState.usingCustomRange = true;
+    analyticsState.customSelection = { from: 10, to: 20 };
+    analyticsState.selectionRange = { from: 10, to: 20 };
+    fetch.mockClear();
+
+    callbacks.onRangePreset(30);
+
+    expect(analyticsState.usingCustomRange).toBe(false);
+    expect(analyticsState.customSelection).toBeNull();
+    expect(analyticsState.selectionRange).toEqual({ from: null, to: null });
+    await flushPromises();
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(new URL(fetch.mock.calls[0][0]).searchParams.has("selectedRangeStartUtc")).toBe(false);
   });
 
   it("defers chart zoom resets until preset data arrives", () => {

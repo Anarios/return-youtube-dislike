@@ -1,5 +1,6 @@
 import { isMobile, isShorts, extConfig } from "./state";
 import { getVideoId, querySelector, querySelectorAll } from "./utils";
+import { isPrivateBrowsingContext } from "./private-browsing";
 import {
   actionBarHasHydratedData,
   getShortsIdentityLinkVideoIds,
@@ -310,6 +311,7 @@ function isSyntheticShortsDislike(dislikeButton) {
 
 function setSyntheticShortsDislikePressed(pressed, dislikeButton = getDislikeButton()) {
   if (!isSyntheticShortsDislike(dislikeButton)) return false;
+  if (isPrivateBrowsingContext()) pressed = false;
 
   dislikeButton.classList.toggle("style-default-active", pressed);
   dislikeButton.classList.toggle("style-text", !pressed);
@@ -319,6 +321,7 @@ function setSyntheticShortsDislikePressed(pressed, dislikeButton = getDislikeBut
 
 function setSyntheticShortsDislikeEnabled(enabled, dislikeButton = getDislikeButton()) {
   if (!isSyntheticShortsDislike(dislikeButton)) return false;
+  if (isPrivateBrowsingContext()) enabled = false;
 
   const button = dislikeButton.querySelector("button");
   if (!button) return false;

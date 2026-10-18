@@ -3,6 +3,101 @@
 import { createDiscussionPanel } from "./panel";
 import { discussionText } from "./localize";
 
+const otherSession = {
+  authenticated: true,
+  canPost: true,
+  isModerator: false,
+  profile: { id: "55555555-5555-4555-8555-555555555555", nickname: "Other writer" },
+};
+
+function identityForm(root, kind) {
+  if (kind === "root") return root.querySelector(".ryd-discussion-composer form");
+  root.querySelector(`[data-action='${kind === "edit" ? "edit" : "reply"}']`).click();
+  return root.querySelector(".ryd-discussion-inline-editor form");
+}
+
+function typeIdentityDraft(form, text) {
+  const input = form.querySelector("textarea");
+  input.value = text;
+  input.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
+test.each(["root", "reply", "edit"])("identity change discards the previous account's %s draft", async (kind) => {
+  const root = await mount({ session });
+  typeIdentityDraft(identityForm(root, kind), "Private draft for first account");
+  panel.setSession(otherSession);
+  await flush();
+  expect(root.querySelector(".ryd-discussion-composer textarea").value).toBe("");
+  expect(root.querySelector("[data-action='edit']")).toBeNull();
+  panel.setSession(session);
+  await flush();
+  expect(identityForm(root, kind).querySelector("textarea").value).toBe(kind === "edit" ? "First comment" : "");
+});
+
+test("logout prevents a root draft returning after signing in again", async () => {
+  const root = await mount({ session });
+  typeIdentityDraft(identityForm(root, "root"), "First account draft");
+  panel.setSession({ authenticated: false, canPost: false, profile: null });
+  await flush();
+  panel.setSession(session);
+  await flush();
+  expect(identityForm(root, "root").querySelector("textarea").value).toBe("");
+});
+
+test("same-account refresh preserves a failed submission's retry ID", async () => {
+  Object.defineProperty(globalThis.crypto, "randomUUID", {
+    configurable: true,
+    value: jest
+      .fn()
+      .mockReturnValueOnce("44444444-4444-4444-8444-444444444444")
+      .mockReturnValue("66666666-6666-4666-8666-666666666666"),
+  });
+  const root = await mount({ session });
+  request.mockRejectedValueOnce({ code: "unavailable" });
+  submit(identityForm(root, "root"), "Retry my own draft");
+  await flush();
+  panel.setSession({ ...session });
+  await flush();
+  request.mockResolvedValueOnce(comment({ text: "Retry my own draft" }));
+  identityForm(root, "root").dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+  await flush();
+  const creates = request.mock.calls.filter(([operation]) => operation === "createComment");
+  expect(creates).toHaveLength(2);
+  expect(creates[1][1].requestId).toBe(creates[0][1].requestId);
+});
+
+test.each(["root", "reply", "edit"])("same-account refresh preserves its %s draft", async (kind) => {
+  const root = await mount({ session });
+  typeIdentityDraft(identityForm(root, kind), "Keep my own draft");
+  panel.setSession({ ...session, profile: { ...session.profile } });
+  await flush();
+  expect(identityForm(root, kind).querySelector("textarea").value).toBe("Keep my own draft");
+});
+
+test.each(["root", "reply", "edit"])("old %s completion cannot clear a draft after A to B to A", async (kind) => {
+  const root = await mount({ session });
+  let finish;
+  const operation = kind === "edit" ? "editComment" : "createComment";
+  request.mockImplementation((name) => {
+    if (name === operation)
+      return new Promise((resolve) => {
+        finish = resolve;
+      });
+    return Promise.resolve({ items: [comment()], nextCursor: null });
+  });
+  submit(identityForm(root, kind), "Old pending submission");
+  panel.setSession(otherSession);
+  await flush();
+  panel.setSession(session);
+  await flush();
+  typeIdentityDraft(identityForm(root, kind), "New draft after returning");
+  finish(comment({ ...(kind === "reply" ? { id: REPLY, parentId: ROOT } : {}), text: "Old pending submission" }));
+  await flush();
+  panel.setSession({ ...session });
+  await flush();
+  expect(identityForm(root, kind).querySelector("textarea").value).toBe("New draft after returning");
+});
+
 const VIDEO = "abcdefghijk";
 const ROOT = "11111111-1111-1111-1111-111111111111";
 const REPLY = "22222222-2222-2222-2222-222222222222";

@@ -21,6 +21,7 @@ import {
   restoreCurrentState,
   setInitialState,
   storedData,
+  NEUTRAL_STATE,
 } from "./src/state";
 import { getBrowser, getVideoId, isVideoLoaded } from "./src/utils";
 import {
@@ -42,6 +43,7 @@ import { initDiscussion } from "./src/discussion";
 import { waitForCoreDataConsent } from "./src/consent-prompt";
 import { onCoreDataPermissionChanged } from "./src/core-data-consent";
 import { cancelObsoleteVoteDataRequests, clearVoteDataRequestCache } from "./src/vote-data-request";
+import { isPrivateBrowsingContext } from "./src/private-browsing";
 import {
   actionBarHasHydratedData,
   captureShortsNativeControlInventory,
@@ -70,9 +72,33 @@ let pendingShortsMutationSurface = null;
 let shortsRouteEpoch = 0;
 let observedRouteKey = null;
 let coreConsentGranted = false;
+let privatePageActive = true;
+const privateBrowsingContext = isPrivateBrowsingContext();
 const pendingNavigation = createPendingNavigationTracker();
 const SHORTS_HYDRATION_ATTRIBUTE = "data-ryd-shorts-action-bar-hydrated";
 const SHORTS_HYDRATION_REQUEST_EVENT = "ryd-shorts-action-bar-hydration-request";
+
+function clearPrivateVoteState() {
+  clearVoteDataRequestCache();
+  Object.assign(storedData, { likes: 0, dislikes: 0, previousState: NEUTRAL_STATE, videoId: null });
+}
+
+if (privateBrowsingContext) {
+  window.addEventListener("pagehide", () => {
+    privatePageActive = false;
+    clearPrivateVoteState();
+    clearRenderedVoteState();
+    initializedVideoId = null;
+    isSetInitialStateDone = false;
+    if (jsInitChecktimer !== null) {
+      clearInterval(jsInitChecktimer);
+      jsInitChecktimer = null;
+    }
+  });
+  window.addEventListener("pageshow", () => {
+    privatePageActive = true;
+  });
+}
 
 function injectPageWorldHelpers() {
   return new Promise((resolve) => {
@@ -107,6 +133,7 @@ onCoreDataPermissionChanged((granted) => {
   coreConsentGranted = granted;
   if (!granted) {
     clearVoteDataRequestCache();
+    if (privateBrowsingContext) clearPrivateVoteState();
     storedData.videoId = null;
     initializedVideoId = null;
     isSetInitialStateDone = false;
@@ -119,13 +146,17 @@ onCoreDataPermissionChanged((granted) => {
 const pageWorldHelpersReady = injectPageWorldHelpers();
 // Listen before asynchronous initialization so settings changed in another tab
 // are applied while the page is still loading.
-getBrowser().storage.onChanged.addListener(storageChangeHandler);
-isStorageListenerRegistered = true;
+if (!privateBrowsingContext) {
+  getBrowser().storage.onChanged.addListener(storageChangeHandler);
+  isStorageListenerRegistered = true;
+}
 await initExtConfig();
 observeColorTheme();
 await pageWorldHelpersReady;
-initPatreonFeatures();
-initDiscussion();
+if (!privateBrowsingContext) {
+  initPatreonFeatures();
+  initDiscussion();
+}
 
 function ensureShortsNavigationObserver() {
   if (!isShorts()) {
@@ -308,6 +339,7 @@ function getStableShortsControls(videoId) {
 }
 
 async function checkForInitialization() {
+  if (privateBrowsingContext && !privatePageActive) return;
   if (!coreConsentGranted) return;
   if (initializationCheckRunning) return;
   initializationCheckRunning = true;
@@ -341,7 +373,7 @@ async function checkForInitialization() {
       } else {
         rendered = await setInitialState();
       }
-      if (rendered === false || !coreConsentGranted) return;
+      if (rendered === false || !coreConsentGranted || (privateBrowsingContext && !privatePageActive)) return;
       const currentControls = getButtonControls();
       if (
         videoId !== getVideoId(window.location.href) ||
@@ -369,13 +401,17 @@ async function checkForInitialization() {
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
       }
-      if (!isStorageListenerRegistered) {
+      if (!privateBrowsingContext && !isStorageListenerRegistered) {
         getBrowser().storage.onChanged.addListener(storageChangeHandler);
         isStorageListenerRegistered = true;
       }
     }
   } catch (exception) {
-    console.warn("Initialization failed; retrying when the current controls are ready.", exception);
+    if (privateBrowsingContext) {
+      console.warn("Initialization failed; retrying when the current controls are ready.");
+    } else {
+      console.warn("Initialization failed; retrying when the current controls are ready.", exception);
+    }
   } finally {
     initializationCheckRunning = false;
   }
@@ -405,6 +441,7 @@ const initializationCycle = createInitializationCycleRunner(async () => {
 });
 
 function triggerInitializationCycle() {
+  if (privateBrowsingContext && !privatePageActive) return Promise.resolve();
   if (!coreConsentGranted) return Promise.resolve();
   return initializationCycle.request();
 }
@@ -415,6 +452,7 @@ async function setEventListeners() {
 
 document.addEventListener("yt-navigate-start", function () {
   clearVoteDataRequestCache();
+  if (privateBrowsingContext) clearPrivateVoteState();
   shortsRouteEpoch += 1;
   pendingShortsMutationSurface = null;
   pendingNavigation.begin(() => {
@@ -523,6 +561,7 @@ function watchControlsNeedInitialization() {
 }
 
 setInterval(() => {
+  if (privateBrowsingContext && !privatePageActive) return;
   if (!coreConsentGranted) return;
   syncShortsRouteEpoch();
   if (isShorts()) ensureShortsNavigationObserver();

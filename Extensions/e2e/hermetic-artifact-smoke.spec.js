@@ -49,7 +49,7 @@ test("the extension adapter honors the selected artifact even when a scenario us
   }
 });
 
-function createExtensionFixture(lineEnding = "\n") {
+function createExtensionFixture(lineEnding = "\n", installedHandler = "maybeShowChangelog(details);") {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "ryd-mv3-source-fixture-"));
   temporaryDirectories.push(directory);
   fs.writeFileSync(
@@ -66,7 +66,7 @@ function createExtensionFixture(lineEnding = "\n") {
   );
   fs.writeFileSync(
     path.join(directory, "ryd.background.js"),
-    `fetch("${PRODUCTION_API_ORIGIN}/register")\napi.runtime.onInstalled.addListener((details) => {\n  maybeShowChangelog(details);\n});`.replaceAll(
+    `fetch("${PRODUCTION_API_ORIGIN}/register")\napi.runtime.onInstalled.addListener((details) => {\n  ${installedHandler}\n});`.replaceAll(
       "\n",
       lineEnding,
     ),
@@ -381,10 +381,15 @@ test("the routed fake backend records a valid preflight and blocks an unknown on
   ]);
 });
 
-test.each(["\n", "\r\n"])(
-  "redirects MV3 background traffic with %j line endings and preserves routed traffic",
-  (lineEnding) => {
-    const sourceDirectory = createExtensionFixture(lineEnding);
+test.each([
+  ["\n", "maybeShowChangelog(details);"],
+  ["\r\n", "maybeShowChangelog(details);"],
+  ["\n", "void handleInstallation(details);"],
+  ["\r\n", "void handleInstallation(details);"],
+])(
+  "redirects MV3 background traffic with %j line endings and %s while preserving routed traffic",
+  (lineEnding, installedHandler) => {
+    const sourceDirectory = createExtensionFixture(lineEnding, installedHandler);
     const prepared = prepareHermeticExtensionArtifact(sourceDirectory, "http://127.0.0.1:43127");
     temporaryDirectories.push(prepared.temporaryRoot);
 

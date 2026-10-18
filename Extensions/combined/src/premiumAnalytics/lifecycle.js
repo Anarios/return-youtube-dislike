@@ -7,8 +7,13 @@ import {
   updateModeButtons,
   applyChartExpansionState,
 } from "./panel";
-import { resizeActivityChart, disposeActivityChart, registerZoomSelectionListener } from "./activity";
-import { renderMap, resizeMapChart, disposeMapChart } from "./map";
+import {
+  resizeActivityChart,
+  disposeActivityChart,
+  registerZoomSelectionListener,
+  refreshActivityTheme,
+} from "./activity";
+import { renderMap, resizeMapChart, disposeMapChart, refreshMapTheme } from "./map";
 import { debounce } from "./utils";
 import { getVideoId } from "../utils";
 
@@ -16,12 +21,18 @@ import { MS_PER_DAY, EXPANDABLE_SECTIONS } from "./constants";
 import { requestAnalytics, scheduleSelectionFetch, normalizeSelection } from "./requests";
 import { setTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } from "./teaser";
 import { showTierNotice, hideTierNotice } from "./tierNotice";
+import { observeTheme } from "./theme";
 
 let resizeListener = null;
+let themeObserver = null;
 
 function initPremiumAnalytics() {
   if (analyticsState.initialized) return;
   analyticsState.initialized = true;
+  themeObserver = observeTheme(() => {
+    refreshActivityTheme();
+    refreshMapTheme();
+  });
 
   if (!analyticsState.zoomListenerRegistered) {
     registerZoomSelectionListener(handleChartSelection);
@@ -65,7 +76,7 @@ function handleNavigation() {
 
 function handleRangePreset(rangeDays) {
   const state = analyticsState;
-  const samePreset = rangeDays === state.currentRange;
+  const samePreset = !state.usingCustomRange && rangeDays === state.currentRange;
   if (samePreset) {
     return;
   }
@@ -135,8 +146,7 @@ function handleChartSelection(range) {
   }
 
   const sameAsCurrent =
-    analyticsState.selectionRange.from === normalized.from &&
-    analyticsState.selectionRange.to === normalized.to;
+    analyticsState.selectionRange.from === normalized.from && analyticsState.selectionRange.to === normalized.to;
 
   analyticsState.selectionRange = normalized;
   analyticsState.customSelection = { ...normalized };
@@ -169,6 +179,8 @@ function teardownPanel() {
 }
 
 function teardownPremiumAnalytics() {
+  themeObserver?.disconnect();
+  themeObserver = null;
   teardownPanel();
   if (resizeListener) {
     window.removeEventListener("resize", resizeListener);

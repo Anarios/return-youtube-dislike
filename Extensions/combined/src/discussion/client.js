@@ -1,9 +1,15 @@
+import { isFirefoxExtension, isPrivateBrowsingContext } from "../private-browsing";
+
 function runtimeApi() {
   return typeof chrome !== "undefined" ? chrome.runtime : globalThis.browser?.runtime;
 }
 
 export function requestDiscussion(operation, payload = {}, scope) {
   return new Promise((resolve, reject) => {
+    if (isPrivateBrowsingContext()) {
+      reject(Object.assign(new Error("Discussion service unavailable"), { code: "private_browsing" }));
+      return;
+    }
     const runtime = runtimeApi();
     if (!runtime?.sendMessage) {
       reject(Object.assign(new Error("Discussion service unavailable"), { code: "unavailable" }));
@@ -79,6 +85,22 @@ export function createDiscussionRequestScope(videoId, request = requestDiscussio
 }
 
 export function subscribeDiscussionEvents(listener) {
+  if (isPrivateBrowsingContext()) return () => {};
+  const api = typeof browser !== "undefined" ? browser : globalThis.chrome;
+  const extensionUrl = api?.runtime?.getURL?.("");
+  if (
+    isFirefoxExtension(api) &&
+    typeof window !== "undefined" &&
+    window.location.protocol === "moz-extension:" &&
+    extensionUrl &&
+    window.location.href.startsWith(extensionUrl)
+  ) {
+    const receive = (event) => {
+      if (event.detail?.message === "ryd_discussion_event") listener(event.detail);
+    };
+    window.addEventListener("ryd-discussion-event", receive);
+    return () => window.removeEventListener("ryd-discussion-event", receive);
+  }
   const event = runtimeApi()?.onMessage;
   const receive = (message) => {
     if (message?.message === "ryd_discussion_event") listener(message);

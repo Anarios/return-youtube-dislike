@@ -75,6 +75,7 @@ export function createDiscussionPanel({
   let activeTab = "discussion";
   const drafts = new Map();
   const postingIds = new Map();
+  let draftGeneration = 0;
   const rootReplyHandlers = new Map();
   let moderationSequence = 0;
   let reportCursor = null;
@@ -237,6 +238,8 @@ export function createDiscussionPanel({
       if (submit.disabled) return;
       const text = input.value.trim();
       if (!text || text.length > maxLength) return;
+      const accountSnapshot = draftGeneration;
+      const stillCurrent = () => current() && accountSnapshot === draftGeneration;
       submit.disabled = true;
       input.disabled = true;
       message.textContent = t("saving");
@@ -247,7 +250,7 @@ export function createDiscussionPanel({
           ? { id: comment.id, text }
           : { videoId, text, requestId, ...(parentId ? { parentId, replyToId } : {}) };
         const result = await request(comment ? "editComment" : "createComment", payload);
-        if (!current()) return;
+        if (!stillCurrent()) return;
         drafts.delete(key);
         postingIds.delete(key);
         if (onSaved) onSaved(result);
@@ -258,9 +261,9 @@ export function createDiscussionPanel({
           await load();
         }
       } catch (error) {
-        if (current()) message.textContent = discussionError(error);
+        if (stillCurrent()) message.textContent = discussionError(error);
       } finally {
-        if (current()) {
+        if (stillCurrent()) {
           input.disabled = false;
           submit.disabled = !input.value.trim();
         }
@@ -676,6 +679,11 @@ export function createDiscussionPanel({
     setSession(next) {
       const previousIdentity = session.authenticated ? session.profile?.id || "authenticated" : "anonymous";
       const nextIdentity = next?.authenticated ? next.profile?.id || "authenticated" : "anonymous";
+      if (previousIdentity !== nextIdentity) {
+        draftGeneration++;
+        drafts.clear();
+        postingIds.clear();
+      }
       accountGeneration++;
       moderationSequence++;
       session = next || SIGNED_OUT;

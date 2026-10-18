@@ -6,21 +6,32 @@ jest.mock("./src/core-data-consent", () => ({
   requestCoreDataPermission: jest.fn(),
   consentApi: jest.fn(),
 }));
+jest.mock("./src/private-browsing", () => ({ isPrivateBrowsingContext: jest.fn() }));
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 describe("Firefox consent explainer", () => {
   let permission;
   let local;
-  beforeEach(() => {
+  let sendMessage;
+  function openExplainer({ privateBrowsing = false, canRequest = true } = {}) {
     jest.resetModules();
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "consent.html"), "utf8");
     permission = require("./src/core-data-consent");
-    local = { set: jest.fn(async () => {}), remove: jest.fn(async () => {}) };
-    permission.consentApi.mockReturnValue({ storage: { local }, permissions: { request: jest.fn() } });
+    require("./src/private-browsing").isPrivateBrowsingContext.mockReturnValue(privateBrowsing);
+    local = { get: jest.fn(), set: jest.fn(async () => {}), remove: jest.fn(async () => {}) };
+    sendMessage = jest.fn(async () => ({ success: true }));
+    permission.consentApi.mockReturnValue({
+      storage: { local },
+      runtime: { sendMessage },
+      ...(canRequest ? { permissions: { request: jest.fn() } } : {}),
+    });
     permission.hasCoreDataPermission.mockResolvedValue(false);
     permission.requestCoreDataPermission.mockResolvedValue(false);
+    const continueButton = document.getElementById("consent-continue");
     require("./consent");
-  });
+    return continueButton;
+  }
+  beforeEach(() => openExplainer());
 
   test("opening the explainer and selecting Not now request no permissions", async () => {
     expect(document.querySelector("main").textContent).toMatch(/random ID/);
@@ -50,16 +61,40 @@ describe("Firefox consent explainer", () => {
   });
 
   test("a page-embedded explainer opens the extension consent page without requesting permissions", async () => {
-    jest.resetModules();
-    document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "consent.html"), "utf8");
-    permission = require("./src/core-data-consent");
-    const sendMessage = jest.fn(async () => ({ success: true }));
-    permission.consentApi.mockReturnValue({ storage: { local }, runtime: { sendMessage } });
-    require("./consent");
+    openExplainer({ canRequest: false });
     document.getElementById("consent-continue").click();
     await flush();
     expect(sendMessage).toHaveBeenCalledWith({ message: "ryd_open_consent" });
     expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
     expect(document.getElementById("consent-next-step").textContent).toMatch(/permission page/);
   });
+
+  test.each([true, false])(
+    "private setup stays local without requesting permissions or opening a normal page when request API availability is %s",
+    async (canRequest) => {
+      const continueButton = openExplainer({ privateBrowsing: true, canRequest });
+      expect(document.getElementById("consent-next-step").textContent).toBe(
+        "Enable RYD in a normal Firefox window to load counts here.",
+      );
+      expect(document.querySelector("main").textContent).toContain(
+        "Counts only in private windows. Voting, sign-in, premium analytics and discussions are unavailable here.",
+      );
+      expect(document.querySelector("main").textContent).not.toMatch(/random ID|Allow in Firefox|Continue/);
+      expect(document.getElementById("consent-continue")).toBeNull();
+      continueButton.click();
+      document.getElementById("consent-decline").click();
+      await flush();
+
+      expect(permission.consentApi).not.toHaveBeenCalled();
+      expect(permission.hasCoreDataPermission).not.toHaveBeenCalled();
+      expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
+      expect(local.get).not.toHaveBeenCalled();
+      expect(local.set).not.toHaveBeenCalled();
+      expect(local.remove).not.toHaveBeenCalled();
+      expect(sendMessage).not.toHaveBeenCalled();
+      expect(document.getElementById("consent-status").textContent).toBe(
+        "Enable RYD in a normal Firefox window to load counts here.",
+      );
+    },
+  );
 });
