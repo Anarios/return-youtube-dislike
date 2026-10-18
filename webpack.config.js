@@ -107,6 +107,27 @@ class ExtensionBuildReceiptPlugin {
   }
 }
 
+class StripSourceMapReferencesPlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap("StripSourceMapReferencesPlugin", (compilation) => {
+      compilation.hooks.processAssets.tap(
+        {
+          name: "StripSourceMapReferencesPlugin",
+          stage: webpack.Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE,
+        },
+        (assets) => {
+          for (const [name, asset] of Object.entries(assets)) {
+            if (!name.endsWith(".js")) continue;
+            const source = asset.source().toString();
+            const cleaned = source.replace(/^\/\/[#@] sourceMappingURL=.*(?:\r?\n|$)/gm, "");
+            if (cleaned !== source) compilation.updateAsset(name, new webpack.sources.RawSource(cleaned));
+          }
+        },
+      );
+    });
+  }
+}
+
 module.exports = (env = {}, argv = {}) => {
   const liveTestBuild = env.liveTest === true || env.liveTest === "true";
   let discussionTestOrigin = "";
@@ -160,6 +181,7 @@ module.exports = (env = {}, argv = {}) => {
     },
     plugins: [
       new ExtensionBuildReceiptPlugin(buildMode),
+      ...(buildMode === "production" ? [new StripSourceMapReferencesPlugin()] : []),
       new webpack.DefinePlugin({
         __RYD_LIVE_BUILD_ID__: JSON.stringify(liveBuildId),
         __RYD_LIVE_TEST_BUILD__: JSON.stringify(liveTestBuild),
