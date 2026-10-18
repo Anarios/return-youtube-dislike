@@ -3,10 +3,14 @@
     <h1 class="title-text pt-12">
       {{ $vuetify.lang.t("$vuetify.help.title") }}
     </h1>
-    <ol style="line-height: 3rem; color: #aaa" class="text-left">
+    <ol
+      class="ps-6 pe-0"
+      :class="$vuetify.rtl ? 'text-right' : 'text-left'"
+      style="line-height: 3rem; color: #aaa"
+    >
       <li>
         {{ $vuetify.lang.t("$vuetify.help.bullet1") }}
-        <code style="color: #eee">
+        <code dir="ltr" style="color: #eee">
           <b>{{ version }}</b>
         </code>
         {{ $vuetify.lang.t("$vuetify.help.bullet11") }}
@@ -17,6 +21,7 @@
       <li>
         {{ $vuetify.lang.t("$vuetify.help.bullet3") }}
         <a
+          dir="ltr"
           class="px-2 py-1"
           style="background: #222; border-radius: 0.25rem"
           href="https://returnyoutubedislikeapi.com/votes?videoId=QOFEgexls14"
@@ -26,7 +31,7 @@
         , <br />
         {{ $vuetify.lang.t("$vuetify.help.bullet31") }}
         <br />
-        <span style="color: #eee">
+        <span dir="ltr" style="color: #eee">
           {"id":"QOFEgexls14", "dateCreated":"2021-12-15T16:54:12.250813Z",
           "likes":2907, "dislikes":215, "rating":4.725641025641026,
           "viewCount":28222, "deleted":false}
@@ -34,7 +39,7 @@
       </li>
       <li>
         {{ $vuetify.lang.t("$vuetify.help.bullet4") }}
-        <code>#bugs-and-problems</code>
+        <code dir="ltr">#bugs-and-problems</code>
         {{ $vuetify.lang.t("$vuetify.help.bullet41") }}
         <v-btn
           class="mainAltButton"
@@ -51,7 +56,7 @@
           <v-icon size="1rem" style="margin-right: 0.5em">mdi-discord</v-icon>
           {{ $vuetify.lang.t("$vuetify.links.discord") }}
         </v-btn>
-        <ol type="a">
+        <ol class="ps-6 pe-0" type="a">
           <li>
             {{ $vuetify.lang.t("$vuetify.help.bullet4a") }}
             <v-btn
@@ -77,7 +82,7 @@
 
           <li style="position: relative; width: 100%">
             {{ $vuetify.lang.t("$vuetify.help.bullet4b") }}
-            <code>F12</code>
+            <code dir="ltr">F12</code>
             {{ $vuetify.lang.t("$vuetify.help.bullet4b1") }}
 
             <img
@@ -94,10 +99,10 @@
             <br />
             {{ $vuetify.lang.t("$vuetify.help.bullet4c1") }}
             <br />
-            <code>about:addons</code>
+            <code dir="ltr">about:addons</code>
             {{ $vuetify.lang.t("$vuetify.help.firefox") }}
             <br />
-            <code>chrome://extensions</code>
+            <code dir="ltr">chrome://extensions</code>
             {{ $vuetify.lang.t("$vuetify.help.chrome") }}
           </li>
         </ol>

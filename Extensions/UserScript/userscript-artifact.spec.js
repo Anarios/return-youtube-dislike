@@ -55,7 +55,7 @@ describe("generated userscript artifact", () => {
   it("contains the candidate metadata and required modern and legacy grants", () => {
     expect(artifact.startsWith("// ==UserScript==\n")).toBe(true);
     expect(artifact).toContain(`// @version      ${userscriptMeta.version}`);
-    expect(userscriptMeta.version).toBe("3.2.0");
+    expect(userscriptMeta.version).toBe("3.2.1");
     expect(artifact).toContain(`// @downloadURL  ${userscriptMeta.downloadURL}`);
     expect(artifact).toContain(`// @updateURL    ${userscriptMeta.updateURL}`);
     for (const grant of userscriptMeta.grants) {

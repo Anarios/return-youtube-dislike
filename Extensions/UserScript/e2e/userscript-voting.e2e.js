@@ -482,14 +482,15 @@ test("modern Shorts supports the colored-thumbs option", async ({ context, page 
     },
   );
   await waitForDislikeCount(page, 25);
+  const neutralColor = await visibleVoteButton(page, "dislike").evaluate((button) => getComputedStyle(button).color);
 
   await visibleVoteButton(page, "dislike").click();
   await expect.poll(() => harness.backend.requestsFor("POST", "/interact/confirmVote").length).toBe(1);
-  await expect.poll(() => visibleVoteButton(page, "dislike").evaluate((button) => button.style.color)).toBe("red");
+  await expect(visibleVoteButton(page, "dislike")).toHaveCSS("color", "rgb(255, 0, 0)");
 
   await visibleVoteButton(page, "dislike").click();
   await expect.poll(() => harness.backend.requestsFor("POST", "/interact/confirmVote").length).toBe(2);
-  await expect.poll(() => visibleVoteButton(page, "dislike").evaluate((button) => button.style.color)).toBe("unset");
+  await expect(visibleVoteButton(page, "dislike")).toHaveCSS("color", neutralColor);
   await expectNoRuntimeFailures(harness);
 });
 

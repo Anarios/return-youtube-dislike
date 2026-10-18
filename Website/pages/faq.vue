@@ -12,7 +12,9 @@
         <v-expansion-panel-header>
           {{ $vuetify.lang.t(`$vuetify.faq.bullet${i}`) }}
         </v-expansion-panel-header>
-        <v-expansion-panel-content class="text-left">
+        <v-expansion-panel-content
+          :class="$vuetify.rtl ? 'text-right' : 'text-left'"
+        >
           <hr style="border-color: #444" />
           <br />
           <span v-html="$vuetify.lang.t(`$vuetify.faq.bullet${i}text`)" />

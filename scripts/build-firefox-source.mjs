@@ -14,13 +14,14 @@ const expectedNodeVersion = "v22.17.0";
 const expectedNpmVersion = "10.8.2";
 const expectedExtensionVersion = "4.1.0";
 const expectedFirefoxExtensionId = "{762f9885-5a13-4abd-9c77-433dcd38b8fd}";
-const expectedRequiredDataCollectionPermissions = [
+const expectedRequiredDataCollectionPermissions = ["none"];
+const expectedOptionalDataCollectionPermissions = [
   "personallyIdentifyingInfo",
   "browsingActivity",
   "websiteContent",
   "websiteActivity",
+  "authenticationInfo",
 ];
-const expectedOptionalDataCollectionPermissions = ["authenticationInfo"];
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const shouldUseShell = process.platform === "win32";
 

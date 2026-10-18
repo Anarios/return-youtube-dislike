@@ -141,6 +141,20 @@ module.exports = (env = {}, argv = {}) => {
     optimization: {
       minimize: false,
     },
+    module: {
+      rules: [
+        {
+          test: /messages\.json$/,
+          include: path.resolve(__dirname, "Extensions/combined/_locales"),
+          issuer: /[\\/]src[\\/]discussion[\\/]localize\.js$/,
+          type: "json",
+          parser: {
+            parse: (source) =>
+              Object.fromEntries(Object.entries(JSON.parse(source)).filter(([key]) => key.startsWith("discussion_"))),
+          },
+        },
+      ],
+    },
     watchOptions: {
       ignored: "**/dist/**",
     },

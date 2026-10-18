@@ -5,6 +5,7 @@ import german from "../../_locales/de/messages.json";
 import greek from "../../_locales/el/messages.json";
 import english from "../../_locales/en/messages.json";
 import spanish from "../../_locales/es/messages.json";
+import persian from "../../_locales/fa/messages.json";
 import french from "../../_locales/fr/messages.json";
 import hungarian from "../../_locales/hu/messages.json";
 import indonesian from "../../_locales/id/messages.json";
@@ -31,6 +32,7 @@ const catalogs = {
   el: greek,
   en: english,
   es: spanish,
+  fa: persian,
   fr: french,
   hu: hungarian,
   id: indonesian,

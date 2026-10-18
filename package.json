@@ -56,7 +56,7 @@
   "dependencies": {
     "@microsoft/signalr": "9.0.6",
     "country-code-lookup": "^0.1.3",
-    "echarts": "^5.5.0",
+    "echarts": "^6.0.0",
     "topojson-client": "^3.1.0",
     "us-atlas": "^3.0.0",
     "world-atlas": "^2.0.2"
@@ -68,10 +68,10 @@
     "@playwright/test": "1.62.0",
     "babel-loader": "^10.0.0",
     "babel-plugin-rewire": "^1.2.0",
-    "copy-webpack-plugin": "^11.0.0",
+    "copy-webpack-plugin": "^13.0.1",
     "filemanager-webpack-plugin": "^9.0.1",
     "husky": "^9.1.7",
-    "jest": "^28.1.3",
+    "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.0.4",
     "lint-staged": "^16.1.2",
     "prettier": "^3.2.2",

@@ -6,7 +6,7 @@
   >
     <!-- docs navigation  -->
     <v-list
-      class="py-0 mr-3"
+      class="py-0 me-3"
       style="
         background: transparent;
         position: sticky;
@@ -23,7 +23,7 @@
         color="primary"
         style="overflow: hidden !important; border-radius: 0.75rem"
       >
-        <v-list-item-title style="text-align: right">
+        <v-list-item-title :class="$vuetify.rtl ? 'text-left' : 'text-right'">
           <v-list-item-title
             v-text="$vuetify.lang.t(`$vuetify.api.${link.name}.title`)"
           />
@@ -36,7 +36,8 @@
 
     <!-- docs content -->
     <v-card
-      class="text-left glass pa-6"
+      class="docs-content glass pa-6"
+      :class="$vuetify.rtl ? 'text-right' : 'text-left'"
       style="
         flex-grow: 2;
         height: max-content;
@@ -89,3 +90,12 @@ export default {
   },
 };
 </script>
+
+<style>
+.docs-content .code,
+.docs-content a {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: isolate;
+}
+</style>
