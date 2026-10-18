@@ -28,7 +28,7 @@ Read this in other languages: [English](README.md), [فارسی](READMEfa.md), [
 
 با حذف آمار dislike از YouTube API، بخش backend ما به استفاده از ترکیبی از آمار dislikeهای جمع‌آوری‌شده و برآوردهای استخراج‌شده از داده‌های کاربران افزونه تغییر یافت.
 
-[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQfa.md)
 
 ## چرا اهمیت دارد
 
@@ -77,13 +77,13 @@ You can view all documentation on our website.
 
 ## مشارکت
 
-لطفاً [راهنمای مشارکت](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md) را مطالعه کنید.
+لطفاً [راهنمای مشارکت](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGfa.md) را مطالعه کنید.
 
 ## از این پروژه حمایت کنید!
 
 می‌توانید با اهدا از طریق لینک زیر از این پروژه حمایت کنید:
 
-[Donate](https://returnyoutubedislike.com/donate)
+[کمک مالی](https://returnyoutubedislike.com/donate)
 
 ## حامیان مالی
 

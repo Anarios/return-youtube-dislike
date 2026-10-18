@@ -59,4 +59,4 @@ Read this in other languages: [English](FAQ.md), [فارسی](FAQfa.md), [бел
 
 ## من نگرانی‌های امنیتی / حریم خصوصی دارم
 
-برای اطلاعات بیشتر [این صفحه](SECURITY-FAQ.md) را ببینید.
+برای اطلاعات بیشتر [این صفحه](SECURITY-FAQfa.md) را ببینید.
