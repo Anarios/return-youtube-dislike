@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Yeni və təkmilləşdirilmiş tərcümələr."
+  },
+  "reviewPromptTitle": {
+    "message": "RYD xoşunuza gəlir?"
+  },
+  "reviewPromptBody": {
+    "message": "Google Chrome Web Store reytinqlərinin qaydalarını dəyişdi. 16 000+ beşulduzlu rəyə baxmayaraq, bir neçə yeni mənfi rəy RYD-nin reytinqini 4,6-dan 2,5-ə endirdi.\n\nRYD sizə kömək edirsə, zəhmət olmasa, dürüst rəy yazın."
+  },
+  "reviewPromptAction": {
+    "message": "Rəy yazın"
   }
 }

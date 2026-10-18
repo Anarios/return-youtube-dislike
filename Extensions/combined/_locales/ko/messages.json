@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "번역을 추가하고 개선했습니다."
+  },
+  "reviewPromptTitle": {
+    "message": "RYD가 마음에 드시나요?"
+  },
+  "reviewPromptBody": {
+    "message": "Google이 Chrome Web Store의 평점 규칙을 변경했습니다. 별 5개 리뷰가 16,000개 이상인데도 최근의 부정적인 리뷰 몇 개가 RYD의 평점을 4.6에서 2.5로 끌어내렸습니다.\n\nRYD가 도움이 된다면 솔직한 리뷰를 남겨 주세요."
+  },
+  "reviewPromptAction": {
+    "message": "리뷰 남기기"
   }
 }

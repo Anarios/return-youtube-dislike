@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Traductions ajoutées et améliorées."
+  },
+  "reviewPromptTitle": {
+    "message": "Vous aimez RYD ?"
+  },
+  "reviewPromptBody": {
+    "message": "Google a changé les règles des notes sur le Chrome Web Store. Malgré plus de 16 000 avis cinq étoiles, quelques avis négatifs récents ont fait chuter la note de RYD de 4,6 à 2,5.\n\nSi RYD vous est utile, laissez un avis honnête, s’il vous plaît."
+  },
+  "reviewPromptAction": {
+    "message": "Laisser un avis"
   }
 }

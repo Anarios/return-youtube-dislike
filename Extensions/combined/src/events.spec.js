@@ -5,6 +5,8 @@
 
 const mockSendMessage = jest.fn();
 
+jest.mock("./review-prompt", () => ({ recordReviewAction: jest.fn() }));
+
 jest.mock("./private-browsing", () => ({
   ...jest.requireActual("./private-browsing"),
   isPrivateBrowsingContext: jest.fn(),
@@ -60,8 +62,10 @@ import {
 } from "./events";
 import { isPrivateBrowsingContext } from "./private-browsing";
 import { getBrowser } from "./utils";
+import { recordReviewAction } from "./review-prompt";
 
 beforeEach(() => {
+  recordReviewAction.mockClear();
   isPrivateBrowsingContext.mockReturnValue(false);
   isSyntheticShortsDislike.mockReturnValue(false);
   extConfig.disableVoteSubmission = false;
@@ -101,6 +105,25 @@ test.each([false, true])("private direct reactions do not alter counts or submit
   expect(persistSyntheticShortsDislikeState).not.toHaveBeenCalled();
   expect(storedData).toEqual(before);
   expect(setDislikes).not.toHaveBeenCalled();
+  expect(recordReviewAction).not.toHaveBeenCalled();
+});
+
+test("review progress uses local reactions even when vote submission is disabled", () => {
+  extConfig.disableVoteSubmission = true;
+  likeClicked();
+  expect(recordReviewAction).toHaveBeenLastCalledWith("abcdefghijk", 1);
+  dislikeClicked();
+  expect(recordReviewAction).toHaveBeenLastCalledWith("abcdefghijk", -1);
+  dislikeClicked();
+  expect(recordReviewAction).toHaveBeenLastCalledWith("abcdefghijk", 0);
+  expect(mockSendMessage).not.toHaveBeenCalled();
+});
+
+test("stale video controls cannot advance review progress", () => {
+  history.replaceState({}, "", "/watch?v=zyxwvutsrqp");
+  likeClicked();
+  dislikeClicked();
+  expect(recordReviewAction).not.toHaveBeenCalled();
 });
 
 test("private native reactions keep their YouTube click behavior without local reaction changes", () => {

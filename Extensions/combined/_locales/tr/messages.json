@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Yeni ve iyileştirilmiş çeviriler."
+  },
+  "reviewPromptTitle": {
+    "message": "RYD'den memnun musunuz?"
+  },
+  "reviewPromptBody": {
+    "message": "Google, Chrome Web Store puanlarının kurallarını değiştirdi. 16.000’den fazla beş yıldızlı yoruma rağmen birkaç yeni olumsuz yorum RYD’nin puanını 4,6’dan 2,5’e düşürdü.\n\nRYD size yardımcı oluyorsa lütfen dürüst bir yorum yazın."
+  },
+  "reviewPromptAction": {
+    "message": "Yorum yazın"
   }
 }

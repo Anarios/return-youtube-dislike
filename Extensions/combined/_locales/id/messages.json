@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Terjemahan baru dan penyempurnaan terjemahan."
+  },
+  "reviewPromptTitle": {
+    "message": "Suka RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "Google mengubah aturan rating di Chrome Web Store. Meskipun ada 16.000+ ulasan bintang lima, beberapa ulasan negatif terbaru menurunkan rating RYD dari 4,6 menjadi 2,5.\n\nJika RYD membantu Anda, silakan tulis ulasan yang jujur."
+  },
+  "reviewPromptAction": {
+    "message": "Tulis ulasan"
   }
 }

@@ -994,5 +994,14 @@
   },
   "changelog_also_translations": {
     "message": "ترجمه‌های جدید و بهبودیافته."
+  },
+  "reviewPromptTitle": {
+    "message": "از RYD راضی هستید؟"
+  },
+  "reviewPromptBody": {
+    "message": "Google قوانین امتیازدهی در Chrome Web Store را تغییر داد. با وجود بیش از ۱۶٬۰۰۰ نظر پنج‌ستاره، چند نظر منفی اخیر امتیاز RYD را از ۴٫۶ به ۲٫۵ کاهش داد.\n\nاگر RYD به شما کمک می‌کند، لطفاً نظری صادقانه بنویسید."
+  },
+  "reviewPromptAction": {
+    "message": "نوشتن نظر"
   }
 }

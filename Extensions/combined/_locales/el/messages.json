@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Νέες και βελτιωμένες μεταφράσεις."
+  },
+  "reviewPromptTitle": {
+    "message": "Σας αρέσει το RYD;"
+  },
+  "reviewPromptBody": {
+    "message": "Η Google άλλαξε τους κανόνες για τις βαθμολογίες στο Chrome Web Store. Παρά τις 16.000+ κριτικές πέντε αστέρων, λίγες πρόσφατες αρνητικές κριτικές έριξαν τη βαθμολογία του RYD από 4,6 σε 2,5.\n\nΑν το RYD σας βοηθά, αφήστε μια ειλικρινή κριτική."
+  },
+  "reviewPromptAction": {
+    "message": "Γράψτε μια κριτική"
   }
 }

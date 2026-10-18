@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Новыя і палепшаныя пераклады."
+  },
+  "reviewPromptTitle": {
+    "message": "Вам падабаецца RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "Google змяніў правілы рэйтынгаў у Chrome Web Store. Нягледзячы на 16 000+ пяцізоркавых водгукаў, некалькі нядаўніх негатыўных водгукаў знізілі рэйтынг RYD з 4,6 да 2,5.\n\nКалі RYD вам дапамагае, пакіньце, калі ласка, сумленны водгук."
+  },
+  "reviewPromptAction": {
+    "message": "Пакінуць водгук"
   }
 }

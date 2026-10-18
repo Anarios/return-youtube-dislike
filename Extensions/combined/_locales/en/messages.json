@@ -753,5 +753,14 @@
   },
   "changelog_also_translations": {
     "message": "New and improved translations."
+  },
+  "reviewPromptTitle": {
+    "message": "Enjoying RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "Google changed the rules for Chrome Web Store ratings. Despite 16,000+ five-star reviews, a few recent negative ones dragged RYD’s rating from 4.6 to 2.5.\n\nIf RYD helps you, please leave an honest review."
+  },
+  "reviewPromptAction": {
+    "message": "Leave a review"
   }
 }

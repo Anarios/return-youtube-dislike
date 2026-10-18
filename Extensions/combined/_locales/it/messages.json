@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Traduzioni nuove e migliorate."
+  },
+  "reviewPromptTitle": {
+    "message": "Ti piace RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "Google ha cambiato le regole delle valutazioni sul Chrome Web Store. Nonostante oltre 16.000 recensioni a cinque stelle, poche recensioni negative recenti hanno fatto scendere la valutazione di RYD da 4,6 a 2,5.\n\nSe RYD ti è utile, lascia una recensione sincera, per favore."
+  },
+  "reviewPromptAction": {
+    "message": "Lascia una recensione"
   }
 }

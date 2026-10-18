@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Nya och förbättrade översättningar."
+  },
+  "reviewPromptTitle": {
+    "message": "Gillar du RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "Google har ändrat reglerna för betyg i Chrome Web Store. Trots 16 000+ femstjärniga recensioner har några nya negativa recensioner dragit ner RYD:s betyg från 4,6 till 2,5.\n\nOm RYD hjälper dig får du gärna lämna en ärlig recension."
+  },
+  "reviewPromptAction": {
+    "message": "Skriv en recension"
   }
 }

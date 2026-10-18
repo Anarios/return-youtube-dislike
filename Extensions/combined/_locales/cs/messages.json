@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Nové a vylepšené překlady."
+  },
+  "reviewPromptTitle": {
+    "message": "Líbí se vám RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "Google změnil pravidla hodnocení v Chrome Web Store. Přes 16 000+ pětihvězdičkových recenzí srazilo několik nedávných negativních recenzí hodnocení RYD ze 4,6 na 2,5.\n\nPokud vám RYD pomáhá, napište prosím upřímnou recenzi."
+  },
+  "reviewPromptAction": {
+    "message": "Napsat recenzi"
   }
 }

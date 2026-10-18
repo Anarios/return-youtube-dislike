@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Novi in izboljšani prevodi."
+  },
+  "reviewPromptTitle": {
+    "message": "Vam je RYD všeč?"
+  },
+  "reviewPromptBody": {
+    "message": "Google je spremenil pravila za ocene v Chrome Web Store. Kljub 16.000+ ocenam s petimi zvezdicami je nekaj nedavnih negativnih ocen znižalo oceno RYD s 4,6 na 2,5.\n\nČe vam RYD pomaga, prosimo, napišite iskreno oceno."
+  },
+  "reviewPromptAction": {
+    "message": "Napišite oceno"
   }
 }

@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Nieuwe en verbeterde vertalingen."
+  },
+  "reviewPromptTitle": {
+    "message": "Bevalt RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "Google heeft de regels voor beoordelingen in de Chrome Web Store gewijzigd. Ondanks 16.000+ vijfsterrenreviews hebben enkele recente negatieve reviews de beoordeling van RYD verlaagd van 4,6 naar 2,5.\n\nAls RYD je helpt, laat dan een eerlijke review achter."
+  },
+  "reviewPromptAction": {
+    "message": "Review schrijven"
   }
 }

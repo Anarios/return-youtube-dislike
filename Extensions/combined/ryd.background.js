@@ -5,6 +5,7 @@ import { loginWithGitHub } from "./src/github-auth";
 import { createDiscussionBackground } from "./src/discussion-background";
 import { fetchWithAccountConsent } from "./src/account-data-consent";
 import { isFirefoxExtension, isNormalMessageSender } from "./src/private-browsing";
+import { createReviewPromptTracker } from "./src/review-prompt-tracker";
 import {
   coreConsentError,
   fetchWithCoreConsent,
@@ -33,6 +34,8 @@ let consentPageTabId = null;
 
 if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
+
+const reviewPromptTracker = createReviewPromptTracker(api);
 
 if (__RYD_LIVE_TEST_BUILD__) {
   globalThis.__RYD_LIVE_EXTENSION_BUILD__ = Object.freeze({
@@ -261,7 +264,12 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 function handleMessage(request, sender, sendResponse) {
-  if (request?.message === "ryd_open_consent") {
+  if (request?.message === "ryd_review_action") {
+    void (async () => {
+      sendResponse(await reviewPromptTracker.recordAction(request, sender));
+    })();
+    return true;
+  } else if (request?.message === "ryd_open_consent") {
     let isYouTubeLauncher = false;
     if (sender.tab?.incognito === false && sender.frameId === 0) {
       try {

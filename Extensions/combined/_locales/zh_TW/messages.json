@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "新增並改善翻譯。"
+  },
+  "reviewPromptTitle": {
+    "message": "喜歡 RYD 嗎？"
+  },
+  "reviewPromptBody": {
+    "message": "Google 改變了 Chrome Web Store 的評分規則。儘管已有 16,000 多則五星評論，近期的少數負面評論仍將 RYD 的評分從 4.6 拉低至 2.5。\n\n如果 RYD 對您有幫助，請留下誠實的評論。"
+  },
+  "reviewPromptAction": {
+    "message": "撰寫評論"
   }
 }

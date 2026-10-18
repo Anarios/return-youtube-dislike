@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Bổ sung và cải thiện bản dịch."
+  },
+  "reviewPromptTitle": {
+    "message": "Bạn có thích RYD không?"
+  },
+  "reviewPromptBody": {
+    "message": "Google đã thay đổi quy tắc tính điểm đánh giá trên Chrome Web Store. Dù có hơn 16.000 bài đánh giá 5 sao, một vài bài đánh giá tiêu cực gần đây đã kéo điểm đánh giá của RYD từ 4,6 xuống 2,5.\n\nNếu RYD hữu ích với bạn, vui lòng để lại một bài đánh giá chân thực."
+  },
+  "reviewPromptAction": {
+    "message": "Viết bài đánh giá"
   }
 }

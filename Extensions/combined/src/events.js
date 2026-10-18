@@ -31,6 +31,7 @@ import {
 import { resolveDelegatedVoteActivation } from "../../common/delegated-vote-activation";
 import { normalizeCustomColors, observeYouTubeTheme } from "../../common/color-themes";
 import { isPrivateBrowsingContext } from "./private-browsing";
+import { recordReviewAction } from "./review-prompt";
 
 function sendVote(vote) {
   if (isPrivateBrowsingContext()) return;
@@ -94,6 +95,7 @@ function handleVoteAction(action) {
       );
     }
     updateDOMDislikes();
+    void recordReviewAction(videoId, transition.value);
   }
 }
 

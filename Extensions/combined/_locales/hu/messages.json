@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "Új és javított fordítások."
+  },
+  "reviewPromptTitle": {
+    "message": "Tetszik az RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "A Google megváltoztatta a Chrome Web Store értékelési szabályait. A 16 000+ ötcsillagos vélemény ellenére néhány friss negatív vélemény 4,6-ról 2,5-re húzta le az RYD értékelését.\n\nHa hasznos számodra az RYD, kérjük, írj egy őszinte véleményt."
+  },
+  "reviewPromptAction": {
+    "message": "Vélemény írása"
   }
 }

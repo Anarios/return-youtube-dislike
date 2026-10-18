@@ -943,5 +943,14 @@
   },
   "changelog_also_translations": {
     "message": "翻訳を追加・改善しました。"
+  },
+  "reviewPromptTitle": {
+    "message": "RYDを気に入っていただけましたか？"
+  },
+  "reviewPromptBody": {
+    "message": "GoogleはChrome Web Storeの評価ルールを変更しました。16,000件以上の星5のレビューがあるにもかかわらず、最近の数件の否定的なレビューによって、RYDの評価は4.6から2.5に下がりました。\n\nRYDが役に立っているなら、率直なレビューをお願いします。"
+  },
+  "reviewPromptAction": {
+    "message": "レビューを書く"
   }
 }
