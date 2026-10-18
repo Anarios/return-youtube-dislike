@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Patreonでアップグレード"
   },
-  "changelog_title": {
-    "message": "プレミアム分析変更ログ · 2025 年 10 月 20 日"
-  },
-  "changelog_badge": {
-    "message": "プレミアムリリース"
-  },
-  "changelog_heading": {
-    "message": "再考されたプレミアム分析"
-  },
-  "changelog_subheading": {
-    "message": "Return YouTube Dislike Premium に含まれるライブ アクティビティ タイムライン、上位国のリーダーボード、インタラクティブ マップを探索してください。"
-  },
-  "changelog_releaseDate": {
-    "message": "2025 年 10 月 20 日発売"
-  },
   "changelog_cta_primary": {
     "message": "Patreonでアップグレードする"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "ライブアクティビティのタイムライン"
   },
-  "changelog_feature_timeline_body": {
-    "message": "リアルタイムで好き嫌いのストリーミングを視聴します。リロードせずに時間ごと、毎日、または常時のプリセットを切り替え、ウィンドウを初日または最新の投票に固定し、すべてのスパイクをスクラブしてエンゲージメントのきっかけとなったものを確認します。"
-  },
   "changelog_feature_map_title": {
     "message": "インタラクティブな世界と米国のヒートマップ"
   },
-  "changelog_feature_map_body": {
-    "message": "世界中を移動したり、米国の州に飛び込み、ホットスポットを表面化します。アップグレードされたツールチップでいいね、嫌い、比率を比較し、アップロードに最初に反応した地域にスポットライトを当てます。"
-  },
   "changelog_feature_quality_title": {
     "message": "上位国のリーダーボード"
-  },
-  "changelog_feature_quality_body": {
-    "message": "生のアクティビティ、好き嫌い、比率によってすべての国をランク付けします。タイムラインと同じプリセットでフィルタリングして、キャンペーンがどこに到達するかを確認し、次に何を公開するかを計画します。"
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "スクリーンショットは近日公開予定です。準備ができたら、DevTools でこのビューをキャプチャしてください。"
   },
   "changelog_screenshot_label_timeline": {
     "message": "プレースホルダー: タイムラインの概要"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "プレースホルダー: 各国のリーダーボード"
   },
-  "changelog_section_upgrade": {
-    "message": "プレミアム分析のロックを解除する方法"
-  },
-  "changelog_upgrade_body": {
-    "message": "飛び込む準備はできていますか?次の簡単な手順に従って、YouTube タブを更新します。"
-  },
   "changelog_upgrade_step1": {
     "message": "「Return YouTube Dislike」ポップアップを開き、Patreon にサインインします。"
-  },
-  "changelog_upgrade_step2": {
-    "message": "アカウントへの分析データのストリーミングを有効にするには、プレミアム レベルを選択します。"
-  },
-  "changelog_upgrade_step3": {
-    "message": "YouTube 再生ページをリロードすると、タイムライン、地図、リーダーボードが即座に表示されます。"
-  },
-  "changelog_section_release": {
-    "message": "リリースのハイライト"
-  },
-  "changelog_release_item1": {
-    "message": "アクティビティ タイムライン プリセットは、最初と最新のバケットの範囲アンカーを使用してライブ データをストリーミングします。"
-  },
-  "changelog_release_item2": {
-    "message": "国のリーダーボードは即座に更新されるため、パネルから離れることなく上昇している地域を見つけることができます。"
-  },
-  "changelog_release_item3": {
-    "message": "インタラクティブなマップは、より明確なツールチップと指標を使用して、世界および米国の州のホットスポットを強調表示します。"
   },
   "changelog_support_heading": {
     "message": "手が必要ですか?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike のロゴ"
+  },
+  "changelog_page_title": {
+    "message": "Return YouTube Dislike へようこそ"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "準備ができました"
+  },
+  "changelog_hero_title": {
+    "message": "低評価数が戻ってきました。"
+  },
+  "changelog_hero_body": {
+    "message": "YouTube の動画を開くと、高評価数のすぐ隣に低評価数が表示されます。バージョン 4.1 では、YouTube のコメント欄とは別に動画について話せる RYD コメントも登場しました。"
+  },
+  "changelog_new_badge": {
+    "message": "4.1 の新機能"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "RYD コメントが登場"
+  },
+  "changelog_comments_body": {
+    "message": "動画やショート動画の下で使える、Return YouTube Dislike が運営するコミュニティの議論スペースです。YouTube のコメントとは別で、誰でも閲覧やリアクションができます。Commenter と Premium のメンバーは投稿や返信もできます。"
+  },
+  "changelog_comments_point_replies": {
+    "message": "高評価・低評価を付けられるスレッド形式の返信"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "自分で選んだ公開ニックネームで投稿"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "返信やリアクションがあったときに通知"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "通報とモデレーションで、節度ある会話を維持"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "動画の下にスレッド形式の会話を表示する RYD コメントパネル"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "コメントへの返信や高評価を一覧表示する RYD の通知"
+  },
+  "changelog_sample_note": {
+    "message": "スクリーンショットはサンプルデータです。"
+  },
+  "changelog_analytics_title": {
+    "message": "Premium 分析"
+  },
+  "changelog_analytics_body": {
+    "message": "動画への反応を、時間の経過や世界の地域ごとに確認できます。7 日間、30 日間、90 日間、全期間から選び、高評価数・低評価数・比率を比較できます。"
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "アクティビティのタイムライン"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "高評価数・低評価数の推移を時間単位で確認。"
+  },
+  "changelog_analytics_countries_title": {
+    "message": "上位の国"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "動画に高評価・低評価が最も多く付いた国を確認。"
+  },
+  "changelog_analytics_world_title": {
+    "message": "世界地図"
+  },
+  "changelog_analytics_world_body": {
+    "message": "国ごとの反応を比較。"
+  },
+  "changelog_analytics_us_title": {
+    "message": "米国の州"
+  },
+  "changelog_analytics_us_body": {
+    "message": "拡大して州ごとの反応を確認。"
+  },
+  "changelog_join_title": {
+    "message": "Premium 機能を使う"
+  },
+  "changelog_join_free": {
+    "message": "低評価数は誰でも無料で確認できます。メンバーシップへの加入は任意で、プロジェクトの支援につながります。"
+  },
+  "changelog_join_step1": {
+    "message": "Patreon でメンバーになりましょう。Commenter ではコメントを投稿でき、Premium では分析機能も使えます。"
+  },
+  "changelog_join_step3": {
+    "message": "YouTube の動画を再読み込みすると、新しい機能が自動で表示されます。"
+  },
+  "changelog_also_title": {
+    "message": "このリリースのその他の変更"
+  },
+  "changelog_also_counts": {
+    "message": "拡張機能とユーザースクリプトで、高評価数・低評価数の表示がより安定しました。"
+  },
+  "changelog_also_consent": {
+    "message": "Firefox でのデータ利用への同意手順を改善しました。"
+  },
+  "changelog_also_translations": {
+    "message": "翻訳を追加・改善しました。"
   }
 }

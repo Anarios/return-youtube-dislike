@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Patreon’da yükselt"
   },
-  "changelog_title": {
-    "message": "Premium Analytics Değişiklik Günlüğü · 20 Ekim 2025"
-  },
-  "changelog_badge": {
-    "message": "Premium Sürüm"
-  },
-  "changelog_heading": {
-    "message": "Yeniden tasarlanan premium analizler"
-  },
-  "changelog_subheading": {
-    "message": "Return YouTube Beğenmeme Premium'a dahil olan canlı etkinlik zaman çizelgesini, en iyi ülkeler sıralama tablosunu ve etkileşimli haritayı keşfedin."
-  },
-  "changelog_releaseDate": {
-    "message": "20 Ekim 2025'te yayınlandı"
-  },
   "changelog_cta_primary": {
     "message": "Patreon'da yükseltme"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Canlı etkinlik zaman çizelgesi"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Beğenilenler ve beğenilmeyenler akışını gerçek zamanlı olarak izleyin. Yeniden yüklemeye gerek kalmadan saatlik, günlük veya tüm zamanların ön ayarlarını değiştirin, pencereyi birinci güne veya en son oylara sabitleyin ve etkileşimi neyin tetiklediğini görmek için her artışı temizleyin."
-  },
   "changelog_feature_map_title": {
     "message": "İnteraktif dünya ve ABD ısı haritası"
   },
-  "changelog_feature_map_body": {
-    "message": "Sıcak noktaları ortaya çıkarmak için dünya çapında gezinin veya ABD eyaletlerine dalın. Yükseltilmiş araç ipucundaki beğenme, beğenmeme ve oranları karşılaştırın ve yüklemelerinize ilk tepki veren bölgeleri öne çıkarın."
-  },
   "changelog_feature_quality_title": {
     "message": "En iyi ülkeler sıralama tablosu"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Her ülkeyi ham aktiviteye, beğenilenlere, beğenilmeyenlere veya orana göre sıralayın. Kampanyaların nereye varacağını öğrenmek ve bir sonraki adımda ne yayınlayacağınızı planlamak için zaman çizelgesiyle aynı ön ayarlarla filtreleyin."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Ekran görüntüsü yakında gelecek; hazır olduğunuzda bu görünümü DevTools'ta yakalayın."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Yer tutucu: zaman çizelgesine genel bakış"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Yer tutucu: ülkeler sıralama tablosu"
   },
-  "changelog_section_upgrade": {
-    "message": "Premium analizlerin kilidini açma"
-  },
-  "changelog_upgrade_body": {
-    "message": "Dalmaya hazır mısınız? Bu hızlı adımları izleyin ve YouTube sekmenizi yenileyin."
-  },
   "changelog_upgrade_step1": {
     "message": "YouTube Beğenmemeye Geri Dön açılır penceresini açın ve Patreon'da oturum açın."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Hesabınıza analiz verileri akışını etkinleştirmek için Premium katmanını seçin."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Herhangi bir YouTube izleme sayfasını yeniden yükleyin; zaman çizelgeniz, haritanız ve skor tablolarınız anında görünür."
-  },
-  "changelog_section_release": {
-    "message": "Yayının öne çıkanları"
-  },
-  "changelog_release_item1": {
-    "message": "Etkinlik zaman çizelgesi ön ayarları, ilk ve en son bölümler için aralık bağlantılarıyla canlı verileri yayınlar."
-  },
-  "changelog_release_item2": {
-    "message": "Ülke skor tablosu anında yenilenir, böylece yükselen bölgeleri panelden ayrılmadan tespit edebilirsiniz."
-  },
-  "changelog_release_item3": {
-    "message": "Etkileşimli harita, daha net araç ipuçları ve ölçümlerle küresel ve ABD eyaletinin sıcak noktalarını vurgular."
   },
   "changelog_support_heading": {
     "message": "Yardıma mı ihtiyacınız var?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike logosu"
+  },
+  "changelog_page_title": {
+    "message": "Return YouTube Dislike’a hoş geldiniz"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Her şey hazır"
+  },
+  "changelog_hero_title": {
+    "message": "Beğenmeme sayıları geri döndü."
+  },
+  "changelog_hero_body": {
+    "message": "Herhangi bir YouTube videosunu açın; beğenmeme sayısını beğenilerin hemen yanında, olması gereken yerde göreceksiniz. 4.1 sürümü ayrıca videoları YouTube’un kendi yorum bölümünün dışında tartışabileceğiniz RYD yorumlarını sunuyor."
+  },
+  "changelog_new_badge": {
+    "message": "4.1’de yeni"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "RYD yorumlarıyla tanışın"
+  },
+  "changelog_comments_body": {
+    "message": "Videoların ve Shorts’un altında, Return YouTube Dislike tarafından sunulan ve YouTube yorumlarından ayrı tutulan topluluk tartışmaları. Herkes okuyabilir ve tepki verebilir. Commenter ve Premium üyeleri yorum yazabilir ve yanıt verebilir."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Beğeni ve beğenmeme içeren yanıt dizileri"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Seçtiğiniz, herkese açık bir takma adla yazın"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Birisi yanıt verdiğinde veya tepki gösterdiğinde bildirimler"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Saygılı bir ortam için şikâyet ve moderasyon"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Video altında yanıt dizilerini gösteren RYD yorum paneli"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Yorumlarınıza gelen yanıtları ve beğenileri listeleyen RYD bildirimleri"
+  },
+  "changelog_sample_note": {
+    "message": "Ekran görüntülerinde örnek veriler kullanılmıştır."
+  },
+  "changelog_analytics_title": {
+    "message": "Premium analizler"
+  },
+  "changelog_analytics_body": {
+    "message": "Bir videonun zaman içinde ve dünyada nasıl karşılandığını görün. 7, 30 veya 90 günü ya da tüm zamanları seçip beğenileri, beğenmemeleri ve oranlarını karşılaştırın."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Etkinlik zaman çizelgesi"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Saatlik ayrıntılarla zaman içindeki beğeniler ve beğenmemeler."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Öne çıkan ülkeler"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Videoyu en çok hangi ülkelerin beğendiğini veya beğenmediğini görün."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Dünya haritası"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Ülkeler arasındaki etkileşimi karşılaştırın."
+  },
+  "changelog_analytics_us_title": {
+    "message": "ABD eyaletleri"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Eyaletlere göre etkileşimi daha ayrıntılı inceleyin."
+  },
+  "changelog_join_title": {
+    "message": "Premium özellikleri edinin"
+  },
+  "changelog_join_free": {
+    "message": "Beğenmeme sayıları herkes için ücretsizdir. Üyelik isteğe bağlıdır ve projeyi destekler."
+  },
+  "changelog_join_step1": {
+    "message": "Patreon’da katılın. Commenter yorum yazmanızı sağlar; Premium ayrıca analizleri de sunar."
+  },
+  "changelog_join_step3": {
+    "message": "Herhangi bir YouTube videosunu yeniden yükleyin. Yeni özellikleriniz otomatik olarak görünür."
+  },
+  "changelog_also_title": {
+    "message": "Bu sürümde ayrıca"
+  },
+  "changelog_also_counts": {
+    "message": "Beğeni ve beğenmeme sayıları hem uzantıda hem de kullanıcı betiğinde daha güvenilir gösteriliyor."
+  },
+  "changelog_also_consent": {
+    "message": "Firefox’ta veri izni süreci iyileştirildi."
+  },
+  "changelog_also_translations": {
+    "message": "Yeni ve iyileştirilmiş çeviriler."
   }
 }

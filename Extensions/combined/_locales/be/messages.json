@@ -500,21 +500,6 @@
   "premiumTierNotice_cta": {
     "message": "Павысіць узровень на Patreon"
   },
-  "changelog_title": {
-    "message": "Журнал змен Premium Analytics · 20 кастрычніка 2025 года"
-  },
-  "changelog_badge": {
-    "message": "Прэміум-рэліз"
-  },
-  "changelog_heading": {
-    "message": "Прэміум-аналітыка па-новаму"
-  },
-  "changelog_subheading": {
-    "message": "Даследуйце храналогію актыўнасці ў рэальным часе, рэйтынг краін і інтэрактыўную карту, уключаныя ў Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Выпушчана 20 кастрычніка 2025 года"
-  },
   "changelog_cta_primary": {
     "message": "Павысіць узровень на Patreon"
   },
@@ -527,23 +512,11 @@
   "changelog_feature_timeline_title": {
     "message": "Храналогія ўзаемадзеянняў у рэальным часе"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Назірайце, як падабайкі і непадабайкі паступаюць у рэальным часе. Выбірайце пагадзінны прагляд, штодзённы прагляд або прагляд за ўвесь час без перазагрузкі старонкі, прывязвайце дыяпазон да першага дня або апошніх галасоў і праглядайце кожны ўсплёск, каб зразумець, што выклікала актыўнасць."
-  },
   "changelog_feature_map_title": {
     "message": "Інтэрактыўная цеплавая карта свету і ЗША"
   },
-  "changelog_feature_map_body": {
-    "message": "Перамяшчайцеся па карце свету або пераходзьце да штатаў ЗША, каб знаходзіць месцы найбольшай актыўнасці. Параўноўвайце падабайкі, непадабайкі і іх суадносіны ў палепшанай падказцы і вылучайце рэгіёны, якія першымі рэагуюць на вашы новыя відэа."
-  },
   "changelog_feature_quality_title": {
     "message": "Рэйтынг лідараў сярод краін"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Ранжыруйце краіны паводле колькасці непасрэдна атрыманых узаемадзеянняў, падабаек, непадабаек або іх суадносін. Выкарыстоўвайце тыя ж фільтры, што і для храналогіі, каб даведацца, дзе вашы кампаніі знаходзяць водгук, і спланаваць наступныя публікацыі."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Скрыншот з’явіцца хутка — захавайце гэты выгляд праз DevTools, калі будзеце гатовыя."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Запаўняльнік: агляд храналогіі"
@@ -554,32 +527,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Запаўняльнік: рэйтынг краін"
   },
-  "changelog_section_upgrade": {
-    "message": "Як адкрыць прэміум-аналітыку"
-  },
-  "changelog_upgrade_body": {
-    "message": "Гатовыя пачаць? Выканайце гэтыя простыя крокі і абнавіце ўкладку YouTube."
-  },
   "changelog_upgrade_step1": {
     "message": "Адкрыйце ўсплывальнае акно Return YouTube Dislike і ўвайдзіце праз Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Абярыце ўзровень Premium, каб дадзеныя аналітыкі сталі даступнымі для вашага ўліковага запісу."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Абнавіце любую старонку прагляду YouTube — ваша храналогія, карта і рэйтынгі з’явяцца імгненна."
-  },
-  "changelog_section_release": {
-    "message": "Галоўнае ў рэлізе"
-  },
-  "changelog_release_item1": {
-    "message": "Прадвыбраныя налады храналогіі актыўнасці паказваюць даныя ў рэальным часе і дазваляюць прывязваць дыяпазон да першых або апошніх часавых інтэрвалаў."
-  },
-  "changelog_release_item2": {
-    "message": "Рэйтынг краін абнаўляецца імгненна, таму вы можаце заўважаць рэгіёны, дзе расце актыўнасць, не пакідаючы панэлі."
-  },
-  "changelog_release_item3": {
-    "message": "Інтэрактыўная карта адлюстроўвае гарачыя кропкі свету і штатаў ЗША з больш зразумелымі падказкамі і метрыкамі."
   },
   "changelog_support_heading": {
     "message": "Патрэбна дапамога?"
@@ -607,5 +556,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Лагатып Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Вітаем у Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Усё гатова"
+  },
+  "changelog_hero_title": {
+    "message": "Непадабайкі вярнуліся."
+  },
+  "changelog_hero_body": {
+    "message": "Адкрыйце любое відэа на YouTube, і вы ўбачыце колькасць непадабаек побач з падабайкамі, на сваім месцы. Версія 4.1 таксама дадае каментарыі RYD — месца для абмеркавання відэа па-за каментарыямі YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Новае ў 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Знаёмцеся: каментарыі RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Абмеркаванні супольнасці пад відэа і Shorts ад Return YouTube Dislike, асобна ад каментарыяў YouTube. Усе могуць чытаць і рэагаваць. Удзельнікі з узроўнямі Commenter і Premium могуць пісаць каментарыі і адказы."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Галінкі адказаў з падабайкамі і непадабайкамі"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Пішыце пад публічным псеўданімам на ваш выбар"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Апавяшчэнні пра адказы і рэакцыі"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Скаргі і мадэрацыя для ветлівых зносін"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Панэль каментарыяў RYD з галінкамі абмеркавання пад відэа"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Апавяшчэнні RYD з адказамі і падабайкамі да вашых каментарыяў"
+  },
+  "changelog_sample_note": {
+    "message": "На здымках экрана паказаны дэманстрацыйныя даныя."
+  },
+  "changelog_analytics_title": {
+    "message": "Аналітыка Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Паглядзіце, як успрымаюць відэа з цягам часу і ў розных краінах. Выберыце 7, 30 ці 90 дзён або ўвесь час і параўноўвайце падабайкі, непадабайкі і іх суадносіны."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Графік актыўнасці"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Падабайкі і непадабайкі з цягам часу, з дакладнасцю да гадзіны."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Краіны-лідары"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Даведайцеся, у якіх краінах відэа атрымлівае найбольш падабаек і непадабаек."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Карта свету"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Параўноўвайце актыўнасць у розных краінах."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Штаты ЗША"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Разгледзьце актыўнасць па штатах падрабязней."
+  },
+  "changelog_join_title": {
+    "message": "Атрымайце магчымасці Premium"
+  },
+  "changelog_join_free": {
+    "message": "Колькасць непадабаек даступная ўсім бясплатна. Удзел добраахвотны і дапамагае падтрымліваць праект."
+  },
+  "changelog_join_step1": {
+    "message": "Далучайцеся на Patreon. Commenter дазваляе пісаць каментарыі, а Premium таксама дадае аналітыку."
+  },
+  "changelog_join_step3": {
+    "message": "Перазагрузіце любое відэа на YouTube. Новыя магчымасці з’явяцца аўтаматычна."
+  },
+  "changelog_also_title": {
+    "message": "Таксама ў гэтым выпуску"
+  },
+  "changelog_also_counts": {
+    "message": "Колькасць падабаек і непадабаек адлюстроўваецца надзейней у пашырэнні і карыстальніцкім скрыпце."
+  },
+  "changelog_also_consent": {
+    "message": "Палепшаны працэс згоды на апрацоўку даных у Firefox."
+  },
+  "changelog_also_translations": {
+    "message": "Новыя і палепшаныя пераклады."
   }
 }

@@ -4,7 +4,7 @@
 
 jest.mock("../../config", () => ({
   getApiEndpoint: jest.fn((path) => `https://api.test${path}`),
-  getChangelogUrl: jest.fn(() => "moz-extension://unit-test/changelog/4/changelog_4.0.html"),
+  getChangelogUrl: jest.fn(() => "moz-extension://unit-test/changelog/4/changelog_4.1.html"),
 }));
 
 jest.mock("../../utils", () => {

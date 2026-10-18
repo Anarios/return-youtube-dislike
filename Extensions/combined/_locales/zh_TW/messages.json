@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "前往 Patreon 升級"
   },
-  "changelog_title": {
-    "message": "高級分析變更日誌 · 2025 年 10 月 20 日"
-  },
-  "changelog_badge": {
-    "message": "高級版"
-  },
-  "changelog_heading": {
-    "message": "重新構想的高級分析"
-  },
-  "changelog_subheading": {
-    "message": "探索 Return YouTube Dislike Premium 中包含的實時活動時間表、熱門國家/地區排行榜和交互式地圖。"
-  },
-  "changelog_releaseDate": {
-    "message": "發佈於 2025 年 10 月 20 日"
-  },
   "changelog_cta_primary": {
     "message": "在 Patreon 上升級"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "現場活動時間線"
   },
-  "changelog_feature_timeline_body": {
-    "message": "實時觀看喜歡和不喜歡的內容。切換每小時、每天或所有時間預設，無需重新加載，將窗口錨定到第一天或最新投票，並擦洗每個峰值以查看觸發參與度的因素。"
-  },
   "changelog_feature_map_title": {
     "message": "互動世界和美國熱圖"
   },
-  "changelog_feature_map_body": {
-    "message": "平移全球或潛入美國各州以發現熱點。在升級後的工具提示中比較喜歡、不喜歡和比率，並突出顯示對您上傳的內容首先做出反應的區域。"
-  },
   "changelog_feature_quality_title": {
     "message": "熱門國家排行榜"
-  },
-  "changelog_feature_quality_body": {
-    "message": "根據原始活動、喜歡、不喜歡或比率對每個國家/地區進行排名。使用與時間線相同的預設進行過濾，以了解營銷活動的落地位置併計劃下一步要發布的內容。"
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "屏幕截圖即將推出 - 準備好後在 DevTools 中捕獲此視圖。"
   },
   "changelog_screenshot_label_timeline": {
     "message": "佔位符：時間線概述"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "佔位符：國家排行榜"
   },
-  "changelog_section_upgrade": {
-    "message": "如何解鎖高級分析"
-  },
-  "changelog_upgrade_body": {
-    "message": "準備好潛入了嗎？請按照以下快速步驟操作並刷新您的 YouTube 標籤。"
-  },
   "changelog_upgrade_step1": {
     "message": "打開“返回 YouTube 不喜歡”彈出窗口並使用 Patreon 登錄。"
-  },
-  "changelog_upgrade_step2": {
-    "message": "選擇高級層以啟用分析數據流式傳輸到您的帳戶。"
-  },
-  "changelog_upgrade_step3": {
-    "message": "重新加載任何 YouTube 觀看頁面 - 您的時間線、地圖和排行榜會立即顯示。"
-  },
-  "changelog_section_release": {
-    "message": "發布亮點"
-  },
-  "changelog_release_item1": {
-    "message": "活動時間線預設使用第一個和最新存儲桶的範圍錨點來流式傳輸實時數據。"
-  },
-  "changelog_release_item2": {
-    "message": "國家/地區排行榜會立即刷新，因此您無需離開面板即可發現正在上升的地區。"
-  },
-  "changelog_release_item3": {
-    "message": "交互式地圖通過更清晰的工具提示和指標突出顯示全球和美國各州的熱點。"
   },
   "changelog_support_heading": {
     "message": "需要幫忙嗎？"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 標誌"
+  },
+  "changelog_page_title": {
+    "message": "歡迎使用 Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "一切就緒"
+  },
+  "changelog_hero_title": {
+    "message": "不喜歡次數回來了。"
+  },
+  "changelog_hero_body": {
+    "message": "開啟任一 YouTube 影片，就能在喜歡次數旁看到不喜歡次數，回到原本的位置。4.1 版也推出了 RYD 留言，讓你在 YouTube 原有的留言區之外討論影片。"
+  },
+  "changelog_new_badge": {
+    "message": "4.1 新功能"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "認識 RYD 留言"
+  },
+  "changelog_comments_body": {
+    "message": "由 Return YouTube Dislike 提供的影片和 Shorts 下方社群討論區，與 YouTube 留言互相獨立。所有人都能閱讀及留下反應。Commenter 和 Premium 會員可以發表留言及回覆。"
+  },
+  "changelog_comments_point_replies": {
+    "message": "支援按讚和不喜歡的分層回覆"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "使用自己選擇的公開暱稱發言"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "有人回覆或表達反應時收到通知"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "透過檢舉與管理維持理性討論"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "RYD 留言面板，顯示影片下方的分層討論"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "RYD 通知，列出你的留言收到的回覆和讚"
+  },
+  "changelog_sample_note": {
+    "message": "螢幕截圖使用的是範例資料。"
+  },
+  "changelog_analytics_title": {
+    "message": "Premium 數據分析"
+  },
+  "changelog_analytics_body": {
+    "message": "了解影片在不同時間及世界各地獲得的反應。選擇 7 天、30 天、90 天或全部時間，比較喜歡、不喜歡和比例。"
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "互動時間軸"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "查看喜歡和不喜歡隨時間的變化，精確到小時。"
+  },
+  "changelog_analytics_countries_title": {
+    "message": "熱門國家"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "查看哪些國家對影片的喜歡和不喜歡最多。"
+  },
+  "changelog_analytics_world_title": {
+    "message": "世界地圖"
+  },
+  "changelog_analytics_world_body": {
+    "message": "比較各國的互動情況。"
+  },
+  "changelog_analytics_us_title": {
+    "message": "美國各州"
+  },
+  "changelog_analytics_us_body": {
+    "message": "放大查看各州的互動情況。"
+  },
+  "changelog_join_title": {
+    "message": "取得 Premium 功能"
+  },
+  "changelog_join_free": {
+    "message": "所有人都能免費查看不喜歡次數。加入會員完全自願，也能支持本專案。"
+  },
+  "changelog_join_step1": {
+    "message": "在 Patreon 加入會員。Commenter 可以發表留言，Premium 還提供數據分析功能。"
+  },
+  "changelog_join_step3": {
+    "message": "重新載入任一 YouTube 影片，新功能就會自動顯示。"
+  },
+  "changelog_also_title": {
+    "message": "本次更新的其他內容"
+  },
+  "changelog_also_counts": {
+    "message": "擴充功能和使用者腳本中的喜歡與不喜歡次數顯示更穩定。"
+  },
+  "changelog_also_consent": {
+    "message": "改善 Firefox 中的資料使用同意流程。"
+  },
+  "changelog_also_translations": {
+    "message": "新增並改善翻譯。"
   }
 }

@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "前往 Patreon 升级"
   },
-  "changelog_title": {
-    "message": "高级分析变更日志 · 2025 年 10 月 20 日"
-  },
-  "changelog_badge": {
-    "message": "高级版"
-  },
-  "changelog_heading": {
-    "message": "重新构想的高级分析"
-  },
-  "changelog_subheading": {
-    "message": "探索 Return YouTube Dislike Premium 中包含的实时活动时间表、热门国家/地区排行榜和交互式地图。"
-  },
-  "changelog_releaseDate": {
-    "message": "发布于 2025 年 10 月 20 日"
-  },
   "changelog_cta_primary": {
     "message": "在 Patreon 上升级"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "现场活动时间线"
   },
-  "changelog_feature_timeline_body": {
-    "message": "实时观看喜欢和不喜欢的内容。切换每小时、每天或所有时间预设，无需重新加载，将窗口锚定到第一天或最新投票，并擦洗每个峰值以查看触发参与度的因素。"
-  },
   "changelog_feature_map_title": {
     "message": "互动世界和美国热图"
   },
-  "changelog_feature_map_body": {
-    "message": "平移全球或潜入美国各州以发现热点。在升级后的工具提示中比较喜欢、不喜欢和比率，并突出显示对您上传的内容首先做出反应的区域。"
-  },
   "changelog_feature_quality_title": {
     "message": "热门国家排行榜"
-  },
-  "changelog_feature_quality_body": {
-    "message": "根据原始活动、喜欢、不喜欢或比率对每个国家/地区进行排名。使用与时间线相同的预设进行过滤，以了解营销活动的落地位置并计划下一步要发布的内容。"
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "屏幕截图即将推出 - 准备好后在 DevTools 中捕获此视图。"
   },
   "changelog_screenshot_label_timeline": {
     "message": "占位符：时间线概述"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "占位符：国家排行榜"
   },
-  "changelog_section_upgrade": {
-    "message": "如何解锁高级分析"
-  },
-  "changelog_upgrade_body": {
-    "message": "准备好潜入了吗？请按照以下快速步骤操作并刷新您的 YouTube 标签。"
-  },
   "changelog_upgrade_step1": {
     "message": "打开“返回 YouTube 不喜欢”弹出窗口并使用 Patreon 登录。"
-  },
-  "changelog_upgrade_step2": {
-    "message": "选择高级层以启用分析数据流式传输到您的帐户。"
-  },
-  "changelog_upgrade_step3": {
-    "message": "重新加载任何 YouTube 观看页面 - 您的时间线、地图和排行榜会立即显示。"
-  },
-  "changelog_section_release": {
-    "message": "发布亮点"
-  },
-  "changelog_release_item1": {
-    "message": "活动时间线预设使用第一个和最新存储桶的范围锚点来流式传输实时数据。"
-  },
-  "changelog_release_item2": {
-    "message": "国家/地区排行榜会立即刷新，因此您无需离开面板即可发现正在上升的地区。"
-  },
-  "changelog_release_item3": {
-    "message": "交互式地图通过更清晰的工具提示和指标突出显示全球和美国各州的热点。"
   },
   "changelog_support_heading": {
     "message": "需要帮忙吗？"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 标志"
+  },
+  "changelog_page_title": {
+    "message": "欢迎使用 Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "一切就绪"
+  },
+  "changelog_hero_title": {
+    "message": "点踩数回来了。"
+  },
+  "changelog_hero_body": {
+    "message": "打开任意 YouTube 视频，就能在点赞数旁边看到点踩数，回到它应有的位置。4.1 版本还推出了 RYD 评论，让你在 YouTube 自带的评论区之外讨论视频。"
+  },
+  "changelog_new_badge": {
+    "message": "4.1 新功能"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "认识 RYD 评论"
+  },
+  "changelog_comments_body": {
+    "message": "由 Return YouTube Dislike 提供的视频和 Shorts 下方的社区讨论区，与 YouTube 评论相互独立。所有人都能阅读和表达反应。Commenter 和 Premium 会员可以发表评论和回复。"
+  },
+  "changelog_comments_point_replies": {
+    "message": "支持点赞和点踩的分层回复"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "使用自己选择的公开昵称发言"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "有人回复或表达反应时收到通知"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "通过举报和管理维护文明讨论"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "RYD 评论面板，显示视频下方的分层讨论"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "RYD 通知，列出你的评论收到的回复和点赞"
+  },
+  "changelog_sample_note": {
+    "message": "截图中展示的是示例数据。"
+  },
+  "changelog_analytics_title": {
+    "message": "Premium 数据分析"
+  },
+  "changelog_analytics_body": {
+    "message": "了解视频在不同时间和世界各地获得的反响。选择 7 天、30 天、90 天或全部时间，比较点赞、点踩和比例。"
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "互动时间线"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "查看点赞和点踩随时间的变化，精确到小时。"
+  },
+  "changelog_analytics_countries_title": {
+    "message": "热门国家"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "查看哪些国家对视频的点赞和点踩最多。"
+  },
+  "changelog_analytics_world_title": {
+    "message": "世界地图"
+  },
+  "changelog_analytics_world_body": {
+    "message": "比较各国的互动情况。"
+  },
+  "changelog_analytics_us_title": {
+    "message": "美国各州"
+  },
+  "changelog_analytics_us_body": {
+    "message": "放大查看各州的互动情况。"
+  },
+  "changelog_join_title": {
+    "message": "获取 Premium 功能"
+  },
+  "changelog_join_free": {
+    "message": "所有人都能免费查看点踩数。加入会员完全自愿，也能帮助支持本项目。"
+  },
+  "changelog_join_step1": {
+    "message": "在 Patreon 上加入会员。Commenter 可以发表评论，Premium 还提供数据分析功能。"
+  },
+  "changelog_join_step3": {
+    "message": "重新加载任意 YouTube 视频，新功能便会自动显示。"
+  },
+  "changelog_also_title": {
+    "message": "本次更新的其他内容"
+  },
+  "changelog_also_counts": {
+    "message": "扩展程序和用户脚本中的点赞数与点踩数显示更加稳定。"
+  },
+  "changelog_also_consent": {
+    "message": "改进了 Firefox 中的数据使用同意流程。"
+  },
+  "changelog_also_translations": {
+    "message": "新增并改进了翻译。"
   }
 }

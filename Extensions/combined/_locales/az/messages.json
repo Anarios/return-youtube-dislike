@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Patreonda yüksəldin"
   },
-  "changelog_title": {
-    "message": "Premium Analytics dəyişiklik jurnalı · 20 oktyabr 2025"
-  },
-  "changelog_badge": {
-    "message": "Premium buraxılış"
-  },
-  "changelog_heading": {
-    "message": "Premium analitika yenidən quruldu"
-  },
-  "changelog_subheading": {
-    "message": "Canlı fəaliyyət qrafiki, ən yaxşı ölkələrin lider lövhəsi və qayıtma YouTube-ni bəyənilməyən premium daxil olan interaktiv xəritəni araşdırın."
-  },
-  "changelog_releaseDate": {
-    "message": "20 oktyabr 2025 tarixində buraxıldı"
-  },
   "changelog_cta_primary": {
     "message": "Patreonda yüksəlt"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Canlı fəaliyyət qrafiki"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Gelimi real vaxtda bəyənmə və bəyənməyənləri bəyənməyi izləyin. Saat, gündəlik, gündəlik və ya hər zaman hafızası dəyişdirin, pəncərəni gündən-günə və ya ən son səsləri birləşdirin və hər sıçrayışın nə olduğunu görməyə başladın."
-  },
   "changelog_feature_map_title": {
     "message": "İnteraktiv Dünya və ABŞ HeatMap"
   },
-  "changelog_feature_map_body": {
-    "message": "Dünyada pan, və ya ABŞ-ın isti nöqtələrini yerüstü hissələrə daldırın. Yüksələn alətdə, bəyənilənləri və nisbətləri yüksəldilmiş alətdə və rəqəmləri ilə müqayisə edin və yükləmələrinizə ilk reaksiya verən bölgələrdə."
-  },
   "changelog_feature_quality_title": {
     "message": "Ən yaxşı ölkələrin lider lövhəsi"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Hər ölkəni xam fəaliyyət, bəyənmə, bəyənmir və ya nisbətlə sıralayın. Kampaniyaların harada olduğunu öyrənmək və növbəti dərc etməyi planlaşdıran qrafiki kimi eyni hafızası ilə süzün."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Ekran görüntüsü tezliklə gələcək — hazır olduqda bu görünüşü DevTools ilə çəkin."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Yer tutucu: zaman cədvəli icmalı"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Yerli yerləşdirən: Ölkələrin lider taxtası"
   },
-  "changelog_section_upgrade": {
-    "message": "Premium analitikanı necə açmaq olar"
-  },
-  "changelog_upgrade_body": {
-    "message": "Hazırsınız? Bu addımları izləyin və YouTube vərəqənizi yeniləyin."
-  },
   "changelog_upgrade_step1": {
     "message": "Return YouTube Dislike açılır pəncərəsini açın və Patreon ilə daxil olun."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Premium səviyyəsini seçin ki, analitika məlumatları hesabınıza axın etsin."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Hər hansı YouTube izləmə səhifəsini yeniləyin — zaman cədvəli, xəritə və lider lövhələri dərhal görünəcək."
-  },
-  "changelog_section_release": {
-    "message": "Buraxılışın əsas məqamları"
-  },
-  "changelog_release_item1": {
-    "message": "Fəaliyyət qrafiki, ilk və son çömçə üçün aralığı lövbərləri olan canlı məlumatlar yayımlanır."
-  },
-  "changelog_release_item2": {
-    "message": "Ölkə liderliyi paneli dərhal paneli tərk etmədən yüksələn bölgələri yerləşdirə biləcəyiniz üçün dərhal təravətləndirir."
-  },
-  "changelog_release_item3": {
-    "message": "İnteraktiv xəritə, daha aydın alət və ölçüləri olan qlobal və ABŞ dövlət qaynar nöqtələrini vurğulayır."
   },
   "changelog_support_heading": {
     "message": "Kömək lazımdır?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike loqosu"
+  },
+  "changelog_page_title": {
+    "message": "Return YouTube Dislike-a xoş gəlmisiniz"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Hər şey hazırdır"
+  },
+  "changelog_hero_title": {
+    "message": "Bəyənməmə sayları qayıtdı."
+  },
+  "changelog_hero_body": {
+    "message": "İstənilən YouTube videosunu açın: bəyənməmə sayını bəyənmələrin yanında, öz yerində görəcəksiniz. 4.1 versiyası həmçinin YouTube-un şərh bölməsindən kənarda videoları müzakirə etmək üçün RYD şərhlərini təqdim edir."
+  },
+  "changelog_new_badge": {
+    "message": "4.1-də yenilik"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "RYD şərhləri ilə tanış olun"
+  },
+  "changelog_comments_body": {
+    "message": "Videolar və Shorts altında Return YouTube Dislike-ın təqdim etdiyi, YouTube şərhlərindən ayrı icma müzakirələri. Hər kəs oxuya və reaksiya verə bilər. Commenter və Premium üzvləri şərh və cavab yaza bilər."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Bəyənmə və bəyənməmə ilə şaxələnmiş cavablar"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Seçdiyiniz, hamıya görünən ləqəblə yazın"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Cavab və ya reaksiya gələndə bildirişlər"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Nəzakətli ünsiyyət üçün şikayətlər və moderasiya"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Videonun altında şaxələnmiş müzakirəni göstərən RYD şərhlər paneli"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Şərhlərinizə cavabları və bəyənmələri göstərən RYD bildirişləri"
+  },
+  "changelog_sample_note": {
+    "message": "Ekran görüntülərində nümunə məlumatlar göstərilir."
+  },
+  "changelog_analytics_title": {
+    "message": "Premium analitika"
+  },
+  "changelog_analytics_body": {
+    "message": "Videonun zamanla və dünyanın müxtəlif yerlərində necə qarşılandığını görün. 7, 30 və ya 90 günü, yaxud bütün dövrü seçin, bəyənmələri, bəyənməmələri və onların nisbətini müqayisə edin."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Fəaliyyət qrafiki"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Zamanla bəyənmələr və bəyənməmələr, saat dəqiqliyi ilə."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Ən fəal ölkələr"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Videonu ən çox hansı ölkələrin bəyəndiyini və bəyənmədiyini görün."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Dünya xəritəsi"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Ölkələr üzrə aktivliyi müqayisə edin."
+  },
+  "changelog_analytics_us_title": {
+    "message": "ABŞ ştatları"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Hər ştat üzrə aktivliyi daha ətraflı görün."
+  },
+  "changelog_join_title": {
+    "message": "Premium imkanlarını əldə edin"
+  },
+  "changelog_join_free": {
+    "message": "Bəyənməmə sayları hər kəs üçün pulsuzdur. Üzvlük könüllüdür və layihəyə dəstək olur."
+  },
+  "changelog_join_step1": {
+    "message": "Patreon-da qoşulun. Commenter şərh yazmağa imkan verir; Premium isə analitikanı da əlavə edir."
+  },
+  "changelog_join_step3": {
+    "message": "İstənilən YouTube videosunu yenidən yükləyin. Yeni imkanlarınız avtomatik görünəcək."
+  },
+  "changelog_also_title": {
+    "message": "Bu buraxılışda həmçinin"
+  },
+  "changelog_also_counts": {
+    "message": "Bəyənmə və bəyənməmə sayları həm genişlənmədə, həm də istifadəçi skriptində daha etibarlı göstərilir."
+  },
+  "changelog_also_consent": {
+    "message": "Firefox-da məlumatlara razılıq prosesi təkmilləşdirildi."
+  },
+  "changelog_also_translations": {
+    "message": "Yeni və təkmilləşdirilmiş tərcümələr."
   }
 }

@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Patreon에서 업그레이드"
   },
-  "changelog_title": {
-    "message": "프리미엄 분석 변경 로그 · 2025년 10월 20일"
-  },
-  "changelog_badge": {
-    "message": "프리미엄 릴리스"
-  },
-  "changelog_heading": {
-    "message": "새롭게 재해석된 프리미엄 분석"
-  },
-  "changelog_subheading": {
-    "message": "Return YouTube Dislike Premium에 포함된 실시간 활동 타임라인, 상위 국가 리더보드, 대화형 지도를 살펴보세요."
-  },
-  "changelog_releaseDate": {
-    "message": "2025년 10월 20일 출시"
-  },
   "changelog_cta_primary": {
     "message": "Patreon에서 업그레이드하세요"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "실시간 활동 타임라인"
   },
-  "changelog_feature_timeline_body": {
-    "message": "좋아요 및 싫어요 스트리밍을 실시간으로 시청하세요. 다시 로드하지 않고 시간별, 일일 또는 전체 사전 설정을 전환하고, 창을 첫날 또는 최신 투표에 고정하고, 모든 스파이크를 스크러빙하여 무엇이 참여를 유발했는지 확인하세요."
-  },
   "changelog_feature_map_title": {
     "message": "대화형 세계 및 미국 히트맵"
   },
-  "changelog_feature_map_body": {
-    "message": "전 세계를 탐색하거나 미국 주를 탐험하여 핫스팟을 찾아보세요. 업그레이드된 툴팁에서 좋아요, 싫어요, 비율을 비교하고 업로드에 가장 먼저 반응하는 지역을 집중 조명하세요."
-  },
   "changelog_feature_quality_title": {
     "message": "상위 국가 리더보드"
-  },
-  "changelog_feature_quality_body": {
-    "message": "원시 활동, 좋아요, 싫어요 또는 비율을 기준으로 모든 국가의 순위를 매깁니다. 타임라인과 동일한 사전 설정으로 필터링하여 캠페인이 시작되는 위치를 알아보고 다음에 게시할 내용을 계획하세요."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "스크린샷이 곧 공개됩니다. 준비되면 DevTools에서 이 보기를 캡처하세요."
   },
   "changelog_screenshot_label_timeline": {
     "message": "자리 표시자: 타임라인 개요"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "자리 표시자: 국가 리더보드"
   },
-  "changelog_section_upgrade": {
-    "message": "프리미엄 분석을 잠금 해제하는 방법"
-  },
-  "changelog_upgrade_body": {
-    "message": "다이빙할 준비가 되셨나요? 다음의 빠른 단계를 따르고 YouTube 탭을 새로고침하세요."
-  },
   "changelog_upgrade_step1": {
     "message": "Return YouTube Dislike 팝업을 열고 Patreon에 로그인하세요."
-  },
-  "changelog_upgrade_step2": {
-    "message": "귀하의 계정으로 분석 데이터 스트리밍을 활성화하려면 프리미엄 등급을 선택하세요."
-  },
-  "changelog_upgrade_step3": {
-    "message": "YouTube 보기 페이지를 새로고침하세요. 타임라인, 지도, 리더보드가 즉시 표시됩니다."
-  },
-  "changelog_section_release": {
-    "message": "릴리스 하이라이트"
-  },
-  "changelog_release_item1": {
-    "message": "활동 타임라인 사전 설정은 첫 번째 및 최신 버킷에 대한 범위 앵커를 사용하여 실시간 데이터를 스트리밍합니다."
-  },
-  "changelog_release_item2": {
-    "message": "국가 리더보드는 즉시 새로 고쳐지므로 패널을 떠나지 않고도 상승 지역을 확인할 수 있습니다."
-  },
-  "changelog_release_item3": {
-    "message": "대화형 지도는 보다 명확한 도구 설명과 측정항목을 통해 전 세계 및 미국 주의 핫스팟을 강조합니다."
   },
   "changelog_support_heading": {
     "message": "도움이 필요하세요?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 로고"
+  },
+  "changelog_page_title": {
+    "message": "Return YouTube Dislike에 오신 것을 환영합니다"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "준비가 끝났습니다"
+  },
+  "changelog_hero_title": {
+    "message": "싫어요 수가 돌아왔습니다."
+  },
+  "changelog_hero_body": {
+    "message": "YouTube 동영상을 열면 좋아요 수 바로 옆에 싫어요 수가 표시됩니다. 버전 4.1에서는 YouTube 댓글란과 별도로 동영상에 관해 이야기할 수 있는 RYD 댓글도 선보입니다."
+  },
+  "changelog_new_badge": {
+    "message": "4.1의 새 기능"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "RYD 댓글을 만나보세요"
+  },
+  "changelog_comments_body": {
+    "message": "Return YouTube Dislike가 제공하는 동영상 및 Shorts 아래의 커뮤니티 토론 공간으로, YouTube 댓글과는 별도로 운영됩니다. 누구나 읽고 반응할 수 있습니다. Commenter와 Premium 회원은 댓글과 답글을 작성할 수 있습니다."
+  },
+  "changelog_comments_point_replies": {
+    "message": "좋아요와 싫어요가 있는 스레드형 답글"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "직접 정한 공개 닉네임으로 댓글 작성"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "답글이나 반응이 달리면 알림"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "신고와 관리로 예의를 지키는 토론"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "동영상 아래에 스레드형 토론을 표시하는 RYD 댓글 패널"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "댓글에 달린 답글과 좋아요를 보여주는 RYD 알림"
+  },
+  "changelog_sample_note": {
+    "message": "스크린샷에는 예시 데이터가 표시되어 있습니다."
+  },
+  "changelog_analytics_title": {
+    "message": "Premium 분석"
+  },
+  "changelog_analytics_body": {
+    "message": "시간과 지역에 따라 동영상이 어떤 반응을 얻는지 확인하세요. 7일, 30일, 90일 또는 전체 기간을 선택해 좋아요, 싫어요, 비율을 비교할 수 있습니다."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "활동 타임라인"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "좋아요와 싫어요의 변화를 시간 단위로 확인하세요."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "상위 국가"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "동영상에 좋아요와 싫어요가 가장 많은 국가를 확인하세요."
+  },
+  "changelog_analytics_world_title": {
+    "message": "세계 지도"
+  },
+  "changelog_analytics_world_body": {
+    "message": "국가별 반응을 비교하세요."
+  },
+  "changelog_analytics_us_title": {
+    "message": "미국 주별 보기"
+  },
+  "changelog_analytics_us_body": {
+    "message": "확대해서 주별 반응을 살펴보세요."
+  },
+  "changelog_join_title": {
+    "message": "Premium 기능 이용하기"
+  },
+  "changelog_join_free": {
+    "message": "싫어요 수는 누구나 무료로 볼 수 있습니다. 멤버십 가입은 선택 사항이며 프로젝트를 지원하는 데 도움이 됩니다."
+  },
+  "changelog_join_step1": {
+    "message": "Patreon에서 가입하세요. Commenter는 댓글을 작성할 수 있고, Premium은 분석 기능도 제공합니다."
+  },
+  "changelog_join_step3": {
+    "message": "YouTube 동영상을 새로고침하세요. 새 기능이 자동으로 나타납니다."
+  },
+  "changelog_also_title": {
+    "message": "이번 버전의 기타 변경 사항"
+  },
+  "changelog_also_counts": {
+    "message": "확장 프로그램과 사용자 스크립트에서 좋아요와 싫어요 수가 더 안정적으로 표시됩니다."
+  },
+  "changelog_also_consent": {
+    "message": "Firefox의 데이터 동의 절차를 개선했습니다."
+  },
+  "changelog_also_translations": {
+    "message": "번역을 추가하고 개선했습니다."
   }
 }

@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Povýšit na Patreonu"
   },
-  "changelog_title": {
-    "message": "Přehled novinek Premium Analytics · 20. října 2025"
-  },
-  "changelog_badge": {
-    "message": "Premium vydání"
-  },
-  "changelog_heading": {
-    "message": "Prémiové analýzy v novém"
-  },
-  "changelog_subheading": {
-    "message": "Prozkoumejte časovou osu živých aktivit, žebříček nejlepších zemí a interaktivní mapu, které jsou součástí Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Vydáno 20. října 2025"
-  },
   "changelog_cta_primary": {
     "message": "Upgradovat na Patreonu"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Časová osa živé aktivity"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Sledujte streamy hodnocení Líbí se a Nelíbí se v reálném čase. Přepínejte hodinové, denní nebo trvalé předvolby bez opětovného načítání, ukotvte okno k prvnímu dni nebo posledním hlasům a procházejte každý bodec, abyste viděli, co vyvolalo zapojení."
-  },
   "changelog_feature_map_title": {
     "message": "Interaktivní mapa světa a USA"
   },
-  "changelog_feature_map_body": {
-    "message": "Posouvejte se po celém světě nebo se ponořte do amerických států na povrch hotspotů. Porovnejte hodnocení Líbí se, Nelíbí se a poměry v upgradovaném popisku a zvýrazněte oblasti, které reagují na vaše nahraná videa jako první."
-  },
   "changelog_feature_quality_title": {
     "message": "Žebříček nejlepších zemí"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Seřaďte každou zemi podle nezpracované aktivity, oblíbenosti, nelibosti nebo poměru. Filtrujte se stejnými předvolbami jako na časové ose, abyste zjistili, kde kampaně končí, a naplánujte si, co dále publikovat."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Screenshot doplníme – pořiďte tuto scénu v DevTools, až bude připravena."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Zástupný obrázek: přehled časové osy"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Zástupný symbol: žebříček zemí"
   },
-  "changelog_section_upgrade": {
-    "message": "Jak odemknout Premium Analytics"
-  },
-  "changelog_upgrade_body": {
-    "message": "Připraveni? Postupujte podle těchto kroků a obnovte kartu YouTube."
-  },
   "changelog_upgrade_step1": {
     "message": "Otevřete popup Return YouTube Dislike a přihlaste se přes Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Zvolte úroveň Premium, aby se do vašeho účtu začala posílat analytická data."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Znovu načtěte libovolné video na YouTube – časová osa, mapa a žebříčky se zobrazí okamžitě."
-  },
-  "changelog_section_release": {
-    "message": "Hlavní novinky vydání"
-  },
-  "changelog_release_item1": {
-    "message": "Předvolby časové osy aktivity streamují živá data s ukotvením rozsahu pro první a poslední segmenty."
-  },
-  "changelog_release_item2": {
-    "message": "Žebříček zemí se okamžitě aktualizuje, takže můžete vidět rostoucí oblasti, aniž byste opustili panel."
-  },
-  "changelog_release_item3": {
-    "message": "Interaktivní mapa zvýrazňuje globální a americké státní hotspoty s jasnějšími popisky a metrikami."
   },
   "changelog_support_heading": {
     "message": "Potřebujete pomoct?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Vítejte v Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Vše je připraveno"
+  },
+  "changelog_hero_title": {
+    "message": "Hodnocení Nelíbí se jsou zpět."
+  },
+  "changelog_hero_body": {
+    "message": "Otevřete libovolné video na YouTube a počet hodnocení Nelíbí se uvidíte hned vedle Líbí se, kam patří. Verze 4.1 přináší také komentáře RYD, prostor pro diskusi o videích mimo komentáře YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Nové ve verzi 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Seznamte se s komentáři RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Komunitní diskuse pod videi a Shorts, kterou provozuje Return YouTube Dislike odděleně od komentářů YouTube. Číst a reagovat může každý. Členové úrovní Commenter a Premium mohou psát komentáře a odpovídat."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Odpovědi ve vláknech s hodnocením Líbí se a Nelíbí se"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Pište pod veřejnou přezdívkou, kterou si zvolíte"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Oznámení, když někdo odpoví nebo zareaguje"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Nahlašování a moderování pro slušnou diskusi"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Panel komentářů RYD s diskusním vláknem pod videem"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Oznámení RYD s odpověďmi a hodnoceními Líbí se u vašich komentářů"
+  },
+  "changelog_sample_note": {
+    "message": "Snímky obrazovky obsahují ukázková data."
+  },
+  "changelog_analytics_title": {
+    "message": "Analýzy Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Podívejte se, jak je video přijímáno v průběhu času a po celém světě. Vyberte 7, 30 nebo 90 dní či celé období a porovnejte hodnocení Líbí se, Nelíbí se a jejich poměr."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Časová osa aktivity"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Hodnocení Líbí se a Nelíbí se v čase, až po jednotlivé hodiny."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Žebříček zemí"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Zjistěte, ve kterých zemích dostává video nejvíce hodnocení Líbí se a Nelíbí se."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Mapa světa"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Porovnejte aktivitu v jednotlivých zemích."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Státy USA"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Prohlédněte si aktivitu podle jednotlivých států."
+  },
+  "changelog_join_title": {
+    "message": "Získejte funkce Premium"
+  },
+  "changelog_join_free": {
+    "message": "Počty hodnocení Nelíbí se jsou zdarma pro všechny. Členství je dobrovolné a pomáhá podporovat projekt."
+  },
+  "changelog_join_step1": {
+    "message": "Přidejte se na Patreonu. Úroveň Commenter umožňuje psát komentáře; Premium přidává i analýzy."
+  },
+  "changelog_join_step3": {
+    "message": "Znovu načtěte libovolné video na YouTube. Nové funkce se objeví automaticky."
+  },
+  "changelog_also_title": {
+    "message": "Také v tomto vydání"
+  },
+  "changelog_also_counts": {
+    "message": "Počty hodnocení Líbí se a Nelíbí se se zobrazují spolehlivěji v rozšíření i uživatelském skriptu."
+  },
+  "changelog_also_consent": {
+    "message": "Vylepšený postup udělení souhlasu s použitím dat ve Firefoxu."
+  },
+  "changelog_also_translations": {
+    "message": "Nové a vylepšené překlady."
   }
 }

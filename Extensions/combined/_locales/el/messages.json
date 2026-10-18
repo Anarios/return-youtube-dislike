@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Αναβάθμιση στο Patreon"
   },
-  "changelog_title": {
-    "message": "Ημερολόγιο αλλαγών Premium Analytics · 20 Οκτωβρίου 2025"
-  },
-  "changelog_badge": {
-    "message": "Κυκλοφορία Premium"
-  },
-  "changelog_heading": {
-    "message": "Premium αναλύσεις, επανασχεδιασμένες"
-  },
-  "changelog_subheading": {
-    "message": "Εξερευνήστε το χρονοδιάγραμμα της ζωντανής δραστηριότητας, τον πίνακα κορυφαίων χωρών και τον διαδραστικό χάρτη που περιλαμβάνονται στο Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Κυκλοφόρησε στις 20 Οκτωβρίου 2025"
-  },
   "changelog_cta_primary": {
     "message": "Αναβάθμιση στο Patreon"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Χρονοδιάγραμμα ζωντανής δραστηριότητας"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Παρακολουθήστε τη ροή \"μου αρέσει\" και \"δεν μου αρέσει\" σε πραγματικό χρόνο. Εναλλάξτε τις ωριαίες, ημερήσιες ή προεπιλογές όλων των εποχών χωρίς επαναφόρτωση, αγκυρώστε το παράθυρο στην πρώτη ημέρα ή τις πιο πρόσφατες ψηφοφορίες και σκουπίστε κάθε αιχμή για να δείτε τι ενεργοποίησε την αφοσίωση."
-  },
   "changelog_feature_map_title": {
     "message": "Διαδραστικός χάρτης θερμότητας κόσμου και ΗΠΑ"
   },
-  "changelog_feature_map_body": {
-    "message": "Μετακινηθείτε σε όλο τον κόσμο ή βουτήξτε στις πολιτείες των ΗΠΑ για να εμφανίσετε hotspot. Συγκρίνετε τις επισημάνσεις \"μου αρέσει\", \"δεν μου αρέσει\" και τις αναλογίες στην αναβαθμισμένη επεξήγηση εργαλείου και δώστε έμφαση στις περιοχές που αντιδρούν πρώτες στις μεταφορτώσεις σας."
-  },
   "changelog_feature_quality_title": {
     "message": "Κορυφαίος πίνακας κορυφαίων χωρών"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Κατατάξτε κάθε χώρα κατά ακατέργαστη δραστηριότητα, \"μου αρέσει\", \"δεν μου αρέσει\" ή αναλογία. Φιλτράρετε με τις ίδιες προεπιλογές με το χρονοδιάγραμμα για να μάθετε πού προέρχονται οι καμπάνιες και να σχεδιάσετε τι θα δημοσιεύσετε στη συνέχεια."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Το στιγμιότυπο θα προστεθεί — αποθηκεύστε αυτή την προβολή μέσω DevTools όταν είστε έτοιμοι."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Placeholder: επισκόπηση χρονογραμμής"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Placeholder: leaderboard χωρών"
   },
-  "changelog_section_upgrade": {
-    "message": "Πώς να ξεκλειδώσετε τα Premium analytics"
-  },
-  "changelog_upgrade_body": {
-    "message": "Έτοιμοι; Ακολουθήστε αυτά τα βήματα και ανανεώστε την καρτέλα YouTube."
-  },
   "changelog_upgrade_step1": {
     "message": "Ανοίξτε το αναδυόμενο Return YouTube Dislike και συνδεθείτε με Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Επιλέξτε τη βαθμίδα Premium ώστε τα δεδομένα analytics να ρέουν στον λογαριασμό σας."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Ανανεώστε οποιαδήποτε σελίδα παρακολούθησης στο YouTube — χρονογραμμή, χάρτης και κατατάξεις εμφανίζονται άμεσα."
-  },
-  "changelog_section_release": {
-    "message": "Κύρια σημεία κυκλοφορίας"
-  },
-  "changelog_release_item1": {
-    "message": "Οι προκαθορισμένες ρυθμίσεις του χρονοδιαγράμματος δραστηριότητας μεταδίδουν ζωντανά δεδομένα με αγκυρώσεις εύρους για τον πρώτο και τον τελευταίο κάδο."
-  },
-  "changelog_release_item2": {
-    "message": "Ο πίνακας κορυφαίων χωρών ανανεώνεται αμέσως, ώστε να μπορείτε να εντοπίζετε ανερχόμενες περιοχές χωρίς να βγείτε από το πλαίσιο."
-  },
-  "changelog_release_item3": {
-    "message": "Ο διαδραστικός χάρτης υπογραμμίζει τα παγκόσμια και τις πολιτειακές εστίες των ΗΠΑ με σαφέστερες συμβουλές εργαλείων και μετρήσεις."
   },
   "changelog_support_heading": {
     "message": "Χρειάζεστε βοήθεια;"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Λογότυπο Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Καλώς ήρθατε στο Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Όλα είναι έτοιμα"
+  },
+  "changelog_hero_title": {
+    "message": "Τα «Δεν μου αρέσει» επέστρεψαν."
+  },
+  "changelog_hero_body": {
+    "message": "Ανοίξτε οποιοδήποτε βίντεο στο YouTube και θα δείτε τον αριθμό των «Δεν μου αρέσει» δίπλα στα «Μου αρέσει», εκεί που ανήκει. Η έκδοση 4.1 φέρνει επίσης τα σχόλια RYD, έναν χώρο συζήτησης για βίντεο έξω από την ενότητα σχολίων του YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Νέο στην έκδοση 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Γνωρίστε τα σχόλια RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Μια συζήτηση της κοινότητας κάτω από βίντεο και Shorts, που φιλοξενείται από το Return YouTube Dislike, ξεχωριστά από τα σχόλια του YouTube. Όλοι μπορούν να διαβάζουν και να αντιδρούν. Τα μέλη Commenter και Premium μπορούν να γράφουν σχόλια και απαντήσεις."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Απαντήσεις σε νήματα με «Μου αρέσει» και «Δεν μου αρέσει»"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Γράψτε με δημόσιο ψευδώνυμο της επιλογής σας"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Ειδοποιήσεις όταν κάποιος απαντά ή αντιδρά"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Αναφορές και εποπτεία για πολιτισμένες συζητήσεις"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Πίνακας σχολίων RYD με συζήτηση σε νήμα κάτω από ένα βίντεο"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Ειδοποιήσεις RYD με απαντήσεις και «Μου αρέσει» στα σχόλιά σας"
+  },
+  "changelog_sample_note": {
+    "message": "Τα στιγμιότυπα οθόνης δείχνουν ενδεικτικά δεδομένα."
+  },
+  "changelog_analytics_title": {
+    "message": "Αναλύσεις Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Δείτε την απήχηση ενός βίντεο με την πάροδο του χρόνου και σε όλο τον κόσμο. Επιλέξτε 7, 30 ή 90 ημέρες ή όλη την περίοδο και συγκρίνετε τα «Μου αρέσει», τα «Δεν μου αρέσει» και την αναλογία τους."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Χρονοδιάγραμμα δραστηριότητας"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "«Μου αρέσει» και «Δεν μου αρέσει» με την πάροδο του χρόνου, ανά ώρα."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Κορυφαίες χώρες"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Δείτε από ποιες χώρες ένα βίντεο λαμβάνει τα περισσότερα «Μου αρέσει» και «Δεν μου αρέσει»."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Παγκόσμιος χάρτης"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Συγκρίνετε τη συμμετοχή του κοινού ανά χώρα."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Πολιτείες των ΗΠΑ"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Δείτε αναλυτικά τη συμμετοχή του κοινού ανά πολιτεία."
+  },
+  "changelog_join_title": {
+    "message": "Αποκτήστε τις λειτουργίες Premium"
+  },
+  "changelog_join_free": {
+    "message": "Ο αριθμός των «Δεν μου αρέσει» είναι δωρεάν για όλους. Η συνδρομή είναι προαιρετική και βοηθά στη στήριξη του έργου."
+  },
+  "changelog_join_step1": {
+    "message": "Γίνετε μέλος στο Patreon. Το Commenter σάς επιτρέπει να γράφετε σχόλια· το Premium προσθέτει και αναλύσεις."
+  },
+  "changelog_join_step3": {
+    "message": "Φορτώστε ξανά οποιοδήποτε βίντεο στο YouTube. Οι νέες λειτουργίες εμφανίζονται αυτόματα."
+  },
+  "changelog_also_title": {
+    "message": "Επίσης σε αυτή την έκδοση"
+  },
+  "changelog_also_counts": {
+    "message": "Οι αριθμοί των «Μου αρέσει» και «Δεν μου αρέσει» εμφανίζονται πιο αξιόπιστα στην επέκταση και στο σενάριο χρήστη."
+  },
+  "changelog_also_consent": {
+    "message": "Βελτιωμένη διαδικασία συγκατάθεσης για τη χρήση δεδομένων στον Firefox."
+  },
+  "changelog_also_translations": {
+    "message": "Νέες και βελτιωμένες μεταφράσεις."
   }
 }

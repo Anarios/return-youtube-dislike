@@ -500,21 +500,6 @@
   "premiumTierNotice_cta": {
     "message": "Passer au niveau supérieur sur Patreon"
   },
-  "changelog_title": {
-    "message": "Journal des nouveautés Analytics Premium · 20 octobre 2025"
-  },
-  "changelog_badge": {
-    "message": "Version Premium"
-  },
-  "changelog_heading": {
-    "message": "Des analyses Premium réinventées"
-  },
-  "changelog_subheading": {
-    "message": "Explorez la chronologie des activités en direct, le classement des principaux pays et la carte interactive inclus avec Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Publié le 20 octobre 2025"
-  },
   "changelog_cta_primary": {
     "message": "Passer à Patreon Premium"
   },
@@ -527,23 +512,11 @@
   "changelog_feature_timeline_title": {
     "message": "Chronologie des activités en direct"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Regardez les likes et les dégoûts en temps réel. Basculez entre les préréglages horaires, quotidiens ou permanents sans recharger, ancrez la fenêtre au premier jour ou aux derniers votes et éliminez chaque pic pour voir ce qui a déclenché l'engagement."
-  },
   "changelog_feature_map_title": {
     "message": "Carte thermique interactive du monde et des États-Unis"
   },
-  "changelog_feature_map_body": {
-    "message": "Parcourez le monde ou plongez dans les États américains pour faire surface des points chauds. Comparez les goûts, les aversions et les ratios dans l'info-bulle mise à jour et mettez en évidence les régions qui réagissent en premier à vos téléchargements."
-  },
   "changelog_feature_quality_title": {
     "message": "Classement des meilleurs pays"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Classez chaque pays par activité brute, goûts, dégoûts ou ratio. Filtrez avec les mêmes préréglages que la chronologie pour savoir où atterrissent les campagnes et planifier ce qu'il faut publier ensuite."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Capture à venir — enregistrez cette vue dans DevTools lorsque vous serez prêt."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Espace réservé : vue d’ensemble de la chronologie"
@@ -554,32 +527,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Espace réservé : classement des pays"
   },
-  "changelog_section_upgrade": {
-    "message": "Comment débloquer les analyses Premium"
-  },
-  "changelog_upgrade_body": {
-    "message": "Envie de vous lancer ? Suivez ces étapes et actualisez ensuite votre onglet YouTube."
-  },
   "changelog_upgrade_step1": {
     "message": "Ouvrez le pop-up Return YouTube Dislike et connectez-vous avec Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Choisissez le palier Premium pour activer l’acheminement des données d’analyse vers votre compte."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Rechargez n’importe quelle page YouTube : la chronologie, la carte et les classements apparaissent instantanément."
-  },
-  "changelog_section_release": {
-    "message": "Points forts de la version"
-  },
-  "changelog_release_item1": {
-    "message": "Les préréglages de la chronologie des activités diffusent des données en direct avec des ancres de plage pour le premier et le dernier compartiment."
-  },
-  "changelog_release_item2": {
-    "message": "Le classement des pays s'actualise instantanément afin que vous puissiez repérer les régions en hausse sans quitter le panneau."
-  },
-  "changelog_release_item3": {
-    "message": "La carte interactive met en évidence les points chauds du monde et des États américains avec des info-bulles et des mesures plus claires."
   },
   "changelog_support_heading": {
     "message": "Besoin d’aide ?"
@@ -607,5 +556,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Logo de Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Bienvenue sur Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Tout est prêt"
+  },
+  "changelog_hero_title": {
+    "message": "Les dislikes sont de retour."
+  },
+  "changelog_hero_body": {
+    "message": "Ouvrez une vidéo YouTube et vous verrez le nombre de dislikes juste à côté des likes, à sa place. La version 4.1 ajoute aussi les commentaires RYD, un espace pour discuter des vidéos en dehors des commentaires de YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Nouveau dans la version 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Découvrez les commentaires RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Un espace de discussion sous les vidéos et les Shorts, hébergé par Return YouTube Dislike et distinct des commentaires de YouTube. Tout le monde peut lire et réagir. Les membres Commenter et Premium peuvent publier et répondre."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Réponses en fils de discussion avec likes et dislikes"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Publiez sous le pseudonyme public de votre choix"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Notifications quand quelqu’un répond ou réagit"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Signalement et modération pour des échanges respectueux"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Panneau de commentaires RYD montrant un fil de discussion sous une vidéo"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Notifications RYD affichant les réponses et les likes sur vos commentaires"
+  },
+  "changelog_sample_note": {
+    "message": "Les captures d’écran présentent des données d’exemple."
+  },
+  "changelog_analytics_title": {
+    "message": "Analyses Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Découvrez l’accueil d’une vidéo au fil du temps et dans le monde. Choisissez 7, 30 ou 90 jours ou toute la période, et comparez les likes, les dislikes et leur ratio."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Chronologie de l’activité"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Les likes et les dislikes au fil du temps, à l’heure près."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Principaux pays"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Voyez quels pays donnent le plus de likes et de dislikes à une vidéo."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Carte du monde"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Comparez la participation d’un pays à l’autre."
+  },
+  "changelog_analytics_us_title": {
+    "message": "États américains"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Examinez la participation par État en détail."
+  },
+  "changelog_join_title": {
+    "message": "Profitez des fonctions Premium"
+  },
+  "changelog_join_free": {
+    "message": "Le nombre de dislikes est gratuit pour tout le monde. L’abonnement est facultatif et aide à soutenir le projet."
+  },
+  "changelog_join_step1": {
+    "message": "Abonnez-vous sur Patreon. Commenter permet de publier des commentaires ; Premium ajoute aussi les analyses."
+  },
+  "changelog_join_step3": {
+    "message": "Rechargez une vidéo YouTube. Vos nouvelles fonctions apparaissent automatiquement."
+  },
+  "changelog_also_title": {
+    "message": "Également dans cette version"
+  },
+  "changelog_also_counts": {
+    "message": "Les nombres de likes et de dislikes s’affichent de façon plus fiable, dans l’extension et le script utilisateur."
+  },
+  "changelog_also_consent": {
+    "message": "Parcours de consentement à l’utilisation des données amélioré dans Firefox."
+  },
+  "changelog_also_translations": {
+    "message": "Traductions ajoutées et améliorées."
   }
 }

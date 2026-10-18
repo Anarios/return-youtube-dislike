@@ -500,21 +500,6 @@
   "premiumTierNotice_cta": {
     "message": "Nadgradi na Patreonu"
   },
-  "changelog_title": {
-    "message": "Dnevnik sprememb premium analitike · 20. oktober 2025"
-  },
-  "changelog_badge": {
-    "message": "Premium izdaja"
-  },
-  "changelog_heading": {
-    "message": "Premium analitika na novo zasnovana"
-  },
-  "changelog_subheading": {
-    "message": "Raziščite časovnico odzivov v živo, lestvico vodilnih držav in interaktivni zemljevid, ki jih vključuje Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Izdano 20. oktobra 2025"
-  },
   "changelog_cta_primary": {
     "message": "Nadgradi na Patreonu"
   },
@@ -527,23 +512,11 @@
   "changelog_feature_timeline_title": {
     "message": "Časovnica odzivov v živo"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Opazujte, kako všečki in nevšečki pritekajo v realnem času. Preklapljajte med urnimi, dnevnimi in vseskozi trajajočimi prednastavitvami brez ponovnega nalaganja, zasidrajte okno na prvi dan ali na najnovejše glasove in preglejte vsak skok, da vidite, kaj je sprožilo odziv."
-  },
   "changelog_feature_map_title": {
     "message": "Interaktivni zemljevid sveta in ZDA"
   },
-  "changelog_feature_map_body": {
-    "message": "Premikajte se po svetu ali se poglobite v zvezne države ZDA in odkrijte žarišča. V nadgrajenem opisu primerjajte všečke, nevšečke in razmerja ter izpostavite regije, ki se na vaše objave odzovejo prve."
-  },
   "changelog_feature_quality_title": {
     "message": "Lestvica vodilnih držav"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Razvrstite države po neobdelani odzivnosti, všečkih, nevšečkih ali razmerju. Filtrirajte z enakimi prednastavitvami kot na časovnici in ugotovite, kje kampanje zaležejo ter kaj objaviti naslednjič."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Zaslonska slika bo kmalu na voljo – zajemite ta pogled v razvijalskih orodjih, ko bo pripravljen."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Ograda: pregled časovnice"
@@ -554,32 +527,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Ograda: lestvica držav"
   },
-  "changelog_section_upgrade": {
-    "message": "Kako odkleniti premium analitiko"
-  },
-  "changelog_upgrade_body": {
-    "message": "Ste pripravljeni na začetek? Sledite tem hitrim korakom in osvežite zavihek z YouTubom."
-  },
   "changelog_upgrade_step1": {
     "message": "Odprite pojavno okno Return YouTube Dislike in se prijavite s Patreonom."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Izberite stopnjo Premium, da omogočite pretakanje analitičnih podatkov v svoj račun."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Znova naložite katero koli stran za ogled videa na YouTubu – časovnica, zemljevid in lestvice se prikažejo takoj."
-  },
-  "changelog_section_release": {
-    "message": "Poudarki izdaje"
-  },
-  "changelog_release_item1": {
-    "message": "Prednastavitve časovnice odzivov pretakajo podatke v živo s sidri obsega za prvo in zadnje časovno okno."
-  },
-  "changelog_release_item2": {
-    "message": "Lestvica držav se osvežuje sproti, zato lahko opazite regije v vzponu, ne da bi zapustili ploščo."
-  },
-  "changelog_release_item3": {
-    "message": "Interaktivni zemljevid izpostavi svetovna žarišča in žarišča po zveznih državah ZDA z jasnejšimi opisi in merili."
   },
   "changelog_support_heading": {
     "message": "Potrebujete pomoč?"
@@ -607,5 +556,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Logotip Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Dobrodošli v Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Vse je pripravljeno"
+  },
+  "changelog_hero_title": {
+    "message": "Nevšečki so nazaj."
+  },
+  "changelog_hero_body": {
+    "message": "Odprite kateri koli videoposnetek na YouTubu in število nevšečkov boste videli tik ob všečkih, kamor sodi. Različica 4.1 prinaša tudi komentarje RYD, prostor za pogovor o videoposnetkih zunaj YouTubovega razdelka za komentarje."
+  },
+  "changelog_new_badge": {
+    "message": "Novo v različici 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Spoznajte komentarje RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Razprava skupnosti pod videoposnetki in posnetki Shorts, ki jo gosti Return YouTube Dislike, ločeno od YouTubovih komentarjev. Vsi lahko berejo in se odzivajo. Člani stopenj Commenter in Premium lahko objavljajo in odgovarjajo."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Odgovori v nitih z všečki in nevšečki"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Objavljajte pod javnim vzdevkom, ki ga izberete sami"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Obvestila, ko kdo odgovori ali se odzove"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Prijave in moderiranje za spoštljivo razpravo"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Plošča s komentarji RYD, ki prikazuje razpravo v niti pod videoposnetkom"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Obvestila RYD z odgovori in všečki na vaše komentarje"
+  },
+  "changelog_sample_note": {
+    "message": "Posnetki zaslona prikazujejo vzorčne podatke."
+  },
+  "changelog_analytics_title": {
+    "message": "Analitika Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Oglejte si, kako je videoposnetek sprejet skozi čas in po svetu. Izberite 7, 30 ali 90 dni ali celotno obdobje ter primerjajte všečke, nevšečke in njihovo razmerje."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Časovnica aktivnosti"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Všečki in nevšečki skozi čas, vse do posamezne ure."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Vodilne države"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Poglejte, iz katerih držav videoposnetek prejme največ všečkov in nevšečkov."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Zemljevid sveta"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Primerjajte odzive med državami."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Zvezne države ZDA"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Podrobneje si oglejte odzive po zveznih državah."
+  },
+  "changelog_join_title": {
+    "message": "Pridobite funkcije Premium"
+  },
+  "changelog_join_free": {
+    "message": "Število nevšečkov je brezplačno za vse. Članstvo je neobvezno in pomaga podpirati projekt."
+  },
+  "changelog_join_step1": {
+    "message": "Pridružite se na Patreonu. Commenter omogoča objavljanje komentarjev, Premium pa doda še analitiko."
+  },
+  "changelog_join_step3": {
+    "message": "Znova naložite kateri koli videoposnetek na YouTubu. Nove funkcije se prikažejo samodejno."
+  },
+  "changelog_also_title": {
+    "message": "Tudi v tej izdaji"
+  },
+  "changelog_also_counts": {
+    "message": "Število všečkov in nevšečkov se zanesljiveje prikazuje v razširitvi in uporabniškem skriptu."
+  },
+  "changelog_also_consent": {
+    "message": "Izboljšan postopek soglasja za uporabo podatkov v Firefoxu."
+  },
+  "changelog_also_translations": {
+    "message": "Novi in izboljšani prevodi."
   }
 }

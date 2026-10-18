@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Nâng cấp trên Patreon"
   },
-  "changelog_title": {
-    "message": "Nhật ký thay đổi của Analytics cao cấp · Ngày 20 tháng 10 năm 2025"
-  },
-  "changelog_badge": {
-    "message": "Bản phát hành cao cấp"
-  },
-  "changelog_heading": {
-    "message": "Phân tích cao cấp, được mô phỏng lại"
-  },
-  "changelog_subheading": {
-    "message": "Khám phá dòng thời gian hoạt động trực tiếp, bảng xếp hạng các quốc gia hàng đầu và bản đồ tương tác đi kèm với Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Phát hành vào ngày 20 tháng 10 năm 2025"
-  },
   "changelog_cta_primary": {
     "message": "Nâng cấp trên Patreon"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Dòng thời gian hoạt động trực tiếp"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Xem luồng lượt thích và không thích trong thời gian thực. Chuyển đổi các cài đặt trước hàng giờ, hàng ngày hoặc mọi thời điểm mà không cần tải lại, neo cửa sổ vào ngày đầu tiên hoặc phiếu bầu mới nhất và xem xét mọi mức tăng đột biến để xem điều gì đã kích hoạt sự tương tác."
-  },
   "changelog_feature_map_title": {
     "message": "Thế giới tương tác & bản đồ nhiệt của Hoa Kỳ"
   },
-  "changelog_feature_map_body": {
-    "message": "Xoay khắp thế giới hoặc đi sâu vào các tiểu bang của Hoa Kỳ để tìm ra các điểm nóng. So sánh lượt thích, lượt không thích và tỷ lệ trong chú giải công cụ được nâng cấp và đánh dấu các khu vực phản ứng đầu tiên với video tải lên của bạn."
-  },
   "changelog_feature_quality_title": {
     "message": "Bảng xếp hạng các quốc gia hàng đầu"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Xếp hạng mọi quốc gia theo hoạt động thô, lượt thích, lượt không thích hoặc tỷ lệ. Lọc với các giá trị đặt trước tương tự như dòng thời gian để tìm hiểu vị trí chiến dịch diễn ra và lên kế hoạch xuất bản nội dung tiếp theo."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Sắp có ảnh chụp màn hình—chụp chế độ xem này trong DevTools khi sẵn sàng."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Trình giữ chỗ: tổng quan về dòng thời gian"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Trình giữ chỗ: bảng xếp hạng các quốc gia"
   },
-  "changelog_section_upgrade": {
-    "message": "Cách mở khóa Phân tích cao cấp"
-  },
-  "changelog_upgrade_body": {
-    "message": "Sẵn sàng để đi sâu vào? Hãy làm theo các bước nhanh sau đây và làm mới tab YouTube của bạn."
-  },
   "changelog_upgrade_step1": {
     "message": "Mở cửa sổ bật lên Trả lại lượt không thích trên YouTube và đăng nhập bằng Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Chọn cấp Premium để bật truyền dữ liệu phân tích tới tài khoản của bạn."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Tải lại bất kỳ trang xem YouTube nào—dòng thời gian, bản đồ và bảng xếp hạng của bạn sẽ xuất hiện ngay lập tức."
-  },
-  "changelog_section_release": {
-    "message": "Phát hành điểm nổi bật"
-  },
-  "changelog_release_item1": {
-    "message": "Giá trị đặt trước của dòng thời gian hoạt động truyền phát dữ liệu trực tiếp với các điểm cố định phạm vi cho các nhóm đầu tiên và mới nhất."
-  },
-  "changelog_release_item2": {
-    "message": "Bảng xếp hạng quốc gia làm mới ngay lập tức để bạn có thể phát hiện các khu vực đang phát triển mà không cần rời khỏi bảng điều khiển."
-  },
-  "changelog_release_item3": {
-    "message": "Bản đồ tương tác làm nổi bật các điểm nóng trên toàn cầu và tiểu bang Hoa Kỳ bằng các chú giải công cụ và số liệu rõ ràng hơn."
   },
   "changelog_support_heading": {
     "message": "Cần một bàn tay?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Chào mừng đến với Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Mọi thứ đã sẵn sàng"
+  },
+  "changelog_hero_title": {
+    "message": "Lượt không thích đã trở lại."
+  },
+  "changelog_hero_body": {
+    "message": "Mở bất kỳ video YouTube nào, bạn sẽ thấy số lượt không thích ngay cạnh lượt thích, đúng vị trí vốn có. Phiên bản 4.1 còn giới thiệu bình luận RYD, nơi thảo luận về video ngoài phần bình luận của YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Mới trong 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Khám phá bình luận RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Không gian thảo luận cộng đồng bên dưới video và Shorts, do Return YouTube Dislike cung cấp và tách biệt với bình luận của YouTube. Mọi người đều có thể đọc và bày tỏ cảm xúc. Thành viên Commenter và Premium có thể đăng bình luận và trả lời."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Trả lời theo luồng, có lượt thích và không thích"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Đăng bằng biệt danh công khai do bạn chọn"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Thông báo khi có người trả lời hoặc bày tỏ cảm xúc"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Báo cáo và kiểm duyệt để thảo luận văn minh"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Bảng bình luận RYD hiển thị thảo luận theo luồng dưới video"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Thông báo RYD liệt kê trả lời và lượt thích cho bình luận của bạn"
+  },
+  "changelog_sample_note": {
+    "message": "Ảnh chụp màn hình sử dụng dữ liệu mẫu."
+  },
+  "changelog_analytics_title": {
+    "message": "Phân tích Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Xem phản hồi về video theo thời gian và trên khắp thế giới. Chọn 7, 30, 90 ngày hoặc toàn bộ thời gian để so sánh lượt thích, lượt không thích và tỷ lệ."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Dòng thời gian hoạt động"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Lượt thích và không thích theo thời gian, chi tiết đến từng giờ."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Quốc gia hàng đầu"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Xem quốc gia nào thích và không thích video nhiều nhất."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Bản đồ thế giới"
+  },
+  "changelog_analytics_world_body": {
+    "message": "So sánh mức độ tương tác giữa các quốc gia."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Các bang của Hoa Kỳ"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Phóng to để xem tương tác theo từng bang."
+  },
+  "changelog_join_title": {
+    "message": "Sử dụng tính năng Premium"
+  },
+  "changelog_join_free": {
+    "message": "Số lượt không thích miễn phí cho mọi người. Tư cách thành viên là tùy chọn và giúp hỗ trợ dự án."
+  },
+  "changelog_join_step1": {
+    "message": "Tham gia trên Patreon. Commenter cho phép đăng bình luận; Premium có thêm tính năng phân tích."
+  },
+  "changelog_join_step3": {
+    "message": "Tải lại bất kỳ video YouTube nào. Các tính năng mới sẽ tự động xuất hiện."
+  },
+  "changelog_also_title": {
+    "message": "Cũng trong phiên bản này"
+  },
+  "changelog_also_counts": {
+    "message": "Số lượt thích và không thích hiển thị ổn định hơn trong tiện ích mở rộng và userscript."
+  },
+  "changelog_also_consent": {
+    "message": "Cải thiện quy trình đồng ý sử dụng dữ liệu trên Firefox."
+  },
+  "changelog_also_translations": {
+    "message": "Bổ sung và cải thiện bản dịch."
   }
 }

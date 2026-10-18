@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Обновить на Patreon"
   },
-  "changelog_title": {
-    "message": "Журнал изменений Premium Analytics · 20 октября 2025 года"
-  },
-  "changelog_badge": {
-    "message": "Премиум-релиз"
-  },
-  "changelog_heading": {
-    "message": "Премиальная аналитика по-новому"
-  },
-  "changelog_subheading": {
-    "message": "Изучите хронологию событий в прямом эфире, таблицу лидеров лучших стран и интерактивную карту, включенную в состав Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Выпущено 20 октября 2025 года"
-  },
   "changelog_cta_primary": {
     "message": "Повысить уровень на Patreon"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "График активности в прямом эфире"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Смотрите трансляцию лайков и антипатий в режиме реального времени. Переключайте ежечасные, ежедневные или постоянные настройки без перезагрузки, привязывайте окно к первому или последнему дню голосования и просматривайте каждый всплеск, чтобы увидеть, что вызвало взаимодействие."
-  },
   "changelog_feature_map_title": {
     "message": "Интерактивная тепловая карта мира и США"
   },
-  "changelog_feature_map_body": {
-    "message": "Путешествуйте по всему земному шару или погрузитесь в штаты США, чтобы обнаружить горячие точки. Сравните соотношение лайков, антипатий и их соотношение в обновленной подсказке и выделите регионы, которые первыми реагируют на ваши загрузки."
-  },
   "changelog_feature_quality_title": {
     "message": "Таблица лидеров лучших стран"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Проранжируйте каждую страну по показателям активности, симпатий, антипатий или соотношения. Фильтруйте с теми же настройками, что и на временной шкале, чтобы узнать, где будут проводиться кампании, и спланировать, что публиковать дальше."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Скриншот появится позже — сохраните этот вид через DevTools, когда будете готовы."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Заполнитель: обзор временной шкалы"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Заполнитель: таблица лидеров стран"
   },
-  "changelog_section_upgrade": {
-    "message": "Как открыть Premium Analytics"
-  },
-  "changelog_upgrade_body": {
-    "message": "Готовы погрузиться? Выполните эти шаги и обновите вкладку YouTube."
-  },
   "changelog_upgrade_step1": {
     "message": "Откройте всплывающее окно Return YouTube Dislike и войдите через Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Выберите уровень Premium, чтобы аналитические данные поступали в ваш аккаунт."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Перезагрузите любую страницу просмотра YouTube — временная шкала, карта и рейтинги появятся сразу."
-  },
-  "changelog_section_release": {
-    "message": "Основные моменты релиза"
-  },
-  "changelog_release_item1": {
-    "message": "Предварительные настройки временной шкалы активности передают данные в реальном времени с привязкой к диапазону для первого и последнего сегментов."
-  },
-  "changelog_release_item2": {
-    "message": "Таблица лидеров стран обновляется мгновенно, поэтому вы можете видеть растущие регионы, не покидая панели."
-  },
-  "changelog_release_item3": {
-    "message": "На интерактивной карте обозначены горячие точки мира и штатов США с более четкими подсказками и показателями."
   },
   "changelog_support_heading": {
     "message": "Нужна помощь?"
@@ -688,5 +637,104 @@
   "patreonTierCommenter": { "message": "Commenter" },
   "changelog_brand_logo_alt": {
     "message": "Логотип Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Добро пожаловать в Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Всё готово"
+  },
+  "changelog_hero_title": {
+    "message": "Дизлайки вернулись."
+  },
+  "changelog_hero_body": {
+    "message": "Откройте любое видео на YouTube, и вы увидите число дизлайков рядом с лайками, на своём месте. В версии 4.1 также появились комментарии RYD — место для обсуждения видео вне раздела комментариев YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Новое в 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Знакомьтесь: комментарии RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Обсуждения сообщества под видео и Shorts в Return YouTube Dislike, отдельно от комментариев YouTube. Читать и ставить реакции могут все. Участники с уровнями Commenter и Premium могут писать комментарии и ответы."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Ветки ответов с лайками и дизлайками"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Пишите под выбранным вами публичным ником"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Уведомления об ответах и реакциях"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Жалобы и модерация для вежливого общения"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Панель комментариев RYD с ветками обсуждения под видео"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Уведомления RYD с ответами и лайками к вашим комментариям"
+  },
+  "changelog_sample_note": {
+    "message": "На скриншотах показаны демонстрационные данные."
+  },
+  "changelog_analytics_title": {
+    "message": "Аналитика Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Узнайте, как воспринимают видео со временем и в разных странах. Выберите 7, 30 или 90 дней либо всё время и сравнивайте лайки, дизлайки и их соотношение."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "График активности"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Лайки и дизлайки со временем, с точностью до часа."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Топ стран"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Узнайте, в каких странах видео получает больше всего лайков и дизлайков."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Карта мира"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Сравнивайте активность в разных странах."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Штаты США"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Рассмотрите активность по штатам подробнее."
+  },
+  "changelog_join_title": {
+    "message": "Получите возможности Premium"
+  },
+  "changelog_join_free": {
+    "message": "Число дизлайков доступно всем бесплатно. Участие добровольное и помогает поддерживать проект."
+  },
+  "changelog_join_step1": {
+    "message": "Присоединяйтесь на Patreon. Commenter позволяет писать комментарии, а Premium также добавляет аналитику."
+  },
+  "changelog_join_step3": {
+    "message": "Перезагрузите любое видео на YouTube. Новые возможности появятся автоматически."
+  },
+  "changelog_also_title": {
+    "message": "Также в этом выпуске"
+  },
+  "changelog_also_counts": {
+    "message": "Число лайков и дизлайков отображается надёжнее в расширении и пользовательском скрипте."
+  },
+  "changelog_also_consent": {
+    "message": "Улучшен процесс согласия на обработку данных в Firefox."
+  },
+  "changelog_also_translations": {
+    "message": "Новые и улучшенные переводы."
   }
 }

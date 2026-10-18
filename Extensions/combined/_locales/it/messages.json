@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Esegui l’upgrade su Patreon"
   },
-  "changelog_title": {
-    "message": "Registro delle novità di Analytics Premium · 20 ottobre 2025"
-  },
-  "changelog_badge": {
-    "message": "Versione Premium"
-  },
-  "changelog_heading": {
-    "message": "Analytics Premium reinventate"
-  },
-  "changelog_subheading": {
-    "message": "Esplora la sequenza temporale delle attività dal vivo, la classifica dei principali paesi e la mappa interattiva inclusa in Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Rilasciato il 20 ottobre 2025"
-  },
   "changelog_cta_primary": {
     "message": "Esegui l’upgrade su Patreon"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Cronologia delle attività dal vivo"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Guarda lo streaming di Mi piace e Non mi piace in tempo reale. Alterna le preimpostazioni orarie, giornaliere o di tutti i tempi senza ricaricare, ancora la finestra al primo giorno o agli ultimi voti e scorri ogni picco per vedere cosa ha attivato il coinvolgimento."
-  },
   "changelog_feature_map_title": {
     "message": "Mondo interattivo e mappa termica degli Stati Uniti"
   },
-  "changelog_feature_map_body": {
-    "message": "Effettua una panoramica in tutto il mondo o tuffati negli stati degli Stati Uniti per individuare gli hotspot. Confronta Mi piace, Non mi piace e rapporti nella descrizione comando aggiornata e metti in evidenza le regioni che reagiscono per prime ai tuoi caricamenti."
-  },
   "changelog_feature_quality_title": {
     "message": "Classifica dei principali paesi"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Classifica ogni paese in base all'attività grezza, alle preferenze, alle antipatie o al rapporto. Filtra con le stesse preimpostazioni della sequenza temporale per scoprire dove arrivano le campagne e pianificare cosa pubblicare successivamente."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Screenshot in arrivo: acquisisci questa vista con DevTools quando sarà pronta."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Segnaposto: panoramica della timeline"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Segnaposto: classifica dei paesi"
   },
-  "changelog_section_upgrade": {
-    "message": "Come sbloccare le Analytics Premium"
-  },
-  "changelog_upgrade_body": {
-    "message": "Pronto a iniziare? Segui questi passaggi e poi aggiorna la scheda di YouTube."
-  },
   "changelog_upgrade_step1": {
     "message": "Apri il popup di Return YouTube Dislike e accedi con Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Scegli il livello Premium per attivare il flusso dei dati di analisi sul tuo account."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Ricarica una pagina video di YouTube: timeline, mappa e classifiche compaiono all’istante."
-  },
-  "changelog_section_release": {
-    "message": "Punti salienti della release"
-  },
-  "changelog_release_item1": {
-    "message": "Le preimpostazioni della sequenza temporale delle attività trasmettono dati in tempo reale con ancoraggi di intervallo per il primo e l'ultimo bucket."
-  },
-  "changelog_release_item2": {
-    "message": "La classifica dei paesi si aggiorna istantaneamente in modo da poter individuare le regioni in crescita senza uscire dal pannello."
-  },
-  "changelog_release_item3": {
-    "message": "La mappa interattiva evidenzia gli hotspot statali globali e statunitensi con descrizioni comandi e metriche più chiare."
   },
   "changelog_support_heading": {
     "message": "Serve aiuto?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Benvenuto in Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "È tutto pronto"
+  },
+  "changelog_hero_title": {
+    "message": "I Non mi piace sono tornati."
+  },
+  "changelog_hero_body": {
+    "message": "Apri un video di YouTube e vedrai il numero di Non mi piace accanto ai Mi piace, al suo posto. La versione 4.1 introduce anche i commenti RYD, uno spazio per parlare dei video al di fuori della sezione commenti di YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Novità della 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Scopri i commenti RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Uno spazio di discussione sotto video e Shorts, ospitato da Return YouTube Dislike e separato dai commenti di YouTube. Tutti possono leggere e reagire. Gli abbonati Commenter e Premium possono pubblicare e rispondere."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Risposte in thread con Mi piace e Non mi piace"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Pubblica con un nickname pubblico scelto da te"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Notifiche quando qualcuno risponde o reagisce"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Segnalazioni e moderazione per discussioni rispettose"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Pannello dei commenti RYD con una discussione in thread sotto un video"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Notifiche RYD con risposte e Mi piace ai tuoi commenti"
+  },
+  "changelog_sample_note": {
+    "message": "Le schermate mostrano dati di esempio."
+  },
+  "changelog_analytics_title": {
+    "message": "Analisi Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Scopri come viene accolto un video nel tempo e nel mondo. Scegli 7, 30 o 90 giorni oppure l’intero periodo e confronta Mi piace, Non mi piace e il loro rapporto."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Cronologia delle attività"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Mi piace e Non mi piace nel tempo, fino al dettaglio orario."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Paesi principali"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Scopri quali paesi mettono più Mi piace e Non mi piace a un video."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Mappa del mondo"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Confronta le interazioni tra paesi."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Stati degli USA"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Esamina le interazioni stato per stato."
+  },
+  "changelog_join_title": {
+    "message": "Ottieni le funzioni Premium"
+  },
+  "changelog_join_free": {
+    "message": "Il numero di Non mi piace è gratuito per tutti. L’abbonamento è facoltativo e aiuta a sostenere il progetto."
+  },
+  "changelog_join_step1": {
+    "message": "Abbonati su Patreon. Commenter ti permette di pubblicare commenti; Premium aggiunge anche le analisi."
+  },
+  "changelog_join_step3": {
+    "message": "Ricarica un video di YouTube. Le nuove funzioni appariranno automaticamente."
+  },
+  "changelog_also_title": {
+    "message": "Altre novità di questa versione"
+  },
+  "changelog_also_counts": {
+    "message": "Il numero di Mi piace e Non mi piace viene mostrato in modo più affidabile, sia nell’estensione sia nello userscript."
+  },
+  "changelog_also_consent": {
+    "message": "Migliorata la procedura di consenso all’uso dei dati in Firefox."
+  },
+  "changelog_also_translations": {
+    "message": "Traduzioni nuove e migliorate."
   }
 }

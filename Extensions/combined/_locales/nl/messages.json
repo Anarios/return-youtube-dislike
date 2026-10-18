@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Upgraden op Patreon"
   },
-  "changelog_title": {
-    "message": "Wijzigingenlogboek voor Premium Analytics · 20 oktober 2025"
-  },
-  "changelog_badge": {
-    "message": "Premium-release"
-  },
-  "changelog_heading": {
-    "message": "Premium analyses, opnieuw uitgevonden"
-  },
-  "changelog_subheading": {
-    "message": "Ontdek de tijdlijn van live-activiteiten, het klassement van de beste landen en de interactieve kaart die bij Return YouTube Dislike Premium zijn inbegrepen."
-  },
-  "changelog_releaseDate": {
-    "message": "Uitgebracht op 20 oktober 2025"
-  },
   "changelog_cta_primary": {
     "message": "Upgraden op Patreon"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Tijdlijn voor live activiteiten"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Bekijk de likes en dislikes in realtime. Schakel tussen voorinstellingen per uur, per dag of altijd zonder opnieuw te laden, veranker het venster op dag één of de laatste stemmingen en scrub elke piek om te zien wat de betrokkenheid heeft veroorzaakt."
-  },
   "changelog_feature_map_title": {
     "message": "Interactieve wereld- en Amerikaanse heatmap"
   },
-  "changelog_feature_map_body": {
-    "message": "Kijk over de hele wereld of duik in Amerikaanse staten om hotspots te ontdekken. Vergelijk de likes, dislikes en ratio's in de geüpgradede tooltip en breng de regio's onder de aandacht die het eerst op uw uploads reageren."
-  },
   "changelog_feature_quality_title": {
     "message": "Leiderbord van toplanden"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Rangschik elk land op ruwe activiteit, voorkeuren, antipathieën of verhoudingen. Filter met dezelfde voorinstellingen als de tijdlijn om te zien waar campagnes terechtkomen en plan wat u vervolgens gaat publiceren."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Screenshot binnenkort beschikbaar: leg deze weergave vast in DevTools als u klaar bent."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Placeholder: tijdlijnoverzicht"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Tijdelijke aanduiding: landenklassement"
   },
-  "changelog_section_upgrade": {
-    "message": "Hoe Premium-analyses te ontgrendelen"
-  },
-  "changelog_upgrade_body": {
-    "message": "Klaar om erin te duiken? Volg deze snelle stappen en vernieuw uw YouTube-tabblad."
-  },
   "changelog_upgrade_step1": {
     "message": "Open de pop-up Return YouTube Dislike en log in met Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Kies de Premium-laag om het streamen van analysegegevens naar uw account in te schakelen."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Laad elke YouTube-weergavepagina opnieuw: uw tijdlijn, kaart en klassementen verschijnen onmiddellijk."
-  },
-  "changelog_section_release": {
-    "message": "Hoogtepunten vrijgeven"
-  },
-  "changelog_release_item1": {
-    "message": "Voorinstellingen voor de tijdlijn van activiteiten streamen live gegevens met bereikankers voor de eerste en laatste buckets."
-  },
-  "changelog_release_item2": {
-    "message": "Het landenklassement wordt onmiddellijk vernieuwd, zodat u stijgende regio's kunt zien zonder het paneel te verlaten."
-  },
-  "changelog_release_item3": {
-    "message": "Interactieve kaart belicht hotspots in de wereld en de VS met duidelijkere tooltips en statistieken."
   },
   "changelog_support_heading": {
     "message": "Handje nodig?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-logo"
+  },
+  "changelog_page_title": {
+    "message": "Welkom bij Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Je bent klaar"
+  },
+  "changelog_hero_title": {
+    "message": "Dislikes zijn terug."
+  },
+  "changelog_hero_body": {
+    "message": "Open een YouTube-video en je ziet het aantal dislikes direct naast de likes, waar het hoort. Versie 4.1 introduceert ook RYD-reacties, een plek om over video’s te praten buiten de reacties van YouTube zelf."
+  },
+  "changelog_new_badge": {
+    "message": "Nieuw in 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Ontdek RYD-reacties"
+  },
+  "changelog_comments_body": {
+    "message": "Een discussieplek onder video’s en Shorts, gehost door Return YouTube Dislike en los van de reacties van YouTube. Iedereen kan meelezen en reageren met likes en dislikes. Leden met Commenter of Premium kunnen berichten en antwoorden plaatsen."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Antwoorden in discussiedraden met likes en dislikes"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Plaats berichten onder een zelfgekozen openbare bijnaam"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Meldingen als iemand antwoordt of reageert"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Melden en modereren om gesprekken respectvol te houden"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "RYD-reactiepaneel met een discussiedraad onder een video"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "RYD-meldingen met antwoorden en likes op je reacties"
+  },
+  "changelog_sample_note": {
+    "message": "De schermafbeeldingen tonen voorbeeldgegevens."
+  },
+  "changelog_analytics_title": {
+    "message": "Premium-analyses"
+  },
+  "changelog_analytics_body": {
+    "message": "Bekijk hoe een video wordt ontvangen door de tijd heen en wereldwijd. Kies 7, 30 of 90 dagen of de hele periode en vergelijk likes, dislikes en hun verhouding."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Activiteit door de tijd"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Likes en dislikes door de tijd heen, tot op het uur."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Toplanden"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Bekijk welke landen een video de meeste likes en dislikes geven."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Wereldkaart"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Vergelijk de betrokkenheid tussen landen."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Amerikaanse staten"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Bekijk de betrokkenheid per staat in detail."
+  },
+  "changelog_join_title": {
+    "message": "Krijg Premium-functies"
+  },
+  "changelog_join_free": {
+    "message": "Het aantal dislikes is voor iedereen gratis. Een lidmaatschap is optioneel en helpt het project te ondersteunen."
+  },
+  "changelog_join_step1": {
+    "message": "Word lid op Patreon. Met Commenter kun je reacties plaatsen; Premium voegt ook analyses toe."
+  },
+  "changelog_join_step3": {
+    "message": "Laad een YouTube-video opnieuw. Je nieuwe functies verschijnen automatisch."
+  },
+  "changelog_also_title": {
+    "message": "Ook in deze versie"
+  },
+  "changelog_also_counts": {
+    "message": "Het aantal likes en dislikes wordt betrouwbaarder weergegeven, in de extensie en het gebruikersscript."
+  },
+  "changelog_also_consent": {
+    "message": "Verbeterde toestemmingsprocedure voor gegevensgebruik in Firefox."
+  },
+  "changelog_also_translations": {
+    "message": "Nieuwe en verbeterde vertalingen."
   }
 }

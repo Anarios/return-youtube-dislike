@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Frissítés a Patreonon"
   },
-  "changelog_title": {
-    "message": "Premium Analytics változásnapló · 2025. október 20"
-  },
-  "changelog_badge": {
-    "message": "Prémium kiadás"
-  },
-  "changelog_heading": {
-    "message": "Prémium elemzés, újragondolva"
-  },
-  "changelog_subheading": {
-    "message": "Fedezze fel az élő tevékenységek idővonalát, a legjobb országok ranglistáját és az interaktív térképet, amely a Return YouTube Dislike Premiumhoz tartozik."
-  },
-  "changelog_releaseDate": {
-    "message": "Megjelenés: 2025. október 20"
-  },
   "changelog_cta_primary": {
     "message": "Frissítés a Patreonon"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Élő tevékenység idővonala"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Nézze meg a tetszésnyilvánításokat és a nemtetszéseket valós időben. Változtassa meg az óránkénti, napi vagy minden idők előre beállított értékeit újratöltés nélkül, rögzítse az ablakot az első naphoz vagy a legutóbbi szavazatokhoz, és súrolja meg az összes tüskét, hogy megtudja, mi váltotta ki az elköteleződést."
-  },
   "changelog_feature_map_title": {
     "message": "Interaktív világ és amerikai hőtérkép"
   },
-  "changelog_feature_map_body": {
-    "message": "Pásztázzon szerte a világon, vagy merüljön el az Egyesült Államok államaiba, hogy felszínre kerüljön a hotspotok. Hasonlítsa össze a kedveléseket, nemtetszéseket és arányokat a frissített elemleírásban, és emelje ki azokat a régiókat, amelyek először reagálnak a feltöltéseire."
-  },
   "changelog_feature_quality_title": {
     "message": "A legjobb országok ranglistája"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Rangsoroljon minden országot nyers tevékenység, tetszésnyilvánítás, nemtetszés vagy arány szerint. Szűrjön ugyanazokkal az előre beállított értékekkel, mint az idővonalon, hogy megtudja, hol érnek el a kampányok, és megtervezheti, mit tegyen közzé legközelebb."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Képernyőkép hamarosan – rögzítse ezt a nézetet a DevToolsban, ha készen áll."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Helyőrző: idővonal áttekintése"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Helyőrző: országok ranglista"
   },
-  "changelog_section_upgrade": {
-    "message": "A Premium Analytics feloldása"
-  },
-  "changelog_upgrade_body": {
-    "message": "Készen állsz a merülésre? Kövesse ezeket a gyors lépéseket, és frissítse a YouTube lapot."
-  },
   "changelog_upgrade_step1": {
     "message": "Nyissa meg a YouTube Nem tetszik visszaküldése előugró ablakot, és jelentkezzen be a Patreonnal."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Válassza a prémium szintet, hogy engedélyezze az analitikai adatok streamelését a fiókjába."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Töltse be újra bármelyik YouTube-videóoldalt – az idővonal, a térkép és a ranglisták azonnal megjelennek."
-  },
-  "changelog_section_release": {
-    "message": "Kiemelések kiadása"
-  },
-  "changelog_release_item1": {
-    "message": "A tevékenység idővonala előre beállítja az élő adatok közvetítését az első és a legújabb gyűjtőcsoportokhoz tartozó tartományhorgonyokkal."
-  },
-  "changelog_release_item2": {
-    "message": "Az ország ranglistája azonnal frissül, így a panel elhagyása nélkül is észreveheti az emelkedő régiókat."
-  },
-  "changelog_release_item3": {
-    "message": "Az interaktív térkép világosabb eszközleírásokkal és mérőszámokkal kiemeli a globális és az Egyesült Államok államainak hotspotjait."
   },
   "changelog_support_heading": {
     "message": "Kézre van szüksége?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike logója"
+  },
+  "changelog_page_title": {
+    "message": "Üdvözöljük a Return YouTube Dislike-ban"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Minden készen áll"
+  },
+  "changelog_hero_title": {
+    "message": "Visszatértek a nemtetszések."
+  },
+  "changelog_hero_body": {
+    "message": "Nyisson meg egy YouTube-videót, és a nemtetszések számát közvetlenül a kedvelések mellett láthatja, ahová való. A 4.1-es verzióban megérkeznek az RYD-hozzászólások is, ahol a YouTube saját hozzászólásaitól függetlenül beszélgethet a videókról."
+  },
+  "changelog_new_badge": {
+    "message": "Újdonság a 4.1-ben"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Ismerje meg az RYD-hozzászólásokat"
+  },
+  "changelog_comments_body": {
+    "message": "Közösségi beszélgetés a videók és a Shorts-videók alatt, a Return YouTube Dislike felületén, a YouTube hozzászólásaitól elkülönítve. Bárki olvashat és reagálhat. A Commenter és Premium tagok hozzászólhatnak és válaszolhatnak."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Szálakba rendezett válaszok kedvelésekkel és nemtetszésekkel"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Hozzászólás az Ön által választott nyilvános becenéven"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Értesítések, ha valaki válaszol vagy reagál"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Jelentés és moderálás a kulturált beszélgetésért"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "RYD-hozzászóláspanel egy videó alatti, szálakba rendezett beszélgetéssel"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "RYD-értesítések a hozzászólásaira érkezett válaszokkal és kedvelésekkel"
+  },
+  "changelog_sample_note": {
+    "message": "A képernyőképek mintaadatokat mutatnak."
+  },
+  "changelog_analytics_title": {
+    "message": "Premium elemzések"
+  },
+  "changelog_analytics_body": {
+    "message": "Nézze meg, hogyan fogadnak egy videót idővel és világszerte. Válasszon 7, 30 vagy 90 napot, illetve a teljes időszakot, és hasonlítsa össze a kedveléseket, a nemtetszéseket és az arányukat."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Aktivitási idővonal"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Kedvelések és nemtetszések időben, óránkénti részletességgel."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Országok rangsora"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Nézze meg, mely országokból kapja a videó a legtöbb kedvelést és nemtetszést."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Világtérkép"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Hasonlítsa össze az országok közönségének aktivitását."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Az USA államai"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Vizsgálja meg közelebbről az aktivitást államonként."
+  },
+  "changelog_join_title": {
+    "message": "Szerezze meg a Premium funkciókat"
+  },
+  "changelog_join_free": {
+    "message": "A nemtetszések száma mindenki számára ingyenes. A tagság választható, és segít támogatni a projektet."
+  },
+  "changelog_join_step1": {
+    "message": "Csatlakozzon a Patreonon. A Commenter hozzászólást tesz lehetővé, a Premium pedig elemzéseket is ad."
+  },
+  "changelog_join_step3": {
+    "message": "Töltsön újra egy YouTube-videót. Az új funkciók automatikusan megjelennek."
+  },
+  "changelog_also_title": {
+    "message": "További újdonságok ebben a kiadásban"
+  },
+  "changelog_also_counts": {
+    "message": "A kedvelések és nemtetszések száma megbízhatóbban jelenik meg a bővítményben és a felhasználói szkriptben."
+  },
+  "changelog_also_consent": {
+    "message": "Javított adatkezelési hozzájárulási folyamat a Firefoxban."
+  },
+  "changelog_also_translations": {
+    "message": "Új és javított fordítások."
   }
 }

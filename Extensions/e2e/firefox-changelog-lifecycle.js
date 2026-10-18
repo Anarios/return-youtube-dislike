@@ -5,7 +5,7 @@ const path = require("node:path");
 
 const EVENT_KEY = "__rydTestInstalledEvents";
 const RUNTIME_KEY = "__rydTestLifecycleRuntime";
-const CHANGELOG_PATH = "/changelog/4/changelog_4.0.html";
+const CHANGELOG_PATH = "/changelog/4/changelog_4.1.html";
 const STORAGE_KEYS = ["lastShownChangelogVersion", "pendingChangelogVersion", EVENT_KEY, RUNTIME_KEY];
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

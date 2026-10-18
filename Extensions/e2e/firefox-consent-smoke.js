@@ -371,7 +371,7 @@ async function run() {
         () =>
           driver.script(
             `
-          const url = "moz-extension://" + arguments[0] + "/changelog/4/changelog_4.0.html";
+          const url = "moz-extension://" + arguments[0] + "/changelog/4/changelog_4.1.html";
           const tabs = Array.from(gBrowser.tabs).filter(tab => tab.linkedBrowser.currentURI.spec === url);
           return tabs.length ? { url, tabCount: tabs.length } : false;
         `,

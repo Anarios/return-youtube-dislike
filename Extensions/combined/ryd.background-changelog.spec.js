@@ -7,7 +7,7 @@ jest.mock("./src/data-collection-permissions", () => ({
 
 const flushCallbacks = () => new Promise((resolve) => setTimeout(resolve, 0));
 const VERSION = "4.0.5";
-const CHANGELOG_URL = "moz-extension://test/changelog/4/changelog_4.0.html";
+const CHANGELOG_URL = "moz-extension://test/changelog/4/changelog_4.1.html";
 
 describe("background changelog lifecycle", () => {
   let installedListener;

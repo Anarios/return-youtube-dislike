@@ -479,21 +479,6 @@
   "premiumTierNotice_cta": {
     "message": "Tingkatkan di Patreon"
   },
-  "changelog_title": {
-    "message": "Log Perubahan Analisis Premium · 20 Oktober 2025"
-  },
-  "changelog_badge": {
-    "message": "Rilis Premium"
-  },
-  "changelog_heading": {
-    "message": "Analisis premium, dirancang ulang"
-  },
-  "changelog_subheading": {
-    "message": "Jelajahi garis waktu aktivitas langsung, papan peringkat negara teratas, dan peta interaktif yang disertakan dengan Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Dirilis pada 20 Oktober 2025"
-  },
   "changelog_cta_primary": {
     "message": "Tingkatkan di Patreon"
   },
@@ -506,23 +491,11 @@
   "changelog_feature_timeline_title": {
     "message": "Garis waktu aktivitas langsung"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Tonton streaming suka dan tidak suka secara real-time. Alihkan preset per jam, harian, atau sepanjang waktu tanpa memuat ulang, jangkar jendela ke hari pertama atau pemungutan suara terbaru, dan bersihkan setiap lonjakan untuk melihat apa yang memicu keterlibatan."
-  },
   "changelog_feature_map_title": {
     "message": "Dunia interaktif & peta panas AS"
   },
-  "changelog_feature_map_body": {
-    "message": "Jelajahi dunia atau jelajahi negara bagian AS untuk menemukan hotspot. Bandingkan suka, tidak suka, dan rasio di tooltip yang ditingkatkan dan soroti wilayah yang bereaksi pertama kali terhadap upload Anda."
-  },
   "changelog_feature_quality_title": {
     "message": "Papan peringkat negara teratas"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Beri peringkat setiap negara berdasarkan aktivitas mentah, kesukaan, ketidaksukaan, atau rasio. Filter dengan preset yang sama dengan timeline untuk mempelajari lokasi kampanye dan merencanakan apa yang akan dipublikasikan selanjutnya."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Tangkapan layar segera hadir—ambil gambar ini di DevTools jika sudah siap."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Placeholder: ikhtisar garis waktu"
@@ -533,32 +506,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Placeholder: papan peringkat negara"
   },
-  "changelog_section_upgrade": {
-    "message": "Cara membuka kunci analitik Premium"
-  },
-  "changelog_upgrade_body": {
-    "message": "Siap untuk terjun? Ikuti langkah cepat ini dan segarkan tab YouTube Anda."
-  },
   "changelog_upgrade_step1": {
     "message": "Buka popup Kembalikan YouTube Dislike dan masuk dengan Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Pilih tingkat Premium untuk mengaktifkan streaming data analitik ke akun Anda."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Muat ulang laman tontonan YouTube mana pun—garis waktu, peta, dan papan peringkat Anda langsung muncul."
-  },
-  "changelog_section_release": {
-    "message": "Sorotan rilis"
-  },
-  "changelog_release_item1": {
-    "message": "Preset garis waktu aktivitas mengalirkan data langsung dengan jangkar rentang untuk keranjang pertama dan terbaru."
-  },
-  "changelog_release_item2": {
-    "message": "Papan peringkat negara langsung diperbarui sehingga Anda dapat melihat wilayah yang meningkat tanpa perlu keluar dari panel."
-  },
-  "changelog_release_item3": {
-    "message": "Peta interaktif menyoroti hotspot global dan negara bagian AS dengan tooltip dan metrik yang lebih jelas."
   },
   "changelog_support_heading": {
     "message": "Butuh bantuan?"
@@ -586,5 +535,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Selamat datang di Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Semuanya siap"
+  },
+  "changelog_hero_title": {
+    "message": "Jumlah tidak suka kembali."
+  },
+  "changelog_hero_body": {
+    "message": "Buka video YouTube mana pun dan jumlah tidak suka akan terlihat di samping jumlah suka, di tempat semestinya. Versi 4.1 juga memperkenalkan komentar RYD, tempat membahas video di luar kolom komentar YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Baru di 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Kenali komentar RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Ruang diskusi komunitas di bawah video dan Shorts, dikelola oleh Return YouTube Dislike dan terpisah dari komentar YouTube. Semua orang dapat membaca dan bereaksi. Anggota Commenter dan Premium dapat mengirim komentar dan balasan."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Balasan berutas dengan suka dan tidak suka"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Gunakan nama panggilan publik pilihan Anda saat berkomentar"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Notifikasi saat ada balasan atau reaksi"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Pelaporan dan moderasi agar diskusi tetap santun"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Panel komentar RYD dengan diskusi berutas di bawah video"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Notifikasi RYD berisi balasan dan suka pada komentar Anda"
+  },
+  "changelog_sample_note": {
+    "message": "Tangkapan layar menampilkan data contoh."
+  },
+  "changelog_analytics_title": {
+    "message": "Analitik Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Lihat tanggapan terhadap video dari waktu ke waktu dan di seluruh dunia. Pilih rentang 7, 30, atau 90 hari atau sepanjang waktu, lalu bandingkan suka, tidak suka, dan rasionya."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Linimasa aktivitas"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Suka dan tidak suka dari waktu ke waktu, hingga per jam."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Negara teratas"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Lihat negara yang paling banyak menyukai dan tidak menyukai video."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Peta dunia"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Bandingkan interaksi antarnegara."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Negara bagian AS"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Perbesar untuk melihat interaksi per negara bagian."
+  },
+  "changelog_join_title": {
+    "message": "Dapatkan fitur Premium"
+  },
+  "changelog_join_free": {
+    "message": "Jumlah tidak suka gratis untuk semua orang. Keanggotaan bersifat opsional dan membantu mendukung proyek ini."
+  },
+  "changelog_join_step1": {
+    "message": "Bergabunglah di Patreon. Commenter memungkinkan Anda mengirim komentar; Premium juga menambahkan analitik."
+  },
+  "changelog_join_step3": {
+    "message": "Muat ulang video YouTube mana pun. Fitur baru Anda akan muncul secara otomatis."
+  },
+  "changelog_also_title": {
+    "message": "Juga dalam rilis ini"
+  },
+  "changelog_also_counts": {
+    "message": "Jumlah suka dan tidak suka tampil lebih andal di ekstensi maupun userscript."
+  },
+  "changelog_also_consent": {
+    "message": "Alur persetujuan data di Firefox telah ditingkatkan."
+  },
+  "changelog_also_translations": {
+    "message": "Terjemahan baru dan penyempurnaan terjemahan."
   }
 }

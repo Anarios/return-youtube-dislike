@@ -656,7 +656,7 @@ if (api?.runtime?.onStartup && typeof api.runtime.onStartup.addListener === "fun
 //     // keep it inside get to avoid race condition
 //     api.storage.sync.set({'lastShowChangelogVersion ': chrome.runtime.getManifest().version});
 //     // wait until async get runs & don't steal tab focus
-//     api.tabs.create({url: api.runtime.getURL("/changelog/4/changelog_4.0.html"), active: false});
+//     api.tabs.create({url: api.runtime.getURL("/changelog/4/changelog_4.1.html"), active: false});
 //   }
 // });
 

@@ -32,7 +32,7 @@ describe("Firefox AMO policy declarations", () => {
     const popupHtml = readExtensionFile("popup.html");
     const popupScript = readExtensionFile("popup.js");
     const changelog3 = readExtensionFile("changelog/3/changelog_3.0.html");
-    const changelog4 = readExtensionFile("changelog/4/changelog_4.0.html");
+    const changelog4 = readExtensionFile("changelog/4/changelog_4.1.html");
 
     for (const page of [popupHtml, changelog3, changelog4]) {
       expect(page).not.toMatch(/<(?:link|script)[^>]+https?:\/\//i);

@@ -500,21 +500,6 @@
   "premiumTierNotice_cta": {
     "message": "Ulepsz na Patreonie"
   },
-  "changelog_title": {
-    "message": "Dziennik zmian analityki premium · 20 października 2025 r."
-  },
-  "changelog_badge": {
-    "message": "Wydanie premium"
-  },
-  "changelog_heading": {
-    "message": "Analityka premium w nowym wydaniu"
-  },
-  "changelog_subheading": {
-    "message": "Przeglądaj oś czasu aktywności na żywo, rankingi najlepszych krajów oraz interaktywną mapę dostępną w ramach Return YouTube Dislike Premium."
-  },
-  "changelog_releaseDate": {
-    "message": "Wydany 20 października 2025 r."
-  },
   "changelog_cta_primary": {
     "message": "Uaktualnij na Patreonie"
   },
@@ -527,23 +512,11 @@
   "changelog_feature_timeline_title": {
     "message": "Oś czasu aktywności na żywo"
   },
-  "changelog_feature_timeline_body": {
-    "message": "Obserwuj zmiany liczby łapek w górę i w dół w czasie rzeczywistym. Przełączaj się między ustawieniami godzinnymi, dziennymi lub z całego okresu bez odświeżania strony, wybieraj zakres rozpoczynający się od pierwszego dnia albo kończący się na najnowszych głosach i prześledź każdy skok, aby sprawdzić, co wywołało zaangażowanie."
-  },
   "changelog_feature_map_title": {
     "message": "Interaktywna mapa cieplna świata i USA"
   },
-  "changelog_feature_map_body": {
-    "message": "Przesuwaj mapę świata lub przyjrzyj się poszczególnym stanom USA, aby znaleźć miejsca największej aktywności. Porównuj łapki w górę, łapki w dół i ich współczynnik w ulepszonej podpowiedzi oraz wyróżniaj regiony, które jako pierwsze reagują na Twoje nowe filmy."
-  },
   "changelog_feature_quality_title": {
     "message": "Ranking najlepszych krajów"
-  },
-  "changelog_feature_quality_body": {
-    "message": "Uszereguj kraje według surowej aktywności, liczby łapek w górę, łapek w dół lub ich współczynnika. Filtruj wyniki przy użyciu tych samych ustawień co na osi czasu, aby sprawdzić, gdzie Twoje kampanie znajdują odbiorców, i zaplanować kolejne publikacje."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "Zrzuty ekranu wkrótce - przechwyć ten widok w DevTools, gdy będzie gotowy."
   },
   "changelog_screenshot_label_timeline": {
     "message": "Symbol zastępczy: przegląd osi czasu"
@@ -554,32 +527,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "Symbol zastępczy: ranking krajów"
   },
-  "changelog_section_upgrade": {
-    "message": "Jak odblokować analitykę Premium"
-  },
-  "changelog_upgrade_body": {
-    "message": "Gotowy, by zacząć? Wykonaj poniższe proste kroki i odśwież kartę YouTube."
-  },
   "changelog_upgrade_step1": {
     "message": "Otwórz okienko Return YouTube Dislike i zaloguj się przez Patreon."
-  },
-  "changelog_upgrade_step2": {
-    "message": "Wybierz poziom Premium, aby umożliwić przesyłanie strumieniowe danych analitycznych na swoje konto."
-  },
-  "changelog_upgrade_step3": {
-    "message": "Odśwież dowolną stronę odtwarzania na YouTube — Twoja oś czasu, mapa i rankingi pojawią się natychmiast."
-  },
-  "changelog_section_release": {
-    "message": "Najważniejsze zmiany w wydaniu"
-  },
-  "changelog_release_item1": {
-    "message": "Gotowe ustawienia osi czasu aktywności przesyłają strumieniowo dane na żywo z punktami odniesienia zakresu dla pierwszego i najnowszego segmentu."
-  },
-  "changelog_release_item2": {
-    "message": "Ranking krajów odświeża się natychmiast, dzięki czemu możesz wykryć regiony o wzroście popularności bez opuszczania panelu."
-  },
-  "changelog_release_item3": {
-    "message": "Interaktywna mapa wyróżnia obszary największej aktywności na świecie i w poszczególnych stanach USA oraz oferuje czytelniejsze podpowiedzi i wskaźniki."
   },
   "changelog_support_heading": {
     "message": "Potrzebujesz pomocy?"
@@ -607,5 +556,104 @@
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
+  },
+  "changelog_page_title": {
+    "message": "Witaj w Return YouTube Dislike"
+  },
+  "changelog_hero_eyebrow": {
+    "message": "Wszystko gotowe"
+  },
+  "changelog_hero_title": {
+    "message": "Łapki w dół wróciły."
+  },
+  "changelog_hero_body": {
+    "message": "Otwórz dowolny film na YouTube, a zobaczysz liczbę łapek w dół tuż obok łapek w górę, tam, gdzie jej miejsce. Wersja 4.1 wprowadza też komentarze RYD — miejsce do rozmów o filmach poza sekcją komentarzy YouTube."
+  },
+  "changelog_new_badge": {
+    "message": "Nowość w wersji 4.1"
+  },
+  "changelog_premium_badge": {
+    "message": "Premium"
+  },
+  "changelog_comments_title": {
+    "message": "Poznaj komentarze RYD"
+  },
+  "changelog_comments_body": {
+    "message": "Dyskusje społeczności pod filmami i Shorts, prowadzone przez Return YouTube Dislike i oddzielone od komentarzy YouTube. Każdy może czytać i reagować. Osoby z członkostwem Commenter lub Premium mogą pisać komentarze i odpowiadać."
+  },
+  "changelog_comments_point_replies": {
+    "message": "Odpowiedzi w wątkach z łapkami w górę i w dół"
+  },
+  "changelog_comments_point_nickname": {
+    "message": "Pisz pod wybranym przez siebie publicznym pseudonimem"
+  },
+  "changelog_comments_point_notifications": {
+    "message": "Powiadomienia, gdy ktoś odpowie lub zareaguje"
+  },
+  "changelog_comments_point_moderation": {
+    "message": "Zgłoszenia i moderacja pomagające zachować kulturę dyskusji"
+  },
+  "changelog_comments_shot_alt": {
+    "message": "Panel komentarzy RYD z dyskusją w wątku pod filmem"
+  },
+  "changelog_notifications_shot_alt": {
+    "message": "Powiadomienia RYD z odpowiedziami i łapkami w górę pod Twoimi komentarzami"
+  },
+  "changelog_sample_note": {
+    "message": "Zrzuty ekranu pokazują przykładowe dane."
+  },
+  "changelog_analytics_title": {
+    "message": "Analityka Premium"
+  },
+  "changelog_analytics_body": {
+    "message": "Zobacz, jak film jest odbierany z upływem czasu i na całym świecie. Wybierz 7, 30 lub 90 dni albo cały okres i porównuj łapki w górę, łapki w dół oraz ich stosunek."
+  },
+  "changelog_analytics_timeline_title": {
+    "message": "Oś czasu aktywności"
+  },
+  "changelog_analytics_timeline_body": {
+    "message": "Łapki w górę i w dół w czasie, z dokładnością do godziny."
+  },
+  "changelog_analytics_countries_title": {
+    "message": "Ranking krajów"
+  },
+  "changelog_analytics_countries_body": {
+    "message": "Zobacz, w których krajach film dostaje najwięcej łapek w górę i w dół."
+  },
+  "changelog_analytics_world_title": {
+    "message": "Mapa świata"
+  },
+  "changelog_analytics_world_body": {
+    "message": "Porównuj aktywność w poszczególnych krajach."
+  },
+  "changelog_analytics_us_title": {
+    "message": "Stany USA"
+  },
+  "changelog_analytics_us_body": {
+    "message": "Przyjrzyj się aktywności w poszczególnych stanach."
+  },
+  "changelog_join_title": {
+    "message": "Uzyskaj funkcje Premium"
+  },
+  "changelog_join_free": {
+    "message": "Liczba łapek w dół jest dostępna bezpłatnie dla wszystkich. Członkostwo jest opcjonalne i pomaga wspierać projekt."
+  },
+  "changelog_join_step1": {
+    "message": "Dołącz na Patreonie. Commenter pozwala pisać komentarze, a Premium dodaje też analitykę."
+  },
+  "changelog_join_step3": {
+    "message": "Odśwież dowolny film na YouTube. Nowe funkcje pojawią się automatycznie."
+  },
+  "changelog_also_title": {
+    "message": "Także w tym wydaniu"
+  },
+  "changelog_also_counts": {
+    "message": "Liczby łapek w górę i w dół wyświetlają się bardziej niezawodnie w rozszerzeniu i skrypcie użytkownika."
+  },
+  "changelog_also_consent": {
+    "message": "Ulepszony proces wyrażania zgody na wykorzystanie danych w Firefoksie."
+  },
+  "changelog_also_translations": {
+    "message": "Nowe i ulepszone tłumaczenia."
   }
 }

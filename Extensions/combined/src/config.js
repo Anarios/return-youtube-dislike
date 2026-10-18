@@ -7,8 +7,8 @@ const isDevelopment = !manifest || !("update_url" in manifest);
 
 const extensionChangelogUrl =
   runtime && typeof runtime.getURL === "function"
-    ? runtime.getURL("changelog/4/changelog_4.0.html")
-    : "https://returnyoutubedislike.com/changelog/4/changelog_4.0.html";
+    ? runtime.getURL("changelog/4/changelog_4.1.html")
+    : "https://returnyoutubedislike.com/changelog/4/changelog_4.1.html";
 
 const config = {
   apiUrl: isDevelopment ? DEV_API_URL : PROD_API_URL,
