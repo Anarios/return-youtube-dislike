@@ -1,4 +1,18 @@
-import { extConfig } from "./state";
+import { extConfig, isShorts } from "./state";
+
+const DEFAULT_SHORTS_LOADED_SELECTORS = {
+  containers: [".reel-video-in-sequence-new"],
+  thumbnail: [".reel-video-in-sequence-thumbnail"],
+  renderer: ["ytd-reel-video-renderer"],
+  mobileRenderer: ["ytm-reel-video-renderer"],
+  overlay: ["#experiment-overlay"],
+};
+
+const DEFAULT_VIDEO_LOADED_SELECTORS = [
+  "ytd-watch-grid[video-id='{videoId}']",
+  "ytd-watch-flexy[video-id='{videoId}']",
+  '#player[loading="false"]:not([hidden])',
+];
 
 function numberFormat(numberState) {
   return getNumberFormatter(extConfig.numberDisplayFormat).format(numberState);
@@ -18,7 +32,7 @@ function getNumberFormatter(optionSelect) {
           ?.getAttribute("href"),
       )?.searchParams?.get("locale");
     } catch {
-      cLog("Cannot find browser locale. Use en as default for number formatting.");
+      console.log("Cannot find browser locale. Use en as default for number formatting.");
       userLocales = "en";
     }
   }
@@ -40,15 +54,34 @@ function getNumberFormatter(optionSelect) {
       formatterCompactDisplay = "short";
   }
 
-  const formatter = Intl.NumberFormat(userLocales, {
+  return Intl.NumberFormat(userLocales, {
     notation: formatterNotation,
     compactDisplay: formatterCompactDisplay,
   });
-  return formatter;
 }
 
-function localize(localeString) {
-  return chrome.i18n.getMessage(localeString);
+function localize(localeString, substitutions) {
+  try {
+    if (typeof chrome !== "undefined" && chrome?.i18n?.getMessage) {
+      const args = substitutions === undefined ? [localeString] : [localeString, substitutions];
+      const message = chrome.i18n.getMessage(...args);
+      if (message) {
+        return message;
+      }
+    }
+  } catch (error) {
+    console.warn("Localization lookup failed for", localeString, error);
+  }
+
+  if (Array.isArray(substitutions)) {
+    return substitutions.join(" ");
+  }
+
+  if (substitutions != null) {
+    return `${substitutions}`;
+  }
+
+  return localeString;
 }
 
 function getBrowser() {
@@ -91,26 +124,138 @@ function isInViewport(element) {
   );
 }
 
-function isVideoLoaded() {
-  const videoId = getVideoId(window.location.href);
+function getShortsRendererVideoId(renderer) {
+  const rendererVideoId = renderer?.getAttribute("video-id");
+  if (rendererVideoId) return rendererVideoId;
+
+  const href = renderer?.querySelector("a[href*='/shorts/']")?.getAttribute("href");
+  if (!href) return null;
+  try {
+    return getVideoId(new URL(href, window.location.href).href);
+  } catch {
+    return null;
+  }
+}
+
+function isRenderedInViewport(element) {
+  if (!element || element.closest("[hidden], [aria-hidden='true'], [inert]")) return false;
+
+  for (let current = element; current; current = current.parentElement) {
+    const style = window.getComputedStyle(current);
+    if (
+      style.display === "none" ||
+      style.visibility === "hidden" ||
+      style.visibility === "collapse" ||
+      Number.parseFloat(style.opacity || "1") === 0
+    ) {
+      return false;
+    }
+  }
+
+  const rect = element.getBoundingClientRect();
+  const height = innerHeight || document.documentElement.clientHeight;
+  const width = innerWidth || document.documentElement.clientWidth;
   return (
-    // desktop: spring 2024 UI
-    document.querySelector(`ytd-watch-grid[video-id='${videoId}']`) !== null ||
-    // desktop: older UI
-    document.querySelector(`ytd-watch-flexy[video-id='${videoId}']`) !== null ||
-    // mobile: no video-id attribute
-    document.querySelector('#player[loading="false"]:not([hidden])') !== null
+    rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.right > 0 && rect.top < height && rect.left < width
   );
 }
 
-function cLog(message, writer) {
-  if (!extConfig.disableLogging) {
-    message = `[return youtube dislike]: ${message}`;
-    if (writer) {
-      writer(message);
-    } else {
-      console.log(message);
+function isShortsLoaded(videoId) {
+  if (!videoId) return false;
+
+  const selectors = extConfig.selectors.shortsLoaded ?? DEFAULT_SHORTS_LOADED_SELECTORS;
+
+  // Mobile Shorts does not use the desktop sequence/thumbnail/experiment-overlay
+  // readiness tree. Its active renderer is the stable identity and visibility
+  // boundary; button readiness is validated separately before initialization.
+  for (const renderer of querySelectorAll(selectors.mobileRenderer ?? DEFAULT_SHORTS_LOADED_SELECTORS.mobileRenderer)) {
+    if (!renderer.hasAttribute("is-active")) continue;
+    if (getShortsRendererVideoId(renderer) !== videoId) continue;
+    if (renderer.closest("[hidden], [aria-hidden='true'], [inert]")) continue;
+
+    const style = window.getComputedStyle(renderer);
+    const rect = renderer.getBoundingClientRect();
+    if (
+      style.display !== "none" &&
+      style.visibility !== "hidden" &&
+      style.visibility !== "collapse" &&
+      Number.parseFloat(style.opacity || "1") !== 0 &&
+      rect.width > 0 &&
+      rect.height > 0
+    ) {
+      return true;
     }
+  }
+
+  // On desktop the active reel can be partially clipped after YouTube scrolls
+  // its action controls into view. Current YouTube variants can also omit both
+  // `is-active` and `video-id`; in that topology the renderer's canonical
+  // /shorts/ link is the only stable identity. Full viewport containment and
+  // the active attribute are therefore not valid readiness requirements.
+  for (const renderer of querySelectorAll(selectors.renderer ?? DEFAULT_SHORTS_LOADED_SELECTORS.renderer)) {
+    if (getShortsRendererVideoId(renderer) !== videoId) continue;
+    if (isRenderedInViewport(renderer)) return true;
+  }
+
+  // Find all reel containers
+  const reelContainers = querySelectorAll(selectors.containers);
+
+  for (const container of reelContainers) {
+    // Check if this container's thumbnail matches our video ID
+    const thumbnail = querySelector(selectors.thumbnail, container);
+    if (thumbnail) {
+      const bgImage = thumbnail.style.backgroundImage;
+      // YouTube thumbnail URLs contain the video ID in the format: /vi/VIDEO_ID/
+      if ((bgImage && bgImage.includes(`/${videoId}/`)) || (!bgImage && isInViewport(container))) {
+        // Check if this container has the renderer with visible experiment-overlay
+        const renderer = querySelector(selectors.renderer, container);
+        if (renderer) {
+          const experimentOverlay = querySelector(selectors.overlay, renderer);
+          if (
+            experimentOverlay &&
+            !experimentOverlay.hidden &&
+            window.getComputedStyle(experimentOverlay).display !== "none" &&
+            experimentOverlay.hasChildNodes()
+          ) {
+            return true;
+          }
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
+function isVideoLoaded() {
+  const videoId = getVideoId(window.location.href);
+
+  // Check if this is a Shorts URL
+  if (isShorts()) {
+    return isShortsLoaded(videoId);
+  }
+
+  const videoLoadedSelectors = extConfig.selectors.videoLoaded ?? DEFAULT_VIDEO_LOADED_SELECTORS;
+
+  // Regular video checks
+  return querySelector(videoLoadedSelectors.map((selector) => selector.replace("{videoId}", videoId))) !== undefined;
+}
+
+const originalConsole = {
+  log: console.log.bind(console),
+  debug: console.debug.bind(console),
+  info: console.info.bind(console),
+  warn: console.warn.bind(console),
+  error: console.error.bind(console),
+};
+
+function initializeLogging() {
+  if (extConfig.disableLogging) {
+    console.log = () => {};
+    console.debug = () => {};
+  } else {
+    console.log = originalConsole.log;
+    console.debug = originalConsole.debug;
   }
 }
 
@@ -142,9 +287,22 @@ function getColorFromTheme(voteIsLike) {
   return colorString;
 }
 
+function getElementWidth(element) {
+  if (!element) return 0;
+  // getComputedStyle().width resolves to "auto"/"" (→ NaN) for inline
+  // elements such as YouTube's newer <like-button-view-model> /
+  // <dislike-button-view-model> wrappers. Fall back to the rendered box width
+  // so the ratio bar still gets a sensible size.
+  const styleWidth = parseFloat(window.getComputedStyle(element).width);
+  if (Number.isFinite(styleWidth)) return styleWidth;
+  const rect = element.getBoundingClientRect?.();
+  return rect ? rect.width : 0;
+}
+
 function querySelector(selectors, element) {
   let result;
-  for (const selector of selectors) {
+  for (const selector of Array.isArray(selectors) ? selectors : [selectors]) {
+    if (!selector) continue;
     result = (element ?? document).querySelector(selector);
     if (result !== null) {
       return result;
@@ -154,13 +312,14 @@ function querySelector(selectors, element) {
 
 function querySelectorAll(selectors) {
   let result;
-  for (const selector of selectors) {
+  for (const selector of Array.isArray(selectors) ? selectors : [selectors]) {
+    if (!selector) continue;
     result = document.querySelectorAll(selector);
     if (result.length !== 0) {
       return result;
     }
   }
-  return result;
+  return result ?? document.querySelectorAll("__ryd-missing-selector__");
 }
 
 function createObserver(options, callback) {
@@ -183,8 +342,9 @@ export {
   getVideoId,
   isInViewport,
   isVideoLoaded,
-  cLog,
+  initializeLogging,
   getColorFromTheme,
+  getElementWidth,
   localize,
   querySelector,
   querySelectorAll,

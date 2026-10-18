@@ -9,6 +9,7 @@ export default {
       "Расширение для браузера и API, которые показывают вам отметки «Не нравится» в Youtube",
     ukraine: "Поддержите Украину",
     sponsors: "Спонсоры",
+    becomeSponsor: "Станьте нашим спонсором",
   },
   install: {
     name: "Скачать",
@@ -20,6 +21,18 @@ export default {
     title3: "От других разработчиков",
     subtitle3:
       "Никакой ответственности с нашей стороны, используйте на свой страх и риск",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Пользовательский скрипт",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
+    androidTubular: "Android (Tubular — форк NewPipe)",
+    iosJailbroken: "iOS (джейлбрейк)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -81,6 +94,8 @@ export default {
     bullet4c1: "Чтобы увидеть расширения, введите это в адресную строку: ",
     firefox: "для Firefox",
     chrome: "для Chrome, Edge, Brave, Opera, Vivaldi",
+    detected: "Обнаружено:",
+    altExampleScreenshot: "пример скриншота",
   },
   faq: {
     name: "ЧаВО",
@@ -114,6 +129,8 @@ export default {
     name: "Пожертвовать",
     subtitle:
       "Вы можете поддержать пожертвованием наши усилия по обеспечению свободного Интернета!",
+    patreon: "Patreon",
+    crypto: "Крипто",
   },
   links: {
     name: "Ссылки",
@@ -123,5 +140,11 @@ export default {
     translators: "Переводчики",
     sponsorBlockDescription: "Проматывает рекламу, встроенную в видео",
     filmotDescription: "Поиск по субтитрам YouTube",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "не поддерживается.",
+    considerUpgrade: "Рекомендуется обновить до последней версии.",
   },
 };

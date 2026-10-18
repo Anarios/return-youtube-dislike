@@ -1,0 +1,21 @@
+Return YouTube Dislike YouTube-da bəyənməmələri görmək imkanını bərpa edir.
+
+Əgər işləmirsə: Genişlənmələr nişanını (chrome://extensions/) açın, bu genişləndirməni söndürüb yenidən aktiv edin. Bu, əksər problemləri aradan qaldırmalıdır, çünki bəzi hallarda genişləndirməni sıradan çıxaran Chromium xətası mövcuddur. Ümid edirik ki, Chromium komandası bunu tezliklə düzəldəcək.
+
+13 dekabr 2021‑dən etibarən YouTube öz API‑sindən bəyənməmələri görmə imkanını çıxardı.
+Bu genişləndirmə ən dəqiq göstəriciləri göstərmək üçün arxivləşdirilmiş bəyənmə və bəyənməmə məlumatlarının, həmçinin genişləndirmə istifadəçilərinin etdiyi bəyənmə və bəyənməmələrin birləşməsindən istifadə edərək istifadəçilərə nəzarəti qaytarmağı hədəfləyir.
+
+Hazırda 13 dekabr 2021‑dən əvvəl 200+ milyon videoya aid bəyənmə/bəyənməmə məlumatları saxlanılır.
+
+13 dekabr 2021‑dən sonrakı yükləmələrlə aktiv şəkildə böyüyür və yenilənir.
+
+Genişləndirmədən nə qədər çox istifadəçi istifadə etsə, nəticələr bir o qədər dəqiq olacaq.
+
+13 dekabr 2021‑dən sonra yüklənmiş, populyar olmayan videolarda, populyar videolarla müqayisədə göstərilən məlumatlar daha az dəqiq ola bilər.
+
+Bu genişləndirmə hazırda aktiv inkişaf mərhələsindədir, buna görə hər hansı problem yaşasanız, GitHub səhifəmizdə və ya Discord serverimizdə tərəddüd etmədən xəbər verin.
+
+Tezliklə daha çox funksiya gələcək!
+
+https://github.com/Anarios/return-youtube-dislike
+
