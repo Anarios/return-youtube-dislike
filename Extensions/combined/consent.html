@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Enable Return YouTube Dislike</title>
+    <link rel="stylesheet" href="consent.css" />
+    <script src="consent.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <img src="icons/icon48.png" width="48" height="48" alt="" />
+      <h1>Enable Return YouTube Dislike</h1>
+      <p>To show dislike counts, RYD sends the current video ID and its visible like count to the RYD API.</p>
+      <p>
+        When you first like or dislike a video, RYD creates a random ID for your extension. Your vote is sent with this
+        ID and the video ID to count likes and dislikes.
+      </p>
+      <p>Voting does not use your YouTube email, username, or account ID.</p>
+      <p class="secondary" id="consent-next-step">
+        After you select Continue, Firefox will ask for permission. If you decline, RYD will not load counts or submit
+        votes. YouTube's own buttons will still work.
+      </p>
+      <div id="consent-actions">
+        <button id="consent-continue" type="button">Continue</button>
+        <button id="consent-decline" type="button">Not now</button>
+      </div>
+      <p id="consent-status" role="status" aria-live="polite"></p>
+    </main>
+  </body>
+</html>

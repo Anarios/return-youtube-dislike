@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Inloggen met Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Informatie over je Patreon-lidmaatschap wordt gebruikt om je premiumtoegang te verifiëren. We ontvangen geen kaart- of bankgegevens van je."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "Aanmelden kon niet worden voltooid. Probeer het opnieuw."
   },
@@ -396,7 +411,7 @@
     "message": "Like-verhouding: $1"
   },
   "premiumTeaser_title": {
-    "message": "Momentopname van dislike-inzichten"
+    "message": "Videoanalyse"
   },
   "premiumTeaser_subtitle": {
     "message": "Ruwe dislikes zijn directe meldingen van extensiegebruikers die deze video bekijken."
@@ -414,7 +429,7 @@
     "message": "Geschatte dislikes"
   },
   "premiumTeaser_statLikes": {
-    "message": "Geschatte likes"
+    "message": "Ruwe telling van vind-ik-leuks"
   },
   "premiumTeaser_statusLoading": {
     "message": "Nieuwste totalen van dislikes ophalen…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Vraag het aan de gemeenschap"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-logo"

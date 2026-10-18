@@ -1,4 +1,4 @@
-Đọc bằng các ngôn ngữ khác: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md)
+Đọc bằng các ngôn ngữ khác: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Nederlands](FAQnl.md), [Türkçe](FAQtr.md), [українська](FAQuk.md), [Polski](FAQpl.md), [Slovenščina](FAQsl.md)
 
 
 # Câu Hỏi Thường Gặp <!-- # Frequently Asked Questions -->

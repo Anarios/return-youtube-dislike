@@ -109,10 +109,12 @@ export default {
       { name: "Français", locale: "fr" },
       { name: "Deutsch", locale: "de" },
       { name: "Українська", locale: "uk" },
+      { name: "Беларуская", locale: "be" },
       { name: "한국어", locale: "ko" },
       { name: "Polski", locale: "pl" },
       { name: "Bahasa Indonesia", locale: "id" },
       { name: "Tiếng Việt", locale: "vi"},
+      { name: "Slovenščina", locale: "sl" },
     ],
     alert: {
       show: false,

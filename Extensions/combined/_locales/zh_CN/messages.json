@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "使用 Patreon 登录"
   },
+  "patreonPrivacyNote": {
+    "message": "Patreon 会员信息用于验证高级功能的访问权限。我们不会接收您的银行卡或银行账户信息。"
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "登录未完成，请重试。"
   },
@@ -396,7 +411,7 @@
     "message": "点赞比例：$1"
   },
   "premiumTeaser_title": {
-    "message": "点踩洞察速览"
+    "message": "视频分析"
   },
   "premiumTeaser_subtitle": {
     "message": "原始点踩来自正在观看此视频的扩展用户的直接反馈。"
@@ -414,7 +429,7 @@
     "message": "预计点踩数"
   },
   "premiumTeaser_statLikes": {
-    "message": "预计点赞数"
+    "message": "点赞原始数"
   },
   "premiumTeaser_statusLoading": {
     "message": "正在获取最新的点踩总数…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "询问社区"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 标志"

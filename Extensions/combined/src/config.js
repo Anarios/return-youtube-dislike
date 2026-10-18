@@ -1,5 +1,5 @@
-const DEV_API_URL = "https://localhost:7258";
 const PROD_API_URL = "https://returnyoutubedislikeapi.com";
+const DEV_API_URL = PROD_API_URL;
 
 const runtime = typeof chrome !== "undefined" ? chrome.runtime : null;
 const manifest = typeof runtime?.getManifest === "function" ? runtime.getManifest() : null;
@@ -35,6 +35,7 @@ const config = {
     numberDisplayFormat: "compactShort",
     numberDisplayReformatLikes: false,
     hidePremiumTeaser: false,
+    hideClutterButtons: false,
   },
 };
 

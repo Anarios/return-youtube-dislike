@@ -1,0 +1,20 @@
+Return YouTube Dislike povrne možnost ogleda nevšečkov na YouTubu.
+
+Če ne deluje: odprite zavihek z razširitvami (chrome://extensions/), to razširitev onemogočite in jo znova omogočite. S tem odpravite večino težav, saj je v Chromiumu napaka, ki razširitev v nekaterih primerih pokvari. Upajmo, da jo bo ekipa Chromiuma kmalu odpravila.
+
+13. decembra 2021 je YouTube v svojem API-ju odstranil možnost ogleda nevšečkov.
+Ta razširitev želi moč vrniti uporabnikom tako, da za prikaz čim natančnejših ocen uporablja kombinacijo arhiviranih podatkov o všečkih in nevšečkih ter všečkov in nevšečkov uporabnikov razširitve.
+
+Trenutno so shranjeni podatki o všečkih in nevšečkih za več kot 200 milijonov videov, zbrani pred 13. decembrom 2021.
+
+Zbirka se dejavno širi in ostaja ažurna glede videov, naloženih po 13. decembru 2021
+
+Več ko je uporabnikov razširitve, natančnejša bo.
+
+Pri nepriljubljenih videih, naloženih po 13. decembru 2021, so lahko prikazani podatki manj natančni kot pri priljubljenejših videih.
+
+Ta razširitev je trenutno v fazi dejavnega razvoja, zato nam morebitne težave brez oklevanja prijavite na naši strani GitHub ali na našem strežniku Discord.
+
+Kmalu prihajajo nove funkcije!
+
+https://github.com/Anarios/return-youtube-dislike

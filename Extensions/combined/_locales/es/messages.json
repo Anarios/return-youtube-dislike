@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Iniciar sesión con Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "La información de tu membresía de Patreon se usa para verificar el acceso premium. No recibimos los datos de tu tarjeta ni de tu cuenta bancaria."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "No se pudo completar el inicio de sesión. Inténtalo de nuevo."
   },
@@ -396,7 +411,7 @@
     "message": "Proporción de me gusta: $1"
   },
   "premiumTeaser_title": {
-    "message": "Resumen de insights de dislikes"
+    "message": "Analíticas de video"
   },
   "premiumTeaser_subtitle": {
     "message": "Los dislikes sin procesar son reportes directos de usuarios de la extensión que ven este video."
@@ -414,7 +429,7 @@
     "message": "Dislikes estimados"
   },
   "premiumTeaser_statLikes": {
-    "message": "Likes estimados"
+    "message": "Recuento bruto de Me gusta"
   },
   "premiumTeaser_statusLoading": {
     "message": "Obteniendo los últimos totales de dislikes…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Pregunta a la comunidad"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Logotipo de Return YouTube Dislike"

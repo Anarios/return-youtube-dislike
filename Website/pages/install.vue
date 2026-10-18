@@ -68,6 +68,10 @@
       <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
       {{ $vuetify.lang.t("$vuetify.install.androidReVanced") }}
     </v-btn>
+    <v-btn class="mainAltButton" :href="morphe" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
+      {{ $vuetify.lang.t("$vuetify.install.androidMorphe") }}
+    </v-btn>
     <v-btn class="mainAltButton" :href="androidNewPipe" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-android</v-icon>
       {{ $vuetify.lang.t("$vuetify.install.androidTubular") }}
@@ -105,12 +109,12 @@ export default {
 
       iosJailbreakLink: "https://chariz.com/get/return-youtube-dislike/",
 
-      androidNewPipe: "https://github.com/polymorphicshade/NewPipe",
       androidVueTube: "https://vuetube.app",
       iosuYouPlus: "https://github.com/qnblackcat/uYouPlus",
 
       androidNewPipe: "https://github.com/polymorphicshade/Tubular",
       reVanced: "https://revanced.app/",
+      morphe: "https://morphe.software/",
 
     };
   },

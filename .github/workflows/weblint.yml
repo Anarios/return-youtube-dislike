@@ -8,11 +8,15 @@ on:
       - main
     paths:
       - Website/**
+      - .github/workflows/weblint.yml
+      - .nvmrc
   pull_request:
     branches: 
       - main
     paths:
       - Website/**
+      - .github/workflows/weblint.yml
+      - .nvmrc
 
 jobs:
   weblint:
@@ -22,8 +26,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: Website/package-lock.json
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: Website
 
       - name: Run lint

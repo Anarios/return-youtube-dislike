@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Войти через Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Информация о подписке на Patreon используется для проверки доступа к премиум-функциям. Мы не получаем данные вашей карты или банковского счёта."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "Не удалось завершить вход. Попробуйте еще раз."
   },
@@ -396,7 +411,7 @@
     "message": "Соотношение лайков: $1"
   },
   "premiumTeaser_title": {
-    "message": "Краткий обзор дизлайков"
+    "message": "Аналитика видео"
   },
   "premiumTeaser_subtitle": {
     "message": "Необработанные дизлайки — это прямые сообщения пользователей расширения, смотрящих это видео."
@@ -414,7 +429,7 @@
     "message": "Оценочные дизлайки"
   },
   "premiumTeaser_statLikes": {
-    "message": "Оценочные лайки"
+    "message": "Сырое количество лайков"
   },
   "premiumTeaser_statusLoading": {
     "message": "Получаем последние суммы дизлайков…"
@@ -536,6 +551,123 @@
   "changelog_support_contact": {
     "message": "Спросить сообщество"
   },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
+  },
+  "discussion_title": { "message": "Комментарии RYD" },
+  "discussion_subtitle": { "message": "Обсуждение сообщества Return YouTube Dislike." },
+  "discussion_independent": { "message": "Эти комментарии не связаны с комментариями YouTube." },
+  "discussion_open": { "message": "Открыть комментарии RYD" },
+  "discussion_close": { "message": "Закрыть" },
+  "discussion_new": { "message": "Сначала новые" },
+  "discussion_top": { "message": "Популярные" },
+  "discussion_sort": { "message": "Сортировка комментариев" },
+  "discussion_refresh": { "message": "Обновить" },
+  "discussion_loading": { "message": "Загрузка комментариев…" },
+  "discussion_empty": { "message": "Комментариев пока нет. Начните обсуждение." },
+  "discussion_replyEmpty": { "message": "Ответов пока нет." },
+  "discussion_comment": { "message": "Комментарий" },
+  "discussion_post": { "message": "Отправить" },
+  "discussion_reply": { "message": "Ответить" },
+  "discussion_postReply": { "message": "Отправить ответ" },
+  "discussion_cancel": { "message": "Отмена" },
+  "discussion_save": { "message": "Сохранить" },
+  "discussion_edit": { "message": "Изменить" },
+  "discussion_delete": { "message": "Удалить" },
+  "discussion_deleteConfirm": { "message": "Удалить этот комментарий?" },
+  "discussion_deleted": { "message": "Комментарий удалён" },
+  "discussion_edited": { "message": "изменён" },
+  "discussion_replies": { "message": "Ответы ($1)" },
+  "discussion_more": { "message": "Показать ещё" },
+  "discussion_like": { "message": "Нравится" },
+  "discussion_dislike": { "message": "Не нравится" },
+  "discussion_reacting": { "message": "Сохранение реакции…" },
+  "discussion_signInRequired": { "message": "Чтобы продолжить, войдите в аккаунт через меню расширения." },
+  "discussion_tierRequired": { "message": "Писать могут участники с активным уровнем Commenter и выше." },
+  "discussion_join": { "message": "Стать участником Commenter" },
+  "discussion_gate": {
+    "message": "Читать и оценивать могут все. Писать могут участники с активным уровнем Commenter и выше."
+  },
+  "discussion_nicknameRequired": { "message": "Перед отправкой выберите публичный псевдоним RYD." },
+  "discussion_nicknameLabel": { "message": "Публичный псевдоним RYD" },
+  "discussion_nicknameHint": {
+    "message": "От 3 до 32 букв, цифр, пробелов, точек, дефисов или знаков подчёркивания. Это имя будет видно рядом с вашими комментариями."
+  },
+  "discussion_nicknameSave": { "message": "Сохранить псевдоним" },
+  "discussion_nicknameTaken": { "message": "Этот псевдоним уже занят. Выберите другой." },
+  "discussion_nicknameInvalid": {
+    "message": "Используйте от 3 до 32 букв, цифр, пробелов, точек, дефисов или знаков подчёркивания."
+  },
+  "discussion_nicknameChange": { "message": "Изменить псевдоним" },
+  "discussion_as": { "message": "Вы пишете как $1" },
+  "discussion_placeholder": { "message": "Добавьте комментарий…" },
+  "discussion_characters": { "message": "$1 / $2" },
+  "discussion_report": { "message": "Пожаловаться" },
+  "discussion_reportTitle": { "message": "Жалоба на комментарий" },
+  "discussion_reportReason": { "message": "Причина" },
+  "discussion_reportSpam": { "message": "Спам" },
+  "discussion_reportAbuse": { "message": "Оскорбления или ненависть" },
+  "discussion_reportOther": { "message": "Другое" },
+  "discussion_reportDetails": { "message": "Дополнительные сведения (необязательно)" },
+  "discussion_reportSend": { "message": "Отправить жалобу" },
+  "discussion_reportDone": { "message": "Жалоба отправлена. Спасибо." },
+  "discussion_moderation": { "message": "Модерация" },
+  "discussion_queueEmpty": { "message": "Новых жалоб нет." },
+  "discussion_hide": { "message": "Скрыть комментарий" },
+  "discussion_restore": { "message": "Восстановить комментарий" },
+  "discussion_dismiss": { "message": "Отклонить жалобы" },
+  "discussion_ban": { "message": "Заблокировать автора" },
+  "discussion_unban": { "message": "Разблокировать автора" },
+  "discussion_moderationReason": { "message": "Причина модерации" },
+  "discussion_moderationSaved": { "message": "Действие модератора сохранено." },
+  "discussion_reported": { "message": "Жалоб: $1" },
+  "discussion_unavailable": { "message": "Комментарии RYD недоступны для этого видео." },
+  "discussion_commentUnavailable": { "message": "Этот комментарий больше недоступен." },
+  "discussion_error": { "message": "Не удалось подключиться. Попробуйте ещё раз." },
+  "discussion_rateLimited": { "message": "Немного подождите и попробуйте снова." },
+  "discussion_conflict": { "message": "Комментарий изменился. Обновите страницу и попробуйте снова." },
+  "discussion_forbidden": { "message": "Это действие недоступно для вашего аккаунта." },
+  "discussion_retry": { "message": "Повторить" },
+  "discussion_notifications": { "message": "Уведомления" },
+  "discussion_notificationEmpty": { "message": "Новых уведомлений нет." },
+  "discussion_notificationReply": { "message": "$1 ответил(а) на ваш комментарий" },
+  "discussion_notificationLike": { "message": "Кому-то понравился ваш комментарий" },
+  "discussion_notificationLikes": { "message": "Новых лайков у вашего комментария: $1" },
+  "discussion_notificationDislike": { "message": "Кому-то не понравился ваш комментарий" },
+  "discussion_notificationReaction": { "message": "Кто-то оценил ваш комментарий" },
+  "discussion_someone": { "message": "Кто-то" },
+  "discussion_markRead": { "message": "Отметить прочитанным" },
+  "discussion_markAllRead": { "message": "Прочитать все" },
+  "discussion_view": { "message": "Открыть обсуждение" },
+  "discussion_unread": { "message": "Непрочитанных уведомлений: $1" },
+  "discussion_signedOutInbox": { "message": "Войдите, чтобы видеть ответы и реакции на ваши комментарии." },
+  "discussion_notificationUnavailable": { "message": "Это обсуждение больше недоступно." },
+  "discussion_discussionTab": { "message": "Обсуждение" },
+  "discussion_nickname": { "message": "Псевдоним" },
+  "discussion_reportCount": { "message": "Жалобы" },
+  "discussion_reportStatus": { "message": "Статус жалоб" },
+  "discussion_openReports": { "message": "Открытые жалобы" },
+  "discussion_resolvedReports": { "message": "Закрытые жалобы" },
+  "discussion_author": { "message": "Автор" },
+  "discussion_me": { "message": "Вы" },
+  "discussion_saving": { "message": "Сохранение…" },
+  "discussion_confirm": { "message": "Подтвердить" },
+  "discussion_notificationUpdated": { "message": "Новая активность в ваших комментариях" },
+  "discussion_showThread": { "message": "Показать ветку" },
+  "discussion_loadReplies": { "message": "Показать ответы ($1)" },
+  "patreonTierCommenter": { "message": "Commenter" },
   "changelog_brand_logo_alt": {
     "message": "Логотип Return YouTube Dislike"
   }

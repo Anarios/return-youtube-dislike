@@ -1,4 +1,4 @@
-اقرأ هذا بلغات أخرى: [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md)
+اقرأ هذا بلغات أخرى: [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [Slovenščina](SECURITY-FAQsl.md)
 
 # الأمان
 
@@ -16,7 +16,7 @@
 
 ### كيف يتم تخزين عنوان IP الخاص بي؟
 
-يحتفظ الخلفية بعناوين IP غير المشفرة في الذاكرة المتطايرة (RAM) فقط. هذه العناوين لا يتم تخزينها على القرص الصلب، وبالتالي لا يتم تسجيلها. نقوم بتشفير عناوين IP، ويتم تخزين هذا التشفير بدلاً من ذلك. يتم ذلك لمنع تخريب قاعدة البيانات.
+يحتفظ الخادم بعناوين IP الأصلية في ذاكرة RAM فقط. ونخزّن قيم التجزئة (hashes) الخاصة بها بدلاً من العناوين الأصلية، للمساعدة في منع إساءة الاستخدام.
 
 ### سمعت بعض النقاش حول OAuth والوصول إلى حساب YouTube الخاص بي!
 

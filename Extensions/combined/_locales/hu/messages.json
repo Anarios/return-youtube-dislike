@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Bejelentkezés Patreonnal"
   },
+  "patreonPrivacyNote": {
+    "message": "A Patreon-tagság adatait a prémium hozzáférés ellenőrzésére használjuk. Nem kapjuk meg a kártya- vagy banki adataidat."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "A bejelentkezés nem sikerült. Próbáld újra."
   },
@@ -396,7 +411,7 @@
     "message": "Kedvelési arány: $1"
   },
   "premiumTeaser_title": {
-    "message": "Nem tetszések összefoglalója"
+    "message": "Videóanalitika"
   },
   "premiumTeaser_subtitle": {
     "message": "A nyers nem tetszések az ezt a videót néző bővítményfelhasználók közvetlen jelentései."
@@ -414,7 +429,7 @@
     "message": "Becsült nem tetszések"
   },
   "premiumTeaser_statLikes": {
-    "message": "Becsült kedvelések"
+    "message": "Nyers kedvelések száma"
   },
   "premiumTeaser_statusLoading": {
     "message": "Legfrissebb nemtetszés-összegek lekérése…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Kérdezd meg a közösséget"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike logója"

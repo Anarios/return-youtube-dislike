@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Σύνδεση με Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Οι πληροφορίες συνδρομής στο Patreon χρησιμοποιούνται για την επαλήθευση της πρόσβασης στις premium λειτουργίες. Δεν λαμβάνουμε στοιχεία της κάρτας ή του τραπεζικού σας λογαριασμού."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "Η σύνδεση δεν ολοκληρώθηκε. Δοκιμάστε ξανά."
   },
@@ -396,7 +411,7 @@
     "message": "Αναλογία likes: $1"
   },
   "premiumTeaser_title": {
-    "message": "Στιγμιότυπο στατιστικών dislikes"
+    "message": "Αναλυτικά στοιχεία βίντεο"
   },
   "premiumTeaser_subtitle": {
     "message": "Τα ανεπεξέργαστα dislikes είναι άμεσες αναφορές χρηστών της επέκτασης που βλέπουν αυτό το βίντεο."
@@ -414,7 +429,7 @@
     "message": "Εκτιμώμενα dislikes"
   },
   "premiumTeaser_statLikes": {
-    "message": "Εκτιμώμενα likes"
+    "message": "Ανεπεξέργαστος αριθμός likes"
   },
   "premiumTeaser_statusLoading": {
     "message": "Λήψη των πιο πρόσφατων συνολικών dislikes…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Ρωτήστε την κοινότητα"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Λογότυπο Return YouTube Dislike"
