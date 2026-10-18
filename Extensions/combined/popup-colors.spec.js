@@ -92,6 +92,12 @@ describe("popup color settings", () => {
     expect(chrome.storage.sync.set).not.toHaveBeenCalled();
   });
 
+  test("uses the default number format before first-run storage is initialized", () => {
+    expect(() => openPopup({ numberDisplayFormat: undefined })).not.toThrow();
+    expect(document.getElementById("number_format").value).toBe("compactShort");
+    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+  });
+
   test("uses a keyboard-compatible change event for preset selection and previews both themes", () => {
     openPopup();
     chooseTheme("hibiscus");

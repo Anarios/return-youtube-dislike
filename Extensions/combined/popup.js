@@ -60,7 +60,28 @@ function localizeHtmlPage() {
 
 localizeHtmlPage();
 const privateBrowsing = isPrivateBrowsingContext();
-const coreConsentReady = privateBrowsing ? null : waitForCoreDataConsent({ alwaysExplain: true });
+function isToolbarPopup() {
+  try {
+    return browser.extension?.getViews?.({ type: "popup" }).includes(window) === true;
+  } catch (_) {
+    return false;
+  }
+}
+
+function waitForPopupCoreConsent() {
+  const toolbarPopup = isToolbarPopup();
+  return waitForCoreDataConsent({
+    alwaysExplain: !toolbarPopup,
+    openConsentPage: toolbarPopup
+      ? async () => {
+          await browser.tabs.create({ url: browser.runtime.getURL("consent.html"), active: true });
+          window.close();
+        }
+      : undefined,
+  });
+}
+
+const coreConsentReady = privateBrowsing ? null : waitForPopupCoreConsent();
 if (privateBrowsing) {
   const home = document.createElement("center");
   const message = document.createElement("p");
@@ -76,7 +97,7 @@ if (privateBrowsing) {
 } else {
   coreConsentReady.then(() => initDiscussionPopup());
   onCoreDataPermissionChanged((granted) => {
-    if (!granted) void waitForCoreDataConsent({ alwaysExplain: true });
+    if (!granted) void waitForPopupCoreConsent();
   });
 
   /*   Links   */
@@ -174,6 +195,7 @@ function initPatreonAuth() {
   const userName = document.getElementById("patreon-user-name");
   const userTier = document.getElementById("patreon-tier");
   let authenticationGeneration = 0;
+  let openingPermissionPage = false;
   const initialGeneration = authenticationGeneration;
 
   chrome.storage.sync.get(["patreonUser", "patreonSessionToken"], async (data) => {
@@ -234,6 +256,8 @@ function initPatreonAuth() {
     userAvatar.style.display = "none";
     userName.textContent = "";
     userTier.textContent = "";
+    if (window.location.hash === "#patreon-login-btn") loginBtn.focus();
+    if (window.location.hash === "#github-login-btn") githubLoginBtn?.focus();
   }
 
   function showLoggedInView(user) {
@@ -402,7 +426,43 @@ function initPatreonAuth() {
     }
   }
 
+  function requestLoginConsent(buttonId, generation, continueLogin) {
+    if (!usesFirefoxDataCollectionConsent()) {
+      continueLogin(true);
+      return;
+    }
+    if (!isToolbarPopup()) {
+      requestAuthenticationDataPermission().then(continueLogin);
+      return;
+    }
+
+    // Keep the native permission prompt and its continuation outside the toolbar popup.
+    openingPermissionPage = true;
+    void hasAuthenticationDataPermission()
+      .then(async (granted) => {
+        if (generation !== authenticationGeneration) return;
+        if (granted) {
+          continueLogin(true);
+          return;
+        }
+        await browser.tabs.create({ url: browser.runtime.getURL("popup.html") + "#" + buttonId, active: true });
+        if (generation === authenticationGeneration) window.close();
+      })
+      .catch(() => {
+        if (generation !== authenticationGeneration) return;
+        alert(
+          chrome.i18n.getMessage(
+            buttonId === "github-login-btn" ? "githubLoginStartFailed" : "patreonLoginStartFailed",
+          ),
+        );
+      })
+      .finally(() => {
+        openingPermissionPage = false;
+      });
+  }
+
   loginBtn.addEventListener("click", () => {
+    if (openingPermissionPage) return;
     const generation = ++authenticationGeneration;
     const continueLogin = (consentGranted) => {
       if (generation !== authenticationGeneration) return;
@@ -439,16 +499,12 @@ function initPatreonAuth() {
       });
     };
 
-    if (!usesFirefoxDataCollectionConsent()) {
-      continueLogin(true);
-      return;
-    }
-
-    requestAuthenticationDataPermission().then(continueLogin);
+    requestLoginConsent("patreon-login-btn", generation, continueLogin);
   });
 
   if (githubLoginBtn) {
     githubLoginBtn.addEventListener("click", () => {
+      if (openingPermissionPage) return;
       const generation = ++authenticationGeneration;
       const continueLogin = (consentGranted) => {
         if (generation !== authenticationGeneration) return;
@@ -485,12 +541,7 @@ function initPatreonAuth() {
         });
       };
 
-      if (!usesFirefoxDataCollectionConsent()) {
-        continueLogin(true);
-        return;
-      }
-
-      requestAuthenticationDataPermission().then(continueLogin);
+      requestLoginConsent("github-login-btn", generation, continueLogin);
     });
   }
 
@@ -731,7 +782,7 @@ function updateColorThemePreviewContent() {
   }
 }
 
-function handleNumberDisplayFormatChangeEvent(value) {
+function handleNumberDisplayFormatChangeEvent(value = "compactShort") {
   config.numberDisplayFormat = value;
   document.getElementById("number_format").querySelector('option[value="' + value + '"]').selected = true;
 }

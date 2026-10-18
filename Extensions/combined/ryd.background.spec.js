@@ -93,6 +93,7 @@ describe("background account consent lifecycle", () => {
       tabs: {
         get: jest.fn(async () => ({ id: 9, url: "moz-extension://fixture/consent.html", incognito: false })),
         create: jest.fn(async () => ({ id: 9 })),
+        reload: jest.fn(async () => {}),
         update: jest.fn(async () => ({ id: 9 })),
         query: jest.fn((query, callback) =>
           callback([{ id: 1, url: "https://www.youtube.com/watch?v=video123456", incognito: false }]),
@@ -331,18 +332,55 @@ describe("background account consent lifecycle", () => {
     ).not.toHaveBeenCalled();
   });
 
-  test("only the explainer can open the consent page and repeated clicks reuse the tab", async () => {
+  test.each([
+    { url: "moz-extension://fixture/consent.html" },
+    { url: "https://www.youtube.com/watch?v=video123456", frameId: 0 },
+    { url: "https://m.youtube.com/", frameId: 0 },
+    { url: "http://youtube.com/", frameId: 0 },
+  ])(
+    "the explainer or top-level YouTube launcher opens and refreshes the reused consent page (%j)",
+    async (context) => {
+      const response = jest.fn();
+      const sender = { ...normalSender, ...context };
+      messageListener({ message: "ryd_open_consent" }, sender, response);
+      messageListener({ message: "ryd_open_consent" }, sender, response);
+      await flushPromises();
+      expect(response).toHaveBeenCalledWith({ success: true });
+      expect(chrome.tabs.reload).not.toHaveBeenCalled();
+      messageListener({ message: "ryd_open_consent" }, sender, response);
+      await flushPromises();
+      expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
+      expect(chrome.tabs.reload).toHaveBeenCalledTimes(1);
+      expect(chrome.tabs.reload).toHaveBeenCalledWith(9);
+      expect(chrome.tabs.update).toHaveBeenCalledWith(9, { active: true });
+      expect(fetch).not.toHaveBeenCalled();
+    },
+  );
+
+  test.each([
+    { id: "other-extension" },
+    { frameId: 1 },
+    { frameId: undefined },
+    { tab: undefined },
+    { tab: { id: 2, incognito: true } },
+    { tab: { id: 2 } },
+    { url: "https://example.com/" },
+    { url: "https://youtube.com.example.com/" },
+    { url: "https://youtube.com@example.com/" },
+    { url: "blob:https://www.youtube.com/test" },
+    { url: "not a URL" },
+  ])("rejects unrelated consent-page opener contexts (%j)", async (override) => {
     const response = jest.fn();
-    const sender = { ...normalSender, url: "moz-extension://fixture/consent.html" };
-    messageListener({ message: "ryd_open_consent" }, { ...sender, url: "https://www.youtube.com/" }, response);
-    expect(response).toHaveBeenCalledWith({ success: false });
+    messageListener(
+      { message: "ryd_open_consent" },
+      { ...normalSender, url: "https://www.youtube.com/watch?v=video123456", frameId: 0, ...override },
+      response,
+    );
+    await flushPromises();
+    expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
     expect(chrome.tabs.create).not.toHaveBeenCalled();
-    messageListener({ message: "ryd_open_consent" }, sender, response);
-    await flushPromises();
-    messageListener({ message: "ryd_open_consent" }, sender, response);
-    await flushPromises();
-    expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
-    expect(chrome.tabs.update).toHaveBeenCalledWith(9, { active: true });
+    expect(chrome.tabs.update).not.toHaveBeenCalled();
+    expect(chrome.tabs.reload).not.toHaveBeenCalled();
     expect(fetch).not.toHaveBeenCalled();
   });
 
@@ -355,6 +393,7 @@ describe("background account consent lifecycle", () => {
     await flushPromises();
     expect(chrome.tabs.create).toHaveBeenCalledTimes(2);
     expect(chrome.tabs.update).not.toHaveBeenCalled();
+    expect(chrome.tabs.reload).not.toHaveBeenCalled();
   });
 
   test.each(["patreon_oauth_login", "github_oauth_login"])(

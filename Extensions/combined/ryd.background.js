@@ -262,7 +262,16 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 function handleMessage(request, sender, sendResponse) {
   if (request?.message === "ryd_open_consent") {
-    if (sender.id !== api.runtime.id || sender.url !== api.runtime.getURL("consent.html")) {
+    let isYouTubeLauncher = false;
+    if (sender.tab?.incognito === false && sender.frameId === 0) {
+      try {
+        const { protocol, hostname } = new URL(sender.url);
+        isYouTubeLauncher =
+          (protocol === "https:" || protocol === "http:") &&
+          (hostname === "youtube.com" || hostname.endsWith(".youtube.com"));
+      } catch (_) {}
+    }
+    if (sender.id !== api.runtime.id || (sender.url !== api.runtime.getURL("consent.html") && !isYouTubeLauncher)) {
       sendResponse({ success: false });
       return;
     }
@@ -273,6 +282,7 @@ function handleMessage(request, sender, sendResponse) {
           try {
             const existing = await tabs.get(consentPageTabId);
             if (existing.url === api.runtime.getURL("consent.html") && existing.incognito === false) {
+              await tabs.reload(consentPageTabId);
               await tabs.update(consentPageTabId, { active: true });
               return;
             }

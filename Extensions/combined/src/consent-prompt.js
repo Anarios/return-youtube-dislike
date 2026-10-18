@@ -4,14 +4,16 @@ import { isPrivateBrowsingContext } from "./private-browsing";
 
 let pendingConsent = null;
 
-function waitForCoreDataConsent({ alwaysExplain = false } = {}) {
+function waitForCoreDataConsent({ alwaysExplain = false, openConsentPage } = {}) {
   if (!usesFirefoxDataCollectionConsent()) return Promise.resolve();
   if (pendingConsent) return pendingConsent;
   pendingConsent = (async () => {
     if (await hasCoreDataPermission()) return;
     const api = consentApi();
+    const privateBrowsing = isPrivateBrowsingContext();
+    const useLauncher = !alwaysExplain && !privateBrowsing;
     let dismissed = false;
-    if (!isPrivateBrowsingContext()) {
+    if (!privateBrowsing) {
       try {
         dismissed = (await api.storage.local.get("rydConsentDismissed"))?.rydConsentDismissed === true;
       } catch (_) {}
@@ -31,10 +33,12 @@ function waitForCoreDataConsent({ alwaysExplain = false } = {}) {
           font: 600 14px system-ui; background: light-dark(#fff, #202020); color: light-dark(#151515, #fff); }
         [hidden] { display: none; }
       `;
-      const frame = document.createElement("iframe");
+      const frame = useLauncher ? null : document.createElement("iframe");
       const url = api.runtime.getURL("consent.html");
-      frame.src = url;
-      frame.title = "Enable Return YouTube Dislike";
+      if (frame) {
+        frame.src = url;
+        frame.title = "Enable Return YouTube Dislike";
+      }
       const reopen = document.createElement("button");
       reopen.type = "button";
       reopen.textContent = "Enable Return YouTube Dislike";
@@ -46,13 +50,29 @@ function waitForCoreDataConsent({ alwaysExplain = false } = {}) {
       }
       function collapse() {
         host.setAttribute("collapsed", "");
-        frame.hidden = true;
+        if (frame) frame.hidden = true;
         reopen.hidden = false;
       }
-      reopen.addEventListener("click", expand);
-      if (dismissed && !alwaysExplain) collapse();
+      reopen.addEventListener(
+        "click",
+        useLauncher
+          ? async () => {
+              reopen.disabled = true;
+              try {
+                if (openConsentPage) await openConsentPage();
+                else await api.runtime.sendMessage({ message: "ryd_open_consent" });
+              } catch (_) {
+              } finally {
+                reopen.disabled = false;
+              }
+            }
+          : expand,
+      );
+      if (useLauncher || (dismissed && !alwaysExplain)) collapse();
       else expand();
-      shadow.append(style, frame, reopen);
+      shadow.append(style);
+      if (frame) shadow.append(frame);
+      shadow.append(reopen);
       (document.body || document.documentElement).append(host);
       let requestPending = false;
       const unsubscribe = onCoreDataPermissionChanged((granted) => {
@@ -65,7 +85,7 @@ function waitForCoreDataConsent({ alwaysExplain = false } = {}) {
         resolve();
       }
       function onMessage(event) {
-        if (event.source !== frame.contentWindow || event.origin !== new URL(url).origin) return;
+        if (!frame || event.source !== frame.contentWindow || event.origin !== new URL(url).origin) return;
         if (event.data?.type === "ryd-consent-requested") requestPending = true;
         if (event.data?.type === "ryd-consent-dismissed") {
           requestPending = false;

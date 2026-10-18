@@ -1,7 +1,7 @@
 /** @jest-environment jsdom */
 const fs = require("fs");
 const path = require("path");
-jest.mock("./src/consent-prompt", () => ({ waitForCoreDataConsent: () => Promise.resolve() }));
+jest.mock("./src/consent-prompt", () => ({ waitForCoreDataConsent: jest.fn(() => Promise.resolve()) }));
 jest.mock("./src/core-data-consent", () => ({
   fetchWithCoreConsent: (...args) => fetch(...args),
   onCoreDataPermissionChanged: jest.fn(),
@@ -29,7 +29,13 @@ describe("popup account consent lifecycle", () => {
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "popup.html"), "utf8");
     global.chrome = {
       i18n: { getMessage: () => "" },
-      runtime: { getManifest: () => require("./manifest-firefox.json"), sendMessage: jest.fn() },
+      runtime: {
+        getManifest: () => require("./manifest-firefox.json"),
+        getURL: (path) => `moz-extension://fixture/${path}`,
+        sendMessage: jest.fn(),
+      },
+      extension: { getViews: jest.fn(() => []) },
+      tabs: { create: jest.fn().mockResolvedValue({ id: 9 }) },
       permissions: {
         getAll: jest.fn(() => Promise.resolve({ data_collection: consent ? ["authenticationInfo"] : [] })),
         contains: jest.fn().mockResolvedValue(true),
@@ -65,10 +71,51 @@ describe("popup account consent lifecycle", () => {
   });
 
   afterEach(() => {
+    window.location.hash = "";
     jest.restoreAllMocks();
     delete global.chrome;
     delete global.browser;
     delete global.fetch;
+  });
+
+  test.each(["patreon-login-btn", "github-login-btn"])(
+    "focuses the selected %s after the asynchronous account view becomes visible",
+    async (buttonId) => {
+      window.location.hash = `#${buttonId}`;
+      const button = document.getElementById(buttonId);
+      const focus = jest.spyOn(button, "focus").mockImplementation(() => {
+        expect(document.getElementById("patreon-logged-out").style.display).toBe("block");
+      });
+      expect(document.getElementById("patreon-logged-out").style.display).toBe("none");
+      await readCachedSession({});
+      expect(focus).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  test.each([true, false])("moves toolbar core consent into a tab and closes only on success=%s", async (success) => {
+    chrome.extension.getViews.mockReturnValue([window]);
+    jest.resetModules();
+    const waitForConsent = require("./src/consent-prompt").waitForCoreDataConsent;
+    require("./popup");
+    const options = waitForConsent.mock.calls[0][0];
+    expect(options.alwaysExplain).toBe(false);
+    expect(options.openConsentPage).toEqual(expect.any(Function));
+    const close = jest.spyOn(window, "close").mockImplementation(() => {});
+    let complete;
+    chrome.tabs.create.mockImplementation(
+      () =>
+        new Promise((resolve, reject) => {
+          complete = () => (success ? resolve({ id: 9 }) : reject(new Error("Could not open tab")));
+        }),
+    );
+    const opening = options.openConsentPage();
+    expect(chrome.tabs.create).toHaveBeenCalledWith({ url: "moz-extension://fixture/consent.html", active: true });
+    expect(close).not.toHaveBeenCalled();
+    complete();
+    if (success) await opening;
+    else await expect(opening).rejects.toThrow("Could not open tab");
+    expect(close).toHaveBeenCalledTimes(success ? 1 : 0);
+    expect(chrome.permissions.request).not.toHaveBeenCalled();
   });
 
   test.each([
@@ -137,6 +184,80 @@ describe("popup account consent lifecycle", () => {
       await flushPromises();
       expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
       expect(fetch).not.toHaveBeenCalled();
+    },
+  );
+
+  test.each(["patreon-login-btn", "github-login-btn"])(
+    "moves missing %s consent out of the toolbar before requesting permission",
+    async (button) => {
+      consent = false;
+      chrome.extension.getViews.mockReturnValue([window]);
+      const close = jest.spyOn(window, "close").mockImplementation(() => {});
+      let opened;
+      chrome.tabs.create.mockImplementation(() => new Promise((resolve) => (opened = resolve)));
+      document.getElementById(button).click();
+      document.getElementById(button).click();
+      await flushPromises();
+      expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
+      expect(chrome.tabs.create).toHaveBeenCalledWith({
+        url: `moz-extension://fixture/popup.html#${button}`,
+        active: true,
+      });
+      expect(chrome.permissions.request).not.toHaveBeenCalled();
+      expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+      expect(fetch).not.toHaveBeenCalled();
+      expect(close).not.toHaveBeenCalled();
+      opened({ id: 9 });
+      await flushPromises();
+      expect(close).toHaveBeenCalledTimes(1);
+    },
+  );
+
+  test.each(["patreon", "github"])("keeps already-granted %s toolbar login in the existing flow", async (provider) => {
+    chrome.extension.getViews.mockReturnValue([window]);
+    document.getElementById(`${provider}-login-btn`).click();
+    await flushPromises();
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
+    expect(chrome.permissions.request).not.toHaveBeenCalled();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(
+      { message: `${provider}_oauth_login` },
+      expect.any(Function),
+    );
+  });
+
+  test("failed consent-tab opening leaves the toolbar open and can be retried", async () => {
+    consent = false;
+    chrome.extension.getViews.mockReturnValue([window]);
+    chrome.tabs.create.mockRejectedValueOnce(new Error("Tab could not open"));
+    const close = jest.spyOn(window, "close").mockImplementation(() => {});
+    const alert = jest.spyOn(window, "alert").mockImplementation(() => {});
+    document.getElementById("github-login-btn").click();
+    await flushPromises();
+    expect(alert).toHaveBeenCalledTimes(1);
+    expect(close).not.toHaveBeenCalled();
+    document.getElementById("github-login-btn").click();
+    await flushPromises();
+    expect(chrome.tabs.create).toHaveBeenCalledTimes(2);
+    expect(close).toHaveBeenCalledTimes(1);
+    expect(chrome.permissions.request).not.toHaveBeenCalled();
+    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+  });
+
+  test.each(["revocation", "logout"])(
+    "does not open a consent tab after %s during its permission query",
+    async (event) => {
+      chrome.extension.getViews.mockReturnValue([window]);
+      let resolvePermission;
+      chrome.permissions.getAll.mockImplementationOnce(() => new Promise((resolve) => (resolvePermission = resolve)));
+      document.getElementById("patreon-login-btn").click();
+      if (event === "revocation") removeCoreConsent();
+      else document.getElementById("patreon-logout-btn").click();
+      chrome.runtime.sendMessage.mockClear();
+      resolvePermission({ data_collection: [] });
+      await flushPromises();
+      expect(chrome.tabs.create).not.toHaveBeenCalled();
+      expect(chrome.permissions.request).not.toHaveBeenCalled();
+      expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
     },
   );
 

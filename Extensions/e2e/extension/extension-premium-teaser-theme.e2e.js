@@ -81,6 +81,9 @@ async function expectTeaserPalette(page, theme, legacyTokens) {
     await expect(control).toHaveCSS("color", hoverColor);
     await page.mouse.move(0, 0);
     await control.focus();
+    await page.keyboard.press("Shift+Tab");
+    await page.keyboard.press("Tab");
+    await expect(control).toBeFocused();
     await expect(control).toHaveCSS("color", hoverColor);
     await control.blur();
   }
