@@ -122,15 +122,27 @@ export default {
       html: "",
     },
   }),
+  head() {
+    const { current, locales, defaultLocale } = this.$vuetify.lang;
+    const locale = locales[current] ? current : defaultLocale;
+    return {
+      htmlAttrs: {
+        lang: locale.replace("_", "-"),
+        dir: this.$vuetify.rtl ? "rtl" : "ltr",
+      },
+    };
+  },
   created() {
     // fetch locale preference or browser default
     if (process.client && navigator.language) {
       if (!("locale" in localStorage))
-        this.$vuetify.lang.current = navigator.language.slice(0, 2);
-      else this.$vuetify.lang.current = localStorage.locale;
+        this.applyLocale(navigator.language.slice(0, 2));
+      else this.applyLocale(localStorage.locale);
     }
   },
   mounted() {
+    // Browser preferences can differ from the prerendered page's language.
+    this.$nextTick(() => this.$meta().refresh());
     setTimeout(() => {
       // Chrome < 70 or FF < 60 unsupported warning popup
       if (
@@ -145,12 +157,16 @@ export default {
     }, 1000);
   },
   methods: {
+    applyLocale(locale) {
+      this.$vuetify.lang.current = locale;
+      this.$vuetify.rtl = locale === "fa";
+    },
     changeLocale(locale) {
       // reset to browser default if selection matches browser default
       if (locale == navigator.language.slice(0, 2)) localStorage.clear();
       // else save preference
       else localStorage.locale = locale;
-      this.$vuetify.lang.current = locale;
+      this.applyLocale(locale);
     },
   },
 };

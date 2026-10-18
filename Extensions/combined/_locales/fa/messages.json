@@ -57,7 +57,7 @@
     "message": "Discord"
   },
   "linkDonate": {
-    "message": "Donate"
+    "message": "کمک مالی"
   },
   "linkFAQ": {
     "message": "FAQ"
@@ -306,10 +306,10 @@
     "message": "تمام زمان‌ها"
   },
   "premiumAnalytics_windowSummaryLast": {
-    "message": "$1 روز گذشته"
+    "message": "$1 گذشته"
   },
   "premiumAnalytics_windowSummaryFirst": {
-    "message": "$1 روز نخست"
+    "message": "$1 نخست"
   },
   "premiumAnalytics_daysSingular": {
     "message": "$1 روز"
