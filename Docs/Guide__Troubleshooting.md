@@ -125,7 +125,17 @@ If it does, find the extension(s) preventing RYD from working correctly and re-c
 >
 > **Solution:** Allow XHR for `returnyoutubedislikeapi.com` manually
 >
-> ![Allow XHR for `returnyoutubedislikeapi.com` manually](https://media.discordapp.net/attachments/821116437720334397/929813724238336141/unknown.png)
+> In the uMatrix dashboard, open **My rules**, add the following rule, and save it permanently:
+>
+> ```text
+> youtube.com returnyoutubedislikeapi.com xhr allow
+> ```
+>
+> This allows XHR and Fetch requests from YouTube to the RYD API. A reverse rule is not needed.
+>
+> Reload a YouTube video and check that a dislike count appears. If it does not, open uMatrix's logger, reload the video,
+> and check whether requests to `returnyoutubedislikeapi.com` are blocked. Check the source scope shown in the logger:
+> a more specific rule, such as one for `www.youtube.com`, can override the `youtube.com` rule.
 
 <br>
 
