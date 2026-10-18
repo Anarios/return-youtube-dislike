@@ -281,6 +281,11 @@ function setLikes(likesCount) {
 }
 
 function refreshReactionPresentation() {
+  const rateBar = getButtons()?.querySelector("#ryd-bar-container");
+  if (rateBar) {
+    const liked = String(isVideoLiked());
+    if (rateBar.getAttribute("data-ryd-liked") !== liked) rateBar.setAttribute("data-ryd-liked", liked);
+  }
   const nativeLikeCount = readNativeLikeCount();
   const nativeLikes = nativeLikeCount?.likes ?? false;
   if (nativeLikes > 0 && nativeLikeCount.videoId === storedData.videoId && !nativeLikeCount.presented) {

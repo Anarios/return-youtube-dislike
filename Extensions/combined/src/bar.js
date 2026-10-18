@@ -1,5 +1,5 @@
 import { getButtons, getDislikeButton, getLikeButton } from "./buttons";
-import { extConfig, isMobile, isLikesDisabled, isNewDesign, isRoundedDesign, isShorts } from "./state";
+import { extConfig, isMobile, isLikesDisabled, isNewDesign, isRoundedDesign, isShorts, isVideoLiked } from "./state";
 import { getColorFromTheme, getElementWidth, getVideoId, isInViewport, querySelector } from "./utils";
 
 function closestConfigured(element, selectors) {
@@ -147,6 +147,7 @@ function createRateBar(likes, dislikes) {
               <div class="ryd-tooltip-bar-container">
                 <div
                     id="ryd-bar-container"
+                    data-ryd-liked="${isVideoLiked()}"
                     style="width: 100%; height: 2px;${colorDislikeStyle}"
                     >
                     <div
@@ -175,6 +176,7 @@ function createRateBar(likes, dislikes) {
       } else {
         const currentParts = getRateBarParts(buttons);
         currentParts.wrapper.setAttribute("data-ryd-video-id", videoId);
+        currentParts.rateBar.setAttribute("data-ryd-liked", String(isVideoLiked()));
         currentParts.wrapper.style.width = widthPx + "px";
         currentParts.fill.style.width = widthPercent + "%";
         const tooltipHost = buttons.querySelector("#ryd-dislike-tooltip");
