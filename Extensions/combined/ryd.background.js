@@ -270,6 +270,10 @@ function handleMessage(request, sender, sendResponse) {
     })();
     return true;
   } else if (request?.message === "ryd_open_consent") {
+    const consentUrl = api.runtime.getURL("consent.html");
+    const detailsUrl = `${consentUrl}#permission-details`;
+    const isConsentPage = (url) => url === consentUrl || url === detailsUrl;
+    const targetUrl = request.details === true ? detailsUrl : consentUrl;
     let isYouTubeLauncher = false;
     if (sender.tab?.incognito === false && sender.frameId === 0) {
       try {
@@ -279,7 +283,7 @@ function handleMessage(request, sender, sendResponse) {
           (hostname === "youtube.com" || hostname.endsWith(".youtube.com"));
       } catch (_) {}
     }
-    if (sender.id !== api.runtime.id || (sender.url !== api.runtime.getURL("consent.html") && !isYouTubeLauncher)) {
+    if (sender.id !== api.runtime.id || (!isConsentPage(sender.url) && !isYouTubeLauncher)) {
       sendResponse({ success: false });
       return;
     }
@@ -289,7 +293,8 @@ function handleMessage(request, sender, sendResponse) {
         if (consentPageTabId !== null) {
           try {
             const existing = await tabs.get(consentPageTabId);
-            if (existing.url === api.runtime.getURL("consent.html") && existing.incognito === false) {
+            if (isConsentPage(existing.url) && existing.incognito === false) {
+              if (existing.url !== targetUrl) await tabs.update(consentPageTabId, { url: targetUrl });
               await tabs.reload(consentPageTabId);
               await tabs.update(consentPageTabId, { active: true });
               return;
@@ -297,7 +302,7 @@ function handleMessage(request, sender, sendResponse) {
           } catch (_) {}
         }
         const tab = await tabs.create({
-          url: api.runtime.getURL("consent.html"),
+          url: targetUrl,
           ...(Number.isInteger(sender.tab?.windowId) ? { windowId: sender.tab.windowId } : {}),
         });
         consentPageTabId = tab.id;

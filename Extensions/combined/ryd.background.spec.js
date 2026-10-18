@@ -334,6 +334,7 @@ describe("background account consent lifecycle", () => {
 
   test.each([
     { url: "moz-extension://fixture/consent.html" },
+    { url: "moz-extension://fixture/consent.html#permission-details" },
     { url: "https://www.youtube.com/watch?v=video123456", frameId: 0 },
     { url: "https://m.youtube.com/", frameId: 0 },
     { url: "http://youtube.com/", frameId: 0 },
@@ -369,6 +370,8 @@ describe("background account consent lifecycle", () => {
     { url: "https://youtube.com@example.com/" },
     { url: "blob:https://www.youtube.com/test" },
     { url: "not a URL" },
+    { url: "moz-extension://fixture/consent.html#unrelated" },
+    { url: "moz-extension://fixture/consent.html?redirect=https://example.com" },
   ])("rejects unrelated consent-page opener contexts (%j)", async (override) => {
     const response = jest.fn();
     messageListener(
@@ -394,6 +397,42 @@ describe("background account consent lifecycle", () => {
     expect(chrome.tabs.create).toHaveBeenCalledTimes(2);
     expect(chrome.tabs.update).not.toHaveBeenCalled();
     expect(chrome.tabs.reload).not.toHaveBeenCalled();
+  });
+
+  test("Read more opens the fixed details URL without requesting permission", async () => {
+    chrome.permissions.request = jest.fn();
+    messageListener(
+      { message: "ryd_open_consent", details: true, url: "https://example.com/" },
+      { ...normalSender, url: "https://www.youtube.com/watch?v=video123456", frameId: 0 },
+      jest.fn(),
+    );
+    await flushPromises();
+    expect(chrome.tabs.create).toHaveBeenCalledWith(
+      expect.objectContaining({ url: "moz-extension://fixture/consent.html#permission-details" }),
+    );
+    expect(chrome.permissions.request).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  test("Read more reuses the consent tab and Continue restores the compact page", async () => {
+    const sender = { ...normalSender, url: "https://www.youtube.com/watch?v=video123456", frameId: 0 };
+    messageListener({ message: "ryd_open_consent" }, sender, jest.fn());
+    await flushPromises();
+    messageListener({ message: "ryd_open_consent", details: true }, sender, jest.fn());
+    await flushPromises();
+    expect(chrome.tabs.update).toHaveBeenCalledWith(9, {
+      url: "moz-extension://fixture/consent.html#permission-details",
+    });
+    chrome.tabs.get.mockResolvedValue({
+      id: 9,
+      url: "moz-extension://fixture/consent.html#permission-details",
+      incognito: false,
+    });
+    messageListener({ message: "ryd_open_consent" }, sender, jest.fn());
+    await flushPromises();
+    expect(chrome.tabs.update).toHaveBeenCalledWith(9, { url: "moz-extension://fixture/consent.html" });
+    expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
+    expect(chrome.tabs.reload).toHaveBeenCalledTimes(2);
   });
 
   test.each(["patreon_oauth_login", "github_oauth_login"])(

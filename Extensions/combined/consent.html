@@ -10,22 +10,51 @@
   <body>
     <main>
       <img src="icons/icon48.png" width="48" height="48" alt="" />
-      <h1>Enable Return YouTube Dislike</h1>
-      <p>To show dislike counts, RYD sends the current video ID and its visible like count to the RYD API.</p>
+      <h1>Enable dislike counts in Firefox</h1>
       <p>
-        When you first like or dislike a video, RYD creates a random ID for your extension. Your vote is sent with this
-        ID and the video ID to count likes and dislikes.
+        RYD needs permission to send the YouTube video ID and available like count to load dislike counts. When you
+        vote, it also sends your choice with a saved random ID.
       </p>
-      <p>Voting does not use your YouTube email, username, or account ID.</p>
       <p class="secondary" id="consent-next-step">
-        After you select Continue, Firefox will ask for permission. If you decline, RYD will not load counts or submit
-        votes. YouTube's own buttons will still work.
+        Firefox will ask you to approve these data permissions. YouTube's own buttons still work if you decline.
       </p>
       <div id="consent-actions">
         <button id="consent-continue" type="button">Continue</button>
         <button id="consent-decline" type="button">Not now</button>
       </div>
       <p id="consent-status" role="status" aria-live="polite"></p>
+      <details id="permission-details">
+        <summary>What do Firefox's permission labels mean?</summary>
+        <p>Firefox groups extension data into broad categories. Here is what RYD uses:</p>
+        <dl>
+          <dt>Personally identifying information</dt>
+          <dd>
+            A random voting ID saved by the extension and reused when you submit votes or react to RYD discussion
+            comments. Voting does not use your YouTube email, username, or account ID.
+          </dd>
+          <dt>Browsing activity</dt>
+          <dd>
+            The YouTube video ID needed to request counts, load RYD discussions, or show analytics for that video.
+          </dd>
+          <dt>Website content</dt>
+          <dd>
+            The video's visible like count, when available. If you post in RYD Discussions, RYD also receives the
+            comment text and display name you choose to submit.
+          </dd>
+          <dt>Website activity</dt>
+          <dd>
+            Your like, dislike, or removed vote. If you use RYD Discussions, RYD also receives your reactions and
+            actions such as editing or reporting comments.
+          </dd>
+        </dl>
+        <h2>Signing in is optional</h2>
+        <p>
+          If you choose GitHub or Patreon sign-in, Firefox asks separately for
+          <strong>Authentication information</strong>. This covers the authorization and session data used for account
+          features. You do not need GitHub or Patreon sign-in to see counts or submit video votes.
+        </p>
+        <p>You can change these permissions later in Firefox's extension settings.</p>
+      </details>
     </main>
   </body>
 </html>

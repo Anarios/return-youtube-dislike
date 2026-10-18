@@ -1,6 +1,7 @@
 import { consentApi, hasCoreDataPermission, onCoreDataPermissionChanged } from "./core-data-consent";
 import { usesFirefoxDataCollectionConsent } from "./data-collection-permissions";
 import { isPrivateBrowsingContext } from "./private-browsing";
+import { createConsentCard } from "./consent-card";
 
 let pendingConsent = null;
 
@@ -17,6 +18,29 @@ function waitForCoreDataConsent({ alwaysExplain = false, openConsentPage } = {})
       try {
         dismissed = (await api.storage.local.get("rydConsentDismissed"))?.rydConsentDismissed === true;
       } catch (_) {}
+    }
+    if (useLauncher && !openConsentPage) {
+      await new Promise((resolve) => {
+        const card = createConsentCard({ api, dismissed });
+        let finished = false;
+        let unsubscribe = () => {};
+        function finish() {
+          if (finished) return;
+          finished = true;
+          unsubscribe();
+          card.destroy();
+          resolve();
+        }
+        unsubscribe = onCoreDataPermissionChanged((granted) => {
+          if (granted) finish();
+        });
+        if (finished) unsubscribe();
+        // Another tab may grant permission while the card is mounting.
+        void (async () => {
+          if (await hasCoreDataPermission()) finish();
+        })();
+      });
+      return;
     }
     await new Promise((resolve) => {
       const host = document.createElement("div");

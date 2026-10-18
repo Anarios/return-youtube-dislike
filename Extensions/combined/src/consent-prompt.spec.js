@@ -14,6 +14,7 @@ describe("consent overlay lifecycle", () => {
   let local;
   let sendMessage;
   let waitForConsent;
+  let unsubscribe;
   beforeEach(() => {
     jest.resetModules();
     core = require("./core-data-consent");
@@ -26,9 +27,10 @@ describe("consent overlay lifecycle", () => {
       runtime: { getURL: () => "moz-extension://fixture/consent.html", sendMessage },
     });
     core.hasCoreDataPermission.mockResolvedValue(false);
+    unsubscribe = jest.fn();
     core.onCoreDataPermissionChanged.mockImplementation((listener) => {
       changed = listener;
-      return () => {};
+      return unsubscribe;
     });
     waitForConsent = require("./consent-prompt").waitForCoreDataConsent;
   });
@@ -57,16 +59,18 @@ describe("consent overlay lifecycle", () => {
     const pending = waitForConsent();
     expect(waitForConsent()).toBe(pending);
     const { host, frame } = await mounted();
-    expect(host.hasAttribute("collapsed")).toBe(true);
+    expect(host.hasAttribute("collapsed")).toBe(false);
     expect(frame).toBeNull();
+    expect(host.shadowRoot.querySelector("h2").textContent).toBe("Enable dislike counts");
     expect(sendMessage).not.toHaveBeenCalled();
     changed(true);
     await pending;
     expect(host.isConnected).toBe(false);
+    expect(unsubscribe).toHaveBeenCalledTimes(1);
   });
 
   test.each([false, true])(
-    "the launcher opens the explainer once without granting consent (dismissed=%s)",
+    "the card opens the consent page once without granting consent (dismissed=%s)",
     async (dismissed) => {
       local.get.mockResolvedValue({ rydConsentDismissed: dismissed });
       let opened;
@@ -75,8 +79,9 @@ describe("consent overlay lifecycle", () => {
       const resolved = jest.fn();
       void pending.then(resolved);
       const { host } = await mounted();
-      expect(host.hasAttribute("collapsed")).toBe(true);
-      const button = host.shadowRoot.querySelector("button");
+      expect(host.hasAttribute("collapsed")).toBe(dismissed);
+      if (dismissed) host.shadowRoot.querySelector(".reopen").click();
+      const button = host.shadowRoot.querySelector(".continue");
       button.click();
       button.click();
       expect(sendMessage).toHaveBeenCalledTimes(1);
@@ -85,7 +90,7 @@ describe("consent overlay lifecycle", () => {
       opened({ success: true });
       await flush();
       expect(button.disabled).toBe(false);
-      expect(host.hasAttribute("collapsed")).toBe(true);
+      expect(host.hasAttribute("collapsed")).toBe(false);
       expect(host.shadowRoot.querySelector("iframe")).toBeNull();
       expect(resolved).not.toHaveBeenCalled();
       changed(false);
@@ -101,7 +106,7 @@ describe("consent overlay lifecycle", () => {
     else sendMessage.mockResolvedValueOnce({ success: false });
     const pending = waitForConsent();
     const { host } = await mounted();
-    const button = host.shadowRoot.querySelector("button");
+    const button = host.shadowRoot.querySelector(".continue");
     button.click();
     await flush();
     expect(button.disabled).toBe(false);
@@ -131,11 +136,36 @@ describe("consent overlay lifecycle", () => {
     await pending;
   });
 
-  test("a grant during mounting removes the launcher even before a change notification", async () => {
+  test("a grant during mounting removes the card even before a change notification", async () => {
     core.hasCoreDataPermission.mockResolvedValueOnce(false).mockResolvedValueOnce(true);
     await waitForConsent();
     expect(document.querySelector("#ryd-consent-prompt")).toBeNull();
     expect(sendMessage).not.toHaveBeenCalled();
+    expect(unsubscribe).toHaveBeenCalledTimes(1);
+  });
+
+  test("a synchronous grant while subscribing cleans up the card and its subscription", async () => {
+    core.onCoreDataPermissionChanged.mockImplementation((listener) => {
+      listener(true);
+      return unsubscribe;
+    });
+    await waitForConsent();
+    expect(document.querySelector("#ryd-consent-prompt")).toBeNull();
+    expect(unsubscribe).toHaveBeenCalledTimes(1);
+  });
+
+  test("a permission grant removes the card while its page opener is still pending", async () => {
+    let opened;
+    sendMessage.mockImplementation(() => new Promise((resolve) => (opened = resolve)));
+    const pending = waitForConsent();
+    const { host } = await mounted();
+    host.shadowRoot.querySelector(".continue").click();
+    changed(true);
+    await pending;
+    expect(host.isConnected).toBe(false);
+    opened({ success: true });
+    await flush();
+    expect(document.querySelector("#ryd-consent-prompt")).toBeNull();
   });
 
   test("waits for the active iframe request to finish before unloading it", async () => {

@@ -25,8 +25,8 @@ if (privateBrowsing) {
 } else if (window.parent === window) {
   continueButton.textContent = "Allow in Firefox";
   document.getElementById("consent-next-step").textContent =
-    "Select Allow in Firefox to review Firefox's request. If you decline, RYD will not load counts or submit votes. " +
-    "YouTube's own buttons will still work.";
+    "Firefox will ask you to approve these data permissions. If you decline, RYD stays paused; " +
+    "YouTube's own buttons still work.";
   void hasCoreDataPermission().then((granted) => {
     if (granted) {
       document.getElementById("consent-actions").hidden = true;
@@ -34,6 +34,13 @@ if (privateBrowsing) {
     }
   });
 }
+
+function showRequestedDetails() {
+  const details = document.getElementById("permission-details");
+  if (details && window.location.hash === "#permission-details") details.open = true;
+}
+showRequestedDetails();
+window.addEventListener("hashchange", showRequestedDetails);
 
 function notifyParent(type) {
   if (window.parent !== window) window.parent.postMessage({ type }, "*");

@@ -31,7 +31,32 @@ describe("Firefox consent explainer", () => {
     require("./consent");
     return continueButton;
   }
-  beforeEach(() => openExplainer());
+  beforeEach(() => {
+    window.history.replaceState(null, "", "/");
+    openExplainer();
+  });
+
+  test("the compact page leaves explanations collapsed until Read more is selected", () => {
+    expect(document.getElementById("permission-details").open).toBe(false);
+    expect(document.getElementById("consent-continue").textContent).toBe("Allow in Firefox");
+  });
+
+  test("Read more links expand explanations without requesting permission", () => {
+    window.history.replaceState(null, "", "/#permission-details");
+    openExplainer();
+    expect(document.getElementById("permission-details").open).toBe(true);
+    expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
+    expect(sendMessage).not.toHaveBeenCalled();
+  });
+
+  test("reading the category explanations requests no permissions", () => {
+    const details = document.getElementById("permission-details");
+    expect(details.querySelectorAll("dt")).toHaveLength(4);
+    expect(details.textContent).toContain("Authentication information");
+    details.querySelector("summary").click();
+    expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
+    expect(sendMessage).not.toHaveBeenCalled();
+  });
 
   test("opening the explainer and selecting Not now request no permissions", async () => {
     expect(document.querySelector("main").textContent).toMatch(/random ID/);

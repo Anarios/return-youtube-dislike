@@ -18,6 +18,11 @@ main {
   margin: auto;
   padding: 28px;
 }
+@media (min-width: 600px) {
+  main {
+    margin-top: 7vh;
+  }
+}
 h1 {
   font-size: 24px;
   line-height: 1.25;
@@ -25,6 +30,28 @@ h1 {
 }
 p {
   margin: 14px 0;
+}
+details {
+  margin: 20px 0;
+  padding: 16px;
+  border: 1px solid light-dark(#ddd, #555);
+  border-radius: 12px;
+  font-size: 14px;
+}
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+dt {
+  margin-top: 18px;
+  font-weight: 700;
+}
+dd {
+  margin: 5px 0 0;
+}
+h2 {
+  margin: 24px 0 8px;
+  font-size: 16px;
 }
 .secondary,
 #consent-status {
@@ -35,7 +62,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 20px;
 }
 button {
   font:
@@ -53,7 +80,8 @@ button {
   border-color: #c00;
   color: white;
 }
-button:focus-visible {
+button:focus-visible,
+summary:focus-visible {
   outline: 3px solid #388bff;
   outline-offset: 3px;
 }
