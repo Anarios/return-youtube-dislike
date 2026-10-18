@@ -9,7 +9,7 @@
     "message": "En ligne"
   },
   "colorTheme": {
-    "message": "Schéma de couleur:"
+    "message": "Schéma de couleur :"
   },
   "colorizeRatio": {
     "message": "Coloriser la barre de ratio"
@@ -33,7 +33,7 @@
     "message": "Formats numériques personnalisés"
   },
   "disableLoggingHover": {
-    "message": "Désactive la journalisation des réponses de l’API dans la console."
+    "message": "Désactiver la journalisation des réponses de l’API dans la console."
   },
   "disableLoggingLabel": {
     "message": "Désactiver la journalisation dans la console"
@@ -78,10 +78,46 @@
     "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
-    "message": "Fonctionnalités premium disponibles pour les soutiens sur Patreon"
+    "message": "Fonctionnalités premium disponibles pour les mécènes sur Patreon"
   },
   "patreonLogin": {
     "message": "Se connecter avec Patreon"
+  },
+  "patreonPrivacyNote": {
+    "message": "Les informations sur votre abonnement Patreon servent à vérifier votre accès premium. Nous ne recevons pas les données de votre carte ni vos coordonnées bancaires."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Fonctionnalités premium disponibles pour les contributeurs sur GitHub"
+  },
+  "githubLogin": {
+    "message": "Se connecter avec GitHub (contributeurs)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Échec du démarrage de la connexion GitHub. Veuillez réessayer."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Échec de la connexion. Veuillez réessayer."
+  },
+  "githubLoginUnavailable": {
+    "message": "La connexion des contributeurs via GitHub est actuellement indisponible. Le service nécessite une mise à jour ou une modification de sa configuration."
+  },
+  "githubLoginNotContributor": {
+    "message": "Ce compte GitHub ne figure pas parmi les contributeurs à Return YouTube Dislike. Connectez-vous avec un compte ayant contribué au projet. Les contributions récentes peuvent mettre quelques heures à être prises en compte."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "La connexion via GitHub n’est pas configurée pour l’adresse de rappel de ce navigateur. Veuillez contacter l’assistance."
+  },
+  "githubLoginExpired": {
+    "message": "Cette tentative de connexion via GitHub a expiré ou n’a pas pu être vérifiée. Veuillez réessayer de vous connecter."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Veuillez mettre à jour l’extension pour vous connecter en tant que contributeur via GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Trop de tentatives de connexion. Veuillez patienter une minute avant de réessayer."
+  },
+  "githubLoginDenied": {
+    "message": "L’autorisation GitHub a été refusée. Une autorisation est nécessaire pour se connecter en tant que contributeur."
   },
   "patreonLoginCompleteFailed": {
     "message": "Échec de la connexion. Veuillez réessayer."
@@ -105,10 +141,10 @@
     "message": "Aucun abonnement actif"
   },
   "patreonTierPremium": {
-    "message": "Soutien Premium"
+    "message": "Mécène Premium"
   },
   "patreonTierSupporter": {
-    "message": "Soutien"
+    "message": "Mécène"
   },
   "patreonUserFallback": {
     "message": "Utilisateur Patreon"
@@ -117,7 +153,7 @@
     "message": "Formater le nombre de likes"
   },
   "reformatLikesHover": {
-    "message": "Rend la valeur des statistiques plus cohérente."
+    "message": "Rendre la valeur des statistiques plus cohérente."
   },
   "hidePremiumTeaser": {
     "message": "Masquer le panneau d’aperçu Premium"
@@ -156,7 +192,7 @@
     "message": "Coloriser la barre de ratio"
   },
   "textColorizeRatioBarHover": {
-    "message": "Utilisez des couleurs personnalisées pour la barre de ratio."
+    "message": "Utiliser des couleurs personnalisées pour la barre de ratio."
   },
   "textColorizeThumbs": {
     "message": "Coloriser les pouces"
@@ -396,7 +432,7 @@
     "message": "Ratio de J’aime : $1"
   },
   "premiumTeaser_title": {
-    "message": "Aperçu des insights des Je n’aime pas"
+    "message": "Analytique vidéo"
   },
   "premiumTeaser_subtitle": {
     "message": "Les Je n’aime pas bruts sont les signalements directs des utilisateurs de l’extension qui regardent cette vidéo."
@@ -414,7 +450,7 @@
     "message": "Je n’aime pas estimés"
   },
   "premiumTeaser_statLikes": {
-    "message": "J’aime estimés"
+    "message": "Nombre brut de mentions J’aime"
   },
   "premiumTeaser_statusLoading": {
     "message": "Récupération des derniers totaux de Je n’aime pas…"
@@ -535,6 +571,21 @@
   },
   "changelog_support_contact": {
     "message": "Demander à la communauté"
+  },
+  "hideClutterButtons": {
+    "message": "Regrouper les autres boutons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Afficher un exemple avant/après"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Garder uniquement les boutons Like/Dislike visibles. Les boutons Partager, Enregistrer, Merci, et autres seront déplacés vers le menu Plus de YouTube."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Avant : tous les boutons d’action sont visibles"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "Après : seuls les boutons Like et Dislike restent visibles"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo de Return YouTube Dislike"

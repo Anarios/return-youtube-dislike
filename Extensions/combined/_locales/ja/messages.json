@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Patreonでログイン"
   },
+  "patreonPrivacyNote": {
+    "message": "Patreonのメンバーシップ情報は、プレミアム機能の利用資格を確認するために使用されます。カード情報や銀行口座情報は受け取りません。"
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "ログインを完了できませんでした。もう一度お試しください。"
   },
@@ -396,7 +411,7 @@
     "message": "高評価率: $1"
   },
   "premiumTeaser_title": {
-    "message": "低評価インサイトの概要"
+    "message": "動画分析"
   },
   "premiumTeaser_subtitle": {
     "message": "未加工の低評価は、この動画を視聴している拡張機能ユーザーからの直接報告です。"
@@ -414,7 +429,7 @@
     "message": "推定低評価"
   },
   "premiumTeaser_statLikes": {
-    "message": "推定高評価"
+    "message": "生の高評価数"
   },
   "premiumTeaser_statusLoading": {
     "message": "最新の低評価合計を取得中…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "コミュニティに質問する"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike のロゴ"

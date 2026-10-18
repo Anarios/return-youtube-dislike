@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Patreon ilə daxil ol"
   },
+  "patreonPrivacyNote": {
+    "message": "Patreon üzvlük məlumatları premium funksiyalara giriş hüququnu yoxlamaq üçün istifadə olunur. Kart və ya bank məlumatlarınızı almırıq."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "Giriş tamamlanmadı. Yenidən cəhd edin."
   },
@@ -396,7 +411,7 @@
     "message": "Bəyənmə nisbəti: $1"
   },
   "premiumTeaser_title": {
-    "message": "Bəyənməmə analitikasının xülasəsi"
+    "message": "Video analitikası"
   },
   "premiumTeaser_subtitle": {
     "message": "Emal olunmamış bəyənməmələr bu videoya baxan uzantı istifadəçilərinin birbaşa hesabatlarıdır."
@@ -414,7 +429,7 @@
     "message": "Təxmini bəyənməmələr"
   },
   "premiumTeaser_statLikes": {
-    "message": "Təxmini bəyənmələr"
+    "message": "Bəyənmələrin xam sayı"
   },
   "premiumTeaser_statusLoading": {
     "message": "Ən son bəyənməmə cəmləri alınır…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "İcmadan soruş"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike loqosu"

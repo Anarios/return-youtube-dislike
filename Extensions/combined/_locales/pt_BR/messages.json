@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Entrar com o Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "As informações da sua assinatura no Patreon são usadas para verificar o acesso premium. Não recebemos os dados do seu cartão nem da sua conta bancária."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "Não foi possível concluir o login. Tente novamente."
   },
@@ -396,7 +411,7 @@
     "message": "Proporção de curtidas: $1"
   },
   "premiumTeaser_title": {
-    "message": "Resumo de insights de dislikes"
+    "message": "Análises de vídeo"
   },
   "premiumTeaser_subtitle": {
     "message": "Os dislikes brutos são relatos diretos dos usuários da extensão que assistem a este vídeo."
@@ -414,7 +429,7 @@
     "message": "Dislikes estimados"
   },
   "premiumTeaser_statLikes": {
-    "message": "Curtidas estimadas"
+    "message": "Contagem bruta de curtidas"
   },
   "premiumTeaser_statusLoading": {
     "message": "Obtendo os últimos totais de dislikes…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Pergunte à comunidade"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo do Return YouTube Dislike"

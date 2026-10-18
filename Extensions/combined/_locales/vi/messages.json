@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Đăng nhập bằng Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Thông tin thành viên Patreon được dùng để xác minh quyền truy cập các tính năng cao cấp. Chúng tôi không nhận thông tin thẻ hoặc tài khoản ngân hàng của bạn."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "Không thể hoàn tất đăng nhập. Vui lòng thử lại."
   },
@@ -396,7 +411,7 @@
     "message": "Tỷ lệ lượt thích: $1"
   },
   "premiumTeaser_title": {
-    "message": "Tổng quan nhanh về lượt không thích"
+    "message": "Phân tích video"
   },
   "premiumTeaser_subtitle": {
     "message": "Lượt không thích thô là báo cáo trực tiếp từ người dùng tiện ích đang xem video này."
@@ -414,7 +429,7 @@
     "message": "Ước tính lượt không thích"
   },
   "premiumTeaser_statLikes": {
-    "message": "Ước tính lượt thích"
+    "message": "Số lượt thích thô"
   },
   "premiumTeaser_statusLoading": {
     "message": "Đang lấy tổng lượt không thích mới nhất…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Hỏi cộng đồng"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

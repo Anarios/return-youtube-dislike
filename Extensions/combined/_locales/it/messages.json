@@ -83,8 +83,23 @@
   "patreonLogin": {
     "message": "Accedi con Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Le informazioni sull'abbonamento a Patreon vengono usate per verificare l'accesso premium. Non riceviamo i dati della tua carta né quelli del tuo conto bancario."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
-    "message": "Impossibile completare l’accesso. Riprova."
+    "message": "Impossibile completare l'accesso. Riprova."
   },
   "patreonLoginStartFailed": {
     "message": "Impossibile avviare l’accesso con Patreon. Riprova."
@@ -396,7 +411,7 @@
     "message": "Rapporto Mi piace: $1"
   },
   "premiumTeaser_title": {
-    "message": "Panoramica delle analisi dei Non mi piace"
+    "message": "Analisi video"
   },
   "premiumTeaser_subtitle": {
     "message": "I Non mi piace grezzi sono segnalazioni dirette degli utenti dell’estensione che guardano questo video."
@@ -414,7 +429,7 @@
     "message": "Non mi piace stimati"
   },
   "premiumTeaser_statLikes": {
-    "message": "Mi piace stimati"
+    "message": "Conteggio grezzo dei Mi piace"
   },
   "premiumTeaser_statusLoading": {
     "message": "Recupero degli ultimi totali di Non mi piace…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Chiedi alla community"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

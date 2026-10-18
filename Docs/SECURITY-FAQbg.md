@@ -1,4 +1,4 @@
-Прочетете това на други езици:  [English](SECURITY-FAQ.md), [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md)
+Прочетете това на други езици:  [English](SECURITY-FAQ.md), [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Slovenščina](SECURITY-FAQsl.md)
 
 
 # Сигурност
@@ -17,7 +17,7 @@
 
 ### Как се съхранява моят IP адрес?
 
-Бекендът държи незакодирани IP адреси само в изменяемата памет (RAM). Те не се съхраняват на твърд диск и следователно не се записват. Ние кодираме IP адресите, и това се съхранява. Това се прави, за да се предотврати вандализмът върху базата данни.
+Сървърът пази оригиналните IP адреси само в оперативната памет (RAM). Съхраняваме техните хешове вместо оригиналните адреси, за да предотвратяваме злоупотреби.
 
 ### Чух за OAuth и достъп до акаунта ми на YouTube!
 

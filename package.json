@@ -1,13 +1,36 @@
 {
   "name": "return-youtube-dislike",
-  "version": "4.0.2",
+  "version": "4.0.6",
   "description": "Chrome extension to return youtube dislikes",
   "main": "ryd.content-script.js",
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": "22.17.0",
+    "npm": "10.8.2"
+  },
   "scripts": {
     "start": "echo To build for development, please use \"npm run dev\". To build for production, please use \"npm run build\".",
     "dev": "webpack --mode=development --watch",
     "build": "webpack --mode=production",
+    "build-for-amo": "npm run build",
+    "build:userscript": "webpack --mode=production --config webpack.userscript.config.js",
+    "build:live:userscript": "webpack --mode=production --config webpack.userscript.config.js --env liveTest=true",
+    "build:live:extension": "webpack --mode=production --env liveTest=true",
+    "check:userscript-artifact": "node Extensions/e2e/verify-userscript-artifact.js",
+    "reload:live:extension": "node Extensions/UserScript/e2e/live/reload-live-extension.js",
+    "check:extension-artifact": "node Extensions/e2e/verify-extension-artifact.js",
     "test": "jest",
+    "test:e2e:artifacts": "npm run check:extension-artifact && npm run check:userscript-artifact && node Extensions/e2e/hermetic-artifact-smoke.js",
+    "test:e2e:extension:run": "npm run check:extension-artifact && playwright test --config playwright.extension.config.js",
+    "test:e2e:extension": "npm run build && npm run check:extension-artifact && npm run test:e2e:extension:run",
+    "test:e2e:userscript:run": "npm run check:userscript-artifact && playwright test --config playwright.userscript.config.js",
+    "test:e2e:userscript": "npm run build:userscript && npm run test:e2e:userscript:run",
+    "test:e2e:systematic": "npm run build && npm run check:extension-artifact && npm run build:userscript && npm run test:e2e:artifacts && npm run test:e2e:extension:run && npm run test:e2e:userscript:run",
+    "test:live:youtube": "node Extensions/UserScript/e2e/live/live-interactive-runner.js",
+    "test:live:youtube:full": "npm run test:live:youtube",
+    "test:live:youtube:interactive": "npm run test:live:youtube",
+    "test:live:youtube:read-only": "playwright test --config playwright.live-youtube.config.js",
+    "test:all": "npm test -- --runInBand && npm run test:e2e:systematic",
     "build:safari": "webpack --mode=production && xcrun safari-web-extension-converter Extensions/combined/dist/safari --project-location Extensions/combined/dist --bundle-identifier com.returnyoutubedislike.safari-ext --force",
     "prepare": "husky install"
   },
@@ -30,16 +53,18 @@
   },
   "homepage": "https://github.com/Anarios/return-youtube-dislike#readme",
   "dependencies": {
+    "@microsoft/signalr": "9.0.6",
     "country-code-lookup": "^0.1.3",
     "echarts": "^5.5.0",
     "topojson-client": "^3.1.0",
-    "world-atlas": "^2.0.2",
-    "us-atlas": "^3.0.0"
+    "us-atlas": "^3.0.0",
+    "world-atlas": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.23.5",
     "@babel/preset-env": "^7.23.5",
     "@babel/runtime": "^7.23.5",
+    "@playwright/test": "1.62.0",
     "babel-loader": "^10.0.0",
     "babel-plugin-rewire": "^1.2.0",
     "copy-webpack-plugin": "^11.0.0",

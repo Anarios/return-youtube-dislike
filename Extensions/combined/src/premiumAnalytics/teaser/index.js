@@ -1,6 +1,7 @@
-import { getApiEndpoint, getChangelogUrl } from "../../config";
+import { getChangelogUrl } from "../../config";
 import { getBrowser, getVideoId, localize } from "../../utils";
 import { extConfig } from "../../state";
+import { requestVoteData } from "../../vote-data-request";
 
 const PATREON_JOIN_URL = "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649";
 const CHANGELOG_URL = getChangelogUrl();
@@ -17,6 +18,7 @@ const teaserState = {
   abortController: null,
   suppressionReasons: new Set(),
   storageListener: null,
+  expanded: false,
 };
 
 export async function initPremiumTeaser() {
@@ -149,7 +151,7 @@ function resolveVideoId() {
 }
 
 function fetchAndRender(videoId) {
-  if (teaserState.suppressed) {
+  if (teaserState.suppressed || teaserState.currentVideoId !== videoId || resolveVideoId() !== videoId) {
     return;
   }
 
@@ -173,28 +175,16 @@ function fetchAndRender(videoId) {
   const controller = new AbortController();
   teaserState.abortController = controller;
 
-  const url = getApiEndpoint(`/votes?videoId=${encodeURIComponent(videoId)}`);
-
-  fetch(url, {
-    method: "GET",
-    headers: { Accept: "application/json" },
-    signal: controller.signal,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`Unexpected response: ${response.status}`);
-      }
-      return response.json();
-    })
+  requestVoteData(videoId)
     .then((payload) => {
-      if (teaserState.currentVideoId !== videoId || teaserState.suppressed) {
+      if (controller.signal.aborted || teaserState.currentVideoId !== videoId || teaserState.suppressed) {
         return;
       }
       updateCounts(payload);
       setLoading(false);
     })
     .catch((error) => {
-      if (error?.name === "AbortError") {
+      if (controller.signal.aborted || error?.name === "AbortError") {
         return;
       }
       if (teaserState.suppressed) {
@@ -226,32 +216,41 @@ function ensurePanel() {
   }
 
   const panel = document.createElement("section");
-  panel.className = "ryd-premium-teaser";
+  panel.className = "ryd-premium-teaser is-collapsed";
   panel.innerHTML = createPanelMarkup();
   container.insertBefore(panel, container.firstChild);
-
-  const cta = panel.querySelector("#ryd-premium-teaser-cta");
-  if (cta) {
-    cta.addEventListener("click", (event) => {
-      event.preventDefault();
-      openTab(PATREON_JOIN_URL);
-    });
-  }
-
-  const infoLink = panel.querySelector("#ryd-premium-teaser-learn");
-  if (infoLink) {
-    infoLink.addEventListener("click", (event) => {
-      event.preventDefault();
-      openTab(CHANGELOG_URL);
-    });
-  }
 
   const dismissButton = panel.querySelector("#ryd-premium-teaser-close");
   if (dismissButton) {
     dismissButton.addEventListener("click", handleManualDismiss);
   }
 
+  const toggle = panel.querySelector("#ryd-premium-teaser-toggle");
+  if (toggle) {
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      setExpanded(!teaserState.expanded);
+    });
+  }
+
+  const expandCta = panel.querySelector("#ryd-premium-teaser-cta");
+  if (expandCta) {
+    expandCta.addEventListener("click", (event) => {
+      event.preventDefault();
+      openTab(PATREON_JOIN_URL);
+    });
+  }
+
+  const learnMore = panel.querySelector("#ryd-premium-teaser-learn");
+  if (learnMore) {
+    learnMore.addEventListener("click", (event) => {
+      event.preventDefault();
+      openTab(CHANGELOG_URL);
+    });
+  }
+
   teaserState.panelElement = panel;
+  setExpanded(false);
   return panel;
 }
 
@@ -275,6 +274,7 @@ function resetState() {
     teaserState.abortController.abort();
     teaserState.abortController = null;
   }
+  teaserState.expanded = false;
 }
 
 function setLoading(isLoading) {
@@ -301,16 +301,13 @@ function updateCounts(payload) {
   if (!panel) return;
 
   const dislikesValue = panel.querySelector("#ryd-premium-teaser-dislikes");
-  const rawDislikesValue = panel.querySelector("#ryd-premium-teaser-raw");
   const likesValue = panel.querySelector("#ryd-premium-teaser-likes");
 
-  const dislikes = normalizeNumber(payload?.dislikes);
   const rawDislikes = normalizeNumber(payload?.rawDislikes ?? payload?.dislikes);
-  const likes = normalizeNumber(payload?.likes ?? payload?.rawLikes);
+  const rawLikes = normalizeNumber(payload?.rawLikes ?? payload?.likes);
 
-  if (dislikesValue) dislikesValue.textContent = dislikes;
-  if (rawDislikesValue) rawDislikesValue.textContent = rawDislikes;
-  if (likesValue) likesValue.textContent = likes;
+  if (dislikesValue) dislikesValue.textContent = rawDislikes;
+  if (likesValue) likesValue.textContent = rawLikes;
 }
 
 function normalizeNumber(value) {
@@ -325,60 +322,66 @@ function normalizeNumber(value) {
 }
 
 function createPanelMarkup() {
-  const extensionName = localize("extensionName");
   const title = localize("premiumTeaser_title");
   const subtitle = localize("premiumTeaser_subtitle");
   const ctaText = localize("premiumTeaser_cta");
   const secondaryText = localize("premiumTeaser_learn");
   const closeLabel = localize("hidePremiumTeaser");
-  const statRaw = localize("premiumTeaser_statRaw");
-  const statDislikes = localize("premiumTeaser_statDislikes");
+  const statDislikes = localize("premiumTeaser_statRaw");
   const statLikes = localize("premiumTeaser_statLikes");
-  const breadcrumbsAria = localize("premiumTeaser_breadcrumbsAria");
-  const breadcrumbsTitle = localize("premiumTeaser_breadcrumbsTitle");
-  const step1 = localize("premiumTeaser_breadcrumbStep1");
-  const step2 = localize("premiumTeaser_breadcrumbStep2");
-  const step3 = localize("premiumTeaser_breadcrumbStep3");
+  const expandLabel = localize("premiumAnalytics_expand");
+  const collapseLabel = localize("premiumAnalytics_collapse");
+  const highlightsAria = localize("changelog_section_highlights");
+  const highlightsTitle = localize("changelog_section_highlights");
+  const highlightOne = localize("changelog_feature_timeline_title");
+  const highlightTwo = localize("changelog_feature_map_title");
+  const highlightThree = localize("changelog_feature_quality_title");
 
   return `
-    <header class="ryd-premium-teaser__header">
-      <div>
-        <span class="ryd-premium-teaser__badge">${extensionName}</span>
-        <h2 class="ryd-premium-teaser__title">${title}</h2>
-        <p class="ryd-premium-teaser__subtitle">${subtitle}</p>
+    <button type="button" class="ryd-premium-teaser__close" id="ryd-premium-teaser-close" aria-label="${closeLabel}" title="${closeLabel}">
+      <span class="ryd-premium-teaser__close-icon" aria-hidden="true">&times;</span>
+    </button>
+    <div class="ryd-premium-teaser__summary">
+      <div class="ryd-premium-teaser__counts" role="status" aria-live="polite">
+        <div class="ryd-premium-teaser__count">
+          <span class="ryd-premium-teaser__count-label">${statLikes}</span>
+          <span class="ryd-premium-teaser__count-value" id="ryd-premium-teaser-likes">—</span>
+        </div>
+        <div class="ryd-premium-teaser__count">
+          <span class="ryd-premium-teaser__count-label">${statDislikes}</span>
+          <span class="ryd-premium-teaser__count-value" id="ryd-premium-teaser-dislikes">—</span>
+        </div>
       </div>
-      <div class="ryd-premium-teaser__actions">
+    </div>
+    <button
+      type="button"
+      class="ryd-premium-teaser__toggle"
+      id="ryd-premium-teaser-toggle"
+      aria-expanded="false"
+      aria-controls="ryd-premium-teaser-details"
+      aria-label="${expandLabel}"
+      title="${expandLabel}"
+      data-expand-label="${expandLabel}"
+      data-collapse-label="${collapseLabel}"
+    >
+      <span class="ryd-premium-teaser__toggle-icon" aria-hidden="true"></span>
+    </button>
+    <div class="ryd-premium-teaser__details" id="ryd-premium-teaser-details" aria-hidden="true">
+      <h3 class="ryd-premium-teaser__title">${title}</h3>
+      <p class="ryd-premium-teaser__subtitle">${subtitle}</p>
+      <section class="ryd-premium-teaser__highlights" aria-label="${highlightsAria}">
+        <h4 class="ryd-premium-teaser__highlights-title">${highlightsTitle}</h4>
+        <ul class="ryd-premium-teaser__highlights-list">
+          <li>${highlightOne}</li>
+          <li>${highlightTwo}</li>
+          <li>${highlightThree}</li>
+        </ul>
+      </section>
+      <div class="ryd-premium-teaser__links">
         <a href="${PATREON_JOIN_URL}" class="ryd-premium-teaser__cta" id="ryd-premium-teaser-cta">${ctaText}</a>
         <a href="${CHANGELOG_URL}" class="ryd-premium-teaser__secondary" id="ryd-premium-teaser-learn">${secondaryText}</a>
       </div>
-      <button type="button" class="ryd-premium-teaser__close" id="ryd-premium-teaser-close" aria-label="${closeLabel}" title="${closeLabel}">
-        <span class="ryd-premium-teaser__close-icon" aria-hidden="true">&times;</span>
-      </button>
-    </header>
-    <div class="ryd-premium-teaser__body">
-      <div class="ryd-premium-teaser__stats" role="status" aria-live="polite">
-        <div class="ryd-premium-teaser__stat">
-          <span class="ryd-premium-teaser__stat-label">${statRaw}</span>
-          <span class="ryd-premium-teaser__stat-value" id="ryd-premium-teaser-raw">—</span>
-        </div>
-        <div class="ryd-premium-teaser__stat">
-          <span class="ryd-premium-teaser__stat-label">${statDislikes}</span>
-          <span class="ryd-premium-teaser__stat-value" id="ryd-premium-teaser-dislikes">—</span>
-        </div>
-        <div class="ryd-premium-teaser__stat">
-          <span class="ryd-premium-teaser__stat-label">${statLikes}</span>
-          <span class="ryd-premium-teaser__stat-value" id="ryd-premium-teaser-likes">—</span>
-        </div>
-      </div>
       <p class="ryd-premium-teaser__status" id="ryd-premium-teaser-status"></p>
-      <section class="ryd-premium-teaser__breadcrumbs" aria-label="${breadcrumbsAria}">
-        <h3 class="ryd-premium-teaser__breadcrumbs-title">${breadcrumbsTitle}</h3>
-        <ol class="ryd-premium-teaser__breadcrumbs-list">
-          <li>${step1}</li>
-          <li>${step2}</li>
-          <li>${step3}</li>
-        </ol>
-      </section>
     </div>
   `;
 }
@@ -416,4 +419,31 @@ function handleManualDismiss(event) {
   event?.preventDefault?.();
   event?.stopPropagation?.();
   applySettingsSuppression(true, true);
+}
+
+function setExpanded(next) {
+  teaserState.expanded = !!next;
+  const panel = teaserState.panelElement;
+  if (!panel) return;
+
+  panel.classList.toggle("is-expanded", teaserState.expanded);
+  panel.classList.toggle("is-collapsed", !teaserState.expanded);
+
+  const details = panel.querySelector("#ryd-premium-teaser-details");
+  if (details) {
+    details.toggleAttribute("hidden", !teaserState.expanded);
+    details.setAttribute("aria-hidden", teaserState.expanded ? "false" : "true");
+  }
+
+  const toggle = panel.querySelector("#ryd-premium-teaser-toggle");
+  if (toggle) {
+    const expandText = toggle.getAttribute("data-expand-label") || "";
+    const collapseText = toggle.getAttribute("data-collapse-label") || expandText;
+    toggle.setAttribute("aria-expanded", teaserState.expanded ? "true" : "false");
+    const nextLabel = teaserState.expanded ? collapseText : expandText;
+    if (nextLabel) {
+      toggle.setAttribute("aria-label", nextLabel);
+      toggle.setAttribute("title", nextLabel);
+    }
+  }
 }

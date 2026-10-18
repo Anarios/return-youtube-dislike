@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Logga in med Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Information om ditt Patreon-medlemskap används för att verifiera din premiumåtkomst. Vi får inte dina kort- eller bankuppgifter."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "Det gick inte att slutföra inloggningen. Försök igen."
   },
@@ -396,7 +411,7 @@
     "message": "Gilla-förhållande: $1"
   },
   "premiumTeaser_title": {
-    "message": "Översikt över ogilla-insikter"
+    "message": "Videoanalys"
   },
   "premiumTeaser_subtitle": {
     "message": "Råa ogilla-markeringar är direkta rapporter från tilläggsanvändare som tittar på videon."
@@ -414,7 +429,7 @@
     "message": "Beräknade ogilla-markeringar"
   },
   "premiumTeaser_statLikes": {
-    "message": "Beräknade gilla-markeringar"
+    "message": "Rått antal gilla-markeringar"
   },
   "premiumTeaser_statusLoading": {
     "message": "Hämtar de senaste ogilla-summorna…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Fråga samhället"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-logotyp"

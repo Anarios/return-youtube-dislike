@@ -1,4 +1,19 @@
 import { config, getApiUrl, getApiEndpoint, getChangelogUrl } from "./src/config";
+import { createVoteClient } from "../common/vote-client";
+import { createBrowserCredentialStore } from "./src/vote-client-adapter";
+import { loginWithGitHub } from "./src/github-auth";
+import { createDiscussionBackground } from "./src/discussion-background";
+import {
+  coreConsentError,
+  fetchWithCoreConsent,
+  hasCoreDataPermission,
+  onCoreDataPermissionChanged,
+} from "./src/core-data-consent";
+import {
+  hasAuthenticationDataPermission,
+  onAuthenticationDataPermissionRemoved,
+  usesFirefoxDataCollectionConsent,
+} from "./src/data-collection-permissions";
 
 const apiUrl = getApiUrl();
 const voteDisabledIconName = config.voteDisabledIconName;
@@ -9,14 +24,51 @@ const PENDING_CHANGELOG_STORAGE_KEY = "pendingChangelogVersion";
 
 /** stores extension's global config */
 let extConfig = { ...config.defaultExtConfig };
+let authenticationGeneration = 0;
+let accountStorageQueue = Promise.resolve();
+let consentPageOpening = null;
+let consentPageTabId = null;
 
 if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
 
+if (__RYD_LIVE_TEST_BUILD__) {
+  globalThis.__RYD_LIVE_EXTENSION_BUILD__ = Object.freeze({
+    buildId: __RYD_LIVE_BUILD_ID__,
+    runtime: "extension",
+    version: api.runtime.getManifest().version,
+  });
+}
+
+const credentialStore = createBrowserCredentialStore(api.storage.sync, () => api.runtime?.lastError);
+const voteClient = createVoteClient({
+  apiBaseUrl: apiUrl,
+  fetchImpl: fetchWithCoreConsent,
+  credentialStore: {
+    ...credentialStore,
+    async save(value) {
+      await requireCoreConsent();
+      return credentialStore.save(value);
+    },
+  },
+  cryptoImpl: globalThis.crypto,
+});
+
+const discussionBackground = createDiscussionBackground({
+  api,
+  voteClient,
+  fetchImpl: fetchWithCoreConsent,
+  hasConsent: async () =>
+    (await hasCoreDataPermission({ queryBackground: false })) &&
+    (!usesFirefoxDataCollectionConsent() || (await hasAuthenticationDataPermission({ queryBackground: false }))),
+});
+discussionBackground.initialize();
+
 initExtConfig();
 
-function broadcastPatreonStatus(authenticated, user, sessionToken) {
+function broadcastPatreonStatus(authenticated, user, sessionToken, generation = authenticationGeneration) {
   chrome.tabs.query({}, (tabs) => {
+    if (generation !== authenticationGeneration) return;
     tabs
       .filter((tab) => tab.url && tab.url.includes("youtube.com"))
       .forEach((tab) => {
@@ -44,23 +96,104 @@ function broadcastPatreonStatus(authenticated, user, sessionToken) {
   });
 }
 
-function handlePatreonAuthComplete(user, sessionToken, done) {
-  if (!user) {
-    done?.();
+function handlePatreonAuthComplete(user, sessionToken, generation, done) {
+  if (!user || !sessionToken || generation !== authenticationGeneration) {
+    done?.(false);
     return;
   }
 
-  chrome.storage.sync.set(
-    {
-      patreonAuthenticated: true,
-      patreonUser: user,
-      patreonSessionToken: sessionToken,
-    },
-    () => {
-      broadcastPatreonStatus(true, user, sessionToken);
-      done?.();
-    },
+  if (usesFirefoxDataCollectionConsent()) {
+    hasAuthenticationDataPermission({ queryBackground: false }).then((granted) => {
+      if (granted && generation === authenticationGeneration) persistPatreonAuth(user, sessionToken, generation, done);
+      else done?.(false);
+    });
+    return;
+  }
+
+  persistPatreonAuth(user, sessionToken, generation, done);
+}
+
+function persistPatreonAuth(user, sessionToken, generation, done) {
+  queueAccountStorageMutation((complete) => {
+    if (generation !== authenticationGeneration) {
+      complete();
+      return;
+    }
+    chrome.storage.sync.set(
+      {
+        patreonAuthenticated: true,
+        patreonUser: user,
+        patreonSessionToken: sessionToken,
+      },
+      complete,
+    );
+  })
+    .then(() => {
+      if (generation !== authenticationGeneration) {
+        done?.(false);
+        return;
+      }
+      broadcastPatreonStatus(true, user, sessionToken, generation);
+      done?.(true);
+    })
+    .catch(() => done?.(false));
+}
+
+function queueAccountStorageMutation(operation) {
+  const pending = accountStorageQueue.then(
+    () =>
+      new Promise((resolve, reject) => {
+        operation(() => {
+          if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
+          else resolve();
+        });
+      }),
   );
+  accountStorageQueue = pending.catch(() => {});
+  return pending;
+}
+
+function clearPatreonAuth(done) {
+  const generation = ++authenticationGeneration;
+  discussionBackground.clearSession(true);
+  broadcastPatreonStatus(false, null, null, generation);
+  queueAccountStorageMutation((complete) => {
+    chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], complete);
+  })
+    .then(() => {
+      discussionBackground.resumeSession().catch(() => {});
+      done?.();
+    })
+    .catch((error) => console.error("Account session cleanup failed", error));
+}
+
+onAuthenticationDataPermissionRemoved(() => clearPatreonAuth());
+
+onCoreDataPermissionChanged((granted) => {
+  if (!granted) clearPatreonAuth();
+  api.tabs.query({ url: "*://*.youtube.com/*" }, (tabs) => {
+    for (const tab of tabs) {
+      const result = api.tabs.sendMessage(tab.id, { message: "ryd_core_consent_changed", granted }, () => {
+        void api.runtime.lastError;
+      });
+      result?.catch?.(() => {});
+    }
+  });
+});
+
+async function requireCoreConsent() {
+  if (!(await hasCoreDataPermission({ queryBackground: false }))) throw coreConsentError();
+}
+
+async function requireCurrentAuthenticationConsent(generation) {
+  await requireCoreConsent();
+  if (
+    generation !== authenticationGeneration ||
+    (usesFirefoxDataCollectionConsent() && !(await hasAuthenticationDataPermission({ queryBackground: false }))) ||
+    generation !== authenticationGeneration
+  ) {
+    throw new Error("authentication data consent removed or sign-in cancelled");
+  }
 }
 
 function getIdentityApi() {
@@ -105,22 +238,50 @@ function extractOAuthParams(responseUrl) {
 }
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.message === "get_auth_token") {
-    chrome.identity.getAuthToken({ interactive: true }, function (token) {
-      console.log(token);
-      chrome.identity.getProfileUserInfo(function (userInfo) {
-        console.log(JSON.stringify(userInfo));
+  if (request?.message === "ryd_open_consent") {
+    if (sender.id !== api.runtime.id || sender.url !== api.runtime.getURL("consent.html")) {
+      sendResponse({ success: false });
+      return;
+    }
+    if (!consentPageOpening) {
+      consentPageOpening = (async () => {
+        const tabs = (typeof browser !== "undefined" ? browser : api).tabs;
+        if (consentPageTabId !== null) {
+          try {
+            const existing = await tabs.get(consentPageTabId);
+            if (existing.url === api.runtime.getURL("consent.html")) {
+              await tabs.update(consentPageTabId, { active: true });
+              return;
+            }
+          } catch (_) {}
+        }
+        const tab = await tabs.create({ url: api.runtime.getURL("consent.html") });
+        consentPageTabId = tab.id;
+      })().finally(() => {
+        consentPageOpening = null;
       });
-    });
-  } else if (request.message === "log_off") {
-    // chrome.identity.clearAllCachedAuthTokens(() => console.log("logged off"));
-  } else if (request.message === "patreon_auth_complete") {
-    handlePatreonAuthComplete(request.user, request.sessionToken);
+    }
+    consentPageOpening.then(
+      () => sendResponse({ success: true }),
+      () => sendResponse({ success: false }),
+    );
+    return true;
+  } else if (request?.message === "ryd_has_core_consent") {
+    hasCoreDataPermission({ queryBackground: false }).then((granted) => sendResponse({ granted }));
+    return true;
+  } else if (request?.message === "ryd_discussion") {
+    requireCoreConsent()
+      .then(() => discussionBackground.handleMessage(request, sender))
+      .then(sendResponse)
+      .catch(() =>
+        sendResponse({ ok: false, error: { code: "consent_required", message: "Enable RYD to continue." } }),
+      );
+    return true;
   } else if (request.message === "patreon_logout") {
-    // Clear Patreon authentication
-    chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], () => {
-      broadcastPatreonStatus(false, null, null);
-    });
+    clearPatreonAuth();
+  } else if (request.message === "ryd_has_authentication_consent") {
+    hasAuthenticationDataPermission({ queryBackground: false }).then((granted) => sendResponse({ granted }));
+    return true;
   } else if (request.message === "ryd_open_tab") {
     const targetUrl = typeof request?.url === "string" ? request.url : null;
     if (!targetUrl) {
@@ -147,7 +308,7 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   } else if (request.message == "set_state") {
     // chrome.identity.getAuthToken({ interactive: true }, function (token) {
     let token = "";
-    fetch(getApiEndpoint(`/votes?videoId=${request.videoId}&likeCount=${request.likeCount || ""}`), {
+    fetchWithCoreConsent(getApiEndpoint(`/votes?videoId=${request.videoId}&likeCount=${request.likeCount || ""}`), {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -157,32 +318,46 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
       .then((response) => {
         sendResponse(response);
       })
-      .catch();
+      .catch(() => sendResponse({ error: "consent_required_or_request_failed" }));
     return true;
   } else if (request.message == "send_links") {
     toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
     if (toSend.length >= 20) {
-      fetch(getApiEndpoint("/votes"), {
+      fetchWithCoreConsent(getApiEndpoint("/votes"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(toSend),
-      });
+      }).catch(() => {});
       for (const toSendUrl of toSend) {
         sentIds.add(toSendUrl);
       }
       toSend = [];
     }
   } else if (request.message == "register") {
-    register();
+    requireCoreConsent()
+      .then(() => voteClient.getRegisteredUser())
+      .then((user) =>
+        sendResponse?.(user ? { success: true, userId: user.userId } : { success: false, error: "vote_required" }),
+      )
+      .catch((error) => sendResponse?.({ success: false, error: error.message }));
     return true;
   } else if (request.message == "send_vote") {
-    sendVote(request.videoId, request.vote);
+    requireCoreConsent()
+      .then(() => {
+        if (extConfig.disableVoteSubmission) throw new Error("Vote submission is disabled.");
+        return voteClient.submitVote(request.videoId, request.vote);
+      })
+      .then(() => sendResponse?.({ success: true }))
+      .catch((error) => sendResponse?.({ success: false, error: error.message }));
     return true;
   } else if (request.message === "patreon_oauth_login") {
+    const generation = ++authenticationGeneration;
     (async () => {
       try {
+        await requireCurrentAuthenticationConsent(generation);
+
         const idApi = getIdentityApi();
         if (
           !idApi ||
@@ -199,11 +374,12 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
               ? chrome.identity.getRedirectURL()
               : "";
 
-        const startRes = await fetch(
+        const startRes = await fetchWithCoreConsent(
           getApiEndpoint(`/api/auth/oauth/login?redirectUri=${encodeURIComponent(redirectUri)}`),
         );
         const startData = await startRes.json();
 
+        await requireCurrentAuthenticationConsent(generation);
         const responseUrl = await launchWebAuthFlow(startData.authUrl);
         const { code, state } = extractOAuthParams(responseUrl);
         if (!code) {
@@ -211,7 +387,9 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
           return;
         }
 
-        const exchangeRes = await fetch(getApiEndpoint("/api/auth/oauth/exchange"), {
+        await requireCurrentAuthenticationConsent(generation);
+
+        const exchangeRes = await fetchWithCoreConsent(getApiEndpoint("/api/auth/oauth/exchange"), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -223,14 +401,64 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
         const authData = await exchangeRes.json();
         if (authData && authData.success) {
-          handlePatreonAuthComplete(authData.user, authData.sessionToken, () => {
-            sendResponse({ success: true, user: authData.user });
+          handlePatreonAuthComplete(authData.user, authData.sessionToken, generation, (stored) => {
+            sendResponse(
+              stored
+                ? { success: true, user: authData.user }
+                : { success: false, error: "authentication data consent removed" },
+            );
           });
         } else {
           sendResponse({ success: false, error: (authData && authData.error) || "OAuth exchange failed" });
         }
       } catch (e) {
         console.error("patreon_oauth_login error", e);
+        sendResponse({ success: false, error: String((e && e.message) || e) });
+      }
+    })();
+    return true;
+  } else if (request.message === "github_oauth_login") {
+    const generation = ++authenticationGeneration;
+    (async () => {
+      try {
+        await requireCurrentAuthenticationConsent(generation);
+
+        const idApi = getIdentityApi();
+        if (
+          !idApi ||
+          typeof (idApi.getRedirectURL || (isChrome() && chrome.identity && chrome.identity.getRedirectURL)) !==
+            "function"
+        ) {
+          sendResponse({ success: false, error: "identity API not available" });
+          return;
+        }
+
+        const redirectUri =
+          isFirefox() && browser.identity.getRedirectURL
+            ? browser.identity.getRedirectURL()
+            : isChrome() && chrome.identity.getRedirectURL
+              ? chrome.identity.getRedirectURL()
+              : "";
+
+        const authData = await loginWithGitHub({
+          fetchImpl: fetchWithCoreConsent,
+          redirectUri,
+          launchWebAuthFlow,
+          requireConsent: () => requireCurrentAuthenticationConsent(generation),
+        });
+        if (authData && authData.success) {
+          handlePatreonAuthComplete(authData.user, authData.sessionToken, generation, (stored) => {
+            sendResponse(
+              stored
+                ? { success: true, user: authData.user }
+                : { success: false, error: "authentication data consent removed" },
+            );
+          });
+        } else {
+          sendResponse({ success: false, error: (authData && authData.error) || "OAuth exchange failed" });
+        }
+      } catch (e) {
+        console.error("github_oauth_login error", e);
         sendResponse({ success: false, error: String((e && e.message) || e) });
       }
     })();
@@ -244,6 +472,7 @@ function openChangelogTab(version) {
     api.tabs.create({ url }, () => {
       if (api.runtime.lastError) {
         console.debug("Changelog tab could not open:", api.runtime.lastError.message);
+        return;
       }
       persistChangelogVersion(version);
     });
@@ -355,7 +584,8 @@ function maybeShowChangelog(details) {
   const manifest = api.runtime.getManifest();
   const currentVersion = manifest?.version;
   const storage = api?.storage?.local;
-  const isInstall = reason === "install";
+  // Temporary add-ons do not survive a browser restart, so their updates cannot wait for onStartup.
+  const showImmediately = reason === "install" || details.temporary === true;
 
   const showChangelog = () => {
     openChangelogTab(currentVersion || null);
@@ -378,7 +608,7 @@ function maybeShowChangelog(details) {
       const lastShownValue = result?.[CHANGELOG_STORAGE_KEY];
       const pendingValue = result?.[PENDING_CHANGELOG_STORAGE_KEY];
 
-      if (isInstall) {
+      if (showImmediately) {
         if (hasStoredValue(pendingValue)) {
           clearPendingChangelogVersion();
         }
@@ -430,157 +660,11 @@ if (api?.runtime?.onStartup && typeof api.runtime.onStartup.addListener === "fun
 //   }
 // });
 
-async function sendVote(videoId, vote, depth = 1) {
-  api.storage.sync.get(null, async (storageResult) => {
-    if (!storageResult.userId || !storageResult.registrationConfirmed) {
-      await register();
-    }
-    let voteResponse = await fetch(getApiEndpoint("/interact/vote"), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: storageResult.userId,
-        videoId,
-        value: vote,
-      }),
-    });
-
-    if (voteResponse.status == 401 && depth > 0) {
-      await register();
-      await sendVote(videoId, vote, depth - 1);
-      return;
-    } else if (voteResponse.status == 401) {
-      // We have already tried registering
-      return;
-    }
-
-    const voteResponseJson = await voteResponse.json();
-    const solvedPuzzle = await solvePuzzle(voteResponseJson);
-    if (!solvedPuzzle.solution) {
-      await sendVote(videoId, vote);
-      return;
-    }
-
-    await fetch(getApiEndpoint("/interact/confirmVote"), {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...solvedPuzzle,
-        userId: storageResult.userId,
-        videoId,
-      }),
-    });
-  });
-}
-
-async function register() {
-  const userId = generateUserID();
-  api.storage.sync.set({ userId });
-  const registrationResponse = await fetch(getApiEndpoint(`/puzzle/registration?userId=${userId}`), {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-    },
-  }).then((response) => response.json());
-  const solvedPuzzle = await solvePuzzle(registrationResponse);
-  if (!solvedPuzzle.solution) {
-    await register();
-    return;
-  }
-  const result = await fetch(getApiEndpoint(`/puzzle/registration?userId=${userId}`), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(solvedPuzzle),
-  }).then((response) => response.json());
-  if (result === true) {
-    return api.storage.sync.set({ registrationConfirmed: true });
-  }
-}
-
-api.storage.sync.get(null, async (res) => {
-  if (!res || !res.userId || !res.registrationConfirmed) {
-    await register();
-  }
-});
-
 const sentIds = new Set();
 let toSend = [];
 
-function countLeadingZeroes(uInt8View, limit) {
-  let zeroes = 0;
-  let value = 0;
-  for (let i = 0; i < uInt8View.length; i++) {
-    value = uInt8View[i];
-    if (value === 0) {
-      zeroes += 8;
-    } else {
-      let count = 1;
-      if (value >>> 4 === 0) {
-        count += 4;
-        value <<= 4;
-      }
-      if (value >>> 6 === 0) {
-        count += 2;
-        value <<= 2;
-      }
-      zeroes += count - (value >>> 7);
-      break;
-    }
-    if (zeroes >= limit) {
-      break;
-    }
-  }
-  return zeroes;
-}
-
-async function solvePuzzle(puzzle) {
-  let challenge = Uint8Array.from(atob(puzzle.challenge), (c) => c.charCodeAt(0));
-  let buffer = new ArrayBuffer(20);
-  let uInt8View = new Uint8Array(buffer);
-  let uInt32View = new Uint32Array(buffer);
-  let maxCount = Math.pow(2, puzzle.difficulty) * 3;
-  for (let i = 4; i < 20; i++) {
-    uInt8View[i] = challenge[i - 4];
-  }
-
-  for (let i = 0; i < maxCount; i++) {
-    uInt32View[0] = i;
-    let hash = await crypto.subtle.digest("SHA-512", buffer);
-    let hashUint8 = new Uint8Array(hash);
-    if (countLeadingZeroes(hashUint8) >= puzzle.difficulty) {
-      return {
-        solution: btoa(String.fromCharCode.apply(null, uInt8View.slice(0, 4))),
-      };
-    }
-  }
-  return {};
-}
-
-function generateUserID(length = 36) {
-  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let result = "";
-  if (crypto && crypto.getRandomValues) {
-    const values = new Uint32Array(length);
-    crypto.getRandomValues(values);
-    for (let i = 0; i < length; i++) {
-      result += charset[values[i] % charset.length];
-    }
-    return result;
-  } else {
-    for (let i = 0; i < length; i++) {
-      result += charset[Math.floor(Math.random() * charset.length)];
-    }
-    return result;
-  }
-}
-
 function storageChangeHandler(changes, area) {
+  discussionBackground.onStorageChanged(changes, area);
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }
@@ -610,6 +694,9 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.hidePremiumTeaser !== undefined) {
     handleHidePremiumTeaserChangeEvent(changes.hidePremiumTeaser.newValue);
+  }
+  if (changes.hideClutterButtons !== undefined) {
+    handleHideClutterButtonsChangeEvent(changes.hideClutterButtons.newValue);
   }
 }
 
@@ -670,6 +757,10 @@ function handleHidePremiumTeaserChangeEvent(value) {
   extConfig.hidePremiumTeaser = value === true;
 }
 
+function handleHideClutterButtonsChangeEvent(value) {
+  extConfig.hideClutterButtons = value === true;
+}
+
 api.storage.onChanged.addListener(storageChangeHandler);
 
 function initExtConfig() {
@@ -683,6 +774,7 @@ function initExtConfig() {
   initializeTooltipPercentage();
   initializeTooltipPercentageMode();
   initializeHidePremiumTeaser();
+  initializeHideClutterButtons();
 }
 
 function initializeDisableVoteSubmission() {
@@ -783,6 +875,17 @@ function initializeHidePremiumTeaser() {
       extConfig.hidePremiumTeaser = false;
     } else {
       extConfig.hidePremiumTeaser = res.hidePremiumTeaser === true;
+    }
+  });
+}
+
+function initializeHideClutterButtons() {
+  api.storage.sync.get(["hideClutterButtons"], (res) => {
+    if (res.hideClutterButtons === undefined) {
+      api.storage.sync.set({ hideClutterButtons: false });
+      extConfig.hideClutterButtons = false;
+    } else {
+      extConfig.hideClutterButtons = res.hideClutterButtons === true;
     }
   });
 }

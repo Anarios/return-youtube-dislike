@@ -40,6 +40,7 @@ describe("premiumAnalytics.teaser", () => {
   let getVideoId;
   let TEASER_SUPPRESSION_REASON_SETTINGS;
   let TEASER_SUPPRESSION_REASON_PREMIUM;
+  let requestVoteData;
   let storageGetMock;
   let storageSetMock;
   let storageOnChangedAddListener;
@@ -85,6 +86,7 @@ describe("premiumAnalytics.teaser", () => {
     };
 
     ({ getVideoId } = require("../../utils"));
+    ({ requestVoteData } = require("../../vote-data-request"));
     ({
       initPremiumTeaser,
       setTeaserSuppressed,
@@ -99,6 +101,7 @@ describe("premiumAnalytics.teaser", () => {
           dislikes: 123,
           rawDislikes: 456,
           likes: 789,
+          rawLikes: 654,
         }),
     });
   });
@@ -125,13 +128,114 @@ describe("premiumAnalytics.teaser", () => {
     expect(panel).not.toBeNull();
     expect(global.fetch).toHaveBeenCalledWith("https://api.test/votes?videoId=abcdefghijk", expect.any(Object));
 
-    const raw = panel.querySelector("#ryd-premium-teaser-raw")?.textContent;
-    const dislikes = panel.querySelector("#ryd-premium-teaser-dislikes")?.textContent;
     const likes = panel.querySelector("#ryd-premium-teaser-likes")?.textContent;
+    const dislikes = panel.querySelector("#ryd-premium-teaser-dislikes")?.textContent;
+    const details = panel.querySelector("#ryd-premium-teaser-details");
 
-    expect(raw).toBe("456");
-    expect(dislikes).toBe("123");
-    expect(likes).toBe("789");
+    expect(likes).toBe("654");
+    expect(dislikes).toBe("456");
+    expect(panel?.classList.contains("is-collapsed")).toBe(true);
+    expect(details?.hasAttribute("hidden")).toBe(true);
+  });
+
+  it("shares aggregate vote data with the main renderer but still refreshes for a real Like count", async () => {
+    getVideoId.mockReturnValue("abcdefghijk");
+
+    await initPremiumTeaser();
+    await flushPromises();
+
+    await requestVoteData("abcdefghijk", { likeCount: false });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(global.fetch).toHaveBeenCalledWith("https://api.test/votes?videoId=abcdefghijk", expect.any(Object));
+
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ dislikes: 124, likes: 790 }),
+    });
+    await requestVoteData("abcdefghijk", { likeCount: 790 });
+
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+    expect(global.fetch).toHaveBeenLastCalledWith(
+      "https://api.test/votes?videoId=abcdefghijk&likeCount=790",
+      expect.any(Object),
+    );
+  });
+
+  it.each([true, false])(
+    "does not restart an outgoing request when the panel mounts late (navigation event: %s)",
+    async (navigationEventDelivered) => {
+      jest.useFakeTimers();
+      const navigationListenerSpy = jest.spyOn(document, "addEventListener");
+      let resolveResponse;
+      const destinationResponse = {
+        ok: true,
+        json: async () => ({ dislikes: 35, likes: 65 }),
+      };
+
+      try {
+        document.body.innerHTML = "";
+        getVideoId.mockReturnValue("abcdefghijk");
+        await initPremiumTeaser();
+        expect(global.fetch).not.toHaveBeenCalled();
+
+        getVideoId.mockReturnValue("zyxwvutsrqp");
+        if (navigationEventDelivered) {
+          const navigationListener = navigationListenerSpy.mock.calls.find(
+            ([name]) => name === "yt-navigate-finish",
+          )[1];
+          navigationListener();
+        }
+
+        global.fetch.mockReturnValueOnce(
+          new Promise((resolve) => {
+            resolveResponse = resolve;
+          }),
+        );
+        const destinationRequest = requestVoteData("zyxwvutsrqp", { likeCount: 65 });
+        destinationRequest.catch(() => {});
+
+        mountSecondary();
+        jest.advanceTimersByTime(500);
+
+        expect(global.fetch).toHaveBeenCalledTimes(1);
+        expect(global.fetch).toHaveBeenCalledWith(
+          "https://api.test/votes?videoId=zyxwvutsrqp&likeCount=65",
+          expect.any(Object),
+        );
+        expect(requestVoteData("zyxwvutsrqp", { likeCount: 65 })).toBe(destinationRequest);
+
+        resolveResponse(destinationResponse);
+        await expect(destinationRequest).resolves.toEqual({ dislikes: 35, likes: 65 });
+      } finally {
+        resolveResponse?.(destinationResponse);
+        navigationListenerSpy.mockRestore();
+        jest.clearAllTimers();
+        jest.useRealTimers();
+      }
+    },
+  );
+
+  it("toggles the expanded state when the toggle is clicked", async () => {
+    getVideoId.mockReturnValue("togglevideo");
+
+    await initPremiumTeaser();
+    await flushPromises();
+
+    const panel = document.querySelector(".ryd-premium-teaser");
+    expect(panel).not.toBeNull();
+
+    const toggle = panel.querySelector("#ryd-premium-teaser-toggle");
+    const details = panel.querySelector("#ryd-premium-teaser-details");
+
+    expect(toggle?.getAttribute("aria-expanded")).toBe("false");
+    expect(details?.hasAttribute("hidden")).toBe(true);
+
+    toggle?.dispatchEvent(new window.MouseEvent("click", { bubbles: true }));
+    await flushPromises();
+
+    expect(panel?.classList.contains("is-expanded")).toBe(true);
+    expect(toggle?.getAttribute("aria-expanded")).toBe("true");
+    expect(details?.hasAttribute("hidden")).toBe(false);
   });
 
   it("removes the panel when suppressed and restores it when unsuppressed", async () => {
@@ -227,5 +331,4 @@ describe("premiumAnalytics.teaser", () => {
     expect(storageSetMock).toHaveBeenCalledWith({ hidePremiumTeaser: true });
     expect(document.querySelector(".ryd-premium-teaser")).toBeNull();
   });
-
 });

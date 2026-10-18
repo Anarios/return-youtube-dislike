@@ -83,6 +83,21 @@
   "patreonLogin": {
     "message": "Masuk dengan Patreon"
   },
+  "patreonPrivacyNote": {
+    "message": "Informasi keanggotaan Patreon digunakan untuk memverifikasi akses premium. Kami tidak menerima detail kartu atau rekening bank Anda."
+  },
+  "githubLoggedOutMessage": {
+    "message": "Premium features available for GitHub contributors"
+  },
+  "githubLogin": {
+    "message": "Login with GitHub (Contributor)"
+  },
+  "githubLoginStartFailed": {
+    "message": "Failed to initiate GitHub login. Please try again."
+  },
+  "githubLoginCompleteFailed": {
+    "message": "Failed to complete GitHub login. Please try again."
+  },
   "patreonLoginCompleteFailed": {
     "message": "Gagal menyelesaikan login. Coba lagi."
   },
@@ -396,7 +411,7 @@
     "message": "Rasio suka: $1"
   },
   "premiumTeaser_title": {
-    "message": "Ringkasan insight tidak suka"
+    "message": "Analitik video"
   },
   "premiumTeaser_subtitle": {
     "message": "Tidak suka mentah adalah laporan langsung dari pengguna ekstensi yang menonton video ini."
@@ -414,7 +429,7 @@
     "message": "Perkiraan tidak suka"
   },
   "premiumTeaser_statLikes": {
-    "message": "Perkiraan suka"
+    "message": "Jumlah suka mentah"
   },
   "premiumTeaser_statusLoading": {
     "message": "Mengambil total tidak suka terbaru…"
@@ -535,6 +550,21 @@
   },
   "changelog_support_contact": {
     "message": "Tanyakan pada komunitas"
+  },
+  "hideClutterButtons": {
+    "message": "Hide clutter buttons"
+  },
+  "hideClutterButtonsHelpLabel": {
+    "message": "Show before and after examples"
+  },
+  "hideClutterButtonsDescription": {
+    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+  },
+  "hideClutterButtonsBefore": {
+    "message": "Before: all action buttons are visible"
+  },
+  "hideClutterButtonsAfter": {
+    "message": "After: only Like and Dislike stay visible"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

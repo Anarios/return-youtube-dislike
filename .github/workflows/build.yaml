@@ -1,24 +1,48 @@
-name: Test Build Extension
+name: Test Builds
 
 on:
   push:
     branches:
       - main
     paths:
-      - Extensions/combined/**
+      - "Extensions/combined/**"
+      - "Extensions/common/**"
+      - "Extensions/UserScript/**"
+      - "Extensions/e2e/**"
+      - ".github/workflows/build.yaml"
+      - ".babelrc"
+      - ".gitattributes"
+      - ".nvmrc"
+      - "extension-build-receipt*.js"
+      - "userscript-build-receipt*.js"
+      - "jest.config.js"
+      - "package.json"
+      - "package-lock.json"
+      - "playwright*.js"
+      - "webpack*.js"
   pull_request:
     branches:
       - main
     paths:
-      - Extensions/combined/**
+      - "Extensions/combined/**"
+      - "Extensions/common/**"
+      - "Extensions/UserScript/**"
+      - "Extensions/e2e/**"
+      - ".github/workflows/build.yaml"
+      - ".babelrc"
+      - ".gitattributes"
+      - ".nvmrc"
+      - "extension-build-receipt*.js"
+      - "userscript-build-receipt*.js"
+      - "jest.config.js"
+      - "package.json"
+      - "package-lock.json"
+      - "playwright*.js"
+      - "webpack*.js"
 
 jobs:
   build:
     runs-on: ubuntu-24.04
-
-    defaults:
-      run:
-        working-directory: ./Extensions/combined
 
     steps:
       - name: Checkout repository
@@ -27,13 +51,38 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version-file: .nvmrc
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Run Jest tests
+        run: npm test -- --runInBand
+
       - name: Build extension
         run: npm run build
+
+      - name: Check generated extension artifact
+        run: npm run check:extension-artifact
+
+      - name: Build userscript
+        run: npm run build:userscript
+
+      - name: Check generated userscript
+        run: git diff --exit-code -- "Extensions/UserScript/Return Youtube Dislike.user.js"
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run generated-artifact browser tests
+        run: npm run test:e2e:artifacts
+
+      - name: Run extension browser tests
+        run: npm run test:e2e:extension:run
+
+      - name: Run userscript browser tests
+        run: npm run test:e2e:userscript:run
 
       - name: Upload Chrome artifact
         uses: actions/upload-artifact@v6
@@ -52,3 +101,14 @@ jobs:
         with:
           name: ryd-safari
           path: ./Extensions/combined/dist/safari
+
+      - name: Upload Playwright failure artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-browser-failures
+          path: |
+            ./test-results
+            ./playwright-report
+          if-no-files-found: ignore
+          retention-days: 7

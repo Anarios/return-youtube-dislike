@@ -234,6 +234,25 @@ describe("premiumAnalytics.map", () => {
     expect(option.series[0].data[0].name).toBe("United States of America");
   });
 
+  it("renders remote tooltip names and region codes as literal text", () => {
+    const chart = createChartStub();
+    analyticsState.mapChart = chart;
+    const name = '<img src="https://example.org/track" onerror="alert(1)">&';
+    const code = '<svg onload="alert(2)">';
+    renderMap([{ countryCode: "US", countryName: name, likes: 75, dislikes: 25 }]);
+    const option = chart.setOption.mock.calls[0][0];
+    const data = { ...option.series[0].data[0], code };
+    const tooltip = document.createElement("div");
+    tooltip.innerHTML = option.tooltip.formatter({ name: "United States", data });
+    expect(tooltip.querySelector("img, svg, script")).toBeNull();
+    expect(tooltip.textContent).toContain(`${name} (${code})`);
+    expect(tooltip.querySelectorAll("br")).toHaveLength(3);
+
+    tooltip.innerHTML = option.tooltip.formatter({ name });
+    expect(tooltip.children).toHaveLength(0);
+    expect(tooltip.textContent).toBe(name);
+  });
+
   it("falls back to synonyms when only country name present", () => {
     const chart = createChartStub();
     analyticsState.mapChart = chart;

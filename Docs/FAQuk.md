@@ -1,4 +1,4 @@
-Read this in other languages: [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Türkçe](FAQtr.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Tiếng Việt](FAQvi.md)
+Read this in other languages: [беларуская](FAQbe.md), [English](FAQ.md), [русский](FAQru.md), [Français](FAQfr.md), [Türkçe](FAQtr.md), [Deutsch](FAQde.md), [العربية](FAQar.md), [Bahasa Indonesia](FAQid.md), [中文](FAqcn.md), [български](FAQbg.md), [Tiếng Việt](FAQvi.md), [Slovenščina](FAQsl.md)
 
 # Часті питання
 
@@ -40,7 +40,7 @@ RYD використовує відмітки своїх користувачі�
 
 - Якщо відео було завантажено після вимкнення API:
 
-  $$ \textup{К-ть відміток «Не подобається» у RYD} = \left( \frac{\textup{К-ть відміток «Подобається» серед користувачів RYD}}{\textup{К-ть відміток «Не подобається» серед користувачів RYD}} \right) \times \textup{Публічна к-ть відміток «Подобається»} $$
+  $$ \textup{К-ть відміток «Не подобається» у RYD} = \left( \frac{\textup{К-ть відміток «Не подобається» серед користувачів RYD}}{\textup{К-ть відміток «Подобається» серед користувачів RYD}} \right) \times \textup{Публічна к-ть відміток «Подобається»} $$
 
 - Якщо база даних RYD якимось чином мала фактичну кількість відміток «Подобається» та «Не подобається» (надану завантажувачем або з архіву), кількість відміток «Не подобається» буде розраховано на основі відміток користувачів і архівного значення. Архівне значення матиме менший вплив на остаточний підрахунок у міру актуальності.
 
