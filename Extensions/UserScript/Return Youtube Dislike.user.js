@@ -1739,20 +1739,38 @@ function getDislikeTextContainer(dislikeButton = getDislikeButton()) {
   let result =
     dislikeButton.querySelector("#text") ??
     dislikeButton.getElementsByTagName("yt-formatted-string")[0] ??
-    dislikeButton.querySelector("span[role='text']");
+    dislikeButton.querySelector("span[role='text']") ??
+    dislikeButton.querySelector(
+      ".ytSpecButtonShapeNextButtonTextContent, .yt-spec-button-shape-next__button-text-content",
+    );
   if (result == null) {
     const activationTarget = getActivationTarget(dislikeButton);
     if (!activationTarget?.matches("button, tp-yt-paper-button#button")) {
       return null;
     }
 
-    const textSpan = document.createElement("span");
-    textSpan.id = "text";
-    textSpan.setAttribute("role", "text");
-    textSpan.style.marginLeft = "6px";
-    activationTarget.appendChild(textSpan);
-    activationTarget.style.width = "auto";
-    result = textSpan;
+    const shorts = isShorts();
+    const usesNativeShape =
+      !shorts &&
+      activationTarget.matches(
+        ".ytSpecButtonShapeNextHost, .yt-spec-button-shape-next, " +
+          ".ytSpecButtonShapeNextIconButton, .yt-spec-button-shape-next--icon-button, " +
+          ".ytSpecButtonShapeNextIconLeading, .yt-spec-button-shape-next--icon-leading",
+      );
+    const text = document.createElement(usesNativeShape ? "div" : "span");
+    text.id = "text";
+    text.setAttribute("role", "text");
+    if (usesNativeShape) {
+      text.className = "ytSpecButtonShapeNextButtonTextContent yt-spec-button-shape-next__button-text-content";
+      activationTarget.classList.remove("ytSpecButtonShapeNextIconButton", "yt-spec-button-shape-next--icon-button");
+      activationTarget.classList.add("ytSpecButtonShapeNextIconLeading", "yt-spec-button-shape-next--icon-leading");
+    } else {
+      if (shorts) text.style.marginLeft = "6px";
+      else text.style.marginInlineStart = "6px";
+      activationTarget.style.width = "auto";
+    }
+    activationTarget.appendChild(text);
+    result = text;
   }
   return result;
 }
@@ -2278,7 +2296,10 @@ function clearWatchPresentation(buttons, dislikeButton) {
   const dislikeText =
     dislikeButton?.querySelector("#text") ??
     dislikeButton?.getElementsByTagName("yt-formatted-string")[0] ??
-    dislikeButton?.querySelector("span[role='text']");
+    dislikeButton?.querySelector("span[role='text']") ??
+    dislikeButton?.querySelector(
+      ".ytSpecButtonShapeNextButtonTextContent, .yt-spec-button-shape-next__button-text-content",
+    );
   if (dislikeText) {
     dislikeText.textContent = "";
   }
