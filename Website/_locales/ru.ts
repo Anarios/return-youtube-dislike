@@ -138,6 +138,7 @@ export default {
     subtitle: "Ссылки на проект и его разработчиков",
     contact: "Связаться",
     translators: "Переводчики",
+    coolProjects: "Интересные проекты",
     sponsorBlockDescription: "Проматывает рекламу, встроенную в видео",
     filmotDescription: "Поиск по субтитрам YouTube",
     github: "GitHub",

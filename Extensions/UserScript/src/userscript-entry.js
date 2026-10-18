@@ -49,8 +49,8 @@ const extConfig = {
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
   colorTheme: "classic", // [classic*, accessible, neon, hibiscus, custom] Color theme (red/green, blue/yellow, pink/cyan, green/magenta, custom)
   customColors: {
-    light: { like: "#008000", dislike: "#b300b3" },
-    dark: { like: "#00d000", dislike: "#ff66ff" },
+    light: { like: "#007600", dislike: "#b300b3" },
+    dark: { like: "#00d000", dislike: "#ff77ff" },
   }, // Custom like/dislike colors for YouTube's light and dark themes (#rrggbb)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)

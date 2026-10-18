@@ -14,6 +14,11 @@ import id from "./_locales/id";
 import vi from "./_locales/vi";
 import be from "./_locales/be";
 import sl from "./_locales/sl";
+import az from "./_locales/az";
+import itIT from "./_locales/it-IT";
+import nl from "./_locales/nl";
+import pt_BR from "./_locales/pt_BR";
+import sv from "./_locales/sv";
 // ...
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -58,7 +63,7 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     lang: {
-      locales: { en, es, tr, ru, cs, ja, fr, uk, ko, pl, de, hu, id, vi, be, sl  /*...*/ },
+      locales: { en, es, tr, ru, cs, ja, fr, uk, ko, pl, de, hu, id, vi, be, sl, az, "it-IT": itIT, nl, pt_BR, sv },
       current: "en",
     },
     theme: {

@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 로고"
   },
+  "githubLoginUnavailable": {
+    "message": "현재 GitHub 기여자 로그인을 사용할 수 없습니다. 서비스 업데이트 또는 설정 변경이 필요합니다."
+  },
+  "githubLoginNotContributor": {
+    "message": "이 GitHub 계정은 Return YouTube Dislike 기여자로 등록되어 있지 않습니다. 기여한 계정으로 로그인해 주세요. 최근 기여 내역이 반영되기까지 몇 시간이 걸릴 수 있습니다."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "이 브라우저의 콜백 주소에 대한 GitHub 로그인이 설정되어 있지 않습니다. 지원팀에 문의해 주세요."
+  },
+  "githubLoginExpired": {
+    "message": "이 GitHub 로그인 시도가 만료되었거나 확인할 수 없습니다. 로그인을 다시 시작해 주세요."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "GitHub 기여자 로그인을 사용하려면 확장 프로그램을 업데이트해 주세요."
+  },
+  "githubLoginRateLimited": {
+    "message": "로그인 시도 횟수가 너무 많습니다. 1분 후에 다시 시도해 주세요."
+  },
+  "githubLoginDenied": {
+    "message": "GitHub 권한 승인이 거부되었습니다. 기여자로 로그인하려면 권한 승인이 필요합니다."
+  },
+  "discussion_title": {
+    "message": "RYD 댓글"
+  },
+  "discussion_subtitle": {
+    "message": "Return YouTube Dislike에서 제공하는 커뮤니티 토론입니다."
+  },
+  "discussion_independent": {
+    "message": "이 댓글은 YouTube와 별개입니다."
+  },
+  "discussion_open": {
+    "message": "RYD 댓글 열기"
+  },
+  "discussion_close": {
+    "message": "닫기"
+  },
+  "discussion_new": {
+    "message": "최신순"
+  },
+  "discussion_top": {
+    "message": "인기순"
+  },
+  "discussion_sort": {
+    "message": "댓글 정렬"
+  },
+  "discussion_refresh": {
+    "message": "새로고침"
+  },
+  "discussion_loading": {
+    "message": "댓글 불러오는 중…"
+  },
+  "discussion_empty": {
+    "message": "아직 댓글이 없습니다. 대화를 시작해 보세요."
+  },
+  "discussion_replyEmpty": {
+    "message": "아직 답글이 없습니다."
+  },
+  "discussion_comment": {
+    "message": "댓글"
+  },
+  "discussion_post": {
+    "message": "댓글 게시"
+  },
+  "discussion_reply": {
+    "message": "답글"
+  },
+  "discussion_postReply": {
+    "message": "답글 게시"
+  },
+  "discussion_cancel": {
+    "message": "취소"
+  },
+  "discussion_save": {
+    "message": "저장"
+  },
+  "discussion_edit": {
+    "message": "수정"
+  },
+  "discussion_delete": {
+    "message": "삭제"
+  },
+  "discussion_deleteConfirm": {
+    "message": "이 댓글을 삭제할까요?"
+  },
+  "discussion_deleted": {
+    "message": "삭제된 댓글"
+  },
+  "discussion_edited": {
+    "message": "수정됨"
+  },
+  "discussion_replies": {
+    "message": "답글 ($1)"
+  },
+  "discussion_more": {
+    "message": "더 불러오기"
+  },
+  "discussion_like": {
+    "message": "좋아요"
+  },
+  "discussion_dislike": {
+    "message": "싫어요"
+  },
+  "discussion_reacting": {
+    "message": "반응 저장 중…"
+  },
+  "discussion_signInRequired": {
+    "message": "계속하려면 확장 프로그램 팝업에서 로그인해 주세요."
+  },
+  "discussion_tierRequired": {
+    "message": "Commenter 이상 등급의 활성 회원은 댓글을 게시할 수 있습니다."
+  },
+  "discussion_join": {
+    "message": "Commenter 가입하기"
+  },
+  "discussion_gate": {
+    "message": "누구나 읽고 반응을 남길 수 있습니다. Commenter 이상 등급의 활성 회원은 댓글을 게시할 수 있습니다."
+  },
+  "discussion_nicknameRequired": {
+    "message": "게시하기 전에 공개 RYD 닉네임을 정해 주세요."
+  },
+  "discussion_nicknameLabel": {
+    "message": "공개 RYD 닉네임"
+  },
+  "discussion_nicknameHint": {
+    "message": "문자, 숫자, 공백, 마침표, 하이픈 또는 밑줄을 사용하여 3~32자로 입력하세요. 이 이름은 댓글과 함께 표시됩니다."
+  },
+  "discussion_nicknameSave": {
+    "message": "닉네임 저장"
+  },
+  "discussion_nicknameTaken": {
+    "message": "이미 사용 중인 닉네임입니다. 다른 닉네임을 선택해 주세요."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "문자, 숫자, 공백, 마침표, 하이픈 또는 밑줄을 사용하여 3~32자로 입력하세요."
+  },
+  "discussion_nicknameChange": {
+    "message": "닉네임 변경"
+  },
+  "discussion_as": {
+    "message": "$1 이름으로 댓글 작성"
+  },
+  "discussion_placeholder": {
+    "message": "토론에 참여해 보세요…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "신고"
+  },
+  "discussion_reportTitle": {
+    "message": "댓글 신고"
+  },
+  "discussion_reportReason": {
+    "message": "사유"
+  },
+  "discussion_reportSpam": {
+    "message": "스팸"
+  },
+  "discussion_reportAbuse": {
+    "message": "괴롭힘 또는 혐오"
+  },
+  "discussion_reportOther": {
+    "message": "기타"
+  },
+  "discussion_reportDetails": {
+    "message": "추가 정보 (선택 사항)"
+  },
+  "discussion_reportSend": {
+    "message": "신고 제출"
+  },
+  "discussion_reportDone": {
+    "message": "신고가 접수되었습니다. 감사합니다."
+  },
+  "discussion_moderation": {
+    "message": "관리"
+  },
+  "discussion_queueEmpty": {
+    "message": "검토할 신고가 없습니다."
+  },
+  "discussion_hide": {
+    "message": "댓글 숨기기"
+  },
+  "discussion_restore": {
+    "message": "댓글 복원"
+  },
+  "discussion_dismiss": {
+    "message": "신고 기각"
+  },
+  "discussion_ban": {
+    "message": "작성자 이용 정지"
+  },
+  "discussion_unban": {
+    "message": "작성자 이용 정지 해제"
+  },
+  "discussion_moderationReason": {
+    "message": "관리 조치 사유"
+  },
+  "discussion_moderationSaved": {
+    "message": "관리 조치가 저장되었습니다."
+  },
+  "discussion_reported": {
+    "message": "신고 $1건"
+  },
+  "discussion_unavailable": {
+    "message": "이 동영상에서는 RYD 댓글을 사용할 수 없습니다."
+  },
+  "discussion_commentUnavailable": {
+    "message": "더 이상 볼 수 없는 댓글입니다."
+  },
+  "discussion_error": {
+    "message": "연결할 수 없습니다. 다시 시도해 주세요."
+  },
+  "discussion_rateLimited": {
+    "message": "잠시 후에 다시 시도해 주세요."
+  },
+  "discussion_conflict": {
+    "message": "이 댓글이 변경되었습니다. 새로고침 후 다시 시도해 주세요."
+  },
+  "discussion_forbidden": {
+    "message": "이 계정으로는 이 작업을 수행할 수 없습니다."
+  },
+  "discussion_retry": {
+    "message": "다시 시도"
+  },
+  "discussion_notifications": {
+    "message": "알림"
+  },
+  "discussion_notificationEmpty": {
+    "message": "모든 알림을 확인했습니다."
+  },
+  "discussion_notificationReply": {
+    "message": "내 댓글에 $1의 답글이 달렸습니다"
+  },
+  "discussion_notificationLike": {
+    "message": "누군가 내 댓글에 좋아요를 눌렀습니다"
+  },
+  "discussion_notificationLikes": {
+    "message": "내 댓글이 좋아요 $1개를 받았습니다"
+  },
+  "discussion_notificationDislike": {
+    "message": "누군가 내 댓글에 싫어요를 눌렀습니다"
+  },
+  "discussion_notificationReaction": {
+    "message": "누군가 내 댓글에 반응을 남겼습니다"
+  },
+  "discussion_someone": {
+    "message": "누군가"
+  },
+  "discussion_markRead": {
+    "message": "읽음으로 표시"
+  },
+  "discussion_markAllRead": {
+    "message": "모두 읽음으로 표시"
+  },
+  "discussion_view": {
+    "message": "토론 보기"
+  },
+  "discussion_unread": {
+    "message": "읽지 않은 알림 $1개"
+  },
+  "discussion_signedOutInbox": {
+    "message": "내 댓글에 달린 답글과 반응을 보려면 로그인해 주세요."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "더 이상 볼 수 없는 토론입니다."
+  },
+  "discussion_discussionTab": {
+    "message": "토론"
+  },
+  "discussion_nickname": {
+    "message": "닉네임"
+  },
+  "discussion_reportCount": {
+    "message": "신고"
+  },
+  "discussion_reportStatus": {
+    "message": "신고 상태"
+  },
+  "discussion_openReports": {
+    "message": "미처리 신고"
+  },
+  "discussion_resolvedReports": {
+    "message": "기각된 신고"
+  },
+  "discussion_author": {
+    "message": "작성자"
+  },
+  "discussion_me": {
+    "message": "나"
+  },
+  "discussion_saving": {
+    "message": "저장 중…"
+  },
+  "discussion_confirm": {
+    "message": "확인"
+  },
+  "discussion_notificationUpdated": {
+    "message": "내 댓글에 새로운 활동이 있습니다"
+  },
+  "discussion_showThread": {
+    "message": "댓글 대화 보기"
+  },
+  "discussion_loadReplies": {
+    "message": "답글 보기 ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Return YouTube Dislike에 오신 것을 환영합니다"
   },

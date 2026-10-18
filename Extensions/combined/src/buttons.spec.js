@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-const { extConfig } = require("./state");
+const { extConfig, refreshReactionPresentation } = require("./state");
 const {
   ensureSyntheticShortsDislikeButton,
   getButtonControls,
@@ -13,6 +13,7 @@ const {
   hasRenderedBox,
   isSyntheticShortsDislike,
   markButtonsForVideo,
+  refreshDislikeTextTypography,
   setSyntheticShortsDislikeEnabled,
   setSyntheticShortsDislikePressed,
 } = require("./buttons");
@@ -40,6 +41,52 @@ function setBox(element, { height = 48, width = 320, x = 20, y = 20 } = {}) {
     x,
     y,
   });
+}
+
+function typographyControls(nativeText) {
+  document.body.innerHTML = `
+    <style>
+      .ytSpecButtonShapeNextButtonTextContent,
+      .ytSpecButtonShapeNextButtonTextContent > span[role='text'] {
+        font-size: 14px;
+        font-weight: 500;
+        font-family: Roboto, Arial, sans-serif;
+        line-height: 40px;
+      }
+      like-button-view-model .fixture-digit {
+        font-size: 21px;
+        font-weight: 600;
+        font-family: Arial, sans-serif;
+        line-height: 21px;
+      }
+      like-button-view-model .fixture-large { font-size: 25px; line-height: 27px; }
+      like-button-view-model .fixture-static { font-size: 18px; line-height: 24px; }
+      .fixture-screen-reader { position: absolute; clip: rect(0px, 0px, 0px, 0px); }
+    </style>
+    <ytd-watch-flexy video-id="BBBBBBBBBBB">
+      <ytd-menu-renderer class="ytd-watch-metadata">
+        <div id="current">
+          <like-button-view-model>
+            <button aria-pressed="false">
+              <div class="ytSpecButtonShapeNextButtonTextContent ytSpecButtonShapeNextElevatedContent">${nativeText}</div>
+            </button>
+          </like-button-view-model>
+          <dislike-button-view-model>
+            <button class="ytSpecButtonShapeNextIconButton" aria-pressed="false">
+              <span class="ytSpecButtonShapeNextIcon"><svg width="24" height="24"><path d="M0 0"></path></svg></span>
+            </button>
+          </dislike-button-view-model>
+        </div>
+      </ytd-menu-renderer>
+    </ytd-watch-flexy>`;
+  const current = document.querySelector("#current");
+  setBox(current);
+  setNativeTextBoxes();
+  return current;
+}
+
+function setNativeTextBoxes() {
+  document.querySelectorAll("like-button-view-model *").forEach((element) => setBox(element));
 }
 
 describe("desktop watch button ownership", () => {
@@ -346,6 +393,126 @@ describe("desktop watch button ownership", () => {
     expect(first.innerText).toBe("42");
     expect(dislike.querySelectorAll(".ytSpecButtonShapeNextButtonTextContent")).toHaveLength(1);
     expect(dislike.querySelectorAll("#text[role='text']")).toHaveLength(1);
+  });
+
+  test("matches nested native digit typography without changing the native count or dislike icon", () => {
+    const current = typographyControls(`
+      <span hidden>999</span>
+      <span class="fixture-screen-reader">999</span>
+      <animated-rolling-number><animated-rolling-character class="fixture-digit" aria-hidden="true">2</animated-rolling-character></animated-rolling-number>`);
+    const like = current.querySelector("like-button-view-model");
+    const dislike = current.querySelector("dislike-button-view-model");
+    const nativeContent = like.innerHTML;
+    const nativeIcon = dislike.querySelector("svg").outerHTML;
+
+    const count = getDislikeTextContainer(getButtonControls(current));
+
+    expect(count.style.fontSize).toBe("21px");
+    expect(count.style.fontWeight).toBe("600");
+    expect(count.style.fontFamily).toBe("Arial, sans-serif");
+    expect(count.style.lineHeight).toBe("21px");
+    expect(like.innerHTML).toBe(nativeContent);
+    expect(dislike.querySelector("svg").outerHTML).toBe(nativeIcon);
+    expect(dislike.querySelectorAll("animated-rolling-number")).toHaveLength(0);
+    expect(dislike.querySelector("button").classList.contains("ytSpecButtonShapeNextIconLeading")).toBe(true);
+
+    const observer = new MutationObserver(() => {});
+    observer.observe(count, { attributes: true });
+    expect(getDislikeTextContainer(getButtonControls(current))).toBe(count);
+    refreshDislikeTextTypography(like, dislike);
+    expect(observer.takeRecords()).toHaveLength(0);
+    observer.disconnect();
+    expect(dislike.querySelectorAll("#text[role='text']")).toHaveLength(1);
+  });
+
+  test("refreshes delayed native digits and restores ordinary typography on reused controls", () => {
+    const current = typographyControls("254");
+    const nativeText = current.querySelector("like-button-view-model .ytSpecButtonShapeNextButtonTextContent");
+    const count = getDislikeTextContainer(getButtonControls(current));
+    count.innerText = "42";
+    expect(count.style.cssText).toBe("");
+
+    nativeText.innerHTML = '<animated-rolling-character class="fixture-digit">2</animated-rolling-character>';
+    setNativeTextBoxes();
+    refreshReactionPresentation();
+    expect(count.style.fontSize).toBe("21px");
+
+    nativeText.firstElementChild.classList.add("fixture-large");
+    refreshReactionPresentation();
+    expect(count.style.fontSize).toBe("25px");
+    expect(count.style.lineHeight).toBe("27px");
+
+    nativeText.textContent = "254";
+    refreshReactionPresentation();
+    expect(count.style.cssText).toBe("");
+    expect(getDislikeTextContainer(getButtonControls(current))).toBe(count);
+    expect(count.innerText).toBe("42");
+  });
+
+  test.each(["ordinary", "missing"])(
+    "restores original inline values and priorities after cloned controls receive %s native text",
+    (nativeState) => {
+      const originalInlineStyle = "font-size: 14px !important; line-height: 40px !important;";
+      const current = typographyControls(
+        `<span role="text" style="${originalInlineStyle}"><animated-rolling-character class="fixture-digit">2</animated-rolling-character></span>`,
+      );
+      const count = getDislikeTextContainer(getButtonControls(current));
+      count.textContent = "42";
+      expect(count.style.fontSize).toBe("21px");
+
+      const clonedControls = current.cloneNode(true);
+      current.replaceWith(clonedControls);
+      setBox(clonedControls);
+      const nativeText = clonedControls.querySelector("like-button-view-model .ytSpecButtonShapeNextButtonTextContent");
+      nativeText.querySelector(".fixture-digit").classList.add("fixture-large");
+      setNativeTextBoxes();
+      const clonedCount = getDislikeTextContainer(getButtonControls(clonedControls));
+      expect(clonedCount).not.toBe(count);
+      expect(clonedCount.style.fontSize).toBe("25px");
+      expect(clonedCount.style.lineHeight).toBe("27px");
+
+      nativeText.textContent = nativeState === "ordinary" ? "254" : "";
+      refreshReactionPresentation();
+      expect(clonedCount.style.cssText).toBe(originalInlineStyle);
+      expect(clonedCount.style.getPropertyPriority("font-size")).toBe("important");
+      expect(clonedCount.style.getPropertyPriority("line-height")).toBe("important");
+      expect(clonedCount.textContent).toBe("42");
+
+      const observer = new MutationObserver(() => {});
+      observer.observe(clonedCount, { attributes: true });
+      expect(getDislikeTextContainer(getButtonControls(clonedControls))).toBe(clonedCount);
+      refreshReactionPresentation();
+      expect(observer.takeRecords()).toHaveLength(0);
+      observer.disconnect();
+      expect(clonedControls.querySelectorAll("dislike-button-view-model #text[role='text']")).toHaveLength(1);
+    },
+  );
+
+  test("matches native typography scoped to the Like ancestor for ordinary text too", () => {
+    const current = typographyControls('<span class="fixture-static" role="text">254</span>');
+    const count = getDislikeTextContainer(getButtonControls(current));
+
+    expect(count.style.fontSize).toBe("18px");
+    expect(count.style.lineHeight).toBe("24px");
+    expect(count.style.fontWeight).toBe("");
+    expect(count.style.fontFamily).toBe("");
+  });
+
+  test("preserves matching cloned inline styles and existing native dislike text", () => {
+    const current = typographyControls('<span role="text" style="font-size: 18px; line-height: 24px">254</span>');
+    const nativeCount = current.querySelector("like-button-view-model span[role='text']");
+    const count = getDislikeTextContainer(getButtonControls(current));
+    expect(count.style.cssText).toBe(nativeCount.style.cssText);
+
+    const dislike = current.querySelector("dislike-button-view-model");
+    dislike.querySelector(".ytSpecButtonShapeNextButtonTextContent").remove();
+    const existing = document.createElement("span");
+    existing.setAttribute("role", "text");
+    existing.style.fontSize = "16px";
+    dislike.querySelector("button").appendChild(existing);
+    expect(getDislikeTextContainer(getButtonControls(current))).toBe(existing);
+    refreshReactionPresentation();
+    expect(existing.style.cssText).toBe("font-size: 16px;");
   });
 
   test("inserts one owned Shorts Dislike after Like instead of treating Comments as Dislike", () => {

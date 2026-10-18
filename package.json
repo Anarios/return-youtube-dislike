@@ -1,6 +1,6 @@
 {
   "name": "return-youtube-dislike",
-  "version": "4.0.6",
+  "version": "4.1.0",
   "description": "Chrome extension to return youtube dislikes",
   "main": "ryd.content-script.js",
   "packageManager": "npm@10.8.2",
@@ -20,6 +20,7 @@
     "reload:live:extension": "node Extensions/UserScript/e2e/live/reload-live-extension.js",
     "check:extension-artifact": "node Extensions/e2e/verify-extension-artifact.js",
     "test": "jest",
+    "check:locales": "node scripts/check-locales.js",
     "test:e2e:artifacts": "npm run check:extension-artifact && npm run check:userscript-artifact && node Extensions/e2e/hermetic-artifact-smoke.js",
     "test:e2e:extension:run": "npm run check:extension-artifact && playwright test --config playwright.extension.config.js",
     "test:e2e:extension": "npm run build && npm run check:extension-artifact && npm run test:e2e:extension:run",

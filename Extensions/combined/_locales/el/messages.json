@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Λογότυπο Return YouTube Dislike"
   },
+  "githubLoginUnavailable": {
+    "message": "Η σύνδεση συντελεστών μέσω GitHub δεν είναι διαθέσιμη αυτήν τη στιγμή. Η υπηρεσία χρειάζεται ενημέρωση ή αλλαγή ρυθμίσεων."
+  },
+  "githubLoginNotContributor": {
+    "message": "Αυτός ο λογαριασμός GitHub δεν περιλαμβάνεται στους συντελεστές του Return YouTube Dislike. Συνδεθείτε με λογαριασμό συντελεστή. Οι πρόσφατες συνεισφορές μπορεί να χρειαστούν λίγες ώρες για να εμφανιστούν."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Η σύνδεση μέσω GitHub δεν έχει ρυθμιστεί για τη διεύθυνση επανάκλησης αυτού του προγράμματος περιήγησης. Επικοινωνήστε με την υποστήριξη."
+  },
+  "githubLoginExpired": {
+    "message": "Αυτή η προσπάθεια σύνδεσης μέσω GitHub έληξε ή δεν ήταν δυνατό να επαληθευτεί. Ξεκινήστε νέα σύνδεση."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Ενημερώστε την επέκταση για να χρησιμοποιήσετε τη σύνδεση συντελεστών μέσω GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Πάρα πολλές προσπάθειες σύνδεσης. Περιμένετε ένα λεπτό πριν δοκιμάσετε ξανά."
+  },
+  "githubLoginDenied": {
+    "message": "Η εξουσιοδότηση GitHub απορρίφθηκε. Η σύνδεση συντελεστών απαιτεί εξουσιοδότηση."
+  },
+  "discussion_title": {
+    "message": "Σχόλια RYD"
+  },
+  "discussion_subtitle": {
+    "message": "Μια συζήτηση της κοινότητας που φιλοξενείται από το Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Αυτά τα σχόλια είναι ανεξάρτητα από το YouTube."
+  },
+  "discussion_open": {
+    "message": "Άνοιγμα σχολίων RYD"
+  },
+  "discussion_close": {
+    "message": "Κλείσιμο"
+  },
+  "discussion_new": {
+    "message": "Νεότερα"
+  },
+  "discussion_top": {
+    "message": "Κορυφαία"
+  },
+  "discussion_sort": {
+    "message": "Ταξινόμηση σχολίων"
+  },
+  "discussion_refresh": {
+    "message": "Ανανέωση"
+  },
+  "discussion_loading": {
+    "message": "Φόρτωση σχολίων…"
+  },
+  "discussion_empty": {
+    "message": "Δεν υπάρχουν ακόμη σχόλια. Ξεκινήστε τη συζήτηση."
+  },
+  "discussion_replyEmpty": {
+    "message": "Δεν υπάρχουν ακόμη απαντήσεις."
+  },
+  "discussion_comment": {
+    "message": "Σχόλιο"
+  },
+  "discussion_post": {
+    "message": "Δημοσίευση σχολίου"
+  },
+  "discussion_reply": {
+    "message": "Απάντηση"
+  },
+  "discussion_postReply": {
+    "message": "Δημοσίευση απάντησης"
+  },
+  "discussion_cancel": {
+    "message": "Ακύρωση"
+  },
+  "discussion_save": {
+    "message": "Αποθήκευση"
+  },
+  "discussion_edit": {
+    "message": "Επεξεργασία"
+  },
+  "discussion_delete": {
+    "message": "Διαγραφή"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Να διαγραφεί αυτό το σχόλιο;"
+  },
+  "discussion_deleted": {
+    "message": "Το σχόλιο διαγράφηκε"
+  },
+  "discussion_edited": {
+    "message": "τροποποιήθηκε"
+  },
+  "discussion_replies": {
+    "message": "Απαντήσεις ($1)"
+  },
+  "discussion_more": {
+    "message": "Φόρτωση περισσότερων"
+  },
+  "discussion_like": {
+    "message": "Μου αρέσει"
+  },
+  "discussion_dislike": {
+    "message": "Δεν μου αρέσει"
+  },
+  "discussion_reacting": {
+    "message": "Αποθήκευση αντίδρασης…"
+  },
+  "discussion_signInRequired": {
+    "message": "Συνδεθείτε από το αναδυόμενο παράθυρο της επέκτασης για να συνεχίσετε."
+  },
+  "discussion_tierRequired": {
+    "message": "Η δημοσίευση είναι διαθέσιμη σε ενεργά μέλη της βαθμίδας Commenter και άνω."
+  },
+  "discussion_join": {
+    "message": "Γίνετε μέλος Commenter"
+  },
+  "discussion_gate": {
+    "message": "Όλοι μπορούν να διαβάζουν και να αντιδρούν. Τα ενεργά μέλη της βαθμίδας Commenter και άνω μπορούν να δημοσιεύουν."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Επιλέξτε το δημόσιο ψευδώνυμό σας στο RYD πριν δημοσιεύσετε."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Δημόσιο ψευδώνυμο RYD"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 γράμματα, αριθμοί, κενά, τελείες, παύλες ή κάτω παύλες. Αυτό το όνομα θα εμφανίζεται μαζί με τα σχόλιά σας."
+  },
+  "discussion_nicknameSave": {
+    "message": "Αποθήκευση ψευδωνύμου"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Αυτό το ψευδώνυμο χρησιμοποιείται ήδη. Επιλέξτε άλλο."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Χρησιμοποιήστε 3–32 γράμματα, αριθμούς, κενά, τελείες, παύλες ή κάτω παύλες."
+  },
+  "discussion_nicknameChange": {
+    "message": "Αλλαγή ψευδωνύμου"
+  },
+  "discussion_as": {
+    "message": "Σχολιάζετε ως $1"
+  },
+  "discussion_placeholder": {
+    "message": "Συμμετέχετε στη συζήτηση…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Αναφορά"
+  },
+  "discussion_reportTitle": {
+    "message": "Αναφορά σχολίου"
+  },
+  "discussion_reportReason": {
+    "message": "Αιτία"
+  },
+  "discussion_reportSpam": {
+    "message": "Ανεπιθύμητο περιεχόμενο"
+  },
+  "discussion_reportAbuse": {
+    "message": "Παρενόχληση ή μίσος"
+  },
+  "discussion_reportOther": {
+    "message": "Άλλο"
+  },
+  "discussion_reportDetails": {
+    "message": "Πρόσθετες λεπτομέρειες (προαιρετικά)"
+  },
+  "discussion_reportSend": {
+    "message": "Αποστολή αναφοράς"
+  },
+  "discussion_reportDone": {
+    "message": "Η αναφορά παραλήφθηκε. Ευχαριστούμε."
+  },
+  "discussion_moderation": {
+    "message": "Συντονισμός"
+  },
+  "discussion_queueEmpty": {
+    "message": "Δεν υπάρχουν αναφορές για έλεγχο."
+  },
+  "discussion_hide": {
+    "message": "Απόκρυψη σχολίου"
+  },
+  "discussion_restore": {
+    "message": "Επαναφορά σχολίου"
+  },
+  "discussion_dismiss": {
+    "message": "Απόρριψη αναφορών"
+  },
+  "discussion_ban": {
+    "message": "Αποκλεισμός συντάκτη"
+  },
+  "discussion_unban": {
+    "message": "Άρση αποκλεισμού συντάκτη"
+  },
+  "discussion_moderationReason": {
+    "message": "Αιτία ενέργειας συντονισμού"
+  },
+  "discussion_moderationSaved": {
+    "message": "Η ενέργεια συντονισμού αποθηκεύτηκε."
+  },
+  "discussion_reported": {
+    "message": "$1 αναφορές"
+  },
+  "discussion_unavailable": {
+    "message": "Τα σχόλια RYD δεν είναι διαθέσιμα για αυτό το βίντεο."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Αυτό το σχόλιο δεν είναι πλέον διαθέσιμο."
+  },
+  "discussion_error": {
+    "message": "Δεν ήταν δυνατή η σύνδεση. Δοκιμάστε ξανά."
+  },
+  "discussion_rateLimited": {
+    "message": "Περιμένετε λίγο πριν δοκιμάσετε ξανά."
+  },
+  "discussion_conflict": {
+    "message": "Αυτό το σχόλιο άλλαξε. Ανανεώστε και δοκιμάστε ξανά."
+  },
+  "discussion_forbidden": {
+    "message": "Αυτή η ενέργεια δεν είναι διαθέσιμη για τον λογαριασμό σας."
+  },
+  "discussion_retry": {
+    "message": "Δοκιμάστε ξανά"
+  },
+  "discussion_notifications": {
+    "message": "Ειδοποιήσεις"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Έχετε δει όλες τις ενημερώσεις."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 απάντησε στο σχόλιό σας"
+  },
+  "discussion_notificationLike": {
+    "message": "Σε κάποιον άρεσε το σχόλιό σας"
+  },
+  "discussion_notificationLikes": {
+    "message": "Το σχόλιό σας έλαβε $1 likes"
+  },
+  "discussion_notificationDislike": {
+    "message": "Σε κάποιον δεν άρεσε το σχόλιό σας"
+  },
+  "discussion_notificationReaction": {
+    "message": "Κάποιος αντέδρασε στο σχόλιό σας"
+  },
+  "discussion_someone": {
+    "message": "Κάποιος"
+  },
+  "discussion_markRead": {
+    "message": "Επισήμανση ως αναγνωσμένη"
+  },
+  "discussion_markAllRead": {
+    "message": "Επισήμανση όλων ως αναγνωσμένων"
+  },
+  "discussion_view": {
+    "message": "Προβολή συζήτησης"
+  },
+  "discussion_unread": {
+    "message": "$1 μη αναγνωσμένες ειδοποιήσεις"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Συνδεθείτε για να δείτε απαντήσεις και αντιδράσεις στα σχόλιά σας."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Αυτή η συζήτηση δεν είναι πλέον διαθέσιμη."
+  },
+  "discussion_discussionTab": {
+    "message": "Συζήτηση"
+  },
+  "discussion_nickname": {
+    "message": "Ψευδώνυμο"
+  },
+  "discussion_reportCount": {
+    "message": "Αναφορές"
+  },
+  "discussion_reportStatus": {
+    "message": "Κατάσταση αναφοράς"
+  },
+  "discussion_openReports": {
+    "message": "Ανοιχτές αναφορές"
+  },
+  "discussion_resolvedReports": {
+    "message": "Αναφορές που απορρίφθηκαν"
+  },
+  "discussion_author": {
+    "message": "Συντάκτης"
+  },
+  "discussion_me": {
+    "message": "Εσείς"
+  },
+  "discussion_saving": {
+    "message": "Αποθήκευση…"
+  },
+  "discussion_confirm": {
+    "message": "Επιβεβαίωση"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Νέα δραστηριότητα στα σχόλιά σας"
+  },
+  "discussion_showThread": {
+    "message": "Εμφάνιση νήματος"
+  },
+  "discussion_loadReplies": {
+    "message": "Εμφάνιση απαντήσεων ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Καλώς ήρθατε στο Return YouTube Dislike"
   },

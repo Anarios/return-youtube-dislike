@@ -9,6 +9,10 @@ on:
       - "Extensions/common/**"
       - "Extensions/UserScript/**"
       - "Extensions/e2e/**"
+      - "Website/_locales/**"
+      - "Website/utils/locale*"
+      - "Website/nuxt.config.js"
+      - "Website/layouts/default.vue"
       - ".github/workflows/build.yaml"
       - ".babelrc"
       - ".gitattributes"
@@ -18,6 +22,7 @@ on:
       - "jest.config.js"
       - "package.json"
       - "package-lock.json"
+      - "scripts/check-locales*"
       - "playwright*.js"
       - "webpack*.js"
   pull_request:
@@ -28,6 +33,10 @@ on:
       - "Extensions/common/**"
       - "Extensions/UserScript/**"
       - "Extensions/e2e/**"
+      - "Website/_locales/**"
+      - "Website/utils/locale*"
+      - "Website/nuxt.config.js"
+      - "Website/layouts/default.vue"
       - ".github/workflows/build.yaml"
       - ".babelrc"
       - ".gitattributes"
@@ -37,6 +46,7 @@ on:
       - "jest.config.js"
       - "package.json"
       - "package-lock.json"
+      - "scripts/check-locales*"
       - "playwright*.js"
       - "webpack*.js"
 
@@ -59,6 +69,9 @@ jobs:
 
       - name: Run Jest tests
         run: npm test -- --runInBand
+
+      - name: Check locale completeness
+        run: npm run check:locales
 
       - name: Build extension
         run: npm run build

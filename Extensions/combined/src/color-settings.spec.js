@@ -32,7 +32,7 @@ test("changes custom colors in an open tab and refreshes the current video's pre
 
 test("ignores custom color events from other storage areas", () => {
   storageChangeHandler({ customColors: { newValue: { light: { like: "#123456" } } } }, "local");
-  expect(getColorFromTheme(true)).toBe("#008000");
+  expect(getColorFromTheme(true)).toBe("#007600");
   expect(createRateBar).not.toHaveBeenCalled();
 });
 
@@ -69,6 +69,6 @@ test("theme attribute changes repaint current controls without fetching counts",
   expect(createRateBar).toHaveBeenCalledTimes(1);
   document.documentElement.removeAttribute("dark");
   await Promise.resolve();
-  expect(getColorFromTheme(true)).toBe("#008000");
+  expect(getColorFromTheme(true)).toBe("#007600");
   expect(createRateBar).toHaveBeenCalledTimes(2);
 });

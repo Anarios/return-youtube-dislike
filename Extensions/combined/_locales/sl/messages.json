@@ -557,6 +557,294 @@
   "changelog_brand_logo_alt": {
     "message": "Logotip Return YouTube Dislike"
   },
+  "discussion_title": {
+    "message": "Komentarji RYD"
+  },
+  "discussion_subtitle": {
+    "message": "Razprava skupnosti, ki jo gosti Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Ti komentarji so ločeni od YouTuba."
+  },
+  "discussion_open": {
+    "message": "Odpri komentarje RYD"
+  },
+  "discussion_close": {
+    "message": "Zapri"
+  },
+  "discussion_new": {
+    "message": "Najnovejši"
+  },
+  "discussion_top": {
+    "message": "Najboljši"
+  },
+  "discussion_sort": {
+    "message": "Razvrsti komentarje"
+  },
+  "discussion_refresh": {
+    "message": "Osveži"
+  },
+  "discussion_loading": {
+    "message": "Nalaganje komentarjev…"
+  },
+  "discussion_empty": {
+    "message": "Komentarjev še ni. Začnite pogovor."
+  },
+  "discussion_replyEmpty": {
+    "message": "Odgovorov še ni."
+  },
+  "discussion_comment": {
+    "message": "Komentar"
+  },
+  "discussion_post": {
+    "message": "Objavi komentar"
+  },
+  "discussion_reply": {
+    "message": "Odgovori"
+  },
+  "discussion_postReply": {
+    "message": "Objavi odgovor"
+  },
+  "discussion_cancel": {
+    "message": "Prekliči"
+  },
+  "discussion_save": {
+    "message": "Shrani"
+  },
+  "discussion_edit": {
+    "message": "Uredi"
+  },
+  "discussion_delete": {
+    "message": "Izbriši"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Želite izbrisati ta komentar?"
+  },
+  "discussion_deleted": {
+    "message": "Komentar je izbrisan"
+  },
+  "discussion_edited": {
+    "message": "urejeno"
+  },
+  "discussion_replies": {
+    "message": "Odgovori ($1)"
+  },
+  "discussion_more": {
+    "message": "Naloži več"
+  },
+  "discussion_like": {
+    "message": "Všeč mi je"
+  },
+  "discussion_dislike": {
+    "message": "Ni mi všeč"
+  },
+  "discussion_reacting": {
+    "message": "Shranjevanje odziva…"
+  },
+  "discussion_signInRequired": {
+    "message": "Za nadaljevanje se prijavite v pojavnem oknu razširitve."
+  },
+  "discussion_tierRequired": {
+    "message": "Objavljanje je na voljo članom z aktivnim članstvom na stopnji Commenter ali višji."
+  },
+  "discussion_join": {
+    "message": "Pridobite članstvo Commenter"
+  },
+  "discussion_gate": {
+    "message": "Vsi lahko berejo in se odzivajo. Člani z aktivnim članstvom na stopnji Commenter ali višji lahko objavljajo."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Pred objavo izberite svoj javni vzdevek RYD."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Javni vzdevek RYD"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 črk, številk, presledkov, pik, vezajev ali podčrtajev. To ime bo prikazano ob vaših komentarjih."
+  },
+  "discussion_nicknameSave": {
+    "message": "Shrani vzdevek"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Ta vzdevek je že zaseden. Izberite drugega."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Uporabite 3–32 črk, številk, presledkov, pik, vezajev ali podčrtajev."
+  },
+  "discussion_nicknameChange": {
+    "message": "Spremeni vzdevek"
+  },
+  "discussion_as": {
+    "message": "Komentirate kot $1"
+  },
+  "discussion_placeholder": {
+    "message": "Pridružite se razpravi…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Prijavi"
+  },
+  "discussion_reportTitle": {
+    "message": "Prijavi komentar"
+  },
+  "discussion_reportReason": {
+    "message": "Razlog"
+  },
+  "discussion_reportSpam": {
+    "message": "Neželena vsebina"
+  },
+  "discussion_reportAbuse": {
+    "message": "Nadlegovanje ali sovraštvo"
+  },
+  "discussion_reportOther": {
+    "message": "Drugo"
+  },
+  "discussion_reportDetails": {
+    "message": "Dodatne podrobnosti (neobvezno)"
+  },
+  "discussion_reportSend": {
+    "message": "Pošlji prijavo"
+  },
+  "discussion_reportDone": {
+    "message": "Prijava je prejeta. Hvala."
+  },
+  "discussion_moderation": {
+    "message": "Moderiranje"
+  },
+  "discussion_queueEmpty": {
+    "message": "Ni prijav za pregled."
+  },
+  "discussion_hide": {
+    "message": "Skrij komentar"
+  },
+  "discussion_restore": {
+    "message": "Obnovi komentar"
+  },
+  "discussion_dismiss": {
+    "message": "Zavrni prijave"
+  },
+  "discussion_ban": {
+    "message": "Blokiraj avtorja"
+  },
+  "discussion_unban": {
+    "message": "Odblokiraj avtorja"
+  },
+  "discussion_moderationReason": {
+    "message": "Razlog moderiranja"
+  },
+  "discussion_moderationSaved": {
+    "message": "Dejanje moderiranja je shranjeno."
+  },
+  "discussion_reported": {
+    "message": "Prijave: $1"
+  },
+  "discussion_unavailable": {
+    "message": "Komentarji RYD za ta videoposnetek niso na voljo."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Ta komentar ni več na voljo."
+  },
+  "discussion_error": {
+    "message": "Povezave ni bilo mogoče vzpostaviti. Poskusite znova."
+  },
+  "discussion_rateLimited": {
+    "message": "Pred ponovnim poskusom malo počakajte."
+  },
+  "discussion_conflict": {
+    "message": "Ta komentar je bil spremenjen. Osvežite in poskusite znova."
+  },
+  "discussion_forbidden": {
+    "message": "To dejanje za vaš račun ni na voljo."
+  },
+  "discussion_retry": {
+    "message": "Poskusi znova"
+  },
+  "discussion_notifications": {
+    "message": "Obvestila"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Prebrali ste vsa obvestila."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 odgovarja na vaš komentar"
+  },
+  "discussion_notificationLike": {
+    "message": "Nekomu je bil všeč vaš komentar"
+  },
+  "discussion_notificationLikes": {
+    "message": "Vaš komentar ima toliko všečkov: $1"
+  },
+  "discussion_notificationDislike": {
+    "message": "Nekomu ni bil všeč vaš komentar"
+  },
+  "discussion_notificationReaction": {
+    "message": "Nekdo se je odzval na vaš komentar"
+  },
+  "discussion_someone": {
+    "message": "Nekdo"
+  },
+  "discussion_markRead": {
+    "message": "Označi kot prebrano"
+  },
+  "discussion_markAllRead": {
+    "message": "Označi vse kot prebrano"
+  },
+  "discussion_view": {
+    "message": "Ogled razprave"
+  },
+  "discussion_unread": {
+    "message": "Neprebrana obvestila: $1"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Prijavite se za ogled odgovorov in odzivov na svoje komentarje."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Ta razprava ni več na voljo."
+  },
+  "discussion_discussionTab": {
+    "message": "Razprava"
+  },
+  "discussion_nickname": {
+    "message": "Vzdevek"
+  },
+  "discussion_reportCount": {
+    "message": "Prijave"
+  },
+  "discussion_reportStatus": {
+    "message": "Stanje prijave"
+  },
+  "discussion_openReports": {
+    "message": "Odprte prijave"
+  },
+  "discussion_resolvedReports": {
+    "message": "Zavrnjene prijave"
+  },
+  "discussion_author": {
+    "message": "Avtor"
+  },
+  "discussion_me": {
+    "message": "Vi"
+  },
+  "discussion_saving": {
+    "message": "Shranjevanje…"
+  },
+  "discussion_confirm": {
+    "message": "Potrdi"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Nova dejavnost pri vaših komentarjih"
+  },
+  "discussion_showThread": {
+    "message": "Prikaži nit"
+  },
+  "discussion_loadReplies": {
+    "message": "Prikaži odgovore ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Dobrodošli v Return YouTube Dislike"
   },

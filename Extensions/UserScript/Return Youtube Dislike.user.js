@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      3.2.0
+// @version      3.2.1
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -529,8 +529,8 @@ function resolveDelegatedVoteActivation({
 
 ;// CONCATENATED MODULE: ./Extensions/common/color-themes.js
 const DEFAULT_CUSTOM_COLORS = Object.freeze({
-  light: Object.freeze({ like: "#008000", dislike: "#b300b3" }),
-  dark: Object.freeze({ like: "#00d000", dislike: "#ff66ff" }),
+  light: Object.freeze({ like: "#007600", dislike: "#b300b3" }),
+  dark: Object.freeze({ like: "#00d000", dislike: "#ff77ff" }),
 });
 
 function normalizeCustomColors(value) {
@@ -916,7 +916,7 @@ function createGmSyntheticDislikeStore() {
 
 
 ;// CONCATENATED MODULE: ./Extensions/UserScript/userscript-version.json
-const userscript_version_namespaceObject = "3.2.0";
+const userscript_version_namespaceObject = "3.2.1";
 ;// CONCATENATED MODULE: ./Extensions/UserScript/src/userscript-entry.js
 
 
@@ -949,8 +949,8 @@ const extConfig = {
   coloredBar: false, // [true, false*] Colorize ratio bar (Use custom colors for ratio bar)
   colorTheme: "classic", // [classic*, accessible, neon, hibiscus, custom] Color theme (red/green, blue/yellow, pink/cyan, green/magenta, custom)
   customColors: {
-    light: { like: "#008000", dislike: "#b300b3" },
-    dark: { like: "#00d000", dislike: "#ff66ff" },
+    light: { like: "#007600", dislike: "#b300b3" },
+    dark: { like: "#00d000", dislike: "#ff77ff" },
   }, // Custom like/dislike colors for YouTube's light and dark themes (#rrggbb)
   numberDisplayFormat: "compactShort", // [compactShort*, compactLong, standard] Number format (For non-English locale users, you may be able to improve appearance with a different option. Please file a feature request if your locale is not covered)
   numberDisplayRoundDown: true, // [true*, false] Round down numbers (Show rounded down numbers)

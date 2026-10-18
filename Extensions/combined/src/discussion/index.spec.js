@@ -6,6 +6,7 @@
 import { initDiscussion } from "./index";
 import { NATIVE_STATE_REQUEST, NATIVE_STATE_ATTRIBUTE } from "./detector";
 import { threadUrl } from "./dom";
+import { discussionText } from "./localize";
 
 const VIDEO = "abcdefghijk";
 const OTHER = "zyxwvutsrqp";
@@ -201,12 +202,30 @@ test("restoring a cached page recreates the panel with a fresh request scope", a
   expect(document.querySelectorAll("#ryd-discussion-panel")).toHaveLength(1);
 });
 
-test("switching YouTube language refreshes the panel language", async () => {
+test.each(["ru", "be-BY", "de-DE", "pt_BR", "sv_SE", "zh-Hans", "zh-Hant"])(
+  "switching YouTube language to %s refreshes the panel language",
+  async (language) => {
+    feature = initDiscussion({ request });
+    await flush();
+    const previousPanel = document.getElementById("ryd-discussion-panel");
+    document.documentElement.lang = language;
+    await flush();
+    jest.advanceTimersByTime(150);
+    await flush();
+    expect(document.getElementById("ryd-discussion-panel")).not.toBe(previousPanel);
+    expect(document.querySelector(".ryd-discussion-title").textContent).toBe(discussionText("title", [], language));
+  },
+);
+
+test("switching between Chinese scripts refreshes an existing translated panel", async () => {
+  document.documentElement.lang = "zh-Hans";
   feature = initDiscussion({ request });
   await flush();
-  document.documentElement.lang = "ru";
+  const previousPanel = document.getElementById("ryd-discussion-panel");
+  document.documentElement.lang = "zh-Hant";
   await feature.refresh();
-  expect(document.querySelector(".ryd-discussion-title").textContent).toBe("Комментарии RYD");
+  expect(document.getElementById("ryd-discussion-panel")).not.toBe(previousPanel);
+  expect(document.querySelector(".ryd-discussion-title").textContent).toBe(discussionText("title", [], "zh-TW"));
 });
 
 test("an opened Shorts drawer survives a transiently hidden and replaced same-video container", async () => {

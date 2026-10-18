@@ -24,10 +24,10 @@ test.each([
 
 test("Hibiscus uses distinct light and dark palettes without reading custom settings", () => {
   const custom = { light: { like: "#123456", dislike: "#654321" } };
-  expect(getThemeColor("hibiscus", true, false, custom)).toBe("#008000");
+  expect(getThemeColor("hibiscus", true, false, custom)).toBe("#007600");
   expect(getThemeColor("hibiscus", false, false, custom)).toBe("#b300b3");
   expect(getThemeColor("hibiscus", true, true, custom)).toBe("#00d000");
-  expect(getThemeColor("hibiscus", false, true, custom)).toBe("#ff66ff");
+  expect(getThemeColor("hibiscus", false, true, custom)).toBe("#ff77ff");
 });
 
 test("custom colors use the matching theme and recover each malformed field independently", () => {
@@ -43,7 +43,7 @@ test("custom colors use the matching theme and recover each malformed field inde
   });
   const colors = normalizeCustomColors();
   colors.light.like = "#ffffff";
-  expect(normalizeCustomColors().light.like).toBe("#008000");
+  expect(normalizeCustomColors().light.like).toBe("#007600");
 });
 
 test.each(["", "true", "false"])("recognizes dark attribute by its presence (%s)", (value) => {
@@ -90,5 +90,17 @@ test.each([
   for (const isLike of [true, false]) {
     const levels = [luminance(getThemeColor("hibiscus", isLike, dark)), luminance(surface)].sort((a, b) => b - a);
     expect((levels[0] + 0.05) / (levels[1] + 0.05)).toBeGreaterThanOrEqual(3);
+  }
+});
+
+test.each([
+  [false, "#f2f2f2"],
+  [false, "#e5e5e5"],
+  [true, "#272727"],
+  [true, "#3f3f3f"],
+])("Hibiscus text has at least 4.5:1 contrast with idle and hovered buttons (dark=%s, %s)", (dark, surface) => {
+  for (const isLike of [true, false]) {
+    const levels = [luminance(getThemeColor("hibiscus", isLike, dark)), luminance(surface)].sort((a, b) => b - a);
+    expect((levels[0] + 0.05) / (levels[1] + 0.05)).toBeGreaterThanOrEqual(4.5);
   }
 });

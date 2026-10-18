@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 標誌"
   },
+  "githubLoginUnavailable": {
+    "message": "目前無法使用 GitHub 貢獻者登入。服務需要更新或變更設定。"
+  },
+  "githubLoginNotContributor": {
+    "message": "此 GitHub 帳戶未列為 Return YouTube Dislike 的貢獻者。請使用有貢獻紀錄的帳戶登入。近期的貢獻可能需要幾個小時才會顯示。"
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "尚未為此瀏覽器的回呼位址設定 GitHub 登入。請聯絡支援人員。"
+  },
+  "githubLoginExpired": {
+    "message": "此次 GitHub 登入嘗試已過期或無法驗證。請重新登入。"
+  },
+  "githubLoginUpdateRequired": {
+    "message": "請更新擴充功能以使用 GitHub 貢獻者登入。"
+  },
+  "githubLoginRateLimited": {
+    "message": "登入嘗試次數過多。請等待一分鐘後再試。"
+  },
+  "githubLoginDenied": {
+    "message": "GitHub 授權遭拒。貢獻者登入需要授權。"
+  },
+  "discussion_title": {
+    "message": "RYD 留言"
+  },
+  "discussion_subtitle": {
+    "message": "由 Return YouTube Dislike 提供的社群討論。"
+  },
+  "discussion_independent": {
+    "message": "這些留言獨立於 YouTube。"
+  },
+  "discussion_open": {
+    "message": "開啟 RYD 留言"
+  },
+  "discussion_close": {
+    "message": "關閉"
+  },
+  "discussion_new": {
+    "message": "最新"
+  },
+  "discussion_top": {
+    "message": "熱門"
+  },
+  "discussion_sort": {
+    "message": "留言排序"
+  },
+  "discussion_refresh": {
+    "message": "重新整理"
+  },
+  "discussion_loading": {
+    "message": "正在載入留言…"
+  },
+  "discussion_empty": {
+    "message": "還沒有留言。來開啟討論吧。"
+  },
+  "discussion_replyEmpty": {
+    "message": "還沒有回覆。"
+  },
+  "discussion_comment": {
+    "message": "留言"
+  },
+  "discussion_post": {
+    "message": "發布留言"
+  },
+  "discussion_reply": {
+    "message": "回覆"
+  },
+  "discussion_postReply": {
+    "message": "發布回覆"
+  },
+  "discussion_cancel": {
+    "message": "取消"
+  },
+  "discussion_save": {
+    "message": "儲存"
+  },
+  "discussion_edit": {
+    "message": "編輯"
+  },
+  "discussion_delete": {
+    "message": "刪除"
+  },
+  "discussion_deleteConfirm": {
+    "message": "要刪除此留言嗎？"
+  },
+  "discussion_deleted": {
+    "message": "留言已刪除"
+  },
+  "discussion_edited": {
+    "message": "已編輯"
+  },
+  "discussion_replies": {
+    "message": "回覆（$1）"
+  },
+  "discussion_more": {
+    "message": "載入更多"
+  },
+  "discussion_like": {
+    "message": "按讚"
+  },
+  "discussion_dislike": {
+    "message": "不喜歡"
+  },
+  "discussion_reacting": {
+    "message": "正在儲存反應…"
+  },
+  "discussion_signInRequired": {
+    "message": "請從擴充功能的彈出視窗登入以繼續。"
+  },
+  "discussion_tierRequired": {
+    "message": "有效的 Commenter 及以上等級會員可以發言。"
+  },
+  "discussion_join": {
+    "message": "成為 Commenter 會員"
+  },
+  "discussion_gate": {
+    "message": "所有人都可以閱讀和表達反應。有效的 Commenter 及以上等級會員可以發言。"
+  },
+  "discussion_nicknameRequired": {
+    "message": "發言前請設定您的 RYD 公開暱稱。"
+  },
+  "discussion_nicknameLabel": {
+    "message": "RYD 公開暱稱"
+  },
+  "discussion_nicknameHint": {
+    "message": "可使用 3–32 個字母、數字、空格、句點、連字號或底線。此暱稱會與您的留言一起顯示。"
+  },
+  "discussion_nicknameSave": {
+    "message": "儲存暱稱"
+  },
+  "discussion_nicknameTaken": {
+    "message": "此暱稱已被使用。請選擇其他暱稱。"
+  },
+  "discussion_nicknameInvalid": {
+    "message": "請使用 3–32 個字母、數字、空格、句點、連字號或底線。"
+  },
+  "discussion_nicknameChange": {
+    "message": "變更暱稱"
+  },
+  "discussion_as": {
+    "message": "以 $1 的身分留言"
+  },
+  "discussion_placeholder": {
+    "message": "參與討論…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "檢舉"
+  },
+  "discussion_reportTitle": {
+    "message": "檢舉留言"
+  },
+  "discussion_reportReason": {
+    "message": "原因"
+  },
+  "discussion_reportSpam": {
+    "message": "垃圾訊息"
+  },
+  "discussion_reportAbuse": {
+    "message": "騷擾或仇恨"
+  },
+  "discussion_reportOther": {
+    "message": "其他"
+  },
+  "discussion_reportDetails": {
+    "message": "補充詳情（選填）"
+  },
+  "discussion_reportSend": {
+    "message": "送出檢舉"
+  },
+  "discussion_reportDone": {
+    "message": "已收到檢舉，謝謝。"
+  },
+  "discussion_moderation": {
+    "message": "內容管理"
+  },
+  "discussion_queueEmpty": {
+    "message": "沒有待審核的檢舉。"
+  },
+  "discussion_hide": {
+    "message": "隱藏留言"
+  },
+  "discussion_restore": {
+    "message": "還原留言"
+  },
+  "discussion_dismiss": {
+    "message": "駁回檢舉"
+  },
+  "discussion_ban": {
+    "message": "封鎖作者"
+  },
+  "discussion_unban": {
+    "message": "解除封鎖作者"
+  },
+  "discussion_moderationReason": {
+    "message": "管理操作原因"
+  },
+  "discussion_moderationSaved": {
+    "message": "管理操作已儲存。"
+  },
+  "discussion_reported": {
+    "message": "$1 次檢舉"
+  },
+  "discussion_unavailable": {
+    "message": "此影片無法使用 RYD 留言。"
+  },
+  "discussion_commentUnavailable": {
+    "message": "此留言已無法查看。"
+  },
+  "discussion_error": {
+    "message": "無法連線。請再試一次。"
+  },
+  "discussion_rateLimited": {
+    "message": "請稍候再試。"
+  },
+  "discussion_conflict": {
+    "message": "此留言已被變更。請重新整理後再試。"
+  },
+  "discussion_forbidden": {
+    "message": "您的帳戶無法執行此操作。"
+  },
+  "discussion_retry": {
+    "message": "再試一次"
+  },
+  "discussion_notifications": {
+    "message": "通知"
+  },
+  "discussion_notificationEmpty": {
+    "message": "您已查看所有通知。"
+  },
+  "discussion_notificationReply": {
+    "message": "$1 回覆了您的留言"
+  },
+  "discussion_notificationLike": {
+    "message": "有人對您的留言按讚"
+  },
+  "discussion_notificationLikes": {
+    "message": "您的留言獲得了 $1 個讚"
+  },
+  "discussion_notificationDislike": {
+    "message": "有人對您的留言按了不喜歡"
+  },
+  "discussion_notificationReaction": {
+    "message": "有人對您的留言表達了反應"
+  },
+  "discussion_someone": {
+    "message": "有人"
+  },
+  "discussion_markRead": {
+    "message": "標示為已讀"
+  },
+  "discussion_markAllRead": {
+    "message": "全部標示為已讀"
+  },
+  "discussion_view": {
+    "message": "查看討論"
+  },
+  "discussion_unread": {
+    "message": "$1 則未讀通知"
+  },
+  "discussion_signedOutInbox": {
+    "message": "登入後即可查看您留言收到的回覆與反應。"
+  },
+  "discussion_notificationUnavailable": {
+    "message": "此討論已無法查看。"
+  },
+  "discussion_discussionTab": {
+    "message": "討論"
+  },
+  "discussion_nickname": {
+    "message": "暱稱"
+  },
+  "discussion_reportCount": {
+    "message": "檢舉"
+  },
+  "discussion_reportStatus": {
+    "message": "檢舉狀態"
+  },
+  "discussion_openReports": {
+    "message": "待處理檢舉"
+  },
+  "discussion_resolvedReports": {
+    "message": "已駁回的檢舉"
+  },
+  "discussion_author": {
+    "message": "作者"
+  },
+  "discussion_me": {
+    "message": "您"
+  },
+  "discussion_saving": {
+    "message": "正在儲存…"
+  },
+  "discussion_confirm": {
+    "message": "確認"
+  },
+  "discussion_notificationUpdated": {
+    "message": "您的留言有新動態"
+  },
+  "discussion_showThread": {
+    "message": "顯示留言串"
+  },
+  "discussion_loadReplies": {
+    "message": "顯示回覆（$1）"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "歡迎使用 Return YouTube Dislike"
   },

@@ -20,10 +20,10 @@ describe("Belarusian localization", () => {
   );
 
   it.each(dynamicMessages.filter((key) => key.startsWith("discussion_")))(
-    "uses the English fallback and substitutions for %s",
+    "uses the Belarusian translation and substitutions for %s",
     (key) => {
       const substitutions = ["First value", "Second value"];
-      const expected = english[key].message.replace(/\$(\d+)/g, (_, index) => substitutions[Number(index) - 1]);
+      const expected = belarusian[key].message.replace(/\$(\d+)/g, (_, index) => substitutions[Number(index) - 1]);
       expect(discussionText(key.slice("discussion_".length), substitutions, "be")).toBe(expected);
     },
   );

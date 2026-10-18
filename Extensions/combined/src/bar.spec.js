@@ -29,6 +29,7 @@ jest.mock("./state", () => ({
   isNewDesign: jest.fn(() => true),
   isRoundedDesign: jest.fn(() => true),
   isShorts: jest.fn(() => false),
+  isVideoLiked: jest.fn(() => false),
 }));
 
 jest.mock("./utils", () => ({
@@ -48,8 +49,8 @@ jest.mock("./utils", () => ({
 
 const { getButtons, getDislikeButton, getLikeButton } = require("./buttons");
 const { createRateBar, hasUsableRateBar } = require("./bar");
-const { isLikesDisabled, isMobile, isNewDesign, isRoundedDesign, isShorts } = require("./state");
-const { getVideoId } = require("./utils");
+const { isLikesDisabled, isMobile, isNewDesign, isRoundedDesign, isShorts, isVideoLiked } = require("./state");
+const { getVideoId, isInViewport } = require("./utils");
 
 describe("rate-bar stylesheet contrast", () => {
   test("uses the same high-contrast negative track recipe as the userscript", () => {
@@ -95,11 +96,38 @@ describe("rate-bar visual ownership", () => {
     isNewDesign.mockReturnValue(true);
     isRoundedDesign.mockReturnValue(true);
     isShorts.mockReturnValue(false);
+    isVideoLiked.mockReturnValue(false);
     getVideoId.mockReturnValue("BBBBBBBBBBB");
     const buttons = document.querySelector('[data-watch-buttons="BBBBBBBBBBB"]');
     getButtons.mockReturnValue(buttons);
     getLikeButton.mockReturnValue(buttons.querySelector("like-button-view-model"));
     getDislikeButton.mockReturnValue(buttons.querySelector("dislike-button-view-model"));
+  });
+
+  test.each([false, true])("initializes the custom CSS hook from the native liked state: %s", (liked) => {
+    isVideoLiked.mockReturnValue(liked);
+
+    createRateBar(80, 20);
+
+    expect(getButtons().querySelector("#ryd-bar-container").getAttribute("data-ryd-liked")).toBe(String(liked));
+  });
+
+  test("refreshes the liked hook when reusing or recreating the bar", () => {
+    isInViewport.mockReturnValue(true);
+    createRateBar(80, 20);
+    const originalBar = getButtons().querySelector("#ryd-bar-container");
+    isVideoLiked.mockReturnValue(true);
+
+    createRateBar(81, 20);
+
+    expect(getButtons().querySelector("#ryd-bar-container")).toBe(originalBar);
+    expect(originalBar.getAttribute("data-ryd-liked")).toBe("true");
+
+    originalBar.closest(".ryd-tooltip").remove();
+    createRateBar(81, 20);
+    const recreatedBar = getButtons().querySelector("#ryd-bar-container");
+    expect(recreatedBar).not.toBe(originalBar);
+    expect(recreatedBar.getAttribute("data-ryd-liked")).toBe("true");
   });
 
   test("mutates only the selected current watch tree when stale duplicate IDs come first", () => {
@@ -160,6 +188,7 @@ describe("rate-bar visual ownership", () => {
     expect(currentButtons.querySelector("#ryd-bar").style.width).toBe("85.99%");
 
     getVideoId.mockReturnValue("AAAAAAAAAAA");
+    isVideoLiked.mockReturnValue(true);
     expect(hasUsableRateBar(currentButtons)).toBe(false);
     createRateBar(3_591, 1_409);
 
@@ -168,6 +197,7 @@ describe("rate-bar visual ownership", () => {
     expect(staleWrapper.isConnected).toBe(false);
     expect(currentWrapper).not.toBe(staleWrapper);
     expect(currentWrapper.getAttribute("data-ryd-video-id")).toBe("AAAAAAAAAAA");
+    expect(currentWrapper.querySelector("#ryd-bar-container").getAttribute("data-ryd-liked")).toBe("true");
     expect(currentButtons.querySelector("#ryd-bar").style.width).toBe("71.82%");
     expect(hasUsableRateBar(currentButtons)).toBe(true);
   });

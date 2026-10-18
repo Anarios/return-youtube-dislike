@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
   },
+  "githubLoginUnavailable": {
+    "message": "Hiện không thể đăng nhập với tư cách người đóng góp GitHub. Dịch vụ cần được cập nhật hoặc thay đổi cấu hình."
+  },
+  "githubLoginNotContributor": {
+    "message": "Tài khoản GitHub này không có trong danh sách người đóng góp cho Return YouTube Dislike. Hãy đăng nhập bằng tài khoản đã đóng góp. Các đóng góp gần đây có thể mất vài giờ mới được hiển thị."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Đăng nhập GitHub chưa được cấu hình cho địa chỉ gọi lại của trình duyệt này. Vui lòng liên hệ bộ phận hỗ trợ."
+  },
+  "githubLoginExpired": {
+    "message": "Lần đăng nhập GitHub này đã hết hạn hoặc không thể xác minh. Vui lòng bắt đầu đăng nhập lại."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Vui lòng cập nhật tiện ích mở rộng để đăng nhập với tư cách người đóng góp GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Bạn đã thử đăng nhập quá nhiều lần. Vui lòng đợi một phút trước khi thử lại."
+  },
+  "githubLoginDenied": {
+    "message": "Quyền truy cập GitHub đã bị từ chối. Đăng nhập với tư cách người đóng góp cần được cấp quyền."
+  },
+  "discussion_title": {
+    "message": "Bình luận RYD"
+  },
+  "discussion_subtitle": {
+    "message": "Cuộc thảo luận cộng đồng do Return YouTube Dislike tổ chức."
+  },
+  "discussion_independent": {
+    "message": "Những bình luận này tách biệt với YouTube."
+  },
+  "discussion_open": {
+    "message": "Mở bình luận RYD"
+  },
+  "discussion_close": {
+    "message": "Đóng"
+  },
+  "discussion_new": {
+    "message": "Mới nhất"
+  },
+  "discussion_top": {
+    "message": "Hàng đầu"
+  },
+  "discussion_sort": {
+    "message": "Sắp xếp bình luận"
+  },
+  "discussion_refresh": {
+    "message": "Làm mới"
+  },
+  "discussion_loading": {
+    "message": "Đang tải bình luận…"
+  },
+  "discussion_empty": {
+    "message": "Chưa có bình luận nào. Hãy bắt đầu cuộc trò chuyện."
+  },
+  "discussion_replyEmpty": {
+    "message": "Chưa có phản hồi nào."
+  },
+  "discussion_comment": {
+    "message": "Bình luận"
+  },
+  "discussion_post": {
+    "message": "Đăng bình luận"
+  },
+  "discussion_reply": {
+    "message": "Phản hồi"
+  },
+  "discussion_postReply": {
+    "message": "Đăng phản hồi"
+  },
+  "discussion_cancel": {
+    "message": "Hủy"
+  },
+  "discussion_save": {
+    "message": "Lưu"
+  },
+  "discussion_edit": {
+    "message": "Chỉnh sửa"
+  },
+  "discussion_delete": {
+    "message": "Xóa"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Xóa bình luận này?"
+  },
+  "discussion_deleted": {
+    "message": "Bình luận đã bị xóa"
+  },
+  "discussion_edited": {
+    "message": "đã chỉnh sửa"
+  },
+  "discussion_replies": {
+    "message": "Phản hồi ($1)"
+  },
+  "discussion_more": {
+    "message": "Tải thêm"
+  },
+  "discussion_like": {
+    "message": "Thích"
+  },
+  "discussion_dislike": {
+    "message": "Không thích"
+  },
+  "discussion_reacting": {
+    "message": "Đang lưu cảm xúc…"
+  },
+  "discussion_signInRequired": {
+    "message": "Đăng nhập từ cửa sổ bật lên của tiện ích mở rộng để tiếp tục."
+  },
+  "discussion_tierRequired": {
+    "message": "Thành viên đang hoạt động ở cấp Commenter trở lên có thể đăng bài."
+  },
+  "discussion_join": {
+    "message": "Trở thành thành viên Commenter"
+  },
+  "discussion_gate": {
+    "message": "Mọi người đều có thể đọc và bày tỏ cảm xúc. Thành viên đang hoạt động ở cấp Commenter trở lên có thể đăng bài."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Chọn biệt danh RYD công khai trước khi đăng bài."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Biệt danh RYD công khai"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 ký tự gồm chữ cái, chữ số, dấu cách, dấu chấm, dấu gạch ngang hoặc dấu gạch dưới. Tên này sẽ hiển thị cùng bình luận của bạn."
+  },
+  "discussion_nicknameSave": {
+    "message": "Lưu biệt danh"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Biệt danh này đã được sử dụng. Hãy chọn biệt danh khác."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Dùng 3–32 ký tự gồm chữ cái, chữ số, dấu cách, dấu chấm, dấu gạch ngang hoặc dấu gạch dưới."
+  },
+  "discussion_nicknameChange": {
+    "message": "Đổi biệt danh"
+  },
+  "discussion_as": {
+    "message": "Bình luận với tên $1"
+  },
+  "discussion_placeholder": {
+    "message": "Tham gia thảo luận…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Báo cáo"
+  },
+  "discussion_reportTitle": {
+    "message": "Báo cáo bình luận"
+  },
+  "discussion_reportReason": {
+    "message": "Lý do"
+  },
+  "discussion_reportSpam": {
+    "message": "Nội dung rác"
+  },
+  "discussion_reportAbuse": {
+    "message": "Quấy rối hoặc thù ghét"
+  },
+  "discussion_reportOther": {
+    "message": "Khác"
+  },
+  "discussion_reportDetails": {
+    "message": "Thông tin bổ sung (không bắt buộc)"
+  },
+  "discussion_reportSend": {
+    "message": "Gửi báo cáo"
+  },
+  "discussion_reportDone": {
+    "message": "Đã nhận được báo cáo. Cảm ơn bạn."
+  },
+  "discussion_moderation": {
+    "message": "Kiểm duyệt"
+  },
+  "discussion_queueEmpty": {
+    "message": "Không có báo cáo nào cần xem xét."
+  },
+  "discussion_hide": {
+    "message": "Ẩn bình luận"
+  },
+  "discussion_restore": {
+    "message": "Khôi phục bình luận"
+  },
+  "discussion_dismiss": {
+    "message": "Bác bỏ báo cáo"
+  },
+  "discussion_ban": {
+    "message": "Cấm tác giả"
+  },
+  "discussion_unban": {
+    "message": "Bỏ cấm tác giả"
+  },
+  "discussion_moderationReason": {
+    "message": "Lý do kiểm duyệt"
+  },
+  "discussion_moderationSaved": {
+    "message": "Đã lưu thao tác kiểm duyệt."
+  },
+  "discussion_reported": {
+    "message": "$1 báo cáo"
+  },
+  "discussion_unavailable": {
+    "message": "Bình luận RYD không khả dụng cho video này."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Bình luận này không còn khả dụng."
+  },
+  "discussion_error": {
+    "message": "Không thể kết nối. Vui lòng thử lại."
+  },
+  "discussion_rateLimited": {
+    "message": "Vui lòng đợi một lát trước khi thử lại."
+  },
+  "discussion_conflict": {
+    "message": "Bình luận này đã thay đổi. Hãy làm mới và thử lại."
+  },
+  "discussion_forbidden": {
+    "message": "Tài khoản của bạn không thể thực hiện thao tác này."
+  },
+  "discussion_retry": {
+    "message": "Thử lại"
+  },
+  "discussion_notifications": {
+    "message": "Thông báo"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Bạn đã xem hết thông báo."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 đã phản hồi bình luận của bạn"
+  },
+  "discussion_notificationLike": {
+    "message": "Có người đã thích bình luận của bạn"
+  },
+  "discussion_notificationLikes": {
+    "message": "Bình luận của bạn nhận được $1 lượt thích"
+  },
+  "discussion_notificationDislike": {
+    "message": "Có người đã bấm không thích bình luận của bạn"
+  },
+  "discussion_notificationReaction": {
+    "message": "Có người đã bày tỏ cảm xúc về bình luận của bạn"
+  },
+  "discussion_someone": {
+    "message": "Ai đó"
+  },
+  "discussion_markRead": {
+    "message": "Đánh dấu đã đọc"
+  },
+  "discussion_markAllRead": {
+    "message": "Đánh dấu tất cả đã đọc"
+  },
+  "discussion_view": {
+    "message": "Xem thảo luận"
+  },
+  "discussion_unread": {
+    "message": "$1 thông báo chưa đọc"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Đăng nhập để xem phản hồi và cảm xúc về bình luận của bạn."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Cuộc thảo luận này không còn khả dụng."
+  },
+  "discussion_discussionTab": {
+    "message": "Thảo luận"
+  },
+  "discussion_nickname": {
+    "message": "Biệt danh"
+  },
+  "discussion_reportCount": {
+    "message": "Báo cáo"
+  },
+  "discussion_reportStatus": {
+    "message": "Trạng thái báo cáo"
+  },
+  "discussion_openReports": {
+    "message": "Báo cáo chưa xử lý"
+  },
+  "discussion_resolvedReports": {
+    "message": "Báo cáo đã bác bỏ"
+  },
+  "discussion_author": {
+    "message": "Tác giả"
+  },
+  "discussion_me": {
+    "message": "Bạn"
+  },
+  "discussion_saving": {
+    "message": "Đang lưu…"
+  },
+  "discussion_confirm": {
+    "message": "Xác nhận"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Hoạt động mới trên bình luận của bạn"
+  },
+  "discussion_showThread": {
+    "message": "Hiện chuỗi bình luận"
+  },
+  "discussion_loadReplies": {
+    "message": "Hiện phản hồi ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Chào mừng đến với Return YouTube Dislike"
   },

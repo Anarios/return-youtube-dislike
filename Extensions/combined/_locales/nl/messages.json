@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-logo"
   },
+  "githubLoginUnavailable": {
+    "message": "Inloggen via GitHub voor bijdragers is momenteel niet beschikbaar. De dienst heeft een update of een configuratiewijziging nodig."
+  },
+  "githubLoginNotContributor": {
+    "message": "Dit GitHub-account staat niet vermeld als bijdrager aan Return YouTube Dislike. Log in met een account dat aan het project heeft bijgedragen. Het kan enkele uren duren voordat recente bijdragen worden weergegeven."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Inloggen via GitHub is niet geconfigureerd voor het terugkeeradres van deze browser. Neem contact op met de ondersteuning."
+  },
+  "githubLoginExpired": {
+    "message": "Deze inlogpoging via GitHub is verlopen of kon niet worden geverifieerd. Start een nieuwe inlogpoging."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Werk de extensie bij om via GitHub als bijdrager in te loggen."
+  },
+  "githubLoginRateLimited": {
+    "message": "Te veel inlogpogingen. Wacht een minuut voordat je het opnieuw probeert."
+  },
+  "githubLoginDenied": {
+    "message": "De GitHub-autorisatie is geweigerd. Autorisatie is vereist om als bijdrager in te loggen."
+  },
+  "discussion_title": {
+    "message": "RYD-reacties"
+  },
+  "discussion_subtitle": {
+    "message": "Een discussie voor de community, gehost door Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Deze reacties staan los van YouTube."
+  },
+  "discussion_open": {
+    "message": "RYD-reacties openen"
+  },
+  "discussion_close": {
+    "message": "Sluiten"
+  },
+  "discussion_new": {
+    "message": "Nieuwste"
+  },
+  "discussion_top": {
+    "message": "Beste"
+  },
+  "discussion_sort": {
+    "message": "Reacties sorteren"
+  },
+  "discussion_refresh": {
+    "message": "Vernieuwen"
+  },
+  "discussion_loading": {
+    "message": "Reacties laden…"
+  },
+  "discussion_empty": {
+    "message": "Nog geen reacties. Begin het gesprek."
+  },
+  "discussion_replyEmpty": {
+    "message": "Nog geen antwoorden."
+  },
+  "discussion_comment": {
+    "message": "Reactie"
+  },
+  "discussion_post": {
+    "message": "Reactie plaatsen"
+  },
+  "discussion_reply": {
+    "message": "Beantwoorden"
+  },
+  "discussion_postReply": {
+    "message": "Antwoord plaatsen"
+  },
+  "discussion_cancel": {
+    "message": "Annuleren"
+  },
+  "discussion_save": {
+    "message": "Opslaan"
+  },
+  "discussion_edit": {
+    "message": "Bewerken"
+  },
+  "discussion_delete": {
+    "message": "Verwijderen"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Deze reactie verwijderen?"
+  },
+  "discussion_deleted": {
+    "message": "Reactie verwijderd"
+  },
+  "discussion_edited": {
+    "message": "bewerkt"
+  },
+  "discussion_replies": {
+    "message": "Antwoorden ($1)"
+  },
+  "discussion_more": {
+    "message": "Meer laden"
+  },
+  "discussion_like": {
+    "message": "Vind ik leuk"
+  },
+  "discussion_dislike": {
+    "message": "Vind ik niet leuk"
+  },
+  "discussion_reacting": {
+    "message": "Waardering opslaan…"
+  },
+  "discussion_signInRequired": {
+    "message": "Log in via het pop-upvenster van de extensie om verder te gaan."
+  },
+  "discussion_tierRequired": {
+    "message": "Actieve leden op het niveau Commenter en hoger kunnen reacties plaatsen."
+  },
+  "discussion_join": {
+    "message": "Word lid op het niveau Commenter"
+  },
+  "discussion_gate": {
+    "message": "Iedereen kan lezen en waarderingen geven. Actieve leden op het niveau Commenter en hoger kunnen reacties plaatsen."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Kies je openbare RYD-bijnaam voordat je een reactie plaatst."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Openbare RYD-bijnaam"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 letters, cijfers, spaties, punten, streepjes of onderstrepingstekens. Deze naam verschijnt bij je reacties."
+  },
+  "discussion_nicknameSave": {
+    "message": "Bijnaam opslaan"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Deze bijnaam is al in gebruik. Kies een andere."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Gebruik 3–32 letters, cijfers, spaties, punten, streepjes of onderstrepingstekens."
+  },
+  "discussion_nicknameChange": {
+    "message": "Bijnaam wijzigen"
+  },
+  "discussion_as": {
+    "message": "Je reageert als $1"
+  },
+  "discussion_placeholder": {
+    "message": "Neem deel aan de discussie…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Melden"
+  },
+  "discussion_reportTitle": {
+    "message": "Reactie melden"
+  },
+  "discussion_reportReason": {
+    "message": "Reden"
+  },
+  "discussion_reportSpam": {
+    "message": "Spam"
+  },
+  "discussion_reportAbuse": {
+    "message": "Intimidatie of haat"
+  },
+  "discussion_reportOther": {
+    "message": "Overig"
+  },
+  "discussion_reportDetails": {
+    "message": "Aanvullende informatie (optioneel)"
+  },
+  "discussion_reportSend": {
+    "message": "Melding verzenden"
+  },
+  "discussion_reportDone": {
+    "message": "Melding ontvangen. Bedankt."
+  },
+  "discussion_moderation": {
+    "message": "Moderatie"
+  },
+  "discussion_queueEmpty": {
+    "message": "Geen meldingen om te beoordelen."
+  },
+  "discussion_hide": {
+    "message": "Reactie verbergen"
+  },
+  "discussion_restore": {
+    "message": "Reactie herstellen"
+  },
+  "discussion_dismiss": {
+    "message": "Meldingen afwijzen"
+  },
+  "discussion_ban": {
+    "message": "Auteur verbannen"
+  },
+  "discussion_unban": {
+    "message": "Verbanning van auteur opheffen"
+  },
+  "discussion_moderationReason": {
+    "message": "Reden voor moderatie"
+  },
+  "discussion_moderationSaved": {
+    "message": "Moderatieactie opgeslagen."
+  },
+  "discussion_reported": {
+    "message": "$1 meldingen"
+  },
+  "discussion_unavailable": {
+    "message": "RYD-reacties zijn niet beschikbaar voor deze video."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Deze reactie is niet meer beschikbaar."
+  },
+  "discussion_error": {
+    "message": "Kan geen verbinding maken. Probeer het opnieuw."
+  },
+  "discussion_rateLimited": {
+    "message": "Wacht even voordat je het opnieuw probeert."
+  },
+  "discussion_conflict": {
+    "message": "Deze reactie is gewijzigd. Vernieuw en probeer het opnieuw."
+  },
+  "discussion_forbidden": {
+    "message": "Deze actie is niet beschikbaar voor je account."
+  },
+  "discussion_retry": {
+    "message": "Opnieuw proberen"
+  },
+  "discussion_notifications": {
+    "message": "Meldingen"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Je bent weer helemaal bij."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 heeft je reactie beantwoord"
+  },
+  "discussion_notificationLike": {
+    "message": "Iemand vindt je reactie leuk"
+  },
+  "discussion_notificationLikes": {
+    "message": "Je reactie heeft $1 likes gekregen"
+  },
+  "discussion_notificationDislike": {
+    "message": "Iemand vindt je reactie niet leuk"
+  },
+  "discussion_notificationReaction": {
+    "message": "Iemand heeft je reactie gewaardeerd"
+  },
+  "discussion_someone": {
+    "message": "Iemand"
+  },
+  "discussion_markRead": {
+    "message": "Markeren als gelezen"
+  },
+  "discussion_markAllRead": {
+    "message": "Alles markeren als gelezen"
+  },
+  "discussion_view": {
+    "message": "Discussie bekijken"
+  },
+  "discussion_unread": {
+    "message": "$1 ongelezen meldingen"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Log in om antwoorden en waarderingen op je reacties te zien."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Deze discussie is niet meer beschikbaar."
+  },
+  "discussion_discussionTab": {
+    "message": "Discussie"
+  },
+  "discussion_nickname": {
+    "message": "Bijnaam"
+  },
+  "discussion_reportCount": {
+    "message": "Meldingen"
+  },
+  "discussion_reportStatus": {
+    "message": "Status van melding"
+  },
+  "discussion_openReports": {
+    "message": "Openstaande meldingen"
+  },
+  "discussion_resolvedReports": {
+    "message": "Afgewezen meldingen"
+  },
+  "discussion_author": {
+    "message": "Auteur"
+  },
+  "discussion_me": {
+    "message": "Jij"
+  },
+  "discussion_saving": {
+    "message": "Opslaan…"
+  },
+  "discussion_confirm": {
+    "message": "Bevestigen"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Nieuwe activiteit bij je reacties"
+  },
+  "discussion_showThread": {
+    "message": "Gespreksreeks tonen"
+  },
+  "discussion_loadReplies": {
+    "message": "Antwoorden tonen ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Welkom bij Return YouTube Dislike"
   },

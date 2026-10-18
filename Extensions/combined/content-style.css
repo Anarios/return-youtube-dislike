@@ -946,12 +946,21 @@ ytd-menu-renderer.ytd-watch-metadata {
 }
 
 .ryd-premium-teaser {
-  background: var(--yt-spec-base-background, #202020);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  --ryd-teaser-bg: var(--yt-spec-base-background, #fff);
+  --ryd-teaser-fg: var(--yt-spec-text-primary, #0f0f0f);
+  --ryd-teaser-muted: var(--yt-spec-text-secondary, #606060);
+  --ryd-teaser-control: var(--ryd-teaser-muted);
+  --ryd-teaser-subtitle: var(--ryd-teaser-muted);
+  --ryd-teaser-highlights: var(--ryd-teaser-muted);
+  --ryd-teaser-link: var(--ryd-teaser-muted);
+  --ryd-teaser-hover-fg: var(--ryd-teaser-fg);
+  --ryd-teaser-border: rgba(0, 0, 0, 0.08);
+  background: var(--ryd-teaser-bg);
+  border: 1px solid var(--ryd-teaser-border);
   border-radius: 16px;
   padding: 12px 18px 10px;
   margin-bottom: 16px;
-  color: var(--yt-spec-text-primary, #ffffff);
+  color: var(--ryd-teaser-fg);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
   font-family: Roboto, Arial, sans-serif;
   transition:
@@ -963,6 +972,18 @@ ytd-menu-renderer.ytd-watch-metadata {
   display: flex;
   flex-direction: column;
   gap: 0;
+}
+
+html[dark] .ryd-premium-teaser {
+  --ryd-teaser-bg: var(--yt-spec-base-background, #202020);
+  --ryd-teaser-fg: var(--yt-spec-text-primary, #fff);
+  --ryd-teaser-muted: var(--yt-spec-text-secondary, #9ca3af);
+  --ryd-teaser-control: var(--yt-spec-text-secondary, #94a3b8);
+  --ryd-teaser-subtitle: var(--yt-spec-text-secondary, #bcccdc);
+  --ryd-teaser-highlights: var(--yt-spec-text-secondary, #93adc8);
+  --ryd-teaser-link: var(--yt-spec-text-secondary, #8ea4c8);
+  --ryd-teaser-hover-fg: var(--yt-spec-text-primary, #f8fafc);
+  --ryd-teaser-border: rgba(255, 255, 255, 0.08);
 }
 
 .ryd-premium-teaser.is-expanded {
@@ -1067,7 +1088,7 @@ ytd-menu-renderer.ytd-watch-metadata {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--yt-spec-text-secondary, #9ca3af);
+  color: var(--ryd-teaser-muted);
 }
 
 .ryd-premium-teaser__count-value {
@@ -1085,7 +1106,7 @@ ytd-menu-renderer.ytd-watch-metadata {
   border: none;
   border-radius: 6px;
   background: rgba(148, 163, 184, 0.16);
-  color: var(--yt-spec-text-secondary, #94a3b8);
+  color: var(--ryd-teaser-control);
   cursor: pointer;
   transition:
     background 0.2s ease,
@@ -1102,7 +1123,7 @@ ytd-menu-renderer.ytd-watch-metadata {
 .ryd-premium-teaser__toggle:hover,
 .ryd-premium-teaser__toggle:focus-visible {
   background: rgba(148, 163, 184, 0.28);
-  color: var(--yt-spec-text-primary, #f8fafc);
+  color: var(--ryd-teaser-hover-fg);
   outline: none;
 }
 
@@ -1125,7 +1146,7 @@ ytd-menu-renderer.ytd-watch-metadata {
   border: none;
   border-radius: 999px;
   background: transparent;
-  color: var(--yt-spec-text-secondary, #94a3b8);
+  color: var(--ryd-teaser-control);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1141,7 +1162,7 @@ ytd-menu-renderer.ytd-watch-metadata {
 .ryd-premium-teaser__close:hover,
 .ryd-premium-teaser__close:focus-visible {
   background: rgba(148, 163, 184, 0.16);
-  color: var(--yt-spec-text-primary, #f8fafc);
+  color: var(--ryd-teaser-hover-fg);
   outline: none;
 }
 
@@ -1171,7 +1192,7 @@ ytd-menu-renderer.ytd-watch-metadata {
 .ryd-premium-teaser__subtitle {
   margin: 0;
   font-size: 13px;
-  color: var(--yt-spec-text-secondary, #bcccdc);
+  color: var(--ryd-teaser-subtitle);
   line-height: 1.5;
 }
 
@@ -1180,7 +1201,7 @@ ytd-menu-renderer.ytd-watch-metadata {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--yt-spec-text-secondary, #9ca3af);
+  color: var(--ryd-teaser-muted);
 }
 
 .ryd-premium-teaser__highlights-list {
@@ -1189,7 +1210,7 @@ ytd-menu-renderer.ytd-watch-metadata {
   display: grid;
   gap: 6px;
   font-size: 13px;
-  color: var(--yt-spec-text-secondary, #93adc8);
+  color: var(--ryd-teaser-highlights);
 }
 
 .ryd-premium-teaser__links {
@@ -1221,7 +1242,7 @@ ytd-menu-renderer.ytd-watch-metadata {
 }
 
 .ryd-premium-teaser__secondary {
-  color: var(--yt-spec-text-secondary, #8ea4c8);
+  color: var(--ryd-teaser-link);
   font-size: 12px;
   text-decoration: none;
 }
@@ -1233,7 +1254,7 @@ ytd-menu-renderer.ytd-watch-metadata {
 .ryd-premium-teaser__status {
   margin: 0;
   font-size: 12px;
-  color: var(--yt-spec-text-secondary, #9ca3af);
+  color: var(--ryd-teaser-muted);
 }
 
 html[dark] .ryd-premium-teaser__count {

@@ -4,19 +4,21 @@ name: Website Lint
 
 on:
   push:
-    branches: 
+    branches:
       - main
     paths:
       - Website/**
       - .github/workflows/weblint.yml
       - .nvmrc
+      - scripts/check-locales*
   pull_request:
-    branches: 
+    branches:
       - main
     paths:
       - Website/**
       - .github/workflows/weblint.yml
       - .nvmrc
+      - scripts/check-locales*
 
 jobs:
   weblint:
@@ -40,3 +42,6 @@ jobs:
       - name: Run lint
         run: npm run lint
         working-directory: Website
+
+      - name: Check website locales
+        run: node scripts/check-locales.js --website

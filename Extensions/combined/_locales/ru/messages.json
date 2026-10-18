@@ -638,6 +638,27 @@
   "changelog_brand_logo_alt": {
     "message": "Логотип Return YouTube Dislike"
   },
+  "githubLoginUnavailable": {
+    "message": "Вход для участников проекта через GitHub сейчас недоступен. Сервису требуется обновление или изменение конфигурации."
+  },
+  "githubLoginNotContributor": {
+    "message": "Этот аккаунт GitHub не указан среди участников проекта Return YouTube Dislike. Войдите с аккаунта, с которого вы вносили вклад в проект. Информация о недавнем вкладе в проект может появиться через несколько часов."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Вход через GitHub не настроен для адреса обратного вызова этого браузера. Обратитесь в службу поддержки."
+  },
+  "githubLoginExpired": {
+    "message": "Срок действия этой попытки входа через GitHub истёк или её не удалось подтвердить. Начните вход заново."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Обновите расширение, чтобы войти как участник проекта через GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Слишком много попыток входа. Подождите минуту перед следующей попыткой."
+  },
+  "githubLoginDenied": {
+    "message": "Авторизация через GitHub отклонена. Для входа участника проекта требуется авторизация."
+  },
   "changelog_page_title": {
     "message": "Добро пожаловать в Return YouTube Dislike"
   },

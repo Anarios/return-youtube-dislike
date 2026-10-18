@@ -8,6 +8,9 @@ import {
 } from "../../common/shorts-control-readiness";
 
 const buttonsVideoOwnership = new WeakMap();
+const createdDislikeTextTypography = new WeakMap();
+const COUNT_TYPOGRAPHY_ATTRIBUTE = "data-ryd-count-typography";
+const COUNT_TYPOGRAPHY_PROPERTIES = ["font-size", "font-weight", "font-family", "line-height"];
 const SYNTHETIC_SHORTS_DISLIKE_SELECTOR = "[data-ryd-synthetic-shorts-dislike]";
 const SHORTS_DISLIKE_ICON_PATH =
   "m8.482 1.5.294.005a9.01 9.01 0 013.918 1.04l.257.143.203.116c.17.097.357.16.55.185l.194.012h1.477l.115.006c.53.054.95.475 1.004 1.005l.006.114v4.499c0 .621-.504 1.125-1.125 1.125h-1.343a.75.75 0 00-.66.395l-.048.107-2.24 6.402a.75.75 0 01-.832.491l-.78-.13a3 3 0 01-2.439-3.587L7.5 11.25H4.454a2.749 2.749 0 01-2.683-2.151 2.762 2.762 0 01.479-2.237l-.016-.065A2.862 2.862 0 013 4.125v-.032c0-.227.037-.453.108-.668l.08-.211A2.816 2.816 0 015.78 1.5h2.703ZM5.78 3c-.566 0-1.069.362-1.248.9a.613.613 0 00-.031.193v.654l-.44.44c-.333.332-.47.813-.364 1.271l.015.065.157.675-.413.557a1.248 1.248 0 00.999 1.995H7.5a1.501 1.501 0 011.467 1.815L8.5 13.742a1.5 1.5 0 001.22 1.794l.157.027 2.031-5.806a2.25 2.25 0 012.124-1.507H15V4.501h-1.102a3.001 3.001 0 01-1.489-.396l-.202-.116A7.504 7.504 0 008.482 3H5.78Z";
@@ -560,6 +563,99 @@ function updateDislikeButtonShape(dislikeButton) {
   }
 }
 
+function getNativeCountTypography(likeButton) {
+  const root = getLikeTextContainer(likeButton);
+  if (!root?.isConnected) return undefined;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  for (let node = walker.nextNode(); node; node = walker.nextNode()) {
+    if (!/\p{N}/u.test(node.data)) continue;
+    const element = node.parentElement;
+    if (element.closest("[hidden], [inert]")) continue;
+    const rect = element.getBoundingClientRect();
+    if (rect.width <= 1 || rect.height <= 1) continue;
+    const typography = window.getComputedStyle(element);
+    let visible = true;
+    for (let current = element; current && root.contains(current); current = current.parentElement) {
+      const style = current === element ? typography : window.getComputedStyle(current);
+      if (
+        style.display === "none" ||
+        style.visibility === "hidden" ||
+        style.visibility === "collapse" ||
+        Number.parseFloat(style.opacity) === 0 ||
+        style.clip === "rect(0px, 0px, 0px, 0px)" ||
+        style.clipPath === "inset(50%)" ||
+        style.clipPath === "inset(100%)"
+      ) {
+        visible = false;
+        break;
+      }
+    }
+    if (visible) return typography;
+  }
+}
+
+function getCreatedDislikeTextTypography(textContainer) {
+  const existing = createdDislikeTextTypography.get(textContainer);
+  if (existing) return existing;
+  const saved = textContainer?.getAttribute(COUNT_TYPOGRAPHY_ATTRIBUTE);
+  if (saved == null) return undefined;
+  try {
+    const entries = JSON.parse(saved);
+    if (!entries || typeof entries !== "object" || Array.isArray(entries)) return undefined;
+    const overrides = new Map();
+    for (const property of COUNT_TYPOGRAPHY_PROPERTIES) {
+      const entry = entries[property];
+      if (entry === undefined) continue;
+      if (
+        !entry ||
+        typeof entry.value !== "string" ||
+        typeof entry.computedValue !== "string" ||
+        (entry.priority !== "" && entry.priority !== "important")
+      ) {
+        return undefined;
+      }
+      overrides.set(property, { value: entry.value, priority: entry.priority, computedValue: entry.computedValue });
+    }
+    createdDislikeTextTypography.set(textContainer, overrides);
+    return overrides;
+  } catch {
+    return undefined;
+  }
+}
+
+function refreshDislikeTextTypography(likeButton = getLikeButton(), dislikeButton = getDislikeButton()) {
+  const textContainer = findDislikeTextContainer(dislikeButton, getNativeButton(dislikeButton));
+  const overrides = getCreatedDislikeTextTypography(textContainer);
+  if (!overrides) return;
+  const nativeTypography = getNativeCountTypography(likeButton);
+  if (!nativeTypography && overrides.size === 0) return;
+  const currentTypography = window.getComputedStyle(textContainer);
+  const currentValues = COUNT_TYPOGRAPHY_PROPERTIES.map((property) => currentTypography.getPropertyValue(property));
+  COUNT_TYPOGRAPHY_PROPERTIES.forEach((property, index) => {
+    const value = nativeTypography?.getPropertyValue(property);
+    const previous = overrides.get(property);
+    if (previous && (!value || value === previous.computedValue)) {
+      if (previous.value) textContainer.style.setProperty(property, previous.value, previous.priority);
+      else textContainer.style.removeProperty(property);
+      overrides.delete(property);
+    } else if (value && value !== currentValues[index]) {
+      if (!previous) {
+        overrides.set(property, {
+          value: textContainer.style.getPropertyValue(property),
+          priority: textContainer.style.getPropertyPriority(property),
+          computedValue: currentValues[index],
+        });
+      }
+      textContainer.style.setProperty(property, value);
+    }
+  });
+  // Cloned action bars retain our inline styles and need their original values for restoration.
+  const saved = JSON.stringify(Object.fromEntries(overrides));
+  if (textContainer.getAttribute(COUNT_TYPOGRAPHY_ATTRIBUTE) !== saved) {
+    textContainer.setAttribute(COUNT_TYPOGRAPHY_ATTRIBUTE, saved);
+  }
+}
+
 function createDislikeTextContainer(controls = getButtonControls()) {
   const { dislikeButton, dislikeTextContainer, nativeDislikeButton, textContainerTemplate } = controls;
   if (dislikeTextContainer) return dislikeTextContainer;
@@ -588,11 +684,15 @@ function createDislikeTextContainer(controls = getButtonControls()) {
   textContainer.innerText = "";
   nativeDislikeButton.insertBefore(textNodeClone, null);
   updateDislikeButtonShape(nativeDislikeButton);
+  createdDislikeTextTypography.set(textContainer, new Map());
+  textContainer.setAttribute(COUNT_TYPOGRAPHY_ATTRIBUTE, "{}");
   return textContainer;
 }
 
 function getDislikeTextContainer(controls = getButtonControls()) {
-  return controls.dislikeTextContainer ?? createDislikeTextContainer(controls);
+  const textContainer = controls.dislikeTextContainer ?? createDislikeTextContainer(controls);
+  refreshDislikeTextTypography(controls.likeButton, controls.dislikeButton);
+  return textContainer;
 }
 
 function checkForSignInButton() {
@@ -618,6 +718,7 @@ export {
   hasRenderedBox,
   isSyntheticShortsDislike,
   markButtonsForVideo,
+  refreshDislikeTextTypography,
   setSyntheticShortsDislikeEnabled,
   setSyntheticShortsDislikePressed,
   shortsControlSurfaceIsReadyForMutation,

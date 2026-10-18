@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
   },
+  "githubLoginUnavailable": {
+    "message": "L’accesso dei collaboratori tramite GitHub non è al momento disponibile. Il servizio richiede un aggiornamento o una modifica della configurazione."
+  },
+  "githubLoginNotContributor": {
+    "message": "Questo account GitHub non risulta tra i collaboratori di Return YouTube Dislike. Accedi con un account che abbia contribuito al progetto. I contributi recenti potrebbero richiedere alcune ore per essere visualizzati."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "L’accesso tramite GitHub non è configurato per l’indirizzo di callback di questo browser. Contatta l’assistenza."
+  },
+  "githubLoginExpired": {
+    "message": "Questo tentativo di accesso tramite GitHub è scaduto o non è stato possibile verificarlo. Avvia un nuovo accesso."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Aggiorna l’estensione per accedere come collaboratore tramite GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Troppi tentativi di accesso. Attendi un minuto prima di riprovare."
+  },
+  "githubLoginDenied": {
+    "message": "L’autorizzazione GitHub è stata rifiutata. Per accedere come collaboratore è necessaria l’autorizzazione."
+  },
+  "discussion_title": {
+    "message": "Commenti RYD"
+  },
+  "discussion_subtitle": {
+    "message": "Una discussione della community ospitata da Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Questi commenti sono indipendenti da YouTube."
+  },
+  "discussion_open": {
+    "message": "Apri i commenti RYD"
+  },
+  "discussion_close": {
+    "message": "Chiudi"
+  },
+  "discussion_new": {
+    "message": "Più recenti"
+  },
+  "discussion_top": {
+    "message": "Più apprezzati"
+  },
+  "discussion_sort": {
+    "message": "Ordina i commenti"
+  },
+  "discussion_refresh": {
+    "message": "Aggiorna"
+  },
+  "discussion_loading": {
+    "message": "Caricamento dei commenti…"
+  },
+  "discussion_empty": {
+    "message": "Ancora nessun commento. Avvia la conversazione."
+  },
+  "discussion_replyEmpty": {
+    "message": "Ancora nessuna risposta."
+  },
+  "discussion_comment": {
+    "message": "Commento"
+  },
+  "discussion_post": {
+    "message": "Pubblica commento"
+  },
+  "discussion_reply": {
+    "message": "Rispondi"
+  },
+  "discussion_postReply": {
+    "message": "Pubblica risposta"
+  },
+  "discussion_cancel": {
+    "message": "Annulla"
+  },
+  "discussion_save": {
+    "message": "Salva"
+  },
+  "discussion_edit": {
+    "message": "Modifica"
+  },
+  "discussion_delete": {
+    "message": "Elimina"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Eliminare questo commento?"
+  },
+  "discussion_deleted": {
+    "message": "Commento eliminato"
+  },
+  "discussion_edited": {
+    "message": "modificato"
+  },
+  "discussion_replies": {
+    "message": "Risposte ($1)"
+  },
+  "discussion_more": {
+    "message": "Carica altri"
+  },
+  "discussion_like": {
+    "message": "Mi piace"
+  },
+  "discussion_dislike": {
+    "message": "Non mi piace"
+  },
+  "discussion_reacting": {
+    "message": "Salvataggio della reazione…"
+  },
+  "discussion_signInRequired": {
+    "message": "Accedi dal popup dell’estensione per continuare."
+  },
+  "discussion_tierRequired": {
+    "message": "I membri attivi del livello Commenter o superiore possono pubblicare."
+  },
+  "discussion_join": {
+    "message": "Diventa membro Commenter"
+  },
+  "discussion_gate": {
+    "message": "Tutti possono leggere e reagire. I membri attivi del livello Commenter o superiore possono pubblicare."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Scegli il tuo nickname pubblico RYD prima di pubblicare."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Nickname pubblico RYD"
+  },
+  "discussion_nicknameHint": {
+    "message": "Da 3 a 32 lettere, numeri, spazi, punti, trattini o trattini bassi. Questo nome apparirà accanto ai tuoi commenti."
+  },
+  "discussion_nicknameSave": {
+    "message": "Salva nickname"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Questo nickname è già in uso. Scegline un altro."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Usa da 3 a 32 lettere, numeri, spazi, punti, trattini o trattini bassi."
+  },
+  "discussion_nicknameChange": {
+    "message": "Cambia nickname"
+  },
+  "discussion_as": {
+    "message": "Commenti come $1"
+  },
+  "discussion_placeholder": {
+    "message": "Partecipa alla discussione…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Segnala"
+  },
+  "discussion_reportTitle": {
+    "message": "Segnala commento"
+  },
+  "discussion_reportReason": {
+    "message": "Motivo"
+  },
+  "discussion_reportSpam": {
+    "message": "Spam"
+  },
+  "discussion_reportAbuse": {
+    "message": "Molestie o odio"
+  },
+  "discussion_reportOther": {
+    "message": "Altro"
+  },
+  "discussion_reportDetails": {
+    "message": "Ulteriori dettagli (facoltativo)"
+  },
+  "discussion_reportSend": {
+    "message": "Invia segnalazione"
+  },
+  "discussion_reportDone": {
+    "message": "Segnalazione ricevuta. Grazie."
+  },
+  "discussion_moderation": {
+    "message": "Moderazione"
+  },
+  "discussion_queueEmpty": {
+    "message": "Nessuna segnalazione da esaminare."
+  },
+  "discussion_hide": {
+    "message": "Nascondi commento"
+  },
+  "discussion_restore": {
+    "message": "Ripristina commento"
+  },
+  "discussion_dismiss": {
+    "message": "Respingi segnalazioni"
+  },
+  "discussion_ban": {
+    "message": "Blocca autore"
+  },
+  "discussion_unban": {
+    "message": "Sblocca autore"
+  },
+  "discussion_moderationReason": {
+    "message": "Motivo della moderazione"
+  },
+  "discussion_moderationSaved": {
+    "message": "Azione di moderazione salvata."
+  },
+  "discussion_reported": {
+    "message": "$1 segnalazioni"
+  },
+  "discussion_unavailable": {
+    "message": "I commenti RYD non sono disponibili per questo video."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Questo commento non è più disponibile."
+  },
+  "discussion_error": {
+    "message": "Impossibile connettersi. Riprova."
+  },
+  "discussion_rateLimited": {
+    "message": "Attendi un momento prima di riprovare."
+  },
+  "discussion_conflict": {
+    "message": "Questo commento è stato modificato. Aggiorna e riprova."
+  },
+  "discussion_forbidden": {
+    "message": "Questa azione non è disponibile per il tuo account."
+  },
+  "discussion_retry": {
+    "message": "Riprova"
+  },
+  "discussion_notifications": {
+    "message": "Notifiche"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Non ci sono novità."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 ha risposto al tuo commento"
+  },
+  "discussion_notificationLike": {
+    "message": "A qualcuno piace il tuo commento"
+  },
+  "discussion_notificationLikes": {
+    "message": "Il tuo commento ha ricevuto $1 Mi piace"
+  },
+  "discussion_notificationDislike": {
+    "message": "A qualcuno non piace il tuo commento"
+  },
+  "discussion_notificationReaction": {
+    "message": "Qualcuno ha reagito al tuo commento"
+  },
+  "discussion_someone": {
+    "message": "Qualcuno"
+  },
+  "discussion_markRead": {
+    "message": "Segna come letto"
+  },
+  "discussion_markAllRead": {
+    "message": "Segna tutto come letto"
+  },
+  "discussion_view": {
+    "message": "Visualizza discussione"
+  },
+  "discussion_unread": {
+    "message": "$1 notifiche non lette"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Accedi per vedere le risposte e le reazioni ai tuoi commenti."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Questa discussione non è più disponibile."
+  },
+  "discussion_discussionTab": {
+    "message": "Discussione"
+  },
+  "discussion_nickname": {
+    "message": "Nickname"
+  },
+  "discussion_reportCount": {
+    "message": "Segnalazioni"
+  },
+  "discussion_reportStatus": {
+    "message": "Stato della segnalazione"
+  },
+  "discussion_openReports": {
+    "message": "Segnalazioni aperte"
+  },
+  "discussion_resolvedReports": {
+    "message": "Segnalazioni respinte"
+  },
+  "discussion_author": {
+    "message": "Autore"
+  },
+  "discussion_me": {
+    "message": "Tu"
+  },
+  "discussion_saving": {
+    "message": "Salvataggio…"
+  },
+  "discussion_confirm": {
+    "message": "Conferma"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Nuove attività sui tuoi commenti"
+  },
+  "discussion_showThread": {
+    "message": "Mostra discussione"
+  },
+  "discussion_loadReplies": {
+    "message": "Mostra risposte ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Benvenuto in Return YouTube Dislike"
   },

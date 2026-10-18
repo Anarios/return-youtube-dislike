@@ -112,7 +112,7 @@ function observeReactionPresentation(likeButton, dislikeButton) {
   presentationObserver.disconnect();
   const options = {
     attributes: true,
-    attributeFilter: ["aria-label", "aria-pressed"],
+    attributeFilter: ["aria-label", "aria-pressed", "class"],
     characterData: true,
     childList: true,
     subtree: true,

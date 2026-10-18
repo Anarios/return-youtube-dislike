@@ -87,6 +87,8 @@
 </template>
 
 <script>
+import { readLocalePreference, writeLocalePreference } from "../utils/locale";
+
 export default {
   data: () => ({
     links: [
@@ -115,6 +117,11 @@ export default {
       { name: "Bahasa Indonesia", locale: "id" },
       { name: "Tiếng Việt", locale: "vi"},
       { name: "Slovenščina", locale: "sl" },
+      { name: "Azərbaycanca", locale: "az" },
+      { name: "Italiano", locale: "it-IT" },
+      { name: "Nederlands", locale: "nl" },
+      { name: "Svenska", locale: "sv" },
+      { name: "Magyar", locale: "hu" },
     ],
     alert: {
       show: false,
@@ -123,10 +130,12 @@ export default {
   }),
   created() {
     // fetch locale preference or browser default
-    if (process.client && navigator.language) {
-      if (!("locale" in localStorage))
-        this.$vuetify.lang.current = navigator.language.slice(0, 2);
-      else this.$vuetify.lang.current = localStorage.locale;
+    if (process.client) {
+      this.$vuetify.lang.current = readLocalePreference(
+        localStorage,
+        navigator.language,
+        Object.keys(this.$vuetify.lang.locales),
+      );
     }
   },
   mounted() {
@@ -145,11 +154,12 @@ export default {
   },
   methods: {
     changeLocale(locale) {
-      // reset to browser default if selection matches browser default
-      if (locale == navigator.language.slice(0, 2)) localStorage.clear();
-      // else save preference
-      else localStorage.locale = locale;
-      this.$vuetify.lang.current = locale;
+      this.$vuetify.lang.current = writeLocalePreference(
+        localStorage,
+        navigator.language,
+        locale,
+        Object.keys(this.$vuetify.lang.locales),
+      );
     },
   },
 };

@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-logotyp"
   },
+  "githubLoginUnavailable": {
+    "message": "Inloggning med GitHub för bidragsgivare är inte tillgänglig för tillfället. Tjänsten behöver uppdateras eller konfigureras om."
+  },
+  "githubLoginNotContributor": {
+    "message": "Det här GitHub-kontot finns inte med bland bidragsgivarna till Return YouTube Dislike. Logga in med ett konto som har bidragit. Det kan ta några timmar innan nya bidrag syns."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "GitHub-inloggning är inte konfigurerad för den här webbläsarens återanropsadress. Kontakta supporten."
+  },
+  "githubLoginExpired": {
+    "message": "Det här GitHub-inloggningsförsöket har löpt ut eller kunde inte verifieras. Starta en ny inloggning."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Uppdatera tillägget för att använda GitHub-inloggning för bidragsgivare."
+  },
+  "githubLoginRateLimited": {
+    "message": "För många inloggningsförsök. Vänta en minut innan du försöker igen."
+  },
+  "githubLoginDenied": {
+    "message": "Åtkomst via GitHub nekades. Inloggning för bidragsgivare kräver att du ger åtkomst."
+  },
+  "discussion_title": {
+    "message": "RYD-kommentarer"
+  },
+  "discussion_subtitle": {
+    "message": "En diskussion för communityn som tillhandahålls av Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Dessa kommentarer är fristående från YouTube."
+  },
+  "discussion_open": {
+    "message": "Öppna RYD-kommentarer"
+  },
+  "discussion_close": {
+    "message": "Stäng"
+  },
+  "discussion_new": {
+    "message": "Senaste"
+  },
+  "discussion_top": {
+    "message": "Populäraste"
+  },
+  "discussion_sort": {
+    "message": "Sortera kommentarer"
+  },
+  "discussion_refresh": {
+    "message": "Uppdatera"
+  },
+  "discussion_loading": {
+    "message": "Läser in kommentarer…"
+  },
+  "discussion_empty": {
+    "message": "Inga kommentarer ännu. Starta diskussionen."
+  },
+  "discussion_replyEmpty": {
+    "message": "Inga svar ännu."
+  },
+  "discussion_comment": {
+    "message": "Kommentar"
+  },
+  "discussion_post": {
+    "message": "Publicera kommentar"
+  },
+  "discussion_reply": {
+    "message": "Svara"
+  },
+  "discussion_postReply": {
+    "message": "Publicera svar"
+  },
+  "discussion_cancel": {
+    "message": "Avbryt"
+  },
+  "discussion_save": {
+    "message": "Spara"
+  },
+  "discussion_edit": {
+    "message": "Redigera"
+  },
+  "discussion_delete": {
+    "message": "Ta bort"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Vill du ta bort den här kommentaren?"
+  },
+  "discussion_deleted": {
+    "message": "Kommentaren har tagits bort"
+  },
+  "discussion_edited": {
+    "message": "redigerad"
+  },
+  "discussion_replies": {
+    "message": "Svar ($1)"
+  },
+  "discussion_more": {
+    "message": "Läs in fler"
+  },
+  "discussion_like": {
+    "message": "Gilla"
+  },
+  "discussion_dislike": {
+    "message": "Ogilla"
+  },
+  "discussion_reacting": {
+    "message": "Sparar reaktion…"
+  },
+  "discussion_signInRequired": {
+    "message": "Logga in via tilläggets popupfönster för att fortsätta."
+  },
+  "discussion_tierRequired": {
+    "message": "Aktiva medlemmar på nivån Commenter och högre kan publicera kommentarer."
+  },
+  "discussion_join": {
+    "message": "Bli Commenter-medlem"
+  },
+  "discussion_gate": {
+    "message": "Alla kan läsa och reagera. Aktiva medlemmar på nivån Commenter och högre kan publicera kommentarer."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Välj ditt offentliga RYD-smeknamn innan du publicerar."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Offentligt RYD-smeknamn"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 bokstäver, siffror, mellanslag, punkter, bindestreck eller understreck. Det här namnet visas vid dina kommentarer."
+  },
+  "discussion_nicknameSave": {
+    "message": "Spara smeknamn"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Det här smeknamnet är redan upptaget. Välj ett annat."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Använd 3–32 bokstäver, siffror, mellanslag, punkter, bindestreck eller understreck."
+  },
+  "discussion_nicknameChange": {
+    "message": "Ändra smeknamn"
+  },
+  "discussion_as": {
+    "message": "Kommenterar som $1"
+  },
+  "discussion_placeholder": {
+    "message": "Delta i diskussionen…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Rapportera"
+  },
+  "discussion_reportTitle": {
+    "message": "Rapportera kommentar"
+  },
+  "discussion_reportReason": {
+    "message": "Orsak"
+  },
+  "discussion_reportSpam": {
+    "message": "Skräppost"
+  },
+  "discussion_reportAbuse": {
+    "message": "Trakasserier eller hat"
+  },
+  "discussion_reportOther": {
+    "message": "Annat"
+  },
+  "discussion_reportDetails": {
+    "message": "Ytterligare information (valfritt)"
+  },
+  "discussion_reportSend": {
+    "message": "Skicka rapport"
+  },
+  "discussion_reportDone": {
+    "message": "Rapporten har tagits emot. Tack."
+  },
+  "discussion_moderation": {
+    "message": "Moderering"
+  },
+  "discussion_queueEmpty": {
+    "message": "Inga rapporter att granska."
+  },
+  "discussion_hide": {
+    "message": "Dölj kommentar"
+  },
+  "discussion_restore": {
+    "message": "Återställ kommentar"
+  },
+  "discussion_dismiss": {
+    "message": "Avfärda rapporter"
+  },
+  "discussion_ban": {
+    "message": "Stäng av författaren"
+  },
+  "discussion_unban": {
+    "message": "Häv författarens avstängning"
+  },
+  "discussion_moderationReason": {
+    "message": "Orsak till moderering"
+  },
+  "discussion_moderationSaved": {
+    "message": "Modereringsåtgärden har sparats."
+  },
+  "discussion_reported": {
+    "message": "$1 rapporter"
+  },
+  "discussion_unavailable": {
+    "message": "RYD-kommentarer är inte tillgängliga för den här videon."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Den här kommentaren är inte längre tillgänglig."
+  },
+  "discussion_error": {
+    "message": "Det gick inte att ansluta. Försök igen."
+  },
+  "discussion_rateLimited": {
+    "message": "Vänta en stund innan du försöker igen."
+  },
+  "discussion_conflict": {
+    "message": "Den här kommentaren har ändrats. Uppdatera och försök igen."
+  },
+  "discussion_forbidden": {
+    "message": "Den här åtgärden är inte tillgänglig för ditt konto."
+  },
+  "discussion_retry": {
+    "message": "Försök igen"
+  },
+  "discussion_notifications": {
+    "message": "Aviseringar"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Du har sett allt nytt."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 svarade på din kommentar"
+  },
+  "discussion_notificationLike": {
+    "message": "Någon gillade din kommentar"
+  },
+  "discussion_notificationLikes": {
+    "message": "Din kommentar fick $1 gilla-markeringar"
+  },
+  "discussion_notificationDislike": {
+    "message": "Någon ogillade din kommentar"
+  },
+  "discussion_notificationReaction": {
+    "message": "Någon reagerade på din kommentar"
+  },
+  "discussion_someone": {
+    "message": "Någon"
+  },
+  "discussion_markRead": {
+    "message": "Markera som läst"
+  },
+  "discussion_markAllRead": {
+    "message": "Markera alla som lästa"
+  },
+  "discussion_view": {
+    "message": "Visa diskussion"
+  },
+  "discussion_unread": {
+    "message": "$1 olästa aviseringar"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Logga in för att se svar och reaktioner på dina kommentarer."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Den här diskussionen är inte längre tillgänglig."
+  },
+  "discussion_discussionTab": {
+    "message": "Diskussion"
+  },
+  "discussion_nickname": {
+    "message": "Smeknamn"
+  },
+  "discussion_reportCount": {
+    "message": "Rapporter"
+  },
+  "discussion_reportStatus": {
+    "message": "Rapportstatus"
+  },
+  "discussion_openReports": {
+    "message": "Öppna rapporter"
+  },
+  "discussion_resolvedReports": {
+    "message": "Avfärdade rapporter"
+  },
+  "discussion_author": {
+    "message": "Författare"
+  },
+  "discussion_me": {
+    "message": "Du"
+  },
+  "discussion_saving": {
+    "message": "Sparar…"
+  },
+  "discussion_confirm": {
+    "message": "Bekräfta"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Ny aktivitet på dina kommentarer"
+  },
+  "discussion_showThread": {
+    "message": "Visa tråd"
+  },
+  "discussion_loadReplies": {
+    "message": "Visa svar ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Välkommen till Return YouTube Dislike"
   },

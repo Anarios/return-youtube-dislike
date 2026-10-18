@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Логотип Return YouTube Dislike"
   },
+  "githubLoginUnavailable": {
+    "message": "Вхід для учасників проєкту через GitHub зараз недоступний. Сервіс потребує оновлення або зміни конфігурації."
+  },
+  "githubLoginNotContributor": {
+    "message": "Цей обліковий запис GitHub не вказано серед учасників проєкту Return YouTube Dislike. Увійдіть з облікового запису, з якого ви робили внески в проєкт. Нещодавні внески можуть відобразитися за кілька годин."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Вхід через GitHub не налаштовано для адреси зворотного виклику цього браузера. Зверніться до служби підтримки."
+  },
+  "githubLoginExpired": {
+    "message": "Термін дії цієї спроби входу через GitHub минув або її не вдалося підтвердити. Почніть вхід заново."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Оновіть розширення, щоб увійти як учасник проєкту через GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Забагато спроб входу. Зачекайте хвилину перед наступною спробою."
+  },
+  "githubLoginDenied": {
+    "message": "Авторизацію через GitHub відхилено. Для входу учасника проєкту потрібна авторизація."
+  },
+  "discussion_title": {
+    "message": "Коментарі RYD"
+  },
+  "discussion_subtitle": {
+    "message": "Обговорення спільноти на платформі Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Ці коментарі не пов’язані з YouTube."
+  },
+  "discussion_open": {
+    "message": "Відкрити коментарі RYD"
+  },
+  "discussion_close": {
+    "message": "Закрити"
+  },
+  "discussion_new": {
+    "message": "Найновіші"
+  },
+  "discussion_top": {
+    "message": "Найкращі"
+  },
+  "discussion_sort": {
+    "message": "Сортувати коментарі"
+  },
+  "discussion_refresh": {
+    "message": "Оновити"
+  },
+  "discussion_loading": {
+    "message": "Завантаження коментарів…"
+  },
+  "discussion_empty": {
+    "message": "Коментарів поки немає. Розпочніть розмову."
+  },
+  "discussion_replyEmpty": {
+    "message": "Відповідей поки немає."
+  },
+  "discussion_comment": {
+    "message": "Коментар"
+  },
+  "discussion_post": {
+    "message": "Опублікувати коментар"
+  },
+  "discussion_reply": {
+    "message": "Відповісти"
+  },
+  "discussion_postReply": {
+    "message": "Опублікувати відповідь"
+  },
+  "discussion_cancel": {
+    "message": "Скасувати"
+  },
+  "discussion_save": {
+    "message": "Зберегти"
+  },
+  "discussion_edit": {
+    "message": "Редагувати"
+  },
+  "discussion_delete": {
+    "message": "Видалити"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Видалити цей коментар?"
+  },
+  "discussion_deleted": {
+    "message": "Коментар видалено"
+  },
+  "discussion_edited": {
+    "message": "відредаговано"
+  },
+  "discussion_replies": {
+    "message": "Відповіді ($1)"
+  },
+  "discussion_more": {
+    "message": "Завантажити ще"
+  },
+  "discussion_like": {
+    "message": "Подобається"
+  },
+  "discussion_dislike": {
+    "message": "Не подобається"
+  },
+  "discussion_reacting": {
+    "message": "Збереження реакції…"
+  },
+  "discussion_signInRequired": {
+    "message": "Щоб продовжити, увійдіть через спливне вікно розширення."
+  },
+  "discussion_tierRequired": {
+    "message": "Публікація доступна учасникам з активною підпискою рівня Commenter або вище."
+  },
+  "discussion_join": {
+    "message": "Стати учасником рівня Commenter"
+  },
+  "discussion_gate": {
+    "message": "Усі можуть читати й реагувати. Учасники з активною підпискою рівня Commenter або вище можуть публікувати коментарі."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Перед публікацією виберіть свій публічний псевдонім RYD."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Публічний псевдонім RYD"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 літери, цифри, пробіли, крапки, дефіси або знаки підкреслення. Це ім’я відображатиметься біля ваших коментарів."
+  },
+  "discussion_nicknameSave": {
+    "message": "Зберегти псевдонім"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Цей псевдонім уже зайнятий. Виберіть інший."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Використовуйте 3–32 літери, цифри, пробіли, крапки, дефіси або знаки підкреслення."
+  },
+  "discussion_nicknameChange": {
+    "message": "Змінити псевдонім"
+  },
+  "discussion_as": {
+    "message": "Ви коментуєте як $1"
+  },
+  "discussion_placeholder": {
+    "message": "Долучайтеся до обговорення…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Поскаржитися"
+  },
+  "discussion_reportTitle": {
+    "message": "Поскаржитися на коментар"
+  },
+  "discussion_reportReason": {
+    "message": "Причина"
+  },
+  "discussion_reportSpam": {
+    "message": "Спам"
+  },
+  "discussion_reportAbuse": {
+    "message": "Переслідування або ненависть"
+  },
+  "discussion_reportOther": {
+    "message": "Інше"
+  },
+  "discussion_reportDetails": {
+    "message": "Додаткові відомості (необов’язково)"
+  },
+  "discussion_reportSend": {
+    "message": "Надіслати скаргу"
+  },
+  "discussion_reportDone": {
+    "message": "Скаргу отримано. Дякуємо."
+  },
+  "discussion_moderation": {
+    "message": "Модерація"
+  },
+  "discussion_queueEmpty": {
+    "message": "Немає скарг для розгляду."
+  },
+  "discussion_hide": {
+    "message": "Приховати коментар"
+  },
+  "discussion_restore": {
+    "message": "Відновити коментар"
+  },
+  "discussion_dismiss": {
+    "message": "Відхилити скарги"
+  },
+  "discussion_ban": {
+    "message": "Заблокувати автора"
+  },
+  "discussion_unban": {
+    "message": "Розблокувати автора"
+  },
+  "discussion_moderationReason": {
+    "message": "Причина модерації"
+  },
+  "discussion_moderationSaved": {
+    "message": "Дію модерації збережено."
+  },
+  "discussion_reported": {
+    "message": "Скарг: $1"
+  },
+  "discussion_unavailable": {
+    "message": "Коментарі RYD недоступні для цього відео."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Цей коментар більше недоступний."
+  },
+  "discussion_error": {
+    "message": "Не вдалося під’єднатися. Спробуйте ще раз."
+  },
+  "discussion_rateLimited": {
+    "message": "Зачекайте трохи перед наступною спробою."
+  },
+  "discussion_conflict": {
+    "message": "Цей коментар змінився. Оновіть і спробуйте ще раз."
+  },
+  "discussion_forbidden": {
+    "message": "Ця дія недоступна для вашого облікового запису."
+  },
+  "discussion_retry": {
+    "message": "Спробувати ще раз"
+  },
+  "discussion_notifications": {
+    "message": "Сповіщення"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Усі сповіщення прочитано."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 відповідає на ваш коментар"
+  },
+  "discussion_notificationLike": {
+    "message": "Комусь сподобався ваш коментар"
+  },
+  "discussion_notificationLikes": {
+    "message": "Кількість уподобань вашого коментаря: $1"
+  },
+  "discussion_notificationDislike": {
+    "message": "Комусь не сподобався ваш коментар"
+  },
+  "discussion_notificationReaction": {
+    "message": "Хтось відреагував на ваш коментар"
+  },
+  "discussion_someone": {
+    "message": "Хтось"
+  },
+  "discussion_markRead": {
+    "message": "Позначити як прочитане"
+  },
+  "discussion_markAllRead": {
+    "message": "Позначити все як прочитане"
+  },
+  "discussion_view": {
+    "message": "Переглянути обговорення"
+  },
+  "discussion_unread": {
+    "message": "Непрочитаних сповіщень: $1"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Увійдіть, щоб бачити відповіді й реакції на ваші коментарі."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Це обговорення більше недоступне."
+  },
+  "discussion_discussionTab": {
+    "message": "Обговорення"
+  },
+  "discussion_nickname": {
+    "message": "Псевдонім"
+  },
+  "discussion_reportCount": {
+    "message": "Скарги"
+  },
+  "discussion_reportStatus": {
+    "message": "Статус скарги"
+  },
+  "discussion_openReports": {
+    "message": "Відкриті скарги"
+  },
+  "discussion_resolvedReports": {
+    "message": "Відхилені скарги"
+  },
+  "discussion_author": {
+    "message": "Автор"
+  },
+  "discussion_me": {
+    "message": "Ви"
+  },
+  "discussion_saving": {
+    "message": "Збереження…"
+  },
+  "discussion_confirm": {
+    "message": "Підтвердити"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Нова активність у ваших коментарях"
+  },
+  "discussion_showThread": {
+    "message": "Показати гілку обговорення"
+  },
+  "discussion_loadReplies": {
+    "message": "Показати відповіді ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Вітаємо в Return YouTube Dislike"
   },

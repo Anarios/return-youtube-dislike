@@ -10,8 +10,8 @@ const customColors = {
   dark: { like: "#abcdef", dislike: "#fedcba" },
 };
 const defaultColors = {
-  light: { like: "#008000", dislike: "#b300b3" },
-  dark: { like: "#00d000", dislike: "#ff66ff" },
+  light: { like: "#007600", dislike: "#b300b3" },
+  dark: { like: "#00d000", dislike: "#ff77ff" },
 };
 
 describe("popup color settings", () => {

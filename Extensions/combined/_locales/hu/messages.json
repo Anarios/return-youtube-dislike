@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike logója"
   },
+  "githubLoginUnavailable": {
+    "message": "A közreműködők GitHub-bejelentkezése jelenleg nem érhető el. A szolgáltatás frissítést vagy konfigurációmódosítást igényel."
+  },
+  "githubLoginNotContributor": {
+    "message": "Ez a GitHub-fiók nem szerepel a Return YouTube Dislike közreműködői között. Jelentkezz be egy közreműködői fiókkal. A friss hozzájárulások megjelenése néhány órát is igénybe vehet."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "A GitHub-bejelentkezés nincs beállítva ennek a böngészőnek a visszahívási címéhez. Fordulj az ügyfélszolgálathoz."
+  },
+  "githubLoginExpired": {
+    "message": "Ez a GitHub-bejelentkezési kísérlet lejárt, vagy nem sikerült ellenőrizni. Indíts új bejelentkezést."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "A közreműködők GitHub-bejelentkezéséhez frissítsd a bővítményt."
+  },
+  "githubLoginRateLimited": {
+    "message": "Túl sok bejelentkezési kísérlet. Várj egy percet, majd próbáld újra."
+  },
+  "githubLoginDenied": {
+    "message": "A GitHub-engedélyezés elutasítva. A közreműködői bejelentkezéshez engedélyezés szükséges."
+  },
+  "discussion_title": {
+    "message": "RYD-hozzászólások"
+  },
+  "discussion_subtitle": {
+    "message": "A Return YouTube Dislike által biztosított közösségi beszélgetés."
+  },
+  "discussion_independent": {
+    "message": "Ezek a hozzászólások függetlenek a YouTube-tól."
+  },
+  "discussion_open": {
+    "message": "RYD-hozzászólások megnyitása"
+  },
+  "discussion_close": {
+    "message": "Bezárás"
+  },
+  "discussion_new": {
+    "message": "Legújabbak"
+  },
+  "discussion_top": {
+    "message": "Legnépszerűbbek"
+  },
+  "discussion_sort": {
+    "message": "Hozzászólások rendezése"
+  },
+  "discussion_refresh": {
+    "message": "Frissítés"
+  },
+  "discussion_loading": {
+    "message": "Hozzászólások betöltése…"
+  },
+  "discussion_empty": {
+    "message": "Még nincsenek hozzászólások. Indítsd el a beszélgetést."
+  },
+  "discussion_replyEmpty": {
+    "message": "Még nincsenek válaszok."
+  },
+  "discussion_comment": {
+    "message": "Hozzászólás"
+  },
+  "discussion_post": {
+    "message": "Hozzászólás küldése"
+  },
+  "discussion_reply": {
+    "message": "Válasz"
+  },
+  "discussion_postReply": {
+    "message": "Válasz küldése"
+  },
+  "discussion_cancel": {
+    "message": "Mégse"
+  },
+  "discussion_save": {
+    "message": "Mentés"
+  },
+  "discussion_edit": {
+    "message": "Szerkesztés"
+  },
+  "discussion_delete": {
+    "message": "Törlés"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Törlöd ezt a hozzászólást?"
+  },
+  "discussion_deleted": {
+    "message": "Hozzászólás törölve"
+  },
+  "discussion_edited": {
+    "message": "szerkesztve"
+  },
+  "discussion_replies": {
+    "message": "Válaszok ($1)"
+  },
+  "discussion_more": {
+    "message": "Továbbiak betöltése"
+  },
+  "discussion_like": {
+    "message": "Tetszik"
+  },
+  "discussion_dislike": {
+    "message": "Nem tetszik"
+  },
+  "discussion_reacting": {
+    "message": "Reakció mentése…"
+  },
+  "discussion_signInRequired": {
+    "message": "A folytatáshoz jelentkezz be a bővítmény felugró ablakában."
+  },
+  "discussion_tierRequired": {
+    "message": "Az aktív Commenter és magasabb szintű tagok szólhatnak hozzá."
+  },
+  "discussion_join": {
+    "message": "Legyél Commenter tag"
+  },
+  "discussion_gate": {
+    "message": "Mindenki olvashat és reagálhat. Az aktív Commenter és magasabb szintű tagok szólhatnak hozzá."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Hozzászólás előtt válaszd ki nyilvános RYD-becenevedet."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Nyilvános RYD-becenév"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 betű, szám, szóköz, pont, kötőjel vagy aláhúzás. Ez a név jelenik meg a hozzászólásaid mellett."
+  },
+  "discussion_nicknameSave": {
+    "message": "Becenév mentése"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Ez a becenév már foglalt. Válassz másikat."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Használj 3–32 betűt, számot, szóközt, pontot, kötőjelet vagy aláhúzást."
+  },
+  "discussion_nicknameChange": {
+    "message": "Becenév módosítása"
+  },
+  "discussion_as": {
+    "message": "Hozzászólás $1 néven"
+  },
+  "discussion_placeholder": {
+    "message": "Szólj hozzá a beszélgetéshez…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Jelentés"
+  },
+  "discussion_reportTitle": {
+    "message": "Hozzászólás jelentése"
+  },
+  "discussion_reportReason": {
+    "message": "Indok"
+  },
+  "discussion_reportSpam": {
+    "message": "Spam"
+  },
+  "discussion_reportAbuse": {
+    "message": "Zaklatás vagy gyűlöletkeltés"
+  },
+  "discussion_reportOther": {
+    "message": "Egyéb"
+  },
+  "discussion_reportDetails": {
+    "message": "További részletek (nem kötelező)"
+  },
+  "discussion_reportSend": {
+    "message": "Jelentés küldése"
+  },
+  "discussion_reportDone": {
+    "message": "A jelentést megkaptuk. Köszönjük."
+  },
+  "discussion_moderation": {
+    "message": "Moderálás"
+  },
+  "discussion_queueEmpty": {
+    "message": "Nincsenek ellenőrzésre váró jelentések."
+  },
+  "discussion_hide": {
+    "message": "Hozzászólás elrejtése"
+  },
+  "discussion_restore": {
+    "message": "Hozzászólás visszaállítása"
+  },
+  "discussion_dismiss": {
+    "message": "Jelentések elutasítása"
+  },
+  "discussion_ban": {
+    "message": "Szerző kitiltása"
+  },
+  "discussion_unban": {
+    "message": "Szerző kitiltásának feloldása"
+  },
+  "discussion_moderationReason": {
+    "message": "Moderálás indoka"
+  },
+  "discussion_moderationSaved": {
+    "message": "Moderálási művelet mentve."
+  },
+  "discussion_reported": {
+    "message": "$1 jelentés"
+  },
+  "discussion_unavailable": {
+    "message": "Ehhez a videóhoz nem érhetők el RYD-hozzászólások."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Ez a hozzászólás már nem érhető el."
+  },
+  "discussion_error": {
+    "message": "Nem sikerült csatlakozni. Próbáld újra."
+  },
+  "discussion_rateLimited": {
+    "message": "Várj egy kicsit, majd próbáld újra."
+  },
+  "discussion_conflict": {
+    "message": "Ez a hozzászólás megváltozott. Frissíts, és próbáld újra."
+  },
+  "discussion_forbidden": {
+    "message": "Ez a művelet nem érhető el a fiókoddal."
+  },
+  "discussion_retry": {
+    "message": "Újrapróbálás"
+  },
+  "discussion_notifications": {
+    "message": "Értesítések"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Nincsenek új értesítéseid."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 válaszolt a hozzászólásodra"
+  },
+  "discussion_notificationLike": {
+    "message": "Valakinek tetszett a hozzászólásod"
+  },
+  "discussion_notificationLikes": {
+    "message": "A hozzászólásod $1 kedvelést kapott"
+  },
+  "discussion_notificationDislike": {
+    "message": "Valakinek nem tetszett a hozzászólásod"
+  },
+  "discussion_notificationReaction": {
+    "message": "Valaki reagált a hozzászólásodra"
+  },
+  "discussion_someone": {
+    "message": "Valaki"
+  },
+  "discussion_markRead": {
+    "message": "Megjelölés olvasottként"
+  },
+  "discussion_markAllRead": {
+    "message": "Összes megjelölése olvasottként"
+  },
+  "discussion_view": {
+    "message": "Beszélgetés megtekintése"
+  },
+  "discussion_unread": {
+    "message": "$1 olvasatlan értesítés"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Jelentkezz be a hozzászólásaidra érkező válaszok és reakciók megtekintéséhez."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Ez a beszélgetés már nem érhető el."
+  },
+  "discussion_discussionTab": {
+    "message": "Beszélgetés"
+  },
+  "discussion_nickname": {
+    "message": "Becenév"
+  },
+  "discussion_reportCount": {
+    "message": "Jelentések"
+  },
+  "discussion_reportStatus": {
+    "message": "Jelentés állapota"
+  },
+  "discussion_openReports": {
+    "message": "Nyitott jelentések"
+  },
+  "discussion_resolvedReports": {
+    "message": "Elutasított jelentések"
+  },
+  "discussion_author": {
+    "message": "Szerző"
+  },
+  "discussion_me": {
+    "message": "Te"
+  },
+  "discussion_saving": {
+    "message": "Mentés…"
+  },
+  "discussion_confirm": {
+    "message": "Megerősítés"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Új aktivitás a hozzászólásaidnál"
+  },
+  "discussion_showThread": {
+    "message": "Hozzászóláslánc megjelenítése"
+  },
+  "discussion_loadReplies": {
+    "message": "Válaszok megjelenítése ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Üdvözöljük a Return YouTube Dislike-ban"
   },

@@ -1,7 +1,7 @@
-import { pt_BR } from "vuetify/src/locale";
+import { pt } from "vuetify/src/locale";
 // by Unnamed-orbert
 export default {
-  ...pt_BR,
+  ...pt,
   home: {
     name: "Inicio",
     title: "Return YouTube Dislike",

@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike logosu"
   },
+  "githubLoginUnavailable": {
+    "message": "Katkıda bulunanlar için GitHub ile giriş şu anda kullanılamıyor. Hizmetin güncellenmesi veya yapılandırmasının değiştirilmesi gerekiyor."
+  },
+  "githubLoginNotContributor": {
+    "message": "Bu GitHub hesabı, Return YouTube Dislike projesine katkıda bulunanlar arasında yer almıyor. Katkıda bulunan bir hesapla giriş yapın. Son katkıların görünmesi birkaç saat sürebilir."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "GitHub ile giriş, bu tarayıcının geri çağrı adresi için yapılandırılmamış. Lütfen destek ekibiyle iletişime geçin."
+  },
+  "githubLoginExpired": {
+    "message": "Bu GitHub giriş denemesinin süresi doldu veya deneme doğrulanamadı. Lütfen yeniden giriş yapmayı deneyin."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Katkıda bulunanlar için GitHub ile girişi kullanmak üzere lütfen uzantıyı güncelleyin."
+  },
+  "githubLoginRateLimited": {
+    "message": "Çok fazla giriş denemesi yapıldı. Tekrar denemeden önce lütfen bir dakika bekleyin."
+  },
+  "githubLoginDenied": {
+    "message": "GitHub yetkilendirmesi reddedildi. Katkıda bulunanlar için giriş, yetkilendirme gerektirir."
+  },
+  "discussion_title": {
+    "message": "RYD yorumları"
+  },
+  "discussion_subtitle": {
+    "message": "Return YouTube Dislike tarafından barındırılan bir topluluk tartışması."
+  },
+  "discussion_independent": {
+    "message": "Bu yorumlar YouTube yorumlarından ayrıdır."
+  },
+  "discussion_open": {
+    "message": "RYD yorumlarını aç"
+  },
+  "discussion_close": {
+    "message": "Kapat"
+  },
+  "discussion_new": {
+    "message": "En yeni"
+  },
+  "discussion_top": {
+    "message": "En popüler"
+  },
+  "discussion_sort": {
+    "message": "Yorumları sırala"
+  },
+  "discussion_refresh": {
+    "message": "Yenile"
+  },
+  "discussion_loading": {
+    "message": "Yorumlar yükleniyor…"
+  },
+  "discussion_empty": {
+    "message": "Henüz yorum yok. Sohbeti başlatın."
+  },
+  "discussion_replyEmpty": {
+    "message": "Henüz yanıt yok."
+  },
+  "discussion_comment": {
+    "message": "Yorum"
+  },
+  "discussion_post": {
+    "message": "Yorum gönder"
+  },
+  "discussion_reply": {
+    "message": "Yanıtla"
+  },
+  "discussion_postReply": {
+    "message": "Yanıt gönder"
+  },
+  "discussion_cancel": {
+    "message": "İptal"
+  },
+  "discussion_save": {
+    "message": "Kaydet"
+  },
+  "discussion_edit": {
+    "message": "Düzenle"
+  },
+  "discussion_delete": {
+    "message": "Sil"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Bu yorum silinsin mi?"
+  },
+  "discussion_deleted": {
+    "message": "Yorum silindi"
+  },
+  "discussion_edited": {
+    "message": "düzenlendi"
+  },
+  "discussion_replies": {
+    "message": "Yanıtlar ($1)"
+  },
+  "discussion_more": {
+    "message": "Daha fazla yükle"
+  },
+  "discussion_like": {
+    "message": "Beğen"
+  },
+  "discussion_dislike": {
+    "message": "Beğenme"
+  },
+  "discussion_reacting": {
+    "message": "Tepki kaydediliyor…"
+  },
+  "discussion_signInRequired": {
+    "message": "Devam etmek için uzantının açılır penceresinden giriş yapın."
+  },
+  "discussion_tierRequired": {
+    "message": "Yorum gönderme, aktif Commenter ve üzeri seviyelerdeki üyelere açıktır."
+  },
+  "discussion_join": {
+    "message": "Commenter üyesi olun"
+  },
+  "discussion_gate": {
+    "message": "Herkes okuyabilir ve tepki verebilir. Aktif Commenter ve üzeri seviyelerdeki üyeler yorum gönderebilir."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Yorum göndermeden önce herkese açık RYD takma adınızı seçin."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Herkese açık RYD takma adı"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 harf, rakam, boşluk, nokta, kısa çizgi veya alt çizgi. Bu ad yorumlarınızla birlikte görünecektir."
+  },
+  "discussion_nicknameSave": {
+    "message": "Takma adı kaydet"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Bu takma ad zaten kullanılıyor. Başka bir takma ad seçin."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "3–32 harf, rakam, boşluk, nokta, kısa çizgi veya alt çizgi kullanın."
+  },
+  "discussion_nicknameChange": {
+    "message": "Takma adı değiştir"
+  },
+  "discussion_as": {
+    "message": "$1 olarak yorum yapıyorsunuz"
+  },
+  "discussion_placeholder": {
+    "message": "Tartışmaya katılın…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Şikayet et"
+  },
+  "discussion_reportTitle": {
+    "message": "Yorumu şikayet et"
+  },
+  "discussion_reportReason": {
+    "message": "Neden"
+  },
+  "discussion_reportSpam": {
+    "message": "Spam"
+  },
+  "discussion_reportAbuse": {
+    "message": "Taciz veya nefret"
+  },
+  "discussion_reportOther": {
+    "message": "Diğer"
+  },
+  "discussion_reportDetails": {
+    "message": "Ek ayrıntılar (isteğe bağlı)"
+  },
+  "discussion_reportSend": {
+    "message": "Şikayeti gönder"
+  },
+  "discussion_reportDone": {
+    "message": "Şikayet alındı. Teşekkür ederiz."
+  },
+  "discussion_moderation": {
+    "message": "Moderasyon"
+  },
+  "discussion_queueEmpty": {
+    "message": "İncelenecek şikayet yok."
+  },
+  "discussion_hide": {
+    "message": "Yorumu gizle"
+  },
+  "discussion_restore": {
+    "message": "Yorumu geri yükle"
+  },
+  "discussion_dismiss": {
+    "message": "Şikayetleri reddet"
+  },
+  "discussion_ban": {
+    "message": "Yazarı yasakla"
+  },
+  "discussion_unban": {
+    "message": "Yazarın yasağını kaldır"
+  },
+  "discussion_moderationReason": {
+    "message": "Moderasyon nedeni"
+  },
+  "discussion_moderationSaved": {
+    "message": "Moderasyon işlemi kaydedildi."
+  },
+  "discussion_reported": {
+    "message": "$1 şikayet"
+  },
+  "discussion_unavailable": {
+    "message": "Bu video için RYD yorumları kullanılamıyor."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Bu yorum artık kullanılamıyor."
+  },
+  "discussion_error": {
+    "message": "Bağlantı kurulamadı. Lütfen tekrar deneyin."
+  },
+  "discussion_rateLimited": {
+    "message": "Tekrar denemeden önce lütfen biraz bekleyin."
+  },
+  "discussion_conflict": {
+    "message": "Bu yorum değişti. Yenileyip tekrar deneyin."
+  },
+  "discussion_forbidden": {
+    "message": "Bu işlem hesabınız için kullanılamıyor."
+  },
+  "discussion_retry": {
+    "message": "Tekrar dene"
+  },
+  "discussion_notifications": {
+    "message": "Bildirimler"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Tüm yeni bildirimleri gördünüz."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 yorumunuza yanıt verdi"
+  },
+  "discussion_notificationLike": {
+    "message": "Birisi yorumunuzu beğendi"
+  },
+  "discussion_notificationLikes": {
+    "message": "Yorumunuz $1 beğeni aldı"
+  },
+  "discussion_notificationDislike": {
+    "message": "Birisi yorumunuzu beğenmedi"
+  },
+  "discussion_notificationReaction": {
+    "message": "Birisi yorumunuza tepki verdi"
+  },
+  "discussion_someone": {
+    "message": "Birisi"
+  },
+  "discussion_markRead": {
+    "message": "Okundu olarak işaretle"
+  },
+  "discussion_markAllRead": {
+    "message": "Tümünü okundu olarak işaretle"
+  },
+  "discussion_view": {
+    "message": "Tartışmayı görüntüle"
+  },
+  "discussion_unread": {
+    "message": "$1 okunmamış bildirim"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Yorumlarınıza gelen yanıtları ve tepkileri görmek için giriş yapın."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Bu tartışma artık kullanılamıyor."
+  },
+  "discussion_discussionTab": {
+    "message": "Tartışma"
+  },
+  "discussion_nickname": {
+    "message": "Takma ad"
+  },
+  "discussion_reportCount": {
+    "message": "Şikayetler"
+  },
+  "discussion_reportStatus": {
+    "message": "Şikayet durumu"
+  },
+  "discussion_openReports": {
+    "message": "Açık şikayetler"
+  },
+  "discussion_resolvedReports": {
+    "message": "Reddedilen şikayetler"
+  },
+  "discussion_author": {
+    "message": "Yazar"
+  },
+  "discussion_me": {
+    "message": "Siz"
+  },
+  "discussion_saving": {
+    "message": "Kaydediliyor…"
+  },
+  "discussion_confirm": {
+    "message": "Onayla"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Yorumlarınızda yeni etkinlik var"
+  },
+  "discussion_showThread": {
+    "message": "Yorum dizisini göster"
+  },
+  "discussion_loadReplies": {
+    "message": "Yanıtları göster ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Return YouTube Dislike’a hoş geldiniz"
   },

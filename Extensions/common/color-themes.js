@@ -1,6 +1,6 @@
 const DEFAULT_CUSTOM_COLORS = Object.freeze({
-  light: Object.freeze({ like: "#008000", dislike: "#b300b3" }),
-  dark: Object.freeze({ like: "#00d000", dislike: "#ff66ff" }),
+  light: Object.freeze({ like: "#007600", dislike: "#b300b3" }),
+  dark: Object.freeze({ like: "#00d000", dislike: "#ff77ff" }),
 });
 
 function normalizeCustomColors(value) {

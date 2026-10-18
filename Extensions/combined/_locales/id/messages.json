@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
   },
+  "githubLoginUnavailable": {
+    "message": "Login kontributor GitHub saat ini tidak tersedia. Layanan memerlukan pembaruan atau perubahan konfigurasi."
+  },
+  "githubLoginNotContributor": {
+    "message": "Akun GitHub ini tidak terdaftar sebagai kontributor Return YouTube Dislike. Login dengan akun yang telah berkontribusi. Kontribusi terbaru mungkin memerlukan beberapa jam untuk muncul."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Login GitHub belum dikonfigurasi untuk alamat callback browser ini. Hubungi dukungan."
+  },
+  "githubLoginExpired": {
+    "message": "Upaya login GitHub ini telah kedaluwarsa atau tidak dapat diverifikasi. Mulai login baru."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Perbarui ekstensi untuk menggunakan login kontributor GitHub."
+  },
+  "githubLoginRateLimited": {
+    "message": "Terlalu banyak upaya login. Tunggu satu menit sebelum mencoba lagi."
+  },
+  "githubLoginDenied": {
+    "message": "Otorisasi GitHub ditolak. Login kontributor memerlukan otorisasi."
+  },
+  "discussion_title": {
+    "message": "Komentar RYD"
+  },
+  "discussion_subtitle": {
+    "message": "Diskusi komunitas yang diselenggarakan oleh Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Komentar ini terpisah dari YouTube."
+  },
+  "discussion_open": {
+    "message": "Buka komentar RYD"
+  },
+  "discussion_close": {
+    "message": "Tutup"
+  },
+  "discussion_new": {
+    "message": "Terbaru"
+  },
+  "discussion_top": {
+    "message": "Teratas"
+  },
+  "discussion_sort": {
+    "message": "Urutkan komentar"
+  },
+  "discussion_refresh": {
+    "message": "Muat ulang"
+  },
+  "discussion_loading": {
+    "message": "Memuat komentar…"
+  },
+  "discussion_empty": {
+    "message": "Belum ada komentar. Mulai percakapan."
+  },
+  "discussion_replyEmpty": {
+    "message": "Belum ada balasan."
+  },
+  "discussion_comment": {
+    "message": "Komentar"
+  },
+  "discussion_post": {
+    "message": "Kirim komentar"
+  },
+  "discussion_reply": {
+    "message": "Balas"
+  },
+  "discussion_postReply": {
+    "message": "Kirim balasan"
+  },
+  "discussion_cancel": {
+    "message": "Batal"
+  },
+  "discussion_save": {
+    "message": "Simpan"
+  },
+  "discussion_edit": {
+    "message": "Edit"
+  },
+  "discussion_delete": {
+    "message": "Hapus"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Hapus komentar ini?"
+  },
+  "discussion_deleted": {
+    "message": "Komentar dihapus"
+  },
+  "discussion_edited": {
+    "message": "diedit"
+  },
+  "discussion_replies": {
+    "message": "Balasan ($1)"
+  },
+  "discussion_more": {
+    "message": "Muat lebih banyak"
+  },
+  "discussion_like": {
+    "message": "Suka"
+  },
+  "discussion_dislike": {
+    "message": "Tidak suka"
+  },
+  "discussion_reacting": {
+    "message": "Menyimpan reaksi…"
+  },
+  "discussion_signInRequired": {
+    "message": "Login melalui popup ekstensi untuk melanjutkan."
+  },
+  "discussion_tierRequired": {
+    "message": "Anggota aktif tingkat Commenter ke atas dapat mengirim komentar."
+  },
+  "discussion_join": {
+    "message": "Jadi anggota Commenter"
+  },
+  "discussion_gate": {
+    "message": "Semua orang dapat membaca dan memberi reaksi. Anggota aktif tingkat Commenter ke atas dapat mengirim komentar."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Pilih nama panggilan RYD publik Anda sebelum mengirim komentar."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Nama panggilan RYD publik"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 karakter berupa huruf, angka, spasi, titik, tanda hubung, atau garis bawah. Nama ini akan ditampilkan bersama komentar Anda."
+  },
+  "discussion_nicknameSave": {
+    "message": "Simpan nama panggilan"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Nama panggilan ini sudah digunakan. Pilih yang lain."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Gunakan 3–32 karakter berupa huruf, angka, spasi, titik, tanda hubung, atau garis bawah."
+  },
+  "discussion_nicknameChange": {
+    "message": "Ubah nama panggilan"
+  },
+  "discussion_as": {
+    "message": "Berkomentar sebagai $1"
+  },
+  "discussion_placeholder": {
+    "message": "Ikut berdiskusi…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Laporkan"
+  },
+  "discussion_reportTitle": {
+    "message": "Laporkan komentar"
+  },
+  "discussion_reportReason": {
+    "message": "Alasan"
+  },
+  "discussion_reportSpam": {
+    "message": "Spam"
+  },
+  "discussion_reportAbuse": {
+    "message": "Pelecehan atau kebencian"
+  },
+  "discussion_reportOther": {
+    "message": "Lainnya"
+  },
+  "discussion_reportDetails": {
+    "message": "Detail tambahan (opsional)"
+  },
+  "discussion_reportSend": {
+    "message": "Kirim laporan"
+  },
+  "discussion_reportDone": {
+    "message": "Laporan diterima. Terima kasih."
+  },
+  "discussion_moderation": {
+    "message": "Moderasi"
+  },
+  "discussion_queueEmpty": {
+    "message": "Tidak ada laporan untuk ditinjau."
+  },
+  "discussion_hide": {
+    "message": "Sembunyikan komentar"
+  },
+  "discussion_restore": {
+    "message": "Pulihkan komentar"
+  },
+  "discussion_dismiss": {
+    "message": "Abaikan laporan"
+  },
+  "discussion_ban": {
+    "message": "Blokir penulis"
+  },
+  "discussion_unban": {
+    "message": "Buka blokir penulis"
+  },
+  "discussion_moderationReason": {
+    "message": "Alasan moderasi"
+  },
+  "discussion_moderationSaved": {
+    "message": "Tindakan moderasi disimpan."
+  },
+  "discussion_reported": {
+    "message": "$1 laporan"
+  },
+  "discussion_unavailable": {
+    "message": "Komentar RYD tidak tersedia untuk video ini."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Komentar ini tidak lagi tersedia."
+  },
+  "discussion_error": {
+    "message": "Tidak dapat terhubung. Coba lagi."
+  },
+  "discussion_rateLimited": {
+    "message": "Tunggu sebentar sebelum mencoba lagi."
+  },
+  "discussion_conflict": {
+    "message": "Komentar ini telah berubah. Muat ulang dan coba lagi."
+  },
+  "discussion_forbidden": {
+    "message": "Tindakan ini tidak tersedia untuk akun Anda."
+  },
+  "discussion_retry": {
+    "message": "Coba lagi"
+  },
+  "discussion_notifications": {
+    "message": "Notifikasi"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Semua notifikasi sudah dibaca."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 membalas komentar Anda"
+  },
+  "discussion_notificationLike": {
+    "message": "Seseorang menyukai komentar Anda"
+  },
+  "discussion_notificationLikes": {
+    "message": "Komentar Anda mendapat $1 suka"
+  },
+  "discussion_notificationDislike": {
+    "message": "Seseorang tidak menyukai komentar Anda"
+  },
+  "discussion_notificationReaction": {
+    "message": "Seseorang memberi reaksi pada komentar Anda"
+  },
+  "discussion_someone": {
+    "message": "Seseorang"
+  },
+  "discussion_markRead": {
+    "message": "Tandai sudah dibaca"
+  },
+  "discussion_markAllRead": {
+    "message": "Tandai semua sudah dibaca"
+  },
+  "discussion_view": {
+    "message": "Lihat diskusi"
+  },
+  "discussion_unread": {
+    "message": "$1 notifikasi belum dibaca"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Login untuk melihat balasan dan reaksi pada komentar Anda."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Diskusi ini tidak lagi tersedia."
+  },
+  "discussion_discussionTab": {
+    "message": "Diskusi"
+  },
+  "discussion_nickname": {
+    "message": "Nama panggilan"
+  },
+  "discussion_reportCount": {
+    "message": "Laporan"
+  },
+  "discussion_reportStatus": {
+    "message": "Status laporan"
+  },
+  "discussion_openReports": {
+    "message": "Laporan terbuka"
+  },
+  "discussion_resolvedReports": {
+    "message": "Laporan yang diabaikan"
+  },
+  "discussion_author": {
+    "message": "Penulis"
+  },
+  "discussion_me": {
+    "message": "Anda"
+  },
+  "discussion_saving": {
+    "message": "Menyimpan…"
+  },
+  "discussion_confirm": {
+    "message": "Konfirmasi"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Aktivitas baru pada komentar Anda"
+  },
+  "discussion_showThread": {
+    "message": "Tampilkan rangkaian komentar"
+  },
+  "discussion_loadReplies": {
+    "message": "Tampilkan balasan ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Selamat datang di Return YouTube Dislike"
   },

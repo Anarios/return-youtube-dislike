@@ -557,6 +557,294 @@
   "changelog_brand_logo_alt": {
     "message": "Лагатып Return YouTube Dislike"
   },
+  "discussion_title": {
+    "message": "Каментарыі RYD"
+  },
+  "discussion_subtitle": {
+    "message": "Абмеркаванне супольнасці на платформе Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Гэтыя каментарыі не звязаны з YouTube."
+  },
+  "discussion_open": {
+    "message": "Адкрыць каментарыі RYD"
+  },
+  "discussion_close": {
+    "message": "Закрыць"
+  },
+  "discussion_new": {
+    "message": "Найноўшыя"
+  },
+  "discussion_top": {
+    "message": "Найлепшыя"
+  },
+  "discussion_sort": {
+    "message": "Сартаваць каментарыі"
+  },
+  "discussion_refresh": {
+    "message": "Абнавіць"
+  },
+  "discussion_loading": {
+    "message": "Загрузка каментарыяў…"
+  },
+  "discussion_empty": {
+    "message": "Каментарыяў пакуль няма. Пачніце размову."
+  },
+  "discussion_replyEmpty": {
+    "message": "Адказаў пакуль няма."
+  },
+  "discussion_comment": {
+    "message": "Каментарый"
+  },
+  "discussion_post": {
+    "message": "Апублікаваць каментарый"
+  },
+  "discussion_reply": {
+    "message": "Адказаць"
+  },
+  "discussion_postReply": {
+    "message": "Апублікаваць адказ"
+  },
+  "discussion_cancel": {
+    "message": "Скасаваць"
+  },
+  "discussion_save": {
+    "message": "Захаваць"
+  },
+  "discussion_edit": {
+    "message": "Рэдагаваць"
+  },
+  "discussion_delete": {
+    "message": "Выдаліць"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Выдаліць гэты каментарый?"
+  },
+  "discussion_deleted": {
+    "message": "Каментарый выдалены"
+  },
+  "discussion_edited": {
+    "message": "адрэдагавана"
+  },
+  "discussion_replies": {
+    "message": "Адказы ($1)"
+  },
+  "discussion_more": {
+    "message": "Загрузіць яшчэ"
+  },
+  "discussion_like": {
+    "message": "Падабаецца"
+  },
+  "discussion_dislike": {
+    "message": "Не падабаецца"
+  },
+  "discussion_reacting": {
+    "message": "Захаванне рэакцыі…"
+  },
+  "discussion_signInRequired": {
+    "message": "Каб працягнуць, увайдзіце праз усплывальнае акно пашырэння."
+  },
+  "discussion_tierRequired": {
+    "message": "Публікацыя даступна ўдзельнікам з актыўнай падпіскай узроўню Commenter або вышэй."
+  },
+  "discussion_join": {
+    "message": "Стаць удзельнікам узроўню Commenter"
+  },
+  "discussion_gate": {
+    "message": "Усе могуць чытаць і рэагаваць. Удзельнікі з актыўнай падпіскай узроўню Commenter або вышэй могуць публікаваць каментарыі."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Перад публікацыяй выберыце публічны псеўданім RYD."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Публічны псеўданім RYD"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 літары, лічбы, прабелы, кропкі, злучкі або знакі падкрэслівання. Гэтае імя будзе паказана побач з вашымі каментарыямі."
+  },
+  "discussion_nicknameSave": {
+    "message": "Захаваць псеўданім"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Гэты псеўданім ужо заняты. Выберыце іншы."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Выкарыстоўвайце 3–32 літары, лічбы, прабелы, кропкі, злучкі або знакі падкрэслівання."
+  },
+  "discussion_nicknameChange": {
+    "message": "Змяніць псеўданім"
+  },
+  "discussion_as": {
+    "message": "Вы каментуеце як $1"
+  },
+  "discussion_placeholder": {
+    "message": "Далучайцеся да абмеркавання…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Паскардзіцца"
+  },
+  "discussion_reportTitle": {
+    "message": "Паскардзіцца на каментарый"
+  },
+  "discussion_reportReason": {
+    "message": "Прычына"
+  },
+  "discussion_reportSpam": {
+    "message": "Спам"
+  },
+  "discussion_reportAbuse": {
+    "message": "Пераслед або варожасць"
+  },
+  "discussion_reportOther": {
+    "message": "Іншае"
+  },
+  "discussion_reportDetails": {
+    "message": "Дадатковыя звесткі (неабавязкова)"
+  },
+  "discussion_reportSend": {
+    "message": "Адправіць скаргу"
+  },
+  "discussion_reportDone": {
+    "message": "Скарга атрымана. Дзякуй."
+  },
+  "discussion_moderation": {
+    "message": "Мадэрацыя"
+  },
+  "discussion_queueEmpty": {
+    "message": "Няма скаргаў для разгляду."
+  },
+  "discussion_hide": {
+    "message": "Схаваць каментарый"
+  },
+  "discussion_restore": {
+    "message": "Аднавіць каментарый"
+  },
+  "discussion_dismiss": {
+    "message": "Адхіліць скаргі"
+  },
+  "discussion_ban": {
+    "message": "Заблакаваць аўтара"
+  },
+  "discussion_unban": {
+    "message": "Разблакаваць аўтара"
+  },
+  "discussion_moderationReason": {
+    "message": "Прычына мадэрацыі"
+  },
+  "discussion_moderationSaved": {
+    "message": "Дзеянне мадэрацыі захавана."
+  },
+  "discussion_reported": {
+    "message": "Скаргаў: $1"
+  },
+  "discussion_unavailable": {
+    "message": "Каментарыі RYD недаступны для гэтага відэа."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Гэты каментарый больш недаступны."
+  },
+  "discussion_error": {
+    "message": "Не ўдалося падключыцца. Паспрабуйце зноў."
+  },
+  "discussion_rateLimited": {
+    "message": "Пачакайце крыху перад наступнай спробай."
+  },
+  "discussion_conflict": {
+    "message": "Гэты каментарый змяніўся. Абнавіце старонку і паспрабуйце зноў."
+  },
+  "discussion_forbidden": {
+    "message": "Гэтае дзеянне недаступна для вашага ўліковага запісу."
+  },
+  "discussion_retry": {
+    "message": "Паспрабаваць зноў"
+  },
+  "discussion_notifications": {
+    "message": "Апавяшчэнні"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Усе апавяшчэнні прачытаны."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 адказвае на ваш каментарый"
+  },
+  "discussion_notificationLike": {
+    "message": "Камусьці спадабаўся ваш каментарый"
+  },
+  "discussion_notificationLikes": {
+    "message": "Ваш каментарый атрымаў падабайкі: $1"
+  },
+  "discussion_notificationDislike": {
+    "message": "Камусьці не спадабаўся ваш каментарый"
+  },
+  "discussion_notificationReaction": {
+    "message": "Хтосьці адрэагаваў на ваш каментарый"
+  },
+  "discussion_someone": {
+    "message": "Хтосьці"
+  },
+  "discussion_markRead": {
+    "message": "Пазначыць як прачытанае"
+  },
+  "discussion_markAllRead": {
+    "message": "Пазначыць усё як прачытанае"
+  },
+  "discussion_view": {
+    "message": "Паглядзець абмеркаванне"
+  },
+  "discussion_unread": {
+    "message": "Непрачытаных апавяшчэнняў: $1"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Увайдзіце, каб бачыць адказы і рэакцыі на вашы каментарыі."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Гэтае абмеркаванне больш недаступна."
+  },
+  "discussion_discussionTab": {
+    "message": "Абмеркаванне"
+  },
+  "discussion_nickname": {
+    "message": "Псеўданім"
+  },
+  "discussion_reportCount": {
+    "message": "Скаргі"
+  },
+  "discussion_reportStatus": {
+    "message": "Статус скаргі"
+  },
+  "discussion_openReports": {
+    "message": "Адкрытыя скаргі"
+  },
+  "discussion_resolvedReports": {
+    "message": "Адхіленыя скаргі"
+  },
+  "discussion_author": {
+    "message": "Аўтар"
+  },
+  "discussion_me": {
+    "message": "Вы"
+  },
+  "discussion_saving": {
+    "message": "Захаванне…"
+  },
+  "discussion_confirm": {
+    "message": "Пацвердзіць"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Новая актыўнасць у вашых каментарыях"
+  },
+  "discussion_showThread": {
+    "message": "Паказаць галіну абмеркавання"
+  },
+  "discussion_loadReplies": {
+    "message": "Паказаць адказы ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Вітаем у Return YouTube Dislike"
   },

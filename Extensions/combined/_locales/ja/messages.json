@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike のロゴ"
   },
+  "githubLoginUnavailable": {
+    "message": "GitHub 貢献者向けログインは現在利用できません。サービスの更新または設定変更が必要です。"
+  },
+  "githubLoginNotContributor": {
+    "message": "この GitHub アカウントは Return YouTube Dislike の貢献者として登録されていません。貢献したアカウントでログインしてください。最近の貢献が反映されるまで数時間かかる場合があります。"
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "このブラウザのコールバックアドレス用に GitHub ログインが設定されていません。サポートにお問い合わせください。"
+  },
+  "githubLoginExpired": {
+    "message": "この GitHub ログインの試行は期限切れか、確認できませんでした。もう一度ログインを開始してください。"
+  },
+  "githubLoginUpdateRequired": {
+    "message": "GitHub 貢献者向けログインを使用するには、拡張機能を更新してください。"
+  },
+  "githubLoginRateLimited": {
+    "message": "ログインの試行回数が多すぎます。1 分待ってからもう一度お試しください。"
+  },
+  "githubLoginDenied": {
+    "message": "GitHub のアクセス許可が拒否されました。貢献者としてログインするにはアクセス許可が必要です。"
+  },
+  "discussion_title": {
+    "message": "RYD コメント"
+  },
+  "discussion_subtitle": {
+    "message": "Return YouTube Dislike が提供するコミュニティディスカッションです。"
+  },
+  "discussion_independent": {
+    "message": "これらのコメントは YouTube とは別のものです。"
+  },
+  "discussion_open": {
+    "message": "RYD コメントを開く"
+  },
+  "discussion_close": {
+    "message": "閉じる"
+  },
+  "discussion_new": {
+    "message": "新しい順"
+  },
+  "discussion_top": {
+    "message": "人気順"
+  },
+  "discussion_sort": {
+    "message": "コメントを並べ替え"
+  },
+  "discussion_refresh": {
+    "message": "更新"
+  },
+  "discussion_loading": {
+    "message": "コメントを読み込み中…"
+  },
+  "discussion_empty": {
+    "message": "まだコメントはありません。会話を始めましょう。"
+  },
+  "discussion_replyEmpty": {
+    "message": "まだ返信はありません。"
+  },
+  "discussion_comment": {
+    "message": "コメント"
+  },
+  "discussion_post": {
+    "message": "コメントを投稿"
+  },
+  "discussion_reply": {
+    "message": "返信"
+  },
+  "discussion_postReply": {
+    "message": "返信を投稿"
+  },
+  "discussion_cancel": {
+    "message": "キャンセル"
+  },
+  "discussion_save": {
+    "message": "保存"
+  },
+  "discussion_edit": {
+    "message": "編集"
+  },
+  "discussion_delete": {
+    "message": "削除"
+  },
+  "discussion_deleteConfirm": {
+    "message": "このコメントを削除しますか？"
+  },
+  "discussion_deleted": {
+    "message": "コメントは削除されました"
+  },
+  "discussion_edited": {
+    "message": "編集済み"
+  },
+  "discussion_replies": {
+    "message": "返信（$1）"
+  },
+  "discussion_more": {
+    "message": "さらに読み込む"
+  },
+  "discussion_like": {
+    "message": "高評価"
+  },
+  "discussion_dislike": {
+    "message": "低評価"
+  },
+  "discussion_reacting": {
+    "message": "リアクションを保存中…"
+  },
+  "discussion_signInRequired": {
+    "message": "続行するには、拡張機能のポップアップからログインしてください。"
+  },
+  "discussion_tierRequired": {
+    "message": "投稿は有効な Commenter 以上のメンバーが利用できます。"
+  },
+  "discussion_join": {
+    "message": "Commenter になる"
+  },
+  "discussion_gate": {
+    "message": "誰でも閲覧とリアクションができます。有効な Commenter 以上のメンバーは投稿できます。"
+  },
+  "discussion_nicknameRequired": {
+    "message": "投稿する前に、公開する RYD ニックネームを選んでください。"
+  },
+  "discussion_nicknameLabel": {
+    "message": "公開 RYD ニックネーム"
+  },
+  "discussion_nicknameHint": {
+    "message": "文字、数字、スペース、ピリオド、ハイフン、アンダースコアを使用して 3～32 文字で入力してください。この名前はコメントとともに表示されます。"
+  },
+  "discussion_nicknameSave": {
+    "message": "ニックネームを保存"
+  },
+  "discussion_nicknameTaken": {
+    "message": "このニックネームはすでに使われています。別の名前を選んでください。"
+  },
+  "discussion_nicknameInvalid": {
+    "message": "文字、数字、スペース、ピリオド、ハイフン、アンダースコアを使用して 3～32 文字で入力してください。"
+  },
+  "discussion_nicknameChange": {
+    "message": "ニックネームを変更"
+  },
+  "discussion_as": {
+    "message": "$1 としてコメント"
+  },
+  "discussion_placeholder": {
+    "message": "ディスカッションに参加…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "報告"
+  },
+  "discussion_reportTitle": {
+    "message": "コメントを報告"
+  },
+  "discussion_reportReason": {
+    "message": "理由"
+  },
+  "discussion_reportSpam": {
+    "message": "スパム"
+  },
+  "discussion_reportAbuse": {
+    "message": "嫌がらせやヘイト"
+  },
+  "discussion_reportOther": {
+    "message": "その他"
+  },
+  "discussion_reportDetails": {
+    "message": "詳細（任意）"
+  },
+  "discussion_reportSend": {
+    "message": "報告を送信"
+  },
+  "discussion_reportDone": {
+    "message": "報告を受け付けました。ありがとうございます。"
+  },
+  "discussion_moderation": {
+    "message": "モデレーション"
+  },
+  "discussion_queueEmpty": {
+    "message": "確認する報告はありません。"
+  },
+  "discussion_hide": {
+    "message": "コメントを非表示"
+  },
+  "discussion_restore": {
+    "message": "コメントを再表示"
+  },
+  "discussion_dismiss": {
+    "message": "報告を却下"
+  },
+  "discussion_ban": {
+    "message": "投稿者を利用禁止"
+  },
+  "discussion_unban": {
+    "message": "投稿者の利用禁止を解除"
+  },
+  "discussion_moderationReason": {
+    "message": "モデレーションの理由"
+  },
+  "discussion_moderationSaved": {
+    "message": "モデレーション操作を保存しました。"
+  },
+  "discussion_reported": {
+    "message": "$1 件の報告"
+  },
+  "discussion_unavailable": {
+    "message": "この動画では RYD コメントを利用できません。"
+  },
+  "discussion_commentUnavailable": {
+    "message": "このコメントは利用できなくなりました。"
+  },
+  "discussion_error": {
+    "message": "接続できません。もう一度お試しください。"
+  },
+  "discussion_rateLimited": {
+    "message": "しばらく待ってからもう一度お試しください。"
+  },
+  "discussion_conflict": {
+    "message": "このコメントは変更されています。更新してもう一度お試しください。"
+  },
+  "discussion_forbidden": {
+    "message": "お使いのアカウントではこの操作を利用できません。"
+  },
+  "discussion_retry": {
+    "message": "再試行"
+  },
+  "discussion_notifications": {
+    "message": "通知"
+  },
+  "discussion_notificationEmpty": {
+    "message": "未読の通知はありません。"
+  },
+  "discussion_notificationReply": {
+    "message": "$1 があなたのコメントに返信しました"
+  },
+  "discussion_notificationLike": {
+    "message": "誰かがあなたのコメントを高く評価しました"
+  },
+  "discussion_notificationLikes": {
+    "message": "あなたのコメントが $1 件の高評価を受けました"
+  },
+  "discussion_notificationDislike": {
+    "message": "誰かがあなたのコメントを低く評価しました"
+  },
+  "discussion_notificationReaction": {
+    "message": "誰かがあなたのコメントにリアクションしました"
+  },
+  "discussion_someone": {
+    "message": "誰か"
+  },
+  "discussion_markRead": {
+    "message": "既読にする"
+  },
+  "discussion_markAllRead": {
+    "message": "すべて既読にする"
+  },
+  "discussion_view": {
+    "message": "ディスカッションを表示"
+  },
+  "discussion_unread": {
+    "message": "$1 件の未読通知"
+  },
+  "discussion_signedOutInbox": {
+    "message": "コメントへの返信やリアクションを確認するにはログインしてください。"
+  },
+  "discussion_notificationUnavailable": {
+    "message": "このディスカッションは利用できなくなりました。"
+  },
+  "discussion_discussionTab": {
+    "message": "ディスカッション"
+  },
+  "discussion_nickname": {
+    "message": "ニックネーム"
+  },
+  "discussion_reportCount": {
+    "message": "報告"
+  },
+  "discussion_reportStatus": {
+    "message": "報告の状態"
+  },
+  "discussion_openReports": {
+    "message": "未対応の報告"
+  },
+  "discussion_resolvedReports": {
+    "message": "却下した報告"
+  },
+  "discussion_author": {
+    "message": "投稿者"
+  },
+  "discussion_me": {
+    "message": "あなた"
+  },
+  "discussion_saving": {
+    "message": "保存中…"
+  },
+  "discussion_confirm": {
+    "message": "確認"
+  },
+  "discussion_notificationUpdated": {
+    "message": "あなたのコメントに新しいアクティビティがあります"
+  },
+  "discussion_showThread": {
+    "message": "スレッドを表示"
+  },
+  "discussion_loadReplies": {
+    "message": "返信を表示（$1）"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Return YouTube Dislike へようこそ"
   },

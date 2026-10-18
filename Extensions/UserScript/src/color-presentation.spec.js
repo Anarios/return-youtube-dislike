@@ -132,15 +132,15 @@ test("retains the existing editable defaults and exposes separate custom palette
 test("recolors existing desktop thumbs and ratio when YouTube toggles an empty dark attribute", async () => {
   const { like, dislike, rateBar, rateBarFill } = mountWatch();
   userscript.__get__("refreshColorPresentation")();
-  expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#008000");
+  expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#007600");
   expect(dislike.style.getPropertyValue("--ryd-thumb-color")).toBe("#b300b3");
-  expect(rateBarFill.style.backgroundColor).toBe("rgb(0, 128, 0)");
+  expect(rateBarFill.style.backgroundColor).toBe("rgb(0, 118, 0)");
 
   document.documentElement.setAttribute("dark", "");
   await flushMutations();
   expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#00d000");
-  expect(dislike.style.getPropertyValue("--ryd-thumb-color")).toBe("#ff66ff");
-  expect(rateBar.style.backgroundColor).toBe("rgb(255, 102, 255)");
+  expect(dislike.style.getPropertyValue("--ryd-thumb-color")).toBe("#ff77ff");
+  expect(rateBar.style.backgroundColor).toBe("rgb(255, 119, 255)");
   expect(rateBarFill.style.backgroundColor).toBe("rgb(0, 208, 0)");
   expect(rateBarFill.style.width).toBe("75%");
   expect(like.textContent).toBe("730");
@@ -149,7 +149,7 @@ test("recolors existing desktop thumbs and ratio when YouTube toggles an empty d
 
   document.documentElement.removeAttribute("dark");
   await flushMutations();
-  expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#008000");
+  expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#007600");
   expect(rateBar.style.backgroundColor).toBe("rgb(179, 0, 179)");
 });
 
@@ -197,7 +197,7 @@ test.each([
 ])("recolors only the selected Shorts thumb and follows later selection changes (%j)", async (options) => {
   const { like, dislike } = mountShorts(options);
   userscript.__get__("refreshColorPresentation")();
-  expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#008000");
+  expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#007600");
   expect(dislike.hasAttribute("data-ryd-thumb-color")).toBe(false);
 
   document.documentElement.setAttribute("dark", "");
@@ -209,7 +209,7 @@ test.each([
   dislike.setAttribute("aria-pressed", "true");
   await flushMutations();
   expect(like.hasAttribute("data-ryd-thumb-color")).toBe(false);
-  expect(dislike.style.getPropertyValue("--ryd-thumb-color")).toBe("#ff66ff");
+  expect(dislike.style.getPropertyValue("--ryd-thumb-color")).toBe("#ff77ff");
 });
 
 test.each([
@@ -234,7 +234,7 @@ test.each([
 
   expect(userscript.__get__("getLikeButton")()).toBe(likeHost);
   expect(userscript.__get__("getDislikeButton")()).toBe(dislikeHost);
-  expect(nextLike.style.getPropertyValue("--ryd-thumb-color")).toBe("#008000");
+  expect(nextLike.style.getPropertyValue("--ryd-thumb-color")).toBe("#007600");
   expect(nextDislike.style.getPropertyValue("--ryd-thumb-color")).toBe(options.shorts ? "" : "#b300b3");
   if (options.shorts) {
     nextLike.setAttribute("aria-pressed", "false");
@@ -265,7 +265,7 @@ test("targets native thumbs and removes only its own overrides when coloring is 
   expect(like.hasAttribute("data-ryd-thumb-color")).toBe(true);
   expect(dislike.hasAttribute("data-ryd-thumb-color")).toBe(true);
   expect(like.parentElement.hasAttribute("data-ryd-thumb-color")).toBe(false);
-  expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#008000");
+  expect(like.style.getPropertyValue("--ryd-thumb-color")).toBe("#007600");
 
   extConfig.coloredThumbs = false;
   userscript.__get__("refreshColorPresentation")();

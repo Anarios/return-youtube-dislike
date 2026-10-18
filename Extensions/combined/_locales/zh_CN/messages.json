@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 标志"
   },
+  "githubLoginUnavailable": {
+    "message": "GitHub 贡献者登录目前不可用。服务需要更新或更改配置。"
+  },
+  "githubLoginNotContributor": {
+    "message": "此 GitHub 账户未被列为 Return YouTube Dislike 的贡献者。请使用有贡献记录的账户登录。近期的贡献可能需要几小时才会显示。"
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "尚未为此浏览器的回调地址配置 GitHub 登录。请联系支持人员。"
+  },
+  "githubLoginExpired": {
+    "message": "此次 GitHub 登录尝试已过期或无法验证。请重新登录。"
+  },
+  "githubLoginUpdateRequired": {
+    "message": "请更新扩展以使用 GitHub 贡献者登录。"
+  },
+  "githubLoginRateLimited": {
+    "message": "登录尝试次数过多。请等待一分钟后重试。"
+  },
+  "githubLoginDenied": {
+    "message": "GitHub 授权被拒绝。贡献者登录需要授权。"
+  },
+  "discussion_title": {
+    "message": "RYD 评论"
+  },
+  "discussion_subtitle": {
+    "message": "由 Return YouTube Dislike 提供的社区讨论。"
+  },
+  "discussion_independent": {
+    "message": "这些评论独立于 YouTube。"
+  },
+  "discussion_open": {
+    "message": "打开 RYD 评论"
+  },
+  "discussion_close": {
+    "message": "关闭"
+  },
+  "discussion_new": {
+    "message": "最新"
+  },
+  "discussion_top": {
+    "message": "热门"
+  },
+  "discussion_sort": {
+    "message": "评论排序"
+  },
+  "discussion_refresh": {
+    "message": "刷新"
+  },
+  "discussion_loading": {
+    "message": "正在加载评论…"
+  },
+  "discussion_empty": {
+    "message": "还没有评论。来开启讨论吧。"
+  },
+  "discussion_replyEmpty": {
+    "message": "还没有回复。"
+  },
+  "discussion_comment": {
+    "message": "评论"
+  },
+  "discussion_post": {
+    "message": "发表评论"
+  },
+  "discussion_reply": {
+    "message": "回复"
+  },
+  "discussion_postReply": {
+    "message": "发布回复"
+  },
+  "discussion_cancel": {
+    "message": "取消"
+  },
+  "discussion_save": {
+    "message": "保存"
+  },
+  "discussion_edit": {
+    "message": "编辑"
+  },
+  "discussion_delete": {
+    "message": "删除"
+  },
+  "discussion_deleteConfirm": {
+    "message": "删除这条评论？"
+  },
+  "discussion_deleted": {
+    "message": "评论已删除"
+  },
+  "discussion_edited": {
+    "message": "已编辑"
+  },
+  "discussion_replies": {
+    "message": "回复（$1）"
+  },
+  "discussion_more": {
+    "message": "加载更多"
+  },
+  "discussion_like": {
+    "message": "点赞"
+  },
+  "discussion_dislike": {
+    "message": "点踩"
+  },
+  "discussion_reacting": {
+    "message": "正在保存回应…"
+  },
+  "discussion_signInRequired": {
+    "message": "请在扩展弹出窗口中登录以继续。"
+  },
+  "discussion_tierRequired": {
+    "message": "有效的 Commenter 及以上等级会员可以发言。"
+  },
+  "discussion_join": {
+    "message": "成为 Commenter 会员"
+  },
+  "discussion_gate": {
+    "message": "所有人都可以阅读和回应。有效的 Commenter 及以上等级会员可以发言。"
+  },
+  "discussion_nicknameRequired": {
+    "message": "发言前请设置您的 RYD 公开昵称。"
+  },
+  "discussion_nicknameLabel": {
+    "message": "RYD 公开昵称"
+  },
+  "discussion_nicknameHint": {
+    "message": "可使用 3–32 个字母、数字、空格、句点、连字符或下划线。此昵称将随您的评论一起显示。"
+  },
+  "discussion_nicknameSave": {
+    "message": "保存昵称"
+  },
+  "discussion_nicknameTaken": {
+    "message": "此昵称已被使用。请选择其他昵称。"
+  },
+  "discussion_nicknameInvalid": {
+    "message": "请使用 3–32 个字母、数字、空格、句点、连字符或下划线。"
+  },
+  "discussion_nicknameChange": {
+    "message": "更改昵称"
+  },
+  "discussion_as": {
+    "message": "以 $1 的身份评论"
+  },
+  "discussion_placeholder": {
+    "message": "参与讨论…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "举报"
+  },
+  "discussion_reportTitle": {
+    "message": "举报评论"
+  },
+  "discussion_reportReason": {
+    "message": "原因"
+  },
+  "discussion_reportSpam": {
+    "message": "垃圾信息"
+  },
+  "discussion_reportAbuse": {
+    "message": "骚扰或仇恨"
+  },
+  "discussion_reportOther": {
+    "message": "其他"
+  },
+  "discussion_reportDetails": {
+    "message": "补充详情（可选）"
+  },
+  "discussion_reportSend": {
+    "message": "提交举报"
+  },
+  "discussion_reportDone": {
+    "message": "举报已收到。谢谢。"
+  },
+  "discussion_moderation": {
+    "message": "内容管理"
+  },
+  "discussion_queueEmpty": {
+    "message": "没有待审核的举报。"
+  },
+  "discussion_hide": {
+    "message": "隐藏评论"
+  },
+  "discussion_restore": {
+    "message": "恢复评论"
+  },
+  "discussion_dismiss": {
+    "message": "驳回举报"
+  },
+  "discussion_ban": {
+    "message": "封禁作者"
+  },
+  "discussion_unban": {
+    "message": "解封作者"
+  },
+  "discussion_moderationReason": {
+    "message": "管理操作原因"
+  },
+  "discussion_moderationSaved": {
+    "message": "管理操作已保存。"
+  },
+  "discussion_reported": {
+    "message": "$1 次举报"
+  },
+  "discussion_unavailable": {
+    "message": "此视频无法使用 RYD 评论。"
+  },
+  "discussion_commentUnavailable": {
+    "message": "此评论已不可用。"
+  },
+  "discussion_error": {
+    "message": "无法连接。请重试。"
+  },
+  "discussion_rateLimited": {
+    "message": "请稍等片刻后重试。"
+  },
+  "discussion_conflict": {
+    "message": "此评论已被更改。请刷新后重试。"
+  },
+  "discussion_forbidden": {
+    "message": "您的账户无法执行此操作。"
+  },
+  "discussion_retry": {
+    "message": "重试"
+  },
+  "discussion_notifications": {
+    "message": "通知"
+  },
+  "discussion_notificationEmpty": {
+    "message": "您已查看所有通知。"
+  },
+  "discussion_notificationReply": {
+    "message": "$1 回复了您的评论"
+  },
+  "discussion_notificationLike": {
+    "message": "有人赞了您的评论"
+  },
+  "discussion_notificationLikes": {
+    "message": "您的评论收到了 $1 个赞"
+  },
+  "discussion_notificationDislike": {
+    "message": "有人踩了您的评论"
+  },
+  "discussion_notificationReaction": {
+    "message": "有人回应了您的评论"
+  },
+  "discussion_someone": {
+    "message": "有人"
+  },
+  "discussion_markRead": {
+    "message": "标为已读"
+  },
+  "discussion_markAllRead": {
+    "message": "全部标为已读"
+  },
+  "discussion_view": {
+    "message": "查看讨论"
+  },
+  "discussion_unread": {
+    "message": "$1 条未读通知"
+  },
+  "discussion_signedOutInbox": {
+    "message": "登录后可查看您评论收到的回复和回应。"
+  },
+  "discussion_notificationUnavailable": {
+    "message": "此讨论已不可用。"
+  },
+  "discussion_discussionTab": {
+    "message": "讨论"
+  },
+  "discussion_nickname": {
+    "message": "昵称"
+  },
+  "discussion_reportCount": {
+    "message": "举报"
+  },
+  "discussion_reportStatus": {
+    "message": "举报状态"
+  },
+  "discussion_openReports": {
+    "message": "待处理举报"
+  },
+  "discussion_resolvedReports": {
+    "message": "已驳回的举报"
+  },
+  "discussion_author": {
+    "message": "作者"
+  },
+  "discussion_me": {
+    "message": "您"
+  },
+  "discussion_saving": {
+    "message": "正在保存…"
+  },
+  "discussion_confirm": {
+    "message": "确认"
+  },
+  "discussion_notificationUpdated": {
+    "message": "您的评论有新动态"
+  },
+  "discussion_showThread": {
+    "message": "显示评论串"
+  },
+  "discussion_loadReplies": {
+    "message": "显示回复（$1）"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "欢迎使用 Return YouTube Dislike"
   },

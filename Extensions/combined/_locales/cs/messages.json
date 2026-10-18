@@ -536,6 +536,315 @@
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
   },
+  "githubLoginUnavailable": {
+    "message": "Přihlášení přispěvatelů přes GitHub je momentálně nedostupné. Služba vyžaduje aktualizaci nebo změnu konfigurace."
+  },
+  "githubLoginNotContributor": {
+    "message": "Tento účet GitHub není uveden mezi přispěvateli projektu Return YouTube Dislike. Přihlaste se účtem, který do projektu přispěl. Nedávné příspěvky se mohou projevit až za několik hodin."
+  },
+  "githubLoginBrowserUnavailable": {
+    "message": "Přihlášení přes GitHub není nastaveno pro adresu zpětného volání tohoto prohlížeče. Kontaktujte podporu."
+  },
+  "githubLoginExpired": {
+    "message": "Tento pokus o přihlášení přes GitHub vypršel nebo jej nebylo možné ověřit. Začněte nové přihlášení."
+  },
+  "githubLoginUpdateRequired": {
+    "message": "Pro přihlášení přispěvatelů přes GitHub aktualizujte rozšíření."
+  },
+  "githubLoginRateLimited": {
+    "message": "Příliš mnoho pokusů o přihlášení. Před dalším pokusem počkejte minutu."
+  },
+  "githubLoginDenied": {
+    "message": "Autorizace na GitHubu byla zamítnuta. Přihlášení přispěvatelů vyžaduje autorizaci."
+  },
+  "discussion_title": {
+    "message": "Komentáře RYD"
+  },
+  "discussion_subtitle": {
+    "message": "Komunitní diskuze provozovaná službou Return YouTube Dislike."
+  },
+  "discussion_independent": {
+    "message": "Tyto komentáře jsou oddělené od YouTube."
+  },
+  "discussion_open": {
+    "message": "Otevřít komentáře RYD"
+  },
+  "discussion_close": {
+    "message": "Zavřít"
+  },
+  "discussion_new": {
+    "message": "Nejnovější"
+  },
+  "discussion_top": {
+    "message": "Nejlepší"
+  },
+  "discussion_sort": {
+    "message": "Seřadit komentáře"
+  },
+  "discussion_refresh": {
+    "message": "Obnovit"
+  },
+  "discussion_loading": {
+    "message": "Načítání komentářů…"
+  },
+  "discussion_empty": {
+    "message": "Zatím tu nejsou žádné komentáře. Zahajte diskuzi."
+  },
+  "discussion_replyEmpty": {
+    "message": "Zatím žádné odpovědi."
+  },
+  "discussion_comment": {
+    "message": "Komentář"
+  },
+  "discussion_post": {
+    "message": "Zveřejnit komentář"
+  },
+  "discussion_reply": {
+    "message": "Odpovědět"
+  },
+  "discussion_postReply": {
+    "message": "Zveřejnit odpověď"
+  },
+  "discussion_cancel": {
+    "message": "Zrušit"
+  },
+  "discussion_save": {
+    "message": "Uložit"
+  },
+  "discussion_edit": {
+    "message": "Upravit"
+  },
+  "discussion_delete": {
+    "message": "Smazat"
+  },
+  "discussion_deleteConfirm": {
+    "message": "Smazat tento komentář?"
+  },
+  "discussion_deleted": {
+    "message": "Komentář smazán"
+  },
+  "discussion_edited": {
+    "message": "upraveno"
+  },
+  "discussion_replies": {
+    "message": "Odpovědi ($1)"
+  },
+  "discussion_more": {
+    "message": "Načíst další"
+  },
+  "discussion_like": {
+    "message": "To se mi líbí"
+  },
+  "discussion_dislike": {
+    "message": "To se mi nelíbí"
+  },
+  "discussion_reacting": {
+    "message": "Ukládání reakce…"
+  },
+  "discussion_signInRequired": {
+    "message": "Pro pokračování se přihlaste ve vyskakovacím okně rozšíření."
+  },
+  "discussion_tierRequired": {
+    "message": "Komentáře mohou zveřejňovat členové s aktivním členstvím úrovně Commenter nebo vyšší."
+  },
+  "discussion_join": {
+    "message": "Získat členství Commenter"
+  },
+  "discussion_gate": {
+    "message": "Číst a reagovat mohou všichni. Komentáře mohou zveřejňovat členové s aktivním členstvím úrovně Commenter nebo vyšší."
+  },
+  "discussion_nicknameRequired": {
+    "message": "Před zveřejněním komentáře si zvolte veřejnou přezdívku RYD."
+  },
+  "discussion_nicknameLabel": {
+    "message": "Veřejná přezdívka RYD"
+  },
+  "discussion_nicknameHint": {
+    "message": "3–32 písmen, číslic, mezer, teček, spojovníků nebo podtržítek. Toto jméno se zobrazí u vašich komentářů."
+  },
+  "discussion_nicknameSave": {
+    "message": "Uložit přezdívku"
+  },
+  "discussion_nicknameTaken": {
+    "message": "Tato přezdívka je již obsazená. Zvolte jinou."
+  },
+  "discussion_nicknameInvalid": {
+    "message": "Použijte 3–32 písmen, číslic, mezer, teček, spojovníků nebo podtržítek."
+  },
+  "discussion_nicknameChange": {
+    "message": "Změnit přezdívku"
+  },
+  "discussion_as": {
+    "message": "Komentujete jako $1"
+  },
+  "discussion_placeholder": {
+    "message": "Zapojte se do diskuze…"
+  },
+  "discussion_characters": {
+    "message": "$1 / $2"
+  },
+  "discussion_report": {
+    "message": "Nahlásit"
+  },
+  "discussion_reportTitle": {
+    "message": "Nahlásit komentář"
+  },
+  "discussion_reportReason": {
+    "message": "Důvod"
+  },
+  "discussion_reportSpam": {
+    "message": "Spam"
+  },
+  "discussion_reportAbuse": {
+    "message": "Obtěžování nebo nenávist"
+  },
+  "discussion_reportOther": {
+    "message": "Jiné"
+  },
+  "discussion_reportDetails": {
+    "message": "Další podrobnosti (nepovinné)"
+  },
+  "discussion_reportSend": {
+    "message": "Odeslat hlášení"
+  },
+  "discussion_reportDone": {
+    "message": "Hlášení přijato. Děkujeme."
+  },
+  "discussion_moderation": {
+    "message": "Moderování"
+  },
+  "discussion_queueEmpty": {
+    "message": "Žádná hlášení ke kontrole."
+  },
+  "discussion_hide": {
+    "message": "Skrýt komentář"
+  },
+  "discussion_restore": {
+    "message": "Obnovit komentář"
+  },
+  "discussion_dismiss": {
+    "message": "Zamítnout hlášení"
+  },
+  "discussion_ban": {
+    "message": "Zablokovat autora"
+  },
+  "discussion_unban": {
+    "message": "Odblokovat autora"
+  },
+  "discussion_moderationReason": {
+    "message": "Důvod moderování"
+  },
+  "discussion_moderationSaved": {
+    "message": "Akce moderátora byla uložena."
+  },
+  "discussion_reported": {
+    "message": "Počet hlášení: $1"
+  },
+  "discussion_unavailable": {
+    "message": "Komentáře RYD nejsou pro toto video dostupné."
+  },
+  "discussion_commentUnavailable": {
+    "message": "Tento komentář již není dostupný."
+  },
+  "discussion_error": {
+    "message": "Nelze se připojit. Zkuste to znovu."
+  },
+  "discussion_rateLimited": {
+    "message": "Před dalším pokusem chvíli počkejte."
+  },
+  "discussion_conflict": {
+    "message": "Tento komentář se změnil. Obnovte zobrazení a zkuste to znovu."
+  },
+  "discussion_forbidden": {
+    "message": "Tato akce není pro váš účet dostupná."
+  },
+  "discussion_retry": {
+    "message": "Zkusit znovu"
+  },
+  "discussion_notifications": {
+    "message": "Oznámení"
+  },
+  "discussion_notificationEmpty": {
+    "message": "Máte přečtená všechna oznámení."
+  },
+  "discussion_notificationReply": {
+    "message": "$1 odpovídá na váš komentář"
+  },
+  "discussion_notificationLike": {
+    "message": "Někomu se líbil váš komentář"
+  },
+  "discussion_notificationLikes": {
+    "message": "Váš komentář získal tento počet označení To se mi líbí: $1"
+  },
+  "discussion_notificationDislike": {
+    "message": "Někomu se nelíbil váš komentář"
+  },
+  "discussion_notificationReaction": {
+    "message": "Někdo reagoval na váš komentář"
+  },
+  "discussion_someone": {
+    "message": "Někdo"
+  },
+  "discussion_markRead": {
+    "message": "Označit jako přečtené"
+  },
+  "discussion_markAllRead": {
+    "message": "Označit vše jako přečtené"
+  },
+  "discussion_view": {
+    "message": "Zobrazit diskuzi"
+  },
+  "discussion_unread": {
+    "message": "Nepřečtená oznámení: $1"
+  },
+  "discussion_signedOutInbox": {
+    "message": "Přihlaste se a zobrazte odpovědi a reakce na své komentáře."
+  },
+  "discussion_notificationUnavailable": {
+    "message": "Tato diskuze již není dostupná."
+  },
+  "discussion_discussionTab": {
+    "message": "Diskuze"
+  },
+  "discussion_nickname": {
+    "message": "Přezdívka"
+  },
+  "discussion_reportCount": {
+    "message": "Hlášení"
+  },
+  "discussion_reportStatus": {
+    "message": "Stav hlášení"
+  },
+  "discussion_openReports": {
+    "message": "Otevřená hlášení"
+  },
+  "discussion_resolvedReports": {
+    "message": "Zamítnutá hlášení"
+  },
+  "discussion_author": {
+    "message": "Autor"
+  },
+  "discussion_me": {
+    "message": "Vy"
+  },
+  "discussion_saving": {
+    "message": "Ukládání…"
+  },
+  "discussion_confirm": {
+    "message": "Potvrdit"
+  },
+  "discussion_notificationUpdated": {
+    "message": "Nová aktivita u vašich komentářů"
+  },
+  "discussion_showThread": {
+    "message": "Zobrazit vlákno"
+  },
+  "discussion_loadReplies": {
+    "message": "Zobrazit odpovědi ($1)"
+  },
+  "patreonTierCommenter": {
+    "message": "Commenter"
+  },
   "changelog_page_title": {
     "message": "Vítejte v Return YouTube Dislike"
   },
