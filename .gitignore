@@ -1,10 +1,25 @@
 *cert
 *Backend
 .DS_Store
-package-lock.json
 
 # Website node modules and build output
 Website/package-lock.json
+
+# Private maintainer guidance and local workspace state
+/.private/
+.codex/
+.agents/
+AGENTS.md
+AGENTS.local.md
+AGENTS.override.md
+.claude/
+CLAUDE.md
+# Retired private-document locations; do not reintroduce them into public source.
+/Docs/SSH_ACCESS.md
+/Docs/DiscussionApi.md
+/Docs/DiscussionValidation.md
+/AMO_SUBMISSION_NOTES.md
+
 Website/.editorconfig
 Website/node_modules
 Website/.nuxt
@@ -30,11 +45,16 @@ yarn-error.log*
 *.sw*
 
 node_modules
+.pnpm-store/
+.pnpm-store/
 
 # Build files
 Extensions/combined/bundled-content-script.js
 
 # Dist Files
 Extensions/combined/dist/*
-package-lock.json
 Website/package-lock.json
+
+# Playwright output
+/playwright-report/
+/test-results/

@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Userscript navigation browser-test fixture</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        min-height: 768px;
+        width: 100%;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      #fixture-account,
+      #fixture-navigation,
+      #fixture-page {
+        display: block;
+      }
+
+      #fixture-navigation a,
+      #fixture-page > a {
+        display: inline-block;
+        margin: 4px;
+        min-height: 24px;
+        min-width: 96px;
+      }
+
+      /* Model YouTube's overlaid Shorts next control without causing a document scroll on activation. */
+      #short-next {
+        margin: 0;
+        position: fixed;
+        right: 4px;
+        top: 4px;
+        z-index: 1;
+      }
+
+      ytd-watch-flexy,
+      ytd-menu-renderer,
+      segmented-like-dislike-button-view-model,
+      like-button-view-model,
+      dislike-button-view-model,
+      ytd-shorts,
+      ytd-reel-video-renderer,
+      ytm-reel-video-renderer,
+      ytm-reel-player-overlay-renderer,
+      reel-action-bar-view-model,
+      ytm-like-button-renderer {
+        display: block;
+      }
+
+      #top-row,
+      ytd-menu-renderer.ytd-watch-metadata > div {
+        width: min(320px, 100%);
+      }
+
+      segmented-like-dislike-button-view-model {
+        display: block;
+        min-height: 48px;
+        width: 320px;
+      }
+
+      segmented-like-dislike-button-view-model > yt-smartimation,
+      [data-fixture-smartimation-content-shell] {
+        display: block;
+        min-height: 48px;
+        width: 320px;
+      }
+
+      [data-fixture-smartimation-content] {
+        display: flex;
+        gap: 8px;
+        min-height: 48px;
+        width: 320px;
+      }
+
+      segmented-like-dislike-button-view-model button {
+        min-height: 36px;
+        min-width: 96px;
+      }
+
+      [data-fixture-watch-icon] {
+        height: 20px;
+        width: 20px;
+      }
+
+      [data-fixture-touch-feedback] {
+        display: none;
+      }
+
+      ytd-reel-video-renderer {
+        display: block;
+        min-height: 640px;
+        width: min(420px, 100%);
+      }
+
+      .reel-video-in-sequence-new,
+      .reel-video-in-sequence-thumbnail {
+        display: block;
+        min-height: 1px;
+        min-width: 1px;
+      }
+
+      ytd-reel-video-renderer[hidden] {
+        display: none;
+      }
+
+      ytm-reel-video-renderer[hidden] {
+        display: none;
+      }
+
+      .slim-video-action-bar-actions,
+      .segmented-buttons {
+        display: flex;
+        gap: 8px;
+      }
+
+      ytm-like-button-renderer button {
+        min-height: 36px;
+        min-width: 96px;
+      }
+
+      reel-action-bar-view-model {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        min-height: 320px;
+        width: 48px;
+      }
+
+      .ytwReelActionBarViewModelHostDesktopActionButton,
+      reel-action-bar-view-model > button-view-model {
+        box-sizing: content-box;
+        display: block;
+        height: 70px;
+        margin: 0;
+        padding: 0 0 8px;
+        width: 48px;
+      }
+
+      .ytSpecButtonShapeWithLabelHost {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 70px;
+        margin: 0;
+        padding: 0;
+        width: 48px;
+      }
+
+      reel-action-bar-view-model button {
+        align-items: center;
+        border: 0;
+        box-sizing: border-box;
+        display: flex;
+        height: 48px;
+        justify-content: center;
+        margin: 0;
+        min-height: 0;
+        min-width: 0;
+        padding: 12px;
+        width: 48px;
+      }
+
+      .ytSpecButtonShapeNextIcon,
+      .ytSpecButtonShapeNextIcon svg {
+        display: block;
+        height: 24px;
+        width: 24px;
+      }
+
+      .ytSpecButtonShapeWithLabelLabel {
+        align-items: center;
+        display: flex;
+        font:
+          12px/18px Arial,
+          sans-serif;
+        height: 22px;
+        justify-content: center;
+        width: 48px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="fixture-account"><button id="avatar-btn" aria-label="Account menu">Account</button></div>
+    <nav id="fixture-navigation" aria-label="Fixture navigation"></nav>
+    <main id="fixture-page"></main>
+
+    <script>
+      (() => {
+        const firstVideoId = "__VIDEO_ID__";
+        const secondVideoId = "__SECOND_VIDEO_ID__";
+        const nativeLikesByVideo = new Map([
+          [firstVideoId, Number("__VIDEO_LIKES__")],
+          [secondVideoId, Number("__SECOND_VIDEO_LIKES__")],
+        ]);
+        const marker = "rydNavigationFixture=1";
+        const navigation = document.getElementById("fixture-navigation");
+        const page = document.getElementById("fixture-page");
+        const isMobile = location.hostname === "m.youtube.com";
+        const fixtureBaseline = {
+          renderedDesktopShortsNativeDislikes: null,
+          renderedMobileShortsNativeDislikes: null,
+          renderedWatchNativeDislikeTextCount: null,
+        };
+        const nativeReactionStats = {
+          activations: 0,
+          dislikeActivations: 0,
+          likeActivations: 0,
+        };
+        globalThis.__navigationFixtureBaseline = fixtureBaseline;
+        let pendingDelayedRender = null;
+        let pendingStartedWatchRender = null;
+
+        if (!customElements.get("like-button-view-model")) {
+          customElements.define(
+            "like-button-view-model",
+            class extends HTMLElement {
+              get className() {
+                return undefined;
+              }
+            },
+          );
+        }
+
+        const hrefFor = (pageKind, videoId) => {
+          if (pageKind === "shorts") return `/shorts/${videoId}?${marker}`;
+          if (pageKind === "watch") return `/watch?v=${videoId}&${marker}`;
+          return `/@FixtureChannel?${marker}`;
+        };
+
+        const nativeLikes = (videoId) => nativeLikesByVideo.get(videoId) ?? 100;
+
+        function setNativeLikeCount(root, videoId) {
+          const count = nativeLikes(videoId);
+          const like = root?.querySelector('[data-fixture-role="like"]');
+          like?.querySelector("button")?.setAttribute("aria-label", `${count} likes`);
+          const text = like?.querySelector("#text, [role='text']");
+          if (text) text.textContent = String(count);
+        }
+
+        function setNativeReactionPressed(control, pressed) {
+          control?.classList.toggle("style-default-active", pressed);
+          control?.classList.toggle("style-text", !pressed);
+          control?.querySelector("button")?.setAttribute("aria-pressed", String(pressed));
+        }
+
+        function adjustNativeLikeCount(like, delta) {
+          const text = like?.querySelector("#text, [role='text']");
+          const count = Number.parseInt(text?.textContent, 10);
+          if (!text || !Number.isFinite(count)) return;
+          text.textContent = String(Math.max(0, count + delta));
+        }
+
+        document.addEventListener(
+          "click",
+          (event) => {
+            const nativeButton = event.target.closest("button");
+            const control = nativeButton?.closest('[data-fixture-role="like"], [data-fixture-role="dislike"]');
+            if (!control || control.querySelector("button") !== nativeButton) return;
+
+            const controls = control.closest('[data-fixture-role="buttons"]');
+            const role = control.getAttribute("data-fixture-role");
+            const like = controls?.querySelector('[data-fixture-role="like"]');
+            const dislike = controls?.querySelector('[data-fixture-role="dislike"]');
+            const wasPressed = nativeButton.getAttribute("aria-pressed") === "true";
+            const counterpart = role === "like" ? dislike : like;
+            const counterpartWasPressed = counterpart?.querySelector("button")?.getAttribute("aria-pressed") === "true";
+
+            nativeReactionStats.activations += 1;
+            nativeReactionStats[`${role}Activations`] += 1;
+
+            setNativeReactionPressed(control, !wasPressed);
+            if (!wasPressed) setNativeReactionPressed(counterpart, false);
+            if (role === "like") adjustNativeLikeCount(like, wasPressed ? -1 : 1);
+            if (role === "dislike" && !wasPressed && counterpartWasPressed) adjustNativeLikeCount(like, -1);
+          },
+          true,
+        );
+
+        const linkMarkup = (id, label, pageKind, videoId, options = {}) => `
+          <a
+            id="${id}"
+            href="${hrefFor(pageKind, videoId)}"
+            data-fixture-page-kind="${pageKind}"
+            data-fixture-video-id="${videoId || ""}"
+            data-fixture-control-delay="${options.controlDelay || 0}"
+          >${label}</a>
+        `;
+
+        function channelMarkup() {
+          const decoyControls = isMobile
+            ? `
+              <div class="slim-video-action-bar-actions" data-fixture-decoy-controls>
+                <div class="segmented-buttons" data-fixture-role="buttons">
+                  <like-button-view-model class="style-text" data-fixture-role="like">
+                    <button type="button" aria-label="Channel preview likes" aria-pressed="false">
+                      <span id="text" role="text">100</span>
+                    </button>
+                  </like-button-view-model>
+                  <dislike-button-view-model class="style-text" data-fixture-role="dislike">
+                    <button type="button" aria-label="Channel preview dislike" aria-pressed="false">
+                      <span id="text" role="text"></span>
+                    </button>
+                  </dislike-button-view-model>
+                </div>
+              </div>
+            `
+            : `
+              <div id="menu-container" style="display: none"></div>
+              <ytd-menu-renderer class="ytd-watch-metadata" data-fixture-decoy-controls>
+                <div id="top-level-buttons-computed">
+                  <segmented-like-dislike-button-view-model data-fixture-role="buttons">
+                    <like-button-view-model class="style-text" data-fixture-role="like">
+                      <button type="button" aria-label="Channel preview likes" aria-pressed="false">
+                        <span id="text" role="text">100</span>
+                      </button>
+                    </like-button-view-model>
+                    <dislike-button-view-model class="style-text" data-fixture-role="dislike">
+                      <button type="button" aria-label="Channel preview dislike" aria-pressed="false">
+                        <span id="text" role="text"></span>
+                      </button>
+                    </dislike-button-view-model>
+                  </segmented-like-dislike-button-view-model>
+                </div>
+              </ytd-menu-renderer>
+            `;
+          return `
+            <section data-fixture-page-kind="channel">
+              <h1>Fixture channel</h1>
+              ${decoyControls}
+              ${linkMarkup("channel-short", "Open Short", "shorts", firstVideoId, { controlDelay: 600 })}
+              ${linkMarkup("channel-watch", "Open video", "watch", firstVideoId, { controlDelay: 200 })}
+            </section>
+          `;
+        }
+
+        function watchMarkup(videoId) {
+          const nextVideoId = videoId === firstVideoId ? secondVideoId : firstVideoId;
+          const likeCount = nativeLikes(videoId);
+          return `
+            <section data-fixture-page-kind="watch" data-fixture-video-id="${videoId}">
+              <ytd-watch-flexy video-id="${videoId}">
+                <div id="menu-container" style="display: none"></div>
+                <div id="player" loading="false"></div>
+                <div id="top-row">
+                  <ytd-menu-renderer class="ytd-watch-metadata">
+                    <div id="top-level-buttons-computed">
+                      <segmented-like-dislike-button-view-model
+                        data-fixture-role="buttons"
+                        data-fixture-control-video-id="${videoId}"
+                      >
+                        <yt-smartimation>
+                          <div id="content" data-fixture-smartimation-content-shell>
+                            <div id="wrapper" data-fixture-smartimation-content>
+                              <like-button-view-model class="style-text" data-fixture-role="like">
+                                <toggle-button-view-model>
+                                  <button-view-model>
+                                    <button type="button" aria-label="${likeCount} likes" aria-pressed="false">
+                                      <svg data-fixture-watch-icon="like" aria-hidden="true" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M8 21H5V9h3v12Zm2 0V9l4-7 2 1v5h5v5l-3 8h-8Z"></path>
+                                      </svg>
+                                      <div class="ytSpecButtonShapeNextButtonTextContent" data-fixture-provided-native-text>
+                                        <span id="text" role="text">${likeCount}</span>
+                                      </div>
+                                      <span data-fixture-touch-feedback aria-hidden="true"></span>
+                                    </button>
+                                  </button-view-model>
+                                </toggle-button-view-model>
+                              </like-button-view-model>
+                              <dislike-button-view-model class="style-text" data-fixture-role="dislike">
+                                <toggle-button-view-model>
+                                  <button-view-model>
+                                    <button type="button" aria-label="Dislike this video" aria-pressed="false">
+                                      <svg data-fixture-watch-icon="dislike" aria-hidden="true" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M16 3h3v12h-3V3Zm-2 0v12l-4 7-2-1v-5H3v-5l3-8h8Z"></path>
+                                      </svg>
+                                      <span data-fixture-touch-feedback aria-hidden="true"></span>
+                                    </button>
+                                  </button-view-model>
+                                </toggle-button-view-model>
+                              </dislike-button-view-model>
+                            </div>
+                          </div>
+                        </yt-smartimation>
+                      </segmented-like-dislike-button-view-model>
+                    </div>
+                  </ytd-menu-renderer>
+                </div>
+              </ytd-watch-flexy>
+              ${linkMarkup("watch-to-short", "Open Short", "shorts", nextVideoId, { controlDelay: 200 })}
+              ${linkMarkup("watch-related", "Open related video", "watch", nextVideoId)}
+              ${linkMarkup("watch-next", "Play next video", "watch", nextVideoId)}
+              <video id="fixture-media" data-fixture-autoplay-kind="watch" data-fixture-autoplay-id="${nextVideoId}"></video>
+            </section>
+          `;
+        }
+
+        function shortRendererMarkup(videoId, active) {
+          const likeCount = nativeLikes(videoId);
+          return `
+            <div class="reel-video-in-sequence-new" data-fixture-sequence-video-id="${videoId}">
+              <div class="reel-video-in-sequence-thumbnail"></div>
+              <ytd-reel-video-renderer video-id="${videoId}" ${active ? "is-active" : "hidden"}>
+                <div id="experiment-overlay"><span>Ready</span></div>
+                <a class="ytp-title-link" href="/shorts/${videoId}" aria-label="Short ${videoId}"></a>
+                <reel-action-bar-view-model data-fixture-role="buttons">
+                  <like-button-view-model
+                    class="ytLikeButtonViewModelHost ytwReelActionBarViewModelHostDesktopActionButton"
+                    data-fixture-role="like"
+                  >
+                    <label class="ytSpecButtonShapeWithLabelHost">
+                      <button class="ytSpecButtonShapeNextHost" type="button" aria-label="${likeCount} likes" aria-pressed="false">
+                        <span class="ytSpecButtonShapeNextIcon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24"><path d="M8 21H5V9h3v12Zm2 0V9l4-7 2 1v5h5v5l-3 8h-8Z"></path></svg>
+                        </span>
+                      </button>
+                      <div class="ytSpecButtonShapeWithLabelLabel"><span id="text" role="text">${likeCount}</span></div>
+                    </label>
+                  </like-button-view-model>
+                  <button-view-model data-fixture-control="comments">
+                    <label class="ytSpecButtonShapeWithLabelHost">
+                      <button type="button" aria-label="View comments">
+                        <span class="ytSpecButtonShapeNextIcon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24"><path d="M3 4h18v14H8l-5 3Z"></path></svg>
+                        </span>
+                      </button>
+                      <div class="ytSpecButtonShapeWithLabelLabel"><span role="text">12</span></div>
+                    </label>
+                  </button-view-model>
+                  <button-view-model data-fixture-control="share">
+                    <label class="ytSpecButtonShapeWithLabelHost">
+                      <button type="button" aria-label="Share">
+                        <span class="ytSpecButtonShapeNextIcon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24"><path d="M14 4l7 7-7 7v-4H3V8h11Z"></path></svg>
+                        </span>
+                      </button>
+                      <div class="ytSpecButtonShapeWithLabelLabel"><span role="text">Share</span></div>
+                    </label>
+                  </button-view-model>
+                  <button-view-model data-fixture-control="remix">
+                    <label class="ytSpecButtonShapeWithLabelHost">
+                      <button type="button" aria-label="Remix">
+                        <span class="ytSpecButtonShapeNextIcon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24"><path d="M4 7h10l-2-2 2-2 6 6-6 6-2-2 2-2H4Z"></path></svg>
+                        </span>
+                      </button>
+                      <div class="ytSpecButtonShapeWithLabelLabel"><span role="text">Remix</span></div>
+                    </label>
+                  </button-view-model>
+                  <button-view-model data-fixture-control="sound">
+                    <label class="ytSpecButtonShapeWithLabelHost">
+                      <button type="button" aria-label="Sound">
+                        <span class="ytSpecButtonShapeNextIcon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a3.5 3.5 0 0 0-2-3.16v6.32a3.5 3.5 0 0 0 2-3.16Z"></path></svg>
+                        </span>
+                      </button>
+                      <div class="ytSpecButtonShapeWithLabelLabel"><span role="text">Sound</span></div>
+                    </label>
+                  </button-view-model>
+                </reel-action-bar-view-model>
+              </ytd-reel-video-renderer>
+            </div>
+          `;
+        }
+
+        function mobileShortRendererMarkup(videoId, active) {
+          const likeCount = nativeLikes(videoId);
+          return `
+            <ytm-reel-video-renderer
+              data-fixture-mobile-short="${videoId}"
+              video-id="${videoId}"
+              ${active ? "is-active" : "hidden"}
+            >
+              <a href="/shorts/${videoId}" aria-label="Short ${videoId}"></a>
+              <ytm-reel-player-overlay-renderer>
+                <div id="like-button">
+                  <ytm-like-button-renderer data-fixture-role="buttons">
+                    <like-button-view-model class="style-text" data-fixture-role="like">
+                      <button type="button" aria-label="${likeCount} likes" aria-pressed="false">
+                        <span id="text" class="button-renderer-text" role="text">${likeCount}</span>
+                      </button>
+                    </like-button-view-model>
+                    <dislike-button-view-model class="style-text" data-fixture-role="dislike">
+                      <button type="button" aria-label="Dislike this video" aria-pressed="false">
+                        <span id="text" class="button-renderer-text" role="text"></span>
+                      </button>
+                    </dislike-button-view-model>
+                  </ytm-like-button-renderer>
+                </div>
+              </ytm-reel-player-overlay-renderer>
+            </ytm-reel-video-renderer>
+          `;
+        }
+
+        function shortsMarkup(videoId) {
+          const nextVideoId = videoId === firstVideoId ? secondVideoId : firstVideoId;
+          return `
+            <section data-fixture-page-kind="shorts" data-fixture-video-id="${videoId}">
+              ${
+                isMobile
+                  ? `<div id="fixture-shorts-reels">
+                      ${mobileShortRendererMarkup(videoId, true)}
+                      ${mobileShortRendererMarkup(nextVideoId, false)}
+                    </div>`
+                  : `<ytd-shorts>
+                      <div id="fixture-shorts-reels">
+                        ${shortRendererMarkup(videoId, true)}
+                        ${shortRendererMarkup(nextVideoId, false)}
+                      </div>
+                    </ytd-shorts>`
+              }
+              ${linkMarkup("short-to-watch", "Open video", "watch", nextVideoId, { controlDelay: 200 })}
+              ${linkMarkup("short-next", "Play next Short", "shorts", nextVideoId)}
+              <video id="fixture-media" data-fixture-autoplay-kind="shorts" data-fixture-autoplay-id="${nextVideoId}"></video>
+            </section>
+          `;
+        }
+
+        function pageMarkup(pageKind, videoId) {
+          if (pageKind === "shorts") return shortsMarkup(videoId);
+          if (pageKind === "watch") return watchMarkup(videoId);
+          return channelMarkup();
+        }
+
+        function dispatchNavigation() {
+          document.dispatchEvent(new Event("yt-navigate-finish", { bubbles: true }));
+        }
+
+        function render(pageKind, videoId) {
+          page.innerHTML = pageMarkup(pageKind, videoId);
+          fixtureBaseline.renderedWatchNativeDislikeTextCount =
+            pageKind === "watch"
+              ? page.querySelectorAll(
+                  '[data-fixture-page-kind="watch"] [data-fixture-role="dislike"] .ytSpecButtonShapeNextButtonTextContent',
+                ).length
+              : null;
+          fixtureBaseline.renderedDesktopShortsNativeDislikes =
+            pageKind === "shorts" && !isMobile
+              ? page.querySelectorAll(
+                  "ytd-reel-video-renderer[is-active] > reel-action-bar-view-model > dislike-button-view-model",
+                ).length
+              : null;
+          fixtureBaseline.renderedMobileShortsNativeDislikes =
+            pageKind === "shorts" && isMobile
+              ? page.querySelectorAll(
+                  "ytm-reel-video-renderer[is-active] ytm-like-button-renderer > dislike-button-view-model",
+                ).length
+              : null;
+          navigation.innerHTML =
+            pageKind === "channel"
+              ? ""
+              : linkMarkup("return-to-channel", "Return to channel", "channel", "", { controlDelay: 20 });
+        }
+
+        function navigate(pageKind, videoId, { controlDelay = 0, dispatchEvent = true } = {}) {
+          history.pushState({}, "", hrefFor(pageKind, videoId));
+          if (controlDelay > 0) {
+            page.dataset.fixtureTransitionPending = pageKind;
+            if (dispatchEvent) dispatchNavigation();
+            setTimeout(() => {
+              delete page.dataset.fixtureTransitionPending;
+              render(pageKind, videoId);
+            }, controlDelay);
+            return;
+          }
+          render(pageKind, videoId);
+          if (dispatchEvent) dispatchNavigation();
+        }
+
+        function recycleShort(videoId) {
+          const section = page.querySelector('[data-fixture-page-kind="shorts"]');
+          const activeRenderer = section?.querySelector(
+            isMobile ? "ytm-reel-video-renderer[is-active]" : "ytd-reel-video-renderer[is-active]",
+          );
+          const nextRenderer = section?.querySelector(
+            isMobile
+              ? `ytm-reel-video-renderer[video-id="${videoId}"]`
+              : `ytd-reel-video-renderer[video-id="${videoId}"]`,
+          );
+          if (!section || !activeRenderer || !nextRenderer) return;
+          history.pushState({}, "", hrefFor("shorts", videoId));
+          section.dataset.fixtureVideoId = videoId;
+          activeRenderer.removeAttribute("is-active");
+          activeRenderer.hidden = true;
+          nextRenderer.hidden = false;
+          nextRenderer.setAttribute("is-active", "");
+          const nextLink = section.querySelector("#short-next");
+          nextLink?.setAttribute("data-fixture-video-id", firstVideoId);
+          nextLink?.setAttribute("href", hrefFor("shorts", firstVideoId));
+          section.querySelector("#fixture-media")?.setAttribute("data-fixture-autoplay-id", firstVideoId);
+        }
+
+        function churnInactiveDesktopShortIdentity(sequence) {
+          const renderer = page.querySelector("ytd-reel-video-renderer:not([is-active])");
+          if (!renderer) return;
+          const churnVideoId = sequence % 2 === 0 ? secondVideoId : "CCCCCCCCCCC";
+          renderer.setAttribute("video-id", churnVideoId);
+          renderer.querySelector('a[href*="/shorts/"]')?.setAttribute("href", `/shorts/${churnVideoId}`);
+        }
+
+        function queueDelayedRender(pageKind, videoId) {
+          page.dataset.fixtureTransitionPending = pageKind;
+          pendingDelayedRender = () => {
+            delete page.dataset.fixtureTransitionPending;
+            render(pageKind, videoId);
+          };
+        }
+
+        function finishDelayedNavigation() {
+          if (!pendingDelayedRender) throw new Error("No delayed fixture navigation is pending");
+          const finish = pendingDelayedRender;
+          pendingDelayedRender = null;
+          finish();
+        }
+
+        function navigateDelayedShort(videoId) {
+          const rendererTag = isMobile ? "ytm-reel-video-renderer" : "ytd-reel-video-renderer";
+          const activeRenderer = page.querySelector(`${rendererTag}[is-active]`);
+          for (const renderer of page.querySelectorAll(`${rendererTag}:not([is-active])`)) {
+            renderer.remove();
+          }
+          if (!activeRenderer) return;
+          activeRenderer.querySelector('a[href*="/shorts/"]')?.setAttribute("href", `/shorts/${videoId}`);
+          history.pushState({}, "", hrefFor("shorts", videoId));
+          queueDelayedRender("shorts", videoId);
+          dispatchNavigation();
+        }
+
+        function anonymizeActiveDesktopShort() {
+          const activeRenderer = page.querySelector("ytd-reel-video-renderer[is-active]");
+          if (!activeRenderer) return;
+          activeRenderer.removeAttribute("video-id");
+          activeRenderer.querySelector('a[href*="/shorts/"]')?.removeAttribute("href");
+        }
+
+        function navigateDelayedAnonymousShort(videoId) {
+          const activeRenderer = page.querySelector("ytd-reel-video-renderer[is-active]");
+          for (const renderer of page.querySelectorAll("ytd-reel-video-renderer:not([is-active])")) {
+            renderer.remove();
+          }
+          if (!activeRenderer) return;
+          anonymizeActiveDesktopShort();
+          history.pushState({}, "", hrefFor("shorts", videoId));
+          queueDelayedRender("shorts", videoId);
+          dispatchNavigation();
+        }
+
+        function navigateDelayedWatch(videoId) {
+          const watch = page.querySelector("ytd-watch-flexy");
+          if (!watch) return;
+          history.pushState({}, "", hrefFor("watch", videoId));
+          watch.setAttribute("video-id", videoId);
+          queueDelayedRender("watch", videoId);
+          dispatchNavigation();
+        }
+
+        function navigateWatchAfterStartWithoutFinish(videoId) {
+          const watchPage = page.querySelector('[data-fixture-page-kind="watch"]');
+          const watch = watchPage?.querySelector("ytd-watch-flexy");
+          if (!watchPage || !watch) return;
+          document.dispatchEvent(new Event("yt-navigate-start", { bubbles: true }));
+          history.pushState({}, "", hrefFor("watch", videoId));
+          watchPage.setAttribute("data-fixture-video-id", videoId);
+          watch.setAttribute("video-id", videoId);
+          page.dataset.fixtureTransitionPending = "watch-start-without-finish";
+          pendingStartedWatchRender = () => {
+            delete page.dataset.fixtureTransitionPending;
+            render("watch", videoId);
+          };
+        }
+
+        function finishWatchAfterStartWithoutFinish() {
+          if (!pendingStartedWatchRender) throw new Error("No start-only Watch navigation is pending");
+          const finish = pendingStartedWatchRender;
+          pendingStartedWatchRender = null;
+          finish();
+        }
+
+        function beginSameNodeWatchNavigation(videoId) {
+          const watch = page.querySelector("ytd-watch-flexy");
+          if (!watch) return;
+          document.dispatchEvent(new Event("yt-navigate-start", { bubbles: true }));
+          history.pushState({}, "", hrefFor("watch", videoId));
+          watch.setAttribute("video-id", videoId);
+        }
+
+        function finishSameNodeWatchNavigation() {
+          dispatchNavigation();
+        }
+
+        function mutateOutgoingWatchDescendant() {
+          const dislike = page.querySelector('[data-fixture-page-kind="watch"] [data-fixture-role="dislike"]');
+          if (!dislike) return;
+          const countMarker = document.createElement("span");
+          countMarker.hidden = true;
+          countMarker.setAttribute("data-fixture-irrelevant-watch-count-mutation", "true");
+          dislike.querySelector("#text")?.appendChild(countMarker);
+
+          const tooltipMarker = document.createElement("span");
+          tooltipMarker.hidden = true;
+          tooltipMarker.setAttribute("data-fixture-irrelevant-watch-tooltip-mutation", "true");
+          page.querySelector(".ryd-tooltip")?.appendChild(tooltipMarker);
+        }
+
+        function replaceDelayedWatchControl(role) {
+          const control = page.querySelector(`[data-fixture-page-kind="watch"] [data-fixture-role="${role}"]`);
+          if (!control) return;
+          const replacement = control.cloneNode(true);
+          replacement.setAttribute("data-fixture-watch-replacement", role);
+          replacement.classList.remove("style-default-active");
+          replacement.classList.add("style-text");
+          replacement.querySelector("button")?.setAttribute("aria-pressed", "false");
+          if (role === "dislike") {
+            const count = replacement.querySelector("#text");
+            if (count) count.textContent = "";
+          }
+          control.replaceWith(replacement);
+        }
+
+        function replaceCurrentWatchActions({ nativeHydrationDelay = 0, retainOutgoing = false } = {}) {
+          const section = page.querySelector('[data-fixture-page-kind="watch"]');
+          const currentActions = section?.querySelector("#top-level-buttons-computed");
+          const videoId = section?.dataset.fixtureVideoId;
+          if (!section || !currentActions || !videoId) return false;
+
+          const replacement = currentActions.cloneNode(true);
+          replacement.setAttribute("data-fixture-watch-actions-replacement", videoId);
+          replacement.querySelectorAll(".ryd-tooltip").forEach((tooltip) => tooltip.remove());
+
+          const controls = replacement.querySelector('[data-fixture-role="buttons"]');
+          controls?.setAttribute("data-fixture-control-video-id", videoId);
+          for (const role of ["like", "dislike"]) {
+            const control = controls?.querySelector(`[data-fixture-role="${role}"]`);
+            control?.classList.remove("style-default-active");
+            control?.classList.add("style-text");
+            const button = control?.querySelector("button");
+            button?.setAttribute("aria-pressed", "false");
+            button?.removeAttribute("disabled");
+            button?.setAttribute("aria-disabled", "false");
+          }
+          controls
+            ?.querySelectorAll(
+              '[data-fixture-role="dislike"] .ytSpecButtonShapeNextButtonTextContent, [data-fixture-role="dislike"] #text',
+            )
+            .forEach((element) => element.remove());
+
+          const delayedNativeButtons = [];
+          if (nativeHydrationDelay > 0) {
+            for (const role of ["like", "dislike"]) {
+              const control = controls?.querySelector(`[data-fixture-role="${role}"]`);
+              const button = control?.querySelector("button");
+              if (control && button) {
+                control.setAttribute("data-fixture-native-hydration-pending", role);
+                delayedNativeButtons.push({ button, control });
+                button.remove();
+              }
+            }
+          }
+
+          currentActions.replaceWith(replacement);
+          globalThis.__fixtureReplacedWatchActions = currentActions;
+          if (retainOutgoing) {
+            const retained = document.createElement("div");
+            retained.hidden = true;
+            retained.setAttribute("data-fixture-retained-settling-watch-actions", videoId);
+            retained.appendChild(currentActions);
+            document.body.appendChild(retained);
+          }
+          if (delayedNativeButtons.length > 0) {
+            setTimeout(() => {
+              for (const { button, control } of delayedNativeButtons) {
+                if (replacement.isConnected && control.isConnected && !control.querySelector("button")) {
+                  control.appendChild(button);
+                  control.removeAttribute("data-fixture-native-hydration-pending");
+                }
+              }
+            }, nativeHydrationDelay);
+          }
+          return true;
+        }
+
+        function refreshReusedWatchControl(role, videoId) {
+          const control = page.querySelector(`[data-fixture-page-kind="watch"] [data-fixture-role="${role}"]`);
+          if (!control) return;
+          setNativeReactionPressed(control, false);
+          control.querySelector("button")?.setAttribute("aria-label", `${role} refreshed for ${videoId}`);
+        }
+
+        function driftWatchControlBeforeNavigation(role, videoId) {
+          const button = page.querySelector(`[data-fixture-page-kind="watch"] [data-fixture-role="${role}"] button`);
+          if (!button) return;
+          button.setAttribute("aria-label", `${role} drift while ${videoId}`);
+          button.setAttribute("title", `${role} title drift while ${videoId}`);
+        }
+
+        function replaceActiveMobileOverlay() {
+          const activeRenderer = page.querySelector("ytm-reel-video-renderer[is-active]");
+          const overlay = activeRenderer?.querySelector("ytm-reel-player-overlay-renderer");
+          if (!overlay) return;
+          const replacement = overlay.cloneNode(true);
+          replacement.setAttribute("data-fixture-replacement", "true");
+          const dislike = replacement.querySelector('[data-fixture-role="dislike"]');
+          dislike?.classList.remove("style-default-active");
+          dislike?.classList.add("style-text");
+          dislike?.querySelector("button")?.setAttribute("aria-pressed", "false");
+          const dislikeCount = dislike?.querySelector("#text");
+          if (dislikeCount) dislikeCount.textContent = "";
+          overlay.replaceWith(replacement);
+        }
+
+        function navigateToShortsDescendant(videoId) {
+          history.pushState({}, "", `/shorts/${videoId}/extra?${marker}`);
+          dispatchNavigation();
+        }
+
+        document.addEventListener("click", (event) => {
+          const link = event.target.closest("a[data-fixture-page-kind]");
+          if (!link) return;
+          event.preventDefault();
+          if (link.id === "short-next") {
+            recycleShort(link.dataset.fixtureVideoId);
+            dispatchNavigation();
+            return;
+          }
+          navigate(link.dataset.fixturePageKind, link.dataset.fixtureVideoId, {
+            controlDelay: Number(link.dataset.fixtureControlDelay || 0),
+          });
+        });
+
+        document.addEventListener(
+          "ended",
+          (event) => {
+            const media = event.target.closest("#fixture-media");
+            if (!media) return;
+            if (media.dataset.fixtureAutoplayKind === "shorts") {
+              recycleShort(media.dataset.fixtureAutoplayId);
+              return;
+            }
+            navigate(media.dataset.fixtureAutoplayKind, media.dataset.fixtureAutoplayId, {
+              dispatchEvent: false,
+            });
+          },
+          true,
+        );
+
+        window.__navigationFixture = {
+          anonymizeActiveDesktopShort,
+          beginSameNodeWatchNavigation,
+          churnInactiveDesktopShortIdentity,
+          dispatchEnded() {
+            page.querySelector("#fixture-media")?.dispatchEvent(new Event("ended"));
+          },
+          finishDelayedNavigation,
+          finishSameNodeWatchNavigation,
+          finishWatchAfterStartWithoutFinish,
+          driftWatchControlBeforeNavigation,
+          navigate,
+          navigateDelayedAnonymousShort,
+          navigateDelayedShort,
+          navigateDelayedWatch,
+          navigateToShortsDescendant,
+          navigateWatchAfterStartWithoutFinish,
+          mutateOutgoingWatchDescendant,
+          nativeReactionSnapshot() {
+            return { ...nativeReactionStats };
+          },
+          recycleShort,
+          replaceActiveMobileOverlay,
+          replaceCurrentWatchActions,
+          replaceDelayedWatchControl,
+          refreshReusedWatchControl,
+          setNativeLikeCount,
+        };
+
+        render("__INITIAL_PAGE_KIND__", "__VIDEO_ID__");
+      })();
+    </script>
+  </body>
+</html>

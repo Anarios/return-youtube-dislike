@@ -10,12 +10,12 @@
 
     <v-btn class="mainAltButton" :href="githubLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-github</v-icon>
-      GitHub
+      {{ $vuetify.lang.t("$vuetify.links.github") }}
     </v-btn>
 
     <v-btn class="mainAltButton" :href="discordLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-discord</v-icon>
-      Discord
+      {{ $vuetify.lang.t("$vuetify.links.discord") }}
     </v-btn>
 
     <h1 style="margin-top: 1em">
@@ -23,7 +23,7 @@
     </h1>
 
     <v-icon style="margin-right: 0.5em">mdi-email</v-icon>
-    selivano.d@gmail.com
+    <a class="attr-link" :href="emailLink" target="_blank">selivano.d@gmail.com</a>
 
     <p style="color: #555" class="my-8">
       Site by <v-icon color="#555">mdi-discord</v-icon>

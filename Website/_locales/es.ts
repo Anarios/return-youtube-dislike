@@ -9,6 +9,7 @@ export default {
       "Una extensión de navegador y una API que muestra el número de «dislikes» («No me gusta») en YouTube",
     ukraine: "Apoya a Ucrania",
     sponsors: "Patrocinadores",
+    becomeSponsor: "Hazte nuestro patrocinador",
   },
   install: {
     name: "Instalación",
@@ -18,6 +19,18 @@ export default {
     subtitle2: "Si tu navegador aún no es compatible, usa este UserScript",
     title3: "Implementaciones de terceros",
     subtitle3: "No nos hacemos responsables, úsalas bajo tu cuenta y riesgo",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Script de usuario",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
+    androidTubular: "Android (Tubular - un fork de NewPipe)",
+    iosJailbroken: "iOS (con jailbreak)",
+    iosUYouPlus: "iOS (uYou+)",
   },
   api: {
     name: "API",
@@ -82,6 +95,8 @@ export default {
       "Para ver las extensiones, escribe el siguiente texto en la barra de dirección: ",
     firefox: "para Firefox",
     chrome: "para Chrome, Edge, Brave, Opera, Vivaldi",
+    detected: "Detectado:",
+    altExampleScreenshot: "captura de ejemplo",
   },
   faq: {
     name: "Preguntas",
@@ -100,9 +115,9 @@ export default {
     bullet4: "¿Puedo compartir mi contador de «dislikes» con vosotros?",
     bullet4text:
       "Próximamente. Estamos investigando en usar Oauth u otra API de solo lectura con alcance limitado para que los creadores puedan compartir sus contadores de «dislikes» verificablemente.",
-    bullet5: "¿Qué datos almacenáis y cómo son guardados?",
+    bullet5: "¿Qué datos tratáis y cómo se gestionan?",
     bullet5text:
-      'La extensión almacena únicamente aquellos datos estrictamente necesarios para su buen funcionamiento, cómo la dirección IP o el ID del vídeo que estés viendo. Tus datos nunca serán vendidos a terceros. Si quieres saber más sobre nuestras políticas de seguridad y privacidad, consulta nuestro <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">documento de preguntas frecuentes sobre seguridad</a>.',
+      'La extensión procesa únicamente aquellos datos estrictamente necesarios para su buen funcionamiento, cómo la dirección IP o el ID del vídeo que estés viendo. Tus datos nunca serán vendidos a terceros. Si quieres saber más sobre nuestras políticas de seguridad y privacidad, consulta nuestro <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">documento de preguntas frecuentes sobre seguridad</a>.',
     bullet6: "¿Cómo funciona la API y el «backend»?",
     bullet6text:
       "El «backend» utiliza datos archivados de cuando la API de YouTube seguía proporcionando el contador de «dislikes», los votos de usuarios de la extensión y su extrapolación. En un futuro cercano permitiremos que los creadores de contenido puedan proporcionar sus cifras de «dislikes» de forma fácil y segura, e incorporaremos los datos archivados de ArchiveTeam (4.560 millones de vídeos) en nuestra base de datos. También puedes ver un vídeo al respecto.",
@@ -114,6 +129,8 @@ export default {
     name: "Donar",
     subtitle:
       "¡Puedes apoyar nuestros esfuerzos para que Internet siga siendo con un donativo!",
+    patreon: "Patreon",
+    crypto: "Cripto",
   },
   links: {
     name: "Enlaces",
@@ -124,5 +141,11 @@ export default {
     coolProjects: "Proyectos interesantes",
     sponsorBlockDescription: "Omite los anuncios integrados en vídeos",
     filmotDescription: "Busca vídeos de YouTube a través de sus subtítulos",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "no es compatible.",
+    considerUpgrade: "Considera actualizar a la última versión.",
   },
 };

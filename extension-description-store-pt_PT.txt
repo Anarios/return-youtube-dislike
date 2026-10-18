@@ -1,0 +1,21 @@
+O Return YouTube Dislike restaura a possibilidade de ver os “não gostos” no YouTube.
+
+Se não funcionar: abra a página Extensões (chrome://extensions/), desative esta extensão e volte a ativá‑la. Isto deverá resolver a maioria dos problemas, pois existe um erro no Chromium que, em alguns casos, faz com que a extensão deixe de funcionar. Esperemos que a equipa do Chromium o resolva em breve.
+
+Desde 13 de dezembro de 2021, o YouTube removeu da sua API a possibilidade de ver os “não gostos”.
+Esta extensão tem como objetivo devolver o controlo aos utilizadores utilizando uma combinação de dados arquivados de “gostos” e “não gostos”, bem como os “gostos” e “não gostos” feitos pelos utilizadores da extensão, para apresentar as avaliações mais precisas.
+
+Atualmente possui dados de “gostos/ não gostos” de mais de 200 milhões de vídeos guardados antes de 13 de dezembro de 2021.
+
+Em crescimento ativo e sempre atualizada com os carregamentos após 13 de dezembro de 2021.
+
+Quanto mais utilizadores usarem a extensão, mais precisa ela será.
+
+Vídeos pouco populares carregados depois de 13 de dezembro de 2021 podem apresentar dados menos precisos do que vídeos mais populares.
+
+Esta extensão encontra‑se atualmente em fase de desenvolvimento ativo; se encontrar algum problema, não hesite em reportá‑lo na nossa página do GitHub ou no nosso servidor do Discord.
+
+Mais funcionalidades em breve!
+
+https://github.com/Anarios/return-youtube-dislike
+

@@ -1,0 +1,137 @@
+import { sl } from "vuetify/src/locale";
+
+export default {
+  ...sl,
+  home: {
+    name: "Domov",
+    title: "Return YouTube Dislike",
+    subtitle: "Razširitev za brskalnik in API, ki prikazujeta nevšečke na YouTubu",
+    ukraine: "Podprite Ukrajino",
+    sponsors: "Pokrovitelji",
+    becomeSponsor: "Postanite naš pokrovitelj",
+  },
+  install: {
+    name: "Namestitev",
+    title: "Izberite svojo platformo",
+    subtitle: "Na voljo za Firefox in vse brskalnike na osnovi Chromiuma",
+    title2: "Druge platforme",
+    subtitle2: "Če vaš brskalnik še ni podprt, poskusite s tem uporabniškim skriptom",
+    title3: "Implementacije tretjih oseb",
+    subtitle3: "Za te ne odgovarjamo, uporabljate jih na lastno odgovornost",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Uporabniški skript",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android – ReVanced",
+    androidMorphe: "Android – Morphe",
+    androidTubular: "Android (Tubular – fork NewPipe)",
+    iosJailbroken: "iOS (z odklenjenim sistemom)",
+    iosUYouPlus: "iOS (uYou+)",
+  },
+  api: {
+    name: "API",
+    title: "Dobrodošli v uradni dokumentaciji RYD!",
+    subtitle: "Za začetek izberite razdelek v meniju.",
+    rights: {
+      title: "Pravice do uporabe",
+      subtitle: "Uporaba tega odprtega API-ja s strani tretjih oseb je dovoljena z naslednjimi omejitvami:",
+      bullet1: "Navedba vira: ",
+      bullet1text: "Ta projekt mora biti jasno naveden s povezavo do tega repozitorija ali do returnyoutubedislike.com",
+      bullet2: "Omejevanje pogostosti: ",
+      bullet2text:
+        "Za posameznega odjemalca veljata omejitvi 100 zahtev na minuto in 10.000 na dan. Ob prekoračitvi API vrne statusno kodo 429, kar pomeni, da mora vaša aplikacija zmanjšati pogostost zahtev",
+    },
+    url: {
+      title: "Informacije o naslovu URL",
+      subtitle: "API je dostopen na naslednjem osnovnem naslovu URL: ",
+    },
+    endpoints: {
+      title: "Razpoložljive končne točke",
+      subtitle: "Seznam razpoložljivih končnih točk je na voljo tukaj: ",
+    },
+    fetching: {
+      title: "Osnove pridobivanja podatkov",
+      subtitle: "Primer pridobivanja glasov za podani ID videa na YouTubu: ",
+      title2: "Primer zahteve: ",
+      url: "Naslov URL zahteve: ",
+      method: "Metoda zahteve: ",
+      headers: "Glave: ",
+      response: "Odgovor: ",
+      error1: "Neveljaven ID videa na YouTubu vrne statusno kodo 404 »Not Found«",
+      error2: "Napačno oblikovan ID videa na YouTubu vrne 400 »Bad Request«",
+    },
+  },
+  help: {
+    name: "Pomoč",
+    title: "Odpravljanje težav",
+    bullet1: "Prepričajte se, da imate nameščeno najnovejšo različico razširitve, ",
+    bullet11: "prav zdaj",
+    bullet2:
+      "Poskusite razširitev odstraniti in jo znova namestiti, nato pa znova zaženite brskalnik (vsa aktivna okna, ne le enega zavihka)",
+    bullet3: "Prepričajte se, da se ta povezava odpre: ",
+    bullet31: "videti bi morali navadno besedilo: ",
+    bullet4: "Če nič od naštetega ne pomaga, težavo prijavite v",
+    bullet41: "na našem",
+    bullet4a: "Sporočite nam svoj operacijski sistem, ime brskalnika in različico brskalnika",
+    bullet4b:
+      "Zajemite zaslonsko sliko strani s težavo (npr. strani z videom na YouTubu) z odprto konzolo (pritisnite ",
+    bullet4b1: ") – primer zaslonske slike je spodaj.",
+    bullet4c: "Zajemite zaslonsko sliko strani z razširitvami v svojem brskalniku, na kateri je razširitev nameščena.",
+    bullet4c1: "Za ogled razširitev v naslovno vrstico vnesite: ",
+    firefox: "za Firefox",
+    chrome: "za Chrome, Edge, Brave, Opero in Vivaldi",
+    detected: "Zaznano:",
+    altExampleScreenshot: "primer zaslonske slike",
+  },
+  faq: {
+    name: "Pogosta vprašanja",
+    title: "Pogosto zastavljena vprašanja",
+    subtitle: "Imate še vprašanja? Kar pridružite se našemu strežniku Discord!",
+    bullet1: "Od kod razširitev dobi svoje podatke?",
+    bullet1text:
+      "Iz kombinacije arhiviranih podatkov izpred izklopa uradnega YouTubovega API-ja za nevšečke in iz ekstrapoliranega vedenja uporabnikov razširitve.",
+    bullet2: "Zakaj se število nevšečkov ne posodablja?",
+    bullet2text:
+      "Trenutno so nevšečki videov predpomnjeni in se ne posodabljajo zelo pogosto. Odvisno od priljubljenosti videa lahko posodobitev traja od nekaj ur do nekaj dni.",
+    bullet3: "Kako to deluje?",
+    bullet3text:
+      "Razširitev zbere ID videa, ki ga gledate, in prek našega API-ja pridobi število nevšečkov (ter druga polja, kot so ogledi, všečki itd.). Nato na strani prikaže število nevšečkov in razmerje. Če videu date všeček ali nevšeček, se to zabeleži in pošlje v zbirko podatkov, da je mogoče ekstrapolirati natančno število nevšečkov.",
+    bullet4: "Ali lahko z vami delim svoje število nevšečkov?",
+    bullet4text:
+      "Kmalu. Preučujemo uporabo protokola OAuth ali drugega API-ja samo za branje z omejenim obsegom, da bodo ustvarjalci lahko svoje število nevšečkov delili preverljivo.",
+    bullet5: "Katere podatke zbirate in kako z njimi ravnate?",
+    bullet5text:
+      'Razširitev zbira samo podatke, ki so nujno potrebni za njeno pravilno delovanje, na primer naslov IP ali ID videa, ki ga gledate. Nobeden od vaših podatkov ne bo nikoli prodan tretjim osebam. Če želite izvedeti več o tem, kako ravnamo z varnostjo in zasebnostjo, si oglejte naša <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">pogosta vprašanja o varnosti</a>.',
+    bullet6: "Kako deluje API oziroma zaledje?",
+    bullet6text:
+      "Zaledje uporablja arhivirane podatke iz časa, ko je YouTubov API še vračal število nevšečkov, število všečkov in nevšečkov uporabnikov razširitve ter ekstrapolacijo. V bližnji prihodnosti bomo ustvarjalcem vsebin omogočili preprosto in varno oddajo njihovega števila nevšečkov, v našo zbirko podatkov pa bomo dodali arhivirane podatke skupine ArchiveTeam (4,56 milijarde videov). Na to temo si lahko ogledate tudi video.",
+    bullet7: "Zakaj je pri številu nevšečkov prikazano »DISLIKES DISABLED«?",
+    bullet7text:
+      "Pri nedavno naloženem videu je včasih prikazano »DISLIKES DISABLED«, tudi če ustvarjalec nevšečkov ni onemogočil. To je posledica načina, kako zaznavamo onemogočene nevšečke; sporočilo bi moralo izginiti v nekaj urah ali potem, ko videu daste všeček oziroma nevšeček in znova naložite stran (upajmo).",
+  },
+  donate: {
+    name: "Donacije",
+    subtitle: "Naša prizadevanja za svoboden internet lahko podprete z donacijo!",
+    patreon: "Patreon",
+    crypto: "Kriptovalute",
+  },
+  links: {
+    name: "Povezave",
+    title: "Povezave projekta",
+    subtitle: "Povezave do projekta in njegovih razvijalcev",
+    contact: "Stopite v stik",
+    translators: "Prevajalci",
+    coolProjects: "Zanimivi projekti",
+    sponsorBlockDescription: "Preskoči oglase, vgrajene v video",
+    filmotDescription: "Iskanje videov na YouTubu po podnapisih",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "ni podprt.",
+    considerUpgrade: "Razmislite o nadgradnji na najnovejšo različico.",
+  },
+};
