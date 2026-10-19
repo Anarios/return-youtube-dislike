@@ -62,7 +62,7 @@
     "world-atlas": "^2.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.5",
+    "@babel/core": "^8.0.7",
     "@babel/preset-env": "^7.23.5",
     "@babel/runtime": "^7.23.5",
     "@playwright/test": "1.62.0",
