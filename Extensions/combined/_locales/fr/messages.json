@@ -156,10 +156,16 @@
     "message": "Rendre la valeur des statistiques plus cohérente."
   },
   "hidePremiumTeaser": {
-    "message": "Masquer le panneau d’aperçu Premium"
+    "message": "Masquer les nombres bruts"
   },
   "hidePremiumTeaserHover": {
-    "message": "Ne pas afficher l’aperçu Premium sur les pages de lecture YouTube."
+    "message": "Ne pas afficher le panneau des nombres bruts sur les pages de lecture YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Masquer les analyses vidéo Premium"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Masquer le panneau des analyses vidéo Premium sur les pages de lecture YouTube."
   },
   "roundNumbers": {
     "message": "Afficher les nombres arrondis"

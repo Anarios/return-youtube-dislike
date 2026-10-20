@@ -156,10 +156,16 @@
     "message": "Ujednolica format liczbowy łapek, aby był on taki sam zarówno dla łapek w górę, jak i w dół."
   },
   "hidePremiumTeaser": {
-    "message": "Ukryj panel zwiastunu Premium"
+    "message": "Ukryj surowe liczby"
   },
   "hidePremiumTeaserHover": {
-    "message": "Nie pokazuj zwiastunu Premium na stronach odtwarzania YouTube."
+    "message": "Nie pokazuj panelu z surowymi liczbami na stronach odtwarzania YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Ukryj premiumowe statystyki wideo"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Ukryj panel premiumowych statystyk wideo na stronach odtwarzania YouTube."
   },
   "roundNumbers": {
     "message": "Pokaż zaokrąglone w dół liczby"

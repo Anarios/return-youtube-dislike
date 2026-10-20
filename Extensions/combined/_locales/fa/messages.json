@@ -174,10 +174,16 @@
     "message": "یکسان‌سازی قالب اعداد like و dislike."
   },
   "hidePremiumTeaser": {
-    "message": "مخفی کردن پنل پیش‌نمایش پریمیوم"
+    "message": "مخفی کردن شمارش‌های خام"
   },
   "hidePremiumTeaserHover": {
-    "message": "عدم نمایش پیش‌نمایش پریمیوم در صفحات تماشای YouTube."
+    "message": "عدم نمایش پنل شمارش‌های خام در صفحات تماشای YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "مخفی کردن بینش‌های ویدیویی پریمیوم"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "مخفی کردن پنل بینش‌های ویدیویی پریمیوم در صفحات تماشای YouTube."
   },
   "roundNumbers": {
     "message": "نمایش اعداد گرد شده به پایین"

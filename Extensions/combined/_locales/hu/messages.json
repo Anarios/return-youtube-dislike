@@ -135,10 +135,16 @@
     "message": "Tedd egységessé a kedvelés/nem tetszik formátumát."
   },
   "hidePremiumTeaser": {
-    "message": "Prémium előnézeti panel elrejtése"
+    "message": "Nyers számok elrejtése"
   },
   "hidePremiumTeaserHover": {
-    "message": "Ne jelenjen meg a prémium előnézet a YouTube lejátszó oldalain."
+    "message": "Ne jelenjen meg a nyers számokat mutató panel a YouTube lejátszó oldalain."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Prémium videóelemzések elrejtése"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "A Prémium videóelemzések panel elrejtése a YouTube lejátszó oldalain."
   },
   "roundNumbers": {
     "message": "Lekerekített számok megjelenítése"

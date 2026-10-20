@@ -27,6 +27,13 @@ jest.mock("./panel", () => ({
   hidePanel: jest.fn(),
   togglePanel: jest.fn(),
   applyChartExpansionState: jest.fn(),
+  applyPanelView: jest.fn(),
+  setPanelExpanded: jest.fn(),
+}));
+
+jest.mock("./rawCounts", () => ({
+  loadRawCounts: jest.fn(),
+  resetRawCounts: jest.fn(),
 }));
 
 jest.mock("./activity", () => ({
@@ -175,7 +182,10 @@ describe("premiumAnalytics", () => {
     analyticsState.currentVideoId = "video1234567";
     analyticsState.zoomListenerRegistered = false;
     analyticsState.initialized = false;
+    analyticsState.panelView = "full";
+    analyticsState.panelDismissed = false;
     global.chrome = {
+      runtime: {},
       i18n: {
         getMessage,
       },
@@ -217,6 +227,151 @@ describe("premiumAnalytics", () => {
     document.documentElement.removeAttribute("dark");
     delete global.fetch;
     delete global.chrome;
+  });
+
+  it("persists display changes, closes enlarged charts, and resizes on reopening", () => {
+    const set = jest.fn();
+    chrome.storage = { sync: { set } };
+    initPremiumAnalytics();
+    const { onPanelViewChange } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    analyticsState.expandedChart = "map";
+    onPanelViewChange("raw");
+    expect(analyticsState.panelView).toBe("raw");
+    expect(analyticsState.expandedChart).toBeNull();
+    expect(panelMocks.setPanelExpanded).toHaveBeenCalledWith(false);
+    expect(set).toHaveBeenLastCalledWith({ premiumAnalyticsView: "raw" });
+    onPanelViewChange("hidden");
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(analyticsState.panelDismissed).toBe(false);
+    expect(set).toHaveBeenLastCalledWith({ premiumAnalyticsView: "hidden" });
+    mockResizeActivityChart.mockClear();
+    mockResizeMapChart.mockClear();
+    onPanelViewChange("full");
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(1);
+    expect(mockResizeMapChart).toHaveBeenCalledTimes(1);
+    expect(set).toHaveBeenLastCalledWith({ premiumAnalyticsView: "full" });
+  });
+
+  it("restores and synchronizes the display preference without overwriting a newer click", () => {
+    let storageCallback;
+    let storageListener;
+    const removeListener = jest.fn();
+    chrome.storage = {
+      sync: {
+        get: jest.fn((keys, callback) => {
+          storageCallback = callback;
+        }),
+        set: jest.fn(),
+      },
+      onChanged: {
+        addListener: jest.fn((listener) => {
+          storageListener = listener;
+        }),
+        removeListener,
+      },
+    };
+    initPremiumAnalytics();
+    storageCallback({ premiumAnalyticsView: "raw" });
+    expect(analyticsState.panelView).toBe("raw");
+    const { onPanelViewChange } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    onPanelViewChange("full");
+    storageCallback({ premiumAnalyticsView: "raw" });
+    expect(analyticsState.panelView).toBe("full");
+    storageListener({ premiumAnalyticsView: { newValue: "raw" } }, "sync");
+    expect(analyticsState.panelView).toBe("raw");
+    storageListener({ hidePremiumTeaser: { newValue: true } }, "sync");
+    expect(analyticsState.panelView).toBe("raw");
+    expect(analyticsState.panelDismissed).toBe(true);
+    storageListener({ premiumAnalyticsView: { newValue: "full" } }, "sync");
+    expect(analyticsState.panelView).toBe("full");
+    expect(analyticsState.panelDismissed).toBe(true);
+    storageListener({ hidePremiumTeaser: { newValue: false } }, "sync");
+    expect(analyticsState.panelView).toBe("full");
+    expect(analyticsState.panelDismissed).toBe(false);
+    storageListener({ premiumAnalyticsView: { newValue: "raw" } }, "sync");
+    resetStateForVideo();
+    expect(analyticsState.panelView).toBe("raw");
+    teardownPremiumAnalytics();
+    expect(removeListener).toHaveBeenCalledWith(storageListener);
+    storageCallback({ premiumAnalyticsView: "full" });
+    expect(analyticsState.panelView).toBe("raw");
+  });
+
+  it.each(["raw", "hidden"])("restores a saved dismissed panel in its %s view from the popup setting", (view) => {
+    let listener;
+    chrome.storage = {
+      sync: { get: jest.fn((keys, callback) => callback({ premiumAnalyticsView: view, hidePremiumTeaser: true })) },
+      onChanged: {
+        addListener: jest.fn((callback) => {
+          listener = callback;
+        }),
+        removeListener: jest.fn(),
+      },
+    };
+    initPremiumAnalytics();
+    expect(analyticsState.panelView).toBe(view);
+    expect(analyticsState.panelDismissed).toBe(true);
+    listener({ hidePremiumTeaser: { newValue: false } }, "sync");
+    expect(analyticsState.panelView).toBe(view);
+    expect(analyticsState.panelDismissed).toBe(false);
+  });
+
+  it("dismisses a header-only panel through the shared setting without losing its display mode", () => {
+    let initialRead;
+    let listener;
+    const set = jest.fn();
+    chrome.storage = {
+      sync: {
+        get: jest.fn((keys, callback) => {
+          initialRead = callback;
+        }),
+        set,
+      },
+      onChanged: {
+        addListener: jest.fn((callback) => {
+          listener = callback;
+        }),
+        removeListener: jest.fn(),
+      },
+    };
+    initPremiumAnalytics();
+    const { onPanelViewChange, onPanelDismiss } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    onPanelViewChange("hidden");
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(analyticsState.panelDismissed).toBe(false);
+    onPanelDismiss();
+    expect(set).toHaveBeenLastCalledWith({ hidePremiumTeaser: true });
+    expect(analyticsState.panelDismissed).toBe(true);
+    initialRead({ premiumAnalyticsView: "full", hidePremiumTeaser: false });
+    resetStateForVideo();
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(analyticsState.panelDismissed).toBe(true);
+    listener({ hidePremiumTeaser: { newValue: false } }, "sync");
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(analyticsState.panelDismissed).toBe(false);
+    onPanelViewChange("full");
+    expect(analyticsState.panelView).toBe("full");
+    expect(analyticsState.panelDismissed).toBe(false);
+  });
+
+  it("applies saved dismissal even when a view click wins the initial storage race", () => {
+    let initialRead;
+    chrome.storage = {
+      sync: {
+        get: jest.fn((keys, callback) => {
+          initialRead = callback;
+        }),
+        set: jest.fn(),
+      },
+      onChanged: { addListener: jest.fn(), removeListener: jest.fn() },
+    };
+    initPremiumAnalytics();
+    const { onPanelViewChange } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    onPanelViewChange("raw");
+    initialRead({ premiumAnalyticsView: "full", hidePremiumTeaser: true });
+    expect(analyticsState.panelView).toBe("raw");
+    expect(analyticsState.panelDismissed).toBe(true);
+    expect(chrome.storage.sync.set).toHaveBeenLastCalledWith({ premiumAnalyticsView: "raw" });
   });
 
   it("repaints existing charts after a host theme toggle without fetching or changing the selected range", async () => {

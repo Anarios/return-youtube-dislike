@@ -149,6 +149,83 @@ describe("popup account consent lifecycle", () => {
     expect(document.getElementById("patreon-user-avatar").hasAttribute("src")).toBe(false);
   }
 
+  function expectPremiumVisibilityLabel(hasPremiumAnalytics) {
+    const messages = require("./_locales/en/messages.json");
+    const messageKey = hasPremiumAnalytics ? "hidePremiumAnalytics" : "hidePremiumTeaser";
+    const label = document.getElementById("hide_premium_teaser").closest("label");
+    expect(label.querySelector(".switchLabel").textContent).toBe(messages[messageKey].message);
+    expect(label.dataset.hover).toBe(messages[`${messageKey}Hover`].message);
+  }
+
+  function localizeMembershipLabels() {
+    const messages = require("./_locales/en/messages.json");
+    chrome.i18n.getMessage = (key) => messages[key]?.message || "";
+  }
+
+  test.each([
+    ["premium", true, true],
+    ["supporter", true, false],
+    ["commenter", true, false],
+    ["none", true, false],
+    ["premium", false, false],
+    ["premium", undefined, false],
+    ["premium", "true", false],
+  ])(
+    "uses the matching visibility label for cached %s membership with active=%s",
+    async (membershipTier, active, premium) => {
+      localizeMembershipLabels();
+      fetch.mockReturnValue(new Promise(() => {}));
+      await readCachedSession({
+        patreonUser: { ...cachedUser, membershipTier, hasActiveMembership: active },
+        patreonSessionToken: "test-token",
+      });
+      expectPremiumVisibilityLabel(premium);
+    },
+  );
+
+  test.each([
+    ["supporter", true, { valid: true, membershipTier: "premium" }, true],
+    ["premium", true, { valid: true, membershipTier: "supporter" }, false],
+    ["premium", false, { valid: true, membershipTier: "premium" }, true],
+    ["premium", true, { valid: false, failureReason: "membershipinactive", membershipTier: "premium" }, false],
+  ])(
+    "updates the visibility label after verifying cached %s membership with active=%s",
+    async (membershipTier, active, verification, premium) => {
+      localizeMembershipLabels();
+      fetch.mockResolvedValue({ json: async () => verification });
+      document.getElementById("hide_premium_teaser").click();
+      expect(chrome.storage.sync.set).toHaveBeenCalledWith({ hidePremiumTeaser: true });
+      await readCachedSession({
+        patreonUser: { ...cachedUser, membershipTier, hasActiveMembership: active },
+        patreonSessionToken: "test-token",
+      });
+      await flushPromises();
+      expectPremiumVisibilityLabel(premium);
+      expect(document.getElementById("hide_premium_teaser").checked).toBe(true);
+    },
+  );
+
+  test("keeps the raw-count visibility label for logged-out users", async () => {
+    localizeMembershipLabels();
+    await readCachedSession({});
+    expectPremiumVisibilityLabel(false);
+  });
+
+  test.each(["patreon-login-btn", "github-login-btn"])(
+    "updates the visibility label after %s and restores it on logout",
+    async (button) => {
+      localizeMembershipLabels();
+      chrome.runtime.sendMessage.mockImplementation((request, callback) =>
+        callback?.({ success: true, user: { ...cachedUser, membershipTier: "premium", hasActiveMembership: true } }),
+      );
+      document.getElementById(button).click();
+      await flushPromises();
+      expectPremiumVisibilityLabel(true);
+      document.getElementById("patreon-logout-btn").click();
+      expectPremiumVisibilityLabel(false);
+    },
+  );
+
   test.each([[], undefined])("does not verify or display cached account data without a grant: %j", async (granted) => {
     chrome.permissions.getAll.mockResolvedValue({ permissions: ["identity"], data_collection: granted });
     readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });

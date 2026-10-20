@@ -135,10 +135,16 @@
     "message": "使点赞/点踩的显示格式保持一致。"
   },
   "hidePremiumTeaser": {
-    "message": "隐藏 Premium 推广面板"
+    "message": "隐藏原始计数"
   },
   "hidePremiumTeaserHover": {
-    "message": "不要在 YouTube 播放页面显示 Premium 推广。"
+    "message": "不要在 YouTube 播放页面显示原始计数面板。"
+  },
+  "hidePremiumAnalytics": {
+    "message": "隐藏高级视频洞察"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "在 YouTube 播放页面隐藏高级视频洞察面板。"
   },
   "roundNumbers": {
     "message": "显示取整后的数字"

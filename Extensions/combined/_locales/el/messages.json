@@ -135,10 +135,16 @@
     "message": "Σταθερή μορφοποίηση των likes & dislikes."
   },
   "hidePremiumTeaser": {
-    "message": "Απόκρυψη πίνακα προωθητικού Premium"
+    "message": "Απόκρυψη ανεπεξέργαστων μετρήσεων"
   },
   "hidePremiumTeaserHover": {
-    "message": "Να μην εμφανίζεται το προωθητικό Premium στις σελίδες αναπαραγωγής του YouTube."
+    "message": "Να μην εμφανίζεται ο πίνακας ανεπεξέργαστων μετρήσεων στις σελίδες αναπαραγωγής του YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Απόκρυψη στατιστικών Premium για το βίντεο"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Απόκρυψη του πίνακα στατιστικών Premium για το βίντεο στις σελίδες αναπαραγωγής του YouTube."
   },
   "roundNumbers": {
     "message": "Εμφάνιση στρογγυλεμένων αριθμών"

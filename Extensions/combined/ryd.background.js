@@ -139,7 +139,13 @@ function persistPatreonAuth(user, sessionToken, generation, done) {
         patreonUser: user,
         patreonSessionToken: sessionToken,
       },
-      complete,
+      () => {
+        if (chrome.runtime.lastError || generation !== authenticationGeneration) {
+          complete();
+          return;
+        }
+        chrome.storage.sync.set({ hidePremiumTeaser: false }, complete);
+      },
     );
   })
     .then(() => {

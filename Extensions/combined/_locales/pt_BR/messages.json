@@ -135,10 +135,16 @@
     "message": "Tornar o formato de curtidas e descurtidas consistente."
   },
   "hidePremiumTeaser": {
-    "message": "Ocultar painel do teaser Premium"
+    "message": "Ocultar contagens brutas"
   },
   "hidePremiumTeaserHover": {
-    "message": "Não mostrar o teaser Premium nas páginas de exibição do YouTube."
+    "message": "Não mostrar o painel de contagens brutas nas páginas de exibição do YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Ocultar insights premium do vídeo"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Ocultar o painel de insights premium do vídeo nas páginas de exibição do YouTube."
   },
   "roundNumbers": {
     "message": "Mostrar números arredondados"

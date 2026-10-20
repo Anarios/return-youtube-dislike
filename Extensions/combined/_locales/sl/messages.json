@@ -156,10 +156,16 @@
     "message": "Poenoti obliko zapisa všečkov in nevšečkov."
   },
   "hidePremiumTeaser": {
-    "message": "Skrij predstavitveno ploščo premiuma"
+    "message": "Skrij neobdelana števila"
   },
   "hidePremiumTeaserHover": {
-    "message": "Ne prikazuj predstavitve premiuma na straneh za ogled videov na YouTubu."
+    "message": "Ne prikazuj plošče z neobdelanimi števili na straneh za ogled videov na YouTubu."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Skrij premium vpoglede v video"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Skrij ploščo s premium vpogledi v video na straneh za ogled videov na YouTubu."
   },
   "roundNumbers": {
     "message": "Prikaži navzdol zaokrožena števila"

@@ -256,6 +256,7 @@ function initPatreonAuth() {
     userAvatar.style.display = "none";
     userName.textContent = "";
     userTier.textContent = "";
+    updateHidePremiumSettingLabel();
     if (window.location.hash === "#patreon-login-btn") loginBtn.focus();
     if (window.location.hash === "#github-login-btn") githubLoginBtn?.focus();
   }
@@ -263,6 +264,7 @@ function initPatreonAuth() {
   function showLoggedInView(user) {
     loggedOutView.style.display = "none";
     loggedInView.style.display = "block";
+    updateHidePremiumSettingLabel(user);
 
     userName.textContent = user.fullName || user.email || chrome.i18n.getMessage("patreonUserFallback");
 
@@ -289,6 +291,14 @@ function initPatreonAuth() {
     } else {
       userTier.style.color = "var(--lightGrey)";
     }
+  }
+
+  function updateHidePremiumSettingLabel(user) {
+    const hasPremiumAnalytics = user?.hasActiveMembership === true && user.membershipTier === "premium";
+    const messageKey = hasPremiumAnalytics ? "hidePremiumAnalytics" : "hidePremiumTeaser";
+    const label = document.getElementById("hide_premium_teaser").closest("label");
+    label.querySelector(".switchLabel").textContent = chrome.i18n.getMessage(messageKey);
+    label.dataset.hover = chrome.i18n.getMessage(`${messageKey}Hover`);
   }
 
   async function verifySession(token, generation) {

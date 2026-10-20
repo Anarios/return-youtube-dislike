@@ -135,10 +135,16 @@
     "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
   },
   "hidePremiumTeaser": {
-    "message": "Nascondi il pannello teaser Premium"
+    "message": "Nascondi i conteggi grezzi"
   },
   "hidePremiumTeaserHover": {
-    "message": "Non mostrare il teaser Premium nelle pagine di riproduzione di YouTube."
+    "message": "Non mostrare il pannello dei conteggi grezzi nelle pagine di riproduzione di YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Nascondi le analisi video Premium"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Nascondi il pannello delle analisi video Premium nelle pagine di riproduzione di YouTube."
   },
   "roundNumbers": {
     "message": "Mostra numeri arrotondati per difetto"

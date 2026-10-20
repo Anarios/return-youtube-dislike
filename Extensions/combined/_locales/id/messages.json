@@ -135,10 +135,16 @@
     "message": "Membuat format like dan dislike konsisten."
   },
   "hidePremiumTeaser": {
-    "message": "Sembunyikan panel teaser premium"
+    "message": "Sembunyikan jumlah mentah"
   },
   "hidePremiumTeaserHover": {
-    "message": "Jangan tampilkan teaser premium di halaman tonton YouTube."
+    "message": "Jangan tampilkan panel jumlah mentah di halaman tonton YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Sembunyikan insight video premium"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Sembunyikan panel insight video premium di halaman tonton YouTube."
   },
   "roundNumbers": {
     "message": "Munculkan angka yang dibulatkan kebawah"

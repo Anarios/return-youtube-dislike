@@ -135,10 +135,16 @@
     "message": "Udělat formát palců nahoru/dolů konzistentní."
   },
   "hidePremiumTeaser": {
-    "message": "Skrýt panel prémiové upoutávky"
+    "message": "Skrýt nezpracované počty"
   },
   "hidePremiumTeaserHover": {
-    "message": "Nezobrazovat prémiovou upoutávku na stránkách přehrávání na YouTube."
+    "message": "Nezobrazovat panel s nezpracovanými počty na stránkách přehrávání na YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Skrýt prémiové statistiky videa"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Skrýt panel prémiových statistik videa na stránkách přehrávání na YouTube."
   },
   "roundNumbers": {
     "message": "Zobrazit čísla zaokrouhlená dolů"

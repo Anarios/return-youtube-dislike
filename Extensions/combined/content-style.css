@@ -1296,8 +1296,122 @@ html[dark] .ryd-premium-teaser__toggle:focus-visible {
 }
 
 .ryd-analytics__title {
+  margin: 0;
+  flex: 1;
   font-size: 16px;
   font-weight: 600;
+}
+
+.ryd-premium-analytics[hidden],
+.ryd-premium-analytics [hidden] {
+  display: none !important;
+}
+
+.ryd-premium-analytics[data-view="hidden"] .ryd-analytics__header {
+  margin-bottom: 0;
+}
+
+.ryd-analytics__disclosure {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.ryd-analytics__disclosure:focus-visible,
+.ryd-analytics__hide:focus-visible,
+.ryd-analytics__dismiss:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.ryd-analytics__hide,
+.ryd-analytics__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.ryd-analytics__hide:hover,
+.ryd-analytics__dismiss:hover {
+  background: var(--ryd-analytics-surface);
+}
+
+.ryd-analytics__disclosure-icon {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  margin-inline: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(225deg);
+}
+
+.ryd-analytics__disclosure[aria-expanded="false"] .ryd-analytics__disclosure-icon {
+  transform: rotate(45deg);
+}
+
+.ryd-analytics__detail-controls {
+  margin-bottom: 16px;
+}
+
+.ryd-analytics__raw-counts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ryd-premium-analytics[data-view="raw"] .ryd-analytics__raw-counts {
+  margin-bottom: 0;
+}
+
+.ryd-analytics__raw-count {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--ryd-analytics-surface);
+  overflow-wrap: anywhere;
+}
+
+.ryd-analytics__raw-label,
+.ryd-analytics__raw-status {
+  font-size: 12px;
+  color: var(--yt-spec-text-secondary, #606060);
+}
+
+.ryd-analytics__raw-value {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.ryd-analytics__raw-status {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.ryd-analytics__raw-status:empty {
+  display: none;
 }
 
 .ryd-analytics__controls {

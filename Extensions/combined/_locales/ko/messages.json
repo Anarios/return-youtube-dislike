@@ -135,10 +135,16 @@
     "message": "좋아요와 싫어요 형식을 일관되게 만듭니다."
   },
   "hidePremiumTeaser": {
-    "message": "프리미엄 티저 패널 숨기기"
+    "message": "원본 수 숨기기"
   },
   "hidePremiumTeaserHover": {
-    "message": "YouTube 시청 페이지에서 프리미엄 티저를 표시하지 않습니다."
+    "message": "YouTube 시청 페이지에서 원본 수 패널을 표시하지 않습니다."
+  },
+  "hidePremiumAnalytics": {
+    "message": "프리미엄 동영상 인사이트 숨기기"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "YouTube 시청 페이지에서 프리미엄 동영상 인사이트 패널을 숨깁니다."
   },
   "roundNumbers": {
     "message": "반올림된 숫자 표시"

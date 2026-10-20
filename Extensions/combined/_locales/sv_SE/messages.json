@@ -135,10 +135,16 @@
     "message": "Gör formatet på gilla och ogilla konsekvent."
   },
   "hidePremiumTeaser": {
-    "message": "Dölj premiumteaser-panelen"
+    "message": "Dölj råa antal"
   },
   "hidePremiumTeaserHover": {
-    "message": "Visa inte premiumteasern på YouTubes tittarsidor."
+    "message": "Visa inte panelen med råa antal på YouTubes tittarsidor."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Dölj Premium-videoinblickar"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Dölj panelen med Premium-videoinblickar på YouTubes tittarsidor."
   },
   "roundNumbers": {
     "message": "Visa avrundade siffror"

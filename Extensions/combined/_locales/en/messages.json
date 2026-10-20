@@ -174,10 +174,16 @@
     "message": "Make likes and dislikes format consistent."
   },
   "hidePremiumTeaser": {
-    "message": "Hide premium teaser panel"
+    "message": "Hide raw counts"
   },
   "hidePremiumTeaserHover": {
-    "message": "Don't show the premium teaser on YouTube watch pages."
+    "message": "Don't show the raw counts panel on YouTube watch pages."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Hide Premium Video Insights"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Hide the Premium Video Insights panel on YouTube watch pages."
   },
   "roundNumbers": {
     "message": "Show rounded down numbers"

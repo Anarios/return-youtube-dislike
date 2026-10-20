@@ -1,12 +1,15 @@
 import { analyticsState, RANGE_OPTIONS, RANGE_ANCHORS } from "./state";
 import { sanitizeCount } from "./utils";
 import { localize } from "../utils";
+import { renderRawCounts } from "./rawCounts";
 
 let callbacks = {
   onRangePreset: () => {},
   onRangeAnchorChange: () => {},
   onModeChange: () => {},
   onChartExpand: () => {},
+  onPanelViewChange: () => {},
+  onPanelDismiss: () => {},
 };
 
 export function configurePanelCallbacks(newCallbacks) {
@@ -15,6 +18,8 @@ export function configurePanelCallbacks(newCallbacks) {
 
 export function ensurePanel() {
   if (analyticsState.panelElement && analyticsState.panelElement.isConnected) {
+    applyPanelView();
+    renderRawCounts();
     applyExpansionState();
     applyLoadingState();
     updateRangeAnchorButtons();
@@ -41,6 +46,8 @@ export function ensurePanel() {
   applyExpansionState();
   applyLoadingState();
   applyChartExpansionState();
+  applyPanelView();
+  renderRawCounts();
 
   return panel;
 }
@@ -155,16 +162,31 @@ export function renderSummary(summary) {
       </div>
     </div>
     <div class="ryd-analytics__summary-meta">
-      ${localize("premiumAnalytics_summaryMeta", [
-        formattedInteractions,
-        formattedCountries,
-        formattedIps,
-      ])}
+      ${localize("premiumAnalytics_summaryMeta", [formattedInteractions, formattedCountries, formattedIps])}
     </div>
   `;
 }
 
 function bindUiControls(container) {
+  container
+    .querySelectorAll(".ryd-analytics__disclosure, .ryd-analytics__hide, .ryd-analytics__dismiss")
+    .forEach((button) => {
+      for (const type of ["keydown", "keyup"]) {
+        button.addEventListener(type, (event) => {
+          if (event.key === " " || event.key === "Enter") event.stopPropagation();
+        });
+      }
+    });
+  container.querySelector(".ryd-analytics__hide").addEventListener("click", () => {
+    callbacks.onPanelViewChange("hidden");
+  });
+  container.querySelector(".ryd-analytics__dismiss").addEventListener("click", () => {
+    callbacks.onPanelDismiss();
+  });
+  container.querySelector(".ryd-analytics__disclosure").addEventListener("click", () => {
+    callbacks.onPanelViewChange(analyticsState.panelView === "full" ? "raw" : "full");
+  });
+
   container.querySelectorAll(".ryd-range").forEach((btn) => {
     btn.addEventListener("click", () => {
       const value = btn.dataset.range;
@@ -212,12 +234,35 @@ function createPanelMarkup() {
 
   return `
     <header class="ryd-analytics__header">
-      <div class="ryd-analytics__title">${localize("premiumAnalytics_title")}</div>
-      <div class="ryd-analytics__controls">
+      <h2 class="ryd-analytics__title">
+        <button class="ryd-analytics__disclosure" type="button" aria-expanded="true" aria-controls="ryd-analytics-details">
+          <span>${localize("premiumAnalytics_title")}</span>
+          <span class="ryd-analytics__disclosure-icon" aria-hidden="true"></span>
+        </button>
+      </h2>
+      <button class="ryd-analytics__hide" type="button" aria-label="${localize("hidePremiumTeaser")}">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <button class="ryd-analytics__dismiss" type="button" aria-label="${localize("hidePremiumAnalytics")}" hidden>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </header>
+    <div class="ryd-analytics__raw-counts" id="ryd-analytics-raw-counts" role="status" aria-live="polite">
+      <div class="ryd-analytics__raw-count">
+        <span class="ryd-analytics__raw-label">${localize("premiumTeaser_statLikes")}</span>
+        <span class="ryd-analytics__raw-value" id="ryd-analytics-raw-likes">—</span>
+      </div>
+      <div class="ryd-analytics__raw-count">
+        <span class="ryd-analytics__raw-label">${localize("premiumTeaser_statRaw")}</span>
+        <span class="ryd-analytics__raw-value" id="ryd-analytics-raw-dislikes">—</span>
+      </div>
+      <p class="ryd-analytics__raw-status" id="ryd-analytics-raw-status"></p>
+    </div>
+    <div id="ryd-analytics-details">
+      <div class="ryd-analytics__controls ryd-analytics__detail-controls">
         <div class="ryd-analytics__ranges">${rangeControls}</div>
         ${anchorControls}
       </div>
-    </header>
     <div class="ryd-analytics__body">
       <section class="ryd-analytics__section" data-chart="activity">
         <div class="ryd-analytics__section-header">
@@ -269,7 +314,23 @@ function createPanelMarkup() {
       </section>
       <div class="ryd-analytics__footer" id="ryd-analytics-footer"></div>
     </div>
+    </div>
   `;
+}
+
+export function applyPanelView() {
+  const panel = analyticsState.panelElement;
+  if (!panel) return;
+  const full = analyticsState.panelView === "full";
+  const hidden = analyticsState.panelView === "hidden";
+  panel.hidden = analyticsState.panelDismissed;
+  panel.dataset.view = analyticsState.panelView;
+  panel.querySelector("#ryd-analytics-raw-counts").hidden = hidden;
+  panel.querySelector(".ryd-analytics__hide").hidden = hidden;
+  panel.querySelector(".ryd-analytics__dismiss").hidden = !hidden;
+  panel.querySelector("#ryd-analytics-details").hidden = !full;
+  const disclosure = panel.querySelector(".ryd-analytics__disclosure");
+  disclosure.setAttribute("aria-expanded", `${full}`);
 }
 
 function createModeControls() {

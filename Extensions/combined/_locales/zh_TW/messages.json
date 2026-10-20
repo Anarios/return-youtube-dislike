@@ -135,10 +135,16 @@
     "message": "使按讚/不喜歡的顯示格式一致。"
   },
   "hidePremiumTeaser": {
-    "message": "隱藏 Premium 宣傳面板"
+    "message": "隱藏原始計數"
   },
   "hidePremiumTeaserHover": {
-    "message": "不要在 YouTube 觀看頁面顯示 Premium 宣傳。"
+    "message": "不要在 YouTube 觀看頁面顯示原始計數面板。"
+  },
+  "hidePremiumAnalytics": {
+    "message": "隱藏進階影片洞察"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "在 YouTube 觀看頁面隱藏進階影片洞察面板。"
   },
   "roundNumbers": {
     "message": "顯示取整後的數字"

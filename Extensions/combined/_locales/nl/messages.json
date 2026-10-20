@@ -135,10 +135,16 @@
     "message": "Maak het formaat voor leuk en niet leuk consistent."
   },
   "hidePremiumTeaser": {
-    "message": "Premium-teaserpaneel verbergen"
+    "message": "Ruwe aantallen verbergen"
   },
   "hidePremiumTeaserHover": {
-    "message": "Toon de premiumteaser niet op YouTube-kijkpagina’s."
+    "message": "Toon het paneel met ruwe aantallen niet op YouTube-kijkpagina’s."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Premium video-inzichten verbergen"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Verberg het paneel met Premium video-inzichten op YouTube-kijkpagina’s."
   },
   "roundNumbers": {
     "message": "Afgeronde getallen weergeven"

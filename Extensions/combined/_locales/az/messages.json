@@ -135,10 +135,16 @@
     "message": "Like və dislike formatını uyğunlaşdırır."
   },
   "hidePremiumTeaser": {
-    "message": "Premium tanıtım panelini gizlət"
+    "message": "Emal olunmamış sayları gizlət"
   },
   "hidePremiumTeaserHover": {
-    "message": "YouTube izləmə səhifələrində premium tanıtım panelini göstərmə."
+    "message": "YouTube izləmə səhifələrində emal olunmamış saylar panelini göstərmə."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Premium video analitikasını gizlət"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "YouTube izləmə səhifələrində Premium video analitikası panelini gizlət."
   },
   "roundNumbers": {
     "message": "Aşağı yuvarlanmış sayıları göstərir"

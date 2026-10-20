@@ -156,10 +156,16 @@
     "message": "Beğeni ve beğenmeme sayılarını tutarlı bir biçimde gösterin."
   },
   "hidePremiumTeaser": {
-    "message": "Premium tanıtım panelini gizle"
+    "message": "Ham sayıları gizle"
   },
   "hidePremiumTeaserHover": {
-    "message": "YouTube video izleme sayfalarında Premium tanıtımını gösterme."
+    "message": "YouTube video izleme sayfalarında ham sayılar panelini gösterme."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Premium Video İstatistiklerini gizle"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "YouTube video izleme sayfalarında Premium Video İstatistikleri panelini gizle."
   },
   "roundNumbers": {
     "message": "Aşağı yuvarlanmış sayıları göster"

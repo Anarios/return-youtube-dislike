@@ -135,10 +135,16 @@
     "message": "Haz que el formato de like y dislike sea consistente."
   },
   "hidePremiumTeaser": {
-    "message": "Ocultar panel del teaser Premium"
+    "message": "Ocultar conteos sin procesar"
   },
   "hidePremiumTeaserHover": {
-    "message": "No mostrar el teaser Premium en las páginas de reproducción de YouTube."
+    "message": "No mostrar el panel de conteos sin procesar en las páginas de reproducción de YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Ocultar la información premium del video"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Ocultar el panel de información premium del video en las páginas de reproducción de YouTube."
   },
   "roundNumbers": {
     "message": "Mostrar números redondeados hacia abajo"

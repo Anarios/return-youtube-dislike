@@ -135,10 +135,16 @@
     "message": "統計値の一貫性を高めます。"
   },
   "hidePremiumTeaser": {
-    "message": "プレミアムティーザーパネルを非表示にする"
+    "message": "未加工の件数を非表示にする"
   },
   "hidePremiumTeaserHover": {
-    "message": "YouTube の再生ページにプレミアムティーザーを表示しません。"
+    "message": "YouTube の再生ページに未加工の件数パネルを表示しません。"
+  },
+  "hidePremiumAnalytics": {
+    "message": "プレミアム動画インサイトを非表示にする"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "YouTube の再生ページでプレミアム動画インサイトのパネルを非表示にします。"
   },
   "roundNumbers": {
     "message": "四捨五入された数値を表示"

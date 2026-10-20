@@ -123,6 +123,74 @@ describe("background account consent lifecycle", () => {
   }
 
   test.each(["patreon_oauth_login", "github_oauth_login"])(
+    "%s shows Premium/raw counts after saving the account without changing its display mode",
+    async (message) => {
+      const stored = { hidePremiumTeaser: true, premiumAnalyticsView: "hidden" };
+      const user = { fullName: "Test", hasActiveMembership: true, membershipTier: "premium" };
+      chrome.storage.sync.set.mockImplementation((data, callback) => {
+        Object.assign(stored, data);
+        callback?.();
+      });
+      fetch.mockResolvedValueOnce({ ok: true, json: async () => startData() }).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ success: true, user, sessionToken: "test-token" }),
+      });
+      const response = jest.fn(() => {
+        expect(stored.hidePremiumTeaser).toBe(false);
+      });
+
+      messageListener({ message }, normalSender, response);
+      await flushPromises();
+
+      expect(response).toHaveBeenCalledWith({ success: true, user });
+      expect(chrome.storage.sync.set).toHaveBeenNthCalledWith(
+        1,
+        { patreonAuthenticated: true, patreonUser: user, patreonSessionToken: "test-token" },
+        expect.any(Function),
+      );
+      expect(chrome.storage.sync.set).toHaveBeenNthCalledWith(2, { hidePremiumTeaser: false }, expect.any(Function));
+      expect(stored.premiumAnalyticsView).toBe("hidden");
+    },
+  );
+
+  test.each(["patreon_oauth_login", "github_oauth_login"])(
+    "%s leaves the visibility preference unchanged if OAuth is cancelled or fails",
+    async (message) => {
+      fetch.mockResolvedValueOnce({ ok: true, json: async () => startData() });
+      chrome.identity.launchWebAuthFlow.mockRejectedValue(new Error("User cancelled"));
+      const response = jest.fn();
+      messageListener({ message }, normalSender, response);
+      await flushPromises();
+      expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+      expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+    },
+  );
+
+  test.each(["patreon_oauth_login", "github_oauth_login"])(
+    "%s leaves visibility unchanged if saving the account fails",
+    async (message) => {
+      chrome.storage.sync.set.mockImplementation((data, callback) => {
+        chrome.runtime.lastError = { message: "Storage unavailable" };
+        callback();
+        delete chrome.runtime.lastError;
+      });
+      fetch.mockResolvedValueOnce({ ok: true, json: async () => startData() }).mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ success: true, user: { fullName: "Test" }, sessionToken: "test-token" }),
+      });
+      const response = jest.fn();
+      messageListener({ message }, normalSender, response);
+      await flushPromises();
+      expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+      expect(chrome.storage.sync.set).toHaveBeenCalledTimes(1);
+      expect(chrome.storage.sync.set).not.toHaveBeenCalledWith(
+        expect.objectContaining({ hidePremiumTeaser: false }),
+        expect.any(Function),
+      );
+    },
+  );
+
+  test.each(["patreon_oauth_login", "github_oauth_login"])(
     "%s and logout broadcast only to parsed YouTube hostnames",
     async (message) => {
       const youtubeUrls = [
@@ -512,11 +580,16 @@ describe("background account consent lifecycle", () => {
     },
   );
 
-  test.each(["logout", "revocation"])(
-    "clears a pending stored session after %s even if its save completes later",
-    async (event) => {
+  test.each([
+    ["patreon_oauth_login", "logout"],
+    ["patreon_oauth_login", "revocation"],
+    ["github_oauth_login", "logout"],
+    ["github_oauth_login", "revocation"],
+  ])(
+    "clears a pending %s session after %s without changing visibility if its save completes later",
+    async (message, event) => {
       let saved;
-      const stored = {};
+      const stored = { hidePremiumTeaser: true };
       chrome.storage.sync.set.mockImplementation((data, callback) => {
         saved = () => {
           Object.assign(stored, data);
@@ -532,7 +605,7 @@ describe("background account consent lifecycle", () => {
         json: async () => ({ success: true, user: { fullName: "Test" }, sessionToken: "test-token" }),
       });
       const response = jest.fn();
-      messageListener({ message: "patreon_oauth_login" }, normalSender, response);
+      messageListener({ message }, normalSender, response);
       await flushPromises();
       if (event === "revocation") revoke();
       else messageListener({ message: "patreon_logout" }, normalSender, jest.fn());
@@ -540,7 +613,8 @@ describe("background account consent lifecycle", () => {
       expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
       saved();
       await flushPromises();
-      expect(stored).toEqual({});
+      expect(stored).toEqual({ hidePremiumTeaser: true });
+      expect(chrome.storage.sync.set).toHaveBeenCalledTimes(1);
       expect(chrome.storage.sync.remove).toHaveBeenCalledTimes(1);
       expect(
         chrome.tabs.sendMessage.mock.calls

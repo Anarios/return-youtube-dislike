@@ -15,6 +15,7 @@ import {
   setPanelExpanded,
   setLoadingState,
   applyChartExpansionState,
+  applyPanelView,
 } from "./panel";
 
 const enMessages = require("../../_locales/en/messages.json");
@@ -56,6 +57,8 @@ describe("premiumAnalytics.panel", () => {
     };
     resetStateForVideo();
     analyticsState.panelElement = null;
+    analyticsState.panelView = "full";
+    analyticsState.panelDismissed = false;
     analyticsState.currentRange = 30;
     analyticsState.rangeAnchor = "first";
     analyticsState.currentMode = "ratio";
@@ -100,6 +103,115 @@ describe("premiumAnalytics.panel", () => {
     const listsExpand = panel.querySelector(".ryd-analytics__section-expand[data-chart='lists']");
     listsExpand.click();
     expect(expandSpy).toHaveBeenCalledWith("lists");
+  });
+
+  it("keeps raw counts visible while the analytics controls and charts are collapsed", () => {
+    const panel = ensurePanel();
+    const changeView = jest.fn((view) => {
+      analyticsState.panelView = view;
+      applyPanelView();
+    });
+    configurePanelCallbacks({ onPanelViewChange: changeView });
+    const disclosure = panel.querySelector(".ryd-analytics__disclosure");
+    const details = panel.querySelector("#ryd-analytics-details");
+    expect(details.hidden).toBe(false);
+    expect(disclosure.getAttribute("aria-expanded")).toBe("true");
+    panel.querySelector(".ryd-analytics__hide").click();
+    expect(changeView).toHaveBeenLastCalledWith("hidden");
+    expect(panel.hidden).toBe(false);
+    expect(panel.querySelector("#ryd-analytics-raw-counts").hidden).toBe(true);
+    expect(panel.querySelector(".ryd-analytics__hide").hidden).toBe(true);
+    expect(panel.querySelector(".ryd-analytics__dismiss").hidden).toBe(false);
+    expect(disclosure.closest("[hidden]")).toBeNull();
+    expect(ensurePanel()).toBe(panel);
+    expect(panel.querySelector("#ryd-analytics-raw-counts").hidden).toBe(true);
+    disclosure.click();
+    expect(changeView).toHaveBeenLastCalledWith("full");
+    expect(panel.querySelector("#ryd-analytics-raw-counts").hidden).toBe(false);
+    expect(panel.querySelector(".ryd-analytics__hide").hidden).toBe(false);
+    expect(panel.querySelector(".ryd-analytics__dismiss").hidden).toBe(true);
+    analyticsState.panelView = "raw";
+    applyPanelView();
+    expect(panel.hidden).toBe(false);
+
+    disclosure.click();
+    expect(changeView).toHaveBeenLastCalledWith("full");
+    disclosure.click();
+    expect(changeView).toHaveBeenLastCalledWith("raw");
+    expect(details.hidden).toBe(true);
+    expect(disclosure.getAttribute("aria-expanded")).toBe("false");
+    expect(panel.querySelector("#ryd-analytics-raw-counts").closest("[hidden]")).toBeNull();
+    expect(panel.querySelector(".ryd-range").closest("[hidden]")).toBe(details);
+    expect(panel.querySelector("#ryd-analytics-footer").closest("[hidden]")).toBe(details);
+
+    disclosure.click();
+    expect(changeView).toHaveBeenLastCalledWith("full");
+    expect(details.hidden).toBe(false);
+    expect(disclosure.getAttribute("aria-expanded")).toBe("true");
+  });
+
+  it("preserves the selected display after the host replaces the panel", () => {
+    analyticsState.panelView = "raw";
+    const first = ensurePanel();
+    first.remove();
+    const replacement = ensurePanel();
+    expect(replacement).not.toBe(first);
+    expect(replacement.querySelector("#ryd-analytics-details").hidden).toBe(true);
+  });
+
+  it("dismisses the whole collapsed panel and keeps it dismissed when the host replaces it", () => {
+    analyticsState.panelView = "hidden";
+    const panel = ensurePanel();
+    const dismiss = jest.fn(() => {
+      analyticsState.panelDismissed = true;
+      applyPanelView();
+    });
+    configurePanelCallbacks({ onPanelDismiss: dismiss });
+    const closeButton = panel.querySelector(".ryd-analytics__dismiss");
+    expect(closeButton.getAttribute("aria-label")).toBe(getMessage("hidePremiumAnalytics"));
+    expect(closeButton.hidden).toBe(false);
+    closeButton.click();
+    expect(dismiss).toHaveBeenCalledTimes(1);
+    expect(panel.hidden).toBe(true);
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(ensurePanel().hidden).toBe(true);
+    panel.remove();
+    const replacement = ensurePanel();
+    expect(replacement).not.toBe(panel);
+    expect(replacement.hidden).toBe(true);
+    analyticsState.panelDismissed = false;
+    applyPanelView();
+    expect(replacement.hidden).toBe(false);
+    expect(replacement.querySelector("#ryd-analytics-raw-counts").hidden).toBe(true);
+    expect(replacement.querySelector(".ryd-analytics__dismiss").hidden).toBe(false);
+  });
+
+  it("keeps disclosure activation keys away from host playback shortcuts without cancelling native buttons", () => {
+    const panel = ensurePanel();
+    const hostShortcut = jest.fn();
+    document.addEventListener("keydown", hostShortcut);
+    document.addEventListener("keyup", hostShortcut);
+    try {
+      for (const button of panel.querySelectorAll(
+        ".ryd-analytics__disclosure, .ryd-analytics__hide, .ryd-analytics__dismiss",
+      )) {
+        for (const type of ["keydown", "keyup"]) {
+          for (const key of [" ", "Enter"]) {
+            const event = new KeyboardEvent(type, { key, bubbles: true, cancelable: true });
+            button.dispatchEvent(event);
+            expect(event.defaultPrevented).toBe(false);
+          }
+        }
+      }
+      expect(hostShortcut).not.toHaveBeenCalled();
+      panel
+        .querySelector(".ryd-analytics__disclosure")
+        .dispatchEvent(new KeyboardEvent("keydown", { key: "Tab", bubbles: true }));
+      expect(hostShortcut).toHaveBeenCalledTimes(1);
+    } finally {
+      document.removeEventListener("keydown", hostShortcut);
+      document.removeEventListener("keyup", hostShortcut);
+    }
   });
 
   it("creates the analytics panel inside the secondary column", () => {

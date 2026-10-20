@@ -135,10 +135,16 @@
     "message": "Das Format der Likes und Dislikes einheitlich machen."
   },
   "hidePremiumTeaser": {
-    "message": "Premium-Teaser-Panel ausblenden"
+    "message": "Rohzahlen ausblenden"
   },
   "hidePremiumTeaserHover": {
-    "message": "Premium-Teaser auf YouTube-Wiedergabeseiten nicht anzeigen."
+    "message": "Das Panel mit Rohzahlen auf YouTube-Wiedergabeseiten nicht anzeigen."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Premium-Video-Analyse ausblenden"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Das Panel „Premium-Video-Analyse“ auf YouTube-Wiedergabeseiten ausblenden."
   },
   "roundNumbers": {
     "message": "Zeige abgerundete Zahlen"

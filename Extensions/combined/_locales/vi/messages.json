@@ -135,10 +135,16 @@
     "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\"."
   },
   "hidePremiumTeaser": {
-    "message": "Ẩn bảng giới thiệu Premium"
+    "message": "Ẩn số lượt thô"
   },
   "hidePremiumTeaserHover": {
-    "message": "Không hiển thị bảng giới thiệu Premium trên trang xem YouTube."
+    "message": "Không hiển thị bảng số lượt thô trên trang xem YouTube."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Ẩn phân tích video cao cấp"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Ẩn bảng phân tích video cao cấp trên trang xem YouTube."
   },
   "roundNumbers": {
     "message": "Hiện số lượt đánh giá đã làm tròn"

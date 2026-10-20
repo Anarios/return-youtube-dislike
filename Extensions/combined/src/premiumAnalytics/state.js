@@ -6,6 +6,8 @@ export const analyticsState = {
   initialized: false,
   panelElement: null,
   panelExpanded: false,
+  panelView: "full",
+  panelDismissed: false,
   isLoading: false,
   activityChart: null,
   mapChart: null,
