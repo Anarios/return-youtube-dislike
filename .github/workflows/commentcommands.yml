@@ -11,6 +11,12 @@ jobs:
       contains(github.event.comment.body, '/assignme') ||
       contains(github.event.comment.body, '/assign me')
     steps:
+      - name: Update trusted certificate authorities
+        run: |
+          sudo apt-get update -o APT::Update::Error-Mode=any
+          sudo apt-get install --yes --no-install-recommends --only-upgrade ca-certificates
+          dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge 20260816ubuntu0.24.04.1
+
       - name: Assigning commenter
         run: |
           curl \
@@ -29,6 +35,12 @@ jobs:
         github.event.comment.author_association == 'CONTRIBUTOR'
       )
     steps:
+      - name: Update trusted certificate authorities
+        run: |
+          sudo apt-get update -o APT::Update::Error-Mode=any
+          sudo apt-get install --yes --no-install-recommends --only-upgrade ca-certificates
+          dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge 20260816ubuntu0.24.04.1
+
       - name: Request issue framing improvement
         run: |
           curl \
@@ -47,6 +59,12 @@ jobs:
         github.event.comment.author_association != 'CONTRIBUTOR'
       )
     steps:
+      - name: Update trusted certificate authorities
+        run: |
+          sudo apt-get update -o APT::Update::Error-Mode=any
+          sudo apt-get install --yes --no-install-recommends --only-upgrade ca-certificates
+          dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge 20260816ubuntu0.24.04.1
+
       - name: Add duplicate label
         run: |
           curl \
