@@ -23,8 +23,18 @@ on:
 jobs:
   weblint:
     runs-on: ubuntu-24.04
+    env:
+      NODE_OPTIONS: --use-openssl-ca
+      SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+      SSL_CERT_DIR: /etc/ssl/certs
 
     steps:
+      - name: Update trusted certificate authorities
+        run: |
+          sudo apt-get update -o APT::Update::Error-Mode=any
+          sudo apt-get install --yes --no-install-recommends --only-upgrade ca-certificates
+          dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge 20260816ubuntu0.24.04.1
+
       - name: Checkout repository
         uses: actions/checkout@v6
 
