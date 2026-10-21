@@ -100,7 +100,11 @@ for (const { locale, language, direction } of [
     const apiServer = await startHermeticApiServer();
     const browserType = {
       launchPersistentContext: (profile, options) =>
-        chromium.launchPersistentContext(profile, { ...options, args: [...options.args, `--lang=${language}`] }),
+        chromium.launchPersistentContext(profile, {
+          ...options,
+          args: [...options.args, `--lang=${language}`],
+          ...(process.platform === "linux" ? { env: { ...process.env, ...options.env, LANGUAGE: language } } : {}),
+        }),
     };
     const adapter = new HermeticExtensionArtifactAdapter({
       apiServer,
