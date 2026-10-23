@@ -22,6 +22,7 @@ on:
 
 jobs:
   weblint:
+    if: github.event_name != 'pull_request' || github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-24.04
     env:
       NODE_OPTIONS: --use-openssl-ca

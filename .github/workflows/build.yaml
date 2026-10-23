@@ -54,6 +54,7 @@ on:
 
 jobs:
   build:
+    if: github.event_name != 'pull_request' || github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-24.04
     env:
       NODE_OPTIONS: --use-openssl-ca
@@ -114,18 +115,21 @@ jobs:
         with:
           name: ryd-chrome
           path: ./Extensions/combined/dist/chrome
+          retention-days: 7
 
       - name: Upload Firefox artifact
         uses: actions/upload-artifact@v6
         with:
           name: ryd-firefox
           path: ./Extensions/combined/dist/firefox
+          retention-days: 7
 
       - name: Upload Safari artifact
         uses: actions/upload-artifact@v6
         with:
           name: ryd-safari
           path: ./Extensions/combined/dist/safari
+          retention-days: 7
 
       - name: Upload Playwright failure artifacts
         if: failure()
