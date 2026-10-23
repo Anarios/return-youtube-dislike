@@ -52,6 +52,10 @@ on:
       - "playwright*.js"
       - "webpack*.js"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     if: github.event_name != 'pull_request' || github.event.pull_request.user.login != 'dependabot[bot]'
