@@ -7,7 +7,7 @@ This source package is provided for Mozilla Add-ons review. The extension is bui
 Build the 4.1.0 release with this exact toolchain:
 
 - Windows 11 (PowerShell); the build script also supports Linux and macOS
-- Node.js 22.17.0
+- Node.js 22.23.4
 - npm 10.8.2
 
 These versions are intentionally pinned instead of relying on the default AMO reviewer environment. The build script checks both versions before installing dependencies and stops if either differs. The release's accompanying reproducibility report records the environment actually used for its independent source rebuild.
@@ -17,8 +17,8 @@ These versions are intentionally pinned instead of relying on the default AMO re
 Using `nvm`:
 
 ```sh
-nvm install 22.17.0
-nvm use 22.17.0
+nvm install 22.23.4
+nvm use 22.23.4
 npm install --global npm@10.8.2
 ```
 
@@ -32,7 +32,7 @@ npm --version
 Expected versions:
 
 ```text
-v22.17.0
+v22.23.4
 10.8.2
 ```
 
@@ -46,7 +46,7 @@ node scripts/build-firefox-source.mjs
 
 The script performs all required technical build steps:
 
-1. Confirms Node.js 22.17.0 and npm 10.8.2 are in use.
+1. Confirms Node.js 22.23.4 and npm 10.8.2 are in use.
 2. Installs the locked dependencies with `npm ci`.
 3. Builds the extension with the release-specific `npm run build-for-amo` hook.
 4. Verifies the generated Firefox manifest is version 4.1.0, retains the published AMO add-on ID, and declares the expected desktop data-collection permissions and minimum Firefox version.

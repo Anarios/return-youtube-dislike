@@ -7,11 +7,11 @@ const { spawnSync } = require("node:child_process");
 const { filterCertificates, readCertificates, prepareEnvironment, main } = require("./with-trusted-node.cjs");
 
 const root = path.resolve(__dirname, "../.private/node-trust-tests");
-const blocked = tls.rootCertificates.find((pem) =>
-  new X509Certificate(pem).subject.includes("CN=AAA Certificate Services"),
-);
+// Public root certificate from https://emudhra.we-have-a-problem.com/roots.json.
+// Patched Node versions no longer include it in their bundled trust store.
+const blocked = fs.readFileSync(path.join(__dirname, "fixtures/aaa-certificate-services.pem"), "utf8");
 const allowed = tls.rootCertificates.filter(
-  (pem) => !new X509Certificate(pem).subject.includes("emSign") && pem !== blocked,
+  (pem) => !/emSign|CN=AAA Certificate Services/.test(new X509Certificate(pem).subject),
 );
 const npmConfig = { ca: null, cafile: null, strictSsl: true, nodeOptions: null };
 let temporary;
