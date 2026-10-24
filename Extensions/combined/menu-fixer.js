@@ -27,10 +27,16 @@
     return `${Math.round(rect.width * 10) / 10}:${Math.round(rect.height * 10) / 10}`;
   }
 
-  function hasMeasurableBox(element) {
+  function getMeasuredRect(element, rects) {
+    if (!rects.has(element)) rects.set(element, element.getBoundingClientRect());
+    return rects.get(element);
+  }
+
+  function hasMeasurableBox(element, styles, rects) {
     if (!element?.isConnected || element.closest?.("[hidden], [aria-hidden='true'], [inert]")) return false;
     for (let current = element; current; current = current.parentElement) {
-      const style = getComputedStyle(current);
+      if (!styles.has(current)) styles.set(current, getComputedStyle(current));
+      const style = styles.get(current);
       if (
         style.display === "none" ||
         style.visibility === "hidden" ||
@@ -40,7 +46,7 @@
         return false;
       }
     }
-    const rect = element.getBoundingClientRect();
+    const rect = getMeasuredRect(element, rects);
     return rect.width > 0 && rect.height > 0;
   }
 
@@ -48,19 +54,21 @@
     ytdMenuRenderer,
     { tolerance = 2, viewportWidth = window.innerWidth || document.documentElement.clientWidth } = {},
   ) {
+    const styles = new WeakMap();
+    const rects = new WeakMap();
+    const isMeasurable = (element) => hasMeasurableBox(element, styles, rects);
     const actionSurface = ytdMenuRenderer?.querySelector?.("#top-level-buttons-computed");
-    if (!hasMeasurableBox(actionSurface) || !Number.isFinite(viewportWidth) || viewportWidth <= 0) return false;
+    if (!isMeasurable(actionSurface) || !Number.isFinite(viewportWidth) || viewportWidth <= 0) return false;
 
-    const actionSurfaceRect = actionSurface.getBoundingClientRect();
+    const actionSurfaceRect = getMeasuredRect(actionSurface, rects);
     const flexibleActionHosts = [...ytdMenuRenderer.querySelectorAll("#flexible-item-buttons")].flatMap((container) =>
-      [...container.children].filter(hasMeasurableBox),
+      [...container.children].filter(isMeasurable),
     );
     const moreButtons = [...ytdMenuRenderer.querySelectorAll("button")].filter(
-      (button) =>
-        !actionSurface.contains(button) && !button.closest("#flexible-item-buttons") && hasMeasurableBox(button),
+      (button) => !actionSurface.contains(button) && !button.closest("#flexible-item-buttons") && isMeasurable(button),
     );
     const actionRects = [actionSurface, ...flexibleActionHosts, ...moreButtons].map((element) =>
-      element.getBoundingClientRect(),
+      getMeasuredRect(element, rects),
     );
 
     if (actionRects.some((rect) => rect.left < -tolerance || rect.right > viewportWidth + tolerance)) return true;
@@ -422,33 +430,96 @@
     return true;
   }
 
-  function scanForMenuRenderers(options) {
-    for (const renderer of document.querySelectorAll("ytd-menu-renderer")) {
-      fixYtdMenuRenderer(renderer, options);
-    }
-  }
-
   function installMenuFixer() {
-    const previousInstallation = window[INSTALL_STATE_KEY];
-    previousInstallation?.observer?.disconnect();
-    previousInstallation?.resizeObserver?.disconnect();
+    window[INSTALL_STATE_KEY]?.stop();
+
+    const rendererTargets = new Map();
+    const targetRenderers = new Map();
+    const pendingRenderers = new Map();
+    const pendingInitialization = new Set();
+    let frameId = null;
+    let stopped = false;
+
+    const releaseTarget = (renderer) => {
+      const target = rendererTargets.get(renderer);
+      const renderers = targetRenderers.get(target);
+      renderers?.delete(renderer);
+      if (renderers?.size === 0) {
+        resizeObserver?.unobserve(target);
+        targetRenderers.delete(target);
+      }
+      rendererTargets.delete(renderer);
+    };
+
+    const forgetRenderer = (renderer) => {
+      releaseTarget(renderer);
+      pendingRenderers.delete(renderer);
+      pendingInitialization.delete(renderer);
+    };
+
+    const trackRenderer = (renderer) => {
+      const target = renderer.closest("#actions") ?? renderer;
+      if (rendererTargets.get(renderer) === target) return;
+      releaseTarget(renderer);
+      rendererTargets.set(renderer, target);
+      if (!targetRenderers.has(target)) {
+        targetRenderers.set(target, new Set());
+        resizeObserver?.observe(target);
+      }
+      targetRenderers.get(target).add(renderer);
+    };
+
+    const updateRenderer = (renderer, options) => {
+      if (!renderer.isConnected) {
+        forgetRenderer(renderer);
+        return;
+      }
+      trackRenderer(renderer);
+      if (fixYtdMenuRenderer(renderer, options)) pendingInitialization.delete(renderer);
+      else pendingInitialization.add(renderer);
+    };
+
+    const flushUpdates = () => {
+      frameId = null;
+      const updates = [...pendingRenderers];
+      pendingRenderers.clear();
+      for (const [renderer, options] of updates) updateRenderer(renderer, options);
+    };
+
+    const queueRenderer = (renderer, options = {}) => {
+      if (stopped) return;
+      if (!renderer.isConnected) {
+        forgetRenderer(renderer);
+        return;
+      }
+      trackRenderer(renderer);
+      const pending = pendingRenderers.get(renderer);
+      pendingRenderers.set(renderer, {
+        refresh: Boolean(pending?.refresh || options.refresh),
+        restoreCandidates: Boolean(pending?.restoreCandidates || options.restoreCandidates),
+      });
+      if (frameId === null) frameId = window.requestAnimationFrame(flushUpdates);
+    };
 
     const resizeObserver =
       typeof ResizeObserver === "function"
-        ? new ResizeObserver(() => {
-            scanForMenuRenderers({ refresh: true });
+        ? new ResizeObserver((entries) => {
+            for (const { target } of entries) {
+              for (const renderer of targetRenderers.get(target) ?? []) {
+                queueRenderer(renderer, { refresh: true });
+              }
+            }
           })
         : null;
-    const observeMenuLayouts = () => {
-      if (!resizeObserver) return;
-      for (const renderer of document.querySelectorAll("ytd-menu-renderer")) {
-        resizeObserver.observe(renderer.closest("#actions") ?? renderer);
-      }
+
+    const visitRenderers = (node, visit) => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return;
+      if (node.matches("ytd-menu-renderer")) visit(node);
+      if (node.childElementCount) node.querySelectorAll("ytd-menu-renderer").forEach((renderer) => visit(renderer));
     };
 
     document.addEventListener(SHORTS_HYDRATION_REQUEST_EVENT, reportShortsActionBarHydration, true);
-    scanForMenuRenderers();
-    observeMenuLayouts();
+    visitRenderers(document.documentElement, (renderer) => updateRenderer(renderer));
 
     const observer = new MutationObserver((mutations) => {
       const preferenceChanged = mutations.some(
@@ -457,11 +528,26 @@
           mutation.target === document.documentElement &&
           mutation.attributeName === HIDE_CLUTTER_ATTRIBUTE,
       );
-      scanForMenuRenderers({
-        refresh: preferenceChanged,
-        restoreCandidates: preferenceChanged && !hideClutterButtonsEnabled(),
-      });
-      observeMenuLayouts();
+      if (preferenceChanged) {
+        for (const renderer of rendererTargets.keys()) {
+          queueRenderer(renderer, { refresh: true, restoreCandidates: !hideClutterButtonsEnabled() });
+        }
+      }
+      for (const mutation of mutations) {
+        if (mutation.type !== "childList") continue;
+        const renderer = mutation.target.closest?.("ytd-menu-renderer");
+        if (renderer) queueRenderer(renderer);
+        for (const node of mutation.addedNodes) visitRenderers(node, queueRenderer);
+        for (const node of mutation.removedNodes) {
+          visitRenderers(node, (removedRenderer) => {
+            if (removedRenderer.isConnected) queueRenderer(removedRenderer);
+            else forgetRenderer(removedRenderer);
+          });
+        }
+      }
+      // A controller can hydrate without changing its own subtree. Retry only
+      // uninitialized renderers, not every already fitted menu on the page.
+      for (const renderer of pendingInitialization) queueRenderer(renderer);
     });
     observer.observe(document.documentElement, {
       attributeFilter: [HIDE_CLUTTER_ATTRIBUTE],
@@ -474,8 +560,15 @@
       observer,
       resizeObserver,
       stop() {
+        stopped = true;
         observer.disconnect();
         resizeObserver?.disconnect();
+        if (frameId !== null) window.cancelAnimationFrame(frameId);
+        frameId = null;
+        rendererTargets.clear();
+        targetRenderers.clear();
+        pendingRenderers.clear();
+        pendingInitialization.clear();
         document.removeEventListener(SHORTS_HYDRATION_REQUEST_EVENT, reportShortsActionBarHydration, true);
         if (window[INSTALL_STATE_KEY] === installation) delete window[INSTALL_STATE_KEY];
       },

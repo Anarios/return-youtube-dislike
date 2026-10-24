@@ -65,8 +65,15 @@ function makeCurrentMenuData() {
   };
 }
 
+async function flushMenuUpdates() {
+  await Promise.resolve();
+  await new Promise(window.requestAnimationFrame);
+}
+
 describe("menu fixer", () => {
   afterEach(() => {
+    window[Symbol.for("return-youtube-dislike.menu-fixer.install-state")]?.stop();
+    jest.restoreAllMocks();
     document.documentElement.removeAttribute(HIDE_CLUTTER_ATTRIBUTE);
     document.body.replaceChildren();
   });
@@ -605,7 +612,7 @@ describe("menu fixer", () => {
 
     controller.data = secondFixture.data;
     renderer.append(document.createElement("span"));
-    await Promise.resolve();
+    await flushMenuUpdates();
 
     expect(controller.data).not.toBe(secondFixture.data);
     expect(controller.data.videoId).toBe("second-video");
@@ -732,14 +739,297 @@ describe("menu fixer", () => {
     expect(original).toHaveBeenCalledTimes(1);
 
     document.documentElement.setAttribute(HIDE_CLUTTER_ATTRIBUTE, "true");
-    await Promise.resolve();
+    await flushMenuUpdates();
     expect(controller.flexAsTopLevelButtons).toEqual([]);
 
     document.documentElement.setAttribute(HIDE_CLUTTER_ATTRIBUTE, "false");
-    await Promise.resolve();
+    await flushMenuUpdates();
     expect(original).toHaveBeenCalledTimes(2);
     expect(controller.flexAsTopLevelButtons).toEqual(["share", "save", "thanks"]);
 
     installation.stop();
+  });
+
+  test("reuses ancestor styles and element rectangles only within an overflow measurement", () => {
+    const renderer = document.createElement("ytd-menu-renderer");
+    renderer.innerHTML = `
+      <div id="top-level-buttons-computed"></div>
+      <div id="flexible-item-buttons"><span></span></div>
+      <button type="button">More</button>`;
+    document.body.append(renderer);
+    const surface = renderer.querySelector("#top-level-buttons-computed");
+    const flexibleHost = renderer.querySelector("#flexible-item-buttons > *");
+    const moreButton = renderer.querySelector("button");
+    for (const element of [surface, flexibleHost, moreButton]) {
+      element.getBoundingClientRect = jest.fn(() => ({ height: 40, left: 0, right: 40, top: 0, width: 40 }));
+    }
+    const styles = jest.spyOn(window, "getComputedStyle");
+
+    expect(menuNeedsMoreOverflow(renderer, { viewportWidth: 800 })).toBe(false);
+    expect(styles.mock.calls.filter(([element]) => element === renderer)).toHaveLength(1);
+    for (const element of [surface, flexibleHost, moreButton]) {
+      expect(element.getBoundingClientRect).toHaveBeenCalledTimes(1);
+    }
+
+    flexibleHost.getBoundingClientRect.mockReturnValue({ height: 40, left: 0, right: 40, top: 40, width: 40 });
+    expect(menuNeedsMoreOverflow(renderer, { viewportWidth: 800 })).toBe(true);
+    expect(styles.mock.calls.filter(([element]) => element === renderer)).toHaveLength(2);
+    for (const element of [surface, flexibleHost, moreButton]) {
+      expect(element.getBoundingClientRect).toHaveBeenCalledTimes(2);
+    }
+  });
+
+  test.each(["display: none", "visibility: hidden", "visibility: collapse", "opacity: 0"])(
+    "does not measure actions below an ancestor with %s",
+    (style) => {
+      const renderer = document.createElement("ytd-menu-renderer");
+      renderer.style.cssText = style;
+      renderer.innerHTML = '<div id="top-level-buttons-computed"></div>';
+      document.body.append(renderer);
+      const surface = renderer.firstElementChild;
+      surface.getBoundingClientRect = jest.fn();
+
+      expect(menuNeedsMoreOverflow(renderer)).toBe(false);
+      expect(surface.getBoundingClientRect).not.toHaveBeenCalled();
+    },
+  );
+
+  describe("targeted observer updates", () => {
+    let frames;
+    let resizeObservers;
+    let originalResizeObserver;
+
+    beforeEach(() => {
+      frames = new Map();
+      resizeObservers = [];
+      let nextFrameId = 0;
+      jest.spyOn(window, "requestAnimationFrame").mockImplementation((callback) => {
+        const id = ++nextFrameId;
+        frames.set(id, callback);
+        return id;
+      });
+      jest.spyOn(window, "cancelAnimationFrame").mockImplementation((id) => frames.delete(id));
+      originalResizeObserver = global.ResizeObserver;
+      global.ResizeObserver = jest.fn().mockImplementation((callback) => {
+        const observer = {
+          callback,
+          disconnect: jest.fn(),
+          observe: jest.fn(),
+          unobserve: jest.fn(),
+        };
+        resizeObservers.push(observer);
+        return observer;
+      });
+    });
+
+    afterEach(() => {
+      window[Symbol.for("return-youtube-dislike.menu-fixer.install-state")]?.stop();
+      global.ResizeObserver = originalResizeObserver;
+    });
+
+    async function flushObserverUpdates() {
+      await Promise.resolve();
+      const callbacks = [...frames.values()];
+      frames.clear();
+      callbacks.forEach((callback) => callback(0));
+      await Promise.resolve();
+    }
+
+    test("does no menu or document-wide work for unrelated DOM mutations", async () => {
+      const controllers = Array.from({ length: 20 }, () => makeController());
+      controllers.forEach((controller) => attachRenderer(controller));
+      const comments = document.createElement("section");
+      document.body.append(comments);
+      installMenuFixer();
+      const layoutChecks = controllers.map((controller) =>
+        jest.spyOn(controller.maybeUpdateFlexibleMenuImpl, "enforceLayout"),
+      );
+      const documentQuery = jest.spyOn(document, "querySelectorAll");
+      const rootQuery = jest.spyOn(document.documentElement, "querySelectorAll");
+      resizeObservers[0].observe.mockClear();
+
+      for (let i = 0; i < 100; i++) {
+        const comment = document.createElement("div");
+        comment.innerHTML = "<span>Unrelated comment</span>";
+        comments.append(comment);
+        await Promise.resolve();
+      }
+      await flushObserverUpdates();
+
+      expect(documentQuery).not.toHaveBeenCalled();
+      expect(rootQuery).not.toHaveBeenCalled();
+      layoutChecks.forEach((check) => expect(check).not.toHaveBeenCalled());
+      expect(resizeObservers[0].observe).not.toHaveBeenCalled();
+      expect(window.requestAnimationFrame).not.toHaveBeenCalled();
+    });
+
+    test("coalesces repeated mutations into one check of the affected renderer", async () => {
+      const first = makeController();
+      const second = makeController();
+      const renderer = attachRenderer(first);
+      attachRenderer(second);
+      installMenuFixer();
+      const firstCheck = jest.spyOn(first.maybeUpdateFlexibleMenuImpl, "enforceLayout");
+      const secondCheck = jest.spyOn(second.maybeUpdateFlexibleMenuImpl, "enforceLayout");
+
+      for (let i = 0; i < 3; i++) {
+        renderer.append(document.createElement("span"));
+        await Promise.resolve();
+      }
+      expect(firstCheck).not.toHaveBeenCalled();
+      expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
+      await flushObserverUpdates();
+
+      expect(firstCheck).toHaveBeenCalledTimes(1);
+      expect(secondCheck).not.toHaveBeenCalled();
+      expect(resizeObservers[0].observe).toHaveBeenCalledTimes(2);
+    });
+
+    test("discovers menus in added subtrees and retries delayed controller initialization", async () => {
+      installMenuFixer();
+      const container = document.createElement("section");
+      container.innerHTML = "<div><ytd-menu-renderer></ytd-menu-renderer></div>";
+      const renderer = container.querySelector("ytd-menu-renderer");
+      document.body.append(container);
+      await flushObserverUpdates();
+      const controller = makeController();
+      const nativeFit = controller.maybeUpdateFlexibleMenuImpl;
+      renderer.polymerController = controller;
+
+      document.body.append(document.createElement("span"));
+      await flushObserverUpdates();
+
+      expect(controller.maybeUpdateFlexibleMenuImpl).not.toBe(nativeFit);
+      expect(nativeFit).toHaveBeenCalledTimes(1);
+      expect(resizeObservers[0].observe).toHaveBeenCalledTimes(1);
+    });
+
+    test("refreshes only resized allocations and merges resize with pending mutations", async () => {
+      const first = makeController();
+      const second = makeController();
+      const renderer = attachRenderer(first);
+      attachRenderer(second);
+      installMenuFixer();
+      const firstRefresh = jest.spyOn(first.maybeUpdateFlexibleMenuImpl, "refreshLayout");
+      const secondRefresh = jest.spyOn(second.maybeUpdateFlexibleMenuImpl, "refreshLayout");
+      const firstCheck = jest.spyOn(first.maybeUpdateFlexibleMenuImpl, "enforceLayout");
+
+      renderer.append(document.createElement("span"));
+      await Promise.resolve();
+      resizeObservers[0].callback([{ target: renderer }]);
+      resizeObservers[0].callback([{ target: renderer }]);
+      await flushObserverUpdates();
+
+      expect(firstRefresh).toHaveBeenCalledTimes(1);
+      expect(firstCheck).not.toHaveBeenCalled();
+      expect(secondRefresh).not.toHaveBeenCalled();
+      expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
+    });
+
+    test("forgets removed subtrees and does not update a disconnected renderer", async () => {
+      const controller = makeController();
+      const renderer = attachRenderer(controller);
+      const container = document.createElement("section");
+      container.append(renderer);
+      document.body.append(container);
+      installMenuFixer();
+      const check = jest.spyOn(controller.maybeUpdateFlexibleMenuImpl, "enforceLayout");
+
+      renderer.append(document.createElement("span"));
+      await Promise.resolve();
+      container.remove();
+      await flushObserverUpdates();
+      resizeObservers[0].callback([{ target: renderer }]);
+      await flushObserverUpdates();
+
+      expect(resizeObservers[0].unobserve).toHaveBeenCalledWith(renderer);
+      expect(check).not.toHaveBeenCalled();
+      expect(frames.size).toBe(0);
+    });
+
+    test("observes shared allocations once and releases them after the last renderer leaves", async () => {
+      const actions = document.createElement("div");
+      actions.id = "actions";
+      const first = makeController();
+      const second = makeController();
+      const firstRenderer = attachRenderer(first);
+      const secondRenderer = attachRenderer(second);
+      actions.append(firstRenderer, secondRenderer);
+      document.body.append(actions);
+      installMenuFixer();
+      const firstRefresh = jest.spyOn(first.maybeUpdateFlexibleMenuImpl, "refreshLayout");
+      const secondRefresh = jest.spyOn(second.maybeUpdateFlexibleMenuImpl, "refreshLayout");
+
+      resizeObservers[0].callback([{ target: actions }]);
+      await flushObserverUpdates();
+      expect(firstRefresh).toHaveBeenCalledTimes(1);
+      expect(secondRefresh).toHaveBeenCalledTimes(1);
+      expect(resizeObservers[0].observe).toHaveBeenCalledTimes(1);
+
+      firstRenderer.remove();
+      await flushObserverUpdates();
+      expect(resizeObservers[0].unobserve).not.toHaveBeenCalled();
+      secondRenderer.remove();
+      await flushObserverUpdates();
+      expect(resizeObservers[0].unobserve).toHaveBeenCalledTimes(1);
+      expect(resizeObservers[0].unobserve).toHaveBeenCalledWith(actions);
+    });
+
+    test("updates observation targets when an existing renderer moves", async () => {
+      const controller = makeController();
+      const renderer = attachRenderer(controller);
+      installMenuFixer();
+      const guarded = controller.maybeUpdateFlexibleMenuImpl;
+      const actions = document.createElement("div");
+      actions.id = "actions";
+      document.body.append(actions);
+      actions.append(renderer);
+      await flushObserverUpdates();
+
+      expect(controller.maybeUpdateFlexibleMenuImpl).toBe(guarded);
+      expect(resizeObservers[0].unobserve).toHaveBeenCalledWith(renderer);
+      expect(resizeObservers[0].observe).toHaveBeenLastCalledWith(actions);
+    });
+
+    test("preference restoration survives coalescing with mutations and resize", async () => {
+      const controller = makeController();
+      const renderer = attachRenderer(controller);
+      document.documentElement.setAttribute(HIDE_CLUTTER_ATTRIBUTE, "true");
+      installMenuFixer();
+      expect(controller.flexAsTopLevelButtons).toEqual([]);
+
+      document.documentElement.setAttribute(HIDE_CLUTTER_ATTRIBUTE, "false");
+      renderer.append(document.createElement("span"));
+      await Promise.resolve();
+      resizeObservers[0].callback([{ target: renderer }]);
+      await flushObserverUpdates();
+
+      expect(controller.flexAsTopLevelButtons).toEqual(["share", "save", "thanks"]);
+      expect(window.requestAnimationFrame).toHaveBeenCalledTimes(1);
+    });
+
+    test("stopping or replacing an installation cancels its queued work", async () => {
+      const controller = makeController();
+      const renderer = attachRenderer(controller);
+      installMenuFixer();
+      renderer.append(document.createElement("span"));
+      await Promise.resolve();
+      const firstFrame = [...frames.keys()][0];
+
+      const replacement = installMenuFixer();
+      expect(window.cancelAnimationFrame).toHaveBeenCalledWith(firstFrame);
+      expect(resizeObservers[0].disconnect).toHaveBeenCalledTimes(1);
+      const check = jest.spyOn(controller.maybeUpdateFlexibleMenuImpl, "enforceLayout");
+      await flushObserverUpdates();
+      expect(check).not.toHaveBeenCalled();
+
+      renderer.append(document.createElement("span"));
+      await Promise.resolve();
+      replacement.stop();
+      await flushObserverUpdates();
+      resizeObservers[1].callback([{ target: renderer }]);
+      expect(check).not.toHaveBeenCalled();
+      expect(frames.size).toBe(0);
+    });
   });
 });

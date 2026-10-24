@@ -244,4 +244,42 @@ test.describe("built extension watch action overflow", () => {
       assertActionOverflowScenario(snapshot, widerScenario, assert);
     });
   });
+
+  test("unrelated page mutations do not remeasure an already fitted menu", async ({}, testInfo) => {
+    const scenario = ACTION_OVERFLOW_SCENARIOS.find(({ id }) => id === "roomy-keeps-every-optional-action");
+    await withOverflowFixture(testInfo, {}, async ({ page }) => {
+      await settleAndRead(page, scenario);
+      const layoutChecks = await page.evaluate(async () => {
+        const renderer = document.querySelector("ytd-menu-renderer.ytd-watch-metadata");
+        const { guardedMethod } =
+          renderer.polymerController[Symbol.for("return-youtube-dislike.menu-fixer.controller-state")];
+        const original = guardedMethod.enforceLayout;
+        const comments = document.createElement("section");
+        comments.style.cssText = "position: fixed; width: 0; height: 0; overflow: hidden";
+        document.body.append(comments);
+        await new Promise(requestAnimationFrame);
+        await new Promise(requestAnimationFrame);
+        let checks = 0;
+        guardedMethod.enforceLayout = function (...args) {
+          checks++;
+          return original.apply(this, args);
+        };
+        try {
+          for (let i = 0; i < 100; i++) {
+            const comment = document.createElement("div");
+            comment.innerHTML = "<span>Unrelated comment</span>";
+            comments.append(comment);
+            await Promise.resolve();
+          }
+          await new Promise(requestAnimationFrame);
+          await new Promise(requestAnimationFrame);
+          return checks;
+        } finally {
+          guardedMethod.enforceLayout = original;
+          comments.remove();
+        }
+      });
+      expect(layoutChecks).toBe(0);
+    });
+  });
 });
