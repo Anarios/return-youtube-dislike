@@ -12,7 +12,7 @@ node node_modules/webpack-cli/bin/cli.js --mode=production --env liveTest=true -
 node Extensions/e2e/discussion/hermetic-discussion-smoke.js
 ```
 
-Use Node 22.17.0. `RYD_DISCUSSION_ARTIFACT` can select another generated local-test
+Use Node 22.23.4. `RYD_DISCUSSION_ARTIFACT` can select another generated local-test
 Chrome artifact; `RYD_DISCUSSION_OUTPUT` can select a fresh evidence directory.
 The default output creates a new timestamped directory under `test-results/discussion`.
 Set `RYD_DISCUSSION_NOTIFICATIONS_ONLY=true` for a focused notification/reconnect
