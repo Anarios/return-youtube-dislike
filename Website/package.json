@@ -24,6 +24,6 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.2.5",
     "eslint-plugin-vue": "^8.2.0",
-    "prettier": "^2.5.1"
+    "prettier": "^3.9.10"
   }
 }
