@@ -6,18 +6,18 @@ Thank you for investing your time in contributing to our project! All your chang
 
 ## Getting Started
 
-Please use Prettier with default settings for formatting.
+Please use Prettier for formatting. The config lives in `package.json`, and a pre-commit hook formats staged files automatically.
 
 #### Prerequisites
 
 You need to have node and npm installed to create the bundled version of the source.
 
-Versions used when setting up:
+Versions used when setting up (see `engines` in `package.json`):
 
-- node: 12.18.4
-- npm: 6.14.6
+- node: 22.17.0
+- npm: 10.8.2
 
-To create the `bundled-content-script.js` that contains most of the business logic of this extension you have to install all dependencies first.
+To create the bundled scripts (such as `ryd.content-script.js`) that contain most of the business logic of this extension you have to install all dependencies first.
 
 1. Go to the root of the repo and run:
 
@@ -25,14 +25,20 @@ To create the `bundled-content-script.js` that contains most of the business log
 npm install
 ```
 
-2. Run the following command to create `bundled-content-script.js` which is used in `manifest.json`
+2. Run one of the following commands to create the bundled extension in `Extensions/combined/dist/` (`chrome`, `firefox` and `safari` folders)
 
 ```
-npm start // to create the build file(s) and start a file watcher that hot-reloads on save
+npm run dev // to create the build file(s) and start a file watcher that rebuilds on save
 
 // or
 
 npm run build // to create the build file(s) once
+```
+
+3. Run the unit tests with:
+
+```
+npm test
 ```
 
 Congratulations, You are now ready to develop!
