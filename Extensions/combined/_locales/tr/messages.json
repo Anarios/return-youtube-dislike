@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Bir tıklama daha gerekli: Firefox’un hesap izinlerini inceleyip devam etmek için aşağıdaki giriş düğmenizi seçin."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Firefox’ta seç"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Teşekkürler. Oylarınız artık sayılıyor."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Oy paylaşımı kapalı kalır, bu yüzden beğeni ve beğenmeme oylarınız sayılmayacak. Daha sonra Firefox eklenti ayarlarından ya da beğenmeme sayıları etkinleştirildikten sonra bir videoyu beğendiğinizde veya beğenmediğinizde etkinleştirebilirsiniz."
   },
   "vote_consent_hint": {
     "message": "Oyunuz sayılmıyor ve beğenmeme sayılarında görünmeyecek. Sayılması için oy paylaşımını açın."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Yorumlara tepki vermek için oy paylaşımını açın. Tepkiniz açıldığında gönderilir."
   },
-  "vote_consent_continue": {
-    "message": "Devam et"
-  },
   "discussion_consentContinue": {
     "message": "Devam et"
-  },
-  "vote_consent_open_failed": {
-    "message": "İzin sayfası açılamadı. Lütfen tekrar deneyin."
   },
   "counts_consent_enable": {
     "message": "Beğenmeme sayılarını etkinleştir"
   },
-  "counts_consent_reason": {
-    "message": "Firefox artık RYD’nin beğenmeme sayılarını gösterebilmesi için izninizi istiyor."
-  },
-  "counts_consent_body": {
-    "message": "Sayıları almak için RYD, geçerli YouTube videosunun kimliğini kendi sunucusuna gönderir. Firefox buna “Gezinme etkinliği” adını verir."
-  },
-  "counts_consent_allow": {
-    "message": "Sayıları etkinleştir"
-  },
   "counts_consent_toolbar": {
-    "message": "Sayıları etkinleştirmek için Firefox’un uzantılar menüsünden Return YouTube Dislike’ı açın."
+    "message": "Devam etmek için Firefox’un uzantılar menüsünden Return YouTube Dislike’ı açın."
   },
   "counts_consent_declined": {
     "message": "Sayılar kapalı kalır. Bunları daha sonra buradan etkinleştirebilirsiniz."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Önce normal bir pencerede beğenmeme sayılarını etkinleştirin. Gizli pencerelerde yalnızca sayılar gösterilir."
+  },
+  "data_consent_reason": {
+    "message": "Firefox, RYD’nin beğenmeme sayılarını gösterebilmesi ve beğenilerinizi ve beğenmemelerinizi sayabilmesi için izninizi istiyor."
+  },
+  "data_consent_title": {
+    "message": "Beğenmemeleri gösterin ve oylarınız sayılsın"
+  },
+  "data_consent_body": {
+    "message": "RYD, beğenmeme sayılarını yüklemek için video kimliğini gönderir. İzin verirseniz tahminleri iyileştirmek için gördüğünüz beğeni sayısı ve sayılmaları için beğenileriniz, beğenmemeleriniz ve yorum tepkileriniz de rastgele bir oylama kimliğiyle paylaşılır."
   }
 }

@@ -16,60 +16,26 @@ function message(key) {
   return chrome.i18n.getMessage(key);
 }
 
-function createOptIn({ feature, id, grantedMessage, declinedMessage, onSettled }) {
-  const button = document.getElementById(`${id}-allow`);
-  const actions = document.getElementById(`${id}-actions`);
-  const status = document.getElementById(`${id}-status`);
-  let outcome = "";
-  button.addEventListener("click", () => {
-    const request = requestFeaturePermission(feature);
-    button.disabled = true;
-    void (async () => {
-      try {
-        outcome = (await request) ? "" : declinedMessage;
-      } catch (_) {
-        outcome = "consent_error_status";
-      } finally {
-        button.disabled = false;
-        onSettled();
-      }
-    })();
-  });
-  return {
-    render(granted) {
-      actions.hidden = granted;
-      const key = granted ? grantedMessage : outcome;
-      status.textContent = key ? message(key) : "";
-    },
-  };
-}
-
 function setupFirefoxOptIn() {
   if (!usesFirefoxDataCollectionConsent() || isPrivateBrowsingContext()) return;
   const section = document.getElementById("ryd-firefox-optin");
   if (!section) return;
   const heroEyebrow = document.getElementById("ryd-hero-eyebrow");
   const heroBody = document.getElementById("ryd-hero-body");
-  const voteSection = document.getElementById("ryd-firefox-vote");
+  const allow = document.getElementById("ryd-firefox-consent-allow");
+  const actions = document.getElementById("ryd-firefox-consent-actions");
+  const status = document.getElementById("ryd-firefox-consent-status");
   let revision = 0;
-  const countsOptIn = createOptIn({
-    feature: "counts",
-    id: "ryd-firefox-counts",
-    grantedMessage: "counts_consent_enabled",
-    declinedMessage: "counts_consent_declined",
-    onSettled: render,
-  });
-  const voteOptIn = createOptIn({
-    feature: "voteOptIn",
-    id: "ryd-firefox-vote",
-    grantedMessage: "changelog_firefox_vote_granted",
-    declinedMessage: "changelog_firefox_vote_declined",
-    onSettled: render,
-  });
+  let outcome = "";
 
   function renderHero(countsGranted) {
     heroEyebrow.textContent = message(countsGranted ? "changelog_hero_eyebrow" : "changelog_hero_eyebrow_counts_off");
     heroBody.textContent = message(countsGranted ? "changelog_hero_body" : "changelog_hero_body_counts_off");
+  }
+
+  function settledMessage({ countsGranted, votesGranted, voteSubmissionDisabled }) {
+    if (voteSubmissionDisabled) return countsGranted ? "counts_consent_enabled" : "";
+    return votesGranted ? "changelog_firefox_vote_granted" : "";
   }
 
   async function render() {
@@ -81,11 +47,28 @@ function setupFirefoxOptIn() {
     ]);
     if (current !== revision) return;
     renderHero(countsGranted);
-    countsOptIn.render(countsGranted);
-    voteOptIn.render(votesGranted);
-    voteSection.hidden = voteSubmissionDisabled;
+    const settled = settledMessage({ countsGranted, votesGranted, voteSubmissionDisabled });
+    if (settled) outcome = "";
+    actions.hidden = Boolean(settled);
+    const key = settled || outcome;
+    status.textContent = key ? message(key) : "";
     section.hidden = false;
   }
+
+  allow.addEventListener("click", () => {
+    const request = requestFeaturePermission("voteOptIn");
+    allow.disabled = true;
+    void (async () => {
+      try {
+        outcome = (await request) ? "" : "consent_declined_status";
+      } catch (_) {
+        outcome = "consent_error_status";
+      } finally {
+        allow.disabled = false;
+        await render();
+      }
+    })();
+  });
 
   renderHero(false);
   onDataPermissionsChanged(() => void render());

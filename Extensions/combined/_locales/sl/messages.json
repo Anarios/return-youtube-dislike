@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Potreben je še en klik: spodaj izberite gumb za prijavo, da pregledate dovoljenja računa v Firefoxu in nadaljujete."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Izberi v Firefoxu"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Hvala. Vaši glasovi se zdaj štejejo."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Deljenje glasov ostane izklopljeno, zato se vaši všečki in nevšečki ne bodo šteli. Pozneje ga lahko omogočite v nastavitvah dodatkov Firefoxa ali ko videoposnetek všečkate ali nevšečkate, potem ko je prikaz števila nevšečkov omogočen."
   },
   "vote_consent_hint": {
     "message": "Vaš glas se ne šteje in se ne bo poznal v številu nevšečkov. Vklopite deljenje glasov, da se bo štel."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Vklopite deljenje glasov, da se boste lahko odzivali na komentarje. Vaš odziv bo poslan, ko bo deljenje vklopljeno."
   },
-  "vote_consent_continue": {
-    "message": "Nadaljuj"
-  },
   "discussion_consentContinue": {
     "message": "Nadaljuj"
-  },
-  "vote_consent_open_failed": {
-    "message": "Strani z dovoljenji ni bilo mogoče odpreti. Poskusite znova."
   },
   "counts_consent_enable": {
     "message": "Omogoči število nevšečkov"
   },
-  "counts_consent_reason": {
-    "message": "Firefox zdaj potrebuje vaše dovoljenje, preden lahko RYD prikaže število nevšečkov."
-  },
-  "counts_consent_body": {
-    "message": "Za pridobitev števila RYD pošlje ID trenutnega videoposnetka v YouTubu svojemu strežniku. Firefox to imenuje »Dejavnost brskanja«."
-  },
-  "counts_consent_allow": {
-    "message": "Omogoči prikaz števila"
-  },
   "counts_consent_toolbar": {
-    "message": "Za omogočanje prikaza števila odprite Return YouTube Dislike v Firefoxovem meniju razširitev."
+    "message": "Za nadaljevanje odprite Return YouTube Dislike v Firefoxovem meniju razširitev."
   },
   "counts_consent_declined": {
     "message": "Prikaz števila ostane izklopljen. Pozneje ga lahko omogočite tukaj."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Najprej omogočite število nevšečkov v običajnem oknu. Zasebna okna prikazujejo samo število."
+  },
+  "data_consent_reason": {
+    "message": "Firefox potrebuje vaše dovoljenje, preden lahko RYD prikaže število nevšečkov in šteje vaše všečke in nevšečke."
+  },
+  "data_consent_title": {
+    "message": "Prikažite nevšečke in naj se vaši glasovi štejejo"
+  },
+  "data_consent_body": {
+    "message": "RYD pošlje ID videoposnetka, da naloži število nevšečkov. Če to dovolite, deli tudi število všečkov, ki ga vidite, za izboljšanje ocen, ter vaše všečke, nevšečke in odzive na komentarje z naključnim ID-jem glasovanja, da se štejejo."
   }
 }

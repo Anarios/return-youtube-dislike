@@ -15,7 +15,8 @@ import {
   onDataPermissionsChanged,
 } from "./src/core-data-consent";
 import { hasAuthenticationDataPermission, usesFirefoxDataCollectionConsent } from "./src/data-collection-permissions";
-import { votesCounted } from "./src/vote-submission-setting";
+import { allowVoteSubmission, votesCounted } from "./src/vote-submission-setting";
+import { VOTE_SUBMISSION_INTENT_MESSAGE, createVoteSubmissionIntent } from "./src/vote-submission-intent";
 
 const apiUrl = getApiUrl();
 const voteDisabledIconName = config.voteDisabledIconName;
@@ -38,6 +39,10 @@ if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
 
 const reviewPromptTracker = createReviewPromptTracker(api);
+const voteSubmissionIntent = createVoteSubmissionIntent({
+  hasVotingPermission: () => hasFeaturePermission("voting", { queryBackground: false }),
+  allowVoteSubmission,
+});
 
 if (__RYD_LIVE_TEST_BUILD__) {
   globalThis.__RYD_LIVE_EXTENSION_BUILD__ = Object.freeze({
@@ -221,15 +226,18 @@ function clearPatreonAuth(done) {
 }
 
 onDataPermissionsChanged((change) => {
-  if (change.removed.some((category) => FEATURE_DATA_PERMISSIONS.voting.includes(category))) {
+  const voting = (category) => FEATURE_DATA_PERMISSIONS.voting.includes(category);
+  if (change.removed.some(voting)) {
     votingPermissionGeneration++;
     currentVoteClient = null;
+    voteSubmissionIntent.clear();
   }
+  if (change.added.some(voting)) void voteSubmissionIntent.applyOnGrant();
   if (change.removed.includes("authenticationInfo")) clearPatreonAuth();
   discussionBackground.onDataPermissionsChanged(change).catch((error) => {
     console.debug("Discussion permission update failed", error);
   });
-  if ([...change.added, ...change.removed].some((category) => FEATURE_DATA_PERMISSIONS.voting.includes(category))) {
+  if ([...change.added, ...change.removed].some(voting)) {
     void refreshVotingIcon();
   }
   api.tabs.query({ url: "*://*.youtube.com/*" }, (tabs) => {
@@ -321,13 +329,29 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   });
 });
 
+function isOwnPopupSender(sender) {
+  try {
+    const url = new URL(sender.url);
+    const popup = new URL(api.runtime.getURL("popup.html"));
+    return (
+      sender.id === api.runtime.id &&
+      sender.tab?.incognito !== true &&
+      url.protocol === popup.protocol &&
+      url.host === popup.host &&
+      url.pathname === popup.pathname
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
 function handleMessage(request, sender, sendResponse) {
   if (request?.message === "ryd_review_action") {
     void (async () => {
       sendResponse(await reviewPromptTracker.recordAction(request, sender));
     })();
     return true;
-  } else if (request?.message === "ryd_open_counts_popup") {
+  } else if (request?.message === "ryd_open_consent_popup") {
     let validSender = false;
     try {
       const { protocol, hostname } = new URL(sender.url);
@@ -414,6 +438,12 @@ function handleMessage(request, sender, sendResponse) {
       () => sendResponse({ success: false }),
     );
     return true;
+  } else if (request?.message === VOTE_SUBMISSION_INTENT_MESSAGE) {
+    const accepted = usesFirefoxDataCollectionConsent() && isOwnPopupSender(sender);
+    if (accepted && request.withdraw === true) voteSubmissionIntent.clear();
+    else if (accepted) voteSubmissionIntent.remember();
+    sendResponse({ success: accepted });
+    return;
   } else if (request?.message === "ryd_consent_prompt_state") {
     if (
       usesFirefoxDataCollectionConsent() &&
@@ -680,6 +710,7 @@ api.runtime.onStartup?.addListener?.(() => {
 function storageChangeHandler(changes, area) {
   discussionBackground.onStorageChanged(changes, area);
   if (changes.disableVoteSubmission !== undefined) {
+    voteSubmissionIntent.clear();
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }
   if (changes.coloredThumbs !== undefined) {

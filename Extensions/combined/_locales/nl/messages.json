@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Nog één klik nodig: kies hieronder je aanmeldknop om de accountmachtigingen van Firefox te bekijken en door te gaan."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Kiezen in Firefox"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Bedankt. Je stemmen tellen nu mee."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Het delen van stemmen blijft uitgeschakeld, dus je likes en dislikes tellen niet mee. Je kunt het later inschakelen in de add-oninstellingen van Firefox, of wanneer je een video liket of disliket zodra aantallen dislikes zijn ingeschakeld."
   },
   "vote_consent_hint": {
     "message": "Je stem wordt niet geteld en is niet te zien in de aantallen dislikes. Schakel het delen van stemmen in zodat hij telt."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Schakel het delen van stemmen in om op opmerkingen te reageren. Je reactie wordt verstuurd zodra het is ingeschakeld."
   },
-  "vote_consent_continue": {
-    "message": "Doorgaan"
-  },
   "discussion_consentContinue": {
     "message": "Doorgaan"
-  },
-  "vote_consent_open_failed": {
-    "message": "De machtigingspagina kon niet worden geopend. Probeer het opnieuw."
   },
   "counts_consent_enable": {
     "message": "Aantallen dislikes inschakelen"
   },
-  "counts_consent_reason": {
-    "message": "Firefox vraagt nu eerst je toestemming voordat RYD aantallen dislikes kan tonen."
-  },
-  "counts_consent_body": {
-    "message": "Om aantallen op te halen, stuurt RYD de ID van de huidige YouTube-video naar zijn server. Firefox noemt dit ‘Browseactiviteit’."
-  },
-  "counts_consent_allow": {
-    "message": "Aantallen inschakelen"
-  },
   "counts_consent_toolbar": {
-    "message": "Open Return YouTube Dislike via het extensiemenu van Firefox om aantallen in te schakelen."
+    "message": "Open Return YouTube Dislike via het extensiemenu van Firefox om verder te gaan."
   },
   "counts_consent_declined": {
     "message": "Aantallen blijven uitgeschakeld. Je kunt ze hier later inschakelen."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Schakel aantallen dislikes eerst in een normaal venster in. Privévensters tonen alleen aantallen."
+  },
+  "data_consent_reason": {
+    "message": "Firefox vraagt eerst je toestemming voordat RYD aantallen dislikes kan tonen en je likes en dislikes kan meetellen."
+  },
+  "data_consent_title": {
+    "message": "Toon dislikes en laat je stemmen tellen"
+  },
+  "data_consent_body": {
+    "message": "RYD verstuurt de video-ID om aantallen dislikes te laden. Als je dit toestaat, deel je ook het aantal likes dat je ziet, om schattingen te verbeteren, en je likes, dislikes en reacties op opmerkingen met een willekeurige stem-ID, zodat ze meetellen."
   }
 }

@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Daha bir klik lazımdır: Firefox-un hesab icazələrini nəzərdən keçirib davam etmək üçün aşağıdakı giriş düymənizi seçin."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Firefox-da seç"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Təşəkkürlər. Səsləriniz artıq sayılır."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Səs paylaşımı sönülü qalır, ona görə də bəyənmə və bəyənməmələriniz sayılmayacaq. Onu daha sonra Firefox-un əlavə ayarlarında, yaxud bəyənməmə sayları aktiv olduqdan sonra bir videonu bəyənərkən və ya bəyənməyərkən aktivləşdirə bilərsiniz."
   },
   "vote_consent_hint": {
     "message": "Səsiniz sayılmır və bəyənməmə saylarında əks olunmayacaq. Onun sayılması üçün səs paylaşımını aktivləşdirin."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Şərhlərə reaksiya vermək üçün səs paylaşımını aktivləşdirin. Reaksiyanız o aktiv olduqdan sonra göndəriləcək."
   },
-  "vote_consent_continue": {
-    "message": "Davam et"
-  },
   "discussion_consentContinue": {
     "message": "Davam et"
-  },
-  "vote_consent_open_failed": {
-    "message": "İcazə səhifəsini açmaq mümkün olmadı. Yenidən cəhd edin."
   },
   "counts_consent_enable": {
     "message": "Bəyənməmə saylarını aktivləşdirin"
   },
-  "counts_consent_reason": {
-    "message": "Firefox artıq RYD-nin bəyənməmə saylarını göstərməsi üçün icazənizi tələb edir."
-  },
-  "counts_consent_body": {
-    "message": "Sayları almaq üçün RYD cari YouTube videosunun ID-sini öz serverinə göndərir. Firefox bunu «Baxış fəaliyyəti» adlandırır."
-  },
-  "counts_consent_allow": {
-    "message": "Sayları aktivləşdirin"
-  },
   "counts_consent_toolbar": {
-    "message": "Sayları aktivləşdirmək üçün Firefox-un genişlənmələr menyusundan Return YouTube Dislike-ı açın."
+    "message": "Davam etmək üçün Firefox-un genişlənmələr menyusundan Return YouTube Dislike-ı açın."
   },
   "counts_consent_declined": {
     "message": "Saylar sönülü qalır. Onları daha sonra buradan aktivləşdirə bilərsiniz."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Əvvəlcə adi pəncərədə bəyənməmə saylarını aktivləşdirin. Məxfi pəncərələrdə yalnız saylar göstərilir."
+  },
+  "data_consent_reason": {
+    "message": "Firefox RYD-nin bəyənməmə saylarını göstərməsi və bəyənmə və bəyənməmələrinizi sayması üçün icazənizi tələb edir."
+  },
+  "data_consent_title": {
+    "message": "Bəyənməmələri göstərin və səsləriniz sayılsın"
+  },
+  "data_consent_body": {
+    "message": "RYD bəyənməmə saylarını yükləmək üçün video ID-sini göndərir. İcazə versəniz, təxminləri yaxşılaşdırmaq üçün gördüyünüz bəyənmə sayı, həmçinin sayılmaları üçün bəyənmələriniz, bəyənməmələriniz və şərh reaksiyalarınız təsadüfi səsvermə identifikatoru ilə paylaşılır."
   }
 }

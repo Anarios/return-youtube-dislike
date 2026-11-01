@@ -32,12 +32,16 @@ const deferred = () => {
 describe("background account consent lifecycle", () => {
   let messageListener;
   let removeConsent;
+  let addConsent;
   let consent;
   let originalCrypto;
 
   beforeEach(() => {
     jest.resetModules();
     const permissionRemovedListeners = new Set();
+    const permissionAddedListeners = new Set();
+    addConsent = (...categories) =>
+      [...permissionAddedListeners].forEach((listener) => listener({ data_collection: categories }));
     const messageListeners = new Set();
     messageListener = (...args) => {
       for (const listener of [...messageListeners]) listener(...args);
@@ -85,6 +89,10 @@ describe("background account consent lifecycle", () => {
           }),
         ),
         contains: jest.fn().mockResolvedValue(true),
+        onAdded: {
+          addListener: (listener) => permissionAddedListeners.add(listener),
+          removeListener: (listener) => permissionAddedListeners.delete(listener),
+        },
         onRemoved: {
           addListener: (listener) => {
             permissionRemovedListeners.add(listener);
@@ -526,7 +534,7 @@ describe("background account consent lifecycle", () => {
   test("count activation opens the existing toolbar popup without creating a tab or requesting permission", async () => {
     const response = jest.fn();
     messageListener(
-      { message: "ryd_open_counts_popup" },
+      { message: "ryd_open_consent_popup" },
       { ...normalSender, frameId: 0, url: "https://www.youtube.com/watch?v=video123456" },
       response,
     );
@@ -540,7 +548,7 @@ describe("background account consent lifecycle", () => {
     chrome.browserAction.openPopup.mockRejectedValue(new Error("User gesture required"));
     const response = jest.fn();
     messageListener(
-      { message: "ryd_open_counts_popup" },
+      { message: "ryd_open_consent_popup" },
       { ...normalSender, frameId: 0, url: "https://www.youtube.com/watch?v=video123456" },
       response,
     );
@@ -556,11 +564,149 @@ describe("background account consent lifecycle", () => {
     { ...normalSender, frameId: 0, url: "https://www.youtube.com/", tab: { id: 2, incognito: true } },
   ])("rejects an untrusted or private count-popup launcher: %j", async (sender) => {
     const response = jest.fn();
-    messageListener({ message: "ryd_open_counts_popup" }, sender, response);
+    messageListener({ message: "ryd_open_consent_popup" }, sender, response);
     await flushPromises();
     expect(chrome.browserAction.openPopup).not.toHaveBeenCalled();
     expect(chrome.tabs.create).not.toHaveBeenCalled();
     expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+  });
+
+  describe("switch-off intent from the popup vote card", () => {
+    const popupUrl = "moz-extension://fixture/popup.html?rydContext=popup-view";
+    const popupSender = { id: "extension-id", url: popupUrl };
+    let grants;
+    const switchWrites = () =>
+      chrome.storage.sync.set.mock.calls.filter(([values]) => Object.hasOwn(values, "disableVoteSubmission"));
+    const sendIntent = async (sender = popupSender, request = { message: "ryd_vote_switch_on_grant" }) => {
+      const response = jest.fn();
+      messageListener(request, sender, response);
+      await flushPromises();
+      return response.mock.calls[0]?.[0];
+    };
+    const grantVoting = async () => {
+      grants.push("websiteActivity", "websiteContent");
+      addConsent("websiteActivity", "websiteContent");
+      await flushPromises();
+    };
+
+    beforeEach(() => {
+      grants = ["browsingActivity"];
+      chrome.permissions.getAll.mockImplementation(async () => ({ data_collection: [...grants] }));
+      chrome.extension = {
+        getViews: () => [{ location: { href: popupUrl }, browser: { extension: { inIncognitoContext: false } } }],
+      };
+    });
+
+    test("a fresh grant turns the switch off exactly once", async () => {
+      expect(await sendIntent()).toEqual({ success: true });
+      expect(switchWrites()).toEqual([]);
+      await grantVoting();
+      expect(switchWrites()).toEqual([[{ disableVoteSubmission: false }]]);
+      addConsent("websiteActivity");
+      await flushPromises();
+      expect(switchWrites()).toHaveLength(1);
+    });
+
+    test("the popup page opened in a tab is accepted", async () => {
+      const tabSender = {
+        id: "extension-id",
+        tab: { id: 3, incognito: false },
+        url: "moz-extension://fixture/popup.html",
+      };
+      expect(await sendIntent(tabSender)).toEqual({ success: true });
+      await grantVoting();
+      expect(switchWrites()).toEqual([[{ disableVoteSubmission: false }]]);
+    });
+
+    test("a grant without an intent never writes the switch", async () => {
+      await grantVoting();
+      expect(switchWrites()).toEqual([]);
+    });
+
+    test("an expired intent is ignored", async () => {
+      const now = jest.spyOn(Date, "now").mockReturnValue(1000000);
+      await sendIntent();
+      now.mockReturnValue(1000000 + 120001);
+      await grantVoting();
+      expect(switchWrites()).toEqual([]);
+      now.mockReturnValue(1000000);
+      addConsent("websiteActivity");
+      await flushPromises();
+      expect(switchWrites()).toEqual([]);
+    });
+
+    test("an intent still fresh at the time limit is applied", async () => {
+      const now = jest.spyOn(Date, "now").mockReturnValue(1000000);
+      await sendIntent();
+      now.mockReturnValue(1000000 + 120000);
+      await grantVoting();
+      expect(switchWrites()).toEqual([[{ disableVoteSubmission: false }]]);
+    });
+
+    test("a grant that does not complete voting keeps the intent for the completing grant", async () => {
+      await sendIntent();
+      grants.push("websiteContent");
+      addConsent("websiteContent");
+      await flushPromises();
+      expect(switchWrites()).toEqual([]);
+      grants.push("websiteActivity");
+      addConsent("websiteActivity");
+      await flushPromises();
+      expect(switchWrites()).toEqual([[{ disableVoteSubmission: false }]]);
+    });
+
+    test.each([
+      { ...normalSender, frameId: 0, url: "https://www.youtube.com/watch?v=video123456" },
+      { id: "other-extension", url: popupUrl },
+      { id: "extension-id", tab: { id: 3, incognito: false }, url: "moz-extension://fixture/consent.html" },
+      { id: "extension-id", tab: { id: 3, incognito: false }, url: "moz-extension://other/popup.html" },
+      { id: "extension-id", tab: { id: 3, incognito: false }, url: "https://example.org/popup.html" },
+      { id: "extension-id", tab: { id: 3, incognito: true }, url: "moz-extension://fixture/popup.html" },
+      { id: "extension-id", url: "moz-extension://fixture/popup.html" },
+      { id: "extension-id", tab: { id: 3, incognito: false }, url: "not a URL" },
+    ])("an untrusted sender cannot record an intent: %j", async (sender) => {
+      expect(await sendIntent(sender)).toEqual(expect.objectContaining({ success: false }));
+      await grantVoting();
+      expect(switchWrites()).toEqual([]);
+    });
+
+    test("a withdrawn intent is not applied to a later grant", async () => {
+      await sendIntent();
+      expect(await sendIntent(popupSender, { message: "ryd_vote_switch_on_grant", withdraw: true })).toEqual({
+        success: true,
+      });
+      await grantVoting();
+      expect(switchWrites()).toEqual([]);
+    });
+
+    test("an untrusted sender cannot withdraw an intent", async () => {
+      await sendIntent();
+      const contentScript = { id: "extension-id", tab: { id: 2, incognito: false }, url: "https://www.youtube.com/" };
+      const response = await sendIntent(contentScript, { message: "ryd_vote_switch_on_grant", withdraw: true });
+      expect(response).toEqual({ success: false });
+      await grantVoting();
+      expect(switchWrites()).toEqual([[{ disableVoteSubmission: false }]]);
+    });
+
+    test("changing the switch by hand clears the intent", async () => {
+      await sendIntent();
+      const storageListener = chrome.storage.onChanged.addListener.mock.calls[0][0];
+      storageListener({ disableVoteSubmission: { oldValue: true, newValue: false } }, "sync");
+      await grantVoting();
+      expect(switchWrites()).toEqual([]);
+    });
+
+    test.each(["websiteActivity", "browsingActivity"])("removing %s clears the intent", async (category) => {
+      await sendIntent();
+      removeConsent(category);
+      await grantVoting();
+      expect(switchWrites()).toEqual([]);
+    });
+
+    test("Chrome and Safari ignore the intent", async () => {
+      chrome.runtime.getManifest = () => ({ manifest_version: 3, version: "4.1.0" });
+      expect(await sendIntent()).toEqual({ success: false });
+    });
   });
 
   test("private pages receive only count-grant changes without account or voting categories", () => {

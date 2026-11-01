@@ -90,11 +90,13 @@ function harness(
   };
   let permissionsChanged;
   const hintState = { dismissed };
+  const pageOfferEndedListeners = [];
   const hint = {
-    sync: jest.fn(),
-    hide: jest.fn(),
-    isDismissed: jest.fn(() => hintState.dismissed),
-    loadDismissal: jest.fn(async () => hintState.dismissed),
+    syncPageOffer: jest.fn(),
+    hidePageOffer: jest.fn(),
+    canOfferOnPage: jest.fn(() => !hintState.dismissed),
+    loadPageOfferDismissal: jest.fn(async () => hintState.dismissed),
+    onPageOfferEnded: jest.fn((listener) => pageOfferEndedListeners.push(listener)),
   };
   const buttonFunctions = {
     captureShortsNativeControlInventory: () => ({ nativeLikeButton }),
@@ -135,7 +137,7 @@ function harness(
         permissionsChanged = listener;
       },
     },
-    "./src/counts-consent-hint": { createCountsConsentHintController: jest.fn(() => hint) },
+    "./src/data-consent-prompt": { getDataConsentPrompt: jest.fn(() => hint) },
     "./src/vote-data-request": {
       cancelObsoleteVoteDataRequests: jest.fn(),
       clearVoteDataRequestCache: jest.fn(),
@@ -161,7 +163,7 @@ function harness(
     hint,
     dismissHint: () => {
       hintState.dismissed = true;
-      dependencies["./src/counts-consent-hint"].createCountsConsentHintController.mock.calls[0][0].onDismiss();
+      pageOfferEndedListeners.forEach((listener) => listener());
     },
     permissionsChanged: (change) => permissionsChanged?.(change),
     run: () => execute(dependencies, pageWindow, page, setInterval, clearInterval, setTimeout, clearTimeout, false),
@@ -197,7 +199,7 @@ test.each([false, true])(
 test("missing Firefox count permission shows the control beside hydrated Shorts reactions", async () => {
   const context = harness(false, { firefox: true, counts: false, shorts: true });
   await context.run();
-  expect(context.hint.sync).toHaveBeenCalledWith(expect.objectContaining({ ready: true }), "abcdefghijk");
+  expect(context.hint.syncPageOffer).toHaveBeenCalledWith(expect.objectContaining({ ready: true }), "abcdefghijk");
   expect(context.state.setInitialState).not.toHaveBeenCalled();
   expect(context.buttonFunctions.setSyntheticShortsDislikeEnabled).not.toHaveBeenCalled();
   expect(context.dependencies["./src/events"].addLikeDislikeEventListener).not.toHaveBeenCalled();
@@ -206,10 +208,10 @@ test("missing Firefox count permission shows the control beside hydrated Shorts 
 test("Shorts without a native Dislike show activation beside the stable Like without creating a vote button", async () => {
   const context = harness(false, { firefox: true, counts: false, shorts: true, shortsNoDislike: true });
   await context.run();
-  expect(context.hint.sync).not.toHaveBeenCalled();
+  expect(context.hint.syncPageOffer).not.toHaveBeenCalled();
   jest.advanceTimersByTime(500);
   await flush();
-  expect(context.hint.sync).toHaveBeenCalledWith(
+  expect(context.hint.syncPageOffer).toHaveBeenCalledWith(
     expect.objectContaining({ ready: true, nativeLikeButton: expect.any(HTMLElement), nativeDislikeButton: null }),
     "abcdefghijk",
   );
@@ -281,9 +283,9 @@ test.each([false, true])(
     expect(context.state.setInitialState).not.toHaveBeenCalled();
     expect(context.dependencies["./src/core-data-consent"].hasFeaturePermission).toHaveBeenCalledTimes(1);
     expect(context.dependencies["./src/events"].addLikeDislikeEventListener).not.toHaveBeenCalled();
-    if (privateContext) expect(context.hint.sync).not.toHaveBeenCalled();
-    else expect(context.hint.sync).toHaveBeenCalled();
-    expect(context.dependencies["./src/counts-consent-hint"].createCountsConsentHintController).toHaveBeenCalledTimes(
+    if (privateContext) expect(context.hint.syncPageOffer).not.toHaveBeenCalled();
+    else expect(context.hint.syncPageOffer).toHaveBeenCalled();
+    expect(context.dependencies["./src/data-consent-prompt"].getDataConsentPrompt).toHaveBeenCalledTimes(
       privateContext ? 0 : 1,
     );
     expect(jest.getTimerCount()).toBe(privateContext ? 0 : 1);
@@ -293,12 +295,12 @@ test.each([false, true])(
 test("a stored hint dismissal stops all polling while counts are off", async () => {
   const context = harness(false, { firefox: true, counts: false, dismissed: true });
   await context.run();
-  expect(context.hint.loadDismissal).toHaveBeenCalledTimes(1);
+  expect(context.hint.loadPageOfferDismissal).toHaveBeenCalledTimes(1);
   expect(jest.getTimerCount()).toBe(0);
-  context.hint.sync.mockClear();
+  context.hint.syncPageOffer.mockClear();
   jest.advanceTimersByTime(6000);
   await flush();
-  expect(context.hint.sync).not.toHaveBeenCalled();
+  expect(context.hint.syncPageOffer).not.toHaveBeenCalled();
   expect(context.state.setInitialState).not.toHaveBeenCalled();
 });
 
@@ -308,10 +310,10 @@ test("dismissing the hint stops the polling and a later grant restarts count dis
   expect(jest.getTimerCount()).toBe(1);
   context.dismissHint();
   expect(jest.getTimerCount()).toBe(0);
-  context.hint.sync.mockClear();
+  context.hint.syncPageOffer.mockClear();
   jest.advanceTimersByTime(2000);
   await flush();
-  expect(context.hint.sync).not.toHaveBeenCalled();
+  expect(context.hint.syncPageOffer).not.toHaveBeenCalled();
   context.permissionsChanged({ added: ["browsingActivity"], removed: [] });
   await flush();
   expect(context.state.setInitialState).toHaveBeenCalledTimes(1);

@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "한 번 더 클릭해야 합니다. 아래의 로그인 버튼을 선택하여 Firefox 계정 권한을 확인하고 계속하세요."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Firefox에서 선택"
-  },
   "changelog_firefox_vote_granted": {
     "message": "감사합니다. 이제 내 평가가 집계됩니다."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "평가 공유가 꺼진 상태로 유지되므로 내 좋아요와 싫어요가 집계되지 않습니다. 나중에 Firefox 부가 기능 설정에서 켜거나, 싫어요 수 표시를 켠 뒤 동영상에 좋아요나 싫어요를 누를 때 켤 수 있습니다."
   },
   "vote_consent_hint": {
     "message": "내 평가가 집계되지 않으며 싫어요 수에도 반영되지 않습니다. 반영되게 하려면 평가 공유를 켜세요."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "댓글에 반응하려면 평가 공유를 켜세요. 켜지면 반응이 전송됩니다."
   },
-  "vote_consent_continue": {
-    "message": "계속"
-  },
   "discussion_consentContinue": {
     "message": "계속"
-  },
-  "vote_consent_open_failed": {
-    "message": "권한 페이지를 열지 못했습니다. 다시 시도해 주세요."
   },
   "counts_consent_enable": {
     "message": "싫어요 수 표시 활성화"
   },
-  "counts_consent_reason": {
-    "message": "이제 RYD가 싫어요 수를 표시하려면 Firefox에서 권한을 허용해야 합니다."
-  },
-  "counts_consent_body": {
-    "message": "수를 가져오기 위해 RYD는 현재 YouTube 동영상 ID를 자체 서버로 전송합니다. Firefox에서는 이를 ‘탐색 활동’이라고 합니다."
-  },
-  "counts_consent_allow": {
-    "message": "수 표시 활성화"
-  },
   "counts_consent_toolbar": {
-    "message": "수를 표시하려면 Firefox의 확장 기능 메뉴에서 Return YouTube Dislike를 여세요."
+    "message": "계속하려면 Firefox의 확장 기능 메뉴에서 Return YouTube Dislike를 여세요."
   },
   "counts_consent_declined": {
     "message": "수 표시는 꺼진 상태로 유지됩니다. 나중에 여기서 활성화할 수 있습니다."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "먼저 일반 창에서 싫어요 수 표시를 활성화하세요. 사생활 보호 창에서는 수 표시만 사용할 수 있습니다."
+  },
+  "data_consent_reason": {
+    "message": "RYD가 싫어요 수를 표시하고 내 좋아요와 싫어요를 반영하려면 Firefox에서 권한을 허용해야 합니다."
+  },
+  "data_consent_title": {
+    "message": "싫어요 수를 표시하고 내 평가가 반영되게 하세요"
+  },
+  "data_consent_body": {
+    "message": "RYD는 싫어요 수를 불러오기 위해 동영상 ID를 전송합니다. 허용하면 추정을 개선하기 위해 표시된 좋아요 수도 공유하고, 내 좋아요, 싫어요, 댓글 반응을 무작위 투표 ID와 함께 전송하여 반영되게 합니다."
   }
 }

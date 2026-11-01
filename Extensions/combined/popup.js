@@ -6,6 +6,7 @@ import { fetchWithAccountConsent } from "./src/account-data-consent";
 import { isPrivateBrowsingContext } from "./src/private-browsing";
 import { initCountsConsentPopup } from "./src/counts-consent-popup";
 import { initVoteStatusPopup } from "./src/vote-status-popup";
+import { isToolbarPopup, openPopupPageInTab } from "./src/toolbar-popup";
 import { DEFAULT_CUSTOM_COLORS, getThemeColor, normalizeCustomColors } from "../common/color-themes";
 import {
   hasAuthenticationDataPermission,
@@ -63,14 +64,6 @@ function localizeHtmlPage() {
 
 localizeHtmlPage();
 const privateBrowsing = isPrivateBrowsingContext();
-function isToolbarPopup() {
-  try {
-    return browser.extension?.getViews?.({ type: "popup" }).includes(window) === true;
-  } catch (_) {
-    return false;
-  }
-}
-
 const firefoxDataConsent = usesFirefoxDataCollectionConsent();
 if (privateBrowsing) {
   const home = document.createElement("main");
@@ -461,7 +454,7 @@ function initPatreonAuth() {
           continueLogin(true);
           return;
         }
-        await browser.tabs.create({ url: browser.runtime.getURL("popup.html") + "#" + buttonId, active: true });
+        await openPopupPageInTab(buttonId);
         if (generation === authenticationGeneration) window.close();
       })
       .catch(() => {

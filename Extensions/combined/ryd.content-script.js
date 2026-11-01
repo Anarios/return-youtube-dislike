@@ -48,7 +48,7 @@ import {
   onDataPermissionsChanged,
   usesFirefoxDataCollectionConsent,
 } from "./src/core-data-consent";
-import { createCountsConsentHintController } from "./src/counts-consent-hint";
+import { getDataConsentPrompt } from "./src/data-consent-prompt";
 import { cancelObsoleteVoteDataRequests, clearVoteDataRequestCache } from "./src/vote-data-request";
 import { isPrivateBrowsingContext } from "./src/private-browsing";
 import {
@@ -80,10 +80,8 @@ let observedRouteKey = null;
 let privatePageActive = true;
 const privateBrowsingContext = isPrivateBrowsingContext();
 const firefoxDataConsent = usesFirefoxDataCollectionConsent();
-const countsConsentHint =
-  firefoxDataConsent && !privateBrowsingContext
-    ? createCountsConsentHintController({ onDismiss: updateInitializationWatch })
-    : null;
+const dataConsentPrompt = firefoxDataConsent && !privateBrowsingContext ? getDataConsentPrompt() : null;
+dataConsentPrompt?.onPageOfferEnded(updateInitializationWatch);
 let countsPermissionGranted = !firefoxDataConsent;
 let countsPermissionEpoch = 0;
 let contentReady = false;
@@ -145,7 +143,7 @@ function applyCountsPermission(granted) {
   countsPermissionEpoch += 1;
   countsPermissionGranted = granted;
   setCountPermissionAvailable(granted);
-  countsConsentHint?.hide();
+  dataConsentPrompt?.hidePageOffer();
   clearPrivateVoteState();
   clearRenderedVoteState(initializedButtons ? getButtonControls(initializedButtons) : undefined);
   initializedVideoId = null;
@@ -184,7 +182,7 @@ function observeCountPermissions() {
 observeCountPermissions();
 if (firefoxDataConsent) {
   const epoch = countsPermissionEpoch;
-  const [granted] = await Promise.all([hasFeaturePermission("counts"), countsConsentHint?.loadDismissal()]);
+  const [granted] = await Promise.all([hasFeaturePermission("counts"), dataConsentPrompt?.loadPageOfferDismissal()]);
   if (epoch === countsPermissionEpoch) countsPermissionGranted = granted;
   setCountPermissionAvailable(countsPermissionGranted);
 }
@@ -399,12 +397,12 @@ async function checkForInitialization() {
     const videoId = getVideoId(window.location.href);
     const pendingOrigin = pendingNavigation.get();
     if (pendingOrigin && (!pendingOrigin.videoId || pendingOrigin.videoId === videoId)) {
-      countsConsentHint?.hide();
+      dataConsentPrompt?.hidePageOffer();
       return;
     }
     const controls = isShorts() ? getStableShortsControls(videoId, countsPermissionGranted) : getButtonControls();
     if (!controls) {
-      countsConsentHint?.hide();
+      dataConsentPrompt?.hidePageOffer();
       return;
     }
     const { buttons, dislikeButton, likeButton, nativeDislikeButton, nativeLikeButton } = controls;
@@ -418,10 +416,10 @@ async function checkForInitialization() {
       })
     ) {
       if (!countsPermissionGranted) {
-        countsConsentHint?.sync(controls, videoId);
+        dataConsentPrompt?.syncPageOffer(controls, videoId);
         return;
       }
-      countsConsentHint?.hide();
+      dataConsentPrompt?.hidePageOffer();
       if (!getDislikeTextContainer(controls)) return;
       createSmartimationObserver(buttons);
       addLikeDislikeEventListener(likeButton, dislikeButton);
@@ -470,7 +468,7 @@ async function checkForInitialization() {
         isStorageListenerRegistered = true;
       }
     } else if (!countsPermissionGranted) {
-      countsConsentHint?.hide();
+      dataConsentPrompt?.hidePageOffer();
     }
   } catch (exception) {
     if (privateBrowsingContext) {
@@ -517,7 +515,7 @@ async function setEventListeners() {
 }
 
 document.addEventListener("yt-navigate-start", function () {
-  countsConsentHint?.hide();
+  dataConsentPrompt?.hidePageOffer();
   clearVoteDataRequestCache();
   if (privateBrowsingContext) clearPrivateVoteState();
   shortsRouteEpoch += 1;
@@ -640,7 +638,7 @@ function watchInitialization() {
 }
 
 function initializationWatchNeeded() {
-  return countsPermissionGranted || (countsConsentHint !== null && !countsConsentHint.isDismissed());
+  return countsPermissionGranted || (dataConsentPrompt !== null && dataConsentPrompt.canOfferOnPage());
 }
 
 function updateInitializationWatch() {

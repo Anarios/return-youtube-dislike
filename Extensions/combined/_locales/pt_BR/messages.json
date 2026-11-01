@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "É necessário mais um clique: selecione seu botão de login abaixo para revisar as permissões de conta do Firefox e continuar."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Escolher no Firefox"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Obrigado. Seus votos agora contam."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "O compartilhamento de votos continua desativado, então seus Gostei e Não gostei não serão contados. Você pode ativá-lo mais tarde nas configurações de extensões do Firefox, ou ao marcar Gostei ou Não gostei em um vídeo depois que as contagens de Não gostei estiverem ativadas."
   },
   "vote_consent_hint": {
     "message": "Seu voto não é contado e não aparecerá nas contagens de Não gostei. Ative o compartilhamento de votos para que ele conte."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Ative o compartilhamento de votos para reagir a comentários. Sua reação será enviada assim que ele for ativado."
   },
-  "vote_consent_continue": {
-    "message": "Continuar"
-  },
   "discussion_consentContinue": {
     "message": "Continuar"
-  },
-  "vote_consent_open_failed": {
-    "message": "Não foi possível abrir a página de permissões. Tente novamente."
   },
   "counts_consent_enable": {
     "message": "Ativar contagens de Não gostei"
   },
-  "counts_consent_reason": {
-    "message": "Agora o Firefox precisa da sua permissão para que o RYD mostre as contagens de Não gostei."
-  },
-  "counts_consent_body": {
-    "message": "Para obter as contagens, o RYD envia o ID do vídeo atual do YouTube ao seu servidor. O Firefox chama isso de “Atividade de navegação”."
-  },
-  "counts_consent_allow": {
-    "message": "Ativar contagens"
-  },
   "counts_consent_toolbar": {
-    "message": "Abra o Return YouTube Dislike pelo menu de extensões do Firefox para ativar as contagens."
+    "message": "Abra o Return YouTube Dislike pelo menu de extensões do Firefox para continuar."
   },
   "counts_consent_declined": {
     "message": "As contagens continuam desativadas. Você pode ativá-las aqui mais tarde."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Primeiro, ative as contagens de Não gostei em uma janela normal. As janelas privativas mostram apenas as contagens."
+  },
+  "data_consent_reason": {
+    "message": "O Firefox precisa da sua permissão para que o RYD mostre as contagens de Não gostei e conte seus Gostei e Não gostei."
+  },
+  "data_consent_title": {
+    "message": "Mostre os Não gostei e faça seus votos contarem"
+  },
+  "data_consent_body": {
+    "message": "O RYD envia o ID do vídeo para carregar as contagens de Não gostei. Ao permitir, você também compartilha o número de Gostei que vê, para melhorar as estimativas, e seus Gostei, Não gostei e reações a comentários com um ID de votação aleatório, para que contem."
   }
 }

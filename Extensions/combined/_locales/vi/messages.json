@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Cần thêm một lần nhấp: chọn nút đăng nhập bên dưới để xem quyền tài khoản của Firefox và tiếp tục."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Chọn trong Firefox"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Cảm ơn bạn. Lượt bình chọn của bạn giờ đã được tính."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Chia sẻ lượt bình chọn vẫn tắt, nên lượt thích và không thích của bạn sẽ không được tính. Bạn có thể bật sau trong phần cài đặt tiện ích của Firefox, hoặc khi bạn thích hoặc không thích một video sau khi đã bật số lượt không thích."
   },
   "vote_consent_hint": {
     "message": "Lượt bình chọn của bạn không được tính và sẽ không hiển thị trong số lượt không thích. Hãy bật chia sẻ lượt bình chọn để được tính."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Hãy bật chia sẻ lượt bình chọn để phản ứng với bình luận. Phản ứng của bạn sẽ được gửi khi tính năng này được bật."
   },
-  "vote_consent_continue": {
-    "message": "Tiếp tục"
-  },
   "discussion_consentContinue": {
     "message": "Tiếp tục"
-  },
-  "vote_consent_open_failed": {
-    "message": "Không thể mở trang quyền. Vui lòng thử lại."
   },
   "counts_consent_enable": {
     "message": "Bật số lượt không thích"
   },
-  "counts_consent_reason": {
-    "message": "Giờ đây Firefox cần bạn cho phép trước khi RYD có thể hiển thị số lượt không thích."
-  },
-  "counts_consent_body": {
-    "message": "Để lấy số lượt, RYD gửi ID video YouTube hiện tại tới máy chủ của mình. Firefox gọi đây là “Hoạt động duyệt web”."
-  },
-  "counts_consent_allow": {
-    "message": "Bật số lượt"
-  },
   "counts_consent_toolbar": {
-    "message": "Mở Return YouTube Dislike từ menu tiện ích mở rộng của Firefox để bật số lượt."
+    "message": "Mở Return YouTube Dislike từ menu tiện ích mở rộng của Firefox để tiếp tục."
   },
   "counts_consent_declined": {
     "message": "Số lượt vẫn tắt. Bạn có thể bật tại đây sau."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Trước tiên, hãy bật số lượt không thích trong cửa sổ thông thường. Cửa sổ riêng tư chỉ hiển thị số lượt."
+  },
+  "data_consent_reason": {
+    "message": "Firefox cần bạn cho phép trước khi RYD có thể hiển thị số lượt không thích và tính lượt thích, không thích của bạn."
+  },
+  "data_consent_title": {
+    "message": "Hiển thị lượt không thích và để lượt bình chọn của bạn được tính"
+  },
+  "data_consent_body": {
+    "message": "RYD gửi ID video để tải số lượt không thích. Nếu cho phép, RYD cũng chia sẻ số lượt thích bạn thấy để cải thiện ước tính, cùng lượt thích, không thích và phản ứng với bình luận của bạn kèm ID bình chọn ngẫu nhiên để chúng được tính."
   }
 }

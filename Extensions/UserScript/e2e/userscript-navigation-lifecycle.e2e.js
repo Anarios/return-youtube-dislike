@@ -116,6 +116,30 @@ async function expectHealthyRuntime(page, harness) {
   expect(await page.evaluate(() => globalThis.__unhandledRejections)).toEqual([]);
 }
 
+async function likePreviousRecycledShortImmediately({ context, page }) {
+  const harness = await launchNavigationHarness({ context, page }, { pageKind: "shorts", videoId: VIDEO_A });
+  await expectShortInitialized(page, VIDEO_A);
+  const likeA = page.locator(`ytd-reel-video-renderer[video-id="${VIDEO_A}"] [data-fixture-role="like"] button`);
+  await likeA.click();
+  await expect.poll(() => harness.backend.requestsFor("POST", "/interact/confirmVote").length).toBe(1);
+  await expect(likeA).toHaveAttribute("aria-pressed", "true");
+
+  await page.locator("#short-next").click();
+  await expectShortInitialized(page, VIDEO_B);
+  await expectOneActivation(page, harness.backend, VIDEO_B);
+
+  await page.evaluate((videoId) => {
+    window.__navigationFixture.recycleShort(videoId);
+    document.dispatchEvent(new Event("yt-navigate-finish", { bubbles: true }));
+    document.querySelector(`ytd-reel-video-renderer[video-id="${videoId}"] [data-fixture-role="like"] button`).click();
+  }, VIDEO_A);
+
+  await expect.poll(() => harness.backend.requestsFor("POST", "/interact/confirmVote").length).toBe(3);
+  await page.waitForTimeout(600);
+  await expect(likeA).toHaveAttribute("aria-pressed", "false");
+  return harness;
+}
+
 test("cold channel reload then immediate Short link initializes delayed Shorts controls once", async ({
   context,
   page,
@@ -362,6 +386,36 @@ test("Short next navigation activates one preloaded sibling control", async ({ c
   await expectOneActivation(page, harness.backend, VIDEO_B);
   await expectShortInitialized(page, VIDEO_B, COUNTS[VIDEO_B].dislikes + 1);
   await expectHealthyRuntime(page, harness);
+});
+
+test("an immediate Like on the previous recycled Short votes and confirms only that Short", async ({
+  context,
+  page,
+}) => {
+  const harness = await likePreviousRecycledShortImmediately({ context, page });
+
+  expect(harness.backend.requestsFor("POST", "/interact/vote").map(({ body }) => body.videoId)).toEqual([
+    VIDEO_A,
+    VIDEO_B,
+    VIDEO_A,
+  ]);
+  expect(harness.backend.requestsFor("POST", "/interact/confirmVote").map(({ body }) => body.videoId)).toEqual([
+    VIDEO_A,
+    VIDEO_B,
+    VIDEO_A,
+  ]);
+  await expectHealthyRuntime(page, harness);
+});
+
+test("an immediate Like on the previous recycled Short resolves that Short's own state", async ({ context, page }) => {
+  test.fail(
+    true,
+    "Known userscript bug: until the recycled reel re-initializes, its bound controls resolve the transition " +
+      "from the outgoing Short's state, so an already-liked Short submits value 1 instead of 0.",
+  );
+  const harness = await likePreviousRecycledShortImmediately({ context, page });
+
+  expect(harness.backend.requestsFor("POST", "/interact/vote").map(({ body }) => body.value)).toEqual([1, -1, 0]);
 });
 
 test("delayed Short navigation never retags or submits the outgoing reel as the target video", async ({

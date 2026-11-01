@@ -130,7 +130,7 @@ test.each(["hidden", "fullscreen", "consent", "analytics"])(
   async (state) => {
     if (state === "hidden") Object.defineProperty(document, "visibilityState", { value: "hidden" });
     if (state === "fullscreen") Object.defineProperty(document, "fullscreenElement", { value: document.body });
-    if (state === "consent") document.body.insertAdjacentHTML("beforeend", '<div id="ryd-vote-consent-hint"></div>');
+    if (state === "consent") document.body.insertAdjacentHTML("beforeend", '<div id="ryd-data-consent-prompt"></div>');
     if (state === "analytics")
       document.body.insertAdjacentHTML("beforeend", '<div class="ryd-premium-analytics is-expanded"></div>');
     await recordReviewAction(videoId, -1);

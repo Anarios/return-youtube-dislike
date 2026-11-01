@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Ytterligare ett klick behövs: välj din inloggningsknapp nedan för att granska Firefox kontobehörigheter och fortsätta."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Välj i Firefox"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Tack. Dina röster räknas nu."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Röstdelning förblir avstängd, så dina gilla och ogilla räknas inte. Du kan aktivera den senare i Firefox tilläggsinställningar, eller när du gillar eller ogillar en video efter att antalet ogilla har aktiverats."
   },
   "vote_consent_hint": {
     "message": "Din röst räknas inte och syns inte i antalet ogilla. Aktivera röstdelning så att den räknas."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Aktivera röstdelning för att reagera på kommentarer. Din reaktion skickas när den har aktiverats."
   },
-  "vote_consent_continue": {
-    "message": "Fortsätt"
-  },
   "discussion_consentContinue": {
     "message": "Fortsätt"
-  },
-  "vote_consent_open_failed": {
-    "message": "Behörighetssidan kunde inte öppnas. Försök igen."
   },
   "counts_consent_enable": {
     "message": "Aktivera antalet ogilla"
   },
-  "counts_consent_reason": {
-    "message": "Firefox behöver nu ditt tillstånd innan RYD kan visa antalet ogilla."
-  },
-  "counts_consent_body": {
-    "message": "För att hämta antalet skickar RYD ID:t för den aktuella YouTube-videon till sin server. Firefox kallar detta ”Surfaktivitet”."
-  },
-  "counts_consent_allow": {
-    "message": "Aktivera antalet"
-  },
   "counts_consent_toolbar": {
-    "message": "Öppna Return YouTube Dislike från Firefox tilläggsmeny för att aktivera antalet."
+    "message": "Öppna Return YouTube Dislike från Firefox tilläggsmeny för att fortsätta."
   },
   "counts_consent_declined": {
     "message": "Antalet förblir avstängt. Du kan aktivera det här senare."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Aktivera först antalet ogilla i ett vanligt fönster. Privata fönster visar bara antalet."
+  },
+  "data_consent_reason": {
+    "message": "Firefox behöver ditt tillstånd innan RYD kan visa antalet ogilla och räkna dina gilla och ogilla."
+  },
+  "data_consent_title": {
+    "message": "Visa ogilla och låt dina röster räknas"
+  },
+  "data_consent_body": {
+    "message": "RYD skickar videons ID för att läsa in antalet ogilla. Om du tillåter det delas även antalet gilla som du ser, för att förbättra uppskattningar, och dina gilla, ogilla och reaktioner på kommentarer med ett slumpmässigt röstnings-ID, så att de räknas."
   }
 }

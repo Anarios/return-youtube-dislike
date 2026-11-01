@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Serve un altro clic: seleziona il pulsante di accesso qui sotto per esaminare i permessi dell’account in Firefox e continuare."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Scegli in Firefox"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Grazie. Ora i tuoi voti contano."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "La condivisione dei voti resta disattivata, quindi i tuoi Mi piace e Non mi piace non verranno contati. Puoi attivarla in seguito nelle impostazioni dei componenti aggiuntivi di Firefox, oppure quando metti Mi piace o Non mi piace a un video dopo aver attivato i conteggi dei Non mi piace."
   },
   "vote_consent_hint": {
     "message": "Il tuo voto non viene contato e non comparirà nei conteggi dei Non mi piace. Attiva la condivisione dei voti perché conti."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Attiva la condivisione dei voti per reagire ai commenti. La tua reazione verrà inviata una volta attivata."
   },
-  "vote_consent_continue": {
-    "message": "Continua"
-  },
   "discussion_consentContinue": {
     "message": "Continua"
-  },
-  "vote_consent_open_failed": {
-    "message": "Impossibile aprire la pagina dei permessi. Riprova."
   },
   "counts_consent_enable": {
     "message": "Attiva i conteggi dei Non mi piace"
   },
-  "counts_consent_reason": {
-    "message": "Firefox ora richiede il tuo permesso prima che RYD possa mostrare i conteggi dei Non mi piace."
-  },
-  "counts_consent_body": {
-    "message": "Per recuperare i conteggi, RYD invia l’ID del video YouTube attuale al proprio server. Firefox chiama questa categoria «Attività di navigazione»."
-  },
-  "counts_consent_allow": {
-    "message": "Attiva i conteggi"
-  },
   "counts_consent_toolbar": {
-    "message": "Apri Return YouTube Dislike dal menu delle estensioni di Firefox per attivare i conteggi."
+    "message": "Apri Return YouTube Dislike dal menu delle estensioni di Firefox per continuare."
   },
   "counts_consent_declined": {
     "message": "I conteggi restano disattivati. Puoi attivarli qui in seguito."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Attiva prima i conteggi dei Non mi piace in una finestra normale. Le finestre anonime mostrano solo i conteggi."
+  },
+  "data_consent_reason": {
+    "message": "Firefox ha bisogno del tuo permesso prima che RYD possa mostrare i conteggi dei Non mi piace e contare i tuoi Mi piace e Non mi piace."
+  },
+  "data_consent_title": {
+    "message": "Mostra i Non mi piace e fai contare i tuoi voti"
+  },
+  "data_consent_body": {
+    "message": "RYD invia l’ID del video per caricare i conteggi dei Non mi piace. Se lo consenti, condivide anche il numero di Mi piace che vedi, per migliorare le stime, e i tuoi Mi piace, Non mi piace e reazioni ai commenti con un ID di voto casuale, perché vengano contati."
   }
 }

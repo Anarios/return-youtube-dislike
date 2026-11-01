@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "還需要點擊一次：請選擇下方的登入按鈕，檢視 Firefox 的帳號權限並繼續。"
   },
-  "changelog_firefox_vote_allow": {
-    "message": "在 Firefox 中選擇"
-  },
   "changelog_firefox_vote_granted": {
     "message": "謝謝。您的評價現在會被計入。"
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "評價分享維持關閉，因此您的喜歡和不喜歡不會被計入。您可以稍後在 Firefox 的附加元件設定中啟用，或在啟用不喜歡數後對影片按喜歡或不喜歡時啟用。"
   },
   "vote_consent_hint": {
     "message": "您的評價不會被計入，也不會反映在不喜歡數中。開啟評價分享即可計入。"
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "請開啟評價分享以對留言做出反應。開啟後，您的反應將會傳送。"
   },
-  "vote_consent_continue": {
-    "message": "繼續"
-  },
   "discussion_consentContinue": {
     "message": "繼續"
-  },
-  "vote_consent_open_failed": {
-    "message": "無法開啟權限頁面。請再試一次。"
   },
   "counts_consent_enable": {
     "message": "啟用不喜歡數"
   },
-  "counts_consent_reason": {
-    "message": "Firefox 現在需要您的許可，RYD 才能顯示不喜歡數。"
-  },
-  "counts_consent_body": {
-    "message": "為了取得計數，RYD 會將目前 YouTube 影片的 ID 傳送到其伺服器。Firefox 將此稱為「瀏覽活動」。"
-  },
-  "counts_consent_allow": {
-    "message": "啟用計數"
-  },
   "counts_consent_toolbar": {
-    "message": "從 Firefox 的擴充套件選單開啟 Return YouTube Dislike 以啟用計數。"
+    "message": "從 Firefox 的擴充套件選單開啟 Return YouTube Dislike 以繼續。"
   },
   "counts_consent_declined": {
     "message": "計數維持關閉。您可以稍後在此啟用。"
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "請先在一般視窗中啟用不喜歡數。隱私視窗僅顯示計數。"
+  },
+  "data_consent_reason": {
+    "message": "Firefox 需要您的許可，RYD 才能顯示不喜歡數並計入您的喜歡和不喜歡。"
+  },
+  "data_consent_title": {
+    "message": "顯示不喜歡數，讓您的評價被計入"
+  },
+  "data_consent_body": {
+    "message": "RYD 會傳送影片 ID 以載入不喜歡數。允許後，也會分享您看到的喜歡數以改善估算，並將您的喜歡、不喜歡和留言反應連同隨機投票 ID 一起傳送，使其被計入。"
   }
 }

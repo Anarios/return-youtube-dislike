@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Je potřeba ještě jedno kliknutí: níže zvolte přihlašovací tlačítko, zkontrolujte oprávnění účtu ve Firefoxu a pokračujte."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Vybrat ve Firefoxu"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Děkujeme. Vaše hlasy se nyní započítávají."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Sdílení hlasů zůstane vypnuté, takže se vaše hlasy nezapočítají. Později ho můžete zapnout v nastavení doplňků Firefoxu nebo když video ohodnotíte jako líbí se nebo nelíbí se, jakmile budou zapnuté počty nelíbí se."
   },
   "vote_consent_hint": {
     "message": "Váš hlas se nezapočítá a neprojeví se v počtech nelíbí se. Zapněte sdílení hlasů, aby se započítal."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Zapněte sdílení hlasů, abyste mohli reagovat na komentáře. Vaše reakce se odešle po jeho zapnutí."
   },
-  "vote_consent_continue": {
-    "message": "Pokračovat"
-  },
   "discussion_consentContinue": {
     "message": "Pokračovat"
-  },
-  "vote_consent_open_failed": {
-    "message": "Stránku oprávnění se nepodařilo otevřít. Zkuste to znovu."
   },
   "counts_consent_enable": {
     "message": "Zapnout počty nelíbí se"
   },
-  "counts_consent_reason": {
-    "message": "Firefox nyní vyžaduje vaše svolení, než bude RYD moci zobrazit počty nelíbí se."
-  },
-  "counts_consent_body": {
-    "message": "Pro načtení počtů posílá RYD ID aktuálního videa na YouTube na svůj server. Firefox to označuje jako „Aktivita prohlížení“."
-  },
-  "counts_consent_allow": {
-    "message": "Zapnout počty"
-  },
   "counts_consent_toolbar": {
-    "message": "Chcete-li zapnout počty, otevřete Return YouTube Dislike z nabídky rozšíření Firefoxu."
+    "message": "Chcete-li pokračovat, otevřete Return YouTube Dislike z nabídky rozšíření Firefoxu."
   },
   "counts_consent_declined": {
     "message": "Počty zůstávají vypnuté. Později je můžete zapnout zde."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Nejprve zapněte počty nelíbí se v běžném okně. Anonymní okna zobrazují pouze počty."
+  },
+  "data_consent_reason": {
+    "message": "Firefox potřebuje vaše svolení, než bude RYD moci zobrazit počty nelíbí se a započítávat vaše líbí se a nelíbí se."
+  },
+  "data_consent_title": {
+    "message": "Zobrazte počty nelíbí se a ať se vaše hlasy počítají"
+  },
+  "data_consent_body": {
+    "message": "RYD odesílá ID videa, aby načetl počty nelíbí se. Povolením navíc sdílíte počet líbí se, který vidíte, pro zlepšení odhadů, a své líbí se, nelíbí se a reakce na komentáře s náhodným hlasovacím ID, aby se počítaly."
   }
 }

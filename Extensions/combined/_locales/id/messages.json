@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Perlu satu klik lagi: pilih tombol masuk di bawah untuk meninjau izin akun Firefox dan melanjutkan."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Pilih di Firefox"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Terima kasih. Suara Anda kini dihitung."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Berbagi suara tetap dinonaktifkan, sehingga suka dan tidak suka Anda tidak akan dihitung. Anda dapat mengaktifkannya nanti di pengaturan pengaya Firefox, atau saat menyukai atau tidak menyukai video setelah jumlah tidak suka diaktifkan."
   },
   "vote_consent_hint": {
     "message": "Suara Anda tidak dihitung dan tidak akan terlihat dalam jumlah tidak suka. Aktifkan berbagi suara agar suara Anda dihitung."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Aktifkan berbagi suara untuk bereaksi terhadap komentar. Reaksi Anda dikirim setelah fitur ini aktif."
   },
-  "vote_consent_continue": {
-    "message": "Lanjutkan"
-  },
   "discussion_consentContinue": {
     "message": "Lanjutkan"
-  },
-  "vote_consent_open_failed": {
-    "message": "Halaman izin tidak dapat dibuka. Silakan coba lagi."
   },
   "counts_consent_enable": {
     "message": "Aktifkan jumlah tidak suka"
   },
-  "counts_consent_reason": {
-    "message": "Firefox kini memerlukan izin Anda sebelum RYD dapat menampilkan jumlah tidak suka."
-  },
-  "counts_consent_body": {
-    "message": "Untuk mengambil jumlah, RYD mengirim ID video YouTube saat ini ke servernya. Firefox menyebutnya “Aktivitas penjelajahan”."
-  },
-  "counts_consent_allow": {
-    "message": "Aktifkan jumlah"
-  },
   "counts_consent_toolbar": {
-    "message": "Buka Return YouTube Dislike dari menu ekstensi Firefox untuk mengaktifkan jumlah."
+    "message": "Buka Return YouTube Dislike dari menu ekstensi Firefox untuk melanjutkan."
   },
   "counts_consent_declined": {
     "message": "Jumlah tetap dinonaktifkan. Anda dapat mengaktifkannya di sini nanti."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Aktifkan jumlah tidak suka di jendela biasa terlebih dahulu. Jendela pribadi hanya menampilkan jumlah."
+  },
+  "data_consent_reason": {
+    "message": "Firefox memerlukan izin Anda sebelum RYD dapat menampilkan jumlah tidak suka dan menghitung suka dan tidak suka Anda."
+  },
+  "data_consent_title": {
+    "message": "Tampilkan jumlah tidak suka dan pastikan suara Anda dihitung"
+  },
+  "data_consent_body": {
+    "message": "RYD mengirim ID video untuk memuat jumlah tidak suka. Jika diizinkan, RYD juga membagikan jumlah suka yang Anda lihat, untuk meningkatkan perkiraan, serta suka, tidak suka, dan reaksi komentar Anda dengan ID pemungutan suara acak, agar dihitung."
   }
 }

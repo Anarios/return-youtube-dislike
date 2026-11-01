@@ -16,7 +16,13 @@ describe("popup notice when likes and dislikes are not counted", () => {
   const action = () => document.getElementById("ryd-vote-status-action");
   const result = () => document.getElementById("ryd-vote-status-result");
 
-  async function open({ categories = [], firefox = true, switchOn = false, privateBrowsing = false } = {}) {
+  async function open({
+    categories = [],
+    firefox = true,
+    switchOn = false,
+    privateBrowsing = false,
+    toolbar = false,
+  } = {}) {
     jest.resetModules();
     document.body.innerHTML = fs.readFileSync(path.join(__dirname, "../popup.html"), "utf8");
     grants = new Set(categories);
@@ -27,8 +33,13 @@ describe("popup notice when likes and dislikes are not counted", () => {
     decline = false;
     failRequest = false;
     global.browser = global.chrome = {
-      extension: { inIncognitoContext: privateBrowsing },
-      runtime: { getManifest: () => (firefox ? require("../manifest-firefox.json") : {}) },
+      extension: { inIncognitoContext: privateBrowsing, getViews: () => (toolbar ? [window] : []) },
+      runtime: {
+        getManifest: () => (firefox ? require("../manifest-firefox.json") : {}),
+        getURL: (file) => `moz-extension://fixture/${file}`,
+        sendMessage: jest.fn(async () => ({ success: true })),
+      },
+      tabs: { create: jest.fn(async () => ({ id: 9 })) },
       i18n: { getMessage: (key) => key },
       storage: {
         sync: {
@@ -64,6 +75,8 @@ describe("popup notice when likes and dislikes are not counted", () => {
   }
 
   afterEach(() => {
+    jest.restoreAllMocks();
+    history.replaceState({}, "", "/");
     delete global.browser;
     delete global.chrome;
   });
@@ -107,6 +120,16 @@ describe("popup notice when likes and dislikes are not counted", () => {
     expect(result().textContent).toBe("");
   });
 
+  test("in the toolbar popup the button asks during the click, then closes so Firefox's prompt is visible", async () => {
+    await open({ categories: ["browsingActivity"], toolbar: true });
+    const close = jest.spyOn(window, "close").mockImplementation(() => {});
+    action().click();
+    expect(browser.permissions.request).toHaveBeenCalledTimes(1);
+    expect(close).toHaveBeenCalledTimes(1);
+    expect(browser.permissions.request.mock.invocationCallOrder[0]).toBeLessThan(close.mock.invocationCallOrder[0]);
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
+  });
+
   test("a declined Firefox prompt keeps the notice and allows another try", async () => {
     await open({ categories: ["browsingActivity"] });
     decline = true;
@@ -117,14 +140,68 @@ describe("popup notice when likes and dislikes are not counted", () => {
     expect(action().disabled).toBe(false);
   });
 
-  test("when both block counting, the switch turns off only after vote sharing is allowed", async () => {
+  test("in the toolbar popup with the switch on, the button asks, records the switch intent, then closes", async () => {
+    await open({ categories: ["browsingActivity"], switchOn: true, toolbar: true });
+    const close = jest.spyOn(window, "close").mockImplementation(() => {});
+    action().click();
+    expect(browser.permissions.request).toHaveBeenCalledWith({
+      data_collection: ["browsingActivity", "websiteActivity", "websiteContent"],
+    });
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({ message: "ryd_vote_switch_on_grant" });
+    expect(close).toHaveBeenCalledTimes(1);
+    const [request] = browser.permissions.request.mock.invocationCallOrder;
+    const [intent] = chrome.runtime.sendMessage.mock.invocationCallOrder;
+    expect(request).toBeLessThan(intent);
+    expect(intent).toBeLessThan(close.mock.invocationCallOrder[0]);
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
+    await flush();
+    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
+  });
+
+  test("with the switch on in a tab, the popup records the intent and leaves the switch to the background", async () => {
     await open({ categories: ["browsingActivity"], switchOn: true });
+    const close = jest.spyOn(window, "close").mockImplementation(() => {});
+    action().click();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({ message: "ryd_vote_switch_on_grant" });
+    expect(result().textContent).toBe("consent_prompt_status");
+    await flush();
+    expect(close).not.toHaveBeenCalled();
+    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+    expect(card().hidden).toBe(false);
+    expect(result().textContent).toBe("");
+    chrome.storage.sync.set({ disableVoteSubmission: false });
+    await flush();
+    expect(card().hidden).toBe(true);
+  });
+
+  test("with the switch off the button records no switch intent", async () => {
+    await open({ categories: ["browsingActivity"], toolbar: true });
+    jest.spyOn(window, "close").mockImplementation(() => {});
     action().click();
     expect(browser.permissions.request).toHaveBeenCalledTimes(1);
-    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+  });
+
+  test("with vote sharing already allowed the button turns the switch off directly", async () => {
+    await open({ categories: ["browsingActivity", "websiteActivity"], switchOn: true, toolbar: true });
+    const close = jest.spyOn(window, "close").mockImplementation(() => {});
+    action().click();
     await flush();
     expect(chrome.storage.sync.set).toHaveBeenCalledWith({ disableVoteSubmission: false });
+    expect(browser.permissions.request).not.toHaveBeenCalled();
+    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+    expect(close).not.toHaveBeenCalled();
     expect(card().hidden).toBe(true);
+  });
+
+  test("a rejected intent message does not block the prompt", async () => {
+    await open({ categories: ["browsingActivity"], switchOn: true });
+    chrome.runtime.sendMessage.mockRejectedValueOnce(new Error("Background unavailable"));
+    action().click();
+    await flush();
+    expect(browser.permissions.request).toHaveBeenCalledTimes(1);
+    expect(action().disabled).toBe(false);
   });
 
   test("declining the prompt keeps the switch on when both block counting", async () => {
@@ -132,6 +209,10 @@ describe("popup notice when likes and dislikes are not counted", () => {
     decline = true;
     action().click();
     await flush();
+    expect(chrome.runtime.sendMessage.mock.calls).toEqual([
+      [{ message: "ryd_vote_switch_on_grant" }],
+      [{ message: "ryd_vote_switch_on_grant", withdraw: true }],
+    ]);
     expect(chrome.storage.sync.set).not.toHaveBeenCalled();
     expect(sync.disableVoteSubmission).toBe(true);
     expect(card().hidden).toBe(false);

@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Hace falta otro clic: selecciona abajo tu botón de inicio de sesión para revisar los permisos de cuenta de Firefox y continuar."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Elegir en Firefox"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Gracias. Tus votos ya cuentan."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "El uso compartido de votos sigue desactivado, así que tus Me gusta y No me gusta no contarán. Puedes activarlo más tarde en la configuración de complementos de Firefox, o al dar Me gusta o No me gusta a un vídeo cuando los recuentos de No me gusta estén activados."
   },
   "vote_consent_hint": {
     "message": "Tu voto no se cuenta y no aparecerá en los recuentos de No me gusta. Activa el uso compartido de votos para que cuente."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Activa el uso compartido de votos para reaccionar a comentarios. Tu reacción se enviará cuando esté activado."
   },
-  "vote_consent_continue": {
-    "message": "Continuar"
-  },
   "discussion_consentContinue": {
     "message": "Continuar"
-  },
-  "vote_consent_open_failed": {
-    "message": "No se pudo abrir la página de permisos. Inténtalo de nuevo."
   },
   "counts_consent_enable": {
     "message": "Activar recuentos de No me gusta"
   },
-  "counts_consent_reason": {
-    "message": "Firefox ahora necesita tu permiso para que RYD pueda mostrar los recuentos de No me gusta."
-  },
-  "counts_consent_body": {
-    "message": "Para obtener los recuentos, RYD envía el ID del vídeo actual de YouTube a su servidor. Firefox lo llama «Actividad de navegación»."
-  },
-  "counts_consent_allow": {
-    "message": "Activar recuentos"
-  },
   "counts_consent_toolbar": {
-    "message": "Abre Return YouTube Dislike desde el menú de extensiones de Firefox para activar los recuentos."
+    "message": "Abre Return YouTube Dislike desde el menú de extensiones de Firefox para continuar."
   },
   "counts_consent_declined": {
     "message": "Los recuentos siguen desactivados. Puedes activarlos aquí más tarde."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Primero activa los recuentos de No me gusta en una ventana normal. Las ventanas privadas solo muestran recuentos."
+  },
+  "data_consent_reason": {
+    "message": "Firefox necesita tu permiso para que RYD pueda mostrar los recuentos de No me gusta y contar tus Me gusta y No me gusta."
+  },
+  "data_consent_title": {
+    "message": "Muestra los No me gusta y haz que tus votos cuenten"
+  },
+  "data_consent_body": {
+    "message": "RYD envía el ID del vídeo para cargar los recuentos de No me gusta. Si lo permites, también se comparten el número de Me gusta que ves, para mejorar las estimaciones, y tus Me gusta, No me gusta y reacciones a comentarios con un ID de votación aleatorio, para que cuenten."
   }
 }
