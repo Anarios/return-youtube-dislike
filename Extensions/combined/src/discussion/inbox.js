@@ -10,14 +10,22 @@ export function notificationText(notification) {
       : t("notificationLike");
 }
 
-export function createDiscussionInbox({ request = requestDiscussion, authenticated = true } = {}) {
+export function notificationsLabel(unreadCount) {
+  return `${t("notifications")}${unreadCount ? ` (${unreadCount})` : ""}`;
+}
+
+export function createDiscussionInbox({
+  request = requestDiscussion,
+  authenticated = true,
+  onUnreadCount = () => {},
+} = {}) {
   const node = element("section", "ryd-discussion-inbox");
   const heading = element("div", "ryd-discussion-toolbar");
   heading.append(element("h3", "ryd-discussion-subtitle", t("notifications")));
   const readAll = button(t("markAllRead"), async () => {
     readAll.disabled = true;
     try {
-      await request("readNotifications", { all: true });
+      await read({ all: true });
       await load();
     } catch (error) {
       status.textContent = discussionError(error);
@@ -57,7 +65,7 @@ export function createDiscussionInbox({ request = requestDiscussion, authenticat
         link.target = "_blank";
         link.rel = "noopener noreferrer";
         link.addEventListener("click", () => {
-          request("readNotifications", { ids: [item.id] })
+          read({ ids: [item.id] })
             .then(() => {
               item.read = true;
               render();
@@ -73,7 +81,7 @@ export function createDiscussionInbox({ request = requestDiscussion, authenticat
           button(t("markRead"), async (event) => {
             event.currentTarget.disabled = true;
             try {
-              await request("readNotifications", { ids: [item.id] });
+              await read({ ids: [item.id] });
               item.read = true;
               render();
             } catch (error) {
@@ -85,6 +93,12 @@ export function createDiscussionInbox({ request = requestDiscussion, authenticat
       list.append(row);
     }
     more.hidden = !cursor;
+  }
+
+  async function read(payload) {
+    const current = generation;
+    const result = await request("readNotifications", payload);
+    if (!disposed && current === generation) onUnreadCount(result?.unreadCount);
   }
 
   async function load(append = false) {
@@ -102,6 +116,7 @@ export function createDiscussionInbox({ request = requestDiscussion, authenticat
       items = [...new Map(combined.map((item) => [item.id, item])).values()];
       cursor = result.nextCursor;
       hasPage = true;
+      onUnreadCount(result.unreadCount);
       render();
     } catch (error) {
       if (!disposed && current === generation) status.textContent = discussionError(error);
@@ -123,6 +138,7 @@ export function createDiscussionInbox({ request = requestDiscussion, authenticat
         hasPage = false;
       }
       accountId = nextId;
+      if (!authenticated) onUnreadCount(0);
       render();
     },
     update(inbox, { live = false } = {}) {
@@ -137,6 +153,7 @@ export function createDiscussionInbox({ request = requestDiscussion, authenticat
       }
       if (!live || !hasPage) cursor = inbox?.nextCursor;
       hasPage = true;
+      onUnreadCount(inbox?.unreadCount);
       render();
     },
     destroy() {

@@ -1,5 +1,6 @@
 import { getBrowser, getVideoId, localize } from "./utils";
 import { getDislikeButton } from "./buttons";
+import { isMicrosoftEdge } from "./browser-brand";
 
 const PROMPT_ID = "ryd-review-prompt";
 const MIN_PROMPT_SPACE = 96;
@@ -30,7 +31,7 @@ function canShowPrompt(videoId) {
     rect.right > 0 &&
     rect.left < window.innerWidth &&
     Math.max(rect.top - 28, window.innerHeight - rect.bottom - 28) >= MIN_PROMPT_SPACE &&
-    !document.querySelector(`#${PROMPT_ID}, #ryd-consent-prompt, .ryd-premium-analytics.is-expanded`)
+    !document.querySelector(`#${PROMPT_ID}, #ryd-vote-consent-hint, .ryd-premium-analytics.is-expanded`)
   );
 }
 
@@ -257,6 +258,7 @@ async function recordReviewAction(videoId, vote) {
     if (
       manifest?.manifest_version !== 3 ||
       !manifest.background?.service_worker ||
+      isMicrosoftEdge() ||
       api.extension?.inIncognitoContext === true ||
       ![1, -1].includes(vote) ||
       !isCurrentVideo(videoId)

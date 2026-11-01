@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Désactiver la journalisation des réponses de l’API dans la console."
   },
+  "developerSettings": {
+    "message": "Options pour les développeurs"
+  },
   "disableLoggingLabel": {
     "message": "Désactiver la journalisation dans la console"
   },
@@ -161,6 +164,12 @@
   "hidePremiumTeaserHover": {
     "message": "Ne pas afficher le panneau des nombres bruts sur les pages de lecture YouTube."
   },
+  "hideRydComments": {
+    "message": "Masquer les commentaires RYD"
+  },
+  "hideRydCommentsHover": {
+    "message": "Ne pas afficher les commentaires RYD sur les vidéos dont les commentaires YouTube sont désactivés."
+  },
   "hidePremiumAnalytics": {
     "message": "Masquer les analyses vidéo Premium"
   },
@@ -177,7 +186,7 @@
     "message": "Prise en charge des YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
+    "message": "Pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas"
   },
   "showTooltipPercentageHover": {
     "message": "Afficher le pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
@@ -249,7 +258,7 @@
     "message": "Désactiver l'envoi des likes/dislikes"
   },
   "textSettingsHover": {
-    "message": "Arrête de compter les likes et les dislikes mis sur les vidéos."
+    "message": "Vos « J’aime » et « Je n’aime pas » ne seront pas comptés et n’apparaîtront pas dans les compteurs de « Je n’aime pas »."
   },
   "textTempUnavailable": {
     "message": "temporairement indisponible"
@@ -804,7 +813,7 @@
     "message": "$1 notifications non lues"
   },
   "discussion_signedOutInbox": {
-    "message": "Connectez-vous pour voir les réponses et les réactions à vos commentaires."
+    "message": "Connectez-vous pour voir les réponses et les mentions J’aime sur vos commentaires."
   },
   "discussion_notificationUnavailable": {
     "message": "Cette discussion n’est plus disponible."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Ouvrez une vidéo YouTube et vous verrez le nombre de dislikes juste à côté des likes, à sa place. La version 4.1 ajoute aussi les commentaires RYD, un espace pour discuter des vidéos en dehors des commentaires de YouTube."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Encore une étape"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Activez ci-dessous les compteurs de « Je n’aime pas » pour les voir à côté des « J’aime » sur YouTube. La version 4.1 ajoute aussi les commentaires RYD, un espace pour discuter des vidéos en dehors des commentaires de YouTube."
+  },
   "changelog_new_badge": {
     "message": "Nouveau dans la version 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Découvrez les commentaires RYD"
   },
   "changelog_comments_body": {
-    "message": "Un espace de discussion sous les vidéos et les Shorts, hébergé par Return YouTube Dislike et distinct des commentaires de YouTube. Tout le monde peut lire et réagir. Les membres Commenter et Premium peuvent publier et répondre."
+    "message": "Un espace de discussion sous les vidéos et les Shorts dont les commentaires YouTube sont désactivés, hébergé par Return YouTube Dislike. Tout le monde peut lire et réagir. Les membres Commenter et Premium peuvent publier et répondre."
   },
   "changelog_comments_point_replies": {
     "message": "Réponses en fils de discussion avec likes et dislikes"
@@ -882,7 +897,7 @@
     "message": "Publiez sous le pseudonyme public de votre choix"
   },
   "changelog_comments_point_notifications": {
-    "message": "Notifications quand quelqu’un répond ou réagit"
+    "message": "Notifications quand quelqu’un répond à votre commentaire ou l’aime"
   },
   "changelog_comments_point_moderation": {
     "message": "Signalement et modération pour des échanges respectueux"
@@ -958,5 +973,149 @@
   },
   "reviewPromptAction": {
     "message": "Laisser un avis"
+  },
+  "consent_page_title": {
+    "message": "Autorisations des fonctionnalités de RYD"
+  },
+  "consent_vote_title": {
+    "message": "Faites compter vos votes"
+  },
+  "consent_vote_body": {
+    "message": "Sans le partage des votes, vos « J’aime » et « Je n’aime pas » ne sont pas comptés et n’apparaissent pas dans les compteurs de « Je n’aime pas ». Le partage envoie vos votes et le nombre de « J’aime » affiché. Il nécessite les compteurs de « Je n’aime pas » : Firefox vous demandera donc aussi de les activer s’ils sont désactivés."
+  },
+  "consent_account_title": {
+    "message": "Choisir les autorisations du compte"
+  },
+  "consent_account_body": {
+    "message": "Connectez-vous pour utiliser votre profil, les notifications, les analyses Premium et les autres fonctionnalités du compte."
+  },
+  "consent_next_step": {
+    "message": "Sélectionnez Autoriser dans Firefox pour examiner les autorisations. Vous pouvez refuser."
+  },
+  "consent_allow": {
+    "message": "Autoriser dans Firefox"
+  },
+  "consent_not_now": {
+    "message": "Pas maintenant"
+  },
+  "consent_prompt_status": {
+    "message": "Choisissez si vous souhaitez accorder ces autorisations dans Firefox."
+  },
+  "consent_granted_status": {
+    "message": "Les autorisations sont activées. Vous pouvez retourner sur YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Ces fonctions facultatives restent désactivées. Vous pourrez modifier les autorisations plus tard."
+  },
+  "consent_error_status": {
+    "message": "Impossible de modifier les autorisations. Veuillez réessayer."
+  },
+  "consent_details_summary": {
+    "message": "Que signifient les catégories d’autorisations de Firefox ?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox regroupe les données en grandes catégories. Voici ce que chacune signifie pour RYD :"
+  },
+  "consent_browsing_label": {
+    "message": "Activité de navigation"
+  },
+  "consent_browsing_body": {
+    "message": "L’identifiant de la vidéo YouTube utilisé pour charger les compteurs de « Je n’aime pas » et les discussions. Vous choisissez de l’autoriser ou non."
+  },
+  "consent_content_label": {
+    "message": "Contenu des sites web"
+  },
+  "consent_content_body": {
+    "message": "Le nombre de « J’aime » affiché sur la vidéo YouTube, pour améliorer les estimations de « Je n’aime pas »."
+  },
+  "consent_activity_label": {
+    "message": "Activité sur les sites web"
+  },
+  "consent_activity_body": {
+    "message": "Vos « J’aime », « Je n’aime pas », votes retirés et réactions aux commentaires RYD, envoyés avec un identifiant de vote aléatoire enregistré."
+  },
+  "consent_identity_label": {
+    "message": "Informations d’identification personnelle"
+  },
+  "consent_identity_body": {
+    "message": "Les informations de votre profil, comme votre nom affiché et votre adresse e-mail, uniquement si vous choisissez de vous connecter."
+  },
+  "consent_auth_label": {
+    "message": "Informations d’authentification"
+  },
+  "consent_auth_body": {
+    "message": "Les données d’autorisation et de session nécessaires pour se connecter et utiliser les fonctionnalités du compte."
+  },
+  "consent_scope": {
+    "message": "RYD ne collecte rien en dehors de youtube.com et n’accède pas à votre compte YouTube. Aucun nom ni e-mail n’est reçu sans connexion."
+  },
+  "consent_settings": {
+    "message": "Vous pouvez modifier les autorisations facultatives plus tard dans les paramètres de l’extension dans Firefox."
+  },
+  "consent_private_counts": {
+    "message": "Les fenêtres privées affichent uniquement les compteurs, avec l’autorisation activée dans une fenêtre normale. Les votes, la connexion, les analyses Premium et les discussions n’y sont pas disponibles."
+  },
+  "consent_voter_timing": {
+    "message": "Votre identifiant de vote n’est envoyé que lorsque vous votez ou réagissez. Vos propres réactions aux commentaires sont mémorisées sur cet appareil."
+  },
+  "popup_signin_next_click": {
+    "message": "Un clic supplémentaire est nécessaire : sélectionnez votre bouton de connexion ci-dessous pour examiner les autorisations de compte de Firefox et continuer."
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "Choisir dans Firefox"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Merci. Vos votes comptent désormais."
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "Le partage des votes reste désactivé, vos « J’aime » et « Je n’aime pas » ne seront donc pas comptés. Vous pourrez l’activer plus tard dans les paramètres de l’extension dans Firefox, ou en aimant ou en n’aimant pas une vidéo une fois les compteurs de « Je n’aime pas » activés."
+  },
+  "vote_consent_hint": {
+    "message": "Votre vote n’est pas compté et n’apparaîtra pas dans les compteurs de « Je n’aime pas ». Activez le partage des votes pour qu’il compte."
+  },
+  "vote_not_counted": {
+    "message": "Vos « J’aime » et « Je n’aime pas » ne sont pas comptés et n’apparaissent pas dans les compteurs de « Je n’aime pas »."
+  },
+  "vote_count_mine": {
+    "message": "Compter mes votes"
+  },
+  "vote_consent_dismiss": {
+    "message": "Ne plus demander"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Activez le partage des votes pour réagir aux commentaires. Votre réaction sera envoyée une fois le partage activé."
+  },
+  "vote_consent_continue": {
+    "message": "Continuer"
+  },
+  "discussion_consentContinue": {
+    "message": "Continuer"
+  },
+  "vote_consent_open_failed": {
+    "message": "Impossible d’ouvrir la page des autorisations. Veuillez réessayer."
+  },
+  "counts_consent_enable": {
+    "message": "Activer les compteurs de « Je n’aime pas »"
+  },
+  "counts_consent_reason": {
+    "message": "Firefox demande désormais votre autorisation avant que RYD puisse afficher les compteurs de « Je n’aime pas »."
+  },
+  "counts_consent_body": {
+    "message": "Pour récupérer les compteurs, RYD envoie l’identifiant de la vidéo YouTube actuelle à son serveur. Firefox appelle cela « Activité de navigation »."
+  },
+  "counts_consent_allow": {
+    "message": "Activer les compteurs"
+  },
+  "counts_consent_toolbar": {
+    "message": "Ouvrez Return YouTube Dislike depuis le menu des extensions de Firefox pour activer les compteurs."
+  },
+  "counts_consent_declined": {
+    "message": "Les compteurs restent désactivés. Vous pourrez les activer ici plus tard."
+  },
+  "counts_consent_enabled": {
+    "message": "Les compteurs de « Je n’aime pas » sont activés."
+  },
+  "counts_consent_private": {
+    "message": "Activez d’abord les compteurs de « Je n’aime pas » dans une fenêtre normale. Les fenêtres privées affichent uniquement les compteurs."
   }
 }

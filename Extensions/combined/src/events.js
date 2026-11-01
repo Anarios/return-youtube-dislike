@@ -13,6 +13,7 @@ import {
   setDislikes,
   extConfig,
   storedData,
+  getState,
   refreshReactionPresentation,
   persistSyntheticShortsDislikeState,
   updateDisableLogging,
@@ -32,19 +33,62 @@ import { resolveDelegatedVoteActivation } from "../../common/delegated-vote-acti
 import { normalizeCustomColors, observeYouTubeTheme } from "../../common/color-themes";
 import { isPrivateBrowsingContext } from "./private-browsing";
 import { recordReviewAction } from "./review-prompt";
+import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "./core-data-consent";
+import { createVoteConsentHintController } from "./vote-consent-hint";
+
+function dispatchVote(vote, videoId) {
+  const result = getBrowser().runtime.sendMessage({ message: "send_vote", vote, videoId });
+  if (result && typeof result.catch === "function") {
+    result.catch((error) => console.error("Vote submission failed", error));
+  }
+}
+
+let voteConsentHint = null;
+let firefoxVoteSequence = 0;
+let countPermissionAvailable = true;
+
+function cancelPendingFirefoxVote() {
+  firefoxVoteSequence += 1;
+  voteConsentHint?.clearPending();
+}
+
+function setCountPermissionAvailable(available) {
+  countPermissionAvailable = available;
+  if (!available) cancelPendingFirefoxVote();
+}
 
 function sendVote(vote) {
   if (isPrivateBrowsingContext()) return;
-  if (shouldSubmitVote({ disableVoteSubmission: extConfig.disableVoteSubmission })) {
-    const result = getBrowser().runtime.sendMessage({
-      message: "send_vote",
-      vote: vote,
-      videoId: getVideoId(window.location.href),
-    });
-    if (result && typeof result.catch === "function") {
-      result.catch((error) => console.error("Vote submission failed", error));
-    }
+  if (!shouldSubmitVote({ disableVoteSubmission: extConfig.disableVoteSubmission })) return;
+  if (usesFirefoxDataCollectionConsent() && !countPermissionAvailable) return;
+  const videoId = getVideoId(window.location.href);
+  if (!usesFirefoxDataCollectionConsent()) {
+    dispatchVote(vote, videoId);
+    return;
   }
+  if (!voteConsentHint) voteConsentHint = createVoteConsentHintController();
+  const sequence = ++firefoxVoteSequence;
+  voteConsentHint.clearPending();
+  const context = voteConsentHint.capturePageContext(videoId);
+  void hasFeaturePermission("voting").then((granted) => {
+    if (sequence !== firefoxVoteSequence || !voteConsentHint.isCurrent(context)) return;
+    if (granted) {
+      dispatchVote(vote, videoId);
+      return;
+    }
+    void voteConsentHint.offer(context, () => {
+      if (
+        sequence !== firefoxVoteSequence ||
+        !voteConsentHint.isCurrent(context) ||
+        !getLikeButton() ||
+        !getDislikeButton() ||
+        checkForSignInButton()
+      )
+        return;
+      const state = getState(storedData).current;
+      dispatchVote(state === LIKED_STATE ? 1 : state === DISLIKED_STATE ? -1 : 0, videoId);
+    });
+  });
 }
 
 function updateDOMDislikes() {
@@ -75,6 +119,7 @@ function clearNativeLikeForSyntheticDislike(action, stateBeforeActivation, synth
 
 function handleVoteAction(action) {
   if (isPrivateBrowsingContext()) return;
+  if (usesFirefoxDataCollectionConsent() && !countPermissionAvailable) return;
   if (checkForSignInButton() === false) {
     const videoId = getVideoId(window.location.href);
     if (!videoId || storedData.videoId !== videoId) return;
@@ -241,6 +286,7 @@ function storageChangeHandler(changes, area) {
 
 function handleDisableVoteSubmissionChangeEvent(value) {
   extConfig.disableVoteSubmission = value;
+  if (value === true) cancelPendingFirefoxVote();
 }
 
 function handleColoredThumbsChangeEvent(value) {
@@ -299,4 +345,5 @@ export {
   storageChangeHandler,
   updateDOMDislikes,
   observeColorTheme,
+  setCountPermissionAvailable,
 };

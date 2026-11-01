@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "API yanıtlarının konsola kaydedilmesini devre dışı bırakın."
   },
+  "developerSettings": {
+    "message": "Geliştirici seçenekleri"
+  },
   "disableLoggingLabel": {
     "message": "Konsola günlük kaydını devre dışı bırak"
   },
@@ -161,6 +164,12 @@
   "hidePremiumTeaserHover": {
     "message": "YouTube video izleme sayfalarında ham sayılar panelini gösterme."
   },
+  "hideRydComments": {
+    "message": "RYD yorumlarını gizle"
+  },
+  "hideRydCommentsHover": {
+    "message": "YouTube yorumları kapalı olan videolarda RYD yorumlarını gösterme."
+  },
   "hidePremiumAnalytics": {
     "message": "Premium Video İstatistiklerini gizle"
   },
@@ -177,7 +186,7 @@
     "message": "YouTube Shorts Desteği"
   },
   "showTooltipPercentage": {
-    "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzde."
+    "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzde"
   },
   "showTooltipPercentageHover": {
     "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzdeyi göster."
@@ -249,7 +258,7 @@
     "message": "Beğeni/beğenmeme gönderimini devre dışı bırak"
   },
   "textSettingsHover": {
-    "message": "Beğeni ve beğenmeme oylarınızın sayılmasını durdurur."
+    "message": "Beğeni ve beğenmeme oylarınız sayılmayacak ve beğenmeme sayılarında görünmeyecek."
   },
   "textTempUnavailable": {
     "message": "Geçici Olarak Kullanılamıyor"
@@ -804,7 +813,7 @@
     "message": "$1 okunmamış bildirim"
   },
   "discussion_signedOutInbox": {
-    "message": "Yorumlarınıza gelen yanıtları ve tepkileri görmek için giriş yapın."
+    "message": "Yorumlarınıza gelen yanıtları ve beğenileri görmek için giriş yapın."
   },
   "discussion_notificationUnavailable": {
     "message": "Bu tartışma artık kullanılamıyor."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Herhangi bir YouTube videosunu açın; beğenmeme sayısını beğenilerin hemen yanında, olması gereken yerde göreceksiniz. 4.1 sürümü ayrıca videoları YouTube’un kendi yorum bölümünün dışında tartışabileceğiniz RYD yorumlarını sunuyor."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Bir adım kaldı"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "YouTube’da beğenilerin hemen yanında görmek için aşağıdan beğenmeme sayılarını etkinleştirin. 4.1 sürümü ayrıca videoları YouTube’un kendi yorum bölümünün dışında tartışabileceğiniz RYD yorumlarını sunuyor."
+  },
   "changelog_new_badge": {
     "message": "4.1’de yeni"
   },
@@ -873,7 +888,7 @@
     "message": "RYD yorumlarıyla tanışın"
   },
   "changelog_comments_body": {
-    "message": "Videoların ve Shorts’un altında, Return YouTube Dislike tarafından sunulan ve YouTube yorumlarından ayrı tutulan topluluk tartışmaları. Herkes okuyabilir ve tepki verebilir. Commenter ve Premium üyeleri yorum yazabilir ve yanıt verebilir."
+    "message": "YouTube yorumlarının kapalı olduğu videoların ve Shorts’un altında, Return YouTube Dislike tarafından sunulan topluluk tartışmaları. Herkes okuyabilir ve tepki verebilir. Commenter ve Premium üyeleri yorum yazabilir ve yanıt verebilir."
   },
   "changelog_comments_point_replies": {
     "message": "Beğeni ve beğenmeme içeren yanıt dizileri"
@@ -882,7 +897,7 @@
     "message": "Seçtiğiniz, herkese açık bir takma adla yazın"
   },
   "changelog_comments_point_notifications": {
-    "message": "Birisi yanıt verdiğinde veya tepki gösterdiğinde bildirimler"
+    "message": "Birisi yorumunuza yanıt verdiğinde veya yorumunuzu beğendiğinde bildirimler"
   },
   "changelog_comments_point_moderation": {
     "message": "Saygılı bir ortam için şikâyet ve moderasyon"
@@ -958,5 +973,149 @@
   },
   "reviewPromptAction": {
     "message": "Yorum yazın"
+  },
+  "consent_page_title": {
+    "message": "RYD özellik izinleri"
+  },
+  "consent_vote_title": {
+    "message": "Oylarınız sayılsın"
+  },
+  "consent_vote_body": {
+    "message": "Oy paylaşımı olmadan beğeni ve beğenmeme oylarınız sayılmaz ve beğenmeme sayılarında görünmez. Paylaşım, oylarınızı ve gördüğünüz beğeni sayısını gönderir. Beğenmeme sayılarını gerektirir, bu yüzden kapalıysa Firefox bunları açmak için de izin isteyecektir."
+  },
+  "consent_account_title": {
+    "message": "Hesap izinlerini seçin"
+  },
+  "consent_account_body": {
+    "message": "Profiliniz, bildirimler ve Premium analizler dahil hesap özelliklerini kullanmak için giriş yapın."
+  },
+  "consent_next_step": {
+    "message": "İzinleri incelemek için Firefox’ta İzin ver’i seçin. Reddedebilirsiniz."
+  },
+  "consent_allow": {
+    "message": "Firefox’ta izin ver"
+  },
+  "consent_not_now": {
+    "message": "Şimdi değil"
+  },
+  "consent_prompt_status": {
+    "message": "Firefox’ta bu izinleri verip vermeyeceğinizi seçin."
+  },
+  "consent_granted_status": {
+    "message": "İzinler etkin. YouTube’a dönebilirsiniz."
+  },
+  "consent_declined_status": {
+    "message": "Bu isteğe bağlı özellikler kapalı kalır. İzinleri daha sonra değiştirebilirsiniz."
+  },
+  "consent_error_status": {
+    "message": "İzinler güncellenemedi. Lütfen tekrar deneyin."
+  },
+  "consent_details_summary": {
+    "message": "Firefox’un izin kategorileri ne anlama geliyor?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox verileri geniş kategorilere ayırır. Her kategorinin RYD için anlamı şöyledir:"
+  },
+  "consent_browsing_label": {
+    "message": "Gezinme etkinliği"
+  },
+  "consent_browsing_body": {
+    "message": "Beğenmeme sayılarını ve tartışmaları yüklemek için kullanılan YouTube video kimliği. Buna izin verip vermemeyi siz seçersiniz."
+  },
+  "consent_content_label": {
+    "message": "Web sitesi içeriği"
+  },
+  "consent_content_body": {
+    "message": "Beğenmeme tahminlerini iyileştirmek için YouTube videosunda gösterilen beğeni sayısı."
+  },
+  "consent_activity_label": {
+    "message": "Web sitesi etkinliği"
+  },
+  "consent_activity_body": {
+    "message": "Kayıtlı rastgele bir oylama kimliğiyle gönderilen beğenileriniz, beğenmemeleriniz, geri aldığınız oylar ve RYD yorumlarına tepkileriniz."
+  },
+  "consent_identity_label": {
+    "message": "Kişisel kimlik bilgileri"
+  },
+  "consent_identity_body": {
+    "message": "Yalnızca giriş yapmayı seçtiğinizde görünen ad ve e-posta gibi profil bilgileriniz."
+  },
+  "consent_auth_label": {
+    "message": "Kimlik doğrulama bilgileri"
+  },
+  "consent_auth_body": {
+    "message": "Giriş yapmak ve hesap özelliklerini kullanmak için gereken yetkilendirme ve oturum verileri."
+  },
+  "consent_scope": {
+    "message": "RYD youtube.com dışında hiçbir şey toplamaz ve YouTube hesabınıza erişmez. Giriş yapmadığınız sürece ad veya e-posta almaz."
+  },
+  "consent_settings": {
+    "message": "İsteğe bağlı izinleri daha sonra Firefox’un eklenti ayarlarından değiştirebilirsiniz."
+  },
+  "consent_private_counts": {
+    "message": "Gizli pencerelerde, normal bir pencerede etkinleştirilen izin kullanılarak yalnızca sayılar gösterilir. Oy verme, giriş, Premium analizler ve tartışmalar burada kullanılamaz."
+  },
+  "consent_voter_timing": {
+    "message": "Oylama kimliğiniz yalnızca oy verdiğinizde veya tepki gösterdiğinizde gönderilir. Yorumlara kendi tepkileriniz bu cihazda hatırlanır."
+  },
+  "popup_signin_next_click": {
+    "message": "Bir tıklama daha gerekli: Firefox’un hesap izinlerini inceleyip devam etmek için aşağıdaki giriş düğmenizi seçin."
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "Firefox’ta seç"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Teşekkürler. Oylarınız artık sayılıyor."
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "Oy paylaşımı kapalı kalır, bu yüzden beğeni ve beğenmeme oylarınız sayılmayacak. Daha sonra Firefox eklenti ayarlarından ya da beğenmeme sayıları etkinleştirildikten sonra bir videoyu beğendiğinizde veya beğenmediğinizde etkinleştirebilirsiniz."
+  },
+  "vote_consent_hint": {
+    "message": "Oyunuz sayılmıyor ve beğenmeme sayılarında görünmeyecek. Sayılması için oy paylaşımını açın."
+  },
+  "vote_not_counted": {
+    "message": "Beğeni ve beğenmeme oylarınız sayılmıyor ve beğenmeme sayılarında görünmüyor."
+  },
+  "vote_count_mine": {
+    "message": "Oylarımı say"
+  },
+  "vote_consent_dismiss": {
+    "message": "Bir daha sorma"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Yorumlara tepki vermek için oy paylaşımını açın. Tepkiniz açıldığında gönderilir."
+  },
+  "vote_consent_continue": {
+    "message": "Devam et"
+  },
+  "discussion_consentContinue": {
+    "message": "Devam et"
+  },
+  "vote_consent_open_failed": {
+    "message": "İzin sayfası açılamadı. Lütfen tekrar deneyin."
+  },
+  "counts_consent_enable": {
+    "message": "Beğenmeme sayılarını etkinleştir"
+  },
+  "counts_consent_reason": {
+    "message": "Firefox artık RYD’nin beğenmeme sayılarını gösterebilmesi için izninizi istiyor."
+  },
+  "counts_consent_body": {
+    "message": "Sayıları almak için RYD, geçerli YouTube videosunun kimliğini kendi sunucusuna gönderir. Firefox buna “Gezinme etkinliği” adını verir."
+  },
+  "counts_consent_allow": {
+    "message": "Sayıları etkinleştir"
+  },
+  "counts_consent_toolbar": {
+    "message": "Sayıları etkinleştirmek için Firefox’un uzantılar menüsünden Return YouTube Dislike’ı açın."
+  },
+  "counts_consent_declined": {
+    "message": "Sayılar kapalı kalır. Bunları daha sonra buradan etkinleştirebilirsiniz."
+  },
+  "counts_consent_enabled": {
+    "message": "Beğenmeme sayıları etkin."
+  },
+  "counts_consent_private": {
+    "message": "Önce normal bir pencerede beğenmeme sayılarını etkinleştirin. Gizli pencerelerde yalnızca sayılar gösterilir."
   }
 }

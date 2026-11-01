@@ -452,7 +452,7 @@ async function runLiveDiscussionMatrix({
     );
   }
   async function newest(id) {
-    await root().locator(".ryd-discussion-thread > .ryd-discussion-toolbar select").selectOption("new");
+    await root().locator(".ryd-discussion-thread > .ryd-discussion-toolbar [data-sort='new']").click();
     await row(id).waitFor({ state: "visible", timeout: TIMEOUT_MS });
   }
   const inboxEvents = () =>
@@ -678,7 +678,7 @@ async function runLiveDiscussionMatrix({
       if (selected.has("sorting")) {
         for (const sort of ["new", "top"]) {
           const expected = await request(`/videos/${videoId}/comments?sort=${sort}`);
-          await root().locator(".ryd-discussion-thread > .ryd-discussion-toolbar select").selectOption(sort);
+          await root().locator(`.ryd-discussion-thread > .ryd-discussion-toolbar [data-sort='${sort}']`).click();
           await poll(
             () =>
               root()

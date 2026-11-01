@@ -17,10 +17,11 @@ main {
   box-sizing: border-box;
   margin: auto;
   padding: 28px;
+  overflow-wrap: anywhere;
 }
 @media (min-width: 600px) {
   main {
-    margin-top: 7vh;
+    margin-block-start: 7vh;
   }
 }
 h1 {
@@ -43,7 +44,7 @@ summary {
   font-weight: 600;
 }
 dt {
-  margin-top: 18px;
+  margin-block-start: 18px;
   font-weight: 700;
 }
 dd {
@@ -62,13 +63,14 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 20px;
+  margin-block-start: 20px;
 }
 button {
   font:
     600 15px system-ui,
     sans-serif;
   padding: 12px 22px;
+  min-block-size: 44px;
   border: 1px solid light-dark(#888, #999);
   border-radius: 24px;
   cursor: pointer;

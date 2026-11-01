@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Letiltja az API‑válaszok konzolos naplózását."
   },
+  "developerSettings": {
+    "message": "Fejlesztői beállítások"
+  },
   "disableLoggingLabel": {
     "message": "Konzolnaplózás letiltása"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "Ne jelenjen meg a nyers számokat mutató panel a YouTube lejátszó oldalain."
   },
+  "hideRydComments": {
+    "message": "RYD-hozzászólások elrejtése"
+  },
+  "hideRydCommentsHover": {
+    "message": "Ne jelenjenek meg RYD-hozzászólások azoknál a videóknál, ahol a YouTube-hozzászólások ki vannak kapcsolva."
+  },
   "hidePremiumAnalytics": {
     "message": "Prémium videóelemzések elrejtése"
   },
@@ -156,7 +165,7 @@
     "message": "YouTube Shorts támogatás"
   },
   "showTooltipPercentage": {
-    "message": "Százalék a like/dislike sáv buborékjában."
+    "message": "Százalék a like/dislike sáv buborékjában"
   },
   "showTooltipPercentageHover": {
     "message": "Százalék megjelenítése a tetszik/nem tetszik sáv buborékában."
@@ -228,7 +237,7 @@
     "message": "Like/Dislike beküldés kikapcsolása"
   },
   "textSettingsHover": {
-    "message": "Nem számolja tovább a like és dislike adataidat."
+    "message": "A szavazataid nem fognak számítani, és nem jelennek meg a nemtetszések számában."
   },
   "textTempUnavailable": {
     "message": "temp n/a"
@@ -804,7 +813,7 @@
     "message": "$1 olvasatlan értesítés"
   },
   "discussion_signedOutInbox": {
-    "message": "Jelentkezz be a hozzászólásaidra érkező válaszok és reakciók megtekintéséhez."
+    "message": "Jelentkezz be a hozzászólásaidra érkező válaszok és kedvelések megtekintéséhez."
   },
   "discussion_notificationUnavailable": {
     "message": "Ez a beszélgetés már nem érhető el."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Nyisson meg egy YouTube-videót, és a nemtetszések számát közvetlenül a kedvelések mellett láthatja, ahová való. A 4.1-es verzióban megérkeznek az RYD-hozzászólások is, ahol a YouTube saját hozzászólásaitól függetlenül beszélgethet a videókról."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Még egy lépés"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Kapcsolja be alább a nemtetszések számát, hogy a YouTube-on közvetlenül a kedvelések mellett lássa. A 4.1-es verzióban megérkeznek az RYD-hozzászólások is, ahol a YouTube saját hozzászólásaitól függetlenül beszélgethet a videókról."
+  },
   "changelog_new_badge": {
     "message": "Újdonság a 4.1-ben"
   },
@@ -873,7 +888,7 @@
     "message": "Ismerje meg az RYD-hozzászólásokat"
   },
   "changelog_comments_body": {
-    "message": "Közösségi beszélgetés a videók és a Shorts-videók alatt, a Return YouTube Dislike felületén, a YouTube hozzászólásaitól elkülönítve. Bárki olvashat és reagálhat. A Commenter és Premium tagok hozzászólhatnak és válaszolhatnak."
+    "message": "Közösségi beszélgetés azoknál a videóknál és Shorts-videóknál, ahol a YouTube-hozzászólások ki vannak kapcsolva, a Return YouTube Dislike felületén. Bárki olvashat és reagálhat. A Commenter és Premium tagok hozzászólhatnak és válaszolhatnak."
   },
   "changelog_comments_point_replies": {
     "message": "Szálakba rendezett válaszok kedvelésekkel és nemtetszésekkel"
@@ -882,7 +897,7 @@
     "message": "Hozzászólás az Ön által választott nyilvános becenéven"
   },
   "changelog_comments_point_notifications": {
-    "message": "Értesítések, ha valaki válaszol vagy reagál"
+    "message": "Értesítések, ha valaki válaszol a hozzászólásodra vagy kedveli azt"
   },
   "changelog_comments_point_moderation": {
     "message": "Jelentés és moderálás a kulturált beszélgetésért"
@@ -958,5 +973,149 @@
   },
   "reviewPromptAction": {
     "message": "Vélemény írása"
+  },
+  "consent_page_title": {
+    "message": "Az RYD funkcióinak engedélyei"
+  },
+  "consent_vote_title": {
+    "message": "Számítsanak a szavazataid"
+  },
+  "consent_vote_body": {
+    "message": "Szavazatmegosztás nélkül a szavazataid nem számítanak, és nem jelennek meg a nemtetszések számában. A megosztás elküldi a szavazataidat és a látható tetszésszámot. Ehhez szükség van a nemtetszések számára, ezért ha ki van kapcsolva, a Firefox annak bekapcsolását is kéri."
+  },
+  "consent_account_title": {
+    "message": "Fiókengedélyek kiválasztása"
+  },
+  "consent_account_body": {
+    "message": "Jelentkezz be a fiókfunkciók, köztük a profilod, az értesítések és a Premium elemzések használatához."
+  },
+  "consent_next_step": {
+    "message": "Az engedélyek áttekintéséhez válaszd az Engedélyezés lehetőséget a Firefoxban. El is utasíthatod őket."
+  },
+  "consent_allow": {
+    "message": "Engedélyezés a Firefoxban"
+  },
+  "consent_not_now": {
+    "message": "Most nem"
+  },
+  "consent_prompt_status": {
+    "message": "Döntsd el, hogy megadod-e ezeket az engedélyeket a Firefoxban."
+  },
+  "consent_granted_status": {
+    "message": "Az engedélyek megadva. Visszatérhetsz a YouTube-ra."
+  },
+  "consent_declined_status": {
+    "message": "Ezek a választható funkciók kikapcsolva maradnak. Az engedélyeket később módosíthatod."
+  },
+  "consent_error_status": {
+    "message": "Nem sikerült módosítani az engedélyeket. Próbáld újra."
+  },
+  "consent_details_summary": {
+    "message": "Mit jelentenek a Firefox engedélykategóriái?"
+  },
+  "consent_details_intro": {
+    "message": "A Firefox tág kategóriákba sorolja az adatokat. Az RYD esetében ezek a következőket jelentik:"
+  },
+  "consent_browsing_label": {
+    "message": "Böngészési tevékenység"
+  },
+  "consent_browsing_body": {
+    "message": "A nemtetszések számának és a beszélgetéseknek a betöltéséhez használt YouTube-videóazonosító. Te döntöd el, hogy ezt engedélyezed-e."
+  },
+  "consent_content_label": {
+    "message": "Webhelytartalom"
+  },
+  "consent_content_body": {
+    "message": "A YouTube-videón látható tetszésszám, a nemtetszések becslésének pontosításához."
+  },
+  "consent_activity_label": {
+    "message": "Webhelytevékenység"
+  },
+  "consent_activity_body": {
+    "message": "A tetszéseid, nemtetszéseid, visszavont szavazataid és az RYD-hozzászólásokra adott reakcióid, mentett véletlenszerű szavazási azonosítóval elküldve."
+  },
+  "consent_identity_label": {
+    "message": "Személyazonosításra alkalmas adatok"
+  },
+  "consent_identity_body": {
+    "message": "A profiladataid, például megjelenített név és e-mail-cím, csak ha a bejelentkezést választod."
+  },
+  "consent_auth_label": {
+    "message": "Hitelesítési adatok"
+  },
+  "consent_auth_body": {
+    "message": "A bejelentkezéshez és a fiókfunkciók használatához szükséges engedélyezési és munkamenetadatok."
+  },
+  "consent_scope": {
+    "message": "Az RYD a youtube.com oldalon kívül semmit nem gyűjt, és nem fér hozzá a YouTube-fiókodhoz. Bejelentkezés nélkül nevet és e-mail-címet sem kap."
+  },
+  "consent_settings": {
+    "message": "A választható engedélyeket később a Firefox kiegészítőbeállításaiban módosíthatod."
+  },
+  "consent_private_counts": {
+    "message": "A privát ablakok csak a számlálókat jelenítik meg, a normál ablakban engedélyezett jogosultsággal. Szavazás, bejelentkezés, Premium elemzések és beszélgetések ott nem érhetők el."
+  },
+  "consent_voter_timing": {
+    "message": "A szavazási azonosítódat csak szavazáskor vagy reagáláskor küldjük el. A saját hozzászólásreakcióidat ezen az eszközön jegyezzük meg."
+  },
+  "popup_signin_next_click": {
+    "message": "Még egy kattintás szükséges: alább válaszd ki a bejelentkezési gombot a Firefox fiókengedélyeinek áttekintéséhez és a folytatáshoz."
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "Kiválasztás a Firefoxban"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Köszönjük. A szavazataid mostantól számítanak."
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "A szavazatok megosztása kikapcsolva marad, így a szavazataid nem számítanak. Később bekapcsolhatod a Firefox kiegészítőbeállításaiban, vagy amikor kedvelésként vagy nemtetszésként jelölsz meg egy videót, miután a nemtetszések száma engedélyezve van."
+  },
+  "vote_consent_hint": {
+    "message": "A szavazatod nem számít, és nem jelenik meg a nemtetszések számában. Kapcsold be a szavazatok megosztását, hogy számítson."
+  },
+  "vote_not_counted": {
+    "message": "A szavazataid nem számítanak, és nem jelennek meg a nemtetszések számában."
+  },
+  "vote_count_mine": {
+    "message": "Számítsanak a szavazataim"
+  },
+  "vote_consent_dismiss": {
+    "message": "Ne kérdezze újra"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Kapcsold be a szavazatok megosztását a hozzászólásokra való reagáláshoz. A reakciód a bekapcsolás után kerül elküldésre."
+  },
+  "vote_consent_continue": {
+    "message": "Folytatás"
+  },
+  "discussion_consentContinue": {
+    "message": "Folytatás"
+  },
+  "vote_consent_open_failed": {
+    "message": "Nem sikerült megnyitni az engedélyek oldalát. Próbáld újra."
+  },
+  "counts_consent_enable": {
+    "message": "Nemtetszések számának engedélyezése"
+  },
+  "counts_consent_reason": {
+    "message": "A Firefox mostantól az engedélyedet kéri, mielőtt az RYD megjeleníthetné a nemtetszések számát."
+  },
+  "counts_consent_body": {
+    "message": "A számok lekéréséhez az RYD elküldi az aktuális YouTube-videó azonosítóját a szerverének. A Firefox ezt „Böngészési tevékenység” néven jelöli."
+  },
+  "counts_consent_allow": {
+    "message": "Számlálók engedélyezése"
+  },
+  "counts_consent_toolbar": {
+    "message": "A számlálók engedélyezéséhez nyisd meg a Return YouTube Dislike-ot a Firefox kiegészítőmenüjéből."
+  },
+  "counts_consent_declined": {
+    "message": "A számlálók kikapcsolva maradnak. Később itt engedélyezheted őket."
+  },
+  "counts_consent_enabled": {
+    "message": "A nemtetszések száma engedélyezve van."
+  },
+  "counts_consent_private": {
+    "message": "Először egy normál ablakban engedélyezd a nemtetszések számát. A privát ablakok csak a számlálókat jelenítik meg."
   }
 }

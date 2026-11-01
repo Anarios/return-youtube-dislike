@@ -519,6 +519,10 @@ figure {
   background: linear-gradient(135deg, rgba(255, 68, 68, 0.14), rgba(255, 68, 68, 0.03));
 }
 
+.ryd-callout + .ryd-callout {
+  margin-top: 16px;
+}
+
 .ryd-callout__title {
   margin: 0;
   font-size: 1.25rem;

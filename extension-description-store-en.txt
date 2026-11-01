@@ -1,5 +1,11 @@
 Return YouTube Dislike restores the ability to see dislikes on YouTube.
 
+RYD comments let you read and react to discussions on videos and Shorts where YouTube comments are disabled. Commenter and Premium members can post and reply, with notifications for replies and likes.
+
+Core dislike counts are free. Some optional features have access requirements, including paid Patreon membership tiers or eligible GitHub contributor access.
+
+Your votes help improve the estimates. They are sent with a random ID that is created the first time you vote or react to a comment and is not linked to your Google or YouTube account. You can stop sending votes with "Disable like/dislike submission" in the extension menu.
+
 If it doesn't work: open the Extensions tab (chrome://extensions/), disable this extension and enable it again. This should fix most of the problems, since there is a bug in Chromium that breaks the extension in some cases. Hopefully the Chromium team will fix this soon.
 
 Starting December 13th 2021, YouTube removed the ability to see dislikes from their API.

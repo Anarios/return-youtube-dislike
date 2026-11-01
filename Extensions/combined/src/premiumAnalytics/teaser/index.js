@@ -36,6 +36,13 @@ export async function initPremiumTeaser() {
   handleNavigation();
 }
 
+export function refreshPremiumTeaser() {
+  if (!teaserState.initialized) return;
+  resetState();
+  removePanel(true);
+  handleNavigation();
+}
+
 export function setTeaserSuppressed(shouldSuppress, reason = TEASER_SUPPRESSION_REASON_LEGACY) {
   const normalizedReason = reason || TEASER_SUPPRESSION_REASON_LEGACY;
   const reasons = teaserState.suppressionReasons;

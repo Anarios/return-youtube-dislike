@@ -86,6 +86,8 @@ import { dislikeClicked, likeClicked } from "./events";
 import { clearVoteDataRequestCache } from "./vote-data-request";
 import {
   clearRenderedVoteState,
+  ensureRemoteSelectors,
+  remoteSelectorsSettled,
   extConfig,
   getLikeCountFromButton,
   initExtConfig,
@@ -590,6 +592,35 @@ test("falls back to bundled selectors when the remote selector request never set
   }
 });
 
+test("remote selectors are fetched again only until one request succeeds", async () => {
+  stateRewire.__set__("remoteSelectorsLoaded", false);
+  fetch.mockRejectedValueOnce(new Error("consent required"));
+  await ensureRemoteSelectors();
+  fetch.mockResolvedValueOnce({ ok: true, json: async () => ({}) });
+  await ensureRemoteSelectors();
+  await ensureRemoteSelectors();
+  expect(fetch.mock.calls.filter(([url]) => url.endsWith("/configs/selectors"))).toHaveLength(2);
+});
+
+test("concurrent selector loads share one request that later cycles wait for", async () => {
+  stateRewire.__set__("remoteSelectorsLoaded", false);
+  let respond;
+  fetch.mockImplementationOnce(() => new Promise((resolve) => (respond = resolve)));
+  const first = ensureRemoteSelectors();
+  const second = ensureRemoteSelectors();
+  let settled = false;
+  const waiting = remoteSelectorsSettled().then(() => (settled = true));
+  await Promise.resolve();
+  expect(settled).toBe(false);
+  respond({ ok: true, json: async () => ({}) });
+  await expect(first).resolves.toBe(true);
+  await expect(second).resolves.toBe(true);
+  await waiting;
+  expect(settled).toBe(true);
+  expect(fetch.mock.calls.filter(([url]) => url.endsWith("/configs/selectors"))).toHaveLength(1);
+  await expect(remoteSelectorsSettled()).resolves.toBeUndefined();
+});
+
 describe("private count display", () => {
   beforeEach(() => {
     stateRewire.__set__("isPrivateBrowsingContext", () => true);
@@ -760,5 +791,23 @@ describe("private count display", () => {
     pending.resolve({ ok: true, json: async () => ({ privateSelectorMarker: true }) });
     await expect(initialization).resolves.toBe(false);
     expect(extConfig.selectors).not.toHaveProperty("privateSelectorMarker");
+  });
+});
+
+describe("vote submission preference", () => {
+  test("is read and defaulted in synced storage", async () => {
+    const storage = {
+      sync: { get: jest.fn((_keys, callback) => callback({})), set: jest.fn() },
+      local: { get: jest.fn((_keys, callback) => callback({})), set: jest.fn() },
+      onChanged: { addListener: jest.fn(), removeListener: jest.fn() },
+    };
+    globalThis.__mockBrowser = { storage };
+    fetch.mockResolvedValueOnce({ ok: true, json: async () => ({}) });
+
+    await initExtConfig();
+
+    const requested = storage.sync.get.mock.calls.flatMap(([keys]) => [].concat(keys));
+    expect(requested).toContain("disableVoteSubmission");
+    expect(storage.sync.set).toHaveBeenCalledWith({ disableVoteSubmission: false });
   });
 });

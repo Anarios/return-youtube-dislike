@@ -91,6 +91,54 @@ test("a live update preserves loaded history and the remaining pagination cursor
   expect(request).toHaveBeenLastCalledWith("notifications", { cursor: "oldest-page" });
 });
 
+test("on-demand loads and reads report the server's unread count", async () => {
+  const onUnreadCount = jest.fn();
+  const request = jest.fn(async (operation) =>
+    operation === "readNotifications"
+      ? { unreadCount: 0, revision: "2" }
+      : { items: [{ ...notification }], nextCursor: null, unreadCount: 1 },
+  );
+  inbox = createDiscussionInbox({ request, onUnreadCount });
+  document.body.append(inbox.node);
+  await inbox.load();
+  expect(onUnreadCount).toHaveBeenLastCalledWith(1);
+  inbox.node.querySelector(".ryd-discussion-notification button").click();
+  await Promise.resolve();
+  await Promise.resolve();
+  expect(request).toHaveBeenLastCalledWith("readNotifications", { ids: [ID] });
+  expect(onUnreadCount).toHaveBeenLastCalledWith(0);
+});
+
+test("a read response superseded by a live update keeps the live count", async () => {
+  const onUnreadCount = jest.fn();
+  let resolve;
+  const request = jest.fn(
+    () =>
+      new Promise((done) => {
+        resolve = done;
+      }),
+  );
+  inbox = createDiscussionInbox({ request, onUnreadCount });
+  inbox.update({ items: [{ ...notification }], unreadCount: 1 });
+  inbox.node.querySelector(".ryd-discussion-notification button").click();
+  inbox.update({ items: [], unreadCount: 3 }, { live: true });
+  resolve({ unreadCount: 0, revision: "2" });
+  await Promise.resolve();
+  await Promise.resolve();
+  expect(onUnreadCount).toHaveBeenLastCalledWith(3);
+});
+
+test("signing out resets the unread count and ignores later signed-out updates", () => {
+  const onUnreadCount = jest.fn();
+  inbox = createDiscussionInbox({ onUnreadCount });
+  inbox.update({ items: [notification], unreadCount: 4 }, { live: true });
+  expect(onUnreadCount).toHaveBeenLastCalledWith(4);
+  inbox.setSession({ authenticated: false });
+  inbox.update({ items: [notification], unreadCount: 5 }, { live: true });
+  expect(onUnreadCount).toHaveBeenLastCalledWith(0);
+  expect(onUnreadCount).not.toHaveBeenCalledWith(5);
+});
+
 test("an account replacement clears old rows and pagination even without an intervening anonymous event", () => {
   inbox = createDiscussionInbox();
   inbox.setSession({ authenticated: true, profile: { id: "first-account" } });

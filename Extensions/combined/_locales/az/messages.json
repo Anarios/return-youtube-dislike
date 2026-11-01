@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "API cavablarının konsolda qeydə alınmasını deaktiv et."
   },
+  "developerSettings": {
+    "message": "Tərtibatçı seçimləri"
+  },
   "disableLoggingLabel": {
     "message": "Konsola yazmağı söndür"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "YouTube izləmə səhifələrində emal olunmamış saylar panelini göstərmə."
   },
+  "hideRydComments": {
+    "message": "RYD şərhlərini gizlət"
+  },
+  "hideRydCommentsHover": {
+    "message": "YouTube şərhləri söndürülmüş videolarda RYD şərhlərini göstərmə."
+  },
   "hidePremiumAnalytics": {
     "message": "Premium video analitikasını gizlət"
   },
@@ -156,7 +165,7 @@
     "message": "YouTube Shorts Dəstəyi"
   },
   "showTooltipPercentage": {
-    "message": "Bəyən/bəyənməmə çubuğu ipucunda faiz."
+    "message": "Bəyən/bəyənməmə çubuğu ipucunda faiz"
   },
   "showTooltipPercentageHover": {
     "message": "Bəyən/bəyənməmə çubuğu ipucunda faizi göstər."
@@ -228,7 +237,7 @@
     "message": "Like/dislike göndərməsini deaktiv et"
   },
   "textSettingsHover": {
-    "message": "Like və dislike-larınızı saymağı dayandırır."
+    "message": "Bəyənmə və bəyənməmələriniz sayılmayacaq və bəyənməmə saylarında əks olunmayacaq."
   },
   "textTempUnavailable": {
     "message": "Müvəqqəti olaraq istifadədən kənar"
@@ -804,7 +813,7 @@
     "message": "$1 oxunmamış bildiriş"
   },
   "discussion_signedOutInbox": {
-    "message": "Şərhlərinizə verilən cavabları və reaksiyaları görmək üçün daxil olun."
+    "message": "Şərhlərinizə verilən cavabları və bəyənmələri görmək üçün daxil olun."
   },
   "discussion_notificationUnavailable": {
     "message": "Bu müzakirə artıq əlçatan deyil."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "İstənilən YouTube videosunu açın: bəyənməmə sayını bəyənmələrin yanında, öz yerində görəcəksiniz. 4.1 versiyası həmçinin YouTube-un şərh bölməsindən kənarda videoları müzakirə etmək üçün RYD şərhlərini təqdim edir."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Daha bir addım"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "YouTube-da bəyənməmə saylarını bəyənmələrin yanında görmək üçün aşağıda onları aktivləşdirin. 4.1 versiyası həmçinin YouTube-un şərh bölməsindən kənarda videoları müzakirə etmək üçün RYD şərhlərini təqdim edir."
+  },
   "changelog_new_badge": {
     "message": "4.1-də yenilik"
   },
@@ -873,7 +888,7 @@
     "message": "RYD şərhləri ilə tanış olun"
   },
   "changelog_comments_body": {
-    "message": "Videolar və Shorts altında Return YouTube Dislike-ın təqdim etdiyi, YouTube şərhlərindən ayrı icma müzakirələri. Hər kəs oxuya və reaksiya verə bilər. Commenter və Premium üzvləri şərh və cavab yaza bilər."
+    "message": "YouTube şərhləri söndürülmüş videolar və Shorts altında Return YouTube Dislike-ın təqdim etdiyi icma müzakirəsi. Hər kəs oxuya və reaksiya verə bilər. Commenter və Premium üzvləri şərh və cavab yaza bilər."
   },
   "changelog_comments_point_replies": {
     "message": "Bəyənmə və bəyənməmə ilə şaxələnmiş cavablar"
@@ -882,7 +897,7 @@
     "message": "Seçdiyiniz, hamıya görünən ləqəblə yazın"
   },
   "changelog_comments_point_notifications": {
-    "message": "Cavab və ya reaksiya gələndə bildirişlər"
+    "message": "Kimsə şərhinizə cavab yazanda və ya onu bəyənəndə bildirişlər"
   },
   "changelog_comments_point_moderation": {
     "message": "Nəzakətli ünsiyyət üçün şikayətlər və moderasiya"
@@ -958,5 +973,149 @@
   },
   "reviewPromptAction": {
     "message": "Rəy yazın"
+  },
+  "consent_page_title": {
+    "message": "RYD funksiyalarının icazələri"
+  },
+  "consent_vote_title": {
+    "message": "Səsləriniz sayılsın"
+  },
+  "consent_vote_body": {
+    "message": "Səs paylaşımı olmadan bəyənmə və bəyənməmələriniz sayılmır və bəyənməmə saylarında əks olunmur. Paylaşım səslərinizi və gördüyünüz bəyənmə sayını göndərir. O, bəyənməmə saylarını tələb edir, ona görə də onlar sönülüdürsə, Firefox onları aktivləşdirmək üçün də icazə istəyəcək."
+  },
+  "consent_account_title": {
+    "message": "Hesab icazələrini seçin"
+  },
+  "consent_account_body": {
+    "message": "Profiliniz, bildirişlər və Premium analitika daxil olmaqla hesab funksiyalarından istifadə etmək üçün daxil olun."
+  },
+  "consent_next_step": {
+    "message": "İcazələri nəzərdən keçirmək üçün Firefox-da İcazə ver seçin. İmtina edə bilərsiniz."
+  },
+  "consent_allow": {
+    "message": "Firefox-da icazə ver"
+  },
+  "consent_not_now": {
+    "message": "İndi yox"
+  },
+  "consent_prompt_status": {
+    "message": "Firefox-da bu icazələri verib-verməyəcəyinizi seçin."
+  },
+  "consent_granted_status": {
+    "message": "İcazələr aktivdir. YouTube-a qayıda bilərsiniz."
+  },
+  "consent_declined_status": {
+    "message": "Bu könüllü funksiyalar sönülü qalır. İcazələri daha sonra dəyişə bilərsiniz."
+  },
+  "consent_error_status": {
+    "message": "İcazələri yeniləmək mümkün olmadı. Yenidən cəhd edin."
+  },
+  "consent_details_summary": {
+    "message": "Firefox-un icazə kateqoriyaları nə deməkdir?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox məlumatları geniş kateqoriyalara ayırır. Hər kateqoriyanın RYD üçün mənası budur:"
+  },
+  "consent_browsing_label": {
+    "message": "Baxış fəaliyyəti"
+  },
+  "consent_browsing_body": {
+    "message": "Bəyənməmə saylarını və müzakirələri yükləmək üçün istifadə olunan YouTube video ID-si. Buna icazə verib-verməməyi siz seçirsiniz."
+  },
+  "consent_content_label": {
+    "message": "Veb-sayt məzmunu"
+  },
+  "consent_content_body": {
+    "message": "Bəyənməmə təxminlərini yaxşılaşdırmaq üçün YouTube videosunda göstərilən bəyənmə sayı."
+  },
+  "consent_activity_label": {
+    "message": "Veb-sayt fəaliyyəti"
+  },
+  "consent_activity_body": {
+    "message": "Saxlanmış təsadüfi səsvermə identifikatoru ilə göndərilən bəyənmələriniz, bəyənməmələriniz, geri götürdüyünüz səslər və RYD şərhlərinə reaksiyalarınız."
+  },
+  "consent_identity_label": {
+    "message": "Şəxsi identifikasiya məlumatları"
+  },
+  "consent_identity_body": {
+    "message": "Yalnız daxil olmağı seçdiyinizdə görünən ad və e-poçt kimi profil məlumatlarınız."
+  },
+  "consent_auth_label": {
+    "message": "Autentifikasiya məlumatları"
+  },
+  "consent_auth_body": {
+    "message": "Daxil olmaq və hesab funksiyalarından istifadə etmək üçün tələb olunan avtorizasiya və sessiya məlumatları."
+  },
+  "consent_scope": {
+    "message": "RYD youtube.com xaricində heç nə toplamır və YouTube hesabınıza daxil olmur. Daxil olmayınca ad və ya e-poçt almır."
+  },
+  "consent_settings": {
+    "message": "Könüllü icazələri daha sonra Firefox-un əlavə ayarlarında dəyişə bilərsiniz."
+  },
+  "consent_private_counts": {
+    "message": "Məxfi pəncərələrdə adi pəncərədə aktivləşdirilmiş icazə ilə yalnız saylar göstərilir. Səsvermə, giriş, Premium analitika və müzakirələr orada mövcud deyil."
+  },
+  "consent_voter_timing": {
+    "message": "Səsvermə identifikatorunuz yalnız səs və ya reaksiya verdikdə göndərilir. Şərhlərə öz reaksiyalarınız bu cihazda yadda saxlanılır."
+  },
+  "popup_signin_next_click": {
+    "message": "Daha bir klik lazımdır: Firefox-un hesab icazələrini nəzərdən keçirib davam etmək üçün aşağıdakı giriş düymənizi seçin."
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "Firefox-da seç"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Təşəkkürlər. Səsləriniz artıq sayılır."
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "Səs paylaşımı sönülü qalır, ona görə də bəyənmə və bəyənməmələriniz sayılmayacaq. Onu daha sonra Firefox-un əlavə ayarlarında, yaxud bəyənməmə sayları aktiv olduqdan sonra bir videonu bəyənərkən və ya bəyənməyərkən aktivləşdirə bilərsiniz."
+  },
+  "vote_consent_hint": {
+    "message": "Səsiniz sayılmır və bəyənməmə saylarında əks olunmayacaq. Onun sayılması üçün səs paylaşımını aktivləşdirin."
+  },
+  "vote_not_counted": {
+    "message": "Bəyənmə və bəyənməmələriniz sayılmır və bəyənməmə saylarında əks olunmur."
+  },
+  "vote_count_mine": {
+    "message": "Səslərimi say"
+  },
+  "vote_consent_dismiss": {
+    "message": "Bir daha soruşma"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Şərhlərə reaksiya vermək üçün səs paylaşımını aktivləşdirin. Reaksiyanız o aktiv olduqdan sonra göndəriləcək."
+  },
+  "vote_consent_continue": {
+    "message": "Davam et"
+  },
+  "discussion_consentContinue": {
+    "message": "Davam et"
+  },
+  "vote_consent_open_failed": {
+    "message": "İcazə səhifəsini açmaq mümkün olmadı. Yenidən cəhd edin."
+  },
+  "counts_consent_enable": {
+    "message": "Bəyənməmə saylarını aktivləşdirin"
+  },
+  "counts_consent_reason": {
+    "message": "Firefox artıq RYD-nin bəyənməmə saylarını göstərməsi üçün icazənizi tələb edir."
+  },
+  "counts_consent_body": {
+    "message": "Sayları almaq üçün RYD cari YouTube videosunun ID-sini öz serverinə göndərir. Firefox bunu «Baxış fəaliyyəti» adlandırır."
+  },
+  "counts_consent_allow": {
+    "message": "Sayları aktivləşdirin"
+  },
+  "counts_consent_toolbar": {
+    "message": "Sayları aktivləşdirmək üçün Firefox-un genişlənmələr menyusundan Return YouTube Dislike-ı açın."
+  },
+  "counts_consent_declined": {
+    "message": "Saylar sönülü qalır. Onları daha sonra buradan aktivləşdirə bilərsiniz."
+  },
+  "counts_consent_enabled": {
+    "message": "Bəyənməmə sayları aktivdir."
+  },
+  "counts_consent_private": {
+    "message": "Əvvəlcə adi pəncərədə bəyənməmə saylarını aktivləşdirin. Məxfi pəncərələrdə yalnız saylar göstərilir."
   }
 }

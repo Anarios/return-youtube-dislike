@@ -1,5 +1,6 @@
 import { createVoteClient } from "../../common/vote-client";
 import { resolveDelegatedVoteActivation } from "../../common/delegated-vote-activation";
+import { getLiveVideoId } from "../../common/live-video-id";
 import { getThemeColor, isYouTubeDarkTheme, observeYouTubeTheme } from "../../common/color-themes";
 import {
   actionBarHasHydratedData,
@@ -998,14 +999,21 @@ function getState() {
   return NEUTRAL_STATE;
 }
 
+function setCountText(container, count) {
+  const text = String(count);
+  if (container.textContent !== text) {
+    container.textContent = text;
+  }
+}
+
 function setLikes(likesCount) {
   if (isMobile) {
     const container = getButtons()?.children[0]?.querySelector(".button-renderer-text");
-    if (container) container.innerText = likesCount;
+    if (container) setCountText(container, likesCount);
     return;
   }
   const container = getLikeTextContainer();
-  if (container) container.innerText = likesCount;
+  if (container) setCountText(container, likesCount);
 }
 
 function setDislikes(dislikesCount) {
@@ -1019,9 +1027,14 @@ function setDislikes(dislikesCount) {
     return;
   }
   _container.removeAttribute("is-empty");
-  if (_container.innerText !== dislikesCount) {
-    _container.innerText = dislikesCount;
-  }
+  setCountText(_container, dislikesCount);
+}
+
+function renderMobileDislikes() {
+  const dislikeButton = getDislikeButton();
+  if (!dislikeButton) return;
+  const container = dislikeButton.querySelector(".button-renderer-text") ?? getDislikeTextContainer();
+  if (container) setCountText(container, mobileDislikes);
 }
 
 function getLikeCountFromButton() {
@@ -1066,14 +1079,14 @@ function getLikeCountFromButton() {
       background: #737373;
       background: color-mix(
         in srgb,
-        var(--yt-spec-text-primary, #f1f1f1) 55%,
-        var(--yt-spec-base-background, #0f0f0f) 45%
+        var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1)) 55%,
+        var(--yt-sys-color-baseline--base-background, var(--yt-spec-base-background, #0f0f0f)) 45%
       );
       border-radius: 2px;
     }
 
     #return-youtube-dislike-bar {
-      background: var(--yt-spec-text-primary, #f1f1f1);
+      background: var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1));
       border-radius: 2px;
       transition: all 0.15s ease-in-out;
     }
@@ -1804,7 +1817,7 @@ function getVideoId() {
     if (shortVideoId) {
       return shortVideoId;
     }
-    return urlObject.searchParams.get("v");
+    return urlObject.searchParams.get("v") ?? getLiveVideoId(pathname);
   }
 }
 
@@ -2609,7 +2622,6 @@ function handleNavigateFinish(event) {
 (function () {
   "use strict";
   observeYouTubeTheme(refreshColorPresentation);
-  void voteClient.ensureRegistered().catch(reportVoteFailure);
   document.addEventListener("click", handleDelegatedVoteClick, true);
   window.addEventListener("yt-navigate-start", handleNavigateStart, true);
   window.addEventListener("yt-navigate-finish", handleNavigateFinish, true);
@@ -2619,12 +2631,5 @@ function handleNavigateFinish(event) {
   setEventListeners();
 })();
 if (isMobile) {
-  setInterval(() => {
-    const dislikeButton = getDislikeButton();
-    if (dislikeButton?.querySelector(".button-renderer-text") === null) {
-      getDislikeTextContainer().innerText = mobileDislikes;
-    } else {
-      if (dislikeButton) dislikeButton.querySelector(".button-renderer-text").innerText = mobileDislikes;
-    }
-  }, 1000);
+  setInterval(renderMobileDislikes, 1000);
 }

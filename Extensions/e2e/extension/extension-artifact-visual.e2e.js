@@ -85,6 +85,9 @@ async function withExtensionVisualFixture(testInfo, { initialState = "neutral", 
     await adapter.page.setViewportSize({ height: viewport.height, width: viewport.width });
     await adapter.openWatch(VIDEO_A);
     await adapter.waitForWatchResult(VIDEO_A);
+    await expect
+      .poll(() => apiServer.records.some((record) => record.pathname === "/api/discussion/capabilities"))
+      .toBe(true);
     expect(apiServer.records.filter((record) => record.pathname === "/puzzle/registration")).toHaveLength(0);
     await run({ adapter, apiServer, page: adapter.page, workerErrors });
   } catch (error) {

@@ -26,9 +26,9 @@
     <main class="ryd-page">
       <section class="ryd-hero">
         <div class="ryd-hero__text">
-          <p class="ryd-eyebrow">__MSG_changelog_hero_eyebrow__</p>
+          <p class="ryd-eyebrow" id="ryd-hero-eyebrow">__MSG_changelog_hero_eyebrow__</p>
           <h1 class="ryd-hero__title">__MSG_changelog_hero_title__</h1>
-          <p class="ryd-hero__body">__MSG_changelog_hero_body__</p>
+          <p class="ryd-hero__body" id="ryd-hero-body">__MSG_changelog_hero_body__</p>
         </div>
         <div class="ryd-hero__visual" aria-hidden="true">
           <div class="ryd-vote">
@@ -54,6 +54,37 @@
         </div>
       </section>
 
+      <div id="ryd-firefox-optin" hidden>
+        <section class="ryd-callout" aria-labelledby="ryd-firefox-counts-title">
+          <div>
+            <h2 class="ryd-callout__title" id="ryd-firefox-counts-title">__MSG_counts_consent_enable__</h2>
+            <p class="ryd-callout__body">__MSG_counts_consent_body__</p>
+            <p id="ryd-firefox-counts-status" class="ryd-note" role="status"></p>
+          </div>
+          <div id="ryd-firefox-counts-actions">
+            <div class="ryd-actions">
+              <button type="button" id="ryd-firefox-counts-allow" class="ryd-button ryd-button--secondary">
+                __MSG_counts_consent_allow__
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="ryd-callout" id="ryd-firefox-vote" aria-labelledby="ryd-firefox-vote-title">
+          <div>
+            <h2 class="ryd-callout__title" id="ryd-firefox-vote-title">__MSG_consent_vote_title__</h2>
+            <p class="ryd-callout__body">__MSG_consent_vote_body__</p>
+            <p id="ryd-firefox-vote-status" class="ryd-note" role="status"></p>
+          </div>
+          <div id="ryd-firefox-vote-actions">
+            <div class="ryd-actions">
+              <button type="button" id="ryd-firefox-vote-allow" class="ryd-button ryd-button--secondary">
+                __MSG_changelog_firefox_vote_allow__
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+
       <section class="ryd-section ryd-feature" aria-labelledby="ryd-comments-title">
         <div class="ryd-feature__text">
           <div class="ryd-tags">
@@ -76,7 +107,7 @@
               src="../images/comments-watch.png"
               alt="__MSG_changelog_comments_shot_alt__"
               width="1600"
-              height="2614"
+              height="2594"
               loading="lazy"
             />
           </figure>

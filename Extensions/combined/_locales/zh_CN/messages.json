@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "在控制台中禁用 API 响应日志。"
   },
+  "developerSettings": {
+    "message": "开发者选项"
+  },
   "disableLoggingLabel": {
     "message": "禁用控制台日志"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "不要在 YouTube 播放页面显示原始计数面板。"
   },
+  "hideRydComments": {
+    "message": "隐藏 RYD 评论"
+  },
+  "hideRydCommentsHover": {
+    "message": "在已关闭 YouTube 评论的视频上不显示 RYD 评论。"
+  },
   "hidePremiumAnalytics": {
     "message": "隐藏高级视频洞察"
   },
@@ -156,7 +165,7 @@
     "message": "支持 YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "在点赞/点踩条的工具提示中显示百分比。"
+    "message": "在点赞/点踩条的工具提示中显示百分比"
   },
   "showTooltipPercentageHover": {
     "message": "在点赞/点踩条的工具提示中显示百分比。"
@@ -228,7 +237,7 @@
     "message": "禁用点赞/点踩提交"
   },
   "textSettingsHover": {
-    "message": "停止统计您提交的点赞和点踩。"
+    "message": "您的喜欢和不喜欢将不会被计入，也不会体现在不喜欢数中。"
   },
   "textTempUnavailable": {
     "message": "暂时不可用"
@@ -804,7 +813,7 @@
     "message": "$1 条未读通知"
   },
   "discussion_signedOutInbox": {
-    "message": "登录后可查看您评论收到的回复和回应。"
+    "message": "登录后可查看您评论收到的回复和赞。"
   },
   "discussion_notificationUnavailable": {
     "message": "此讨论已不可用。"
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "打开任意 YouTube 视频，就能在点赞数旁边看到点踩数，回到它应有的位置。4.1 版本还推出了 RYD 评论，让你在 YouTube 自带的评论区之外讨论视频。"
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "还差一步"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "在下方启用不喜欢数，即可在 YouTube 上的喜欢数旁边看到它。4.1 版本还推出了 RYD 评论，让你在 YouTube 自带的评论区之外讨论视频。"
+  },
   "changelog_new_badge": {
     "message": "4.1 新功能"
   },
@@ -873,7 +888,7 @@
     "message": "认识 RYD 评论"
   },
   "changelog_comments_body": {
-    "message": "由 Return YouTube Dislike 提供的视频和 Shorts 下方的社区讨论区，与 YouTube 评论相互独立。所有人都能阅读和表达反应。Commenter 和 Premium 会员可以发表评论和回复。"
+    "message": "在已关闭 YouTube 评论的视频和 Shorts 下方，由 Return YouTube Dislike 提供的社区讨论区。所有人都能阅读和表达反应。Commenter 和 Premium 会员可以发表评论和回复。"
   },
   "changelog_comments_point_replies": {
     "message": "支持点赞和点踩的分层回复"
@@ -882,7 +897,7 @@
     "message": "使用自己选择的公开昵称发言"
   },
   "changelog_comments_point_notifications": {
-    "message": "有人回复或表达反应时收到通知"
+    "message": "有人回复或赞了您的评论时收到通知"
   },
   "changelog_comments_point_moderation": {
     "message": "通过举报和管理维护文明讨论"
@@ -958,5 +973,149 @@
   },
   "reviewPromptAction": {
     "message": "撰写评价"
+  },
+  "consent_page_title": {
+    "message": "RYD 功能权限"
+  },
+  "consent_vote_title": {
+    "message": "让您的评价被计入"
+  },
+  "consent_vote_body": {
+    "message": "未开启评价分享时，您的喜欢和不喜欢不会被计入，也不会体现在不喜欢数中。分享会发送您的评价和看到的喜欢数。分享评价需要启用不喜欢数，因此如果它处于关闭状态，Firefox 也会请求将其开启。"
+  },
+  "consent_account_title": {
+    "message": "选择账户权限"
+  },
+  "consent_account_body": {
+    "message": "登录以使用个人资料、通知和 Premium 分析等账户功能。"
+  },
+  "consent_next_step": {
+    "message": "在 Firefox 中选择“允许”以查看权限。您可以拒绝。"
+  },
+  "consent_allow": {
+    "message": "在 Firefox 中允许"
+  },
+  "consent_not_now": {
+    "message": "暂不"
+  },
+  "consent_prompt_status": {
+    "message": "请选择是否在 Firefox 中授予这些权限。"
+  },
+  "consent_granted_status": {
+    "message": "权限已启用。您可以返回 YouTube。"
+  },
+  "consent_declined_status": {
+    "message": "这些可选功能保持关闭。您可以稍后更改权限。"
+  },
+  "consent_error_status": {
+    "message": "无法更新权限。请重试。"
+  },
+  "consent_details_summary": {
+    "message": "Firefox 的权限分类是什么意思？"
+  },
+  "consent_details_intro": {
+    "message": "Firefox 将数据划分为宽泛的类别。以下是各类别在 RYD 中的含义："
+  },
+  "consent_browsing_label": {
+    "message": "浏览活动"
+  },
+  "consent_browsing_body": {
+    "message": "用于加载不喜欢数和讨论的 YouTube 视频 ID。您可以选择是否允许。"
+  },
+  "consent_content_label": {
+    "message": "网站内容"
+  },
+  "consent_content_body": {
+    "message": "YouTube 视频上显示的喜欢数，用于改进不喜欢数的估算。"
+  },
+  "consent_activity_label": {
+    "message": "网站活动"
+  },
+  "consent_activity_body": {
+    "message": "您的喜欢、不喜欢、撤销的评价以及对 RYD 评论的回应，连同已保存的随机投票 ID 一起发送。"
+  },
+  "consent_identity_label": {
+    "message": "个人身份信息"
+  },
+  "consent_identity_body": {
+    "message": "显示名称和电子邮件等个人资料，仅在您选择登录时使用。"
+  },
+  "consent_auth_label": {
+    "message": "身份验证信息"
+  },
+  "consent_auth_body": {
+    "message": "登录和使用账户功能所需的授权及会话数据。"
+  },
+  "consent_scope": {
+    "message": "RYD 不收集 youtube.com 以外的任何内容，也不会访问您的 YouTube 账户。除非您登录，否则不会收到您的姓名或电子邮件。"
+  },
+  "consent_settings": {
+    "message": "您可稍后在 Firefox 的扩展设置中更改可选权限。"
+  },
+  "consent_private_counts": {
+    "message": "隐私窗口仅显示计数，使用在普通窗口中启用的权限。无法在隐私窗口中投票、登录、使用 Premium 分析或参与讨论。"
+  },
+  "consent_voter_timing": {
+    "message": "仅在您投票或回应时发送投票 ID。您自己的评论回应会保存在此设备上。"
+  },
+  "popup_signin_next_click": {
+    "message": "还需点击一次：请选择下方的登录按钮，查看 Firefox 的账户权限并继续。"
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "在 Firefox 中选择"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "谢谢。您的评价现在会被计入。"
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "评价分享保持关闭，因此您的喜欢和不喜欢不会被计入。您可以稍后在 Firefox 的附加组件设置中启用，或在启用不喜欢数后为视频点喜欢或不喜欢时启用。"
+  },
+  "vote_consent_hint": {
+    "message": "您的评价不会被计入，也不会体现在不喜欢数中。开启评价分享即可计入。"
+  },
+  "vote_not_counted": {
+    "message": "您的喜欢和不喜欢不会被计入，也不会体现在不喜欢数中。"
+  },
+  "vote_count_mine": {
+    "message": "计入我的评价"
+  },
+  "vote_consent_dismiss": {
+    "message": "不再询问"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "请开启评价分享以回应评论。开启后，您的回应将会发送。"
+  },
+  "vote_consent_continue": {
+    "message": "继续"
+  },
+  "discussion_consentContinue": {
+    "message": "继续"
+  },
+  "vote_consent_open_failed": {
+    "message": "无法打开权限页面。请重试。"
+  },
+  "counts_consent_enable": {
+    "message": "启用不喜欢数"
+  },
+  "counts_consent_reason": {
+    "message": "Firefox 现在需要您的许可，RYD 才能显示不喜欢数。"
+  },
+  "counts_consent_body": {
+    "message": "为了获取计数，RYD 会将当前 YouTube 视频的 ID 发送到其服务器。Firefox 将此称为“浏览活动”。"
+  },
+  "counts_consent_allow": {
+    "message": "启用计数"
+  },
+  "counts_consent_toolbar": {
+    "message": "从 Firefox 的扩展菜单中打开 Return YouTube Dislike 以启用计数。"
+  },
+  "counts_consent_declined": {
+    "message": "计数保持关闭。您可以稍后在此启用。"
+  },
+  "counts_consent_enabled": {
+    "message": "不喜欢数已启用。"
+  },
+  "counts_consent_private": {
+    "message": "请先在普通窗口中启用不喜欢数。隐私窗口仅显示计数。"
   }
 }

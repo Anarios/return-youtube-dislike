@@ -248,6 +248,50 @@ describe("utils", () => {
 
       expect(getVideoId("https://www.youtube.com/clip/foobar")).toBe("clip123");
     });
+
+    describe("live URLs", () => {
+      const renderLiveWatchPage = ({ hidden = false } = {}) => {
+        document.head.insertAdjacentHTML(
+          "beforeend",
+          `<link rel="canonical" href="https://www.youtube.com/watch?v=0sfDth4lMLc">`,
+        );
+        document.body.innerHTML = `<ytd-watch-flexy video-id="0sfDth4lMLc"${hidden ? " hidden" : ""}></ytd-watch-flexy>`;
+      };
+
+      afterEach(() => {
+        document.head.querySelector("link[rel='canonical']")?.remove();
+        document.body.innerHTML = "";
+      });
+
+      it("reads the video from a live link path", () => {
+        expect(getVideoId("https://www.youtube.com/live/0sfDth4lMLc?si=share")).toBe("0sfDth4lMLc");
+      });
+
+      it("uses the canonical watch identity when a channel live URL has no video parameter", () => {
+        renderLiveWatchPage();
+
+        expect(getVideoId("https://www.youtube.com/@LofiGirl/live")).toBe("0sfDth4lMLc");
+      });
+
+      it("prefers the URL video parameter over the canonical watch identity", () => {
+        renderLiveWatchPage();
+
+        expect(getVideoId("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).toBe("dQw4w9WgXcQ");
+      });
+
+      it("does not reuse the live identity after leaving the live route", () => {
+        renderLiveWatchPage();
+
+        expect(getVideoId("https://www.youtube.com/@LofiGirl")).toBeNull();
+        expect(getVideoId("https://www.youtube.com/")).toBeNull();
+      });
+
+      it("ignores the canonical identity while the watch page is hidden", () => {
+        renderLiveWatchPage({ hidden: true });
+
+        expect(getVideoId("https://www.youtube.com/@LofiGirl/live")).toBeNull();
+      });
+    });
   });
 
   describe("isInViewport", () => {

@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Schakelt het loggen van API‑antwoorden in de console uit."
   },
+  "developerSettings": {
+    "message": "Ontwikkelaarsopties"
+  },
   "disableLoggingLabel": {
     "message": "Loggen naar de console uitschakelen"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "Toon het paneel met ruwe aantallen niet op YouTube-kijkpagina’s."
   },
+  "hideRydComments": {
+    "message": "RYD-reacties verbergen"
+  },
+  "hideRydCommentsHover": {
+    "message": "Toon geen RYD-reacties bij video’s waarvan de YouTube-reacties zijn uitgeschakeld."
+  },
   "hidePremiumAnalytics": {
     "message": "Premium video-inzichten verbergen"
   },
@@ -156,7 +165,7 @@
     "message": "Ondersteuning voor YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Percentage in de tooltip van de like/dislike‑balk."
+    "message": "Percentage in de tooltip van de like/dislike‑balk"
   },
   "showTooltipPercentageHover": {
     "message": "Percentage in de tooltip van de like/dislike‑balk weergeven."
@@ -228,7 +237,7 @@
     "message": "Inzending voor leuk/niet leuk uitschakelen"
   },
   "textSettingsHover": {
-    "message": "Stopt met het tellen van je leuks en niet leuks"
+    "message": "Je likes en dislikes worden niet geteld en zijn niet te zien in de aantallen dislikes."
   },
   "textTempUnavailable": {
     "message": "Tijdelijk niet beschikbaar"
@@ -804,7 +813,7 @@
     "message": "$1 ongelezen meldingen"
   },
   "discussion_signedOutInbox": {
-    "message": "Log in om antwoorden en waarderingen op je reacties te zien."
+    "message": "Log in om antwoorden en likes op je reacties te zien."
   },
   "discussion_notificationUnavailable": {
     "message": "Deze discussie is niet meer beschikbaar."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Open een YouTube-video en je ziet het aantal dislikes direct naast de likes, waar het hoort. Versie 4.1 introduceert ook RYD-reacties, een plek om over video’s te praten buiten de reacties van YouTube zelf."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Nog één stap"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Schakel hieronder de aantallen dislikes in om ze op YouTube direct naast de likes te zien. Versie 4.1 introduceert ook RYD-reacties, een plek om over video’s te praten buiten de reacties van YouTube zelf."
+  },
   "changelog_new_badge": {
     "message": "Nieuw in 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Ontdek RYD-reacties"
   },
   "changelog_comments_body": {
-    "message": "Een discussieplek onder video’s en Shorts, gehost door Return YouTube Dislike en los van de reacties van YouTube. Iedereen kan meelezen en reageren met likes en dislikes. Leden met Commenter of Premium kunnen berichten en antwoorden plaatsen."
+    "message": "Een discussieplek onder video’s en Shorts waarbij de reacties van YouTube zijn uitgeschakeld, gehost door Return YouTube Dislike. Iedereen kan meelezen en reageren met likes en dislikes. Leden met Commenter of Premium kunnen berichten en antwoorden plaatsen."
   },
   "changelog_comments_point_replies": {
     "message": "Antwoorden in discussiedraden met likes en dislikes"
@@ -882,7 +897,7 @@
     "message": "Plaats berichten onder een zelfgekozen openbare bijnaam"
   },
   "changelog_comments_point_notifications": {
-    "message": "Meldingen als iemand antwoordt of reageert"
+    "message": "Meldingen als iemand op je reactie antwoordt of hem liket"
   },
   "changelog_comments_point_moderation": {
     "message": "Melden en modereren om gesprekken respectvol te houden"
@@ -958,5 +973,149 @@
   },
   "reviewPromptAction": {
     "message": "Review schrijven"
+  },
+  "consent_page_title": {
+    "message": "Machtigingen voor RYD-functies"
+  },
+  "consent_vote_title": {
+    "message": "Laat je stemmen tellen"
+  },
+  "consent_vote_body": {
+    "message": "Zonder het delen van stemmen worden je likes en dislikes niet geteld en zijn ze niet te zien in de aantallen dislikes. Bij delen worden je stemmen en het aantal likes dat je ziet verzonden. Hiervoor zijn aantallen dislikes nodig, dus Firefox vraagt ook om die in te schakelen als ze uit staan."
+  },
+  "consent_account_title": {
+    "message": "Accountmachtigingen kiezen"
+  },
+  "consent_account_body": {
+    "message": "Meld je aan voor accountfuncties, zoals je profiel, meldingen en Premium-analyses."
+  },
+  "consent_next_step": {
+    "message": "Selecteer Toestaan in Firefox om de machtigingen te bekijken. Je kunt weigeren."
+  },
+  "consent_allow": {
+    "message": "Toestaan in Firefox"
+  },
+  "consent_not_now": {
+    "message": "Niet nu"
+  },
+  "consent_prompt_status": {
+    "message": "Kies of je deze machtigingen in Firefox wilt toestaan."
+  },
+  "consent_granted_status": {
+    "message": "De machtigingen zijn ingeschakeld. Je kunt terug naar YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Deze optionele functies blijven uitgeschakeld. Je kunt de machtigingen later wijzigen."
+  },
+  "consent_error_status": {
+    "message": "De machtigingen konden niet worden bijgewerkt. Probeer het opnieuw."
+  },
+  "consent_details_summary": {
+    "message": "Wat betekenen de machtigingscategorieën van Firefox?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox groepeert gegevens in brede categorieën. Dit betekent elke categorie voor RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Browseactiviteit"
+  },
+  "consent_browsing_body": {
+    "message": "De YouTube-video-ID die wordt gebruikt om aantallen dislikes en discussies te laden. Je kiest zelf of je dit toestaat."
+  },
+  "consent_content_label": {
+    "message": "Website-inhoud"
+  },
+  "consent_content_body": {
+    "message": "Het aantal likes dat bij de YouTube-video staat, om de schattingen van dislikes te verbeteren."
+  },
+  "consent_activity_label": {
+    "message": "Websiteactiviteit"
+  },
+  "consent_activity_body": {
+    "message": "Je likes, dislikes, ingetrokken stemmen en reacties op RYD-opmerkingen, verstuurd met een opgeslagen willekeurige stem-ID."
+  },
+  "consent_identity_label": {
+    "message": "Persoonlijk identificeerbare informatie"
+  },
+  "consent_identity_body": {
+    "message": "Je profielgegevens, zoals weergavenaam en e-mailadres, alleen als je ervoor kiest je aan te melden."
+  },
+  "consent_auth_label": {
+    "message": "Authenticatiegegevens"
+  },
+  "consent_auth_body": {
+    "message": "De autorisatie- en sessiegegevens die nodig zijn om je aan te melden en accountfuncties te gebruiken."
+  },
+  "consent_scope": {
+    "message": "RYD verzamelt niets buiten youtube.com en heeft geen toegang tot je YouTube-account. Het ontvangt geen naam of e-mailadres tenzij je je aanmeldt."
+  },
+  "consent_settings": {
+    "message": "Je kunt optionele machtigingen later wijzigen in de extensie-instellingen van Firefox."
+  },
+  "consent_private_counts": {
+    "message": "Privévensters tonen alleen aantallen, met de machtiging die in een normaal venster is ingeschakeld. Stemmen, aanmelden, Premium-analyses en discussies zijn daar niet beschikbaar."
+  },
+  "consent_voter_timing": {
+    "message": "Je stem-ID wordt alleen verstuurd als je stemt of reageert. Je eigen reacties op opmerkingen worden op dit apparaat onthouden."
+  },
+  "popup_signin_next_click": {
+    "message": "Nog één klik nodig: kies hieronder je aanmeldknop om de accountmachtigingen van Firefox te bekijken en door te gaan."
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "Kiezen in Firefox"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Bedankt. Je stemmen tellen nu mee."
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "Het delen van stemmen blijft uitgeschakeld, dus je likes en dislikes tellen niet mee. Je kunt het later inschakelen in de add-oninstellingen van Firefox, of wanneer je een video liket of disliket zodra aantallen dislikes zijn ingeschakeld."
+  },
+  "vote_consent_hint": {
+    "message": "Je stem wordt niet geteld en is niet te zien in de aantallen dislikes. Schakel het delen van stemmen in zodat hij telt."
+  },
+  "vote_not_counted": {
+    "message": "Je likes en dislikes worden niet geteld en zijn niet te zien in de aantallen dislikes."
+  },
+  "vote_count_mine": {
+    "message": "Mijn stemmen laten tellen"
+  },
+  "vote_consent_dismiss": {
+    "message": "Niet opnieuw vragen"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Schakel het delen van stemmen in om op opmerkingen te reageren. Je reactie wordt verstuurd zodra het is ingeschakeld."
+  },
+  "vote_consent_continue": {
+    "message": "Doorgaan"
+  },
+  "discussion_consentContinue": {
+    "message": "Doorgaan"
+  },
+  "vote_consent_open_failed": {
+    "message": "De machtigingspagina kon niet worden geopend. Probeer het opnieuw."
+  },
+  "counts_consent_enable": {
+    "message": "Aantallen dislikes inschakelen"
+  },
+  "counts_consent_reason": {
+    "message": "Firefox vraagt nu eerst je toestemming voordat RYD aantallen dislikes kan tonen."
+  },
+  "counts_consent_body": {
+    "message": "Om aantallen op te halen, stuurt RYD de ID van de huidige YouTube-video naar zijn server. Firefox noemt dit ‘Browseactiviteit’."
+  },
+  "counts_consent_allow": {
+    "message": "Aantallen inschakelen"
+  },
+  "counts_consent_toolbar": {
+    "message": "Open Return YouTube Dislike via het extensiemenu van Firefox om aantallen in te schakelen."
+  },
+  "counts_consent_declined": {
+    "message": "Aantallen blijven uitgeschakeld. Je kunt ze hier later inschakelen."
+  },
+  "counts_consent_enabled": {
+    "message": "Aantallen dislikes zijn ingeschakeld."
+  },
+  "counts_consent_private": {
+    "message": "Schakel aantallen dislikes eerst in een normaal venster in. Privévensters tonen alleen aantallen."
   }
 }

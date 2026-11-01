@@ -1,6 +1,7 @@
 module.exports = {
   resetMocks: true,
   collectCoverage: false,
+  modulePathIgnorePatterns: ["<rootDir>/.private/"],
   collectCoverageFrom: [
     "Extensions/common/**/*.js",
     "Extensions/combined/src/**/*.js",
@@ -8,6 +9,7 @@ module.exports = {
     "Extensions/UserScript/src/**/*.js",
   ],
   testPathIgnorePatterns: [
+    "<rootDir>/.private/",
     "/node_modules/",
     "<rootDir>/Extensions/combined/dist/",
     "<rootDir>/test-results/",

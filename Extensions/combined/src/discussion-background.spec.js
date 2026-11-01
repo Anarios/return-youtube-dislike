@@ -1,4 +1,4 @@
-import { createDiscussionBackground, ANONYMOUS_SESSION } from "./discussion-background";
+import { createDiscussionBackground, canReceiveLiveNotifications, ANONYMOUS_SESSION } from "./discussion-background";
 
 const ID = "11111111-1111-4111-8111-111111111111";
 const PROFILE_ID = "22222222-2222-4222-8222-222222222222";
@@ -24,6 +24,9 @@ const sender = {
   frameId: 0,
 };
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
+const settle = async () => {
+  for (let index = 0; index < 100; index++) await Promise.resolve();
+};
 const deferred = () => {
   let resolve;
   const promise = new Promise((done) => {
@@ -67,16 +70,19 @@ function harness({
   solveOverride,
   firefox = false,
   views = [],
+  featureConsent,
+  connectionStartOverride,
+  account: accountOverrides = {},
 } = {}) {
   const sync = storageArea(authenticated ? { patreonAuthenticated: true, patreonSessionToken: "account-token" } : {});
   const local = storageArea();
-  let alarmListener;
   const api = {
     runtime: {
       id: "extension-id",
       getURL: (path) => `${firefox ? "moz" : "chrome"}-extension://extension-id/${path}`,
       getManifest: () => (firefox ? { browser_specific_settings: { gecko: {} } } : {}),
       sendMessage: jest.fn((message, callback) => callback?.()),
+      onStartup: { addListener: jest.fn() },
     },
     extension: { getViews: jest.fn(() => views) },
     storage: { sync, local },
@@ -95,15 +101,6 @@ function harness({
       sendMessage: jest.fn((id, message, callback) => callback?.()),
       onCreated: { addListener: jest.fn() },
       onUpdated: { addListener: jest.fn() },
-    },
-    alarms: {
-      create: jest.fn(),
-      clear: jest.fn(),
-      onAlarm: {
-        addListener: (listener) => {
-          alarmListener = listener;
-        },
-      },
     },
   };
   const notification = {
@@ -125,6 +122,16 @@ function harness({
     revision: "1",
     nextCursor: null,
   };
+  let account = {
+    authenticated: true,
+    canPost: true,
+    isModerator: false,
+    membershipTier: "commenter",
+    profile: { id: PROFILE_ID, nickname: "Tester", suspended: false, providerId: "private" },
+    token: "private",
+    userId: "private",
+    ...accountOverrides,
+  };
   const calls = [];
   const fetchImpl = jest.fn(async (url, options) => {
     const path = url.replace(`${ORIGIN}/api/discussion`, "");
@@ -135,16 +142,13 @@ function harness({
       if (override) return override;
     }
     let data;
-    if (path === "/me" || path === "/me/profile")
-      data = {
-        authenticated: true,
-        canPost: true,
-        isModerator: false,
-        membershipTier: "commenter",
-        profile: { id: PROFILE_ID, nickname: "Tester", suspended: false, providerId: "private" },
-        token: "private",
-        userId: "private",
+    if (path === "/me/profile") {
+      account = {
+        ...account,
+        profile: { id: PROFILE_ID, suspended: false, ...account.profile, nickname: body.nickname },
       };
+      data = account;
+    } else if (path === "/me") data = account;
     else if (path.startsWith("/notifications/ticket"))
       data = { token: "hub-ticket", expiresAt: "2026-09-06T10:01:00Z" };
     else if (path.startsWith("/notifications")) data = inbox;
@@ -178,6 +182,8 @@ function harness({
       },
       start: jest.fn(async () => {
         await tokenFactory();
+        await connectionStartOverride?.(sockets.length);
+        socket.state = "Connected";
       }),
       stop: jest.fn(async () => {}),
     };
@@ -194,8 +200,10 @@ function harness({
     fetchImpl,
     accountFetchImpl,
     hasConsent: async () => consent,
+    ...(featureConsent ? { hasFeatureConsent: featureConsent } : {}),
     connectionFactory,
     solve: solveOverride || jest.fn(async () => ({ solution: "AAAAAA==" })),
+    random: () => 0.5,
     settings: {
       apiOrigin: ORIGIN,
       testMode,
@@ -217,7 +225,9 @@ function harness({
     setInbox: (value) => {
       inbox = value;
     },
-    alarm: () => alarmListener({ name: "ryd-discussion-reconnect" }),
+    setAccount: (value) => {
+      account = { ...account, ...value };
+    },
     send: (operation, payload = {}, source = sender, scope = SCOPE) =>
       client.handleMessage(
         {
@@ -351,7 +361,7 @@ describe("Firefox private discussion isolation", () => {
       ([event]) => event.detail.type === "inbox" && event.detail.data.items.length,
     )[0];
     expect(inboxEvent.detail.data.items[0]).toMatchObject({ read: false, actorNickname: null });
-    expect(h.local.data.discussionState.items[0]).toMatchObject({ read: false, actorNickname: null });
+    expect(h.local.data.discussionState).toBeUndefined();
     h.client.stop();
   });
 
@@ -447,7 +457,768 @@ describe("Firefox private discussion isolation", () => {
   });
 });
 
+describe("activity-driven notification recovery", () => {
+  let clients;
+  const recoveryHarness = (options) => {
+    const value = harness(options);
+    clients.push(value.client);
+    return value;
+  };
+  beforeEach(() => {
+    jest.useFakeTimers();
+    clients = [];
+  });
+  afterEach(() => {
+    for (const client of clients) client.stop();
+    jest.useRealTimers();
+  });
+
+  test("transient initial verification failures retry within the bounded activity budget", async () => {
+    let verifies = 0;
+    const h = recoveryHarness({
+      authenticated: true,
+      fetchOverride: (path) =>
+        path === "/me" && verifies++ < 2 ? { ok: false, status: 503, json: async () => ({}) } : undefined,
+    });
+    await expect(h.client.refreshSession()).rejects.toMatchObject({ status: 503 });
+    expect(await h.send("session")).toMatchObject({ ok: false, error: { code: "session_unavailable" } });
+    await jest.advanceTimersByTimeAsync(1000);
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(2);
+    await jest.advanceTimersByTimeAsync(3000);
+    await settle();
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(3);
+    expect(h.sockets).toHaveLength(1);
+    const sessions = h.api.tabs.sendMessage.mock.calls
+      .filter(([, event]) => event.type === "session")
+      .map(([, event]) => event.data);
+    expect(sessions.length).toBeGreaterThan(0);
+    expect(sessions.every((session) => session.authenticated)).toBe(true);
+    expect(h.api.action.setBadgeText).not.toHaveBeenCalledWith({ text: "" }, expect.any(Function));
+    expect((await h.send("session")).data.authenticated).toBe(true);
+    expect(jest.getTimerCount()).toBe(0);
+  });
+
+  test("REST catches up while a socket start is pending and concurrent activity shares one socket", async () => {
+    const pending = deferred();
+    const h = recoveryHarness({ authenticated: true, connectionStartOverride: () => pending.promise });
+    await Promise.all([h.send("session"), h.send("session"), h.send("session")]);
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(1);
+    expect(
+      h.calls.filter((call) => call.path.startsWith("/notifications") && !call.path.includes("ticket")),
+    ).toHaveLength(1);
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "1" }, expect.any(Function));
+    await h.send("session");
+    await settle();
+    expect(
+      h.calls.filter((call) => call.path.startsWith("/notifications") && !call.path.includes("ticket")),
+    ).toHaveLength(1);
+    h.setInbox({ items: [{ ...h.notification, revision: "2" }], revision: "2", unreadCount: 1, nextCursor: null });
+    pending.resolve();
+    await settle();
+    expect(
+      h.calls.filter((call) => call.path.startsWith("/notifications") && !call.path.includes("ticket")),
+    ).toHaveLength(2);
+    expect(h.calls.at(-1).path).toBe("/notifications?afterRevision=1");
+    expect(h.api.tabs.sendMessage.mock.calls.some(([, event]) => event.type === "toast")).toBe(false);
+  });
+
+  test("initial socket failures exhaust retries and wait for new genuine activity", async () => {
+    const h = recoveryHarness({
+      authenticated: true,
+      connectionStartOverride: async () => {
+        throw new Error("offline");
+      },
+    });
+    await h.send("session");
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "1" }, expect.any(Function));
+    await jest.advanceTimersByTimeAsync(1000);
+    await jest.advanceTimersByTimeAsync(3000);
+    await jest.advanceTimersByTimeAsync(10000);
+    expect(h.sockets).toHaveLength(4);
+    expect(jest.getTimerCount()).toBe(0);
+    await jest.advanceTimersByTimeAsync(60000);
+    expect(h.sockets).toHaveLength(4);
+    expect(
+      h.calls.filter((call) => call.path.startsWith("/notifications") && !call.path.includes("ticket")),
+    ).toHaveLength(1);
+    await h.send("session");
+    await settle();
+    expect(h.sockets).toHaveLength(5);
+    expect(
+      h.calls.filter((call) => call.path.startsWith("/notifications") && !call.path.includes("ticket")),
+    ).toHaveLength(2);
+  });
+
+  test.each(["logout", "revoke", "stop"])("%s cancels a scheduled recovery retry", async (action) => {
+    const h = recoveryHarness({
+      authenticated: true,
+      connectionStartOverride: async () => {
+        throw new Error("offline");
+      },
+    });
+    await h.send("session");
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(jest.getTimerCount()).toBe(1);
+    if (action === "logout") h.client.clearSession(true);
+    else if (action === "revoke") await h.client.onDataPermissionsChanged({ removed: ["authenticationInfo"] });
+    else h.client.stop();
+    await jest.advanceTimersByTimeAsync(60000);
+    expect(h.sockets).toHaveLength(1);
+    expect(jest.getTimerCount()).toBe(0);
+  });
+
+  test("exhausted established reconnects wait for activity, then startup restores silently", async () => {
+    const h = recoveryHarness({ authenticated: true });
+    h.client.initialize();
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    h.sockets[0].handlers.close();
+    await jest.advanceTimersByTimeAsync(60000);
+    expect(h.sockets).toHaveLength(1);
+    h.setInbox({ items: [{ ...h.notification, revision: "2" }], revision: "2", unreadCount: 1, nextCursor: null });
+    h.api.runtime.onStartup.addListener.mock.calls[0][0]();
+    await settle();
+    expect(h.sockets).toHaveLength(2);
+    expect(h.calls.some((call) => call.path === "/notifications?afterRevision=1")).toBe(true);
+    expect(h.api.tabs.sendMessage.mock.calls.some(([, event]) => event.type === "toast")).toBe(false);
+  });
+
+  test("a healthy socket retries a missing initial inbox snapshot on later activity", async () => {
+    let failInbox = true;
+    const h = recoveryHarness({
+      authenticated: true,
+      fetchOverride: (path) =>
+        path.startsWith("/notifications") && !path.includes("ticket") && failInbox
+          ? { ok: false, status: 503, json: async () => ({}) }
+          : undefined,
+    });
+    await h.send("session");
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    failInbox = false;
+    await Promise.all([h.send("session"), h.send("session")]);
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "1" }, expect.any(Function));
+    const count = h.calls.length;
+    await h.send("session");
+    await settle();
+    expect(h.calls).toHaveLength(count);
+  });
+});
+
+describe("live notification eligibility", () => {
+  const popup = { id: "extension-id", url: "chrome-extension://extension-id/popup.html" };
+  const eligible = {
+    authenticated: true,
+    canPost: true,
+    isModerator: false,
+    membershipTier: "commenter",
+    profile: { id: PROFILE_ID, nickname: "Tester", suspended: false },
+  };
+  const ticketCalls = (h) => h.calls.filter((call) => call.path === "/notifications/ticket");
+  const inboxCalls = (h) =>
+    h.calls.filter((call) => call.path.startsWith("/notifications") && call.path !== "/notifications/ticket");
+  const liveEvents = (h) =>
+    h.api.tabs.sendMessage.mock.calls.filter(([, event]) => ["inbox", "toast"].includes(event.type));
+  const unreadState = (h) => [
+    ...h.api.action.setBadgeText.mock.calls.filter(([value]) => value.text !== ""),
+    ...liveEvents(h).filter(([, event]) => event.type === "toast" || event.data.items.length > 0),
+  ];
+  let clients;
+  const eligibilityHarness = (options) => {
+    const value = harness({ authenticated: true, ...options });
+    clients.push(value.client);
+    return value;
+  };
+  beforeEach(() => {
+    jest.useFakeTimers();
+    clients = [];
+  });
+  afterEach(() => {
+    for (const client of clients) client.stop();
+    jest.useRealTimers();
+  });
+
+  test.each([
+    ["none", "Tester", false],
+    ["supporter", "Tester", false],
+    ["commenter", "Tester", true],
+    ["premium", "Tester", true],
+    ["commenter", "", false],
+    ["premium", null, false],
+  ])("a %s session with nickname %p is eligible: %p", (membershipTier, nickname, expected) => {
+    expect(
+      canReceiveLiveNotifications({ ...eligible, membershipTier, profile: { ...eligible.profile, nickname } }),
+    ).toBe(expected);
+  });
+
+  test("anonymous sessions, missing profiles and unknown tiers are ineligible while suspended authors stay eligible", () => {
+    expect(canReceiveLiveNotifications(ANONYMOUS_SESSION)).toBe(false);
+    expect(canReceiveLiveNotifications({ ...eligible, authenticated: false })).toBe(false);
+    expect(canReceiveLiveNotifications({ ...eligible, profile: null })).toBe(false);
+    expect(canReceiveLiveNotifications({ ...eligible, membershipTier: "gold" })).toBe(false);
+    expect(
+      canReceiveLiveNotifications({ ...eligible, canPost: false, profile: { ...eligible.profile, suspended: true } }),
+    ).toBe(true);
+  });
+
+  test.each([
+    ["none", eligible.profile],
+    ["supporter", eligible.profile],
+    ["commenter", null],
+    ["premium", null],
+    ["premium", { ...eligible.profile, nickname: null }],
+  ])(
+    "a signed-in %s account with profile %p never requests a ticket or live inbox",
+    async (membershipTier, profile) => {
+      const h = eligibilityHarness({ account: { membershipTier, profile } });
+      h.client.initialize();
+      await settle();
+      expect((await h.send("session")).data).toMatchObject({ authenticated: true, membershipTier });
+      await h.send("session");
+      await jest.advanceTimersByTimeAsync(60000);
+      expect(h.calls.map((call) => call.path)).toEqual(["/me"]);
+      expect(h.sockets).toHaveLength(0);
+      expect(unreadState(h)).toHaveLength(0);
+      expect(jest.getTimerCount()).toBe(0);
+    },
+  );
+
+  test("a YouTube page asking for the session receives the cached live inbox without another request", async () => {
+    const h = eligibilityHarness();
+    h.client.initialize();
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    const requests = h.calls.length;
+    h.api.tabs.sendMessage.mockClear();
+    const page = { ...sender, tab: { ...sender.tab, id: 7 } };
+    expect((await h.send("session", {}, page)).data).toMatchObject({ authenticated: true });
+    await h.send("session", {}, popup);
+    await settle();
+    expect(h.calls).toHaveLength(requests);
+    expect(h.api.tabs.sendMessage.mock.calls).toEqual([
+      [
+        7,
+        { message: "ryd_discussion_event", type: "inbox", data: expect.objectContaining({ unreadCount: 1 }) },
+        expect.any(Function),
+      ],
+    ]);
+  });
+
+  test("a page of an ineligible account receives no inbox with its session", async () => {
+    const h = eligibilityHarness({ account: { membershipTier: "supporter" } });
+    h.client.initialize();
+    await settle();
+    await h.send("notifications", {}, popup);
+    await settle();
+    h.api.tabs.sendMessage.mockClear();
+    await h.send("session");
+    await settle();
+    expect(liveEvents(h)).toHaveLength(0);
+  });
+
+  test("the on-demand inbox keeps working for ineligible accounts without live badge or toast state", async () => {
+    const h = eligibilityHarness({ account: { membershipTier: "supporter" } });
+    expect((await h.send("notifications", {}, popup)).data).toMatchObject({ unreadCount: 1, items: [h.notification] });
+    expect((await h.send("readNotifications", { ids: [NOTIFICATION_ID] }, popup)).data).toMatchObject({
+      unreadCount: 1,
+    });
+    expect((await h.send("readNotifications", { all: true }, popup)).ok).toBe(true);
+    await settle();
+    expect(h.calls.map((call) => call.path)).toEqual([
+      "/me",
+      "/notifications",
+      "/notifications/read",
+      "/notifications/read",
+    ]);
+    expect(h.sockets).toHaveLength(0);
+    expect(unreadState(h)).toHaveLength(0);
+  });
+
+  test("saving a nickname opens one socket and publishes the live inbox", async () => {
+    const h = eligibilityHarness({ account: { profile: null } });
+    await h.send("session", {}, popup);
+    await settle();
+    expect(h.sockets).toHaveLength(0);
+    expect((await h.send("profile", { nickname: "Tester" }, popup)).data.profile.nickname).toBe("Tester");
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(ticketCalls(h)).toHaveLength(1);
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "1" }, expect.any(Function));
+    await h.send("profile", { nickname: "Renamed" }, popup);
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(ticketCalls(h)).toHaveLength(1);
+  });
+
+  test("a tier upgrade from storage connects a signed-in account that already has a nickname", async () => {
+    const h = eligibilityHarness({ account: { membershipTier: "supporter" } });
+    h.client.initialize();
+    await settle();
+    expect(h.sockets).toHaveLength(0);
+    h.setAccount({ membershipTier: "premium" });
+    h.client.onStorageChanged({ patreonUser: { newValue: { membershipTier: "premium" } } }, "sync");
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(ticketCalls(h)).toHaveLength(1);
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "1" }, expect.any(Function));
+  });
+
+  test.each([
+    ["tier", { membershipTier: "supporter" }],
+    ["profile", { profile: null }],
+    ["nickname", { profile: { ...eligible.profile, nickname: "" } }],
+  ])("losing the %s closes the socket and clears live state without retrying", async (label, change) => {
+    const h = eligibilityHarness();
+    h.client.initialize();
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "1" }, expect.any(Function));
+    h.setAccount(change);
+    h.client.onStorageChanged({ patreonSessionToken: { newValue: "account-token" } }, "sync");
+    await settle();
+    expect(h.sockets[0].stop).toHaveBeenCalled();
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "" }, expect.any(Function));
+    expect(liveEvents(h).at(-1)[1].data).toEqual({ items: [], unreadCount: 0, revision: "0", nextCursor: null });
+    const requests = h.calls.length;
+    await h.send("session");
+    await jest.advanceTimersByTimeAsync(60000);
+    expect(h.calls).toHaveLength(requests);
+    expect(h.sockets).toHaveLength(1);
+    expect(ticketCalls(h)).toHaveLength(1);
+    expect(jest.getTimerCount()).toBe(0);
+  });
+
+  test("sign-out closes the socket and the signed-out worker stays disconnected", async () => {
+    const h = eligibilityHarness();
+    await h.send("session");
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    h.client.clearSession(true);
+    delete h.sync.data.patreonAuthenticated;
+    delete h.sync.data.patreonSessionToken;
+    await h.client.resumeSession();
+    await jest.advanceTimersByTimeAsync(60000);
+    expect(h.sockets[0].stop).toHaveBeenCalled();
+    expect(h.sockets).toHaveLength(1);
+    expect(ticketCalls(h)).toHaveLength(1);
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "" }, expect.any(Function));
+    expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+  });
+
+  test("a profile response that reports a lost tier tears down live state and refuses further tickets", async () => {
+    const h = eligibilityHarness();
+    await h.send("session", {}, popup);
+    await settle();
+    const [socket] = h.sockets;
+    expect(ticketCalls(h)).toHaveLength(1);
+    h.setAccount({ membershipTier: "none" });
+    expect((await h.send("profile", { nickname: "Renamed" }, popup)).data.membershipTier).toBe("none");
+    await settle();
+    expect(socket.stop).toHaveBeenCalled();
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "" }, expect.any(Function));
+    expect(liveEvents(h).at(-1)[1].data.items).toEqual([]);
+    await expect(socket.tokenFactory()).rejects.toMatchObject({ code: "notifications_unavailable" });
+    expect((await h.send("session", {}, popup)).data.authenticated).toBe(true);
+    expect((await h.send("notifications", {}, popup)).ok).toBe(true);
+    await jest.advanceTimersByTimeAsync(60000);
+    expect(h.sockets).toHaveLength(1);
+    expect(ticketCalls(h)).toHaveLength(1);
+  });
+
+  test("a suspended commenter keeps the socket because the server still notifies suspended authors", async () => {
+    const h = eligibilityHarness({ account: { canPost: false, profile: { ...eligible.profile, suspended: true } } });
+    await h.send("session");
+    await settle();
+    expect(h.sockets).toHaveLength(1);
+    expect(ticketCalls(h)).toHaveLength(1);
+  });
+
+  test.each([
+    ["eligible", 1, {}],
+    ["nickname-less", 0, { profile: null }],
+  ])("a restarted worker with an %s stored session opens %i sockets", async (label, count, account) => {
+    const h = eligibilityHarness({ account });
+    h.client.initialize();
+    await settle();
+    expect(h.sockets).toHaveLength(count);
+    expect(ticketCalls(h)).toHaveLength(count);
+    expect(inboxCalls(h).length > 0).toBe(count > 0);
+    h.api.runtime.onStartup.addListener.mock.calls[0][0]();
+    await settle();
+    expect(h.sockets).toHaveLength(count);
+  });
+
+  test("account permission gating still blocks an eligible account before any ticket", async () => {
+    const h = eligibilityHarness({ featureConsent: async (feature) => feature !== "account" });
+    h.client.initialize();
+    await jest.advanceTimersByTimeAsync(60000);
+    expect(h.sync.get).not.toHaveBeenCalled();
+    expect(h.calls).toHaveLength(0);
+    expect(h.sockets).toHaveLength(0);
+  });
+});
+
 describe("discussion worker boundary", () => {
+  const tabEvents = (h, type) =>
+    h.api.tabs.sendMessage.mock.calls.filter(([, event]) => event.type === type).map(([, event]) => event.data);
+
+  test("a restarted worker keeps open tabs signed in, with their inbox and badge, while it rechecks the account", async () => {
+    const h = harness({ authenticated: true });
+    h.client.initialize();
+    await flush();
+    await flush();
+    expect(tabEvents(h, "session").length).toBeGreaterThan(0);
+    expect(tabEvents(h, "session").every((session) => session.authenticated)).toBe(true);
+    expect(tabEvents(h, "inbox").every((inbox) => inbox.items.length === 1)).toBe(true);
+    expect(h.api.action.setBadgeText).not.toHaveBeenCalledWith({ text: "" }, expect.any(Function));
+    h.client.stop();
+  });
+
+  test("a restarted worker signs open tabs out once a stored account is rejected", async () => {
+    const h = harness({
+      authenticated: true,
+      fetchOverride: (path) =>
+        path === "/me"
+          ? { ok: false, status: 401, json: async () => ({ code: "authentication_required" }) }
+          : undefined,
+    });
+    h.client.initialize();
+    await flush();
+    await flush();
+    expect(tabEvents(h, "session")).toEqual([ANONYMOUS_SESSION, ANONYMOUS_SESSION]);
+    expect(h.api.action.setBadgeText).toHaveBeenLastCalledWith({ text: "" }, expect.any(Function));
+    expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(1);
+    h.client.stop();
+  });
+
+  test.each(["/", "/results?search_query=example", "/feed/subscriptions"])(
+    "initializes capabilities and session from a top-frame %s page",
+    async (path) => {
+      const h = harness();
+      const source = {
+        ...sender,
+        url: `https://www.youtube.com${path}`,
+        tab: { ...sender.tab, url: `https://www.youtube.com${path}` },
+      };
+      expect((await h.send("capabilities", {}, source)).ok).toBe(true);
+      expect((await h.send("session", {}, source)).data).toEqual(ANONYMOUS_SESSION);
+      expect((await h.send("comments", { videoId: VIDEO_ID }, source)).error.code).toBe("invalid_sender");
+      h.client.stop();
+    },
+  );
+
+  test.each(["https://www.youtube.com/", "https://www.youtube.com/results?search_query=example"])(
+    "video reads accept the original SPA document URL %s while binding the current tab video",
+    async (url) => {
+      const h = harness();
+      const source = { ...sender, url };
+      expect((await h.send("comments", { videoId: VIDEO_ID }, source)).ok).toBe(true);
+      expect(h.calls.at(-1).path).toBe(`/videos/${VIDEO_ID}/comments?sort=top`);
+      expect((await h.send("comments", { videoId: VIDEO_ID }, source, null)).error.code).toBe("scope_required");
+      expect(
+        (await h.send("comments", { videoId: VIDEO_ID }, source, { ...SCOPE, videoId: "other123456" })).error.code,
+      ).toBe("navigation_changed");
+      expect((await h.send("comments", { videoId: VIDEO_ID }, { ...source, frameId: 1 })).error.code).toBe(
+        "invalid_sender",
+      );
+      expect(
+        (await h.send("comments", { videoId: VIDEO_ID }, { ...source, url: "https://example.com/" })).error.code,
+      ).toBe("invalid_sender");
+      h.client.stop();
+    },
+  );
+
+  test("session and permission updates reach normal home and search tabs", async () => {
+    const h = harness({ authenticated: true, firefox: true });
+    h.api.tabs.query.mockImplementation((query, done) =>
+      done([
+        { id: 1, url: "https://www.youtube.com/", incognito: false },
+        { id: 2, url: "https://www.youtube.com/results?search_query=test", incognito: false },
+        { id: 3, url: "https://www.youtube.com/", incognito: true },
+      ]),
+    );
+    await h.send("session", {}, { ...sender, tab: { ...sender.tab, incognito: false } });
+    await flush();
+    await h.client.onDataPermissionsChanged({ removed: ["websiteActivity"] });
+    for (const type of ["session", "permissions"])
+      expect(h.api.tabs.sendMessage.mock.calls.filter(([, event]) => event.type === type).map(([id]) => id)).toEqual(
+        expect.arrayContaining([1, 2]),
+      );
+    expect(h.api.tabs.sendMessage.mock.calls.some(([id]) => id === 3)).toBe(false);
+    h.client.stop();
+  });
+
+  test("public reads remain anonymous and independent of a failing account lookup", async () => {
+    const h = harness({
+      authenticated: true,
+      fetchOverride: (path) => (path === "/me" ? { ok: false, status: 503, json: async () => ({}) } : undefined),
+    });
+    expect((await h.send("session")).ok).toBe(false);
+    const meCalls = h.calls.filter((call) => call.path === "/me").length;
+    expect((await h.send("comments", { videoId: VIDEO_ID })).ok).toBe(true);
+    expect((await h.send("replies", { rootId: ID })).ok).toBe(true);
+    expect((await h.send("comment", { id: ID })).ok).toBe(true);
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(meCalls);
+    expect(
+      h.calls
+        .filter((call) => call.path.includes("/comments"))
+        .every((call) => !call.options.headers.Authorization && !call.body),
+    ).toBe(true);
+    expect(h.voteClient.getRegisteredUser).not.toHaveBeenCalled();
+    h.client.stop();
+  });
+
+  test("reactions never carry the signed-in session and confirmed values survive public reloads", async () => {
+    let confirmed = 1;
+    const h = harness({
+      authenticated: true,
+      fetchOverride: (path) =>
+        path.endsWith("/reaction/confirm")
+          ? { ok: true, status: 200, json: async () => ({ commentId: ID, myReaction: confirmed }) }
+          : undefined,
+    });
+    await h.send("session");
+    expect((await h.send("react", { id: ID, value: 1 })).ok).toBe(true);
+    expect(h.local.data.rydDiscussionReactions).toEqual([{ videoId: VIDEO_ID, reactions: { [ID]: 1 } }]);
+    expect(h.sync.set).not.toHaveBeenCalled();
+    expect(
+      h.calls.filter((call) => call.path.includes("/reaction/")).every((call) => !call.options.headers.Authorization),
+    ).toBe(true);
+    h.client.clearSession(true);
+    expect((await h.send("comments", { videoId: VIDEO_ID })).data.items[0].myReaction).toBe(1);
+    confirmed = 0;
+    expect((await h.send("react", { id: ID, value: 0 })).ok).toBe(true);
+    expect(h.local.data.rydDiscussionReactions).toEqual([]);
+    expect((await h.send("comments", { videoId: VIDEO_ID })).data.items[0].myReaction).toBe(0);
+    expect(h.calls.some((call) => call.path === "/reactions/state")).toBe(false);
+    h.client.stop();
+  });
+
+  test("a failed reaction confirm does not save a highlight", async () => {
+    const h = harness({
+      fetchOverride: (path) =>
+        path.endsWith("/reaction/confirm") ? { ok: false, status: 503, json: async () => ({}) } : undefined,
+    });
+    expect((await h.send("react", { id: ID, value: 1 })).ok).toBe(false);
+    expect(h.local.data.rydDiscussionReactions).toBeUndefined();
+    h.client.stop();
+  });
+
+  test("local reaction history evicts the oldest video at its fixed limit", async () => {
+    const h = harness();
+    h.local.data.rydDiscussionReactions = Array.from({ length: 100 }, (_, index) => ({
+      videoId: `v${String(index).padStart(10, "0")}`,
+      reactions: { [ID]: 1 },
+    }));
+    expect((await h.send("react", { id: ID, value: 1 })).ok).toBe(true);
+    expect(h.local.data.rydDiscussionReactions).toHaveLength(100);
+    expect(h.local.data.rydDiscussionReactions.some((entry) => entry.videoId === "v0000000000")).toBe(false);
+    expect(h.local.data.rydDiscussionReactions.at(-1)).toEqual({ videoId: VIDEO_ID, reactions: { [ID]: 1 } });
+    h.client.stop();
+  });
+
+  test("Chrome and Safari reactions ignore the disabled like and dislike submission setting", async () => {
+    const h = harness();
+    h.sync.data.disableVoteSubmission = true;
+    expect((await h.send("react", { id: ID, value: 1 })).ok).toBe(true);
+    expect(h.voteClient.ensureRegistered).toHaveBeenCalledTimes(1);
+    expect(h.calls.filter((call) => call.path.includes("/reaction/")).map((call) => call.path)).toEqual([
+      `/comments/${ID}/reaction/challenge`,
+      `/comments/${ID}/reaction/confirm`,
+    ]);
+    const requestedKeys = h.sync.get.mock.calls.flatMap(([keys]) => [].concat(keys));
+    expect(requestedKeys).not.toContain("disableVoteSubmission");
+    h.client.stop();
+  });
+
+  test("initial voter registration can save the reaction after its credential storage event", async () => {
+    const h = harness();
+    h.voteClient.ensureRegistered.mockImplementation(async () => {
+      h.client.onStorageChanged({ userId: { newValue: "first-id" } }, "sync");
+      return { userId: "first-id" };
+    });
+    expect((await h.send("react", { id: ID, value: 1 })).ok).toBe(true);
+    expect(h.local.data.rydDiscussionReactions).toEqual([{ videoId: VIDEO_ID, reactions: { [ID]: 1 } }]);
+    h.client.stop();
+  });
+
+  test("voting revocation clears local reactions and prevents registration while public reads continue", async () => {
+    const allowed = { voting: true, counts: true, account: false };
+    const h = harness({ featureConsent: async (feature) => allowed[feature] });
+    await h.send("react", { id: ID, value: 1 });
+    allowed.voting = false;
+    await h.client.onDataPermissionsChanged({ removed: ["websiteActivity"] });
+    expect(h.local.data.rydDiscussionReactions).toBeUndefined();
+    h.voteClient.ensureRegistered.mockClear();
+    expect((await h.send("react", { id: ID, value: 1 })).error.code).toBe("voting_consent_required");
+    expect(h.voteClient.ensureRegistered).not.toHaveBeenCalled();
+    expect((await h.send("comments", { videoId: VIDEO_ID })).ok).toBe(true);
+    h.client.stop();
+  });
+
+  test.each([
+    ["comments", { videoId: VIDEO_ID }],
+    ["replies", { rootId: ID }],
+    ["comment", { id: ID }],
+    ["createComment", { videoId: VIDEO_ID, text: "Draft", requestId: ID }],
+    ["editComment", { id: ID, text: "Draft" }],
+    ["deleteComment", { id: ID }],
+    ["react", { id: ID, value: 1 }],
+    ["report", { id: ID, reason: "Reason" }],
+  ])("%s requires browsing access before account or voter work", async (operation, payload) => {
+    const h = harness({ authenticated: true, featureConsent: async (feature) => feature !== "counts" });
+    expect((await h.send(operation, payload)).error.code).toBe("counts_consent_required");
+    expect(h.sync.get).not.toHaveBeenCalled();
+    expect(h.fetchImpl).not.toHaveBeenCalled();
+    expect(h.voteClient.ensureRegistered).not.toHaveBeenCalled();
+    h.client.stop();
+  });
+
+  test("browsing revocation invalidates a late comment body without stopping the account session", async () => {
+    const body = deferred();
+    let hold = true;
+    let videoSignal;
+    const allowed = { counts: true, account: true, voting: true };
+    const h = harness({
+      authenticated: true,
+      featureConsent: async (feature) => allowed[feature],
+      fetchOverride: (path, options) => {
+        if (!hold || !path.startsWith("/videos/")) return;
+        videoSignal = options.signal;
+        return { ok: true, status: 200, json: () => body.promise };
+      },
+    });
+    await h.send("session");
+    await flush();
+    const pending = h.send("comments", { videoId: VIDEO_ID });
+    await flush();
+    allowed.counts = false;
+    await h.client.onDataPermissionsChanged({ removed: ["browsingActivity"] });
+    expect(videoSignal.aborted).toBe(true);
+    expect(h.sync.data.patreonSessionToken).toBe("account-token");
+    expect(h.sockets[0].stop).not.toHaveBeenCalled();
+    expect((await h.send("profile", { nickname: "Reader" })).ok).toBe(true);
+    expect((await h.send("notifications")).ok).toBe(true);
+    allowed.counts = true;
+    await h.client.onDataPermissionsChanged({ added: ["browsingActivity"] });
+    body.resolve({ items: [], nextCursor: null });
+    expect((await pending).error.code).toBe("counts_consent_required");
+    hold = false;
+    expect((await h.send("comments", { videoId: VIDEO_ID })).ok).toBe(true);
+    expect((await h.send("session")).data.authenticated).toBe(true);
+    h.client.stop();
+  });
+
+  test("browsing revocation prevents a solved or queued reaction from resuming after regrant", async () => {
+    const solved = deferred();
+    const allowed = { counts: true, account: true, voting: true };
+    const h = harness({ featureConsent: async (feature) => allowed[feature], solveOverride: () => solved.promise });
+    const first = h.send("react", { id: ID, value: 1 });
+    const queued = h.send("react", { id: ID, value: -1 });
+    await flush();
+    allowed.counts = false;
+    await h.client.onDataPermissionsChanged({ removed: ["browsingActivity"] });
+    allowed.counts = true;
+    await h.client.onDataPermissionsChanged({ added: ["browsingActivity"] });
+    solved.resolve({ solution: "AAAAAA==" });
+    expect((await first).error.code).toBe("counts_consent_required");
+    expect((await queued).error.code).toBe("counts_consent_required");
+    expect(h.calls.filter((call) => call.path.endsWith("/reaction/challenge"))).toHaveLength(1);
+    expect(h.calls.filter((call) => call.path.endsWith("/reaction/confirm"))).toHaveLength(0);
+    expect(h.local.data.rydDiscussionReactions).toBeUndefined();
+    h.client.stop();
+  });
+
+  test("slow reaction cleanup does not deliver browsing removal after a newer grant", async () => {
+    const h = harness();
+    let finishRemoval;
+    h.local.remove.mockImplementation((keys, callback) => {
+      if (keys.includes("rydDiscussionReactions")) finishRemoval = callback;
+      else callback?.();
+    });
+    const removed = h.client.onDataPermissionsChanged({ removed: ["browsingActivity"] });
+    await flush();
+    await h.client.onDataPermissionsChanged({ added: ["browsingActivity"] });
+    const changes = h.api.tabs.sendMessage.mock.calls
+      .filter(([tabId, message]) => tabId === 1 && message.type === "permissions")
+      .map(([, message]) => message.data);
+    expect(changes).toEqual([
+      { added: [], removed: ["browsingActivity"] },
+      { added: ["browsingActivity"], removed: [] },
+    ]);
+    finishRemoval();
+    await removed;
+    h.client.stop();
+  });
+
+  test("changing the synced voter ID removes reactions from the previous identity", async () => {
+    const h = harness();
+    await h.send("react", { id: ID, value: 1 });
+    h.client.onStorageChanged({ userId: { oldValue: "old-id", newValue: "new-id" } }, "sync");
+    expect((await h.send("comments", { videoId: VIDEO_ID })).data.items[0].myReaction).toBe(0);
+    expect(h.local.data.rydDiscussionReactions).toBeUndefined();
+    h.client.stop();
+  });
+
+  test.each(["createComment", "editComment", "report"])(
+    "%s needs account permission before account reads",
+    async (operation) => {
+      const h = harness({ authenticated: true, featureConsent: async (feature) => feature !== "account" });
+      const payload =
+        operation === "createComment"
+          ? { videoId: VIDEO_ID, text: "Draft", requestId: ID }
+          : operation === "editComment"
+            ? { id: ID, text: "Draft" }
+            : { id: ID, reason: "Reason" };
+      expect((await h.send(operation, payload)).error.code).toBe("account_consent_required");
+      expect(h.sync.get).not.toHaveBeenCalled();
+      expect(h.fetchImpl).not.toHaveBeenCalled();
+      h.client.stop();
+    },
+  );
+
+  test("cold initialization restores only consented accounts and healthy activity does no notification polling", async () => {
+    const anonymous = harness();
+    anonymous.client.initialize();
+    await flush();
+    expect(anonymous.calls).toHaveLength(0);
+    anonymous.client.stop();
+    const h = harness({ authenticated: true });
+    h.client.initialize();
+    await flush();
+    await flush();
+    expect(h.sockets).toHaveLength(1);
+    const count = h.calls.length;
+    await h.send("session");
+    await flush();
+    expect(h.calls).toHaveLength(count);
+    h.client.stop();
+  });
+
+  test("a queued reaction is dropped when the signed-in profile owns the loaded comment", async () => {
+    const solved = deferred();
+    const h = harness({ solveOverride: () => solved.promise });
+    await h.send("comments", { videoId: VIDEO_ID });
+    const first = h.send("react", { id: ID, value: 1 });
+    const queued = h.send("react", { id: ID, value: -1 });
+    await flush();
+    Object.assign(h.sync.data, { patreonAuthenticated: true, patreonSessionToken: "account-token" });
+    await h.send("session");
+    solved.resolve({ solution: "AAAAAA==" });
+    expect((await first).error.code).toBe("own_comment");
+    expect((await queued).error.code).toBe("own_comment");
+    expect(h.calls.filter((call) => call.path.endsWith("/reaction/challenge"))).toHaveLength(1);
+    expect(h.calls.filter((call) => call.path.endsWith("/reaction/confirm"))).toHaveLength(0);
+    h.client.stop();
+  });
   test("authenticated discussion traffic uses the account guard while anonymous reads keep their ordinary path", async () => {
     const accountFetchImpl = jest.fn(async () => {
       throw new Error("Authentication data consent required.");
@@ -465,6 +1236,9 @@ describe("discussion worker boundary", () => {
     expect((await anonymous.send("comments", { videoId: VIDEO_ID, sort: "new" })).ok).toBe(true);
     expect(anonymous.fetchImpl).toHaveBeenCalled();
     expect(accountFetchImpl).not.toHaveBeenCalled();
+    authenticated.client.stop();
+    anonymous.client.stop();
+    await settle();
   });
 
   test("public comments do not create a voter identity before the first reaction", async () => {
@@ -492,16 +1266,15 @@ describe("discussion worker boundary", () => {
     expect(h.fetchImpl).not.toHaveBeenCalled();
   });
 
-  test("public reads enrich viewer reactions without exposing the voter credential", async () => {
+  test("public reads use only this device's saved reactions without reading voter credentials", async () => {
     const h = harness();
+    h.local.data.rydDiscussionReactions = [{ videoId: VIDEO_ID, reactions: { [ID]: -1 } }];
     const response = await h.send("comments", { videoId: VIDEO_ID, sort: "new" });
     expect(response.ok).toBe(true);
     expect(response.data.items[0].myReaction).toBe(-1);
     expect(JSON.stringify(response)).not.toContain("existing-voter-secret");
-    expect(h.calls.find((call) => call.path === "/reactions/state").body).toEqual({
-      userId: "existing-voter-secret",
-      commentIds: [ID],
-    });
+    expect(h.calls.some((call) => call.path === "/reactions/state")).toBe(false);
+    expect(h.voteClient.getRegisteredUser).not.toHaveBeenCalled();
     expect(h.calls.every((call) => !call.options.headers.Authorization)).toBe(true);
     expect(h.sockets).toHaveLength(0);
   });
@@ -666,16 +1439,18 @@ describe("discussion worker boundary", () => {
     h.client.stop();
   });
 
-  test("alarm reconnects a closed socket and silently catches up notifications", async () => {
+  test("normal session activity reconnects a closed socket and silently catches up notifications", async () => {
     const h = harness({ authenticated: true });
     h.client.initialize();
     await flush();
     await flush();
     h.sockets[0].handlers.close();
-    h.alarm();
+    h.setInbox({ items: [{ ...h.notification, revision: "2" }], unreadCount: 1, revision: "2", nextCursor: null });
+    await h.send("session");
     await flush();
     await flush();
     expect(h.sockets).toHaveLength(2);
+    expect(h.calls.some((call) => call.path === "/notifications?afterRevision=1")).toBe(true);
     expect(h.api.tabs.sendMessage.mock.calls.filter(([, event]) => event.type === "toast")).toHaveLength(0);
     h.client.stop();
   });
@@ -773,7 +1548,7 @@ describe("discussion worker boundary", () => {
     h.client.stop();
   });
 
-  test("navigation aborts only the selected document scope and keeps another document and inbox request alive", async () => {
+  test("navigation aborts only the selected tab scope and keeps another tab and inbox request alive", async () => {
     const pending = [];
     let hold = false;
     const h = harness({
@@ -790,7 +1565,7 @@ describe("discussion worker boundary", () => {
     await flush();
     hold = true;
     const firstSource = { ...sender, documentId: "document-one" };
-    const secondSource = { ...sender, documentId: "document-two" };
+    const secondSource = { ...sender, documentId: "document-two", tab: { ...sender.tab, id: 2 } };
     const first = h.send("comments", { videoId: VIDEO_ID }, firstSource);
     const second = h.send("comments", { videoId: VIDEO_ID }, secondSource);
     const inbox = h.send("notifications", { cursor: "pending" });
@@ -821,6 +1596,28 @@ describe("discussion worker boundary", () => {
     expect(h.calls.filter((call) => call.path.endsWith("/reaction/challenge"))).toHaveLength(1);
     expect(h.calls.filter((call) => call.path.endsWith("/reaction/confirm"))).toHaveLength(0);
     expect((await h.send("comments", { videoId: VIDEO_ID })).error.code).toBe("navigation_changed");
+  });
+
+  test("a replacement top-frame document prunes and cancels the previous document's scope", async () => {
+    let signal;
+    const h = harness({
+      fetchOverride: (path, options) => {
+        if (!path.startsWith("/videos/") || signal) return;
+        signal = options.signal;
+        return new Promise((resolve, reject) =>
+          signal.addEventListener("abort", () => reject(new Error("aborted")), { once: true }),
+        );
+      },
+    });
+    const previous = { ...sender, documentId: "old-document" };
+    const replacement = { ...sender, documentId: "new-document" };
+    const pending = h.send("comments", { videoId: VIDEO_ID }, previous);
+    await flush();
+    expect((await h.send("comments", { videoId: VIDEO_ID }, replacement)).ok).toBe(true);
+    expect(signal.aborted).toBe(true);
+    expect((await pending).error.code).toBe("navigation_changed");
+    expect((await h.send("comments", { videoId: VIDEO_ID }, previous)).error.code).toBe("navigation_changed");
+    h.client.stop();
   });
 
   test("video operations require a scope bound to the current tab video", async () => {
