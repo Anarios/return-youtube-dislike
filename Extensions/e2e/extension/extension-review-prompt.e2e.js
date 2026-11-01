@@ -153,6 +153,40 @@ test("review request counts distinct reacted videos, waits for a later dislike, 
   });
 });
 
+test("review request counts videos reached by in-page navigation and prompts on a later dislike", async ({}, testInfo) => {
+  await withArtifact(testInfo, {}, async (adapter) => {
+    const page = adapter.page;
+    const votedVideos = () =>
+      adapter.apiServer.records
+        .filter((record) => record.method === "POST" && record.pathname === "/interact/vote")
+        .map((record) => record.body.videoId);
+    await adapter.openSpaWatch(VIDEO_IDS[0]);
+    await page.evaluate(() => {
+      window.__reviewSameDocument = true;
+    });
+
+    for (let index = 0; index < VIDEO_IDS.length; index += 1) {
+      if (index > 0) {
+        await page.evaluate((videoId) => window.__navigationFixture.navigate("watch", videoId), VIDEO_IDS[index]);
+      }
+      await expect(page).toHaveURL(new RegExp(`v=${VIDEO_IDS[index]}`));
+      await expect(page.locator(DISLIKE_TEXT)).toHaveText("25");
+      const lastVideo = index === VIDEO_IDS.length - 1;
+      await page.locator(REACTION(lastVideo || index % 2 ? "dislike" : "like")).click();
+      await expect.poll(votedVideos).toEqual(VIDEO_IDS.slice(0, index + 1));
+      if (lastVideo) break;
+      await expect
+        .poll(() => readReviewState(adapter))
+        .toEqual(index === 4 ? { eligible: true } : { videoIds: VIDEO_IDS.slice(0, index + 1) });
+      await expect(page.locator(PROMPT)).toHaveCount(0);
+    }
+
+    await expect(page.locator(PROMPT)).toBeVisible();
+    await expect.poll(() => readReviewState(adapter)).toEqual({ shown: true });
+    expect(await page.evaluate(() => window.__reviewSameDocument === true)).toBe(true);
+  });
+});
+
 for (const viewport of [
   { width: 1280, height: 800 },
   { width: 360, height: 640 },

@@ -25,6 +25,11 @@ function makeSender(videoId = VIDEO_IDS[0], url = `https://www.youtube.com/watch
   };
 }
 
+function makeInPageSender(videoId, firstVideoId = VIDEO_IDS[0]) {
+  const sender = makeSender(firstVideoId);
+  return { ...sender, tab: { ...sender.tab, url: `https://www.youtube.com/watch?v=${videoId}` } };
+}
+
 function harness(initialState) {
   const data = initialState === undefined ? {} : { [STORAGE_KEY]: clone(initialState) };
   const local = {
@@ -47,8 +52,12 @@ function harness(initialState) {
 }
 
 describe("review prompt engagement tracker", () => {
-  test("counts five distinct liked or disliked videos and waits for a later dislike", async () => {
-    const { data, local, record } = harness();
+  test.each([
+    ["a full page load per video", makeSender],
+    ["one tab moving between videos in-page", makeInPageSender],
+  ])("counts five distinct liked or disliked videos and waits for a later dislike, with %s", async (_, senderFor) => {
+    const { data, local, tracker } = harness();
+    const record = (videoId, vote) => tracker.recordAction({ videoId, vote, canShow: true }, senderFor(videoId));
     for (const [index, videoId] of VIDEO_IDS.slice(0, 5).entries()) {
       expect(await record(videoId, index % 2 === 0 ? -1 : 1)).toEqual(NO_PROMPT);
       expect(data[STORAGE_KEY]).toEqual(index === 4 ? { eligible: true } : { videoIds: VIDEO_IDS.slice(0, index + 1) });
@@ -276,8 +285,19 @@ describe("review prompt engagement tracker", () => {
   test.each([
     "https://www.youtube.com/clip/different_clip",
     `https://www.youtube.com/watch?v=${VIDEO_IDS[0]}`,
+    `https://www.youtube.com/shorts/${VIDEO_IDS[0]}`,
+  ])("follows the current tab page after navigating away from a clip: %s", async (tabUrl) => {
+    const { record } = harness({ eligible: true });
+    const sender = makeSender(VIDEO_IDS[0], "https://www.youtube.com/clip/current_clip");
+    sender.tab.url = tabUrl;
+    expect(await record(VIDEO_IDS[0], -1, true, sender)).toEqual({ showPrompt: true });
+  });
+
+  test.each([
     "https://www.youtube.com/clip/",
-  ])("rejects a clip sender when the tab URL is stale or invalid: %s", async (tabUrl) => {
+    `https://www.youtube.com/watch?v=${VIDEO_IDS[1]}`,
+    "https://www.youtube.com/",
+  ])("rejects a current tab page that is not the voted video: %s", async (tabUrl) => {
     const { local, record } = harness({ eligible: true });
     const sender = makeSender(VIDEO_IDS[0], "https://www.youtube.com/clip/current_clip");
     sender.tab.url = tabUrl;
@@ -294,7 +314,8 @@ describe("review prompt engagement tracker", () => {
     ["unknown privacy", (sender) => ({ ...sender, tab: { ...sender.tab, incognito: undefined } })],
     ["missing tab", (sender) => ({ ...sender, tab: undefined })],
     ["missing tab ID", (sender) => ({ ...sender, tab: { ...sender.tab, id: undefined } })],
-    ["stale sender video", (sender) => ({ ...sender, url: `https://www.youtube.com/watch?v=${VIDEO_IDS[1]}` })],
+    ["sender outside YouTube", (sender) => ({ ...sender, url: "https://example.com/" })],
+    ["sender on YouTube Music", (sender) => ({ ...sender, url: "https://music.youtube.com/" })],
     [
       "stale tab video",
       (sender) => ({ ...sender, tab: { ...sender.tab, url: `https://www.youtube.com/shorts/${VIDEO_IDS[1]}` } }),
@@ -327,7 +348,7 @@ describe("review prompt engagement tracker", () => {
     "file://www.youtube.com/watch?v=video000001",
     "javascript:alert(1)",
     "invalid URL",
-  ])("rejects unsupported or stale page %s", async (url) => {
+  ])("rejects unsupported page %s", async (url) => {
     const { local, record } = harness({ eligible: true });
     expect(await record(VIDEO_IDS[0], -1, true, makeSender(VIDEO_IDS[0], url))).toEqual(NO_PROMPT);
     expect(local.get).not.toHaveBeenCalled();
