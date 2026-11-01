@@ -1,5 +1,11 @@
 YouTube Dislike Sayısını Geri Getir YouTube'da beğenmeme durumlarını görme özelliğini geri getirir.
 
+RYD yorumları, YouTube yorumlarının kapalı olduğu videolarda ve Shorts'ta tartışmaları okumanızı ve bunlara tepki vermenizi sağlar. Commenter ve Premium üyeleri yorum yazabilir, yanıt verebilir ve yanıtlar ile beğeniler için bildirim alabilir.
+
+Temel beğenmeme sayıları ücretsizdir. Bazı isteğe bağlı özelliklerin erişim gereksinimleri vardır; bunlar arasında ücretli Patreon üyelik seviyeleri veya uygunluk koşullarını karşılayan GitHub katkıda bulunanları için erişim yer alır.
+
+Oylarınız tahminlerin iyileştirilmesine yardımcı olur. Oylar, ilk kez oy verdiğinizde ya da bir yoruma ilk kez tepki verdiğinizde oluşturulan ve Google ya da YouTube hesabınıza bağlı olmayan rastgele bir kimlikle gönderilir. Uzantının menüsündeki “Beğeni/beğenmeme gönderimini devre dışı bırak” seçeneğiyle oy göndermeyi durdurabilirsiniz.
+
 Eğer çalışmazsa: uzantılar sekmesini açın (chrome://extensions/) bu uzantıyı devre dışı bırakın ve yeniden aktifleştirin. Bu, chromium'daki bazı durumlarda uzantıyı bozan bir hatadır. Bu, sorunların çoğunu çözmelidir. Umarız chromium ekibi bunu yakın zamanda düzeltir.
 
 13 Aralık 2021 tarihinden itibaren YouTube, API'lerinden dislike'ları görme özelliğini kaldırdı.

@@ -1,5 +1,11 @@
 Return YouTube Dislike przywraca możliwość obejrzenia liczby łapek w dół na YouTube.
 
+Komentarze RYD pozwalają czytać dyskusje i reagować na nie pod filmami i Shorts, w których komentarze YouTube są wyłączone. Osoby z członkostwem Commenter lub Premium mogą pisać komentarze i odpowiadać, a także otrzymują powiadomienia o odpowiedziach i łapkach w górę.
+
+Podstawowe liczniki łapek w dół są bezpłatne. Niektóre opcjonalne funkcje mają wymagania dotyczące dostępu, w tym płatne poziomy członkostwa na Patreonie lub dostęp dla uprawnionych kontrybutorów na GitHubie.
+
+Twoje głosy pomagają poprawiać szacunki. Są wysyłane z losowym identyfikatorem, który powstaje, gdy po raz pierwszy zagłosujesz lub zareagujesz na komentarz, i nie jest powiązany z Twoim kontem Google ani YouTube. Możesz przestać wysyłać głosy za pomocą opcji „Wyłącz przesyłanie łapek” w menu rozszerzenia.
+
 Jeśli nie działa: otwórz kartę rozszerzeń (chrome://extensions/), wyłącz je i włącz ponownie. Powinno to naprawić większość problemów, ponieważ jest bug w Chromium, który psuje rozszerzenie w niektórych przypadkach. Miejmy nadzieję, że zespół Chromium naprawi to niedługo.
 
 Od 13 grudnia 2021, Youtube usunął możliwość obejrzenia liczby łapek w dół z ich API.

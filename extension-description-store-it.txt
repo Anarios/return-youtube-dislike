@@ -1,5 +1,11 @@
 Return YouTube Dislike ripristina la possibilità di vedere i Non mi piace su YouTube.
 
+I commenti RYD ti permettono di leggere le discussioni e reagire sotto i video e gli Shorts in cui i commenti di YouTube sono disattivati. Gli abbonati Commenter e Premium possono pubblicare e rispondere, con notifiche per risposte e Mi piace.
+
+I conteggi base dei Non mi piace sono gratuiti. Alcune funzionalità facoltative hanno requisiti di accesso, tra cui livelli di abbonamento a pagamento su Patreon o l’accesso per i collaboratori idonei su GitHub.
+
+I tuoi voti aiutano a migliorare le stime. Vengono inviati con un ID casuale, creato la prima volta che voti o reagisci a un commento e non collegato al tuo account Google o YouTube. Puoi interrompere l’invio dei voti con «Disattiva invio di Mi piace/Non mi piace» nel menu dell’estensione.
+
 Se non funziona: apri la scheda Estensioni (chrome://extensions/), disattiva questa estensione e riattivala. Questo dovrebbe risolvere la maggior parte dei problemi, poiché c’è un bug di Chromium che in alcuni casi interrompe l’estensione. Si spera che il team di Chromium lo risolva presto.
 
 A partire dal 13 dicembre 2021, YouTube ha rimosso dalla propria API la possibilità di vedere i Non mi piace.

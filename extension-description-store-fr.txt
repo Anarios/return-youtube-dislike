@@ -1,5 +1,11 @@
 Return YouTube Dislike rétablit la possibilité de voir les dislikes sur YouTube.
 
+Les commentaires RYD vous permettent de lire les discussions et d'y réagir sous les vidéos et les Shorts dont les commentaires YouTube sont désactivés. Les membres Commenter et Premium peuvent publier et répondre, avec des notifications pour les réponses et les likes.
+
+Les compteurs de dislikes de base sont gratuits. Certaines fonctionnalités facultatives sont soumises à des conditions d'accès, notamment des niveaux d'abonnement payants sur Patreon ou un accès pour les contributeurs éligibles sur GitHub.
+
+Vos votes contribuent à améliorer les estimations. Ils sont envoyés avec un identifiant aléatoire qui est créé la première fois que vous votez ou réagissez à un commentaire et qui n'est pas associé à votre compte Google ou YouTube. Vous pouvez arrêter l'envoi de vos votes avec « Désactiver l'envoi des likes/dislikes » dans le menu de l'extension.
+
 Si cela ne fonctionne pas : ouvrez l'onglet des extensions (chrome://extensions/) désactivez cette extension et réactivez-la. Il s'agit d'un bug dans Chromium qui casse l'extension dans certains cas. Cela devrait résoudre la plupart des problèmes. Espérons que l'équipe de Chromium corrigera ce problème bientôt.
 
 Depuis le 13 décembre 2021, YouTube a supprimé la possibilité de voir les dislikes de son API.

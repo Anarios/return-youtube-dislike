@@ -1,5 +1,11 @@
 Return YouTube Dislike povrne možnost ogleda nevšečkov na YouTubu.
 
+Komentarji RYD vam omogočajo, da berete razprave in se nanje odzivate pri videih in posnetkih Shorts, kjer so komentarji na YouTubu izklopljeni. Člani stopenj Commenter in Premium lahko objavljajo in odgovarjajo ter prejemajo obvestila o odgovorih in všečkih.
+
+Osnovni prikaz števila nevšečkov je brezplačen. Nekatere izbirne funkcije imajo pogoje za dostop, med drugim plačljive stopnje članstva na Patreonu ali dostop za upravičene sodelavce na GitHubu.
+
+Vaši glasovi pomagajo izboljšati ocene. Pošiljajo se z naključnim ID-jem, ki se ustvari, ko prvič glasujete ali se odzovete na komentar, in ni povezan z vašim računom Google ali YouTube. Pošiljanje glasov lahko ustavite z možnostjo „Onemogoči pošiljanje všečkov/nevšečkov“ v meniju razširitve.
+
 Če ne deluje: odprite zavihek z razširitvami (chrome://extensions/), to razširitev onemogočite in jo znova omogočite. S tem odpravite večino težav, saj je v Chromiumu napaka, ki razširitev v nekaterih primerih pokvari. Upajmo, da jo bo ekipa Chromiuma kmalu odpravila.
 
 13. decembra 2021 je YouTube v svojem API-ju odstranil možnost ogleda nevšečkov.
