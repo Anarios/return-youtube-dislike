@@ -1,9 +1,10 @@
 jest.mock("../common/vote-client", () => ({ createVoteClient: jest.fn() }));
 jest.mock("./src/core-data-consent", () => ({
-  hasCoreDataPermission: jest.fn(),
+  ...jest.requireActual("./src/core-data-consent"),
+  hasFeaturePermission: jest.fn(),
+  fetchWithFeatureConsent: (feature, ...args) => fetch(...args),
   fetchWithCoreConsent: (...args) => fetch(...args),
   coreConsentError: () => new Error("Data consent required"),
-  onCoreDataPermissionChanged: jest.fn(),
 }));
 
 const normalSender = { id: "extension-id", tab: { id: 1, incognito: false, windowId: 1 } };
@@ -37,9 +38,17 @@ describe("background account consent lifecycle", () => {
   beforeEach(() => {
     jest.resetModules();
     const permissionRemovedListeners = new Set();
+    const messageListeners = new Set();
+    messageListener = (...args) => {
+      for (const listener of [...messageListeners]) listener(...args);
+    };
     consent = true;
-    require("./src/core-data-consent").hasCoreDataPermission.mockResolvedValue(true);
-    require("./src/core-data-consent").onCoreDataPermissionChanged.mockReturnValue(() => {});
+    require("./src/core-data-consent").hasFeaturePermission.mockImplementation(async (feature) => {
+      const granted = (await chrome.permissions.getAll()).data_collection;
+      return require("./src/core-data-consent").FEATURE_DATA_PERMISSIONS[feature]?.every((value) =>
+        granted?.includes(value),
+      );
+    });
     originalCrypto = Object.getOwnPropertyDescriptor(globalThis, "crypto");
     Object.defineProperty(globalThis, "crypto", {
       configurable: true,
@@ -61,19 +70,26 @@ describe("background account consent lifecycle", () => {
         id: "extension-id",
         getURL: (path) => "moz-extension://fixture/" + path,
         getManifest: () => require("./manifest-firefox.json"),
-        onMessage: { addListener: (listener) => (messageListener = listener) },
+        onMessage: {
+          addListener: (listener) => messageListeners.add(listener),
+          removeListener: (listener) => messageListeners.delete(listener),
+        },
         onInstalled: { addListener: jest.fn() },
       },
       permissions: {
-        getAll: jest.fn(() => Promise.resolve({ data_collection: consent ? ["authenticationInfo"] : [] })),
+        getAll: jest.fn(() =>
+          Promise.resolve({
+            data_collection: consent
+              ? ["browsingActivity", "authenticationInfo", "personallyIdentifyingInfo", "websiteActivity"]
+              : [],
+          }),
+        ),
         contains: jest.fn().mockResolvedValue(true),
         onRemoved: {
           addListener: (listener) => {
             permissionRemovedListeners.add(listener);
-            removeConsent = () =>
-              [...permissionRemovedListeners].forEach((listener) =>
-                listener({ data_collection: ["authenticationInfo"] }),
-              );
+            removeConsent = (category = "authenticationInfo") =>
+              [...permissionRemovedListeners].forEach((listener) => listener({ data_collection: [category] }));
           },
           removeListener: (listener) => permissionRemovedListeners.delete(listener),
         },
@@ -82,6 +98,8 @@ describe("background account consent lifecycle", () => {
         getRedirectURL: () => "https://extension.example/callback",
         launchWebAuthFlow: jest.fn(() => Promise.resolve("https://extension.example/callback?code=test&state=test")),
       },
+      browserAction: { openPopup: jest.fn().mockResolvedValue(undefined), setIcon: jest.fn(), setTitle: jest.fn() },
+      i18n: { getMessage: (key) => key },
       storage: {
         sync: {
           get: jest.fn(),
@@ -91,7 +109,12 @@ describe("background account consent lifecycle", () => {
         onChanged: { addListener: jest.fn() },
       },
       tabs: {
-        get: jest.fn(async () => ({ id: 9, url: "moz-extension://fixture/consent.html", incognito: false })),
+        get: jest.fn(async () => ({
+          id: 9,
+          url: "moz-extension://fixture/consent.html?feature=voteOptIn",
+          incognito: false,
+          windowId: 4,
+        })),
         create: jest.fn(async () => ({ id: 9 })),
         reload: jest.fn(async () => {}),
         update: jest.fn(async () => ({ id: 9 })),
@@ -100,6 +123,7 @@ describe("background account consent lifecycle", () => {
         ),
         sendMessage: jest.fn(),
       },
+      windows: { update: jest.fn().mockResolvedValue({}) },
     };
     global.browser = global.chrome;
     global.fetch = jest.fn();
@@ -315,7 +339,6 @@ describe("background account consent lifecycle", () => {
     "send_links",
     "ryd_open_tab",
     "ryd_open_consent",
-    "ryd_has_authentication_consent",
   ])("private %s is rejected before shared work", async (message) => {
     const response = jest.fn();
     messageListener(
@@ -356,10 +379,16 @@ describe("background account consent lifecycle", () => {
       ]),
     );
     const response = jest.fn();
-    messageListener({ message: "ryd_has_core_consent" }, { id: "extension-id", tab: { incognito: true } }, response);
+    const otherFeature = jest.fn();
+    const privateSender = { id: "extension-id", tab: { incognito: true } };
+    messageListener({ message: "ryd_has_feature_consent", feature: "counts" }, privateSender, response);
+    messageListener({ message: "ryd_has_feature_consent", feature: "voting" }, privateSender, otherFeature);
     messageListener({ message: "patreon_logout" }, normalSender, jest.fn());
     await flushPromises();
     expect(response).toHaveBeenCalledWith({ granted: true });
+    expect(otherFeature).toHaveBeenCalledWith(
+      expect.objectContaining({ granted: false, error: expect.objectContaining({ code: "private_browsing" }) }),
+    );
     const recipients = chrome.tabs.sendMessage.mock.calls
       .filter(([, payload]) => payload.message === "patreon_status_changed")
       .map(([id]) => id);
@@ -375,10 +404,182 @@ describe("background account consent lifecycle", () => {
     expect(response).toHaveBeenCalledWith({ success: true });
   });
 
-  test.each(["send_vote", "register", "patreon_oauth_login", "github_oauth_login"])(
-    "%s cannot register or send data before core consent",
+  test("the disable switch stops YouTube votes on Firefox even with the permission granted", async () => {
+    const storageListener = chrome.storage.onChanged.addListener.mock.calls[0][0];
+    storageListener({ disableVoteSubmission: { oldValue: false, newValue: true } }, "sync");
+    const response = jest.fn();
+    messageListener({ message: "send_vote", videoId: "video123456", vote: -1 }, normalSender, response);
+    await flushPromises();
+    const clients = require("../common/vote-client").createVoteClient.mock.results.map(({ value }) => value);
+    expect(clients.flatMap((client) => client.submitVote.mock.calls)).toEqual([]);
+    expect(response).toHaveBeenCalledWith({ success: false, error: "Vote submission is disabled." });
+  });
+
+  test("a switch saved before startup stops YouTube votes and shows the paused icon", async () => {
+    chrome.storage.sync.get.mockImplementation((keys, callback) => callback({ disableVoteSubmission: true }));
+    require("./ryd.background").__get__("initializeDisableVoteSubmission")();
+    const response = jest.fn();
+    messageListener({ message: "send_vote", videoId: "video123456", vote: 1 }, normalSender, response);
+    await flushPromises();
+    const clients = require("../common/vote-client").createVoteClient.mock.results.map(({ value }) => value);
+    expect(clients.flatMap((client) => client.submitVote.mock.calls)).toEqual([]);
+    expect(response).toHaveBeenCalledWith({ success: false, error: "Vote submission is disabled." });
+    expect(chrome.storage.sync.set).not.toHaveBeenCalledWith({ disableVoteSubmission: false });
+    expect(chrome.browserAction.setIcon).toHaveBeenLastCalledWith({ path: "/icons/icon_hold128.png" });
+  });
+
+  test("on Chrome and Safari only the switch decides YouTube votes and the toolbar icon", async () => {
+    require("./src/core-data-consent").hasFeaturePermission.mockImplementation(
+      jest.requireActual("./src/core-data-consent").hasFeaturePermission,
+    );
+    chrome.runtime.getManifest = () => ({ manifest_version: 3, version: "4.1.0" });
+    chrome.action = { setIcon: jest.fn(), setTitle: jest.fn() };
+    consent = false;
+    const storageListener = chrome.storage.onChanged.addListener.mock.calls[0][0];
+    const submitted = () =>
+      require("../common/vote-client").createVoteClient.mock.results.flatMap(
+        ({ value }) => value.submitVote.mock.calls,
+      );
+    const vote = async () => {
+      const response = jest.fn();
+      messageListener({ message: "send_vote", videoId: "video123456", vote: 1 }, normalSender, response);
+      await flushPromises();
+      return response.mock.calls[0][0];
+    };
+    storageListener({ disableVoteSubmission: { oldValue: false, newValue: true } }, "sync");
+    await flushPromises();
+    expect(chrome.action.setIcon).toHaveBeenLastCalledWith({ path: "/icons/icon_hold128.png" });
+    expect(chrome.action.setTitle).toHaveBeenLastCalledWith({ title: "extensionName\nvote_not_counted" });
+    expect(await vote()).toEqual({ success: false, error: "Vote submission is disabled." });
+    expect(submitted()).toEqual([]);
+    storageListener({ disableVoteSubmission: { oldValue: true, newValue: false } }, "sync");
+    await flushPromises();
+    expect(chrome.action.setIcon).toHaveBeenLastCalledWith({ path: "/icons/icon128.png" });
+    expect(chrome.action.setTitle).toHaveBeenLastCalledWith({ title: "extensionName" });
+    expect(await vote()).toEqual({ success: true });
+    expect(submitted()).toEqual([["video123456", 1]]);
+  });
+
+  test("revoke then regrant drops an old solved or queued vote while a fresh click can proceed", async () => {
+    const background = require("./ryd.background");
+    const createClient = require("../common/vote-client").createVoteClient;
+    createClient.mockImplementation(jest.requireActual("../common/vote-client").createVoteClient);
+    background.__Rewire__("currentVoteClient", null);
+    chrome.storage.sync.get.mockImplementation((keys, callback) =>
+      callback({ userId: "synthetic-voter", registrationConfirmed: true }),
+    );
+    const digest = deferred();
+    globalThis.crypto.subtle.digest = jest
+      .fn()
+      .mockReturnValueOnce(digest.promise)
+      .mockResolvedValue(new Uint8Array(64).buffer);
+    const puzzle = { challenge: Buffer.alloc(16).toString("base64"), difficulty: 0 };
+    fetch
+      .mockResolvedValueOnce({ status: 200, json: async () => puzzle })
+      .mockResolvedValueOnce({ status: 200, json: async () => puzzle })
+      .mockResolvedValueOnce({ status: 200, json: async () => true });
+    const oldResponse = jest.fn();
+    const queuedResponse = jest.fn();
+    messageListener({ message: "send_vote", videoId: "video123456", vote: -1 }, normalSender, oldResponse);
+    messageListener({ message: "send_vote", videoId: "video123456", vote: 1 }, normalSender, queuedResponse);
+    await flushPromises();
+    expect(globalThis.crypto.subtle.digest).toHaveBeenCalledTimes(1);
+    removeConsent("websiteActivity");
+    const freshResponse = jest.fn();
+    messageListener({ message: "send_vote", videoId: "video123457", vote: -1 }, normalSender, freshResponse);
+    await flushPromises();
+    digest.resolve(new Uint8Array(64).buffer);
+    await flushPromises();
+    expect(oldResponse).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+    expect(queuedResponse).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+    expect(freshResponse).toHaveBeenCalledWith({ success: true });
+    const confirmations = fetch.mock.calls.filter(([input]) => input.endsWith("/interact/confirmVote"));
+    expect(confirmations).toHaveLength(1);
+    expect(JSON.parse(confirmations[0][1].body).videoId).toBe("video123457");
+    background.__ResetDependency__("currentVoteClient");
+  });
+
+  test.each(["websiteActivity", "browsingActivity"])(
+    "%s revocation during a pending vote query rejects the old click after regrant",
+    async (category) => {
+      const permission = deferred();
+      require("./src/core-data-consent").hasFeaturePermission.mockReturnValueOnce(permission.promise);
+      const response = jest.fn();
+      messageListener({ message: "send_vote", videoId: "video123456", vote: -1 }, normalSender, response);
+      removeConsent(category);
+      permission.resolve(true);
+      await flushPromises();
+      expect(require("../common/vote-client").createVoteClient.mock.results[0].value.submitVote).not.toHaveBeenCalled();
+      expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+    },
+  );
+
+  test("website activity without browsing permission cannot dispatch a video vote", async () => {
+    chrome.permissions.getAll.mockResolvedValue({ data_collection: ["websiteActivity", "websiteContent"] });
+    const response = jest.fn();
+    messageListener({ message: "send_vote", videoId: "video123456", vote: -1 }, normalSender, response);
+    await flushPromises();
+    expect(require("../common/vote-client").createVoteClient.mock.results[0].value.submitVote).not.toHaveBeenCalled();
+    expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+  });
+
+  test("count activation opens the existing toolbar popup without creating a tab or requesting permission", async () => {
+    const response = jest.fn();
+    messageListener(
+      { message: "ryd_open_counts_popup" },
+      { ...normalSender, frameId: 0, url: "https://www.youtube.com/watch?v=video123456" },
+      response,
+    );
+    await flushPromises();
+    expect(chrome.browserAction.openPopup).toHaveBeenCalledWith({ windowId: 1 });
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
+    expect(response).toHaveBeenCalledWith({ success: true });
+  });
+
+  test("an older Firefox rejecting popup activation returns the toolbar fallback without a tab", async () => {
+    chrome.browserAction.openPopup.mockRejectedValue(new Error("User gesture required"));
+    const response = jest.fn();
+    messageListener(
+      { message: "ryd_open_counts_popup" },
+      { ...normalSender, frameId: 0, url: "https://www.youtube.com/watch?v=video123456" },
+      response,
+    );
+    await flushPromises();
+    expect(response).toHaveBeenCalledWith({ success: false });
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
+  });
+
+  test.each([
+    { ...normalSender, frameId: 1, url: "https://www.youtube.com/watch?v=video123456" },
+    { ...normalSender, frameId: 0, url: "https://youtube.com.example.org/watch?v=video123456" },
+    { ...normalSender, frameId: 0, url: "https://www.youtube.com/", id: "other-extension" },
+    { ...normalSender, frameId: 0, url: "https://www.youtube.com/", tab: { id: 2, incognito: true } },
+  ])("rejects an untrusted or private count-popup launcher: %j", async (sender) => {
+    const response = jest.fn();
+    messageListener({ message: "ryd_open_counts_popup" }, sender, response);
+    await flushPromises();
+    expect(chrome.browserAction.openPopup).not.toHaveBeenCalled();
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
+    expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
+  });
+
+  test("private pages receive only count-grant changes without account or voting categories", () => {
+    chrome.tabs.query.mockImplementation((query, callback) => callback([{ id: 2, incognito: true }]));
+    removeConsent("browsingActivity");
+    expect(chrome.tabs.sendMessage).toHaveBeenCalledWith(
+      2,
+      { message: "ryd_data_permissions_changed", added: [], removed: ["browsingActivity"] },
+      expect.any(Function),
+    );
+    chrome.tabs.sendMessage.mockClear();
+    removeConsent("personallyIdentifyingInfo");
+    expect(chrome.tabs.sendMessage).not.toHaveBeenCalled();
+  });
+
+  test.each(["send_vote", "patreon_oauth_login", "github_oauth_login"])(
+    "%s cannot send data before its feature grant",
     async (message) => {
-      require("./src/core-data-consent").hasCoreDataPermission.mockResolvedValue(false);
+      require("./src/core-data-consent").hasFeaturePermission.mockResolvedValue(false);
       const response = jest.fn();
       messageListener({ message, videoId: "video123456", vote: -1 }, normalSender, response);
       await flushPromises();
@@ -390,41 +591,38 @@ describe("background account consent lifecycle", () => {
     },
   );
 
-  test("a standalone registration request does not create an ID", async () => {
+  test.each(["set_state", "send_links", "register"])("removed handler %s performs no operation", async (message) => {
     const response = jest.fn();
-    messageListener({ message: "register" }, normalSender, response);
+    messageListener(
+      { message, videoIds: Array(20).fill("video123456"), videoId: "video123456" },
+      normalSender,
+      response,
+    );
     await flushPromises();
-    expect(response).toHaveBeenCalledWith({ success: false, error: "vote_required" });
-    expect(
-      require("../common/vote-client").createVoteClient.mock.results[0].value.ensureRegistered,
-    ).not.toHaveBeenCalled();
+    expect(response).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+    const client = require("../common/vote-client").createVoteClient.mock.results[0].value;
+    expect(client.getRegisteredUser).not.toHaveBeenCalled();
+    expect(client.ensureRegistered).not.toHaveBeenCalled();
   });
 
   test.each([
-    { url: "moz-extension://fixture/consent.html" },
-    { url: "moz-extension://fixture/consent.html#permission-details" },
     { url: "https://www.youtube.com/watch?v=video123456", frameId: 0 },
     { url: "https://m.youtube.com/", frameId: 0 },
-    { url: "http://youtube.com/", frameId: 0 },
-  ])(
-    "the explainer or top-level YouTube launcher opens and refreshes the reused consent page (%j)",
-    async (context) => {
-      const response = jest.fn();
-      const sender = { ...normalSender, ...context };
-      messageListener({ message: "ryd_open_consent" }, sender, response);
-      messageListener({ message: "ryd_open_consent" }, sender, response);
-      await flushPromises();
-      expect(response).toHaveBeenCalledWith({ success: true });
-      expect(chrome.tabs.reload).not.toHaveBeenCalled();
-      messageListener({ message: "ryd_open_consent" }, sender, response);
-      await flushPromises();
-      expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
-      expect(chrome.tabs.reload).toHaveBeenCalledTimes(1);
-      expect(chrome.tabs.reload).toHaveBeenCalledWith(9);
-      expect(chrome.tabs.update).toHaveBeenCalledWith(9, { active: true });
-      expect(fetch).not.toHaveBeenCalled();
-    },
-  );
+  ])("approved launcher reuses the consent tab and focuses its window (%j)", async (context) => {
+    const response = jest.fn();
+    const sender = { ...normalSender, ...context };
+    messageListener({ message: "ryd_open_consent", feature: "voteOptIn" }, sender, response);
+    messageListener({ message: "ryd_open_consent", feature: "voteOptIn" }, sender, response);
+    await flushPromises();
+    messageListener({ message: "ryd_open_consent", feature: "voteOptIn" }, sender, response);
+    await flushPromises();
+    expect(response).toHaveBeenCalledWith({ success: true });
+    expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
+    expect(chrome.tabs.reload).not.toHaveBeenCalled();
+    expect(chrome.tabs.update).toHaveBeenCalledWith(9, { active: true });
+    expect(chrome.windows.update).toHaveBeenCalledWith(4, { focused: true });
+  });
 
   test.each([
     { id: "other-extension" },
@@ -436,11 +634,15 @@ describe("background account consent lifecycle", () => {
     { url: "https://example.com/" },
     { url: "https://youtube.com.example.com/" },
     { url: "https://youtube.com@example.com/" },
+    { url: "http://youtube.com/" },
     { url: "blob:https://www.youtube.com/test" },
     { url: "not a URL" },
-    { url: "moz-extension://fixture/consent.html#unrelated" },
-    { url: "moz-extension://fixture/consent.html?redirect=https://example.com" },
-  ])("rejects unrelated consent-page opener contexts (%j)", async (override) => {
+    { url: "moz-extension://fixture/consent.html" },
+    { url: "moz-extension://fixture/consent.html?feature=voteOptIn" },
+    { url: "moz-extension://fixture/popup.html?rydContext=test" },
+    { url: "moz-extension://fixture/popup.html", tab: undefined },
+    { url: "moz-extension://other/popup.html" },
+  ])("rejects unrelated consent launchers (%j)", async (override) => {
     const response = jest.fn();
     messageListener(
       { message: "ryd_open_consent" },
@@ -450,57 +652,86 @@ describe("background account consent lifecycle", () => {
     await flushPromises();
     expect(response).toHaveBeenCalledWith(expect.objectContaining({ success: false }));
     expect(chrome.tabs.create).not.toHaveBeenCalled();
-    expect(chrome.tabs.update).not.toHaveBeenCalled();
     expect(chrome.tabs.reload).not.toHaveBeenCalled();
-    expect(fetch).not.toHaveBeenCalled();
   });
 
-  test("reopens the explainer if its previous tab has navigated away", async () => {
-    const sender = { ...normalSender, url: "moz-extension://fixture/consent.html" };
+  test("reopens the consent page when the previous tab navigates away", async () => {
+    const sender = { ...normalSender, url: "https://www.youtube.com/watch?v=video123456", frameId: 0 };
     messageListener({ message: "ryd_open_consent" }, sender, jest.fn());
     await flushPromises();
     chrome.tabs.get.mockResolvedValue({ id: 9, url: "https://example.org/" });
     messageListener({ message: "ryd_open_consent" }, sender, jest.fn());
     await flushPromises();
     expect(chrome.tabs.create).toHaveBeenCalledTimes(2);
-    expect(chrome.tabs.update).not.toHaveBeenCalled();
     expect(chrome.tabs.reload).not.toHaveBeenCalled();
   });
 
-  test("Read more opens the fixed details URL without requesting permission", async () => {
-    chrome.permissions.request = jest.fn();
-    messageListener(
-      { message: "ryd_open_consent", details: true, url: "https://example.com/" },
-      { ...normalSender, url: "https://www.youtube.com/watch?v=video123456", frameId: 0 },
-      jest.fn(),
-    );
-    await flushPromises();
-    expect(chrome.tabs.create).toHaveBeenCalledWith(
-      expect.objectContaining({ url: "moz-extension://fixture/consent.html#permission-details" }),
-    );
-    expect(chrome.permissions.request).not.toHaveBeenCalled();
-    expect(fetch).not.toHaveBeenCalled();
-  });
-
-  test("Read more reuses the consent tab and Continue restores the compact page", async () => {
+  test("a pending browser prompt is preserved when a different feature requests the tab", async () => {
     const sender = { ...normalSender, url: "https://www.youtube.com/watch?v=video123456", frameId: 0 };
     messageListener({ message: "ryd_open_consent" }, sender, jest.fn());
     await flushPromises();
-    messageListener({ message: "ryd_open_consent", details: true }, sender, jest.fn());
+    messageListener(
+      { message: "ryd_consent_prompt_state", pending: true },
+      {
+        ...normalSender,
+        tab: { id: 9, incognito: false },
+        url: "moz-extension://fixture/consent.html?feature=voteOptIn",
+      },
+      jest.fn(),
+    );
+    messageListener({ message: "ryd_open_consent", feature: "account" }, sender, jest.fn());
     await flushPromises();
-    expect(chrome.tabs.update).toHaveBeenCalledWith(9, {
-      url: "moz-extension://fixture/consent.html#permission-details",
-    });
-    chrome.tabs.get.mockResolvedValue({
-      id: 9,
-      url: "moz-extension://fixture/consent.html#permission-details",
-      incognito: false,
-    });
+    expect(chrome.tabs.update).toHaveBeenCalledWith(9, { active: true });
+    expect(chrome.tabs.update).not.toHaveBeenCalledWith(9, expect.objectContaining({ url: expect.any(String) }));
+    expect(chrome.tabs.reload).not.toHaveBeenCalled();
+  });
+
+  test.each(["voteOptIn", "reactions"])(
+    "a comment reaction request for %s opens the vote sharing page from YouTube",
+    async (feature) => {
+      const sender = { ...normalSender, url: "https://www.youtube.com/watch?v=video123456", frameId: 0 };
+      const response = jest.fn();
+      messageListener({ message: "ryd_open_consent", feature }, sender, response);
+      await flushPromises();
+      expect(chrome.tabs.create).toHaveBeenCalledWith({
+        url: "moz-extension://fixture/consent.html?feature=voteOptIn",
+        windowId: 1,
+      });
+      expect(response).toHaveBeenCalledWith({ success: true });
+    },
+  );
+
+  test("a different feature updates an idle consent tab without reloading it", async () => {
+    const sender = { ...normalSender, url: "https://www.youtube.com/watch?v=video123456", frameId: 0 };
     messageListener({ message: "ryd_open_consent" }, sender, jest.fn());
     await flushPromises();
-    expect(chrome.tabs.update).toHaveBeenCalledWith(9, { url: "moz-extension://fixture/consent.html" });
+    messageListener({ message: "ryd_open_consent", feature: "account" }, sender, jest.fn());
+    await flushPromises();
+    expect(chrome.tabs.update).toHaveBeenCalledWith(9, {
+      url: "moz-extension://fixture/consent.html?feature=account",
+    });
     expect(chrome.tabs.create).toHaveBeenCalledTimes(1);
-    expect(chrome.tabs.reload).toHaveBeenCalledTimes(2);
+    expect(chrome.tabs.reload).not.toHaveBeenCalled();
+  });
+
+  test.each([
+    "https://example.org/",
+    "javascript:alert(1)",
+    "https://www.patreon.com/other",
+    "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649&redirect=unexpected",
+  ])("generic tab handler rejects URL outside the fixed allowlist: %s", async (url) => {
+    const response = jest.fn();
+    messageListener({ message: "ryd_open_tab", url }, normalSender, response);
+    expect(response).toHaveBeenCalledWith({ success: false, error: "invalid_url" });
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
+  });
+
+  test("Firefox-only consent handlers do not open pages in Chrome", async () => {
+    chrome.runtime.getManifest = () => ({ manifest_version: 3 });
+    const response = jest.fn();
+    messageListener({ message: "ryd_open_consent" }, normalSender, response);
+    expect(response).toHaveBeenCalledWith({ success: false });
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
   });
 
   test.each(["patreon_oauth_login", "github_oauth_login"])(

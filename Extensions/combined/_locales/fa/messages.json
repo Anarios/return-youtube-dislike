@@ -53,6 +53,9 @@
   "disableLoggingHover": {
     "message": "غیرفعال کردن ثبت پاسخ‌های API در کنسول."
   },
+  "developerSettings": {
+    "message": "گزینه‌های توسعه‌دهنده"
+  },
   "disableLoggingLabel": {
     "message": "غیرفعال کردن لاگ در کنسول"
   },
@@ -179,6 +182,12 @@
   "hidePremiumTeaserHover": {
     "message": "عدم نمایش پنل شمارش‌های خام در صفحات تماشای YouTube."
   },
+  "hideRydComments": {
+    "message": "مخفی کردن نظرات RYD"
+  },
+  "hideRydCommentsHover": {
+    "message": "عدم نمایش نظرات RYD در ویدیوهایی که نظرات YouTube در آن‌ها خاموش است."
+  },
   "hidePremiumAnalytics": {
     "message": "مخفی کردن بینش‌های ویدیویی پریمیوم"
   },
@@ -195,7 +204,7 @@
     "message": "پشتیبانی از YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "درصد در tooltip نوار like/dislike."
+    "message": "درصد در tooltip نوار like/dislike"
   },
   "showTooltipPercentageHover": {
     "message": "نمایش درصد در tooltip نوار like/dislike."
@@ -249,7 +258,7 @@
     "message": "غیرفعال کردن ارسال like/dislike"
   },
   "textSettingsHover": {
-    "message": "شمارش likeها و dislikeهای شما را متوقف می‌کند."
+    "message": "پسندیدن‌ها و نپسندیدن‌های شما شمرده نمی‌شوند و در تعداد نپسندیدن‌ها دیده نخواهند شد."
   },
   "textTempUnavailable": {
     "message": "موقت غیرقابل دسترس"
@@ -852,7 +861,7 @@
     "message": "$1 اعلان خوانده‌نشده"
   },
   "discussion_signedOutInbox": {
-    "message": "برای دیدن پاسخ‌ها و واکنش‌ها به نظرات خود وارد شوید."
+    "message": "برای دیدن پاسخ‌ها و like‌هایی که نظرات شما دریافت کرده‌اند وارد شوید."
   },
   "discussion_notificationUnavailable": {
     "message": "این گفتگو دیگر در دسترس نیست."
@@ -914,6 +923,12 @@
   "changelog_hero_body": {
     "message": "هر ویدیویی را در YouTube باز کنید تا تعداد dislikeها را درست کنار likeها، همان‌جایی که باید باشد، ببینید. نسخهٔ ۴.۱ همچنین نظرات RYD را معرفی می‌کند؛ فضایی برای گفتگو دربارهٔ ویدیوها خارج از بخش نظرات خود YouTube."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "یک قدم دیگر"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "نمایش تعداد نپسندیدن‌ها را در پایین فعال کنید تا آن‌ها را در YouTube کنار پسندیدن‌ها ببینید. نسخهٔ ۴.۱ همچنین نظرات RYD را معرفی می‌کند؛ فضایی برای گفتگو دربارهٔ ویدیوها خارج از بخش نظرات خود YouTube."
+  },
   "changelog_new_badge": {
     "message": "تازه‌های نسخهٔ ۴.۱"
   },
@@ -924,7 +939,7 @@
     "message": "با نظرات RYD آشنا شوید"
   },
   "changelog_comments_body": {
-    "message": "گفتگویی میان کاربران زیر ویدیوها و Shorts، به میزبانی Return YouTube Dislike و جدا از نظرات YouTube. همه می‌توانند بخوانند و واکنش نشان دهند. اعضای Commenter و Premium می‌توانند نظر و پاسخ ارسال کنند."
+    "message": "گفتگویی میان کاربران زیر ویدیوها و Shorts که نظرات YouTube در آن‌ها خاموش است، به میزبانی Return YouTube Dislike. همه می‌توانند بخوانند و واکنش نشان دهند. اعضای Commenter و Premium می‌توانند نظر و پاسخ ارسال کنند."
   },
   "changelog_comments_point_replies": {
     "message": "پاسخ‌های رشته‌ای با like و dislike"
@@ -933,7 +948,7 @@
     "message": "ارسال نظر با نام مستعار عمومی به انتخاب شما"
   },
   "changelog_comments_point_notifications": {
-    "message": "دریافت اعلان وقتی کسی پاسخ می‌دهد یا واکنش نشان می‌دهد"
+    "message": "دریافت اعلان وقتی کسی به نظر شما پاسخ می‌دهد یا آن را like می‌کند"
   },
   "changelog_comments_point_moderation": {
     "message": "گزارش و نظارت برای حفظ احترام در گفتگوها"
@@ -1009,5 +1024,149 @@
   },
   "reviewPromptAction": {
     "message": "نوشتن نظر"
+  },
+  "consent_page_title": {
+    "message": "مجوزهای قابلیت‌های RYD"
+  },
+  "consent_vote_title": {
+    "message": "بگذارید رأی‌هایتان شمرده شود"
+  },
+  "consent_vote_body": {
+    "message": "بدون اشتراک‌گذاری رأی‌ها، پسندیدن‌ها و نپسندیدن‌های شما شمرده نمی‌شوند و در تعداد نپسندیدن‌ها دیده نمی‌شوند. اشتراک‌گذاری، رأی‌های شما و تعداد پسندیدن‌هایی را که می‌بینید ارسال می‌کند. این کار به نمایش تعداد نپسندیدن‌ها نیاز دارد، بنابراین اگر خاموش باشد Firefox فعال‌کردن آن را هم درخواست می‌کند."
+  },
+  "consent_account_title": {
+    "message": "انتخاب مجوزهای حساب"
+  },
+  "consent_account_body": {
+    "message": "برای استفاده از قابلیت‌های حساب، از جمله نمایه، اعلان‌ها و تحلیل‌های Premium وارد شوید."
+  },
+  "consent_next_step": {
+    "message": "برای بررسی مجوزها، در Firefox گزینهٔ اجازه دادن را انتخاب کنید. می‌توانید نپذیرید."
+  },
+  "consent_allow": {
+    "message": "اجازه در Firefox"
+  },
+  "consent_not_now": {
+    "message": "فعلاً نه"
+  },
+  "consent_prompt_status": {
+    "message": "انتخاب کنید که این مجوزها در Firefox داده شوند یا نه."
+  },
+  "consent_granted_status": {
+    "message": "مجوزها فعال شدند. می‌توانید به YouTube برگردید."
+  },
+  "consent_declined_status": {
+    "message": "این قابلیت‌های اختیاری خاموش می‌مانند. می‌توانید بعداً مجوزها را تغییر دهید."
+  },
+  "consent_error_status": {
+    "message": "به‌روزرسانی مجوزها ممکن نشد. دوباره تلاش کنید."
+  },
+  "consent_details_summary": {
+    "message": "دسته‌های مجوز Firefox چه معنایی دارند؟"
+  },
+  "consent_details_intro": {
+    "message": "Firefox داده‌ها را در دسته‌های کلی قرار می‌دهد. معنای هر دسته برای RYD این است:"
+  },
+  "consent_browsing_label": {
+    "message": "فعالیت مرور"
+  },
+  "consent_browsing_body": {
+    "message": "شناسهٔ ویدیوی YouTube که برای بارگذاری تعداد نپسندیدن‌ها و گفتگوها استفاده می‌شود. خودتان انتخاب می‌کنید که اجازه دهید یا نه."
+  },
+  "consent_content_label": {
+    "message": "محتوای وب‌سایت"
+  },
+  "consent_content_body": {
+    "message": "تعداد پسندیدن‌های نمایش‌داده‌شده در ویدیوی YouTube برای بهبود برآورد نپسندیدن‌ها."
+  },
+  "consent_activity_label": {
+    "message": "فعالیت وب‌سایت"
+  },
+  "consent_activity_body": {
+    "message": "پسندیدن‌ها، نپسندیدن‌ها، رأی‌های پس‌گرفته‌شده و واکنش‌های شما به دیدگاه‌های RYD که همراه یک شناسه تصادفی ذخیره‌شده برای رأی‌دادن فرستاده می‌شوند."
+  },
+  "consent_identity_label": {
+    "message": "اطلاعات شناسایی شخصی"
+  },
+  "consent_identity_body": {
+    "message": "اطلاعات نمایه، مانند نام نمایشی و ایمیل، فقط وقتی خودتان ورود به حساب را انتخاب کنید."
+  },
+  "consent_auth_label": {
+    "message": "اطلاعات احراز هویت"
+  },
+  "consent_auth_body": {
+    "message": "داده‌های مجوزدهی و نشست که برای ورود و استفاده از قابلیت‌های حساب لازم‌اند."
+  },
+  "consent_scope": {
+    "message": "RYD بیرون از youtube.com چیزی جمع‌آوری نمی‌کند و به حساب YouTube شما دسترسی ندارد. تا وارد نشوید، نام یا ایمیلی دریافت نمی‌کند."
+  },
+  "consent_settings": {
+    "message": "می‌توانید بعداً مجوزهای اختیاری را در تنظیمات افزونه در Firefox تغییر دهید."
+  },
+  "consent_private_counts": {
+    "message": "پنجره‌های خصوصی فقط تعداد را با استفاده از مجوز فعال‌شده در یک پنجرهٔ عادی نشان می‌دهند. رأی‌دادن، ورود، تحلیل‌های Premium و گفتگوها در آنجا در دسترس نیستند."
+  },
+  "consent_voter_timing": {
+    "message": "شناسه رأی‌دادن شما فقط هنگام رأی یا واکنش فرستاده می‌شود. واکنش‌های خودتان به دیدگاه‌ها در این دستگاه به خاطر سپرده می‌شوند."
+  },
+  "popup_signin_next_click": {
+    "message": "یک کلیک دیگر لازم است: دکمه ورود را در پایین انتخاب کنید تا مجوزهای حساب Firefox را بررسی کنید و ادامه دهید."
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "انتخاب در Firefox"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "سپاسگزاریم. رأی‌های شما اکنون شمرده می‌شوند."
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "اشتراک‌گذاری رأی‌ها خاموش می‌ماند، بنابراین پسندیدن‌ها و نپسندیدن‌های شما شمرده نمی‌شوند. می‌توانید بعداً آن را در تنظیمات افزونه‌های Firefox، یا پس از فعال شدن نمایش تعداد نپسندیدن‌ها هنگام پسندیدن یا نپسندیدن یک ویدیو فعال کنید."
+  },
+  "vote_consent_hint": {
+    "message": "رأی شما شمرده نمی‌شود و در تعداد نپسندیدن‌ها دیده نخواهد شد. برای شمرده شدن آن، اشتراک‌گذاری رأی‌ها را روشن کنید."
+  },
+  "vote_not_counted": {
+    "message": "پسندیدن‌ها و نپسندیدن‌های شما شمرده نمی‌شوند و در تعداد نپسندیدن‌ها دیده نمی‌شوند."
+  },
+  "vote_count_mine": {
+    "message": "رأی‌های من شمرده شود"
+  },
+  "vote_consent_dismiss": {
+    "message": "دیگر نپرس"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "برای واکنش به دیدگاه‌ها، اشتراک‌گذاری رأی‌ها را روشن کنید. واکنش شما پس از روشن شدن آن فرستاده می‌شود."
+  },
+  "vote_consent_continue": {
+    "message": "ادامه"
+  },
+  "discussion_consentContinue": {
+    "message": "ادامه"
+  },
+  "vote_consent_open_failed": {
+    "message": "بازکردن صفحه مجوزها ممکن نشد. دوباره تلاش کنید."
+  },
+  "counts_consent_enable": {
+    "message": "فعال‌کردن نمایش تعداد نپسندیدن‌ها"
+  },
+  "counts_consent_reason": {
+    "message": "اکنون Firefox برای نمایش تعداد نپسندیدن‌ها توسط RYD به اجازهٔ شما نیاز دارد."
+  },
+  "counts_consent_body": {
+    "message": "برای دریافت تعداد، RYD شناسهٔ ویدیوی فعلی YouTube را به سرور خود می‌فرستد. Firefox این را «فعالیت مرور» می‌نامد."
+  },
+  "counts_consent_allow": {
+    "message": "فعال‌کردن نمایش تعداد"
+  },
+  "counts_consent_toolbar": {
+    "message": "برای فعال‌کردن نمایش تعداد، Return YouTube Dislike را از منوی افزونه‌های Firefox باز کنید."
+  },
+  "counts_consent_declined": {
+    "message": "نمایش تعداد خاموش می‌ماند. می‌توانید بعداً آن را از همین‌جا فعال کنید."
+  },
+  "counts_consent_enabled": {
+    "message": "نمایش تعداد نپسندیدن‌ها فعال است."
+  },
+  "counts_consent_private": {
+    "message": "ابتدا نمایش تعداد نپسندیدن‌ها را در یک پنجرهٔ عادی فعال کنید. پنجره‌های خصوصی فقط تعداد را نشان می‌دهند."
   }
 }

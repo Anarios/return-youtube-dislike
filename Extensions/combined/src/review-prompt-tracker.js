@@ -1,3 +1,5 @@
+import { isMicrosoftEdge } from "./browser-brand";
+
 const STORAGE_KEY = "reviewPromptState";
 const VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
 const VIDEO_THRESHOLD = 5;
@@ -49,6 +51,7 @@ function isAllowedAction(api, action, sender) {
     typeof manifest.background?.service_worker === "string" &&
     manifest.background.service_worker.length > 0 &&
     !manifest.browser_specific_settings?.gecko &&
+    !isMicrosoftEdge() &&
     typeof api.runtime.id === "string" &&
     api.runtime.id.length > 0 &&
     sender?.id === api.runtime.id &&

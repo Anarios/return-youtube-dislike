@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Tắt ghi log phản hồi API trong bảng điều khiển."
   },
+  "developerSettings": {
+    "message": "Tùy chọn nhà phát triển"
+  },
   "disableLoggingLabel": {
     "message": "Tắt ghi log ra bảng điều khiển"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "Không hiển thị bảng số lượt thô trên trang xem YouTube."
   },
+  "hideRydComments": {
+    "message": "Ẩn bình luận RYD"
+  },
+  "hideRydCommentsHover": {
+    "message": "Không hiển thị bình luận RYD trên video đã tắt bình luận YouTube."
+  },
   "hidePremiumAnalytics": {
     "message": "Ẩn phân tích video cao cấp"
   },
@@ -156,7 +165,7 @@
     "message": "Có hỗ trợ YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
+    "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích"
   },
   "showTooltipPercentageHover": {
     "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
@@ -228,7 +237,7 @@
     "message": "Tắt chức năng gửi đánh giá"
   },
   "textSettingsHover": {
-    "message": "Ngừng đếm đánh giá của tôi."
+    "message": "Lượt thích và không thích của bạn sẽ không được tính và không hiển thị trong số lượt không thích."
   },
   "textTempUnavailable": {
     "message": "Tạm thời Không sử dụng được"
@@ -804,7 +813,7 @@
     "message": "$1 thông báo chưa đọc"
   },
   "discussion_signedOutInbox": {
-    "message": "Đăng nhập để xem phản hồi và cảm xúc về bình luận của bạn."
+    "message": "Đăng nhập để xem phản hồi và lượt thích cho bình luận của bạn."
   },
   "discussion_notificationUnavailable": {
     "message": "Cuộc thảo luận này không còn khả dụng."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Mở bất kỳ video YouTube nào, bạn sẽ thấy số lượt không thích ngay cạnh lượt thích, đúng vị trí vốn có. Phiên bản 4.1 còn giới thiệu bình luận RYD, nơi thảo luận về video ngoài phần bình luận của YouTube."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Chỉ còn một bước"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Bật số lượt không thích bên dưới để xem chúng ngay cạnh lượt thích trên YouTube. Phiên bản 4.1 còn giới thiệu bình luận RYD, nơi thảo luận về video ngoài phần bình luận của YouTube."
+  },
   "changelog_new_badge": {
     "message": "Mới trong 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Khám phá bình luận RYD"
   },
   "changelog_comments_body": {
-    "message": "Không gian thảo luận cộng đồng bên dưới video và Shorts, do Return YouTube Dislike cung cấp và tách biệt với bình luận của YouTube. Mọi người đều có thể đọc và bày tỏ cảm xúc. Thành viên Commenter và Premium có thể đăng bình luận và trả lời."
+    "message": "Không gian thảo luận cộng đồng bên dưới video và Shorts đã tắt bình luận YouTube, do Return YouTube Dislike cung cấp. Mọi người đều có thể đọc và bày tỏ cảm xúc. Thành viên Commenter và Premium có thể đăng bình luận và trả lời."
   },
   "changelog_comments_point_replies": {
     "message": "Trả lời theo luồng, có lượt thích và không thích"
@@ -882,7 +897,7 @@
     "message": "Đăng bằng biệt danh công khai do bạn chọn"
   },
   "changelog_comments_point_notifications": {
-    "message": "Thông báo khi có người trả lời hoặc bày tỏ cảm xúc"
+    "message": "Thông báo khi có người trả lời hoặc thích bình luận của bạn"
   },
   "changelog_comments_point_moderation": {
     "message": "Báo cáo và kiểm duyệt để thảo luận văn minh"
@@ -958,5 +973,149 @@
   },
   "reviewPromptAction": {
     "message": "Viết bài đánh giá"
+  },
+  "consent_page_title": {
+    "message": "Quyền cho các tính năng RYD"
+  },
+  "consent_vote_title": {
+    "message": "Để lượt bình chọn của bạn được tính"
+  },
+  "consent_vote_body": {
+    "message": "Nếu không chia sẻ lượt bình chọn, lượt thích và không thích của bạn sẽ không được tính và không hiển thị trong số lượt không thích. Việc chia sẻ sẽ gửi lượt bình chọn của bạn và số lượt thích bạn thấy. Việc này cần số lượt không thích, vì vậy Firefox cũng sẽ yêu cầu bật nó nếu đang tắt."
+  },
+  "consent_account_title": {
+    "message": "Chọn quyền tài khoản"
+  },
+  "consent_account_body": {
+    "message": "Đăng nhập để dùng các tính năng tài khoản, gồm hồ sơ, thông báo và phân tích Premium."
+  },
+  "consent_next_step": {
+    "message": "Chọn Cho phép trong Firefox để xem xét các quyền. Bạn có thể từ chối."
+  },
+  "consent_allow": {
+    "message": "Cho phép trong Firefox"
+  },
+  "consent_not_now": {
+    "message": "Để sau"
+  },
+  "consent_prompt_status": {
+    "message": "Chọn có cấp các quyền này trong Firefox hay không."
+  },
+  "consent_granted_status": {
+    "message": "Đã bật các quyền. Bạn có thể quay lại YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Các tính năng tùy chọn này vẫn tắt. Bạn có thể thay đổi quyền sau."
+  },
+  "consent_error_status": {
+    "message": "Không thể cập nhật quyền. Vui lòng thử lại."
+  },
+  "consent_details_summary": {
+    "message": "Các nhóm quyền của Firefox có nghĩa là gì?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox chia dữ liệu thành các nhóm rộng. Đây là ý nghĩa của từng nhóm đối với RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Hoạt động duyệt web"
+  },
+  "consent_browsing_body": {
+    "message": "ID video YouTube được dùng để tải số lượt không thích và thảo luận. Bạn chọn có cho phép điều này hay không."
+  },
+  "consent_content_label": {
+    "message": "Nội dung trang web"
+  },
+  "consent_content_body": {
+    "message": "Số lượt thích hiển thị trên video YouTube để cải thiện ước tính số lượt không thích."
+  },
+  "consent_activity_label": {
+    "message": "Hoạt động trên trang web"
+  },
+  "consent_activity_body": {
+    "message": "Lượt thích, không thích, lượt bình chọn đã rút và phản ứng với bình luận RYD của bạn, được gửi cùng ID bình chọn ngẫu nhiên đã lưu."
+  },
+  "consent_identity_label": {
+    "message": "Thông tin nhận dạng cá nhân"
+  },
+  "consent_identity_body": {
+    "message": "Thông tin hồ sơ, như tên hiển thị và email, chỉ khi bạn chọn đăng nhập."
+  },
+  "consent_auth_label": {
+    "message": "Thông tin xác thực"
+  },
+  "consent_auth_body": {
+    "message": "Dữ liệu ủy quyền và phiên cần để đăng nhập và sử dụng các tính năng tài khoản."
+  },
+  "consent_scope": {
+    "message": "RYD không thu thập gì ngoài youtube.com và không truy cập tài khoản YouTube của bạn. RYD không nhận tên hay email trừ khi bạn đăng nhập."
+  },
+  "consent_settings": {
+    "message": "Bạn có thể thay đổi các quyền tùy chọn sau trong phần cài đặt tiện ích của Firefox."
+  },
+  "consent_private_counts": {
+    "message": "Cửa sổ riêng tư chỉ hiển thị số lượt, dùng quyền đã bật trong cửa sổ thông thường. Bình chọn, đăng nhập, phân tích Premium và thảo luận không khả dụng ở đó."
+  },
+  "consent_voter_timing": {
+    "message": "ID bình chọn chỉ được gửi khi bạn bình chọn hoặc phản ứng. Phản ứng của chính bạn với bình luận được ghi nhớ trên thiết bị này."
+  },
+  "popup_signin_next_click": {
+    "message": "Cần thêm một lần nhấp: chọn nút đăng nhập bên dưới để xem quyền tài khoản của Firefox và tiếp tục."
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "Chọn trong Firefox"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Cảm ơn bạn. Lượt bình chọn của bạn giờ đã được tính."
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "Chia sẻ lượt bình chọn vẫn tắt, nên lượt thích và không thích của bạn sẽ không được tính. Bạn có thể bật sau trong phần cài đặt tiện ích của Firefox, hoặc khi bạn thích hoặc không thích một video sau khi đã bật số lượt không thích."
+  },
+  "vote_consent_hint": {
+    "message": "Lượt bình chọn của bạn không được tính và sẽ không hiển thị trong số lượt không thích. Hãy bật chia sẻ lượt bình chọn để được tính."
+  },
+  "vote_not_counted": {
+    "message": "Lượt thích và không thích của bạn không được tính và sẽ không hiển thị trong số lượt không thích."
+  },
+  "vote_count_mine": {
+    "message": "Tính lượt bình chọn của tôi"
+  },
+  "vote_consent_dismiss": {
+    "message": "Không hỏi lại"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Hãy bật chia sẻ lượt bình chọn để phản ứng với bình luận. Phản ứng của bạn sẽ được gửi khi tính năng này được bật."
+  },
+  "vote_consent_continue": {
+    "message": "Tiếp tục"
+  },
+  "discussion_consentContinue": {
+    "message": "Tiếp tục"
+  },
+  "vote_consent_open_failed": {
+    "message": "Không thể mở trang quyền. Vui lòng thử lại."
+  },
+  "counts_consent_enable": {
+    "message": "Bật số lượt không thích"
+  },
+  "counts_consent_reason": {
+    "message": "Giờ đây Firefox cần bạn cho phép trước khi RYD có thể hiển thị số lượt không thích."
+  },
+  "counts_consent_body": {
+    "message": "Để lấy số lượt, RYD gửi ID video YouTube hiện tại tới máy chủ của mình. Firefox gọi đây là “Hoạt động duyệt web”."
+  },
+  "counts_consent_allow": {
+    "message": "Bật số lượt"
+  },
+  "counts_consent_toolbar": {
+    "message": "Mở Return YouTube Dislike từ menu tiện ích mở rộng của Firefox để bật số lượt."
+  },
+  "counts_consent_declined": {
+    "message": "Số lượt vẫn tắt. Bạn có thể bật tại đây sau."
+  },
+  "counts_consent_enabled": {
+    "message": "Số lượt không thích đã được bật."
+  },
+  "counts_consent_private": {
+    "message": "Trước tiên, hãy bật số lượt không thích trong cửa sổ thông thường. Cửa sổ riêng tư chỉ hiển thị số lượt."
   }
 }

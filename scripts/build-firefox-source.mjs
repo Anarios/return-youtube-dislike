@@ -16,10 +16,10 @@ const expectedExtensionVersion = "4.1.0";
 const expectedFirefoxExtensionId = "{762f9885-5a13-4abd-9c77-433dcd38b8fd}";
 const expectedRequiredDataCollectionPermissions = ["none"];
 const expectedOptionalDataCollectionPermissions = [
-  "personallyIdentifyingInfo",
   "browsingActivity",
   "websiteContent",
   "websiteActivity",
+  "personallyIdentifyingInfo",
   "authenticationInfo",
 ];
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";

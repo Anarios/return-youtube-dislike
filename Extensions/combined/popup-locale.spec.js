@@ -2,13 +2,13 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-jest.mock("./src/consent-prompt", () => ({ waitForCoreDataConsent: () => new Promise(() => {}) }));
-jest.mock("./src/core-data-consent", () => ({ onCoreDataPermissionChanged: jest.fn() }));
+jest.mock("./src/discussion/popup", () => ({ initDiscussionPopup: jest.fn() }));
 
 describe("popup locale direction", () => {
   beforeEach(() => {
     jest.resetModules();
     document.documentElement.removeAttribute("dir");
+    document.documentElement.removeAttribute("lang");
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "popup.html"), "utf8");
     const messages = require("./_locales/en/messages.json");
     global.chrome = {
@@ -24,6 +24,22 @@ describe("popup locale direction", () => {
   afterEach(() => {
     delete global.chrome;
     document.documentElement.removeAttribute("dir");
+    document.documentElement.removeAttribute("lang");
+  });
+
+  test.each([
+    ["en_US", "en-US", "123,456"],
+    ["pt_BR", "pt-BR", "123.456"],
+  ])("initializes number-format controls for browser locale %s", (locale, language, standardExample) => {
+    const getMessage = chrome.i18n.getMessage.getMockImplementation();
+    chrome.i18n.getMessage.mockImplementation((key) => (key === "@@ui_locale" ? locale : getMessage(key)));
+
+    expect(() => require("./popup")).not.toThrow();
+
+    expect(document.documentElement.lang).toBe(language);
+    expect(document.getElementById("number_format_standard").textContent).toBe(standardExample);
+    expect(document.getElementById("number_format_compactShort").textContent).toMatch(/123/);
+    expect(document.getElementById("number_format_compactLong").textContent).toMatch(/123/);
   });
 
   test.each(["rtl", "ltr"])("uses %s locale direction while localizing the popup", (direction) => {

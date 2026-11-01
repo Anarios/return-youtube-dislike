@@ -7,9 +7,16 @@ jest.mock("../private-browsing", () => ({
   ...jest.requireActual("../private-browsing"),
   isPrivateBrowsingContext: jest.fn(),
 }));
+jest.mock("../core-data-consent", () => ({
+  hasFeaturePermission: jest.fn(),
+  usesFirefoxDataCollectionConsent: jest.fn(),
+}));
 
+import { readFileSync } from "fs";
+import { join } from "path";
 import { initDiscussion } from "./index";
 import { isPrivateBrowsingContext } from "../private-browsing";
+import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "../core-data-consent";
 import { NATIVE_STATE_REQUEST, NATIVE_STATE_ATTRIBUTE } from "./detector";
 import { threadUrl } from "./dom";
 import { discussionText } from "./localize";
@@ -24,9 +31,16 @@ const flush = async () => {
 let feature;
 let listener;
 let eventListener;
+let storedSettings;
+let settingsListener;
 
 beforeEach(() => {
+  eventListener = undefined;
+  storedSettings = {};
+  settingsListener = undefined;
   isPrivateBrowsingContext.mockReturnValue(false);
+  hasFeaturePermission.mockResolvedValue(true);
+  usesFirefoxDataCollectionConsent.mockReturnValue(false);
   jest.useFakeTimers();
   document.body.innerHTML = `<ytd-watch-flexy video-id="${VIDEO}"><ytd-comments></ytd-comments></ytd-watch-flexy>`;
   window.history.replaceState({}, "", `/watch?v=${VIDEO}`);
@@ -37,6 +51,15 @@ beforeEach(() => {
       onMessage: {
         addListener: (value) => {
           eventListener = value;
+        },
+        removeListener: jest.fn(),
+      },
+    },
+    storage: {
+      sync: { get: jest.fn((keys, callback) => callback(storedSettings)) },
+      onChanged: {
+        addListener: (value) => {
+          settingsListener = value;
         },
         removeListener: jest.fn(),
       },
@@ -71,6 +94,7 @@ afterEach(() => {
   feature?.destroy();
   document.removeEventListener(NATIVE_STATE_REQUEST, listener, true);
   jest.useRealTimers();
+  jest.restoreAllMocks();
   delete global.chrome;
 });
 
@@ -79,6 +103,61 @@ function request(operation) {
   if (operation === "capabilities") return Promise.resolve({ enabled: true });
   return Promise.resolve({ items: [], nextCursor: null });
 }
+
+test.each(["root", "reply", "edit"])(
+  "a reaction permission grant keeps the %s editor and a failed draft visibly open",
+  async (kind) => {
+    const profile = { id: "33333333-3333-4333-8333-333333333333", nickname: "Writer" };
+    const item = {
+      id: ROOT_COMMENT,
+      videoId: VIDEO,
+      author: profile,
+      text: "Original",
+      createdAt: "2026-09-01T12:00:00Z",
+      likes: 0,
+      dislikes: 0,
+    };
+    let failing = true;
+    const calls = jest.fn(async (operation) => {
+      if (operation === "session") return { authenticated: true, canPost: true, profile };
+      if (operation === "capabilities") return { enabled: true };
+      if (["createComment", "editComment"].includes(operation)) {
+        if (failing) throw { code: "request_failed" };
+        return item;
+      }
+      return { items: [item], nextCursor: null };
+    });
+    feature = initDiscussion({ request: calls });
+    await flush();
+    const root = document.querySelector(".ryd-discussion");
+    if (kind !== "root") root.querySelector(`[data-action='${kind}']`).click();
+    const form = root.querySelector(
+      kind === "root" ? ".ryd-discussion-composer form" : ".ryd-discussion-inline-editor form",
+    );
+    const textarea = form.querySelector("textarea");
+    textarea.value = "Draft kept across a permission grant";
+    textarea.dispatchEvent(new Event("input", { bubbles: true }));
+    form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    await flush();
+    failing = false;
+    eventListener({
+      message: "ryd_discussion_event",
+      type: "permissions",
+      data: { added: ["websiteActivity"], removed: [] },
+    });
+    await flush();
+    expect(form.isConnected).toBe(true);
+    expect(textarea.value).toBe("Draft kept across a permission grant");
+    expect(calls.mock.calls.filter(([operation]) => ["createComment", "editComment"].includes(operation))).toHaveLength(
+      1,
+    );
+    form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    await flush();
+    expect(calls.mock.calls.filter(([operation]) => ["createComment", "editComment"].includes(operation))).toHaveLength(
+      2,
+    );
+  },
+);
 
 function shortsFixture(videoId = VIDEO) {
   window.history.replaceState({}, "", `/shorts/${videoId}`);
@@ -162,6 +241,166 @@ test("an enabled service still shows subsequent comment request failures", async
   );
 });
 
+describe("comment reactions", () => {
+  const other = { id: "44444444-4444-4444-8444-444444444444", nickname: "Other" };
+  const item = {
+    id: ROOT_COMMENT,
+    videoId: VIDEO,
+    author: other,
+    text: "Someone else's comment",
+    createdAt: "2026-09-01T12:00:00Z",
+    likes: 0,
+    dislikes: 0,
+    myReaction: 0,
+  };
+  const reactions = (call) => call.mock.calls.filter(([operation]) => operation === "react");
+  const reactionCall = (operation, payload) =>
+    operation === "react"
+      ? Promise.resolve({ commentId: ROOT_COMMENT, likes: 1, dislikes: 0, myReaction: payload.value })
+      : operation === "comments"
+        ? Promise.resolve({ items: [{ ...item }], nextCursor: null })
+        : request(operation);
+
+  test("Chrome and Safari reactions are available before any permission lookup completes", async () => {
+    hasFeaturePermission.mockImplementation((name) =>
+      name === "voting" ? new Promise(() => {}) : Promise.resolve(true),
+    );
+    const call = jest.fn(reactionCall);
+    feature = initDiscussion({ request: call });
+    await flush();
+    document.querySelector("[data-reaction='1']").click();
+    await flush();
+    expect(reactions(call)).toHaveLength(1);
+    expect(reactions(call)[0][1]).toEqual({ id: ROOT_COMMENT, value: 1 });
+    expect(document.querySelector("[data-action='voteOptIn-consent']")).toBeNull();
+  });
+
+  test("a Firefox reaction waits for the website activity grant made from its own prompt", async () => {
+    usesFirefoxDataCollectionConsent.mockReturnValue(true);
+    let voting = false;
+    hasFeaturePermission.mockImplementation(async (name) => name !== "voting" || voting);
+    const call = jest.fn(reactionCall);
+    feature = initDiscussion({ request: call });
+    await flush();
+    document.querySelector("[data-reaction='1']").click();
+    await flush();
+    expect(reactions(call)).toHaveLength(0);
+    expect(document.querySelector("[data-action='voteOptIn-consent']")).not.toBeNull();
+    const commentReads = () => call.mock.calls.filter(([operation]) => operation === "comments").length;
+    const readsBeforeGrant = commentReads();
+    voting = true;
+    eventListener({
+      message: "ryd_discussion_event",
+      type: "permissions",
+      data: { added: ["websiteActivity"], removed: [] },
+    });
+    await flush();
+    expect(reactions(call)).toHaveLength(1);
+    expect(reactions(call)[0][1]).toEqual({ id: ROOT_COMMENT, value: 1 });
+    expect(document.querySelector("[data-reaction='1']").getAttribute("aria-pressed")).toBe("true");
+    expect(commentReads()).toBe(readsBeforeGrant);
+  });
+});
+
+test.each(["watch", "shorts"])(
+  "the hide setting keeps the %s surface and the capability request away",
+  async (surface) => {
+    if (surface === "shorts") shortsFixture();
+    storedSettings = { hideRydComments: true };
+    const call = jest.fn(request);
+    feature = initDiscussion({ request: call });
+    await flush();
+    jest.advanceTimersByTime(4000);
+    await flush();
+    expect(call.mock.calls.some(([operation]) => ["capabilities", "comments"].includes(operation))).toBe(false);
+    expect(document.getElementById("ryd-discussion-panel")).toBeNull();
+    expect(document.getElementById("ryd-discussion-launcher")).toBeNull();
+  },
+);
+
+test("changing the hide setting removes and restores the discussion on the open page", async () => {
+  const call = jest.fn(request);
+  feature = initDiscussion({ request: call });
+  await flush();
+  expect(document.getElementById("ryd-discussion-panel")).not.toBeNull();
+
+  settingsListener({ hideRydComments: { newValue: true } }, "local");
+  await flush();
+  expect(document.getElementById("ryd-discussion-panel")).not.toBeNull();
+
+  settingsListener({ hideRydComments: { newValue: true } }, "sync");
+  await flush();
+  expect(document.getElementById("ryd-discussion-panel")).toBeNull();
+
+  settingsListener({ hideRydComments: { newValue: false } }, "sync");
+  await flush();
+  expect(call.mock.calls.filter(([operation]) => operation === "capabilities")).toHaveLength(2);
+  expect(document.getElementById("ryd-discussion-panel")).not.toBeNull();
+
+  feature.destroy();
+  expect(chrome.storage.onChanged.removeListener).toHaveBeenCalledWith(settingsListener);
+  feature = null;
+});
+
+test("browsing access enables capabilities and discussion on the current page after an initial denial", async () => {
+  let browsing = false;
+  hasFeaturePermission.mockImplementation(async (name) => name !== "counts" || browsing);
+  const call = jest.fn(request);
+  feature = initDiscussion({ request: call });
+  await flush();
+  expect(call.mock.calls.some(([operation]) => operation === "capabilities")).toBe(false);
+  expect(document.getElementById("ryd-discussion-panel")).toBeNull();
+  expect(call.mock.calls.some(([operation]) => operation === "session")).toBe(true);
+  browsing = true;
+  eventListener({
+    message: "ryd_discussion_event",
+    type: "permissions",
+    data: { added: ["browsingActivity"], removed: [] },
+  });
+  await flush();
+  expect(call.mock.calls.filter(([operation]) => operation === "capabilities")).toHaveLength(1);
+  expect(call.mock.calls.some(([operation]) => operation === "comments")).toBe(true);
+  expect(document.getElementById("ryd-discussion-panel")).not.toBeNull();
+});
+
+test("a capability response from before browsing revocation cannot restore the discussion", async () => {
+  let browsing = true;
+  let complete;
+  let hold = true;
+  hasFeaturePermission.mockImplementation(async (name) => name !== "counts" || browsing);
+  const call = jest.fn((operation) =>
+    operation === "capabilities" && hold ? new Promise((resolve) => (complete = resolve)) : request(operation),
+  );
+  feature = initDiscussion({ request: call });
+  await flush();
+  browsing = false;
+  eventListener({
+    message: "ryd_discussion_event",
+    type: "permissions",
+    data: { added: [], removed: ["browsingActivity"] },
+  });
+  complete({ enabled: true });
+  await flush();
+  expect(document.getElementById("ryd-discussion-panel")).toBeNull();
+  expect(call.mock.calls.some(([operation]) => operation === "comments")).toBe(false);
+  browsing = true;
+  hold = false;
+  eventListener({
+    message: "ryd_discussion_event",
+    type: "permissions",
+    data: { added: ["browsingActivity"], removed: [] },
+  });
+  await flush();
+  expect(document.getElementById("ryd-discussion-panel")).not.toBeNull();
+  browsing = false;
+  eventListener({
+    message: "ryd_discussion_event",
+    type: "permissions",
+    data: { added: [], removed: ["browsingActivity"] },
+  });
+  expect(document.getElementById("ryd-discussion-panel")).toBeNull();
+});
+
 test("navigation removes outgoing content immediately and ignores its delayed response", async () => {
   let resolve;
   const call = jest.fn((operation) =>
@@ -199,6 +438,7 @@ test("a logout event wins over an older initial session read", async () => {
           })
         : request(operation),
   });
+  await flush();
   eventListener({
     message: "ryd_discussion_event",
     type: "session",
@@ -208,6 +448,28 @@ test("a logout event wins over an older initial session read", async () => {
   await flush();
   expect(document.querySelector("textarea[name='comment']")).toBeNull();
   expect(document.body.textContent).not.toContain("Previous");
+});
+
+test("an inbox that arrives before the signed-in session still labels the notifications tab", async () => {
+  let resolve;
+  const profile = { id: "33333333-3333-4333-8333-333333333333", nickname: "Writer" };
+  feature = initDiscussion({
+    request: (operation) =>
+      operation === "session"
+        ? new Promise((done) => {
+            resolve = done;
+          })
+        : request(operation),
+  });
+  await flush();
+  eventListener({
+    message: "ryd_discussion_event",
+    type: "inbox",
+    data: { items: [], unreadCount: 2, revision: "4", nextCursor: null },
+  });
+  resolve({ authenticated: true, canPost: true, membershipTier: "commenter", profile });
+  await flush();
+  expect(document.querySelector("[data-action='inbox']").textContent).toBe(`${discussionText("notifications")} (2)`);
 });
 
 test("restoring a cached page recreates the panel with a fresh request scope", async () => {
@@ -251,6 +513,30 @@ test("switching between Chinese scripts refreshes an existing translated panel",
   await feature.refresh();
   expect(document.getElementById("ryd-discussion-panel")).not.toBe(previousPanel);
   expect(document.querySelector(".ryd-discussion-title").textContent).toBe(discussionText("title", [], "zh-TW"));
+});
+
+test.each([
+  ["before the native sound pivot", "<pivot-button-view-model></pivot-button-view-model>", "PIVOT-BUTTON-VIEW-MODEL"],
+  ["at the end of the column", "", null],
+])("places the Shorts launcher inside the native action column %s", async (_, trailingAction, nextTag) => {
+  const actionBar = shortsFixture().querySelector("reel-action-bar-view-model");
+  actionBar.innerHTML = `<like-button-view-model></like-button-view-model><button-view-model></button-view-model>${trailingAction}`;
+  feature = initDiscussion({ request });
+  await flush();
+  const launcher = document.getElementById("ryd-discussion-launcher");
+  expect(launcher.parentElement).toBe(actionBar);
+  expect(launcher.previousElementSibling.tagName).toBe("BUTTON-VIEW-MODEL");
+  expect(launcher.nextElementSibling?.tagName ?? null).toBe(nextTag);
+  expect(actionBar.nextElementSibling).toBeNull();
+});
+
+test("sizes the Shorts launcher like a native action item instead of YouTube's sibling spacing", () => {
+  const stylesheet = readFileSync(join(__dirname, "../../content-style.css"), "utf8");
+  const launcher = stylesheet.match(/\.ryd-discussion-launcher\s*\{([^}]*)\}/)?.[1] ?? "";
+  expect(launcher).toContain("width: 48px");
+  expect(launcher).toContain("height: 48px");
+  expect(launcher).toContain("flex: none");
+  expect(launcher).toContain("margin: 0 auto 8px !important");
 });
 
 test("an opened Shorts drawer survives a transiently hidden and replaced same-video container", async () => {
@@ -390,4 +676,179 @@ test("a new page opened with a fragment focuses its target after initial panel h
   feature = initDiscussion({ request: linkRequest });
   await flush();
   expect(document.activeElement.dataset.commentId).toBe(REPLY_COMMENT);
+});
+
+test.each([
+  ["pageshow", "window"],
+  ["popstate", "window"],
+  ["yt-navigate-finish", "document"],
+  ["online", "window"],
+  ["visibilitychange", "document"],
+])("visible %s activity refreshes the existing session recovery path", async (type, target) => {
+  const call = jest.fn(request);
+  feature = initDiscussion({ request: call });
+  await flush();
+  expect(call.mock.calls.filter(([operation]) => operation === "session")).toHaveLength(1);
+  (target === "window" ? window : document).dispatchEvent(new Event(type));
+  await flush();
+  expect(call.mock.calls.filter(([operation]) => operation === "session")).toHaveLength(2);
+});
+
+test("activity bursts coalesce with the current session request and allow a later recovery", async () => {
+  let complete;
+  const call = jest.fn((operation) =>
+    operation === "session" ? new Promise((resolve) => (complete = resolve)) : request(operation),
+  );
+  feature = initDiscussion({ request: call });
+  await flush();
+  window.dispatchEvent(new Event("pageshow"));
+  window.dispatchEvent(new Event("popstate"));
+  window.dispatchEvent(new Event("online"));
+  document.dispatchEvent(new Event("yt-navigate-finish"));
+  document.dispatchEvent(new Event("visibilitychange"));
+  await flush();
+  expect(call.mock.calls.filter(([operation]) => operation === "session")).toHaveLength(1);
+  complete({ authenticated: false, canPost: false, profile: null });
+  await flush();
+  window.dispatchEvent(new Event("online"));
+  await flush();
+  expect(call.mock.calls.filter(([operation]) => operation === "session")).toHaveLength(2);
+});
+
+test("DOM refresh intervals and mutations do not initiate session recovery", async () => {
+  const call = jest.fn(request);
+  feature = initDiscussion({ request: call });
+  await flush();
+  call.mockClear();
+  document.body.append(document.createElement("span"));
+  await flush();
+  jest.advanceTimersByTime(60000);
+  await flush();
+  expect(call).not.toHaveBeenCalled();
+});
+
+test("hidden pages defer all session recovery until they become visible", async () => {
+  const visibility = jest.spyOn(document, "visibilityState", "get").mockReturnValue("hidden");
+  const call = jest.fn(request);
+  feature = initDiscussion({ request: call });
+  await flush();
+  window.dispatchEvent(new Event("pageshow"));
+  window.dispatchEvent(new Event("popstate"));
+  window.dispatchEvent(new Event("online"));
+  document.dispatchEvent(new Event("yt-navigate-finish"));
+  document.dispatchEvent(new Event("visibilitychange"));
+  jest.advanceTimersByTime(30000);
+  await flush();
+  expect(call.mock.calls.some(([operation]) => operation === "session")).toBe(false);
+  visibility.mockReturnValue("visible");
+  document.dispatchEvent(new Event("visibilitychange"));
+  await flush();
+  expect(call.mock.calls.filter(([operation]) => operation === "session")).toHaveLength(1);
+});
+
+test("a page hidden during the account-permission check sends no session request", async () => {
+  const visibility = jest.spyOn(document, "visibilityState", "get").mockReturnValue("visible");
+  let allowAccount;
+  hasFeaturePermission.mockImplementation((feature) =>
+    feature === "account" ? new Promise((resolve) => (allowAccount = resolve)) : Promise.resolve(true),
+  );
+  const call = jest.fn(request);
+  feature = initDiscussion({ request: call });
+  visibility.mockReturnValue("hidden");
+  allowAccount(true);
+  await flush();
+  expect(call.mock.calls.some(([operation]) => operation === "session")).toBe(false);
+});
+
+test("missing account consent skips activity recovery while public discussions remain available", async () => {
+  hasFeaturePermission.mockImplementation(async (feature) => feature !== "account");
+  const call = jest.fn(request);
+  feature = initDiscussion({ request: call });
+  await flush();
+  window.dispatchEvent(new Event("online"));
+  window.dispatchEvent(new Event("pageshow"));
+  await flush();
+  expect(call.mock.calls.some(([operation]) => operation === "session")).toBe(false);
+  expect(call.mock.calls.some(([operation]) => operation === "comments")).toBe(true);
+});
+
+test("account-permission revocation prevents an older recovery reply from restoring account controls", async () => {
+  let complete;
+  const call = jest.fn((operation) =>
+    operation === "session" ? new Promise((resolve) => (complete = resolve)) : request(operation),
+  );
+  feature = initDiscussion({ request: call });
+  await flush();
+  hasFeaturePermission.mockImplementation(async (feature) => feature !== "account");
+  eventListener({
+    message: "ryd_discussion_event",
+    type: "permissions",
+    data: { removed: ["authenticationInfo"], added: [] },
+  });
+  complete({ authenticated: true, canPost: true, profile: { id: "old", nickname: "Previous" } });
+  await flush();
+  expect(document.querySelector("textarea[name='comment']")).toBeNull();
+  expect(document.body.textContent).not.toContain("Previous");
+  call.mockClear();
+  window.dispatchEvent(new Event("online"));
+  await flush();
+  expect(call.mock.calls.some(([operation]) => operation === "session")).toBe(false);
+});
+
+test("destroy removes activity listeners and ignores a pending permission check", async () => {
+  let allowAccount;
+  hasFeaturePermission.mockImplementation((feature) =>
+    feature === "account" ? new Promise((resolve) => (allowAccount = resolve)) : Promise.resolve(true),
+  );
+  const call = jest.fn(request);
+  feature = initDiscussion({ request: call });
+  await flush();
+  const removeWindow = jest.spyOn(window, "removeEventListener");
+  const removeDocument = jest.spyOn(document, "removeEventListener");
+  feature.destroy();
+  allowAccount(true);
+  call.mockClear();
+  hasFeaturePermission.mockClear();
+  window.dispatchEvent(new Event("online"));
+  window.dispatchEvent(new Event("pageshow"));
+  window.dispatchEvent(new Event("popstate"));
+  document.dispatchEvent(new Event("visibilitychange"));
+  document.dispatchEvent(new Event("yt-navigate-finish"));
+  await flush();
+  expect(call).not.toHaveBeenCalled();
+  expect(hasFeaturePermission).not.toHaveBeenCalled();
+  expect(removeWindow).toHaveBeenCalledWith("online", expect.any(Function));
+  expect(removeWindow).toHaveBeenCalledWith("popstate", expect.any(Function));
+  expect(removeDocument).toHaveBeenCalledWith("visibilitychange", expect.any(Function));
+});
+
+test("unchanged activity session replies preserve the active comment draft and focus", async () => {
+  const account = { authenticated: true, canPost: true, profile: { id: "reader", nickname: "Writer" } };
+  const call = jest.fn((operation) =>
+    operation === "session" ? Promise.resolve({ ...account, profile: { ...account.profile } }) : request(operation),
+  );
+  feature = initDiscussion({ request: call });
+  await flush();
+  const textarea = document.querySelector("textarea[name='comment']");
+  textarea.value = "Unsent draft";
+  textarea.dispatchEvent(new Event("input", { bubbles: true }));
+  textarea.focus();
+  window.dispatchEvent(new Event("online"));
+  await flush();
+  expect(document.querySelector("textarea[name='comment']")).toBe(textarea);
+  expect(textarea.value).toBe("Unsent draft");
+  expect(document.activeElement).toBe(textarea);
+});
+
+test("a failed session recovery can be retried by later activity", async () => {
+  let failed = true;
+  const call = jest.fn((operation) =>
+    operation === "session" && failed ? Promise.reject(new Error("offline")) : request(operation),
+  );
+  feature = initDiscussion({ request: call });
+  await flush();
+  failed = false;
+  window.dispatchEvent(new Event("online"));
+  await flush();
+  expect(call.mock.calls.filter(([operation]) => operation === "session")).toHaveLength(2);
 });

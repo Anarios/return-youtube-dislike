@@ -4,6 +4,18 @@
  */
 
 const mockSendMessage = jest.fn();
+const mockHint = {
+  capturePageContext: jest.fn((videoId) => ({ videoId })),
+  clearPending: jest.fn(),
+  isCurrent: jest.fn(() => true),
+  offer: jest.fn(),
+};
+
+jest.mock("./core-data-consent", () => ({
+  hasFeaturePermission: jest.fn(async () => false),
+  usesFirefoxDataCollectionConsent: jest.fn(() => false),
+}));
+jest.mock("./vote-consent-hint", () => ({ createVoteConsentHintController: jest.fn() }));
 
 jest.mock("./review-prompt", () => ({ recordReviewAction: jest.fn() }));
 
@@ -37,6 +49,7 @@ jest.mock("./state", () => ({
     selectors: { buttons: { smartimation: ["yt-smartimation"] } },
   },
   getLikeCountFromButton: jest.fn(),
+  getState: jest.fn(),
   persistSyntheticShortsDislikeState: jest.fn(async () => undefined),
   setDislikes: jest.fn(),
   updateDisableLogging: jest.fn(),
@@ -51,7 +64,16 @@ jest.mock("./bar", () => ({
 
 import { createRateBar } from "./bar";
 import { getButtons, getDislikeButton, getLikeButton, isSyntheticShortsDislike } from "./buttons";
-import { extConfig, persistSyntheticShortsDislikeState, setDislikes, storedData, updateDisableLogging } from "./state";
+import {
+  extConfig,
+  getState,
+  persistSyntheticShortsDislikeState,
+  setDislikes,
+  storedData,
+  updateDisableLogging,
+} from "./state";
+import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "./core-data-consent";
+import { createVoteConsentHintController } from "./vote-consent-hint";
 import {
   addLikeDislikeEventListener,
   dislikeClicked,
@@ -59,12 +81,23 @@ import {
   sendVote,
   storageChangeHandler,
   updateDOMDislikes,
+  setCountPermissionAvailable,
 } from "./events";
 import { isPrivateBrowsingContext } from "./private-browsing";
 import { getBrowser } from "./utils";
 import { recordReviewAction } from "./review-prompt";
 
 beforeEach(() => {
+  setCountPermissionAvailable(true);
+  usesFirefoxDataCollectionConsent.mockReturnValue(false);
+  hasFeaturePermission.mockClear();
+  hasFeaturePermission.mockResolvedValue(false);
+  createVoteConsentHintController.mockReturnValue(mockHint);
+  mockHint.capturePageContext.mockImplementation((videoId) => ({ videoId }));
+  mockHint.isCurrent.mockReturnValue(true);
+  mockHint.offer.mockClear();
+  mockHint.clearPending.mockClear();
+  getState.mockReturnValue({ current: "NEUTRAL_STATE" });
   recordReviewAction.mockClear();
   isPrivateBrowsingContext.mockReturnValue(false);
   isSyntheticShortsDislike.mockReturnValue(false);
@@ -81,6 +114,152 @@ beforeEach(() => {
   storedData.previousState = "NEUTRAL_STATE";
   storedData.videoId = "abcdefghijk";
   history.replaceState({}, "", "/watch?v=abcdefghijk");
+});
+
+test("Firefox does not submit a denied vote and offers permission only after the click", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  sendVote(-1);
+  await Promise.resolve();
+  expect(hasFeaturePermission).toHaveBeenCalledWith("voting");
+  expect(mockSendMessage).not.toHaveBeenCalled();
+  expect(mockHint.offer).toHaveBeenCalledWith({ videoId: "abcdefghijk" }, expect.any(Function));
+});
+
+test("missing Firefox count permission leaves native reactions untouched and sends no vote", () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  setCountPermissionAvailable(false);
+  const before = { ...storedData };
+  sendVote(-1);
+  dislikeClicked();
+  likeClicked();
+  expect(storedData).toEqual(before);
+  expect(mockSendMessage).not.toHaveBeenCalled();
+  expect(hasFeaturePermission).not.toHaveBeenCalled();
+  expect(mockHint.offer).not.toHaveBeenCalled();
+  expect(recordReviewAction).not.toHaveBeenCalled();
+});
+
+test("count revocation invalidates a pending vote lookup even after counts are granted again", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  let resolvePermission;
+  hasFeaturePermission.mockImplementationOnce(() => new Promise((resolve) => (resolvePermission = resolve)));
+  sendVote(-1);
+  setCountPermissionAvailable(false);
+  setCountPermissionAvailable(true);
+  resolvePermission(true);
+  await Promise.resolve();
+  expect(mockSendMessage).not.toHaveBeenCalled();
+  expect(mockHint.offer).not.toHaveBeenCalled();
+});
+
+test("count revocation invalidates an earlier vote hint callback", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  sendVote(-1);
+  await Promise.resolve();
+  const submit = mockHint.offer.mock.calls[0][1];
+  setCountPermissionAvailable(false);
+  setCountPermissionAvailable(true);
+  submit();
+  expect(mockSendMessage).not.toHaveBeenCalled();
+  expect(mockHint.clearPending).toHaveBeenCalled();
+});
+
+test.each([
+  ["LIKED_STATE", 1],
+  ["DISLIKED_STATE", -1],
+  ["NEUTRAL_STATE", 0],
+])("Firefox submits the current button state after a grant (%s)", async (current, vote) => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  sendVote(-1);
+  await Promise.resolve();
+  const granted = mockHint.offer.mock.calls[0][1];
+  getLikeButton.mockReturnValue(document.createElement("div"));
+  getDislikeButton.mockReturnValue(document.createElement("div"));
+  storedData.videoId = null;
+  getState.mockReturnValue({ current });
+  granted();
+  expect(mockSendMessage).toHaveBeenCalledWith({ message: "send_vote", videoId: "abcdefghijk", vote });
+});
+
+test("a pending Firefox click cannot submit after its navigation context changes", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  sendVote(-1);
+  await Promise.resolve();
+  const granted = mockHint.offer.mock.calls[0][1];
+  mockHint.isCurrent.mockReturnValue(false);
+  granted();
+  expect(mockSendMessage).not.toHaveBeenCalled();
+});
+
+test.each([false, true])(
+  "the disable switch stops Firefox votes and offers no hint (voting granted: %s)",
+  async (granted) => {
+    usesFirefoxDataCollectionConsent.mockReturnValue(true);
+    hasFeaturePermission.mockResolvedValue(granted);
+    extConfig.disableVoteSubmission = true;
+    sendVote(-1);
+    await Promise.resolve();
+    expect(mockSendMessage).not.toHaveBeenCalled();
+    expect(hasFeaturePermission).not.toHaveBeenCalled();
+    expect(mockHint.offer).not.toHaveBeenCalled();
+  },
+);
+
+test("turning the switch on cancels a pending Firefox vote hint", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  sendVote(-1);
+  await Promise.resolve();
+  const granted = mockHint.offer.mock.calls[0][1];
+  storageChangeHandler({ disableVoteSubmission: { oldValue: false, newValue: true } }, "sync");
+  expect(mockHint.clearPending).toHaveBeenCalled();
+  storageChangeHandler({ disableVoteSubmission: { oldValue: true, newValue: false } }, "sync");
+  granted();
+  expect(mockSendMessage).not.toHaveBeenCalled();
+});
+
+test("reversed Firefox permission completions submit only the latest click", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  const resolutions = [];
+  hasFeaturePermission.mockImplementation(() => new Promise((resolve) => resolutions.push(resolve)));
+  sendVote(-1);
+  sendVote(0);
+  resolutions[1](true);
+  await Promise.resolve();
+  resolutions[0](true);
+  await Promise.resolve();
+  expect(mockSendMessage).toHaveBeenCalledTimes(1);
+  expect(mockSendMessage).toHaveBeenCalledWith({ message: "send_vote", videoId: "abcdefghijk", vote: 0 });
+  expect(mockHint.offer).not.toHaveBeenCalled();
+});
+
+test("an earlier denied Firefox result cannot show a hint after a newer granted click", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  const resolutions = [];
+  hasFeaturePermission.mockImplementation(() => new Promise((resolve) => resolutions.push(resolve)));
+  sendVote(-1);
+  sendVote(1);
+  resolutions[1](true);
+  await Promise.resolve();
+  resolutions[0](false);
+  await Promise.resolve();
+  expect(mockSendMessage).toHaveBeenCalledWith({ message: "send_vote", videoId: "abcdefghijk", vote: 1 });
+  expect(mockHint.offer).not.toHaveBeenCalled();
+  expect(mockHint.clearPending).toHaveBeenCalledTimes(2);
+});
+
+test("a newer Firefox activation invalidates the earlier hint's grant callback", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  sendVote(-1);
+  await Promise.resolve();
+  const earlierGrant = mockHint.offer.mock.calls[0][1];
+  getLikeButton.mockReturnValue(document.createElement("div"));
+  getDislikeButton.mockReturnValue(document.createElement("div"));
+  getState.mockReturnValue({ current: "LIKED_STATE" });
+  sendVote(1);
+  earlierGrant();
+  expect(mockSendMessage).not.toHaveBeenCalled();
+  await Promise.resolve();
+  expect(mockHint.offer).toHaveBeenCalledTimes(2);
 });
 
 test.each([false, true])("private direct reactions do not alter counts or submit (disabled=%s)", (disabled) => {

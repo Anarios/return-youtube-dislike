@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Wyłącza logowanie odpowiedzi API w konsoli."
   },
+  "developerSettings": {
+    "message": "Opcje programisty"
+  },
   "disableLoggingLabel": {
     "message": "Wyłącz logowanie do konsoli"
   },
@@ -161,6 +164,12 @@
   "hidePremiumTeaserHover": {
     "message": "Nie pokazuj panelu z surowymi liczbami na stronach odtwarzania YouTube."
   },
+  "hideRydComments": {
+    "message": "Ukryj komentarze RYD"
+  },
+  "hideRydCommentsHover": {
+    "message": "Nie pokazuj komentarzy RYD pod filmami, w których komentarze YouTube są wyłączone."
+  },
   "hidePremiumAnalytics": {
     "message": "Ukryj premiumowe statystyki wideo"
   },
@@ -177,7 +186,7 @@
     "message": "Wsparcie dla YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Procent w podpowiedzi paska polubień/łapek w dół."
+    "message": "Procent w podpowiedzi paska polubień/łapek w dół"
   },
   "showTooltipPercentageHover": {
     "message": "Wyświetla wartości procentowe po najechaniu na pasek wyświetlany pod łapkami."
@@ -249,7 +258,7 @@
     "message": "Wyłącz przesyłanie łapek"
   },
   "textSettingsHover": {
-    "message": "Przestaje liczyć Twoje łapki."
+    "message": "Twoje polubienia i oceny negatywne nie będą liczone ani nie pojawią się w licznikach ocen negatywnych."
   },
   "textTempUnavailable": {
     "message": "Tymczasowo niedostępny"
@@ -804,7 +813,7 @@
     "message": "Nieprzeczytane powiadomienia: $1"
   },
   "discussion_signedOutInbox": {
-    "message": "Zaloguj się, aby zobaczyć odpowiedzi i reakcje na Twoje komentarze."
+    "message": "Zaloguj się, aby zobaczyć odpowiedzi i polubienia Twoich komentarzy."
   },
   "discussion_notificationUnavailable": {
     "message": "Ta dyskusja nie jest już dostępna."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Otwórz dowolny film na YouTube, a zobaczysz liczbę łapek w dół tuż obok łapek w górę, tam, gdzie jej miejsce. Wersja 4.1 wprowadza też komentarze RYD — miejsce do rozmów o filmach poza sekcją komentarzy YouTube."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Jeszcze jeden krok"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Włącz poniżej liczniki ocen negatywnych, aby widzieć je na YouTube tuż obok polubień. Wersja 4.1 wprowadza też komentarze RYD — miejsce do rozmów o filmach poza sekcją komentarzy YouTube."
+  },
   "changelog_new_badge": {
     "message": "Nowość w wersji 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Poznaj komentarze RYD"
   },
   "changelog_comments_body": {
-    "message": "Dyskusje społeczności pod filmami i Shorts, prowadzone przez Return YouTube Dislike i oddzielone od komentarzy YouTube. Każdy może czytać i reagować. Osoby z członkostwem Commenter lub Premium mogą pisać komentarze i odpowiadać."
+    "message": "Dyskusje społeczności pod filmami i Shorts z wyłączonymi komentarzami YouTube, prowadzone przez Return YouTube Dislike. Każdy może czytać i reagować. Osoby z członkostwem Commenter lub Premium mogą pisać komentarze i odpowiadać."
   },
   "changelog_comments_point_replies": {
     "message": "Odpowiedzi w wątkach z łapkami w górę i w dół"
@@ -882,7 +897,7 @@
     "message": "Pisz pod wybranym przez siebie publicznym pseudonimem"
   },
   "changelog_comments_point_notifications": {
-    "message": "Powiadomienia, gdy ktoś odpowie lub zareaguje"
+    "message": "Powiadomienia, gdy ktoś odpowie na Twój komentarz lub go polubi"
   },
   "changelog_comments_point_moderation": {
     "message": "Zgłoszenia i moderacja pomagające zachować kulturę dyskusji"
@@ -958,5 +973,149 @@
   },
   "reviewPromptAction": {
     "message": "Napisz opinię"
+  },
+  "consent_page_title": {
+    "message": "Uprawnienia funkcji RYD"
+  },
+  "consent_vote_title": {
+    "message": "Niech Twoje oceny się liczą"
+  },
+  "consent_vote_body": {
+    "message": "Bez udostępniania ocen Twoje polubienia i oceny negatywne nie są liczone i nie pojawią się w licznikach ocen negatywnych. Udostępnianie wysyła Twoje oceny i widoczną liczbę polubień. Wymaga ono liczników ocen negatywnych, więc Firefox poprosi też o ich włączenie, jeśli są wyłączone."
+  },
+  "consent_account_title": {
+    "message": "Wybierz uprawnienia konta"
+  },
+  "consent_account_body": {
+    "message": "Zaloguj się, aby korzystać z funkcji konta, w tym profilu, powiadomień i analiz Premium."
+  },
+  "consent_next_step": {
+    "message": "Wybierz Zezwól w Firefoksie, aby przejrzeć uprawnienia. Możesz odmówić."
+  },
+  "consent_allow": {
+    "message": "Zezwól w Firefoksie"
+  },
+  "consent_not_now": {
+    "message": "Nie teraz"
+  },
+  "consent_prompt_status": {
+    "message": "Zdecyduj, czy chcesz przyznać te uprawnienia w Firefoksie."
+  },
+  "consent_granted_status": {
+    "message": "Uprawnienia są włączone. Możesz wrócić do YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Te opcjonalne funkcje pozostają wyłączone. Możesz zmienić uprawnienia później."
+  },
+  "consent_error_status": {
+    "message": "Nie udało się zmienić uprawnień. Spróbuj ponownie."
+  },
+  "consent_details_summary": {
+    "message": "Co oznaczają kategorie uprawnień Firefoksa?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox grupuje dane w szerokie kategorie. Oto znaczenie każdej z nich dla RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Aktywność przeglądania"
+  },
+  "consent_browsing_body": {
+    "message": "Identyfikator filmu w YouTube używany do wczytywania liczników ocen negatywnych i dyskusji. Ty decydujesz, czy na to zezwolić."
+  },
+  "consent_content_label": {
+    "message": "Treść witryn"
+  },
+  "consent_content_body": {
+    "message": "Liczba polubień wyświetlana przy filmie YouTube, służąca do poprawiania szacunków liczby ocen negatywnych."
+  },
+  "consent_activity_label": {
+    "message": "Aktywność w witrynach"
+  },
+  "consent_activity_body": {
+    "message": "Twoje polubienia, oceny negatywne, cofnięte oceny i reakcje na komentarze RYD, wysyłane z zapisanym losowym identyfikatorem głosowania."
+  },
+  "consent_identity_label": {
+    "message": "Dane umożliwiające identyfikację osoby"
+  },
+  "consent_identity_body": {
+    "message": "Dane profilu, takie jak wyświetlana nazwa i e-mail, tylko gdy zdecydujesz się zalogować."
+  },
+  "consent_auth_label": {
+    "message": "Dane uwierzytelniania"
+  },
+  "consent_auth_body": {
+    "message": "Dane autoryzacji i sesji niezbędne do logowania i korzystania z funkcji konta."
+  },
+  "consent_scope": {
+    "message": "RYD nie zbiera niczego poza youtube.com i nie uzyskuje dostępu do Twojego konta YouTube. Nie otrzymuje nazwy ani e-maila, dopóki się nie zalogujesz."
+  },
+  "consent_settings": {
+    "message": "Opcjonalne uprawnienia możesz później zmienić w ustawieniach rozszerzenia w Firefoksie."
+  },
+  "consent_private_counts": {
+    "message": "Okna prywatne wyświetlają tylko liczniki, korzystając z uprawnienia włączonego w zwykłym oknie. Głosowanie, logowanie, analizy Premium i dyskusje są w nich niedostępne."
+  },
+  "consent_voter_timing": {
+    "message": "Identyfikator głosowania jest wysyłany tylko przy głosowaniu lub reagowaniu. Twoje reakcje na komentarze są zapamiętywane na tym urządzeniu."
+  },
+  "popup_signin_next_click": {
+    "message": "Potrzebne jest jeszcze jedno kliknięcie: wybierz poniżej przycisk logowania, aby sprawdzić uprawnienia konta w Firefoksie i kontynuować."
+  },
+  "changelog_firefox_vote_allow": {
+    "message": "Wybierz w Firefoksie"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Dziękujemy. Twoje oceny są teraz liczone."
+  },
+  "changelog_firefox_vote_declined": {
+    "message": "Udostępnianie ocen pozostaje wyłączone, więc Twoje polubienia i oceny negatywne nie będą liczone. Możesz je włączyć później w ustawieniach dodatków Firefoksa albo gdy polubisz film lub ocenisz go negatywnie, po włączeniu liczników ocen negatywnych."
+  },
+  "vote_consent_hint": {
+    "message": "Twoja ocena nie jest liczona i nie pojawi się w licznikach ocen negatywnych. Włącz udostępnianie ocen, aby się liczyła."
+  },
+  "vote_not_counted": {
+    "message": "Twoje polubienia i oceny negatywne nie są liczone i nie pojawią się w licznikach ocen negatywnych."
+  },
+  "vote_count_mine": {
+    "message": "Licz moje oceny"
+  },
+  "vote_consent_dismiss": {
+    "message": "Nie pytaj ponownie"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Włącz udostępnianie ocen, aby reagować na komentarze. Twoja reakcja zostanie wysłana po jego włączeniu."
+  },
+  "vote_consent_continue": {
+    "message": "Kontynuuj"
+  },
+  "discussion_consentContinue": {
+    "message": "Kontynuuj"
+  },
+  "vote_consent_open_failed": {
+    "message": "Nie udało się otworzyć strony uprawnień. Spróbuj ponownie."
+  },
+  "counts_consent_enable": {
+    "message": "Włącz liczniki ocen negatywnych"
+  },
+  "counts_consent_reason": {
+    "message": "Firefox wymaga teraz Twojej zgody, zanim RYD będzie mógł wyświetlać liczniki ocen negatywnych."
+  },
+  "counts_consent_body": {
+    "message": "Aby pobrać liczniki, RYD wysyła identyfikator bieżącego filmu w YouTube na swój serwer. Firefox nazywa to „Aktywność przeglądania”."
+  },
+  "counts_consent_allow": {
+    "message": "Włącz liczniki"
+  },
+  "counts_consent_toolbar": {
+    "message": "Otwórz Return YouTube Dislike z menu rozszerzeń Firefoksa, aby włączyć liczniki."
+  },
+  "counts_consent_declined": {
+    "message": "Liczniki pozostają wyłączone. Możesz je włączyć tutaj później."
+  },
+  "counts_consent_enabled": {
+    "message": "Liczniki ocen negatywnych są włączone."
+  },
+  "counts_consent_private": {
+    "message": "Najpierw włącz liczniki ocen negatywnych w zwykłym oknie. Okna prywatne wyświetlają tylko liczniki."
   }
 }

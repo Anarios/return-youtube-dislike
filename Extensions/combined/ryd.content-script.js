@@ -1,9 +1,9 @@
 import {
+  captureShortsNativeControlInventory,
   ensureSyntheticShortsDislikeButton,
   getButtonControls,
   getButtons,
   getDislikeTextContainer,
-  getNativeButton,
   getShortsCandidateVideoId,
   getShortsControlSurfaceSignature,
   hasRenderedBox,
@@ -13,11 +13,13 @@ import {
   shortsNativeControlInventoryIsReadyForFallback,
 } from "./src/buttons";
 import {
+  ensureRemoteSelectors,
   hasLoadedStateForVideo,
   initExtConfig,
   isLikesDisabled,
   isShorts,
   clearRenderedVoteState,
+  remoteSelectorsSettled,
   restoreCurrentState,
   setInitialState,
   storedData,
@@ -29,6 +31,7 @@ import {
   createSmartimationObserver,
   storageChangeHandler,
   observeColorTheme,
+  setCountPermissionAvailable,
 } from "./src/events";
 import { hasUsableRateBar } from "./src/bar";
 import {
@@ -40,13 +43,16 @@ import {
 } from "./src/initialization-cycle";
 import { initPatreonFeatures } from "./src/patreon";
 import { initDiscussion } from "./src/discussion";
-import { waitForCoreDataConsent } from "./src/consent-prompt";
-import { onCoreDataPermissionChanged } from "./src/core-data-consent";
+import {
+  hasFeaturePermission,
+  onDataPermissionsChanged,
+  usesFirefoxDataCollectionConsent,
+} from "./src/core-data-consent";
+import { createCountsConsentHintController } from "./src/counts-consent-hint";
 import { cancelObsoleteVoteDataRequests, clearVoteDataRequestCache } from "./src/vote-data-request";
 import { isPrivateBrowsingContext } from "./src/private-browsing";
 import {
   actionBarHasHydratedData,
-  captureShortsNativeControlInventory,
   getShortsControlSurfaceStabilityMs,
   shortsNativeControlInventoryMatches,
 } from "../common/shorts-control-readiness";
@@ -71,9 +77,17 @@ let initializationCheckRunning = false;
 let pendingShortsMutationSurface = null;
 let shortsRouteEpoch = 0;
 let observedRouteKey = null;
-let coreConsentGranted = false;
 let privatePageActive = true;
 const privateBrowsingContext = isPrivateBrowsingContext();
+const firefoxDataConsent = usesFirefoxDataCollectionConsent();
+const countsConsentHint =
+  firefoxDataConsent && !privateBrowsingContext
+    ? createCountsConsentHintController({ onDismiss: updateInitializationWatch })
+    : null;
+let countsPermissionGranted = !firefoxDataConsent;
+let countsPermissionEpoch = 0;
+let contentReady = false;
+let initializationWatchTimer = null;
 const pendingNavigation = createPendingNavigationTracker();
 const SHORTS_HYDRATION_ATTRIBUTE = "data-ryd-shorts-action-bar-hydrated";
 const SHORTS_HYDRATION_REQUEST_EVENT = "ryd-shorts-action-bar-hydration-request";
@@ -127,22 +141,53 @@ function pageWorldActionBarHasHydratedData(actionBar) {
   return hydrated;
 }
 
-await waitForCoreDataConsent();
-coreConsentGranted = true;
-onCoreDataPermissionChanged((granted) => {
-  coreConsentGranted = granted;
-  if (!granted) {
+function applyCountsPermission(granted) {
+  countsPermissionEpoch += 1;
+  countsPermissionGranted = granted;
+  setCountPermissionAvailable(granted);
+  countsConsentHint?.hide();
+  clearPrivateVoteState();
+  clearRenderedVoteState(initializedButtons ? getButtonControls(initializedButtons) : undefined);
+  initializedVideoId = null;
+  isSetInitialStateDone = false;
+  if (jsInitChecktimer !== null) {
+    clearInterval(jsInitChecktimer);
+    jsInitChecktimer = null;
+  }
+  if (granted) void ensureRemoteSelectors();
+  if (!contentReady) return;
+  updateInitializationWatch();
+  void triggerInitializationCycle();
+}
+
+async function recheckCountsPermission() {
+  if (!firefoxDataConsent || countsPermissionGranted) return;
+  const epoch = countsPermissionEpoch;
+  const granted = await hasFeaturePermission("counts");
+  if (granted && epoch === countsPermissionEpoch && !countsPermissionGranted) applyCountsPermission(true);
+}
+
+function observeCountPermissions() {
+  onDataPermissionsChanged(({ added, removed }) => {
+    if (added.includes("browsingActivity") || removed.includes("browsingActivity")) {
+      applyCountsPermission(!removed.includes("browsingActivity"));
+      return;
+    }
+    if (![...added, ...removed].includes("websiteContent")) return;
     clearVoteDataRequestCache();
-    if (privateBrowsingContext) clearPrivateVoteState();
     storedData.videoId = null;
     initializedVideoId = null;
     isSetInitialStateDone = false;
-    clearRenderedVoteState();
-    void waitForCoreDataConsent().then(() => {
-      coreConsentGranted = true;
-    });
-  }
-});
+    if (contentReady && countsPermissionGranted) void triggerInitializationCycle();
+  });
+}
+observeCountPermissions();
+if (firefoxDataConsent) {
+  const epoch = countsPermissionEpoch;
+  const [granted] = await Promise.all([hasFeaturePermission("counts"), countsConsentHint?.loadDismissal()]);
+  if (epoch === countsPermissionEpoch) countsPermissionGranted = granted;
+  setCountPermissionAvailable(countsPermissionGranted);
+}
 const pageWorldHelpersReady = injectPageWorldHelpers();
 // Listen before asynchronous initialization so settings changed in another tab
 // are applied while the page is still loading.
@@ -224,7 +269,7 @@ function syncShortsRouteEpoch() {
   }
 }
 
-function getStableShortsControls(videoId) {
+function getStableShortsControls(videoId, allowSyntheticDislike = true) {
   const buttons = getButtons();
   const isHydrated = pageWorldActionBarHasHydratedData(buttons);
   const needsSyntheticDislike =
@@ -235,7 +280,7 @@ function getStableShortsControls(videoId) {
     pendingShortsMutationSurface = null;
     return buttons ? getButtonControls(buttons) : null;
   }
-  const inventory = captureShortsNativeControlInventory(buttons, { getNativeLikeButton: getNativeButton });
+  const inventory = captureShortsNativeControlInventory(buttons);
   if (
     !buttons ||
     !inventory ||
@@ -285,9 +330,7 @@ function getStableShortsControls(videoId) {
 
   const allowUnhydratedFallback = !isHydrated;
   const preMutationButtons = getButtons();
-  const preMutationInventory = captureShortsNativeControlInventory(preMutationButtons, {
-    getNativeLikeButton: getNativeButton,
-  });
+  const preMutationInventory = captureShortsNativeControlInventory(preMutationButtons);
   const preMutationIsHydrated = pageWorldActionBarHasHydratedData(preMutationButtons);
   const preMutationAllowsFallback = !preMutationIsHydrated && allowUnhydratedFallback;
   if (
@@ -306,6 +349,13 @@ function getStableShortsControls(videoId) {
   }
 
   if (needsSyntheticDislike) {
+    if (!allowSyntheticDislike) {
+      const consentControls = getButtonControls(preMutationButtons);
+      return {
+        ...consentControls,
+        ready: Boolean(consentControls.nativeLikeButton),
+      };
+    }
     ensureSyntheticShortsDislikeButton(preMutationButtons, {
       allowUnhydratedFallback: preMutationAllowsFallback,
       currentVideoId: videoId,
@@ -315,9 +365,7 @@ function getStableShortsControls(videoId) {
   }
 
   const confirmedButtons = getButtons();
-  const confirmedInventory = captureShortsNativeControlInventory(confirmedButtons, {
-    getNativeLikeButton: getNativeButton,
-  });
+  const confirmedInventory = captureShortsNativeControlInventory(confirmedButtons);
   const confirmedIsHydrated = pageWorldActionBarHasHydratedData(confirmedButtons);
   if (
     confirmedButtons !== buttons ||
@@ -340,7 +388,6 @@ function getStableShortsControls(videoId) {
 
 async function checkForInitialization() {
   if (privateBrowsingContext && !privatePageActive) return;
-  if (!coreConsentGranted) return;
   if (initializationCheckRunning) return;
   initializationCheckRunning = true;
   try {
@@ -351,9 +398,15 @@ async function checkForInitialization() {
 
     const videoId = getVideoId(window.location.href);
     const pendingOrigin = pendingNavigation.get();
-    if (pendingOrigin && (!pendingOrigin.videoId || pendingOrigin.videoId === videoId)) return;
-    const controls = isShorts() ? getStableShortsControls(videoId) : getButtonControls();
-    if (!controls) return;
+    if (pendingOrigin && (!pendingOrigin.videoId || pendingOrigin.videoId === videoId)) {
+      countsConsentHint?.hide();
+      return;
+    }
+    const controls = isShorts() ? getStableShortsControls(videoId, countsPermissionGranted) : getButtonControls();
+    if (!controls) {
+      countsConsentHint?.hide();
+      return;
+    }
     const { buttons, dislikeButton, likeButton, nativeDislikeButton, nativeLikeButton } = controls;
     const shortsRoute = isShorts();
     if (
@@ -364,16 +417,27 @@ async function checkForInitialization() {
         isVideoLoaded: !shortsRoute && isVideoLoaded(),
       })
     ) {
+      if (!countsPermissionGranted) {
+        countsConsentHint?.sync(controls, videoId);
+        return;
+      }
+      countsConsentHint?.hide();
       if (!getDislikeTextContainer(controls)) return;
       createSmartimationObserver(buttons);
       addLikeDislikeEventListener(likeButton, dislikeButton);
+      const initializationPermissionEpoch = countsPermissionEpoch;
       let rendered;
       if (hasLoadedStateForVideo(videoId)) {
         rendered = restoreCurrentState();
       } else {
         rendered = await setInitialState();
       }
-      if (rendered === false || !coreConsentGranted || (privateBrowsingContext && !privatePageActive)) return;
+      if (!countsPermissionGranted || initializationPermissionEpoch !== countsPermissionEpoch) {
+        clearPrivateVoteState();
+        clearRenderedVoteState();
+        return;
+      }
+      if (rendered === false || (privateBrowsingContext && !privatePageActive)) return;
       const currentControls = getButtonControls();
       if (
         videoId !== getVideoId(window.location.href) ||
@@ -405,6 +469,8 @@ async function checkForInitialization() {
         getBrowser().storage.onChanged.addListener(storageChangeHandler);
         isStorageListenerRegistered = true;
       }
+    } else if (!countsPermissionGranted) {
+      countsConsentHint?.hide();
     }
   } catch (exception) {
     if (privateBrowsingContext) {
@@ -425,9 +491,10 @@ const initializationCycle = createInitializationCycleRunner(async () => {
     jsInitChecktimer = null;
   }
 
+  await remoteSelectorsSettled();
   await checkForInitialization();
 
-  if (!isSetInitialStateDone) {
+  if (!isSetInitialStateDone && countsPermissionGranted) {
     jsInitChecktimer = setInterval(() => {
       checkForInitialization();
     }, 111);
@@ -442,7 +509,6 @@ const initializationCycle = createInitializationCycleRunner(async () => {
 
 function triggerInitializationCycle() {
   if (privateBrowsingContext && !privatePageActive) return Promise.resolve();
-  if (!coreConsentGranted) return Promise.resolve();
   return initializationCycle.request();
 }
 
@@ -451,6 +517,7 @@ async function setEventListeners() {
 }
 
 document.addEventListener("yt-navigate-start", function () {
+  countsConsentHint?.hide();
   clearVoteDataRequestCache();
   if (privateBrowsingContext) clearPrivateVoteState();
   shortsRouteEpoch += 1;
@@ -492,6 +559,7 @@ document.addEventListener("yt-navigate-start", function () {
 document.addEventListener("yt-navigate-finish", async function (event) {
   pendingNavigation.clear();
   syncShortsRouteEpoch();
+  await recheckCountsPermission();
   await setEventListeners();
 });
 
@@ -560,13 +628,31 @@ function watchControlsNeedInitialization() {
   );
 }
 
-setInterval(() => {
+function watchInitialization() {
   if (privateBrowsingContext && !privatePageActive) return;
-  if (!coreConsentGranted) return;
   syncShortsRouteEpoch();
   if (isShorts()) ensureShortsNavigationObserver();
+  if (!countsPermissionGranted) {
+    void checkForInitialization();
+    return;
+  }
   if (watchControlsNeedInitialization()) void triggerInitializationCycle();
-}, 500);
+}
 
+function initializationWatchNeeded() {
+  return countsPermissionGranted || (countsConsentHint !== null && !countsConsentHint.isDismissed());
+}
+
+function updateInitializationWatch() {
+  if (!initializationWatchNeeded()) {
+    if (initializationWatchTimer !== null) clearInterval(initializationWatchTimer);
+    initializationWatchTimer = null;
+    return;
+  }
+  initializationWatchTimer ??= setInterval(watchInitialization, 500);
+}
+
+updateInitializationWatch();
 // Navigation must be observable even while the first count request is pending.
+contentReady = true;
 await setEventListeners();

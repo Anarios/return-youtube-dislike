@@ -1,5 +1,6 @@
 export const NATIVE_STATE_ATTRIBUTE = "data-ryd-discussion-native-state";
 export const NATIVE_STATE_REQUEST = "ryd-discussion-state-request";
+export const SHORTS_LAUNCHER_ID = "ryd-discussion-launcher";
 
 export function discussionRoute(url = location.href) {
   try {

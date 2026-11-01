@@ -58,9 +58,20 @@ describe("rate-bar stylesheet contrast", () => {
     const rule = stylesheet.match(/#ryd-bar-container\s*{([^}]*)}/)?.[1] ?? "";
 
     expect(rule).toContain("background: #737373");
-    expect(rule).toContain("var(--yt-spec-text-primary, #f1f1f1) 55%");
-    expect(rule).toContain("var(--yt-spec-base-background, #0f0f0f) 45%");
+    expect(rule).toContain("var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1)) 55%");
+    expect(rule).toContain(
+      "var(--yt-sys-color-baseline--base-background, var(--yt-spec-base-background, #0f0f0f)) 45%",
+    );
     expect(rule).not.toContain("--yt-spec-icon-disabled");
+  });
+
+  test("fills the positive share with YouTube's current text color before the legacy name", () => {
+    const stylesheet = fs.readFileSync(path.join(__dirname, "../content-style.css"), "utf8");
+    const rule = stylesheet.match(/#ryd-bar\s*{([^}]*)}/)?.[1] ?? "";
+
+    expect(rule).toContain(
+      "background: var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1))",
+    );
   });
 
   test("anchors the bar without overriding YouTube's responsive action-row layout", () => {

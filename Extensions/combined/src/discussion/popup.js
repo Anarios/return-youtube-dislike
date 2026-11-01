@@ -1,5 +1,5 @@
 import { requestDiscussion, subscribeDiscussionEvents } from "./client";
-import { createDiscussionInbox } from "./inbox";
+import { createDiscussionInbox, notificationsLabel } from "./inbox";
 import { discussionText as t } from "./localize";
 import { button, element } from "./dom";
 import { isPrivateBrowsingContext } from "../private-browsing";
@@ -11,7 +11,12 @@ export function initDiscussionPopup() {
   if (!document.documentElement.lang && chrome.i18n?.getUILanguage)
     document.documentElement.lang = chrome.i18n.getUILanguage();
   const toggle = document.getElementById("ryd-discussion-inbox-toggle");
-  const inbox = createDiscussionInbox({ authenticated: false });
+  const inbox = createDiscussionInbox({
+    authenticated: false,
+    onUnreadCount: (count) => {
+      toggle.textContent = notificationsLabel(count);
+    },
+  });
   const back = button("←", () => setInboxOpen(false), "ryd-discussion-inbox-back");
   back.setAttribute("aria-label", t("close"));
   const brand = element("div", "ryd-discussion-inbox-brand");
@@ -33,10 +38,7 @@ export function initDiscussionPopup() {
     document.documentElement.classList.toggle("ryd-discussion-inbox-open", open);
     if (open) {
       background = Array.from(document.body.children)
-        .filter(
-          (node) =>
-            node !== root && node.id !== "ryd-consent-prompt" && !["SCRIPT", "STYLE", "LINK"].includes(node.tagName),
-        )
+        .filter((node) => node !== root && !["SCRIPT", "STYLE", "LINK"].includes(node.tagName))
         .map((node) => ({ node, hidden: node.hidden, inert: node.inert }));
       for (const { node } of background) {
         node.hidden = true;
@@ -71,10 +73,7 @@ export function initDiscussionPopup() {
       generation++;
       inbox.setSession(event.data);
     }
-    if (event.type === "inbox") {
-      inbox.update(event.data, { live: true });
-      toggle.textContent = `${t("notifications")}${event.data?.unreadCount ? ` (${event.data.unreadCount})` : ""}`;
-    }
+    if (event.type === "inbox") inbox.update(event.data, { live: true });
   });
   const initial = generation;
   requestDiscussion("session")
@@ -86,7 +85,6 @@ export function initDiscussionPopup() {
           .then((value) => {
             if (initial !== generation) return;
             inbox.update(value);
-            toggle.textContent = `${t("notifications")}${value?.unreadCount ? ` (${value.unreadCount})` : ""}`;
           })
           .catch(() => {});
     })
@@ -100,4 +98,5 @@ export function initDiscussionPopup() {
     },
     { once: true },
   );
+  return { close: () => setInboxOpen(false) };
 }

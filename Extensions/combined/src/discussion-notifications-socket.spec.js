@@ -77,7 +77,12 @@ test("real SignalR events and reconnects fetch durable notifications with fresh 
     fetchImpl: async (url) => {
       let data;
       if (url.endsWith("/me"))
-        data = { authenticated: true, profile: { id: profileId, nickname: "Tester" }, canPost: true };
+        data = {
+          authenticated: true,
+          profile: { id: profileId, nickname: "Tester" },
+          canPost: true,
+          membershipTier: "commenter",
+        };
       else if (url.endsWith("/ticket")) data = { token: `hub-ticket-${++ticketRequests}` };
       else {
         notificationReads.push(url);
@@ -117,10 +122,97 @@ test("real SignalR events and reconnects fetch durable notifications with fresh 
   }
 });
 
-test("the configured SignalR retry policy stops after four reconnect attempts", async () => {
+test("a real hub stays closed without a nickname, opens once one is saved and closes on sign-out", async () => {
+  const server = new WebSocketServer({ port: 0, host: "127.0.0.1" });
+  await new Promise((resolve) => server.once("listening", resolve));
+  const profileId = "22222222-2222-4222-8222-222222222222";
+  const popup = { id: "extension-id", url: "chrome-extension://extension-id/popup.html" };
+  const peers = [];
+  let connected;
+  const ready = new Promise((resolve) => {
+    connected = resolve;
+  });
+  let disconnected;
+  const closed = new Promise((resolve) => {
+    disconnected = resolve;
+  });
+  server.on("connection", (socket) => {
+    peers.push(socket);
+    socket.on("close", disconnected);
+    socket.on("message", (bytes) => {
+      const message = JSON.parse(bytes.toString().split("\u001e")[0]);
+      if (message.protocol) {
+        socket.send("{}\u001e");
+        connected();
+      }
+    });
+  });
+  const area = {
+    get: (keys, callback) => callback({ patreonAuthenticated: true, patreonSessionToken: "account-token" }),
+    set: (values, callback) => callback?.(),
+    remove: (keys, callback) => callback?.(),
+  };
+  const api = {
+    runtime: {
+      id: "extension-id",
+      getURL: (path) => `chrome-extension://extension-id/${path}`,
+      sendMessage: (message, callback) => callback?.(),
+    },
+    storage: { sync: area, local: area },
+    tabs: {
+      query: (query, callback) => callback([]),
+      sendMessage: (id, message, callback) => callback?.(),
+    },
+  };
+  let profile = null;
+  const paths = [];
+  const connectionFactory = jest.fn((url, tokenFactory) =>
+    createConnection(`http://127.0.0.1:${server.address().port}/api/discussion/notifications/hub`, tokenFactory),
+  );
+  const client = createDiscussionBackground({
+    api,
+    voteClient: { ensureRegistered: async () => ({ userId: "unused" }) },
+    settings: { apiOrigin: "https://returnyoutubedislikeapi.com", testMode: false, stateStorageKey: "state" },
+    connectionFactory,
+    fetchImpl: async (url, options) => {
+      const path = new URL(url).pathname.replace("/api/discussion", "");
+      paths.push(path);
+      if (path === "/me/profile") profile = { id: profileId, nickname: JSON.parse(options.body).nickname };
+      const data = path.startsWith("/me")
+        ? { authenticated: true, profile, canPost: true, membershipTier: "premium" }
+        : path === "/notifications/ticket"
+          ? { token: "hub-ticket" }
+          : { items: [], unreadCount: 0, revision: "0", nextCursor: null };
+      return { ok: true, status: 200, json: async () => data };
+    },
+  });
+  const send = (operation, payload) => client.handleMessage({ message: "ryd_discussion", operation, payload }, popup);
+  try {
+    await client.refreshSession();
+    expect((await send("session")).data).toMatchObject({ authenticated: true, profile: null });
+    expect((await send("notifications")).ok).toBe(true);
+    expect(connectionFactory).not.toHaveBeenCalled();
+    expect(paths).toEqual(["/me", "/notifications"]);
+    expect((await send("profile", { nickname: "Tester" })).data.profile.nickname).toBe("Tester");
+    await ready;
+    expect(connectionFactory).toHaveBeenCalledTimes(1);
+    expect(paths.filter((path) => path === "/notifications/ticket")).toHaveLength(1);
+    client.clearSession(true);
+    await closed;
+    expect(peers).toHaveLength(1);
+    expect(paths.filter((path) => path === "/notifications/ticket")).toHaveLength(1);
+  } finally {
+    client.stop();
+    for (const socket of server.clients) socket.terminate();
+    await new Promise((resolve) => server.close(resolve));
+  }
+});
+
+test("the configured SignalR retry policy jitters four reconnect attempts then stops", async () => {
   const connection = createConnection(
     "https://returnyoutubedislikeapi.com/api/discussion/notifications/hub",
     async () => "ticket",
+    () => 0.5,
   );
   const policy = connection._reconnectPolicy;
   expect(
@@ -131,6 +223,20 @@ test("the configured SignalR retry policy stops after four reconnect attempts", 
         retryReason: new Error("disconnected"),
       }),
     ),
-  ).toEqual([0, 2000, 10000, 30000, null]);
+  ).toEqual([500, 2000, 10000, 30000, null]);
+  const low = createConnection(
+    "https://example.com/hub",
+    async () => "ticket",
+    () => 0,
+  );
+  const high = createConnection(
+    "https://example.com/hub",
+    async () => "ticket",
+    () => 1,
+  );
+  expect(low._reconnectPolicy.nextRetryDelayInMilliseconds({ previousRetryCount: 1 })).toBe(1500);
+  expect(high._reconnectPolicy.nextRetryDelayInMilliseconds({ previousRetryCount: 1 })).toBe(2500);
+  await low.stop();
+  await high.stop();
   await connection.stop();
 });

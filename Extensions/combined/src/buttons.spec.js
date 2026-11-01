@@ -8,6 +8,7 @@ jest.mock("./private-browsing", () => ({
 const { isPrivateBrowsingContext } = require("./private-browsing");
 const { extConfig, refreshReactionPresentation } = require("./state");
 const {
+  captureShortsNativeControlInventory: captureExtensionShortsNativeControlInventory,
   ensureSyntheticShortsDislikeButton,
   getButtonControls,
   getButtons,
@@ -425,6 +426,42 @@ describe("desktop watch button ownership", () => {
     expect(getButtonControls(actionBar).ready).toBe(false);
     nativeLikeButton.setAttribute("aria-pressed", "false");
     expect(getButtonControls(actionBar).ready).toBe(true);
+  });
+
+  test("keeps extension-owned Shorts actions out of the native control inventory", () => {
+    history.replaceState({}, "", "/shorts/BBBBBBBBBBB");
+    document.body.innerHTML = `
+      <ytd-reel-video-renderer video-id="BBBBBBBBBBB" is-active>
+        <reel-action-bar-view-model>
+          <like-button-view-model>
+            <toggle-button-view-model><button-view-model><label>
+              <button aria-pressed="false"><svg><path d="M3 12h18"></path></svg></button>
+            </label></button-view-model></toggle-button-view-model>
+          </like-button-view-model>
+          <button-view-model><button>Comments</button></button-view-model>
+          <button-view-model><button>Share</button></button-view-model>
+          <pivot-button-view-model><a href="/source/BBBBBBBBBBB/shorts">Sound</a></pivot-button-view-model>
+        </reel-action-bar-view-model>
+      </ytd-reel-video-renderer>`;
+    const actionBar = document.querySelector("reel-action-bar-view-model");
+    const nativeLikeButton = actionBar.querySelector("button[aria-pressed]");
+    setBox(actionBar);
+    setBox(nativeLikeButton.querySelector("svg"));
+    const nativeChildren = [...actionBar.children];
+    const inventory = captureShortsNativeControlInventory(actionBar, { getNativeLikeButton: getNativeButton });
+
+    expect(ensureSyntheticShortsDislikeButton(actionBar, { isHydrated: true, isStable: true })).toBe(
+      actionBar.querySelector("[data-ryd-synthetic-shorts-dislike]"),
+    );
+    const launcher = document.createElement("button");
+    launcher.id = "ryd-discussion-launcher";
+    actionBar.insertBefore(launcher, actionBar.querySelector("pivot-button-view-model"));
+
+    const extensionInventory = captureExtensionShortsNativeControlInventory(actionBar);
+    expect(extensionInventory.nativeChildren).toEqual(nativeChildren);
+    expect(extensionInventory.activationTargets).toEqual(inventory.activationTargets);
+    expect(extensionInventory.nativeLikeButton).toBe(nativeLikeButton);
+    expect(captureShortsNativeControlInventory(actionBar, { getNativeLikeButton: getNativeButton })).toBeNull();
   });
 
   test("does not clone a text template from outside the selected reaction tree", () => {

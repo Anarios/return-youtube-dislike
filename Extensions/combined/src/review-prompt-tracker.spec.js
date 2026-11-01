@@ -351,6 +351,23 @@ describe("review prompt engagement tracker", () => {
     expect(local.get).not.toHaveBeenCalled();
   });
 
+  test("does not track in Microsoft Edge, whose store has its own reviews", async () => {
+    const original = Object.getOwnPropertyDescriptor(globalThis, "navigator");
+    Object.defineProperty(globalThis, "navigator", {
+      configurable: true,
+      value: { userAgentData: { brands: [{ brand: "Microsoft Edge" }, { brand: "Chromium" }] } },
+    });
+    try {
+      const { local, record } = harness({ eligible: true });
+      expect(await record(VIDEO_IDS[0])).toEqual(NO_PROMPT);
+      expect(local.get).not.toHaveBeenCalled();
+      expect(local.set).not.toHaveBeenCalled();
+    } finally {
+      if (original) Object.defineProperty(globalThis, "navigator", original);
+      else delete globalThis.navigator;
+    }
+  });
+
   test("does not track in a private extension context", async () => {
     const { api, local, record } = harness();
     api.extension = { inIncognitoContext: true };

@@ -112,7 +112,8 @@ test.each(["--use-openssl-ca", "--no-use-openssl-ca", "--no-use_openssl_ca"])(
   (option) => {
     const env = { ...process.env };
     for (const key of Object.keys(env)) {
-      if (/^(NODE_OPTIONS|SSL_CERT_FILE|SSL_CERT_DIR|NODE_EXTRA_CA_CERTS)$/i.test(key)) delete env[key];
+      if (/^(NODE_OPTIONS|SSL_CERT_FILE|SSL_CERT_DIR|NODE_EXTRA_CA_CERTS|NODE_USE_SYSTEM_CA|OPENSSL_CONF)$/i.test(key))
+        delete env[key];
     }
     const result = spawnSync(
       process.execPath,
@@ -144,7 +145,8 @@ test.each([
 test("applies the replacement store in a native Node child and propagates its exit status", () => {
   const env = { ...process.env };
   for (const key of Object.keys(env)) {
-    if (/^(NODE_OPTIONS|SSL_CERT_FILE|SSL_CERT_DIR|NODE_EXTRA_CA_CERTS)$/i.test(key)) delete env[key];
+    if (/^(NODE_OPTIONS|SSL_CERT_FILE|SSL_CERT_DIR|NODE_EXTRA_CA_CERTS|NODE_USE_SYSTEM_CA|OPENSSL_CONF)$/i.test(key))
+      delete env[key];
   }
   const result = spawnSync(
     process.execPath,
@@ -163,7 +165,8 @@ test("reads real npm custom CA paths with spaces and lifecycle options without t
   fs.writeFileSync(cafile, [allowed[0], blocked].join("\n"));
   const env = { ...process.env, npm_config_cafile: cafile, npm_config_node_options: "--max-old-space-size=256" };
   for (const key of Object.keys(env)) {
-    if (/^(NODE_OPTIONS|SSL_CERT_FILE|SSL_CERT_DIR|NODE_EXTRA_CA_CERTS)$/i.test(key)) delete env[key];
+    if (/^(NODE_OPTIONS|SSL_CERT_FILE|SSL_CERT_DIR|NODE_EXTRA_CA_CERTS|NODE_USE_SYSTEM_CA|OPENSSL_CONF)$/i.test(key))
+      delete env[key];
   }
   const result = spawnSync(
     process.execPath,
