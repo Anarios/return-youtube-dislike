@@ -106,24 +106,40 @@ async function clickVoteAndWait(page, backend, role, expectedConfirmations) {
   await expect.poll(() => backend.requestsFor("POST", "/interact/confirmVote").length).toBe(expectedConfirmations);
 }
 
-test("fresh startup eagerly registers and submits a complete dislike handshake", async ({ context, page }) => {
+test("fresh startup registers only on the first vote and submits a complete dislike handshake", async ({
+  context,
+  page,
+}) => {
   const harness = await launchHarness({ context, page });
   const { backend } = harness;
   await waitForDislikeCount(page, 25);
 
+  expect(await readGmValue(page, CREDENTIAL_KEY)).toBeNull();
+  const activationIndex = backend.requests.length;
+
+  await clickVoteAndWait(page, backend, "dislike", 1);
+  expect(
+    backend.requests.slice(0, activationIndex).filter((record) => record.pathname === "/puzzle/registration"),
+  ).toEqual([]);
+
   const credentials = await waitForCredentials(page);
   expect(credentials.userId).toHaveLength(36);
-
   const registrationGet = backend.requestsFor("GET", "/puzzle/registration");
   const registrationPost = backend.requestsFor("POST", "/puzzle/registration");
   expect(registrationGet).toHaveLength(1);
   expect(registrationPost).toHaveLength(1);
   expect(registrationGet[0].query.userId).toBe(credentials.userId);
   expect(Buffer.from(registrationPost[0].body.solution, "base64")).toHaveLength(4);
-  expect(backend.requestsFor("POST", "/interact/vote")).toHaveLength(0);
-  expect(backend.requestsFor("POST", "/interact/confirmVote")).toHaveLength(0);
-
-  await clickVoteAndWait(page, backend, "dislike", 1);
+  expect(
+    backend.requests
+      .filter((record) => record.pathname !== "/votes")
+      .map(({ method, pathname }) => `${method} ${pathname}`),
+  ).toEqual([
+    "GET /puzzle/registration",
+    "POST /puzzle/registration",
+    "POST /interact/vote",
+    "POST /interact/confirmVote",
+  ]);
 
   const vote = backend.requestsFor("POST", "/interact/vote")[0];
   const confirmation = backend.requestsFor("POST", "/interact/confirmVote")[0];
@@ -137,22 +153,21 @@ test("fresh startup eagerly registers and submits a complete dislike handshake",
 test("credentials survive a page reload and prevent duplicate registration", async ({ context, page }) => {
   const harness = await launchHarness({ context, page });
   const { backend } = harness;
-  const firstCredentials = await waitForCredentials(page);
   await waitForDislikeCount(page, 25);
-  const registrationCount = backend.requestsFor("GET", "/puzzle/registration").length;
+  await clickVoteAndWait(page, backend, "like", 1);
+  const firstCredentials = await waitForCredentials(page);
 
   await page.reload({ waitUntil: "domcontentloaded" });
   await injectGeneratedUserscript(page);
   await waitForDislikeCount(page, 25);
 
   expect(await readGmValue(page, CREDENTIAL_KEY)).toEqual(firstCredentials);
-  expect(backend.requestsFor("GET", "/puzzle/registration")).toHaveLength(registrationCount);
-
-  await clickVoteAndWait(page, backend, "like", 1);
-  expect(backend.requestsFor("POST", "/interact/vote")[0].body).toEqual({
+  await clickVoteAndWait(page, backend, "dislike", 2);
+  expect(backend.requestsFor("GET", "/puzzle/registration")).toHaveLength(1);
+  expect(backend.requestsFor("POST", "/interact/vote")[1].body).toEqual({
     userId: firstCredentials.userId,
     videoId: VIDEO_A,
-    value: 1,
+    value: -1,
   });
   await expectNoRuntimeFailures(harness);
 });
@@ -160,6 +175,8 @@ test("credentials survive a page reload and prevent duplicate registration", asy
 test("a second page reuses the registered identity", async ({ context, page }) => {
   const harness = await launchHarness({ context, page });
   const { backend, monitoredPages } = harness;
+  await waitForDislikeCount(page, 25);
+  await clickVoteAndWait(page, backend, "like", 1);
   const credentials = await waitForCredentials(page);
 
   const secondPage = await context.newPage();
@@ -168,9 +185,9 @@ test("a second page reuses the registered identity", async ({ context, page }) =
   await injectGeneratedUserscript(secondPage);
   await waitForDislikeCount(secondPage, 25);
 
+  await clickVoteAndWait(secondPage, backend, "like", 2);
   expect(backend.requestsFor("GET", "/puzzle/registration")).toHaveLength(1);
-  await clickVoteAndWait(secondPage, backend, "like", 1);
-  expect(backend.requestsFor("POST", "/interact/vote")[0].body).toEqual({
+  expect(backend.requestsFor("POST", "/interact/vote")[1].body).toEqual({
     userId: credentials.userId,
     videoId: VIDEO_B,
     value: 1,
@@ -220,7 +237,6 @@ test("disabled vote submission keeps local UI transitions without API interactio
   );
   const { backend } = harness;
   await waitForDislikeCount(page, 25);
-  await waitForCredentials(page);
 
   await visibleVoteButton(page, "dislike").click();
   await waitForDislikeCount(page, 26);
@@ -228,7 +244,8 @@ test("disabled vote submission keeps local UI transitions without API interactio
 
   expect(backend.requestsFor("POST", "/interact/vote")).toHaveLength(0);
   expect(backend.requestsFor("POST", "/interact/confirmVote")).toHaveLength(0);
-  expect(backend.requestsFor("GET", "/puzzle/registration")).toHaveLength(1);
+  expect(backend.requestsFor("GET", "/puzzle/registration")).toHaveLength(0);
+  expect(await readGmValue(page, CREDENTIAL_KEY)).toBeNull();
   await expectNoRuntimeFailures(harness);
 });
 

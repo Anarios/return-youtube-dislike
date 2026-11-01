@@ -118,12 +118,32 @@ test("repeated count updates retain one container, its native icon, and its acti
   userscript.__get__("setDislikes")("26");
   userscript.__get__("setDislikes")("26");
 
-  expect(count.innerText).toBe("26");
+  expect(count.textContent).toBe("26");
   expect(host.querySelectorAll("#text")).toHaveLength(1);
   expect(host.querySelector("#text")).toBe(count);
   expect(host.querySelector("[data-native-icon]")).toBe(icon);
   expect(userscript.__get__("getActivationTarget")(host)).toBe(button);
   expect(globalThis.fetch).not.toHaveBeenCalled();
+});
+
+test("updates hidden counts without reading or writing layout-dependent text", () => {
+  const { host } = mountControl({ text: '<span id="text" style="display:none">25</span>' });
+  const count = host.querySelector("#text");
+  Object.defineProperty(count, "innerText", {
+    get: () => {
+      throw new Error("Count rendering must not read innerText");
+    },
+    set: () => {
+      throw new Error("Count rendering must not write innerText");
+    },
+  });
+  restoreDislikeButton = userscript.__set__("getDislikeButton", () => host);
+
+  userscript.__get__("setDislikes")("26");
+  expect(count.textContent).toBe("26");
+  const unchangedText = count.firstChild;
+  userscript.__get__("setDislikes")("26");
+  expect(count.firstChild).toBe(unchangedText);
 });
 
 test.each(["ytSpecButtonShapeNextButtonTextContent", "yt-spec-button-shape-next__button-text-content"])(
@@ -221,4 +241,74 @@ test("waits when a dislike host has no native activation target", () => {
   expect(userscript.__get__("getDislikeTextContainer")(host)).toBeNull();
   expect(host.outerHTML).toBe(before);
   expect(userscript.__get__("getDislikeTextContainer")(null)).toBeNull();
+});
+
+function guardLayoutText(node) {
+  Object.defineProperty(node, "innerText", {
+    get: () => {
+      throw new Error("Count rendering must not read innerText");
+    },
+    set: () => {
+      throw new Error("Count rendering must not write innerText");
+    },
+  });
+  return node;
+}
+
+test("desktop like counts use textContent and skip unchanged writes", () => {
+  const count = guardLayoutText(document.createElement("span"));
+  count.textContent = "34";
+  const restore = userscript.__set__("getLikeTextContainer", () => count);
+  try {
+    userscript.__get__("setLikes")("35");
+    expect(count.textContent).toBe("35");
+    const unchanged = count.firstChild;
+    userscript.__get__("setLikes")("35");
+    expect(count.firstChild).toBe(unchanged);
+  } finally {
+    restore();
+  }
+});
+
+test("mobile like and dislike counts use textContent", () => {
+  document.body.innerHTML = `
+    <div id="buttons">
+      <div><span class="button-renderer-text">1</span></div>
+      <div id="dislike"><span class="button-renderer-text">2</span></div>
+    </div>`;
+  const like = guardLayoutText(document.querySelector("#buttons > div:first-child .button-renderer-text"));
+  const dislike = guardLayoutText(document.querySelector("#dislike .button-renderer-text"));
+  const restore = [
+    userscript.__set__("isMobile", true),
+    userscript.__set__("getButtons", () => document.getElementById("buttons")),
+    userscript.__set__("getDislikeButton", () => document.getElementById("dislike")),
+  ];
+  try {
+    userscript.__get__("setLikes")("10");
+    userscript.__get__("setDislikes")("4");
+    userscript.__get__("renderMobileDislikes")();
+    expect(like.textContent).toBe("10");
+    expect(dislike.textContent).toBe("4");
+  } finally {
+    restore.reverse().forEach((revert) => revert());
+  }
+});
+
+test("mobile dislikes fall back to the shared count container and tolerate a missing button", () => {
+  document.body.innerHTML = '<div id="dislike"></div>';
+  const count = guardLayoutText(document.createElement("span"));
+  const restore = [
+    userscript.__set__("isMobile", true),
+    userscript.__set__("mobileDislikes", "7"),
+    userscript.__set__("getDislikeButton", () => document.getElementById("dislike")),
+    userscript.__set__("getDislikeTextContainer", () => count),
+  ];
+  try {
+    userscript.__get__("renderMobileDislikes")();
+    expect(count.textContent).toBe("7");
+    restore.push(userscript.__set__("getDislikeButton", () => undefined));
+    expect(() => userscript.__get__("renderMobileDislikes")()).not.toThrow();
+  } finally {
+    restore.reverse().forEach((revert) => revert());
+  }
 });

@@ -62,6 +62,19 @@ function expectVisibleBarColors(colors, expected) {
   expect(contrastRatio(colors.positive, colors.negative)).toBeGreaterThanOrEqual(3);
 }
 
+const LIGHT_THEME_VARIABLES = Object.freeze({
+  legacy: {
+    "--yt-spec-base-background": "rgb(255, 255, 255)",
+    "--yt-spec-text-primary": "rgb(15, 15, 15)",
+    "--yt-spec-text-secondary": "rgb(96, 96, 96)",
+  },
+  current: {
+    "--yt-sys-color-baseline--base-background": "rgb(255, 255, 255)",
+    "--yt-sys-color-baseline--text-primary": "rgb(15, 15, 15)",
+    "--yt-sys-color-baseline--text-secondary": "rgb(96, 96, 96)",
+  },
+});
+
 async function launchRateBarFixture({ context, page }, { rateBarEnabled, theme = "dark" } = {}) {
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
@@ -70,13 +83,12 @@ async function launchRateBarFixture({ context, page }, { rateBarEnabled, theme =
   await installGmEnvironment(context, { [CREDENTIAL_KEY]: EXISTING_CREDENTIALS });
   await installHermeticRoutes(context, backend);
   await openWatchFixture(page, VIDEO_A);
-  if (theme === "light") {
-    await page.evaluate(() => {
-      document.documentElement.style.setProperty("--yt-spec-base-background", "rgb(255, 255, 255)");
-      document.documentElement.style.setProperty("--yt-spec-text-primary", "rgb(15, 15, 15)");
-      document.documentElement.style.setProperty("--yt-spec-text-secondary", "rgb(96, 96, 96)");
+  const variables = LIGHT_THEME_VARIABLES[theme];
+  if (variables) {
+    await page.evaluate((entries) => {
+      for (const [name, value] of Object.entries(entries)) document.documentElement.style.setProperty(name, value);
       document.body.style.background = "rgb(255, 255, 255)";
-    });
+    }, variables);
   }
   await injectGeneratedUserscript(page, { rateBarEnabled });
 
@@ -194,18 +206,23 @@ for (const viewport of VIEWPORTS) {
   });
 }
 
-test("default ratio bar keeps both sides distinct in the light theme", async ({ context, page }) => {
-  await page.setViewportSize({ width: 1280, height: 720 });
-  const { backend, pageErrors } = await launchRateBarFixture({ context, page }, { theme: "light" });
+for (const theme of Object.keys(LIGHT_THEME_VARIABLES)) {
+  test(`default ratio bar keeps both sides distinct in the light theme with ${theme} YouTube variables`, async ({
+    context,
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    const { backend, pageErrors } = await launchRateBarFixture({ context, page }, { theme });
 
-  expectVisibleBarColors(await readBarColors(page), {
-    background: "rgb(255, 255, 255)",
-    negative: 123,
-    positive: "rgb(15, 15, 15)",
+    expectVisibleBarColors(await readBarColors(page), {
+      background: "rgb(255, 255, 255)",
+      negative: 123,
+      positive: "rgb(15, 15, 15)",
+    });
+    expect(backend.blockedRequests).toEqual([]);
+    expect(pageErrors).toEqual([]);
   });
-  expect(backend.blockedRequests).toEqual([]);
-  expect(pageErrors).toEqual([]);
-});
+}
 
 test("in-memory disabled option omits the ratio bar", async ({ context, page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
