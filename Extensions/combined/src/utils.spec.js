@@ -249,6 +249,35 @@ describe("utils", () => {
       expect(getVideoId("https://www.youtube.com/clip/foobar")).toBe("clip123");
     });
 
+    it.each([
+      [
+        "a watch URL with parameters around the id",
+        "https://www.youtube.com/watch?app=desktop&v=a-B_c1D2e3F&list=PLx&t=42s",
+      ],
+      ["a watch URL with a fragment", "https://www.youtube.com/watch?v=a-B_c1D2e3F#comments"],
+      ["a mobile watch URL", "https://m.youtube.com/watch?v=a-B_c1D2e3F&pp=ygUEdGVzdA%3D%3D"],
+      ["a Shorts URL with share parameters", "https://www.youtube.com/shorts/a-B_c1D2e3F?feature=share&si=abc"],
+      ["a mobile Shorts URL", "https://m.youtube.com/shorts/a-B_c1D2e3F"],
+      ["a mobile live URL", "https://m.youtube.com/live/a-B_c1D2e3F?si=share"],
+    ])("reads the current video id from %s", (_, url) => {
+      expect(getVideoId(url)).toBe("a-B_c1D2e3F");
+    });
+
+    it("reads a clip's source video from the identifier meta tag and never returns the clip slug", () => {
+      document.head.insertAdjacentHTML("beforeend", '<meta itemprop="identifier" content="a-B_c1D2e3F">');
+
+      expect(getVideoId("https://www.youtube.com/clip/UgkxClipSlug_-?si=share")).toBe("a-B_c1D2e3F");
+    });
+
+    it.each([
+      "https://www.youtube.com/embed/a-B_c1D2e3F",
+      "https://www.youtube.com/results?search_query=a-B_c1D2e3F",
+      "https://www.youtube.com/feed/subscriptions",
+      "https://m.youtube.com/@FixtureChannel/videos",
+    ])("returns no video identity for %s", (url) => {
+      expect(getVideoId(url)).toBeNull();
+    });
+
     describe("live URLs", () => {
       const renderLiveWatchPage = ({ hidden = false } = {}) => {
         document.head.insertAdjacentHTML(
