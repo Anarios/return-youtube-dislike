@@ -1,0 +1,97 @@
+html {
+  background-color: #fff !important;
+}
+
+html[dark] {
+  background-color: #0f0f0f !important;
+}
+
+[light],
+html {
+  --yt-sys-color-baseline--base-background: #fff;
+  --yt-sys-color-baseline--raised-background: #fff;
+  --yt-sys-color-baseline--menu-background: #fff;
+  --yt-sys-color-baseline--additive-background: rgba(0, 0, 0, 0.05);
+  --yt-sys-color-baseline--text-primary: #0f0f0f;
+  --yt-sys-color-baseline--text-secondary: #606060;
+  --yt-sys-color-baseline--outline: rgba(0, 0, 0, 0.1);
+  --yt-sys-color-baseline--inverted-background: #0f0f0f;
+  --yt-sys-color-baseline--text-primary-inverse: #fff;
+  --yt-sys-color-baseline--call-to-action: #065fd4;
+}
+
+[dark],
+html[dark] {
+  --yt-sys-color-baseline--base-background: #0f0f0f;
+  --yt-sys-color-baseline--raised-background: #212121;
+  --yt-sys-color-baseline--menu-background: #282828;
+  --yt-sys-color-baseline--additive-background: rgba(255, 255, 255, 0.1);
+  --yt-sys-color-baseline--text-primary: #f1f1f1;
+  --yt-sys-color-baseline--text-secondary: #aaa;
+  --yt-sys-color-baseline--outline: rgba(255, 255, 255, 0.2);
+  --yt-sys-color-baseline--inverted-background: #f1f1f1;
+  --yt-sys-color-baseline--text-primary-inverse: #0f0f0f;
+  --yt-sys-color-baseline--call-to-action: #3ea6ff;
+}
+
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+font,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+menu,
+object,
+ol,
+p,
+pre,
+q,
+s,
+samp,
+small,
+span,
+strike,
+strong,
+sub,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr,
+tt,
+u,
+ul,
+var {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}

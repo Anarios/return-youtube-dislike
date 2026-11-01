@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "もう一度クリックする必要があります。下のログインボタンを選択し、Firefoxのアカウント権限を確認して続行してください。"
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Firefoxで選択"
-  },
   "changelog_firefox_vote_granted": {
     "message": "ありがとうございます。あなたの評価がカウントされるようになりました。"
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "評価の共有は無効のままのため、あなたの高評価・低評価はカウントされません。後で Firefox のアドオン設定で、または低評価数の表示を有効にした後に動画に高評価または低評価を付けるときに有効にできます。"
   },
   "vote_consent_hint": {
     "message": "あなたの評価はカウントされず、低評価数にも反映されません。カウントされるようにするには評価の共有をオンにしてください。"
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "コメントにリアクションするには、評価の共有をオンにしてください。オンになると、リアクションが送信されます。"
   },
-  "vote_consent_continue": {
-    "message": "続行"
-  },
   "discussion_consentContinue": {
     "message": "続行"
-  },
-  "vote_consent_open_failed": {
-    "message": "権限ページを開けませんでした。もう一度お試しください。"
   },
   "counts_consent_enable": {
     "message": "低評価数を有効にする"
   },
-  "counts_consent_reason": {
-    "message": "RYDが低評価数を表示するには、Firefoxで許可が必要になりました。"
-  },
-  "counts_consent_body": {
-    "message": "件数を取得するため、RYDは現在のYouTube動画のIDをサーバーに送信します。Firefoxではこれを「閲覧アクティビティ」と呼びます。"
-  },
-  "counts_consent_allow": {
-    "message": "件数表示を有効にする"
-  },
   "counts_consent_toolbar": {
-    "message": "件数表示を有効にするには、Firefoxの拡張機能メニューからReturn YouTube Dislikeを開いてください。"
+    "message": "続行するには、Firefoxの拡張機能メニューからReturn YouTube Dislikeを開いてください。"
   },
   "counts_consent_declined": {
     "message": "件数表示は無効のままです。後でここから有効にできます。"
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "まず通常のウィンドウで低評価数を有効にしてください。プライベートウィンドウでは件数表示のみ利用できます。"
+  },
+  "data_consent_reason": {
+    "message": "RYDが低評価数を表示し、あなたの高評価と低評価をカウントに反映するには、Firefoxでの許可が必要です。"
+  },
+  "data_consent_title": {
+    "message": "低評価を表示して、あなたの評価をカウントに反映"
+  },
+  "data_consent_body": {
+    "message": "RYDは低評価数を読み込むために動画IDを送信します。許可すると、推定精度を高めるために表示されている高評価数も共有し、あなたの高評価、低評価、コメントへのリアクションをランダムな投票IDとともに送信してカウントに反映します。"
   }
 }

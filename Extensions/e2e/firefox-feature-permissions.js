@@ -24,6 +24,12 @@ const {
   assertNoIdentity,
   assertNoLinkedIdentity,
 } = require("./feature-permissions-fixtures");
+const { assertThemedPopoverSurfaces } = require("./popover-surface");
+const { addToolbarButton, createToolbarPopup } = require("./firefox-toolbar-popup");
+const ENGLISH = require("../combined/_locales/en/messages.json");
+
+const PROMPT = "#ryd-data-consent-prompt";
+const VOTE_OPT_IN = ["browsingActivity", "websiteActivity", "websiteContent"];
 
 async function run() {
   const evidence = path.resolve(
@@ -191,25 +197,6 @@ async function run() {
       await selectCurrentTab(driver);
       await driver.click(selector);
     };
-    const waitTab = async (part) => {
-      const snapshot = await until(async () => {
-        const handles = await driver.command("WebDriver:GetWindowHandles");
-        const values = handles.value || handles;
-        for (const handle of values) {
-          await switchTab(handle);
-          const current = await driver.command("WebDriver:GetCurrentURL");
-          const url = current.value || current;
-          if (url.includes(part)) return { handle, url };
-        }
-        return false;
-      }, "tab " + part);
-      await chrome(
-        "const tab=[...gBrowser.tabs].find(t=>t.linkedBrowser.currentURI.spec===arguments[0]);gBrowser.selectedTab=tab;return gBrowser.selectedBrowser.currentURI.spec;",
-        [snapshot.url],
-      );
-      await switchTab(snapshot.handle);
-      return snapshot;
-    };
     const dataGrants = () =>
       chrome(
         'const done=arguments[arguments.length-1];const {ExtensionPermissions}=ChromeUtils.importESModule("resource://gre/modules/ExtensionPermissions.sys.mjs");ExtensionPermissions.get(arguments[0]).then(value=>done(value.data_collection||[]));',
@@ -220,30 +207,20 @@ async function run() {
       chrome(
         "return {calls:window.__rydNativePrompts.length,notifications:window.__rydPermissionNotifications.length};",
       );
-    const toolbarPopup = () =>
-      chrome(
-        'const browser=[...document.querySelectorAll("browser.webextension-popup-browser")].find(b=>b.currentURI?.spec.startsWith(arguments[0]+"/popup.html")&&b.closest("panel")?.state==="open");if(!browser)return null;window.__rydToolbarPopupBrowser=browser;return {url:browser.currentURI.spec,type:browser.getAttribute("webextension-view-type"),panel:browser.closest("panel").id,browsingContext:browser.browsingContext.id};',
-        [base],
-      );
+    const toolbar = createToolbarPopup(chrome, base);
+    const toolbarPopup = toolbar.find;
     const toolbarScript = async (script, args = [], async = false) => {
-      const response = await chrome(
-        'const done=arguments[arguments.length-1];const browser=window.__rydToolbarPopupBrowser;if(!browser?.browsingContext?.currentWindowGlobal){done({error:"Toolbar popup document unavailable"});return;}const actor=browser.browsingContext.currentWindowGlobal.getActor("MarionetteCommands");actor.executeScript(arguments[0],arguments[1],{async:arguments[2],timeout:10000,sandboxName:null,newSandbox:false}).then(value=>done({value}),error=>done({error:String(error)}));',
-        [script, args, async],
-        true,
-      );
+      const response = await toolbar.run(script, args, async);
       assert(!response.error, JSON.stringify(response));
       return response.value;
     };
     const toolbarClick = async (selector) => {
-      const response = await chrome(
-        'const done=arguments[arguments.length-1];const browser=window.__rydToolbarPopupBrowser;const actor=browser.browsingContext.currentWindowGlobal.getActor("MarionetteCommands");(async()=>{const element=await actor.findElement("css selector",arguments[0],{timeout:10000});await actor.clickElement(element,{toJSON:()=>({"moz:accessibilityChecks":false,"moz:webdriverClick":true})});return true;})().then(value=>done({value}),error=>done({error:String(error)}));',
-        [selector],
-        true,
-      );
+      const response = await toolbar.click(selector);
       (result.toolbarClicks ||= []).push({ selector, ...response });
       if (response.error) assert(await prompt(), JSON.stringify(response));
     };
-    const closeToolbarPopup = () => chrome('window.__rydToolbarPopupBrowser?.closest("panel")?.hidePopup();');
+    const toolbarClosedForPrompt = () =>
+      until(async () => !(await toolbarPopup()), "toolbar popup closed so it cannot cover the native prompt");
     const setVoteSubmissionDisabled = async (disabled) => {
       await go(base + "/popup.html");
       await until(
@@ -262,40 +239,79 @@ async function run() {
         "vote submission switch saved",
       );
     };
-    result.toolbarWidgetId = await chrome(
-      'const {ExtensionParent}=ChromeUtils.importESModule("resource://gre/modules/ExtensionParent.sys.mjs");const ui=window.CustomizableUI||ChromeUtils.importESModule("moz-src:///browser/components/customizableui/CustomizableUI.sys.mjs").CustomizableUI;const action=ExtensionParent.apiManager.global.browserActionFor(WebExtensionPolicy.getByID(arguments[0]).extension);ui.addWidgetToArea(action.widget.id,ui.AREA_NAVBAR);return action.widget.id;',
-      [result.installed.id],
-    );
-    const openCountsToolbar = async () => {
-      const countsBefore = await nativePromptCounts();
+    result.toolbarWidgetId = await addToolbarButton(chrome, result.installed.id);
+    const promptVisible = () =>
+      content(
+        'const host=document.querySelector(arguments[0]);return !!host&&!host.hidden&&host.shadowRoot.querySelector("button.primary")?.getBoundingClientRect().height>0;',
+        [PROMPT],
+      );
+    const promptPresent = () => content("return !!document.querySelector(arguments[0]);", [PROMPT]);
+    const singleConsentHost = async (label) => {
+      const hosts = await content(
+        'return {prompts:document.querySelectorAll(arguments[0]).length,legacy:document.querySelectorAll("#ryd-counts-consent-hint,#ryd-vote-consent-hint").length};',
+        [PROMPT],
+      );
+      assert(hosts.prompts <= 1 && hosts.legacy === 0, label + ": RYD consent hosts coexist " + JSON.stringify(hosts));
+      (result.singleConsentHostChecks ||= []).push({ label, ...hosts });
+      return hosts;
+    };
+    const assertCombinedPrompt = (nativePrompt) => {
+      assert.match(nativePrompt.text, /browsing activity/i);
+      assert.match(nativePrompt.text, /website activity/i);
+      assert.match(nativePrompt.text, /website content/i);
+      assert.doesNotMatch(nativePrompt.text, /personally identifying|authentication|communications/i);
+    };
+    const assertMissingVotePrompt = (nativePrompt) => {
+      assert.match(nativePrompt.text, /website activity/i);
+      assert.match(nativePrompt.text, /website content/i);
+      assert.doesNotMatch(nativePrompt.text, /browsing activity|personally identifying|authentication|communications/i);
+    };
+    const storedVoteSwitch = () =>
+      content(
+        'const done=arguments[arguments.length-1];browser.storage.sync.get("disableVoteSubmission").then(value=>done(value.disableVoteSubmission));',
+        [],
+        true,
+      );
+    const openToolbarButton = async (label) => {
+      await driver.context("chrome");
+      await driver.click('[id="' + result.toolbarWidgetId + '"] .unified-extensions-item-action-button');
+      return until(toolbarPopup, label);
+    };
+    const openToolbarFromPrompt = async (sectionId) => {
+      const promptsBefore = await nativePromptCounts();
       await focusCurrent();
       const button = await driver.script(
-        'return document.getElementById("ryd-counts-consent-hint")?.shadowRoot.querySelector("button");',
+        'return document.querySelector(arguments[0])?.shadowRoot.querySelector("button.primary");',
+        [PROMPT],
       );
-      assert(button, "Counts activation control is missing");
+      assert(button, "In-page Allow button is missing");
       await driver.command("WebDriver:ElementClick", { id: button["element-6066-11e4-a52e-4f735466cecf"] });
       const outcome = await until(async () => {
         const popup = await toolbarPopup();
         if (popup) return { popup };
         const guidance = await content(
-          'return document.getElementById("ryd-counts-consent-hint")?.shadowRoot.querySelector("[role=status]")?.textContent;',
+          'return document.querySelector(arguments[0])?.shadowRoot.querySelector(".status")?.textContent;',
+          [PROMPT],
         );
         return guidance ? { guidance } : false;
       }, "toolbar popup or older-browser toolbar instruction");
-      if (!outcome.popup) {
-        await driver.context("chrome");
-        await driver.click('[id="' + result.toolbarWidgetId + '"] .unified-extensions-item-action-button');
-        outcome.popup = await until(toolbarPopup, "toolbar popup opened directly by its native button");
+      if (outcome.popup) {
+        outcome.inPageCardGone = await until(
+          async () => !(await promptPresent()),
+          "in-page card gone while the toolbar popup is open",
+        );
+      } else {
+        outcome.popup = await openToolbarButton("toolbar popup opened directly by its native button");
       }
       assert.equal(outcome.popup.type, "popup");
       await until(
-        () => toolbarScript('return !document.getElementById("ryd-counts-consent").hidden;'),
-        "counts explanation in the actual toolbar popup",
+        () => toolbarScript("return !document.getElementById(arguments[0]).hidden;", [sectionId]),
+        sectionId + " in the actual toolbar popup",
       );
       assert.deepEqual(
         await nativePromptCounts(),
-        countsBefore,
-        "Opening the explainer requested consent automatically",
+        promptsBefore,
+        "Opening the toolbar popup requested consent automatically",
       );
       return outcome;
     };
@@ -330,17 +346,11 @@ async function run() {
       { kind: "shorts", videoId: VIDEO_A, label: "shorts" },
     ]) {
       await evaluate(navigateFixture, [stage.kind, stage.videoId]);
-      if (stage.kind !== "channel")
-        await until(
-          () =>
-            content(
-              'return document.getElementById("ryd-counts-consent-hint")?.shadowRoot.querySelector("button")?.getBoundingClientRect().height>0;',
-            ),
-          "visible counts activation on " + stage.label,
-        );
+      if (stage.kind !== "channel") await until(promptVisible, "visible page-load card on " + stage.label);
       await delay(700);
       const view = await content(
-        'return {barCount:document.querySelectorAll("#ryd-bar-container").length,renderedCount:[...document.querySelectorAll("dislike-button-view-model #text,dislike-button-view-model [role=text]")].some(e=>e.textContent.trim()==="25"),hint:!!document.getElementById("ryd-counts-consent-hint"),discussion:!!document.getElementById("ryd-discussion-panel")};',
+        'return {barCount:document.querySelectorAll("#ryd-bar-container").length,renderedCount:[...document.querySelectorAll("dislike-button-view-model #text,dislike-button-view-model [role=text]")].some(e=>e.textContent.trim()==="25"),hint:!!document.querySelector(arguments[0]),discussion:!!document.getElementById("ryd-discussion-panel")};',
+        [PROMPT],
       );
       assert.equal(view.barCount, 0);
       assert.equal(view.renderedCount, false);
@@ -348,42 +358,39 @@ async function run() {
       assert.equal(view.hint, stage.kind !== "channel");
       assert.equal(fixture.records.length, noCountsStart, "Traffic started before counts consent on " + stage.label);
       assert.deepEqual(await nativePromptCounts(), noCountsPromptStart, "Passive navigation requested native consent");
+      await singleConsentHost("page-load " + stage.label);
+      if (stage.kind !== "channel")
+        view.surfaces = await assertThemedPopoverSurfaces(evaluate, PROMPT, "page-load card on " + stage.label);
       result.noCountsViews.push({ ...stage, ...view, noTraffic: true, noAutomaticPrompt: true });
       await shot("counts-ungranted-" + stage.label);
     }
     await evaluate(navigateFixture, ["watch", VIDEO_A]);
-    await until(
-      () => content('return !!document.getElementById("ryd-counts-consent-hint");'),
-      "watch counts activation before explicit opt-in",
-    );
+    await until(promptVisible, "watch page-load card before explicit opt-in");
     const countsDocument = await content(
       "window.__rydCountsDocument=crypto.randomUUID();return window.__rydCountsDocument;",
     );
-    result.countsToolbarDenied = await openCountsToolbar();
+    result.countsToolbarDenied = await openToolbarFromPrompt("ryd-counts-consent");
     await toolbarClick("#ryd-counts-consent-allow");
     result.countsDenyPrompt = await prompt();
-    assert.match(result.countsDenyPrompt.text, /browsing activity/i);
-    assert.doesNotMatch(
-      result.countsDenyPrompt.text,
-      /website activity|website content|personally identifying|authentication|communications/i,
-    );
+    await toolbarClosedForPrompt();
+    assertCombinedPrompt(result.countsDenyPrompt);
     await choose(false);
-    await closeToolbarPopup();
     await switchTab(homeHandle);
     await delay(700);
     assert.deepEqual(await dataGrants(), []);
-    assert.equal(fixture.records.length, noCountsStart, "Declining counts consent sent a request");
+    assert.equal(fixture.records.length, noCountsStart, "Declining consent sent a request");
     assert.equal(await content("return window.__rydCountsDocument;"), countsDocument);
-    result.countsToolbarGranted = await openCountsToolbar();
+    result.cardStaysAwayOnHandedOffPage = !(await promptPresent());
+    assert(result.cardStaysAwayOnHandedOffPage, "The page-load card returned on the page that opened the popup");
+    await evaluate(navigateFixture, ["watch", VIDEO_B]);
+    await until(promptVisible, "page-load card on the next video after a declined prompt");
+    await singleConsentHost("page-load card after a declined prompt");
+    result.countsToolbarGranted = await openToolbarFromPrompt("ryd-counts-consent");
     await toolbarClick("#ryd-counts-consent-allow");
     result.countsGrantPrompt = await prompt();
-    assert.match(result.countsGrantPrompt.text, /browsing activity/i);
-    assert.doesNotMatch(
-      result.countsGrantPrompt.text,
-      /website activity|website content|personally identifying|authentication|communications/i,
-    );
+    await toolbarClosedForPrompt();
+    assertCombinedPrompt(result.countsGrantPrompt);
     await choose(true);
-    await closeToolbarPopup();
     await switchTab(homeHandle);
     await until(
       () =>
@@ -392,16 +399,23 @@ async function run() {
         ),
       "same-document counts after toolbar grant and popup unload",
     );
-    assert.deepEqual(await dataGrants(), ["browsingActivity"]);
+    assert.deepEqual([...(await dataGrants())].sort(), VOTE_OPT_IN);
     assert.equal(
       await content("return window.__rydCountsDocument;"),
       countsDocument,
       "Grant reloaded the YouTube document",
     );
+    assert.equal(await promptPresent(), false, "The page-load card stayed after counts were allowed");
+    await delay(700);
+    assertNoIdentity(fixture.records);
     await shot("counts-granted-without-reload");
     result.scenarios.push(
-      "counts remain quiet without browsing activity; watch and Shorts offer activation; real toolbar popup deny/retry requests only browsing activity and recovers counts without reloading",
+      "counts remain quiet without browsing activity; watch and Shorts show one themed page-load card; its Allow hides the card and opens the real toolbar popup on the combined card, which closes for the native prompt; Deny and Allow both list browsing activity, website activity and website content; the grant recovers counts without reloading and creates no voter identity",
     );
+    await go(base + "/popup.html");
+    await remove(["websiteActivity", "websiteContent"]);
+    await until(async () => (await dataGrants()).join() === "browsingActivity", "counts-only grant for passive views");
+    const passiveStart = fixture.records.length;
     await go("https://www.youtube.com/");
     await delay(700);
     assertNoIdentity(fixture.records);
@@ -423,6 +437,7 @@ async function run() {
         );
       await delay(700);
       assertNoIdentity(fixture.records);
+      assert.equal(await promptPresent(), false, "Counts-only views showed a consent card on " + stage.label);
       if (stage.disabled)
         await until(
           () => content('return !!document.querySelector("#ryd-discussion-panel");'),
@@ -431,44 +446,59 @@ async function run() {
       await shot("passive-" + stage.label.replaceAll(" ", "-"));
       result.scenarios.push({ stage: stage.label, noIdentity: true });
     }
-    assert(fixture.records.some((record) => record.path === "/votes"));
+    assert(fixture.records.slice(passiveStart).some((record) => record.path === "/votes"));
     assert(
       fixture.records
+        .slice(passiveStart)
         .filter((record) => record.path === "/votes")
         .every((record) => !Object.hasOwn(record.query, "likeCount")),
-      "Counts sent likeCount before optional grant",
+      "Counts sent likeCount without the website content grant",
     );
     result.passiveRequestCount = fixture.records.length;
 
     await go(base + "/changelog/4/changelog_4.1.html");
+    await remove(["browsingActivity"]);
+    await until(async () => (await dataGrants()).length === 0, "no optional grants before the welcome opt-in");
     await until(
-      () => content('return document.getElementById("ryd-firefox-vote-allow")?.getBoundingClientRect().height>0;'),
-      "welcome vote opt-in",
+      () =>
+        content(
+          'return document.getElementById("ryd-firefox-consent-allow")?.getBoundingClientRect().height>0&&!document.getElementById("ryd-firefox-consent-actions").hidden;',
+        ),
+      "welcome combined opt-in",
     );
     assert.equal(
-      await content('return document.getElementById("ryd-firefox-counts-actions").hidden;'),
-      true,
-      "Welcome offered counts after they were allowed",
+      await content('return document.querySelectorAll("#ryd-firefox-optin button").length;'),
+      1,
+      "Welcome offers more than one consent action",
     );
-    await click("#ryd-firefox-vote-allow");
+    const welcomeSwitch = await storedVoteSwitch();
+    await click("#ryd-firefox-consent-allow");
     result.welcomeDenyPrompt = await prompt();
-    assert.match(result.welcomeDenyPrompt.text, /website activity/i);
-    assert.match(result.welcomeDenyPrompt.text, /website content/i);
-    assert.doesNotMatch(
-      result.welcomeDenyPrompt.text,
-      /browsing activity|personally identifying|authentication|communications/i,
-    );
+    assertCombinedPrompt(result.welcomeDenyPrompt);
     await choose(false);
     await until(
-      () => content('return !document.getElementById("ryd-firefox-vote-allow").disabled;'),
+      () =>
+        content(
+          'return !document.getElementById("ryd-firefox-consent-allow").disabled&&document.getElementById("ryd-firefox-consent-status").textContent===browser.i18n.getMessage("consent_declined_status");',
+        ),
       "welcome denial completion",
     );
-    await click("#ryd-firefox-vote-allow");
+    assert.deepEqual(await dataGrants(), []);
+    await click("#ryd-firefox-consent-allow");
     result.welcomeGrantPrompt = await prompt();
+    assertCombinedPrompt(result.welcomeGrantPrompt);
     await choose(true);
-    await until(async () => (await perms()).data_collection.includes("websiteActivity"), "welcome voting grant");
+    await until(
+      () =>
+        content(
+          'return document.getElementById("ryd-firefox-consent-actions").hidden&&document.getElementById("ryd-firefox-consent-status").textContent===browser.i18n.getMessage("changelog_firefox_vote_granted");',
+        ),
+      "welcome reports that votes count",
+    );
+    assert.deepEqual([...(await dataGrants())].sort(), VOTE_OPT_IN);
+    assert.equal(await storedVoteSwitch(), welcomeSwitch, "Welcome changed the like and dislike submission switch");
     result.scenarios.push(
-      "welcome hides the counts opt-in once counts are allowed; vote opt-in native Deny and Allow list only the missing website activity and website content",
+      "welcome offers one action; its native Deny and Allow list browsing activity, website activity and website content, Allow reports that votes count and the switch is untouched",
     );
     await shot("welcome-granted");
     await remove(["websiteActivity", "websiteContent"]);
@@ -487,49 +517,73 @@ async function run() {
       () => content('return !document.getElementById("ryd-vote-status").hidden;'),
       "vote status notice with the switch on and no vote sharing",
     );
-    const storedVoteSwitch = () =>
-      content(
-        'const done=arguments[arguments.length-1];browser.storage.sync.get("disableVoteSubmission").then(value=>done(value.disableVoteSubmission));',
-        [],
-        true,
-      );
     const declinedStatus = await content('return browser.i18n.getMessage("consent_declined_status");');
-    await driver.context("chrome");
-    await driver.click('[id="' + result.toolbarWidgetId + '"] .unified-extensions-item-action-button');
-    result.voteStatusToolbar = await until(toolbarPopup, "toolbar popup opened by its native button");
+    result.voteStatusToolbar = await openToolbarButton("toolbar popup opened by its native button");
     await until(
-      () => toolbarScript('return !document.getElementById("ryd-vote-status").hidden;'),
+      () =>
+        toolbarScript(
+          'return !document.getElementById("ryd-vote-status").hidden&&document.getElementById("ryd-counts-consent").hidden;',
+        ),
       "vote status notice in the actual toolbar popup",
     );
     await toolbarClick("#ryd-vote-status-action");
     result.voteStatusDenyPrompt = await prompt();
-    assert.match(result.voteStatusDenyPrompt.text, /website activity/i);
-    assert.match(result.voteStatusDenyPrompt.text, /website content/i);
-    assert.doesNotMatch(result.voteStatusDenyPrompt.text, /browsing activity|personally identifying|authentication/i);
+    await toolbarClosedForPrompt();
+    assertMissingVotePrompt(result.voteStatusDenyPrompt);
+    await choose(false);
+    await delay(700);
+    assert.equal(await storedVoteSwitch(), true, "Declining vote sharing turned the switch off");
+    assert.deepEqual(await dataGrants(), ["browsingActivity"]);
+    await openToolbarButton("toolbar popup opened again by its native button");
+    await until(
+      () => toolbarScript('return !document.getElementById("ryd-vote-status").hidden;'),
+      "vote status notice in the reopened toolbar popup",
+    );
+    await toolbarClick("#ryd-vote-status-action");
+    result.voteStatusGrantPrompt = await prompt();
+    await toolbarClosedForPrompt();
+    assertMissingVotePrompt(result.voteStatusGrantPrompt);
+    await choose(true);
+    await until(
+      async () => !(await toolbarPopup()) && (await storedVoteSwitch()) === false,
+      "switch turned off through the remembered intent while the toolbar popup is closed",
+    );
+    assert.deepEqual([...(await dataGrants())].sort(), VOTE_OPT_IN);
+    await until(
+      () => content('return document.getElementById("ryd-vote-status").hidden;'),
+      "vote status notice hidden in the popup tab after the toolbar grant",
+    );
+    await remove(["websiteActivity", "websiteContent"]);
+    await setVoteSubmissionDisabled(true);
+    await until(
+      () => content('return !document.getElementById("ryd-vote-status").hidden;'),
+      "vote status notice in the popup tab with the switch on",
+    );
+    await click("#ryd-vote-status-action");
+    result.voteStatusTabDenyPrompt = await prompt();
+    assertMissingVotePrompt(result.voteStatusTabDenyPrompt);
     await choose(false);
     await until(
       () =>
-        toolbarScript(
+        content(
           'return !document.getElementById("ryd-vote-status").hidden&&!document.getElementById("ryd-vote-status-action").disabled&&document.getElementById("ryd-vote-status-result").textContent===arguments[0];',
           [declinedStatus],
         ),
-      "declined vote status in the toolbar popup",
+      "declined vote status in the popup tab",
     );
-    assert.equal(await storedVoteSwitch(), true, "Declining vote sharing turned the switch off");
-    assert.deepEqual(await dataGrants(), ["browsingActivity"]);
-    await toolbarClick("#ryd-vote-status-action");
-    result.voteStatusGrantPrompt = await prompt();
+    assert.equal(await storedVoteSwitch(), true, "Declining vote sharing in the tab turned the switch off");
+    await click("#ryd-vote-status-action");
+    result.voteStatusTabGrantPrompt = await prompt();
     await choose(true);
     await until(
-      () => toolbarScript('return document.getElementById("ryd-vote-status").hidden;'),
-      "vote status notice hidden after the toolbar grant",
+      async () =>
+        (await storedVoteSwitch()) === false &&
+        (await content('return document.getElementById("ryd-vote-status").hidden;')),
+      "switch turned off through the remembered intent in the popup tab",
     );
-    assert.equal(await storedVoteSwitch(), false, "Allowing vote sharing kept the switch on");
-    assert.deepEqual([...(await dataGrants())].sort(), ["browsingActivity", "websiteActivity", "websiteContent"]);
-    await closeToolbarPopup();
     await remove(["websiteActivity", "websiteContent"]);
     result.scenarios.push(
-      "real toolbar popup vote notice: native Deny keeps the switch on and the notice; Allow adds website activity and content and turns the switch off",
+      "popup vote card with the switch on: in the real toolbar popup and in a popup tab, the click asks for the missing website activity and website content and records the switch intent; Deny keeps the switch on, Allow turns it off through the background while the toolbar popup is closed",
     );
     await switchTab(homeHandle);
     await go("https://www.youtube.com/watch?v=" + VIDEO_B);
@@ -544,30 +598,50 @@ async function run() {
     );
     const voteStart = fixture.records.length;
     await click("dislike-button-view-model button");
-    await until(
+    await until(promptVisible, "vote-click card");
+    result.voteClickBody = await until(
       () =>
-        content(
-          'return !!document.getElementById("ryd-vote-consent-hint")?.shadowRoot?.querySelector(".actions button");',
-        ),
-      "small vote hint",
+        content('return document.querySelector(arguments[0]).shadowRoot.querySelector(".body").textContent;', [PROMPT]),
+      "announced vote-click message",
     );
+    assert.equal(result.voteClickBody, ENGLISH.vote_consent_hint.message);
+    await singleConsentHost("vote-click card");
+    result.voteHintSurfaces = await assertThemedPopoverSurfaces(evaluate, PROMPT, "vote-click card");
     assert(
       !fixture.records.slice(voteStart).some((record) => record.path === "/puzzle/registration"),
-      "Hint registered voter before grant",
+      "Vote-click card registered voter before grant",
     );
-    await content(
-      'document.getElementById("ryd-vote-consent-hint").shadowRoot.querySelector(".actions button").click();',
+    result.voteClickToolbar = await openToolbarFromPrompt("ryd-vote-status");
+    assert.equal(
+      await toolbarScript('return document.getElementById("ryd-counts-consent").hidden;'),
+      true,
+      "Toolbar popup showed the combined card while counts were on",
     );
-    const hintConsent = await waitTab("/consent.html?feature=voteOptIn");
-    result.hintConsentTab = hintConsent;
-    await click("#consent-continue");
+    await toolbarClick("#ryd-vote-status-action");
     result.hintPrompt = await prompt();
+    await toolbarClosedForPrompt();
+    assertMissingVotePrompt(result.hintPrompt);
     await choose(true);
+    await switchTab(homeHandle);
     await until(
       () => fixture.records.slice(voteStart).some((record) => record.path === "/interact/confirmVote"),
       "same-page pending vote after native grant",
     );
-    result.scenarios.push("watch hint sends nothing before native grant and submits the current click after grant");
+    await delay(1500);
+    result.pendingVoteReplay = {
+      votes: fixture.records.slice(voteStart).filter((record) => record.path === "/interact/vote").length,
+      confirmations: fixture.records.slice(voteStart).filter((record) => record.path === "/interact/confirmVote")
+        .length,
+    };
+    assert.deepEqual(
+      result.pendingVoteReplay,
+      { votes: 1, confirmations: 1 },
+      "Pending vote was not sent exactly once",
+    );
+    assert.equal(await promptPresent(), false, "Vote-click card stayed after the grant");
+    result.scenarios.push(
+      "watch vote-click card sends nothing before the grant; its Allow opens the toolbar popup on the vote card, which asks for website activity and website content and closes; the pending click is sent exactly once after the grant",
+    );
     await switchTab(homeHandle);
     await until(
       () => content('return !!document.querySelector("[data-reaction=\\"1\\"]");'),
@@ -610,7 +684,7 @@ async function run() {
         .some((record) => record.path.startsWith("/interact/") || record.path === "/puzzle/registration"),
       "Vote sent while the vote submission switch was on",
     );
-    assert.equal(await content('return !!document.getElementById("ryd-vote-consent-hint");'), false);
+    assert.equal(await promptPresent(), false);
     result.scenarios.push(
       "with the like and dislike submission switch on, a dislike click sends nothing and a comment reaction still goes through",
     );
@@ -693,7 +767,7 @@ async function run() {
     await click("dislike-button-view-model button");
     await delay(800);
     result.privateBeforeCountsGrant = await content(
-      'return {count:[...document.querySelectorAll("dislike-button-view-model #text,dislike-button-view-model [role=text]")].some(e=>e.textContent.trim()==="25"),ui:!!document.querySelector("#ryd-counts-consent-hint,#ryd-vote-consent-hint,#ryd-discussion-panel,.ryd-premium-analytics")};',
+      'return {count:[...document.querySelectorAll("dislike-button-view-model #text,dislike-button-view-model [role=text]")].some(e=>e.textContent.trim()==="25"),ui:!!document.querySelector("#ryd-data-consent-prompt,#ryd-discussion-panel,.ryd-premium-analytics")};',
     );
     assert.equal(result.privateBeforeCountsGrant.count, false);
     assert.equal(result.privateBeforeCountsGrant.ui, false);
@@ -734,7 +808,7 @@ async function run() {
     }
     assert.equal(
       await content(
-        'return !!document.getElementById("ryd-vote-consent-hint")||!!document.querySelector("#ryd-discussion-panel");',
+        'return !!document.getElementById("ryd-data-consent-prompt")||!!document.querySelector("#ryd-discussion-panel");',
       ),
       false,
     );
@@ -856,7 +930,7 @@ async function run() {
     await until(
       () =>
         content(
-          'return !document.querySelector("#ryd-bar-container,#ryd-discussion-panel,.ryd-premium-analytics")&&!!document.getElementById("ryd-counts-consent-hint");',
+          'return !document.querySelector("#ryd-bar-container,#ryd-discussion-panel,.ryd-premium-analytics")&&!!document.getElementById("ryd-data-consent-prompt");',
         ),
       "counts revocation removes count, discussion and premium renders",
     );
@@ -879,7 +953,7 @@ async function run() {
       false,
       "Revoked pending counts rendered",
     );
-    result.countsRegrantToolbar = await openCountsToolbar();
+    result.countsRegrantToolbar = await openToolbarFromPrompt("ryd-counts-consent");
     const keptSession = await toolbarScript(
       'const done=arguments[arguments.length-1];Promise.all([browser.permissions.getAll(),browser.storage.sync.get("patreonSessionToken")]).then(([permissions,storage])=>done({permissions,sessionKept:storage.patreonSessionToken==="fixture-account-session"}));',
       [],
@@ -893,6 +967,7 @@ async function run() {
     );
     await toolbarClick("#ryd-counts-consent-allow");
     result.countsRegrantPrompt = await prompt();
+    await toolbarClosedForPrompt();
     assert.match(result.countsRegrantPrompt.text, /browsing activity/i);
     assert.doesNotMatch(
       result.countsRegrantPrompt.text,
@@ -900,7 +975,6 @@ async function run() {
     );
     const resumedStart = fixture.records.length;
     await choose(true);
-    await closeToolbarPopup();
     await switchTab(homeHandle);
     await until(
       () =>

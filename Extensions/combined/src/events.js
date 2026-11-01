@@ -34,7 +34,7 @@ import { normalizeCustomColors, observeYouTubeTheme } from "../../common/color-t
 import { isPrivateBrowsingContext } from "./private-browsing";
 import { recordReviewAction } from "./review-prompt";
 import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "./core-data-consent";
-import { createVoteConsentHintController } from "./vote-consent-hint";
+import { getDataConsentPrompt } from "./data-consent-prompt";
 
 function dispatchVote(vote, videoId) {
   const result = getBrowser().runtime.sendMessage({ message: "send_vote", vote, videoId });
@@ -43,13 +43,13 @@ function dispatchVote(vote, videoId) {
   }
 }
 
-let voteConsentHint = null;
+let dataConsentPrompt = null;
 let firefoxVoteSequence = 0;
 let countPermissionAvailable = true;
 
 function cancelPendingFirefoxVote() {
   firefoxVoteSequence += 1;
-  voteConsentHint?.clearPending();
+  dataConsentPrompt?.clearPendingVote();
 }
 
 function setCountPermissionAvailable(available) {
@@ -66,20 +66,20 @@ function sendVote(vote) {
     dispatchVote(vote, videoId);
     return;
   }
-  if (!voteConsentHint) voteConsentHint = createVoteConsentHintController();
+  if (!dataConsentPrompt) dataConsentPrompt = getDataConsentPrompt();
   const sequence = ++firefoxVoteSequence;
-  voteConsentHint.clearPending();
-  const context = voteConsentHint.capturePageContext(videoId);
+  dataConsentPrompt.clearPendingVote();
+  const context = dataConsentPrompt.capturePageContext(videoId);
   void hasFeaturePermission("voting").then((granted) => {
-    if (sequence !== firefoxVoteSequence || !voteConsentHint.isCurrent(context)) return;
+    if (sequence !== firefoxVoteSequence || !dataConsentPrompt.isCurrent(context)) return;
     if (granted) {
       dispatchVote(vote, videoId);
       return;
     }
-    void voteConsentHint.offer(context, () => {
+    void dataConsentPrompt.offerVote(context, () => {
       if (
         sequence !== firefoxVoteSequence ||
-        !voteConsentHint.isCurrent(context) ||
+        !dataConsentPrompt.isCurrent(context) ||
         !getLikeButton() ||
         !getDislikeButton() ||
         checkForSignInButton()

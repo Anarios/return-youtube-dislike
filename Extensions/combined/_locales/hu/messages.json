@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Még egy kattintás szükséges: alább válaszd ki a bejelentkezési gombot a Firefox fiókengedélyeinek áttekintéséhez és a folytatáshoz."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Kiválasztás a Firefoxban"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Köszönjük. A szavazataid mostantól számítanak."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "A szavazatok megosztása kikapcsolva marad, így a szavazataid nem számítanak. Később bekapcsolhatod a Firefox kiegészítőbeállításaiban, vagy amikor kedvelésként vagy nemtetszésként jelölsz meg egy videót, miután a nemtetszések száma engedélyezve van."
   },
   "vote_consent_hint": {
     "message": "A szavazatod nem számít, és nem jelenik meg a nemtetszések számában. Kapcsold be a szavazatok megosztását, hogy számítson."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Kapcsold be a szavazatok megosztását a hozzászólásokra való reagáláshoz. A reakciód a bekapcsolás után kerül elküldésre."
   },
-  "vote_consent_continue": {
-    "message": "Folytatás"
-  },
   "discussion_consentContinue": {
     "message": "Folytatás"
-  },
-  "vote_consent_open_failed": {
-    "message": "Nem sikerült megnyitni az engedélyek oldalát. Próbáld újra."
   },
   "counts_consent_enable": {
     "message": "Nemtetszések számának engedélyezése"
   },
-  "counts_consent_reason": {
-    "message": "A Firefox mostantól az engedélyedet kéri, mielőtt az RYD megjeleníthetné a nemtetszések számát."
-  },
-  "counts_consent_body": {
-    "message": "A számok lekéréséhez az RYD elküldi az aktuális YouTube-videó azonosítóját a szerverének. A Firefox ezt „Böngészési tevékenység” néven jelöli."
-  },
-  "counts_consent_allow": {
-    "message": "Számlálók engedélyezése"
-  },
   "counts_consent_toolbar": {
-    "message": "A számlálók engedélyezéséhez nyisd meg a Return YouTube Dislike-ot a Firefox kiegészítőmenüjéből."
+    "message": "A folytatáshoz nyisd meg a Return YouTube Dislike-ot a Firefox kiegészítőmenüjéből."
   },
   "counts_consent_declined": {
     "message": "A számlálók kikapcsolva maradnak. Később itt engedélyezheted őket."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Először egy normál ablakban engedélyezd a nemtetszések számát. A privát ablakok csak a számlálókat jelenítik meg."
+  },
+  "data_consent_reason": {
+    "message": "A Firefox az engedélyedet kéri, mielőtt az RYD megjeleníthetné a nemtetszések számát és beszámíthatná a tetszéseidet és nemtetszéseidet."
+  },
+  "data_consent_title": {
+    "message": "Lásd a nemtetszéseket, és számítsanak a szavazataid"
+  },
+  "data_consent_body": {
+    "message": "Az RYD elküldi a videó azonosítóját a nemtetszések számának betöltéséhez. Ha engedélyezed, megosztja a látott tetszésszámot is a becslések pontosításához, valamint a tetszéseidet, nemtetszéseidet és a hozzászólásokra adott reakcióidat egy véletlenszerű szavazási azonosítóval, hogy beszámítsanak."
   }
 }

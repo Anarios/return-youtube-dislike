@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Ein weiterer Klick ist nötig: Wähle unten deine Anmeldeschaltfläche, um die Kontoberechtigungen von Firefox zu prüfen und fortzufahren."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "In Firefox auswählen"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Danke. Deine Bewertungen zählen jetzt."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Das Teilen von Bewertungen bleibt deaktiviert, daher werden deine Likes und Dislikes nicht gezählt. Du kannst es später in den Add-on-Einstellungen von Firefox aktivieren oder wenn du ein Video likest oder dislikest, sobald die Dislike-Zahlen aktiviert sind."
   },
   "vote_consent_hint": {
     "message": "Deine Bewertung wird nicht gezählt und erscheint nicht in den Dislike-Zahlen. Aktiviere das Teilen von Bewertungen, damit sie zählt."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Aktiviere das Teilen von Bewertungen, um auf Kommentare zu reagieren. Deine Reaktion wird gesendet, sobald es aktiviert ist."
   },
-  "vote_consent_continue": {
-    "message": "Weiter"
-  },
   "discussion_consentContinue": {
     "message": "Weiter"
-  },
-  "vote_consent_open_failed": {
-    "message": "Die Berechtigungsseite konnte nicht geöffnet werden. Bitte versuche es erneut."
   },
   "counts_consent_enable": {
     "message": "Dislike-Zahlen aktivieren"
   },
-  "counts_consent_reason": {
-    "message": "Firefox braucht jetzt deine Erlaubnis, bevor RYD Dislike-Zahlen anzeigen kann."
-  },
-  "counts_consent_body": {
-    "message": "Um die Zahlen abzurufen, sendet RYD die ID des aktuellen YouTube-Videos an seinen Server. Firefox nennt dies „Surfaktivitäten“."
-  },
-  "counts_consent_allow": {
-    "message": "Zahlen aktivieren"
-  },
   "counts_consent_toolbar": {
-    "message": "Öffne Return YouTube Dislike über das Erweiterungsmenü von Firefox, um die Zahlen zu aktivieren."
+    "message": "Öffne Return YouTube Dislike über das Erweiterungsmenü von Firefox, um fortzufahren."
   },
   "counts_consent_declined": {
     "message": "Die Zahlen bleiben deaktiviert. Du kannst sie später hier aktivieren."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Aktiviere Dislike-Zahlen zuerst in einem normalen Fenster. Private Fenster zeigen nur Zahlen an."
+  },
+  "data_consent_reason": {
+    "message": "Firefox braucht deine Erlaubnis, bevor RYD Dislike-Zahlen anzeigen und deine Likes und Dislikes zählen kann."
+  },
+  "data_consent_title": {
+    "message": "Dislikes anzeigen und deine Bewertungen zählen lassen"
+  },
+  "data_consent_body": {
+    "message": "RYD sendet die Video-ID, um Dislike-Zahlen zu laden. Wenn du es erlaubst, werden außerdem die angezeigte Anzahl von Likes geteilt, um Schätzungen zu verbessern, sowie deine Likes, Dislikes und Reaktionen auf Kommentare mit einer zufälligen Abstimmungs-ID, damit sie zählen."
   }
 }

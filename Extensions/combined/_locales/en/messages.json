@@ -871,14 +871,8 @@
   "popup_signin_next_click": {
     "message": "One more click is needed: select your sign-in button below to review Firefox’s account permissions and continue."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Choose in Firefox"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Thank you. Your votes now count."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Vote sharing stays off, so your likes and dislikes won't count. You can turn it on later in Firefox’s add-on settings, or when you like or dislike a video once dislike counts are on."
   },
   "vote_consent_hint": {
     "message": "Your vote isn't counted and won't show in dislike counts. Turn on vote sharing to make it count."
@@ -895,29 +889,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Turn on vote sharing to react to comments. Your reaction is sent once it's on."
   },
-  "vote_consent_continue": {
-    "message": "Continue"
-  },
   "discussion_consentContinue": {
     "message": "Continue"
-  },
-  "vote_consent_open_failed": {
-    "message": "Could not open the permission page. Please try again."
   },
   "counts_consent_enable": {
     "message": "Enable dislike counts"
   },
-  "counts_consent_reason": {
-    "message": "Firefox now needs your permission before RYD can show dislike counts."
-  },
-  "counts_consent_body": {
-    "message": "To fetch counts, RYD sends the current YouTube video ID to its server. Firefox calls this “browsing activity”."
-  },
-  "counts_consent_allow": {
-    "message": "Enable counts"
-  },
   "counts_consent_toolbar": {
-    "message": "Open Return YouTube Dislike from Firefox’s extensions menu to enable counts."
+    "message": "Open Return YouTube Dislike from Firefox’s extensions menu to continue."
   },
   "counts_consent_declined": {
     "message": "Counts stay off. You can enable them here later."
@@ -927,5 +906,14 @@
   },
   "counts_consent_private": {
     "message": "Enable dislike counts in a regular window first. Private windows show counts only."
+  },
+  "data_consent_reason": {
+    "message": "Firefox needs your permission before RYD can show dislike counts and count your likes and dislikes."
+  },
+  "data_consent_title": {
+    "message": "Show dislikes and make your votes count"
+  },
+  "data_consent_body": {
+    "message": "RYD sends the video ID to load dislike counts. Allowing also shares the like count you see, to improve estimates, and your likes, dislikes and comment reactions with a random voting ID, so they count."
   }
 }

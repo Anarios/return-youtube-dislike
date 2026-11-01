@@ -5,6 +5,8 @@ import {
   requestFeaturePermission,
 } from "./core-data-consent";
 import { isPrivateBrowsingContext } from "./private-browsing";
+import { closeToolbarPopup } from "./toolbar-popup";
+import { rememberVoteSubmissionIntent, withdrawVoteSubmissionIntent } from "./vote-submission-intent";
 import {
   allowVoteSubmission,
   onVoteSubmissionSettingChanged,
@@ -42,12 +44,15 @@ function initVoteStatusPopup() {
     pending = true;
     revision++;
     const request = requestFeaturePermission("voteOptIn");
+    const switchIntent = submissionDisabled;
+    if (switchIntent) rememberVoteSubmissionIntent();
     action.disabled = true;
     status.textContent = message("consent_prompt_status");
+    closeToolbarPopup();
     void (async () => {
       try {
         const allowed = await request;
-        if (allowed && submissionDisabled) allowVoteSubmission();
+        if (!allowed && switchIntent) withdrawVoteSubmissionIntent();
         status.textContent = allowed ? "" : message("consent_declined_status");
       } finally {
         pending = false;

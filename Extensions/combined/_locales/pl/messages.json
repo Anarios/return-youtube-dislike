@@ -1061,14 +1061,8 @@
   "popup_signin_next_click": {
     "message": "Potrzebne jest jeszcze jedno kliknięcie: wybierz poniżej przycisk logowania, aby sprawdzić uprawnienia konta w Firefoksie i kontynuować."
   },
-  "changelog_firefox_vote_allow": {
-    "message": "Wybierz w Firefoksie"
-  },
   "changelog_firefox_vote_granted": {
     "message": "Dziękujemy. Twoje oceny są teraz liczone."
-  },
-  "changelog_firefox_vote_declined": {
-    "message": "Udostępnianie ocen pozostaje wyłączone, więc Twoje polubienia i oceny negatywne nie będą liczone. Możesz je włączyć później w ustawieniach dodatków Firefoksa albo gdy polubisz film lub ocenisz go negatywnie, po włączeniu liczników ocen negatywnych."
   },
   "vote_consent_hint": {
     "message": "Twoja ocena nie jest liczona i nie pojawi się w licznikach ocen negatywnych. Włącz udostępnianie ocen, aby się liczyła."
@@ -1085,29 +1079,14 @@
   "discussion_reactionConsentRequired": {
     "message": "Włącz udostępnianie ocen, aby reagować na komentarze. Twoja reakcja zostanie wysłana po jego włączeniu."
   },
-  "vote_consent_continue": {
-    "message": "Kontynuuj"
-  },
   "discussion_consentContinue": {
     "message": "Kontynuuj"
-  },
-  "vote_consent_open_failed": {
-    "message": "Nie udało się otworzyć strony uprawnień. Spróbuj ponownie."
   },
   "counts_consent_enable": {
     "message": "Włącz liczniki ocen negatywnych"
   },
-  "counts_consent_reason": {
-    "message": "Firefox wymaga teraz Twojej zgody, zanim RYD będzie mógł wyświetlać liczniki ocen negatywnych."
-  },
-  "counts_consent_body": {
-    "message": "Aby pobrać liczniki, RYD wysyła identyfikator bieżącego filmu w YouTube na swój serwer. Firefox nazywa to „Aktywność przeglądania”."
-  },
-  "counts_consent_allow": {
-    "message": "Włącz liczniki"
-  },
   "counts_consent_toolbar": {
-    "message": "Otwórz Return YouTube Dislike z menu rozszerzeń Firefoksa, aby włączyć liczniki."
+    "message": "Otwórz Return YouTube Dislike z menu rozszerzeń Firefoksa, aby kontynuować."
   },
   "counts_consent_declined": {
     "message": "Liczniki pozostają wyłączone. Możesz je włączyć tutaj później."
@@ -1117,5 +1096,14 @@
   },
   "counts_consent_private": {
     "message": "Najpierw włącz liczniki ocen negatywnych w zwykłym oknie. Okna prywatne wyświetlają tylko liczniki."
+  },
+  "data_consent_reason": {
+    "message": "Firefox wymaga Twojej zgody, zanim RYD będzie mógł wyświetlać liczniki ocen negatywnych i uwzględniać Twoje polubienia i oceny negatywne."
+  },
+  "data_consent_title": {
+    "message": "Pokazuj oceny negatywne i niech Twoje oceny się liczą"
+  },
+  "data_consent_body": {
+    "message": "RYD wysyła identyfikator filmu, aby wczytać liczniki ocen negatywnych. Zezwolenie udostępnia też widoczną liczbę polubień, aby poprawić szacunki, oraz Twoje polubienia, oceny negatywne i reakcje na komentarze z losowym identyfikatorem głosowania, aby były liczone."
   }
 }

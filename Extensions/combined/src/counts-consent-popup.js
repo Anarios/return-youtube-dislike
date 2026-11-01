@@ -6,6 +6,8 @@ import {
   usesFirefoxDataCollectionConsent,
 } from "./core-data-consent";
 import { isPrivateBrowsingContext } from "./private-browsing";
+import { closeToolbarPopup } from "./toolbar-popup";
+import { withdrawVoteSubmissionIntent } from "./vote-submission-intent";
 
 function initCountsConsentPopup({ beforeShow = () => {} } = {}) {
   if (!usesFirefoxDataCollectionConsent() || isPrivateBrowsingContext()) return;
@@ -36,10 +38,12 @@ function initCountsConsentPopup({ beforeShow = () => {} } = {}) {
     if (pending) return;
     pending = true;
     revision++;
-    const request = requestFeaturePermission("counts");
+    const request = requestFeaturePermission("voteOptIn");
+    withdrawVoteSubmissionIntent();
     allow.disabled = true;
     dismiss.disabled = true;
     status.textContent = message("consent_prompt_status");
+    closeToolbarPopup();
     void (async () => {
       try {
         const granted = await request;

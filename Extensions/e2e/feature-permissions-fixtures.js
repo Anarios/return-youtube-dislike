@@ -79,10 +79,13 @@ async function startFixtures(evidence, options = {}) {
     ],
     { windowsHide: true, stdio: "ignore" },
   );
-  const navigation = await fs.readFile(
+  const navigationPage = await fs.readFile(
     path.join(ROOT, "Extensions/UserScript/e2e/fixtures/navigation-page.html"),
     "utf8",
   );
+  const youtubeCascade = await fs.readFile(path.join(__dirname, "fixtures/youtube-cascade.css"), "utf8");
+  assert.equal(navigationPage.split("</head>").length, 2, "Fixture page needs exactly one head");
+  const navigation = navigationPage.replace("</head>", `<style id="youtube-cascade">${youtubeCascade}</style></head>`);
   const records = [];
   const blocked = [];
   const unknown = [];

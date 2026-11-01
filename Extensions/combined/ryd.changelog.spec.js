@@ -12,6 +12,7 @@ jest.mock("./src/private-browsing", () => ({ isPrivateBrowsingContext: jest.fn()
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 const messages = require("./_locales/en/messages.json");
 const text = (key) => messages[key].message;
+const VOTE_OPT_IN = ["browsingActivity", "websiteActivity", "websiteContent"];
 
 describe("Firefox welcome opt-ins", () => {
   let permissions;
@@ -64,123 +65,132 @@ describe("Firefox welcome opt-ins", () => {
     delete global.chrome;
   });
 
-  test("without counts the hero says counts are off and both opt-ins wait for a click", async () => {
+  test("without counts the hero says counts are off and one combined opt-in waits for a click", async () => {
     await open();
     expect(byId("ryd-firefox-optin").hidden).toBe(false);
     expect(byId("ryd-hero-eyebrow").textContent).toBe(text("changelog_hero_eyebrow_counts_off"));
     expect(byId("ryd-hero-body").textContent).toBe(text("changelog_hero_body_counts_off"));
-    expect(byId("ryd-firefox-counts-actions").hidden).toBe(false);
-    expect(byId("ryd-firefox-vote-actions").hidden).toBe(false);
-    expect(byId("ryd-firefox-counts-status").textContent).toBe("");
-    expect(byId("ryd-firefox-vote-status").textContent).toBe("");
+    expect(byId("ryd-firefox-consent-title").textContent).toBe(text("data_consent_title"));
+    expect(byId("ryd-firefox-consent-title").nextElementSibling.textContent).toBe(text("data_consent_body"));
+    expect(byId("ryd-firefox-consent-allow").textContent.trim()).toBe(text("consent_allow"));
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe("");
+    expect(document.querySelectorAll("#ryd-firefox-optin button")).toHaveLength(1);
     expect(permissions.requestFeaturePermission).not.toHaveBeenCalled();
   });
 
-  test("enabling counts requests browsing activity in the click and updates the hero", async () => {
+  test("allowing requests counts and vote sharing in the click and reports that votes count", async () => {
     await open();
-    grantOnRequest(["browsingActivity"]);
-    byId("ryd-firefox-counts-allow").click();
+    grantOnRequest(VOTE_OPT_IN);
+    byId("ryd-firefox-consent-allow").click();
     expect(permissions.requestFeaturePermission).toHaveBeenCalledTimes(1);
-    expect(permissions.requestFeaturePermission).toHaveBeenCalledWith("counts");
-    expect(byId("ryd-firefox-counts-allow").disabled).toBe(true);
+    expect(permissions.requestFeaturePermission).toHaveBeenCalledWith("voteOptIn");
+    expect(byId("ryd-firefox-consent-allow").disabled).toBe(true);
     await flush();
     expect(byId("ryd-hero-eyebrow").textContent).toBe(text("changelog_hero_eyebrow"));
     expect(byId("ryd-hero-body").textContent).toBe(text("changelog_hero_body"));
-    expect(byId("ryd-firefox-counts-actions").hidden).toBe(true);
-    expect(byId("ryd-firefox-counts-status").textContent).toBe(text("counts_consent_enabled"));
-    expect(byId("ryd-firefox-vote-actions").hidden).toBe(false);
-    expect(byId("ryd-firefox-vote-status").textContent).toBe("");
-    expect(byId("ryd-firefox-counts-allow").disabled).toBe(false);
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(true);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe(text("changelog_firefox_vote_granted"));
+    expect(byId("ryd-firefox-consent-allow").disabled).toBe(false);
   });
 
-  test("enabling votes also requests counts and reports both only after the grant", async () => {
-    await open();
-    grantOnRequest(["browsingActivity", "websiteActivity", "websiteContent"]);
-    byId("ryd-firefox-vote-allow").click();
+  test("with the switch on, allowing reports counts as enabled and never touches the switch", async () => {
+    await open({ switchOn: true });
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
+    grantOnRequest(VOTE_OPT_IN);
+    byId("ryd-firefox-consent-allow").click();
     expect(permissions.requestFeaturePermission).toHaveBeenCalledWith("voteOptIn");
-    expect(permissions.FEATURE_DATA_PERMISSIONS.voteOptIn).toContain("browsingActivity");
     await flush();
-    expect(byId("ryd-firefox-vote-actions").hidden).toBe(true);
-    expect(byId("ryd-firefox-vote-status").textContent).toBe(text("changelog_firefox_vote_granted"));
-    expect(byId("ryd-firefox-counts-status").textContent).toBe(text("counts_consent_enabled"));
-    expect(byId("ryd-hero-body").textContent).toBe(text("changelog_hero_body"));
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(true);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe(text("counts_consent_enabled"));
+    expect(sync.disableVoteSubmission).toBe(true);
+    expect(chrome.storage.sync.set).toBeUndefined();
   });
 
-  test.each([
-    ["counts", "ryd-firefox-counts", "counts_consent_declined"],
-    ["voteOptIn", "ryd-firefox-vote", "changelog_firefox_vote_declined"],
-  ])("declining %s keeps the offer and claims nothing", async (feature, id, declined) => {
+  test("declining keeps the offer and claims nothing", async () => {
     await open();
-    byId(`${id}-allow`).click();
-    expect(permissions.requestFeaturePermission).toHaveBeenCalledWith(feature);
+    byId("ryd-firefox-consent-allow").click();
+    expect(permissions.requestFeaturePermission).toHaveBeenCalledWith("voteOptIn");
     await flush();
-    expect(byId(`${id}-actions`).hidden).toBe(false);
-    expect(byId(`${id}-status`).textContent).toBe(text(declined));
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe(text("consent_declined_status"));
     expect(byId("ryd-hero-body").textContent).toBe(text("changelog_hero_body_counts_off"));
-    expect(byId(`${id}-allow`).disabled).toBe(false);
+    expect(byId("ryd-firefox-consent-allow").disabled).toBe(false);
   });
 
-  test("voting without the like count is reported as on", async () => {
+  test("a failed request reports the error and allows another try", async () => {
+    await open();
+    permissions.requestFeaturePermission.mockRejectedValue(new Error("prompt failed"));
+    byId("ryd-firefox-consent-allow").click();
+    await flush();
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe(text("consent_error_status"));
+    expect(byId("ryd-firefox-consent-allow").disabled).toBe(false);
+  });
+
+  test("counts without vote sharing keep the offer while the switch is off", async () => {
+    await open({ categories: ["browsingActivity"] });
+    expect(byId("ryd-hero-eyebrow").textContent).toBe(text("changelog_hero_eyebrow"));
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe("");
+  });
+
+  test("counts without vote sharing are enough while the switch is on", async () => {
+    await open({ categories: ["browsingActivity"], switchOn: true });
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(true);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe(text("counts_consent_enabled"));
+  });
+
+  test("voting without the like count is reported as counting", async () => {
     await open({ categories: ["browsingActivity", "websiteActivity"] });
-    expect(byId("ryd-firefox-vote-actions").hidden).toBe(true);
-    expect(byId("ryd-firefox-vote-status").textContent).toBe(text("changelog_firefox_vote_granted"));
-    expect(byId("ryd-firefox-counts-status").textContent).toBe(text("counts_consent_enabled"));
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(true);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe(text("changelog_firefox_vote_granted"));
   });
 
-  test("revoking only the like count keeps voting reported as on", async () => {
-    await open({ categories: ["browsingActivity", "websiteActivity", "websiteContent"] });
+  test("revoking only the like count keeps votes reported as counting", async () => {
+    await open({ categories: VOTE_OPT_IN });
     granted.delete("websiteContent");
     permissionListener({ added: [], removed: ["websiteContent"] });
     await flush();
-    expect(byId("ryd-firefox-vote-actions").hidden).toBe(true);
-    expect(byId("ryd-firefox-vote-status").textContent).toBe(text("changelog_firefox_vote_granted"));
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(true);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe(text("changelog_firefox_vote_granted"));
   });
 
-  test("grants and revocations made elsewhere refresh the page", async () => {
+  test("grants and revocations made elsewhere refresh the page and clear an earlier decline", async () => {
     await open();
+    byId("ryd-firefox-consent-allow").click();
+    await flush();
+    expect(byId("ryd-firefox-consent-status").textContent).toBe(text("consent_declined_status"));
     granted.add("browsingActivity");
-    permissionListener({ added: ["browsingActivity"], removed: [] });
+    granted.add("websiteActivity");
+    permissionListener({ added: ["browsingActivity", "websiteActivity"], removed: [] });
     await flush();
     expect(byId("ryd-hero-eyebrow").textContent).toBe(text("changelog_hero_eyebrow"));
-    granted.delete("browsingActivity");
-    permissionListener({ added: [], removed: ["browsingActivity"] });
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(true);
+    granted.clear();
+    permissionListener({ added: [], removed: ["browsingActivity", "websiteActivity"] });
     await flush();
     expect(byId("ryd-hero-eyebrow").textContent).toBe(text("changelog_hero_eyebrow_counts_off"));
-    expect(byId("ryd-firefox-counts-actions").hidden).toBe(false);
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
+    expect(byId("ryd-firefox-consent-status").textContent).toBe("");
   });
 
-  test.each([[[]], [["browsingActivity", "websiteActivity", "websiteContent"]]])(
-    "the vote offer stays hidden while like/dislike submission is disabled: %j",
-    async (categories) => {
-      await open({ categories, switchOn: true });
-      expect(byId("ryd-firefox-optin").hidden).toBe(false);
-      expect(byId("ryd-firefox-vote").hidden).toBe(true);
-      expect(byId("ryd-firefox-counts-title").closest("section").hidden).toBe(false);
-      expect(permissions.requestFeaturePermission).not.toHaveBeenCalled();
-    },
-  );
-
-  test("switching like/dislike submission elsewhere updates the vote offer", async () => {
-    await open({ switchOn: true });
+  test("switching like/dislike submission elsewhere updates the offer", async () => {
+    await open({ categories: ["browsingActivity"], switchOn: true });
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(true);
     sync.disableVoteSubmission = false;
     storageListener({ disableVoteSubmission: { oldValue: true, newValue: false } }, "sync");
     await flush();
-    expect(byId("ryd-firefox-vote").hidden).toBe(false);
-    expect(byId("ryd-firefox-vote-actions").hidden).toBe(false);
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
     sync.disableVoteSubmission = true;
-    storageListener({ disableVoteSubmission: { oldValue: false, newValue: true } }, "sync");
+    storageListener({ disableVoteSubmission: { oldValue: false, newValue: true } }, "local");
     await flush();
-    expect(byId("ryd-firefox-vote").hidden).toBe(true);
-    sync.disableVoteSubmission = false;
-    storageListener({ disableVoteSubmission: { oldValue: true, newValue: false } }, "local");
-    await flush();
-    expect(byId("ryd-firefox-vote").hidden).toBe(true);
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
   });
 
   test("existing grants need no further request", async () => {
-    await open({ categories: ["browsingActivity", "websiteActivity", "websiteContent"] });
-    expect(byId("ryd-firefox-counts-actions").hidden).toBe(true);
-    expect(byId("ryd-firefox-vote-actions").hidden).toBe(true);
+    await open({ categories: VOTE_OPT_IN });
+    expect(byId("ryd-firefox-consent-actions").hidden).toBe(true);
     expect(permissions.requestFeaturePermission).not.toHaveBeenCalled();
   });
 
