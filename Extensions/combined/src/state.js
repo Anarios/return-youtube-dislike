@@ -257,6 +257,7 @@ function getState(storedData) {
 
 //---   Sets The Likes And Dislikes Values   ---//
 const reformattedLikeText = new WeakMap();
+const DISLIKE_NATIVE_LABEL_ATTRIBUTE = "data-ryd-native-aria-label";
 
 function getLikeTextNode() {
   const container = getLikeTextContainer();
@@ -333,6 +334,33 @@ function refreshReactionPresentation() {
       button.style.removeProperty("--ryd-thumb-color");
     }
   }
+
+  refreshDislikeCountLabel();
+}
+
+// An aria-label replaces a button's text for screen readers, so the count we
+// render is never announced unless it is part of the label.
+function refreshDislikeCountLabel() {
+  const { dislikeTextContainer, nativeDislikeButton: button } = getButtonControls();
+  // Mobile toggles use aria-label for their pressed state.
+  if (isMobile() || !button) return;
+  const label = button.getAttribute("aria-label");
+  // Kept on the element because cloned buttons retain the label we wrote.
+  const savedLabel = button.getAttribute(DISLIKE_NATIVE_LABEL_ATTRIBUTE);
+  const nativeLabel = savedLabel !== null && label?.startsWith(`${savedLabel}, `) ? savedLabel : label;
+  if (!nativeLabel) return;
+  const text = dislikeTextContainer?.textContent.trim() ?? "";
+  // The container can also hold words, such as a Shorts label or a status message.
+  const hasCount = /\p{N}/u.test(text);
+  const nextSavedLabel = hasCount ? nativeLabel : null;
+  const nextLabel = hasCount ? `${nativeLabel}, ${text}` : nativeLabel;
+  // Every write must be skipped when unchanged: the smartimation observer watches
+  // all attributes and calls back into setDislikes, so a repeated write freezes the page.
+  if (savedLabel !== nextSavedLabel) {
+    if (hasCount) button.setAttribute(DISLIKE_NATIVE_LABEL_ATTRIBUTE, nativeLabel);
+    else button.removeAttribute(DISLIKE_NATIVE_LABEL_ATTRIBUTE);
+  }
+  if (label !== nextLabel) button.setAttribute("aria-label", nextLabel);
 }
 
 function setDislikes(dislikesCount) {
@@ -355,6 +383,8 @@ function setDislikes(dislikesCount) {
   if (_dislikeText != null && _container.textContent !== String(_dislikeText)) {
     _container.textContent = _dislikeText;
   }
+  // An unchanged count produces no mutation for the observer to act on.
+  refreshDislikeCountLabel();
   return true;
 }
 
