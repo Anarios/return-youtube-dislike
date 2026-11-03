@@ -1,10 +1,10 @@
-# Return YouTube Dislike 4.1.3
+# Return YouTube Dislike 4.1.4
 
-4.1.3 explains Firefox's permission prompt more clearly.
+4.1.4 explains why some features are paid.
 
-- RYD only works on YouTube. Allowing its Firefox permissions doesn't give it access to any other website, and RYD never sees your browsing history.
-- Firefox now requires every extension to ask before sharing any data, and it uses the same broad labels for every extension. Before Firefox's prompt opens, RYD now explains what "Browsing activity", "Website activity" and "Website content" mean for RYD.
-- The same explanation appears in the toolbar menu, on the welcome page and when you react to RYD comments. The card under the Like and Dislike buttons now says the permission covers YouTube only.
-- Translations updated for all supported languages.
+- Dislike counts stay free for everyone. Next to each paid feature (the sign-in card in the toolbar menu, the Premium Insights teaser and the RYD comments box), a short note now explains that paid extras help pay for the servers: over 15 TB of data and about 20 million users a day, on a budget of a few hundred dollars a month.
+- The welcome page includes a short letter about running costs. Its Firefox permission section now starts with a short summary of Firefox's new privacy rules.
+- Extension pages no longer show untranslated text while they load, and the toolbar menu fits without scrolling.
+- Japanese translations improved.
 
 Requires Firefox 140 or newer.
