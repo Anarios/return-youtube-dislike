@@ -1,5 +1,11 @@
 Return YouTube Dislike (Trả lại số lượt Không thích trên YouTube) là một tiện ích mở rộng nhằm khôi phục chức năng hiển thị số lượt "không thích" trên YouTube.
 
+Bình luận RYD cho phép bạn đọc và bày tỏ cảm xúc trong các cuộc thảo luận trên video và Shorts đã tắt bình luận YouTube. Thành viên Commenter và Premium có thể đăng bình luận và trả lời, đồng thời nhận thông báo về các câu trả lời và lượt thích.
+
+Tính năng cốt lõi hiển thị số lượt “không thích” được cung cấp miễn phí. Một số tính năng tùy chọn có yêu cầu về quyền truy cập, bao gồm các cấp thành viên trả phí trên Patreon hoặc quyền truy cập dành cho người đóng góp đủ điều kiện trên GitHub.
+
+Lượt bình chọn của bạn giúp cải thiện các số liệu ước tính. Chúng được gửi kèm một ID ngẫu nhiên, được tạo vào lần đầu tiên bạn bình chọn hoặc bày tỏ cảm xúc với một bình luận và không liên kết với tài khoản Google hay YouTube của bạn. Bạn có thể ngừng gửi lượt bình chọn bằng tùy chọn “Tắt chức năng gửi đánh giá” trong menu của tiện ích mở rộng.
+
 Nếu tiện ích này không hoạt động: Mở thẻ Tiện ích (chrome://extensions/), tắt tiện ích này và bật lại.
 Chromium có một lỗi có thể phá hỏng tiện ích này trong một số trường hợp. Cách làm nêu trên có thể giải quyết hầu hết các vấn đề do lỗi này gây ra. Hi vọng rằng nhóm phát triển Chromium sẽ sớm khắc phục lỗi này.
 

@@ -1,5 +1,11 @@
 Return YouTube Dislikes restaura la capacidad de ver los «dislikes» ("No me gusta's"), en YouTube.
 
+Los comentarios de RYD te permiten leer las conversaciones y reaccionar a ellas en vídeos y Shorts en los que los comentarios de YouTube están desactivados. Los miembros Commenter y Premium pueden publicar y responder, con notificaciones de respuestas y «likes».
+
+Los recuentos básicos de «dislikes» son gratuitos. Algunas funciones opcionales tienen requisitos de acceso, entre ellos niveles de suscripción de pago en Patreon o el acceso para colaboradores de GitHub que reúnan las condiciones.
+
+Tus votos ayudan a mejorar las estimaciones. Se envían con un ID aleatorio que se crea la primera vez que votas o reaccionas a un comentario y que no está vinculado a tu cuenta de Google ni de YouTube. Puedes dejar de enviar votos con «Desactivar envío de votos» en el menú de la extensión.
+
 En caso de que no funcione: abre la pestaña de Extensiones (chrome://extensions/), desactiva esta extensión y luego vuelve a activarla. Existe un fallo en Chromium que, en algunos casos, da problemas con la extensión. Esta solución debería arreglar la mayoría de los problemas. Con suerte, el equipo de Chromium resolverá el problema pronto.
 
 A partir del 13 de diciembre de 2021, YouTube quitó la capacidad de ver la cantidad de «dislikes» desde su API.

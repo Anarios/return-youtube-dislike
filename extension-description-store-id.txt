@@ -1,5 +1,11 @@
 Return YouTube Dislike mengembalikan kemampuan untuk melihat jumlah dislike di Youtube.
 
+Komentar RYD memungkinkan kamu membaca dan bereaksi terhadap diskusi di video dan Shorts yang komentar YouTube-nya dinonaktifkan. Anggota Commenter dan Premium dapat mengirim komentar dan balasan, dengan notifikasi untuk balasan dan like.
+
+Jumlah dislike sebagai fitur inti tersedia gratis. Beberapa fitur opsional memiliki persyaratan akses, termasuk tingkat keanggotaan Patreon berbayar atau akses untuk kontributor GitHub yang memenuhi syarat.
+
+Suara kamu membantu menyempurnakan perkiraan. Suara dikirim dengan ID acak yang dibuat saat pertama kali kamu memberi suara atau bereaksi terhadap komentar, dan ID ini tidak terhubung dengan akun Google atau YouTube kamu. Kamu dapat berhenti mengirim suara dengan “Matikan pengiriman like/dislike” di menu extension.
+
 Jika ini tidak bekerja: buka tab Extension (chrome://extensions/), matikan lalu hidupkan lagi extension ini. Ini biasanya memperbaiki banyak masalah, ini terjadi karena terdapat bug pada Chromium yang dapat merusak extension pada kasus tertentu. Semoga tim Chromium akan segera memperbaikinya.
 
 Mulai 13 Desember 2021, Youtube menghapus kemampuan untuk melihat jumlah dislike dari API mereka.
