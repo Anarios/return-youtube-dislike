@@ -38,6 +38,9 @@
   "extensionName": {
     "message": "Επαναφορά του YouTube Dislike"
   },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
   "legendSettings": {
     "message": "Ρυθμίσεις"
   },

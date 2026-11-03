@@ -38,6 +38,9 @@
   "extensionName": {
     "message": "Volta Descurtidas do YouTube"
   },
+  "extensionNameBeta": {
+    "message": "Volta Descurtidas do YouTube Beta"
+  },
   "legendSettings": {
     "message": "Configurações"
   },

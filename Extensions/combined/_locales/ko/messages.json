@@ -38,6 +38,9 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike 베타"
+  },
   "legendSettings": {
     "message": "설정"
   },

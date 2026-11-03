@@ -38,6 +38,9 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
+  "extensionNameBeta": {
+    "message": "Return YouTube Dislike Beta"
+  },
   "legendSettings": {
     "message": "Cài đặt"
   },
