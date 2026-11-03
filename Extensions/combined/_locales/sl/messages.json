@@ -981,7 +981,7 @@
     "message": "Naj se vaši glasovi štejejo"
   },
   "consent_vote_body": {
-    "message": "Brez deljenja glasov se vaši všečki in nevšečki ne štejejo in se ne poznajo v številu nevšečkov. Deljenje pošilja vaše glasove in prikazano število všečkov. Zahteva prikaz števila nevšečkov, zato vas bo Firefox prosil tudi za njegov vklop, če je izklopljen."
+    "message": "Firefox zdaj zahteva, da vas vsaka razširitev vpraša, preden deli kakršne koli podatke. Dovolite to, da bo RYD lahko štel vaše všečke, nevšečke in odzive na komentarje. To dovoljenje velja samo za YouTube, ne za druga spletna mesta."
   },
   "consent_account_title": {
     "message": "Izberite dovoljenja računa"
@@ -1020,7 +1020,7 @@
     "message": "Dejavnost brskanja"
   },
   "consent_browsing_body": {
-    "message": "ID videoposnetka v YouTubu, ki se uporablja za nalaganje števila nevšečkov in razprav. Sami izberete, ali to dovolite."
+    "message": "Samo ID videoposnetka YouTube, ki ga odprete, za nalaganje njegovih nevšečkov in komentarjev RYD. Nikoli vaša zgodovina brskanja ali druga spletna mesta."
   },
   "consent_content_label": {
     "message": "Vsebina spletnih mest"
@@ -1032,7 +1032,7 @@
     "message": "Dejavnost na spletnih mestih"
   },
   "consent_activity_body": {
-    "message": "Vaši všečki, nevšečki, odstranjeni glasovi in odzivi na komentarje RYD, poslani s shranjenim naključnim ID-jem glasovanja."
+    "message": "Vaši všečki, nevšečki in odzivi na komentarje RYD na YouTubu, da se štejejo. Poslani z naključnim ID-jem, ki ni povezan z vašim računom Google ali YouTube."
   },
   "consent_identity_label": {
     "message": "Osebni identifikacijski podatki"
@@ -1050,7 +1050,7 @@
     "message": "RYD ne zbira ničesar zunaj youtube.com in ne dostopa do vašega računa YouTube. Brez prijave ne prejme imena ali e-pošte."
   },
   "consent_settings": {
-    "message": "Izbirna dovoljenja lahko pozneje spremenite v nastavitvah razširitve v Firefoxu."
+    "message": "Ta dovoljenja lahko kadar koli spremenite v nastavitvah dodatkov v Firefoxu (about:addons)."
   },
   "consent_private_counts": {
     "message": "Zasebna okna prikazujejo samo število z dovoljenjem, omogočenim v običajnem oknu. Glasovanje, prijava, analitika Premium in razprave tam niso na voljo."
@@ -1065,7 +1065,7 @@
     "message": "Hvala. Vaši glasovi se zdaj štejejo."
   },
   "vote_consent_hint": {
-    "message": "Vaš glas se ne šteje in se ne bo poznal v številu nevšečkov. Vklopite deljenje glasov, da se bo štel."
+    "message": "Vaš glas se še ne šteje. Firefox zdaj zahteva vaše dovoljenje, preden ga RYD lahko pošlje. To dovoljenje velja samo za YouTube, ne za druga spletna mesta."
   },
   "vote_not_counted": {
     "message": "Vaši všečki in nevšečki se ne štejejo in se ne bodo poznali v številu nevšečkov."
@@ -1098,12 +1098,15 @@
     "message": "Najprej omogočite število nevšečkov v običajnem oknu. Zasebna okna prikazujejo samo število."
   },
   "data_consent_reason": {
-    "message": "Firefox potrebuje vaše dovoljenje, preden lahko RYD prikaže število nevšečkov in šteje vaše všečke in nevšečke."
+    "message": "Firefox zdaj zahteva, da vas vsaka razširitev vpraša, preden deli kakršne koli podatke. Dovolite, da RYD prikazuje nevšečke in šteje vaše glasove. To dovoljenje velja samo za YouTube, ne za druga spletna mesta."
   },
   "data_consent_title": {
     "message": "Prikažite nevšečke in naj se vaši glasovi štejejo"
   },
   "data_consent_body": {
-    "message": "RYD pošlje ID videoposnetka, da naloži število nevšečkov. Če to dovolite, deli tudi število všečkov, ki ga vidite, za izboljšanje ocen, ter vaše všečke, nevšečke in odzive na komentarje z naključnim ID-jem glasovanja, da se štejejo."
+    "message": "Firefox zdaj zahteva, da vas vsaka razširitev vpraša, preden deli kakršne koli podatke. Za vse razširitve uporablja enake splošne oznake, zato je tukaj razloženo, kaj vsaka oznaka pomeni za RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD deluje samo na YouTubu. Če to dovolite, ne dobi dostopa do nobenega drugega spletnega mesta."
   }
 }

@@ -981,7 +981,7 @@
     "message": "Haz que tus votos cuenten"
   },
   "consent_vote_body": {
-    "message": "Sin compartir votos, tus Me gusta y No me gusta no se cuentan y no aparecen en los recuentos de No me gusta. Al compartir se envían tus votos y el número de Me gusta que ves. Requiere los recuentos de No me gusta, así que Firefox también te pedirá activarlos si están desactivados."
+    "message": "Firefox ahora exige a todas las extensiones que te pregunten antes de compartir cualquier dato. Permítelo para que RYD pueda contar tus Me gusta, No me gusta y reacciones a comentarios. Este permiso solo cubre YouTube, no otros sitios web."
   },
   "consent_account_title": {
     "message": "Elegir permisos de la cuenta"
@@ -1020,7 +1020,7 @@
     "message": "Actividad de navegación"
   },
   "consent_browsing_body": {
-    "message": "El ID del vídeo de YouTube usado para cargar los recuentos de No me gusta y las conversaciones. Tú eliges si lo permites."
+    "message": "Solo el ID del vídeo de YouTube que abres, para cargar sus No me gusta y comentarios de RYD. Nunca tu historial de navegación ni otros sitios web."
   },
   "consent_content_label": {
     "message": "Contenido de sitios web"
@@ -1032,7 +1032,7 @@
     "message": "Actividad en sitios web"
   },
   "consent_activity_body": {
-    "message": "Tus Me gusta, No me gusta, votos retirados y reacciones a comentarios de RYD, enviados con un ID de votación aleatorio guardado."
+    "message": "Tus Me gusta, No me gusta y reacciones a comentarios de RYD en YouTube, para que cuenten. Se envían con un ID aleatorio que no está vinculado a tu cuenta de Google o YouTube."
   },
   "consent_identity_label": {
     "message": "Información de identificación personal"
@@ -1050,7 +1050,7 @@
     "message": "RYD no recopila nada fuera de youtube.com ni accede a tu cuenta de YouTube. No recibe tu nombre ni tu correo si no inicias sesión."
   },
   "consent_settings": {
-    "message": "Puedes cambiar los permisos opcionales más tarde en los ajustes de la extensión en Firefox."
+    "message": "Puedes cambiar estos permisos en cualquier momento en los ajustes de complementos de Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "Las ventanas privadas solo muestran recuentos, con el permiso activado en una ventana normal. Los votos, el inicio de sesión, las estadísticas Premium y las conversaciones no están disponibles allí."
@@ -1065,7 +1065,7 @@
     "message": "Gracias. Tus votos ya cuentan."
   },
   "vote_consent_hint": {
-    "message": "Tu voto no se cuenta y no aparecerá en los recuentos de No me gusta. Activa el uso compartido de votos para que cuente."
+    "message": "Tu voto aún no se cuenta. Firefox ahora exige tu permiso antes de que RYD pueda enviarlo. Este permiso solo cubre YouTube, no otros sitios web."
   },
   "vote_not_counted": {
     "message": "Tus Me gusta y No me gusta no se cuentan y no aparecen en los recuentos de No me gusta."
@@ -1098,12 +1098,15 @@
     "message": "Primero activa los recuentos de No me gusta en una ventana normal. Las ventanas privadas solo muestran recuentos."
   },
   "data_consent_reason": {
-    "message": "Firefox necesita tu permiso para que RYD pueda mostrar los recuentos de No me gusta y contar tus Me gusta y No me gusta."
+    "message": "Firefox ahora exige a todas las extensiones que te pregunten antes de compartir cualquier dato. Permite que RYD muestre los No me gusta y cuente tus votos. Este permiso solo cubre YouTube, no otros sitios web."
   },
   "data_consent_title": {
     "message": "Muestra los No me gusta y haz que tus votos cuenten"
   },
   "data_consent_body": {
-    "message": "RYD envía el ID del vídeo para cargar los recuentos de No me gusta. Si lo permites, también se comparten el número de Me gusta que ves, para mejorar las estimaciones, y tus Me gusta, No me gusta y reacciones a comentarios con un ID de votación aleatorio, para que cuenten."
+    "message": "Firefox ahora exige a todas las extensiones que te pregunten antes de compartir cualquier dato. Usa las mismas etiquetas generales para todas las extensiones, así que esto es lo que significa cada etiqueta para RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD solo funciona en YouTube. Permitirlo no le da acceso a ningún otro sitio web."
   }
 }

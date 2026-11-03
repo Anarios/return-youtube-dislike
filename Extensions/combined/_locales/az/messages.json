@@ -981,7 +981,7 @@
     "message": "Səsləriniz sayılsın"
   },
   "consent_vote_body": {
-    "message": "Səs paylaşımı olmadan bəyənmə və bəyənməmələriniz sayılmır və bəyənməmə saylarında əks olunmur. Paylaşım səslərinizi və gördüyünüz bəyənmə sayını göndərir. O, bəyənməmə saylarını tələb edir, ona görə də onlar sönülüdürsə, Firefox onları aktivləşdirmək üçün də icazə istəyəcək."
+    "message": "Firefox indi hər genişlənmənin hər hansı məlumatı paylaşmazdan əvvəl sizdən soruşmasını tələb edir. RYD-nin bəyənmələrinizi, bəyənməmələrinizi və şərh reaksiyalarınızı sayması üçün buna icazə verin. Bu icazə yalnız YouTube-u əhatə edir, digər veb-saytları yox."
   },
   "consent_account_title": {
     "message": "Hesab icazələrini seçin"
@@ -1020,7 +1020,7 @@
     "message": "Baxış fəaliyyəti"
   },
   "consent_browsing_body": {
-    "message": "Bəyənməmə saylarını və müzakirələri yükləmək üçün istifadə olunan YouTube video ID-si. Buna icazə verib-verməməyi siz seçirsiniz."
+    "message": "Yalnız açdığınız YouTube videosunun ID-si, onun bəyənməmələrini və RYD şərhlərini yükləmək üçün. Heç vaxt nə brauzer tarixçəniz, nə də digər veb-saytlar."
   },
   "consent_content_label": {
     "message": "Veb-sayt məzmunu"
@@ -1032,7 +1032,7 @@
     "message": "Veb-sayt fəaliyyəti"
   },
   "consent_activity_body": {
-    "message": "Saxlanmış təsadüfi səsvermə identifikatoru ilə göndərilən bəyənmələriniz, bəyənməmələriniz, geri götürdüyünüz səslər və RYD şərhlərinə reaksiyalarınız."
+    "message": "YouTube-dakı bəyənmələriniz, bəyənməmələriniz və RYD şərhlərinə reaksiyalarınız, sayılmaları üçün. Google və ya YouTube hesabınızla əlaqəsi olmayan təsadüfi identifikatorla göndərilir."
   },
   "consent_identity_label": {
     "message": "Şəxsi identifikasiya məlumatları"
@@ -1050,7 +1050,7 @@
     "message": "RYD youtube.com xaricində heç nə toplamır və YouTube hesabınıza daxil olmur. Daxil olmayınca ad və ya e-poçt almır."
   },
   "consent_settings": {
-    "message": "Könüllü icazələri daha sonra Firefox-un əlavə ayarlarında dəyişə bilərsiniz."
+    "message": "Bu icazələri istənilən vaxt Firefox-un əlavələr ayarlarında (about:addons) dəyişə bilərsiniz."
   },
   "consent_private_counts": {
     "message": "Məxfi pəncərələrdə adi pəncərədə aktivləşdirilmiş icazə ilə yalnız saylar göstərilir. Səsvermə, giriş, Premium analitika və müzakirələr orada mövcud deyil."
@@ -1065,7 +1065,7 @@
     "message": "Təşəkkürlər. Səsləriniz artıq sayılır."
   },
   "vote_consent_hint": {
-    "message": "Səsiniz sayılmır və bəyənməmə saylarında əks olunmayacaq. Onun sayılması üçün səs paylaşımını aktivləşdirin."
+    "message": "Səsiniz hələ sayılmayıb. Firefox indi RYD onu göndərməzdən əvvəl icazənizi tələb edir. Bu icazə yalnız YouTube-u əhatə edir, digər veb-saytları yox."
   },
   "vote_not_counted": {
     "message": "Bəyənmə və bəyənməmələriniz sayılmır və bəyənməmə saylarında əks olunmur."
@@ -1098,12 +1098,15 @@
     "message": "Əvvəlcə adi pəncərədə bəyənməmə saylarını aktivləşdirin. Məxfi pəncərələrdə yalnız saylar göstərilir."
   },
   "data_consent_reason": {
-    "message": "Firefox RYD-nin bəyənməmə saylarını göstərməsi və bəyənmə və bəyənməmələrinizi sayması üçün icazənizi tələb edir."
+    "message": "Firefox indi hər genişlənmənin hər hansı məlumatı paylaşmazdan əvvəl sizdən soruşmasını tələb edir. RYD-yə bəyənməmələri göstərməyə və səslərinizi saymağa icazə verin. Bu icazə yalnız YouTube-u əhatə edir, digər veb-saytları yox."
   },
   "data_consent_title": {
     "message": "Bəyənməmələri göstərin və səsləriniz sayılsın"
   },
   "data_consent_body": {
-    "message": "RYD bəyənməmə saylarını yükləmək üçün video ID-sini göndərir. İcazə versəniz, təxminləri yaxşılaşdırmaq üçün gördüyünüz bəyənmə sayı, həmçinin sayılmaları üçün bəyənmələriniz, bəyənməmələriniz və şərh reaksiyalarınız təsadüfi səsvermə identifikatoru ilə paylaşılır."
+    "message": "Firefox indi hər genişlənmənin hər hansı məlumatı paylaşmazdan əvvəl sizdən soruşmasını tələb edir. O, bütün genişlənmələr üçün eyni ümumi adlardan istifadə edir, ona görə də hər birinin RYD üçün mənası belədir:"
+  },
+  "data_consent_scope": {
+    "message": "RYD yalnız YouTube-da işləyir. Bu icazə ona başqa heç bir veb-sayta giriş vermir."
   }
 }

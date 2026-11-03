@@ -981,7 +981,7 @@
     "message": "Damit deine Bewertungen zählen"
   },
   "consent_vote_body": {
-    "message": "Ohne das Teilen von Bewertungen werden deine Likes und Dislikes nicht gezählt und erscheinen nicht in den Dislike-Zahlen. Beim Teilen werden deine Bewertungen und die angezeigte Anzahl von Likes gesendet. Es setzt Dislike-Zahlen voraus, daher fragt Firefox bei Bedarf auch nach deren Aktivierung."
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Erlaube das, damit RYD deine Likes, Dislikes und Reaktionen auf Kommentare zählen kann. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
   },
   "consent_account_title": {
     "message": "Kontoberechtigungen auswählen"
@@ -1020,7 +1020,7 @@
     "message": "Surfaktivitäten"
   },
   "consent_browsing_body": {
-    "message": "Die YouTube-Video-ID zum Laden von Dislike-Zahlen und Diskussionen. Du entscheidest, ob du dies erlaubst."
+    "message": "Nur die ID des YouTube-Videos, das du öffnest, um seine Dislikes und RYD-Kommentare zu laden. Nie dein Browserverlauf oder andere Websites."
   },
   "consent_content_label": {
     "message": "Website-Inhalte"
@@ -1032,7 +1032,7 @@
     "message": "Website-Aktivitäten"
   },
   "consent_activity_body": {
-    "message": "Deine Likes, Dislikes, zurückgenommenen Bewertungen und Reaktionen auf RYD-Kommentare, zusammen mit einer gespeicherten zufälligen Abstimmungs-ID."
+    "message": "Deine Likes, Dislikes und RYD-Kommentarreaktionen auf YouTube, damit sie zählen. Gesendet mit einer zufälligen ID, die nicht mit deinem Google- oder YouTube-Konto verknüpft ist."
   },
   "consent_identity_label": {
     "message": "Personenbezogene Daten"
@@ -1050,7 +1050,7 @@
     "message": "RYD erfasst nichts außerhalb von youtube.com und greift nicht auf dein YouTube-Konto zu. Ohne Anmeldung erhält RYD weder deinen Namen noch deine E-Mail-Adresse."
   },
   "consent_settings": {
-    "message": "Du kannst optionale Berechtigungen später in den Erweiterungseinstellungen von Firefox ändern."
+    "message": "Du kannst diese Berechtigungen jederzeit in den Add-on-Einstellungen von Firefox (about:addons) ändern."
   },
   "consent_private_counts": {
     "message": "Private Fenster zeigen nur Zahlen an und nutzen dafür die in einem normalen Fenster aktivierte Berechtigung. Abstimmen, Anmelden, Premium-Analysen und Diskussionen sind dort nicht verfügbar."
@@ -1065,7 +1065,7 @@
     "message": "Danke. Deine Bewertungen zählen jetzt."
   },
   "vote_consent_hint": {
-    "message": "Deine Bewertung wird nicht gezählt und erscheint nicht in den Dislike-Zahlen. Aktiviere das Teilen von Bewertungen, damit sie zählt."
+    "message": "Deine Bewertung wird noch nicht gezählt. Bevor RYD sie senden kann, verlangt Firefox jetzt deine Erlaubnis. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
   },
   "vote_not_counted": {
     "message": "Deine Likes und Dislikes werden nicht gezählt und erscheinen nicht in den Dislike-Zahlen."
@@ -1098,12 +1098,15 @@
     "message": "Aktiviere Dislike-Zahlen zuerst in einem normalen Fenster. Private Fenster zeigen nur Zahlen an."
   },
   "data_consent_reason": {
-    "message": "Firefox braucht deine Erlaubnis, bevor RYD Dislike-Zahlen anzeigen und deine Likes und Dislikes zählen kann."
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Erlaube RYD, Dislikes anzuzeigen und deine Bewertungen zu zählen. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
   },
   "data_consent_title": {
     "message": "Dislikes anzeigen und deine Bewertungen zählen lassen"
   },
   "data_consent_body": {
-    "message": "RYD sendet die Video-ID, um Dislike-Zahlen zu laden. Wenn du es erlaubst, werden außerdem die angezeigte Anzahl von Likes geteilt, um Schätzungen zu verbessern, sowie deine Likes, Dislikes und Reaktionen auf Kommentare mit einer zufälligen Abstimmungs-ID, damit sie zählen."
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Dabei verwendet Firefox für alle Erweiterungen dieselben allgemeinen Bezeichnungen. Das bedeuten sie jeweils für RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD funktioniert nur auf YouTube. Wenn du das erlaubst, erhält RYD dadurch keinen Zugriff auf andere Websites."
   }
 }

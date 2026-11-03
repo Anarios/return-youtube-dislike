@@ -981,7 +981,7 @@
     "message": "Fai contare i tuoi voti"
   },
   "consent_vote_body": {
-    "message": "Senza la condivisione dei voti, i tuoi Mi piace e Non mi piace non vengono contati e non compaiono nei conteggi dei Non mi piace. La condivisione invia i tuoi voti e il numero di Mi piace visualizzato. Richiede i conteggi dei Non mi piace, quindi Firefox chiederà anche di attivarli se sono disattivati."
+    "message": "Firefox ora impone a ogni estensione di chiederti il permesso prima di condividere qualsiasi dato. Consentilo perché RYD possa contare i tuoi Mi piace, Non mi piace e reazioni ai commenti. Questo permesso vale solo per YouTube, non per altri siti web."
   },
   "consent_account_title": {
     "message": "Scegli i permessi dell’account"
@@ -1020,7 +1020,7 @@
     "message": "Attività di navigazione"
   },
   "consent_browsing_body": {
-    "message": "L’ID del video YouTube usato per caricare i conteggi dei Non mi piace e le discussioni. Puoi scegliere se consentirlo."
+    "message": "Solo l’ID del video YouTube che apri, per caricarne i Non mi piace e i commenti RYD. Mai la tua cronologia di navigazione né altri siti web."
   },
   "consent_content_label": {
     "message": "Contenuti dei siti web"
@@ -1032,7 +1032,7 @@
     "message": "Attività sui siti web"
   },
   "consent_activity_body": {
-    "message": "I tuoi Mi piace, Non mi piace, voti rimossi e reazioni ai commenti RYD, inviati con un ID di voto casuale salvato."
+    "message": "I tuoi Mi piace, Non mi piace e reazioni ai commenti RYD su YouTube, perché vengano contati. Inviati con un ID casuale non collegato al tuo account Google o YouTube."
   },
   "consent_identity_label": {
     "message": "Informazioni di identificazione personale"
@@ -1050,7 +1050,7 @@
     "message": "RYD non raccoglie nulla al di fuori di youtube.com e non accede al tuo account YouTube. Non riceve nome o e-mail se non accedi."
   },
   "consent_settings": {
-    "message": "Puoi modificare i permessi facoltativi in seguito nelle impostazioni dell’estensione in Firefox."
+    "message": "Puoi modificare questi permessi in qualsiasi momento nelle impostazioni dei componenti aggiuntivi di Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "Le finestre anonime mostrano solo i conteggi, usando il permesso attivato in una finestra normale. Voti, accesso, analisi Premium e discussioni non sono disponibili lì."
@@ -1065,7 +1065,7 @@
     "message": "Grazie. Ora i tuoi voti contano."
   },
   "vote_consent_hint": {
-    "message": "Il tuo voto non viene contato e non comparirà nei conteggi dei Non mi piace. Attiva la condivisione dei voti perché conti."
+    "message": "Il tuo voto non viene ancora contato. Firefox ora richiede il tuo permesso prima che RYD possa inviarlo. Questo permesso vale solo per YouTube, non per altri siti web."
   },
   "vote_not_counted": {
     "message": "I tuoi Mi piace e Non mi piace non vengono contati e non compaiono nei conteggi dei Non mi piace."
@@ -1098,12 +1098,15 @@
     "message": "Attiva prima i conteggi dei Non mi piace in una finestra normale. Le finestre anonime mostrano solo i conteggi."
   },
   "data_consent_reason": {
-    "message": "Firefox ha bisogno del tuo permesso prima che RYD possa mostrare i conteggi dei Non mi piace e contare i tuoi Mi piace e Non mi piace."
+    "message": "Firefox ora impone a ogni estensione di chiederti il permesso prima di condividere qualsiasi dato. Consenti a RYD di mostrare i Non mi piace e di contare i tuoi voti. Questo permesso vale solo per YouTube, non per altri siti web."
   },
   "data_consent_title": {
     "message": "Mostra i Non mi piace e fai contare i tuoi voti"
   },
   "data_consent_body": {
-    "message": "RYD invia l’ID del video per caricare i conteggi dei Non mi piace. Se lo consenti, condivide anche il numero di Mi piace che vedi, per migliorare le stime, e i tuoi Mi piace, Non mi piace e reazioni ai commenti con un ID di voto casuale, perché vengano contati."
+    "message": "Firefox ora impone a ogni estensione di chiederti il permesso prima di condividere qualsiasi dato. Usa le stesse etichette generiche per tutte le estensioni, quindi ecco cosa significa ciascuna etichetta per RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD funziona solo su YouTube. Consentirlo non gli dà accesso a nessun altro sito web."
   }
 }

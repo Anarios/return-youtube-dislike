@@ -981,7 +981,7 @@
     "message": "Để lượt bình chọn của bạn được tính"
   },
   "consent_vote_body": {
-    "message": "Nếu không chia sẻ lượt bình chọn, lượt thích và không thích của bạn sẽ không được tính và không hiển thị trong số lượt không thích. Việc chia sẻ sẽ gửi lượt bình chọn của bạn và số lượt thích bạn thấy. Việc này cần số lượt không thích, vì vậy Firefox cũng sẽ yêu cầu bật nó nếu đang tắt."
+    "message": "Firefox hiện yêu cầu mọi tiện ích mở rộng phải hỏi bạn trước khi chia sẻ bất kỳ dữ liệu nào. Hãy cho phép để RYD có thể tính lượt thích, không thích và phản ứng với bình luận của bạn. Quyền này chỉ áp dụng cho YouTube, không áp dụng cho các trang web khác."
   },
   "consent_account_title": {
     "message": "Chọn quyền tài khoản"
@@ -1020,7 +1020,7 @@
     "message": "Hoạt động duyệt web"
   },
   "consent_browsing_body": {
-    "message": "ID video YouTube được dùng để tải số lượt không thích và thảo luận. Bạn chọn có cho phép điều này hay không."
+    "message": "Chỉ ID của video YouTube bạn mở, để tải lượt không thích và bình luận RYD của video đó. Không bao giờ là lịch sử duyệt web của bạn hay các trang web khác."
   },
   "consent_content_label": {
     "message": "Nội dung trang web"
@@ -1032,7 +1032,7 @@
     "message": "Hoạt động trên trang web"
   },
   "consent_activity_body": {
-    "message": "Lượt thích, không thích, lượt bình chọn đã rút và phản ứng với bình luận RYD của bạn, được gửi cùng ID bình chọn ngẫu nhiên đã lưu."
+    "message": "Lượt thích, không thích và phản ứng với bình luận RYD của bạn trên YouTube, để chúng được tính. Được gửi kèm một ID ngẫu nhiên không liên kết với tài khoản Google hoặc YouTube của bạn."
   },
   "consent_identity_label": {
     "message": "Thông tin nhận dạng cá nhân"
@@ -1050,7 +1050,7 @@
     "message": "RYD không thu thập gì ngoài youtube.com và không truy cập tài khoản YouTube của bạn. RYD không nhận tên hay email trừ khi bạn đăng nhập."
   },
   "consent_settings": {
-    "message": "Bạn có thể thay đổi các quyền tùy chọn sau trong phần cài đặt tiện ích của Firefox."
+    "message": "Bạn có thể thay đổi các quyền này bất cứ lúc nào trong phần cài đặt tiện ích của Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "Cửa sổ riêng tư chỉ hiển thị số lượt, dùng quyền đã bật trong cửa sổ thông thường. Bình chọn, đăng nhập, phân tích Premium và thảo luận không khả dụng ở đó."
@@ -1065,7 +1065,7 @@
     "message": "Cảm ơn bạn. Lượt bình chọn của bạn giờ đã được tính."
   },
   "vote_consent_hint": {
-    "message": "Lượt bình chọn của bạn không được tính và sẽ không hiển thị trong số lượt không thích. Hãy bật chia sẻ lượt bình chọn để được tính."
+    "message": "Lượt bình chọn của bạn chưa được tính. Firefox hiện yêu cầu bạn cho phép trước khi RYD có thể gửi nó. Quyền này chỉ áp dụng cho YouTube, không áp dụng cho các trang web khác."
   },
   "vote_not_counted": {
     "message": "Lượt thích và không thích của bạn không được tính và sẽ không hiển thị trong số lượt không thích."
@@ -1098,12 +1098,15 @@
     "message": "Trước tiên, hãy bật số lượt không thích trong cửa sổ thông thường. Cửa sổ riêng tư chỉ hiển thị số lượt."
   },
   "data_consent_reason": {
-    "message": "Firefox cần bạn cho phép trước khi RYD có thể hiển thị số lượt không thích và tính lượt thích, không thích của bạn."
+    "message": "Firefox hiện yêu cầu mọi tiện ích mở rộng phải hỏi bạn trước khi chia sẻ bất kỳ dữ liệu nào. Hãy cho phép RYD hiển thị lượt không thích và tính lượt bình chọn của bạn. Quyền này chỉ áp dụng cho YouTube, không áp dụng cho các trang web khác."
   },
   "data_consent_title": {
     "message": "Hiển thị lượt không thích và để lượt bình chọn của bạn được tính"
   },
   "data_consent_body": {
-    "message": "RYD gửi ID video để tải số lượt không thích. Nếu cho phép, RYD cũng chia sẻ số lượt thích bạn thấy để cải thiện ước tính, cùng lượt thích, không thích và phản ứng với bình luận của bạn kèm ID bình chọn ngẫu nhiên để chúng được tính."
+    "message": "Firefox hiện yêu cầu mọi tiện ích mở rộng phải hỏi bạn trước khi chia sẻ bất kỳ dữ liệu nào. Firefox dùng cùng những nhãn chung cho mọi tiện ích mở rộng, nên đây là ý nghĩa của từng nhãn đối với RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD chỉ hoạt động trên YouTube. Cho phép điều này không cấp cho RYD quyền truy cập vào bất kỳ trang web nào khác."
   }
 }

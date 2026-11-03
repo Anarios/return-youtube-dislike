@@ -981,7 +981,7 @@
     "message": "Pastikan suara Anda dihitung"
   },
   "consent_vote_body": {
-    "message": "Tanpa berbagi suara, suka dan tidak suka Anda tidak dihitung dan tidak akan terlihat dalam jumlah tidak suka. Berbagi mengirim suara Anda dan jumlah suka yang terlihat. Fitur ini memerlukan jumlah tidak suka, jadi Firefox juga akan meminta untuk mengaktifkannya jika masih nonaktif."
+    "message": "Firefox kini mewajibkan setiap ekstensi meminta izin Anda sebelum membagikan data apa pun. Izinkan agar RYD dapat menghitung suka, tidak suka, dan reaksi komentar Anda. Izin ini hanya berlaku untuk YouTube, bukan situs web lain."
   },
   "consent_account_title": {
     "message": "Pilih izin akun"
@@ -1020,7 +1020,7 @@
     "message": "Aktivitas penjelajahan"
   },
   "consent_browsing_body": {
-    "message": "ID video YouTube yang digunakan untuk memuat jumlah tidak suka dan diskusi. Anda memilih apakah akan mengizinkannya."
+    "message": "Hanya ID video YouTube yang Anda buka, untuk memuat jumlah tidak suka dan komentar RYD-nya. Tidak pernah mencakup riwayat penjelajahan Anda atau situs web lain."
   },
   "consent_content_label": {
     "message": "Konten situs web"
@@ -1032,7 +1032,7 @@
     "message": "Aktivitas situs web"
   },
   "consent_activity_body": {
-    "message": "Suka, tidak suka, suara yang dibatalkan, dan reaksi Anda terhadap komentar RYD, dikirim dengan ID pemungutan suara acak yang disimpan."
+    "message": "Suka, tidak suka, dan reaksi Anda terhadap komentar RYD di YouTube, agar dihitung. Dikirim dengan ID acak yang tidak terhubung dengan akun Google atau YouTube Anda."
   },
   "consent_identity_label": {
     "message": "Informasi pengenal pribadi"
@@ -1050,7 +1050,7 @@
     "message": "RYD tidak mengumpulkan apa pun di luar youtube.com dan tidak mengakses akun YouTube Anda. RYD tidak menerima nama atau email kecuali Anda masuk."
   },
   "consent_settings": {
-    "message": "Anda dapat mengubah izin opsional nanti di pengaturan ekstensi Firefox."
+    "message": "Anda dapat mengubah izin ini kapan saja di pengaturan pengaya Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "Jendela pribadi hanya menampilkan jumlah dengan izin yang diaktifkan di jendela biasa. Pemungutan suara, masuk, analitik Premium, dan diskusi tidak tersedia di sana."
@@ -1065,7 +1065,7 @@
     "message": "Terima kasih. Suara Anda kini dihitung."
   },
   "vote_consent_hint": {
-    "message": "Suara Anda tidak dihitung dan tidak akan terlihat dalam jumlah tidak suka. Aktifkan berbagi suara agar suara Anda dihitung."
+    "message": "Suara Anda belum dihitung. Firefox kini memerlukan izin Anda sebelum RYD dapat mengirimnya. Izin ini hanya berlaku untuk YouTube, bukan situs web lain."
   },
   "vote_not_counted": {
     "message": "Suka dan tidak suka Anda tidak dihitung dan tidak akan terlihat dalam jumlah tidak suka."
@@ -1098,12 +1098,15 @@
     "message": "Aktifkan jumlah tidak suka di jendela biasa terlebih dahulu. Jendela pribadi hanya menampilkan jumlah."
   },
   "data_consent_reason": {
-    "message": "Firefox memerlukan izin Anda sebelum RYD dapat menampilkan jumlah tidak suka dan menghitung suka dan tidak suka Anda."
+    "message": "Firefox kini mewajibkan setiap ekstensi meminta izin Anda sebelum membagikan data apa pun. Izinkan RYD menampilkan jumlah tidak suka dan menghitung suara Anda. Izin ini hanya berlaku untuk YouTube, bukan situs web lain."
   },
   "data_consent_title": {
     "message": "Tampilkan jumlah tidak suka dan pastikan suara Anda dihitung"
   },
   "data_consent_body": {
-    "message": "RYD mengirim ID video untuk memuat jumlah tidak suka. Jika diizinkan, RYD juga membagikan jumlah suka yang Anda lihat, untuk meningkatkan perkiraan, serta suka, tidak suka, dan reaksi komentar Anda dengan ID pemungutan suara acak, agar dihitung."
+    "message": "Firefox kini mewajibkan setiap ekstensi meminta izin Anda sebelum membagikan data apa pun. Firefox memakai label umum yang sama untuk setiap ekstensi, jadi berikut arti masing-masing label bagi RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD hanya berfungsi di YouTube. Mengizinkan ini tidak memberinya akses ke situs web lain mana pun."
   }
 }

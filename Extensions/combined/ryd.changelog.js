@@ -1,8 +1,11 @@
 import { initChangelogPage } from "./src/changelog";
 import { hasFeaturePermission, onDataPermissionsChanged, requestFeaturePermission } from "./src/core-data-consent";
 import { usesFirefoxDataCollectionConsent } from "./src/data-collection-permissions";
+import { renderDataPermissionList } from "./src/data-permission-list";
 import { isPrivateBrowsingContext } from "./src/private-browsing";
 import { onVoteSubmissionSettingChanged, readVoteSubmissionDisabled } from "./src/vote-submission-setting";
+
+const FIREFOX_OPT_IN_FEATURE = "voteOptIn";
 
 initChangelogPage();
 
@@ -56,7 +59,7 @@ function setupFirefoxOptIn() {
   }
 
   allow.addEventListener("click", () => {
-    const request = requestFeaturePermission("voteOptIn");
+    const request = requestFeaturePermission(FIREFOX_OPT_IN_FEATURE);
     allow.disabled = true;
     void (async () => {
       try {
@@ -71,6 +74,7 @@ function setupFirefoxOptIn() {
   });
 
   renderHero(false);
+  renderDataPermissionList(document.getElementById("ryd-firefox-consent-permissions"), FIREFOX_OPT_IN_FEATURE, message);
   onDataPermissionsChanged(() => void render());
   onVoteSubmissionSettingChanged(() => void render());
   void render();

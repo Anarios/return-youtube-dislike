@@ -981,7 +981,7 @@
     "message": "讓您的評價被計入"
   },
   "consent_vote_body": {
-    "message": "未開啟評價分享時，您的喜歡和不喜歡不會被計入，也不會反映在不喜歡數中。分享會傳送您的評價和看到的喜歡數。分享評價需要啟用不喜歡數，因此若它處於關閉狀態，Firefox 也會請求將其開啟。"
+    "message": "Firefox 現在要求每個擴充套件在分享任何資料前都先詢問您。請允許此項，讓 RYD 能計入您的喜歡、不喜歡和留言反應。此權限僅適用於 YouTube，不涉及其他網站。"
   },
   "consent_account_title": {
     "message": "選擇帳號權限"
@@ -1020,7 +1020,7 @@
     "message": "瀏覽活動"
   },
   "consent_browsing_body": {
-    "message": "用於載入不喜歡數和討論的 YouTube 影片 ID。您可以選擇是否允許。"
+    "message": "僅限您開啟的 YouTube 影片 ID，用於載入該影片的不喜歡數和 RYD 留言。絕不包括您的瀏覽紀錄或其他網站。"
   },
   "consent_content_label": {
     "message": "網站內容"
@@ -1032,7 +1032,7 @@
     "message": "網站活動"
   },
   "consent_activity_body": {
-    "message": "您的喜歡、不喜歡、撤回的評價及對 RYD 留言的反應，連同已儲存的隨機投票 ID 一起傳送。"
+    "message": "您在 YouTube 上的喜歡、不喜歡和 RYD 留言反應，以便計入。連同一個未與您的 Google 或 YouTube 帳號連結的隨機 ID 一起傳送。"
   },
   "consent_identity_label": {
     "message": "個人識別資訊"
@@ -1050,7 +1050,7 @@
     "message": "RYD 不收集 youtube.com 以外的任何內容，也不會存取您的 YouTube 帳號。除非您登入，否則不會收到您的姓名或電子郵件。"
   },
   "consent_settings": {
-    "message": "您可稍後在 Firefox 的擴充套件設定中變更選用權限。"
+    "message": "您可以隨時在 Firefox 的附加元件設定（about:addons）中變更這些權限。"
   },
   "consent_private_counts": {
     "message": "隱私視窗僅顯示計數，使用在一般視窗中啟用的權限。無法在隱私視窗中投票、登入、使用 Premium 分析或參與討論。"
@@ -1065,7 +1065,7 @@
     "message": "謝謝。您的評價現在會被計入。"
   },
   "vote_consent_hint": {
-    "message": "您的評價不會被計入，也不會反映在不喜歡數中。開啟評價分享即可計入。"
+    "message": "您的評價尚未計入。Firefox 現在要求 RYD 在傳送評價前先取得您的許可。此權限僅適用於 YouTube，不涉及其他網站。"
   },
   "vote_not_counted": {
     "message": "您的喜歡和不喜歡不會被計入，也不會反映在不喜歡數中。"
@@ -1098,12 +1098,15 @@
     "message": "請先在一般視窗中啟用不喜歡數。隱私視窗僅顯示計數。"
   },
   "data_consent_reason": {
-    "message": "Firefox 需要您的許可，RYD 才能顯示不喜歡數並計入您的喜歡和不喜歡。"
+    "message": "Firefox 現在要求每個擴充套件在分享任何資料前都先詢問您。請允許 RYD 顯示不喜歡數並計入您的評價。此權限僅適用於 YouTube，不涉及其他網站。"
   },
   "data_consent_title": {
     "message": "顯示不喜歡數，讓您的評價被計入"
   },
   "data_consent_body": {
-    "message": "RYD 會傳送影片 ID 以載入不喜歡數。允許後，也會分享您看到的喜歡數以改善估算，並將您的喜歡、不喜歡和留言反應連同隨機投票 ID 一起傳送，使其被計入。"
+    "message": "Firefox 現在要求每個擴充套件在分享任何資料前都先詢問您。它對所有擴充套件使用相同的廣泛類別名稱，因此以下說明各類別對 RYD 的意義："
+  },
+  "data_consent_scope": {
+    "message": "RYD 只在 YouTube 上運作。允許後，它也不會取得任何其他網站的存取權限。"
   }
 }

@@ -981,7 +981,7 @@
     "message": "Laat je stemmen tellen"
   },
   "consent_vote_body": {
-    "message": "Zonder het delen van stemmen worden je likes en dislikes niet geteld en zijn ze niet te zien in de aantallen dislikes. Bij delen worden je stemmen en het aantal likes dat je ziet verzonden. Hiervoor zijn aantallen dislikes nodig, dus Firefox vraagt ook om die in te schakelen als ze uit staan."
+    "message": "Firefox verplicht nu elke extensie om je toestemming te vragen voordat ze gegevens deelt. Sta dit toe zodat RYD je likes, dislikes en waarderingen van reacties kan tellen. Deze toestemming geldt alleen voor YouTube, niet voor andere websites."
   },
   "consent_account_title": {
     "message": "Accountmachtigingen kiezen"
@@ -1020,7 +1020,7 @@
     "message": "Browseactiviteit"
   },
   "consent_browsing_body": {
-    "message": "De YouTube-video-ID die wordt gebruikt om aantallen dislikes en discussies te laden. Je kiest zelf of je dit toestaat."
+    "message": "Alleen de ID van de YouTube-video die je opent, om de bijbehorende dislikes en RYD-reacties te laden. Nooit je browsegeschiedenis of andere websites."
   },
   "consent_content_label": {
     "message": "Website-inhoud"
@@ -1032,7 +1032,7 @@
     "message": "Websiteactiviteit"
   },
   "consent_activity_body": {
-    "message": "Je likes, dislikes, ingetrokken stemmen en reacties op RYD-opmerkingen, verstuurd met een opgeslagen willekeurige stem-ID."
+    "message": "Je likes, dislikes en waarderingen van RYD-reacties op YouTube, zodat ze meetellen. Verstuurd met een willekeurige ID die niet gekoppeld is aan je Google- of YouTube-account."
   },
   "consent_identity_label": {
     "message": "Persoonlijk identificeerbare informatie"
@@ -1050,7 +1050,7 @@
     "message": "RYD verzamelt niets buiten youtube.com en heeft geen toegang tot je YouTube-account. Het ontvangt geen naam of e-mailadres tenzij je je aanmeldt."
   },
   "consent_settings": {
-    "message": "Je kunt optionele machtigingen later wijzigen in de extensie-instellingen van Firefox."
+    "message": "Je kunt deze machtigingen op elk moment wijzigen in de instellingen voor add-ons van Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "Privévensters tonen alleen aantallen, met de machtiging die in een normaal venster is ingeschakeld. Stemmen, aanmelden, Premium-analyses en discussies zijn daar niet beschikbaar."
@@ -1065,7 +1065,7 @@
     "message": "Bedankt. Je stemmen tellen nu mee."
   },
   "vote_consent_hint": {
-    "message": "Je stem wordt niet geteld en is niet te zien in de aantallen dislikes. Schakel het delen van stemmen in zodat hij telt."
+    "message": "Je stem wordt nog niet geteld. Firefox vereist nu je toestemming voordat RYD hem kan versturen. Deze toestemming geldt alleen voor YouTube, niet voor andere websites."
   },
   "vote_not_counted": {
     "message": "Je likes en dislikes worden niet geteld en zijn niet te zien in de aantallen dislikes."
@@ -1098,12 +1098,15 @@
     "message": "Schakel aantallen dislikes eerst in een normaal venster in. Privévensters tonen alleen aantallen."
   },
   "data_consent_reason": {
-    "message": "Firefox vraagt eerst je toestemming voordat RYD aantallen dislikes kan tonen en je likes en dislikes kan meetellen."
+    "message": "Firefox verplicht nu elke extensie om je toestemming te vragen voordat ze gegevens deelt. Sta RYD toe om dislikes te tonen en je stemmen te tellen. Deze toestemming geldt alleen voor YouTube, niet voor andere websites."
   },
   "data_consent_title": {
     "message": "Toon dislikes en laat je stemmen tellen"
   },
   "data_consent_body": {
-    "message": "RYD verstuurt de video-ID om aantallen dislikes te laden. Als je dit toestaat, deel je ook het aantal likes dat je ziet, om schattingen te verbeteren, en je likes, dislikes en reacties op opmerkingen met een willekeurige stem-ID, zodat ze meetellen."
+    "message": "Firefox verplicht nu elke extensie om je toestemming te vragen voordat ze gegevens deelt. Daarbij gebruikt Firefox voor elke extensie dezelfde algemene labels. Dit betekent elk label voor RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD werkt alleen op YouTube. Als je dit toestaat, krijgt RYD daardoor geen toegang tot andere websites."
   }
 }

@@ -981,7 +981,7 @@
     "message": "Faça seus votos contarem"
   },
   "consent_vote_body": {
-    "message": "Sem o compartilhamento de votos, seus Gostei e Não gostei não são contados e não aparecem nas contagens de Não gostei. O compartilhamento envia seus votos e o número de Gostei exibido. Ele precisa das contagens de Não gostei, então o Firefox também pedirá para ativá-las se estiverem desativadas."
+    "message": "Agora o Firefox exige que toda extensão peça sua permissão antes de compartilhar qualquer dado. Permita isso para que o RYD possa contar seus Gostei, Não gostei e reações a comentários. Esta permissão vale só para o YouTube, não para outros sites."
   },
   "consent_account_title": {
     "message": "Escolher permissões da conta"
@@ -1020,7 +1020,7 @@
     "message": "Atividade de navegação"
   },
   "consent_browsing_body": {
-    "message": "O ID do vídeo do YouTube usado para carregar as contagens de Não gostei e as discussões. Você escolhe se permite isso."
+    "message": "Apenas o ID do vídeo do YouTube que você abre, para carregar os Não gostei e os comentários do RYD desse vídeo. Nunca seu histórico de navegação nem outros sites."
   },
   "consent_content_label": {
     "message": "Conteúdo de sites"
@@ -1032,7 +1032,7 @@
     "message": "Atividade em sites"
   },
   "consent_activity_body": {
-    "message": "Seus Gostei, Não gostei, votos removidos e reações a comentários do RYD, enviados com um ID de votação aleatório salvo."
+    "message": "Seus Gostei, Não gostei e reações a comentários do RYD no YouTube, para que contem. Enviados com um ID aleatório que não está vinculado à sua conta do Google ou do YouTube."
   },
   "consent_identity_label": {
     "message": "Informações de identificação pessoal"
@@ -1050,7 +1050,7 @@
     "message": "O RYD não coleta nada fora do youtube.com e não acessa sua conta do YouTube. Não recebe nome ou e-mail a menos que você entre."
   },
   "consent_settings": {
-    "message": "Você pode alterar as permissões opcionais depois nas configurações da extensão no Firefox."
+    "message": "Você pode alterar essas permissões a qualquer momento nas configurações de extensões do Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "As janelas privativas mostram apenas as contagens, usando a permissão ativada em uma janela normal. Votos, login, análises Premium e discussões não estão disponíveis nelas."
@@ -1065,7 +1065,7 @@
     "message": "Obrigado. Seus votos agora contam."
   },
   "vote_consent_hint": {
-    "message": "Seu voto não é contado e não aparecerá nas contagens de Não gostei. Ative o compartilhamento de votos para que ele conte."
+    "message": "Seu voto ainda não foi contado. Agora o Firefox exige sua permissão antes que o RYD possa enviá-lo. Esta permissão vale só para o YouTube, não para outros sites."
   },
   "vote_not_counted": {
     "message": "Seus Gostei e Não gostei não são contados e não aparecem nas contagens de Não gostei."
@@ -1098,12 +1098,15 @@
     "message": "Primeiro, ative as contagens de Não gostei em uma janela normal. As janelas privativas mostram apenas as contagens."
   },
   "data_consent_reason": {
-    "message": "O Firefox precisa da sua permissão para que o RYD mostre as contagens de Não gostei e conte seus Gostei e Não gostei."
+    "message": "Agora o Firefox exige que toda extensão peça sua permissão antes de compartilhar qualquer dado. Permita que o RYD mostre os Não gostei e conte seus votos. Esta permissão vale só para o YouTube, não para outros sites."
   },
   "data_consent_title": {
     "message": "Mostre os Não gostei e faça seus votos contarem"
   },
   "data_consent_body": {
-    "message": "O RYD envia o ID do vídeo para carregar as contagens de Não gostei. Ao permitir, você também compartilha o número de Gostei que vê, para melhorar as estimativas, e seus Gostei, Não gostei e reações a comentários com um ID de votação aleatório, para que contem."
+    "message": "Agora o Firefox exige que toda extensão peça sua permissão antes de compartilhar qualquer dado. Ele usa os mesmos rótulos genéricos para todas as extensões, então veja o que cada um significa para o RYD:"
+  },
+  "data_consent_scope": {
+    "message": "O RYD só funciona no YouTube. Permitir isso não dá ao RYD acesso a nenhum outro site."
   }
 }
