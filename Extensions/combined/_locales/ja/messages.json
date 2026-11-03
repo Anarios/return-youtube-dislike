@@ -12,16 +12,16 @@
     "message": "配色："
   },
   "colorizeRatio": {
-    "message": "嫌いなバーに色を付ける"
+    "message": "比率バーに色を付ける"
   },
   "colorizeRatioHover": {
-    "message": "嫌いなバーをカスタムカラーで色付けします。"
+    "message": "比率バーにカスタムカラーを使用します。"
   },
   "colorizeThumbs": {
     "message": "ボタンに色を付ける"
   },
   "colorizeThumbsHover": {
-    "message": "カスタムカラーのボタンの色が好きで嫌いです。"
+    "message": "高評価/低評価のアイコンにカスタムカラーを使用します。"
   },
   "considerDonating": {
     "message": "この拡張機能を存続させることができるのは,皆様からの寄付だけです。"
@@ -75,31 +75,31 @@
     "message": "Webサイト"
   },
   "numberFormat": {
-    "message": "数値形式"
+    "message": "数値形式："
   },
   "patreonBadgePrefix": {
     "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
-    "message": "プレミアム機能はPatreonサポーター向けに提供されています。"
+    "message": "Premium機能はPatreon支援者向けに提供されています。"
   },
   "patreonLogin": {
     "message": "Patreonでログイン"
   },
   "patreonPrivacyNote": {
-    "message": "Patreonのメンバーシップ情報は、プレミアム機能の利用資格を確認するために使用されます。カード情報や銀行口座情報は受け取りません。"
+    "message": "Patreonのメンバーシップ情報は、Premium機能の利用資格を確認するために使用されます。カード情報や銀行口座情報は受け取りません。"
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Premium機能はGitHub貢献者向けに提供されています。"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "GitHubでログイン（貢献者向け）"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "GitHubログインの開始に失敗しました。もう一度お試しください。"
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "GitHubログインを完了できませんでした。もう一度お試しください。"
   },
   "patreonLoginCompleteFailed": {
     "message": "ログインを完了できませんでした。もう一度お試しください。"
@@ -123,7 +123,7 @@
     "message": "有効なメンバーシップはありません"
   },
   "patreonTierPremium": {
-    "message": "プレミアム支援者"
+    "message": "Premium支援者"
   },
   "patreonTierSupporter": {
     "message": "支援者"
@@ -132,10 +132,10 @@
     "message": "Patreonユーザー"
   },
   "reformatLikes": {
-    "message": "いいねの数をフォーマットする"
+    "message": "高評価数の表示形式をそろえる"
   },
   "reformatLikesHover": {
-    "message": "統計値の一貫性を高めます。"
+    "message": "高評価数と低評価数の表示形式を統一します。"
   },
   "hidePremiumTeaser": {
     "message": "未加工の件数を非表示にする"
@@ -150,10 +150,10 @@
     "message": "YouTube のコメントがオフになっている動画で RYD コメントを表示しません。"
   },
   "hidePremiumAnalytics": {
-    "message": "プレミアム動画インサイトを非表示にする"
+    "message": "Premium動画インサイトを非表示にする"
   },
   "hidePremiumAnalyticsHover": {
-    "message": "YouTube の再生ページでプレミアム動画インサイトのパネルを非表示にします。"
+    "message": "YouTube の再生ページで Premium 動画インサイトのパネルを非表示にします。"
   },
   "roundNumbers": {
     "message": "四捨五入された数値を表示"
@@ -183,7 +183,7 @@
     "message": "ネオン"
   },
   "textColorThemeHibiscus": {
-    "message": "Hibiscus"
+    "message": "ハイビスカス"
   },
   "textColorThemeCustom": {
     "message": "カスタム"
@@ -234,7 +234,7 @@
     "message": "切り下げた統計を表示します。"
   },
   "textSettings": {
-    "message": "高評価/低評価を表示しない"
+    "message": "高評価/低評価を送信しない"
   },
   "textSettingsHover": {
     "message": "あなたの高評価・低評価はカウントされず、低評価数にも反映されなくなります。"
@@ -246,7 +246,7 @@
     "message": "アップデート："
   },
   "tooltipPercentageMode": {
-    "message": "パーセント表示モード:"
+    "message": "パーセント表示モード："
   },
   "tooltipPercentageModeHover": {
     "message": "ホバー時にカスタムのパーセント表示を使用する。"
@@ -258,7 +258,7 @@
     "message": "新機能"
   },
   "premiumAnalytics_title": {
-    "message": "プレミアム動画インサイト"
+    "message": "Premium動画インサイト"
   },
   "premiumAnalytics_activityTitle": {
     "message": "時間別エンゲージメント"
@@ -390,7 +390,7 @@
     "message": "分析を有効にするにはPatreonの認証を再実行してください。"
   },
   "premiumAnalytics_errorInactive": {
-    "message": "プレミアム分析はアクティブなPatreon支援者が利用できます。"
+    "message": "Premium分析はアクティブなPatreon支援者が利用できます。"
   },
   "premiumAnalytics_errorSession": {
     "message": "セッションの有効期限が切れました。Patreonで再ログインしてください。"
@@ -402,7 +402,7 @@
     "message": "分析サービスに接続できません。"
   },
   "premiumAnalytics_errorGeneric": {
-    "message": "プレミアム分析を読み込めませんでした。"
+    "message": "Premium分析を読み込めませんでした。"
   },
   "premiumAnalytics_mapSeriesLabel": {
     "message": "アクティビティ"
@@ -462,7 +462,7 @@
     "message": "推定低評価"
   },
   "premiumTeaser_statLikes": {
-    "message": "生の高評価数"
+    "message": "未加工の高評価数"
   },
   "premiumTeaser_statusLoading": {
     "message": "最新の低評価合計を取得中…"
@@ -486,10 +486,10 @@
     "message": "YouTubeを再読み込みして、各動画の時間帯トレンド、上位国、米国州別の詳細を確認してください。"
   },
   "premiumTierNotice_title": {
-    "message": "プレミアム分析はロックされています"
+    "message": "Premium分析はロックされています"
   },
   "premiumTierNotice_message": {
-    "message": "ご利用中のPatreonメンバーシップにはプレミアム階層が含まれていません。上位プランにアップグレードして高度な動画分析を開放してください。"
+    "message": "ご利用中のPatreonメンバーシップにはPremiumプランが含まれていません。上位プランにアップグレードすると、高度な動画分析を利用できます。"
   },
   "premiumTierNotice_cta": {
     "message": "Patreonでアップグレード"
@@ -525,28 +525,28 @@
     "message": "「Return YouTube Dislike」ポップアップを開き、Patreon にサインインします。"
   },
   "changelog_support_heading": {
-    "message": "手が必要ですか?"
+    "message": "お困りですか？"
   },
   "changelog_support_description": {
-    "message": "問題が発生した場合は、サポート ドキュメントまたはコミュニティに質問してください。"
+    "message": "問題が発生した場合は、サポートドキュメントやコミュニティでお気軽に質問してください。"
   },
   "changelog_support_contact": {
     "message": "コミュニティに質問する"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "余分なボタンを非表示にする"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "変更前と変更後の例を表示"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "高評価と低評価のボタンだけを表示します。共有、保存、Thanks などのボタンは、YouTube の⋯（その他の操作）メニューから引き続き利用できます。"
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "変更前：すべての操作ボタンが表示されます"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "変更後：高評価と低評価のボタンだけが表示されます"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike のロゴ"
@@ -900,7 +900,7 @@
     "message": "コメントへの返信や高評価があったときに通知"
   },
   "changelog_comments_point_moderation": {
-    "message": "通報とモデレーションで、節度ある会話を維持"
+    "message": "報告とモデレーションで、節度ある会話を維持"
   },
   "changelog_comments_shot_alt": {
     "message": "動画の下にスレッド形式の会話を表示する RYD コメントパネル"
@@ -1017,25 +1017,25 @@
     "message": "Firefoxはデータを大きな分類にまとめています。RYDでの各分類の意味は次のとおりです。"
   },
   "consent_browsing_label": {
-    "message": "閲覧アクティビティ"
+    "message": "ブラウジングアクティビティ"
   },
   "consent_browsing_body": {
     "message": "あなたが開いたYouTube動画のIDのみで、その動画の低評価とRYDコメントの読み込みに使います。閲覧履歴や他のウェブサイトが対象になることはありません。"
   },
   "consent_content_label": {
-    "message": "ウェブサイトのコンテンツ"
+    "message": "ウェブサイトの内容"
   },
   "consent_content_body": {
     "message": "低評価数の推定精度を高めるために使う、YouTube動画に表示された高評価数です。"
   },
   "consent_activity_label": {
-    "message": "ウェブサイトのアクティビティ"
+    "message": "ウェブサイトアクティビティ"
   },
   "consent_activity_body": {
     "message": "YouTubeでのあなたの高評価、低評価、RYDコメントへのリアクションで、カウントに反映するためのものです。GoogleやYouTubeのアカウントとは紐付かないランダムなIDとともに送信します。"
   },
   "consent_identity_label": {
-    "message": "個人を特定できる情報"
+    "message": "個人を特定可能な情報"
   },
   "consent_identity_body": {
     "message": "表示名やメールアドレスなどのプロフィール情報です。ログインを選択した場合にのみ使用します。"

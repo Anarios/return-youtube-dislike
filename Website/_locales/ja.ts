@@ -41,7 +41,7 @@ export default {
       title: "使用権",
       subtitle:
         "このオープンAPIを第三者が使用することは、以下の制限付きで許可されています：",
-      bullet1: "属性：",
+      bullet1: "帰属表示：",
       bullet1text:
         "このレポ、もしくは returnyoutubedislike.com へのリンクのどちらかによって、明確に帰属させる必要があります。",
       bullet2: "通信量制限：",
