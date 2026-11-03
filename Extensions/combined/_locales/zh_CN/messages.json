@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API 状态:"
-  },
-  "apiStatusOffline": {
-    "message": "离线"
-  },
-  "apiStatusOnline": {
-    "message": "在线"
-  },
   "colorTheme": {
     "message": "配色主题:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "数字格式:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Patreon 赞助者可使用高级功能"
   },
@@ -89,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Patreon 会员信息用于验证高级功能的访问权限。我们不会接收您的银行卡或银行账户信息。"
   },
+  "paidFeaturesWhy": {
+    "message": "点踩数将继续免费向所有人开放。付费功能帮助支付背后的服务器费用：超过 15 TB 的数据、每天约 2000 万用户，而每月预算只有几百美元。"
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "GitHub 贡献者可使用高级功能"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "使用 GitHub 登录（贡献者）"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "无法开始 GitHub 登录，请重试。"
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "无法完成 GitHub 登录，请重试。"
   },
   "patreonLoginCompleteFailed": {
     "message": "登录未完成，请重试。"
@@ -155,12 +146,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "在 YouTube 播放页面隐藏高级视频洞察面板。"
   },
-  "roundNumbers": {
-    "message": "显示取整后的数字"
-  },
-  "roundNumbersHover": {
-    "message": "对数字向下取整（YouTube 默认行为）。"
-  },
   "shortsSupport": {
     "message": "支持 YouTube Shorts"
   },
@@ -169,9 +154,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "在点赞/点踩条的工具提示中显示百分比。"
-  },
-  "textColorTheme": {
-    "message": "配色主题:"
   },
   "textColorTheme1": {
     "message": "经典"
@@ -200,38 +182,8 @@
   "colorThemeDislike": {
     "message": "点踩"
   },
-  "textColorizeRatioBar": {
-    "message": "为比例条着色"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "为比例条使用自定义颜色。"
-  },
-  "textColorizeThumbs": {
-    "message": "为点赞/点踩图标着色"
-  },
-  "textColorizeThumbsHover": {
-    "message": "为点赞/点踩图标使用自定义颜色。"
-  },
-  "textConsistentFormat": {
-    "message": "使点赞/点踩的显示格式保持一致"
-  },
-  "textConsistentFormatHover": {
-    "message": "重新格式化点赞数字。"
-  },
   "textDeveloper": {
     "message": "由 Dmitry Selivanov 与社区开发"
-  },
-  "textLikesDisabled": {
-    "message": "已被作者禁用"
-  },
-  "textNumberFormat": {
-    "message": "数字格式:"
-  },
-  "textRoundingNumbers": {
-    "message": "对点赞/点踩统计取整（YouTube 默认行为）"
-  },
-  "textRoundingNumbersHover": {
-    "message": "显示取整后的统计。"
   },
   "textSettings": {
     "message": "禁用点赞/点踩提交"
@@ -241,9 +193,6 @@
   },
   "textTempUnavailable": {
     "message": "暂时不可用"
-  },
-  "textUpdate": {
-    "message": "更新到"
   },
   "tooltipPercentageMode": {
     "message": "百分比模式:"
@@ -458,9 +407,6 @@
   "premiumTeaser_statRaw": {
     "message": "原始点踩数"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "预计点踩数"
-  },
   "premiumTeaser_statLikes": {
     "message": "点赞原始数"
   },
@@ -469,21 +415,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "暂时无法加载点踩数据，请尝试刷新页面。"
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "如何解锁高级分析"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "三步快速解锁高级视频洞察："
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "在 Return YouTube Dislike 扩展弹窗中使用 Patreon 登录。"
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "选择 Premium 等级以启用活动时间线、国家排行榜和交互式地图。"
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "重新加载 YouTube 以查看每个视频的小时趋势、热门国家和美国各州的详细数据。"
   },
   "premiumTierNotice_title": {
     "message": "Premium 高级分析已锁定"
@@ -534,19 +465,19 @@
     "message": "询问社区"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "隐藏多余按钮"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "显示前后对比示例"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "仅显示点赞和点踩按钮。“分享”“保存”“感谢”等可选操作仍可在 YouTube 的“其他操作”（⋯）菜单中使用。"
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "启用前：所有操作按钮都会显示"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "启用后：仅显示点赞和点踩按钮"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 标志"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "还没有评论。来开启讨论吧。"
   },
-  "discussion_replyEmpty": {
-    "message": "还没有回复。"
-  },
   "discussion_comment": {
     "message": "评论"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "点踩"
-  },
-  "discussion_reacting": {
-    "message": "正在保存回应…"
   },
   "discussion_signInRequired": {
     "message": "请在扩展弹出窗口中登录以继续。"
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "管理操作原因"
   },
-  "discussion_moderationSaved": {
-    "message": "管理操作已保存。"
-  },
-  "discussion_reported": {
-    "message": "$1 次举报"
-  },
   "discussion_unavailable": {
     "message": "此视频无法使用 RYD 评论。"
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "您的评论收到了 $1 个赞"
   },
-  "discussion_notificationDislike": {
-    "message": "有人踩了您的评论"
-  },
-  "discussion_notificationReaction": {
-    "message": "有人回应了您的评论"
-  },
   "discussion_someone": {
     "message": "有人"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "查看讨论"
   },
-  "discussion_unread": {
-    "message": "$1 条未读通知"
-  },
   "discussion_signedOutInbox": {
     "message": "登录后可查看您评论收到的回复和赞。"
-  },
-  "discussion_notificationUnavailable": {
-    "message": "此讨论已不可用。"
   },
   "discussion_discussionTab": {
     "message": "讨论"
   },
   "discussion_nickname": {
     "message": "昵称"
-  },
-  "discussion_reportCount": {
-    "message": "举报"
   },
   "discussion_reportStatus": {
     "message": "举报状态"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "作者"
   },
-  "discussion_me": {
-    "message": "您"
-  },
   "discussion_saving": {
     "message": "正在保存…"
-  },
-  "discussion_confirm": {
-    "message": "确认"
-  },
-  "discussion_notificationUpdated": {
-    "message": "您的评论有新动态"
-  },
-  "discussion_showThread": {
-    "message": "显示评论串"
   },
   "discussion_loadReplies": {
     "message": "显示回复（$1）"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "放大查看各州的互动情况。"
   },
+  "changelog_appeal_title": {
+    "message": "一个小小的、有点难为情的请求"
+  },
+  "changelog_appeal_intro": {
+    "message": "你好。接下来要聊钱的事了，说实话，我们不太擅长这个。"
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike 是一个小型开源项目，由 Dmitry Selivanov 与社区共同打造。它每天为约 2000 万人提供服务，保管着超过 15 TB 的数据。这一切每月只靠几百美元维持——要找回一家市值数十亿美元的公司决定拿走的东西，这笔钱真的不多。"
+  },
+  "changelog_appeal_free": {
+    "message": "点踩数是免费的，而且会一直免费。这正是这个项目的意义所在。但服务器不是免费的，说实话，运营成本没给我们留下太多选择：为了让项目继续运转，我们不得不推出 Premium 功能——RYD 评论和 Premium 数据分析。每一份会员都在帮助支付这些费用。"
+  },
+  "changelog_appeal_ask": {
+    "message": "如果 RYD 曾经帮你避开过一个标题党视频，或是一个不管用的教程，请考虑在 Patreon 上加入我们。如果现在不方便，也完全没关系。感谢你一直使用它并参与投票：每一票都让数字更准确一点。"
+  },
+  "changelog_appeal_cta": {
+    "message": "在 Patreon 上加入会员"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry 和 RYD 社区"
+  },
   "changelog_join_title": {
     "message": "获取 Premium 功能"
-  },
-  "changelog_join_free": {
-    "message": "所有人都能免费查看点踩数。加入会员完全自愿，也能帮助支持本项目。"
   },
   "changelog_join_step1": {
     "message": "在 Patreon 上加入会员。Commenter 可以发表评论，Premium 还提供数据分析功能。"
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "还需点击一次：请选择下方的登录按钮，查看 Firefox 的账户权限并继续。"
   },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox 的新隐私规则"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "在 Firefox 中，RYD 需要先获得你的许可才能显示点踩数。下面会准确说明这项许可包括什么，以及不包括什么。"
+  },
   "changelog_firefox_vote_granted": {
     "message": "谢谢。您的评价现在会被计入。"
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "继续"
-  },
-  "counts_consent_enable": {
-    "message": "启用不喜欢数"
   },
   "counts_consent_toolbar": {
     "message": "从 Firefox 的扩展菜单中打开 Return YouTube Dislike 以继续。"

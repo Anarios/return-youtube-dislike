@@ -2,7 +2,7 @@ Return YouTube Dislike rétablit la possibilité de voir les dislikes sur YouTub
 
 Les commentaires RYD vous permettent de lire les discussions et d'y réagir sous les vidéos et les Shorts dont les commentaires YouTube sont désactivés. Les membres Commenter et Premium peuvent publier et répondre, avec des notifications pour les réponses et les likes.
 
-Les compteurs de dislikes de base sont gratuits. Certaines fonctionnalités facultatives sont soumises à des conditions d'accès, notamment des niveaux d'abonnement payants sur Patreon ou un accès pour les contributeurs éligibles sur GitHub.
+Les compteurs de dislikes de base sont gratuits pour tout le monde. Certaines fonctionnalités facultatives, comme la publication de commentaires RYD et les analyses vidéo Premium, nécessitent un abonnement payant sur Patreon ou un accès pour les contributeurs éligibles sur GitHub. Ces options payantes aident à financer les serveurs qui maintiennent les compteurs de dislikes gratuits : plus de 15 To de données et environ 20 millions d'utilisateurs par jour, avec un budget de quelques centaines de dollars par mois.
 
 Vos votes contribuent à améliorer les estimations. Ils sont envoyés avec un identifiant aléatoire qui est créé la première fois que vous votez ou réagissez à un commentaire et qui n'est pas associé à votre compte Google ou YouTube. Vous pouvez arrêter l'envoi de vos votes avec « Désactiver l'envoi des likes/dislikes » dans le menu de l'extension.
 

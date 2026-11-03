@@ -2,7 +2,7 @@ O Return YouTube Dislike restaura a possibilidade de ver os “não gostos” no
 
 Os comentários do RYD permitem-lhe ler discussões e reagir a elas em vídeos e Shorts com os comentários do YouTube desativados. Os membros Commenter e Premium podem publicar e responder, com notificações de respostas e de “gostos”.
 
-As contagens básicas de “não gostos” são gratuitas. Algumas funcionalidades opcionais têm requisitos de acesso, incluindo níveis pagos de subscrição no Patreon ou acesso para contribuidores elegíveis do GitHub.
+As contagens básicas de “não gostos” são gratuitas para todos. Algumas funcionalidades opcionais, como publicar comentários do RYD e as estatísticas premium dos vídeos, exigem uma subscrição paga no Patreon ou acesso para contribuidores elegíveis do GitHub. Estes extras pagos ajudam a pagar os servidores que mantêm as contagens de “não gostos” gratuitas: mais de 15 TB de dados e cerca de 20 milhões de utilizadores por dia, com um orçamento de algumas centenas de dólares por mês.
 
 Os seus votos ajudam a melhorar as estimativas. São enviados com um ID aleatório que é criado na primeira vez que vota ou reage a um comentário e que não está associado à sua conta Google ou YouTube. Pode deixar de enviar votos com “Disable like/dislike submission” (Desativar o envio de gostos/não gostos) no menu da extensão.
 

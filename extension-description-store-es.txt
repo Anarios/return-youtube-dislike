@@ -2,7 +2,7 @@ Return YouTube Dislikes restaura la capacidad de ver los «dislikes» ("No me gu
 
 Los comentarios de RYD te permiten leer las conversaciones y reaccionar a ellas en vídeos y Shorts en los que los comentarios de YouTube están desactivados. Los miembros Commenter y Premium pueden publicar y responder, con notificaciones de respuestas y «likes».
 
-Los recuentos básicos de «dislikes» son gratuitos. Algunas funciones opcionales tienen requisitos de acceso, entre ellos niveles de suscripción de pago en Patreon o el acceso para colaboradores de GitHub que reúnan las condiciones.
+Los recuentos básicos de «dislikes» son gratuitos para todos. Algunas funciones opcionales, como publicar comentarios de RYD y las estadísticas premium de los vídeos, requieren una suscripción de pago en Patreon o el acceso para colaboradores de GitHub que reúnan las condiciones. Estos extras de pago ayudan a pagar los servidores que mantienen gratuitos los recuentos de «dislikes»: más de 15 TB de datos y unos 20 millones de usuarios al día, con un presupuesto de unos pocos cientos de dólares al mes.
 
 Tus votos ayudan a mejorar las estimaciones. Se envían con un ID aleatorio que se crea la primera vez que votas o reaccionas a un comentario y que no está vinculado a tu cuenta de Google ni de YouTube. Puedes dejar de enviar votos con «Desactivar envío de votos» en el menú de la extensión.
 

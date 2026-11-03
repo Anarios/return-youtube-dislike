@@ -4,6 +4,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { createDiscussionPanel } from "./panel";
 import { discussionText } from "./localize";
+import english from "../../_locales/en/messages.json";
 
 const otherSession = {
   authenticated: true,
@@ -199,6 +200,15 @@ test("signed-out users can react without seeing author or moderator controls", a
   root.querySelector("[data-reaction='1']").click();
   await flush();
   expect(request).toHaveBeenLastCalledWith("react", { id: ROOT, value: 0 });
+});
+
+test("explains why posting is paid between the membership gate and the join link", async () => {
+  const root = await mount();
+  const gate = root.querySelector(".ryd-discussion-composer > .ryd-discussion-gate");
+  const why = gate.nextElementSibling;
+  expect(why.className).toBe("ryd-discussion-why");
+  expect(why.textContent).toBe(english.paidFeaturesWhy.message);
+  expect(why.nextElementSibling.className).toBe("ryd-discussion-link");
 });
 
 test("renders comment bodies and nicknames as literal text", async () => {

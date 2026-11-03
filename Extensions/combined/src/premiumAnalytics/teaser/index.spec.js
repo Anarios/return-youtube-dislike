@@ -138,6 +138,18 @@ describe("premiumAnalytics.teaser", () => {
     expect(details?.hasAttribute("hidden")).toBe(true);
   });
 
+  it("explains why paid features exist below the Premium call to action", async () => {
+    getVideoId.mockReturnValue("abcdefghijk");
+
+    await initPremiumTeaser();
+    await flushPromises();
+
+    const links = document.querySelector(".ryd-premium-teaser__links");
+    const why = links?.nextElementSibling;
+    expect(why?.className).toBe("ryd-premium-teaser__why");
+    expect(why?.textContent).toBe(enMessages.paidFeaturesWhy.message);
+  });
+
   it("shares aggregate vote data with the main renderer but still refreshes for a real Like count", async () => {
     getVideoId.mockReturnValue("abcdefghijk");
 

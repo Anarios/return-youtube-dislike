@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API Status:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Color theme:"
   },
@@ -95,9 +86,6 @@
   "numberFormat": {
     "message": "Number format:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Premium features available for Patreon supporters"
   },
@@ -106,6 +94,9 @@
   },
   "patreonPrivacyNote": {
     "message": "Patreon membership information is used to verify premium access. We do not receive your card or bank details."
+  },
+  "paidFeaturesWhy": {
+    "message": "Dislike counts stay free for everyone. Paid extras help pay for the servers behind them: over 15 TB of data and about 20 million users a day, on a budget of a few hundred dollars a month."
   },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
@@ -194,12 +185,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Hide the Premium Video Insights panel on YouTube watch pages."
   },
-  "roundNumbers": {
-    "message": "Show rounded down numbers"
-  },
-  "roundNumbersHover": {
-    "message": "Round down numbers (default YouTube behavior)."
-  },
   "shortsSupport": {
     "message": "YouTube Shorts Support"
   },
@@ -208,9 +193,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Display percentage in like/dislike bar tooltip."
-  },
-  "textColorTheme": {
-    "message": "Color theme:"
   },
   "textColorTheme1": {
     "message": "Classic"
@@ -221,38 +203,8 @@
   "textColorTheme3": {
     "message": "Neon"
   },
-  "textColorizeRatioBar": {
-    "message": "Colorize ratio bar"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Use custom colors for ratio bar."
-  },
-  "textColorizeThumbs": {
-    "message": "Colorize thumbs"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Use custom colors for thumb icons."
-  },
-  "textConsistentFormat": {
-    "message": "Make likes and dislikes format consistent"
-  },
-  "textConsistentFormatHover": {
-    "message": "Re-format like numbers."
-  },
   "textDeveloper": {
     "message": "by Dmitry Selivanov & Community"
-  },
-  "textLikesDisabled": {
-    "message": "Disabled by Owner"
-  },
-  "textNumberFormat": {
-    "message": "Number format:"
-  },
-  "textRoundingNumbers": {
-    "message": "Round down like/dislike stats (default YouTube behavior)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Show rounded down stats."
   },
   "textSettings": {
     "message": "Disable like/dislike submission"
@@ -262,9 +214,6 @@
   },
   "textTempUnavailable": {
     "message": "Temporarily Unavailable"
-  },
-  "textUpdate": {
-    "message": "Update to"
   },
   "tooltipPercentageMode": {
     "message": "Percent mode:"
@@ -479,9 +428,6 @@
   "premiumTeaser_statRaw": {
     "message": "Raw dislike count"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Estimated dislikes"
-  },
   "premiumTeaser_statLikes": {
     "message": "Raw like count"
   },
@@ -490,21 +436,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "We could not load dislike data just now. Try reloading the page."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "How to unlock Premium analytics"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Unlock Premium Video Insights in three quick steps:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Sign in with Patreon from the Return YouTube Dislike extension popup."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Select the Premium tier to enable activity timelines, country leaderboards, and the interactive map."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Reload YouTube to view hourly trends, top countries, and US state drill-downs for every video."
   },
   "premiumTierNotice_title": {
     "message": "Premium analytics locked"
@@ -580,7 +511,6 @@
   "discussion_refresh": { "message": "Refresh" },
   "discussion_loading": { "message": "Loading comments…" },
   "discussion_empty": { "message": "No comments yet. Start the conversation." },
-  "discussion_replyEmpty": { "message": "No replies yet." },
   "discussion_comment": { "message": "Comment" },
   "discussion_post": { "message": "Post comment" },
   "discussion_reply": { "message": "Reply" },
@@ -596,7 +526,6 @@
   "discussion_more": { "message": "Load more" },
   "discussion_like": { "message": "Like" },
   "discussion_dislike": { "message": "Dislike" },
-  "discussion_reacting": { "message": "Saving reaction…" },
   "discussion_signInRequired": { "message": "Sign in from the extension popup to continue." },
   "discussion_tierRequired": { "message": "Posting is available to active Commenter members and above." },
   "discussion_join": { "message": "Become a Commenter" },
@@ -630,8 +559,6 @@
   "discussion_ban": { "message": "Ban author" },
   "discussion_unban": { "message": "Unban author" },
   "discussion_moderationReason": { "message": "Moderation reason" },
-  "discussion_moderationSaved": { "message": "Moderation action saved." },
-  "discussion_reported": { "message": "$1 reports" },
   "discussion_unavailable": { "message": "RYD comments are unavailable for this video." },
   "discussion_commentUnavailable": { "message": "This comment is no longer available." },
   "discussion_error": { "message": "Unable to connect. Please try again." },
@@ -644,27 +571,18 @@
   "discussion_notificationReply": { "message": "$1 replied to your comment" },
   "discussion_notificationLike": { "message": "Someone liked your comment" },
   "discussion_notificationLikes": { "message": "Your comment received $1 likes" },
-  "discussion_notificationDislike": { "message": "Someone disliked your comment" },
-  "discussion_notificationReaction": { "message": "Someone reacted to your comment" },
   "discussion_someone": { "message": "Someone" },
   "discussion_markRead": { "message": "Mark read" },
   "discussion_markAllRead": { "message": "Mark all read" },
   "discussion_view": { "message": "View discussion" },
-  "discussion_unread": { "message": "$1 unread notifications" },
   "discussion_signedOutInbox": { "message": "Sign in to see replies and likes on your comments." },
-  "discussion_notificationUnavailable": { "message": "This discussion is no longer available." },
   "discussion_discussionTab": { "message": "Discussion" },
   "discussion_nickname": { "message": "Nickname" },
-  "discussion_reportCount": { "message": "Reports" },
   "discussion_reportStatus": { "message": "Report status" },
   "discussion_openReports": { "message": "Open reports" },
   "discussion_resolvedReports": { "message": "Dismissed reports" },
   "discussion_author": { "message": "Author" },
-  "discussion_me": { "message": "You" },
   "discussion_saving": { "message": "Saving…" },
-  "discussion_confirm": { "message": "Confirm" },
-  "discussion_notificationUpdated": { "message": "New activity on your comments" },
-  "discussion_showThread": { "message": "Show thread" },
   "discussion_loadReplies": { "message": "Show replies ($1)" },
   "patreonTierCommenter": { "message": "Commenter" },
   "changelog_brand_logo_alt": {
@@ -751,11 +669,29 @@
   "changelog_analytics_us_body": {
     "message": "Zoom in on engagement by state."
   },
+  "changelog_appeal_title": {
+    "message": "A small, slightly awkward request"
+  },
+  "changelog_appeal_intro": {
+    "message": "Hi. This is the part where we talk about money, and we’re honestly not great at it."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike is a small open-source project, built by Dmitry Selivanov and the community. Every day it answers about 20 million people and looks after more than 15 TB of data. All of that runs on a few hundred dollars a month, which isn’t much for bringing back something a billion-dollar company decided to take away."
+  },
+  "changelog_appeal_free": {
+    "message": "Dislike counts are free, and they stay free. That’s the whole point. But servers aren’t, and honestly, the running costs left us little choice: to keep the lights on, we had to introduce Premium features — RYD comments and Premium analytics. Every membership helps cover those costs."
+  },
+  "changelog_appeal_ask": {
+    "message": "If RYD has ever saved you from a clickbait video or a tutorial that didn’t work, please consider joining on Patreon. And if now isn’t a good time, that’s completely okay. Thank you for using it, and for voting: every vote makes the counts a little more accurate."
+  },
+  "changelog_appeal_cta": {
+    "message": "Join on Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry and the RYD community"
+  },
   "changelog_join_title": {
     "message": "Get Premium features"
-  },
-  "changelog_join_free": {
-    "message": "Dislike counts are free for everyone. Membership is optional and helps support the project."
   },
   "changelog_join_step1": {
     "message": "Join on Patreon. Commenter lets you post comments; Premium adds analytics too."
@@ -871,6 +807,12 @@
   "popup_signin_next_click": {
     "message": "One more click is needed: select your sign-in button below to review Firefox’s account permissions and continue."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox’s new privacy rules"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "In Firefox, RYD needs your permission before it can show dislikes. Here’s exactly what that permission covers — and what it doesn’t."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Thank you. Your votes now count."
   },
@@ -891,9 +833,6 @@
   },
   "discussion_consentContinue": {
     "message": "Continue"
-  },
-  "counts_consent_enable": {
-    "message": "Enable dislike counts"
   },
   "counts_consent_toolbar": {
     "message": "Open Return YouTube Dislike from Firefox’s extensions menu to continue."

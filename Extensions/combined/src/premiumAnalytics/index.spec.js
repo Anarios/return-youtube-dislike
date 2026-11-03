@@ -149,6 +149,7 @@ const premiumAnalyticsModule = require("./index");
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 const enMessages = require("../../_locales/en/messages.json");
+const jaMessages = require("../../_locales/ja/messages.json");
 
 function getMessage(key, substitutions) {
   const entry = enMessages[key];
@@ -426,6 +427,17 @@ describe("premiumAnalytics", () => {
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
     expect(mockToEpoch).toHaveBeenCalledWith("2025-01-01T00:00:00Z");
     expect(mockToEpoch).toHaveBeenCalledWith("2025-01-07T00:00:00Z");
+  });
+
+  it("shows the localized loading message while analytics load", async () => {
+    const loadingMessage = jaMessages.premiumAnalytics_loading.message;
+    global.chrome.i18n.getMessage = (key, substitutions) =>
+      key === "premiumAnalytics_loading" ? loadingMessage : getMessage(key, substitutions);
+
+    requestAnalytics();
+    await flushPromises();
+
+    expect(mockSetFooterMessage).toHaveBeenCalledWith(loadingMessage);
   });
 
   it("does not use a cached analytics token after authentication consent is removed", async () => {

@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Stato API:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Colore tema:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Formato numeri:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Funzionalità premium disponibili per i sostenitori su Patreon"
   },
@@ -89,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Le informazioni sull'abbonamento a Patreon vengono usate per verificare l'accesso premium. Non riceviamo i dati della tua carta né quelli del tuo conto bancario."
   },
+  "paidFeaturesWhy": {
+    "message": "Il numero di Non mi piace resta gratuito per tutti. Gli extra a pagamento aiutano a pagare i server che lo rendono possibile: oltre 15 TB di dati e circa 20 milioni di utenti al giorno, con un budget di poche centinaia di dollari al mese."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Funzionalità premium disponibili per i collaboratori su GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Accedi con GitHub (collaboratori)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Impossibile avviare l’accesso con GitHub. Riprova."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Impossibile completare l’accesso con GitHub. Riprova."
   },
   "patreonLoginCompleteFailed": {
     "message": "Impossibile completare l'accesso. Riprova."
@@ -155,12 +146,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Nascondi il pannello delle analisi video Premium nelle pagine di riproduzione di YouTube."
   },
-  "roundNumbers": {
-    "message": "Mostra numeri arrotondati per difetto"
-  },
-  "roundNumbersHover": {
-    "message": "Arrotonda numeri per difetto (comportamento standard di YouTube)."
-  },
   "shortsSupport": {
     "message": "Supporto per YouTube Shorts"
   },
@@ -169,9 +154,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Mostra la percentuale nel suggerimento della barra mi piace/non mi piace."
-  },
-  "textColorTheme": {
-    "message": "Colore tema:"
   },
   "textColorTheme1": {
     "message": "Classico"
@@ -200,38 +182,8 @@
   "colorThemeDislike": {
     "message": "Non mi piace"
   },
-  "textColorizeRatioBar": {
-    "message": "Colora barra di rapporto"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Usa colori personalizzati per la barra di rapporto."
-  },
-  "textColorizeThumbs": {
-    "message": "Colora pollici"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Usa colori personalizzati per le icone dei pollici."
-  },
-  "textConsistentFormat": {
-    "message": "Rendi uniforme il formato di Mi piace e Non mi piace."
-  },
-  "textConsistentFormatHover": {
-    "message": "Ri-formatta numero di Mi piace."
-  },
   "textDeveloper": {
     "message": "di Dmitry Selivanov e della comunità"
-  },
-  "textLikesDisabled": {
-    "message": "Disattivati dal proprietario"
-  },
-  "textNumberFormat": {
-    "message": "Formato numeri:"
-  },
-  "textRoundingNumbers": {
-    "message": "Arrotonda per difetto il numero di Mi Piace/Non mi piace (comportamento standard di YouTube)."
-  },
-  "textRoundingNumbersHover": {
-    "message": "Mostra stastistiche arrotondate per difetto."
   },
   "textSettings": {
     "message": "Disattiva invio di Mi piace/Non mi piace"
@@ -241,9 +193,6 @@
   },
   "textTempUnavailable": {
     "message": "Temporaneamente non disponibile"
-  },
-  "textUpdate": {
-    "message": "Aggiorna a"
   },
   "tooltipPercentageMode": {
     "message": "Modalità percentuale:"
@@ -458,9 +407,6 @@
   "premiumTeaser_statRaw": {
     "message": "Conteggio Non mi piace grezzi"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Non mi piace stimati"
-  },
   "premiumTeaser_statLikes": {
     "message": "Conteggio grezzo dei Mi piace"
   },
@@ -469,21 +415,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Non è stato possibile caricare i dati dei Non mi piace. Prova a ricaricare la pagina."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Come sbloccare le analisi Premium"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Sblocca le analisi video Premium in tre semplici passaggi:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Accedi con Patreon dal popup dell’estensione Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Seleziona il livello Premium per attivare le cronologie di attività, le classifiche per paese e la mappa interattiva."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Ricarica YouTube per vedere le tendenze orarie, i principali paesi e i dettagli sugli stati USA per ogni video."
   },
   "premiumTierNotice_title": {
     "message": "Analitiche Premium bloccate"
@@ -534,19 +465,19 @@
     "message": "Chiedi alla community"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Nascondi i pulsanti superflui"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Mostra esempi del prima e dopo"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Mantieni visibili solo Mi piace e Non mi piace. Condividi, Salva, Grazie e le altre azioni facoltative restano disponibili nel menu Altre azioni di YouTube, quello con i tre puntini."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Prima: tutti i pulsanti di azione sono visibili"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Dopo: restano visibili solo Mi piace e Non mi piace"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "Ancora nessun commento. Avvia la conversazione."
   },
-  "discussion_replyEmpty": {
-    "message": "Ancora nessuna risposta."
-  },
   "discussion_comment": {
     "message": "Commento"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "Non mi piace"
-  },
-  "discussion_reacting": {
-    "message": "Salvataggio della reazione…"
   },
   "discussion_signInRequired": {
     "message": "Accedi dal popup dell’estensione per continuare."
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "Motivo della moderazione"
   },
-  "discussion_moderationSaved": {
-    "message": "Azione di moderazione salvata."
-  },
-  "discussion_reported": {
-    "message": "$1 segnalazioni"
-  },
   "discussion_unavailable": {
     "message": "I commenti RYD non sono disponibili per questo video."
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "Il tuo commento ha ricevuto $1 Mi piace"
   },
-  "discussion_notificationDislike": {
-    "message": "A qualcuno non piace il tuo commento"
-  },
-  "discussion_notificationReaction": {
-    "message": "Qualcuno ha reagito al tuo commento"
-  },
   "discussion_someone": {
     "message": "Qualcuno"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "Visualizza discussione"
   },
-  "discussion_unread": {
-    "message": "$1 notifiche non lette"
-  },
   "discussion_signedOutInbox": {
     "message": "Accedi per vedere le risposte e i Mi piace ai tuoi commenti."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Questa discussione non è più disponibile."
   },
   "discussion_discussionTab": {
     "message": "Discussione"
   },
   "discussion_nickname": {
     "message": "Nickname"
-  },
-  "discussion_reportCount": {
-    "message": "Segnalazioni"
   },
   "discussion_reportStatus": {
     "message": "Stato della segnalazione"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "Autore"
   },
-  "discussion_me": {
-    "message": "Tu"
-  },
   "discussion_saving": {
     "message": "Salvataggio…"
-  },
-  "discussion_confirm": {
-    "message": "Conferma"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Nuove attività sui tuoi commenti"
-  },
-  "discussion_showThread": {
-    "message": "Mostra discussione"
   },
   "discussion_loadReplies": {
     "message": "Mostra risposte ($1)"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "Esamina le interazioni stato per stato."
   },
+  "changelog_appeal_title": {
+    "message": "Una piccola richiesta, un po’ imbarazzante"
+  },
+  "changelog_appeal_intro": {
+    "message": "Ciao. Questa è la parte in cui parliamo di soldi, e onestamente non siamo molto bravi."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike è un piccolo progetto open source creato da Dmitry Selivanov e dalla comunità. Ogni giorno risponde a circa 20 milioni di persone e custodisce più di 15 TB di dati. Tutto questo funziona con poche centinaia di dollari al mese, che non sono molti per riportare qualcosa che un’azienda da miliardi di dollari ha deciso di togliere."
+  },
+  "changelog_appeal_free": {
+    "message": "Il numero di Non mi piace è gratuito e resterà gratuito. È proprio questo il punto. Ma i server non lo sono e, onestamente, i costi di gestione non ci hanno lasciato molta scelta: per tenere in vita il progetto abbiamo dovuto introdurre le funzionalità Premium — i commenti RYD e le analisi Premium. Ogni abbonamento aiuta a coprire questi costi."
+  },
+  "changelog_appeal_ask": {
+    "message": "Se RYD ti ha salvato almeno una volta da un video acchiappaclic o da un tutorial che non funzionava, valuta di unirti su Patreon. E se ora non è il momento giusto, va benissimo così. Grazie di usarlo e di votare: ogni voto rende i numeri un po’ più precisi."
+  },
+  "changelog_appeal_cta": {
+    "message": "Abbonati su Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry e la comunità di RYD"
+  },
   "changelog_join_title": {
     "message": "Ottieni le funzioni Premium"
-  },
-  "changelog_join_free": {
-    "message": "Il numero di Non mi piace è gratuito per tutti. L’abbonamento è facoltativo e aiuta a sostenere il progetto."
   },
   "changelog_join_step1": {
     "message": "Abbonati su Patreon. Commenter ti permette di pubblicare commenti; Premium aggiunge anche le analisi."
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "Serve un altro clic: seleziona il pulsante di accesso qui sotto per esaminare i permessi dell’account in Firefox e continuare."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Le nuove regole sulla privacy di Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "In Firefox, RYD ha bisogno del tuo permesso prima di poter mostrare i Non mi piace. Ecco esattamente cosa copre questo permesso, e cosa no."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Grazie. Ora i tuoi voti contano."
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "Continua"
-  },
-  "counts_consent_enable": {
-    "message": "Attiva i conteggi dei Non mi piace"
   },
   "counts_consent_toolbar": {
     "message": "Apri Return YouTube Dislike dal menu delle estensioni di Firefox per continuare."

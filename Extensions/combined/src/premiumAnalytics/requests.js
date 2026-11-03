@@ -49,7 +49,7 @@ function requestAnalyticsWithConsent({ selection } = {}) {
   }
 
   ensurePanel();
-  setFooterMessage("Loading insights…");
+  setFooterMessage(localize("premiumAnalytics_loading"));
   setLoadingState(true);
   updateRangeButtons();
   updateRangeAnchorButtons();

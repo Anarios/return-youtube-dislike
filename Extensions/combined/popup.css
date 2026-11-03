@@ -21,6 +21,7 @@
   --ryd-font: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
   --ryd-motion: 150ms;
   --ryd-popup-min-height: 541px;
+  --ryd-popup-min-width: 354px;
   --ryd-column: 480px;
   --ryd-gutter: max(16px, calc((100vw - var(--ryd-column)) / 2 + 16px));
   --lightGrey: #b3a0a0;
@@ -32,9 +33,15 @@
   }
 }
 
+@media (pointer: fine) {
+  :root {
+    --ryd-popup-min-width: 440px;
+  }
+}
+
 html {
   box-sizing: border-box;
-  min-width: 354px;
+  min-width: var(--ryd-popup-min-width);
   padding: 0;
   scrollbar-color: var(--ryd-border-strong) transparent;
   scrollbar-width: thin;
@@ -44,6 +51,10 @@ html {
 ::before,
 ::after {
   box-sizing: inherit;
+}
+
+html:not([data-localized]) body {
+  visibility: hidden;
 }
 
 html,
@@ -61,14 +72,14 @@ body {
   min-width: 0;
   min-height: var(--ryd-popup-min-height);
   margin: 0;
-  padding: 16px var(--ryd-gutter);
+  padding: 12px var(--ryd-gutter);
 }
 
 main {
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
 h1,
@@ -249,7 +260,7 @@ button {
 }
 
 .popup-card {
-  padding: 16px;
+  padding: 14px;
   border: 1px solid var(--ryd-border);
   border-radius: var(--ryd-radius-md);
   background: var(--ryd-surface);
@@ -274,8 +285,8 @@ button {
 }
 
 .account-lead-secondary {
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: 12px;
+  padding-top: 12px;
   border-top: 1px solid var(--ryd-border);
 }
 
@@ -289,7 +300,8 @@ button {
   height: 16px;
 }
 
-#patreon-privacy-note {
+#patreon-privacy-note,
+#paid-features-why {
   margin-top: 8px;
   color: var(--ryd-text-muted);
   font-size: 12px;
@@ -445,6 +457,10 @@ body.ryd-counts-consent-open {
 
 body.ryd-counts-consent-open > :not(#ryd-counts-consent) {
   display: none;
+}
+
+html:has(#advancedSettings:not([inert])) {
+  overflow: hidden;
 }
 
 #advancedSettings {

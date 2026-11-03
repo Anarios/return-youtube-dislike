@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API Durumu:"
-  },
-  "apiStatusOffline": {
-    "message": "Çevrimdışı"
-  },
-  "apiStatusOnline": {
-    "message": "Çevrimiçi"
-  },
   "colorTheme": {
     "message": "Renk teması:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Sayı biçimi:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Patreon destekçileri için Premium özellikler kullanılabilir"
   },
@@ -88,6 +76,9 @@
   },
   "patreonPrivacyNote": {
     "message": "Premium erişimi doğrulamak için Patreon üyelik bilgileri kullanılır. Kart veya banka bilgileriniz bize iletilmez."
+  },
+  "paidFeaturesWhy": {
+    "message": "Beğenmeme sayıları herkes için ücretsiz kalmaya devam ediyor. Ücretli ekstralar, bunları sağlayan sunucuların masraflarını karşılamaya yardımcı oluyor: 15 TB'tan fazla veri ve günde yaklaşık 20 milyon kullanıcı, ayda birkaç yüz dolarlık bir bütçeyle."
   },
   "githubLoggedOutMessage": {
     "message": "GitHub katkıda bulunanları için Premium özellikler kullanılabilir"
@@ -176,12 +167,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "YouTube video izleme sayfalarında Premium Video İstatistikleri panelini gizle."
   },
-  "roundNumbers": {
-    "message": "Aşağı yuvarlanmış sayıları göster"
-  },
-  "roundNumbersHover": {
-    "message": "Sayıları aşağı yuvarla (YouTube'un varsayılan davranışı)."
-  },
   "shortsSupport": {
     "message": "YouTube Shorts Desteği"
   },
@@ -190,9 +175,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Beğeni/beğenmeme çubuğu araç ipucunda yüzdeyi göster."
-  },
-  "textColorTheme": {
-    "message": "Renk teması:"
   },
   "textColorTheme1": {
     "message": "Klasik"
@@ -221,38 +203,8 @@
   "colorThemeDislike": {
     "message": "Beğenme"
   },
-  "textColorizeRatioBar": {
-    "message": "Oran çubuğunu renklendir"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Oran çubuğu için özel renkler kullanın."
-  },
-  "textColorizeThumbs": {
-    "message": "Başparmak simgelerini renklendir"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Başparmak simgeleri için özel renkler kullanın."
-  },
-  "textConsistentFormat": {
-    "message": "Beğeni ve beğenmeme sayılarını tutarlı biçimde göster"
-  },
-  "textConsistentFormatHover": {
-    "message": "Beğeni sayılarını yeniden biçimlendir."
-  },
   "textDeveloper": {
     "message": "Dmitry Selivanov ve Topluluk tarafından"
-  },
-  "textLikesDisabled": {
-    "message": "Sahibi Tarafından Devre Dışı Bırakıldı"
-  },
-  "textNumberFormat": {
-    "message": "Sayı biçimi:"
-  },
-  "textRoundingNumbers": {
-    "message": "Beğeni/beğenmeme istatistiklerini aşağı yuvarla (YouTube'un varsayılan davranışı)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Aşağı yuvarlanmış istatistikleri göster."
   },
   "textSettings": {
     "message": "Beğeni/beğenmeme gönderimini devre dışı bırak"
@@ -262,9 +214,6 @@
   },
   "textTempUnavailable": {
     "message": "Geçici Olarak Kullanılamıyor"
-  },
-  "textUpdate": {
-    "message": "Şuna güncelle:"
   },
   "tooltipPercentageMode": {
     "message": "Yüzde modu:"
@@ -479,9 +428,6 @@
   "premiumTeaser_statRaw": {
     "message": "Ham beğenmeme sayısı"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Tahmini beğenmeme sayısı"
-  },
   "premiumTeaser_statLikes": {
     "message": "Ham beğeni sayısı"
   },
@@ -490,21 +436,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Beğenmeme verileri şu anda yüklenemedi. Sayfayı yeniden yüklemeyi deneyin."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Premium istatistiklerin kilidi nasıl açılır"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Premium Video İstatistiklerinin kilidini üç hızlı adımda açın:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Return YouTube Dislike uzantısının açılır penceresinden Patreon ile giriş yapın."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Etkinlik zaman çizelgelerini, ülke sıralamalarını ve etkileşimli haritayı etkinleştirmek için Premium seviyesini seçin."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Her video için saatlik eğilimleri, en aktif ülkeleri ve ABD eyalet ayrıntılarını görmek üzere YouTube'u yeniden yükleyin."
   },
   "premiumTierNotice_title": {
     "message": "Premium istatistikler kilitli"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "Henüz yorum yok. Sohbeti başlatın."
   },
-  "discussion_replyEmpty": {
-    "message": "Henüz yanıt yok."
-  },
   "discussion_comment": {
     "message": "Yorum"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "Beğenme"
-  },
-  "discussion_reacting": {
-    "message": "Tepki kaydediliyor…"
   },
   "discussion_signInRequired": {
     "message": "Devam etmek için uzantının açılır penceresinden giriş yapın."
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "Moderasyon nedeni"
   },
-  "discussion_moderationSaved": {
-    "message": "Moderasyon işlemi kaydedildi."
-  },
-  "discussion_reported": {
-    "message": "$1 şikayet"
-  },
   "discussion_unavailable": {
     "message": "Bu video için RYD yorumları kullanılamıyor."
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "Yorumunuz $1 beğeni aldı"
   },
-  "discussion_notificationDislike": {
-    "message": "Birisi yorumunuzu beğenmedi"
-  },
-  "discussion_notificationReaction": {
-    "message": "Birisi yorumunuza tepki verdi"
-  },
   "discussion_someone": {
     "message": "Birisi"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "Tartışmayı görüntüle"
   },
-  "discussion_unread": {
-    "message": "$1 okunmamış bildirim"
-  },
   "discussion_signedOutInbox": {
     "message": "Yorumlarınıza gelen yanıtları ve beğenileri görmek için giriş yapın."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Bu tartışma artık kullanılamıyor."
   },
   "discussion_discussionTab": {
     "message": "Tartışma"
   },
   "discussion_nickname": {
     "message": "Takma ad"
-  },
-  "discussion_reportCount": {
-    "message": "Şikayetler"
   },
   "discussion_reportStatus": {
     "message": "Şikayet durumu"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "Yazar"
   },
-  "discussion_me": {
-    "message": "Siz"
-  },
   "discussion_saving": {
     "message": "Kaydediliyor…"
-  },
-  "discussion_confirm": {
-    "message": "Onayla"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Yorumlarınızda yeni etkinlik var"
-  },
-  "discussion_showThread": {
-    "message": "Yorum dizisini göster"
   },
   "discussion_loadReplies": {
     "message": "Yanıtları göster ($1)"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "Eyaletlere göre etkileşimi daha ayrıntılı inceleyin."
   },
+  "changelog_appeal_title": {
+    "message": "Küçük, biraz da mahcup bir rica"
+  },
+  "changelog_appeal_intro": {
+    "message": "Merhaba. Şimdi paradan bahsettiğimiz kısma geldik ve açıkçası bu konuda pek iyi değiliz."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike, Dmitry Selivanov ve topluluk tarafından geliştirilen küçük bir açık kaynak projesidir. Her gün yaklaşık 20 milyon kişiye yanıt veriyor ve 15 TB'tan fazla veriyi koruyor. Bütün bunlar ayda birkaç yüz dolarla işliyor; milyar dolarlık bir şirketin kaldırmaya karar verdiği bir şeyi geri getirmek için bu pek fazla sayılmaz."
+  },
+  "changelog_appeal_free": {
+    "message": "Beğenmeme sayıları ücretsiz ve öyle kalacak. Asıl mesele de bu. Ama sunucular ücretsiz değil ve açıkçası işletme maliyetleri bize pek seçenek bırakmadı: projeyi ayakta tutmak için Premium özellikleri — RYD yorumları ve Premium analizler — sunmak zorunda kaldık. Her üyelik bu maliyetleri karşılamaya yardımcı oluyor."
+  },
+  "changelog_appeal_ask": {
+    "message": "RYD sizi bir kez bile tık tuzağı bir videodan ya da işe yaramayan bir eğitimden kurtardıysa, lütfen Patreon'a katılmayı düşünün. Şu an uygun değilse hiç sorun değil. Kullandığınız ve oy verdiğiniz için teşekkürler: her oy sayıları biraz daha doğru hâle getiriyor."
+  },
+  "changelog_appeal_cta": {
+    "message": "Patreon’da katılın"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry ve RYD topluluğu"
+  },
   "changelog_join_title": {
     "message": "Premium özellikleri edinin"
-  },
-  "changelog_join_free": {
-    "message": "Beğenmeme sayıları herkes için ücretsizdir. Üyelik isteğe bağlıdır ve projeyi destekler."
   },
   "changelog_join_step1": {
     "message": "Patreon’da katılın. Commenter yorum yazmanızı sağlar; Premium ayrıca analizleri de sunar."
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "Bir tıklama daha gerekli: Firefox’un hesap izinlerini inceleyip devam etmek için aşağıdaki giriş düğmenizi seçin."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox’un yeni gizlilik kuralları"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Firefox’ta RYD’nin beğenmeme sayılarını gösterebilmesi için izninize ihtiyacı var. Bu iznin tam olarak neyi kapsadığını — ve neyi kapsamadığını — aşağıda bulabilirsiniz."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Teşekkürler. Oylarınız artık sayılıyor."
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "Devam et"
-  },
-  "counts_consent_enable": {
-    "message": "Beğenmeme sayılarını etkinleştir"
   },
   "counts_consent_toolbar": {
     "message": "Devam etmek için Firefox’un uzantılar menüsünden Return YouTube Dislike’ı açın."

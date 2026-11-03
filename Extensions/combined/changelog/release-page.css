@@ -28,6 +28,10 @@
   box-sizing: border-box;
 }
 
+html:not([data-localized]) body {
+  visibility: hidden;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -270,6 +274,31 @@ figure {
   margin: 0;
   color: var(--ryd-text-muted);
   font-size: 1.0625rem;
+}
+
+.ryd-letter {
+  max-width: 46rem;
+  padding: clamp(24px, 4vw, 40px);
+  border: 1px solid var(--ryd-border);
+  border-radius: var(--ryd-radius-lg);
+  background: var(--ryd-surface);
+}
+
+.ryd-letter > .ryd-section__title {
+  margin-bottom: 20px;
+}
+
+.ryd-letter > p {
+  max-width: 40em;
+  margin: 0 0 16px;
+  color: var(--ryd-text-muted);
+  font-size: 1.0625rem;
+}
+
+.ryd-letter > .ryd-letter__signature {
+  margin: 24px 0 0;
+  color: var(--ryd-text);
+  font-weight: 500;
 }
 
 .ryd-note {
@@ -521,6 +550,10 @@ figure {
 
 .ryd-callout + .ryd-callout {
   margin-top: 16px;
+}
+
+.ryd-section__header + .ryd-callout {
+  margin-top: 0;
 }
 
 .ryd-callout__title {

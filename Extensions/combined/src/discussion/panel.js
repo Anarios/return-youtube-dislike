@@ -1,5 +1,5 @@
 import { requestDiscussion } from "./client";
-import { discussionText as t, discussionError, discussionLanguage } from "./localize";
+import { discussionText as t, discussionError, discussionLanguage, extensionText } from "./localize";
 import { element, button, statusNode, shortDate, thumbIcon, isDiscussionCommentId } from "./dom";
 import { createDiscussionInbox, notificationsLabel } from "./inbox";
 import { consentApi } from "../core-data-consent";
@@ -207,7 +207,10 @@ export function createDiscussionPanel({
       showTab("discussion");
     composer.replaceChildren();
     if (!session.canPost || session.profile?.suspended) {
-      composer.append(element("p", "ryd-discussion-gate", t("gate")));
+      composer.append(
+        element("p", "ryd-discussion-gate", t("gate")),
+        element("p", "ryd-discussion-why", extensionText("paidFeaturesWhy")),
+      );
       const join = element("a", "ryd-discussion-link", t("join"));
       join.href = "https://www.patreon.com/returnyoutubedislike/membership";
       join.target = "_blank";

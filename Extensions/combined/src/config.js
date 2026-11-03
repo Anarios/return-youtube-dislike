@@ -16,6 +16,8 @@ const config = {
   voteDisabledIconName: "icon_hold128.png",
   defaultIconName: "icon128.png",
 
+  reviewPromptEnabled: true,
+
   links: {
     website: "https://returnyoutubedislike.com",
     github: "https://github.com/Anarios/return-youtube-dislike",

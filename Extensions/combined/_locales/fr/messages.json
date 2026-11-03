@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "État de l’API :"
-  },
-  "apiStatusOffline": {
-    "message": "Hors ligne"
-  },
-  "apiStatusOnline": {
-    "message": "En ligne"
-  },
   "colorTheme": {
     "message": "Schéma de couleur :"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Format numérique:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Fonctionnalités premium disponibles pour les mécènes sur Patreon"
   },
@@ -88,6 +76,9 @@
   },
   "patreonPrivacyNote": {
     "message": "Les informations sur votre abonnement Patreon servent à vérifier votre accès premium. Nous ne recevons pas les données de votre carte ni vos coordonnées bancaires."
+  },
+  "paidFeaturesWhy": {
+    "message": "Le nombre de dislikes reste gratuit pour tout le monde. Les options payantes aident à financer les serveurs qui le font tourner : plus de 15 To de données et environ 20 millions d’utilisateurs par jour, avec un budget de quelques centaines de dollars par mois."
   },
   "githubLoggedOutMessage": {
     "message": "Fonctionnalités premium disponibles pour les contributeurs sur GitHub"
@@ -176,12 +167,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Masquer le panneau des analyses vidéo Premium sur les pages de lecture YouTube."
   },
-  "roundNumbers": {
-    "message": "Afficher les nombres arrondis"
-  },
-  "roundNumbersHover": {
-    "message": "Arrondir les nombres à la baisse (comportement par défaut de YouTube)."
-  },
   "shortsSupport": {
     "message": "Prise en charge des YouTube Shorts"
   },
@@ -190,9 +175,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Afficher le pourcentage dans l’infobulle de la barre J’aime/Je n’aime pas."
-  },
-  "textColorTheme": {
-    "message": "Thème de couleur :"
   },
   "textColorTheme1": {
     "message": "Classique"
@@ -221,38 +203,8 @@
   "colorThemeDislike": {
     "message": "Je n’aime pas"
   },
-  "textColorizeRatioBar": {
-    "message": "Coloriser la barre de ratio"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Utiliser des couleurs personnalisées pour la barre de ratio."
-  },
-  "textColorizeThumbs": {
-    "message": "Coloriser les pouces"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Utiliser des couleurs personnalisées pour les icônes des pouces."
-  },
-  "textConsistentFormat": {
-    "message": "Rendre le format des likes et des dislikes cohérent"
-  },
-  "textConsistentFormatHover": {
-    "message": "Reformater le nombre de likes."
-  },
   "textDeveloper": {
     "message": "par Dmitry Selivanov & Communauté"
-  },
-  "textLikesDisabled": {
-    "message": "Désactivé par le créateur"
-  },
-  "textNumberFormat": {
-    "message": "Format numérique :"
-  },
-  "textRoundingNumbers": {
-    "message": "Arrondir vers le bas les statistiques de like/dislike (comportement par défaut de YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Afficher les statistiques arrondies vers le bas."
   },
   "textSettings": {
     "message": "Désactiver l'envoi des likes/dislikes"
@@ -262,9 +214,6 @@
   },
   "textTempUnavailable": {
     "message": "temporairement indisponible"
-  },
-  "textUpdate": {
-    "message": "mettre à jour vers"
   },
   "tooltipPercentageMode": {
     "message": "Mode de pourcentage :"
@@ -479,9 +428,6 @@
   "premiumTeaser_statRaw": {
     "message": "Nombre de Je n’aime pas bruts"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Je n’aime pas estimés"
-  },
   "premiumTeaser_statLikes": {
     "message": "Nombre brut de mentions J’aime"
   },
@@ -490,21 +436,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Impossible de charger les données de Je n’aime pas pour le moment. Veuillez recharger la page."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Comment débloquer les analyses Premium"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Débloquez les analyses vidéo Premium en trois étapes rapides :"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Connectez-vous avec Patreon depuis la fenêtre de l’extension Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Choisissez la formule Premium pour activer les chronologies d’activité, les classements par pays et la carte interactive."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Rechargez YouTube pour voir les tendances horaires, les pays principaux et le détail par États américains pour chaque vidéo."
   },
   "premiumTierNotice_title": {
     "message": "Analyses Premium bloquées"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "Aucun commentaire pour le moment. Lancez la conversation."
   },
-  "discussion_replyEmpty": {
-    "message": "Aucune réponse pour le moment."
-  },
   "discussion_comment": {
     "message": "Commentaire"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "Je n’aime pas"
-  },
-  "discussion_reacting": {
-    "message": "Enregistrement de la réaction…"
   },
   "discussion_signInRequired": {
     "message": "Connectez-vous depuis la fenêtre de l’extension pour continuer."
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "Motif de modération"
   },
-  "discussion_moderationSaved": {
-    "message": "Action de modération enregistrée."
-  },
-  "discussion_reported": {
-    "message": "$1 signalements"
-  },
   "discussion_unavailable": {
     "message": "Les commentaires RYD ne sont pas disponibles pour cette vidéo."
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "Votre commentaire a reçu $1 mentions J’aime"
   },
-  "discussion_notificationDislike": {
-    "message": "Quelqu’un n’a pas aimé votre commentaire"
-  },
-  "discussion_notificationReaction": {
-    "message": "Quelqu’un a réagi à votre commentaire"
-  },
   "discussion_someone": {
     "message": "Quelqu’un"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "Voir la discussion"
   },
-  "discussion_unread": {
-    "message": "$1 notifications non lues"
-  },
   "discussion_signedOutInbox": {
     "message": "Connectez-vous pour voir les réponses et les mentions J’aime sur vos commentaires."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Cette discussion n’est plus disponible."
   },
   "discussion_discussionTab": {
     "message": "Discussion"
   },
   "discussion_nickname": {
     "message": "Pseudonyme"
-  },
-  "discussion_reportCount": {
-    "message": "Signalements"
   },
   "discussion_reportStatus": {
     "message": "Statut du signalement"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "Auteur"
   },
-  "discussion_me": {
-    "message": "Vous"
-  },
   "discussion_saving": {
     "message": "Enregistrement…"
-  },
-  "discussion_confirm": {
-    "message": "Confirmer"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Nouvelle activité sur vos commentaires"
-  },
-  "discussion_showThread": {
-    "message": "Afficher le fil"
   },
   "discussion_loadReplies": {
     "message": "Afficher les réponses ($1)"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "Examinez la participation par État en détail."
   },
+  "changelog_appeal_title": {
+    "message": "Une petite demande, un peu gênante"
+  },
+  "changelog_appeal_intro": {
+    "message": "Bonjour. Voici le moment où l’on parle d’argent, et honnêtement, on n’est pas très doués pour ça."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike est un petit projet open source créé par Dmitry Selivanov et la communauté. Chaque jour, il répond à environ 20 millions de personnes et veille sur plus de 15 To de données. Tout cela fonctionne avec quelques centaines de dollars par mois, ce qui n’est pas grand-chose pour ramener ce qu’une entreprise milliardaire a décidé de supprimer."
+  },
+  "changelog_appeal_free": {
+    "message": "Le nombre de dislikes est gratuit, et il le restera. C’est tout l’intérêt. Mais les serveurs, eux, ne le sont pas, et honnêtement, les frais de fonctionnement ne nous ont guère laissé le choix : pour que le projet continue de tourner, nous avons dû introduire des fonctionnalités Premium — les commentaires RYD et les analyses Premium. Chaque abonnement aide à couvrir ces frais."
+  },
+  "changelog_appeal_ask": {
+    "message": "Si RYD vous a déjà évité une vidéo piège à clics ou un tutoriel qui ne marchait pas, pensez à nous rejoindre sur Patreon. Et si ce n’est pas le bon moment, ce n’est vraiment pas grave. Merci de l’utiliser et de voter : chaque vote rend les chiffres un peu plus précis."
+  },
+  "changelog_appeal_cta": {
+    "message": "Abonnez-vous sur Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry et la communauté RYD"
+  },
   "changelog_join_title": {
     "message": "Profitez des fonctions Premium"
-  },
-  "changelog_join_free": {
-    "message": "Le nombre de dislikes est gratuit pour tout le monde. L’abonnement est facultatif et aide à soutenir le projet."
   },
   "changelog_join_step1": {
     "message": "Abonnez-vous sur Patreon. Commenter permet de publier des commentaires ; Premium ajoute aussi les analyses."
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "Un clic supplémentaire est nécessaire : sélectionnez votre bouton de connexion ci-dessous pour examiner les autorisations de compte de Firefox et continuer."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Les nouvelles règles de confidentialité de Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Dans Firefox, RYD a besoin de votre autorisation pour afficher les dislikes. Voici exactement ce que couvre cette autorisation, et ce qu’elle ne couvre pas."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Merci. Vos votes comptent désormais."
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "Continuer"
-  },
-  "counts_consent_enable": {
-    "message": "Activer les compteurs de « Je n’aime pas »"
   },
   "counts_consent_toolbar": {
     "message": "Ouvrez Return YouTube Dislike depuis le menu des extensions de Firefox pour continuer."

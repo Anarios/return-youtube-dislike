@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API 상태:"
-  },
-  "apiStatusOffline": {
-    "message": "오프라인"
-  },
-  "apiStatusOnline": {
-    "message": "온라인"
-  },
   "colorTheme": {
     "message": "컬러 테마:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "숫자 표시 형식:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "프리미엄 기능은 Patreon 후원자에게 제공됩니다"
   },
@@ -89,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Patreon 멤버십 정보는 프리미엄 이용 자격을 확인하는 데 사용됩니다. 카드 또는 은행 계좌 정보는 전달받지 않습니다."
   },
+  "paidFeaturesWhy": {
+    "message": "싫어요 수는 앞으로도 누구나 무료로 볼 수 있습니다. 유료 부가 기능은 이를 뒷받침하는 서버 비용을 충당하는 데 도움이 됩니다. 15TB가 넘는 데이터와 하루 약 2,000만 명의 사용자를 월 수백 달러의 예산으로 운영하고 있습니다."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "프리미엄 기능은 GitHub 기여자에게 제공됩니다"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "GitHub로 로그인(기여자용)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "GitHub 로그인 시작에 실패했습니다. 다시 시도해 주세요."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "GitHub 로그인을 완료하지 못했습니다. 다시 시도해 주세요."
   },
   "patreonLoginCompleteFailed": {
     "message": "로그인을 완료하지 못했습니다. 다시 시도해 주세요."
@@ -155,12 +146,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "YouTube 시청 페이지에서 프리미엄 동영상 인사이트 패널을 숨깁니다."
   },
-  "roundNumbers": {
-    "message": "반올림된 숫자 표시"
-  },
-  "roundNumbersHover": {
-    "message": "반올림된 숫자(기본 유튜브 동작)."
-  },
   "shortsSupport": {
     "message": "유튜브 쇼츠 지원"
   },
@@ -169,9 +154,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "좋아요/싫어요 막대 툴팁에 백분율을 표시합니다."
-  },
-  "textColorTheme": {
-    "message": "컬러 테마:"
   },
   "textColorTheme1": {
     "message": "클래식"
@@ -200,38 +182,8 @@
   "colorThemeDislike": {
     "message": "싫어요"
   },
-  "textColorizeRatioBar": {
-    "message": "비율 막대 컬러화"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "비율 막대에 커스텀 색상을 사용합니다."
-  },
-  "textColorizeThumbs": {
-    "message": "엄지 컬러화"
-  },
-  "textColorizeThumbsHover": {
-    "message": "엄지 아이콘에 커스텀 색상을 사용합니다."
-  },
-  "textConsistentFormat": {
-    "message": "좋아요와 싫어요 형식을 일관되게 만듭니다"
-  },
-  "textConsistentFormatHover": {
-    "message": "좋아요 갯수 표시 형식 재정의"
-  },
   "textDeveloper": {
     "message": "Dmitry Selivanov와 커뮤니티 제작"
-  },
-  "textLikesDisabled": {
-    "message": "업로더가 비활성화함"
-  },
-  "textNumberFormat": {
-    "message": "숫자 표시 형식:"
-  },
-  "textRoundingNumbers": {
-    "message": "좋아요/싫어요 통계 비활성화(기본 YouTube 동작)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "반올림된 통계 보이기"
   },
   "textSettings": {
     "message": "좋아요/싫어요 제출 비활성화"
@@ -241,9 +193,6 @@
   },
   "textTempUnavailable": {
     "message": "일시적으로 사용할 수 없음"
-  },
-  "textUpdate": {
-    "message": "업데이트"
   },
   "tooltipPercentageMode": {
     "message": "백분율 모드:"
@@ -458,9 +407,6 @@
   "premiumTeaser_statRaw": {
     "message": "원본 싫어요 수"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "예상 싫어요"
-  },
   "premiumTeaser_statLikes": {
     "message": "원시 좋아요 수"
   },
@@ -469,21 +415,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "지금은 싫어요 데이터를 불러올 수 없습니다. 페이지를 새로고침해 보세요."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "프리미엄 분석을 여는 방법"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "세 단계로 프리미엄 동영상 인사이트를 해제하세요:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Return YouTube Dislike 확장 프로그램 팝업에서 Patreon으로 로그인하세요."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "활동 타임라인, 국가 순위 및 인터랙티브 지도를 사용하려면 프리미엄 등급을 선택하세요."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "YouTube를 다시 로드하여 각 영상의 시간대별 추세, 주요 국가 및 미국 주별 세부 정보를 확인하세요."
   },
   "premiumTierNotice_title": {
     "message": "프리미엄 분석이 잠겨 있습니다"
@@ -534,19 +465,19 @@
     "message": "커뮤니티에 물어보세요"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "불필요한 버튼 숨기기"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "적용 전후 예시 보기"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "좋아요와 싫어요 버튼만 표시합니다. 공유, 저장, Thanks 등 다른 선택 기능은 YouTube의 점 3개(추가 작업) 메뉴에서 계속 이용할 수 있습니다."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "적용 전: 모든 작업 버튼이 표시됩니다"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "적용 후: 좋아요와 싫어요 버튼만 표시됩니다"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 로고"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "아직 댓글이 없습니다. 대화를 시작해 보세요."
   },
-  "discussion_replyEmpty": {
-    "message": "아직 답글이 없습니다."
-  },
   "discussion_comment": {
     "message": "댓글"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "싫어요"
-  },
-  "discussion_reacting": {
-    "message": "반응 저장 중…"
   },
   "discussion_signInRequired": {
     "message": "계속하려면 확장 프로그램 팝업에서 로그인해 주세요."
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "관리 조치 사유"
   },
-  "discussion_moderationSaved": {
-    "message": "관리 조치가 저장되었습니다."
-  },
-  "discussion_reported": {
-    "message": "신고 $1건"
-  },
   "discussion_unavailable": {
     "message": "이 동영상에서는 RYD 댓글을 사용할 수 없습니다."
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "내 댓글이 좋아요 $1개를 받았습니다"
   },
-  "discussion_notificationDislike": {
-    "message": "누군가 내 댓글에 싫어요를 눌렀습니다"
-  },
-  "discussion_notificationReaction": {
-    "message": "누군가 내 댓글에 반응을 남겼습니다"
-  },
   "discussion_someone": {
     "message": "누군가"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "토론 보기"
   },
-  "discussion_unread": {
-    "message": "읽지 않은 알림 $1개"
-  },
   "discussion_signedOutInbox": {
     "message": "내 댓글에 달린 답글과 좋아요를 보려면 로그인해 주세요."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "더 이상 볼 수 없는 토론입니다."
   },
   "discussion_discussionTab": {
     "message": "토론"
   },
   "discussion_nickname": {
     "message": "닉네임"
-  },
-  "discussion_reportCount": {
-    "message": "신고"
   },
   "discussion_reportStatus": {
     "message": "신고 상태"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "작성자"
   },
-  "discussion_me": {
-    "message": "나"
-  },
   "discussion_saving": {
     "message": "저장 중…"
-  },
-  "discussion_confirm": {
-    "message": "확인"
-  },
-  "discussion_notificationUpdated": {
-    "message": "내 댓글에 새로운 활동이 있습니다"
-  },
-  "discussion_showThread": {
-    "message": "댓글 대화 보기"
   },
   "discussion_loadReplies": {
     "message": "답글 보기 ($1)"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "확대해서 주별 반응을 살펴보세요."
   },
+  "changelog_appeal_title": {
+    "message": "작고, 조금은 어색한 부탁"
+  },
+  "changelog_appeal_intro": {
+    "message": "안녕하세요. 이제 돈 이야기를 할 차례인데, 솔직히 저희는 이런 걸 잘 못합니다."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike는 Dmitry Selivanov와 커뮤니티가 만드는 작은 오픈 소스 프로젝트입니다. 매일 약 2,000만 명에게 응답하고 15TB가 넘는 데이터를 관리합니다. 이 모든 것이 한 달에 수백 달러로 운영되는데, 수십억 달러 규모의 기업이 없애기로 한 기능을 되살리기에는 많은 금액이 아닙니다."
+  },
+  "changelog_appeal_free": {
+    "message": "싫어요 수는 무료이며 앞으로도 무료입니다. 그게 이 프로젝트의 핵심입니다. 하지만 서버는 무료가 아니고, 솔직히 운영 비용 때문에 선택의 여지가 거의 없었습니다. 프로젝트를 계속 유지하기 위해 RYD 댓글과 Premium 분석 같은 Premium 기능을 도입해야 했습니다. 모든 멤버십이 이 비용을 충당하는 데 도움이 됩니다."
+  },
+  "changelog_appeal_ask": {
+    "message": "RYD 덕분에 낚시성 동영상이나 따라 해도 안 되는 튜토리얼을 한 번이라도 피하셨다면, Patreon 참여를 고려해 주세요. 지금이 적절한 때가 아니라면 전혀 괜찮습니다. 사용해 주시고 투표해 주셔서 감사합니다. 한 표 한 표가 숫자를 조금 더 정확하게 만듭니다."
+  },
+  "changelog_appeal_cta": {
+    "message": "Patreon에서 가입하세요"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry와 RYD 커뮤니티 드림"
+  },
   "changelog_join_title": {
     "message": "Premium 기능 이용하기"
-  },
-  "changelog_join_free": {
-    "message": "싫어요 수는 누구나 무료로 볼 수 있습니다. 멤버십 가입은 선택 사항이며 프로젝트를 지원하는 데 도움이 됩니다."
   },
   "changelog_join_step1": {
     "message": "Patreon에서 가입하세요. Commenter는 댓글을 작성할 수 있고, Premium은 분석 기능도 제공합니다."
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "한 번 더 클릭해야 합니다. 아래의 로그인 버튼을 선택하여 Firefox 계정 권한을 확인하고 계속하세요."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox의 새로운 개인정보 보호 규칙"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Firefox에서는 RYD가 싫어요 수를 표시하기 전에 사용자의 허가가 필요합니다. 이 허가에 무엇이 포함되고 무엇이 포함되지 않는지 아래에서 정확히 알려드립니다."
+  },
   "changelog_firefox_vote_granted": {
     "message": "감사합니다. 이제 내 평가가 집계됩니다."
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "계속"
-  },
-  "counts_consent_enable": {
-    "message": "싫어요 수 표시 활성화"
   },
   "counts_consent_toolbar": {
     "message": "계속하려면 Firefox의 확장 기능 메뉴에서 Return YouTube Dislike를 여세요."

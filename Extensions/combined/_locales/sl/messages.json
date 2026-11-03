@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Stanje API-ja:"
-  },
-  "apiStatusOffline": {
-    "message": "Nedosegljiv"
-  },
-  "apiStatusOnline": {
-    "message": "Dosegljiv"
-  },
   "colorTheme": {
     "message": "Barvna tema:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Oblika zapisa števil:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Premium funkcije so na voljo podpornikom na Patreonu"
   },
@@ -88,6 +76,9 @@
   },
   "patreonPrivacyNote": {
     "message": "Podatke o članstvu na Patreonu uporabljamo za preverjanje dostopa do premium vsebin. Podatkov o vaši kartici ali banki ne prejmemo."
+  },
+  "paidFeaturesWhy": {
+    "message": "Število nevšečkov ostaja brezplačno za vse. Plačljivi dodatki pomagajo plačevati strežnike, ki ga omogočajo: več kot 15 TB podatkov in približno 20 milijonov uporabnikov na dan ob proračunu nekaj sto dolarjev na mesec."
   },
   "githubLoggedOutMessage": {
     "message": "Premium funkcije so na voljo sodelavcem na GitHubu"
@@ -176,12 +167,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Skrij ploščo s premium vpogledi v video na straneh za ogled videov na YouTubu."
   },
-  "roundNumbers": {
-    "message": "Prikaži navzdol zaokrožena števila"
-  },
-  "roundNumbersHover": {
-    "message": "Zaokroži števila navzdol (privzeto vedenje YouTuba)."
-  },
   "shortsSupport": {
     "message": "Podpora za YouTube Shorts"
   },
@@ -190,9 +175,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Prikaži odstotek v opisu vrstice všečkov/nevšečkov."
-  },
-  "textColorTheme": {
-    "message": "Barvna tema:"
   },
   "textColorTheme1": {
     "message": "Klasična"
@@ -221,38 +203,8 @@
   "colorThemeDislike": {
     "message": "Ni mi všeč"
   },
-  "textColorizeRatioBar": {
-    "message": "Obarvaj vrstico razmerja"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Uporabi lastne barve za vrstico razmerja."
-  },
-  "textColorizeThumbs": {
-    "message": "Obarvaj palca"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Uporabi lastne barve za ikoni palcev."
-  },
-  "textConsistentFormat": {
-    "message": "Poenoti obliko zapisa všečkov in nevšečkov"
-  },
-  "textConsistentFormatHover": {
-    "message": "Preoblikuj števila všečkov."
-  },
   "textDeveloper": {
     "message": "avtorja Dmitry Selivanov in skupnost"
-  },
-  "textLikesDisabled": {
-    "message": "Onemogočil lastnik"
-  },
-  "textNumberFormat": {
-    "message": "Oblika zapisa števil:"
-  },
-  "textRoundingNumbers": {
-    "message": "Zaokroži statistiko všečkov/nevšečkov navzdol (privzeto vedenje YouTuba)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Prikaži navzdol zaokroženo statistiko."
   },
   "textSettings": {
     "message": "Onemogoči pošiljanje všečkov/nevšečkov"
@@ -262,9 +214,6 @@
   },
   "textTempUnavailable": {
     "message": "Začasno nedosegljivo"
-  },
-  "textUpdate": {
-    "message": "Posodobi na"
   },
   "tooltipPercentageMode": {
     "message": "Način odstotkov:"
@@ -479,9 +428,6 @@
   "premiumTeaser_statRaw": {
     "message": "Neobdelano število nevšečkov"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Ocenjeno število nevšečkov"
-  },
   "premiumTeaser_statLikes": {
     "message": "Neobdelano število všečkov"
   },
@@ -490,21 +436,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Podatkov o nevšečkih zdaj ni bilo mogoče naložiti. Poskusite znova naložiti stran."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Kako odkleniti premium analitiko"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Odklenite premium vpoglede v video v treh hitrih korakih:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "V pojavnem oknu razširitve Return YouTube Dislike se prijavite s Patreonom."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Izberite stopnjo Premium, da omogočite časovnice odzivov, lestvice držav in interaktivni zemljevid."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Znova naložite YouTube in si za vsak video oglejte urne trende, vodilne države in razčlenitev po zveznih državah ZDA."
   },
   "premiumTierNotice_title": {
     "message": "Premium analitika je zaklenjena"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "Komentarjev še ni. Začnite pogovor."
   },
-  "discussion_replyEmpty": {
-    "message": "Odgovorov še ni."
-  },
   "discussion_comment": {
     "message": "Komentar"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "Ni mi všeč"
-  },
-  "discussion_reacting": {
-    "message": "Shranjevanje odziva…"
   },
   "discussion_signInRequired": {
     "message": "Za nadaljevanje se prijavite v pojavnem oknu razširitve."
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "Razlog moderiranja"
   },
-  "discussion_moderationSaved": {
-    "message": "Dejanje moderiranja je shranjeno."
-  },
-  "discussion_reported": {
-    "message": "Prijave: $1"
-  },
   "discussion_unavailable": {
     "message": "Komentarji RYD za ta videoposnetek niso na voljo."
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "Vaš komentar ima toliko všečkov: $1"
   },
-  "discussion_notificationDislike": {
-    "message": "Nekomu ni bil všeč vaš komentar"
-  },
-  "discussion_notificationReaction": {
-    "message": "Nekdo se je odzval na vaš komentar"
-  },
   "discussion_someone": {
     "message": "Nekdo"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "Ogled razprave"
   },
-  "discussion_unread": {
-    "message": "Neprebrana obvestila: $1"
-  },
   "discussion_signedOutInbox": {
     "message": "Prijavite se za ogled odgovorov in všečkov na svojih komentarjih."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Ta razprava ni več na voljo."
   },
   "discussion_discussionTab": {
     "message": "Razprava"
   },
   "discussion_nickname": {
     "message": "Vzdevek"
-  },
-  "discussion_reportCount": {
-    "message": "Prijave"
   },
   "discussion_reportStatus": {
     "message": "Stanje prijave"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "Avtor"
   },
-  "discussion_me": {
-    "message": "Vi"
-  },
   "discussion_saving": {
     "message": "Shranjevanje…"
-  },
-  "discussion_confirm": {
-    "message": "Potrdi"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Nova dejavnost pri vaših komentarjih"
-  },
-  "discussion_showThread": {
-    "message": "Prikaži nit"
   },
   "discussion_loadReplies": {
     "message": "Prikaži odgovore ($1)"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "Podrobneje si oglejte odzive po zveznih državah."
   },
+  "changelog_appeal_title": {
+    "message": "Majhna, malce nerodna prošnja"
+  },
+  "changelog_appeal_intro": {
+    "message": "Živjo. To je del, kjer govorimo o denarju, in iskreno, v tem nismo prav dobri."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike je majhen odprtokodni projekt, ki ga ustvarjata Dmitry Selivanov in skupnost. Vsak dan odgovori približno 20 milijonom ljudi in skrbi za več kot 15 TB podatkov. Vse to deluje z nekaj sto dolarji na mesec, kar ni veliko za vrnitev nečesa, kar se je podjetje, vredno milijarde dolarjev, odločilo odvzeti."
+  },
+  "changelog_appeal_free": {
+    "message": "Število nevšečkov je brezplačno in bo tudi ostalo. Za to pri vsem skupaj gre. Strežniki pa niso brezplačni in, iskreno, stroški delovanja nam niso pustili veliko izbire: da bi projekt lahko deloval naprej, smo morali uvesti funkcije Premium — komentarje RYD in analitiko Premium. Vsako članstvo pomaga pokriti te stroške."
+  },
+  "changelog_appeal_ask": {
+    "message": "Če vas je RYD kdaj obvaroval pred videom z vabo za klike ali vodičem, ki ni deloval, razmislite o pridružitvi na Patreonu. Če pa zdaj ni pravi trenutek, je povsem v redu. Hvala, da ga uporabljate in glasujete: vsak glas naredi števila malo natančnejša."
+  },
+  "changelog_appeal_cta": {
+    "message": "Pridružite se na Patreonu"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry in skupnost RYD"
+  },
   "changelog_join_title": {
     "message": "Pridobite funkcije Premium"
-  },
-  "changelog_join_free": {
-    "message": "Število nevšečkov je brezplačno za vse. Članstvo je neobvezno in pomaga podpirati projekt."
   },
   "changelog_join_step1": {
     "message": "Pridružite se na Patreonu. Commenter omogoča objavljanje komentarjev, Premium pa doda še analitiko."
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "Potreben je še en klik: spodaj izberite gumb za prijavo, da pregledate dovoljenja računa v Firefoxu in nadaljujete."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Nova pravila zasebnosti v Firefoxu"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "V Firefoxu RYD potrebuje vaše dovoljenje, preden lahko prikaže nevšečke. Tukaj je natanko, kaj to dovoljenje zajema — in česa ne."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Hvala. Vaši glasovi se zdaj štejejo."
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "Nadaljuj"
-  },
-  "counts_consent_enable": {
-    "message": "Omogoči število nevšečkov"
   },
   "counts_consent_toolbar": {
     "message": "Za nadaljevanje odprite Return YouTube Dislike v Firefoxovem meniju razširitev."

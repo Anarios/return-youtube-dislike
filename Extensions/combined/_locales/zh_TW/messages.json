@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API 狀態:"
-  },
-  "apiStatusOffline": {
-    "message": "離線"
-  },
-  "apiStatusOnline": {
-    "message": "線上"
-  },
   "colorTheme": {
     "message": "配色主題:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "數字格式:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Patreon 贊助者可使用進階功能"
   },
@@ -89,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Patreon 會員資訊用於驗證進階功能的存取權限。我們不會接收您的卡片或銀行帳戶資料。"
   },
+  "paidFeaturesWhy": {
+    "message": "不喜歡次數將持續免費提供給所有人。付費功能幫助支付背後的伺服器費用：超過 15 TB 的資料、每天約 2,000 萬名使用者，而每月預算只有幾百美元。"
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "GitHub 貢獻者可使用進階功能"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "使用 GitHub 登入（貢獻者）"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "無法啟動 GitHub 登入，請再試一次。"
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "無法完成 GitHub 登入，請再試一次。"
   },
   "patreonLoginCompleteFailed": {
     "message": "無法完成登入，請再試一次。"
@@ -155,12 +146,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "在 YouTube 觀看頁面隱藏進階影片洞察面板。"
   },
-  "roundNumbers": {
-    "message": "顯示取整後的數字"
-  },
-  "roundNumbersHover": {
-    "message": "對數字向下取整（YouTube 預設行為）。"
-  },
   "shortsSupport": {
     "message": "支援 YouTube Shorts"
   },
@@ -169,9 +154,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "在按讚/不喜歡列的工具提示中顯示百分比。"
-  },
-  "textColorTheme": {
-    "message": "配色主題:"
   },
   "textColorTheme1": {
     "message": "經典"
@@ -200,38 +182,8 @@
   "colorThemeDislike": {
     "message": "不喜歡"
   },
-  "textColorizeRatioBar": {
-    "message": "為比例條著色"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "為比例條使用自訂顏色。"
-  },
-  "textColorizeThumbs": {
-    "message": "為按讚/不喜歡圖示著色"
-  },
-  "textColorizeThumbsHover": {
-    "message": "為按讚/不喜歡圖示使用自訂顏色。"
-  },
-  "textConsistentFormat": {
-    "message": "使按讚/不喜歡的顯示格式一致"
-  },
-  "textConsistentFormatHover": {
-    "message": "重新格式化按讚數。"
-  },
   "textDeveloper": {
     "message": "由 Dmitry Selivanov 與社群開發"
-  },
-  "textLikesDisabled": {
-    "message": "由擁有者停用"
-  },
-  "textNumberFormat": {
-    "message": "數字格式:"
-  },
-  "textRoundingNumbers": {
-    "message": "對按讚/不喜歡統計取整（YouTube 預設行為）"
-  },
-  "textRoundingNumbersHover": {
-    "message": "顯示取整後的統計。"
   },
   "textSettings": {
     "message": "停用送出按讚/不喜歡"
@@ -241,9 +193,6 @@
   },
   "textTempUnavailable": {
     "message": "暫時無法使用"
-  },
-  "textUpdate": {
-    "message": "更新至"
   },
   "tooltipPercentageMode": {
     "message": "百分比模式:"
@@ -458,9 +407,6 @@
   "premiumTeaser_statRaw": {
     "message": "原始不喜歡數量"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "預估不喜歡數"
-  },
   "premiumTeaser_statLikes": {
     "message": "按讚原始數"
   },
@@ -469,21 +415,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "目前無法載入不喜歡資料，請嘗試重新整理頁面。"
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "如何解鎖進階分析"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "三個步驟快速解鎖進階影片洞察："
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "在 Return YouTube Dislike 擴充功能的彈出視窗中使用 Patreon 登入。"
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "選擇 Premium 方案以啟用活動時間軸、國家排行榜和互動地圖。"
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "重新載入 YouTube，以查看每部影片的每小時趨勢、熱門國家與美國各州詳細資料。"
   },
   "premiumTierNotice_title": {
     "message": "Premium 進階分析已鎖定"
@@ -534,19 +465,19 @@
     "message": "詢問社區"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "隱藏多餘按鈕"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "顯示前後比較範例"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "只顯示「我喜歡」和「我不喜歡」按鈕。「分享」、「儲存」、「感謝」等選用動作仍可透過 YouTube 的「其他動作」（⋯）選單使用。"
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "啟用前：顯示所有動作按鈕"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "啟用後：只顯示「我喜歡」和「我不喜歡」按鈕"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 標誌"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "還沒有留言。來開啟討論吧。"
   },
-  "discussion_replyEmpty": {
-    "message": "還沒有回覆。"
-  },
   "discussion_comment": {
     "message": "留言"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "不喜歡"
-  },
-  "discussion_reacting": {
-    "message": "正在儲存反應…"
   },
   "discussion_signInRequired": {
     "message": "請從擴充功能的彈出視窗登入以繼續。"
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "管理操作原因"
   },
-  "discussion_moderationSaved": {
-    "message": "管理操作已儲存。"
-  },
-  "discussion_reported": {
-    "message": "$1 次檢舉"
-  },
   "discussion_unavailable": {
     "message": "此影片無法使用 RYD 留言。"
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "您的留言獲得了 $1 個讚"
   },
-  "discussion_notificationDislike": {
-    "message": "有人對您的留言按了不喜歡"
-  },
-  "discussion_notificationReaction": {
-    "message": "有人對您的留言表達了反應"
-  },
   "discussion_someone": {
     "message": "有人"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "查看討論"
   },
-  "discussion_unread": {
-    "message": "$1 則未讀通知"
-  },
   "discussion_signedOutInbox": {
     "message": "登入後即可查看您留言收到的回覆與讚。"
-  },
-  "discussion_notificationUnavailable": {
-    "message": "此討論已無法查看。"
   },
   "discussion_discussionTab": {
     "message": "討論"
   },
   "discussion_nickname": {
     "message": "暱稱"
-  },
-  "discussion_reportCount": {
-    "message": "檢舉"
   },
   "discussion_reportStatus": {
     "message": "檢舉狀態"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "作者"
   },
-  "discussion_me": {
-    "message": "您"
-  },
   "discussion_saving": {
     "message": "正在儲存…"
-  },
-  "discussion_confirm": {
-    "message": "確認"
-  },
-  "discussion_notificationUpdated": {
-    "message": "您的留言有新動態"
-  },
-  "discussion_showThread": {
-    "message": "顯示留言串"
   },
   "discussion_loadReplies": {
     "message": "顯示回覆（$1）"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "放大查看各州的互動情況。"
   },
+  "changelog_appeal_title": {
+    "message": "一個小小的、有點難為情的請求"
+  },
+  "changelog_appeal_intro": {
+    "message": "你好。接下來要談錢的事了，老實說，我們不太擅長這個。"
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike 是一個小型開源專案，由 Dmitry Selivanov 與社群共同打造。它每天為約 2,000 萬人提供服務，保管超過 15 TB 的資料。這一切每月只靠幾百美元維持——要找回一家市值數十億美元的公司決定拿走的東西，這筆錢真的不多。"
+  },
+  "changelog_appeal_free": {
+    "message": "不喜歡次數是免費的，而且會一直免費。這正是這個專案的意義所在。但伺服器不是免費的，老實說，營運成本沒給我們留下太多選擇：為了讓專案繼續運作，我們不得不推出 Premium 功能——RYD 留言和 Premium 數據分析。每一份會員都在幫助支付這些費用。"
+  },
+  "changelog_appeal_ask": {
+    "message": "如果 RYD 曾經幫你避開過一部標題殺人的影片，或是一個沒用的教學，請考慮在 Patreon 上加入我們。如果現在不方便，也完全沒關係。感謝你一直使用它並參與投票：每一票都讓數字更準確一點。"
+  },
+  "changelog_appeal_cta": {
+    "message": "在 Patreon 加入會員"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry 和 RYD 社群"
+  },
   "changelog_join_title": {
     "message": "取得 Premium 功能"
-  },
-  "changelog_join_free": {
-    "message": "所有人都能免費查看不喜歡次數。加入會員完全自願，也能支持本專案。"
   },
   "changelog_join_step1": {
     "message": "在 Patreon 加入會員。Commenter 可以發表留言，Premium 還提供數據分析功能。"
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "還需要點擊一次：請選擇下方的登入按鈕，檢視 Firefox 的帳號權限並繼續。"
   },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox 的新隱私規則"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "在 Firefox 中，RYD 需要先取得你的許可才能顯示不喜歡次數。以下會準確說明這項許可包括什麼，以及不包括什麼。"
+  },
   "changelog_firefox_vote_granted": {
     "message": "謝謝。您的評價現在會被計入。"
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "繼續"
-  },
-  "counts_consent_enable": {
-    "message": "啟用不喜歡數"
   },
   "counts_consent_toolbar": {
     "message": "從 Firefox 的擴充套件選單開啟 Return YouTube Dislike 以繼續。"

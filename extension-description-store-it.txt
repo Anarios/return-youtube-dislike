@@ -2,7 +2,7 @@ Return YouTube Dislike ripristina la possibilità di vedere i Non mi piace su Yo
 
 I commenti RYD ti permettono di leggere le discussioni e reagire sotto i video e gli Shorts in cui i commenti di YouTube sono disattivati. Gli abbonati Commenter e Premium possono pubblicare e rispondere, con notifiche per risposte e Mi piace.
 
-I conteggi base dei Non mi piace sono gratuiti. Alcune funzionalità facoltative hanno requisiti di accesso, tra cui livelli di abbonamento a pagamento su Patreon o l’accesso per i collaboratori idonei su GitHub.
+I conteggi base dei Non mi piace sono gratuiti per tutti. Alcune funzionalità facoltative, come pubblicare commenti RYD e le analisi video Premium, richiedono un abbonamento a pagamento su Patreon o l’accesso per i collaboratori idonei su GitHub. Questi extra a pagamento aiutano a pagare i server che mantengono gratuiti i conteggi dei Non mi piace: oltre 15 TB di dati e circa 20 milioni di utenti al giorno, con un budget di poche centinaia di dollari al mese.
 
 I tuoi voti aiutano a migliorare le stime. Vengono inviati con un ID casuale, creato la prima volta che voti o reagisci a un commento e non collegato al tuo account Google o YouTube. Puoi interrompere l’invio dei voti con «Disattiva invio di Mi piace/Non mi piace» nel menu dell’estensione.
 

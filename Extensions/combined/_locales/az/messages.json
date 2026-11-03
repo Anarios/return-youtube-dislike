@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API statusu:"
-  },
-  "apiStatusOffline": {
-    "message": "Oflayn"
-  },
-  "apiStatusOnline": {
-    "message": "Onlayn"
-  },
   "colorTheme": {
     "message": "Rəng mövzusu:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Sayı formatı:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Premium xüsusiyyətlər Patreon dəstəkçiləri üçün mövcuddur"
   },
@@ -89,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Patreon üzvlük məlumatları premium funksiyalara giriş hüququnu yoxlamaq üçün istifadə olunur. Kart və ya bank məlumatlarınızı almırıq."
   },
+  "paidFeaturesWhy": {
+    "message": "Bəyənməmə sayları hər kəs üçün pulsuz qalır. Ödənişli əlavələr onları işlədən serverlərin xərclərini ödəməyə kömək edir: 15 TB-dan çox məlumat və gündə təxminən 20 milyon istifadəçi, ayda bir neçə yüz dollarlıq büdcə ilə."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Premium xüsusiyyətlər GitHub töhfəçiləri üçün mövcuddur"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "GitHub ilə daxil ol (töhfəçi)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "GitHub girişini başlatmaq alınmadı. Yenidən cəhd edin."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "GitHub girişini tamamlamaq alınmadı. Yenidən cəhd edin."
   },
   "patreonLoginCompleteFailed": {
     "message": "Giriş tamamlanmadı. Yenidən cəhd edin."
@@ -155,12 +146,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "YouTube izləmə səhifələrində Premium video analitikası panelini gizlət."
   },
-  "roundNumbers": {
-    "message": "Aşağı yuvarlanmış sayıları göstərir"
-  },
-  "roundNumbersHover": {
-    "message": "Sayıları aşağıya yuvarla (standart YouTube davranışı)."
-  },
   "shortsSupport": {
     "message": "YouTube Shorts Dəstəyi"
   },
@@ -169,9 +154,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Bəyən/bəyənməmə çubuğu ipucunda faizi göstər."
-  },
-  "textColorTheme": {
-    "message": "Rəng mövzusu:"
   },
   "textColorTheme1": {
     "message": "Klassik"
@@ -200,38 +182,8 @@
   "colorThemeDislike": {
     "message": "Bəyənmə"
   },
-  "textColorizeRatioBar": {
-    "message": "Bəyənmə nisbəti çubuğunu rəngləndir"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Nisbət çubuğu üçün xüsusi rənglər istifadə edin."
-  },
-  "textColorizeThumbs": {
-    "message": "Düymələri rəngləndir"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Düymə simvolları üçün xüsusi rənglər istifadə edin."
-  },
-  "textConsistentFormat": {
-    "message": "Like və dislike formatını uyğunlaşdırır"
-  },
-  "textConsistentFormatHover": {
-    "message": "Like sayılarının formatını yeniləyir."
-  },
   "textDeveloper": {
     "message": "Dmitry Selivanov və İcma tərəfindən"
-  },
-  "textLikesDisabled": {
-    "message": "Sahibi tərəfindən deaktiv edilib"
-  },
-  "textNumberFormat": {
-    "message": "Sayı formatı:"
-  },
-  "textRoundingNumbers": {
-    "message": "Like/dislike statistikasını aşağı yuvarlayır (standart YouTube davranışı)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Yuvarlanmış statistikaları göstər."
   },
   "textSettings": {
     "message": "Like/dislike göndərməsini deaktiv et"
@@ -241,9 +193,6 @@
   },
   "textTempUnavailable": {
     "message": "Müvəqqəti olaraq istifadədən kənar"
-  },
-  "textUpdate": {
-    "message": "Bu versiyaya yenilə"
   },
   "tooltipPercentageMode": {
     "message": "Faiz rejimi:"
@@ -458,9 +407,6 @@
   "premiumTeaser_statRaw": {
     "message": "Emal olunmamış bəyənməmə sayı"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Təxmini bəyənməmələr"
-  },
   "premiumTeaser_statLikes": {
     "message": "Bəyənmələrin xam sayı"
   },
@@ -469,21 +415,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Hazırda bəyənməmə məlumatı yüklənmədi. Səhifəni yenidən yükləyin."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Premium analitikanı necə açmalı"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Premium video analitikasını üç sürətli addımda açın:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Return YouTube Dislike uzantısının pəncərəsindən Patreon ilə daxil olun."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Fəaliyyət qrafikləri, ölkə reytinqləri və interaktiv xəritə üçün Premium səviyyəsini seçin."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Hər video üçün saatlıq trendləri, aparıcı ölkələri və ABŞ ştatlarının detallı xəritəsini görmək üçün YouTube-u yenidən yükləyin."
   },
   "premiumTierNotice_title": {
     "message": "Premium analitika bloklanıb"
@@ -534,19 +465,19 @@
     "message": "İcmadan soruş"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Əlavə düymələri gizlət"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Əvvəl və sonra nümunələrini göstər"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Yalnız Bəyən və Bəyənmə düymələri görünsün. Paylaşın, Yadda saxlayın, Sağol və başqa istəyə bağlı əməliyyatlar YouTube-un üç nöqtəli Digər menyusunda əlçatan qalır."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Əvvəl: bütün əməliyyat düymələri görünür"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Sonra: yalnız Bəyən və Bəyənmə düymələri görünür"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike loqosu"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "Hələ şərh yoxdur. Söhbətə başlayın."
   },
-  "discussion_replyEmpty": {
-    "message": "Hələ cavab yoxdur."
-  },
   "discussion_comment": {
     "message": "Şərh"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "Bəyənmə"
-  },
-  "discussion_reacting": {
-    "message": "Reaksiya saxlanılır…"
   },
   "discussion_signInRequired": {
     "message": "Davam etmək üçün genişlənmənin açılan pəncərəsindən daxil olun."
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "Moderasiya səbəbi"
   },
-  "discussion_moderationSaved": {
-    "message": "Moderasiya əməliyyatı saxlanıldı."
-  },
-  "discussion_reported": {
-    "message": "$1 şikayət"
-  },
   "discussion_unavailable": {
     "message": "Bu video üçün RYD şərhləri əlçatan deyil."
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "Şərhiniz $1 bəyənmə aldı"
   },
-  "discussion_notificationDislike": {
-    "message": "Kimsə şərhinizi bəyənmədi"
-  },
-  "discussion_notificationReaction": {
-    "message": "Kimsə şərhinizə reaksiya verdi"
-  },
   "discussion_someone": {
     "message": "Kimsə"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "Müzakirəyə bax"
   },
-  "discussion_unread": {
-    "message": "$1 oxunmamış bildiriş"
-  },
   "discussion_signedOutInbox": {
     "message": "Şərhlərinizə verilən cavabları və bəyənmələri görmək üçün daxil olun."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Bu müzakirə artıq əlçatan deyil."
   },
   "discussion_discussionTab": {
     "message": "Müzakirə"
   },
   "discussion_nickname": {
     "message": "Ləqəb"
-  },
-  "discussion_reportCount": {
-    "message": "Şikayətlər"
   },
   "discussion_reportStatus": {
     "message": "Şikayət statusu"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "Müəllif"
   },
-  "discussion_me": {
-    "message": "Siz"
-  },
   "discussion_saving": {
     "message": "Saxlanılır…"
-  },
-  "discussion_confirm": {
-    "message": "Təsdiqlə"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Şərhlərinizdə yeni fəaliyyət var"
-  },
-  "discussion_showThread": {
-    "message": "Şərh zəncirini göstər"
   },
   "discussion_loadReplies": {
     "message": "Cavabları göstər ($1)"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "Hər ştat üzrə aktivliyi daha ətraflı görün."
   },
+  "changelog_appeal_title": {
+    "message": "Kiçik, bir az yöndəmsiz bir xahiş"
+  },
+  "changelog_appeal_intro": {
+    "message": "Salam. Bu, pul haqqında danışdığımız hissədir və açığı, bunu o qədər də yaxşı bacarmırıq."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike Dmitry Selivanov və icma tərəfindən hazırlanan kiçik açıq mənbəli layihədir. Hər gün təxminən 20 milyon insana cavab verir və 15 TB-dan çox məlumatı qoruyur. Bütün bunlar ayda bir neçə yüz dollara işləyir — milyard dollarlıq bir şirkətin götürməyə qərar verdiyi bir şeyi geri qaytarmaq üçün bu, çox deyil."
+  },
+  "changelog_appeal_free": {
+    "message": "Bəyənməmə sayları pulsuzdur və pulsuz qalacaq. Bütün məqsəd elə budur. Amma serverlər pulsuz deyil və açığı, işlətmə xərcləri bizə elə də seçim qoymadı: layihəni ayaqda saxlamaq üçün Premium funksiyaları — RYD şərhləri və Premium analitikanı — təqdim etməli olduq. Hər üzvlük bu xərcləri ödəməyə kömək edir."
+  },
+  "changelog_appeal_ask": {
+    "message": "Əgər RYD sizi heç olmasa bir dəfə klikbeyt videodan və ya işləməyən təlimatdan xilas edibsə, lütfən, Patreon-a qoşulmağı düşünün. Əgər indi uyğun vaxt deyilsə, heç bir problem yoxdur. İstifadə etdiyiniz və səs verdiyiniz üçün təşəkkür edirik: hər səs sayları bir az daha dəqiq edir."
+  },
+  "changelog_appeal_cta": {
+    "message": "Patreon-da qoşulun"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry və RYD icması"
+  },
   "changelog_join_title": {
     "message": "Premium imkanlarını əldə edin"
-  },
-  "changelog_join_free": {
-    "message": "Bəyənməmə sayları hər kəs üçün pulsuzdur. Üzvlük könüllüdür və layihəyə dəstək olur."
   },
   "changelog_join_step1": {
     "message": "Patreon-da qoşulun. Commenter şərh yazmağa imkan verir; Premium isə analitikanı da əlavə edir."
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "Daha bir klik lazımdır: Firefox-un hesab icazələrini nəzərdən keçirib davam etmək üçün aşağıdakı giriş düymənizi seçin."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox-un yeni məxfilik qaydaları"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Firefox-da RYD bəyənməmələri göstərməzdən əvvəl icazənizə ehtiyac duyur. Bu icazənin tam olaraq nəyi əhatə etdiyi — və nəyi əhatə etmədiyi — aşağıdadır."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Təşəkkürlər. Səsləriniz artıq sayılır."
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "Davam et"
-  },
-  "counts_consent_enable": {
-    "message": "Bəyənməmə saylarını aktivləşdirin"
   },
   "counts_consent_toolbar": {
     "message": "Davam etmək üçün Firefox-un genişlənmələr menyusundan Return YouTube Dislike-ı açın."

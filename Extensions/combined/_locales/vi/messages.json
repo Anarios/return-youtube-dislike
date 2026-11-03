@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Trạng thái API:"
-  },
-  "apiStatusOffline": {
-    "message": "Ngoại tuyến"
-  },
-  "apiStatusOnline": {
-    "message": "Trực tuyến"
-  },
   "colorTheme": {
     "message": "Chủ đề màu:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Định dạng số:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Tính năng cao cấp dành cho người ủng hộ trên Patreon"
   },
@@ -89,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Thông tin thành viên Patreon được dùng để xác minh quyền truy cập các tính năng cao cấp. Chúng tôi không nhận thông tin thẻ hoặc tài khoản ngân hàng của bạn."
   },
+  "paidFeaturesWhy": {
+    "message": "Số lượt không thích vẫn miễn phí cho mọi người. Các tính năng trả phí giúp chi trả cho máy chủ vận hành nó: hơn 15 TB dữ liệu và khoảng 20 triệu người dùng mỗi ngày, với ngân sách vài trăm đô la mỗi tháng."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Tính năng cao cấp dành cho người đóng góp trên GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Đăng nhập bằng GitHub (người đóng góp)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Không thể bắt đầu đăng nhập GitHub. Vui lòng thử lại."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Không thể hoàn tất đăng nhập GitHub. Vui lòng thử lại."
   },
   "patreonLoginCompleteFailed": {
     "message": "Không thể hoàn tất đăng nhập. Vui lòng thử lại."
@@ -155,12 +146,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Ẩn bảng phân tích video cao cấp trên trang xem YouTube."
   },
-  "roundNumbers": {
-    "message": "Hiện số lượt đánh giá đã làm tròn"
-  },
-  "roundNumbersHover": {
-    "message": "Làm tròn số lượt đánh giá (hành vi mặc định của YouTube)."
-  },
   "shortsSupport": {
     "message": "Có hỗ trợ YouTube Shorts"
   },
@@ -169,9 +154,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Hiển thị phần trăm trong tooltip của thanh thích/không thích."
-  },
-  "textColorTheme": {
-    "message": "Chủ đề màu:"
   },
   "textColorTheme1": {
     "message": "Cổ điển"
@@ -200,38 +182,8 @@
   "colorThemeDislike": {
     "message": "Không thích"
   },
-  "textColorizeRatioBar": {
-    "message": "Tô màu thanh tỉ lệ đánh giá"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Dùng màu tùy chọn cho thanh tỉ lệ đánh giá."
-  },
-  "textColorizeThumbs": {
-    "message": "Tô màu nút đánh giá"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Dùng màu tùy chọn cho nút đánh giá."
-  },
-  "textConsistentFormat": {
-    "message": "Đồng bộ định dạng đánh giá \"thích\" và \"không thích\""
-  },
-  "textConsistentFormatHover": {
-    "message": "Định dạng lại số lượt đánh giá."
-  },
   "textDeveloper": {
     "message": "bởi Dmitry Selivanov và Cộng đồng"
-  },
-  "textLikesDisabled": {
-    "message": "Chủ kênh đã Tắt Đánh giá"
-  },
-  "textNumberFormat": {
-    "message": "Định dạng số:"
-  },
-  "textRoundingNumbers": {
-    "message": "Làm tròn số lượt đánh giá (hành vi mặc định của YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Hiện số lượt đánh giá đã làm tròn."
   },
   "textSettings": {
     "message": "Tắt chức năng gửi đánh giá"
@@ -241,9 +193,6 @@
   },
   "textTempUnavailable": {
     "message": "Tạm thời Không sử dụng được"
-  },
-  "textUpdate": {
-    "message": "Cập nhật"
   },
   "tooltipPercentageMode": {
     "message": "Chế độ phần trăm:"
@@ -458,9 +407,6 @@
   "premiumTeaser_statRaw": {
     "message": "Số lượt không thích thô"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Ước tính lượt không thích"
-  },
   "premiumTeaser_statLikes": {
     "message": "Số lượt thích thô"
   },
@@ -469,21 +415,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Không thể tải dữ liệu lượt không thích lúc này. Thử tải lại trang."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Cách mở khóa phân tích Premium"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Mở khóa phân tích video Premium trong ba bước nhanh:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Đăng nhập Patreon từ cửa sổ bật lên của tiện ích Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Chọn gói Premium để bật dòng thời gian hoạt động, bảng xếp hạng quốc gia và bản đồ tương tác."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Tải lại YouTube để xem xu hướng theo giờ, quốc gia hàng đầu và chi tiết từng bang của Hoa Kỳ cho mỗi video."
   },
   "premiumTierNotice_title": {
     "message": "Phân tích Premium đã bị khóa"
@@ -534,19 +465,19 @@
     "message": "Hỏi cộng đồng"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Ẩn các nút thừa"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Hiển thị ví dụ trước và sau"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Chỉ giữ lại nút Thích và Không thích. Chia sẻ, Lưu, Thanks và các thao tác phụ khác vẫn có sẵn trong trình đơn ba chấm Tùy chọn khác của YouTube."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Trước: tất cả các nút thao tác đều hiển thị"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Sau: chỉ còn nút Thích và Không thích hiển thị"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "Chưa có bình luận nào. Hãy bắt đầu cuộc trò chuyện."
   },
-  "discussion_replyEmpty": {
-    "message": "Chưa có phản hồi nào."
-  },
   "discussion_comment": {
     "message": "Bình luận"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "Không thích"
-  },
-  "discussion_reacting": {
-    "message": "Đang lưu cảm xúc…"
   },
   "discussion_signInRequired": {
     "message": "Đăng nhập từ cửa sổ bật lên của tiện ích mở rộng để tiếp tục."
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "Lý do kiểm duyệt"
   },
-  "discussion_moderationSaved": {
-    "message": "Đã lưu thao tác kiểm duyệt."
-  },
-  "discussion_reported": {
-    "message": "$1 báo cáo"
-  },
   "discussion_unavailable": {
     "message": "Bình luận RYD không khả dụng cho video này."
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "Bình luận của bạn nhận được $1 lượt thích"
   },
-  "discussion_notificationDislike": {
-    "message": "Có người đã bấm không thích bình luận của bạn"
-  },
-  "discussion_notificationReaction": {
-    "message": "Có người đã bày tỏ cảm xúc về bình luận của bạn"
-  },
   "discussion_someone": {
     "message": "Ai đó"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "Xem thảo luận"
   },
-  "discussion_unread": {
-    "message": "$1 thông báo chưa đọc"
-  },
   "discussion_signedOutInbox": {
     "message": "Đăng nhập để xem phản hồi và lượt thích cho bình luận của bạn."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Cuộc thảo luận này không còn khả dụng."
   },
   "discussion_discussionTab": {
     "message": "Thảo luận"
   },
   "discussion_nickname": {
     "message": "Biệt danh"
-  },
-  "discussion_reportCount": {
-    "message": "Báo cáo"
   },
   "discussion_reportStatus": {
     "message": "Trạng thái báo cáo"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "Tác giả"
   },
-  "discussion_me": {
-    "message": "Bạn"
-  },
   "discussion_saving": {
     "message": "Đang lưu…"
-  },
-  "discussion_confirm": {
-    "message": "Xác nhận"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Hoạt động mới trên bình luận của bạn"
-  },
-  "discussion_showThread": {
-    "message": "Hiện chuỗi bình luận"
   },
   "discussion_loadReplies": {
     "message": "Hiện phản hồi ($1)"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "Phóng to để xem tương tác theo từng bang."
   },
+  "changelog_appeal_title": {
+    "message": "Một lời nhờ nhỏ, hơi ngại ngùng"
+  },
+  "changelog_appeal_intro": {
+    "message": "Xin chào. Đây là phần chúng tôi nói về tiền, và thật lòng mà nói, chúng tôi không giỏi chuyện này lắm."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike là một dự án mã nguồn mở nhỏ do Dmitry Selivanov và cộng đồng xây dựng. Mỗi ngày, dự án phục vụ khoảng 20 triệu người và lưu giữ hơn 15 TB dữ liệu. Tất cả vận hành với vài trăm đô la mỗi tháng — không nhiều để mang lại một thứ mà một công ty tỷ đô đã quyết định gỡ bỏ."
+  },
+  "changelog_appeal_free": {
+    "message": "Số lượt không thích là miễn phí và sẽ luôn miễn phí. Đó chính là mục đích. Nhưng máy chủ thì không miễn phí, và thật lòng mà nói, chi phí vận hành không để lại cho chúng tôi nhiều lựa chọn: để dự án tiếp tục hoạt động, chúng tôi buộc phải đưa ra các tính năng Premium — bình luận RYD và phân tích Premium. Mỗi tư cách thành viên đều giúp trang trải những chi phí đó."
+  },
+  "changelog_appeal_ask": {
+    "message": "Nếu RYD từng giúp bạn tránh một video câu view hay một hướng dẫn không hiệu quả, hãy cân nhắc tham gia trên Patreon. Còn nếu bây giờ chưa phải lúc, hoàn toàn không sao cả. Cảm ơn bạn đã sử dụng và bình chọn: mỗi lượt bình chọn giúp con số chính xác hơn một chút."
+  },
+  "changelog_appeal_cta": {
+    "message": "Tham gia trên Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry và cộng đồng RYD"
+  },
   "changelog_join_title": {
     "message": "Sử dụng tính năng Premium"
-  },
-  "changelog_join_free": {
-    "message": "Số lượt không thích miễn phí cho mọi người. Tư cách thành viên là tùy chọn và giúp hỗ trợ dự án."
   },
   "changelog_join_step1": {
     "message": "Tham gia trên Patreon. Commenter cho phép đăng bình luận; Premium có thêm tính năng phân tích."
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "Cần thêm một lần nhấp: chọn nút đăng nhập bên dưới để xem quyền tài khoản của Firefox và tiếp tục."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Quy tắc quyền riêng tư mới của Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Trên Firefox, RYD cần bạn cho phép trước khi có thể hiển thị số lượt không thích. Dưới đây là chính xác những gì quyền này bao gồm — và những gì không."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Cảm ơn bạn. Lượt bình chọn của bạn giờ đã được tính."
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "Tiếp tục"
-  },
-  "counts_consent_enable": {
-    "message": "Bật số lượt không thích"
   },
   "counts_consent_toolbar": {
     "message": "Mở Return YouTube Dislike từ menu tiện ích mở rộng của Firefox để tiếp tục."

@@ -591,6 +591,14 @@ html[dark] .ryd-discussion-toast {
   overflow-wrap: anywhere;
 }
 
+.ryd-discussion .ryd-discussion-why {
+  margin-block: 0 8px;
+  color: var(--ryd-discussion-muted);
+  font-size: 0.86em;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
 .ryd-discussion .ryd-discussion-composer > .ryd-discussion-link {
   display: inline-block;
   max-inline-size: 100%;
@@ -1138,6 +1146,13 @@ html[dark] .ryd-premium-teaser {
   line-height: 1.5;
 }
 
+.ryd-premium-tier-notice__why {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ryd-analytics-muted);
+  line-height: 1.5;
+}
+
 .ryd-premium-tier-notice__actions {
   display: flex;
   flex-wrap: wrap;
@@ -1357,6 +1372,13 @@ html[dark] .ryd-premium-teaser {
 
 .ryd-premium-teaser__secondary:hover {
   text-decoration: underline;
+}
+
+.ryd-premium-teaser__why {
+  margin: 0;
+  font-size: 12px;
+  color: var(--ryd-teaser-muted);
+  line-height: 1.5;
 }
 
 .ryd-premium-teaser__status {

@@ -54,10 +54,16 @@
         </div>
       </section>
 
-      <div id="ryd-firefox-optin" hidden>
+      <section class="ryd-section" id="ryd-firefox-optin" aria-labelledby="ryd-firefox-intro-title" hidden>
+        <div class="ryd-section__header">
+          <h2 class="ryd-section__title ryd-section__title--small" id="ryd-firefox-intro-title">
+            __MSG_changelog_firefox_intro_title__
+          </h2>
+          <p class="ryd-section__body">__MSG_changelog_firefox_intro_body__</p>
+        </div>
         <section class="ryd-callout" aria-labelledby="ryd-firefox-consent-title">
           <div>
-            <h2 class="ryd-callout__title" id="ryd-firefox-consent-title">__MSG_data_consent_title__</h2>
+            <h3 class="ryd-callout__title" id="ryd-firefox-consent-title">__MSG_data_consent_title__</h3>
             <p class="ryd-callout__scope">__MSG_data_consent_scope__</p>
             <p class="ryd-callout__body">__MSG_data_consent_body__</p>
             <dl id="ryd-firefox-consent-permissions" class="ryd-callout__list"></dl>
@@ -72,7 +78,25 @@
             </div>
           </div>
         </section>
-      </div>
+      </section>
+
+      <section class="ryd-section" aria-labelledby="ryd-appeal-title">
+        <div class="ryd-letter">
+          <h2 class="ryd-section__title ryd-section__title--small" id="ryd-appeal-title">
+            __MSG_changelog_appeal_title__
+          </h2>
+          <p>__MSG_changelog_appeal_intro__</p>
+          <p>__MSG_changelog_appeal_costs__</p>
+          <p>__MSG_changelog_appeal_free__</p>
+          <p>__MSG_changelog_appeal_ask__</p>
+          <p class="ryd-letter__signature">__MSG_changelog_appeal_signature__</p>
+          <div class="ryd-actions">
+            <button type="button" class="ryd-button ryd-button--primary" id="ryd-changelog-appeal-join">
+              __MSG_changelog_appeal_cta__
+            </button>
+          </div>
+        </div>
+      </section>
 
       <section class="ryd-section ryd-feature" aria-labelledby="ryd-comments-title">
         <div class="ryd-feature__text">
@@ -160,7 +184,6 @@
       <section class="ryd-section" aria-labelledby="ryd-join-title">
         <div class="ryd-section__header">
           <h2 class="ryd-section__title" id="ryd-join-title">__MSG_changelog_join_title__</h2>
-          <p class="ryd-section__body">__MSG_changelog_join_free__</p>
         </div>
         <ol class="ryd-steps">
           <li>__MSG_changelog_join_step1__</li>

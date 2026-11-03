@@ -2,7 +2,7 @@ Return YouTube Dislike (Trả lại số lượt Không thích trên YouTube) l�
 
 Bình luận RYD cho phép bạn đọc và bày tỏ cảm xúc trong các cuộc thảo luận trên video và Shorts đã tắt bình luận YouTube. Thành viên Commenter và Premium có thể đăng bình luận và trả lời, đồng thời nhận thông báo về các câu trả lời và lượt thích.
 
-Tính năng cốt lõi hiển thị số lượt “không thích” được cung cấp miễn phí. Một số tính năng tùy chọn có yêu cầu về quyền truy cập, bao gồm các cấp thành viên trả phí trên Patreon hoặc quyền truy cập dành cho người đóng góp đủ điều kiện trên GitHub.
+Tính năng cốt lõi hiển thị số lượt “không thích” được cung cấp miễn phí cho mọi người. Một số tính năng tùy chọn, như đăng bình luận RYD và phân tích video cao cấp, yêu cầu tư cách thành viên trả phí trên Patreon hoặc quyền truy cập dành cho người đóng góp đủ điều kiện trên GitHub. Các tính năng trả phí này giúp chi trả cho máy chủ để số lượt “không thích” luôn miễn phí: hơn 15 TB dữ liệu và khoảng 20 triệu người dùng mỗi ngày, với ngân sách vài trăm đô la mỗi tháng.
 
 Lượt bình chọn của bạn giúp cải thiện các số liệu ước tính. Chúng được gửi kèm một ID ngẫu nhiên, được tạo vào lần đầu tiên bạn bình chọn hoặc bày tỏ cảm xúc với một bình luận và không liên kết với tài khoản Google hay YouTube của bạn. Bạn có thể ngừng gửi lượt bình chọn bằng tùy chọn “Tắt chức năng gửi đánh giá” trong menu của tiện ích mở rộng.
 

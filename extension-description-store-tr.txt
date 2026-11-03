@@ -2,7 +2,7 @@ YouTube Dislike Sayısını Geri Getir YouTube'da beğenmeme durumlarını görm
 
 RYD yorumları, YouTube yorumlarının kapalı olduğu videolarda ve Shorts'ta tartışmaları okumanızı ve bunlara tepki vermenizi sağlar. Commenter ve Premium üyeleri yorum yazabilir, yanıt verebilir ve yanıtlar ile beğeniler için bildirim alabilir.
 
-Temel beğenmeme sayıları ücretsizdir. Bazı isteğe bağlı özelliklerin erişim gereksinimleri vardır; bunlar arasında ücretli Patreon üyelik seviyeleri veya uygunluk koşullarını karşılayan GitHub katkıda bulunanları için erişim yer alır.
+Temel beğenmeme sayıları herkes için ücretsizdir. RYD yorumları yazmak ve Premium video istatistikleri gibi bazı isteğe bağlı özellikler, ücretli bir Patreon üyeliği veya uygunluk koşullarını karşılayan GitHub katkıda bulunanları için erişim gerektirir. Bu ücretli ekstralar, beğenmeme sayılarını ücretsiz tutan sunucuların masraflarını karşılamaya yardımcı olur: 15 TB'tan fazla veri ve günde yaklaşık 20 milyon kullanıcı, ayda birkaç yüz dolarlık bir bütçeyle.
 
 Oylarınız tahminlerin iyileştirilmesine yardımcı olur. Oylar, ilk kez oy verdiğinizde ya da bir yoruma ilk kez tepki verdiğinizde oluşturulan ve Google ya da YouTube hesabınıza bağlı olmayan rastgele bir kimlikle gönderilir. Uzantının menüsündeki “Beğeni/beğenmeme gönderimini devre dışı bırak” seçeneğiyle oy göndermeyi durdurabilirsiniz.
 

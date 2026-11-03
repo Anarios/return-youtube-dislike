@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Стан API:"
-  },
-  "apiStatusOffline": {
-    "message": "Офлайн"
-  },
-  "apiStatusOnline": {
-    "message": "Онлайн"
-  },
   "colorTheme": {
     "message": "Кольорова схема:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Формат значень:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Преміум‑функції доступні прихильникам на Patreon"
   },
@@ -89,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Інформація про підписку на Patreon використовується для перевірки доступу до преміум-функцій. Ми не отримуємо дані вашої картки або банківського рахунку."
   },
+  "paidFeaturesWhy": {
+    "message": "Кількість невподобань залишається безкоштовною для всіх. Платні доповнення допомагають оплачувати сервери, на яких вона працює: понад 15 ТБ даних і близько 20 мільйонів користувачів на день, а бюджет — кілька сотень доларів на місяць."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Преміум‑функції доступні учасникам проєкту на GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Увійти через GitHub (учасник проєкту)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Не вдалося розпочати вхід через GitHub. Спробуйте ще раз."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Не вдалося завершити вхід через GitHub. Спробуйте ще раз."
   },
   "patreonLoginCompleteFailed": {
     "message": "Не вдалося завершити вхід. Спробуйте ще раз."
@@ -155,12 +146,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Приховати панель преміальної аналітики відео на сторінках перегляду YouTube."
   },
-  "roundNumbers": {
-    "message": "Показувати заокруглені значення"
-  },
-  "roundNumbersHover": {
-    "message": "Округлює значення відміток (стандартний параметр YouTube)"
-  },
   "shortsSupport": {
     "message": "Підтримка YouTube Shorts"
   },
@@ -169,9 +154,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Показувати відсоток у підказці панелі вподобань/невподобань."
-  },
-  "textColorTheme": {
-    "message": "Кольорова схема:"
   },
   "textColorTheme1": {
     "message": "Класика"
@@ -200,38 +182,8 @@
   "colorThemeDislike": {
     "message": "Не подобається"
   },
-  "textColorizeRatioBar": {
-    "message": "Обрати кольори стрічки співвідношення"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Змінює кольори стрічки співвідношення на обрані вами."
-  },
-  "textColorizeThumbs": {
-    "message": "Обрати кольори відміток"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Змінює кольори піктограм відміток на обрані вами."
-  },
-  "textConsistentFormat": {
-    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
-  },
-  "textConsistentFormatHover": {
-    "message": "Форматувати як числа."
-  },
   "textDeveloper": {
     "message": "від Дмитра Селіванова та спільноти"
-  },
-  "textLikesDisabled": {
-    "message": "Вимкнуто власником"
-  },
-  "textNumberFormat": {
-    "message": "Формат значень:"
-  },
-  "textRoundingNumbers": {
-    "message": "Округлює значення відміток (стандартний параметр YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Показувати заокруглені значення."
   },
   "textSettings": {
     "message": "Вимкнути надсилання відміток"
@@ -241,9 +193,6 @@
   },
   "textTempUnavailable": {
     "message": "Тимчасово недоступно"
-  },
-  "textUpdate": {
-    "message": "Оновлення до"
   },
   "tooltipPercentageMode": {
     "message": "Режим відсотків:"
@@ -458,9 +407,6 @@
   "premiumTeaser_statRaw": {
     "message": "Кількість необроблених дизлайків"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Орієнтовні дизлайки"
-  },
   "premiumTeaser_statLikes": {
     "message": "Сира кількість вподобань"
   },
@@ -469,21 +415,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Наразі не вдалося завантажити дані про дизлайки. Спробуйте оновити сторінку."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Як розблокувати преміальну аналітику"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Розблокуйте преміальну відеоаналітику у три швидкі кроки:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Увійдіть через Patreon у спливаючому вікні розширення Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Виберіть рівень Premium, щоб увімкнути часові шкали активності, рейтинги країн та інтерактивну карту."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Перезавантажте YouTube, щоб переглянути погодинні тренди, провідні країни та деталізацію за штатами США для кожного відео."
   },
   "premiumTierNotice_title": {
     "message": "Преміум-аналітика заблокована"
@@ -534,19 +465,19 @@
     "message": "Запитайте у спільноти"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Приховати зайві кнопки"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Показати приклади «до» та «після»"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Залишати видимими лише кнопки «Подобається» та «Не подобається». «Поділитися», «Зберегти», «Суперподяка» та інші додаткові дії й надалі доступні в меню YouTube з трьома крапками («Інші дії»)."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "До: видно всі кнопки дій"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Після: видно лише «Подобається» та «Не подобається»"
   },
   "changelog_brand_logo_alt": {
     "message": "Логотип Return YouTube Dislike"
@@ -605,9 +536,6 @@
   "discussion_empty": {
     "message": "Коментарів поки немає. Розпочніть розмову."
   },
-  "discussion_replyEmpty": {
-    "message": "Відповідей поки немає."
-  },
   "discussion_comment": {
     "message": "Коментар"
   },
@@ -652,9 +580,6 @@
   },
   "discussion_dislike": {
     "message": "Не подобається"
-  },
-  "discussion_reacting": {
-    "message": "Збереження реакції…"
   },
   "discussion_signInRequired": {
     "message": "Щоб продовжити, увійдіть через спливне вікно розширення."
@@ -749,12 +674,6 @@
   "discussion_moderationReason": {
     "message": "Причина модерації"
   },
-  "discussion_moderationSaved": {
-    "message": "Дію модерації збережено."
-  },
-  "discussion_reported": {
-    "message": "Скарг: $1"
-  },
   "discussion_unavailable": {
     "message": "Коментарі RYD недоступні для цього відео."
   },
@@ -791,12 +710,6 @@
   "discussion_notificationLikes": {
     "message": "Кількість уподобань вашого коментаря: $1"
   },
-  "discussion_notificationDislike": {
-    "message": "Комусь не сподобався ваш коментар"
-  },
-  "discussion_notificationReaction": {
-    "message": "Хтось відреагував на ваш коментар"
-  },
   "discussion_someone": {
     "message": "Хтось"
   },
@@ -809,23 +722,14 @@
   "discussion_view": {
     "message": "Переглянути обговорення"
   },
-  "discussion_unread": {
-    "message": "Непрочитаних сповіщень: $1"
-  },
   "discussion_signedOutInbox": {
     "message": "Увійдіть, щоб бачити відповіді й уподобання ваших коментарів."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Це обговорення більше недоступне."
   },
   "discussion_discussionTab": {
     "message": "Обговорення"
   },
   "discussion_nickname": {
     "message": "Псевдонім"
-  },
-  "discussion_reportCount": {
-    "message": "Скарги"
   },
   "discussion_reportStatus": {
     "message": "Статус скарги"
@@ -839,20 +743,8 @@
   "discussion_author": {
     "message": "Автор"
   },
-  "discussion_me": {
-    "message": "Ви"
-  },
   "discussion_saving": {
     "message": "Збереження…"
-  },
-  "discussion_confirm": {
-    "message": "Підтвердити"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Нова активність у ваших коментарях"
-  },
-  "discussion_showThread": {
-    "message": "Показати гілку обговорення"
   },
   "discussion_loadReplies": {
     "message": "Показати відповіді ($1)"
@@ -941,11 +833,29 @@
   "changelog_analytics_us_body": {
     "message": "Розгляньте активність за штатами докладніше."
   },
+  "changelog_appeal_title": {
+    "message": "Маленьке, трохи незручне прохання"
+  },
+  "changelog_appeal_intro": {
+    "message": "Привіт. Це та частина, де ми говоримо про гроші, і, чесно кажучи, у нас це не дуже виходить."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike — невеликий проєкт із відкритим кодом, який створюють Дмитро Селіванов і спільнота. Щодня він відповідає приблизно 20 мільйонам людей і зберігає понад 15 ТБ даних. Усе це працює на кілька сотень доларів на місяць — не так багато, щоб повернути те, що вирішила прибрати компанія вартістю в мільярди доларів."
+  },
+  "changelog_appeal_free": {
+    "message": "Кількість невподобань безкоштовна й такою залишиться. У цьому весь сенс. Але сервери не безкоштовні, і, чесно кажучи, витрати на їх утримання не залишили нам особливого вибору: щоб проєкт працював далі, нам довелося запровадити функції Premium — коментарі RYD та аналітику Premium. Кожна підписка допомагає покривати ці витрати."
+  },
+  "changelog_appeal_ask": {
+    "message": "Якщо RYD хоч раз урятував вас від клікбейтного відео чи інструкції, яка не спрацювала, будь ласка, подумайте про підтримку на Patreon. А якщо зараз не час — нічого страшного. Дякуємо, що користуєтеся ним і голосуєте: кожен голос робить цифри трохи точнішими."
+  },
+  "changelog_appeal_cta": {
+    "message": "Приєднуйтеся на Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Дмитро і спільнота RYD"
+  },
   "changelog_join_title": {
     "message": "Отримайте можливості Premium"
-  },
-  "changelog_join_free": {
-    "message": "Кількість невподобань доступна всім безкоштовно. Участь добровільна й допомагає підтримувати проєкт."
   },
   "changelog_join_step1": {
     "message": "Приєднуйтеся на Patreon. Commenter дозволяє писати коментарі, а Premium також додає аналітику."
@@ -1061,6 +971,12 @@
   "popup_signin_next_click": {
     "message": "Потрібне ще одне натискання: виберіть кнопку входу нижче, щоб переглянути дозволи облікового запису у Firefox та продовжити."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Нові правила приватності Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "У Firefox RYD потрібен ваш дозвіл, перш ніж він зможе показувати невподобання. Ось що саме охоплює цей дозвіл — і чого не охоплює."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Дякуємо. Тепер ваші оцінки враховуються."
   },
@@ -1081,9 +997,6 @@
   },
   "discussion_consentContinue": {
     "message": "Продовжити"
-  },
-  "counts_consent_enable": {
-    "message": "Увімкнути показ дизлайків"
   },
   "counts_consent_toolbar": {
     "message": "Щоб продовжити, відкрийте Return YouTube Dislike з меню розширень Firefox."
