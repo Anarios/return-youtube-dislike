@@ -30,7 +30,7 @@ function builtManifest(env) {
 
 test("production packaging never adds a local discussion host", () => {
   const manifest = builtManifest({});
-  expect(manifest.host_permissions).toEqual(["*://*.youtube.com/*", "*://returnyoutubedislikeapi.com/*"]);
+  expect(manifest.host_permissions).toEqual(["*://*.youtube.com/*"]);
   expect(manifest.minimum_chrome_version).toBe("116");
   expect(manifest.permissions).toEqual(["storage"]);
   expect(manifest.web_accessible_resources[0].resources).toContain("comments-bridge.js");
