@@ -7,11 +7,9 @@ const { spawnSync } = require("node:child_process");
 const { filterCertificates, readCertificates, prepareEnvironment, main } = require("./with-trusted-node.cjs");
 
 const root = path.resolve(__dirname, "../.private/node-trust-tests");
-const blocked = tls.rootCertificates.find((pem) =>
-  new X509Certificate(pem).subject.includes("CN=AAA Certificate Services"),
-);
+const blocked = fs.readFileSync(path.join(__dirname, "fixtures/aaa-certificate-services.pem"), "utf8");
 const allowed = tls.rootCertificates.filter(
-  (pem) => !new X509Certificate(pem).subject.includes("emSign") && pem !== blocked,
+  (pem) => !/emSign|CN=AAA Certificate Services/.test(new X509Certificate(pem).subject),
 );
 const npmConfig = { ca: null, cafile: null, strictSsl: true, nodeOptions: null };
 let temporary;
@@ -28,7 +26,7 @@ afterEach(() => {
 });
 
 test("excludes an affected root by public key and retains unrelated roots without duplicates", () => {
-  expect(blocked).toBeDefined();
+  expect(new X509Certificate(blocked).subject).toContain("CN=AAA Certificate Services");
   const result = filterCertificates([allowed[0], blocked, allowed[0]]);
   expect(result).toBe(new X509Certificate(allowed[0]).toString());
   expect(() => filterCertificates([blocked])).toThrow(/No trusted certificates/);

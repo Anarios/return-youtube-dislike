@@ -9,7 +9,7 @@ const { collectExtensionBuildInputs, createExtensionBuildReceipt } = require("..
 const { verifyBuildReceipt, verifyExtensionArtifacts } = require("../Extensions/e2e/verify-extension-artifact");
 
 const REPOSITORY_ROOT = path.resolve(__dirname, "..");
-const EXPECTED_NODE = "v22.17.0";
+const EXPECTED_NODE = "v22.23.4";
 const EXPECTED_NPM = "10.8.2";
 const ARTIFACT_VERIFIER_PATH = "Extensions/e2e/verify-extension-artifact.js";
 const EXTRA_SOURCE_FILES = Object.freeze([
