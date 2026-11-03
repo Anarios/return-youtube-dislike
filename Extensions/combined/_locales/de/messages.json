@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Informationen zu deiner Patreon-Mitgliedschaft werden verwendet, um deinen Premium-Zugang zu überprüfen. Wir erhalten keine Karten- oder Bankdaten von dir."
   },
+  "paidFeaturesWhy": {
+    "message": "Dislike-Zahlen bleiben für alle kostenlos. Kostenpflichtige Extras helfen, die Server dahinter zu bezahlen: über 15 TB Daten und rund 20 Millionen Nutzer am Tag, bei einem Budget von ein paar hundert Dollar im Monat."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Betrachte die Beteiligung nach Bundesstaat im Detail."
   },
+  "changelog_appeal_title": {
+    "message": "Eine kleine, etwas unangenehme Bitte"
+  },
+  "changelog_appeal_intro": {
+    "message": "Hallo. Jetzt kommt der Teil, in dem es um Geld geht – und ehrlich gesagt sind wir darin nicht besonders gut."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike ist ein kleines Open-Source-Projekt von Dmitry Selivanov und der Community. Jeden Tag beantwortet es Anfragen von rund 20 Millionen Menschen und verwaltet mehr als 15 TB Daten. All das läuft mit ein paar hundert Dollar im Monat – nicht viel, um etwas zurückzubringen, das ein Milliardenkonzern abgeschafft hat."
+  },
+  "changelog_appeal_free": {
+    "message": "Dislike-Zahlen sind kostenlos und bleiben es auch. Genau darum geht es. Server sind es aber nicht, und ehrlich gesagt haben uns die laufenden Kosten kaum eine Wahl gelassen: Damit das Projekt weiterläuft, mussten wir Premium-Funktionen einführen – RYD-Kommentare und Premium-Analysen. Jede Mitgliedschaft hilft, diese Kosten zu decken."
+  },
+  "changelog_appeal_ask": {
+    "message": "Wenn RYD dich schon einmal vor einem Clickbait-Video oder einer Anleitung bewahrt hat, die nicht funktioniert hat, überleg dir bitte, auf Patreon mitzumachen. Und wenn es gerade nicht passt, ist das völlig in Ordnung. Danke, dass du RYD nutzt und abstimmst: Jede Stimme macht die Zahlen ein bisschen genauer."
+  },
+  "changelog_appeal_cta": {
+    "message": "Werde Mitglied auf Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry und die RYD-Community"
+  },
   "changelog_join_title": {
     "message": "Hol dir Premium-Funktionen"
-  },
-  "changelog_join_free": {
-    "message": "Dislike-Zahlen sind für alle kostenlos. Eine Mitgliedschaft ist freiwillig und unterstützt das Projekt."
   },
   "changelog_join_step1": {
     "message": "Werde Mitglied auf Patreon. Mit Commenter kannst du Kommentare schreiben; Premium bietet zusätzlich Analysen."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Ein weiterer Klick ist nötig: Wähle unten deine Anmeldeschaltfläche, um die Kontoberechtigungen von Firefox zu prüfen und fortzufahren."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Die neuen Datenschutzregeln von Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "In Firefox braucht RYD deine Erlaubnis, bevor es Dislikes anzeigen kann. Hier steht genau, was diese Erlaubnis umfasst – und was nicht."
   },
   "changelog_firefox_vote_granted": {
     "message": "Danke. Deine Bewertungen zählen jetzt."

@@ -2,7 +2,7 @@ Return YouTube Dislike obnoví možnost vidět palce dolů na YouTube.
 
 Komentáře RYD vám umožňují číst diskuse a reagovat na ně pod videi a Shorts, kde jsou komentáře YouTube vypnuté. Členové úrovní Commenter a Premium mohou psát komentáře a odpovídat a dostávají oznámení o odpovědích a palcích nahoru.
 
-Základní počty palců dolů jsou zdarma. Některé volitelné funkce mají požadavky na přístup, včetně placených úrovní členství na Patreonu nebo přístupu pro způsobilé přispěvatele na GitHubu.
+Základní počty palců dolů jsou zdarma pro všechny. Některé volitelné funkce, například psaní komentářů RYD a prémiové statistiky videa, vyžadují placené členství na Patreonu nebo přístup pro způsobilé přispěvatele na GitHubu. Tyto placené doplňky pomáhají platit servery, díky kterým zůstávají počty palců dolů zdarma: přes 15 TB dat a zhruba 20 milionů uživatelů denně s rozpočtem několika stovek dolarů měsíčně.
 
 Vaše hlasy pomáhají zpřesňovat odhady. Odesílají se s náhodným ID, které se vytvoří, když poprvé zahlasujete nebo zareagujete na komentář, a není propojené s vaším účtem Google ani YouTube. Odesílání hlasů můžete zastavit volbou „Zakázat odesílání palců nahoru/dolů“ v nabídce rozšíření.
 

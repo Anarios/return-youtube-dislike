@@ -2,7 +2,7 @@ Return YouTube Dislike restaura a possibilidade de ver os “não gostei” no Y
 
 Os comentários do RYD permitem que você leia discussões e reaja a elas em vídeos e Shorts com os comentários do YouTube desativados. Membros Commenter e Premium podem publicar e responder, com notificações de respostas e curtidas.
 
-As contagens básicas de “não gostei” são gratuitas. Alguns recursos opcionais têm requisitos de acesso, incluindo níveis pagos de assinatura no Patreon ou acesso para colaboradores elegíveis do GitHub.
+As contagens básicas de “não gostei” são gratuitas para todos. Alguns recursos opcionais, como publicar comentários do RYD e os insights premium dos vídeos, exigem uma assinatura paga no Patreon ou acesso para colaboradores elegíveis do GitHub. Esses extras pagos ajudam a pagar os servidores que mantêm as contagens de “não gostei” gratuitas: mais de 15 TB de dados e cerca de 20 milhões de usuários por dia, com um orçamento de algumas centenas de dólares por mês.
 
 Seus votos ajudam a melhorar as estimativas. Eles são enviados com um ID aleatório que é criado na primeira vez que você vota ou reage a um comentário e que não está vinculado à sua conta do Google ou do YouTube. Você pode parar de enviar votos com “Desativar envio de curtidas/descurtidas” no menu da extensão.
 

@@ -2,7 +2,7 @@ A Return YouTube Dislike visszaállítja a YouTube dislike számlálóját.
 
 Az RYD-hozzászólásokkal elolvashatod a beszélgetéseket és reagálhatsz rájuk azoknál a videóknál és Shorts-videóknál, ahol a YouTube-hozzászólások ki vannak kapcsolva. A Commenter és Premium tagok hozzászólhatnak és válaszolhatnak, és értesítést kapnak a válaszokról és a like-okról.
 
-Az alapvető dislike-számok ingyenesek. Egyes választható funkcióknak hozzáférési feltételei vannak, többek között fizetős Patreon-tagsági szintek vagy jogosult GitHub-közreműködői hozzáférés.
+Az alapvető dislike-számok mindenki számára ingyenesek. Egyes választható funkciókhoz, például az RYD-hozzászólások írásához és a prémium videóelemzésekhez, fizetős Patreon-tagság vagy jogosult GitHub-közreműködői hozzáférés szükséges. Ezek a fizetős extrák segítenek fedezni azoknak a szervereknek a költségeit, amelyek ingyenesen tartják a dislike-számokat: több mint 15 TB adat és naponta körülbelül 20 millió felhasználó, havi néhány száz dolláros költségvetésből.
 
 A szavazataid segítik a becslések javítását. Egy véletlenszerű azonosítóval küldjük el őket, amely akkor jön létre, amikor először szavazol vagy reagálsz egy hozzászólásra, és nincs összekapcsolva a Google- vagy YouTube-fiókoddal. A szavazatok küldését a bővítmény menüjében a „Like/Dislike beküldés kikapcsolása” opcióval állíthatod le.
 

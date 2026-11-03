@@ -2,7 +2,7 @@ Return YouTube Dislike YouTube-da bəyənməmələri görmək imkanını bərpa 
 
 RYD şərhləri sizə YouTube şərhləri söndürülmüş videolar və Shorts altındakı müzakirələri oxumağa və onlara reaksiya verməyə imkan verir. Commenter və Premium üzvləri şərh və cavab yaza bilər, həmçinin cavablar və bəyənmələr barədə bildirişlər alırlar.
 
-Əsas bəyənməmə sayları pulsuzdur. Bəzi opsional funksiyalar üçün giriş tələbləri var, o cümlədən ödənişli Patreon üzvlük səviyyələri və ya uyğun GitHub töhfəçiləri üçün giriş.
+Əsas bəyənməmə sayları hər kəs üçün pulsuzdur. RYD şərhləri yazmaq və Premium video analitikası kimi bəzi opsional funksiyalar üçün ödənişli Patreon üzvlüyü və ya uyğun GitHub töhfəçiləri üçün giriş tələb olunur. Bu ödənişli əlavələr bəyənməmə saylarını pulsuz saxlayan serverlərin xərclərini ödəməyə kömək edir: 15 TB-dan çox məlumat və gündə təxminən 20 milyon istifadəçi, ayda bir neçə yüz dollarlıq büdcə ilə.
 
 Səsləriniz təxminləri yaxşılaşdırmağa kömək edir. Onlar ilk dəfə səs verdiyiniz və ya şərhə reaksiya verdiyiniz zaman yaradılan və Google və ya YouTube hesabınızla əlaqələndirilməyən təsadüfi identifikatorla göndərilir. Genişləndirmə menyusundakı «Like/dislike göndərməsini deaktiv et» seçimi ilə səslərin göndərilməsini dayandıra bilərsiniz.
 

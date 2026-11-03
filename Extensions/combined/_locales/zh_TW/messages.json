@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Patreon 會員資訊用於驗證進階功能的存取權限。我們不會接收您的卡片或銀行帳戶資料。"
   },
+  "paidFeaturesWhy": {
+    "message": "不喜歡次數將持續免費提供給所有人。付費功能幫助支付背後的伺服器費用：超過 15 TB 的資料、每天約 2,000 萬名使用者，而每月預算只有幾百美元。"
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "放大查看各州的互動情況。"
   },
+  "changelog_appeal_title": {
+    "message": "一個小小的、有點難為情的請求"
+  },
+  "changelog_appeal_intro": {
+    "message": "你好。接下來要談錢的事了，老實說，我們不太擅長這個。"
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike 是一個小型開源專案，由 Dmitry Selivanov 與社群共同打造。它每天為約 2,000 萬人提供服務，保管超過 15 TB 的資料。這一切每月只靠幾百美元維持——要找回一家市值數十億美元的公司決定拿走的東西，這筆錢真的不多。"
+  },
+  "changelog_appeal_free": {
+    "message": "不喜歡次數是免費的，而且會一直免費。這正是這個專案的意義所在。但伺服器不是免費的，老實說，營運成本沒給我們留下太多選擇：為了讓專案繼續運作，我們不得不推出 Premium 功能——RYD 留言和 Premium 數據分析。每一份會員都在幫助支付這些費用。"
+  },
+  "changelog_appeal_ask": {
+    "message": "如果 RYD 曾經幫你避開過一部標題殺人的影片，或是一個沒用的教學，請考慮在 Patreon 上加入我們。如果現在不方便，也完全沒關係。感謝你一直使用它並參與投票：每一票都讓數字更準確一點。"
+  },
+  "changelog_appeal_cta": {
+    "message": "在 Patreon 加入會員"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry 和 RYD 社群"
+  },
   "changelog_join_title": {
     "message": "取得 Premium 功能"
-  },
-  "changelog_join_free": {
-    "message": "所有人都能免費查看不喜歡次數。加入會員完全自願，也能支持本專案。"
   },
   "changelog_join_step1": {
     "message": "在 Patreon 加入會員。Commenter 可以發表留言，Premium 還提供數據分析功能。"
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "還需要點擊一次：請選擇下方的登入按鈕，檢視 Firefox 的帳號權限並繼續。"
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox 的新隱私規則"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "在 Firefox 中，RYD 需要先取得你的許可才能顯示不喜歡次數。以下會準確說明這項許可包括什麼，以及不包括什麼。"
   },
   "changelog_firefox_vote_granted": {
     "message": "謝謝。您的評價現在會被計入。"

@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "A Patreon-tagság adatait a prémium hozzáférés ellenőrzésére használjuk. Nem kapjuk meg a kártya- vagy banki adataidat."
   },
+  "paidFeaturesWhy": {
+    "message": "A nemtetszések száma továbbra is mindenki számára ingyenes. A fizetős extrák segítenek fedezni a mögötte álló szerverek költségeit: több mint 15 TB adat és naponta körülbelül 20 millió felhasználó, havi néhány száz dolláros költségvetésből."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Vizsgálja meg közelebbről az aktivitást államonként."
   },
+  "changelog_appeal_title": {
+    "message": "Egy kicsi, kissé kínos kérés"
+  },
+  "changelog_appeal_intro": {
+    "message": "Szia! Ez az a rész, ahol a pénzről beszélünk, és őszintén szólva nem vagyunk túl jók benne."
+  },
+  "changelog_appeal_costs": {
+    "message": "A Return YouTube Dislike egy kis nyílt forráskódú projekt, amelyet Dmitry Selivanov és a közösség készít. Naponta nagyjából 20 millió embert szolgál ki, és több mint 15 TB adatot kezel. Mindez havi néhány száz dollárból működik, ami nem sok ahhoz, hogy visszahozzunk valamit, amit egy milliárdos cég úgy döntött, hogy elvesz."
+  },
+  "changelog_appeal_free": {
+    "message": "A nemtetszések száma ingyenes, és az is marad. Ez a lényeg. A szerverek viszont nem azok, és őszintén szólva a működési költségek nem sok választást hagytak: hogy a projekt működhessen, Premium funkciókat kellett bevezetnünk – az RYD-hozzászólásokat és a Premium elemzéseket. Minden tagság segít fedezni ezeket a költségeket."
+  },
+  "changelog_appeal_ask": {
+    "message": "Ha az RYD akár egyszer is megkímélt egy kattintásvadász videótól vagy egy nem működő útmutatótól, kérjük, fontold meg, hogy csatlakozz a Patreonon. Ha pedig most nem alkalmas, az teljesen rendben van. Köszönjük, hogy használod és szavazol: minden szavazat egy kicsit pontosabbá teszi a számokat."
+  },
+  "changelog_appeal_cta": {
+    "message": "Csatlakozzon a Patreonon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry és az RYD közössége"
+  },
   "changelog_join_title": {
     "message": "Szerezze meg a Premium funkciókat"
-  },
-  "changelog_join_free": {
-    "message": "A nemtetszések száma mindenki számára ingyenes. A tagság választható, és segít támogatni a projektet."
   },
   "changelog_join_step1": {
     "message": "Csatlakozzon a Patreonon. A Commenter hozzászólást tesz lehetővé, a Premium pedig elemzéseket is ad."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Még egy kattintás szükséges: alább válaszd ki a bejelentkezési gombot a Firefox fiókengedélyeinek áttekintéséhez és a folytatáshoz."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "A Firefox új adatvédelmi szabályai"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "A Firefoxban az RYD-nek az engedélyedre van szüksége, mielőtt megjelenítheti a nemtetszéseket. Itt pontosan látod, mire terjed ki ez az engedély – és mire nem."
   },
   "changelog_firefox_vote_granted": {
     "message": "Köszönjük. A szavazataid mostantól számítanak."

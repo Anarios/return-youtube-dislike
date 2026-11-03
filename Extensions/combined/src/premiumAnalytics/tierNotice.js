@@ -42,11 +42,13 @@ function createPanelMarkup() {
   const title = localize("premiumTierNotice_title");
   const message = localize("premiumTierNotice_message");
   const cta = localize("premiumTierNotice_cta");
+  const why = localize("paidFeaturesWhy");
 
   return `
     <div class="ryd-premium-tier-notice__content">
       <h2 class="ryd-premium-tier-notice__title">${title}</h2>
       <p class="ryd-premium-tier-notice__message">${message}</p>
+      <p class="ryd-premium-tier-notice__why">${why}</p>
       <div class="ryd-premium-tier-notice__actions">
         <a href="${PATREON_UPGRADE_URL}" class="ryd-premium-tier-notice__cta" id="ryd-premium-tier-upgrade">${cta}</a>
       </div>

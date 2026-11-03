@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Information om ditt Patreon-medlemskap används för att verifiera din premiumåtkomst. Vi får inte dina kort- eller bankuppgifter."
   },
+  "paidFeaturesWhy": {
+    "message": "Antalet ogilla-markeringar förblir gratis för alla. Betalda extrafunktioner hjälper till att betala servrarna bakom dem: över 15 TB data och omkring 20 miljoner användare per dag, med en budget på några hundra dollar i månaden."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Se engagemanget per delstat i detalj."
   },
+  "changelog_appeal_title": {
+    "message": "En liten, lite pinsam vädjan"
+  },
+  "changelog_appeal_intro": {
+    "message": "Hej. Det här är delen där vi pratar om pengar, och ärligt talat är vi inte så bra på det."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike är ett litet projekt med öppen källkod, byggt av Dmitry Selivanov och communityn. Varje dag svarar det ungefär 20 miljoner människor och tar hand om mer än 15 TB data. Allt det körs på några hundra dollar i månaden, vilket inte är mycket för att ta tillbaka något som ett miljardföretag bestämde sig för att ta bort."
+  },
+  "changelog_appeal_free": {
+    "message": "Antalet ogilla-markeringar är gratis och kommer att förbli det. Det är hela poängen. Men servrar är inte gratis, och ärligt talat lämnade driftskostnaderna oss inte mycket val: för att hålla projektet igång var vi tvungna att införa Premium-funktioner – RYD-kommentarer och Premiumanalys. Varje medlemskap hjälper till att täcka de kostnaderna."
+  },
+  "changelog_appeal_ask": {
+    "message": "Om RYD någon gång har räddat dig från en clickbaitvideo eller en guide som inte fungerade, fundera gärna på att gå med på Patreon. Och om det inte passar just nu är det helt okej. Tack för att du använder det och röstar: varje röst gör siffrorna lite mer exakta."
+  },
+  "changelog_appeal_cta": {
+    "message": "Bli medlem på Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry och RYD-communityn"
+  },
   "changelog_join_title": {
     "message": "Skaffa Premiumfunktioner"
-  },
-  "changelog_join_free": {
-    "message": "Antalet ogilla-markeringar är gratis för alla. Medlemskap är frivilligt och hjälper till att stödja projektet."
   },
   "changelog_join_step1": {
     "message": "Bli medlem på Patreon. Med Commenter kan du skriva kommentarer; Premium ger dig även analysfunktioner."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Ytterligare ett klick behövs: välj din inloggningsknapp nedan för att granska Firefox kontobehörigheter och fortsätta."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox nya integritetsregler"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "I Firefox behöver RYD ditt tillstånd innan det kan visa ogilla-markeringar. Här är exakt vad tillståndet omfattar – och vad det inte omfattar."
   },
   "changelog_firefox_vote_granted": {
     "message": "Tack. Dina röster räknas nu."

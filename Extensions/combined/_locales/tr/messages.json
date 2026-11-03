@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Premium erişimi doğrulamak için Patreon üyelik bilgileri kullanılır. Kart veya banka bilgileriniz bize iletilmez."
   },
+  "paidFeaturesWhy": {
+    "message": "Beğenmeme sayıları herkes için ücretsiz kalmaya devam ediyor. Ücretli ekstralar, bunları sağlayan sunucuların masraflarını karşılamaya yardımcı oluyor: 15 TB'tan fazla veri ve günde yaklaşık 20 milyon kullanıcı, ayda birkaç yüz dolarlık bir bütçeyle."
+  },
   "githubLoggedOutMessage": {
     "message": "GitHub katkıda bulunanları için Premium özellikler kullanılabilir"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Eyaletlere göre etkileşimi daha ayrıntılı inceleyin."
   },
+  "changelog_appeal_title": {
+    "message": "Küçük, biraz da mahcup bir rica"
+  },
+  "changelog_appeal_intro": {
+    "message": "Merhaba. Şimdi paradan bahsettiğimiz kısma geldik ve açıkçası bu konuda pek iyi değiliz."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike, Dmitry Selivanov ve topluluk tarafından geliştirilen küçük bir açık kaynak projesidir. Her gün yaklaşık 20 milyon kişiye yanıt veriyor ve 15 TB'tan fazla veriyi koruyor. Bütün bunlar ayda birkaç yüz dolarla işliyor; milyar dolarlık bir şirketin kaldırmaya karar verdiği bir şeyi geri getirmek için bu pek fazla sayılmaz."
+  },
+  "changelog_appeal_free": {
+    "message": "Beğenmeme sayıları ücretsiz ve öyle kalacak. Asıl mesele de bu. Ama sunucular ücretsiz değil ve açıkçası işletme maliyetleri bize pek seçenek bırakmadı: projeyi ayakta tutmak için Premium özellikleri — RYD yorumları ve Premium analizler — sunmak zorunda kaldık. Her üyelik bu maliyetleri karşılamaya yardımcı oluyor."
+  },
+  "changelog_appeal_ask": {
+    "message": "RYD sizi bir kez bile tık tuzağı bir videodan ya da işe yaramayan bir eğitimden kurtardıysa, lütfen Patreon'a katılmayı düşünün. Şu an uygun değilse hiç sorun değil. Kullandığınız ve oy verdiğiniz için teşekkürler: her oy sayıları biraz daha doğru hâle getiriyor."
+  },
+  "changelog_appeal_cta": {
+    "message": "Patreon’da katılın"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry ve RYD topluluğu"
+  },
   "changelog_join_title": {
     "message": "Premium özellikleri edinin"
-  },
-  "changelog_join_free": {
-    "message": "Beğenmeme sayıları herkes için ücretsizdir. Üyelik isteğe bağlıdır ve projeyi destekler."
   },
   "changelog_join_step1": {
     "message": "Patreon’da katılın. Commenter yorum yazmanızı sağlar; Premium ayrıca analizleri de sunar."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Bir tıklama daha gerekli: Firefox’un hesap izinlerini inceleyip devam etmek için aşağıdaki giriş düğmenizi seçin."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox’un yeni gizlilik kuralları"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Firefox’ta RYD’nin beğenmeme sayılarını gösterebilmesi için izninize ihtiyacı var. Bu iznin tam olarak neyi kapsadığını — ve neyi kapsamadığını — aşağıda bulabilirsiniz."
   },
   "changelog_firefox_vote_granted": {
     "message": "Teşekkürler. Oylarınız artık sayılıyor."

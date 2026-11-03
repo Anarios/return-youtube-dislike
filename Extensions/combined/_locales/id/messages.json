@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Informasi keanggotaan Patreon digunakan untuk memverifikasi akses premium. Kami tidak menerima detail kartu atau rekening bank Anda."
   },
+  "paidFeaturesWhy": {
+    "message": "Jumlah tidak suka tetap gratis untuk semua orang. Fitur berbayar membantu membiayai server di baliknya: lebih dari 15 TB data dan sekitar 20 juta pengguna per hari, dengan anggaran beberapa ratus dolar per bulan."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Perbesar untuk melihat interaksi per negara bagian."
   },
+  "changelog_appeal_title": {
+    "message": "Permintaan kecil yang agak canggung"
+  },
+  "changelog_appeal_intro": {
+    "message": "Hai. Ini bagian ketika kami membahas soal uang, dan jujur saja, kami tidak terlalu pandai melakukannya."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike adalah proyek sumber terbuka kecil yang dibuat oleh Dmitry Selivanov dan komunitas. Setiap hari, proyek ini melayani sekitar 20 juta orang dan menjaga lebih dari 15 TB data. Semuanya berjalan dengan beberapa ratus dolar per bulan, jumlah yang tidak besar untuk mengembalikan sesuatu yang diputuskan untuk dihapus oleh perusahaan bernilai miliaran dolar."
+  },
+  "changelog_appeal_free": {
+    "message": "Jumlah tidak suka gratis, dan akan tetap gratis. Itulah intinya. Tapi server tidak gratis, dan jujur saja, biaya operasionalnya tidak memberi kami banyak pilihan: agar proyek ini tetap berjalan, kami harus menghadirkan fitur Premium — komentar RYD dan analitik Premium. Setiap keanggotaan membantu menutup biaya tersebut."
+  },
+  "changelog_appeal_ask": {
+    "message": "Jika RYD pernah menyelamatkanmu dari video clickbait atau tutorial yang tidak berhasil, pertimbangkan untuk bergabung di Patreon. Dan jika sekarang bukan saat yang tepat, tidak apa-apa. Terima kasih sudah menggunakannya dan memberikan suara: setiap suara membuat angkanya sedikit lebih akurat."
+  },
+  "changelog_appeal_cta": {
+    "message": "Bergabunglah di Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry dan komunitas RYD"
+  },
   "changelog_join_title": {
     "message": "Dapatkan fitur Premium"
-  },
-  "changelog_join_free": {
-    "message": "Jumlah tidak suka gratis untuk semua orang. Keanggotaan bersifat opsional dan membantu mendukung proyek ini."
   },
   "changelog_join_step1": {
     "message": "Bergabunglah di Patreon. Commenter memungkinkan Anda mengirim komentar; Premium juga menambahkan analitik."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Perlu satu klik lagi: pilih tombol masuk di bawah untuk meninjau izin akun Firefox dan melanjutkan."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Aturan privasi baru Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Di Firefox, RYD memerlukan izinmu sebelum dapat menampilkan jumlah tidak suka. Berikut persisnya apa yang dicakup izin itu — dan apa yang tidak."
   },
   "changelog_firefox_vote_granted": {
     "message": "Terima kasih. Suara Anda kini dihitung."

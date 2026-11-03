@@ -333,6 +333,7 @@ function createPanelMarkup() {
   const subtitle = localize("premiumTeaser_subtitle");
   const ctaText = localize("premiumTeaser_cta");
   const secondaryText = localize("premiumTeaser_learn");
+  const whyText = localize("paidFeaturesWhy");
   const closeLabel = localize("hidePremiumTeaser");
   const statDislikes = localize("premiumTeaser_statRaw");
   const statLikes = localize("premiumTeaser_statLikes");
@@ -388,6 +389,7 @@ function createPanelMarkup() {
         <a href="${PATREON_JOIN_URL}" class="ryd-premium-teaser__cta" id="ryd-premium-teaser-cta">${ctaText}</a>
         <a href="${CHANGELOG_URL}" class="ryd-premium-teaser__secondary" id="ryd-premium-teaser-learn">${secondaryText}</a>
       </div>
+      <p class="ryd-premium-teaser__why">${whyText}</p>
       <p class="ryd-premium-teaser__status" id="ryd-premium-teaser-status"></p>
     </div>
   `;

@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Thông tin thành viên Patreon được dùng để xác minh quyền truy cập các tính năng cao cấp. Chúng tôi không nhận thông tin thẻ hoặc tài khoản ngân hàng của bạn."
   },
+  "paidFeaturesWhy": {
+    "message": "Số lượt không thích vẫn miễn phí cho mọi người. Các tính năng trả phí giúp chi trả cho máy chủ vận hành nó: hơn 15 TB dữ liệu và khoảng 20 triệu người dùng mỗi ngày, với ngân sách vài trăm đô la mỗi tháng."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Phóng to để xem tương tác theo từng bang."
   },
+  "changelog_appeal_title": {
+    "message": "Một lời nhờ nhỏ, hơi ngại ngùng"
+  },
+  "changelog_appeal_intro": {
+    "message": "Xin chào. Đây là phần chúng tôi nói về tiền, và thật lòng mà nói, chúng tôi không giỏi chuyện này lắm."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike là một dự án mã nguồn mở nhỏ do Dmitry Selivanov và cộng đồng xây dựng. Mỗi ngày, dự án phục vụ khoảng 20 triệu người và lưu giữ hơn 15 TB dữ liệu. Tất cả vận hành với vài trăm đô la mỗi tháng — không nhiều để mang lại một thứ mà một công ty tỷ đô đã quyết định gỡ bỏ."
+  },
+  "changelog_appeal_free": {
+    "message": "Số lượt không thích là miễn phí và sẽ luôn miễn phí. Đó chính là mục đích. Nhưng máy chủ thì không miễn phí, và thật lòng mà nói, chi phí vận hành không để lại cho chúng tôi nhiều lựa chọn: để dự án tiếp tục hoạt động, chúng tôi buộc phải đưa ra các tính năng Premium — bình luận RYD và phân tích Premium. Mỗi tư cách thành viên đều giúp trang trải những chi phí đó."
+  },
+  "changelog_appeal_ask": {
+    "message": "Nếu RYD từng giúp bạn tránh một video câu view hay một hướng dẫn không hiệu quả, hãy cân nhắc tham gia trên Patreon. Còn nếu bây giờ chưa phải lúc, hoàn toàn không sao cả. Cảm ơn bạn đã sử dụng và bình chọn: mỗi lượt bình chọn giúp con số chính xác hơn một chút."
+  },
+  "changelog_appeal_cta": {
+    "message": "Tham gia trên Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry và cộng đồng RYD"
+  },
   "changelog_join_title": {
     "message": "Sử dụng tính năng Premium"
-  },
-  "changelog_join_free": {
-    "message": "Số lượt không thích miễn phí cho mọi người. Tư cách thành viên là tùy chọn và giúp hỗ trợ dự án."
   },
   "changelog_join_step1": {
     "message": "Tham gia trên Patreon. Commenter cho phép đăng bình luận; Premium có thêm tính năng phân tích."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Cần thêm một lần nhấp: chọn nút đăng nhập bên dưới để xem quyền tài khoản của Firefox và tiếp tục."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Quy tắc quyền riêng tư mới của Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Trên Firefox, RYD cần bạn cho phép trước khi có thể hiển thị số lượt không thích. Dưới đây là chính xác những gì quyền này bao gồm — và những gì không."
   },
   "changelog_firefox_vote_granted": {
     "message": "Cảm ơn bạn. Lượt bình chọn của bạn giờ đã được tính."

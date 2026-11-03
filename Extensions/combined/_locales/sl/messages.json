@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Podatke o članstvu na Patreonu uporabljamo za preverjanje dostopa do premium vsebin. Podatkov o vaši kartici ali banki ne prejmemo."
   },
+  "paidFeaturesWhy": {
+    "message": "Število nevšečkov ostaja brezplačno za vse. Plačljivi dodatki pomagajo plačevati strežnike, ki ga omogočajo: več kot 15 TB podatkov in približno 20 milijonov uporabnikov na dan ob proračunu nekaj sto dolarjev na mesec."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium funkcije so na voljo sodelavcem na GitHubu"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Podrobneje si oglejte odzive po zveznih državah."
   },
+  "changelog_appeal_title": {
+    "message": "Majhna, malce nerodna prošnja"
+  },
+  "changelog_appeal_intro": {
+    "message": "Živjo. To je del, kjer govorimo o denarju, in iskreno, v tem nismo prav dobri."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike je majhen odprtokodni projekt, ki ga ustvarjata Dmitry Selivanov in skupnost. Vsak dan odgovori približno 20 milijonom ljudi in skrbi za več kot 15 TB podatkov. Vse to deluje z nekaj sto dolarji na mesec, kar ni veliko za vrnitev nečesa, kar se je podjetje, vredno milijarde dolarjev, odločilo odvzeti."
+  },
+  "changelog_appeal_free": {
+    "message": "Število nevšečkov je brezplačno in bo tudi ostalo. Za to pri vsem skupaj gre. Strežniki pa niso brezplačni in, iskreno, stroški delovanja nam niso pustili veliko izbire: da bi projekt lahko deloval naprej, smo morali uvesti funkcije Premium — komentarje RYD in analitiko Premium. Vsako članstvo pomaga pokriti te stroške."
+  },
+  "changelog_appeal_ask": {
+    "message": "Če vas je RYD kdaj obvaroval pred videom z vabo za klike ali vodičem, ki ni deloval, razmislite o pridružitvi na Patreonu. Če pa zdaj ni pravi trenutek, je povsem v redu. Hvala, da ga uporabljate in glasujete: vsak glas naredi števila malo natančnejša."
+  },
+  "changelog_appeal_cta": {
+    "message": "Pridružite se na Patreonu"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry in skupnost RYD"
+  },
   "changelog_join_title": {
     "message": "Pridobite funkcije Premium"
-  },
-  "changelog_join_free": {
-    "message": "Število nevšečkov je brezplačno za vse. Članstvo je neobvezno in pomaga podpirati projekt."
   },
   "changelog_join_step1": {
     "message": "Pridružite se na Patreonu. Commenter omogoča objavljanje komentarjev, Premium pa doda še analitiko."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Potreben je še en klik: spodaj izberite gumb za prijavo, da pregledate dovoljenja računa v Firefoxu in nadaljujete."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Nova pravila zasebnosti v Firefoxu"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "V Firefoxu RYD potrebuje vaše dovoljenje, preden lahko prikaže nevšečke. Tukaj je natanko, kaj to dovoljenje zajema — in česa ne."
   },
   "changelog_firefox_vote_granted": {
     "message": "Hvala. Vaši glasovi se zdaj štejejo."

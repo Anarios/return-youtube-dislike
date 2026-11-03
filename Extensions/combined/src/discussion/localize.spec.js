@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 
-import { discussionError, discussionLanguage, discussionText } from "./localize";
+import { discussionError, discussionLanguage, discussionText, extensionText } from "./localize";
 import { shortDate } from "./dom";
 
 const fs = require("fs");
@@ -93,8 +93,13 @@ test.each([undefined, { message: "" }])("falls back to English when a translated
   }
 });
 
+test.each(catalogues)("explains paid features from the %s catalogue", (code, catalogue) => {
+  expect(extensionText("paidFeaturesWhy", code)).toBe(catalogue.paidFeaturesWhy.message);
+});
+
 test("keeps unknown keys and preserves literal and missing substitution values", () => {
   expect(discussionText("unknownKey", [], "de")).toBe("unknownKey");
+  expect(extensionText("unknownName", "de")).toBe("unknownName");
   expect(discussionText("characters", [0, "$1"], "en")).toBe("0 / $1");
   expect(discussionText("characters", [12], "en")).toBe("12 / ");
 });

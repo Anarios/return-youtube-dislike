@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Informace o členství na Patreonu slouží k ověření přístupu k prémiovým funkcím. Údaje o vaší kartě ani bankovním účtu nedostáváme."
   },
+  "paidFeaturesWhy": {
+    "message": "Počty hodnocení Nelíbí se zůstávají zdarma pro všechny. Placené doplňky pomáhají platit servery, které je zajišťují: přes 15 TB dat a zhruba 20 milionů uživatelů denně s rozpočtem několika stovek dolarů měsíčně."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Prohlédněte si aktivitu podle jednotlivých států."
   },
+  "changelog_appeal_title": {
+    "message": "Malá, trochu trapná prosba"
+  },
+  "changelog_appeal_intro": {
+    "message": "Ahoj. Teď přichází část, kdy mluvíme o penězích, a upřímně, moc nám to nejde."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike je malý open-source projekt, který tvoří Dmitry Selivanov a komunita. Každý den odpovídá zhruba 20 milionům lidí a stará se o víc než 15 TB dat. To všechno běží za pár set dolarů měsíčně, což není moc na to, abychom vrátili něco, co se miliardová firma rozhodla vzít."
+  },
+  "changelog_appeal_free": {
+    "message": "Počty hodnocení Nelíbí se jsou zdarma a zdarma zůstanou. O to celé jde. Servery ale zdarma nejsou a provozní náklady nám upřímně moc na výběr nenechaly: abychom projekt udrželi při životě, museli jsme zavést funkce Premium — komentáře RYD a analýzy Premium. Každé členství pomáhá tyto náklady pokrýt."
+  },
+  "changelog_appeal_ask": {
+    "message": "Pokud vás RYD někdy ušetřil clickbaitového videa nebo návodu, který nefungoval, zvažte prosím připojení na Patreonu. A pokud teď není vhodná chvíle, je to úplně v pořádku. Děkujeme, že ho používáte a hlasujete: každý hlas dělá počty o něco přesnější."
+  },
+  "changelog_appeal_cta": {
+    "message": "Přidejte se na Patreonu"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry a komunita RYD"
+  },
   "changelog_join_title": {
     "message": "Získejte funkce Premium"
-  },
-  "changelog_join_free": {
-    "message": "Počty hodnocení Nelíbí se jsou zdarma pro všechny. Členství je dobrovolné a pomáhá podporovat projekt."
   },
   "changelog_join_step1": {
     "message": "Přidejte se na Patreonu. Úroveň Commenter umožňuje psát komentáře; Premium přidává i analýzy."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Je potřeba ještě jedno kliknutí: níže zvolte přihlašovací tlačítko, zkontrolujte oprávnění účtu ve Firefoxu a pokračujte."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Nová pravidla soukromí ve Firefoxu"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Ve Firefoxu potřebuje RYD váš souhlas, než může zobrazovat počty Nelíbí se. Tady je přesně, co tento souhlas zahrnuje — a co ne."
   },
   "changelog_firefox_vote_granted": {
     "message": "Děkujeme. Vaše hlasy se nyní započítávají."

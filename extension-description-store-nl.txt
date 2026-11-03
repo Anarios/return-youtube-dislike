@@ -2,7 +2,7 @@ Return YouTube Dislike herstelt de mogelijkheid om dislikes op YouTube te zien.
 
 Met RYD-reacties kun je bij video's en Shorts waarvan de YouTube-reacties zijn uitgeschakeld discussies lezen en reacties waarderen. Leden met Commenter of Premium kunnen berichten en antwoorden plaatsen en krijgen meldingen over antwoorden en likes.
 
-De kernfunctie, het tonen van het aantal dislikes, is gratis. Voor sommige optionele functies gelden toegangsvoorwaarden, waaronder betaalde lidmaatschapsniveaus op Patreon of toegang voor in aanmerking komende GitHub-bijdragers.
+De kernfunctie, het tonen van het aantal dislikes, is voor iedereen gratis. Voor sommige optionele functies, zoals het plaatsen van RYD-reacties en Premium-video-inzichten, is een betaald lidmaatschap op Patreon of toegang als in aanmerking komende GitHub-bijdrager nodig. Deze betaalde extra's helpen de servers te betalen die het aantal dislikes gratis houden: meer dan 15 TB aan data en zo'n 20 miljoen gebruikers per dag, met een budget van een paar honderd dollar per maand.
 
 Je stemmen helpen de schattingen te verbeteren. Ze worden verstuurd met een willekeurige ID die wordt aangemaakt wanneer je voor het eerst stemt of een reactie waardeert, en die niet gekoppeld is aan je Google- of YouTube-account. Je kunt stoppen met het versturen van stemmen met “Inzending voor leuk/niet leuk uitschakelen” in het menu van de extensie.
 

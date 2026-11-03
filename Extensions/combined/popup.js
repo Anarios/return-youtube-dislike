@@ -4,6 +4,7 @@ import { initDiscussionPopup } from "./src/discussion/popup";
 import { hasFeaturePermission, onDataPermissionsChanged, requestFeaturePermission } from "./src/core-data-consent";
 import { fetchWithAccountConsent } from "./src/account-data-consent";
 import { isPrivateBrowsingContext } from "./src/private-browsing";
+import { localizePage } from "./src/localize-page";
 import { initCountsConsentPopup } from "./src/counts-consent-popup";
 import { initVoteStatusPopup } from "./src/vote-status-popup";
 import { isToolbarPopup, openPopupPageInTab } from "./src/toolbar-popup";
@@ -46,20 +47,7 @@ function localizeHtmlPage() {
   if (locale) document.documentElement.lang = locale.replaceAll("_", "-");
   const direction = chrome.i18n.getMessage("@@bidi_dir");
   if (direction === "rtl" || direction === "ltr") document.documentElement.dir = direction;
-  //Localize by replacing __MSG_***__ meta tags
-  var objects = document.getElementsByTagName("html");
-  for (var j = 0; j < objects.length; j++) {
-    var obj = objects[j];
-
-    var valStrH = obj.innerHTML.toString();
-    var valNewH = valStrH.replace(/__MSG_(\w+)__/g, function (match, v1) {
-      return v1 ? chrome.i18n.getMessage(v1) : "";
-    });
-
-    if (valNewH != valStrH) {
-      obj.innerHTML = valNewH;
-    }
-  }
+  localizePage((key) => chrome.i18n.getMessage(key));
 }
 
 localizeHtmlPage();

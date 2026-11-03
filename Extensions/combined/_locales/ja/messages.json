@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Patreonのメンバーシップ情報は、Premium機能の利用資格を確認するために使用されます。カード情報や銀行口座情報は受け取りません。"
   },
+  "paidFeaturesWhy": {
+    "message": "低評価数はこれからも誰でも無料で確認できます。有料の追加機能は、それを支えるサーバーの費用に充てられています。15 TBを超えるデータと1日約2,000万人のユーザーを、月数百ドルの予算で支えています。"
+  },
   "githubLoggedOutMessage": {
     "message": "Premium機能はGitHub貢献者向けに提供されています。"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "拡大して州ごとの反応を確認。"
   },
+  "changelog_appeal_title": {
+    "message": "ささやかな、少し気まずいお願い"
+  },
+  "changelog_appeal_intro": {
+    "message": "こんにちは。ここはお金の話をするところです。正直なところ、あまり得意ではありません。"
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislikeは、Dmitry Selivanovとコミュニティが作っている小さなオープンソースプロジェクトです。毎日約2,000万人にご利用いただき、15 TBを超えるデータを管理しています。そのすべてを月数百ドルで運営しています。巨大企業がなくすと決めたものを取り戻すには、決して多い金額ではありません。"
+  },
+  "changelog_appeal_free": {
+    "message": "低評価数は無料で、これからも無料です。それがこのプロジェクトのいちばん大切なところです。でもサーバーは無料ではありません。正直なところ、運営費のためにほかの選択肢はほとんどなく、プロジェクトを続けるためにPremium機能（RYDコメントとPremium分析）を導入せざるを得ませんでした。メンバーシップの一つひとつが、その費用をまかなう助けになっています。"
+  },
+  "changelog_appeal_ask": {
+    "message": "RYDのおかげでクリックベイト動画やうまくいかないチュートリアルを避けられたことが一度でもあれば、Patreonへの参加をご検討ください。今はタイミングが合わなくても、まったく問題ありません。ご利用いただき、投票してくださってありがとうございます。一票一票が、数字を少しずつ正確にしています。"
+  },
+  "changelog_appeal_cta": {
+    "message": "Patreon でメンバーになりましょう"
+  },
+  "changelog_appeal_signature": {
+    "message": "— DmitryとRYDコミュニティより"
+  },
   "changelog_join_title": {
     "message": "Premium 機能を使う"
-  },
-  "changelog_join_free": {
-    "message": "低評価数は誰でも無料で確認できます。メンバーシップへの加入は任意で、プロジェクトの支援につながります。"
   },
   "changelog_join_step1": {
     "message": "Patreon でメンバーになりましょう。Commenter ではコメントを投稿でき、Premium では分析機能も使えます。"
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "もう一度クリックする必要があります。下のログインボタンを選択し、Firefoxのアカウント権限を確認して続行してください。"
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox の新しいプライバシールール"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Firefox では、RYD が低評価数を表示する前にあなたの許可が必要です。その許可で何が対象になり、何が対象にならないのかを、以下で正確に説明します。"
   },
   "changelog_firefox_vote_granted": {
     "message": "ありがとうございます。あなたの評価がカウントされるようになりました。"

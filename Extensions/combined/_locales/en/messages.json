@@ -107,6 +107,9 @@
   "patreonPrivacyNote": {
     "message": "Patreon membership information is used to verify premium access. We do not receive your card or bank details."
   },
+  "paidFeaturesWhy": {
+    "message": "Dislike counts stay free for everyone. Paid extras help pay for the servers behind them: over 15 TB of data and about 20 million users a day, on a budget of a few hundred dollars a month."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -751,11 +754,29 @@
   "changelog_analytics_us_body": {
     "message": "Zoom in on engagement by state."
   },
+  "changelog_appeal_title": {
+    "message": "A small, slightly awkward request"
+  },
+  "changelog_appeal_intro": {
+    "message": "Hi. This is the part where we talk about money, and we’re honestly not great at it."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike is a small open-source project, built by Dmitry Selivanov and the community. Every day it answers about 20 million people and looks after more than 15 TB of data. All of that runs on a few hundred dollars a month, which isn’t much for bringing back something a billion-dollar company decided to take away."
+  },
+  "changelog_appeal_free": {
+    "message": "Dislike counts are free, and they stay free. That’s the whole point. But servers aren’t, and honestly, the running costs left us little choice: to keep the lights on, we had to introduce Premium features — RYD comments and Premium analytics. Every membership helps cover those costs."
+  },
+  "changelog_appeal_ask": {
+    "message": "If RYD has ever saved you from a clickbait video or a tutorial that didn’t work, please consider joining on Patreon. And if now isn’t a good time, that’s completely okay. Thank you for using it, and for voting: every vote makes the counts a little more accurate."
+  },
+  "changelog_appeal_cta": {
+    "message": "Join on Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry and the RYD community"
+  },
   "changelog_join_title": {
     "message": "Get Premium features"
-  },
-  "changelog_join_free": {
-    "message": "Dislike counts are free for everyone. Membership is optional and helps support the project."
   },
   "changelog_join_step1": {
     "message": "Join on Patreon. Commenter lets you post comments; Premium adds analytics too."
@@ -870,6 +891,12 @@
   },
   "popup_signin_next_click": {
     "message": "One more click is needed: select your sign-in button below to review Firefox’s account permissions and continue."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox’s new privacy rules"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "In Firefox, RYD needs your permission before it can show dislikes. Here’s exactly what that permission covers — and what it doesn’t."
   },
   "changelog_firefox_vote_granted": {
     "message": "Thank you. Your votes now count."

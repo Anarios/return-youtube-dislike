@@ -41,6 +41,46 @@ describe("release page locale metadata", () => {
     expect(document.documentElement.innerHTML).not.toContain("__MSG_");
   });
 
+  test("explains why some features are paid right under the hero and the Firefox counts prompt", () => {
+    global.chrome = { i18n: { getMessage: () => "" } };
+    const messages = require("../../_locales/en/messages.json");
+
+    initChangelogPage();
+
+    const appeal = document.getElementById("ryd-appeal-title").closest("section");
+    expect(appeal.querySelector("h2").textContent.trim()).toBe(messages.changelog_appeal_title.message);
+    expect(appeal.querySelector(".ryd-letter__signature").textContent).toBe(
+      messages.changelog_appeal_signature.message,
+    );
+    expect(appeal.previousElementSibling.id).toBe("ryd-firefox-optin");
+    expect(appeal.previousElementSibling.previousElementSibling.classList.contains("ryd-hero")).toBe(true);
+    expect(appeal.nextElementSibling.querySelector("#ryd-comments-title")).not.toBeNull();
+  });
+
+  test.each([
+    ["ryd-changelog-appeal-join", "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649"],
+    ["ryd-changelog-upgrade", "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649"],
+    ["ryd-changelog-support", "https://returnyoutubedislike.com/help"],
+  ])("the %s button opens %s", (id, url) => {
+    global.chrome = { i18n: { getMessage: () => "" } };
+    const open = jest.spyOn(window, "open").mockImplementation(() => null);
+
+    initChangelogPage();
+    document.getElementById(id).click();
+
+    expect(open).toHaveBeenCalledWith(url, "_blank", "noopener");
+  });
+
+  test("keeps the original stylesheet while localizing so the release page never renders unstyled", () => {
+    global.chrome = { i18n: { getMessage: () => "" } };
+    const stylesheet = document.querySelector("link[rel='stylesheet']");
+
+    initChangelogPage();
+
+    expect(stylesheet.isConnected).toBe(true);
+    expect(document.title).toBe("Welcome to Return YouTube Dislike");
+  });
+
   test.each(["", "auto"])("preserves document metadata when locale metadata is %j", (metadata) => {
     document.documentElement.lang = "en";
     document.documentElement.dir = "ltr";

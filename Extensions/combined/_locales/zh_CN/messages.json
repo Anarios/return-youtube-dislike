@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Patreon 会员信息用于验证高级功能的访问权限。我们不会接收您的银行卡或银行账户信息。"
   },
+  "paidFeaturesWhy": {
+    "message": "点踩数将继续免费向所有人开放。付费功能帮助支付背后的服务器费用：超过 15 TB 的数据、每天约 2000 万用户，而每月预算只有几百美元。"
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "放大查看各州的互动情况。"
   },
+  "changelog_appeal_title": {
+    "message": "一个小小的、有点难为情的请求"
+  },
+  "changelog_appeal_intro": {
+    "message": "你好。接下来要聊钱的事了，说实话，我们不太擅长这个。"
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike 是一个小型开源项目，由 Dmitry Selivanov 与社区共同打造。它每天为约 2000 万人提供服务，保管着超过 15 TB 的数据。这一切每月只靠几百美元维持——要找回一家市值数十亿美元的公司决定拿走的东西，这笔钱真的不多。"
+  },
+  "changelog_appeal_free": {
+    "message": "点踩数是免费的，而且会一直免费。这正是这个项目的意义所在。但服务器不是免费的，说实话，运营成本没给我们留下太多选择：为了让项目继续运转，我们不得不推出 Premium 功能——RYD 评论和 Premium 数据分析。每一份会员都在帮助支付这些费用。"
+  },
+  "changelog_appeal_ask": {
+    "message": "如果 RYD 曾经帮你避开过一个标题党视频，或是一个不管用的教程，请考虑在 Patreon 上加入我们。如果现在不方便，也完全没关系。感谢你一直使用它并参与投票：每一票都让数字更准确一点。"
+  },
+  "changelog_appeal_cta": {
+    "message": "在 Patreon 上加入会员"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry 和 RYD 社区"
+  },
   "changelog_join_title": {
     "message": "获取 Premium 功能"
-  },
-  "changelog_join_free": {
-    "message": "所有人都能免费查看点踩数。加入会员完全自愿，也能帮助支持本项目。"
   },
   "changelog_join_step1": {
     "message": "在 Patreon 上加入会员。Commenter 可以发表评论，Premium 还提供数据分析功能。"
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "还需点击一次：请选择下方的登录按钮，查看 Firefox 的账户权限并继续。"
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox 的新隐私规则"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "在 Firefox 中，RYD 需要先获得你的许可才能显示点踩数。下面会准确说明这项许可包括什么，以及不包括什么。"
   },
   "changelog_firefox_vote_granted": {
     "message": "谢谢。您的评价现在会被计入。"

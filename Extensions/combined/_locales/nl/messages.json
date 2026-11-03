@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Informatie over je Patreon-lidmaatschap wordt gebruikt om je premiumtoegang te verifiëren. We ontvangen geen kaart- of bankgegevens van je."
   },
+  "paidFeaturesWhy": {
+    "message": "Het aantal dislikes blijft voor iedereen gratis. Betaalde extra’s helpen de servers erachter te betalen: meer dan 15 TB aan data en zo’n 20 miljoen gebruikers per dag, met een budget van een paar honderd dollar per maand."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Bekijk de betrokkenheid per staat in detail."
   },
+  "changelog_appeal_title": {
+    "message": "Een klein, ietwat ongemakkelijk verzoek"
+  },
+  "changelog_appeal_intro": {
+    "message": "Hoi. Dit is het stukje waarin we het over geld hebben, en eerlijk gezegd zijn we daar niet zo goed in."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike is een klein opensourceproject, gemaakt door Dmitry Selivanov en de community. Elke dag beantwoordt het zo’n 20 miljoen mensen en beheert het meer dan 15 TB aan data. Dat draait allemaal op een paar honderd dollar per maand, en dat is niet veel om iets terug te brengen dat een miljardenbedrijf besloot weg te halen."
+  },
+  "changelog_appeal_free": {
+    "message": "Het aantal dislikes is gratis, en dat blijft zo. Daar draait het om. Maar servers zijn dat niet, en eerlijk gezegd lieten de lopende kosten ons weinig keus: om het project draaiende te houden, moesten we Premium-functies invoeren — RYD-reacties en Premium-analyses. Elk lidmaatschap helpt die kosten te dekken."
+  },
+  "changelog_appeal_ask": {
+    "message": "Als RYD je ooit heeft behoed voor een clickbaitvideo of een tutorial die niet werkte, overweeg dan om lid te worden op Patreon. En als het nu niet uitkomt, is dat helemaal oké. Bedankt dat je het gebruikt en dat je stemt: elke stem maakt de aantallen een beetje nauwkeuriger."
+  },
+  "changelog_appeal_cta": {
+    "message": "Word lid op Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry en de RYD-community"
+  },
   "changelog_join_title": {
     "message": "Krijg Premium-functies"
-  },
-  "changelog_join_free": {
-    "message": "Het aantal dislikes is voor iedereen gratis. Een lidmaatschap is optioneel en helpt het project te ondersteunen."
   },
   "changelog_join_step1": {
     "message": "Word lid op Patreon. Met Commenter kun je reacties plaatsen; Premium voegt ook analyses toe."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Nog één klik nodig: kies hieronder je aanmeldknop om de accountmachtigingen van Firefox te bekijken en door te gaan."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "De nieuwe privacyregels van Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "In Firefox heeft RYD je toestemming nodig voordat het dislikes kan tonen. Hier lees je precies wat die toestemming inhoudt — en wat niet."
   },
   "changelog_firefox_vote_granted": {
     "message": "Bedankt. Je stemmen tellen nu mee."

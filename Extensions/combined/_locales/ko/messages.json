@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Patreon 멤버십 정보는 프리미엄 이용 자격을 확인하는 데 사용됩니다. 카드 또는 은행 계좌 정보는 전달받지 않습니다."
   },
+  "paidFeaturesWhy": {
+    "message": "싫어요 수는 앞으로도 누구나 무료로 볼 수 있습니다. 유료 부가 기능은 이를 뒷받침하는 서버 비용을 충당하는 데 도움이 됩니다. 15TB가 넘는 데이터와 하루 약 2,000만 명의 사용자를 월 수백 달러의 예산으로 운영하고 있습니다."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "확대해서 주별 반응을 살펴보세요."
   },
+  "changelog_appeal_title": {
+    "message": "작고, 조금은 어색한 부탁"
+  },
+  "changelog_appeal_intro": {
+    "message": "안녕하세요. 이제 돈 이야기를 할 차례인데, 솔직히 저희는 이런 걸 잘 못합니다."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike는 Dmitry Selivanov와 커뮤니티가 만드는 작은 오픈 소스 프로젝트입니다. 매일 약 2,000만 명에게 응답하고 15TB가 넘는 데이터를 관리합니다. 이 모든 것이 한 달에 수백 달러로 운영되는데, 수십억 달러 규모의 기업이 없애기로 한 기능을 되살리기에는 많은 금액이 아닙니다."
+  },
+  "changelog_appeal_free": {
+    "message": "싫어요 수는 무료이며 앞으로도 무료입니다. 그게 이 프로젝트의 핵심입니다. 하지만 서버는 무료가 아니고, 솔직히 운영 비용 때문에 선택의 여지가 거의 없었습니다. 프로젝트를 계속 유지하기 위해 RYD 댓글과 Premium 분석 같은 Premium 기능을 도입해야 했습니다. 모든 멤버십이 이 비용을 충당하는 데 도움이 됩니다."
+  },
+  "changelog_appeal_ask": {
+    "message": "RYD 덕분에 낚시성 동영상이나 따라 해도 안 되는 튜토리얼을 한 번이라도 피하셨다면, Patreon 참여를 고려해 주세요. 지금이 적절한 때가 아니라면 전혀 괜찮습니다. 사용해 주시고 투표해 주셔서 감사합니다. 한 표 한 표가 숫자를 조금 더 정확하게 만듭니다."
+  },
+  "changelog_appeal_cta": {
+    "message": "Patreon에서 가입하세요"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry와 RYD 커뮤니티 드림"
+  },
   "changelog_join_title": {
     "message": "Premium 기능 이용하기"
-  },
-  "changelog_join_free": {
-    "message": "싫어요 수는 누구나 무료로 볼 수 있습니다. 멤버십 가입은 선택 사항이며 프로젝트를 지원하는 데 도움이 됩니다."
   },
   "changelog_join_step1": {
     "message": "Patreon에서 가입하세요. Commenter는 댓글을 작성할 수 있고, Premium은 분석 기능도 제공합니다."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "한 번 더 클릭해야 합니다. 아래의 로그인 버튼을 선택하여 Firefox 계정 권한을 확인하고 계속하세요."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox의 새로운 개인정보 보호 규칙"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Firefox에서는 RYD가 싫어요 수를 표시하기 전에 사용자의 허가가 필요합니다. 이 허가에 무엇이 포함되고 무엇이 포함되지 않는지 아래에서 정확히 알려드립니다."
   },
   "changelog_firefox_vote_granted": {
     "message": "감사합니다. 이제 내 평가가 집계됩니다."

@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Le informazioni sull'abbonamento a Patreon vengono usate per verificare l'accesso premium. Non riceviamo i dati della tua carta né quelli del tuo conto bancario."
   },
+  "paidFeaturesWhy": {
+    "message": "Il numero di Non mi piace resta gratuito per tutti. Gli extra a pagamento aiutano a pagare i server che lo rendono possibile: oltre 15 TB di dati e circa 20 milioni di utenti al giorno, con un budget di poche centinaia di dollari al mese."
+  },
   "githubLoggedOutMessage": {
     "message": "Premium features available for GitHub contributors"
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Esamina le interazioni stato per stato."
   },
+  "changelog_appeal_title": {
+    "message": "Una piccola richiesta, un po’ imbarazzante"
+  },
+  "changelog_appeal_intro": {
+    "message": "Ciao. Questa è la parte in cui parliamo di soldi, e onestamente non siamo molto bravi."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike è un piccolo progetto open source creato da Dmitry Selivanov e dalla comunità. Ogni giorno risponde a circa 20 milioni di persone e custodisce più di 15 TB di dati. Tutto questo funziona con poche centinaia di dollari al mese, che non sono molti per riportare qualcosa che un’azienda da miliardi di dollari ha deciso di togliere."
+  },
+  "changelog_appeal_free": {
+    "message": "Il numero di Non mi piace è gratuito e resterà gratuito. È proprio questo il punto. Ma i server non lo sono e, onestamente, i costi di gestione non ci hanno lasciato molta scelta: per tenere in vita il progetto abbiamo dovuto introdurre le funzionalità Premium — i commenti RYD e le analisi Premium. Ogni abbonamento aiuta a coprire questi costi."
+  },
+  "changelog_appeal_ask": {
+    "message": "Se RYD ti ha salvato almeno una volta da un video acchiappaclic o da un tutorial che non funzionava, valuta di unirti su Patreon. E se ora non è il momento giusto, va benissimo così. Grazie di usarlo e di votare: ogni voto rende i numeri un po’ più precisi."
+  },
+  "changelog_appeal_cta": {
+    "message": "Abbonati su Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry e la comunità di RYD"
+  },
   "changelog_join_title": {
     "message": "Ottieni le funzioni Premium"
-  },
-  "changelog_join_free": {
-    "message": "Il numero di Non mi piace è gratuito per tutti. L’abbonamento è facoltativo e aiuta a sostenere il progetto."
   },
   "changelog_join_step1": {
     "message": "Abbonati su Patreon. Commenter ti permette di pubblicare commenti; Premium aggiunge anche le analisi."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Serve un altro clic: seleziona il pulsante di accesso qui sotto per esaminare i permessi dell’account in Firefox e continuare."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Le nuove regole sulla privacy di Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "In Firefox, RYD ha bisogno del tuo permesso prima di poter mostrare i Non mi piace. Ecco esattamente cosa copre questo permesso, e cosa no."
   },
   "changelog_firefox_vote_granted": {
     "message": "Grazie. Ora i tuoi voti contano."

@@ -2,7 +2,7 @@ Return YouTube Dislike gendanner muligheden for at se dislikes på YouTube.
 
 RYD-kommentarer giver dig mulighed for at læse og reagere på diskussioner under videoer og Shorts, hvor YouTube-kommentarer er deaktiveret. Medlemmer på Commenter- og Premium-niveau kan skrive indlæg og svar og får notifikationer om svar og likes.
 
-De grundlæggende dislike-tal er gratis. Nogle valgfrie funktioner har adgangskrav, herunder betalte medlemsniveauer på Patreon eller adgang for kvalificerede bidragydere på GitHub.
+De grundlæggende dislike-tal er gratis for alle. Nogle valgfrie funktioner, som at skrive RYD-kommentarer og Premium-videoanalyser, kræver et betalt medlemskab på Patreon eller adgang som kvalificeret bidragyder på GitHub. Disse betalte ekstrafunktioner hjælper med at betale for de servere, der holder dislike-tallene gratis: over 15 TB data og omkring 20 millioner brugere om dagen, på et budget på nogle få hundrede dollars om måneden.
 
 Dine stemmer hjælper med at forbedre estimaterne. De sendes med et tilfældigt ID, der oprettes første gang, du stemmer eller reagerer på en kommentar, og som ikke er knyttet til din Google- eller YouTube-konto. Du kan stoppe afsendelsen af stemmer med »Disable like/dislike submission« (Deaktiver indsendelse af likes/dislikes) i udvidelsens menu.
 

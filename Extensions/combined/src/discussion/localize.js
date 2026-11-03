@@ -69,11 +69,17 @@ export function discussionLanguage(language = document.documentElement.lang || n
   }
 }
 
+function catalogMessage(name, language) {
+  return catalogs[discussionLanguage(language)][name]?.message || english[name]?.message;
+}
+
 export function discussionText(key, substitutions = [], language) {
-  const name = `discussion_${key}`;
-  const catalog = catalogs[discussionLanguage(language)];
-  const text = catalog[name]?.message || english[name]?.message || key;
+  const text = catalogMessage(`discussion_${key}`, language) || key;
   return text.replace(/\$(\d+)/g, (_, number) => String(substitutions[Number(number) - 1] ?? ""));
+}
+
+export function extensionText(name, language) {
+  return catalogMessage(name, language) || name;
 }
 
 export function discussionError(error) {

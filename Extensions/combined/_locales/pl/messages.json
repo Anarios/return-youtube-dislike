@@ -89,6 +89,9 @@
   "patreonPrivacyNote": {
     "message": "Informacje o członkostwie w Patreon służą do weryfikacji dostępu do funkcji premium. Nie otrzymujemy danych Twojej karty ani konta bankowego."
   },
+  "paidFeaturesWhy": {
+    "message": "Liczba łapek w dół pozostaje bezpłatna dla wszystkich. Płatne dodatki pomagają opłacić serwery, które za nią stoją: ponad 15 TB danych i około 20 milionów użytkowników dziennie przy budżecie kilkuset dolarów miesięcznie."
+  },
   "githubLoggedOutMessage": {
     "message": "Funkcje premium są dostępne dla kontrybutorów projektu na GitHub."
   },
@@ -941,11 +944,29 @@
   "changelog_analytics_us_body": {
     "message": "Przyjrzyj się aktywności w poszczególnych stanach."
   },
+  "changelog_appeal_title": {
+    "message": "Mała, trochę niezręczna prośba"
+  },
+  "changelog_appeal_intro": {
+    "message": "Cześć. To ten moment, w którym mówimy o pieniądzach, i szczerze mówiąc, nie najlepiej nam to wychodzi."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike to mały projekt open source tworzony przez Dmitrija Sieliwanowa i społeczność. Każdego dnia obsługuje około 20 milionów osób i przechowuje ponad 15 TB danych. Wszystko to działa za kilkaset dolarów miesięcznie, co nie jest dużo, by przywrócić coś, co firma warta miliardy dolarów postanowiła zabrać."
+  },
+  "changelog_appeal_free": {
+    "message": "Liczba łapek w dół jest bezpłatna i taka pozostanie. O to właśnie chodzi. Ale serwery nie są darmowe i, szczerze mówiąc, koszty ich utrzymania nie zostawiły nam wielkiego wyboru: żeby projekt mógł działać dalej, musieliśmy wprowadzić funkcje Premium — komentarze RYD i analitykę Premium. Każde członkostwo pomaga pokryć te koszty."
+  },
+  "changelog_appeal_ask": {
+    "message": "Jeśli RYD choć raz uchronił cię przed clickbaitowym filmem albo poradnikiem, który nie działał, rozważ dołączenie na Patreonie. A jeśli to nie jest dobry moment, nic się nie stało. Dziękujemy, że z niego korzystasz i głosujesz: każdy głos sprawia, że liczby są trochę dokładniejsze."
+  },
+  "changelog_appeal_cta": {
+    "message": "Dołącz na Patreonie"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitrij i społeczność RYD"
+  },
   "changelog_join_title": {
     "message": "Uzyskaj funkcje Premium"
-  },
-  "changelog_join_free": {
-    "message": "Liczba łapek w dół jest dostępna bezpłatnie dla wszystkich. Członkostwo jest opcjonalne i pomaga wspierać projekt."
   },
   "changelog_join_step1": {
     "message": "Dołącz na Patreonie. Commenter pozwala pisać komentarze, a Premium dodaje też analitykę."
@@ -1060,6 +1081,12 @@
   },
   "popup_signin_next_click": {
     "message": "Potrzebne jest jeszcze jedno kliknięcie: wybierz poniżej przycisk logowania, aby sprawdzić uprawnienia konta w Firefoksie i kontynuować."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Nowe zasady prywatności w Firefoksie"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "W Firefoksie RYD potrzebuje twojej zgody, zanim pokaże łapki w dół. Oto dokładnie, co obejmuje ta zgoda — a czego nie."
   },
   "changelog_firefox_vote_granted": {
     "message": "Dziękujemy. Twoje oceny są teraz liczone."

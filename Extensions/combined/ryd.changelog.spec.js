@@ -68,6 +68,8 @@ describe("Firefox welcome opt-ins", () => {
   test("without counts the hero says counts are off and one combined opt-in waits for a click", async () => {
     await open();
     expect(byId("ryd-firefox-optin").hidden).toBe(false);
+    expect(byId("ryd-firefox-intro-title").textContent.trim()).toBe(text("changelog_firefox_intro_title"));
+    expect(byId("ryd-firefox-intro-title").nextElementSibling.textContent).toBe(text("changelog_firefox_intro_body"));
     expect(byId("ryd-hero-eyebrow").textContent).toBe(text("changelog_hero_eyebrow_counts_off"));
     expect(byId("ryd-hero-body").textContent).toBe(text("changelog_hero_body_counts_off"));
     expect(byId("ryd-firefox-consent-title").textContent).toBe(text("data_consent_title"));

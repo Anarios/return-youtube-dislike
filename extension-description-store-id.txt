@@ -2,7 +2,7 @@ Return YouTube Dislike mengembalikan kemampuan untuk melihat jumlah dislike di Y
 
 Komentar RYD memungkinkan kamu membaca dan bereaksi terhadap diskusi di video dan Shorts yang komentar YouTube-nya dinonaktifkan. Anggota Commenter dan Premium dapat mengirim komentar dan balasan, dengan notifikasi untuk balasan dan like.
 
-Jumlah dislike sebagai fitur inti tersedia gratis. Beberapa fitur opsional memiliki persyaratan akses, termasuk tingkat keanggotaan Patreon berbayar atau akses untuk kontributor GitHub yang memenuhi syarat.
+Jumlah dislike sebagai fitur inti tersedia gratis untuk semua orang. Beberapa fitur opsional, seperti mengirim komentar RYD dan analitik video Premium, memerlukan keanggotaan Patreon berbayar atau akses untuk kontributor GitHub yang memenuhi syarat. Fitur berbayar ini membantu membiayai server yang membuat jumlah dislike tetap gratis: lebih dari 15 TB data dan sekitar 20 juta pengguna per hari, dengan anggaran beberapa ratus dolar per bulan.
 
 Suara kamu membantu menyempurnakan perkiraan. Suara dikirim dengan ID acak yang dibuat saat pertama kali kamu memberi suara atau bereaksi terhadap komentar, dan ID ini tidak terhubung dengan akun Google atau YouTube kamu. Kamu dapat berhenti mengirim suara dengan “Matikan pengiriman like/dislike” di menu extension.
 
