@@ -510,6 +510,7 @@ async function runHermeticDiscussionSmoke({
         await expect(root().locator("h2")).toHaveText(catalog.discussion_title.message);
         await expect(composer().locator("textarea")).toHaveCount(0);
         await expect(composer()).toContainText(catalog.discussion_gate.message);
+        await expect(composer()).toContainText(catalog.paidFeaturesWhy.message);
         record(`${label}-anonymous-unknown-kids-unrelated-kids-render`);
 
         await setAccount("commenter");
