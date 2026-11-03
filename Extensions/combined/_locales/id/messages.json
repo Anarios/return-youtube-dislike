@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Menonaktifkan pencatatan respons API di konsol."
   },
+  "developerSettings": {
+    "message": "Opsi pengembang"
+  },
   "disableLoggingLabel": {
     "message": "Nonaktifkan log ke konsol"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "Jangan tampilkan panel jumlah mentah di halaman tonton YouTube."
   },
+  "hideRydComments": {
+    "message": "Sembunyikan komentar RYD"
+  },
+  "hideRydCommentsHover": {
+    "message": "Jangan tampilkan komentar RYD di video yang komentar YouTube-nya dinonaktifkan."
+  },
   "hidePremiumAnalytics": {
     "message": "Sembunyikan insight video premium"
   },
@@ -156,7 +165,7 @@
     "message": "Mendukung YouTube Short"
   },
   "showTooltipPercentage": {
-    "message": "Persentase di tooltip bilah like/dislike."
+    "message": "Persentase di tooltip bilah like/dislike"
   },
   "showTooltipPercentageHover": {
     "message": "Tampilkan persentase di tooltip bilah like/dislike."
@@ -228,7 +237,7 @@
     "message": "Matikan pengiriman like/dislike"
   },
   "textSettingsHover": {
-    "message": "Memberhentikan penghitungan like dan dislikemu"
+    "message": "Suka dan tidak suka Anda tidak akan dihitung dan tidak akan terlihat dalam jumlah tidak suka."
   },
   "textTempUnavailable": {
     "message": "Tidak Ada Untuk Sementara Waktu"
@@ -804,7 +813,7 @@
     "message": "$1 notifikasi belum dibaca"
   },
   "discussion_signedOutInbox": {
-    "message": "Login untuk melihat balasan dan reaksi pada komentar Anda."
+    "message": "Login untuk melihat balasan dan suka pada komentar Anda."
   },
   "discussion_notificationUnavailable": {
     "message": "Diskusi ini tidak lagi tersedia."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Buka video YouTube mana pun dan jumlah tidak suka akan terlihat di samping jumlah suka, di tempat semestinya. Versi 4.1 juga memperkenalkan komentar RYD, tempat membahas video di luar kolom komentar YouTube."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Satu langkah lagi"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Aktifkan jumlah tidak suka di bawah untuk melihatnya di samping jumlah suka di YouTube. Versi 4.1 juga memperkenalkan komentar RYD, tempat membahas video di luar kolom komentar YouTube."
+  },
   "changelog_new_badge": {
     "message": "Baru di 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Kenali komentar RYD"
   },
   "changelog_comments_body": {
-    "message": "Ruang diskusi komunitas di bawah video dan Shorts, dikelola oleh Return YouTube Dislike dan terpisah dari komentar YouTube. Semua orang dapat membaca dan bereaksi. Anggota Commenter dan Premium dapat mengirim komentar dan balasan."
+    "message": "Ruang diskusi komunitas di bawah video dan Shorts yang komentar YouTube-nya dinonaktifkan, dikelola oleh Return YouTube Dislike. Semua orang dapat membaca dan bereaksi. Anggota Commenter dan Premium dapat mengirim komentar dan balasan."
   },
   "changelog_comments_point_replies": {
     "message": "Balasan berutas dengan suka dan tidak suka"
@@ -882,7 +897,7 @@
     "message": "Gunakan nama panggilan publik pilihan Anda saat berkomentar"
   },
   "changelog_comments_point_notifications": {
-    "message": "Notifikasi saat ada balasan atau reaksi"
+    "message": "Notifikasi saat seseorang membalas atau menyukai komentar Anda"
   },
   "changelog_comments_point_moderation": {
     "message": "Pelaporan dan moderasi agar diskusi tetap santun"
@@ -958,5 +973,140 @@
   },
   "reviewPromptAction": {
     "message": "Tulis ulasan"
+  },
+  "consent_page_title": {
+    "message": "Izin fitur RYD"
+  },
+  "consent_vote_title": {
+    "message": "Pastikan suara Anda dihitung"
+  },
+  "consent_vote_body": {
+    "message": "Firefox kini mewajibkan setiap ekstensi meminta izin Anda sebelum membagikan data apa pun. Izinkan agar RYD dapat menghitung suka, tidak suka, dan reaksi komentar Anda. Izin ini hanya berlaku untuk YouTube, bukan situs web lain."
+  },
+  "consent_account_title": {
+    "message": "Pilih izin akun"
+  },
+  "consent_account_body": {
+    "message": "Masuk untuk menggunakan fitur akun, termasuk profil, notifikasi, dan analitik Premium."
+  },
+  "consent_next_step": {
+    "message": "Pilih Izinkan di Firefox untuk meninjau izin. Anda dapat menolak."
+  },
+  "consent_allow": {
+    "message": "Izinkan di Firefox"
+  },
+  "consent_not_now": {
+    "message": "Jangan sekarang"
+  },
+  "consent_prompt_status": {
+    "message": "Pilih apakah akan memberikan izin ini di Firefox."
+  },
+  "consent_granted_status": {
+    "message": "Izin diaktifkan. Anda dapat kembali ke YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Fitur opsional ini tetap dinonaktifkan. Anda dapat mengubah izin nanti."
+  },
+  "consent_error_status": {
+    "message": "Izin tidak dapat diperbarui. Silakan coba lagi."
+  },
+  "consent_details_summary": {
+    "message": "Apa arti kategori izin Firefox?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox mengelompokkan data ke dalam kategori umum. Berikut arti setiap kategori untuk RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Aktivitas penjelajahan"
+  },
+  "consent_browsing_body": {
+    "message": "Hanya ID video YouTube yang Anda buka, untuk memuat jumlah tidak suka dan komentar RYD-nya. Tidak pernah mencakup riwayat penjelajahan Anda atau situs web lain."
+  },
+  "consent_content_label": {
+    "message": "Konten situs web"
+  },
+  "consent_content_body": {
+    "message": "Jumlah suka yang ditampilkan pada video YouTube, untuk meningkatkan perkiraan jumlah tidak suka."
+  },
+  "consent_activity_label": {
+    "message": "Aktivitas situs web"
+  },
+  "consent_activity_body": {
+    "message": "Suka, tidak suka, dan reaksi Anda terhadap komentar RYD di YouTube, agar dihitung. Dikirim dengan ID acak yang tidak terhubung dengan akun Google atau YouTube Anda."
+  },
+  "consent_identity_label": {
+    "message": "Informasi pengenal pribadi"
+  },
+  "consent_identity_body": {
+    "message": "Informasi profil, seperti nama tampilan dan email, hanya jika Anda memilih untuk masuk."
+  },
+  "consent_auth_label": {
+    "message": "Informasi autentikasi"
+  },
+  "consent_auth_body": {
+    "message": "Data otorisasi dan sesi yang diperlukan untuk masuk dan menggunakan fitur akun."
+  },
+  "consent_scope": {
+    "message": "RYD tidak mengumpulkan apa pun di luar youtube.com dan tidak mengakses akun YouTube Anda. RYD tidak menerima nama atau email kecuali Anda masuk."
+  },
+  "consent_settings": {
+    "message": "Anda dapat mengubah izin ini kapan saja di pengaturan pengaya Firefox (about:addons)."
+  },
+  "consent_private_counts": {
+    "message": "Jendela pribadi hanya menampilkan jumlah dengan izin yang diaktifkan di jendela biasa. Pemungutan suara, masuk, analitik Premium, dan diskusi tidak tersedia di sana."
+  },
+  "consent_voter_timing": {
+    "message": "ID pemungutan suara Anda hanya dikirim saat Anda memberi suara atau reaksi. Reaksi Anda sendiri terhadap komentar diingat pada perangkat ini."
+  },
+  "popup_signin_next_click": {
+    "message": "Perlu satu klik lagi: pilih tombol masuk di bawah untuk meninjau izin akun Firefox dan melanjutkan."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Terima kasih. Suara Anda kini dihitung."
+  },
+  "vote_consent_hint": {
+    "message": "Suara Anda belum dihitung. Firefox kini memerlukan izin Anda sebelum RYD dapat mengirimnya. Izin ini hanya berlaku untuk YouTube, bukan situs web lain."
+  },
+  "vote_not_counted": {
+    "message": "Suka dan tidak suka Anda tidak dihitung dan tidak akan terlihat dalam jumlah tidak suka."
+  },
+  "vote_count_mine": {
+    "message": "Hitung suara saya"
+  },
+  "vote_consent_dismiss": {
+    "message": "Jangan tanya lagi"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Aktifkan berbagi suara untuk bereaksi terhadap komentar. Reaksi Anda dikirim setelah fitur ini aktif."
+  },
+  "discussion_consentContinue": {
+    "message": "Lanjutkan"
+  },
+  "counts_consent_enable": {
+    "message": "Aktifkan jumlah tidak suka"
+  },
+  "counts_consent_toolbar": {
+    "message": "Buka Return YouTube Dislike dari menu ekstensi Firefox untuk melanjutkan."
+  },
+  "counts_consent_declined": {
+    "message": "Jumlah tetap dinonaktifkan. Anda dapat mengaktifkannya di sini nanti."
+  },
+  "counts_consent_enabled": {
+    "message": "Jumlah tidak suka diaktifkan."
+  },
+  "counts_consent_private": {
+    "message": "Aktifkan jumlah tidak suka di jendela biasa terlebih dahulu. Jendela pribadi hanya menampilkan jumlah."
+  },
+  "data_consent_reason": {
+    "message": "Firefox kini mewajibkan setiap ekstensi meminta izin Anda sebelum membagikan data apa pun. Izinkan RYD menampilkan jumlah tidak suka dan menghitung suara Anda. Izin ini hanya berlaku untuk YouTube, bukan situs web lain."
+  },
+  "data_consent_title": {
+    "message": "Tampilkan jumlah tidak suka dan pastikan suara Anda dihitung"
+  },
+  "data_consent_body": {
+    "message": "Firefox kini mewajibkan setiap ekstensi meminta izin Anda sebelum membagikan data apa pun. Firefox memakai label umum yang sama untuk setiap ekstensi, jadi berikut arti masing-masing label bagi RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD hanya berfungsi di YouTube. Mengizinkan ini tidak memberinya akses ke situs web lain mana pun."
   }
 }

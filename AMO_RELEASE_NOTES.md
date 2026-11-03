@@ -1,14 +1,10 @@
-# Return YouTube Dislike 4.1.0
+# Return YouTube Dislike 4.1.3
 
-What's new since 3.0.0.18:
+4.1.3 explains Firefox's permission prompt more clearly.
 
-- **RYD comments:** read and react to discussions under videos and Shorts. Commenter and Premium members can post and reply, with notifications for replies and reactions.
-- **Firefox consent and translations:** updated permission controls and new translations.
-- **YouTube Shorts support:** see dislike counts and vote on Shorts, with fixes for switching between videos and keeping the buttons in sync.
-- **More reliable counts and voting:** fixes for the latest YouTube layouts, stale counts after navigation, and votes that failed to submit.
-- **Premium statistics:** explore likes and dislikes over time, compare activity by country, and browse interactive world and US maps.
-- **Hide clutter:** keep Like and Dislike visible while moving extra YouTube actions into the More menu.
-- **Refreshed controls:** an updated popup, improved display settings, and raw RYD like/dislike totals in the side panel.
-- **New: GitHub contributor sign-in**, alongside Patreon access to premium features.
+- RYD only works on YouTube. Allowing its Firefox permissions doesn't give it access to any other website, and RYD never sees your browsing history.
+- Firefox now requires every extension to ask before sharing any data, and it uses the same broad labels for every extension. Before Firefox's prompt opens, RYD now explains what "Browsing activity", "Website activity" and "Website content" mean for RYD.
+- The same explanation appears in the toolbar menu, on the welcome page and when you react to RYD comments. The card under the Like and Dislike buttons now says the permission covers YouTube only.
+- Translations updated for all supported languages.
 
 Requires Firefox 140 or newer.

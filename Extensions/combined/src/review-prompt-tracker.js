@@ -1,3 +1,5 @@
+import { isMicrosoftEdge } from "./browser-brand";
+
 const STORAGE_KEY = "reviewPromptState";
 const VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
 const VIDEO_THRESHOLD = 5;
@@ -24,31 +26,36 @@ function isValidState(state) {
   );
 }
 
-function videoPageKey(url, videoId) {
+function youtubePage(url) {
   try {
     const page = new URL(url);
-    if (!["https:", "http:"].includes(page.protocol) || !YOUTUBE_HOSTS.has(page.hostname)) return null;
-    if (
-      (page.pathname === "/watch" && page.searchParams.get("v") === videoId) ||
-      page.pathname === `/shorts/${videoId}` ||
-      page.pathname === `/shorts/${videoId}/`
-    )
-      return `video:${videoId}`;
-    const clip = /^\/clip\/([A-Za-z0-9_-]+)\/?$/.exec(page.pathname);
-    return clip ? `clip:${clip[1]}` : null;
+    return ["https:", "http:"].includes(page.protocol) && YOUTUBE_HOSTS.has(page.hostname) ? page : null;
   } catch (_) {
     return null;
   }
 }
 
+function videoPageKey(url, videoId) {
+  const page = youtubePage(url);
+  if (!page) return null;
+  if (
+    (page.pathname === "/watch" && page.searchParams.get("v") === videoId) ||
+    page.pathname === `/shorts/${videoId}` ||
+    page.pathname === `/shorts/${videoId}/`
+  )
+    return `video:${videoId}`;
+  const clip = /^\/clip\/([A-Za-z0-9_-]+)\/?$/.exec(page.pathname);
+  return clip ? `clip:${clip[1]}` : null;
+}
+
 function isAllowedAction(api, action, sender) {
   const manifest = api?.runtime?.getManifest?.();
-  const pageKey = videoPageKey(sender?.url, action?.videoId);
   return (
     manifest?.manifest_version === 3 &&
     typeof manifest.background?.service_worker === "string" &&
     manifest.background.service_worker.length > 0 &&
     !manifest.browser_specific_settings?.gecko &&
+    !isMicrosoftEdge() &&
     typeof api.runtime.id === "string" &&
     api.runtime.id.length > 0 &&
     sender?.id === api.runtime.id &&
@@ -59,8 +66,8 @@ function isAllowedAction(api, action, sender) {
     api.extension?.inIncognitoContext !== true &&
     isVideoId(action?.videoId) &&
     (action.vote === 1 || action.vote === -1) &&
-    pageKey !== null &&
-    (sender.tab.url == null || videoPageKey(sender.tab.url, action.videoId) === pageKey)
+    youtubePage(sender.url) !== null &&
+    videoPageKey(sender.tab.url ?? sender.url, action.videoId) !== null
   );
 }
 

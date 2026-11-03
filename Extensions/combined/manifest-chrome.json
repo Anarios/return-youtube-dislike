@@ -13,7 +13,7 @@
     "128": "icons/icon128.png"
   },
   "host_permissions": ["*://*.youtube.com/*", "*://returnyoutubedislikeapi.com/*"],
-  "permissions": ["storage", "alarms"],
+  "permissions": ["storage"],
   "optional_permissions": ["identity"],
   "action": {
     "default_popup": "popup.html"

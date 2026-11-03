@@ -1,5 +1,6 @@
 import { getVideoId, localize } from "../utils";
 import { requestVoteData } from "../vote-data-request";
+import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "../core-data-consent";
 import { analyticsState } from "./state";
 
 let generation = 0;
@@ -10,6 +11,14 @@ let activeRequest = null;
 
 export async function loadRawCounts(videoId) {
   if (!isCurrentVideo(videoId)) return;
+  if (usesFirefoxDataCollectionConsent()) {
+    const permissionGeneration = generation;
+    if (!(await hasFeaturePermission("account"))) {
+      resetRawCounts();
+      return;
+    }
+    if (permissionGeneration !== generation || !isCurrentVideo(videoId)) return;
+  }
 
   if (countsVideoId === videoId && loadState === "loaded") {
     renderRawCounts();
@@ -66,6 +75,11 @@ export function renderRawCounts() {
 async function fetchRawCounts(request) {
   try {
     const payload = await requestVoteData(request.videoId);
+    if (!ownsRequest(request) || !isCurrentVideo(request.videoId)) return;
+    if (usesFirefoxDataCollectionConsent() && !(await hasFeaturePermission("account"))) {
+      if (ownsRequest(request)) resetRawCounts();
+      return;
+    }
     if (!ownsRequest(request) || !isCurrentVideo(request.videoId)) return;
     cachedPayload = payload;
     loadState = "loaded";

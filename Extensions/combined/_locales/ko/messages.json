@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "콘솔에서 API 응답 로깅을 비활성화합니다."
   },
+  "developerSettings": {
+    "message": "개발자 옵션"
+  },
   "disableLoggingLabel": {
     "message": "콘솔 로그 비활성화"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "YouTube 시청 페이지에서 원본 수 패널을 표시하지 않습니다."
   },
+  "hideRydComments": {
+    "message": "RYD 댓글 숨기기"
+  },
+  "hideRydCommentsHover": {
+    "message": "YouTube 댓글이 사용 중지된 동영상에서 RYD 댓글을 표시하지 않습니다."
+  },
   "hidePremiumAnalytics": {
     "message": "프리미엄 동영상 인사이트 숨기기"
   },
@@ -156,7 +165,7 @@
     "message": "유튜브 쇼츠 지원"
   },
   "showTooltipPercentage": {
-    "message": "좋아요/싫어요 막대 툴팁에 백분율 표시."
+    "message": "좋아요/싫어요 막대 툴팁에 백분율 표시"
   },
   "showTooltipPercentageHover": {
     "message": "좋아요/싫어요 막대 툴팁에 백분율을 표시합니다."
@@ -228,7 +237,7 @@
     "message": "좋아요/싫어요 제출 비활성화"
   },
   "textSettingsHover": {
-    "message": "당신의 좋아요와 싫어요 갯수 계산을 중지합니다."
+    "message": "내 좋아요와 싫어요가 집계되지 않고 싫어요 수에도 반영되지 않습니다."
   },
   "textTempUnavailable": {
     "message": "일시적으로 사용할 수 없음"
@@ -804,7 +813,7 @@
     "message": "읽지 않은 알림 $1개"
   },
   "discussion_signedOutInbox": {
-    "message": "내 댓글에 달린 답글과 반응을 보려면 로그인해 주세요."
+    "message": "내 댓글에 달린 답글과 좋아요를 보려면 로그인해 주세요."
   },
   "discussion_notificationUnavailable": {
     "message": "더 이상 볼 수 없는 토론입니다."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "YouTube 동영상을 열면 좋아요 수 바로 옆에 싫어요 수가 표시됩니다. 버전 4.1에서는 YouTube 댓글란과 별도로 동영상에 관해 이야기할 수 있는 RYD 댓글도 선보입니다."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "한 단계만 더"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "아래에서 싫어요 수 표시를 켜면 YouTube에서 좋아요 수 바로 옆에 표시됩니다. 버전 4.1에서는 YouTube 댓글란과 별도로 동영상에 관해 이야기할 수 있는 RYD 댓글도 선보입니다."
+  },
   "changelog_new_badge": {
     "message": "4.1의 새 기능"
   },
@@ -873,7 +888,7 @@
     "message": "RYD 댓글을 만나보세요"
   },
   "changelog_comments_body": {
-    "message": "Return YouTube Dislike가 제공하는 동영상 및 Shorts 아래의 커뮤니티 토론 공간으로, YouTube 댓글과는 별도로 운영됩니다. 누구나 읽고 반응할 수 있습니다. Commenter와 Premium 회원은 댓글과 답글을 작성할 수 있습니다."
+    "message": "YouTube 댓글이 꺼진 동영상 및 Shorts 아래에서 Return YouTube Dislike가 제공하는 커뮤니티 토론 공간입니다. 누구나 읽고 반응할 수 있습니다. Commenter와 Premium 회원은 댓글과 답글을 작성할 수 있습니다."
   },
   "changelog_comments_point_replies": {
     "message": "좋아요와 싫어요가 있는 스레드형 답글"
@@ -882,7 +897,7 @@
     "message": "직접 정한 공개 닉네임으로 댓글 작성"
   },
   "changelog_comments_point_notifications": {
-    "message": "답글이나 반응이 달리면 알림"
+    "message": "내 댓글에 답글이나 좋아요가 달리면 알림"
   },
   "changelog_comments_point_moderation": {
     "message": "신고와 관리로 예의를 지키는 토론"
@@ -958,5 +973,140 @@
   },
   "reviewPromptAction": {
     "message": "리뷰 남기기"
+  },
+  "consent_page_title": {
+    "message": "RYD 기능 권한"
+  },
+  "consent_vote_title": {
+    "message": "내 평가가 반영되게 하세요"
+  },
+  "consent_vote_body": {
+    "message": "이제 Firefox는 모든 확장 기능이 데이터를 공유하기 전에 사용자에게 먼저 묻도록 요구합니다. RYD가 내 좋아요, 싫어요, 댓글 반응을 반영할 수 있도록 허용하세요. 이 권한은 YouTube에만 적용되며 다른 웹사이트에는 적용되지 않습니다."
+  },
+  "consent_account_title": {
+    "message": "계정 권한 선택"
+  },
+  "consent_account_body": {
+    "message": "로그인하면 프로필, 알림, Premium 분석 등 계정 기능을 사용할 수 있습니다."
+  },
+  "consent_next_step": {
+    "message": "Firefox에서 허용을 선택하여 권한을 검토하세요. 거부할 수 있습니다."
+  },
+  "consent_allow": {
+    "message": "Firefox에서 허용"
+  },
+  "consent_not_now": {
+    "message": "나중에"
+  },
+  "consent_prompt_status": {
+    "message": "Firefox에서 이 권한들을 허용할지 선택하세요."
+  },
+  "consent_granted_status": {
+    "message": "권한이 활성화되었습니다. YouTube로 돌아갈 수 있습니다."
+  },
+  "consent_declined_status": {
+    "message": "이 선택 기능은 꺼진 상태로 유지됩니다. 나중에 권한을 변경할 수 있습니다."
+  },
+  "consent_error_status": {
+    "message": "권한을 변경하지 못했습니다. 다시 시도해 주세요."
+  },
+  "consent_details_summary": {
+    "message": "Firefox 권한 분류는 무엇을 뜻하나요?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox는 데이터를 큰 범주로 묶습니다. RYD에서 각 범주는 다음을 뜻합니다."
+  },
+  "consent_browsing_label": {
+    "message": "탐색 활동"
+  },
+  "consent_browsing_body": {
+    "message": "내가 여는 YouTube 동영상의 ID만 해당 동영상의 싫어요 수와 RYD 댓글을 불러오는 데 사용합니다. 방문 기록이나 다른 웹사이트는 절대 포함하지 않습니다."
+  },
+  "consent_content_label": {
+    "message": "웹사이트 콘텐츠"
+  },
+  "consent_content_body": {
+    "message": "싫어요 수 추정을 개선하기 위한, YouTube 동영상에 표시된 좋아요 수입니다."
+  },
+  "consent_activity_label": {
+    "message": "웹사이트 활동"
+  },
+  "consent_activity_body": {
+    "message": "YouTube에서 남긴 내 좋아요, 싫어요, RYD 댓글 반응으로, 집계에 반영하기 위한 것입니다. Google 또는 YouTube 계정과 연결되지 않은 무작위 ID와 함께 전송됩니다."
+  },
+  "consent_identity_label": {
+    "message": "개인 식별 정보"
+  },
+  "consent_identity_body": {
+    "message": "로그인을 선택한 경우에만 사용하는 표시 이름, 이메일 등 프로필 정보입니다."
+  },
+  "consent_auth_label": {
+    "message": "인증 정보"
+  },
+  "consent_auth_body": {
+    "message": "로그인하고 계정 기능을 사용하는 데 필요한 인증 및 세션 데이터입니다."
+  },
+  "consent_scope": {
+    "message": "RYD는 youtube.com 외부에서 아무것도 수집하지 않으며 YouTube 계정에 접근하지 않습니다. 로그인하지 않으면 이름이나 이메일을 받지 않습니다."
+  },
+  "consent_settings": {
+    "message": "이 권한은 Firefox 부가 기능 설정(about:addons)에서 언제든지 변경할 수 있습니다."
+  },
+  "consent_private_counts": {
+    "message": "사생활 보호 창에서는 일반 창에서 활성화한 권한을 사용해 수 표시만 제공합니다. 투표, 로그인, Premium 분석과 토론은 사용할 수 없습니다."
+  },
+  "consent_voter_timing": {
+    "message": "투표 ID는 투표하거나 반응할 때만 전송됩니다. 내가 남긴 댓글 반응은 이 기기에 기억됩니다."
+  },
+  "popup_signin_next_click": {
+    "message": "한 번 더 클릭해야 합니다. 아래의 로그인 버튼을 선택하여 Firefox 계정 권한을 확인하고 계속하세요."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "감사합니다. 이제 내 평가가 집계됩니다."
+  },
+  "vote_consent_hint": {
+    "message": "내 평가가 아직 집계되지 않았습니다. 이제 RYD가 평가를 전송하려면 Firefox에서 권한을 허용해야 합니다. 이 권한은 YouTube에만 적용되며 다른 웹사이트에는 적용되지 않습니다."
+  },
+  "vote_not_counted": {
+    "message": "내 좋아요와 싫어요가 집계되지 않으며 싫어요 수에도 반영되지 않습니다."
+  },
+  "vote_count_mine": {
+    "message": "내 평가 반영하기"
+  },
+  "vote_consent_dismiss": {
+    "message": "다시 묻지 않기"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "댓글에 반응하려면 평가 공유를 켜세요. 켜지면 반응이 전송됩니다."
+  },
+  "discussion_consentContinue": {
+    "message": "계속"
+  },
+  "counts_consent_enable": {
+    "message": "싫어요 수 표시 활성화"
+  },
+  "counts_consent_toolbar": {
+    "message": "계속하려면 Firefox의 확장 기능 메뉴에서 Return YouTube Dislike를 여세요."
+  },
+  "counts_consent_declined": {
+    "message": "수 표시는 꺼진 상태로 유지됩니다. 나중에 여기서 활성화할 수 있습니다."
+  },
+  "counts_consent_enabled": {
+    "message": "싫어요 수 표시가 활성화되었습니다."
+  },
+  "counts_consent_private": {
+    "message": "먼저 일반 창에서 싫어요 수 표시를 활성화하세요. 사생활 보호 창에서는 수 표시만 사용할 수 있습니다."
+  },
+  "data_consent_reason": {
+    "message": "이제 Firefox는 모든 확장 기능이 데이터를 공유하기 전에 사용자에게 먼저 묻도록 요구합니다. RYD가 싫어요 수를 표시하고 내 평가를 반영할 수 있도록 허용하세요. 이 권한은 YouTube에만 적용되며 다른 웹사이트에는 적용되지 않습니다."
+  },
+  "data_consent_title": {
+    "message": "싫어요 수를 표시하고 내 평가가 반영되게 하세요"
+  },
+  "data_consent_body": {
+    "message": "이제 Firefox는 모든 확장 기능이 데이터를 공유하기 전에 사용자에게 먼저 묻도록 요구합니다. 모든 확장 기능에 똑같은 포괄적 분류를 사용하므로, RYD에서 각 분류의 의미는 다음과 같습니다:"
+  },
+  "data_consent_scope": {
+    "message": "RYD는 YouTube에서만 작동합니다. 허용해도 RYD는 다른 어떤 웹사이트에도 접근할 수 없습니다."
   }
 }

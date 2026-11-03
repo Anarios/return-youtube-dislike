@@ -1,15 +1,16 @@
 import { config as appConfig, getApiUrl, getApiEndpoint } from "./src/config.js";
 import { getGitHubLoginErrorMessage } from "./src/github-login-error";
 import { initDiscussionPopup } from "./src/discussion/popup";
-import { waitForCoreDataConsent } from "./src/consent-prompt";
-import { onCoreDataPermissionChanged } from "./src/core-data-consent";
+import { hasFeaturePermission, onDataPermissionsChanged, requestFeaturePermission } from "./src/core-data-consent";
 import { fetchWithAccountConsent } from "./src/account-data-consent";
 import { isPrivateBrowsingContext } from "./src/private-browsing";
+import { initCountsConsentPopup } from "./src/counts-consent-popup";
+import { initVoteStatusPopup } from "./src/vote-status-popup";
+import { isToolbarPopup, openPopupPageInTab } from "./src/toolbar-popup";
 import { DEFAULT_CUSTOM_COLORS, getThemeColor, normalizeCustomColors } from "../common/color-themes";
 import {
   hasAuthenticationDataPermission,
   onAuthenticationDataPermissionRemoved,
-  requestAuthenticationDataPermission,
   usesFirefoxDataCollectionConsent,
 } from "./src/data-collection-permissions.js";
 
@@ -27,6 +28,7 @@ const config = {
   tooltipPercentageMode: "dash_like",
   numberDisplayReformatLikes: false,
   hidePremiumTeaser: false,
+  hideRydComments: false,
   hideClutterButtons: false,
   showAdvancedMessage:
     '<svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><rect fill="none" height="24" width="24"/><path d="M19.5,12c0-0.23-0.01-0.45-0.03-0.68l1.86-1.41c0.4-0.3,0.51-0.86,0.26-1.3l-1.87-3.23c-0.25-0.44-0.79-0.62-1.25-0.42 l-2.15,0.91c-0.37-0.26-0.76-0.49-1.17-0.68l-0.29-2.31C14.8,2.38,14.37,2,13.87,2h-3.73C9.63,2,9.2,2.38,9.14,2.88L8.85,5.19 c-0.41,0.19-0.8,0.42-1.17,0.68L5.53,4.96c-0.46-0.2-1-0.02-1.25,0.42L2.41,8.62c-0.25,0.44-0.14,0.99,0.26,1.3l1.86,1.41 C4.51,11.55,4.5,11.77,4.5,12s0.01,0.45,0.03,0.68l-1.86,1.41c-0.4,0.3-0.51,0.86-0.26,1.3l1.87,3.23c0.25,0.44,0.79,0.62,1.25,0.42 l2.15-0.91c0.37,0.26,0.76,0.49,1.17,0.68l0.29,2.31C9.2,21.62,9.63,22,10.13,22h3.73c0.5,0,0.93-0.38,0.99-0.88l0.29-2.31 c0.41-0.19,0.8-0.42,1.17-0.68l2.15,0.91c0.46,0.2,1,0.02,1.25-0.42l1.87-3.23c0.25-0.44,0.14-0.99-0.26-1.3l-1.86-1.41 C19.49,12.45,19.5,12.23,19.5,12z M12.04,15.5c-1.93,0-3.5-1.57-3.5-3.5s1.57-3.5,3.5-3.5s3.5,1.57,3.5,3.5S13.97,15.5,12.04,15.5z"/></svg>',
@@ -40,6 +42,8 @@ let customColorsReady = false;
 
 /*   Change language   */
 function localizeHtmlPage() {
+  const locale = chrome.i18n.getMessage("@@ui_locale");
+  if (locale) document.documentElement.lang = locale.replaceAll("_", "-");
   const direction = chrome.i18n.getMessage("@@bidi_dir");
   if (direction === "rtl" || direction === "ltr") document.documentElement.dir = direction;
   //Localize by replacing __MSG_***__ meta tags
@@ -60,45 +64,29 @@ function localizeHtmlPage() {
 
 localizeHtmlPage();
 const privateBrowsing = isPrivateBrowsingContext();
-function isToolbarPopup() {
-  try {
-    return browser.extension?.getViews?.({ type: "popup" }).includes(window) === true;
-  } catch (_) {
-    return false;
-  }
-}
-
-function waitForPopupCoreConsent() {
-  const toolbarPopup = isToolbarPopup();
-  return waitForCoreDataConsent({
-    alwaysExplain: !toolbarPopup,
-    openConsentPage: toolbarPopup
-      ? async () => {
-          await browser.tabs.create({ url: browser.runtime.getURL("consent.html"), active: true });
-          window.close();
-        }
-      : undefined,
-  });
-}
-
-const coreConsentReady = privateBrowsing ? null : waitForPopupCoreConsent();
+const firefoxDataConsent = usesFirefoxDataCollectionConsent();
 if (privateBrowsing) {
-  const home = document.createElement("center");
+  const home = document.createElement("main");
+  const header = document.createElement("header");
   const message = document.createElement("p");
+  header.className = "popup-header";
   message.id = "ryd-private-counts-message";
-  message.textContent =
-    "Counts only in private windows. Voting, sign-in, premium analytics and discussions are unavailable here.";
-  home.append(
-    document.querySelector("body > center > img").cloneNode(true),
-    document.querySelector("body > center > h1").cloneNode(true),
-    message,
+  message.textContent = chrome.i18n.getMessage("consent_private_counts");
+  header.append(
+    document.querySelector(".popup-header .popup-logo").cloneNode(true),
+    document.querySelector(".popup-header h1").cloneNode(true),
   );
+  home.append(header, message);
   document.body.replaceChildren(home);
+  if (firefoxDataConsent) {
+    void hasFeaturePermission("counts").then((granted) => {
+      if (!granted) message.textContent = chrome.i18n.getMessage("counts_consent_private");
+    });
+  }
 } else {
-  coreConsentReady.then(() => initDiscussionPopup());
-  onCoreDataPermissionChanged((granted) => {
-    if (!granted) void waitForPopupCoreConsent();
-  });
+  const discussionPopup = initDiscussionPopup();
+  initCountsConsentPopup({ beforeShow: () => discussionPopup?.close() });
+  initVoteStatusPopup();
 
   /*   Links   */
   createLink(config.links.website, "link_website");
@@ -180,6 +168,10 @@ if (!privateBrowsing) {
     chrome.storage.sync.set({ hidePremiumTeaser: ev.target.checked });
   });
 
+  document.getElementById("hide_ryd_comments").addEventListener("click", (ev) => {
+    chrome.storage.sync.set({ hideRydComments: ev.target.checked });
+  });
+
   document.getElementById("hide_clutter_buttons").addEventListener("click", (ev) => {
     chrome.storage.sync.set({ hideClutterButtons: ev.target.checked });
   });
@@ -195,59 +187,63 @@ function initPatreonAuth() {
   const userName = document.getElementById("patreon-user-name");
   const userTier = document.getElementById("patreon-tier");
   let authenticationGeneration = 0;
+  let accountReadGeneration = 0;
   let openingPermissionPage = false;
-  const initialGeneration = authenticationGeneration;
+  function refreshAccountView() {
+    const initialGeneration = authenticationGeneration;
+    const readGeneration = ++accountReadGeneration;
+    const isCurrent = () => initialGeneration === authenticationGeneration && readGeneration === accountReadGeneration;
+    chrome.storage.sync.get(["patreonUser", "patreonSessionToken"], async (data) => {
+      if (!isCurrent()) return;
+      const cachedUser = data.patreonUser;
+      const sessionToken = data.patreonSessionToken;
 
-  chrome.storage.sync.get(["patreonUser", "patreonSessionToken"], async (data) => {
-    if (initialGeneration !== authenticationGeneration) return;
-    const cachedUser = data.patreonUser;
-    const sessionToken = data.patreonSessionToken;
-
-    if (sessionToken && cachedUser) {
-      const granted = await hasAuthenticationDataPermission();
-      if (initialGeneration !== authenticationGeneration) return;
-      if (!granted) {
-        chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"]);
-        showLoggedOutView();
-        return;
-      }
-
-      // Show cached state immediately to avoid flicker on popup reopen.
-      showLoggedInView(cachedUser);
-
-      verifySession(sessionToken, initialGeneration).then(async (result) => {
-        if (initialGeneration !== authenticationGeneration) return;
-        const stillGranted = await hasAuthenticationDataPermission();
-        if (initialGeneration !== authenticationGeneration || !stillGranted) return;
-        if (result.status === "valid") {
-          if (result.membershipTier && result.membershipTier !== cachedUser.membershipTier) {
-            const updatedUser = { ...cachedUser, membershipTier: result.membershipTier, hasActiveMembership: true };
-            showLoggedInView(updatedUser);
-            chrome.storage.sync.set({ patreonUser: updatedUser });
-          } else if (cachedUser.hasActiveMembership !== true) {
-            const updatedUser = { ...cachedUser, hasActiveMembership: true };
-            showLoggedInView(updatedUser);
-            chrome.storage.sync.set({ patreonUser: updatedUser });
-          }
-        } else if (result.status === "inactive") {
-          const updatedUser = {
-            ...cachedUser,
-            hasActiveMembership: false,
-            membershipTier: result.membershipTier || cachedUser.membershipTier || "none",
-          };
-          showLoggedInView(updatedUser);
-          chrome.storage.sync.set({ patreonUser: updatedUser });
-        } else if (result.status === "error") {
-          console.warn("Patreon session verification skipped:", result.reason || "network_error");
-        } else {
+      if (sessionToken && cachedUser) {
+        const granted = await hasAuthenticationDataPermission();
+        if (!isCurrent()) return;
+        if (!granted) {
           showLoggedOutView();
-          chrome.storage.sync.remove(["patreonUser", "patreonSessionToken"]);
+          return;
         }
-      });
-    } else {
-      showLoggedOutView();
-    }
-  });
+
+        // Show cached state immediately to avoid flicker on popup reopen.
+        showLoggedInView(cachedUser);
+
+        verifySession(sessionToken, initialGeneration).then(async (result) => {
+          if (!isCurrent()) return;
+          const stillGranted = await hasAuthenticationDataPermission();
+          if (!isCurrent() || !stillGranted) return;
+          if (result.status === "valid") {
+            if (result.membershipTier && result.membershipTier !== cachedUser.membershipTier) {
+              const updatedUser = { ...cachedUser, membershipTier: result.membershipTier, hasActiveMembership: true };
+              showLoggedInView(updatedUser);
+              chrome.storage.sync.set({ patreonUser: updatedUser });
+            } else if (cachedUser.hasActiveMembership !== true) {
+              const updatedUser = { ...cachedUser, hasActiveMembership: true };
+              showLoggedInView(updatedUser);
+              chrome.storage.sync.set({ patreonUser: updatedUser });
+            }
+          } else if (result.status === "inactive") {
+            const updatedUser = {
+              ...cachedUser,
+              hasActiveMembership: false,
+              membershipTier: result.membershipTier || cachedUser.membershipTier || "none",
+            };
+            showLoggedInView(updatedUser);
+            chrome.storage.sync.set({ patreonUser: updatedUser });
+          } else if (result.status === "error") {
+            console.warn("Patreon session verification skipped:", result.reason || "network_error");
+          } else {
+            showLoggedOutView();
+            chrome.storage.sync.remove(["patreonUser", "patreonSessionToken"]);
+          }
+        });
+      } else {
+        showLoggedOutView();
+      }
+    });
+  }
+  refreshAccountView();
 
   function showLoggedOutView() {
     loggedOutView.style.display = "block";
@@ -257,11 +253,14 @@ function initPatreonAuth() {
     userName.textContent = "";
     userTier.textContent = "";
     updateHidePremiumSettingLabel();
+    document.getElementById("signin-next-click").hidden =
+      !firefoxDataConsent || !["#patreon-login-btn", "#github-login-btn"].includes(window.location.hash);
     if (window.location.hash === "#patreon-login-btn") loginBtn.focus();
     if (window.location.hash === "#github-login-btn") githubLoginBtn?.focus();
   }
 
   function showLoggedInView(user) {
+    document.getElementById("signin-next-click").hidden = true;
     loggedOutView.style.display = "none";
     loggedInView.style.display = "block";
     updateHidePremiumSettingLabel(user);
@@ -442,7 +441,7 @@ function initPatreonAuth() {
       return;
     }
     if (!isToolbarPopup()) {
-      requestAuthenticationDataPermission().then(continueLogin);
+      void (async () => continueLogin(await requestFeaturePermission("account")))();
       return;
     }
 
@@ -455,7 +454,7 @@ function initPatreonAuth() {
           continueLogin(true);
           return;
         }
-        await browser.tabs.create({ url: browser.runtime.getURL("popup.html") + "#" + buttonId, active: true });
+        await openPopupPageInTab(buttonId);
         if (generation === authenticationGeneration) window.close();
       })
       .catch(() => {
@@ -561,11 +560,13 @@ function initPatreonAuth() {
     showLoggedOutView();
   });
 
-  onCoreDataPermissionChanged((granted) => {
-    if (granted) return;
-    authenticationGeneration++;
-    chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"]);
-    showLoggedOutView();
+  onDataPermissionsChanged(({ added, removed }) => {
+    if (removed.includes("personallyIdentifyingInfo")) {
+      authenticationGeneration++;
+      showLoggedOutView();
+    } else if (added.some((category) => ["authenticationInfo", "personallyIdentifyingInfo"].includes(category))) {
+      refreshAccountView();
+    }
   });
 
   logoutBtn.addEventListener("click", () => {
@@ -577,7 +578,7 @@ function initPatreonAuth() {
 }
 
 if (!privateBrowsing) {
-  coreConsentReady.then(() => initPatreonAuth());
+  initPatreonAuth();
 
   /*   Advanced Toggle   */
   const advancedToggle = document.getElementById("advancedToggle");
@@ -595,6 +596,7 @@ if (!privateBrowsing) {
       advancedToggle.innerHTML = config.hideAdvancedMessage;
     }
     config.advanced = !config.advanced;
+    adv.inert = !config.advanced;
   });
 
   chrome.storage.onChanged.addListener(storageChangeHandler);
@@ -613,6 +615,7 @@ function initConfig() {
   initializeTooltipPercentageMode();
   initializeNumberDisplayReformatLikes();
   initializeHidePremiumTeaser();
+  initializeHideRydComments();
   initializeHideClutterButtons();
 }
 
@@ -696,6 +699,12 @@ function initializeHidePremiumTeaser() {
   });
 }
 
+function initializeHideRydComments() {
+  chrome.storage.sync.get(["hideRydComments"], (res) => {
+    handleHideRydCommentsChangeEvent(res.hideRydComments);
+  });
+}
+
 function initializeHideClutterButtons() {
   chrome.storage.sync.get(["hideClutterButtons"], (res) => {
     if (res.hideClutterButtons === undefined) {
@@ -737,6 +746,9 @@ function storageChangeHandler(changes, area) {
   }
   if (changes.hidePremiumTeaser !== undefined) {
     handleHidePremiumTeaserChangeEvent(changes.hidePremiumTeaser.newValue);
+  }
+  if (changes.hideRydComments !== undefined) {
+    handleHideRydCommentsChangeEvent(changes.hideRydComments.newValue);
   }
   if (changes.hideClutterButtons !== undefined) {
     handleHideClutterButtonsChangeEvent(changes.hideClutterButtons.newValue);
@@ -820,6 +832,12 @@ function handleHidePremiumTeaserChangeEvent(value) {
   const normalized = value === true;
   config.hidePremiumTeaser = normalized;
   document.getElementById("hide_premium_teaser").checked = normalized;
+}
+
+function handleHideRydCommentsChangeEvent(value) {
+  const normalized = value === true;
+  config.hideRydComments = normalized;
+  document.getElementById("hide_ryd_comments").checked = normalized;
 }
 
 function handleHideClutterButtonsChangeEvent(value) {

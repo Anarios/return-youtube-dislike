@@ -1,11 +1,8 @@
 /** @jest-environment jsdom */
 const fs = require("fs");
 const path = require("path");
-jest.mock("./src/consent-prompt", () => ({ waitForCoreDataConsent: jest.fn(() => Promise.resolve()) }));
-jest.mock("./src/core-data-consent", () => ({
-  fetchWithCoreConsent: (...args) => fetch(...args),
-  onCoreDataPermissionChanged: jest.fn(),
-}));
+jest.mock("./src/discussion/popup", () => ({ initDiscussionPopup: jest.fn() }));
+jest.mock("./src/account-data-consent", () => ({ fetchWithAccountConsent: (...args) => fetch(...args) }));
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 const cachedUser = { fullName: "Test User", imageUrl: "https://example.org/avatar", membershipTier: "none" };
@@ -13,18 +10,13 @@ const cachedUser = { fullName: "Test User", imageUrl: "https://example.org/avata
 describe("popup account consent lifecycle", () => {
   let readCachedSession;
   let removeConsent;
-  let removeCoreConsent;
+  let addConsent;
   let consent;
 
   beforeEach(async () => {
     jest.resetModules();
     const permissionRemovedListeners = new Set();
-    const coreConsentListeners = new Set();
-    require("./src/core-data-consent").onCoreDataPermissionChanged.mockImplementation((listener) => {
-      coreConsentListeners.add(listener);
-      return () => coreConsentListeners.delete(listener);
-    });
-    removeCoreConsent = () => [...coreConsentListeners].forEach((listener) => listener(false));
+    const permissionAddedListeners = new Set();
     consent = true;
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "popup.html"), "utf8");
     global.chrome = {
@@ -37,16 +29,24 @@ describe("popup account consent lifecycle", () => {
       extension: { getViews: jest.fn(() => []) },
       tabs: { create: jest.fn().mockResolvedValue({ id: 9 }) },
       permissions: {
-        getAll: jest.fn(() => Promise.resolve({ data_collection: consent ? ["authenticationInfo"] : [] })),
+        getAll: jest.fn(() =>
+          Promise.resolve({ data_collection: consent ? ["authenticationInfo", "personallyIdentifyingInfo"] : [] }),
+        ),
         contains: jest.fn().mockResolvedValue(true),
         request: jest.fn(() => Promise.resolve(consent)),
+        onAdded: {
+          addListener: (listener) => {
+            permissionAddedListeners.add(listener);
+            addConsent = (categories) =>
+              [...permissionAddedListeners].forEach((listener) => listener({ data_collection: categories }));
+          },
+          removeListener: (listener) => permissionAddedListeners.delete(listener),
+        },
         onRemoved: {
           addListener: (listener) => {
             permissionRemovedListeners.add(listener);
-            removeConsent = () =>
-              [...permissionRemovedListeners].forEach((listener) =>
-                listener({ data_collection: ["authenticationInfo"] }),
-              );
+            removeConsent = (categories = ["authenticationInfo"]) =>
+              [...permissionRemovedListeners].forEach((listener) => listener({ data_collection: categories }));
           },
           removeListener: (listener) => permissionRemovedListeners.delete(listener),
         },
@@ -92,30 +92,26 @@ describe("popup account consent lifecycle", () => {
     },
   );
 
-  test.each([true, false])("moves toolbar core consent into a tab and closes only on success=%s", async (success) => {
-    chrome.extension.getViews.mockReturnValue([window]);
-    jest.resetModules();
-    const waitForConsent = require("./src/consent-prompt").waitForCoreDataConsent;
-    require("./popup");
-    const options = waitForConsent.mock.calls[0][0];
-    expect(options.alwaysExplain).toBe(false);
-    expect(options.openConsentPage).toEqual(expect.any(Function));
-    const close = jest.spyOn(window, "close").mockImplementation(() => {});
-    let complete;
-    chrome.tabs.create.mockImplementation(
-      () =>
-        new Promise((resolve, reject) => {
-          complete = () => (success ? resolve({ id: 9 }) : reject(new Error("Could not open tab")));
-        }),
-    );
-    const opening = options.openConsentPage();
-    expect(chrome.tabs.create).toHaveBeenCalledWith({ url: "moz-extension://fixture/consent.html", active: true });
-    expect(close).not.toHaveBeenCalled();
-    complete();
-    if (success) await opening;
-    else await expect(opening).rejects.toThrow("Could not open tab");
-    expect(close).toHaveBeenCalledTimes(success ? 1 : 0);
+  test("the RYD comments switch saves its choice and follows synced changes", () => {
+    const toggle = document.getElementById("hide_ryd_comments");
+    expect(toggle.checked).toBe(false);
+    toggle.click();
+    expect(chrome.storage.sync.set).toHaveBeenCalledWith({ hideRydComments: true });
+    const notify = (newValue) =>
+      chrome.storage.onChanged.addListener.mock.calls.forEach(([listener]) =>
+        listener({ hideRydComments: { newValue } }, "sync"),
+      );
+    notify(false);
+    expect(toggle.checked).toBe(false);
+    notify(true);
+    expect(toggle.checked).toBe(true);
+  });
+
+  test("opens the popup without a global consent wall", () => {
+    expect(document.getElementById("patreon-section")).not.toBeNull();
+    expect(document.querySelector("#ryd-consent-prompt, iframe")).toBeNull();
     expect(chrome.permissions.request).not.toHaveBeenCalled();
+    expect(chrome.tabs.create).not.toHaveBeenCalled();
   });
 
   test.each([
@@ -226,11 +222,42 @@ describe("popup account consent lifecycle", () => {
     },
   );
 
-  test.each([[], undefined])("does not verify or display cached account data without a grant: %j", async (granted) => {
-    chrome.permissions.getAll.mockResolvedValue({ permissions: ["identity"], data_collection: granted });
+  test.each([[], undefined])(
+    "retains cached startup sessions without verifying or displaying account data: %j",
+    async (granted) => {
+      chrome.permissions.getAll.mockResolvedValue({ permissions: ["identity"], data_collection: granted });
+      readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
+      await flushPromises();
+      expect(fetch).not.toHaveBeenCalled();
+      expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+      expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+      expectLoggedOut();
+    },
+  );
+
+  test("keeps the saved session when personally identifying information is absent", async () => {
+    chrome.permissions.getAll.mockResolvedValue({ data_collection: ["authenticationInfo"] });
     readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
     await flushPromises();
     expect(fetch).not.toHaveBeenCalled();
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+    expectLoggedOut();
+  });
+
+  test("hides account features on PII revocation without deleting the saved session", async () => {
+    fetch.mockReturnValue(new Promise(() => {}));
+    readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
+    await flushPromises();
+    expect(document.getElementById("patreon-logged-in").style.display).toBe("block");
+    chrome.permissions.getAll.mockResolvedValue({ data_collection: ["authenticationInfo"] });
+    removeConsent(["personallyIdentifyingInfo"]);
+    await flushPromises();
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+    expectLoggedOut();
+  });
+
+  test("clears saved account data on authenticationInfo revocation", () => {
+    removeConsent(["authenticationInfo"]);
     expect(chrome.storage.sync.remove).toHaveBeenCalledWith([
       "patreonAuthenticated",
       "patreonUser",
@@ -239,13 +266,34 @@ describe("popup account consent lifecycle", () => {
     expectLoggedOut();
   });
 
+  test("restores the saved account view when PII is granted again", async () => {
+    const saved = { patreonUser: cachedUser, patreonSessionToken: "test-token" };
+    chrome.permissions.getAll.mockResolvedValue({ data_collection: ["authenticationInfo"] });
+    readCachedSession(saved);
+    await flushPromises();
+    expectLoggedOut();
+    fetch.mockReturnValue(new Promise(() => {}));
+    chrome.permissions.getAll.mockResolvedValue({
+      data_collection: ["authenticationInfo", "personallyIdentifyingInfo"],
+    });
+    const readsBeforeGrant = chrome.storage.sync.get.mock.calls.length;
+    addConsent(["personallyIdentifyingInfo"]);
+    expect(chrome.storage.sync.get.mock.calls.length).toBe(readsBeforeGrant + 1);
+    readCachedSession(saved);
+    await flushPromises();
+    expect(document.getElementById("patreon-logged-in").style.display).toBe("block");
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+  });
+
   test.each(["patreon-login-btn", "github-login-btn"])(
     "does not start %s when Firefox denies authentication consent",
     async (button) => {
       consent = false;
       jest.spyOn(window, "alert").mockImplementation(() => {});
       document.getElementById(button).click();
-      expect(chrome.permissions.request).toHaveBeenCalledWith({ data_collection: ["authenticationInfo"] });
+      expect(chrome.permissions.request).toHaveBeenCalledWith({
+        data_collection: ["authenticationInfo", "personallyIdentifyingInfo"],
+      });
       await flushPromises();
       expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
       expect(fetch).not.toHaveBeenCalled();
@@ -263,6 +311,19 @@ describe("popup account consent lifecycle", () => {
       expect(fetch).not.toHaveBeenCalled();
     },
   );
+
+  test.each(["patreon", "github"])("continues %s sign-in when the grant emits onAdded", async (provider) => {
+    chrome.permissions.request.mockImplementation(() => {
+      addConsent(["authenticationInfo", "personallyIdentifyingInfo"]);
+      return Promise.resolve(true);
+    });
+    document.getElementById(`${provider}-login-btn`).click();
+    await flushPromises();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(
+      { message: `${provider}_oauth_login` },
+      expect.any(Function),
+    );
+  });
 
   test.each(["patreon-login-btn", "github-login-btn"])(
     "moves missing %s consent out of the toolbar before requesting permission",
@@ -327,7 +388,7 @@ describe("popup account consent lifecycle", () => {
       let resolvePermission;
       chrome.permissions.getAll.mockImplementationOnce(() => new Promise((resolve) => (resolvePermission = resolve)));
       document.getElementById("patreon-login-btn").click();
-      if (event === "revocation") removeCoreConsent();
+      if (event === "revocation") revoke();
       else document.getElementById("patreon-logout-btn").click();
       chrome.runtime.sendMessage.mockClear();
       resolvePermission({ data_collection: [] });
@@ -346,7 +407,7 @@ describe("popup account consent lifecycle", () => {
     expectLoggedOut();
   });
 
-  test("does not restore an account when core consent is removed during the final account-permission query", async () => {
+  test("does not restore an account when authentication consent is removed during the final account-permission query", async () => {
     let resolvePermission;
     fetch.mockResolvedValue({
       json: async () => {
@@ -358,8 +419,8 @@ describe("popup account consent lifecycle", () => {
     await flushPromises();
     expect(typeof resolvePermission).toBe("function");
 
-    removeCoreConsent();
-    resolvePermission({ data_collection: ["authenticationInfo"] });
+    revoke();
+    resolvePermission({ data_collection: ["authenticationInfo", "personallyIdentifyingInfo"] });
     await flushPromises();
 
     expect(chrome.storage.sync.set).not.toHaveBeenCalled();

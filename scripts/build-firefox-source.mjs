@@ -12,14 +12,14 @@ const menuFixerPath = join(firefoxOutputDirectory, "menu-fixer.js");
 const maxContentScriptBytes = 5 * 1024 * 1024;
 const expectedNodeVersion = "v22.23.4";
 const expectedNpmVersion = "10.8.2";
-const expectedExtensionVersion = "4.1.0";
+const expectedExtensionVersion = "4.1.3";
 const expectedFirefoxExtensionId = "{762f9885-5a13-4abd-9c77-433dcd38b8fd}";
 const expectedRequiredDataCollectionPermissions = ["none"];
 const expectedOptionalDataCollectionPermissions = [
-  "personallyIdentifyingInfo",
   "browsingActivity",
   "websiteContent",
   "websiteActivity",
+  "personallyIdentifyingInfo",
   "authenticationInfo",
 ];
 const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";

@@ -8,6 +8,7 @@ const path = require("node:path");
 const {
   EMITTED_JS_FILES,
   manifestExposesWebAccessibleResource,
+  verifyBrowserConsentAssets,
   verifyMirroredJavaScript,
   verifyProductionJavaScript,
   verifyRequestedExtensionArtifact,
@@ -38,9 +39,28 @@ beforeEach(() => {
     const contents = `generated ${bundle}`;
     writeBundle(temporaryRoot, bundle, contents);
     for (const directory of BROWSER_DIRECTORIES) {
+      if (bundle === "consent.js" && directory !== "firefox") continue;
       writeBundle(path.join(temporaryRoot, directory), bundle, contents);
     }
   }
+});
+
+test.each(["chrome", "safari"])("rejects Firefox consent assets in the %s package", (browser) => {
+  const directory = path.join(temporaryRoot, browser);
+  expect(() => verifyBrowserConsentAssets(directory, browser)).not.toThrow();
+  for (const asset of ["consent.html", "consent.css", "consent.js"]) {
+    writeBundle(directory, asset, "consent asset");
+    expect(() => verifyBrowserConsentAssets(directory, browser)).toThrow(`must not package Firefox-only ${asset}`);
+    fs.unlinkSync(path.join(directory, asset));
+  }
+});
+
+test("requires the consent page, styles and script in Firefox", () => {
+  const directory = path.join(temporaryRoot, "firefox");
+  for (const asset of ["consent.html", "consent.css", "consent.js"]) writeBundle(directory, asset, "consent asset");
+  expect(() => verifyBrowserConsentAssets(directory, "firefox")).not.toThrow();
+  fs.unlinkSync(path.join(directory, "consent.html"));
+  expect(() => verifyBrowserConsentAssets(directory, "firefox")).toThrow("Firefox is missing consent.html");
 });
 
 afterEach(() => {

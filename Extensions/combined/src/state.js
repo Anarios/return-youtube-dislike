@@ -573,6 +573,23 @@ function initializePrivateDisplayPreferences() {
   });
 }
 
+let remoteSelectorsLoaded = false;
+let remoteSelectorRequest = null;
+
+function ensureRemoteSelectors() {
+  if (remoteSelectorsLoaded) return Promise.resolve(true);
+  if (!remoteSelectorRequest) {
+    remoteSelectorRequest = initializeSelectors().finally(() => {
+      remoteSelectorRequest = null;
+    });
+  }
+  return remoteSelectorRequest;
+}
+
+function remoteSelectorsSettled() {
+  return remoteSelectorRequest ?? Promise.resolve();
+}
+
 async function initializeSelectors() {
   const controller = new AbortController();
   const privateContext = isPrivateBrowsingContext();
@@ -594,6 +611,7 @@ async function initializeSelectors() {
     const result = await response.json();
     if (privateContext && controller.signal.aborted) return false;
     extConfig.selectors = mergeConfig(DEFAULT_SELECTORS, result);
+    remoteSelectorsLoaded = true;
     if (!isPrivateBrowsingContext()) logger.log(result);
     return true;
   } catch (error) {
@@ -767,6 +785,8 @@ export {
   extConfig,
   initExtConfig,
   initializeSelectors,
+  ensureRemoteSelectors,
+  remoteSelectorsSettled,
   storedData,
   isLikesDisabled,
   hasLoadedStateForVideo,

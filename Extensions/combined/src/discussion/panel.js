@@ -1,15 +1,18 @@
 import { requestDiscussion } from "./client";
 import { discussionText as t, discussionError, discussionLanguage } from "./localize";
 import { element, button, statusNode, shortDate, thumbIcon, isDiscussionCommentId } from "./dom";
-import { createDiscussionInbox } from "./inbox";
+import { createDiscussionInbox, notificationsLabel } from "./inbox";
+import { consentApi } from "../core-data-consent";
 
 const SIGNED_OUT = { authenticated: false, canPost: false, isModerator: false, profile: null };
+const REACTION_CONSENT_FEATURE = "voteOptIn";
 
 export function createDiscussionPanel({
   videoId,
   surface = "watch",
   session = SIGNED_OUT,
   capabilities = {},
+  reactionsAllowed = true,
   request = requestDiscussion,
   onClose,
 } = {}) {
@@ -46,14 +49,17 @@ export function createDiscussionPanel({
   const discussion = element("div", "ryd-discussion-thread");
   const composer = element("div", "ryd-discussion-composer");
   const toolbar = element("div", "ryd-discussion-toolbar");
-  const sort = element("select", "ryd-discussion-select");
+  let sortOrder = "top";
+  const sort = element("div", "ryd-discussion-sort");
+  sort.setAttribute("role", "group");
   sort.setAttribute("aria-label", t("sort"));
-  for (const value of ["top", "new"]) {
-    const option = element("option", "", t(value));
-    option.value = value;
-    sort.append(option);
-  }
-  sort.addEventListener("change", () => load());
+  const sortButtons = ["top", "new"].map((value) => {
+    const option = button(t(value), () => selectSort(value));
+    option.dataset.sort = value;
+    return option;
+  });
+  sort.append(...sortButtons);
+  renderSort();
   const refresh = button(t("refresh"), () => load());
   toolbar.append(sort, refresh);
   const status = statusNode();
@@ -61,7 +67,13 @@ export function createDiscussionPanel({
   const more = button(t("more"), () => load(true), "ryd-discussion-button ryd-discussion-more");
   more.hidden = true;
   discussion.append(composer, toolbar, status, list, more);
-  const inbox = createDiscussionInbox({ request, authenticated: session.authenticated });
+  const inbox = createDiscussionInbox({
+    request,
+    authenticated: session.authenticated,
+    onUnreadCount: (count) => {
+      inboxButton.textContent = notificationsLabel(count);
+    },
+  });
   const moderation = element("div", "ryd-discussion-moderation");
   inbox.node.hidden = true;
   moderation.hidden = true;
@@ -77,6 +89,8 @@ export function createDiscussionPanel({
   const postingIds = new Map();
   let draftGeneration = 0;
   const rootReplyHandlers = new Map();
+  const reactionRows = new Map();
+  let pendingReaction = null;
   let moderationSequence = 0;
   let reportCursor = null;
   let reportStatus = "open";
@@ -89,6 +103,84 @@ export function createDiscussionPanel({
   }
   function setError(error) {
     if (current()) status.textContent = discussionError(error);
+  }
+
+  function showConsentPrompt(message, { text, feature }) {
+    const continued = button(t("consentContinue"), () => {
+      try {
+        const pending = consentApi()?.runtime?.sendMessage({ message: "ryd_open_consent", feature });
+        pending?.catch?.(() => {});
+      } catch (_) {}
+    });
+    continued.dataset.action = `${feature}-consent`;
+    message.replaceChildren(element("span", "", t(text)), continued);
+  }
+
+  function isOwnComment(comment) {
+    return Boolean(session.authenticated && session.profile?.id && comment.author?.id === session.profile.id);
+  }
+
+  function requestReactionConsent(target, value) {
+    clearReactionConsentPrompts();
+    pendingReaction = { comment: target.comment, value };
+    showConsentPrompt(target.notice, { text: "reactionConsentRequired", feature: REACTION_CONSENT_FEATURE });
+  }
+
+  function clearReactionConsentPrompts() {
+    for (const row of reactionRows.values()) {
+      if (row.alive() && row.notice.querySelector(`[data-action='${REACTION_CONSENT_FEATURE}-consent']`))
+        row.notice.replaceChildren();
+    }
+  }
+
+  function setReactionsBusy(target, busy) {
+    for (const item of target.actions.querySelectorAll("[data-reaction]")) item.disabled = busy;
+  }
+
+  function renderedReaction(id) {
+    const row = reactionRows.get(id);
+    return row?.alive() ? row : null;
+  }
+
+  async function sendReaction(comment, value) {
+    if (isOwnComment(comment)) return;
+    const target = renderedReaction(comment.id);
+    target?.notice.replaceChildren();
+    if (target) setReactionsBusy(target, true);
+    try {
+      const result = await request("react", { id: comment.id, value: comment.myReaction === value ? 0 : value });
+      const latest = renderedReaction(comment.id);
+      Object.assign(latest?.comment || comment, result);
+      latest?.update();
+    } catch (error) {
+      setError(error);
+    } finally {
+      if (target) setReactionsBusy(target, false);
+    }
+  }
+
+  async function react(id, value) {
+    const target = renderedReaction(id);
+    if (!target || isOwnComment(target.comment)) return;
+    if (!reactionsAllowed) {
+      requestReactionConsent(target, value);
+      return;
+    }
+    await sendReaction(target.comment, value);
+  }
+
+  function performPendingReaction() {
+    const pending = pendingReaction;
+    pendingReaction = null;
+    if (pending && current()) void sendReaction(pending.comment, pending.value);
+  }
+
+  function clearOwnReactions() {
+    for (const item of items) item.myReaction = 0;
+    for (const row of reactionRows.values()) {
+      row.comment.myReaction = 0;
+      if (row.alive()) row.update();
+    }
   }
 
   function showTab(tab, reload = true) {
@@ -292,48 +384,34 @@ export function createDiscussionPanel({
       comment.deleted || comment.hidden ? t("deleted") : comment.text,
     );
     const actions = element("div", "ryd-discussion-comment-actions");
+    const notice = statusNode();
     const controls = element("div", "ryd-discussion-inline-editor");
     const replies = element("div", "ryd-discussion-replies");
-    row.append(heading, text, actions, controls, replies);
+    row.append(heading, text, actions, notice, controls, replies);
     const alive = () => current() && row.isConnected;
     if (!comment.deleted && !comment.hidden) {
-      for (const value of [1, -1]) {
-        const reaction = button(
-          "",
-          async () => {
-            if (reaction.disabled) return;
-            const buttons = [...actions.querySelectorAll("[data-reaction]")];
-            buttons.forEach((item) => {
-              item.disabled = true;
-            });
-            try {
-              const result = await request("react", {
-                id: comment.id,
-                value: comment.myReaction === value ? 0 : value,
-              });
-              if (!alive()) return;
-              Object.assign(comment, result);
-              updateReactions();
-            } catch (error) {
-              setError(error);
-            } finally {
-              buttons.forEach((item) => {
-                item.disabled = false;
-              });
-            }
-          },
-          "ryd-discussion-button ryd-discussion-reaction",
-        );
+      const ownComment = isOwnComment(comment);
+      function reactionNode(value) {
+        if (ownComment) {
+          const count = element("span", "ryd-discussion-reaction-count");
+          count.dataset.reactionCount = String(value);
+          count.setAttribute("role", "img");
+          return count;
+        }
+        const reaction = button("", () => react(comment.id, value), "ryd-discussion-button ryd-discussion-reaction");
         reaction.dataset.reaction = String(value);
-        actions.append(reaction);
+        return reaction;
       }
+      const reactions = new Map([1, -1].map((value) => [value, reactionNode(value)]));
+      actions.append(...reactions.values());
+      if (!ownComment) reactionRows.set(comment.id, { comment, actions, notice, alive, update: updateReactions });
       function updateReactions() {
-        for (const reaction of actions.querySelectorAll("[data-reaction]")) {
-          const liked = reaction.dataset.reaction === "1";
+        for (const [value, reaction] of reactions) {
+          const liked = value === 1;
           const count = liked ? comment.likes || 0 : comment.dislikes || 0;
           reaction.replaceChildren(thumbIcon(!liked), element("span", "", count.toLocaleString(discussionLanguage())));
           reaction.setAttribute("aria-label", `${t(liked ? "like" : "dislike")} (${count})`);
-          reaction.setAttribute("aria-pressed", String(comment.myReaction === (liked ? 1 : -1)));
+          if (!ownComment) reaction.setAttribute("aria-pressed", String(comment.myReaction === value));
         }
       }
       updateReactions();
@@ -362,55 +440,55 @@ export function createDiscussionPanel({
       });
       reply.dataset.action = "reply";
       actions.append(reply);
-      if (session.authenticated && comment.author?.id === session.profile?.id) {
-        if (comment.canEdit) {
-          const edit = button(t("edit"), () => {
-            controls.replaceChildren(
-              commentForm({
-                comment,
-                onCancel: () => controls.replaceChildren(),
-                onSaved: (updated) => {
+      const canEdit = ownComment && !session.profile?.suspended;
+      const canDelete = ownComment;
+      if (canEdit) {
+        const edit = button(t("edit"), () => {
+          controls.replaceChildren(
+            commentForm({
+              comment,
+              onCancel: () => controls.replaceChildren(),
+              onSaved: (updated) => {
+                Object.assign(comment, updated);
+                row.replaceWith(commentRow(comment, rootId));
+              },
+            }),
+          );
+          controls.querySelector("textarea")?.focus();
+        });
+        edit.dataset.action = "edit";
+        actions.append(edit);
+      }
+      if (canDelete) {
+        const remove = button(t("delete"), () => {
+          const prompt = element("div", "ryd-discussion-confirm");
+          prompt.append(
+            element("span", "", t("deleteConfirm")),
+            button(t("cancel"), () => controls.replaceChildren()),
+          );
+          const confirm = button(
+            t("delete"),
+            async () => {
+              confirm.disabled = true;
+              try {
+                const updated = await request("deleteComment", { id: comment.id });
+                if (alive()) {
                   Object.assign(comment, updated);
                   row.replaceWith(commentRow(comment, rootId));
-                },
-              }),
-            );
-            controls.querySelector("textarea")?.focus();
-          });
-          edit.dataset.action = "edit";
-          actions.append(edit);
-        }
-        if (comment.canDelete) {
-          const remove = button(t("delete"), () => {
-            const prompt = element("div", "ryd-discussion-confirm");
-            prompt.append(
-              element("span", "", t("deleteConfirm")),
-              button(t("cancel"), () => controls.replaceChildren()),
-            );
-            const confirm = button(
-              t("delete"),
-              async () => {
-                confirm.disabled = true;
-                try {
-                  const updated = await request("deleteComment", { id: comment.id });
-                  if (alive()) {
-                    Object.assign(comment, updated);
-                    row.replaceWith(commentRow(comment, rootId));
-                  }
-                } catch (error) {
-                  setError(error);
-                  confirm.disabled = false;
                 }
-              },
-              "ryd-discussion-button ryd-discussion-danger",
-            );
-            confirm.dataset.action = "confirm-delete";
-            prompt.append(confirm);
-            controls.replaceChildren(prompt);
-          });
-          remove.dataset.action = "delete";
-          actions.append(remove);
-        }
+              } catch (error) {
+                setError(error);
+                confirm.disabled = false;
+              }
+            },
+            "ryd-discussion-button ryd-discussion-danger",
+          );
+          confirm.dataset.action = "confirm-delete";
+          prompt.append(confirm);
+          controls.replaceChildren(prompt);
+        });
+        remove.dataset.action = "delete";
+        actions.append(remove);
       }
       if (session.authenticated) {
         const report = button(t("report"), () => showReport(comment, controls));
@@ -523,7 +601,19 @@ export function createDiscussionPanel({
 
   function renderComments() {
     rootReplyHandlers.clear();
+    reactionRows.clear();
     list.replaceChildren(...items.map((item) => commentRow(item)));
+  }
+
+  function renderSort() {
+    for (const option of sortButtons) option.setAttribute("aria-pressed", String(option.dataset.sort === sortOrder));
+  }
+
+  function selectSort(value) {
+    if (value === sortOrder) return;
+    sortOrder = value;
+    renderSort();
+    load();
   }
 
   async function load(append = false) {
@@ -533,7 +623,7 @@ export function createDiscussionPanel({
     refresh.disabled = true;
     more.disabled = true;
     try {
-      const result = await request("comments", { videoId, sort: sort.value, ...(append && cursor ? { cursor } : {}) });
+      const result = await request("comments", { videoId, sort: sortOrder, ...(append && cursor ? { cursor } : {}) });
       if (!current() || currentSequence !== sequence) return;
       items = append ? [...items, ...(result.items || [])] : result.items || [];
       items = [...new Map(items.map((item) => [item.id, item])).values()];
@@ -693,12 +783,22 @@ export function createDiscussionPanel({
     },
     setInbox(value) {
       inbox.update(value, { live: true });
-      inboxButton.textContent = `${t("notifications")}${value?.unreadCount ? ` (${value.unreadCount})` : ""}`;
+    },
+    setPermissions({ reactions }) {
+      const allowed = reactions === true;
+      if (reactionsAllowed === allowed) return;
+      reactionsAllowed = allowed;
+      if (reactionsAllowed) {
+        clearReactionConsentPrompts();
+        performPendingReaction();
+      } else clearOwnReactions();
     },
     destroy() {
       disposed = true;
       sequence++;
       moderationSequence++;
+      pendingReaction = null;
+      reactionRows.clear();
       drafts.clear();
       postingIds.clear();
       inbox.destroy();

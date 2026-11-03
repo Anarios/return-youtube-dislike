@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Onemogoči beleženje odgovorov API-ja v konzolo."
   },
+  "developerSettings": {
+    "message": "Možnosti za razvijalce"
+  },
   "disableLoggingLabel": {
     "message": "Onemogoči beleženje v konzolo"
   },
@@ -161,6 +164,12 @@
   "hidePremiumTeaserHover": {
     "message": "Ne prikazuj plošče z neobdelanimi števili na straneh za ogled videov na YouTubu."
   },
+  "hideRydComments": {
+    "message": "Skrij komentarje RYD"
+  },
+  "hideRydCommentsHover": {
+    "message": "Ne prikazuj komentarjev RYD pri videih, kjer so komentarji na YouTubu izklopljeni."
+  },
   "hidePremiumAnalytics": {
     "message": "Skrij premium vpoglede v video"
   },
@@ -177,7 +186,7 @@
     "message": "Podpora za YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Odstotek v opisu vrstice všečkov/nevšečkov."
+    "message": "Odstotek v opisu vrstice všečkov/nevšečkov"
   },
   "showTooltipPercentageHover": {
     "message": "Prikaži odstotek v opisu vrstice všečkov/nevšečkov."
@@ -249,7 +258,7 @@
     "message": "Onemogoči pošiljanje všečkov/nevšečkov"
   },
   "textSettingsHover": {
-    "message": "Preneha šteti vaše všečke in nevšečke."
+    "message": "Vaši všečki in nevšečki se ne bodo šteli in se ne bodo poznali v številu nevšečkov."
   },
   "textTempUnavailable": {
     "message": "Začasno nedosegljivo"
@@ -804,7 +813,7 @@
     "message": "Neprebrana obvestila: $1"
   },
   "discussion_signedOutInbox": {
-    "message": "Prijavite se za ogled odgovorov in odzivov na svoje komentarje."
+    "message": "Prijavite se za ogled odgovorov in všečkov na svojih komentarjih."
   },
   "discussion_notificationUnavailable": {
     "message": "Ta razprava ni več na voljo."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Odprite kateri koli videoposnetek na YouTubu in število nevšečkov boste videli tik ob všečkih, kamor sodi. Različica 4.1 prinaša tudi komentarje RYD, prostor za pogovor o videoposnetkih zunaj YouTubovega razdelka za komentarje."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Še en korak"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Spodaj omogočite število nevšečkov, da ga boste na YouTubu videli tik ob všečkih. Različica 4.1 prinaša tudi komentarje RYD, prostor za pogovor o videoposnetkih zunaj YouTubovega razdelka za komentarje."
+  },
   "changelog_new_badge": {
     "message": "Novo v različici 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Spoznajte komentarje RYD"
   },
   "changelog_comments_body": {
-    "message": "Razprava skupnosti pod videoposnetki in posnetki Shorts, ki jo gosti Return YouTube Dislike, ločeno od YouTubovih komentarjev. Vsi lahko berejo in se odzivajo. Člani stopenj Commenter in Premium lahko objavljajo in odgovarjajo."
+    "message": "Razprava skupnosti pod videoposnetki in posnetki Shorts z izklopljenimi YouTubovimi komentarji, ki jo gosti Return YouTube Dislike. Vsi lahko berejo in se odzivajo. Člani stopenj Commenter in Premium lahko objavljajo in odgovarjajo."
   },
   "changelog_comments_point_replies": {
     "message": "Odgovori v nitih z všečki in nevšečki"
@@ -882,7 +897,7 @@
     "message": "Objavljajte pod javnim vzdevkom, ki ga izberete sami"
   },
   "changelog_comments_point_notifications": {
-    "message": "Obvestila, ko kdo odgovori ali se odzove"
+    "message": "Obvestila, ko kdo odgovori na vaš komentar ali ga všečka"
   },
   "changelog_comments_point_moderation": {
     "message": "Prijave in moderiranje za spoštljivo razpravo"
@@ -958,5 +973,140 @@
   },
   "reviewPromptAction": {
     "message": "Napišite oceno"
+  },
+  "consent_page_title": {
+    "message": "Dovoljenja za funkcije RYD"
+  },
+  "consent_vote_title": {
+    "message": "Naj se vaši glasovi štejejo"
+  },
+  "consent_vote_body": {
+    "message": "Firefox zdaj zahteva, da vas vsaka razširitev vpraša, preden deli kakršne koli podatke. Dovolite to, da bo RYD lahko štel vaše všečke, nevšečke in odzive na komentarje. To dovoljenje velja samo za YouTube, ne za druga spletna mesta."
+  },
+  "consent_account_title": {
+    "message": "Izberite dovoljenja računa"
+  },
+  "consent_account_body": {
+    "message": "Prijavite se za uporabo funkcij računa, vključno s profilom, obvestili in analitiko Premium."
+  },
+  "consent_next_step": {
+    "message": "V Firefoxu izberite Dovoli, da pregledate dovoljenja. Lahko jih zavrnete."
+  },
+  "consent_allow": {
+    "message": "Dovoli v Firefoxu"
+  },
+  "consent_not_now": {
+    "message": "Ne zdaj"
+  },
+  "consent_prompt_status": {
+    "message": "Izberite, ali želite ta dovoljenja omogočiti v Firefoxu."
+  },
+  "consent_granted_status": {
+    "message": "Dovoljenja so omogočena. Lahko se vrnete na YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Te izbirne funkcije ostanejo izklopljene. Dovoljenja lahko spremenite pozneje."
+  },
+  "consent_error_status": {
+    "message": "Dovoljenj ni bilo mogoče posodobiti. Poskusite znova."
+  },
+  "consent_details_summary": {
+    "message": "Kaj pomenijo kategorije dovoljenj v Firefoxu?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox združuje podatke v široke kategorije. Tako jih uporablja RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Dejavnost brskanja"
+  },
+  "consent_browsing_body": {
+    "message": "Samo ID videoposnetka YouTube, ki ga odprete, za nalaganje njegovih nevšečkov in komentarjev RYD. Nikoli vaša zgodovina brskanja ali druga spletna mesta."
+  },
+  "consent_content_label": {
+    "message": "Vsebina spletnih mest"
+  },
+  "consent_content_body": {
+    "message": "Število všečkov, prikazano ob videoposnetku YouTube, za izboljšanje ocen števila nevšečkov."
+  },
+  "consent_activity_label": {
+    "message": "Dejavnost na spletnih mestih"
+  },
+  "consent_activity_body": {
+    "message": "Vaši všečki, nevšečki in odzivi na komentarje RYD na YouTubu, da se štejejo. Poslani z naključnim ID-jem, ki ni povezan z vašim računom Google ali YouTube."
+  },
+  "consent_identity_label": {
+    "message": "Osebni identifikacijski podatki"
+  },
+  "consent_identity_body": {
+    "message": "Podatki vašega profila, kot sta prikazno ime in e-pošta, samo če se odločite za prijavo."
+  },
+  "consent_auth_label": {
+    "message": "Podatki za preverjanje pristnosti"
+  },
+  "consent_auth_body": {
+    "message": "Podatki o pooblastitvi in seji, potrebni za prijavo in uporabo funkcij računa."
+  },
+  "consent_scope": {
+    "message": "RYD ne zbira ničesar zunaj youtube.com in ne dostopa do vašega računa YouTube. Brez prijave ne prejme imena ali e-pošte."
+  },
+  "consent_settings": {
+    "message": "Ta dovoljenja lahko kadar koli spremenite v nastavitvah dodatkov v Firefoxu (about:addons)."
+  },
+  "consent_private_counts": {
+    "message": "Zasebna okna prikazujejo samo število z dovoljenjem, omogočenim v običajnem oknu. Glasovanje, prijava, analitika Premium in razprave tam niso na voljo."
+  },
+  "consent_voter_timing": {
+    "message": "ID glasovanja se pošlje samo ob glasovanju ali odzivu. Vaši odzivi na komentarje se shranijo v tej napravi."
+  },
+  "popup_signin_next_click": {
+    "message": "Potreben je še en klik: spodaj izberite gumb za prijavo, da pregledate dovoljenja računa v Firefoxu in nadaljujete."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Hvala. Vaši glasovi se zdaj štejejo."
+  },
+  "vote_consent_hint": {
+    "message": "Vaš glas se še ne šteje. Firefox zdaj zahteva vaše dovoljenje, preden ga RYD lahko pošlje. To dovoljenje velja samo za YouTube, ne za druga spletna mesta."
+  },
+  "vote_not_counted": {
+    "message": "Vaši všečki in nevšečki se ne štejejo in se ne bodo poznali v številu nevšečkov."
+  },
+  "vote_count_mine": {
+    "message": "Štej moje glasove"
+  },
+  "vote_consent_dismiss": {
+    "message": "Ne sprašuj več"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Vklopite deljenje glasov, da se boste lahko odzivali na komentarje. Vaš odziv bo poslan, ko bo deljenje vklopljeno."
+  },
+  "discussion_consentContinue": {
+    "message": "Nadaljuj"
+  },
+  "counts_consent_enable": {
+    "message": "Omogoči število nevšečkov"
+  },
+  "counts_consent_toolbar": {
+    "message": "Za nadaljevanje odprite Return YouTube Dislike v Firefoxovem meniju razširitev."
+  },
+  "counts_consent_declined": {
+    "message": "Prikaz števila ostane izklopljen. Pozneje ga lahko omogočite tukaj."
+  },
+  "counts_consent_enabled": {
+    "message": "Prikaz števila nevšečkov je omogočen."
+  },
+  "counts_consent_private": {
+    "message": "Najprej omogočite število nevšečkov v običajnem oknu. Zasebna okna prikazujejo samo število."
+  },
+  "data_consent_reason": {
+    "message": "Firefox zdaj zahteva, da vas vsaka razširitev vpraša, preden deli kakršne koli podatke. Dovolite, da RYD prikazuje nevšečke in šteje vaše glasove. To dovoljenje velja samo za YouTube, ne za druga spletna mesta."
+  },
+  "data_consent_title": {
+    "message": "Prikažite nevšečke in naj se vaši glasovi štejejo"
+  },
+  "data_consent_body": {
+    "message": "Firefox zdaj zahteva, da vas vsaka razširitev vpraša, preden deli kakršne koli podatke. Za vse razširitve uporablja enake splošne oznake, zato je tukaj razloženo, kaj vsaka oznaka pomeni za RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD deluje samo na YouTubu. Če to dovolite, ne dobi dostopa do nobenega drugega spletnega mesta."
   }
 }

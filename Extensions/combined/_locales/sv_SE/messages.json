@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Inaktiverar loggning av API‑svar i konsolen."
   },
+  "developerSettings": {
+    "message": "Utvecklaralternativ"
+  },
   "disableLoggingLabel": {
     "message": "Inaktivera loggning till konsolen"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "Visa inte panelen med råa antal på YouTubes tittarsidor."
   },
+  "hideRydComments": {
+    "message": "Dölj RYD-kommentarer"
+  },
+  "hideRydCommentsHover": {
+    "message": "Visa inte RYD-kommentarer på videor där YouTube-kommentarer är avstängda."
+  },
   "hidePremiumAnalytics": {
     "message": "Dölj Premium-videoinblickar"
   },
@@ -156,7 +165,7 @@
     "message": "YouTube Shorts Support"
   },
   "showTooltipPercentage": {
-    "message": "Procent i verktygstips för gilla/ogilla‑fältet."
+    "message": "Procent i verktygstips för gilla/ogilla‑fältet"
   },
   "showTooltipPercentageHover": {
     "message": "Visa procent i verktygstipset för gilla/ogilla‑fältet."
@@ -228,7 +237,7 @@
     "message": "Inaktivera gilla-/ogilla-inskickningar"
   },
   "textSettingsHover": {
-    "message": "Slutar räkna dina gilla och ogilla."
+    "message": "Dina gilla och ogilla räknas inte och syns inte i antalet ogilla."
   },
   "textTempUnavailable": {
     "message": "Tillfälligt otillgänglig"
@@ -804,7 +813,7 @@
     "message": "$1 olästa aviseringar"
   },
   "discussion_signedOutInbox": {
-    "message": "Logga in för att se svar och reaktioner på dina kommentarer."
+    "message": "Logga in för att se svar och gilla-markeringar på dina kommentarer."
   },
   "discussion_notificationUnavailable": {
     "message": "Den här diskussionen är inte längre tillgänglig."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Öppna valfri YouTube-video så ser du antalet ogilla-markeringar precis bredvid gilla-markeringarna, där det hör hemma. Version 4.1 introducerar också RYD-kommentarer, en plats där du kan prata om videor utanför YouTubes eget kommentarsfält."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Ett steg kvar"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Aktivera antalet ogilla nedan för att se det bredvid gilla-markeringarna på YouTube. Version 4.1 introducerar också RYD-kommentarer, en plats där du kan prata om videor utanför YouTubes eget kommentarsfält."
+  },
   "changelog_new_badge": {
     "message": "Nytt i 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Upptäck RYD-kommentarer"
   },
   "changelog_comments_body": {
-    "message": "Ett diskussionsforum under videor och Shorts, som drivs av Return YouTube Dislike och är separat från YouTubes kommentarer. Alla kan läsa och reagera. Medlemmar på nivåerna Commenter och Premium kan skriva kommentarer och svar."
+    "message": "Ett diskussionsforum under videor och Shorts där YouTubes kommentarer är avstängda, som drivs av Return YouTube Dislike. Alla kan läsa och reagera. Medlemmar på nivåerna Commenter och Premium kan skriva kommentarer och svar."
   },
   "changelog_comments_point_replies": {
     "message": "Trådade svar med gilla- och ogilla-markeringar"
@@ -882,7 +897,7 @@
     "message": "Skriv med ett offentligt smeknamn som du väljer"
   },
   "changelog_comments_point_notifications": {
-    "message": "Aviseringar när någon svarar eller reagerar"
+    "message": "Aviseringar när någon svarar på eller gillar din kommentar"
   },
   "changelog_comments_point_moderation": {
     "message": "Rapportering och moderering för respektfulla samtal"
@@ -958,5 +973,140 @@
   },
   "reviewPromptAction": {
     "message": "Skriv en recension"
+  },
+  "consent_page_title": {
+    "message": "Behörigheter för RYD-funktioner"
+  },
+  "consent_vote_title": {
+    "message": "Låt dina röster räknas"
+  },
+  "consent_vote_body": {
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Tillåt det så att RYD kan räkna dina gilla, ogilla och reaktioner på kommentarer. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
+  },
+  "consent_account_title": {
+    "message": "Välj kontobehörigheter"
+  },
+  "consent_account_body": {
+    "message": "Logga in för kontofunktioner, inklusive din profil, aviseringar och Premium-analys."
+  },
+  "consent_next_step": {
+    "message": "Välj Tillåt i Firefox för att granska behörigheterna. Du kan avböja."
+  },
+  "consent_allow": {
+    "message": "Tillåt i Firefox"
+  },
+  "consent_not_now": {
+    "message": "Inte nu"
+  },
+  "consent_prompt_status": {
+    "message": "Välj om du vill tillåta dessa behörigheter i Firefox."
+  },
+  "consent_granted_status": {
+    "message": "Behörigheterna är aktiverade. Du kan återvända till YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Dessa valfria funktioner förblir avstängda. Du kan ändra behörigheterna senare."
+  },
+  "consent_error_status": {
+    "message": "Behörigheterna kunde inte uppdateras. Försök igen."
+  },
+  "consent_details_summary": {
+    "message": "Vad betyder Firefox behörighetskategorier?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox grupperar data i breda kategorier. Så här används de av RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Surfaktivitet"
+  },
+  "consent_browsing_body": {
+    "message": "Bara ID:t för YouTube-videon som du öppnar, för att läsa in dess ogilla och RYD-kommentarer. Aldrig din surfhistorik eller andra webbplatser."
+  },
+  "consent_content_label": {
+    "message": "Webbplatsinnehåll"
+  },
+  "consent_content_body": {
+    "message": "Antalet gilla som visas vid YouTube-videon, för att förbättra uppskattningar av ogilla."
+  },
+  "consent_activity_label": {
+    "message": "Webbplatsaktivitet"
+  },
+  "consent_activity_body": {
+    "message": "Dina gilla, ogilla och reaktioner på RYD-kommentarer på YouTube, så att de räknas. Skickas med ett slumpmässigt ID som inte är kopplat till ditt Google- eller YouTube-konto."
+  },
+  "consent_identity_label": {
+    "message": "Personligt identifierbar information"
+  },
+  "consent_identity_body": {
+    "message": "Dina profiluppgifter, som visningsnamn och e-postadress, endast om du väljer att logga in."
+  },
+  "consent_auth_label": {
+    "message": "Autentiseringsinformation"
+  },
+  "consent_auth_body": {
+    "message": "De auktoriserings- och sessionsuppgifter som behövs för att logga in och använda kontofunktioner."
+  },
+  "consent_scope": {
+    "message": "RYD samlar inget utanför youtube.com och kommer inte åt ditt YouTube-konto. Inget namn eller e-post tas emot om du inte loggar in."
+  },
+  "consent_settings": {
+    "message": "Du kan när som helst ändra de här behörigheterna i Firefox tilläggsinställningar (about:addons)."
+  },
+  "consent_private_counts": {
+    "message": "Privata fönster visar bara antalet med behörigheten som aktiverats i ett vanligt fönster. Röstning, inloggning, Premium-analys och diskussioner är inte tillgängliga där."
+  },
+  "consent_voter_timing": {
+    "message": "Ditt röstnings-ID skickas bara när du röstar eller reagerar. Dina egna reaktioner på kommentarer sparas på den här enheten."
+  },
+  "popup_signin_next_click": {
+    "message": "Ytterligare ett klick behövs: välj din inloggningsknapp nedan för att granska Firefox kontobehörigheter och fortsätta."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Tack. Dina röster räknas nu."
+  },
+  "vote_consent_hint": {
+    "message": "Din röst räknas inte än. Firefox kräver nu ditt tillstånd innan RYD kan skicka den. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
+  },
+  "vote_not_counted": {
+    "message": "Dina gilla och ogilla räknas inte och syns inte i antalet ogilla."
+  },
+  "vote_count_mine": {
+    "message": "Räkna mina röster"
+  },
+  "vote_consent_dismiss": {
+    "message": "Fråga inte igen"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Aktivera röstdelning för att reagera på kommentarer. Din reaktion skickas när den har aktiverats."
+  },
+  "discussion_consentContinue": {
+    "message": "Fortsätt"
+  },
+  "counts_consent_enable": {
+    "message": "Aktivera antalet ogilla"
+  },
+  "counts_consent_toolbar": {
+    "message": "Öppna Return YouTube Dislike från Firefox tilläggsmeny för att fortsätta."
+  },
+  "counts_consent_declined": {
+    "message": "Antalet förblir avstängt. Du kan aktivera det här senare."
+  },
+  "counts_consent_enabled": {
+    "message": "Antalet ogilla är aktiverat."
+  },
+  "counts_consent_private": {
+    "message": "Aktivera först antalet ogilla i ett vanligt fönster. Privata fönster visar bara antalet."
+  },
+  "data_consent_reason": {
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Tillåt RYD att visa ogilla och räkna dina röster. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
+  },
+  "data_consent_title": {
+    "message": "Visa ogilla och låt dina röster räknas"
+  },
+  "data_consent_body": {
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Samma breda etiketter används för alla tillägg. Det här betyder varje etikett för RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD fungerar bara på YouTube. Att tillåta detta ger inte RYD åtkomst till någon annan webbplats."
   }
 }

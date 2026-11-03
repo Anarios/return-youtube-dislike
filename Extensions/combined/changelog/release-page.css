@@ -519,6 +519,10 @@ figure {
   background: linear-gradient(135deg, rgba(255, 68, 68, 0.14), rgba(255, 68, 68, 0.03));
 }
 
+.ryd-callout + .ryd-callout {
+  margin-top: 16px;
+}
+
 .ryd-callout__title {
   margin: 0;
   font-size: 1.25rem;
@@ -528,6 +532,32 @@ figure {
 .ryd-callout__body {
   max-width: 40em;
   margin: 4px 0 0;
+  color: var(--ryd-text-muted);
+}
+
+.ryd-callout__scope {
+  width: fit-content;
+  max-width: 40em;
+  margin: 12px 0;
+  padding: 10px 14px;
+  border: 1px solid var(--ryd-red-line);
+  border-radius: var(--ryd-radius-sm);
+  background: var(--ryd-red-soft);
+  font-weight: 600;
+}
+
+.ryd-callout__list {
+  max-width: 40em;
+  margin: 16px 0 0;
+}
+
+.ryd-callout__list dt {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.ryd-callout__list dd {
+  margin: 2px 0 0;
   color: var(--ryd-text-muted);
 }
 

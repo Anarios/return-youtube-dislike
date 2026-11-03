@@ -2,124 +2,233 @@
 const fs = require("fs");
 const path = require("path");
 jest.mock("./src/core-data-consent", () => ({
-  hasCoreDataPermission: jest.fn(),
-  requestCoreDataPermission: jest.fn(),
-  consentApi: jest.fn(),
+  FEATURE_DATA_PERMISSIONS: jest.requireActual("./src/core-data-consent").FEATURE_DATA_PERMISSIONS,
+  hasFeaturePermission: jest.fn(),
+  onDataPermissionsChanged: jest.fn(),
+  requestFeaturePermission: jest.fn(),
 }));
 jest.mock("./src/private-browsing", () => ({ isPrivateBrowsingContext: jest.fn() }));
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
 
-describe("Firefox consent explainer", () => {
+describe("Firefox feature permission page", () => {
   let permission;
-  let local;
-  let sendMessage;
-  function openExplainer({ privateBrowsing = false, canRequest = true } = {}) {
+  let permissionChanged;
+  function openExplainer({
+    privateBrowsing = false,
+    feature = "voteOptIn",
+    direction = "ltr",
+    locale = "en",
+    initialPermission = false,
+  } = {}) {
     jest.resetModules();
+    window.history.replaceState(null, "", `/?feature=${feature}${window.location.hash}`);
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "consent.html"), "utf8");
+    const messages = require("./_locales/en/messages.json");
+    global.chrome = {
+      i18n: {
+        getMessage: (key) => ({ "@@bidi_dir": direction, "@@ui_locale": locale })[key] || messages[key]?.message || key,
+      },
+      runtime: { sendMessage: jest.fn(async () => ({ success: true })) },
+    };
+    global.browser = global.chrome;
     permission = require("./src/core-data-consent");
     require("./src/private-browsing").isPrivateBrowsingContext.mockReturnValue(privateBrowsing);
-    local = { get: jest.fn(), set: jest.fn(async () => {}), remove: jest.fn(async () => {}) };
-    sendMessage = jest.fn(async () => ({ success: true }));
-    permission.consentApi.mockReturnValue({
-      storage: { local },
-      runtime: { sendMessage },
-      ...(canRequest ? { permissions: { request: jest.fn() } } : {}),
+    permission.hasFeaturePermission.mockResolvedValue(initialPermission);
+    permission.onDataPermissionsChanged.mockImplementation((listener) => {
+      permissionChanged = listener;
+      return jest.fn();
     });
-    permission.hasCoreDataPermission.mockResolvedValue(false);
-    permission.requestCoreDataPermission.mockResolvedValue(false);
-    const continueButton = document.getElementById("consent-continue");
+    permission.requestFeaturePermission.mockResolvedValue(false);
     require("./consent");
-    return continueButton;
   }
   beforeEach(() => {
     window.history.replaceState(null, "", "/");
     openExplainer();
   });
-
-  test("the compact page leaves explanations collapsed until Read more is selected", () => {
-    expect(document.getElementById("permission-details").open).toBe(false);
-    expect(document.getElementById("consent-continue").textContent).toBe("Allow in Firefox");
+  afterEach(() => {
+    delete global.chrome;
+    delete global.browser;
   });
 
-  test("Read more links expand explanations without requesting permission", () => {
-    window.history.replaceState(null, "", "/#permission-details");
-    openExplainer();
-    expect(document.getElementById("permission-details").open).toBe(true);
-    expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
-    expect(sendMessage).not.toHaveBeenCalled();
+  test("localizes the document, supports RTL and shows the explanations", () => {
+    openExplainer({ direction: "rtl" });
+    expect(document.documentElement.dir).toBe("rtl");
+    expect(document.documentElement.lang).toBe("en");
+    expect(document.documentElement.innerHTML).not.toContain("__MSG_");
+    expect(document.getElementById("permission-details").hidden).toBe(false);
   });
 
-  test("reading the category explanations requests no permissions", () => {
-    const details = document.getElementById("permission-details");
-    expect(details.querySelectorAll("dt")).toHaveLength(4);
-    expect(details.textContent).toContain("Authentication information");
-    details.querySelector("summary").click();
-    expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
-    expect(sendMessage).not.toHaveBeenCalled();
+  test.each([
+    ["pt_BR", "pt-BR"],
+    ["zh_CN", "zh-CN"],
+  ])("uses a valid language tag for the %s UI locale", (locale, tag) => {
+    openExplainer({ locale });
+    expect(document.documentElement.lang).toBe(tag);
   });
 
-  test("opening the explainer and selecting Not now request no permissions", async () => {
-    expect(document.querySelector("main").textContent).toMatch(/random ID/);
-    expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
-    document.getElementById("consent-decline").click();
-    await flush();
-    expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
-    expect(local.set).toHaveBeenCalledWith({ rydConsentDismissed: true });
+  test.each([
+    ["voteOptIn", "consent_vote_title", "consent_vote_body"],
+    ["reactions", "consent_vote_title", "consent_vote_body"],
+    ["account", "consent_account_title", "consent_account_body"],
+    ["posting", "consent_vote_title", "consent_vote_body"],
+    ["constructor", "consent_vote_title", "consent_vote_body"],
+  ])("the %s page shows its own explanation", (feature, title, body) => {
+    openExplainer({ feature });
+    expect(document.getElementById("consent-title").textContent).toBe(chrome.i18n.getMessage(title));
+    expect(document.getElementById("consent-body").textContent).toBe(chrome.i18n.getMessage(body));
   });
 
-  test("Continue requests native permission directly and denial keeps voting paused", async () => {
+  test.each([
+    ["voteOptIn", ["consent_browsing_label", "consent_activity_label", "consent_content_label"]],
+    ["reactions", ["consent_browsing_label", "consent_activity_label", "consent_content_label"]],
+    ["account", ["consent_auth_label", "consent_identity_label"]],
+  ])("the %s page explains only the Firefox categories it asks for", (feature, labels) => {
+    openExplainer({ feature });
+    const terms = [...document.querySelectorAll("#permission-list dt")].map((term) => term.textContent);
+    expect(terms).toEqual(labels.map((key) => chrome.i18n.getMessage(key)));
+    expect(document.querySelectorAll("#permission-list dd")).toHaveLength(labels.length);
+    expect(permission.requestFeaturePermission).not.toHaveBeenCalled();
+    expect(browser.runtime.sendMessage).not.toHaveBeenCalled();
+  });
+
+  test.each([
+    ["voteOptIn", "voteOptIn"],
+    ["reactions", "voteOptIn"],
+    ["account", "account"],
+  ])("the %s page requests only its %s categories directly from click", async (feature, requested) => {
+    openExplainer({ feature });
     document.getElementById("consent-continue").click();
-    expect(permission.requestCoreDataPermission).toHaveBeenCalledTimes(1);
+    expect(permission.requestFeaturePermission).toHaveBeenCalledTimes(1);
+    expect(permission.requestFeaturePermission).toHaveBeenCalledWith(requested);
+    expect(browser.runtime.sendMessage).toHaveBeenCalledWith({ message: "ryd_consent_prompt_state", pending: true });
+    expect(permission.requestFeaturePermission.mock.invocationCallOrder[0]).toBeLessThan(
+      browser.runtime.sendMessage.mock.invocationCallOrder[0],
+    );
     await flush();
-    expect(local.set).toHaveBeenCalledWith({ rydConsentDismissed: true });
+    expect(browser.runtime.sendMessage).toHaveBeenLastCalledWith({
+      message: "ryd_consent_prompt_state",
+      pending: false,
+    });
     expect(document.getElementById("consent-continue").disabled).toBe(false);
-    expect(local.remove).not.toHaveBeenCalled();
+    expect(document.getElementById("consent-actions").hidden).toBe(false);
   });
 
-  test("acceptance requires a confirmed grant and clears the dismissal", async () => {
-    permission.requestCoreDataPermission.mockResolvedValue(true);
-    permission.hasCoreDataPermission.mockResolvedValue(true);
+  test("Not now requests nothing and leaves permission choices available", () => {
+    document.getElementById("consent-decline").click();
+    expect(permission.requestFeaturePermission).not.toHaveBeenCalled();
+    expect(browser.runtime.sendMessage).not.toHaveBeenCalled();
+    expect(document.getElementById("consent-actions").hidden).toBe(false);
+  });
+
+  test("acceptance confirms the grant before completing", async () => {
+    permission.requestFeaturePermission.mockResolvedValue(true);
+    permission.hasFeaturePermission.mockResolvedValue(true);
     document.getElementById("consent-continue").click();
     await flush();
-    expect(local.remove).toHaveBeenCalledWith("rydConsentDismissed");
     expect(document.getElementById("consent-actions").hidden).toBe(true);
   });
 
-  test("a page-embedded explainer opens the extension consent page without requesting permissions", async () => {
-    openExplainer({ canRequest: false });
-    document.getElementById("consent-continue").click();
-    await flush();
-    expect(sendMessage).toHaveBeenCalledWith({ message: "ryd_open_consent" });
-    expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
-    expect(document.getElementById("consent-next-step").textContent).toMatch(/permission page/);
-  });
-
-  test.each([true, false])(
-    "private setup stays local without requesting permissions or opening a normal page when request API availability is %s",
-    async (canRequest) => {
-      const continueButton = openExplainer({ privateBrowsing: true, canRequest });
-      expect(document.getElementById("consent-next-step").textContent).toBe(
-        "Enable RYD in a normal Firefox window to load counts here.",
-      );
-      expect(document.querySelector("main").textContent).toContain(
-        "Counts only in private windows. Voting, sign-in, premium analytics and discussions are unavailable here.",
-      );
-      expect(document.querySelector("main").textContent).not.toMatch(/random ID|Allow in Firefox|Continue/);
-      expect(document.getElementById("consent-continue")).toBeNull();
-      continueButton.click();
-      document.getElementById("consent-decline").click();
+  test.each(["voteOptIn", "account"])(
+    "refreshes reused %s permission pages after revocation and regrant",
+    async (feature) => {
+      openExplainer({ feature, initialPermission: true });
       await flush();
-
-      expect(permission.consentApi).not.toHaveBeenCalled();
-      expect(permission.hasCoreDataPermission).not.toHaveBeenCalled();
-      expect(permission.requestCoreDataPermission).not.toHaveBeenCalled();
-      expect(local.get).not.toHaveBeenCalled();
-      expect(local.set).not.toHaveBeenCalled();
-      expect(local.remove).not.toHaveBeenCalled();
-      expect(sendMessage).not.toHaveBeenCalled();
-      expect(document.getElementById("consent-status").textContent).toBe(
-        "Enable RYD in a normal Firefox window to load counts here.",
+      expect(document.getElementById("consent-actions").hidden).toBe(true);
+      permission.hasFeaturePermission.mockResolvedValue(false);
+      const category = permission.FEATURE_DATA_PERMISSIONS[feature][0];
+      permissionChanged({ added: [], removed: [category] });
+      expect(document.getElementById("consent-actions").hidden).toBe(false);
+      expect(document.getElementById("consent-status").textContent).not.toBe(
+        chrome.i18n.getMessage("consent_granted_status"),
       );
+      await flush();
+      expect(document.getElementById("consent-continue").disabled).toBe(false);
+      permission.hasFeaturePermission.mockResolvedValue(true);
+      permissionChanged({ added: [category], removed: [] });
+      await flush();
+      expect(document.getElementById("consent-actions").hidden).toBe(true);
+      expect(permission.requestFeaturePermission).not.toHaveBeenCalled();
     },
   );
+
+  test("the vote page reports voting as on without the like count and ignores its revocation", async () => {
+    openExplainer({ initialPermission: true });
+    permission.hasFeaturePermission.mockImplementation(async (name) => name === "voting");
+    await flush();
+    permissionChanged({ added: [], removed: ["websiteContent"] });
+    await flush();
+    expect(permission.hasFeaturePermission).not.toHaveBeenCalledWith("voteOptIn");
+    expect(document.getElementById("consent-actions").hidden).toBe(true);
+    expect(document.getElementById("consent-status").textContent).toBe(
+      chrome.i18n.getMessage("consent_granted_status"),
+    );
+  });
+
+  test("a stale permission query cannot hide the actions after revocation", async () => {
+    let finishInitial;
+    openExplainer({ initialPermission: new Promise((resolve) => (finishInitial = resolve)) });
+    permission.hasFeaturePermission.mockResolvedValue(false);
+    permissionChanged({ added: [], removed: ["websiteActivity"] });
+    finishInitial(true);
+    await flush();
+    expect(document.getElementById("consent-actions").hidden).toBe(false);
+    expect(document.getElementById("consent-status").textContent).not.toBe(
+      chrome.i18n.getMessage("consent_granted_status"),
+    );
+  });
+
+  test("revocation invalidates a delayed confirmation check after a native request", async () => {
+    await flush();
+    let finishConfirmation;
+    permission.requestFeaturePermission.mockResolvedValue(true);
+    permission.hasFeaturePermission.mockReturnValueOnce(new Promise((resolve) => (finishConfirmation = resolve)));
+    document.getElementById("consent-continue").click();
+    await flush();
+    permission.hasFeaturePermission.mockResolvedValue(false);
+    permissionChanged({ added: [], removed: ["websiteActivity"] });
+    finishConfirmation(true);
+    await flush();
+    expect(document.getElementById("consent-actions").hidden).toBe(false);
+    expect(document.getElementById("consent-continue").disabled).toBe(false);
+    expect(document.getElementById("consent-status").textContent).not.toBe(
+      chrome.i18n.getMessage("consent_granted_status"),
+    );
+  });
+
+  test("permission changes leave a pending native prompt undisturbed", async () => {
+    await flush();
+    let finishRequest;
+    permission.requestFeaturePermission.mockReturnValue(new Promise((resolve) => (finishRequest = resolve)));
+    document.getElementById("consent-continue").click();
+    permission.hasFeaturePermission.mockResolvedValue(true);
+    permissionChanged({ added: ["websiteActivity", "websiteContent"], removed: [] });
+    await flush();
+    expect(document.getElementById("consent-actions").hidden).toBe(false);
+    expect(document.getElementById("consent-continue").disabled).toBe(true);
+    expect(document.getElementById("consent-status").textContent).toBe(chrome.i18n.getMessage("consent_prompt_status"));
+    expect(browser.runtime.sendMessage).toHaveBeenLastCalledWith({
+      message: "ryd_consent_prompt_state",
+      pending: true,
+    });
+    finishRequest(true);
+    await flush();
+    expect(document.getElementById("consent-actions").hidden).toBe(true);
+    expect(browser.runtime.sendMessage).toHaveBeenLastCalledWith({
+      message: "ryd_consent_prompt_state",
+      pending: false,
+    });
+  });
+
+  test("a private page offers no consent or persistence", async () => {
+    openExplainer({ privateBrowsing: true });
+    document.getElementById("consent-continue").click();
+    document.getElementById("consent-decline").click();
+    await flush();
+    expect(document.getElementById("consent-actions").hidden).toBe(true);
+    expect(document.getElementById("permission-details").hidden).toBe(true);
+    expect(permission.hasFeaturePermission).not.toHaveBeenCalled();
+    expect(permission.onDataPermissionsChanged).not.toHaveBeenCalled();
+    expect(permission.requestFeaturePermission).not.toHaveBeenCalled();
+    expect(browser.runtime.sendMessage).not.toHaveBeenCalled();
+  });
 });

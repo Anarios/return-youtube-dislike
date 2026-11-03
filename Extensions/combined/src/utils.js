@@ -1,6 +1,7 @@
 import { logger, setLoggingDisabled } from "./logging";
 import { extConfig, isShorts } from "./state";
 import { getThemeColor, isYouTubeDarkTheme } from "../../common/color-themes";
+import { getLiveVideoId } from "../../common/live-video-id";
 
 const DEFAULT_SHORTS_LOADED_SELECTORS = {
   containers: [".reel-video-in-sequence-new"],
@@ -107,7 +108,7 @@ function getVideoId(url) {
     if (pathname.startsWith("/shorts")) {
       return pathname.slice(8);
     }
-    return urlObject.searchParams.get("v");
+    return urlObject.searchParams.get("v") ?? getLiveVideoId(pathname);
   }
 }
 

@@ -7,23 +7,23 @@ import { fetchWithAccountConsent } from "./src/account-data-consent";
 import { isFirefoxExtension, isNormalMessageSender } from "./src/private-browsing";
 import { createReviewPromptTracker } from "./src/review-prompt-tracker";
 import {
+  FEATURE_DATA_PERMISSIONS,
   coreConsentError,
   fetchWithCoreConsent,
-  hasCoreDataPermission,
-  onCoreDataPermissionChanged,
+  fetchWithFeatureConsent,
+  hasFeaturePermission,
+  onDataPermissionsChanged,
 } from "./src/core-data-consent";
-import {
-  hasAuthenticationDataPermission,
-  onAuthenticationDataPermissionRemoved,
-  usesFirefoxDataCollectionConsent,
-} from "./src/data-collection-permissions";
+import { hasAuthenticationDataPermission, usesFirefoxDataCollectionConsent } from "./src/data-collection-permissions";
+import { allowVoteSubmission, votesCounted } from "./src/vote-submission-setting";
+import { VOTE_SUBMISSION_INTENT_MESSAGE, createVoteSubmissionIntent } from "./src/vote-submission-intent";
 
 const apiUrl = getApiUrl();
 const voteDisabledIconName = config.voteDisabledIconName;
 const defaultIconName = config.defaultIconName;
 let api;
 const CHANGELOG_STORAGE_KEY = "lastShownChangelogVersion";
-const PENDING_CHANGELOG_STORAGE_KEY = "pendingChangelogVersion";
+const DATA_PERMISSIONS_MIGRATION_KEY = "featureDataPermissionsMigrated";
 
 /** stores extension's global config */
 let extConfig = { ...config.defaultExtConfig };
@@ -31,11 +31,18 @@ let authenticationGeneration = 0;
 let accountStorageQueue = Promise.resolve();
 let consentPageOpening = null;
 let consentPageTabId = null;
+let consentPromptPending = false;
+let votingPermissionGeneration = 0;
+let votingIconRevision = 0;
 
 if (isChrome()) api = chrome;
 else if (isFirefox()) api = browser;
 
 const reviewPromptTracker = createReviewPromptTracker(api);
+const voteSubmissionIntent = createVoteSubmissionIntent({
+  hasVotingPermission: () => hasFeaturePermission("voting", { queryBackground: false }),
+  allowVoteSubmission,
+});
 
 if (__RYD_LIVE_TEST_BUILD__) {
   globalThis.__RYD_LIVE_EXTENSION_BUILD__ = Object.freeze({
@@ -46,27 +53,58 @@ if (__RYD_LIVE_TEST_BUILD__) {
 }
 
 const credentialStore = createBrowserCredentialStore(api.storage.sync, () => api.runtime?.lastError);
-const voteClient = createVoteClient({
-  apiBaseUrl: apiUrl,
-  fetchImpl: fetchWithCoreConsent,
-  credentialStore: {
-    ...credentialStore,
-    async save(value) {
-      await requireCoreConsent();
-      return credentialStore.save(value);
+function createCurrentVoteClient() {
+  const generation = votingPermissionGeneration;
+  const assertCurrent = () => {
+    if (generation !== votingPermissionGeneration) throw coreConsentError();
+  };
+  const guard = async () => {
+    assertCurrent();
+    await requireVotingConsent();
+    assertCurrent();
+  };
+  return createVoteClient({
+    apiBaseUrl: apiUrl,
+    fetchImpl: async (input, options) => {
+      if (usesFirefoxDataCollectionConsent()) await guard();
+      return fetchWithFeatureConsent("voting", input, options);
     },
-  },
-  cryptoImpl: globalThis.crypto,
-});
+    credentialStore: Object.fromEntries(
+      ["load", "save", "clear"].map((method) => [
+        method,
+        async (...args) => {
+          if (usesFirefoxDataCollectionConsent()) await guard();
+          const result = await credentialStore[method](...args);
+          if (usesFirefoxDataCollectionConsent()) assertCurrent();
+          return result;
+        },
+      ]),
+    ),
+    cryptoImpl: globalThis.crypto,
+  });
+}
+
+let currentVoteClient = createCurrentVoteClient();
+const voteClient = Object.fromEntries(
+  ["ensureRegistered", "submitVote"].map((method) => [
+    method,
+    async (...args) => {
+      const generation = votingPermissionGeneration;
+      if (!currentVoteClient) currentVoteClient = createCurrentVoteClient();
+      const result = await currentVoteClient[method](...args);
+      if (usesFirefoxDataCollectionConsent() && generation !== votingPermissionGeneration) throw coreConsentError();
+      return result;
+    },
+  ]),
+);
 
 const discussionBackground = createDiscussionBackground({
   api,
   voteClient,
   fetchImpl: fetchWithCoreConsent,
   accountFetchImpl: fetchWithAccountConsent,
-  hasConsent: async () =>
-    (await hasCoreDataPermission({ queryBackground: false })) &&
-    (!usesFirefoxDataCollectionConsent() || (await hasAuthenticationDataPermission({ queryBackground: false }))),
+  hasConsent: () => hasFeaturePermission("account", { queryBackground: false }),
+  hasFeatureConsent: (feature) => hasFeaturePermission(feature, { queryBackground: false }),
 });
 discussionBackground.initialize();
 
@@ -187,13 +225,33 @@ function clearPatreonAuth(done) {
     .catch((error) => console.error("Account session cleanup failed", error));
 }
 
-onAuthenticationDataPermissionRemoved(() => clearPatreonAuth());
-
-onCoreDataPermissionChanged((granted) => {
-  if (!granted) clearPatreonAuth();
+onDataPermissionsChanged((change) => {
+  const voting = (category) => FEATURE_DATA_PERMISSIONS.voting.includes(category);
+  if (change.removed.some(voting)) {
+    votingPermissionGeneration++;
+    currentVoteClient = null;
+    voteSubmissionIntent.clear();
+  }
+  if (change.added.some(voting)) void voteSubmissionIntent.applyOnGrant();
+  if (change.removed.includes("authenticationInfo")) clearPatreonAuth();
+  discussionBackground.onDataPermissionsChanged(change).catch((error) => {
+    console.debug("Discussion permission update failed", error);
+  });
+  if ([...change.added, ...change.removed].some(voting)) {
+    void refreshVotingIcon();
+  }
   api.tabs.query({ url: "*://*.youtube.com/*" }, (tabs) => {
     for (const tab of tabs) {
-      const result = api.tabs.sendMessage(tab.id, { message: "ryd_core_consent_changed", granted }, () => {
+      let tabChange = change;
+      if (isFirefoxExtension(api) && tab.incognito !== false) {
+        if (tab.incognito !== true) continue;
+        tabChange = {
+          added: change.added.filter((category) => category === "browsingActivity"),
+          removed: change.removed.filter((category) => category === "browsingActivity"),
+        };
+        if (!tabChange.added.length && !tabChange.removed.length) continue;
+      }
+      const result = api.tabs.sendMessage(tab.id, { message: "ryd_data_permissions_changed", ...tabChange }, () => {
         void api.runtime.lastError;
       });
       result?.catch?.(() => {});
@@ -201,12 +259,11 @@ onCoreDataPermissionChanged((granted) => {
   });
 });
 
-async function requireCoreConsent() {
-  if (!(await hasCoreDataPermission({ queryBackground: false }))) throw coreConsentError();
+async function requireVotingConsent() {
+  if (!(await hasFeaturePermission("voting", { queryBackground: false }))) throw coreConsentError();
 }
 
 async function requireCurrentAuthenticationConsent(generation) {
-  await requireCoreConsent();
   if (
     generation !== authenticationGeneration ||
     (usesFirefoxDataCollectionConsent() && !(await hasAuthenticationDataPermission({ queryBackground: false }))) ||
@@ -258,7 +315,10 @@ function extractOAuthParams(responseUrl) {
 }
 
 api.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request?.message === "ryd_has_core_consent" || isNormalMessageSender(api, sender)) {
+  if (
+    (request?.message === "ryd_has_feature_consent" && request.feature === "counts") ||
+    isNormalMessageSender(api, sender)
+  ) {
     return handleMessage(request, sender, sendResponse);
   }
   sendResponse({
@@ -269,27 +329,80 @@ api.runtime.onMessage.addListener((request, sender, sendResponse) => {
   });
 });
 
+function isOwnPopupSender(sender) {
+  try {
+    const url = new URL(sender.url);
+    const popup = new URL(api.runtime.getURL("popup.html"));
+    return (
+      sender.id === api.runtime.id &&
+      sender.tab?.incognito !== true &&
+      url.protocol === popup.protocol &&
+      url.host === popup.host &&
+      url.pathname === popup.pathname
+    );
+  } catch (_) {
+    return false;
+  }
+}
+
 function handleMessage(request, sender, sendResponse) {
   if (request?.message === "ryd_review_action") {
     void (async () => {
       sendResponse(await reviewPromptTracker.recordAction(request, sender));
     })();
     return true;
+  } else if (request?.message === "ryd_open_consent_popup") {
+    let validSender = false;
+    try {
+      const { protocol, hostname } = new URL(sender.url);
+      validSender =
+        usesFirefoxDataCollectionConsent() &&
+        sender.id === api.runtime.id &&
+        sender.tab?.incognito === false &&
+        sender.frameId === 0 &&
+        protocol === "https:" &&
+        (hostname === "youtube.com" || hostname.endsWith(".youtube.com"));
+    } catch (_) {}
+    if (!validSender) {
+      sendResponse({ success: false });
+      return;
+    }
+    void (async () => {
+      try {
+        await browser.browserAction.openPopup({ windowId: sender.tab.windowId });
+        sendResponse({ success: true });
+      } catch (_) {
+        sendResponse({ success: false });
+      }
+    })();
+    return true;
   } else if (request?.message === "ryd_open_consent") {
+    if (!usesFirefoxDataCollectionConsent()) {
+      sendResponse({ success: false });
+      return;
+    }
     const consentUrl = api.runtime.getURL("consent.html");
-    const detailsUrl = `${consentUrl}#permission-details`;
-    const isConsentPage = (url) => url === consentUrl || url === detailsUrl;
-    const targetUrl = request.details === true ? detailsUrl : consentUrl;
+    const isConsentPage = (url) => {
+      try {
+        const parsed = new URL(url);
+        const target = new URL(consentUrl);
+        return (
+          parsed.protocol === target.protocol && parsed.host === target.host && parsed.pathname === target.pathname
+        );
+      } catch (_) {
+        return false;
+      }
+    };
+    const feature = ["voteOptIn", "account"].includes(request.feature) ? request.feature : "voteOptIn";
+    const targetUrl = `${consentUrl}?feature=${feature}${request.details === true ? "#permission-details" : ""}`;
     let isYouTubeLauncher = false;
     if (sender.tab?.incognito === false && sender.frameId === 0) {
       try {
         const { protocol, hostname } = new URL(sender.url);
-        isYouTubeLauncher =
-          (protocol === "https:" || protocol === "http:") &&
-          (hostname === "youtube.com" || hostname.endsWith(".youtube.com"));
+        isYouTubeLauncher = protocol === "https:" && (hostname === "youtube.com" || hostname.endsWith(".youtube.com"));
       } catch (_) {}
     }
-    if (sender.id !== api.runtime.id || (!isConsentPage(sender.url) && !isYouTubeLauncher)) {
+    if (sender.id !== api.runtime.id || !isYouTubeLauncher) {
       sendResponse({ success: false });
       return;
     }
@@ -300,9 +413,12 @@ function handleMessage(request, sender, sendResponse) {
           try {
             const existing = await tabs.get(consentPageTabId);
             if (isConsentPage(existing.url) && existing.incognito === false) {
-              if (existing.url !== targetUrl) await tabs.update(consentPageTabId, { url: targetUrl });
-              await tabs.reload(consentPageTabId);
+              if (!consentPromptPending && existing.url !== targetUrl) {
+                await tabs.update(consentPageTabId, { url: targetUrl });
+              }
               await tabs.update(consentPageTabId, { active: true });
+              if (Number.isInteger(existing.windowId))
+                await api.windows?.update?.(existing.windowId, { focused: true });
               return;
             }
           } catch (_) {}
@@ -312,6 +428,7 @@ function handleMessage(request, sender, sendResponse) {
           ...(Number.isInteger(sender.tab?.windowId) ? { windowId: sender.tab.windowId } : {}),
         });
         consentPageTabId = tab.id;
+        consentPromptPending = false;
       })().finally(() => {
         consentPageOpening = null;
       });
@@ -321,12 +438,33 @@ function handleMessage(request, sender, sendResponse) {
       () => sendResponse({ success: false }),
     );
     return true;
-  } else if (request?.message === "ryd_has_core_consent") {
-    hasCoreDataPermission({ queryBackground: false }).then((granted) => sendResponse({ granted }));
+  } else if (request?.message === VOTE_SUBMISSION_INTENT_MESSAGE) {
+    const accepted = usesFirefoxDataCollectionConsent() && isOwnPopupSender(sender);
+    if (accepted && request.withdraw === true) voteSubmissionIntent.clear();
+    else if (accepted) voteSubmissionIntent.remember();
+    sendResponse({ success: accepted });
+    return;
+  } else if (request?.message === "ryd_consent_prompt_state") {
+    if (
+      usesFirefoxDataCollectionConsent() &&
+      sender.id === api.runtime.id &&
+      sender.tab?.id === consentPageTabId &&
+      sender.url?.startsWith(`${api.runtime.getURL("consent.html")}?feature=`)
+    ) {
+      consentPromptPending = request.pending === true;
+      sendResponse({ success: true });
+    } else sendResponse({ success: false });
+    return;
+  } else if (request?.message === "ryd_has_feature_consent") {
+    if (!usesFirefoxDataCollectionConsent()) {
+      sendResponse({ granted: false });
+      return;
+    }
+    hasFeaturePermission(request.feature, { queryBackground: false }).then((granted) => sendResponse({ granted }));
     return true;
   } else if (request?.message === "ryd_discussion") {
-    requireCoreConsent()
-      .then(() => discussionBackground.handleMessage(request, sender))
+    discussionBackground
+      .handleMessage(request, sender)
       .then(sendResponse)
       .catch(() =>
         sendResponse({ ok: false, error: { code: "consent_required", message: "Enable RYD to continue." } }),
@@ -334,12 +472,13 @@ function handleMessage(request, sender, sendResponse) {
     return true;
   } else if (request.message === "patreon_logout") {
     clearPatreonAuth();
-  } else if (request.message === "ryd_has_authentication_consent") {
-    hasAuthenticationDataPermission({ queryBackground: false }).then((granted) => sendResponse({ granted }));
-    return true;
   } else if (request.message === "ryd_open_tab") {
     const targetUrl = typeof request?.url === "string" ? request.url : null;
-    if (!targetUrl) {
+    const allowedUrls = new Set([
+      "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649",
+      getChangelogUrl(),
+    ]);
+    if (!allowedUrls.has(targetUrl)) {
       sendResponse?.({ success: false, error: "invalid_url" });
       return;
     }
@@ -360,47 +499,11 @@ function handleMessage(request, sender, sendResponse) {
 
     sendResponse?.({ success: false, error: "tabs_api_unavailable" });
     return;
-  } else if (request.message == "set_state") {
-    // chrome.identity.getAuthToken({ interactive: true }, function (token) {
-    let token = "";
-    fetchWithCoreConsent(getApiEndpoint(`/votes?videoId=${request.videoId}&likeCount=${request.likeCount || ""}`), {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        sendResponse(response);
-      })
-      .catch(() => sendResponse({ error: "consent_required_or_request_failed" }));
-    return true;
-  } else if (request.message == "send_links") {
-    toSend = toSend.concat(request.videoIds.filter((x) => !sentIds.has(x)));
-    if (toSend.length >= 20) {
-      fetchWithCoreConsent(getApiEndpoint("/votes"), {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(toSend),
-      }).catch(() => {});
-      for (const toSendUrl of toSend) {
-        sentIds.add(toSendUrl);
-      }
-      toSend = [];
-    }
-  } else if (request.message == "register") {
-    requireCoreConsent()
-      .then(() => voteClient.getRegisteredUser())
-      .then((user) =>
-        sendResponse?.(user ? { success: true, userId: user.userId } : { success: false, error: "vote_required" }),
-      )
-      .catch((error) => sendResponse?.({ success: false, error: error.message }));
-    return true;
   } else if (request.message == "send_vote") {
-    requireCoreConsent()
+    const generation = votingPermissionGeneration;
+    requireVotingConsent()
       .then(() => {
+        if (usesFirefoxDataCollectionConsent() && generation !== votingPermissionGeneration) throw coreConsentError();
         if (extConfig.disableVoteSubmission) throw new Error("Vote submission is disabled.");
         return voteClient.submitVote(request.videoId, request.vote);
       })
@@ -536,209 +639,78 @@ function openChangelogTab(version, { active } = {}) {
   }
 }
 
-function scheduleChangelogVersion(version) {
-  const storage = api?.storage?.local;
-  if (!storage || typeof storage.set !== "function") {
-    return false;
-  }
-  try {
-    const valueToStore = version || true;
-    storage.set({ [PENDING_CHANGELOG_STORAGE_KEY]: valueToStore }, () => {
-      if (api.runtime.lastError) {
-        console.debug("Failed to persist pending changelog version:", api.runtime.lastError.message);
-      }
-    });
-    return true;
-  } catch (error) {
-    console.debug("Storage set failed for pending changelog version", error);
-    return false;
-  }
-}
-
-function clearPendingChangelogVersion() {
-  const storage = api?.storage?.local;
-  if (!storage || typeof storage.remove !== "function") {
-    return;
-  }
-  try {
-    storage.remove(PENDING_CHANGELOG_STORAGE_KEY, () => {
-      if (api.runtime.lastError) {
-        console.debug("Failed to clear pending changelog version:", api.runtime.lastError.message);
-      }
-    });
-  } catch (error) {
-    console.debug("Storage remove failed for pending changelog version", error);
-  }
-}
-
-function showPendingChangelogIfNeeded() {
-  const storage = api?.storage?.local;
-  if (!storage || typeof storage.get !== "function") {
-    return;
-  }
-
-  try {
-    storage.get([PENDING_CHANGELOG_STORAGE_KEY, CHANGELOG_STORAGE_KEY], (result) => {
-      if (api.runtime.lastError) {
-        console.debug("Changelog storage read failed:", api.runtime.lastError.message);
-        return;
-      }
-
-      const pendingValue = result?.[PENDING_CHANGELOG_STORAGE_KEY];
-      if (pendingValue === undefined || pendingValue === null || pendingValue === "") {
-        return;
-      }
-
-      const lastShownValue = result?.[CHANGELOG_STORAGE_KEY];
-      if (lastShownValue !== undefined && lastShownValue !== null && lastShownValue !== "") {
-        clearPendingChangelogVersion();
-        return;
-      }
-
-      openChangelogTab(typeof pendingValue === "string" ? pendingValue : null);
-    });
-  } catch (error) {
-    console.debug("Storage get failed for pending changelog version", error);
-  }
-}
-
 function persistChangelogVersion(version) {
-  const storage = api?.storage?.local;
-  if (!storage || typeof storage.set !== "function") {
-    clearPendingChangelogVersion();
-    return;
-  }
-  try {
-    const valueToStore = version || true;
-    storage.set({ [CHANGELOG_STORAGE_KEY]: valueToStore }, () => {
-      if (api.runtime.lastError) {
-        console.debug("Failed to persist changelog version:", api.runtime.lastError.message);
-        return;
-      }
-      clearPendingChangelogVersion();
-    });
-  } catch (error) {
-    console.debug("Storage set failed for changelog version", error);
-  }
+  api.storage.local?.set?.({ [CHANGELOG_STORAGE_KEY]: version || true });
 }
 
-function maybeShowChangelog(details, { active } = {}) {
-  const reason = details?.reason;
-  if (!reason) {
-    return;
-  }
-
-  if (reason === "browser_update" || reason === "chrome_update") {
-    return;
-  }
-
-  if (reason !== "install" && reason !== "update") {
-    return;
-  }
-
-  const manifest = api.runtime.getManifest();
-  const currentVersion = manifest?.version;
-  const storage = api?.storage?.local;
-  // Temporary add-ons do not survive a browser restart, so their updates cannot wait for onStartup.
-  const showImmediately = reason === "install" || details.temporary === true;
-
-  const showChangelog = () => {
-    openChangelogTab(currentVersion || null, { active });
-  };
-
-  if (!storage || typeof storage.get !== "function") {
-    showChangelog();
-    return;
-  }
-
-  try {
-    storage.get([CHANGELOG_STORAGE_KEY, PENDING_CHANGELOG_STORAGE_KEY], (result) => {
-      if (api.runtime.lastError) {
-        console.debug("Changelog storage read failed:", api.runtime.lastError.message);
-        showChangelog();
-        return;
-      }
-
-      const hasStoredValue = (value) => value !== undefined && value !== null && value !== "";
-      const lastShownValue = result?.[CHANGELOG_STORAGE_KEY];
-      const pendingValue = result?.[PENDING_CHANGELOG_STORAGE_KEY];
-
-      if (showImmediately) {
-        if (hasStoredValue(pendingValue)) {
-          clearPendingChangelogVersion();
-        }
-        if (!hasStoredValue(lastShownValue)) {
-          showChangelog();
-        }
-        return;
-      }
-
-      if (hasStoredValue(lastShownValue)) {
-        return;
-      }
-
-      if (hasStoredValue(pendingValue)) {
-        if (currentVersion && pendingValue !== currentVersion) {
-          scheduleChangelogVersion(currentVersion);
-        }
-        return;
-      }
-
-      if (!scheduleChangelogVersion(currentVersion || null)) {
-        showChangelog();
-      }
+function readStorage(area, keys) {
+  return new Promise((resolve, reject) => {
+    const storage = api.storage[area];
+    if (!storage?.get) return reject(new Error("Storage is unavailable."));
+    storage.get(keys, (value) => {
+      if (api.runtime.lastError) reject(new Error(api.runtime.lastError.message));
+      else resolve(value ?? {});
     });
-  } catch (error) {
-    console.debug("Storage get failed for changelog version", error);
-    showChangelog();
+  });
+}
+
+async function refreshVotingIcon() {
+  const current = ++votingIconRevision;
+  const granted = await hasFeaturePermission("voting", { queryBackground: false });
+  if (current !== votingIconRevision) return;
+  const counted = votesCounted({ granted, submissionDisabled: extConfig.disableVoteSubmission });
+  const name = api.i18n.getMessage("extensionName");
+  setToolbarState(
+    counted ? defaultIconName : voteDisabledIconName,
+    counted ? name : `${name}\n${api.i18n.getMessage("vote_not_counted")}`,
+  );
+}
+
+function markDataPermissionsMigrated() {
+  api.storage.local?.set?.({ [DATA_PERMISSIONS_MIGRATION_KEY]: true });
+}
+
+async function migrateDataPermissions() {
+  if (!usesFirefoxDataCollectionConsent()) return;
+  const local = await readStorage("local", [DATA_PERMISSIONS_MIGRATION_KEY]);
+  if (local[DATA_PERMISSIONS_MIGRATION_KEY]) return;
+  const generation = authenticationGeneration;
+  const previous = await readStorage("sync", ["patreonSessionToken"]);
+  if (!previous.patreonSessionToken && generation === authenticationGeneration) {
+    await api.permissions.remove({ data_collection: ["personallyIdentifyingInfo"] });
   }
+  markDataPermissionsMigrated();
+  await refreshVotingIcon();
 }
 
 async function handleInstallation(details) {
-  const needsConsent =
-    details?.reason === "install" &&
-    usesFirefoxDataCollectionConsent() &&
-    !(await hasCoreDataPermission({ queryBackground: false }));
-  maybeShowChangelog(details, { active: needsConsent ? false : undefined });
-  if (!needsConsent) return;
-
-  try {
-    api.tabs.create({ url: api.runtime.getURL("consent.html") }, (tab) => {
-      if (api.runtime.lastError) return;
-      consentPageTabId = tab?.id ?? null;
-    });
-  } catch (error) {
-    console.debug("Failed to open permission setup", error);
+  api.storage.local?.remove?.("pendingChangelogVersion");
+  if (details?.reason === "update") {
+    try {
+      await migrateDataPermissions();
+    } catch (error) {
+      console.debug("Permission settings migration could not finish", error);
+    }
+    return;
   }
+  if (details?.reason !== "install") return;
+  if (usesFirefoxDataCollectionConsent()) markDataPermissionsMigrated();
+  const stored = await readStorage("local", [CHANGELOG_STORAGE_KEY]).catch(() => ({}));
+  if (!stored[CHANGELOG_STORAGE_KEY]) openChangelogTab(api.runtime.getManifest()?.version);
 }
 
 api.runtime.onInstalled.addListener((details) => {
   void handleInstallation(details);
 });
 
-if (api?.runtime?.onStartup && typeof api.runtime.onStartup.addListener === "function") {
-  api.runtime.onStartup.addListener(() => {
-    showPendingChangelogIfNeeded();
-  });
-}
-
-// api.storage.sync.get(['lastShowChangelogVersion'], (details) => {
-//   if (extConfig.showUpdatePopup === true &&
-//     details.lastShowChangelogVersion !== chrome.runtime.getManifest().version
-//     ) {
-//     // keep it inside get to avoid race condition
-//     api.storage.sync.set({'lastShowChangelogVersion ': chrome.runtime.getManifest().version});
-//     // wait until async get runs & don't steal tab focus
-//     api.tabs.create({url: api.runtime.getURL("/changelog/4/changelog_4.1.html"), active: false});
-//   }
-// });
-
-const sentIds = new Set();
-let toSend = [];
+api.runtime.onStartup?.addListener?.(() => {
+  api.storage.local?.remove?.("pendingChangelogVersion");
+});
 
 function storageChangeHandler(changes, area) {
   discussionBackground.onStorageChanged(changes, area);
   if (changes.disableVoteSubmission !== undefined) {
+    voteSubmissionIntent.clear();
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }
   if (changes.coloredThumbs !== undefined) {
@@ -775,11 +747,7 @@ function storageChangeHandler(changes, area) {
 
 function handleDisableVoteSubmissionChangeEvent(value) {
   extConfig.disableVoteSubmission = value;
-  if (value === true) {
-    changeIcon(voteDisabledIconName);
-  } else {
-    changeIcon(defaultIconName);
-  }
+  void refreshVotingIcon();
 }
 
 function handleDisableLoggingChangeEvent(value) {
@@ -801,10 +769,14 @@ function handleTooltipPercentageModeChangeEvent(value) {
   extConfig.tooltipPercentageMode = value;
 }
 
-function changeIcon(iconName) {
-  if (api.action !== undefined) api.action.setIcon({ path: "/icons/" + iconName });
-  else if (api.browserAction !== undefined) api.browserAction.setIcon({ path: "/icons/" + iconName });
-  else console.log("changing icon is not supported");
+function setToolbarState(iconName, title) {
+  const toolbar = api.action ?? api.browserAction;
+  if (toolbar === undefined) {
+    console.log("changing icon is not supported");
+    return;
+  }
+  toolbar.setIcon({ path: "/icons/" + iconName });
+  toolbar.setTitle({ title });
 }
 
 function handleColoredThumbsChangeEvent(value) {
@@ -856,8 +828,8 @@ function initializeDisableVoteSubmission() {
       api.storage.sync.set({ disableVoteSubmission: false });
     } else {
       extConfig.disableVoteSubmission = res.disableVoteSubmission;
-      if (res.disableVoteSubmission) changeIcon(voteDisabledIconName);
     }
+    void refreshVotingIcon();
   });
 }
 

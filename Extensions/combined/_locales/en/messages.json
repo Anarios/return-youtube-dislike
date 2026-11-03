@@ -53,6 +53,9 @@
   "disableLoggingHover": {
     "message": "Disable logging API responses in console."
   },
+  "developerSettings": {
+    "message": "Developer options"
+  },
   "disableLoggingLabel": {
     "message": "Disable logging to console"
   },
@@ -179,6 +182,12 @@
   "hidePremiumTeaserHover": {
     "message": "Don't show the raw counts panel on YouTube watch pages."
   },
+  "hideRydComments": {
+    "message": "Hide RYD comments"
+  },
+  "hideRydCommentsHover": {
+    "message": "Don't show RYD comments on videos where YouTube comments are turned off."
+  },
   "hidePremiumAnalytics": {
     "message": "Hide Premium Video Insights"
   },
@@ -195,7 +204,7 @@
     "message": "YouTube Shorts Support"
   },
   "showTooltipPercentage": {
-    "message": "Percentage in like/dislike bar tooltip."
+    "message": "Percentage in like/dislike bar tooltip"
   },
   "showTooltipPercentageHover": {
     "message": "Display percentage in like/dislike bar tooltip."
@@ -249,7 +258,7 @@
     "message": "Disable like/dislike submission"
   },
   "textSettingsHover": {
-    "message": "Stops counting your likes and dislikes."
+    "message": "Your likes and dislikes won't count or show in dislike counts."
   },
   "textTempUnavailable": {
     "message": "Temporarily Unavailable"
@@ -642,7 +651,7 @@
   "discussion_markAllRead": { "message": "Mark all read" },
   "discussion_view": { "message": "View discussion" },
   "discussion_unread": { "message": "$1 unread notifications" },
-  "discussion_signedOutInbox": { "message": "Sign in to see replies and reactions to your comments." },
+  "discussion_signedOutInbox": { "message": "Sign in to see replies and likes on your comments." },
   "discussion_notificationUnavailable": { "message": "This discussion is no longer available." },
   "discussion_discussionTab": { "message": "Discussion" },
   "discussion_nickname": { "message": "Nickname" },
@@ -673,6 +682,12 @@
   "changelog_hero_body": {
     "message": "Open any YouTube video and you’ll see the dislike count right next to the likes, where it belongs. Version 4.1 also introduces RYD comments, a place to talk about videos outside YouTube’s own comment section."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "One more step"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Turn on dislike counts below to see them right next to the likes on YouTube. Version 4.1 also introduces RYD comments, a place to talk about videos outside YouTube’s own comment section."
+  },
   "changelog_new_badge": {
     "message": "New in 4.1"
   },
@@ -683,7 +698,7 @@
     "message": "Meet RYD comments"
   },
   "changelog_comments_body": {
-    "message": "A community discussion under videos and Shorts, hosted by Return YouTube Dislike and kept separate from YouTube’s comments. Everyone can read and react. Commenter and Premium members can post and reply."
+    "message": "A community discussion on videos and Shorts where YouTube comments are turned off, hosted by Return YouTube Dislike. Everyone can read and react. Commenter and Premium members can post and reply."
   },
   "changelog_comments_point_replies": {
     "message": "Threaded replies with likes and dislikes"
@@ -692,7 +707,7 @@
     "message": "Post under a public nickname you choose"
   },
   "changelog_comments_point_notifications": {
-    "message": "Notifications when someone replies or reacts"
+    "message": "Notifications when someone replies to or likes your comment"
   },
   "changelog_comments_point_moderation": {
     "message": "Reporting and moderation to keep things civil"
@@ -768,5 +783,140 @@
   },
   "reviewPromptAction": {
     "message": "Leave a review"
+  },
+  "consent_page_title": {
+    "message": "RYD feature permissions"
+  },
+  "consent_vote_title": {
+    "message": "Make your votes count"
+  },
+  "consent_vote_body": {
+    "message": "Firefox now requires every extension to ask you before sharing any data. Allow it so RYD can count your likes, dislikes and comment reactions. This permission covers YouTube only, not other websites."
+  },
+  "consent_account_title": {
+    "message": "Choose account permissions"
+  },
+  "consent_account_body": {
+    "message": "Sign in to use account features, including your profile, notifications and Premium analytics."
+  },
+  "consent_next_step": {
+    "message": "Select Allow in Firefox to review the permissions. You can decline."
+  },
+  "consent_allow": {
+    "message": "Allow in Firefox"
+  },
+  "consent_not_now": {
+    "message": "Not now"
+  },
+  "consent_prompt_status": {
+    "message": "Choose whether to allow these permissions in Firefox."
+  },
+  "consent_granted_status": {
+    "message": "Permissions are enabled. You can return to YouTube."
+  },
+  "consent_declined_status": {
+    "message": "These optional features stay off. You can change permissions later."
+  },
+  "consent_error_status": {
+    "message": "Permissions could not be updated. Please try again."
+  },
+  "consent_details_summary": {
+    "message": "What do Firefox’s permission labels mean?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox groups data into broad categories. Here is what each label means for RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Browsing activity"
+  },
+  "consent_browsing_body": {
+    "message": "Only the ID of the YouTube video you open, to load its dislikes and RYD comments. Never your browsing history or other websites."
+  },
+  "consent_content_label": {
+    "message": "Website content"
+  },
+  "consent_content_body": {
+    "message": "The like count shown on the YouTube video, to help improve dislike estimates."
+  },
+  "consent_activity_label": {
+    "message": "Website activity"
+  },
+  "consent_activity_body": {
+    "message": "Your likes, dislikes and RYD comment reactions on YouTube, so they count. Sent with a random ID that isn't linked to your Google or YouTube account."
+  },
+  "consent_identity_label": {
+    "message": "Personally identifying information"
+  },
+  "consent_identity_body": {
+    "message": "Your profile information, such as a display name and email, only when you choose to sign in."
+  },
+  "consent_auth_label": {
+    "message": "Authentication information"
+  },
+  "consent_auth_body": {
+    "message": "The authorization and session data needed to sign in and use account features."
+  },
+  "consent_scope": {
+    "message": "RYD collects nothing outside youtube.com and does not access your YouTube account. It receives no name or email unless you sign in."
+  },
+  "consent_settings": {
+    "message": "You can change these permissions at any time in Firefox’s add-on settings (about:addons)."
+  },
+  "consent_private_counts": {
+    "message": "Private windows show counts only, using the permission enabled in a regular window. Voting, sign-in, Premium analytics and discussions are unavailable there."
+  },
+  "consent_voter_timing": {
+    "message": "Your voting ID is sent only when you vote or react. Your own comment reactions are remembered on this device."
+  },
+  "popup_signin_next_click": {
+    "message": "One more click is needed: select your sign-in button below to review Firefox’s account permissions and continue."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Thank you. Your votes now count."
+  },
+  "vote_consent_hint": {
+    "message": "Your vote isn't counted yet. Firefox now requires your permission before RYD can send it. This permission covers YouTube only, not other websites."
+  },
+  "vote_not_counted": {
+    "message": "Your likes and dislikes aren't counted and won't show in dislike counts."
+  },
+  "vote_count_mine": {
+    "message": "Count my votes"
+  },
+  "vote_consent_dismiss": {
+    "message": "Don't ask again"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Turn on vote sharing to react to comments. Your reaction is sent once it's on."
+  },
+  "discussion_consentContinue": {
+    "message": "Continue"
+  },
+  "counts_consent_enable": {
+    "message": "Enable dislike counts"
+  },
+  "counts_consent_toolbar": {
+    "message": "Open Return YouTube Dislike from Firefox’s extensions menu to continue."
+  },
+  "counts_consent_declined": {
+    "message": "Counts stay off. You can enable them here later."
+  },
+  "counts_consent_enabled": {
+    "message": "Dislike counts are enabled."
+  },
+  "counts_consent_private": {
+    "message": "Enable dislike counts in a regular window first. Private windows show counts only."
+  },
+  "data_consent_reason": {
+    "message": "Firefox now requires every extension to ask you before sharing any data. Allow RYD to show dislikes and count your votes. This permission covers YouTube only, not other websites."
+  },
+  "data_consent_title": {
+    "message": "Show dislikes and make your votes count"
+  },
+  "data_consent_body": {
+    "message": "Firefox now requires every extension to ask you before sharing any data. It uses the same broad labels for every extension, so here’s what each one means for RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD only works on YouTube. Allowing this doesn’t give it access to any other website."
   }
 }

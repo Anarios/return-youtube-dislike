@@ -1,5 +1,7 @@
 /** @jest-environment jsdom */
 
+import { readFileSync } from "fs";
+import { join } from "path";
 import { createDiscussionPanel } from "./panel";
 import { discussionText } from "./localize";
 
@@ -460,11 +462,33 @@ test("posting fetches unopened history even when the root count predates another
 
 test("top/new sorting discards the prior pagination cursor", async () => {
   const root = await mount();
-  const sort = root.querySelector("select");
-  sort.value = "new";
-  sort.dispatchEvent(new Event("change"));
+  root.querySelector(".ryd-discussion-sort > [data-sort='new']").click();
   await flush();
   expect(request).toHaveBeenLastCalledWith("comments", { videoId: VIDEO, sort: "new" });
+});
+
+test("sort order is a labelled toggle-button group that reloads only when the order changes", async () => {
+  const root = await mount();
+  const group = root.querySelector(".ryd-discussion-toolbar > .ryd-discussion-sort");
+  expect(root.querySelector(".ryd-discussion-toolbar select")).toBeNull();
+  expect(group.getAttribute("role")).toBe("group");
+  expect(group.getAttribute("aria-label")).toBe(discussionText("sort"));
+  const [top, newest] = group.querySelectorAll("button");
+  expect([top.textContent, newest.textContent]).toEqual([discussionText("top"), discussionText("new")]);
+  expect([top.type, newest.type]).toEqual(["button", "button"]);
+  expect([top.getAttribute("aria-pressed"), newest.getAttribute("aria-pressed")]).toEqual(["true", "false"]);
+  const requests = request.mock.calls.length;
+  top.click();
+  await flush();
+  expect(request).toHaveBeenCalledTimes(requests);
+  newest.click();
+  await flush();
+  expect([top.getAttribute("aria-pressed"), newest.getAttribute("aria-pressed")]).toEqual(["false", "true"]);
+  expect(request).toHaveBeenLastCalledWith("comments", { videoId: VIDEO, sort: "new" });
+  top.click();
+  await flush();
+  expect([top.getAttribute("aria-pressed"), newest.getAttribute("aria-pressed")]).toEqual(["true", "false"]);
+  expect(request).toHaveBeenLastCalledWith("comments", { videoId: VIDEO, sort: "top" });
 });
 
 test("an obsolete response cannot render after panel destruction", async () => {
@@ -484,6 +508,28 @@ test("an obsolete response cannot render after panel destruction", async () => {
   expect(document.getElementById("ryd-discussion-panel")).toBeNull();
 });
 
+test("the notifications tab shows the on-demand unread count without a live inbox", async () => {
+  const root = await mount({ session });
+  request.mockImplementation(async (operation) => {
+    if (operation === "notifications")
+      return {
+        items: [{ id: REPLY, type: "reply", actorNickname: "Reader", createdAt: "2026-09-01T12:00:00Z", read: false }],
+        nextCursor: null,
+        unreadCount: 1,
+      };
+    if (operation === "readNotifications") return { unreadCount: 0, revision: "2" };
+    return { items: [], nextCursor: null };
+  });
+  const tab = root.querySelector("[data-action='inbox']");
+  expect(tab.textContent).toBe("Notifications");
+  tab.click();
+  await flush();
+  expect(tab.textContent).toBe("Notifications (1)");
+  root.querySelector(".ryd-discussion-notification button").click();
+  await flush();
+  expect(tab.textContent).toBe("Notifications");
+});
+
 test("moderators can review reports and issue explicit scoped actions", async () => {
   const root = await mount({ session: { ...session, isModerator: true } });
   request.mockResolvedValueOnce({
@@ -500,10 +546,199 @@ test("moderators can review reports and issue explicit scoped actions", async ()
 
 test("Russian UI follows the YouTube document language", async () => {
   document.documentElement.lang = "ru-RU";
-  const root = await mount({ session });
+  const root = await mount({ session }, [comment({ author: otherSession.profile })]);
   expect(root.querySelector("h2").textContent).toBe("Комментарии RYD");
   expect(root.querySelector("[data-action='post']").textContent).toBe("Отправить");
   expect(root.querySelector("[data-reaction='1']").getAttribute("aria-label")).toContain("Нравится");
+});
+
+test("the author's own comments show read-only reaction counts instead of controls", async () => {
+  const root = await mount({ session }, [comment({ canEdit: false, canDelete: false })]);
+  expect(root.querySelector("[data-reaction]")).toBeNull();
+  const counts = [...root.querySelectorAll("[data-reaction-count]")];
+  expect(counts.map((count) => [count.tagName, count.dataset.reactionCount, count.textContent])).toEqual([
+    ["SPAN", "1", "2"],
+    ["SPAN", "-1", "1"],
+  ]);
+  expect(counts.map((count) => count.getAttribute("aria-label"))).toEqual(["Like (2)", "Dislike (1)"]);
+  expect(counts.some((count) => count.hasAttribute("aria-pressed"))).toBe(false);
+  expect(root.querySelector("[data-action='edit']")).not.toBeNull();
+  expect(root.querySelector("[data-action='delete']")).not.toBeNull();
+});
+
+test("a suspended author can delete but cannot edit their own public comment", async () => {
+  const root = await mount({ session: { ...session, profile: { ...session.profile, suspended: true } } });
+  expect(root.querySelector("[data-action='edit']")).toBeNull();
+  expect(root.querySelector("[data-action='delete']")).not.toBeNull();
+});
+
+test("own comments use client-side ownership, not server flags, for edit and delete", async () => {
+  const root = await mount({ session }, [
+    comment({ author: otherSession.profile, canEdit: true, canDelete: true }),
+    comment({ id: REPLY, canEdit: false, canDelete: false }),
+  ]);
+  const other = root.querySelector(`[data-comment-id="${ROOT}"]`);
+  const own = root.querySelector(`[data-comment-id="${REPLY}"]`);
+  expect(other.querySelector("[data-action='edit'], [data-action='delete']")).toBeNull();
+  expect(other.querySelector("[data-reaction]")).not.toBeNull();
+  expect(own.querySelector("[data-action='edit']")).not.toBeNull();
+  expect(own.querySelector("[data-action='delete']")).not.toBeNull();
+  expect(own.querySelector("[data-reaction]")).toBeNull();
+  expect(other.querySelector("[data-reaction-count]")).toBeNull();
+  expect(own.querySelectorAll("[data-reaction-count]")).toHaveLength(2);
+});
+
+test("a signed-in account without a discussion profile owns no comments", async () => {
+  const root = await mount({ session: { ...session, profile: null } }, [comment({ author: { nickname: "Other" } })]);
+  expect(root.querySelector("[data-action='edit'], [data-action='delete']")).toBeNull();
+  expect(root.querySelector("[data-reaction='1']")).not.toBeNull();
+});
+
+test("revoking voting access resets reactions but keeps their controls", async () => {
+  const root = await mount({}, [comment({ author: otherSession.profile, myReaction: 1 })]);
+  panel.setPermissions({ reactions: false });
+  expect(root.querySelector("[data-reaction='1']").getAttribute("aria-pressed")).toBe("false");
+  panel.setPermissions({ reactions: true });
+  expect(root.querySelector("[data-reaction='1']").getAttribute("aria-pressed")).toBe("false");
+});
+
+describe("reactions without Firefox website activity", () => {
+  beforeEach(() => {
+    global.chrome = { runtime: { sendMessage: jest.fn(async () => ({ success: true })) } };
+  });
+  afterEach(() => delete global.chrome);
+
+  test("a click asks for permission in context and reacts only after the grant", async () => {
+    const root = await mount({ reactionsAllowed: false }, [comment({ author: otherSession.profile })]);
+    root.querySelector("[data-reaction='1']").click();
+    await flush();
+    expect(request.mock.calls.some(([operation]) => operation === "react")).toBe(false);
+    const continued = root.querySelector("[data-action='voteOptIn-consent']");
+    expect(continued).not.toBeNull();
+    expect(continued.closest("[data-comment-id]").dataset.commentId).toBe(ROOT);
+    expect(root.textContent).toContain(discussionText("reactionConsentRequired"));
+    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+    continued.click();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({ message: "ryd_open_consent", feature: "voteOptIn" });
+    expect(request.mock.calls.some(([operation]) => operation === "react")).toBe(false);
+    request.mockResolvedValueOnce({ commentId: ROOT, likes: 3, dislikes: 1, myReaction: 1 });
+    panel.setPermissions({ reactions: true });
+    await flush();
+    expect(request.mock.calls.filter(([operation]) => operation === "react")).toEqual([
+      ["react", { id: ROOT, value: 1 }],
+    ]);
+    expect(root.querySelector("[data-action='voteOptIn-consent']")).toBeNull();
+    expect(root.querySelector("[data-reaction='1']").getAttribute("aria-pressed")).toBe("true");
+    panel.setPermissions({ reactions: false });
+    panel.setPermissions({ reactions: true });
+    await flush();
+    expect(request.mock.calls.filter(([operation]) => operation === "react")).toHaveLength(1);
+  });
+
+  test("only the latest pending reaction is sent after the grant", async () => {
+    const root = await mount({ reactionsAllowed: false }, [comment({ author: otherSession.profile })]);
+    root.querySelector("[data-reaction='1']").click();
+    root.querySelector("[data-reaction='-1']").click();
+    request.mockResolvedValueOnce({ commentId: ROOT, likes: 2, dislikes: 2, myReaction: -1 });
+    panel.setPermissions({ reactions: true });
+    await flush();
+    expect(request.mock.calls.filter(([operation]) => operation === "react")).toEqual([
+      ["react", { id: ROOT, value: -1 }],
+    ]);
+  });
+
+  test("a newer pending reaction moves the prompt and a grant clears every prompt", async () => {
+    const other = comment({ id: REPLY, author: otherSession.profile, text: "Second comment" });
+    const root = await mount({ reactionsAllowed: false }, [comment({ author: otherSession.profile }), other]);
+    const prompt = (id) => root.querySelector(`[data-comment-id="${id}"] [data-action='voteOptIn-consent']`);
+    root.querySelector(`[data-comment-id="${ROOT}"] [data-reaction='1']`).click();
+    root.querySelector(`[data-comment-id="${REPLY}"] [data-reaction='-1']`).click();
+    expect(prompt(ROOT)).toBeNull();
+    expect(prompt(REPLY)).not.toBeNull();
+    request.mockResolvedValueOnce({ commentId: REPLY, likes: 0, dislikes: 1, myReaction: -1 });
+    panel.setPermissions({ reactions: true });
+    await flush();
+    expect(root.querySelector("[data-action='voteOptIn-consent']")).toBeNull();
+    expect(request.mock.calls.filter(([operation]) => operation === "react")).toEqual([
+      ["react", { id: REPLY, value: -1 }],
+    ]);
+  });
+
+  test("closing the panel before a grant drops the pending reaction", async () => {
+    const root = await mount({ reactionsAllowed: false }, [comment({ author: otherSession.profile })]);
+    root.querySelector("[data-reaction='1']").click();
+    panel.destroy();
+    panel.setPermissions({ reactions: true });
+    await flush();
+    expect(request.mock.calls.some(([operation]) => operation === "react")).toBe(false);
+  });
+
+  test("a reaction finishing after a reload updates the reloaded comment", async () => {
+    const root = await mount({ reactionsAllowed: false }, [comment({ author: otherSession.profile })]);
+    root.querySelector("[data-reaction='1']").click();
+    let finish;
+    request.mockImplementation(async (operation) => {
+      if (operation === "react") return new Promise((resolve) => (finish = resolve));
+      return { items: [comment({ author: otherSession.profile })], nextCursor: null };
+    });
+    panel.setPermissions({ reactions: true });
+    await panel.load();
+    finish({ commentId: ROOT, likes: 3, dislikes: 1, myReaction: 1 });
+    await flush();
+    expect(root.querySelector("[data-reaction='1']").getAttribute("aria-pressed")).toBe("true");
+    expect(root.querySelector("[data-reaction='1']").textContent).toBe("3");
+  });
+
+  async function mountExpandedReply() {
+    const reply = comment({ id: REPLY, parentId: ROOT, author: otherSession.profile, text: "A reply" });
+    const root = await mount({ reactionsAllowed: false }, [comment({ author: otherSession.profile, replyCount: 1 })]);
+    request.mockImplementation(async (operation) => {
+      if (operation === "replies") return { items: [reply], nextCursor: null };
+      if (operation === "react") return { commentId: REPLY, likes: 3, dislikes: 1, myReaction: 1 };
+      return { items: [comment({ author: otherSession.profile, replyCount: 1 })], nextCursor: null };
+    });
+    root.querySelector("[data-action='load-replies']").click();
+    await flush();
+    return root;
+  }
+
+  const replyReaction = (root) => root.querySelector(`[data-comment-id="${REPLY}"] [data-reaction='1']`);
+
+  test("a pending reaction on a reply is sent after the grant and the reply stays expanded", async () => {
+    const root = await mountExpandedReply();
+    replyReaction(root).click();
+    await flush();
+    expect(root.querySelector(`[data-comment-id="${REPLY}"] [data-action='voteOptIn-consent']`)).not.toBeNull();
+    panel.setPermissions({ reactions: true });
+    await flush();
+    expect(request.mock.calls.filter(([operation]) => operation === "react")).toEqual([
+      ["react", { id: REPLY, value: 1 }],
+    ]);
+    expect(replyReaction(root).getAttribute("aria-pressed")).toBe("true");
+    expect(root.querySelector("[data-action='voteOptIn-consent']")).toBeNull();
+  });
+
+  test("a pending reaction is sent even when its row was rebuilt before the grant", async () => {
+    const root = await mountExpandedReply();
+    replyReaction(root).click();
+    await panel.load();
+    expect(replyReaction(root)).toBeNull();
+    panel.setPermissions({ reactions: true });
+    await flush();
+    expect(request.mock.calls.filter(([operation]) => operation === "react")).toEqual([
+      ["react", { id: REPLY, value: 1 }],
+    ]);
+  });
+
+  test("revoking access resets reply reactions in place", async () => {
+    const root = await mountExpandedReply();
+    panel.setPermissions({ reactions: true });
+    replyReaction(root).click();
+    await flush();
+    expect(replyReaction(root).getAttribute("aria-pressed")).toBe("true");
+    panel.setPermissions({ reactions: false });
+    expect(replyReaction(root).getAttribute("aria-pressed")).toBe("false");
+  });
 });
 
 test("moderators can restore comments and authoring from dismissed report history", async () => {
@@ -525,4 +760,83 @@ test("moderators can restore comments and authoring from dismissed report histor
   await flush();
   expect(request.mock.calls).toContainEqual(["moderateComment", { id: ROOT, hidden: false }]);
   expect(root.querySelector("[data-action='report-status']").value).toBe("resolved");
+});
+
+describe("YouTube-native control styling", () => {
+  const stylesheet = readFileSync(join(__dirname, "../../content-style.css"), "utf8");
+  const chipSelectors = [
+    ".ryd-discussion .ryd-discussion-header-actions > .ryd-discussion-button",
+    ".ryd-discussion .ryd-discussion-sort > .ryd-discussion-button",
+    ".ryd-discussion .ryd-discussion-toolbar > .ryd-discussion-button",
+  ];
+
+  function stylesheetRule(selectors) {
+    const selectorText = selectors.join(", ");
+    for (const [, selector, body] of stylesheet.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      if (selector.replace(/\s+/g, " ").trim() === selectorText) return body;
+    }
+    return "";
+  }
+
+  test("renders the tabs, sort orders and refresh action as YouTube chips", async () => {
+    const root = await mount({ session });
+    expect(root.querySelector(".ryd-discussion-header-actions > [data-action='discussion']")).not.toBeNull();
+    expect(root.querySelector(".ryd-discussion-toolbar > .ryd-discussion-sort > [data-sort='top']")).not.toBeNull();
+    expect(root.querySelector(".ryd-discussion-toolbar > button.ryd-discussion-button")).not.toBeNull();
+    const chip = stylesheetRule(chipSelectors);
+    expect(chip).toContain("min-block-size: 32px");
+    expect(chip).toContain("border-radius: 8px");
+    expect(chip).toContain("background: var(--ryd-discussion-surface)");
+    expect(chip).toContain("font-weight: 500");
+    expect(stylesheetRule(chipSelectors.map((selector) => `${selector}:hover`))).toContain(
+      "background: var(--ryd-discussion-hover)",
+    );
+    const focus = stylesheetRule(chipSelectors.map((selector) => `${selector}:focus-visible`));
+    expect(focus).toContain("outline: 2px solid var(--ryd-discussion-fg)");
+    expect(focus).toContain("outline-offset: 2px");
+  });
+
+  test("inverts the selected tab and sort order like a selected YouTube chip", () => {
+    const selected = stylesheetRule(chipSelectors.slice(0, 2).map((selector) => `${selector}[aria-pressed="true"]`));
+    expect(selected).toContain("background: var(--ryd-discussion-fg)");
+    expect(selected).toContain("color: var(--ryd-discussion-bg)");
+    expect(stylesheet).not.toContain("inset 0 -2px var(--ryd-discussion-accent)");
+  });
+
+  test("keeps the Shorts close button beside the title while no tab is visible", () => {
+    const tabRow = stylesheetRule([".ryd-discussion-shorts .ryd-discussion-header-actions"]);
+    const closeOnly = stylesheetRule([
+      ".ryd-discussion-shorts .ryd-discussion-header-actions:not(:has(> [data-action]:not([hidden])))",
+    ]);
+    expect(tabRow).toContain("width: 100%");
+    expect(closeOnly).toContain("width: auto");
+  });
+
+  test("renders the nickname save action as a YouTube pill button", async () => {
+    const root = await mount({ session: { ...session, profile: { ...session.profile, nickname: null } } });
+    expect(root.querySelector(".ryd-discussion-form-actions > .ryd-discussion-primary").textContent).toBe(
+      discussionText("nicknameSave"),
+    );
+    const pill = stylesheetRule([".ryd-discussion .ryd-discussion-form-actions > .ryd-discussion-button"]);
+    expect(pill).toContain("min-block-size: 36px");
+    expect(pill).toContain("border-radius: 18px");
+  });
+
+  test.each([
+    ["light", [".ryd-discussion", ".ryd-discussion-popup", ".ryd-discussion-toast"]],
+    ["dark", ["html[dark] .ryd-discussion", "html[dark] .ryd-discussion-popup", "html[dark] .ryd-discussion-toast"]],
+  ])("prefers YouTube's current %s theme variables before the legacy names", (_, selectors) => {
+    const tokens = stylesheetRule(selectors).replace(/\s+/g, "");
+    for (const [token, variable, legacy] of [
+      ["bg", "base-background", "base-background"],
+      ["fg", "text-primary", "text-primary"],
+      ["surface", "additive-background", "badge-chip-background"],
+      ["hover", "button-chip-background-hover", "button-chip-background-hover"],
+      ["accent", "call-to-action", "call-to-action"],
+    ]) {
+      expect(tokens).toContain(
+        `--ryd-discussion-${token}:var(--yt-sys-color-baseline--${variable},var(--yt-spec-${legacy},`,
+      );
+    }
+  });
 });

@@ -17,9 +17,6 @@ const BROWSER_ARTIFACTS = Object.freeze([
   Object.freeze({ directory: "safari", manifestVersion: 2 }),
 ]);
 const REQUIRED_FILES = Object.freeze([
-  "consent.html",
-  "consent.css",
-  "consent.js",
   "content-style.css",
   "manifest.json",
   "menu-fixer.js",
@@ -27,6 +24,7 @@ const REQUIRED_FILES = Object.freeze([
   "ryd.background.js",
   "ryd.content-script.js",
 ]);
+const FIREFOX_ONLY_FILES = Object.freeze(["consent.html", "consent.css", "consent.js"]);
 const EMITTED_JS_FILES = Object.freeze([
   "consent.js",
   "popup.js",
@@ -110,6 +108,7 @@ function verifyBrowserArtifact({ directory, manifestVersion }) {
       `${directory} is missing ${requiredFile}.`,
     );
   }
+  verifyBrowserConsentAssets(artifactDirectory, directory);
 
   const manifest = JSON.parse(fs.readFileSync(path.join(artifactDirectory, "manifest.json"), "utf8"));
   assert.equal(manifest.manifest_version, manifestVersion, `${directory} has the wrong manifest version.`);
@@ -146,6 +145,17 @@ function verifyBrowserArtifact({ directory, manifestVersion }) {
   );
 
   return { directory, fileCount: files.length, manifestVersion };
+}
+
+function verifyBrowserConsentAssets(artifactDirectory, browserDirectory) {
+  for (const filename of FIREFOX_ONLY_FILES) {
+    const filePath = path.join(artifactDirectory, filename);
+    if (browserDirectory === "firefox") {
+      assert.ok(fs.existsSync(filePath) && fs.statSync(filePath).isFile(), `Firefox is missing ${filename}.`);
+    } else {
+      assert.equal(fs.existsSync(filePath), false, `${browserDirectory} must not package Firefox-only ${filename}.`);
+    }
+  }
 }
 
 function verifyBuildReceipt(distRoot = DIST_ROOT, repositoryRoot = REPOSITORY_ROOT) {
@@ -194,6 +204,10 @@ function verifyMirroredJavaScript(
 
     for (const { directory } of browserArtifacts) {
       const mirroredBundle = path.join(distRoot, directory, bundle);
+      if (bundle === "consent.js" && directory !== "firefox") {
+        assert.equal(fs.existsSync(mirroredBundle), false, `${directory} must not package Firefox-only ${bundle}.`);
+        continue;
+      }
       assert.ok(fs.statSync(mirroredBundle).isFile(), `${directory} is missing mirrored bundle ${bundle}.`);
       assert.equal(
         sha256(mirroredBundle),
@@ -212,10 +226,12 @@ function verifyProductionJavaScript(
   for (const bundle of emittedJsFiles) {
     const outputs = [
       { filePath: path.join(distRoot, bundle), label: bundle },
-      ...browserArtifacts.map(({ directory }) => ({
-        filePath: path.join(distRoot, directory, bundle),
-        label: `${directory}/${bundle}`,
-      })),
+      ...browserArtifacts
+        .filter(({ directory }) => bundle !== "consent.js" || directory === "firefox")
+        .map(({ directory }) => ({
+          filePath: path.join(distRoot, directory, bundle),
+          label: `${directory}/${bundle}`,
+        })),
     ];
 
     for (const { filePath, label } of outputs) {
@@ -255,6 +271,7 @@ module.exports = {
   EMITTED_JS_FILES,
   assertProductionJavaScriptOutput,
   manifestExposesWebAccessibleResource,
+  verifyBrowserConsentAssets,
   verifyBuildReceipt,
   verifyExtensionArtifacts,
   verifyMirroredJavaScript,

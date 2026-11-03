@@ -12,8 +12,14 @@ jest.mock("../vote-data-request", () => ({
   requestVoteData: jest.fn(),
 }));
 
+jest.mock("../core-data-consent", () => ({
+  hasFeaturePermission: jest.fn(),
+  usesFirefoxDataCollectionConsent: jest.fn(),
+}));
+
 import { getVideoId, localize } from "../utils";
 import { requestVoteData } from "../vote-data-request";
+import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "../core-data-consent";
 import { analyticsState } from "./state";
 import { loadRawCounts, resetRawCounts, renderRawCounts } from "./rawCounts";
 
@@ -56,6 +62,8 @@ function readCounts() {
 
 describe("premiumAnalytics.rawCounts", () => {
   beforeEach(() => {
+    usesFirefoxDataCollectionConsent.mockReturnValue(false);
+    hasFeaturePermission.mockResolvedValue(true);
     analyticsState.panelElement = null;
     resetRawCounts();
     navigate(VIDEO_A);
@@ -86,6 +94,27 @@ describe("premiumAnalytics.rawCounts", () => {
 
     expect(requestVoteData).toHaveBeenCalledWith(VIDEO_A);
     expect(readCounts()).toEqual({ likes: (1200).toLocaleString(), dislikes: "0", status: "" });
+  });
+
+  it("requires account permissions for Firefox premium raw counts", async () => {
+    usesFirefoxDataCollectionConsent.mockReturnValue(true);
+    hasFeaturePermission.mockResolvedValue(false);
+    await loadRawCounts(VIDEO_A);
+    expect(requestVoteData).not.toHaveBeenCalled();
+    expect(hasFeaturePermission).toHaveBeenCalledWith("account");
+    expect(readCounts()).toEqual({ likes: "—", dislikes: "—", status: "" });
+  });
+
+  it("discards Firefox raw counts if account permission is revoked while loading", async () => {
+    usesFirefoxDataCollectionConsent.mockReturnValue(true);
+    const response = deferred();
+    requestVoteData.mockReturnValue(response.promise);
+    const loading = loadRawCounts(VIDEO_A);
+    await Promise.resolve();
+    hasFeaturePermission.mockResolvedValue(false);
+    response.resolve({ rawLikes: 24, rawDislikes: 6 });
+    await loading;
+    expect(readCounts()).toEqual({ likes: "—", dislikes: "—", status: "" });
   });
 
   it("uses existing aggregate fields when raw fields are absent", async () => {

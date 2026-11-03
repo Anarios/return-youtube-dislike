@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "在主控台中停用 API 回應記錄。"
   },
+  "developerSettings": {
+    "message": "開發人員選項"
+  },
   "disableLoggingLabel": {
     "message": "停用主控台記錄"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "不要在 YouTube 觀看頁面顯示原始計數面板。"
   },
+  "hideRydComments": {
+    "message": "隱藏 RYD 留言"
+  },
+  "hideRydCommentsHover": {
+    "message": "在已關閉 YouTube 留言的影片上不顯示 RYD 留言。"
+  },
   "hidePremiumAnalytics": {
     "message": "隱藏進階影片洞察"
   },
@@ -156,7 +165,7 @@
     "message": "支援 YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "在按讚/不喜歡列的工具提示中顯示百分比。"
+    "message": "在按讚/不喜歡列的工具提示中顯示百分比"
   },
   "showTooltipPercentageHover": {
     "message": "在按讚/不喜歡列的工具提示中顯示百分比。"
@@ -228,7 +237,7 @@
     "message": "停用送出按讚/不喜歡"
   },
   "textSettingsHover": {
-    "message": "停止計入您送出的按讚與不喜歡。"
+    "message": "您的喜歡和不喜歡將不會被計入，也不會反映在不喜歡數中。"
   },
   "textTempUnavailable": {
     "message": "暫時無法使用"
@@ -804,7 +813,7 @@
     "message": "$1 則未讀通知"
   },
   "discussion_signedOutInbox": {
-    "message": "登入後即可查看您留言收到的回覆與反應。"
+    "message": "登入後即可查看您留言收到的回覆與讚。"
   },
   "discussion_notificationUnavailable": {
     "message": "此討論已無法查看。"
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "開啟任一 YouTube 影片，就能在喜歡次數旁看到不喜歡次數，回到原本的位置。4.1 版也推出了 RYD 留言，讓你在 YouTube 原有的留言區之外討論影片。"
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "還差一步"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "在下方啟用不喜歡數，即可在 YouTube 上的喜歡數旁看到它。4.1 版也推出了 RYD 留言，讓你在 YouTube 原有的留言區之外討論影片。"
+  },
   "changelog_new_badge": {
     "message": "4.1 新功能"
   },
@@ -873,7 +888,7 @@
     "message": "認識 RYD 留言"
   },
   "changelog_comments_body": {
-    "message": "由 Return YouTube Dislike 提供的影片和 Shorts 下方社群討論區，與 YouTube 留言互相獨立。所有人都能閱讀及留下反應。Commenter 和 Premium 會員可以發表留言及回覆。"
+    "message": "在已關閉 YouTube 留言的影片和 Shorts 下方，由 Return YouTube Dislike 提供的社群討論區。所有人都能閱讀及留下反應。Commenter 和 Premium 會員可以發表留言及回覆。"
   },
   "changelog_comments_point_replies": {
     "message": "支援按讚和不喜歡的分層回覆"
@@ -882,7 +897,7 @@
     "message": "使用自己選擇的公開暱稱發言"
   },
   "changelog_comments_point_notifications": {
-    "message": "有人回覆或表達反應時收到通知"
+    "message": "有人回覆您的留言或按讚時收到通知"
   },
   "changelog_comments_point_moderation": {
     "message": "透過檢舉與管理維持理性討論"
@@ -958,5 +973,140 @@
   },
   "reviewPromptAction": {
     "message": "撰寫評論"
+  },
+  "consent_page_title": {
+    "message": "RYD 功能權限"
+  },
+  "consent_vote_title": {
+    "message": "讓您的評價被計入"
+  },
+  "consent_vote_body": {
+    "message": "Firefox 現在要求每個擴充套件在分享任何資料前都先詢問您。請允許此項，讓 RYD 能計入您的喜歡、不喜歡和留言反應。此權限僅適用於 YouTube，不涉及其他網站。"
+  },
+  "consent_account_title": {
+    "message": "選擇帳號權限"
+  },
+  "consent_account_body": {
+    "message": "登入以使用個人檔案、通知和 Premium 分析等帳號功能。"
+  },
+  "consent_next_step": {
+    "message": "在 Firefox 中選取「允許」以檢視權限。您可以拒絕。"
+  },
+  "consent_allow": {
+    "message": "在 Firefox 中允許"
+  },
+  "consent_not_now": {
+    "message": "暫時不要"
+  },
+  "consent_prompt_status": {
+    "message": "請選擇是否在 Firefox 中授予這些權限。"
+  },
+  "consent_granted_status": {
+    "message": "權限已啟用。您可以返回 YouTube。"
+  },
+  "consent_declined_status": {
+    "message": "這些選用功能維持關閉。您可以稍後變更權限。"
+  },
+  "consent_error_status": {
+    "message": "無法更新權限。請再試一次。"
+  },
+  "consent_details_summary": {
+    "message": "Firefox 的權限分類是什麼意思？"
+  },
+  "consent_details_intro": {
+    "message": "Firefox 將資料分為廣泛的類別。以下是各類別在 RYD 中的意義："
+  },
+  "consent_browsing_label": {
+    "message": "瀏覽活動"
+  },
+  "consent_browsing_body": {
+    "message": "僅限您開啟的 YouTube 影片 ID，用於載入該影片的不喜歡數和 RYD 留言。絕不包括您的瀏覽紀錄或其他網站。"
+  },
+  "consent_content_label": {
+    "message": "網站內容"
+  },
+  "consent_content_body": {
+    "message": "YouTube 影片上顯示的喜歡數，用於改善不喜歡數的估算。"
+  },
+  "consent_activity_label": {
+    "message": "網站活動"
+  },
+  "consent_activity_body": {
+    "message": "您在 YouTube 上的喜歡、不喜歡和 RYD 留言反應，以便計入。連同一個未與您的 Google 或 YouTube 帳號連結的隨機 ID 一起傳送。"
+  },
+  "consent_identity_label": {
+    "message": "個人識別資訊"
+  },
+  "consent_identity_body": {
+    "message": "顯示名稱和電子郵件等個人檔案資訊，僅在您選擇登入時使用。"
+  },
+  "consent_auth_label": {
+    "message": "驗證資訊"
+  },
+  "consent_auth_body": {
+    "message": "登入及使用帳號功能所需的授權與工作階段資料。"
+  },
+  "consent_scope": {
+    "message": "RYD 不收集 youtube.com 以外的任何內容，也不會存取您的 YouTube 帳號。除非您登入，否則不會收到您的姓名或電子郵件。"
+  },
+  "consent_settings": {
+    "message": "您可以隨時在 Firefox 的附加元件設定（about:addons）中變更這些權限。"
+  },
+  "consent_private_counts": {
+    "message": "隱私視窗僅顯示計數，使用在一般視窗中啟用的權限。無法在隱私視窗中投票、登入、使用 Premium 分析或參與討論。"
+  },
+  "consent_voter_timing": {
+    "message": "僅在您投票或回應時傳送投票 ID。您自己的留言反應會記錄在此裝置上。"
+  },
+  "popup_signin_next_click": {
+    "message": "還需要點擊一次：請選擇下方的登入按鈕，檢視 Firefox 的帳號權限並繼續。"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "謝謝。您的評價現在會被計入。"
+  },
+  "vote_consent_hint": {
+    "message": "您的評價尚未計入。Firefox 現在要求 RYD 在傳送評價前先取得您的許可。此權限僅適用於 YouTube，不涉及其他網站。"
+  },
+  "vote_not_counted": {
+    "message": "您的喜歡和不喜歡不會被計入，也不會反映在不喜歡數中。"
+  },
+  "vote_count_mine": {
+    "message": "計入我的評價"
+  },
+  "vote_consent_dismiss": {
+    "message": "不再詢問"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "請開啟評價分享以對留言做出反應。開啟後，您的反應將會傳送。"
+  },
+  "discussion_consentContinue": {
+    "message": "繼續"
+  },
+  "counts_consent_enable": {
+    "message": "啟用不喜歡數"
+  },
+  "counts_consent_toolbar": {
+    "message": "從 Firefox 的擴充套件選單開啟 Return YouTube Dislike 以繼續。"
+  },
+  "counts_consent_declined": {
+    "message": "計數維持關閉。您可以稍後在此啟用。"
+  },
+  "counts_consent_enabled": {
+    "message": "不喜歡數已啟用。"
+  },
+  "counts_consent_private": {
+    "message": "請先在一般視窗中啟用不喜歡數。隱私視窗僅顯示計數。"
+  },
+  "data_consent_reason": {
+    "message": "Firefox 現在要求每個擴充套件在分享任何資料前都先詢問您。請允許 RYD 顯示不喜歡數並計入您的評價。此權限僅適用於 YouTube，不涉及其他網站。"
+  },
+  "data_consent_title": {
+    "message": "顯示不喜歡數，讓您的評價被計入"
+  },
+  "data_consent_body": {
+    "message": "Firefox 現在要求每個擴充套件在分享任何資料前都先詢問您。它對所有擴充套件使用相同的廣泛類別名稱，因此以下說明各類別對 RYD 的意義："
+  },
+  "data_consent_scope": {
+    "message": "RYD 只在 YouTube 上運作。允許後，它也不會取得任何其他網站的存取權限。"
   }
 }

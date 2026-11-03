@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Desactiva el registro de respuestas de la API en la consola."
   },
+  "developerSettings": {
+    "message": "Opciones para desarrolladores"
+  },
   "disableLoggingLabel": {
     "message": "Desactivar registro en la consola"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "No mostrar el panel de conteos sin procesar en las páginas de reproducción de YouTube."
   },
+  "hideRydComments": {
+    "message": "Ocultar comentarios de RYD"
+  },
+  "hideRydCommentsHover": {
+    "message": "No mostrar comentarios de RYD en videos con los comentarios de YouTube desactivados."
+  },
   "hidePremiumAnalytics": {
     "message": "Ocultar la información premium del video"
   },
@@ -156,7 +165,7 @@
     "message": "Soporte de YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Porcentaje en el tooltip de la barra de like/dislike."
+    "message": "Porcentaje en el tooltip de la barra de like/dislike"
   },
   "showTooltipPercentageHover": {
     "message": "Mostrar porcentaje en el tooltip de la barra de like/dislike."
@@ -228,7 +237,7 @@
     "message": "Desactivar envío de votos"
   },
   "textSettingsHover": {
-    "message": "Deja de contar tus «Me gusta» y «No me gusta»."
+    "message": "Tus Me gusta y No me gusta no contarán ni aparecerán en los recuentos de No me gusta."
   },
   "textTempUnavailable": {
     "message": "no disponible temporalmente"
@@ -804,7 +813,7 @@
     "message": "$1 notificaciones sin leer"
   },
   "discussion_signedOutInbox": {
-    "message": "Inicia sesión para ver las respuestas y reacciones a tus comentarios."
+    "message": "Inicia sesión para ver las respuestas y los Me gusta de tus comentarios."
   },
   "discussion_notificationUnavailable": {
     "message": "Esta conversación ya no está disponible."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Abre cualquier vídeo de YouTube y verás el número de «No me gusta» justo al lado de los «Me gusta», donde corresponde. La versión 4.1 también presenta los comentarios de RYD, un espacio para hablar sobre vídeos fuera de la sección de comentarios de YouTube."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Un paso más"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Activa abajo los recuentos de No me gusta para verlos junto a los Me gusta en YouTube. La versión 4.1 también presenta los comentarios de RYD, un espacio para hablar sobre vídeos fuera de la sección de comentarios de YouTube."
+  },
   "changelog_new_badge": {
     "message": "Nuevo en la versión 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Descubre los comentarios de RYD"
   },
   "changelog_comments_body": {
-    "message": "Un espacio de debate bajo los vídeos y Shorts, alojado por Return YouTube Dislike e independiente de los comentarios de YouTube. Todos pueden leer y reaccionar. Los miembros Commenter y Premium pueden publicar y responder."
+    "message": "Un espacio de debate bajo los vídeos y Shorts con los comentarios de YouTube desactivados, alojado por Return YouTube Dislike. Todos pueden leer y reaccionar. Los miembros Commenter y Premium pueden publicar y responder."
   },
   "changelog_comments_point_replies": {
     "message": "Respuestas en hilos con «Me gusta» y «No me gusta»"
@@ -882,7 +897,7 @@
     "message": "Publica con el apodo público que elijas"
   },
   "changelog_comments_point_notifications": {
-    "message": "Notificaciones cuando alguien responde o reacciona"
+    "message": "Notificaciones cuando alguien responde a tu comentario o le da Me gusta"
   },
   "changelog_comments_point_moderation": {
     "message": "Denuncias y moderación para mantener el respeto"
@@ -958,5 +973,140 @@
   },
   "reviewPromptAction": {
     "message": "Dejar una reseña"
+  },
+  "consent_page_title": {
+    "message": "Permisos de las funciones de RYD"
+  },
+  "consent_vote_title": {
+    "message": "Haz que tus votos cuenten"
+  },
+  "consent_vote_body": {
+    "message": "Firefox ahora exige a todas las extensiones que te pregunten antes de compartir cualquier dato. Permítelo para que RYD pueda contar tus Me gusta, No me gusta y reacciones a comentarios. Este permiso solo cubre YouTube, no otros sitios web."
+  },
+  "consent_account_title": {
+    "message": "Elegir permisos de la cuenta"
+  },
+  "consent_account_body": {
+    "message": "Inicia sesión para usar las funciones de la cuenta, como tu perfil, las notificaciones y las estadísticas Premium."
+  },
+  "consent_next_step": {
+    "message": "Selecciona Permitir en Firefox para revisar los permisos. Puedes rechazarlos."
+  },
+  "consent_allow": {
+    "message": "Permitir en Firefox"
+  },
+  "consent_not_now": {
+    "message": "Ahora no"
+  },
+  "consent_prompt_status": {
+    "message": "Elige si quieres conceder estos permisos en Firefox."
+  },
+  "consent_granted_status": {
+    "message": "Los permisos están activados. Puedes volver a YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Estas funciones opcionales siguen desactivadas. Puedes cambiar los permisos más tarde."
+  },
+  "consent_error_status": {
+    "message": "No se pudieron actualizar los permisos. Inténtalo de nuevo."
+  },
+  "consent_details_summary": {
+    "message": "¿Qué significan las categorías de permisos de Firefox?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox agrupa los datos en categorías amplias. Esto significa cada una para RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Actividad de navegación"
+  },
+  "consent_browsing_body": {
+    "message": "Solo el ID del vídeo de YouTube que abres, para cargar sus No me gusta y comentarios de RYD. Nunca tu historial de navegación ni otros sitios web."
+  },
+  "consent_content_label": {
+    "message": "Contenido de sitios web"
+  },
+  "consent_content_body": {
+    "message": "El número de Me gusta mostrado en el vídeo de YouTube, para mejorar las estimaciones de No me gusta."
+  },
+  "consent_activity_label": {
+    "message": "Actividad en sitios web"
+  },
+  "consent_activity_body": {
+    "message": "Tus Me gusta, No me gusta y reacciones a comentarios de RYD en YouTube, para que cuenten. Se envían con un ID aleatorio que no está vinculado a tu cuenta de Google o YouTube."
+  },
+  "consent_identity_label": {
+    "message": "Información de identificación personal"
+  },
+  "consent_identity_body": {
+    "message": "La información de tu perfil, como tu nombre visible y correo electrónico, solo si decides iniciar sesión."
+  },
+  "consent_auth_label": {
+    "message": "Información de autenticación"
+  },
+  "consent_auth_body": {
+    "message": "Los datos de autorización y de sesión necesarios para iniciar sesión y usar las funciones de la cuenta."
+  },
+  "consent_scope": {
+    "message": "RYD no recopila nada fuera de youtube.com ni accede a tu cuenta de YouTube. No recibe tu nombre ni tu correo si no inicias sesión."
+  },
+  "consent_settings": {
+    "message": "Puedes cambiar estos permisos en cualquier momento en los ajustes de complementos de Firefox (about:addons)."
+  },
+  "consent_private_counts": {
+    "message": "Las ventanas privadas solo muestran recuentos, con el permiso activado en una ventana normal. Los votos, el inicio de sesión, las estadísticas Premium y las conversaciones no están disponibles allí."
+  },
+  "consent_voter_timing": {
+    "message": "Tu ID de votación solo se envía cuando votas o reaccionas. Tus propias reacciones a comentarios se recuerdan en este dispositivo."
+  },
+  "popup_signin_next_click": {
+    "message": "Hace falta otro clic: selecciona abajo tu botón de inicio de sesión para revisar los permisos de cuenta de Firefox y continuar."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Gracias. Tus votos ya cuentan."
+  },
+  "vote_consent_hint": {
+    "message": "Tu voto aún no se cuenta. Firefox ahora exige tu permiso antes de que RYD pueda enviarlo. Este permiso solo cubre YouTube, no otros sitios web."
+  },
+  "vote_not_counted": {
+    "message": "Tus Me gusta y No me gusta no se cuentan y no aparecen en los recuentos de No me gusta."
+  },
+  "vote_count_mine": {
+    "message": "Contar mis votos"
+  },
+  "vote_consent_dismiss": {
+    "message": "No volver a preguntar"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Activa el uso compartido de votos para reaccionar a comentarios. Tu reacción se enviará cuando esté activado."
+  },
+  "discussion_consentContinue": {
+    "message": "Continuar"
+  },
+  "counts_consent_enable": {
+    "message": "Activar recuentos de No me gusta"
+  },
+  "counts_consent_toolbar": {
+    "message": "Abre Return YouTube Dislike desde el menú de extensiones de Firefox para continuar."
+  },
+  "counts_consent_declined": {
+    "message": "Los recuentos siguen desactivados. Puedes activarlos aquí más tarde."
+  },
+  "counts_consent_enabled": {
+    "message": "Los recuentos de No me gusta están activados."
+  },
+  "counts_consent_private": {
+    "message": "Primero activa los recuentos de No me gusta en una ventana normal. Las ventanas privadas solo muestran recuentos."
+  },
+  "data_consent_reason": {
+    "message": "Firefox ahora exige a todas las extensiones que te pregunten antes de compartir cualquier dato. Permite que RYD muestre los No me gusta y cuente tus votos. Este permiso solo cubre YouTube, no otros sitios web."
+  },
+  "data_consent_title": {
+    "message": "Muestra los No me gusta y haz que tus votos cuenten"
+  },
+  "data_consent_body": {
+    "message": "Firefox ahora exige a todas las extensiones que te pregunten antes de compartir cualquier dato. Usa las mismas etiquetas generales para todas las extensiones, así que esto es lo que significa cada etiqueta para RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD solo funciona en YouTube. Permitirlo no le da acceso a ningún otro sitio web."
   }
 }

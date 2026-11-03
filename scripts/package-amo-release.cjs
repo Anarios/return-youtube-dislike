@@ -46,7 +46,6 @@ function assertReleaseFile(name, allowVerifier = false) {
     !parts.some((part) =>
       [
         ".git",
-        ".agents",
         "node_modules",
         "userscript",
         "test-results",

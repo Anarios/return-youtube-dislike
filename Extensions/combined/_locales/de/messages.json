@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "Deaktiviert das Protokollieren von API‑Antworten in der Konsole."
   },
+  "developerSettings": {
+    "message": "Entwickleroptionen"
+  },
   "disableLoggingLabel": {
     "message": "Protokollierung in Konsole deaktivieren"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "Das Panel mit Rohzahlen auf YouTube-Wiedergabeseiten nicht anzeigen."
   },
+  "hideRydComments": {
+    "message": "RYD-Kommentare ausblenden"
+  },
+  "hideRydCommentsHover": {
+    "message": "RYD-Kommentare bei Videos mit deaktivierten YouTube-Kommentaren nicht anzeigen."
+  },
   "hidePremiumAnalytics": {
     "message": "Premium-Video-Analyse ausblenden"
   },
@@ -156,7 +165,7 @@
     "message": "YouTube Shorts Unterstützung"
   },
   "showTooltipPercentage": {
-    "message": "Prozentangabe in der Like/Dislike‑Leiste (Tooltip)."
+    "message": "Prozentangabe in der Like/Dislike‑Leiste (Tooltip)"
   },
   "showTooltipPercentageHover": {
     "message": "Prozentangabe im Tooltip der Like/Dislike‑Leiste anzeigen."
@@ -228,7 +237,7 @@
     "message": "Deaktiviere Like/Dislike-Übermittlung"
   },
   "textSettingsHover": {
-    "message": "Stoppt deine Likes und Dislikes zu zählen."
+    "message": "Deine Likes und Dislikes werden nicht gezählt und erscheinen nicht in den Dislike-Zahlen."
   },
   "textTempUnavailable": {
     "message": "Temporär nicht verfügbar"
@@ -804,7 +813,7 @@
     "message": "$1 ungelesene Benachrichtigungen"
   },
   "discussion_signedOutInbox": {
-    "message": "Melde dich an, um Antworten und Reaktionen auf deine Kommentare zu sehen."
+    "message": "Melde dich an, um Antworten und Likes zu deinen Kommentaren zu sehen."
   },
   "discussion_notificationUnavailable": {
     "message": "Diese Diskussion ist nicht mehr verfügbar."
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "Öffne ein beliebiges YouTube-Video und du siehst die Dislike-Zahl direkt neben den Likes, wo sie hingehört. Version 4.1 bringt außerdem RYD-Kommentare: einen Ort, um außerhalb von YouTubes eigenem Kommentarbereich über Videos zu sprechen."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Noch ein Schritt"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Aktiviere unten die Dislike-Zahlen, um sie auf YouTube direkt neben den Likes zu sehen. Version 4.1 bringt außerdem RYD-Kommentare: einen Ort, um außerhalb von YouTubes eigenem Kommentarbereich über Videos zu sprechen."
+  },
   "changelog_new_badge": {
     "message": "Neu in 4.1"
   },
@@ -873,7 +888,7 @@
     "message": "Entdecke RYD-Kommentare"
   },
   "changelog_comments_body": {
-    "message": "Ein Diskussionsbereich unter Videos und Shorts, bereitgestellt von Return YouTube Dislike und getrennt von YouTubes Kommentaren. Alle können mitlesen und reagieren. Mitglieder mit Commenter oder Premium können Beiträge und Antworten schreiben."
+    "message": "Ein Diskussionsbereich unter Videos und Shorts mit deaktivierten YouTube-Kommentaren, bereitgestellt von Return YouTube Dislike. Alle können mitlesen und reagieren. Mitglieder mit Commenter oder Premium können Beiträge und Antworten schreiben."
   },
   "changelog_comments_point_replies": {
     "message": "Antworten in Threads mit Likes und Dislikes"
@@ -882,7 +897,7 @@
     "message": "Schreibe unter einem öffentlichen Nicknamen deiner Wahl"
   },
   "changelog_comments_point_notifications": {
-    "message": "Benachrichtigungen bei Antworten oder Reaktionen"
+    "message": "Benachrichtigungen, wenn jemand auf deinen Kommentar antwortet oder ihn likt"
   },
   "changelog_comments_point_moderation": {
     "message": "Melden und Moderation für einen respektvollen Umgang"
@@ -958,5 +973,140 @@
   },
   "reviewPromptAction": {
     "message": "Rezension schreiben"
+  },
+  "consent_page_title": {
+    "message": "Berechtigungen für RYD-Funktionen"
+  },
+  "consent_vote_title": {
+    "message": "Damit deine Bewertungen zählen"
+  },
+  "consent_vote_body": {
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Erlaube das, damit RYD deine Likes, Dislikes und Reaktionen auf Kommentare zählen kann. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
+  },
+  "consent_account_title": {
+    "message": "Kontoberechtigungen auswählen"
+  },
+  "consent_account_body": {
+    "message": "Melde dich an, um Kontofunktionen wie dein Profil, Benachrichtigungen und Premium-Analysen zu nutzen."
+  },
+  "consent_next_step": {
+    "message": "Wähle in Firefox „Erlauben“, um die Berechtigungen zu prüfen. Du kannst ablehnen."
+  },
+  "consent_allow": {
+    "message": "In Firefox erlauben"
+  },
+  "consent_not_now": {
+    "message": "Jetzt nicht"
+  },
+  "consent_prompt_status": {
+    "message": "Entscheide, ob du diese Berechtigungen in Firefox erlauben möchtest."
+  },
+  "consent_granted_status": {
+    "message": "Die Berechtigungen sind aktiviert. Du kannst zu YouTube zurückkehren."
+  },
+  "consent_declined_status": {
+    "message": "Diese optionalen Funktionen bleiben deaktiviert. Du kannst die Berechtigungen später ändern."
+  },
+  "consent_error_status": {
+    "message": "Die Berechtigungen konnten nicht aktualisiert werden. Bitte versuche es erneut."
+  },
+  "consent_details_summary": {
+    "message": "Was bedeuten die Berechtigungskategorien von Firefox?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox fasst Daten in breite Kategorien zusammen. Das bedeuten die einzelnen Kategorien für RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Surfaktivitäten"
+  },
+  "consent_browsing_body": {
+    "message": "Nur die ID des YouTube-Videos, das du öffnest, um seine Dislikes und RYD-Kommentare zu laden. Nie dein Browserverlauf oder andere Websites."
+  },
+  "consent_content_label": {
+    "message": "Website-Inhalte"
+  },
+  "consent_content_body": {
+    "message": "Die beim YouTube-Video angezeigte Anzahl von Likes, um Dislike-Schätzungen zu verbessern."
+  },
+  "consent_activity_label": {
+    "message": "Website-Aktivitäten"
+  },
+  "consent_activity_body": {
+    "message": "Deine Likes, Dislikes und RYD-Kommentarreaktionen auf YouTube, damit sie zählen. Gesendet mit einer zufälligen ID, die nicht mit deinem Google- oder YouTube-Konto verknüpft ist."
+  },
+  "consent_identity_label": {
+    "message": "Personenbezogene Daten"
+  },
+  "consent_identity_body": {
+    "message": "Deine Profilinformationen, etwa Anzeigename und E-Mail-Adresse, nur wenn du dich anmeldest."
+  },
+  "consent_auth_label": {
+    "message": "Authentifizierungsinformationen"
+  },
+  "consent_auth_body": {
+    "message": "Die Autorisierungs- und Sitzungsdaten, die zum Anmelden und Nutzen von Kontofunktionen erforderlich sind."
+  },
+  "consent_scope": {
+    "message": "RYD erfasst nichts außerhalb von youtube.com und greift nicht auf dein YouTube-Konto zu. Ohne Anmeldung erhält RYD weder deinen Namen noch deine E-Mail-Adresse."
+  },
+  "consent_settings": {
+    "message": "Du kannst diese Berechtigungen jederzeit in den Add-on-Einstellungen von Firefox (about:addons) ändern."
+  },
+  "consent_private_counts": {
+    "message": "Private Fenster zeigen nur Zahlen an und nutzen dafür die in einem normalen Fenster aktivierte Berechtigung. Abstimmen, Anmelden, Premium-Analysen und Diskussionen sind dort nicht verfügbar."
+  },
+  "consent_voter_timing": {
+    "message": "Deine Abstimmungs-ID wird nur beim Abstimmen oder Reagieren gesendet. Deine eigenen Kommentarreaktionen werden auf diesem Gerät gespeichert."
+  },
+  "popup_signin_next_click": {
+    "message": "Ein weiterer Klick ist nötig: Wähle unten deine Anmeldeschaltfläche, um die Kontoberechtigungen von Firefox zu prüfen und fortzufahren."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Danke. Deine Bewertungen zählen jetzt."
+  },
+  "vote_consent_hint": {
+    "message": "Deine Bewertung wird noch nicht gezählt. Bevor RYD sie senden kann, verlangt Firefox jetzt deine Erlaubnis. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
+  },
+  "vote_not_counted": {
+    "message": "Deine Likes und Dislikes werden nicht gezählt und erscheinen nicht in den Dislike-Zahlen."
+  },
+  "vote_count_mine": {
+    "message": "Meine Bewertungen mitzählen"
+  },
+  "vote_consent_dismiss": {
+    "message": "Nicht erneut fragen"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Aktiviere das Teilen von Bewertungen, um auf Kommentare zu reagieren. Deine Reaktion wird gesendet, sobald es aktiviert ist."
+  },
+  "discussion_consentContinue": {
+    "message": "Weiter"
+  },
+  "counts_consent_enable": {
+    "message": "Dislike-Zahlen aktivieren"
+  },
+  "counts_consent_toolbar": {
+    "message": "Öffne Return YouTube Dislike über das Erweiterungsmenü von Firefox, um fortzufahren."
+  },
+  "counts_consent_declined": {
+    "message": "Die Zahlen bleiben deaktiviert. Du kannst sie später hier aktivieren."
+  },
+  "counts_consent_enabled": {
+    "message": "Dislike-Zahlen sind aktiviert."
+  },
+  "counts_consent_private": {
+    "message": "Aktiviere Dislike-Zahlen zuerst in einem normalen Fenster. Private Fenster zeigen nur Zahlen an."
+  },
+  "data_consent_reason": {
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Erlaube RYD, Dislikes anzuzeigen und deine Bewertungen zu zählen. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
+  },
+  "data_consent_title": {
+    "message": "Dislikes anzeigen und deine Bewertungen zählen lassen"
+  },
+  "data_consent_body": {
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Dabei verwendet Firefox für alle Erweiterungen dieselben allgemeinen Bezeichnungen. Das bedeuten sie jeweils für RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD funktioniert nur auf YouTube. Wenn du das erlaubst, erhält RYD dadurch keinen Zugriff auf andere Websites."
   }
 }

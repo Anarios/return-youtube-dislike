@@ -25,13 +25,23 @@
 .ryd-discussion,
 .ryd-discussion-popup,
 .ryd-discussion-toast {
-  --ryd-discussion-bg: var(--yt-spec-base-background, #fff);
-  --ryd-discussion-fg: var(--yt-spec-text-primary, #0f0f0f);
-  --ryd-discussion-muted: var(--yt-spec-text-secondary, #606060);
-  --ryd-discussion-surface: var(--yt-spec-badge-chip-background, #f2f2f2);
-  --ryd-discussion-line: var(--yt-spec-10-percent-layer, #dedede);
-  --ryd-discussion-accent: var(--yt-spec-call-to-action, #065fd4);
-  --ryd-discussion-on-accent: var(--yt-spec-inverted-text-primary, #fff);
+  --ryd-discussion-bg: var(--yt-sys-color-baseline--base-background, var(--yt-spec-base-background, #fff));
+  --ryd-discussion-fg: var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #0f0f0f));
+  --ryd-discussion-muted: var(--yt-sys-color-baseline--text-secondary, var(--yt-spec-text-secondary, #606060));
+  --ryd-discussion-surface: var(
+    --yt-sys-color-baseline--additive-background,
+    var(--yt-spec-badge-chip-background, #f2f2f2)
+  );
+  --ryd-discussion-hover: var(
+    --yt-sys-color-baseline--button-chip-background-hover,
+    var(--yt-spec-button-chip-background-hover, #e5e5e5)
+  );
+  --ryd-discussion-line: var(--yt-sys-color-baseline--outline, var(--yt-spec-10-percent-layer, #dedede));
+  --ryd-discussion-accent: var(--yt-sys-color-baseline--call-to-action, var(--yt-spec-call-to-action, #065fd4));
+  --ryd-discussion-on-accent: var(
+    --yt-sys-color-baseline--text-primary-inverse,
+    var(--yt-spec-inverted-text-primary, #fff)
+  );
   color-scheme: light;
   box-sizing: border-box;
   color: var(--ryd-discussion-fg);
@@ -45,13 +55,23 @@
 html[dark] .ryd-discussion,
 html[dark] .ryd-discussion-popup,
 html[dark] .ryd-discussion-toast {
-  --ryd-discussion-bg: var(--yt-spec-base-background, #0f0f0f);
-  --ryd-discussion-fg: var(--yt-spec-text-primary, #f1f1f1);
-  --ryd-discussion-muted: var(--yt-spec-text-secondary, #aaa);
-  --ryd-discussion-surface: var(--yt-spec-badge-chip-background, #272727);
-  --ryd-discussion-line: var(--yt-spec-10-percent-layer, #3f3f3f);
-  --ryd-discussion-accent: var(--yt-spec-call-to-action, #3ea6ff);
-  --ryd-discussion-on-accent: var(--yt-spec-inverted-text-primary, #0f0f0f);
+  --ryd-discussion-bg: var(--yt-sys-color-baseline--base-background, var(--yt-spec-base-background, #0f0f0f));
+  --ryd-discussion-fg: var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1));
+  --ryd-discussion-muted: var(--yt-sys-color-baseline--text-secondary, var(--yt-spec-text-secondary, #aaa));
+  --ryd-discussion-surface: var(
+    --yt-sys-color-baseline--additive-background,
+    var(--yt-spec-badge-chip-background, #272727)
+  );
+  --ryd-discussion-hover: var(
+    --yt-sys-color-baseline--button-chip-background-hover,
+    var(--yt-spec-button-chip-background-hover, #3f3f3f)
+  );
+  --ryd-discussion-line: var(--yt-sys-color-baseline--outline, var(--yt-spec-10-percent-layer, #3f3f3f));
+  --ryd-discussion-accent: var(--yt-sys-color-baseline--call-to-action, var(--yt-spec-call-to-action, #3ea6ff));
+  --ryd-discussion-on-accent: var(
+    --yt-sys-color-baseline--text-primary-inverse,
+    var(--yt-spec-inverted-text-primary, #0f0f0f)
+  );
   color-scheme: dark;
 }
 
@@ -394,7 +414,10 @@ html[dark] .ryd-discussion-toast {
 }
 .ryd-discussion-launcher {
   display: block;
-  margin: 8px auto;
+  flex: none;
+  box-sizing: border-box;
+  margin: 0 auto 8px !important;
+  padding: 0;
   width: 48px;
   height: 48px;
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -436,6 +459,9 @@ html[dark] .ryd-discussion-toast {
 }
 .ryd-discussion-shorts .ryd-discussion-close {
   margin-inline-start: auto;
+}
+.ryd-discussion-shorts .ryd-discussion-header-actions:not(:has(> [data-action]:not([hidden]))) {
+  width: auto;
 }
 .ryd-discussion-toast {
   position: fixed;
@@ -532,11 +558,7 @@ html[dark] .ryd-discussion-toast {
 }
 
 .ryd-discussion .ryd-discussion-header-actions {
-  gap: 4px;
-}
-
-.ryd-discussion .ryd-discussion-header-actions > .ryd-discussion-button[aria-pressed="true"] {
-  box-shadow: inset 0 -2px var(--ryd-discussion-accent);
+  gap: 8px;
 }
 
 .ryd-discussion .ryd-discussion-description {
@@ -698,6 +720,55 @@ html[dark] .ryd-discussion-toast {
   padding-inline: 16px;
 }
 
+.ryd-discussion .ryd-discussion-sort {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ryd-discussion .ryd-discussion-header-actions > .ryd-discussion-button,
+.ryd-discussion .ryd-discussion-sort > .ryd-discussion-button,
+.ryd-discussion .ryd-discussion-toolbar > .ryd-discussion-button {
+  min-block-size: 32px;
+  padding-block: 0;
+  padding-inline: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--ryd-discussion-surface);
+  color: var(--ryd-discussion-fg);
+  font-size: 1em;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.ryd-discussion .ryd-discussion-header-actions > .ryd-discussion-button:hover,
+.ryd-discussion .ryd-discussion-sort > .ryd-discussion-button:hover,
+.ryd-discussion .ryd-discussion-toolbar > .ryd-discussion-button:hover {
+  background: var(--ryd-discussion-hover);
+}
+
+.ryd-discussion .ryd-discussion-header-actions > .ryd-discussion-button[aria-pressed="true"],
+.ryd-discussion .ryd-discussion-sort > .ryd-discussion-button[aria-pressed="true"] {
+  background: var(--ryd-discussion-fg);
+  color: var(--ryd-discussion-bg);
+}
+
+.ryd-discussion .ryd-discussion-header-actions > .ryd-discussion-button:focus-visible,
+.ryd-discussion .ryd-discussion-sort > .ryd-discussion-button:focus-visible,
+.ryd-discussion .ryd-discussion-toolbar > .ryd-discussion-button:focus-visible {
+  outline: 2px solid var(--ryd-discussion-fg);
+  outline-offset: 2px;
+}
+
+.ryd-discussion .ryd-discussion-form-actions > .ryd-discussion-button {
+  min-block-size: 36px;
+  padding-block: 0;
+  padding-inline: 16px;
+  border-radius: 18px;
+  font-size: 1em;
+  font-weight: 500;
+}
+
 .ryd-discussion .ryd-discussion-comment-actions {
   gap: 4px;
 }
@@ -712,6 +783,19 @@ html[dark] .ryd-discussion-toast {
   border: 0;
   border-radius: 0;
   background: transparent;
+}
+
+.ryd-discussion .ryd-discussion-reaction-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-inline-size: 52px;
+  min-block-size: 36px;
+  padding-inline: 10px;
+  font-size: 0.93em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.4;
 }
 
 .ryd-discussion .ryd-discussion-comment-actions > [data-action="reply"],
@@ -798,12 +882,16 @@ html[dark] .ryd-discussion-toast {
 
 #ryd-bar-container {
   background: #737373;
-  background: color-mix(in srgb, var(--yt-spec-text-primary, #f1f1f1) 55%, var(--yt-spec-base-background, #0f0f0f) 45%);
+  background: color-mix(
+    in srgb,
+    var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1)) 55%,
+    var(--yt-sys-color-baseline--base-background, var(--yt-spec-base-background, #0f0f0f)) 45%
+  );
   border-radius: 2px;
 }
 
 #ryd-bar {
-  background: var(--yt-spec-text-primary, #f1f1f1);
+  background: var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1));
   border-radius: 2px;
   transition: all 0.15s ease-in-out;
 }

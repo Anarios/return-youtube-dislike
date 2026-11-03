@@ -35,6 +35,9 @@
   "disableLoggingHover": {
     "message": "コンソールでの API 応答のログ記録を無効にします。"
   },
+  "developerSettings": {
+    "message": "開発者向けオプション"
+  },
   "disableLoggingLabel": {
     "message": "コンソールへのログ出力を無効化"
   },
@@ -140,6 +143,12 @@
   "hidePremiumTeaserHover": {
     "message": "YouTube の再生ページに未加工の件数パネルを表示しません。"
   },
+  "hideRydComments": {
+    "message": "RYD コメントを非表示にする"
+  },
+  "hideRydCommentsHover": {
+    "message": "YouTube のコメントがオフになっている動画で RYD コメントを表示しません。"
+  },
   "hidePremiumAnalytics": {
     "message": "プレミアム動画インサイトを非表示にする"
   },
@@ -156,7 +165,7 @@
     "message": "YouTubeショートのサポート"
   },
   "showTooltipPercentage": {
-    "message": "高評価/低評価バーのツールチップにパーセントを表示。"
+    "message": "高評価/低評価バーのツールチップにパーセントを表示"
   },
   "showTooltipPercentageHover": {
     "message": "高評価/低評価バーのツールチップにパーセントを表示します。"
@@ -228,7 +237,7 @@
     "message": "高評価/低評価を表示しない"
   },
   "textSettingsHover": {
-    "message": "評価数のカウントを停止します。"
+    "message": "あなたの高評価・低評価はカウントされず、低評価数にも反映されなくなります。"
   },
   "textTempUnavailable": {
     "message": "一時的に利用不可"
@@ -804,7 +813,7 @@
     "message": "$1 件の未読通知"
   },
   "discussion_signedOutInbox": {
-    "message": "コメントへの返信やリアクションを確認するにはログインしてください。"
+    "message": "コメントへの返信や高評価を確認するにはログインしてください。"
   },
   "discussion_notificationUnavailable": {
     "message": "このディスカッションは利用できなくなりました。"
@@ -863,6 +872,12 @@
   "changelog_hero_body": {
     "message": "YouTube の動画を開くと、高評価数のすぐ隣に低評価数が表示されます。バージョン 4.1 では、YouTube のコメント欄とは別に動画について話せる RYD コメントも登場しました。"
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "あと一歩です"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "下で低評価数を有効にすると、YouTube で高評価数のすぐ隣に表示されます。バージョン 4.1 では、YouTube のコメント欄とは別に動画について話せる RYD コメントも登場しました。"
+  },
   "changelog_new_badge": {
     "message": "4.1 の新機能"
   },
@@ -873,7 +888,7 @@
     "message": "RYD コメントが登場"
   },
   "changelog_comments_body": {
-    "message": "動画やショート動画の下で使える、Return YouTube Dislike が運営するコミュニティの議論スペースです。YouTube のコメントとは別で、誰でも閲覧やリアクションができます。Commenter と Premium のメンバーは投稿や返信もできます。"
+    "message": "YouTube のコメントがオフになっている動画やショート動画の下で使える、Return YouTube Dislike が運営するコミュニティの議論スペースです。誰でも閲覧やリアクションができます。Commenter と Premium のメンバーは投稿や返信もできます。"
   },
   "changelog_comments_point_replies": {
     "message": "高評価・低評価を付けられるスレッド形式の返信"
@@ -882,7 +897,7 @@
     "message": "自分で選んだ公開ニックネームで投稿"
   },
   "changelog_comments_point_notifications": {
-    "message": "返信やリアクションがあったときに通知"
+    "message": "コメントへの返信や高評価があったときに通知"
   },
   "changelog_comments_point_moderation": {
     "message": "通報とモデレーションで、節度ある会話を維持"
@@ -958,5 +973,140 @@
   },
   "reviewPromptAction": {
     "message": "レビューを書く"
+  },
+  "consent_page_title": {
+    "message": "RYDの機能の権限"
+  },
+  "consent_vote_title": {
+    "message": "あなたの評価をカウントに反映させましょう"
+  },
+  "consent_vote_body": {
+    "message": "Firefoxは、すべての拡張機能に対し、データを共有する前にあなたに確認することを新たに義務付けました。RYDがあなたの高評価、低評価、コメントへのリアクションをカウントできるよう許可してください。この許可の対象はYouTubeのみで、他のウェブサイトは含まれません。"
+  },
+  "consent_account_title": {
+    "message": "アカウントの権限を選択"
+  },
+  "consent_account_body": {
+    "message": "ログインすると、プロフィール、通知、Premium分析などのアカウント機能を利用できます。"
+  },
+  "consent_next_step": {
+    "message": "Firefoxで「許可」を選択し、権限を確認してください。拒否することもできます。"
+  },
+  "consent_allow": {
+    "message": "Firefoxで許可"
+  },
+  "consent_not_now": {
+    "message": "今はしない"
+  },
+  "consent_prompt_status": {
+    "message": "Firefoxでこれらの権限を許可するか選択してください。"
+  },
+  "consent_granted_status": {
+    "message": "権限が有効になりました。YouTubeに戻れます。"
+  },
+  "consent_declined_status": {
+    "message": "これらの任意機能は無効のままです。権限は後で変更できます。"
+  },
+  "consent_error_status": {
+    "message": "権限を更新できませんでした。もう一度お試しください。"
+  },
+  "consent_details_summary": {
+    "message": "Firefoxの権限の分類は何を意味しますか？"
+  },
+  "consent_details_intro": {
+    "message": "Firefoxはデータを大きな分類にまとめています。RYDでの各分類の意味は次のとおりです。"
+  },
+  "consent_browsing_label": {
+    "message": "閲覧アクティビティ"
+  },
+  "consent_browsing_body": {
+    "message": "あなたが開いたYouTube動画のIDのみで、その動画の低評価とRYDコメントの読み込みに使います。閲覧履歴や他のウェブサイトが対象になることはありません。"
+  },
+  "consent_content_label": {
+    "message": "ウェブサイトのコンテンツ"
+  },
+  "consent_content_body": {
+    "message": "低評価数の推定精度を高めるために使う、YouTube動画に表示された高評価数です。"
+  },
+  "consent_activity_label": {
+    "message": "ウェブサイトのアクティビティ"
+  },
+  "consent_activity_body": {
+    "message": "YouTubeでのあなたの高評価、低評価、RYDコメントへのリアクションで、カウントに反映するためのものです。GoogleやYouTubeのアカウントとは紐付かないランダムなIDとともに送信します。"
+  },
+  "consent_identity_label": {
+    "message": "個人を特定できる情報"
+  },
+  "consent_identity_body": {
+    "message": "表示名やメールアドレスなどのプロフィール情報です。ログインを選択した場合にのみ使用します。"
+  },
+  "consent_auth_label": {
+    "message": "認証情報"
+  },
+  "consent_auth_body": {
+    "message": "ログインとアカウント機能の利用に必要な認可データとセッションデータです。"
+  },
+  "consent_scope": {
+    "message": "RYDはyoutube.com以外では何も収集せず、YouTubeアカウントにアクセスしません。ログインしない限り、名前やメールアドレスを受け取りません。"
+  },
+  "consent_settings": {
+    "message": "これらの権限は、Firefoxのアドオン設定（about:addons）でいつでも変更できます。"
+  },
+  "consent_private_counts": {
+    "message": "プライベートウィンドウでは、通常のウィンドウで有効にした権限を使って件数表示のみ利用できます。投票、ログイン、Premium分析、ディスカッションは利用できません。"
+  },
+  "consent_voter_timing": {
+    "message": "投票IDは投票やリアクションを行ったときにのみ送信します。コメントに対するあなたのリアクションは、この端末に記憶されます。"
+  },
+  "popup_signin_next_click": {
+    "message": "もう一度クリックする必要があります。下のログインボタンを選択し、Firefoxのアカウント権限を確認して続行してください。"
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "ありがとうございます。あなたの評価がカウントされるようになりました。"
+  },
+  "vote_consent_hint": {
+    "message": "あなたの評価はまだカウントされていません。Firefoxでは現在、RYDが評価を送信する前にあなたの許可が必要です。この許可の対象はYouTubeのみで、他のウェブサイトは含まれません。"
+  },
+  "vote_not_counted": {
+    "message": "あなたの高評価・低評価はカウントされず、低評価数にも反映されません。"
+  },
+  "vote_count_mine": {
+    "message": "評価をカウントする"
+  },
+  "vote_consent_dismiss": {
+    "message": "今後表示しない"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "コメントにリアクションするには、評価の共有をオンにしてください。オンになると、リアクションが送信されます。"
+  },
+  "discussion_consentContinue": {
+    "message": "続行"
+  },
+  "counts_consent_enable": {
+    "message": "低評価数を有効にする"
+  },
+  "counts_consent_toolbar": {
+    "message": "続行するには、Firefoxの拡張機能メニューからReturn YouTube Dislikeを開いてください。"
+  },
+  "counts_consent_declined": {
+    "message": "件数表示は無効のままです。後でここから有効にできます。"
+  },
+  "counts_consent_enabled": {
+    "message": "低評価数の表示が有効になっています。"
+  },
+  "counts_consent_private": {
+    "message": "まず通常のウィンドウで低評価数を有効にしてください。プライベートウィンドウでは件数表示のみ利用できます。"
+  },
+  "data_consent_reason": {
+    "message": "Firefoxは、すべての拡張機能に対し、データを共有する前にあなたに確認することを新たに義務付けました。RYDが低評価を表示し、あなたの評価をカウントできるよう許可してください。この許可の対象はYouTubeのみで、他のウェブサイトは含まれません。"
+  },
+  "data_consent_title": {
+    "message": "低評価を表示して、あなたの評価をカウントに反映"
+  },
+  "data_consent_body": {
+    "message": "Firefoxは、すべての拡張機能に対し、データを共有する前にあなたに確認することを新たに義務付けました。どの拡張機能にも同じ大まかな分類が使われるため、RYDでの各分類の意味は次のとおりです："
+  },
+  "data_consent_scope": {
+    "message": "RYDはYouTubeでのみ動作します。許可しても、RYDが他のウェブサイトにアクセスできるようになることはありません。"
   }
 }

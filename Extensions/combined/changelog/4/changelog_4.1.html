@@ -26,9 +26,9 @@
     <main class="ryd-page">
       <section class="ryd-hero">
         <div class="ryd-hero__text">
-          <p class="ryd-eyebrow">__MSG_changelog_hero_eyebrow__</p>
+          <p class="ryd-eyebrow" id="ryd-hero-eyebrow">__MSG_changelog_hero_eyebrow__</p>
           <h1 class="ryd-hero__title">__MSG_changelog_hero_title__</h1>
-          <p class="ryd-hero__body">__MSG_changelog_hero_body__</p>
+          <p class="ryd-hero__body" id="ryd-hero-body">__MSG_changelog_hero_body__</p>
         </div>
         <div class="ryd-hero__visual" aria-hidden="true">
           <div class="ryd-vote">
@@ -54,6 +54,26 @@
         </div>
       </section>
 
+      <div id="ryd-firefox-optin" hidden>
+        <section class="ryd-callout" aria-labelledby="ryd-firefox-consent-title">
+          <div>
+            <h2 class="ryd-callout__title" id="ryd-firefox-consent-title">__MSG_data_consent_title__</h2>
+            <p class="ryd-callout__scope">__MSG_data_consent_scope__</p>
+            <p class="ryd-callout__body">__MSG_data_consent_body__</p>
+            <dl id="ryd-firefox-consent-permissions" class="ryd-callout__list"></dl>
+            <p class="ryd-note">__MSG_consent_settings__</p>
+            <p id="ryd-firefox-consent-status" class="ryd-note" role="status"></p>
+          </div>
+          <div id="ryd-firefox-consent-actions">
+            <div class="ryd-actions">
+              <button type="button" id="ryd-firefox-consent-allow" class="ryd-button ryd-button--secondary">
+                __MSG_consent_allow__
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+
       <section class="ryd-section ryd-feature" aria-labelledby="ryd-comments-title">
         <div class="ryd-feature__text">
           <div class="ryd-tags">
@@ -76,7 +96,7 @@
               src="../images/comments-watch.png"
               alt="__MSG_changelog_comments_shot_alt__"
               width="1600"
-              height="2614"
+              height="2594"
               loading="lazy"
             />
           </figure>

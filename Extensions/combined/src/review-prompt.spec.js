@@ -52,6 +52,7 @@ beforeEach(() => {
 
 afterEach(() => {
   document.dispatchEvent(new Event("yt-navigate-start"));
+  delete navigator.userAgentData;
 });
 
 test.each([1, -1])("reports valid local reactions without showing until authorized (%s)", async (vote) => {
@@ -129,7 +130,7 @@ test.each(["hidden", "fullscreen", "consent", "analytics"])(
   async (state) => {
     if (state === "hidden") Object.defineProperty(document, "visibilityState", { value: "hidden" });
     if (state === "fullscreen") Object.defineProperty(document, "fullscreenElement", { value: document.body });
-    if (state === "consent") document.body.insertAdjacentHTML("beforeend", '<div id="ryd-consent-prompt"></div>');
+    if (state === "consent") document.body.insertAdjacentHTML("beforeend", '<div id="ryd-data-consent-prompt"></div>');
     if (state === "analytics")
       document.body.insertAdjacentHTML("beforeend", '<div class="ryd-premium-analytics is-expanded"></div>');
     await recordReviewAction(videoId, -1);
@@ -186,15 +187,23 @@ test.each(["navigation", "hidden", "fullscreen"])("does not paint a late reply a
   expect(prompt()).toBeNull();
 });
 
-test.each(["firefox", "safari", "incognito", "neutral", "stale", "feed"])("does not send for %s", async (state) => {
-  if (["firefox", "safari"].includes(state))
-    api.runtime.getManifest = () => ({ manifest_version: 2, background: { scripts: ["background.js"] } });
-  if (state === "incognito") api.extension.inIncognitoContext = true;
-  if (state === "stale") history.replaceState({}, "", "/watch?v=zyxwvutsrqp");
-  if (state === "feed") history.replaceState({}, "", "/feed/subscriptions");
-  await recordReviewAction(videoId, state === "neutral" ? 0 : -1);
-  expect(api.runtime.sendMessage).not.toHaveBeenCalled();
-});
+test.each(["firefox", "safari", "edge", "incognito", "neutral", "stale", "feed"])(
+  "does not send for %s",
+  async (state) => {
+    if (["firefox", "safari"].includes(state))
+      api.runtime.getManifest = () => ({ manifest_version: 2, background: { scripts: ["background.js"] } });
+    if (state === "edge")
+      Object.defineProperty(navigator, "userAgentData", {
+        configurable: true,
+        value: { brands: [{ brand: "Microsoft Edge" }, { brand: "Chromium" }] },
+      });
+    if (state === "incognito") api.extension.inIncognitoContext = true;
+    if (state === "stale") history.replaceState({}, "", "/watch?v=zyxwvutsrqp");
+    if (state === "feed") history.replaceState({}, "", "/feed/subscriptions");
+    await recordReviewAction(videoId, state === "neutral" ? 0 : -1);
+    expect(api.runtime.sendMessage).not.toHaveBeenCalled();
+  },
+);
 
 test("storage or extension invalidation failures stay out of the vote flow", async () => {
   api.runtime.sendMessage.mockRejectedValue(new Error("Extension context invalidated"));
