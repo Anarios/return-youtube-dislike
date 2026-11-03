@@ -56,7 +56,7 @@ jobs:
       contains(github.event.comment.body, '/duplicate') && (
         github.event.comment.author_association == 'OWNER' ||
         github.event.comment.author_association == 'COLLABORATOR' ||
-        github.event.comment.author_association != 'CONTRIBUTOR'
+        github.event.comment.author_association == 'CONTRIBUTOR'
       )
     steps:
       - name: Update trusted certificate authorities
