@@ -89,6 +89,31 @@ describe("Patreon authentication consent", () => {
     expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
   });
 
+  it("removes premium panels on navigation only once the extension context is gone", async () => {
+    const { setTeaserSuppressed } = jest.requireMock("./premiumAnalytics/teaser");
+    const navigate = () => document.dispatchEvent(new Event("yt-navigate-finish"));
+    chrome.runtime.id = "extension-id";
+    initPatreonFeatures();
+    await flushPromises();
+    document.body.innerHTML = '<div class="ryd-premium-feature"></div>';
+    analyticsMocks.teardownPremiumAnalytics.mockClear();
+    setTeaserSuppressed.mockClear();
+
+    navigate();
+    expect(document.querySelector(".ryd-premium-feature")).not.toBeNull();
+    expect(analyticsMocks.teardownPremiumAnalytics).not.toHaveBeenCalled();
+    expect(setTeaserSuppressed).not.toHaveBeenCalled();
+
+    delete chrome.runtime.id;
+    navigate();
+    expect(document.querySelector(".ryd-premium-feature")).toBeNull();
+    expect(setTeaserSuppressed).toHaveBeenCalledWith(true, "orphaned");
+    expect(analyticsMocks.teardownPremiumAnalytics).toHaveBeenCalledTimes(1);
+
+    navigate();
+    expect(analyticsMocks.teardownPremiumAnalytics).toHaveBeenCalledTimes(1);
+  });
+
   it("does not read a cached token without authentication consent", async () => {
     initPatreonFeatures();
     await flushPromises();
