@@ -93,16 +93,16 @@
     "message": "Ο αριθμός των «Δεν μου αρέσει» παραμένει δωρεάν για όλους. Οι επί πληρωμή επιπλέον λειτουργίες βοηθούν να πληρώνονται οι διακομιστές που τον υποστηρίζουν: πάνω από 15 TB δεδομένων και περίπου 20 εκατομμύρια χρήστες την ημέρα, με προϋπολογισμό μερικών εκατοντάδων δολαρίων τον μήνα."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Οι premium λειτουργίες είναι διαθέσιμες για συντελεστές στο GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Σύνδεση με GitHub (συντελεστής)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Αποτυχία έναρξης σύνδεσης μέσω GitHub. Δοκιμάστε ξανά."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Η σύνδεση μέσω GitHub δεν ολοκληρώθηκε. Δοκιμάστε ξανά."
   },
   "patreonLoginCompleteFailed": {
     "message": "Η σύνδεση δεν ολοκληρώθηκε. Δοκιμάστε ξανά."
@@ -537,19 +537,19 @@
     "message": "Ρωτήστε την κοινότητα"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Απόκρυψη περιττών κουμπιών"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Εμφάνιση παραδειγμάτων πριν και μετά"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Να μένουν ορατά μόνο τα κουμπιά «Μου αρέσει» και «Δεν μου αρέσει». Οι επιλογές «Κοινοποίηση», «Αποθήκευση», «Super Thanks» και άλλες προαιρετικές ενέργειες παραμένουν διαθέσιμες στο μενού του YouTube με τις τρεις τελείες («Περισσότερες ενέργειες»)."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Πριν: όλα τα κουμπιά ενεργειών είναι ορατά"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Μετά: μόνο τα «Μου αρέσει» και «Δεν μου αρέσει» μένουν ορατά"
   },
   "changelog_brand_logo_alt": {
     "message": "Λογότυπο Return YouTube Dislike"

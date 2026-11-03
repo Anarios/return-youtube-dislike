@@ -93,16 +93,16 @@
     "message": "Кількість невподобань залишається безкоштовною для всіх. Платні доповнення допомагають оплачувати сервери, на яких вона працює: понад 15 ТБ даних і близько 20 мільйонів користувачів на день, а бюджет — кілька сотень доларів на місяць."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Преміум‑функції доступні учасникам проєкту на GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Увійти через GitHub (учасник проєкту)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Не вдалося розпочати вхід через GitHub. Спробуйте ще раз."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Не вдалося завершити вхід через GitHub. Спробуйте ще раз."
   },
   "patreonLoginCompleteFailed": {
     "message": "Не вдалося завершити вхід. Спробуйте ще раз."
@@ -537,19 +537,19 @@
     "message": "Запитайте у спільноти"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Приховати зайві кнопки"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Показати приклади «до» та «після»"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Залишати видимими лише кнопки «Подобається» та «Не подобається». «Поділитися», «Зберегти», «Суперподяка» та інші додаткові дії й надалі доступні в меню YouTube з трьома крапками («Інші дії»)."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "До: видно всі кнопки дій"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Після: видно лише «Подобається» та «Не подобається»"
   },
   "changelog_brand_logo_alt": {
     "message": "Логотип Return YouTube Dislike"

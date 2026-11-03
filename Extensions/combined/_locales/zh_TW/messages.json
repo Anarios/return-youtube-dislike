@@ -93,16 +93,16 @@
     "message": "不喜歡次數將持續免費提供給所有人。付費功能幫助支付背後的伺服器費用：超過 15 TB 的資料、每天約 2,000 萬名使用者，而每月預算只有幾百美元。"
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "GitHub 貢獻者可使用進階功能"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "使用 GitHub 登入（貢獻者）"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "無法啟動 GitHub 登入，請再試一次。"
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "無法完成 GitHub 登入，請再試一次。"
   },
   "patreonLoginCompleteFailed": {
     "message": "無法完成登入，請再試一次。"
@@ -537,19 +537,19 @@
     "message": "詢問社區"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "隱藏多餘按鈕"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "顯示前後比較範例"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "只顯示「我喜歡」和「我不喜歡」按鈕。「分享」、「儲存」、「感謝」等選用動作仍可透過 YouTube 的「其他動作」（⋯）選單使用。"
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "啟用前：顯示所有動作按鈕"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "啟用後：只顯示「我喜歡」和「我不喜歡」按鈕"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 標誌"

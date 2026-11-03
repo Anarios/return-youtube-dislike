@@ -93,16 +93,16 @@
     "message": "Số lượt không thích vẫn miễn phí cho mọi người. Các tính năng trả phí giúp chi trả cho máy chủ vận hành nó: hơn 15 TB dữ liệu và khoảng 20 triệu người dùng mỗi ngày, với ngân sách vài trăm đô la mỗi tháng."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Tính năng cao cấp dành cho người đóng góp trên GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Đăng nhập bằng GitHub (người đóng góp)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Không thể bắt đầu đăng nhập GitHub. Vui lòng thử lại."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Không thể hoàn tất đăng nhập GitHub. Vui lòng thử lại."
   },
   "patreonLoginCompleteFailed": {
     "message": "Không thể hoàn tất đăng nhập. Vui lòng thử lại."
@@ -537,19 +537,19 @@
     "message": "Hỏi cộng đồng"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Ẩn các nút thừa"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Hiển thị ví dụ trước và sau"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Chỉ giữ lại nút Thích và Không thích. Chia sẻ, Lưu, Thanks và các thao tác phụ khác vẫn có sẵn trong trình đơn ba chấm Tùy chọn khác của YouTube."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Trước: tất cả các nút thao tác đều hiển thị"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Sau: chỉ còn nút Thích và Không thích hiển thị"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

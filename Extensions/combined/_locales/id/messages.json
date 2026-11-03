@@ -93,16 +93,16 @@
     "message": "Jumlah tidak suka tetap gratis untuk semua orang. Fitur berbayar membantu membiayai server di baliknya: lebih dari 15 TB data dan sekitar 20 juta pengguna per hari, dengan anggaran beberapa ratus dolar per bulan."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Fitur premium tersedia bagi kontributor di GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Masuk dengan GitHub (kontributor)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Gagal memulai login GitHub. Coba lagi."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Gagal menyelesaikan login GitHub. Coba lagi."
   },
   "patreonLoginCompleteFailed": {
     "message": "Gagal menyelesaikan login. Coba lagi."
@@ -537,19 +537,19 @@
     "message": "Tanyakan pada komunitas"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Sembunyikan tombol tambahan"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Tampilkan contoh sebelum dan sesudah"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Tampilkan hanya tombol Suka dan Tidak suka. Bagikan, Simpan, Thanks, dan tindakan opsional lain tetap tersedia di menu tiga titik Lainnya di YouTube."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Sebelum: semua tombol tindakan terlihat"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Sesudah: hanya tombol Suka dan Tidak suka yang tetap terlihat"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

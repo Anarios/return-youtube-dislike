@@ -93,16 +93,16 @@
     "message": "点踩数将继续免费向所有人开放。付费功能帮助支付背后的服务器费用：超过 15 TB 的数据、每天约 2000 万用户，而每月预算只有几百美元。"
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "GitHub 贡献者可使用高级功能"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "使用 GitHub 登录（贡献者）"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "无法开始 GitHub 登录，请重试。"
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "无法完成 GitHub 登录，请重试。"
   },
   "patreonLoginCompleteFailed": {
     "message": "登录未完成，请重试。"
@@ -537,19 +537,19 @@
     "message": "询问社区"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "隐藏多余按钮"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "显示前后对比示例"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "仅显示点赞和点踩按钮。“分享”“保存”“感谢”等可选操作仍可在 YouTube 的“其他操作”（⋯）菜单中使用。"
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "启用前：所有操作按钮都会显示"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "启用后：仅显示点赞和点踩按钮"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 标志"

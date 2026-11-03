@@ -93,16 +93,16 @@
     "message": "Дизлайки остаются бесплатными для всех. Платные дополнения помогают оплачивать серверы, на которых они работают: более 15 ТБ данных и около 20 миллионов пользователей в день, а бюджет — несколько сотен долларов в месяц."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Премиум‑функции доступны участникам проекта на GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Войти через GitHub (участник проекта)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Не удалось начать вход через GitHub. Попробуйте еще раз."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Не удалось завершить вход через GitHub. Попробуйте еще раз."
   },
   "patreonLoginCompleteFailed": {
     "message": "Не удалось завершить вход. Попробуйте еще раз."
@@ -537,19 +537,19 @@
     "message": "Спросить сообщество"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Скрывать лишние кнопки"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Показать примеры «до» и «после»"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Оставлять видимыми только кнопки «Нравится» и «Не нравится». «Поделиться», «Сохранить», «Суперспасибо» и другие дополнительные действия останутся доступны в меню YouTube с тремя точками («Другие действия»)."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "До: видны все кнопки действий"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "После: видны только «Нравится» и «Не нравится»"
   },
   "discussion_title": { "message": "Комментарии RYD" },
   "discussion_subtitle": { "message": "Обсуждение сообщества Return YouTube Dislike." },

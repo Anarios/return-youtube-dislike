@@ -93,16 +93,16 @@
     "message": "Dislike-Zahlen bleiben für alle kostenlos. Kostenpflichtige Extras helfen, die Server dahinter zu bezahlen: über 15 TB Daten und rund 20 Millionen Nutzer am Tag, bei einem Budget von ein paar hundert Dollar im Monat."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Premiumfunktionen sind für GitHub-Mitwirkende verfügbar"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Mit GitHub anmelden (Mitwirkende)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "GitHub-Anmeldung konnte nicht gestartet werden. Bitte versuche es erneut."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "GitHub-Anmeldung konnte nicht abgeschlossen werden. Bitte versuche es erneut."
   },
   "patreonLoginCompleteFailed": {
     "message": "Anmeldung konnte nicht abgeschlossen werden. Bitte versuche es erneut."
@@ -537,19 +537,19 @@
     "message": "Frag die Community"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Unnötige Schaltflächen ausblenden"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Vorher-Nachher-Beispiele anzeigen"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Nur „Mag ich“ und „Mag ich nicht“ sichtbar lassen. „Teilen“, „Speichern“, „Danke“ und andere optionale Aktionen bleiben über „Mehr Aktionen“, das Drei-Punkte-Menü von YouTube, verfügbar."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Vorher: Alle Aktionsschaltflächen sind sichtbar"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Nachher: Nur „Mag ich“ und „Mag ich nicht“ bleiben sichtbar"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-Logo"

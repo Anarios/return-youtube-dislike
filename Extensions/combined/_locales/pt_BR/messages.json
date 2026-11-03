@@ -93,16 +93,16 @@
     "message": "O número de deslikes continua gratuito para todos. Os extras pagos ajudam a pagar os servidores por trás dele: mais de 15 TB de dados e cerca de 20 milhões de usuários por dia, com um orçamento de algumas centenas de dólares por mês."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Recursos premium disponíveis para colaboradores no GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Entrar com o GitHub (colaborador)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Falha ao iniciar o login pelo GitHub. Tente novamente."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Não foi possível concluir o login pelo GitHub. Tente novamente."
   },
   "patreonLoginCompleteFailed": {
     "message": "Não foi possível concluir o login. Tente novamente."
@@ -537,19 +537,19 @@
     "message": "Pergunte à comunidade"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Ocultar botões extras"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Mostrar exemplos de antes e depois"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Manter visíveis apenas os botões Gostei e Não gostei. Compartilhar, Salvar, Valeu e outras ações opcionais continuam disponíveis no menu de três pontos Mais do YouTube."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Antes: todos os botões de ação ficam visíveis"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Depois: apenas os botões Gostei e Não gostei continuam visíveis"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo do Return YouTube Dislike"

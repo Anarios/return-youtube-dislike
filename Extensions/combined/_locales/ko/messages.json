@@ -93,16 +93,16 @@
     "message": "싫어요 수는 앞으로도 누구나 무료로 볼 수 있습니다. 유료 부가 기능은 이를 뒷받침하는 서버 비용을 충당하는 데 도움이 됩니다. 15TB가 넘는 데이터와 하루 약 2,000만 명의 사용자를 월 수백 달러의 예산으로 운영하고 있습니다."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "프리미엄 기능은 GitHub 기여자에게 제공됩니다"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "GitHub로 로그인(기여자용)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "GitHub 로그인 시작에 실패했습니다. 다시 시도해 주세요."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "GitHub 로그인을 완료하지 못했습니다. 다시 시도해 주세요."
   },
   "patreonLoginCompleteFailed": {
     "message": "로그인을 완료하지 못했습니다. 다시 시도해 주세요."
@@ -537,19 +537,19 @@
     "message": "커뮤니티에 물어보세요"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "불필요한 버튼 숨기기"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "적용 전후 예시 보기"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "좋아요와 싫어요 버튼만 표시합니다. 공유, 저장, Thanks 등 다른 선택 기능은 YouTube의 점 3개(추가 작업) 메뉴에서 계속 이용할 수 있습니다."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "적용 전: 모든 작업 버튼이 표시됩니다"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "적용 후: 좋아요와 싫어요 버튼만 표시됩니다"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike 로고"

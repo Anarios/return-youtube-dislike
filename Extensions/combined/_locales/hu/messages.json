@@ -93,16 +93,16 @@
     "message": "A nemtetszések száma továbbra is mindenki számára ingyenes. A fizetős extrák segítenek fedezni a mögötte álló szerverek költségeit: több mint 15 TB adat és naponta körülbelül 20 millió felhasználó, havi néhány száz dolláros költségvetésből."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Prémium funkciók GitHub‑közreműködőknek érhetők el"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Bejelentkezés GitHubbal (közreműködő)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "A GitHub-bejelentkezés indítása sikertelen. Próbáld újra."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "A GitHub-bejelentkezést nem sikerült befejezni. Próbáld újra."
   },
   "patreonLoginCompleteFailed": {
     "message": "A bejelentkezés nem sikerült. Próbáld újra."
@@ -537,19 +537,19 @@
     "message": "Kérdezd meg a közösséget"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Felesleges gombok elrejtése"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Előtte-utána példák megjelenítése"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Csak a Tetszik és a Nem tetszik gomb maradjon látható. A Megosztás, a Mentés, a Szuperköszönet és a többi választható művelet továbbra is elérhető a YouTube hárompontos menüjében (További műveletek)."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Előtte: minden műveletgomb látható"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Utána: csak a Tetszik és a Nem tetszik gomb marad látható"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike logója"

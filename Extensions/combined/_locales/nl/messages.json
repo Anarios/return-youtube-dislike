@@ -93,16 +93,16 @@
     "message": "Het aantal dislikes blijft voor iedereen gratis. Betaalde extra’s helpen de servers erachter te betalen: meer dan 15 TB aan data en zo’n 20 miljoen gebruikers per dag, met een budget van een paar honderd dollar per maand."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Premiumfuncties zijn beschikbaar voor bijdragers op GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Inloggen met GitHub (bijdragers)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Inloggen via GitHub kon niet worden gestart. Probeer het opnieuw."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Inloggen via GitHub kon niet worden voltooid. Probeer het opnieuw."
   },
   "patreonLoginCompleteFailed": {
     "message": "Aanmelden kon niet worden voltooid. Probeer het opnieuw."
@@ -537,19 +537,19 @@
     "message": "Vraag het aan de gemeenschap"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Overbodige knoppen verbergen"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Voorbeelden van voor en na tonen"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Houd alleen ‘Vind ik leuk’ en ‘Vind ik niet leuk’ zichtbaar. ‘Delen’, ‘Opslaan’, ‘Bedankt’ en andere optionele acties blijven beschikbaar via ‘Meer acties’, het menu met drie puntjes van YouTube."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Voor: alle actieknoppen zijn zichtbaar"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Na: alleen ‘Vind ik leuk’ en ‘Vind ik niet leuk’ blijven zichtbaar"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-logo"

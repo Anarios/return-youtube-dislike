@@ -93,16 +93,16 @@
     "message": "Il numero di Non mi piace resta gratuito per tutti. Gli extra a pagamento aiutano a pagare i server che lo rendono possibile: oltre 15 TB di dati e circa 20 milioni di utenti al giorno, con un budget di poche centinaia di dollari al mese."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Funzionalità premium disponibili per i collaboratori su GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Accedi con GitHub (collaboratori)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Impossibile avviare l’accesso con GitHub. Riprova."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Impossibile completare l’accesso con GitHub. Riprova."
   },
   "patreonLoginCompleteFailed": {
     "message": "Impossibile completare l'accesso. Riprova."
@@ -537,19 +537,19 @@
     "message": "Chiedi alla community"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Nascondi i pulsanti superflui"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Mostra esempi del prima e dopo"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Mantieni visibili solo Mi piace e Non mi piace. Condividi, Salva, Grazie e le altre azioni facoltative restano disponibili nel menu Altre azioni di YouTube, quello con i tre puntini."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Prima: tutti i pulsanti di azione sono visibili"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Dopo: restano visibili solo Mi piace e Non mi piace"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

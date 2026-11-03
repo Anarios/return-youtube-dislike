@@ -93,16 +93,16 @@
     "message": "Antalet ogilla-markeringar förblir gratis för alla. Betalda extrafunktioner hjälper till att betala servrarna bakom dem: över 15 TB data och omkring 20 miljoner användare per dag, med en budget på några hundra dollar i månaden."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Premiumfunktioner är tillgängliga för GitHub-bidragsgivare"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Logga in med GitHub (bidragsgivare)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Det gick inte att starta GitHub-inloggningen. Försök igen."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Det gick inte att slutföra GitHub-inloggningen. Försök igen."
   },
   "patreonLoginCompleteFailed": {
     "message": "Det gick inte att slutföra inloggningen. Försök igen."
@@ -537,19 +537,19 @@
     "message": "Fråga samhället"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Dölj onödiga knappar"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Visa exempel på före och efter"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Behåll bara knapparna Gilla och Ogilla synliga. Dela, Spara, Tack och andra valfria åtgärder finns kvar under Fler åtgärder, YouTubes trepunktsmeny."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Före: alla åtgärdsknappar visas"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Efter: bara Gilla och Ogilla visas"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-logotyp"

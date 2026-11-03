@@ -93,16 +93,16 @@
     "message": "Bəyənməmə sayları hər kəs üçün pulsuz qalır. Ödənişli əlavələr onları işlədən serverlərin xərclərini ödəməyə kömək edir: 15 TB-dan çox məlumat və gündə təxminən 20 milyon istifadəçi, ayda bir neçə yüz dollarlıq büdcə ilə."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Premium xüsusiyyətlər GitHub töhfəçiləri üçün mövcuddur"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "GitHub ilə daxil ol (töhfəçi)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "GitHub girişini başlatmaq alınmadı. Yenidən cəhd edin."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "GitHub girişini tamamlamaq alınmadı. Yenidən cəhd edin."
   },
   "patreonLoginCompleteFailed": {
     "message": "Giriş tamamlanmadı. Yenidən cəhd edin."
@@ -537,19 +537,19 @@
     "message": "İcmadan soruş"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Əlavə düymələri gizlət"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Əvvəl və sonra nümunələrini göstər"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Yalnız Bəyən və Bəyənmə düymələri görünsün. Paylaşın, Yadda saxlayın, Sağol və başqa istəyə bağlı əməliyyatlar YouTube-un üç nöqtəli Digər menyusunda əlçatan qalır."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Əvvəl: bütün əməliyyat düymələri görünür"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Sonra: yalnız Bəyən və Bəyənmə düymələri görünür"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike loqosu"

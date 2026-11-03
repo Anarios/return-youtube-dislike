@@ -93,16 +93,16 @@
     "message": "Počty hodnocení Nelíbí se zůstávají zdarma pro všechny. Placené doplňky pomáhají platit servery, které je zajišťují: přes 15 TB dat a zhruba 20 milionů uživatelů denně s rozpočtem několika stovek dolarů měsíčně."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Prémiové funkce jsou dostupné pro přispěvatele na GitHubu"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Přihlásit se pomocí GitHubu (přispěvatel)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Nepodařilo se zahájit přihlášení přes GitHub. Zkuste to znovu."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Přihlášení přes GitHub se nepodařilo dokončit. Zkuste to znovu."
   },
   "patreonLoginCompleteFailed": {
     "message": "Přihlášení se nepodařilo dokončit. Zkuste to znovu."
@@ -537,19 +537,19 @@
     "message": "Zeptejte se komunity"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Skrýt nadbytečná tlačítka"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Zobrazit ukázky před a po"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Ponechat viditelná jen tlačítka To se mi líbí a To se mi nelíbí. Sdílet, Uložit, Super díky a další volitelné akce zůstanou dostupné v nabídce YouTube se třemi tečkami (Další akce)."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Před: všechna tlačítka akcí jsou viditelná"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Po: viditelná zůstávají jen tlačítka To se mi líbí a To se mi nelíbí"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"

@@ -93,16 +93,16 @@
     "message": "El número de «No me gusta» sigue siendo gratis para todos. Los extras de pago ayudan a pagar los servidores que lo hacen posible: más de 15 TB de datos y unos 20 millones de usuarios al día, con un presupuesto de unos pocos cientos de dólares al mes."
   },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Funciones premium disponibles para colaboradores en GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Iniciar sesión con GitHub (colaboradores)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "No se pudo comenzar el inicio de sesión con GitHub. Inténtalo de nuevo."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "No se pudo completar el inicio de sesión con GitHub. Inténtalo de nuevo."
   },
   "patreonLoginCompleteFailed": {
     "message": "No se pudo completar el inicio de sesión. Inténtalo de nuevo."
@@ -537,19 +537,19 @@
     "message": "Pregunta a la comunidad"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Ocultar botones innecesarios"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Mostrar ejemplos de antes y después"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Mantener visibles solo «Me gusta» y «No me gusta». «Compartir», «Guardar», «Gracias» y otras acciones opcionales siguen disponibles en «Más acciones», el menú de tres puntos de YouTube."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Antes: todos los botones de acción están visibles"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Después: solo «Me gusta» y «No me gusta» siguen visibles"
   },
   "changelog_brand_logo_alt": {
     "message": "Logotipo de Return YouTube Dislike"
