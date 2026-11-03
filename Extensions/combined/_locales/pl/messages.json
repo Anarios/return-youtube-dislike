@@ -981,7 +981,7 @@
     "message": "Niech Twoje oceny się liczą"
   },
   "consent_vote_body": {
-    "message": "Bez udostępniania ocen Twoje polubienia i oceny negatywne nie są liczone i nie pojawią się w licznikach ocen negatywnych. Udostępnianie wysyła Twoje oceny i widoczną liczbę polubień. Wymaga ono liczników ocen negatywnych, więc Firefox poprosi też o ich włączenie, jeśli są wyłączone."
+    "message": "Firefox wymaga teraz, aby każde rozszerzenie pytało Cię o zgodę przed udostępnieniem jakichkolwiek danych. Zezwól na to, aby RYD mógł liczyć Twoje polubienia, oceny negatywne i reakcje na komentarze. Ta zgoda obejmuje tylko YouTube, a nie inne witryny."
   },
   "consent_account_title": {
     "message": "Wybierz uprawnienia konta"
@@ -1020,7 +1020,7 @@
     "message": "Aktywność przeglądania"
   },
   "consent_browsing_body": {
-    "message": "Identyfikator filmu w YouTube używany do wczytywania liczników ocen negatywnych i dyskusji. Ty decydujesz, czy na to zezwolić."
+    "message": "Tylko identyfikator filmu YouTube, który otwierasz, aby wczytać jego oceny negatywne i komentarze RYD. Nigdy Twoja historia przeglądania ani inne witryny."
   },
   "consent_content_label": {
     "message": "Treść witryn"
@@ -1032,7 +1032,7 @@
     "message": "Aktywność w witrynach"
   },
   "consent_activity_body": {
-    "message": "Twoje polubienia, oceny negatywne, cofnięte oceny i reakcje na komentarze RYD, wysyłane z zapisanym losowym identyfikatorem głosowania."
+    "message": "Twoje polubienia, oceny negatywne i reakcje na komentarze RYD na YouTube, aby były liczone. Wysyłane z losowym identyfikatorem, który nie jest powiązany z Twoim kontem Google ani YouTube."
   },
   "consent_identity_label": {
     "message": "Dane umożliwiające identyfikację osoby"
@@ -1050,7 +1050,7 @@
     "message": "RYD nie zbiera niczego poza youtube.com i nie uzyskuje dostępu do Twojego konta YouTube. Nie otrzymuje nazwy ani e-maila, dopóki się nie zalogujesz."
   },
   "consent_settings": {
-    "message": "Opcjonalne uprawnienia możesz później zmienić w ustawieniach rozszerzenia w Firefoksie."
+    "message": "Te uprawnienia możesz w każdej chwili zmienić w ustawieniach dodatków przeglądarki Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "Okna prywatne wyświetlają tylko liczniki, korzystając z uprawnienia włączonego w zwykłym oknie. Głosowanie, logowanie, analizy Premium i dyskusje są w nich niedostępne."
@@ -1065,7 +1065,7 @@
     "message": "Dziękujemy. Twoje oceny są teraz liczone."
   },
   "vote_consent_hint": {
-    "message": "Twoja ocena nie jest liczona i nie pojawi się w licznikach ocen negatywnych. Włącz udostępnianie ocen, aby się liczyła."
+    "message": "Twoja ocena nie jest jeszcze liczona. Firefox wymaga teraz Twojej zgody, zanim RYD będzie mógł ją wysłać. Ta zgoda obejmuje tylko YouTube, a nie inne witryny."
   },
   "vote_not_counted": {
     "message": "Twoje polubienia i oceny negatywne nie są liczone i nie pojawią się w licznikach ocen negatywnych."
@@ -1098,12 +1098,15 @@
     "message": "Najpierw włącz liczniki ocen negatywnych w zwykłym oknie. Okna prywatne wyświetlają tylko liczniki."
   },
   "data_consent_reason": {
-    "message": "Firefox wymaga Twojej zgody, zanim RYD będzie mógł wyświetlać liczniki ocen negatywnych i uwzględniać Twoje polubienia i oceny negatywne."
+    "message": "Firefox wymaga teraz, aby każde rozszerzenie pytało Cię o zgodę przed udostępnieniem jakichkolwiek danych. Zezwól RYD na wyświetlanie ocen negatywnych i liczenie Twoich ocen. Ta zgoda obejmuje tylko YouTube, a nie inne witryny."
   },
   "data_consent_title": {
     "message": "Pokazuj oceny negatywne i niech Twoje oceny się liczą"
   },
   "data_consent_body": {
-    "message": "RYD wysyła identyfikator filmu, aby wczytać liczniki ocen negatywnych. Zezwolenie udostępnia też widoczną liczbę polubień, aby poprawić szacunki, oraz Twoje polubienia, oceny negatywne i reakcje na komentarze z losowym identyfikatorem głosowania, aby były liczone."
+    "message": "Firefox wymaga teraz, aby każde rozszerzenie pytało Cię o zgodę przed udostępnieniem jakichkolwiek danych. Stosuje te same ogólne etykiety do wszystkich rozszerzeń, więc oto, co każda z nich oznacza dla RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD działa tylko na YouTube. Zezwolenie na to nie daje mu dostępu do żadnej innej witryny."
   }
 }

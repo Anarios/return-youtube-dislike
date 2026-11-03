@@ -10,13 +10,16 @@
   <body>
     <section id="ryd-counts-consent" hidden>
       <h2>__MSG_data_consent_title__</h2>
+      <p id="ryd-counts-consent-scope">__MSG_data_consent_scope__</p>
       <p id="ryd-counts-consent-description">__MSG_data_consent_body__</p>
+      <dl id="ryd-counts-consent-permissions"></dl>
+      <p class="ryd-counts-consent-note">__MSG_consent_settings__</p>
       <div class="ryd-counts-consent-actions">
         <button
           type="button"
           id="ryd-counts-consent-allow"
           class="m3-btn m3-primary"
-          aria-describedby="ryd-counts-consent-description"
+          aria-describedby="ryd-counts-consent-scope ryd-counts-consent-description"
         >
           __MSG_consent_allow__
         </button>

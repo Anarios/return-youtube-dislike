@@ -981,7 +981,7 @@
     "message": "Ať se vaše hlasy počítají"
   },
   "consent_vote_body": {
-    "message": "Bez sdílení hlasů se vaše hlasy nezapočítávají a neprojeví se v počtech nelíbí se. Sdílení odesílá vaše hlasy a zobrazený počet líbí se. Vyžaduje počty nelíbí se, takže Firefox požádá i o jejich zapnutí, pokud jsou vypnuté."
+    "message": "Firefox nově vyžaduje, aby se vás každé rozšíření zeptalo, než bude sdílet jakákoli data. Povolte to, aby RYD mohl započítávat vaše líbí se, nelíbí se a reakce na komentáře. Toto oprávnění platí jen pro YouTube, ne pro jiné webové stránky."
   },
   "consent_account_title": {
     "message": "Vybrat oprávnění účtu"
@@ -1020,7 +1020,7 @@
     "message": "Aktivita prohlížení"
   },
   "consent_browsing_body": {
-    "message": "ID videa na YouTube používané k načtení počtů nelíbí se a diskusí. Sami rozhodnete, zda to povolíte."
+    "message": "Pouze ID videa na YouTube, které otevřete, k načtení jeho počtů nelíbí se a komentářů RYD. Nikdy vaše historie prohlížení ani jiné webové stránky."
   },
   "consent_content_label": {
     "message": "Obsah webových stránek"
@@ -1032,7 +1032,7 @@
     "message": "Aktivita na webových stránkách"
   },
   "consent_activity_body": {
-    "message": "Vaše líbí se, nelíbí se, odebrané hlasy a reakce na komentáře RYD, odesílané s uloženým náhodným hlasovacím ID."
+    "message": "Vaše líbí se, nelíbí se a reakce na komentáře RYD na YouTube, aby se počítaly. Odesílají se s náhodným ID, které není propojeno s vaším účtem Google ani YouTube."
   },
   "consent_identity_label": {
     "message": "Osobní identifikační údaje"
@@ -1050,7 +1050,7 @@
     "message": "RYD nic neshromažďuje mimo youtube.com a nemá přístup k vašemu účtu YouTube. Bez přihlášení neobdrží jméno ani e-mail."
   },
   "consent_settings": {
-    "message": "Volitelná oprávnění můžete později změnit v nastavení rozšíření ve Firefoxu."
+    "message": "Tato oprávnění můžete kdykoli změnit v nastavení doplňků Firefoxu (about:addons)."
   },
   "consent_private_counts": {
     "message": "Anonymní okna zobrazují pouze počty s využitím oprávnění zapnutého v běžném okně. Hlasování, přihlášení, analýzy Premium a diskuse v nich nejsou dostupné."
@@ -1065,7 +1065,7 @@
     "message": "Děkujeme. Vaše hlasy se nyní započítávají."
   },
   "vote_consent_hint": {
-    "message": "Váš hlas se nezapočítá a neprojeví se v počtech nelíbí se. Zapněte sdílení hlasů, aby se započítal."
+    "message": "Váš hlas zatím není započítán. Firefox nově vyžaduje vaše svolení, než ho RYD bude moci odeslat. Toto svolení platí jen pro YouTube, ne pro jiné webové stránky."
   },
   "vote_not_counted": {
     "message": "Vaše hlasy se nezapočítávají a neprojeví se v počtech nelíbí se."
@@ -1098,12 +1098,15 @@
     "message": "Nejprve zapněte počty nelíbí se v běžném okně. Anonymní okna zobrazují pouze počty."
   },
   "data_consent_reason": {
-    "message": "Firefox potřebuje vaše svolení, než bude RYD moci zobrazit počty nelíbí se a započítávat vaše líbí se a nelíbí se."
+    "message": "Firefox nově vyžaduje, aby se vás každé rozšíření zeptalo, než bude sdílet jakákoli data. Povolte RYD zobrazovat počty nelíbí se a započítávat vaše hlasy. Toto oprávnění platí jen pro YouTube, ne pro jiné webové stránky."
   },
   "data_consent_title": {
     "message": "Zobrazte počty nelíbí se a ať se vaše hlasy počítají"
   },
   "data_consent_body": {
-    "message": "RYD odesílá ID videa, aby načetl počty nelíbí se. Povolením navíc sdílíte počet líbí se, který vidíte, pro zlepšení odhadů, a své líbí se, nelíbí se a reakce na komentáře s náhodným hlasovacím ID, aby se počítaly."
+    "message": "Firefox nově vyžaduje, aby se vás každé rozšíření zeptalo, než bude sdílet jakákoli data. Pro všechna rozšíření používá stejná obecná označení. Pro RYD znamenají jednotlivá označení toto:"
+  },
+  "data_consent_scope": {
+    "message": "RYD funguje jen na YouTube. Povolením mu nedáte přístup k žádným jiným webovým stránkám."
   }
 }

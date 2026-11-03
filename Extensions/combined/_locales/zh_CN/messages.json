@@ -981,7 +981,7 @@
     "message": "让您的评价被计入"
   },
   "consent_vote_body": {
-    "message": "未开启评价分享时，您的喜欢和不喜欢不会被计入，也不会体现在不喜欢数中。分享会发送您的评价和看到的喜欢数。分享评价需要启用不喜欢数，因此如果它处于关闭状态，Firefox 也会请求将其开启。"
+    "message": "Firefox 现在要求每个扩展在分享任何数据前都先询问您。请允许此项，以便 RYD 计入您的喜欢、不喜欢和评论回应。此权限仅适用于 YouTube，不涉及其他网站。"
   },
   "consent_account_title": {
     "message": "选择账户权限"
@@ -1020,7 +1020,7 @@
     "message": "浏览活动"
   },
   "consent_browsing_body": {
-    "message": "用于加载不喜欢数和讨论的 YouTube 视频 ID。您可以选择是否允许。"
+    "message": "仅限您打开的 YouTube 视频的 ID，用于加载该视频的不喜欢数和 RYD 评论。绝不包括您的浏览历史或其他网站。"
   },
   "consent_content_label": {
     "message": "网站内容"
@@ -1032,7 +1032,7 @@
     "message": "网站活动"
   },
   "consent_activity_body": {
-    "message": "您的喜欢、不喜欢、撤销的评价以及对 RYD 评论的回应，连同已保存的随机投票 ID 一起发送。"
+    "message": "您在 YouTube 上的喜欢、不喜欢和 RYD 评论回应，以便计入。连同一个未与您的 Google 或 YouTube 账户关联的随机 ID 一起发送。"
   },
   "consent_identity_label": {
     "message": "个人身份信息"
@@ -1050,7 +1050,7 @@
     "message": "RYD 不收集 youtube.com 以外的任何内容，也不会访问您的 YouTube 账户。除非您登录，否则不会收到您的姓名或电子邮件。"
   },
   "consent_settings": {
-    "message": "您可稍后在 Firefox 的扩展设置中更改可选权限。"
+    "message": "您可以随时在 Firefox 的附加组件设置（about:addons）中更改这些权限。"
   },
   "consent_private_counts": {
     "message": "隐私窗口仅显示计数，使用在普通窗口中启用的权限。无法在隐私窗口中投票、登录、使用 Premium 分析或参与讨论。"
@@ -1065,7 +1065,7 @@
     "message": "谢谢。您的评价现在会被计入。"
   },
   "vote_consent_hint": {
-    "message": "您的评价不会被计入，也不会体现在不喜欢数中。开启评价分享即可计入。"
+    "message": "您的评价尚未计入。Firefox 现在要求 RYD 在发送评价前先获得您的许可。此权限仅适用于 YouTube，不涉及其他网站。"
   },
   "vote_not_counted": {
     "message": "您的喜欢和不喜欢不会被计入，也不会体现在不喜欢数中。"
@@ -1098,12 +1098,15 @@
     "message": "请先在普通窗口中启用不喜欢数。隐私窗口仅显示计数。"
   },
   "data_consent_reason": {
-    "message": "Firefox 需要您的许可，RYD 才能显示不喜欢数并计入您的喜欢和不喜欢。"
+    "message": "Firefox 现在要求每个扩展在分享任何数据前都先询问您。请允许 RYD 显示不喜欢数并计入您的评价。此权限仅适用于 YouTube，不涉及其他网站。"
   },
   "data_consent_title": {
     "message": "显示不喜欢数，让您的评价被计入"
   },
   "data_consent_body": {
-    "message": "RYD 会发送视频 ID 以加载不喜欢数。允许后，还会分享您看到的喜欢数以改进估算，并将您的喜欢、不喜欢和评论回应连同随机投票 ID 一起发送，使其被计入。"
+    "message": "Firefox 现在要求每个扩展在分享任何数据前都先询问您。它对所有扩展使用相同的宽泛类别名称，因此以下说明各类别对 RYD 的含义："
+  },
+  "data_consent_scope": {
+    "message": "RYD 只在 YouTube 上运行。允许后，它也不会获得任何其他网站的访问权限。"
   }
 }

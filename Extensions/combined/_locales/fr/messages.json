@@ -981,7 +981,7 @@
     "message": "Faites compter vos votes"
   },
   "consent_vote_body": {
-    "message": "Sans le partage des votes, vos « J’aime » et « Je n’aime pas » ne sont pas comptés et n’apparaissent pas dans les compteurs de « Je n’aime pas ». Le partage envoie vos votes et le nombre de « J’aime » affiché. Il nécessite les compteurs de « Je n’aime pas » : Firefox vous demandera donc aussi de les activer s’ils sont désactivés."
+    "message": "Firefox exige désormais que chaque extension vous demande votre accord avant de partager des données. Acceptez pour que RYD puisse compter vos « J’aime », « Je n’aime pas » et réactions aux commentaires. Cette autorisation ne concerne que YouTube, pas les autres sites web."
   },
   "consent_account_title": {
     "message": "Choisir les autorisations du compte"
@@ -1020,7 +1020,7 @@
     "message": "Activité de navigation"
   },
   "consent_browsing_body": {
-    "message": "L’identifiant de la vidéo YouTube utilisé pour charger les compteurs de « Je n’aime pas » et les discussions. Vous choisissez de l’autoriser ou non."
+    "message": "Uniquement l’identifiant de la vidéo YouTube ouverte, pour charger ses « Je n’aime pas » et commentaires RYD. Jamais votre historique de navigation ni d’autres sites web."
   },
   "consent_content_label": {
     "message": "Contenu des sites web"
@@ -1032,7 +1032,7 @@
     "message": "Activité sur les sites web"
   },
   "consent_activity_body": {
-    "message": "Vos « J’aime », « Je n’aime pas », votes retirés et réactions aux commentaires RYD, envoyés avec un identifiant de vote aléatoire enregistré."
+    "message": "Vos « J’aime », « Je n’aime pas » et réactions aux commentaires RYD sur YouTube, pour qu’ils comptent. Envoyés avec un identifiant aléatoire qui n’est pas lié à votre compte Google ou YouTube."
   },
   "consent_identity_label": {
     "message": "Informations d’identification personnelle"
@@ -1050,7 +1050,7 @@
     "message": "RYD ne collecte rien en dehors de youtube.com et n’accède pas à votre compte YouTube. Aucun nom ni e-mail n’est reçu sans connexion."
   },
   "consent_settings": {
-    "message": "Vous pouvez modifier les autorisations facultatives plus tard dans les paramètres de l’extension dans Firefox."
+    "message": "Vous pouvez modifier ces autorisations à tout moment dans les modules complémentaires de Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "Les fenêtres privées affichent uniquement les compteurs, avec l’autorisation activée dans une fenêtre normale. Les votes, la connexion, les analyses Premium et les discussions n’y sont pas disponibles."
@@ -1065,7 +1065,7 @@
     "message": "Merci. Vos votes comptent désormais."
   },
   "vote_consent_hint": {
-    "message": "Votre vote n’est pas compté et n’apparaîtra pas dans les compteurs de « Je n’aime pas ». Activez le partage des votes pour qu’il compte."
+    "message": "Votre vote n’est pas encore compté. Firefox exige désormais votre autorisation avant que RYD puisse l’envoyer. Cette autorisation ne concerne que YouTube, pas les autres sites web."
   },
   "vote_not_counted": {
     "message": "Vos « J’aime » et « Je n’aime pas » ne sont pas comptés et n’apparaissent pas dans les compteurs de « Je n’aime pas »."
@@ -1098,12 +1098,15 @@
     "message": "Activez d’abord les compteurs de « Je n’aime pas » dans une fenêtre normale. Les fenêtres privées affichent uniquement les compteurs."
   },
   "data_consent_reason": {
-    "message": "Firefox a besoin de votre autorisation pour que RYD puisse afficher les compteurs de « Je n’aime pas » et comptabiliser vos « J’aime » et « Je n’aime pas »."
+    "message": "Firefox exige désormais que chaque extension vous demande votre accord avant de partager des données. Autorisez RYD à afficher les « Je n’aime pas » et à compter vos votes. Cette autorisation ne concerne que YouTube, pas les autres sites web."
   },
   "data_consent_title": {
     "message": "Affichez les « Je n’aime pas » et faites compter vos votes"
   },
   "data_consent_body": {
-    "message": "RYD envoie l’identifiant de la vidéo pour charger les compteurs de « Je n’aime pas ». Si vous l’autorisez, il partage aussi le nombre de « J’aime » affiché, pour améliorer les estimations, ainsi que vos « J’aime », « Je n’aime pas » et réactions aux commentaires avec un identifiant de vote aléatoire, pour qu’ils comptent."
+    "message": "Firefox exige désormais que chaque extension vous demande votre accord avant de partager des données. Il utilise les mêmes libellés généraux pour toutes les extensions. Voici donc ce que chacun signifie pour RYD :"
+  },
+  "data_consent_scope": {
+    "message": "RYD ne fonctionne que sur YouTube. L’autoriser ne lui donne accès à aucun autre site web."
   }
 }

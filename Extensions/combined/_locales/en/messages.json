@@ -791,7 +791,7 @@
     "message": "Make your votes count"
   },
   "consent_vote_body": {
-    "message": "Without vote sharing, your likes and dislikes aren't counted and won't show in dislike counts. Sharing sends your votes and the like count you see. It needs dislike counts, so Firefox also asks to turn them on if they are off."
+    "message": "Firefox now requires every extension to ask you before sharing any data. Allow it so RYD can count your likes, dislikes and comment reactions. This permission covers YouTube only, not other websites."
   },
   "consent_account_title": {
     "message": "Choose account permissions"
@@ -830,7 +830,7 @@
     "message": "Browsing activity"
   },
   "consent_browsing_body": {
-    "message": "The YouTube video ID used to load dislike counts and discussions. You choose whether to allow this."
+    "message": "Only the ID of the YouTube video you open, to load its dislikes and RYD comments. Never your browsing history or other websites."
   },
   "consent_content_label": {
     "message": "Website content"
@@ -842,7 +842,7 @@
     "message": "Website activity"
   },
   "consent_activity_body": {
-    "message": "Your likes, dislikes, removed votes and reactions to RYD comments, sent with a saved random voting ID."
+    "message": "Your likes, dislikes and RYD comment reactions on YouTube, so they count. Sent with a random ID that isn't linked to your Google or YouTube account."
   },
   "consent_identity_label": {
     "message": "Personally identifying information"
@@ -860,7 +860,7 @@
     "message": "RYD collects nothing outside youtube.com and does not access your YouTube account. It receives no name or email unless you sign in."
   },
   "consent_settings": {
-    "message": "You can change optional permissions later in Firefox’s extension settings."
+    "message": "You can change these permissions at any time in Firefox’s add-on settings (about:addons)."
   },
   "consent_private_counts": {
     "message": "Private windows show counts only, using the permission enabled in a regular window. Voting, sign-in, Premium analytics and discussions are unavailable there."
@@ -875,7 +875,7 @@
     "message": "Thank you. Your votes now count."
   },
   "vote_consent_hint": {
-    "message": "Your vote isn't counted and won't show in dislike counts. Turn on vote sharing to make it count."
+    "message": "Your vote isn't counted yet. Firefox now requires your permission before RYD can send it. This permission covers YouTube only, not other websites."
   },
   "vote_not_counted": {
     "message": "Your likes and dislikes aren't counted and won't show in dislike counts."
@@ -908,12 +908,15 @@
     "message": "Enable dislike counts in a regular window first. Private windows show counts only."
   },
   "data_consent_reason": {
-    "message": "Firefox needs your permission before RYD can show dislike counts and count your likes and dislikes."
+    "message": "Firefox now requires every extension to ask you before sharing any data. Allow RYD to show dislikes and count your votes. This permission covers YouTube only, not other websites."
   },
   "data_consent_title": {
     "message": "Show dislikes and make your votes count"
   },
   "data_consent_body": {
-    "message": "RYD sends the video ID to load dislike counts. Allowing also shares the like count you see, to improve estimates, and your likes, dislikes and comment reactions with a random voting ID, so they count."
+    "message": "Firefox now requires every extension to ask you before sharing any data. It uses the same broad labels for every extension, so here’s what each one means for RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD only works on YouTube. Allowing this doesn’t give it access to any other website."
   }
 }

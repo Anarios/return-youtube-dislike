@@ -981,7 +981,7 @@
     "message": "Számítsanak a szavazataid"
   },
   "consent_vote_body": {
-    "message": "Szavazatmegosztás nélkül a szavazataid nem számítanak, és nem jelennek meg a nemtetszések számában. A megosztás elküldi a szavazataidat és a látható tetszésszámot. Ehhez szükség van a nemtetszések számára, ezért ha ki van kapcsolva, a Firefox annak bekapcsolását is kéri."
+    "message": "A Firefox mostantól előírja minden kiegészítőnek, hogy kérdezzen meg, mielőtt bármilyen adatot megosztana. Engedélyezd, hogy az RYD beszámíthassa a tetszéseidet, nemtetszéseidet és hozzászólásreakcióidat. Ez az engedély csak a YouTube-ra vonatkozik, más webhelyekre nem."
   },
   "consent_account_title": {
     "message": "Fiókengedélyek kiválasztása"
@@ -1020,7 +1020,7 @@
     "message": "Böngészési tevékenység"
   },
   "consent_browsing_body": {
-    "message": "A nemtetszések számának és a beszélgetéseknek a betöltéséhez használt YouTube-videóazonosító. Te döntöd el, hogy ezt engedélyezed-e."
+    "message": "Csak a megnyitott YouTube-videó azonosítója, a hozzá tartozó nemtetszések és RYD-hozzászólások betöltéséhez. Soha a böngészési előzményeid vagy más webhelyek."
   },
   "consent_content_label": {
     "message": "Webhelytartalom"
@@ -1032,7 +1032,7 @@
     "message": "Webhelytevékenység"
   },
   "consent_activity_body": {
-    "message": "A tetszéseid, nemtetszéseid, visszavont szavazataid és az RYD-hozzászólásokra adott reakcióid, mentett véletlenszerű szavazási azonosítóval elküldve."
+    "message": "A tetszéseid, nemtetszéseid és az RYD-hozzászólásokra adott reakcióid a YouTube-on, hogy beszámítsanak. Véletlenszerű azonosítóval küldjük őket, amely nem kapcsolódik a Google- vagy YouTube-fiókodhoz."
   },
   "consent_identity_label": {
     "message": "Személyazonosításra alkalmas adatok"
@@ -1050,7 +1050,7 @@
     "message": "Az RYD a youtube.com oldalon kívül semmit nem gyűjt, és nem fér hozzá a YouTube-fiókodhoz. Bejelentkezés nélkül nevet és e-mail-címet sem kap."
   },
   "consent_settings": {
-    "message": "A választható engedélyeket később a Firefox kiegészítőbeállításaiban módosíthatod."
+    "message": "Ezeket az engedélyeket bármikor módosíthatod a Firefox kiegészítőbeállításaiban (about:addons)."
   },
   "consent_private_counts": {
     "message": "A privát ablakok csak a számlálókat jelenítik meg, a normál ablakban engedélyezett jogosultsággal. Szavazás, bejelentkezés, Premium elemzések és beszélgetések ott nem érhetők el."
@@ -1065,7 +1065,7 @@
     "message": "Köszönjük. A szavazataid mostantól számítanak."
   },
   "vote_consent_hint": {
-    "message": "A szavazatod nem számít, és nem jelenik meg a nemtetszések számában. Kapcsold be a szavazatok megosztását, hogy számítson."
+    "message": "A szavazatod még nem számít. A Firefox mostantól megköveteli az engedélyedet, mielőtt az RYD elküldhetné. Ez az engedély csak a YouTube-ra vonatkozik, más webhelyekre nem."
   },
   "vote_not_counted": {
     "message": "A szavazataid nem számítanak, és nem jelennek meg a nemtetszések számában."
@@ -1098,12 +1098,15 @@
     "message": "Először egy normál ablakban engedélyezd a nemtetszések számát. A privát ablakok csak a számlálókat jelenítik meg."
   },
   "data_consent_reason": {
-    "message": "A Firefox az engedélyedet kéri, mielőtt az RYD megjeleníthetné a nemtetszések számát és beszámíthatná a tetszéseidet és nemtetszéseidet."
+    "message": "A Firefox mostantól előírja minden kiegészítőnek, hogy kérdezzen meg, mielőtt bármilyen adatot megosztana. Engedélyezd, hogy az RYD mutassa a nemtetszéseket és beszámítsa a szavazataidat. Ez az engedély csak a YouTube-ra vonatkozik, más webhelyekre nem."
   },
   "data_consent_title": {
     "message": "Lásd a nemtetszéseket, és számítsanak a szavazataid"
   },
   "data_consent_body": {
-    "message": "Az RYD elküldi a videó azonosítóját a nemtetszések számának betöltéséhez. Ha engedélyezed, megosztja a látott tetszésszámot is a becslések pontosításához, valamint a tetszéseidet, nemtetszéseidet és a hozzászólásokra adott reakcióidat egy véletlenszerű szavazási azonosítóval, hogy beszámítsanak."
+    "message": "A Firefox mostantól előírja minden kiegészítőnek, hogy kérdezzen meg, mielőtt bármilyen adatot megosztana. Minden kiegészítőnél ugyanazokat a tág címkéket használja, ezért íme, mit jelent az RYD-nél mindegyik címke:"
+  },
+  "data_consent_scope": {
+    "message": "Az RYD csak a YouTube-on működik. Az engedélyezéssel nem kap hozzáférést egyetlen más webhelyhez sem."
   }
 }

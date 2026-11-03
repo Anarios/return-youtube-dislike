@@ -71,7 +71,13 @@ describe("Firefox welcome opt-ins", () => {
     expect(byId("ryd-hero-eyebrow").textContent).toBe(text("changelog_hero_eyebrow_counts_off"));
     expect(byId("ryd-hero-body").textContent).toBe(text("changelog_hero_body_counts_off"));
     expect(byId("ryd-firefox-consent-title").textContent).toBe(text("data_consent_title"));
-    expect(byId("ryd-firefox-consent-title").nextElementSibling.textContent).toBe(text("data_consent_body"));
+    const scope = byId("ryd-firefox-consent-title").nextElementSibling;
+    expect(scope.textContent).toBe(text("data_consent_scope"));
+    expect(scope.nextElementSibling.textContent).toBe(text("data_consent_body"));
+    expect(
+      [...document.querySelectorAll("#ryd-firefox-consent-permissions dt")].map((term) => term.textContent),
+    ).toEqual(["consent_browsing_label", "consent_activity_label", "consent_content_label"].map(text));
+    expect(byId("ryd-firefox-consent-permissions").nextElementSibling.textContent).toBe(text("consent_settings"));
     expect(byId("ryd-firefox-consent-allow").textContent.trim()).toBe(text("consent_allow"));
     expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
     expect(byId("ryd-firefox-consent-status").textContent).toBe("");

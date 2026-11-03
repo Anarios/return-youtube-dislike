@@ -981,7 +981,7 @@
     "message": "Låt dina röster räknas"
   },
   "consent_vote_body": {
-    "message": "Utan röstdelning räknas dina gilla och ogilla inte och syns inte i antalet ogilla. Delningen skickar dina röster och antalet gilla du ser. Den kräver antalet ogilla, så Firefox ber också om att aktivera det om det är avstängt."
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Tillåt det så att RYD kan räkna dina gilla, ogilla och reaktioner på kommentarer. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
   },
   "consent_account_title": {
     "message": "Välj kontobehörigheter"
@@ -1020,7 +1020,7 @@
     "message": "Surfaktivitet"
   },
   "consent_browsing_body": {
-    "message": "YouTube-videons ID som används för att läsa in antalet ogilla och diskussioner. Du väljer om du vill tillåta detta."
+    "message": "Bara ID:t för YouTube-videon som du öppnar, för att läsa in dess ogilla och RYD-kommentarer. Aldrig din surfhistorik eller andra webbplatser."
   },
   "consent_content_label": {
     "message": "Webbplatsinnehåll"
@@ -1032,7 +1032,7 @@
     "message": "Webbplatsaktivitet"
   },
   "consent_activity_body": {
-    "message": "Dina gilla, ogilla, borttagna röster och reaktioner på RYD-kommentarer, skickade med ett sparat slumpmässigt röstnings-ID."
+    "message": "Dina gilla, ogilla och reaktioner på RYD-kommentarer på YouTube, så att de räknas. Skickas med ett slumpmässigt ID som inte är kopplat till ditt Google- eller YouTube-konto."
   },
   "consent_identity_label": {
     "message": "Personligt identifierbar information"
@@ -1050,7 +1050,7 @@
     "message": "RYD samlar inget utanför youtube.com och kommer inte åt ditt YouTube-konto. Inget namn eller e-post tas emot om du inte loggar in."
   },
   "consent_settings": {
-    "message": "Du kan ändra valfria behörigheter senare i Firefox inställningar för tillägget."
+    "message": "Du kan när som helst ändra de här behörigheterna i Firefox tilläggsinställningar (about:addons)."
   },
   "consent_private_counts": {
     "message": "Privata fönster visar bara antalet med behörigheten som aktiverats i ett vanligt fönster. Röstning, inloggning, Premium-analys och diskussioner är inte tillgängliga där."
@@ -1065,7 +1065,7 @@
     "message": "Tack. Dina röster räknas nu."
   },
   "vote_consent_hint": {
-    "message": "Din röst räknas inte och syns inte i antalet ogilla. Aktivera röstdelning så att den räknas."
+    "message": "Din röst räknas inte än. Firefox kräver nu ditt tillstånd innan RYD kan skicka den. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
   },
   "vote_not_counted": {
     "message": "Dina gilla och ogilla räknas inte och syns inte i antalet ogilla."
@@ -1098,12 +1098,15 @@
     "message": "Aktivera först antalet ogilla i ett vanligt fönster. Privata fönster visar bara antalet."
   },
   "data_consent_reason": {
-    "message": "Firefox behöver ditt tillstånd innan RYD kan visa antalet ogilla och räkna dina gilla och ogilla."
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Tillåt RYD att visa ogilla och räkna dina röster. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
   },
   "data_consent_title": {
     "message": "Visa ogilla och låt dina röster räknas"
   },
   "data_consent_body": {
-    "message": "RYD skickar videons ID för att läsa in antalet ogilla. Om du tillåter det delas även antalet gilla som du ser, för att förbättra uppskattningar, och dina gilla, ogilla och reaktioner på kommentarer med ett slumpmässigt röstnings-ID, så att de räknas."
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Samma breda etiketter används för alla tillägg. Det här betyder varje etikett för RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD fungerar bara på YouTube. Att tillåta detta ger inte RYD åtkomst till någon annan webbplats."
   }
 }

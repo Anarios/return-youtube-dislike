@@ -49,7 +49,15 @@ describe("combined Firefox data consent card in the popup", () => {
     const section = document.getElementById("ryd-counts-consent");
     expect(section.hidden).toBe(false);
     expect(section.querySelector("h2").textContent).toBe("__MSG_data_consent_title__");
+    expect(section.querySelector("h2").nextElementSibling.textContent).toBe("__MSG_data_consent_scope__");
     expect(document.getElementById("ryd-counts-consent-description").textContent).toBe("__MSG_data_consent_body__");
+    expect(document.getElementById("ryd-counts-consent-allow").getAttribute("aria-describedby")).toBe(
+      "ryd-counts-consent-scope ryd-counts-consent-description",
+    );
+    expect(
+      [...document.querySelectorAll("#ryd-counts-consent-permissions dt")].map((term) => term.textContent),
+    ).toEqual(["consent_browsing_label", "consent_activity_label", "consent_content_label"]);
+    expect(section.querySelector(".ryd-counts-consent-note").textContent).toBe("__MSG_consent_settings__");
     expect(document.getElementById("ryd-counts-consent-allow").textContent.trim()).toBe("__MSG_consent_allow__");
     expect(document.getElementById("ryd-counts-consent-dismiss").textContent.trim()).toBe("__MSG_consent_not_now__");
     expect(document.body.classList.contains("ryd-counts-consent-open")).toBe(true);

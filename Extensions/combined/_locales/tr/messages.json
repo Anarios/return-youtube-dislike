@@ -981,7 +981,7 @@
     "message": "Oylarınız sayılsın"
   },
   "consent_vote_body": {
-    "message": "Oy paylaşımı olmadan beğeni ve beğenmeme oylarınız sayılmaz ve beğenmeme sayılarında görünmez. Paylaşım, oylarınızı ve gördüğünüz beğeni sayısını gönderir. Beğenmeme sayılarını gerektirir, bu yüzden kapalıysa Firefox bunları açmak için de izin isteyecektir."
+    "message": "Firefox artık her uzantının herhangi bir veriyi paylaşmadan önce size sormasını zorunlu kılıyor. RYD’nin beğenilerinizi, beğenmemelerinizi ve yorum tepkilerinizi sayabilmesi için izin verin. Bu izin yalnızca YouTube’u kapsar, diğer web sitelerini kapsamaz."
   },
   "consent_account_title": {
     "message": "Hesap izinlerini seçin"
@@ -1020,7 +1020,7 @@
     "message": "Gezinme etkinliği"
   },
   "consent_browsing_body": {
-    "message": "Beğenmeme sayılarını ve tartışmaları yüklemek için kullanılan YouTube video kimliği. Buna izin verip vermemeyi siz seçersiniz."
+    "message": "Yalnızca açtığınız YouTube videosunun kimliği, beğenmemelerini ve RYD yorumlarını yüklemek için. Gezinme geçmişiniz veya diğer web siteleri asla dahil edilmez."
   },
   "consent_content_label": {
     "message": "Web sitesi içeriği"
@@ -1032,7 +1032,7 @@
     "message": "Web sitesi etkinliği"
   },
   "consent_activity_body": {
-    "message": "Kayıtlı rastgele bir oylama kimliğiyle gönderilen beğenileriniz, beğenmemeleriniz, geri aldığınız oylar ve RYD yorumlarına tepkileriniz."
+    "message": "YouTube’daki beğenileriniz, beğenmemeleriniz ve RYD yorumlarına tepkileriniz, sayılmaları için. Google veya YouTube hesabınızla bağlantılı olmayan rastgele bir kimlikle gönderilir."
   },
   "consent_identity_label": {
     "message": "Kişisel kimlik bilgileri"
@@ -1050,7 +1050,7 @@
     "message": "RYD youtube.com dışında hiçbir şey toplamaz ve YouTube hesabınıza erişmez. Giriş yapmadığınız sürece ad veya e-posta almaz."
   },
   "consent_settings": {
-    "message": "İsteğe bağlı izinleri daha sonra Firefox’un eklenti ayarlarından değiştirebilirsiniz."
+    "message": "Bu izinleri istediğiniz zaman Firefox’un eklenti ayarlarından (about:addons) değiştirebilirsiniz."
   },
   "consent_private_counts": {
     "message": "Gizli pencerelerde, normal bir pencerede etkinleştirilen izin kullanılarak yalnızca sayılar gösterilir. Oy verme, giriş, Premium analizler ve tartışmalar burada kullanılamaz."
@@ -1065,7 +1065,7 @@
     "message": "Teşekkürler. Oylarınız artık sayılıyor."
   },
   "vote_consent_hint": {
-    "message": "Oyunuz sayılmıyor ve beğenmeme sayılarında görünmeyecek. Sayılması için oy paylaşımını açın."
+    "message": "Oyunuz henüz sayılmadı. Firefox artık RYD’nin oyunuzu gönderebilmesi için izninizi gerektiriyor. Bu izin yalnızca YouTube’u kapsar, diğer web sitelerini kapsamaz."
   },
   "vote_not_counted": {
     "message": "Beğeni ve beğenmeme oylarınız sayılmıyor ve beğenmeme sayılarında görünmüyor."
@@ -1098,12 +1098,15 @@
     "message": "Önce normal bir pencerede beğenmeme sayılarını etkinleştirin. Gizli pencerelerde yalnızca sayılar gösterilir."
   },
   "data_consent_reason": {
-    "message": "Firefox, RYD’nin beğenmeme sayılarını gösterebilmesi ve beğenilerinizi ve beğenmemelerinizi sayabilmesi için izninizi istiyor."
+    "message": "Firefox artık her uzantının herhangi bir veriyi paylaşmadan önce size sormasını zorunlu kılıyor. RYD’nin beğenmemeleri göstermesine ve oylarınızı saymasına izin verin. Bu izin yalnızca YouTube’u kapsar, diğer web sitelerini kapsamaz."
   },
   "data_consent_title": {
     "message": "Beğenmemeleri gösterin ve oylarınız sayılsın"
   },
   "data_consent_body": {
-    "message": "RYD, beğenmeme sayılarını yüklemek için video kimliğini gönderir. İzin verirseniz tahminleri iyileştirmek için gördüğünüz beğeni sayısı ve sayılmaları için beğenileriniz, beğenmemeleriniz ve yorum tepkileriniz de rastgele bir oylama kimliğiyle paylaşılır."
+    "message": "Firefox artık her uzantının herhangi bir veriyi paylaşmadan önce size sormasını zorunlu kılıyor. Tüm uzantılar için aynı genel etiketleri kullandığından, her birinin RYD için anlamı şöyle:"
+  },
+  "data_consent_scope": {
+    "message": "RYD yalnızca YouTube’da çalışır. Buna izin vermek, RYD’ye başka hiçbir web sitesine erişim sağlamaz."
   }
 }

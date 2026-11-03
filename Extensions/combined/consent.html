@@ -18,25 +18,14 @@
         <button id="consent-decline" type="button">__MSG_consent_not_now__</button>
       </div>
       <p id="consent-status" role="status"></p>
-      <details id="permission-details">
-        <summary>__MSG_consent_details_summary__</summary>
+      <section id="permission-details" aria-labelledby="permission-details-title">
+        <h2 id="permission-details-title">__MSG_consent_details_summary__</h2>
         <p>__MSG_consent_details_intro__</p>
-        <dl>
-          <dt>__MSG_consent_browsing_label__</dt>
-          <dd>__MSG_consent_browsing_body__</dd>
-          <dt>__MSG_consent_content_label__</dt>
-          <dd>__MSG_consent_content_body__</dd>
-          <dt>__MSG_consent_activity_label__</dt>
-          <dd>__MSG_consent_activity_body__</dd>
-          <dt>__MSG_consent_identity_label__</dt>
-          <dd>__MSG_consent_identity_body__</dd>
-          <dt>__MSG_consent_auth_label__</dt>
-          <dd>__MSG_consent_auth_body__</dd>
-        </dl>
+        <dl id="permission-list"></dl>
         <p>__MSG_consent_voter_timing__</p>
         <p>__MSG_consent_scope__</p>
         <p>__MSG_consent_settings__</p>
-      </details>
+      </section>
     </main>
   </body>
 </html>

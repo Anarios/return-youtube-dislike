@@ -535,6 +535,32 @@ figure {
   color: var(--ryd-text-muted);
 }
 
+.ryd-callout__scope {
+  width: fit-content;
+  max-width: 40em;
+  margin: 12px 0;
+  padding: 10px 14px;
+  border: 1px solid var(--ryd-red-line);
+  border-radius: var(--ryd-radius-sm);
+  background: var(--ryd-red-soft);
+  font-weight: 600;
+}
+
+.ryd-callout__list {
+  max-width: 40em;
+  margin: 16px 0 0;
+}
+
+.ryd-callout__list dt {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.ryd-callout__list dd {
+  margin: 2px 0 0;
+  color: var(--ryd-text-muted);
+}
+
 .ryd-footer {
   display: flex;
   flex-wrap: wrap;
