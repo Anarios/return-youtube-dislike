@@ -24,7 +24,7 @@
     "message": "高評価/低評価のアイコンにカスタムカラーを使用します。"
   },
   "considerDonating": {
-    "message": "この拡張機能を存続させることができるのは,皆様からの寄付だけです。"
+    "message": "この拡張機能を支えているのは、皆様からの寄付だけです。プロジェクトへのご支援をご検討ください。"
   },
   "customColors": {
     "message": "低評価ボタンとバーの色のカスタマイズ"
@@ -72,7 +72,7 @@
     "message": "ヘルプ"
   },
   "linkWebsite": {
-    "message": "Web サイト"
+    "message": "ウェブサイト"
   },
   "numberFormat": {
     "message": "数値形式："
@@ -90,7 +90,7 @@
     "message": "Patreon のメンバーシップ情報は、Premium 機能の利用資格を確認するために使用されます。カード情報や銀行口座情報は受け取りません。"
   },
   "paidFeaturesWhy": {
-    "message": "低評価数はこれからも誰でも無料で確認できます。有料の追加機能は、それを支えるサーバーの費用に充てられています。15 TB を超えるデータと1日約2,000万人のユーザーを、月数百ドルの予算で支えています。"
+    "message": "低評価数はこれからも誰でも無料で確認できます。有料の追加機能の収益は、それを支えるサーバーの費用に充てられています。15 TB を超えるデータを保管し、1日約2,000万人のユーザーに対応するサーバーを、月数百ドルの予算で運営しています。"
   },
   "githubLoggedOutMessage": {
     "message": "Premium 機能は GitHub 貢献者向けに提供されています。"
@@ -252,7 +252,7 @@
     "message": "パーセント表示モード："
   },
   "tooltipPercentageModeHover": {
-    "message": "ホバー時にカスタムのパーセント表示を使用する。"
+    "message": "ホバー時にカスタムのパーセント表示を使用します。"
   },
   "version30installed": {
     "message": "バージョン __RYD_VERSION__ がインストールされました。"
@@ -303,10 +303,10 @@
     "message": "データ期間"
   },
   "premiumAnalytics_windowLatest": {
-    "message": "直近の日数"
+    "message": "直近の期間"
   },
   "premiumAnalytics_windowFirst": {
-    "message": "初期の日数"
+    "message": "最初の期間"
   },
   "premiumAnalytics_windowLatestTitle": {
     "message": "選択した期間内の直近の日を表示"
@@ -321,22 +321,22 @@
     "message": "全期間"
   },
   "premiumAnalytics_windowSummaryLast": {
-    "message": "直近$1"
+    "message": "直近 $1"
   },
   "premiumAnalytics_windowSummaryFirst": {
-    "message": "最初の$1"
+    "message": "最初の $1"
   },
   "premiumAnalytics_daysSingular": {
-    "message": "$1日"
+    "message": "$1 日"
   },
   "premiumAnalytics_daysPlural": {
-    "message": "$1日"
+    "message": "$1 日"
   },
   "premiumAnalytics_rangeLabelAllTime": {
     "message": "全期間"
   },
   "premiumAnalytics_rangeLabelDays": {
-    "message": "$1日"
+    "message": "$1 日"
   },
   "premiumAnalytics_selectedPeriod": {
     "message": "選択期間: $1"
@@ -345,40 +345,40 @@
     "message": "拡張機能ユーザー"
   },
   "premiumAnalytics_totalsLikes": {
-    "message": "$1件の高評価"
+    "message": "$1 件の高評価"
   },
   "premiumAnalytics_totalsDislikes": {
-    "message": "$1件の低評価"
+    "message": "$1 件の低評価"
   },
   "premiumAnalytics_summaryMeta": {
-    "message": "$2か国から$3個の一意 IP で$1件のインタラクションを取得"
+    "message": "$2 か国・$3 個のユニーク IP アドレスから $1 件のインタラクションを記録"
   },
   "premiumAnalytics_bucketHour": {
-    "message": "1時間あたりの投票数"
+    "message": "1 時間あたりの投票数"
   },
   "premiumAnalytics_bucketDay": {
-    "message": "1日あたりの投票数"
+    "message": "1 日あたりの投票数"
   },
   "premiumAnalytics_bucketWeek": {
-    "message": "1週間あたりの投票数"
+    "message": "1 週間あたりの投票数"
   },
   "premiumAnalytics_bucketHours": {
-    "message": "$1時間ごとの投票数"
+    "message": "$1 時間ごとの投票数"
   },
   "premiumAnalytics_bucketDays": {
-    "message": "$1日ごとの投票数"
+    "message": "$1 日ごとの投票数"
   },
   "premiumAnalytics_bucketMinutes": {
-    "message": "$1分ごとの投票数"
+    "message": "$1 分ごとの投票数"
   },
   "premiumAnalytics_bucketMinute": {
-    "message": "1分あたりの投票数"
+    "message": "1 分あたりの投票数"
   },
   "premiumAnalytics_bucketSeconds": {
-    "message": "$1秒ごとの投票数"
+    "message": "$1 秒ごとの投票数"
   },
   "premiumAnalytics_bucketSecond": {
-    "message": "1秒あたりの投票数"
+    "message": "1 秒あたりの投票数"
   },
   "premiumAnalytics_noData": {
     "message": "データはまだありません"
@@ -525,13 +525,13 @@
     "message": "プレースホルダー: 各国のリーダーボード"
   },
   "changelog_upgrade_step1": {
-    "message": "「Return YouTube Dislike」ポップアップを開き、Patreon にサインインします。"
+    "message": "Return YouTube Dislike のポップアップを開き、Patreon でログインします。"
   },
   "changelog_support_heading": {
     "message": "お困りですか？"
   },
   "changelog_support_description": {
-    "message": "問題が発生した場合は、サポートドキュメントやコミュニティでお気軽に質問してください。"
+    "message": "問題が発生した場合は、サポートドキュメントを確認するか、コミュニティでお気軽に質問してください。"
   },
   "changelog_support_contact": {
     "message": "コミュニティに質問する"
@@ -948,19 +948,19 @@
     "message": "ささやかな、少し気まずいお願い"
   },
   "changelog_appeal_intro": {
-    "message": "こんにちは。ここはお金の話をするところです。正直なところ、あまり得意ではありません。"
+    "message": "こんにちは。ここからは、お金の話をさせてください。正直に言うと、こういう話はあまり得意ではありません。"
   },
   "changelog_appeal_costs": {
     "message": "Return YouTube Dislike は、Dmitry Selivanov とコミュニティが作っている小さなオープンソースプロジェクトです。毎日約2,000万人にご利用いただき、15 TB を超えるデータを管理しています。そのすべてを月数百ドルで運営しています。巨大企業がなくすと決めたものを取り戻すには、決して多い金額ではありません。"
   },
   "changelog_appeal_free": {
-    "message": "低評価数は無料で、これからも無料です。それがこのプロジェクトのいちばん大切なところです。でもサーバーは無料ではありません。正直なところ、運営費のためにほかの選択肢はほとんどなく、プロジェクトを続けるために Premium 機能（RYD コメントと Premium 分析）を導入せざるを得ませんでした。メンバーシップの一つひとつが、その費用をまかなう助けになっています。"
+    "message": "低評価数は無料で、これからも無料です。それがこのプロジェクトのいちばん大切なところです。でもサーバーは無料ではありません。正直なところ、運営費を考えるとほかに選択肢はほとんどなく、プロジェクトを続けるために Premium 機能（RYD コメントと Premium 分析）を導入せざるを得ませんでした。メンバーシップの一つひとつが、その費用をまかなう助けになっています。"
   },
   "changelog_appeal_ask": {
-    "message": "RYD のおかげでクリックベイト動画やうまくいかないチュートリアルを避けられたことが一度でもあれば、Patreon への参加をご検討ください。今はタイミングが合わなくても、まったく問題ありません。ご利用いただき、投票してくださってありがとうございます。一票一票が、数字を少しずつ正確にしています。"
+    "message": "RYD のおかげで釣り動画や、試してもうまくいかないハウツー動画を避けられたことが一度でもあれば、Patreon でのメンバー登録をご検討ください。今はタイミングが合わなくても、まったく問題ありません。ご利用いただき、投票してくださってありがとうございます。一票一票が、数字を少しずつ正確にしています。"
   },
   "changelog_appeal_cta": {
-    "message": "Patreon でメンバーになりましょう"
+    "message": "Patreon でメンバーになる"
   },
   "changelog_appeal_signature": {
     "message": "— Dmitry と RYD コミュニティより"
@@ -990,7 +990,7 @@
     "message": "RYD を気に入っていただけましたか？"
   },
   "reviewPromptBody": {
-    "message": "Google は Chrome Web Store の評価ルールを変更しました。16,000件以上の星5のレビューがあるにもかかわらず、最近の数件の否定的なレビューによって、RYD の評価は4.6から2.5に下がりました。\n\nRYD が役に立っているなら、率直なレビューをお願いします。"
+    "message": "Google は Chrome ウェブストアの評価ルールを変更しました。16,000件以上の星5のレビューがあるにもかかわらず、最近の数件の否定的なレビューによって、RYD の評価は4.6から2.5に下がりました。\n\nRYD が役に立っているなら、率直なレビューをお願いします。"
   },
   "reviewPromptAction": {
     "message": "レビューを書く"
@@ -1071,7 +1071,7 @@
     "message": "RYD は youtube.com 以外では何も収集せず、YouTube アカウントにアクセスしません。ログインしない限り、名前やメールアドレスを受け取りません。"
   },
   "consent_settings": {
-    "message": "これらの権限は、Firefox のアドオン設定（about:addons）でいつでも変更できます。"
+    "message": "これらの権限は、Firefox のアドオンマネージャー（about:addons）でいつでも変更できます。"
   },
   "consent_private_counts": {
     "message": "プライベートウィンドウでは、通常のウィンドウで有効にした権限を使って件数表示のみ利用できます。投票、ログイン、Premium 分析、ディスカッションは利用できません。"
