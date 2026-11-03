@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Стан API:"
-  },
-  "apiStatusOffline": {
-    "message": "Афлайн"
-  },
-  "apiStatusOnline": {
-    "message": "Анлайн"
-  },
   "colorTheme": {
     "message": "Колеравая тэма:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Налады"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Фармат лікаў:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Прэміум-функцыі даступныя для падпісчыкаў на Patreon"
@@ -179,12 +164,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Хаваць панэль прэміум-аналітыкі відэа на старонках прагляду YouTube."
   },
-  "roundNumbers": {
-    "message": "Паказваць лікі, акругленыя ў меншы бок"
-  },
-  "roundNumbersHover": {
-    "message": "Акругляць лікі ў меншы бок (стандартныя паводзіны YouTube)."
-  },
   "shortsSupport": {
     "message": "Падтрымка YouTube Shorts"
   },
@@ -193,9 +172,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Адлюстроўваць працэнты ў падказцы паласы падабаек/непадабаек."
-  },
-  "textColorTheme": {
-    "message": "Колеравая тэма:"
   },
   "textColorTheme1": {
     "message": "Класічная"
@@ -224,38 +200,8 @@
   "colorThemeDislike": {
     "message": "Не падабаецца"
   },
-  "textColorizeRatioBar": {
-    "message": "Размаляваць паласу суадносін"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Выкарыстоўваць уласныя колеры для паласы суадносін."
-  },
-  "textColorizeThumbs": {
-    "message": "Размаляваць кнопкі"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Выкарыстоўваць уласныя колеры для значкоў падабаек і непадабаек."
-  },
-  "textConsistentFormat": {
-    "message": "Прывесці фармат падабаек і непадабаек да адзінага выгляду"
-  },
-  "textConsistentFormatHover": {
-    "message": "Перафарматаваць лік падабаек."
-  },
   "textDeveloper": {
     "message": "ад Дзмітрыя Селіванава і супольнасці"
-  },
-  "textLikesDisabled": {
-    "message": "Адключана аўтарам"
-  },
-  "textNumberFormat": {
-    "message": "Фармат лікаў:"
-  },
-  "textRoundingNumbers": {
-    "message": "Акругляць статыстыку падабаек/непадабаек у меншы бок (звычайныя паводзіны YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Паказваць значэнні, акругленыя ў меншы бок."
   },
   "textSettings": {
     "message": "Адключыць адпраўку падабаек/непадабаек"
@@ -265,9 +211,6 @@
   },
   "textTempUnavailable": {
     "message": "Часова недаступна"
-  },
-  "textUpdate": {
-    "message": "Абнаўленне да"
   },
   "tooltipPercentageMode": {
     "message": "Рэжым працэнтаў:"
@@ -482,9 +425,6 @@
   "premiumTeaser_statRaw": {
     "message": "Колькасць неапрацаваных непадабаек"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Разліковая колькасць непадабаек"
-  },
   "premiumTeaser_statLikes": {
     "message": "Колькасць неапрацаваных падабаек"
   },
@@ -493,21 +433,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Не ўдалося загрузіць дадзеныя аб непадабайках. Паспрабуйце абнавіць старонку."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Як адкрыць прэміум-аналітыку"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Адкрыйце прэміум-аналітыку відэа ў тры простыя крокі:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Увайдзіце праз Patreon ва ўсплывальным акне пашырэння Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Абярыце ўзровень Premium, каб уключыць храналогію актыўнасці, рэйтынгі краін і інтэрактыўную карту."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Перазагрузіце YouTube, каб убачыць пагадзінныя трэнды, топ краін і дэталізацыю па штатах ЗША для кожнага відэа."
   },
   "premiumTierNotice_title": {
     "message": "Прэміум-аналітыка заблакіравана"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Каментарыяў пакуль няма. Пачніце размову."
   },
-  "discussion_replyEmpty": {
-    "message": "Адказаў пакуль няма."
-  },
   "discussion_comment": {
     "message": "Каментарый"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Не падабаецца"
-  },
-  "discussion_reacting": {
-    "message": "Захаванне рэакцыі…"
   },
   "discussion_signInRequired": {
     "message": "Каб працягнуць, увайдзіце праз усплывальнае акно пашырэння."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Прычына мадэрацыі"
   },
-  "discussion_moderationSaved": {
-    "message": "Дзеянне мадэрацыі захавана."
-  },
-  "discussion_reported": {
-    "message": "Скаргаў: $1"
-  },
   "discussion_unavailable": {
     "message": "Каментарыі RYD недаступны для гэтага відэа."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Ваш каментарый атрымаў падабайкі: $1"
   },
-  "discussion_notificationDislike": {
-    "message": "Камусьці не спадабаўся ваш каментарый"
-  },
-  "discussion_notificationReaction": {
-    "message": "Хтосьці адрэагаваў на ваш каментарый"
-  },
   "discussion_someone": {
     "message": "Хтосьці"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Паглядзець абмеркаванне"
   },
-  "discussion_unread": {
-    "message": "Непрачытаных апавяшчэнняў: $1"
-  },
   "discussion_signedOutInbox": {
     "message": "Увайдзіце, каб бачыць адказы і падабайкі на вашы каментарыі."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Гэтае абмеркаванне больш недаступна."
   },
   "discussion_discussionTab": {
     "message": "Абмеркаванне"
   },
   "discussion_nickname": {
     "message": "Псеўданім"
-  },
-  "discussion_reportCount": {
-    "message": "Скаргі"
   },
   "discussion_reportStatus": {
     "message": "Статус скаргі"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Аўтар"
   },
-  "discussion_me": {
-    "message": "Вы"
-  },
   "discussion_saving": {
     "message": "Захаванне…"
-  },
-  "discussion_confirm": {
-    "message": "Пацвердзіць"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Новая актыўнасць у вашых каментарыях"
-  },
-  "discussion_showThread": {
-    "message": "Паказаць галіну абмеркавання"
   },
   "discussion_loadReplies": {
     "message": "Паказаць адказы ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Працягнуць"
-  },
-  "counts_consent_enable": {
-    "message": "Уключыць паказ дызлайкаў"
   },
   "counts_consent_toolbar": {
     "message": "Каб працягнуць, адкрыйце Return YouTube Dislike з меню пашырэнняў Firefox."

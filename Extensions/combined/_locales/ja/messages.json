@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API の状態:"
-  },
-  "apiStatusOffline": {
-    "message": "オフライン"
-  },
-  "apiStatusOnline": {
-    "message": "オンライン"
-  },
   "colorTheme": {
     "message": "配色："
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "設定"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "数値形式："
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premium 機能は Patreon 支援者向けに提供されています。"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "YouTube の再生ページで Premium 動画インサイトのパネルを非表示にします。"
   },
-  "roundNumbers": {
-    "message": "四捨五入された数値を表示"
-  },
-  "roundNumbersHover": {
-    "message": "カウント値を四捨五入します（これは YouTube のデフォルトオプションです）。"
-  },
   "shortsSupport": {
     "message": "YouTube ショートのサポート"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "高評価/低評価バーのツールチップにパーセントを表示します。"
-  },
-  "textColorTheme": {
-    "message": "カラーテーマ:"
   },
   "textColorTheme1": {
     "message": "クラシック"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "低評価"
   },
-  "textColorizeRatioBar": {
-    "message": "比率バーを色付け"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "比率バーにカスタムカラーを使用します。"
-  },
-  "textColorizeThumbs": {
-    "message": "サムズアイコンを色付け"
-  },
-  "textColorizeThumbsHover": {
-    "message": "サムズアイコンにカスタムカラーを使用します。"
-  },
-  "textConsistentFormat": {
-    "message": "高評価/低評価の表示形式を統一"
-  },
-  "textConsistentFormatHover": {
-    "message": "高評価数の表記を再フォーマットします。"
-  },
   "textDeveloper": {
     "message": "by Dmitry Selivanov & コミュニティ"
-  },
-  "textLikesDisabled": {
-    "message": "投稿者により無効化"
-  },
-  "textNumberFormat": {
-    "message": "数値の形式:"
-  },
-  "textRoundingNumbers": {
-    "message": "高評価/低評価の統計を切り下げ表示（YouTube の既定）"
-  },
-  "textRoundingNumbersHover": {
-    "message": "切り下げた統計を表示します。"
   },
   "textSettings": {
     "message": "高評価/低評価を送信しない"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "一時的に利用不可"
-  },
-  "textUpdate": {
-    "message": "アップデート："
   },
   "tooltipPercentageMode": {
     "message": "パーセント表示モード："
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "未加工の低評価数"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "推定低評価"
-  },
   "premiumTeaser_statLikes": {
     "message": "未加工の高評価数"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "低評価データを読み込めませんでした。ページを更新してください。"
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Premium 分析の有効化方法"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "3つのステップですぐに Premium 動画インサイトを有効化:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Return YouTube Dislike 拡張機能のポップアップから Patreon にサインインします。"
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Premium ティアを選択して、アクティビティタイムライン、国別ランキング、インタラクティブマップを利用します。"
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "YouTube を再読み込みして、各動画の時間帯トレンド、上位国、米国州別の詳細を確認してください。"
   },
   "premiumTierNotice_title": {
     "message": "Premium 分析はロックされています"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "まだコメントはありません。会話を始めましょう。"
   },
-  "discussion_replyEmpty": {
-    "message": "まだ返信はありません。"
-  },
   "discussion_comment": {
     "message": "コメント"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "低評価"
-  },
-  "discussion_reacting": {
-    "message": "リアクションを保存中…"
   },
   "discussion_signInRequired": {
     "message": "続行するには、拡張機能のポップアップからログインしてください。"
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "モデレーションの理由"
   },
-  "discussion_moderationSaved": {
-    "message": "モデレーション操作を保存しました。"
-  },
-  "discussion_reported": {
-    "message": "$1 件の報告"
-  },
   "discussion_unavailable": {
     "message": "この動画では RYD コメントを利用できません。"
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "あなたのコメントが $1 件の高評価を受けました"
   },
-  "discussion_notificationDislike": {
-    "message": "誰かがあなたのコメントを低く評価しました"
-  },
-  "discussion_notificationReaction": {
-    "message": "誰かがあなたのコメントにリアクションしました"
-  },
   "discussion_someone": {
     "message": "誰か"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "ディスカッションを表示"
   },
-  "discussion_unread": {
-    "message": "$1 件の未読通知"
-  },
   "discussion_signedOutInbox": {
     "message": "コメントへの返信や高評価を確認するにはログインしてください。"
-  },
-  "discussion_notificationUnavailable": {
-    "message": "このディスカッションは利用できなくなりました。"
   },
   "discussion_discussionTab": {
     "message": "ディスカッション"
   },
   "discussion_nickname": {
     "message": "ニックネーム"
-  },
-  "discussion_reportCount": {
-    "message": "報告"
   },
   "discussion_reportStatus": {
     "message": "報告の状態"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "投稿者"
   },
-  "discussion_me": {
-    "message": "あなた"
-  },
   "discussion_saving": {
     "message": "保存中…"
-  },
-  "discussion_confirm": {
-    "message": "確認"
-  },
-  "discussion_notificationUpdated": {
-    "message": "あなたのコメントに新しいアクティビティがあります"
-  },
-  "discussion_showThread": {
-    "message": "スレッドを表示"
   },
   "discussion_loadReplies": {
     "message": "返信を表示（$1）"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "続行"
-  },
-  "counts_consent_enable": {
-    "message": "低評価数を有効にする"
   },
   "counts_consent_toolbar": {
     "message": "続行するには、Firefox の拡張機能メニューから Return YouTube Dislike を開いてください。"

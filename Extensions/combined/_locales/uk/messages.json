@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Стан API:"
-  },
-  "apiStatusOffline": {
-    "message": "Офлайн"
-  },
-  "apiStatusOnline": {
-    "message": "Онлайн"
-  },
   "colorTheme": {
     "message": "Кольорова схема:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Налаштування"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Формат значень:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Преміум‑функції доступні прихильникам на Patreon"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Приховати панель преміальної аналітики відео на сторінках перегляду YouTube."
   },
-  "roundNumbers": {
-    "message": "Показувати заокруглені значення"
-  },
-  "roundNumbersHover": {
-    "message": "Округлює значення відміток (стандартний параметр YouTube)"
-  },
   "shortsSupport": {
     "message": "Підтримка YouTube Shorts"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Показувати відсоток у підказці панелі вподобань/невподобань."
-  },
-  "textColorTheme": {
-    "message": "Кольорова схема:"
   },
   "textColorTheme1": {
     "message": "Класика"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "Не подобається"
   },
-  "textColorizeRatioBar": {
-    "message": "Обрати кольори стрічки співвідношення"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Змінює кольори стрічки співвідношення на обрані вами."
-  },
-  "textColorizeThumbs": {
-    "message": "Обрати кольори відміток"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Змінює кольори піктограм відміток на обрані вами."
-  },
-  "textConsistentFormat": {
-    "message": "Зробить формат «Подобається» та «Не подобається» однаковим"
-  },
-  "textConsistentFormatHover": {
-    "message": "Форматувати як числа."
-  },
   "textDeveloper": {
     "message": "від Дмитра Селіванова та спільноти"
-  },
-  "textLikesDisabled": {
-    "message": "Вимкнуто власником"
-  },
-  "textNumberFormat": {
-    "message": "Формат значень:"
-  },
-  "textRoundingNumbers": {
-    "message": "Округлює значення відміток (стандартний параметр YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Показувати заокруглені значення."
   },
   "textSettings": {
     "message": "Вимкнути надсилання відміток"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "Тимчасово недоступно"
-  },
-  "textUpdate": {
-    "message": "Оновлення до"
   },
   "tooltipPercentageMode": {
     "message": "Режим відсотків:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Кількість необроблених дизлайків"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Орієнтовні дизлайки"
-  },
   "premiumTeaser_statLikes": {
     "message": "Сира кількість вподобань"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Наразі не вдалося завантажити дані про дизлайки. Спробуйте оновити сторінку."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Як розблокувати преміальну аналітику"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Розблокуйте преміальну відеоаналітику у три швидкі кроки:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Увійдіть через Patreon у спливаючому вікні розширення Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Виберіть рівень Premium, щоб увімкнути часові шкали активності, рейтинги країн та інтерактивну карту."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Перезавантажте YouTube, щоб переглянути погодинні тренди, провідні країни та деталізацію за штатами США для кожного відео."
   },
   "premiumTierNotice_title": {
     "message": "Преміум-аналітика заблокована"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Коментарів поки немає. Розпочніть розмову."
   },
-  "discussion_replyEmpty": {
-    "message": "Відповідей поки немає."
-  },
   "discussion_comment": {
     "message": "Коментар"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Не подобається"
-  },
-  "discussion_reacting": {
-    "message": "Збереження реакції…"
   },
   "discussion_signInRequired": {
     "message": "Щоб продовжити, увійдіть через спливне вікно розширення."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Причина модерації"
   },
-  "discussion_moderationSaved": {
-    "message": "Дію модерації збережено."
-  },
-  "discussion_reported": {
-    "message": "Скарг: $1"
-  },
   "discussion_unavailable": {
     "message": "Коментарі RYD недоступні для цього відео."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Кількість уподобань вашого коментаря: $1"
   },
-  "discussion_notificationDislike": {
-    "message": "Комусь не сподобався ваш коментар"
-  },
-  "discussion_notificationReaction": {
-    "message": "Хтось відреагував на ваш коментар"
-  },
   "discussion_someone": {
     "message": "Хтось"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Переглянути обговорення"
   },
-  "discussion_unread": {
-    "message": "Непрочитаних сповіщень: $1"
-  },
   "discussion_signedOutInbox": {
     "message": "Увійдіть, щоб бачити відповіді й уподобання ваших коментарів."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Це обговорення більше недоступне."
   },
   "discussion_discussionTab": {
     "message": "Обговорення"
   },
   "discussion_nickname": {
     "message": "Псевдонім"
-  },
-  "discussion_reportCount": {
-    "message": "Скарги"
   },
   "discussion_reportStatus": {
     "message": "Статус скарги"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Автор"
   },
-  "discussion_me": {
-    "message": "Ви"
-  },
   "discussion_saving": {
     "message": "Збереження…"
-  },
-  "discussion_confirm": {
-    "message": "Підтвердити"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Нова активність у ваших коментарях"
-  },
-  "discussion_showThread": {
-    "message": "Показати гілку обговорення"
   },
   "discussion_loadReplies": {
     "message": "Показати відповіді ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Продовжити"
-  },
-  "counts_consent_enable": {
-    "message": "Увімкнути показ дизлайків"
   },
   "counts_consent_toolbar": {
     "message": "Щоб продовжити, відкрийте Return YouTube Dislike з меню розширень Firefox."

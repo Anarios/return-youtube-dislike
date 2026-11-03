@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Status API:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Warnai tema:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Pengaturan"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Format angka:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Fitur premium tersedia bagi pendukung di Patreon"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Sembunyikan panel insight video premium di halaman tonton YouTube."
   },
-  "roundNumbers": {
-    "message": "Munculkan angka yang dibulatkan kebawah"
-  },
-  "roundNumbersHover": {
-    "message": "Bulatkan angka kebawah (bawaan YouTube)."
-  },
   "shortsSupport": {
     "message": "Mendukung YouTube Short"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Tampilkan persentase di tooltip bilah like/dislike."
-  },
-  "textColorTheme": {
-    "message": "Warnai tema:"
   },
   "textColorTheme1": {
     "message": "Klasik"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "Tidak suka"
   },
-  "textColorizeRatioBar": {
-    "message": "Warnai bar rasio"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Gunakan warna kustom bar rasio."
-  },
-  "textColorizeThumbs": {
-    "message": "Warnai jempol"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Gunakan warna kustom untuk ikon jempol."
-  },
-  "textConsistentFormat": {
-    "message": "Membuat format like dan dislike konsisten"
-  },
-  "textConsistentFormatHover": {
-    "message": "Format ulang jumlah like."
-  },
   "textDeveloper": {
     "message": "oleh Dmitry Selivanov & Komunitas"
-  },
-  "textLikesDisabled": {
-    "message": "Dimatikan oleh Pemilik"
-  },
-  "textNumberFormat": {
-    "message": "Format angka:"
-  },
-  "textRoundingNumbers": {
-    "message": "Membulatkan data like/dislike kebawah (bawaan YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Munculkan data pembulatan kebawah."
   },
   "textSettings": {
     "message": "Matikan pengiriman like/dislike"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "Tidak Ada Untuk Sementara Waktu"
-  },
-  "textUpdate": {
-    "message": "Update ke"
   },
   "tooltipPercentageMode": {
     "message": "Mode persentase:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Jumlah tidak suka mentah"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Perkiraan tidak suka"
-  },
   "premiumTeaser_statLikes": {
     "message": "Jumlah suka mentah"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Data tidak suka tidak dapat dimuat saat ini. Coba muat ulang halaman."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Cara membuka analitik Premium"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Buka insight video Premium dalam tiga langkah cepat:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Masuk dengan Patreon dari pop-up ekstensi Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Pilih tingkat Premium untuk mengaktifkan linimasa aktivitas, peringkat negara, dan peta interaktif."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Muat ulang YouTube untuk melihat tren per jam, negara teratas, dan detail per negara bagian AS untuk setiap video."
   },
   "premiumTierNotice_title": {
     "message": "Analitik premium terkunci"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Belum ada komentar. Mulai percakapan."
   },
-  "discussion_replyEmpty": {
-    "message": "Belum ada balasan."
-  },
   "discussion_comment": {
     "message": "Komentar"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Tidak suka"
-  },
-  "discussion_reacting": {
-    "message": "Menyimpan reaksi…"
   },
   "discussion_signInRequired": {
     "message": "Login melalui popup ekstensi untuk melanjutkan."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Alasan moderasi"
   },
-  "discussion_moderationSaved": {
-    "message": "Tindakan moderasi disimpan."
-  },
-  "discussion_reported": {
-    "message": "$1 laporan"
-  },
   "discussion_unavailable": {
     "message": "Komentar RYD tidak tersedia untuk video ini."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Komentar Anda mendapat $1 suka"
   },
-  "discussion_notificationDislike": {
-    "message": "Seseorang tidak menyukai komentar Anda"
-  },
-  "discussion_notificationReaction": {
-    "message": "Seseorang memberi reaksi pada komentar Anda"
-  },
   "discussion_someone": {
     "message": "Seseorang"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Lihat diskusi"
   },
-  "discussion_unread": {
-    "message": "$1 notifikasi belum dibaca"
-  },
   "discussion_signedOutInbox": {
     "message": "Login untuk melihat balasan dan suka pada komentar Anda."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Diskusi ini tidak lagi tersedia."
   },
   "discussion_discussionTab": {
     "message": "Diskusi"
   },
   "discussion_nickname": {
     "message": "Nama panggilan"
-  },
-  "discussion_reportCount": {
-    "message": "Laporan"
   },
   "discussion_reportStatus": {
     "message": "Status laporan"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Penulis"
   },
-  "discussion_me": {
-    "message": "Anda"
-  },
   "discussion_saving": {
     "message": "Menyimpan…"
-  },
-  "discussion_confirm": {
-    "message": "Konfirmasi"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Aktivitas baru pada komentar Anda"
-  },
-  "discussion_showThread": {
-    "message": "Tampilkan rangkaian komentar"
   },
   "discussion_loadReplies": {
     "message": "Tampilkan balasan ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Lanjutkan"
-  },
-  "counts_consent_enable": {
-    "message": "Aktifkan jumlah tidak suka"
   },
   "counts_consent_toolbar": {
     "message": "Buka Return YouTube Dislike dari menu ekstensi Firefox untuk melanjutkan."

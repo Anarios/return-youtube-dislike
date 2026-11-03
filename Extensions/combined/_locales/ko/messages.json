@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API 상태:"
-  },
-  "apiStatusOffline": {
-    "message": "오프라인"
-  },
-  "apiStatusOnline": {
-    "message": "온라인"
-  },
   "colorTheme": {
     "message": "컬러 테마:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike 베타"
-  },
   "legendSettings": {
     "message": "설정"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "숫자 표시 형식:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "프리미엄 기능은 Patreon 후원자에게 제공됩니다"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "YouTube 시청 페이지에서 프리미엄 동영상 인사이트 패널을 숨깁니다."
   },
-  "roundNumbers": {
-    "message": "반올림된 숫자 표시"
-  },
-  "roundNumbersHover": {
-    "message": "반올림된 숫자(기본 유튜브 동작)."
-  },
   "shortsSupport": {
     "message": "유튜브 쇼츠 지원"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "좋아요/싫어요 막대 툴팁에 백분율을 표시합니다."
-  },
-  "textColorTheme": {
-    "message": "컬러 테마:"
   },
   "textColorTheme1": {
     "message": "클래식"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "싫어요"
   },
-  "textColorizeRatioBar": {
-    "message": "비율 막대 컬러화"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "비율 막대에 커스텀 색상을 사용합니다."
-  },
-  "textColorizeThumbs": {
-    "message": "엄지 컬러화"
-  },
-  "textColorizeThumbsHover": {
-    "message": "엄지 아이콘에 커스텀 색상을 사용합니다."
-  },
-  "textConsistentFormat": {
-    "message": "좋아요와 싫어요 형식을 일관되게 만듭니다"
-  },
-  "textConsistentFormatHover": {
-    "message": "좋아요 갯수 표시 형식 재정의"
-  },
   "textDeveloper": {
     "message": "Dmitry Selivanov와 커뮤니티 제작"
-  },
-  "textLikesDisabled": {
-    "message": "업로더가 비활성화함"
-  },
-  "textNumberFormat": {
-    "message": "숫자 표시 형식:"
-  },
-  "textRoundingNumbers": {
-    "message": "좋아요/싫어요 통계 비활성화(기본 YouTube 동작)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "반올림된 통계 보이기"
   },
   "textSettings": {
     "message": "좋아요/싫어요 제출 비활성화"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "일시적으로 사용할 수 없음"
-  },
-  "textUpdate": {
-    "message": "업데이트"
   },
   "tooltipPercentageMode": {
     "message": "백분율 모드:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "원본 싫어요 수"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "예상 싫어요"
-  },
   "premiumTeaser_statLikes": {
     "message": "원시 좋아요 수"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "지금은 싫어요 데이터를 불러올 수 없습니다. 페이지를 새로고침해 보세요."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "프리미엄 분석을 여는 방법"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "세 단계로 프리미엄 동영상 인사이트를 해제하세요:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Return YouTube Dislike 확장 프로그램 팝업에서 Patreon으로 로그인하세요."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "활동 타임라인, 국가 순위 및 인터랙티브 지도를 사용하려면 프리미엄 등급을 선택하세요."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "YouTube를 다시 로드하여 각 영상의 시간대별 추세, 주요 국가 및 미국 주별 세부 정보를 확인하세요."
   },
   "premiumTierNotice_title": {
     "message": "프리미엄 분석이 잠겨 있습니다"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "아직 댓글이 없습니다. 대화를 시작해 보세요."
   },
-  "discussion_replyEmpty": {
-    "message": "아직 답글이 없습니다."
-  },
   "discussion_comment": {
     "message": "댓글"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "싫어요"
-  },
-  "discussion_reacting": {
-    "message": "반응 저장 중…"
   },
   "discussion_signInRequired": {
     "message": "계속하려면 확장 프로그램 팝업에서 로그인해 주세요."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "관리 조치 사유"
   },
-  "discussion_moderationSaved": {
-    "message": "관리 조치가 저장되었습니다."
-  },
-  "discussion_reported": {
-    "message": "신고 $1건"
-  },
   "discussion_unavailable": {
     "message": "이 동영상에서는 RYD 댓글을 사용할 수 없습니다."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "내 댓글이 좋아요 $1개를 받았습니다"
   },
-  "discussion_notificationDislike": {
-    "message": "누군가 내 댓글에 싫어요를 눌렀습니다"
-  },
-  "discussion_notificationReaction": {
-    "message": "누군가 내 댓글에 반응을 남겼습니다"
-  },
   "discussion_someone": {
     "message": "누군가"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "토론 보기"
   },
-  "discussion_unread": {
-    "message": "읽지 않은 알림 $1개"
-  },
   "discussion_signedOutInbox": {
     "message": "내 댓글에 달린 답글과 좋아요를 보려면 로그인해 주세요."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "더 이상 볼 수 없는 토론입니다."
   },
   "discussion_discussionTab": {
     "message": "토론"
   },
   "discussion_nickname": {
     "message": "닉네임"
-  },
-  "discussion_reportCount": {
-    "message": "신고"
   },
   "discussion_reportStatus": {
     "message": "신고 상태"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "작성자"
   },
-  "discussion_me": {
-    "message": "나"
-  },
   "discussion_saving": {
     "message": "저장 중…"
-  },
-  "discussion_confirm": {
-    "message": "확인"
-  },
-  "discussion_notificationUpdated": {
-    "message": "내 댓글에 새로운 활동이 있습니다"
-  },
-  "discussion_showThread": {
-    "message": "댓글 대화 보기"
   },
   "discussion_loadReplies": {
     "message": "답글 보기 ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "계속"
-  },
-  "counts_consent_enable": {
-    "message": "싫어요 수 표시 활성화"
   },
   "counts_consent_toolbar": {
     "message": "계속하려면 Firefox의 확장 기능 메뉴에서 Return YouTube Dislike를 여세요."

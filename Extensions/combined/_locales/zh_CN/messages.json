@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API 状态:"
-  },
-  "apiStatusOffline": {
-    "message": "离线"
-  },
-  "apiStatusOnline": {
-    "message": "在线"
-  },
   "colorTheme": {
     "message": "配色主题:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "设置"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "数字格式:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Patreon 赞助者可使用高级功能"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "在 YouTube 播放页面隐藏高级视频洞察面板。"
   },
-  "roundNumbers": {
-    "message": "显示取整后的数字"
-  },
-  "roundNumbersHover": {
-    "message": "对数字向下取整（YouTube 默认行为）。"
-  },
   "shortsSupport": {
     "message": "支持 YouTube Shorts"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "在点赞/点踩条的工具提示中显示百分比。"
-  },
-  "textColorTheme": {
-    "message": "配色主题:"
   },
   "textColorTheme1": {
     "message": "经典"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "点踩"
   },
-  "textColorizeRatioBar": {
-    "message": "为比例条着色"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "为比例条使用自定义颜色。"
-  },
-  "textColorizeThumbs": {
-    "message": "为点赞/点踩图标着色"
-  },
-  "textColorizeThumbsHover": {
-    "message": "为点赞/点踩图标使用自定义颜色。"
-  },
-  "textConsistentFormat": {
-    "message": "使点赞/点踩的显示格式保持一致"
-  },
-  "textConsistentFormatHover": {
-    "message": "重新格式化点赞数字。"
-  },
   "textDeveloper": {
     "message": "由 Dmitry Selivanov 与社区开发"
-  },
-  "textLikesDisabled": {
-    "message": "已被作者禁用"
-  },
-  "textNumberFormat": {
-    "message": "数字格式:"
-  },
-  "textRoundingNumbers": {
-    "message": "对点赞/点踩统计取整（YouTube 默认行为）"
-  },
-  "textRoundingNumbersHover": {
-    "message": "显示取整后的统计。"
   },
   "textSettings": {
     "message": "禁用点赞/点踩提交"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "暂时不可用"
-  },
-  "textUpdate": {
-    "message": "更新到"
   },
   "tooltipPercentageMode": {
     "message": "百分比模式:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "原始点踩数"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "预计点踩数"
-  },
   "premiumTeaser_statLikes": {
     "message": "点赞原始数"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "暂时无法加载点踩数据，请尝试刷新页面。"
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "如何解锁高级分析"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "三步快速解锁高级视频洞察："
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "在 Return YouTube Dislike 扩展弹窗中使用 Patreon 登录。"
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "选择 Premium 等级以启用活动时间线、国家排行榜和交互式地图。"
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "重新加载 YouTube 以查看每个视频的小时趋势、热门国家和美国各州的详细数据。"
   },
   "premiumTierNotice_title": {
     "message": "Premium 高级分析已锁定"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "还没有评论。来开启讨论吧。"
   },
-  "discussion_replyEmpty": {
-    "message": "还没有回复。"
-  },
   "discussion_comment": {
     "message": "评论"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "点踩"
-  },
-  "discussion_reacting": {
-    "message": "正在保存回应…"
   },
   "discussion_signInRequired": {
     "message": "请在扩展弹出窗口中登录以继续。"
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "管理操作原因"
   },
-  "discussion_moderationSaved": {
-    "message": "管理操作已保存。"
-  },
-  "discussion_reported": {
-    "message": "$1 次举报"
-  },
   "discussion_unavailable": {
     "message": "此视频无法使用 RYD 评论。"
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "您的评论收到了 $1 个赞"
   },
-  "discussion_notificationDislike": {
-    "message": "有人踩了您的评论"
-  },
-  "discussion_notificationReaction": {
-    "message": "有人回应了您的评论"
-  },
   "discussion_someone": {
     "message": "有人"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "查看讨论"
   },
-  "discussion_unread": {
-    "message": "$1 条未读通知"
-  },
   "discussion_signedOutInbox": {
     "message": "登录后可查看您评论收到的回复和赞。"
-  },
-  "discussion_notificationUnavailable": {
-    "message": "此讨论已不可用。"
   },
   "discussion_discussionTab": {
     "message": "讨论"
   },
   "discussion_nickname": {
     "message": "昵称"
-  },
-  "discussion_reportCount": {
-    "message": "举报"
   },
   "discussion_reportStatus": {
     "message": "举报状态"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "作者"
   },
-  "discussion_me": {
-    "message": "您"
-  },
   "discussion_saving": {
     "message": "正在保存…"
-  },
-  "discussion_confirm": {
-    "message": "确认"
-  },
-  "discussion_notificationUpdated": {
-    "message": "您的评论有新动态"
-  },
-  "discussion_showThread": {
-    "message": "显示评论串"
   },
   "discussion_loadReplies": {
     "message": "显示回复（$1）"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "继续"
-  },
-  "counts_consent_enable": {
-    "message": "启用不喜欢数"
   },
   "counts_consent_toolbar": {
     "message": "从 Firefox 的扩展菜单中打开 Return YouTube Dislike 以继续。"

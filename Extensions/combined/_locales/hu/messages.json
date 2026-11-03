@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API állapot:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Színtéma:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Beállítások"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Számformátum:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Prémium funkciók Patreon‑támogatóknak érhetők el"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "A Prémium videóelemzések panel elrejtése a YouTube lejátszó oldalain."
   },
-  "roundNumbers": {
-    "message": "Lekerekített számok megjelenítése"
-  },
-  "roundNumbersHover": {
-    "message": "Számok lefelé kerekítése (YouTube alapértelmezett)."
-  },
   "shortsSupport": {
     "message": "YouTube Shorts támogatás"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Százalék megjelenítése a tetszik/nem tetszik sáv buborékában."
-  },
-  "textColorTheme": {
-    "message": "Színtéma:"
   },
   "textColorTheme1": {
     "message": "Klasszikus"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "Nem tetszik"
   },
-  "textColorizeRatioBar": {
-    "message": "Aránysáv színezése"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Egyéni színek használata az aránysávhoz."
-  },
-  "textColorizeThumbs": {
-    "message": "Hüvelykujjas ikonok színezése"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Egyéni színek használata a hüvelykujjas ikonokhoz."
-  },
-  "textConsistentFormat": {
-    "message": "A kedvelések és nem tetszések formátumának egységesítése"
-  },
-  "textConsistentFormatHover": {
-    "message": "A kedvelésszám újraformázása."
-  },
   "textDeveloper": {
     "message": "Készítő: Dmitry Selivanov & Community"
-  },
-  "textLikesDisabled": {
-    "message": "tulajdonos által kikapcsolva"
-  },
-  "textNumberFormat": {
-    "message": "Számformátum:"
-  },
-  "textRoundingNumbers": {
-    "message": "Lekerekített kedvelés/nem tetszik statisztika (YouTube alapértelmezés)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Lekerekített statisztikák megjelenítése."
   },
   "textSettings": {
     "message": "Like/Dislike beküldés kikapcsolása"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "temp n/a"
-  },
-  "textUpdate": {
-    "message": "frissítés erre:"
   },
   "tooltipPercentageMode": {
     "message": "Százalék mód:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Nyers nem tetszések száma"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Becsült nem tetszések"
-  },
   "premiumTeaser_statLikes": {
     "message": "Nyers kedvelések száma"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "A nemtetszés-adatok betöltése most nem sikerült. Próbálja meg újratölteni az oldalt."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Hogyan oldhatók fel a prémium elemzések"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Három gyors lépésben oldja fel a prémium videóelemzéseket:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Jelentkezzen be Patreon-fiókkal a Return YouTube Dislike bővítmény felugró ablakából."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Válassza a Premium szintet az aktivitási idővonalak, az országos ranglisták és az interaktív térkép bekapcsolásához."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Töltse újra a YouTube-ot, hogy minden videónál lássa az óránkénti trendeket, a vezető országokat és az amerikai államok lebontását."
   },
   "premiumTierNotice_title": {
     "message": "A prémium analitika zárolva"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Még nincsenek hozzászólások. Indítsd el a beszélgetést."
   },
-  "discussion_replyEmpty": {
-    "message": "Még nincsenek válaszok."
-  },
   "discussion_comment": {
     "message": "Hozzászólás"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Nem tetszik"
-  },
-  "discussion_reacting": {
-    "message": "Reakció mentése…"
   },
   "discussion_signInRequired": {
     "message": "A folytatáshoz jelentkezz be a bővítmény felugró ablakában."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Moderálás indoka"
   },
-  "discussion_moderationSaved": {
-    "message": "Moderálási művelet mentve."
-  },
-  "discussion_reported": {
-    "message": "$1 jelentés"
-  },
   "discussion_unavailable": {
     "message": "Ehhez a videóhoz nem érhetők el RYD-hozzászólások."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "A hozzászólásod $1 kedvelést kapott"
   },
-  "discussion_notificationDislike": {
-    "message": "Valakinek nem tetszett a hozzászólásod"
-  },
-  "discussion_notificationReaction": {
-    "message": "Valaki reagált a hozzászólásodra"
-  },
   "discussion_someone": {
     "message": "Valaki"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Beszélgetés megtekintése"
   },
-  "discussion_unread": {
-    "message": "$1 olvasatlan értesítés"
-  },
   "discussion_signedOutInbox": {
     "message": "Jelentkezz be a hozzászólásaidra érkező válaszok és kedvelések megtekintéséhez."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Ez a beszélgetés már nem érhető el."
   },
   "discussion_discussionTab": {
     "message": "Beszélgetés"
   },
   "discussion_nickname": {
     "message": "Becenév"
-  },
-  "discussion_reportCount": {
-    "message": "Jelentések"
   },
   "discussion_reportStatus": {
     "message": "Jelentés állapota"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Szerző"
   },
-  "discussion_me": {
-    "message": "Te"
-  },
   "discussion_saving": {
     "message": "Mentés…"
-  },
-  "discussion_confirm": {
-    "message": "Megerősítés"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Új aktivitás a hozzászólásaidnál"
-  },
-  "discussion_showThread": {
-    "message": "Hozzászóláslánc megjelenítése"
   },
   "discussion_loadReplies": {
     "message": "Válaszok megjelenítése ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Folytatás"
-  },
-  "counts_consent_enable": {
-    "message": "Nemtetszések számának engedélyezése"
   },
   "counts_consent_toolbar": {
     "message": "A folytatáshoz nyisd meg a Return YouTube Dislike-ot a Firefox kiegészítőmenüjéből."

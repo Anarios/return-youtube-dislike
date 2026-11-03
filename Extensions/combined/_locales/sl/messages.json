@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Stanje API-ja:"
-  },
-  "apiStatusOffline": {
-    "message": "Nedosegljiv"
-  },
-  "apiStatusOnline": {
-    "message": "Dosegljiv"
-  },
   "colorTheme": {
     "message": "Barvna tema:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Nastavitve"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Oblika zapisa števil:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premium funkcije so na voljo podpornikom na Patreonu"
@@ -179,12 +164,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Skrij ploščo s premium vpogledi v video na straneh za ogled videov na YouTubu."
   },
-  "roundNumbers": {
-    "message": "Prikaži navzdol zaokrožena števila"
-  },
-  "roundNumbersHover": {
-    "message": "Zaokroži števila navzdol (privzeto vedenje YouTuba)."
-  },
   "shortsSupport": {
     "message": "Podpora za YouTube Shorts"
   },
@@ -193,9 +172,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Prikaži odstotek v opisu vrstice všečkov/nevšečkov."
-  },
-  "textColorTheme": {
-    "message": "Barvna tema:"
   },
   "textColorTheme1": {
     "message": "Klasična"
@@ -224,38 +200,8 @@
   "colorThemeDislike": {
     "message": "Ni mi všeč"
   },
-  "textColorizeRatioBar": {
-    "message": "Obarvaj vrstico razmerja"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Uporabi lastne barve za vrstico razmerja."
-  },
-  "textColorizeThumbs": {
-    "message": "Obarvaj palca"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Uporabi lastne barve za ikoni palcev."
-  },
-  "textConsistentFormat": {
-    "message": "Poenoti obliko zapisa všečkov in nevšečkov"
-  },
-  "textConsistentFormatHover": {
-    "message": "Preoblikuj števila všečkov."
-  },
   "textDeveloper": {
     "message": "avtorja Dmitry Selivanov in skupnost"
-  },
-  "textLikesDisabled": {
-    "message": "Onemogočil lastnik"
-  },
-  "textNumberFormat": {
-    "message": "Oblika zapisa števil:"
-  },
-  "textRoundingNumbers": {
-    "message": "Zaokroži statistiko všečkov/nevšečkov navzdol (privzeto vedenje YouTuba)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Prikaži navzdol zaokroženo statistiko."
   },
   "textSettings": {
     "message": "Onemogoči pošiljanje všečkov/nevšečkov"
@@ -265,9 +211,6 @@
   },
   "textTempUnavailable": {
     "message": "Začasno nedosegljivo"
-  },
-  "textUpdate": {
-    "message": "Posodobi na"
   },
   "tooltipPercentageMode": {
     "message": "Način odstotkov:"
@@ -482,9 +425,6 @@
   "premiumTeaser_statRaw": {
     "message": "Neobdelano število nevšečkov"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Ocenjeno število nevšečkov"
-  },
   "premiumTeaser_statLikes": {
     "message": "Neobdelano število všečkov"
   },
@@ -493,21 +433,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Podatkov o nevšečkih zdaj ni bilo mogoče naložiti. Poskusite znova naložiti stran."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Kako odkleniti premium analitiko"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Odklenite premium vpoglede v video v treh hitrih korakih:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "V pojavnem oknu razširitve Return YouTube Dislike se prijavite s Patreonom."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Izberite stopnjo Premium, da omogočite časovnice odzivov, lestvice držav in interaktivni zemljevid."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Znova naložite YouTube in si za vsak video oglejte urne trende, vodilne države in razčlenitev po zveznih državah ZDA."
   },
   "premiumTierNotice_title": {
     "message": "Premium analitika je zaklenjena"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Komentarjev še ni. Začnite pogovor."
   },
-  "discussion_replyEmpty": {
-    "message": "Odgovorov še ni."
-  },
   "discussion_comment": {
     "message": "Komentar"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Ni mi všeč"
-  },
-  "discussion_reacting": {
-    "message": "Shranjevanje odziva…"
   },
   "discussion_signInRequired": {
     "message": "Za nadaljevanje se prijavite v pojavnem oknu razširitve."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Razlog moderiranja"
   },
-  "discussion_moderationSaved": {
-    "message": "Dejanje moderiranja je shranjeno."
-  },
-  "discussion_reported": {
-    "message": "Prijave: $1"
-  },
   "discussion_unavailable": {
     "message": "Komentarji RYD za ta videoposnetek niso na voljo."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Vaš komentar ima toliko všečkov: $1"
   },
-  "discussion_notificationDislike": {
-    "message": "Nekomu ni bil všeč vaš komentar"
-  },
-  "discussion_notificationReaction": {
-    "message": "Nekdo se je odzval na vaš komentar"
-  },
   "discussion_someone": {
     "message": "Nekdo"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Ogled razprave"
   },
-  "discussion_unread": {
-    "message": "Neprebrana obvestila: $1"
-  },
   "discussion_signedOutInbox": {
     "message": "Prijavite se za ogled odgovorov in všečkov na svojih komentarjih."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Ta razprava ni več na voljo."
   },
   "discussion_discussionTab": {
     "message": "Razprava"
   },
   "discussion_nickname": {
     "message": "Vzdevek"
-  },
-  "discussion_reportCount": {
-    "message": "Prijave"
   },
   "discussion_reportStatus": {
     "message": "Stanje prijave"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Avtor"
   },
-  "discussion_me": {
-    "message": "Vi"
-  },
   "discussion_saving": {
     "message": "Shranjevanje…"
-  },
-  "discussion_confirm": {
-    "message": "Potrdi"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Nova dejavnost pri vaših komentarjih"
-  },
-  "discussion_showThread": {
-    "message": "Prikaži nit"
   },
   "discussion_loadReplies": {
     "message": "Prikaži odgovore ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Nadaljuj"
-  },
-  "counts_consent_enable": {
-    "message": "Omogoči število nevšečkov"
   },
   "counts_consent_toolbar": {
     "message": "Za nadaljevanje odprite Return YouTube Dislike v Firefoxovem meniju razširitev."

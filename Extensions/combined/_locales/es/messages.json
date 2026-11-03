@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Estado de la API:"
-  },
-  "apiStatusOffline": {
-    "message": "Fuera de línea"
-  },
-  "apiStatusOnline": {
-    "message": "En línea"
-  },
   "colorTheme": {
     "message": "Combinación de colores:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Ajustes"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Formato de número:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Funciones premium disponibles para patrocinadores en Patreon"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Ocultar el panel de información premium del video en las páginas de reproducción de YouTube."
   },
-  "roundNumbers": {
-    "message": "Mostrar números redondeados hacia abajo"
-  },
-  "roundNumbersHover": {
-    "message": "Redondear números hacia abajo (comportamiento predeterminado de YouTube)."
-  },
   "shortsSupport": {
     "message": "Soporte de YouTube Shorts"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Mostrar porcentaje en el tooltip de la barra de like/dislike."
-  },
-  "textColorTheme": {
-    "message": "Esquema de colores:"
   },
   "textColorTheme1": {
     "message": "Clásico"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "No me gusta"
   },
-  "textColorizeRatioBar": {
-    "message": "Cambiar color de barra de votos"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Utiliza colores personalizados para la barra de votos."
-  },
-  "textColorizeThumbs": {
-    "message": "Cambiar color de iconos de pulgares"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Utiliza colores personalizados para los iconos de los pulgares."
-  },
-  "textConsistentFormat": {
-    "message": "Unificar formato de votos"
-  },
-  "textConsistentFormatHover": {
-    "message": "Cambia el formato de las cifras de «Me gusta» y «No me gusta»."
-  },
   "textDeveloper": {
     "message": "por Dmitry Selivanov y la comunidad"
-  },
-  "textLikesDisabled": {
-    "message": "desactivado por el propietario"
-  },
-  "textNumberFormat": {
-    "message": "Formato de cifras:"
-  },
-  "textRoundingNumbers": {
-    "message": "Redondear cifras (comportamiento original de YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Muestra las estadísticas redondeadas."
   },
   "textSettings": {
     "message": "Desactivar envío de votos"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "no disponible temporalmente"
-  },
-  "textUpdate": {
-    "message": "actualizar a"
   },
   "tooltipPercentageMode": {
     "message": "Modo de porcentaje:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Conteo de dislikes sin procesar"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Dislikes estimados"
-  },
   "premiumTeaser_statLikes": {
     "message": "Recuento bruto de Me gusta"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "No pudimos cargar los datos de dislikes en este momento. Intenta recargar la página."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Cómo desbloquear las analíticas Premium"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Desbloquea las insights premium del video en tres pasos rápidos:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Inicia sesión con Patreon desde la ventana emergente de la extensión Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Selecciona el nivel Premium para activar las líneas de tiempo de actividad, los rankings por país y el mapa interactivo."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Recarga YouTube para ver las tendencias por hora, los países principales y el desglose por estados de EE. UU. para cada video."
   },
   "premiumTierNotice_title": {
     "message": "Análisis premium bloqueados"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Aún no hay comentarios. Inicia la conversación."
   },
-  "discussion_replyEmpty": {
-    "message": "Aún no hay respuestas."
-  },
   "discussion_comment": {
     "message": "Comentario"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "No me gusta"
-  },
-  "discussion_reacting": {
-    "message": "Guardando reacción…"
   },
   "discussion_signInRequired": {
     "message": "Inicia sesión desde la ventana emergente de la extensión para continuar."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Motivo de moderación"
   },
-  "discussion_moderationSaved": {
-    "message": "Acción de moderación guardada."
-  },
-  "discussion_reported": {
-    "message": "$1 denuncias"
-  },
   "discussion_unavailable": {
     "message": "Los comentarios de RYD no están disponibles para este vídeo."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Tu comentario ha recibido $1 me gusta"
   },
-  "discussion_notificationDislike": {
-    "message": "A alguien no le ha gustado tu comentario"
-  },
-  "discussion_notificationReaction": {
-    "message": "Alguien ha reaccionado a tu comentario"
-  },
   "discussion_someone": {
     "message": "Alguien"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Ver conversación"
   },
-  "discussion_unread": {
-    "message": "$1 notificaciones sin leer"
-  },
   "discussion_signedOutInbox": {
     "message": "Inicia sesión para ver las respuestas y los Me gusta de tus comentarios."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Esta conversación ya no está disponible."
   },
   "discussion_discussionTab": {
     "message": "Conversación"
   },
   "discussion_nickname": {
     "message": "Apodo"
-  },
-  "discussion_reportCount": {
-    "message": "Denuncias"
   },
   "discussion_reportStatus": {
     "message": "Estado de la denuncia"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Autor"
   },
-  "discussion_me": {
-    "message": "Tú"
-  },
   "discussion_saving": {
     "message": "Guardando…"
-  },
-  "discussion_confirm": {
-    "message": "Confirmar"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Nueva actividad en tus comentarios"
-  },
-  "discussion_showThread": {
-    "message": "Mostrar hilo"
   },
   "discussion_loadReplies": {
     "message": "Mostrar respuestas ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Continuar"
-  },
-  "counts_consent_enable": {
-    "message": "Activar recuentos de No me gusta"
   },
   "counts_consent_toolbar": {
     "message": "Abre Return YouTube Dislike desde el menú de extensiones de Firefox para continuar."

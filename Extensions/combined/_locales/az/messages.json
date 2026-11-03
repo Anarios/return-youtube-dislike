@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API statusu:"
-  },
-  "apiStatusOffline": {
-    "message": "Oflayn"
-  },
-  "apiStatusOnline": {
-    "message": "Onlayn"
-  },
   "colorTheme": {
     "message": "Rəng mövzusu:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "YouTube Dislike Sayını Geri Qaytar"
   },
-  "extensionNameBeta": {
-    "message": "YouTube Dislike Sayını Geri Qaytar Beta"
-  },
   "legendSettings": {
     "message": "Parametrlər"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Sayı formatı:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premium xüsusiyyətlər Patreon dəstəkçiləri üçün mövcuddur"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "YouTube izləmə səhifələrində Premium video analitikası panelini gizlət."
   },
-  "roundNumbers": {
-    "message": "Aşağı yuvarlanmış sayıları göstərir"
-  },
-  "roundNumbersHover": {
-    "message": "Sayıları aşağıya yuvarla (standart YouTube davranışı)."
-  },
   "shortsSupport": {
     "message": "YouTube Shorts Dəstəyi"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Bəyən/bəyənməmə çubuğu ipucunda faizi göstər."
-  },
-  "textColorTheme": {
-    "message": "Rəng mövzusu:"
   },
   "textColorTheme1": {
     "message": "Klassik"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "Bəyənmə"
   },
-  "textColorizeRatioBar": {
-    "message": "Bəyənmə nisbəti çubuğunu rəngləndir"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Nisbət çubuğu üçün xüsusi rənglər istifadə edin."
-  },
-  "textColorizeThumbs": {
-    "message": "Düymələri rəngləndir"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Düymə simvolları üçün xüsusi rənglər istifadə edin."
-  },
-  "textConsistentFormat": {
-    "message": "Like və dislike formatını uyğunlaşdırır"
-  },
-  "textConsistentFormatHover": {
-    "message": "Like sayılarının formatını yeniləyir."
-  },
   "textDeveloper": {
     "message": "Dmitry Selivanov və İcma tərəfindən"
-  },
-  "textLikesDisabled": {
-    "message": "Sahibi tərəfindən deaktiv edilib"
-  },
-  "textNumberFormat": {
-    "message": "Sayı formatı:"
-  },
-  "textRoundingNumbers": {
-    "message": "Like/dislike statistikasını aşağı yuvarlayır (standart YouTube davranışı)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Yuvarlanmış statistikaları göstər."
   },
   "textSettings": {
     "message": "Like/dislike göndərməsini deaktiv et"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "Müvəqqəti olaraq istifadədən kənar"
-  },
-  "textUpdate": {
-    "message": "Bu versiyaya yenilə"
   },
   "tooltipPercentageMode": {
     "message": "Faiz rejimi:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Emal olunmamış bəyənməmə sayı"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Təxmini bəyənməmələr"
-  },
   "premiumTeaser_statLikes": {
     "message": "Bəyənmələrin xam sayı"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Hazırda bəyənməmə məlumatı yüklənmədi. Səhifəni yenidən yükləyin."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Premium analitikanı necə açmalı"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Premium video analitikasını üç sürətli addımda açın:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Return YouTube Dislike uzantısının pəncərəsindən Patreon ilə daxil olun."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Fəaliyyət qrafikləri, ölkə reytinqləri və interaktiv xəritə üçün Premium səviyyəsini seçin."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Hər video üçün saatlıq trendləri, aparıcı ölkələri və ABŞ ştatlarının detallı xəritəsini görmək üçün YouTube-u yenidən yükləyin."
   },
   "premiumTierNotice_title": {
     "message": "Premium analitika bloklanıb"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Hələ şərh yoxdur. Söhbətə başlayın."
   },
-  "discussion_replyEmpty": {
-    "message": "Hələ cavab yoxdur."
-  },
   "discussion_comment": {
     "message": "Şərh"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Bəyənmə"
-  },
-  "discussion_reacting": {
-    "message": "Reaksiya saxlanılır…"
   },
   "discussion_signInRequired": {
     "message": "Davam etmək üçün genişlənmənin açılan pəncərəsindən daxil olun."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Moderasiya səbəbi"
   },
-  "discussion_moderationSaved": {
-    "message": "Moderasiya əməliyyatı saxlanıldı."
-  },
-  "discussion_reported": {
-    "message": "$1 şikayət"
-  },
   "discussion_unavailable": {
     "message": "Bu video üçün RYD şərhləri əlçatan deyil."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Şərhiniz $1 bəyənmə aldı"
   },
-  "discussion_notificationDislike": {
-    "message": "Kimsə şərhinizi bəyənmədi"
-  },
-  "discussion_notificationReaction": {
-    "message": "Kimsə şərhinizə reaksiya verdi"
-  },
   "discussion_someone": {
     "message": "Kimsə"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Müzakirəyə bax"
   },
-  "discussion_unread": {
-    "message": "$1 oxunmamış bildiriş"
-  },
   "discussion_signedOutInbox": {
     "message": "Şərhlərinizə verilən cavabları və bəyənmələri görmək üçün daxil olun."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Bu müzakirə artıq əlçatan deyil."
   },
   "discussion_discussionTab": {
     "message": "Müzakirə"
   },
   "discussion_nickname": {
     "message": "Ləqəb"
-  },
-  "discussion_reportCount": {
-    "message": "Şikayətlər"
   },
   "discussion_reportStatus": {
     "message": "Şikayət statusu"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Müəllif"
   },
-  "discussion_me": {
-    "message": "Siz"
-  },
   "discussion_saving": {
     "message": "Saxlanılır…"
-  },
-  "discussion_confirm": {
-    "message": "Təsdiqlə"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Şərhlərinizdə yeni fəaliyyət var"
-  },
-  "discussion_showThread": {
-    "message": "Şərh zəncirini göstər"
   },
   "discussion_loadReplies": {
     "message": "Cavabları göstər ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Davam et"
-  },
-  "counts_consent_enable": {
-    "message": "Bəyənməmə saylarını aktivləşdirin"
   },
   "counts_consent_toolbar": {
     "message": "Davam etmək üçün Firefox-un genişlənmələr menyusundan Return YouTube Dislike-ı açın."

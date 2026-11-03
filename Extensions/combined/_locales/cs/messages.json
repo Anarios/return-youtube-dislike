@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Stav API:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Barevný motiv:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Nastavení"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Formát čísel:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Prémiové funkce jsou dostupné pro podporovatele na Patreonu"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Skrýt panel prémiových statistik videa na stránkách přehrávání na YouTube."
   },
-  "roundNumbers": {
-    "message": "Zobrazit čísla zaokrouhlená dolů"
-  },
-  "roundNumbersHover": {
-    "message": "Zaokrouhlit čísla dolů (výchozí chování YouTube)."
-  },
   "shortsSupport": {
     "message": "Podpora YouTube Shorts"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Zobrazit procenta v nápovědě u lišty like/dislike."
-  },
-  "textColorTheme": {
-    "message": "Barevný motiv:"
   },
   "textColorTheme1": {
     "message": "Klasický"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "To se mi nelíbí"
   },
-  "textColorizeRatioBar": {
-    "message": "Obarvit pruh poměru"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Použít vlastní barvy pro pruh poměru."
-  },
-  "textColorizeThumbs": {
-    "message": "Obarvit ikony"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Použít vlastní barvy pro ikony."
-  },
-  "textConsistentFormat": {
-    "message": "Použít stejný formát čísel pro palce nahoru/dolů"
-  },
-  "textConsistentFormatHover": {
-    "message": "Přeformátovat počet palců nahoru."
-  },
   "textDeveloper": {
     "message": "vytvořil Dmitry Selivanov & komunita"
-  },
-  "textLikesDisabled": {
-    "message": "zakázáno majitelem"
-  },
-  "textNumberFormat": {
-    "message": "Formát čísel:"
-  },
-  "textRoundingNumbers": {
-    "message": "Zaokrouhlit dolů statistiky palců nahoru/dolů (výchozí chování YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Zobrazit statistiky zaokrouhlené dolů."
   },
   "textSettings": {
     "message": "Zakázat odesílání palců nahoru/dolů"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "dočasně nedostupné"
-  },
-  "textUpdate": {
-    "message": "aktualizovat na"
   },
   "tooltipPercentageMode": {
     "message": "Režim procent:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Počet nezpracovaných dislajků"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Odhadované dislajky"
-  },
   "premiumTeaser_statLikes": {
     "message": "Hrubý počet lajků"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Data dislajků se nepodařilo načíst. Zkuste stránku znovu načíst."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Jak odemknout prémiové statistiky"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Odemkněte prémiové statistiky videa ve třech krocích:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Přihlaste se přes Patreon v okně rozšíření Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Vyberte úroveň Premium pro aktivaci časových os aktivity, žebříčků zemí a interaktivní mapy."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Znovu načtěte YouTube a uvidíte hodinové trendy, hlavní země a detailní přehled států USA pro každé video."
   },
   "premiumTierNotice_title": {
     "message": "Prémiová analytika je uzamčená"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Zatím tu nejsou žádné komentáře. Zahajte diskuzi."
   },
-  "discussion_replyEmpty": {
-    "message": "Zatím žádné odpovědi."
-  },
   "discussion_comment": {
     "message": "Komentář"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "To se mi nelíbí"
-  },
-  "discussion_reacting": {
-    "message": "Ukládání reakce…"
   },
   "discussion_signInRequired": {
     "message": "Pro pokračování se přihlaste ve vyskakovacím okně rozšíření."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Důvod moderování"
   },
-  "discussion_moderationSaved": {
-    "message": "Akce moderátora byla uložena."
-  },
-  "discussion_reported": {
-    "message": "Počet hlášení: $1"
-  },
   "discussion_unavailable": {
     "message": "Komentáře RYD nejsou pro toto video dostupné."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Váš komentář získal tento počet označení To se mi líbí: $1"
   },
-  "discussion_notificationDislike": {
-    "message": "Někomu se nelíbil váš komentář"
-  },
-  "discussion_notificationReaction": {
-    "message": "Někdo reagoval na váš komentář"
-  },
   "discussion_someone": {
     "message": "Někdo"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Zobrazit diskuzi"
   },
-  "discussion_unread": {
-    "message": "Nepřečtená oznámení: $1"
-  },
   "discussion_signedOutInbox": {
     "message": "Přihlaste se a zobrazte odpovědi a označení líbí se u svých komentářů."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Tato diskuze již není dostupná."
   },
   "discussion_discussionTab": {
     "message": "Diskuze"
   },
   "discussion_nickname": {
     "message": "Přezdívka"
-  },
-  "discussion_reportCount": {
-    "message": "Hlášení"
   },
   "discussion_reportStatus": {
     "message": "Stav hlášení"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Autor"
   },
-  "discussion_me": {
-    "message": "Vy"
-  },
   "discussion_saving": {
     "message": "Ukládání…"
-  },
-  "discussion_confirm": {
-    "message": "Potvrdit"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Nová aktivita u vašich komentářů"
-  },
-  "discussion_showThread": {
-    "message": "Zobrazit vlákno"
   },
   "discussion_loadReplies": {
     "message": "Zobrazit odpovědi ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Pokračovat"
-  },
-  "counts_consent_enable": {
-    "message": "Zapnout počty nelíbí se"
   },
   "counts_consent_toolbar": {
     "message": "Chcete-li pokračovat, otevřete Return YouTube Dislike z nabídky rozšíření Firefoxu."

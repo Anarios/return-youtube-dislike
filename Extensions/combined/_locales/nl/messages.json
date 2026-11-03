@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API‑status:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Kleurenthema:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Instellingen"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Getalnotatie:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premiumfuncties zijn beschikbaar voor supporters op Patreon"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Verberg het paneel met Premium video-inzichten op YouTube-kijkpagina’s."
   },
-  "roundNumbers": {
-    "message": "Afgeronde getallen weergeven"
-  },
-  "roundNumbersHover": {
-    "message": "Rond getallen naar beneden af (standaard YouTube-gedrag)."
-  },
   "shortsSupport": {
     "message": "Ondersteuning voor YouTube Shorts"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Percentage in de tooltip van de like/dislike‑balk weergeven."
-  },
-  "textColorTheme": {
-    "message": "Kleurenthema:"
   },
   "textColorTheme1": {
     "message": "Klassiek"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "Vind ik niet leuk"
   },
-  "textColorizeRatioBar": {
-    "message": "Verhoudingsbalk inkleuren"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Gebruik aangepaste kleuren voor de verhoudingsbalk."
-  },
-  "textColorizeThumbs": {
-    "message": "Duimpjes inkleuren"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Gebruik aangepaste kleuren voor duimpictogrammen."
-  },
-  "textConsistentFormat": {
-    "message": "Maak het formaat voor likes en dislikes consistent"
-  },
-  "textConsistentFormatHover": {
-    "message": "Herformatteer als getallen."
-  },
   "textDeveloper": {
     "message": "door Dmitry Selivanov & Gemeenschap"
-  },
-  "textLikesDisabled": {
-    "message": "Uitgeschakeld door eigenaar"
-  },
-  "textNumberFormat": {
-    "message": "Getalnotatie:"
-  },
-  "textRoundingNumbers": {
-    "message": "Statistieken voor leuk/niet leuk naar beneden afronden (standaard YouTube-gedrag)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Afgeronde statistieken weergeven."
   },
   "textSettings": {
     "message": "Inzending voor leuk/niet leuk uitschakelen"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "Tijdelijk niet beschikbaar"
-  },
-  "textUpdate": {
-    "message": "Actualiseer naar"
   },
   "tooltipPercentageMode": {
     "message": "Percentage‑modus:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Aantal ruwe dislikes"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Geschatte dislikes"
-  },
   "premiumTeaser_statLikes": {
     "message": "Ruwe telling van vind-ik-leuks"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "De dislikegegevens konden nu niet worden geladen. Probeer de pagina te vernieuwen."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Premium-analyses ontgrendelen"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Ontgrendel Premium-video-inzichten in drie snelle stappen:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Meld je aan met Patreon vanuit het pop-upvenster van de Return YouTube Dislike-extensie."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Selecteer het Premium-abonnement om activiteitstijdlijnen, ranglijsten per land en de interactieve kaart te activeren."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Laad YouTube opnieuw om uurlijkse trends, toplanden en uitsplitsingen per Amerikaanse staat te bekijken voor elke video."
   },
   "premiumTierNotice_title": {
     "message": "Premium-analyse vergrendeld"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Nog geen reacties. Begin het gesprek."
   },
-  "discussion_replyEmpty": {
-    "message": "Nog geen antwoorden."
-  },
   "discussion_comment": {
     "message": "Reactie"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Vind ik niet leuk"
-  },
-  "discussion_reacting": {
-    "message": "Waardering opslaan…"
   },
   "discussion_signInRequired": {
     "message": "Log in via het pop-upvenster van de extensie om verder te gaan."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Reden voor moderatie"
   },
-  "discussion_moderationSaved": {
-    "message": "Moderatieactie opgeslagen."
-  },
-  "discussion_reported": {
-    "message": "$1 meldingen"
-  },
   "discussion_unavailable": {
     "message": "RYD-reacties zijn niet beschikbaar voor deze video."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Je reactie heeft $1 likes gekregen"
   },
-  "discussion_notificationDislike": {
-    "message": "Iemand vindt je reactie niet leuk"
-  },
-  "discussion_notificationReaction": {
-    "message": "Iemand heeft je reactie gewaardeerd"
-  },
   "discussion_someone": {
     "message": "Iemand"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Discussie bekijken"
   },
-  "discussion_unread": {
-    "message": "$1 ongelezen meldingen"
-  },
   "discussion_signedOutInbox": {
     "message": "Log in om antwoorden en likes op je reacties te zien."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Deze discussie is niet meer beschikbaar."
   },
   "discussion_discussionTab": {
     "message": "Discussie"
   },
   "discussion_nickname": {
     "message": "Bijnaam"
-  },
-  "discussion_reportCount": {
-    "message": "Meldingen"
   },
   "discussion_reportStatus": {
     "message": "Status van melding"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Auteur"
   },
-  "discussion_me": {
-    "message": "Jij"
-  },
   "discussion_saving": {
     "message": "Opslaan…"
-  },
-  "discussion_confirm": {
-    "message": "Bevestigen"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Nieuwe activiteit bij je reacties"
-  },
-  "discussion_showThread": {
-    "message": "Gespreksreeks tonen"
   },
   "discussion_loadReplies": {
     "message": "Antwoorden tonen ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Doorgaan"
-  },
-  "counts_consent_enable": {
-    "message": "Aantallen dislikes inschakelen"
   },
   "counts_consent_toolbar": {
     "message": "Open Return YouTube Dislike via het extensiemenu van Firefox om verder te gaan."

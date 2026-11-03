@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "وضعیت API:"
-  },
-  "apiStatusOffline": {
-    "message": "آفلاین"
-  },
-  "apiStatusOnline": {
-    "message": "آنلاین"
-  },
   "colorTheme": {
     "message": "تم رنگی:"
   },
@@ -65,9 +56,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "تنظیمات"
   },
@@ -94,9 +82,6 @@
   },
   "numberFormat": {
     "message": "فرمت اعداد:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "ویژگی‌های پریمیوم برای حامیان Patreon در دسترس است"
@@ -197,12 +182,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "مخفی کردن پنل بینش‌های ویدیویی پریمیوم در صفحات تماشای YouTube."
   },
-  "roundNumbers": {
-    "message": "نمایش اعداد گرد شده به پایین"
-  },
-  "roundNumbersHover": {
-    "message": "گرد کردن اعداد به سمت پایین (رفتار پیش‌فرض YouTube)."
-  },
   "shortsSupport": {
     "message": "پشتیبانی از YouTube Shorts"
   },
@@ -211,9 +190,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "نمایش درصد در tooltip نوار like/dislike."
-  },
-  "textColorTheme": {
-    "message": "تم رنگی:"
   },
   "textColorTheme1": {
     "message": "کلاسیک"
@@ -224,38 +200,8 @@
   "textColorTheme3": {
     "message": "نئون"
   },
-  "textColorizeRatioBar": {
-    "message": "رنگی کردن نوار نسبت"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "استفاده از رنگ‌های سفارشی برای نوار نسبت."
-  },
-  "textColorizeThumbs": {
-    "message": "رنگی کردن شست‌ها"
-  },
-  "textColorizeThumbsHover": {
-    "message": "استفاده از رنگ‌های سفارشی برای آیکون‌های شست."
-  },
-  "textConsistentFormat": {
-    "message": "یکسان‌سازی قالب اعداد like و dislike"
-  },
-  "textConsistentFormatHover": {
-    "message": "قالب‌بندی مجدد اعداد like."
-  },
   "textDeveloper": {
     "message": "توسط Dmitry Selivanov و جامعه کاربری"
-  },
-  "textLikesDisabled": {
-    "message": "غیرفعال‌شده توسط مالک"
-  },
-  "textNumberFormat": {
-    "message": "فرمت اعداد:"
-  },
-  "textRoundingNumbers": {
-    "message": "گرد کردن آمار like/dislike به سمت پایین (رفتار پیش‌فرض YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "نمایش آمار گرد شده به سمت پایین."
   },
   "textSettings": {
     "message": "غیرفعال کردن ارسال like/dislike"
@@ -265,9 +211,6 @@
   },
   "textTempUnavailable": {
     "message": "موقت غیرقابل دسترس"
-  },
-  "textUpdate": {
-    "message": "به‌روزرسانی به"
   },
   "tooltipPercentageMode": {
     "message": "حالت درصد:"
@@ -482,9 +425,6 @@
   "premiumTeaser_statRaw": {
     "message": "تعداد دیسلایک خام"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "دیسلایک‌های تخمینی"
-  },
   "premiumTeaser_statLikes": {
     "message": "تعداد لایک خام"
   },
@@ -494,21 +434,6 @@
   "premiumTeaser_statusError": {
     "message": "در حال حاضر نتوانستیم داده‌های دیسلایک را بارگذاری کنیم. صفحه را دوباره بارگذاری کنید."
   },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "نحوه باز کردن قفل تحلیل‌های پریمیوم"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "بینش‌های ویدیویی پریمیوم را در سه مرحله سریع فعال کنید:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "از پنجره بازشوی افزونه Return YouTube Dislike با Patreon وارد شوید."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "سطح Premium را انتخاب کنید تا جدول زمانی فعالیت، رده‌بندی کشورها و نقشه تعاملی فعال شوند."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "صفحه YouTube را دوباره بارگذاری کنید تا روندهای ساعتی، کشورهای برتر و تفکیک ایالت‌های آمریکا را برای هر ویدیو مشاهده کنید."
-  },
   "premiumTierNotice_title": {
     "message": "تحلیل‌های پریمیوم قفل است"
   },
@@ -517,21 +442,6 @@
   },
   "premiumTierNotice_cta": {
     "message": "ارتقا در Patreon"
-  },
-  "changelog_title": {
-    "message": "گزارش تغییرات تحلیل‌های پریمیوم · ۲۰ اکتبر ۲۰۲۵"
-  },
-  "changelog_badge": {
-    "message": "انتشار پریمیوم"
-  },
-  "changelog_heading": {
-    "message": "تحلیل‌های پریمیوم، با طراحی نو"
-  },
-  "changelog_subheading": {
-    "message": "خط زمانی فعالیت زنده، رده‌بندی کشورهای برتر و نقشه تعاملی گنجانده‌شده در Return YouTube Dislike Premium را کاوش کنید."
-  },
-  "changelog_releaseDate": {
-    "message": "منتشر شده در ۲۰ اکتبر ۲۰۲۵"
   },
   "changelog_cta_primary": {
     "message": "ارتقا در Patreon"
@@ -545,23 +455,11 @@
   "changelog_feature_timeline_title": {
     "message": "خط زمانی فعالیت زنده"
   },
-  "changelog_feature_timeline_body": {
-    "message": "جریان likeها و dislikeها را به صورت زنده تماشا کنید. بدون بارگذاری مجدد، پیش‌تنظیم‌های ساعتی، روزانه یا تمام زمان‌ها را تغییر دهید، پنجره را به روز اول یا آخرین آرا متصل کنید و هر جهش را بررسی کنید تا ببینید چه چیزی تعامل را برانگیخته است."
-  },
   "changelog_feature_map_title": {
     "message": "نقشه حرارتی تعاملی جهان و ایالات متحده"
   },
-  "changelog_feature_map_body": {
-    "message": "در سراسر جهان حرکت کنید یا به ایالت‌های آمریکا بروید تا نقاط پرتعامل را ببینید. Likeها، dislikeها و نسبت‌ها را در tooltip ارتقایافته مقایسه کنید و مناطقی را که زودتر از همه به آپلودهای شما واکنش نشان می‌دهند برجسته نمایید."
-  },
   "changelog_feature_quality_title": {
     "message": "رده‌بندی کشورهای برتر"
-  },
-  "changelog_feature_quality_body": {
-    "message": "هر کشور را بر اساس فعالیت خام، likeها، dislikeها یا نسبت رتبه‌بندی کنید. با همان پیش‌تنظیم‌های خط زمانی فیلتر کنید تا متوجه شوید کمپین‌ها در کجا موفق بوده‌اند و برای انتشار بعدی برنامه‌ریزی کنید."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "تصویر به‌زودی ارائه می‌شود—در زمان آماده بودن، این نما را در DevTools ضبط کنید."
   },
   "changelog_screenshot_label_timeline": {
     "message": "محل جای‌گذاری: نمای کلی خط زمانی"
@@ -572,32 +470,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "محل جای‌گذاری: رده‌بندی کشورها"
   },
-  "changelog_section_upgrade": {
-    "message": "نحوه باز کردن قفل تحلیل‌های پریمیوم"
-  },
-  "changelog_upgrade_body": {
-    "message": "آماده‌اید؟ این مراحل سریع را دنبال کنید و برگه YouTube خود را تازه‌سازی نمایید."
-  },
   "changelog_upgrade_step1": {
     "message": "پنجره بازشوی Return YouTube Dislike را باز کرده و با Patreon وارد شوید."
-  },
-  "changelog_upgrade_step2": {
-    "message": "سطح Premium را انتخاب کنید تا جریان داده‌های تحلیلی برای حساب شما فعال شود."
-  },
-  "changelog_upgrade_step3": {
-    "message": "هر صفحه تماشای YouTube را مجدداً بارگذاری کنید—خط زمانی، نقشه و رده‌بندی‌ها بلافاصله نمایش داده می‌شوند."
-  },
-  "changelog_section_release": {
-    "message": "نکات برجسته انتشار"
-  },
-  "changelog_release_item1": {
-    "message": "پیش‌تنظیم‌های خط زمانی فعالیت، داده‌های زنده را با لنگرهای بازه برای اولین و آخرین دسته‌ها پخش می‌کنند."
-  },
-  "changelog_release_item2": {
-    "message": "جدول رده‌بندی کشورها بلافاصله به‌روزرسانی می‌شود تا بتوانید مناطق رو به رشد را بدون ترک پنل مشاهده کنید."
-  },
-  "changelog_release_item3": {
-    "message": "نقشه تعاملی، نقاط پرتعامل جهانی و ایالت‌های آمریکا را با tooltipها و معیارهای شفاف‌تر برجسته می‌کند."
   },
   "changelog_support_heading": {
     "message": "به کمک نیاز دارید؟"
@@ -656,9 +530,6 @@
   "discussion_empty": {
     "message": "هنوز نظری ثبت نشده است. گفتگو را آغاز کنید."
   },
-  "discussion_replyEmpty": {
-    "message": "هنوز پاسخی وجود ندارد."
-  },
   "discussion_comment": {
     "message": "نظر"
   },
@@ -703,9 +574,6 @@
   },
   "discussion_dislike": {
     "message": "Dislike"
-  },
-  "discussion_reacting": {
-    "message": "در حال ذخیره واکنش…"
   },
   "discussion_signInRequired": {
     "message": "برای ادامه، از پنجره بازشوی افزونه وارد شوید."
@@ -800,12 +668,6 @@
   "discussion_moderationReason": {
     "message": "دلیل اقدام مدیریتی"
   },
-  "discussion_moderationSaved": {
-    "message": "اقدام مدیریتی ذخیره شد."
-  },
-  "discussion_reported": {
-    "message": "$1 گزارش"
-  },
   "discussion_unavailable": {
     "message": "نظرات RYD برای این ویدیو در دسترس نیست."
   },
@@ -842,12 +704,6 @@
   "discussion_notificationLikes": {
     "message": "نظر شما $1 like دریافت کرد"
   },
-  "discussion_notificationDislike": {
-    "message": "یک نفر نظر شما را dislike کرد"
-  },
-  "discussion_notificationReaction": {
-    "message": "یک نفر به نظر شما واکنش نشان داد"
-  },
   "discussion_someone": {
     "message": "یک نفر"
   },
@@ -860,23 +716,14 @@
   "discussion_view": {
     "message": "مشاهده گفتگو"
   },
-  "discussion_unread": {
-    "message": "$1 اعلان خوانده‌نشده"
-  },
   "discussion_signedOutInbox": {
     "message": "برای دیدن پاسخ‌ها و like‌هایی که نظرات شما دریافت کرده‌اند وارد شوید."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "این گفتگو دیگر در دسترس نیست."
   },
   "discussion_discussionTab": {
     "message": "گفتگو"
   },
   "discussion_nickname": {
     "message": "نام مستعار"
-  },
-  "discussion_reportCount": {
-    "message": "گزارش‌ها"
   },
   "discussion_reportStatus": {
     "message": "وضعیت گزارش"
@@ -890,20 +737,8 @@
   "discussion_author": {
     "message": "نویسنده"
   },
-  "discussion_me": {
-    "message": "شما"
-  },
   "discussion_saving": {
     "message": "در حال ذخیره…"
-  },
-  "discussion_confirm": {
-    "message": "تأیید"
-  },
-  "discussion_notificationUpdated": {
-    "message": "فعالیت جدید روی نظرات شما"
-  },
-  "discussion_showThread": {
-    "message": "نمایش رشته پیام"
   },
   "discussion_loadReplies": {
     "message": "نمایش پاسخ‌ها ($1)"
@@ -1159,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "ادامه"
-  },
-  "counts_consent_enable": {
-    "message": "فعال‌کردن نمایش تعداد نپسندیدن‌ها"
   },
   "counts_consent_toolbar": {
     "message": "برای ادامه، Return YouTube Dislike را از منوی افزونه‌های Firefox باز کنید."

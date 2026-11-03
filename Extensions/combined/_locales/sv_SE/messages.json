@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API‑status:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Färgtema:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Return YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Inställningar"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Sifforformat:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Premiumfunktioner är tillgängliga för Patreon‑stödjare"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Dölj panelen med Premium-videoinblickar på YouTubes tittarsidor."
   },
-  "roundNumbers": {
-    "message": "Visa avrundade siffror"
-  },
-  "roundNumbersHover": {
-    "message": "Avrunda siffrorna neråt (standard YouTube-beteende)."
-  },
   "shortsSupport": {
     "message": "YouTube Shorts Support"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Visa procent i verktygstipset för gilla/ogilla‑fältet."
-  },
-  "textColorTheme": {
-    "message": "Färgtema:"
   },
   "textColorTheme1": {
     "message": "Klassisk"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "Ogilla"
   },
-  "textColorizeRatioBar": {
-    "message": "Färgsätt förhållandefältet"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Använd anpassade färger för förhållandefältet."
-  },
-  "textColorizeThumbs": {
-    "message": "Färglägg tummarna"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Använd anpassade färger för tumikoner."
-  },
-  "textConsistentFormat": {
-    "message": "Gör formatet på gilla och ogilla konsekvent"
-  },
-  "textConsistentFormatHover": {
-    "message": "Omformatera som siffror."
-  },
   "textDeveloper": {
     "message": "av Dmitry Selivanov & Community"
-  },
-  "textLikesDisabled": {
-    "message": "Inaktiverad av ägaren"
-  },
-  "textNumberFormat": {
-    "message": "Sifforformat:"
-  },
-  "textRoundingNumbers": {
-    "message": "Avrunda statistiken neråt för gilla/ogilla (standard YouTube-beteende)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Visa avrundad statistik."
   },
   "textSettings": {
     "message": "Inaktivera gilla-/ogilla-inskickningar"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "Tillfälligt otillgänglig"
-  },
-  "textUpdate": {
-    "message": "Uppdatera till"
   },
   "tooltipPercentageMode": {
     "message": "Procentläge:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Antal råa ogilla-markeringar"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Beräknade ogilla-markeringar"
-  },
   "premiumTeaser_statLikes": {
     "message": "Rått antal gilla-markeringar"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Ogilla-data kunde inte läsas in. Försök att ladda om sidan."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Så låser du upp Premiumanalyser"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Lås upp Premium-videoinblickar i tre snabba steg:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Logga in med Patreon via popup-fönstret i Return YouTube Dislike-tillägget."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Välj Premium-nivån för att aktivera aktivitetsgrafer, landstopplistor och den interaktiva kartan."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Ladda om YouTube för att se timvisa trender, toppländer och detaljer per delstat i USA för varje video."
   },
   "premiumTierNotice_title": {
     "message": "Premiumanalys låst"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Inga kommentarer ännu. Starta diskussionen."
   },
-  "discussion_replyEmpty": {
-    "message": "Inga svar ännu."
-  },
   "discussion_comment": {
     "message": "Kommentar"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Ogilla"
-  },
-  "discussion_reacting": {
-    "message": "Sparar reaktion…"
   },
   "discussion_signInRequired": {
     "message": "Logga in via tilläggets popupfönster för att fortsätta."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Orsak till moderering"
   },
-  "discussion_moderationSaved": {
-    "message": "Modereringsåtgärden har sparats."
-  },
-  "discussion_reported": {
-    "message": "$1 rapporter"
-  },
   "discussion_unavailable": {
     "message": "RYD-kommentarer är inte tillgängliga för den här videon."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Din kommentar fick $1 gilla-markeringar"
   },
-  "discussion_notificationDislike": {
-    "message": "Någon ogillade din kommentar"
-  },
-  "discussion_notificationReaction": {
-    "message": "Någon reagerade på din kommentar"
-  },
   "discussion_someone": {
     "message": "Någon"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Visa diskussion"
   },
-  "discussion_unread": {
-    "message": "$1 olästa aviseringar"
-  },
   "discussion_signedOutInbox": {
     "message": "Logga in för att se svar och gilla-markeringar på dina kommentarer."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Den här diskussionen är inte längre tillgänglig."
   },
   "discussion_discussionTab": {
     "message": "Diskussion"
   },
   "discussion_nickname": {
     "message": "Smeknamn"
-  },
-  "discussion_reportCount": {
-    "message": "Rapporter"
   },
   "discussion_reportStatus": {
     "message": "Rapportstatus"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Författare"
   },
-  "discussion_me": {
-    "message": "Du"
-  },
   "discussion_saving": {
     "message": "Sparar…"
-  },
-  "discussion_confirm": {
-    "message": "Bekräfta"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Ny aktivitet på dina kommentarer"
-  },
-  "discussion_showThread": {
-    "message": "Visa tråd"
   },
   "discussion_loadReplies": {
     "message": "Visa svar ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Fortsätt"
-  },
-  "counts_consent_enable": {
-    "message": "Aktivera antalet ogilla"
   },
   "counts_consent_toolbar": {
     "message": "Öppna Return YouTube Dislike från Firefox tilläggsmeny för att fortsätta."

@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Κατάσταση API:"
-  },
-  "apiStatusOffline": {
-    "message": "Εκτός λειτουργίας"
-  },
-  "apiStatusOnline": {
-    "message": "Σε λειτουργία"
-  },
   "colorTheme": {
     "message": "Χρωματικό θέμα:"
   },
@@ -47,9 +38,6 @@
   "extensionName": {
     "message": "Επαναφορά του YouTube Dislike"
   },
-  "extensionNameBeta": {
-    "message": "Return YouTube Dislike Beta"
-  },
   "legendSettings": {
     "message": "Ρυθμίσεις"
   },
@@ -76,9 +64,6 @@
   },
   "numberFormat": {
     "message": "Μορφή αριθμών:"
-  },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
   },
   "patreonLoggedOutMessage": {
     "message": "Οι premium λειτουργίες είναι διαθέσιμες για υποστηρικτές στο Patreon"
@@ -158,12 +143,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Απόκρυψη του πίνακα στατιστικών Premium για το βίντεο στις σελίδες αναπαραγωγής του YouTube."
   },
-  "roundNumbers": {
-    "message": "Εμφάνιση στρογγυλεμένων αριθμών"
-  },
-  "roundNumbersHover": {
-    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (προεπιλεγμένη επιλογή του YouTube)."
-  },
   "shortsSupport": {
     "message": "Υποστήριξη για YouTube Shorts"
   },
@@ -172,9 +151,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Εμφάνιση ποσοστού στο tooltip της μπάρας like/dislike."
-  },
-  "textColorTheme": {
-    "message": "Θέματα χρωμάτων:"
   },
   "textColorTheme1": {
     "message": "Classic"
@@ -203,38 +179,8 @@
   "colorThemeDislike": {
     "message": "Δεν μου αρέσει"
   },
-  "textColorizeRatioBar": {
-    "message": "Χρωματισμός μπάρας αναλογιών."
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Προσαρμοζόμενο χρώμα για την μπάρα αναλογιών."
-  },
-  "textColorizeThumbs": {
-    "message": "Χρωματισμός των thumbs"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Προσαρμοζόμενο χρώμα για τα thumb icons."
-  },
-  "textConsistentFormat": {
-    "message": "Κάνει σταθερή την μορφοποίηση των likes & dislikes."
-  },
-  "textConsistentFormatHover": {
-    "message": "Μορφοποίηση του αριθμού των likes."
-  },
   "textDeveloper": {
     "message": "από τον Dmitry Selivanov & την κοινότητα"
-  },
-  "textLikesDisabled": {
-    "message": "Απενεργοποιήθηκε από τον κάτοχο"
-  },
-  "textNumberFormat": {
-    "message": "Μορφή αριθμών:"
-  },
-  "textRoundingNumbers": {
-    "message": "Στρογγυλοποιήστε την τιμή μέτρησης (προεπιλεγμένη επιλογή του YouTube)."
-  },
-  "textRoundingNumbersHover": {
-    "message": "Εμφάνιση στρογγυλεμένων αριθμών."
   },
   "textSettings": {
     "message": "Διακοπή υποβολής like/dislike"
@@ -244,9 +190,6 @@
   },
   "textTempUnavailable": {
     "message": "Προσωρινά μη διαθέσιμο"
-  },
-  "textUpdate": {
-    "message": "Ενημέρωση σε"
   },
   "tooltipPercentageMode": {
     "message": "Λειτουργία ποσοστού:"
@@ -461,9 +404,6 @@
   "premiumTeaser_statRaw": {
     "message": "Ανεπεξέργαστος αριθμός dislikes"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Εκτιμώμενα dislikes"
-  },
   "premiumTeaser_statLikes": {
     "message": "Ανεπεξέργαστος αριθμός likes"
   },
@@ -472,21 +412,6 @@
   },
   "premiumTeaser_statusError": {
     "message": "Δεν ήταν δυνατή η φόρτωση των δεδομένων dislikes. Δοκιμάστε να ανανεώσετε τη σελίδα."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Πώς να ξεκλειδώσετε τα premium στατιστικά"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Ξεκλειδώστε τα premium στατιστικά βίντεο σε τρία γρήγορα βήματα:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Συνδεθείτε με το Patreon από το αναδυόμενο παράθυρο της επέκτασης Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Επιλέξτε το επίπεδο Premium για να ενεργοποιήσετε χρονολόγια δραστηριότητας, πίνακες κατάταξης χωρών και τον διαδραστικό χάρτη."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Ανανεώστε το YouTube για να δείτε ωριαίες τάσεις, κορυφαίες χώρες και ανάλυση πολιτειών των ΗΠΑ για κάθε βίντεο."
   },
   "premiumTierNotice_title": {
     "message": "Οι premium αναλύσεις είναι κλειδωμένες"
@@ -608,9 +533,6 @@
   "discussion_empty": {
     "message": "Δεν υπάρχουν ακόμη σχόλια. Ξεκινήστε τη συζήτηση."
   },
-  "discussion_replyEmpty": {
-    "message": "Δεν υπάρχουν ακόμη απαντήσεις."
-  },
   "discussion_comment": {
     "message": "Σχόλιο"
   },
@@ -655,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Δεν μου αρέσει"
-  },
-  "discussion_reacting": {
-    "message": "Αποθήκευση αντίδρασης…"
   },
   "discussion_signInRequired": {
     "message": "Συνδεθείτε από το αναδυόμενο παράθυρο της επέκτασης για να συνεχίσετε."
@@ -752,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Αιτία ενέργειας συντονισμού"
   },
-  "discussion_moderationSaved": {
-    "message": "Η ενέργεια συντονισμού αποθηκεύτηκε."
-  },
-  "discussion_reported": {
-    "message": "$1 αναφορές"
-  },
   "discussion_unavailable": {
     "message": "Τα σχόλια RYD δεν είναι διαθέσιμα για αυτό το βίντεο."
   },
@@ -794,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Το σχόλιό σας έλαβε $1 likes"
   },
-  "discussion_notificationDislike": {
-    "message": "Σε κάποιον δεν άρεσε το σχόλιό σας"
-  },
-  "discussion_notificationReaction": {
-    "message": "Κάποιος αντέδρασε στο σχόλιό σας"
-  },
   "discussion_someone": {
     "message": "Κάποιος"
   },
@@ -812,23 +719,14 @@
   "discussion_view": {
     "message": "Προβολή συζήτησης"
   },
-  "discussion_unread": {
-    "message": "$1 μη αναγνωσμένες ειδοποιήσεις"
-  },
   "discussion_signedOutInbox": {
     "message": "Συνδεθείτε για να δείτε απαντήσεις και «Μου αρέσει» στα σχόλιά σας."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Αυτή η συζήτηση δεν είναι πλέον διαθέσιμη."
   },
   "discussion_discussionTab": {
     "message": "Συζήτηση"
   },
   "discussion_nickname": {
     "message": "Ψευδώνυμο"
-  },
-  "discussion_reportCount": {
-    "message": "Αναφορές"
   },
   "discussion_reportStatus": {
     "message": "Κατάσταση αναφοράς"
@@ -842,20 +740,8 @@
   "discussion_author": {
     "message": "Συντάκτης"
   },
-  "discussion_me": {
-    "message": "Εσείς"
-  },
   "discussion_saving": {
     "message": "Αποθήκευση…"
-  },
-  "discussion_confirm": {
-    "message": "Επιβεβαίωση"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Νέα δραστηριότητα στα σχόλιά σας"
-  },
-  "discussion_showThread": {
-    "message": "Εμφάνιση νήματος"
   },
   "discussion_loadReplies": {
     "message": "Εμφάνιση απαντήσεων ($1)"
@@ -1108,9 +994,6 @@
   },
   "discussion_consentContinue": {
     "message": "Συνέχεια"
-  },
-  "counts_consent_enable": {
-    "message": "Ενεργοποίηση μετρητών «Δεν μου αρέσει»"
   },
   "counts_consent_toolbar": {
     "message": "Ανοίξτε το Return YouTube Dislike από το μενού επεκτάσεων του Firefox για να συνεχίσετε."
