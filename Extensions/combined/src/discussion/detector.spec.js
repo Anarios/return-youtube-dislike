@@ -55,17 +55,18 @@ test("missing comments and generic messages never count as disabled", () => {
   expect(findDiscussionSurface({ videoId: VIDEO, surface: "watch" })).toBeNull();
 });
 
-test("accepts positive native disabled evidence when kids status is unknown", () => {
+test("accepts positive native disabled evidence", () => {
   const root = watch();
   respond({ videoId: VIDEO, disabled: true });
   expect(findDiscussionSurface({ videoId: VIDEO, surface: "watch" })?.host).toBe(root.querySelector("ytd-comments"));
   expect(root.hasAttribute(NATIVE_STATE_ATTRIBUTE)).toBe(false);
 });
 
-test("positive made-for-kids proof overrides disabled proof and help link", () => {
-  watch();
-  respond({ videoId: VIDEO, disabled: true, madeForKids: true });
-  expect(findDiscussionSurface({ videoId: VIDEO, surface: "watch" })).toBeNull();
+test("eligibility does not depend on the video's audience setting", () => {
+  const root = watch();
+  root.setAttribute("made-for-kids", "true");
+  respond({ videoId: VIDEO, disabled: true });
+  expect(findDiscussionSurface({ videoId: VIDEO, surface: "watch" })?.root).toBe(root);
 });
 
 test("ignores stale hidden roots and stale bridge identity", () => {
@@ -92,6 +93,6 @@ test("Shorts requires a current native disabled state and action surface", () =>
     right: 400,
   });
   expect(findDiscussionSurface({ videoId: VIDEO, surface: "shorts" })).toBeNull();
-  respond({ videoId: VIDEO, disabled: true, madeForKids: false });
+  respond({ videoId: VIDEO, disabled: true });
   expect(findDiscussionSurface({ videoId: VIDEO, surface: "shorts" })?.host.tagName).toBe("REEL-ACTION-BAR-VIEW-MODEL");
 });

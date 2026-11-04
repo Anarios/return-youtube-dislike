@@ -94,7 +94,6 @@ export function discussionError(error) {
     unauthorized: "signInRequired",
     comments_not_allowed: "unavailable",
     comments_disabled_required: "unavailable",
-    made_for_kids: "unavailable",
     video_not_eligible: "unavailable",
     comment_not_found: "commentUnavailable",
     not_found: "commentUnavailable",

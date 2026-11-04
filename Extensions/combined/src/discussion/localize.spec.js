@@ -107,7 +107,7 @@ test("keeps unknown keys and preserves literal and missing substitution values",
 test.each([
   [{ code: "invalid_session" }, "signInRequired"],
   [{ code: "membership_inactive" }, "tierRequired"],
-  [{ code: "made_for_kids" }, "unavailable"],
+  [{ code: "video_not_eligible" }, "unavailable"],
   [{ code: "comment_not_found" }, "commentUnavailable"],
   [{ code: "nickname_taken" }, "nicknameTaken"],
   [{ code: "conflict", status: 403 }, "conflict"],

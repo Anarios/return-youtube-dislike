@@ -51,112 +51,15 @@ function watch() {
   return root;
 }
 
-function miniplayerNotice(
-  text,
-  helpUrl = "//support.google.com/youtube/bin/answer.py?answer=9632097&nohelpkit=1&hl=en",
-) {
-  return {
-    miniplayer: {
-      miniplayerRenderer: {
-        playbackMode: "PLAYBACK_MODE_PAUSED_ONLY",
-        minimizedEndpoint: {
-          openPopupAction: {
-            popup: {
-              notificationActionRenderer: {
-                responseText: { simpleText: text },
-                actionButton: {
-                  buttonRenderer: {
-                    command: {
-                      urlEndpoint: { url: helpUrl },
-                      commandMetadata: { webCommandMetadata: { url: helpUrl } },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  };
-}
-
-const ENGLISH_KIDS_NOTICE = "Miniplayer is off for videos made for kids. Tap play to resume";
-
 test("reads disabled watch evidence from the page-owned controller without text matching", () => {
-  expect(state(watch())).toEqual({ videoId: VIDEO, disabled: true, madeForKids: false });
+  expect(state(watch())).toEqual({ videoId: VIDEO, disabled: true });
 });
 
-test("only an explicit kids flag for the current video excludes the discussion", () => {
+test("reports the same native state whatever the video's audience setting", () => {
   const root = watch();
-  window.ytInitialPlayerResponse = { videoDetails: { videoId: "zyxwvutsrqp", isMadeForKids: true } };
-  expect(state(root).madeForKids).toBe(false);
-  window.ytInitialPlayerResponse = {
-    videoDetails: { videoId: VIDEO },
-    microformat: { playerMicroformatRenderer: { isFamilySafe: true } },
-  };
-  expect(state(root).madeForKids).toBe(false);
-  window.ytInitialPlayerResponse.videoDetails.isMadeForKids = true;
-  expect(state(root).madeForKids).toBe(true);
-});
-
-test("recognizes the current video's explicit miniplayer kids notice", () => {
-  const root = watch();
-  window.ytInitialPlayerResponse = {
-    videoDetails: { videoId: VIDEO },
-    playabilityStatus: miniplayerNotice(ENGLISH_KIDS_NOTICE),
-  };
-  expect(state(root).madeForKids).toBe(true);
-  window.ytInitialPlayerResponse.videoDetails.videoId = "zyxwvutsrqp";
-  expect(state(root).madeForKids).toBe(false);
-});
-
-test.each([
-  ["en", "//support.google.com/youtube/bin/answer.py?answer=9632097&nohelpkit=1&hl=en"],
-  ["ru", "//support.google.com/youtube/bin/answer.py?answer=9632097&nohelpkit=1&hl=ru"],
-  ["ru", "https://support.google.com/youtube/answer/9632097?hl=ru"],
-])("uses the current miniplayer's made-for-kids help link independently of %s wording", (language, helpUrl) => {
-  const root = watch();
-  document.documentElement.lang = language;
-  window.ytInitialPlayerResponse = {
-    videoDetails: { videoId: VIDEO },
-    playabilityStatus: miniplayerNotice("Localized miniplayer notice", helpUrl),
-  };
-  expect(state(root).madeForKids).toBe(true);
-  delete window.ytInitialPlayerResponse.playabilityStatus.miniplayer.miniplayerRenderer.minimizedEndpoint
-    .openPopupAction.popup.notificationActionRenderer.actionButton.buttonRenderer.command.urlEndpoint;
-  expect(state(root).madeForKids).toBe(true);
-  window.ytInitialPlayerResponse.playabilityStatus.miniplayer.miniplayerRenderer.playbackMode = "PLAYBACK_MODE_ALLOW";
-  expect(state(root).madeForKids).toBe(false);
-});
-
-test.each([
-  "https://support.google.com/youtube/answer/9706180",
-  "https://support.google.com.example.test/youtube/answer/9632097",
-  "https://support.google.com/youtube/bin/answer.py?answer=9706180",
-  "",
-])("does not infer a kids restriction from miniplayer text with an unrelated or absent help link: %s", (helpUrl) => {
-  const root = watch();
-  window.ytInitialPlayerResponse = {
-    videoDetails: { videoId: VIDEO },
-    playabilityStatus: miniplayerNotice(ENGLISH_KIDS_NOTICE, helpUrl),
-  };
-  expect(state(root).madeForKids).toBe(false);
-});
-
-test("ignores matching miniplayer text in descriptions, recommendations and advertisements", () => {
-  const root = watch();
-  const kids = { videoDetails: { videoId: "zyxwvutsrqp" }, playabilityStatus: miniplayerNotice(ENGLISH_KIDS_NOTICE) };
-  window.ytInitialPlayerResponse = {
-    videoDetails: { videoId: VIDEO, shortDescription: ENGLISH_KIDS_NOTICE },
-    playabilityStatus: miniplayerNotice(
-      "Miniplayer is unavailable. Please try again.",
-      "https://support.google.com/youtube/answer/9706180",
-    ),
-    endscreen: { videos: [kids] },
-    adPlacements: [kids],
-  };
-  expect(state(root).madeForKids).toBe(false);
+  root.setAttribute("made-for-kids", "");
+  window.ytInitialPlayerResponse = { videoDetails: { videoId: VIDEO, isMadeForKids: true } };
+  expect(state(root)).toEqual({ videoId: VIDEO, disabled: true });
 });
 
 test("finds a disabled Shorts comment button through its controller model", () => {
@@ -170,31 +73,11 @@ test("finds a disabled Shorts comment button through its controller model", () =
       ],
     },
   };
-  expect(state(root)).toEqual({ videoId: VIDEO, disabled: true, madeForKids: false });
+  expect(state(root)).toEqual({ videoId: VIDEO, disabled: true });
   root.querySelector("reel-action-bar-view-model").polymerController.data.buttonViewModels[0].buttonViewModel.state =
     "BUTTON_VIEW_MODEL_STATE_ACTIVE";
   expect(state(root).disabled).toBe(false);
 });
-
-test.each(["isMadeForKids", "madeForKids", "is_made_for_kids"])(
-  "accepts current response and microformat %s flags but ignores unrelated nested videos",
-  (flag) => {
-    const root = watch();
-    window.ytInitialPlayerResponse = {
-      videoDetails: { videoId: VIDEO },
-      endscreen: { videos: [{ videoId: "zyxwvutsrqp", [flag]: true }] },
-      adPlacements: [{ videoDetails: { videoId: "zyxwvutsrqp", [flag]: true } }],
-      microformat: { playerMicroformatRenderer: { recommendations: [{ [flag]: true }] } },
-    };
-    expect(state(root).madeForKids).toBe(false);
-    window.ytInitialPlayerResponse.microformat.playerMicroformatRenderer[flag] = true;
-    expect(state(root).madeForKids).toBe(true);
-    window.ytInitialPlayerResponse.microformat.playerMicroformatRenderer.videoId = "zyxwvutsrqp";
-    expect(state(root).madeForKids).toBe(false);
-    window.ytInitialPlayerResponse[flag] = true;
-    expect(state(root).madeForKids).toBe(true);
-  },
-);
 
 test("does not expose a result for an outgoing Shorts renderer", () => {
   window.history.replaceState({}, "", `/shorts/${VIDEO}`);
@@ -214,5 +97,5 @@ test("recognizes an unmarked current reel by contained player identity while rej
       ],
     };
   expect(state(document.getElementById("retained"))).toBeNull();
-  expect(state(document.getElementById("current"))).toEqual({ videoId: VIDEO, disabled: true, madeForKids: false });
+  expect(state(document.getElementById("current"))).toEqual({ videoId: VIDEO, disabled: true });
 });

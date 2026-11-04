@@ -26,17 +26,14 @@ function fixture({ language, surface, videoId, disabled = true, kids = false, da
     </style></head><body><main id="fixture-root"></main><script>
     (()=>{const o=${options};const root=document.createElement(o.surface==='watch'?'ytd-watch-flexy':'ytd-reel-video-renderer');
     const player=document.createElement('div');player.id=o.surface==='watch'?'movie_player':'shorts-player';
-    player.getVideoData=()=>({video_id:o.videoId});player.getPlayerResponse=()=>({videoDetails:{videoId:o.videoId,...(o.kids?{isMadeForKids:true}:{})},
-    endscreen:{videos:[{videoId:'OtherVideo1',isMadeForKids:true}]},adPlacements:[{videoDetails:{videoId:'OtherVideo2',madeForKids:true}}],
-    microformat:{playerMicroformatRenderer:{recommendations:[{isMadeForKids:true}]}}});
+    player.getVideoData=()=>({video_id:o.videoId});player.getPlayerResponse=()=>({videoDetails:{videoId:o.videoId,...(o.kids?{isMadeForKids:true}:{})}});
     root.append(player);root.polymerController={data:o.kids?{isMadeForKids:true}:{}};
     if(o.surface==='watch'){root.setAttribute('video-id',o.videoId);const comments=document.createElement('ytd-comments');
     comments.textContent=o.disabled?(o.language==='ru'?'Комментарии отключены.':'Comments are turned off.'):'Native comments enabled';
     comments.polymerController={data:{contents:o.disabled?[{messageRenderer:{text:{runs:[{navigationEndpoint:{urlEndpoint:{url:'https://support.google.com/youtube/answer/9706180?hl='+o.language}}}]}}}]:[]}};root.append(comments);}
     else{const actions=document.createElement('reel-action-bar-view-model');actions.polymerController={data:{buttonViewModels:[{buttonViewModel:{iconName:'SHORTS_COMMENT',state:o.disabled?'BUTTON_VIEW_MODEL_STATE_DISABLED':'BUTTON_VIEW_MODEL_STATE_ENABLED'}}]}};root.append(actions);}
     document.querySelector('#fixture-root').append(root);window.ytInitialPlayerResponse=player.getPlayerResponse();
-    window.__discussionFixture={setKids(value){root.polymerController.data=value?{isMadeForKids:true}:{};o.kids=value;window.ytInitialPlayerResponse=player.getPlayerResponse();document.dispatchEvent(new Event('yt-page-data-updated'));},
-    setLanguage(value){document.documentElement.lang=value;document.dispatchEvent(new Event('yt-page-data-updated'));}};
+    window.__discussionFixture={setLanguage(value){document.documentElement.lang=value;document.dispatchEvent(new Event('yt-page-data-updated'));}};
     })();</script></body></html>`;
 }
 
@@ -252,7 +249,7 @@ async function runHermeticDiscussionSmoke({
         { waitUntil: "domcontentloaded" },
       );
       await expect(page.locator("html")).toHaveAttribute("data-ryd-extension-build", marker.buildId);
-      if (options.kids || options.disabled === false) return;
+      if (options.disabled === false) return;
       if (options.surface === "shorts") await page.locator("#ryd-discussion-launcher").click();
       await expect(root()).toHaveCount(1);
       await expect(root()).toHaveAttribute("data-video-id", options.videoId);
@@ -511,7 +508,7 @@ async function runHermeticDiscussionSmoke({
         await expect(composer().locator("textarea")).toHaveCount(0);
         await expect(composer()).toContainText(catalog.discussion_gate.message);
         await expect(composer()).toContainText(catalog.paidFeaturesWhy.message);
-        record(`${label}-anonymous-unknown-kids-unrelated-kids-render`);
+        record(`${label}-anonymous-render`);
 
         await setAccount("commenter");
         const nickname = await ownNickname(language, surface);
@@ -606,15 +603,8 @@ async function runHermeticDiscussionSmoke({
         await moderation(comment, label);
         await notifications(comment, label, catalog);
 
-        await page.evaluate(() => window.__discussionFixture.setKids(true));
-        await expect(
-          page.locator("#ryd-discussion-panel, #ryd-discussion-launcher, #ryd-discussion-drawer"),
-        ).toHaveCount(0);
-        await page.evaluate(() => window.__discussionFixture.setKids(false));
-        if (surface === "shorts")
-          await expect(page.locator("#ryd-discussion-launcher")).toHaveAttribute("aria-expanded", "true");
-        await expect(root()).toHaveCount(1);
-        record(`${label}-positive-kids-excluded-unknown-restored`);
+        await open({ language, surface, videoId, disabled: true, kids: true, dark: true });
+        record(`${label}-audience-setting-render`);
 
         await open({ language, surface, videoId, disabled: false, kids: false, dark: true });
         await page.waitForTimeout(300);

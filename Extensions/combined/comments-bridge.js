@@ -28,67 +28,6 @@
     return Object.values(value).some((child) => hasDisabledNotice(child, depth + 1));
   }
 
-  function positiveKidsFlag(value) {
-    return ["isMadeForKids", "madeForKids", "is_made_for_kids"].some((key) => value?.[key] === true);
-  }
-
-  function hasKidsMiniplayerNotice(response) {
-    const renderer = response?.playabilityStatus?.miniplayer?.miniplayerRenderer;
-    if (renderer?.playbackMode !== "PLAYBACK_MODE_PAUSED_ONLY") return false;
-    const warning = renderer.minimizedEndpoint?.openPopupAction?.popup?.notificationActionRenderer;
-    const command = warning?.actionButton?.buttonRenderer?.command;
-    return [command?.urlEndpoint?.url, command?.commandMetadata?.webCommandMetadata?.url].some((value) => {
-      if (typeof value !== "string") return false;
-      try {
-        const url = new URL(value, "https://www.youtube.com");
-        return (
-          url.protocol === "https:" &&
-          url.hostname === "support.google.com" &&
-          (url.pathname === "/youtube/answer/9632097" ||
-            (url.pathname === "/youtube/bin/answer.py" && url.searchParams.get("answer") === "9632097"))
-        );
-      } catch {
-        return false;
-      }
-    });
-  }
-
-  function isMadeForKids(root, videoId) {
-    if (
-      ["is-made-for-kids", "made-for-kids"].some(
-        (name) => root.hasAttribute(name) && root.getAttribute(name) !== "false",
-      )
-    )
-      return true;
-    const controller = root.polymerController || root;
-    const rootData = data(root);
-    if (
-      positiveKidsFlag(rootData) ||
-      ((!rootData?.videoDetails?.videoId || rootData.videoDetails.videoId === videoId) &&
-        positiveKidsFlag(rootData?.videoDetails))
-    )
-      return true;
-    const player = root.querySelector("#movie_player, #shorts-player") || document.querySelector("#shorts-player");
-    const candidates = [controller.playerData, controller.playerResponse, data(root)?.playerResponse];
-    try {
-      candidates.push(player?.getPlayerResponse?.());
-    } catch {
-      /* Player may be between videos. */
-    }
-    if (window.ytInitialPlayerResponse?.videoDetails?.videoId === videoId)
-      candidates.push(window.ytInitialPlayerResponse);
-    return candidates.some((value) => {
-      if (value?.videoDetails?.videoId !== videoId) return false;
-      const microformat = value.microformat?.playerMicroformatRenderer;
-      return (
-        positiveKidsFlag(value) ||
-        positiveKidsFlag(value.videoDetails) ||
-        hasKidsMiniplayerNotice(value) ||
-        ((!microformat?.videoId || microformat.videoId === videoId) && positiveKidsFlag(microformat))
-      );
-    });
-  }
-
   function inspect(event) {
     const root = event.target;
     if (!(root instanceof Element) || !root.matches("ytd-watch-flexy, ytd-watch-grid, ytd-reel-video-renderer")) return;
@@ -132,7 +71,7 @@
       if (url.pathname !== "/watch" || root.getAttribute("video-id") !== videoId) return;
       disabled = [...root.querySelectorAll("ytd-comments")].some((comments) => hasDisabledNotice(data(comments)));
     }
-    root.setAttribute(ATTRIBUTE, JSON.stringify({ videoId, disabled, madeForKids: isMadeForKids(root, videoId) }));
+    root.setAttribute(ATTRIBUTE, JSON.stringify({ videoId, disabled }));
   }
   document.addEventListener(REQUEST, inspect, true);
 })();
