@@ -49,7 +49,7 @@ test.each(["Comments are turned off.", "Комментарии отключен�
   },
 );
 
-test("missing comments and generic messages never count as disabled", () => {
+test("without bridge state, generic messages lacking the comments-off help link never count as disabled", () => {
   const root = watch();
   root.querySelector("ytd-comments").innerHTML = "<ytd-message-renderer>Loading comments</ytd-message-renderer>";
   expect(findDiscussionSurface({ videoId: VIDEO, surface: "watch" })).toBeNull();

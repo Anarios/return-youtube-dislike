@@ -19,6 +19,7 @@ beforeEach(() => {
 afterEach(() => {
   document.removeEventListener("ryd-discussion-state-request", handler, true);
   delete window.ytInitialPlayerResponse;
+  delete window.ytcfg;
 });
 
 function state(root) {
@@ -62,6 +63,59 @@ test("reports the same native state whatever the video's audience setting", () =
   expect(state(root)).toEqual({ videoId: VIDEO, disabled: true });
 });
 
+const OTHER_VIDEO = "zyxwvutsrqp";
+const PLAIN_NOTICE = { messageRenderer: { text: { runs: [{ text: "Comments are turned off" }] } } };
+const NOTICE_SECTION = { sectionIdentifier: "comment-item-section", contents: [PLAIN_NOTICE] };
+
+function watchWithResponse({ section = NOTICE_SECTION, videoId = VIDEO, panels = [] } = {}) {
+  document.body.innerHTML = `<ytd-watch-flexy video-id="${VIDEO}"><ytd-comments></ytd-comments></ytd-watch-flexy>`;
+  const root = document.querySelector("ytd-watch-flexy");
+  root.polymerController = {
+    data: {
+      currentVideoEndpoint: { watchEndpoint: { videoId } },
+      contents: {
+        twoColumnWatchNextResults: { results: { results: { contents: [{ itemSectionRenderer: section }] } } },
+      },
+      engagementPanels: panels.map((targetId) => ({ engagementPanelSectionListRenderer: { targetId } })),
+    },
+  };
+  root.querySelector("ytd-comments").polymerController = { data: section };
+  return root;
+}
+
+function restrictedMode() {
+  window.ytcfg = { get: (key) => (key === "INNERTUBE_CONTEXT" ? { user: { enableSafetyMode: true } } : undefined) };
+}
+
+test("recognizes a current response whose comments section holds only a notice without a help link", () => {
+  expect(state(watchWithResponse())).toEqual({ videoId: VIDEO, disabled: true });
+});
+
+test.each([
+  ["a comments header", { section: { ...NOTICE_SECTION, header: { commentsHeaderRenderer: {} } } }],
+  [
+    "a notice beside a comments continuation",
+    { section: { ...NOTICE_SECTION, contents: [PLAIN_NOTICE, { continuationItemRenderer: {} }] } },
+  ],
+  ["an empty comments section", { section: { ...NOTICE_SECTION, contents: [] } }],
+  ["a comments section without contents", { section: { sectionIdentifier: "comment-item-section" } }],
+  ["no comments section", { section: { ...NOTICE_SECTION, sectionIdentifier: "related-items" } }],
+  ["a comments engagement panel", { panels: ["engagement-panel-comments-section"] }],
+  ["a response that still belongs to the previous video", { videoId: OTHER_VIDEO }],
+])("keeps native comments when the page has %s", (_, response) => {
+  expect(state(watchWithResponse(response)).disabled).toBe(false);
+});
+
+test("Restricted Mode notices never count as comments being unavailable", () => {
+  restrictedMode();
+  expect(state(watchWithResponse()).disabled).toBe(false);
+});
+
+test("Restricted Mode keeps the comments-off help link behavior", () => {
+  restrictedMode();
+  expect(state(watch())).toEqual({ videoId: VIDEO, disabled: true });
+});
+
 function shortsWithActions(buttonViewModels) {
   window.history.replaceState({}, "", `/shorts/${VIDEO}`);
   document.body.innerHTML = `<ytd-reel-video-renderer video-id="${VIDEO}"><reel-action-bar-view-model></reel-action-bar-view-model></ytd-reel-video-renderer>`;
@@ -70,8 +124,8 @@ function shortsWithActions(buttonViewModels) {
   return root;
 }
 
-function likeButton(videoId) {
-  const buttonViewModel = { onTap: { innertubeCommand: { likeEndpoint: { target: { videoId } } } } };
+function likeButton(videoId, innertubeCommand = { likeEndpoint: { target: { videoId } } }) {
+  const buttonViewModel = { onTap: { innertubeCommand } };
   return {
     likeButtonViewModel: {
       toggleButtonViewModel: { toggleButtonViewModel: { defaultButtonViewModel: { buttonViewModel } } },
@@ -94,12 +148,64 @@ test("treats a loaded Short without a comment button as having comments turned o
   expect(state(shortsWithActions([likeButton(VIDEO), SHARE_BUTTON]))).toEqual({ videoId: VIDEO, disabled: true });
 });
 
+test("finds the current Short's like target behind a sign-in prompt", () => {
+  const signIn = {
+    modalEndpoint: {
+      modal: {
+        modalWithTitleAndButtonRenderer: {
+          button: {
+            buttonRenderer: {
+              navigationEndpoint: {
+                signInEndpoint: { nextEndpoint: { likeEndpoint: { target: { videoId: VIDEO } } } },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
+  expect(state(shortsWithActions([likeButton(VIDEO, signIn), SHARE_BUTTON])).disabled).toBe(true);
+});
+
 test.each([
   ["an active comment button", [likeButton(VIDEO), commentButton("ACTIVE"), SHARE_BUTTON]],
-  ["an action bar still showing another video", [likeButton("zyxwvutsrqp"), SHARE_BUTTON]],
+  [
+    "a renamed comment button",
+    [likeButton(VIDEO), { buttonViewModel: { iconName: "COMMENT", accessibilityId: "id.reel_comment_button" } }],
+  ],
+  [
+    "a wrapped button that opens the comments panel",
+    [
+      likeButton(VIDEO),
+      {
+        wrapperViewModel: {
+          buttonViewModel: {
+            onTap: {
+              innertubeCommand: { showEngagementPanelEndpoint: { identifier: { tag: "shorts-comments-panel" } } },
+            },
+          },
+        },
+      },
+    ],
+  ],
+  ["an action bar still showing another video", [likeButton(OTHER_VIDEO), SHARE_BUTTON]],
   ["an action bar that has not loaded its buttons", []],
 ])("keeps native comments on a Short with %s", (_, buttons) => {
   expect(state(shortsWithActions(buttons)).disabled).toBe(false);
+});
+
+test("trusts the current Short's buttons over a stale action bar", () => {
+  const root = shortsWithActions([likeButton(OTHER_VIDEO), commentButton("DISABLED")]);
+  root.polymerController = {
+    data: {
+      overlay: {
+        reelPlayerOverlayRenderer: {
+          buttonBar: { reelActionBarViewModel: { buttonViewModels: [likeButton(VIDEO), commentButton("ACTIVE")] } },
+        },
+      },
+    },
+  };
+  expect(state(root).disabled).toBe(false);
 });
 
 test("does not expose a result for an outgoing Shorts renderer", () => {

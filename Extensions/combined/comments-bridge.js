@@ -2,6 +2,9 @@
   const REQUEST = "ryd-discussion-state-request";
   const ATTRIBUTE = "data-ryd-discussion-native-state";
   const INSTALL = Symbol.for("return-youtube-dislike.discussion-bridge");
+  const MAX_SEARCH_DEPTH = 20;
+  const COMMENTS_PANEL_ID = "engagement-panel-comments-section";
+  const DISABLED_BUTTON_STATE = "BUTTON_VIEW_MODEL_STATE_DISABLED";
   if (window[INSTALL]) return;
   window[INSTALL] = true;
 
@@ -9,43 +12,95 @@
     return element?.polymerController?.data || element?.data || null;
   }
 
-  function hasDisabledNotice(value, depth = 0) {
-    if (!value || typeof value !== "object" || depth > 14) return false;
-    if (value.messageRenderer) {
-      const runs = value.messageRenderer.text?.runs || [];
-      if (
-        runs.some((run) => {
-          try {
-            const url = new URL(run.navigationEndpoint?.urlEndpoint?.url);
-            return url.hostname === "support.google.com" && url.pathname === "/youtube/answer/9706180";
-          } catch {
-            return false;
-          }
-        })
-      )
-        return true;
-    }
-    return Object.values(value).some((child) => hasDisabledNotice(child, depth + 1));
+  function findAll(value, matches, depth = 0, found = []) {
+    if (!value || typeof value !== "object" || depth > MAX_SEARCH_DEPTH) return found;
+    if (matches(value)) found.push(value);
+    for (const child of Object.values(value)) findAll(child, matches, depth + 1, found);
+    return found;
   }
 
-  function likeTarget(value, depth = 0) {
-    if (!value || typeof value !== "object" || depth > 12) return null;
-    const target = value.likeEndpoint?.target?.videoId;
-    if (typeof target === "string") return target;
-    for (const child of Object.values(value)) {
-      const found = likeTarget(child, depth + 1);
-      if (found) return found;
+  function isCommentsOffHelpLink(run) {
+    try {
+      const url = new URL(run.navigationEndpoint?.urlEndpoint?.url);
+      return url.hostname === "support.google.com" && url.pathname === "/youtube/answer/9706180";
+    } catch {
+      return false;
     }
-    return null;
   }
 
-  function shortsCommentsUnavailable(actionButtons, overlayButtons, videoId) {
-    const commentButtons = [...actionButtons, ...overlayButtons]
-      .map((item) => item?.buttonViewModel)
-      .filter((button) => button?.iconName === "SHORTS_COMMENT");
-    if (commentButtons.length)
-      return commentButtons.some((button) => button.state === "BUTTON_VIEW_MODEL_STATE_DISABLED");
-    return [actionButtons, overlayButtons].some((buttons) => likeTarget(buttons) === videoId);
+  function hasCommentsOffHelpLink(value) {
+    return findAll(value, (node) => node.messageRenderer).some((node) =>
+      (node.messageRenderer.text?.runs || []).some(isCommentsOffHelpLink),
+    );
+  }
+
+  function safetyModeEnabled() {
+    try {
+      const user = window.ytcfg?.get?.("INNERTUBE_CONTEXT")?.user;
+      return user?.enableSafetyMode === true || user?.lockedSafetyMode === true;
+    } catch {
+      return false;
+    }
+  }
+
+  function currentWatchResponse(root, videoId) {
+    const response = data(root);
+    return response?.currentVideoEndpoint?.watchEndpoint?.videoId === videoId ? response : null;
+  }
+
+  function commentSection(response) {
+    return (response.contents?.twoColumnWatchNextResults?.results?.results?.contents || [])
+      .map((item) => item?.itemSectionRenderer)
+      .find((section) => section?.sectionIdentifier === "comment-item-section");
+  }
+
+  function hasCommentsPanel(response) {
+    return (response.engagementPanels || []).some(
+      (panel) => panel?.engagementPanelSectionListRenderer?.targetId === COMMENTS_PANEL_ID,
+    );
+  }
+
+  function isNoticeOnlySection(section) {
+    const contents = section?.contents;
+    return (
+      !section?.header &&
+      Array.isArray(contents) &&
+      contents.length > 0 &&
+      contents.every((item) => item?.messageRenderer)
+    );
+  }
+
+  function watchCommentsReplacedByNotice(root, videoId) {
+    if (safetyModeEnabled()) return false;
+    const response = currentWatchResponse(root, videoId);
+    return Boolean(response) && !hasCommentsPanel(response) && isNoticeOnlySection(commentSection(response));
+  }
+
+  function watchCommentsUnavailable(root, videoId) {
+    return (
+      [...root.querySelectorAll("ytd-comments")].some((comments) => hasCommentsOffHelpLink(data(comments))) ||
+      watchCommentsReplacedByNotice(root, videoId)
+    );
+  }
+
+  function likeTarget(value) {
+    const [node] = findAll(value, (candidate) => typeof candidate.likeEndpoint?.target?.videoId === "string");
+    return node?.likeEndpoint.target.videoId ?? null;
+  }
+
+  function isCommentControl(node) {
+    return [
+      node.iconName,
+      node.accessibilityId,
+      node.onTap?.innertubeCommand?.showEngagementPanelEndpoint?.identifier?.tag,
+    ].some((text) => typeof text === "string" && /comment/i.test(text));
+  }
+
+  function shortsCommentsUnavailable(buttonLists, videoId) {
+    const current = buttonLists.filter((buttons) => likeTarget(buttons) === videoId);
+    const controls = (current.length ? current : buttonLists).flatMap((buttons) => findAll(buttons, isCommentControl));
+    if (controls.length) return controls.some((control) => control.state === DISABLED_BUTTON_STATE);
+    return current.length > 0;
   }
 
   function inspect(event) {
@@ -78,10 +133,10 @@
       const actionButtons = data(root.querySelector("reel-action-bar-view-model"))?.buttonViewModels || [];
       const overlayButtons =
         rootData?.overlay?.reelPlayerOverlayRenderer?.buttonBar?.reelActionBarViewModel?.buttonViewModels || [];
-      disabled = shortsCommentsUnavailable(actionButtons, overlayButtons, videoId);
+      disabled = shortsCommentsUnavailable([actionButtons, overlayButtons], videoId);
     } else {
       if (url.pathname !== "/watch" || root.getAttribute("video-id") !== videoId) return;
-      disabled = [...root.querySelectorAll("ytd-comments")].some((comments) => hasDisabledNotice(data(comments)));
+      disabled = watchCommentsUnavailable(root, videoId);
     }
     root.setAttribute(ATTRIBUTE, JSON.stringify({ videoId, disabled }));
   }
