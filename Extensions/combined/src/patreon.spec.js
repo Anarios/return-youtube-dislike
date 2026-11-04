@@ -114,6 +114,31 @@ describe("Patreon authentication consent", () => {
     expect(analyticsMocks.teardownPremiumAnalytics).toHaveBeenCalledTimes(1);
   });
 
+  it("does not restore premium panels when a permission check resolves after the extension context is gone", async () => {
+    const pending = [];
+    permissionMocks.hasFeaturePermission.mockImplementation(() => new Promise((resolve) => pending.push(resolve)));
+    consentMocks.hasAuthenticationDataPermission.mockResolvedValue(true);
+    chrome.storage.sync.get.mockImplementation((_keys, callback) =>
+      callback({
+        patreonAuthenticated: true,
+        patreonUser: { hasActiveMembership: true, membershipTier: "premium" },
+        patreonSessionToken: "token",
+      }),
+    );
+    chrome.runtime.id = "extension-id";
+    initPatreonFeatures();
+    await flushPromises();
+    expect(pending.length).toBeGreaterThan(0);
+
+    delete chrome.runtime.id;
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+    pending.forEach((resolve) => resolve(true));
+    await flushPromises();
+
+    expect(analyticsMocks.updatePremiumSession).not.toHaveBeenCalled();
+    expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
+  });
+
   it("does not read a cached token without authentication consent", async () => {
     initPatreonFeatures();
     await flushPromises();

@@ -24,6 +24,7 @@ const ORPHANED_SUPPRESSION_REASON = "orphaned";
 function removePremiumFeaturesIfOrphaned() {
   if (getBrowser()?.runtime?.id) return;
   document.removeEventListener("yt-navigate-finish", removePremiumFeaturesIfOrphaned, true);
+  premiumGeneration++;
   setTeaserSuppressed(true, ORPHANED_SUPPRESSION_REASON);
   disablePremiumFeatures();
 }
