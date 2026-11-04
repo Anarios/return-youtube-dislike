@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "από τον Dmitry Selivanov & την κοινότητα"
   },
+  "textLikesDisabled": {
+    "message": "Απενεργοποιήθηκε από τον κάτοχο"
+  },
   "textSettings": {
     "message": "Διακοπή υποβολής like/dislike"
   },

@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "por Dmitry Selivanov y la comunidad"
   },
+  "textLikesDisabled": {
+    "message": "desactivado por el propietario"
+  },
   "textSettings": {
     "message": "Desactivar envío de votos"
   },

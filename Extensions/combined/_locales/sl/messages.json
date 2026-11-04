@@ -206,6 +206,9 @@
   "textDeveloper": {
     "message": "avtorja Dmitry Selivanov in skupnost"
   },
+  "textLikesDisabled": {
+    "message": "Onemogočil lastnik"
+  },
   "textSettings": {
     "message": "Onemogoči pošiljanje všečkov/nevšečkov"
   },

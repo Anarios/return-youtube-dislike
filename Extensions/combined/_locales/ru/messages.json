@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "Дмитрий Селиванов и сообщество"
   },
+  "textLikesDisabled": {
+    "message": "Отключено владельцем"
+  },
   "textSettings": {
     "message": "Отключить отправку лайков/дизлайков"
   },

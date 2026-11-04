@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "bởi Dmitry Selivanov và Cộng đồng"
   },
+  "textLikesDisabled": {
+    "message": "Chủ kênh đã Tắt Đánh giá"
+  },
   "textSettings": {
     "message": "Tắt chức năng gửi đánh giá"
   },

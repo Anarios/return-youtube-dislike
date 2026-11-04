@@ -206,6 +206,9 @@
   "textDeveloper": {
     "message": "توسط Dmitry Selivanov و جامعه کاربری"
   },
+  "textLikesDisabled": {
+    "message": "غیرفعال‌شده توسط مالک"
+  },
   "textSettings": {
     "message": "غیرفعال کردن ارسال like/dislike"
   },

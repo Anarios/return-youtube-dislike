@@ -206,6 +206,9 @@
   "textDeveloper": {
     "message": "Dmitry Selivanov ve Topluluk tarafından"
   },
+  "textLikesDisabled": {
+    "message": "Sahibi Tarafından Devre Dışı Bırakıldı"
+  },
   "textSettings": {
     "message": "Beğeni/beğenmeme gönderimini devre dışı bırak"
   },

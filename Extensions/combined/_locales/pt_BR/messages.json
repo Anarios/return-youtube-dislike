@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "por Dmitry Selivanov & Comunidade"
   },
+  "textLikesDisabled": {
+    "message": "Desativado pelo proprietário"
+  },
   "textSettings": {
     "message": "Desativar envio de curtidas/descurtidas"
   },

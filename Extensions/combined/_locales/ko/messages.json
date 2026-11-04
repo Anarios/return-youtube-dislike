@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "Dmitry Selivanov와 커뮤니티 제작"
   },
+  "textLikesDisabled": {
+    "message": "업로더가 비활성화함"
+  },
   "textSettings": {
     "message": "좋아요/싫어요 제출 비활성화"
   },

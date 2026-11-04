@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "door Dmitry Selivanov & Gemeenschap"
   },
+  "textLikesDisabled": {
+    "message": "Uitgeschakeld door eigenaar"
+  },
   "textSettings": {
     "message": "Inzending voor leuk/niet leuk uitschakelen"
   },

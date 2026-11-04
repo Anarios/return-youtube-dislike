@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "av Dmitry Selivanov & Community"
   },
+  "textLikesDisabled": {
+    "message": "Inaktiverad av ägaren"
+  },
   "textSettings": {
     "message": "Inaktivera gilla-/ogilla-inskickningar"
   },

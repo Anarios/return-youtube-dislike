@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "di Dmitry Selivanov e della comunità"
   },
+  "textLikesDisabled": {
+    "message": "Disattivati dal proprietario"
+  },
   "textSettings": {
     "message": "Disattiva invio di Mi piace/Non mi piace"
   },

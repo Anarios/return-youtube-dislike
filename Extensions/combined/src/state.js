@@ -348,7 +348,7 @@ function setDislikes(dislikesCount) {
     _dislikeText = dislikesCount;
   } else {
     logger.log("likes count disabled by creator");
-    _dislikeText = localize("TextLikesDisabled");
+    _dislikeText = localize("textLikesDisabled");
   }
 
   // Compare raw text so CSS text transforms cannot retrigger the mutation observer indefinitely.

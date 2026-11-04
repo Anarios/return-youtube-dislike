@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "від Дмитра Селіванова та спільноти"
   },
+  "textLikesDisabled": {
+    "message": "Вимкнуто власником"
+  },
   "textSettings": {
     "message": "Вимкнути надсилання відміток"
   },

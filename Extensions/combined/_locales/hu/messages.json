@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "Készítő: Dmitry Selivanov & Community"
   },
+  "textLikesDisabled": {
+    "message": "tulajdonos által kikapcsolva"
+  },
   "textSettings": {
     "message": "Like/Dislike beküldés kikapcsolása"
   },

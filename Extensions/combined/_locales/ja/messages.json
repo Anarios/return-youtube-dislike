@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "by Dmitry Selivanov & コミュニティ"
   },
+  "textLikesDisabled": {
+    "message": "投稿者により無効化"
+  },
   "textSettings": {
     "message": "高評価/低評価を送信しない"
   },

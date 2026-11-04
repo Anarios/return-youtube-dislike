@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "von Dmitry Selivanov & der Community"
   },
+  "textLikesDisabled": {
+    "message": "Deaktiviert vom Ersteller"
+  },
   "textSettings": {
     "message": "Deaktiviere Like/Dislike-Übermittlung"
   },

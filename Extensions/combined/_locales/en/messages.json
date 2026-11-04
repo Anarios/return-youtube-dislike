@@ -206,6 +206,9 @@
   "textDeveloper": {
     "message": "by Dmitry Selivanov & Community"
   },
+  "textLikesDisabled": {
+    "message": "Disabled by Owner"
+  },
   "textSettings": {
     "message": "Disable like/dislike submission"
   },

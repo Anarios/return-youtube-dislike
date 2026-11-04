@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "vytvořil Dmitry Selivanov & komunita"
   },
+  "textLikesDisabled": {
+    "message": "zakázáno majitelem"
+  },
   "textSettings": {
     "message": "Zakázat odesílání palců nahoru/dolů"
   },
