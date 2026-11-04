@@ -206,6 +206,9 @@
   "textDeveloper": {
     "message": "par Dmitry Selivanov & Communauté"
   },
+  "textLikesDisabled": {
+    "message": "Désactivé par le créateur"
+  },
   "textSettings": {
     "message": "Désactiver l'envoi des likes/dislikes"
   },

@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "Dmitry Selivanov və İcma tərəfindən"
   },
+  "textLikesDisabled": {
+    "message": "Sahibi tərəfindən deaktiv edilib"
+  },
   "textSettings": {
     "message": "Like/dislike göndərməsini deaktiv et"
   },

@@ -206,6 +206,9 @@
   "textDeveloper": {
     "message": "ад Дзмітрыя Селіванава і супольнасці"
   },
+  "textLikesDisabled": {
+    "message": "Адключана аўтарам"
+  },
   "textSettings": {
     "message": "Адключыць адпраўку падабаек/непадабаек"
   },

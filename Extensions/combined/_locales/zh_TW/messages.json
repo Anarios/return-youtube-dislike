@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "由 Dmitry Selivanov 與社群開發"
   },
+  "textLikesDisabled": {
+    "message": "由擁有者停用"
+  },
   "textSettings": {
     "message": "停用送出按讚/不喜歡"
   },

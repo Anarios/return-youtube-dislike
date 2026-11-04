@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "oleh Dmitry Selivanov & Komunitas"
   },
+  "textLikesDisabled": {
+    "message": "Dimatikan oleh Pemilik"
+  },
   "textSettings": {
     "message": "Matikan pengiriman like/dislike"
   },

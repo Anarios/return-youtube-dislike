@@ -185,6 +185,9 @@
   "textDeveloper": {
     "message": "由 Dmitry Selivanov 与社区开发"
   },
+  "textLikesDisabled": {
+    "message": "已被作者禁用"
+  },
   "textSettings": {
     "message": "禁用点赞/点踩提交"
   },

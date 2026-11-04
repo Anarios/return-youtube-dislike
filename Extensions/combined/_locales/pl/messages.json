@@ -206,6 +206,9 @@
   "textDeveloper": {
     "message": "Autorzy: Dmitrij Sieliwanow i społeczność"
   },
+  "textLikesDisabled": {
+    "message": "Wyłączone przez twórcę"
+  },
   "textSettings": {
     "message": "Wyłącz przesyłanie łapek"
   },

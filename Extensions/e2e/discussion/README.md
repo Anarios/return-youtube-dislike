@@ -27,8 +27,7 @@ comment and reply creation, public reactions through like/dislike/removal, autho
 controls after account switches, and premium/supporter/inactive posting gates.
 It checks light and dark fallback styles without native YouTube color variables,
 a 390-pixel viewport, Shorts Escape/Enter handling, enabled native comments exclusion,
-explicit current-video kids exclusion, and continued rendering when only unrelated
-recommendations or advertisements have kids flags.
+and rendering regardless of the video's audience setting.
 
 It also exercises report submission, moderator hide/ban/dismiss, resolved report
 history, and restoration/unbanning. Incoming replies and likes must produce a real

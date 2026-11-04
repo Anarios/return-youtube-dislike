@@ -248,7 +248,6 @@ async function runLiveDiscussionMatrix({
       "native-language-menu",
       "native-theme-switch",
       "spa-and-recycled-shorts",
-      "explicit-native-kids",
       "cross-tab-toasts",
       "offline-and-worker-restart",
       "cursor-pagination",

@@ -2,6 +2,9 @@
   const REQUEST = "ryd-discussion-state-request";
   const ATTRIBUTE = "data-ryd-discussion-native-state";
   const INSTALL = Symbol.for("return-youtube-dislike.discussion-bridge");
+  const MAX_SEARCH_DEPTH = 20;
+  const COMMENTS_PANEL_ID = "engagement-panel-comments-section";
+  const DISABLED_BUTTON_STATE = "BUTTON_VIEW_MODEL_STATE_DISABLED";
   if (window[INSTALL]) return;
   window[INSTALL] = true;
 
@@ -9,84 +12,95 @@
     return element?.polymerController?.data || element?.data || null;
   }
 
-  function hasDisabledNotice(value, depth = 0) {
-    if (!value || typeof value !== "object" || depth > 14) return false;
-    if (value.messageRenderer) {
-      const runs = value.messageRenderer.text?.runs || [];
-      if (
-        runs.some((run) => {
-          try {
-            const url = new URL(run.navigationEndpoint?.urlEndpoint?.url);
-            return url.hostname === "support.google.com" && url.pathname === "/youtube/answer/9706180";
-          } catch {
-            return false;
-          }
-        })
-      )
-        return true;
-    }
-    return Object.values(value).some((child) => hasDisabledNotice(child, depth + 1));
+  function findAll(value, matches, depth = 0, found = []) {
+    if (!value || typeof value !== "object" || depth > MAX_SEARCH_DEPTH) return found;
+    if (matches(value)) found.push(value);
+    for (const child of Object.values(value)) findAll(child, matches, depth + 1, found);
+    return found;
   }
 
-  function positiveKidsFlag(value) {
-    return ["isMadeForKids", "madeForKids", "is_made_for_kids"].some((key) => value?.[key] === true);
-  }
-
-  function hasKidsMiniplayerNotice(response) {
-    const renderer = response?.playabilityStatus?.miniplayer?.miniplayerRenderer;
-    if (renderer?.playbackMode !== "PLAYBACK_MODE_PAUSED_ONLY") return false;
-    const warning = renderer.minimizedEndpoint?.openPopupAction?.popup?.notificationActionRenderer;
-    const command = warning?.actionButton?.buttonRenderer?.command;
-    return [command?.urlEndpoint?.url, command?.commandMetadata?.webCommandMetadata?.url].some((value) => {
-      if (typeof value !== "string") return false;
-      try {
-        const url = new URL(value, "https://www.youtube.com");
-        return (
-          url.protocol === "https:" &&
-          url.hostname === "support.google.com" &&
-          (url.pathname === "/youtube/answer/9632097" ||
-            (url.pathname === "/youtube/bin/answer.py" && url.searchParams.get("answer") === "9632097"))
-        );
-      } catch {
-        return false;
-      }
-    });
-  }
-
-  function isMadeForKids(root, videoId) {
-    if (
-      ["is-made-for-kids", "made-for-kids"].some(
-        (name) => root.hasAttribute(name) && root.getAttribute(name) !== "false",
-      )
-    )
-      return true;
-    const controller = root.polymerController || root;
-    const rootData = data(root);
-    if (
-      positiveKidsFlag(rootData) ||
-      ((!rootData?.videoDetails?.videoId || rootData.videoDetails.videoId === videoId) &&
-        positiveKidsFlag(rootData?.videoDetails))
-    )
-      return true;
-    const player = root.querySelector("#movie_player, #shorts-player") || document.querySelector("#shorts-player");
-    const candidates = [controller.playerData, controller.playerResponse, data(root)?.playerResponse];
+  function isCommentsOffHelpLink(run) {
     try {
-      candidates.push(player?.getPlayerResponse?.());
+      const url = new URL(run.navigationEndpoint?.urlEndpoint?.url);
+      return url.hostname === "support.google.com" && url.pathname === "/youtube/answer/9706180";
     } catch {
-      /* Player may be between videos. */
+      return false;
     }
-    if (window.ytInitialPlayerResponse?.videoDetails?.videoId === videoId)
-      candidates.push(window.ytInitialPlayerResponse);
-    return candidates.some((value) => {
-      if (value?.videoDetails?.videoId !== videoId) return false;
-      const microformat = value.microformat?.playerMicroformatRenderer;
-      return (
-        positiveKidsFlag(value) ||
-        positiveKidsFlag(value.videoDetails) ||
-        hasKidsMiniplayerNotice(value) ||
-        ((!microformat?.videoId || microformat.videoId === videoId) && positiveKidsFlag(microformat))
-      );
-    });
+  }
+
+  function hasCommentsOffHelpLink(value) {
+    return findAll(value, (node) => node.messageRenderer).some((node) =>
+      (node.messageRenderer.text?.runs || []).some(isCommentsOffHelpLink),
+    );
+  }
+
+  function safetyModeEnabled() {
+    try {
+      const user = window.ytcfg?.get?.("INNERTUBE_CONTEXT")?.user;
+      return user?.enableSafetyMode === true || user?.lockedSafetyMode === true;
+    } catch {
+      return false;
+    }
+  }
+
+  function currentWatchResponse(root, videoId) {
+    const response = data(root);
+    return response?.currentVideoEndpoint?.watchEndpoint?.videoId === videoId ? response : null;
+  }
+
+  function commentSection(response) {
+    return (response.contents?.twoColumnWatchNextResults?.results?.results?.contents || [])
+      .map((item) => item?.itemSectionRenderer)
+      .find((section) => section?.sectionIdentifier === "comment-item-section");
+  }
+
+  function hasCommentsPanel(response) {
+    return (response.engagementPanels || []).some(
+      (panel) => panel?.engagementPanelSectionListRenderer?.targetId === COMMENTS_PANEL_ID,
+    );
+  }
+
+  function isNoticeOnlySection(section) {
+    const contents = section?.contents;
+    return (
+      !section?.header &&
+      Array.isArray(contents) &&
+      contents.length > 0 &&
+      contents.every((item) => item?.messageRenderer)
+    );
+  }
+
+  function watchCommentsReplacedByNotice(root, videoId) {
+    if (safetyModeEnabled()) return false;
+    const response = currentWatchResponse(root, videoId);
+    return Boolean(response) && !hasCommentsPanel(response) && isNoticeOnlySection(commentSection(response));
+  }
+
+  function watchCommentsUnavailable(root, videoId) {
+    return (
+      [...root.querySelectorAll("ytd-comments")].some((comments) => hasCommentsOffHelpLink(data(comments))) ||
+      watchCommentsReplacedByNotice(root, videoId)
+    );
+  }
+
+  function likeTarget(value) {
+    const [node] = findAll(value, (candidate) => typeof candidate.likeEndpoint?.target?.videoId === "string");
+    return node?.likeEndpoint.target.videoId ?? null;
+  }
+
+  function isCommentControl(node) {
+    return [
+      node.iconName,
+      node.accessibilityId,
+      node.onTap?.innertubeCommand?.showEngagementPanelEndpoint?.identifier?.tag,
+    ].some((text) => typeof text === "string" && /comment/i.test(text));
+  }
+
+  function shortsCommentsUnavailable(buttonLists, videoId) {
+    const current = buttonLists.filter((buttons) => likeTarget(buttons) === videoId);
+    const controls = (current.length ? current : buttonLists).flatMap((buttons) => findAll(buttons, isCommentControl));
+    if (controls.length) return controls.some((control) => control.state === DISABLED_BUTTON_STATE);
+    return current.length > 0;
   }
 
   function inspect(event) {
@@ -116,23 +130,15 @@
       });
       const ownsCurrentPlayer = playerId === videoId && root.contains(player);
       if (identity ? identity !== videoId : !linked && !ownsCurrentPlayer) return;
-      const actionData = data(root.querySelector("reel-action-bar-view-model"));
-      disabled = (actionData?.buttonViewModels || []).some((item) => {
-        const button = item.buttonViewModel;
-        return button?.iconName === "SHORTS_COMMENT" && button.state === "BUTTON_VIEW_MODEL_STATE_DISABLED";
-      });
+      const actionButtons = data(root.querySelector("reel-action-bar-view-model"))?.buttonViewModels || [];
       const overlayButtons =
         rootData?.overlay?.reelPlayerOverlayRenderer?.buttonBar?.reelActionBarViewModel?.buttonViewModels || [];
-      disabled ||= overlayButtons.some(
-        (item) =>
-          item.buttonViewModel?.iconName === "SHORTS_COMMENT" &&
-          item.buttonViewModel.state === "BUTTON_VIEW_MODEL_STATE_DISABLED",
-      );
+      disabled = shortsCommentsUnavailable([actionButtons, overlayButtons], videoId);
     } else {
       if (url.pathname !== "/watch" || root.getAttribute("video-id") !== videoId) return;
-      disabled = [...root.querySelectorAll("ytd-comments")].some((comments) => hasDisabledNotice(data(comments)));
+      disabled = watchCommentsUnavailable(root, videoId);
     }
-    root.setAttribute(ATTRIBUTE, JSON.stringify({ videoId, disabled, madeForKids: isMadeForKids(root, videoId) }));
+    root.setAttribute(ATTRIBUTE, JSON.stringify({ videoId, disabled }));
   }
   document.addEventListener(REQUEST, inspect, true);
 })();
