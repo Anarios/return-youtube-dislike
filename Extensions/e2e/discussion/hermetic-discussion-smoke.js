@@ -31,7 +31,8 @@ function fixture({ language, surface, videoId, disabled = true, kids = false, da
     if(o.surface==='watch'){root.setAttribute('video-id',o.videoId);const comments=document.createElement('ytd-comments');
     comments.textContent=o.disabled?(o.language==='ru'?'Комментарии отключены.':'Comments are turned off.'):'Native comments enabled';
     comments.polymerController={data:{contents:o.disabled?[{messageRenderer:{text:{runs:[{navigationEndpoint:{urlEndpoint:{url:'https://support.google.com/youtube/answer/9706180?hl='+o.language}}}]}}}]:[]}};root.append(comments);}
-    else{const actions=document.createElement('reel-action-bar-view-model');actions.polymerController={data:{buttonViewModels:[{buttonViewModel:{iconName:'SHORTS_COMMENT',state:o.disabled?'BUTTON_VIEW_MODEL_STATE_DISABLED':'BUTTON_VIEW_MODEL_STATE_ENABLED'}}]}};root.append(actions);}
+    else{const actions=document.createElement('reel-action-bar-view-model');const like={likeButtonViewModel:{likeEndpoint:{target:{videoId:o.videoId}}}};const comment={buttonViewModel:{iconName:'SHORTS_COMMENT',state:o.disabled?'BUTTON_VIEW_MODEL_STATE_DISABLED':'BUTTON_VIEW_MODEL_STATE_ENABLED'}};
+    actions.polymerController={data:{buttonViewModels:o.kids?[like]:[like,comment]}};root.append(actions);}
     document.querySelector('#fixture-root').append(root);window.ytInitialPlayerResponse=player.getPlayerResponse();
     window.__discussionFixture={setLanguage(value){document.documentElement.lang=value;document.dispatchEvent(new Event('yt-page-data-updated'));}};
     })();</script></body></html>`;

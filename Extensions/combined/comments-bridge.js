@@ -28,6 +28,26 @@
     return Object.values(value).some((child) => hasDisabledNotice(child, depth + 1));
   }
 
+  function likeTarget(value, depth = 0) {
+    if (!value || typeof value !== "object" || depth > 12) return null;
+    const target = value.likeEndpoint?.target?.videoId;
+    if (typeof target === "string") return target;
+    for (const child of Object.values(value)) {
+      const found = likeTarget(child, depth + 1);
+      if (found) return found;
+    }
+    return null;
+  }
+
+  function shortsCommentsUnavailable(actionButtons, overlayButtons, videoId) {
+    const commentButtons = [...actionButtons, ...overlayButtons]
+      .map((item) => item?.buttonViewModel)
+      .filter((button) => button?.iconName === "SHORTS_COMMENT");
+    if (commentButtons.length)
+      return commentButtons.some((button) => button.state === "BUTTON_VIEW_MODEL_STATE_DISABLED");
+    return [actionButtons, overlayButtons].some((buttons) => likeTarget(buttons) === videoId);
+  }
+
   function inspect(event) {
     const root = event.target;
     if (!(root instanceof Element) || !root.matches("ytd-watch-flexy, ytd-watch-grid, ytd-reel-video-renderer")) return;
@@ -55,18 +75,10 @@
       });
       const ownsCurrentPlayer = playerId === videoId && root.contains(player);
       if (identity ? identity !== videoId : !linked && !ownsCurrentPlayer) return;
-      const actionData = data(root.querySelector("reel-action-bar-view-model"));
-      disabled = (actionData?.buttonViewModels || []).some((item) => {
-        const button = item.buttonViewModel;
-        return button?.iconName === "SHORTS_COMMENT" && button.state === "BUTTON_VIEW_MODEL_STATE_DISABLED";
-      });
+      const actionButtons = data(root.querySelector("reel-action-bar-view-model"))?.buttonViewModels || [];
       const overlayButtons =
         rootData?.overlay?.reelPlayerOverlayRenderer?.buttonBar?.reelActionBarViewModel?.buttonViewModels || [];
-      disabled ||= overlayButtons.some(
-        (item) =>
-          item.buttonViewModel?.iconName === "SHORTS_COMMENT" &&
-          item.buttonViewModel.state === "BUTTON_VIEW_MODEL_STATE_DISABLED",
-      );
+      disabled = shortsCommentsUnavailable(actionButtons, overlayButtons, videoId);
     } else {
       if (url.pathname !== "/watch" || root.getAttribute("video-id") !== videoId) return;
       disabled = [...root.querySelectorAll("ytd-comments")].some((comments) => hasDisabledNotice(data(comments)));

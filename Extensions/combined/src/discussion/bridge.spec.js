@@ -62,21 +62,44 @@ test("reports the same native state whatever the video's audience setting", () =
   expect(state(root)).toEqual({ videoId: VIDEO, disabled: true });
 });
 
-test("finds a disabled Shorts comment button through its controller model", () => {
+function shortsWithActions(buttonViewModels) {
   window.history.replaceState({}, "", `/shorts/${VIDEO}`);
   document.body.innerHTML = `<ytd-reel-video-renderer video-id="${VIDEO}"><reel-action-bar-view-model></reel-action-bar-view-model></ytd-reel-video-renderer>`;
   const root = document.querySelector("ytd-reel-video-renderer");
-  root.querySelector("reel-action-bar-view-model").polymerController = {
-    data: {
-      buttonViewModels: [
-        { buttonViewModel: { iconName: "SHORTS_COMMENT", state: "BUTTON_VIEW_MODEL_STATE_DISABLED" } },
-      ],
+  root.querySelector("reel-action-bar-view-model").polymerController = { data: { buttonViewModels } };
+  return root;
+}
+
+function likeButton(videoId) {
+  const buttonViewModel = { onTap: { innertubeCommand: { likeEndpoint: { target: { videoId } } } } };
+  return {
+    likeButtonViewModel: {
+      toggleButtonViewModel: { toggleButtonViewModel: { defaultButtonViewModel: { buttonViewModel } } },
     },
   };
-  expect(state(root)).toEqual({ videoId: VIDEO, disabled: true });
-  root.querySelector("reel-action-bar-view-model").polymerController.data.buttonViewModels[0].buttonViewModel.state =
-    "BUTTON_VIEW_MODEL_STATE_ACTIVE";
-  expect(state(root).disabled).toBe(false);
+}
+
+const SHARE_BUTTON = { buttonViewModel: { iconName: "SHORTS_SHARE", state: "BUTTON_VIEW_MODEL_STATE_ACTIVE" } };
+
+function commentButton(state) {
+  return { buttonViewModel: { iconName: "SHORTS_COMMENT", state: `BUTTON_VIEW_MODEL_STATE_${state}` } };
+}
+
+test("finds a disabled Shorts comment button through its controller model", () => {
+  expect(state(shortsWithActions([commentButton("DISABLED")]))).toEqual({ videoId: VIDEO, disabled: true });
+  expect(state(shortsWithActions([commentButton("ACTIVE")])).disabled).toBe(false);
+});
+
+test("treats a loaded Short without a comment button as having comments turned off", () => {
+  expect(state(shortsWithActions([likeButton(VIDEO), SHARE_BUTTON]))).toEqual({ videoId: VIDEO, disabled: true });
+});
+
+test.each([
+  ["an active comment button", [likeButton(VIDEO), commentButton("ACTIVE"), SHARE_BUTTON]],
+  ["an action bar still showing another video", [likeButton("zyxwvutsrqp"), SHARE_BUTTON]],
+  ["an action bar that has not loaded its buttons", []],
+])("keeps native comments on a Short with %s", (_, buttons) => {
+  expect(state(shortsWithActions(buttons)).disabled).toBe(false);
 });
 
 test("does not expose a result for an outgoing Shorts renderer", () => {
