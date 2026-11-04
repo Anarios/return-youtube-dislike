@@ -1,10 +1,9 @@
-# Return YouTube Dislike 4.1.4
+# Return YouTube Dislike 4.1.5
 
-4.1.4 explains why some features are paid.
+4.1.5 shows RYD comments on more videos and restores a missing label.
 
-- Dislike counts stay free for everyone. Next to each paid feature (the sign-in card in the toolbar menu, the Premium Insights teaser and the RYD comments box), a short note now explains that paid extras help pay for the servers: over 15 TB of data and about 20 million users a day, on a budget of a few hundred dollars a month.
-- The welcome page includes a short letter about running costs. Its Firefox permission section now starts with a short summary of Firefox's new privacy rules.
-- Extension pages no longer show untranslated text while they load, and the toolbar menu fits without scrolling.
-- The GitHub sign-in and the "Hide clutter buttons" setting are now translated in 17 more languages, and the Japanese text was reviewed and corrected throughout.
+- RYD comments now appear on every video and Short where YouTube comments aren't available, whatever the video's audience setting.
+- RYD comments also appear when YouTube replaces the comments with a notice that has no "Learn more" link, and on Shorts that have no comment button.
+- Videos with hidden like counts show "Disabled by Owner" under the dislike button again, instead of an untranslated label.
 
 Requires Firefox 140 or newer.
