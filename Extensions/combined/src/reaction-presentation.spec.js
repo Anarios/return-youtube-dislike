@@ -20,6 +20,7 @@ import {
   isVideoLiked,
   refreshReactionPresentation,
   restoreCurrentState,
+  setDislikes,
   setLikes,
   storedData,
   NEUTRAL_STATE,
@@ -425,6 +426,97 @@ test("mobile boolean reaction labels still determine the current native vote", (
     buttonsRewire.__ResetDependency__("isMobile");
     stateRewire.__ResetDependency__("isMobile");
   }
+});
+
+describe("dislike count accessible name", () => {
+  test("adds the rendered count to the native label and follows later counts", async () => {
+    const { nativeDislikeButton } = mount();
+    setDislikes("1.2K");
+    await flushMutations();
+    expect(nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video, 1.2K");
+    setDislikes("1.3K");
+    await flushMutations();
+    expect(nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video, 1.3K");
+  });
+
+  test("keeps the count when YouTube rewrites the label", async () => {
+    const { nativeDislikeButton } = mount();
+    setDislikes("12");
+    await flushMutations();
+    nativeDislikeButton.setAttribute("aria-label", "Remove dislike");
+    await flushMutations();
+    expect(nativeDislikeButton.getAttribute("aria-label")).toBe("Remove dislike, 12");
+  });
+
+  test("does not repeat the count on a cloned button", async () => {
+    const { nativeDislikeButton } = mount();
+    setDislikes("12");
+    await flushMutations();
+    const clone = nativeDislikeButton.cloneNode(true);
+    nativeDislikeButton.replaceWith(clone);
+    await flushMutations();
+    setDislikes("13");
+    await flushMutations();
+    expect(clone.getAttribute("aria-label")).toBe("Dislike this video, 13");
+  });
+
+  test.each(["", "Dislike", "Disabled by owner"])("restores the native label for the text %j", async (text) => {
+    const controls = mount();
+    setDislikes("12");
+    await flushMutations();
+    controls.dislikeTextContainer.textContent = text;
+    await flushMutations();
+    expect(controls.nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video");
+    expect(controls.nativeDislikeButton.hasAttribute("data-ryd-native-aria-label")).toBe(false);
+  });
+
+  test("settles after one label write instead of retriggering its observer", async () => {
+    const { nativeDislikeButton } = mount();
+    const writes = [];
+    const observer = new MutationObserver((records) => writes.push(...records));
+    observer.observe(nativeDislikeButton, { attributes: true, attributeFilter: ["aria-label"] });
+    setDislikes("12");
+    await flushMutations();
+    await flushMutations();
+    observer.disconnect();
+    expect(writes).toHaveLength(1);
+  });
+
+  // The smartimation observer watches every attribute, so any repeated write would loop forever.
+  test("writes no attributes at all when the count has not changed", async () => {
+    const { nativeDislikeButton } = mount();
+    setDislikes("12");
+    await flushMutations();
+    const writes = [];
+    const observer = new MutationObserver((records) => writes.push(...records));
+    observer.observe(nativeDislikeButton, { attributes: true });
+    setDislikes("12");
+    refreshReactionPresentation();
+    await flushMutations();
+    observer.disconnect();
+    expect(writes.map((record) => record.attributeName)).toEqual([]);
+  });
+
+  test("does not invent a label when the button has none", async () => {
+    const { nativeDislikeButton } = mount();
+    nativeDislikeButton.removeAttribute("aria-label");
+    setDislikes("12");
+    await flushMutations();
+    expect(nativeDislikeButton.hasAttribute("aria-label")).toBe(false);
+  });
+
+  test("leaves mobile labels alone because they hold the pressed state", () => {
+    const controls = mount();
+    controls.buttons.classList.add("slim-video-action-bar-actions");
+    controls.nativeDislikeButton.setAttribute("aria-label", "false");
+    stateRewire.__set__("isMobile", () => true);
+    try {
+      refreshReactionPresentation();
+      expect(controls.nativeDislikeButton.getAttribute("aria-label")).toBe("false");
+    } finally {
+      stateRewire.__ResetDependency__("isMobile");
+    }
+  });
 });
 
 test("synthetic Shorts Dislike clears the native Like without activating a prepended speed control", () => {
