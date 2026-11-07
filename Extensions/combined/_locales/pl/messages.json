@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "Nie udało się wczytać danych o łapkach w dół. Spróbuj odświeżyć stronę."
   },
-  "premiumTierNotice_title": {
-    "message": "Analityka premium zablokowana"
-  },
   "premiumTierNotice_message": {
     "message": "Twoje członkostwo w Patreonie nie obejmuje poziomu Premium. Zwiększ wsparcie, aby odblokować zaawansowane analizy wideo."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Ulepsz na Patreonie"
   },
   "changelog_cta_primary": {
     "message": "Uaktualnij na Patreonie"

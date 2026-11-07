@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "暂时无法加载点踩数据，请尝试刷新页面。"
   },
-  "premiumTierNotice_title": {
-    "message": "Premium 高级分析已锁定"
-  },
   "premiumTierNotice_message": {
     "message": "您的 Patreon 会员资格不包含 Premium 等级。升级支持即可解锁高级视频分析功能。"
-  },
-  "premiumTierNotice_cta": {
-    "message": "前往 Patreon 升级"
   },
   "changelog_cta_primary": {
     "message": "在 Patreon 上升级"

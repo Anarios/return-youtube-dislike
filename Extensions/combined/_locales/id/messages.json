@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Data tidak suka tidak dapat dimuat saat ini. Coba muat ulang halaman."
   },
-  "premiumTierNotice_title": {
-    "message": "Analitik premium terkunci"
-  },
   "premiumTierNotice_message": {
     "message": "Keanggotaan Patreon Anda belum mencakup tingkat Premium. Tingkatkan dukungan Anda untuk membuka analitik video lanjutan."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Tingkatkan di Patreon"
   },
   "changelog_cta_primary": {
     "message": "Tingkatkan di Patreon"

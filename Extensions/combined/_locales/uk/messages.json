@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Наразі не вдалося завантажити дані про дизлайки. Спробуйте оновити сторінку."
   },
-  "premiumTierNotice_title": {
-    "message": "Преміум-аналітика заблокована"
-  },
   "premiumTierNotice_message": {
     "message": "У вашому членстві Patreon немає рівня Premium. Оновіть свій внесок, щоб відкрити розширену відеоаналітику."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Оновити на Patreon"
   },
   "changelog_cta_primary": {
     "message": "Оновлення на Patreon"

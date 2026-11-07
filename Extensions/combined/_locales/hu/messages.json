@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "A nemtetszés-adatok betöltése most nem sikerült. Próbálja meg újratölteni az oldalt."
   },
-  "premiumTierNotice_title": {
-    "message": "A prémium analitika zárolva"
-  },
   "premiumTierNotice_message": {
     "message": "A Patreon tagságod nem tartalmazza a Premium szintet. Frissítsd a támogatásodat, hogy elérd a fejlett videóanalitikát."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Frissítés a Patreonon"
   },
   "changelog_cta_primary": {
     "message": "Frissítés a Patreonon"

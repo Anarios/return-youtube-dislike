@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "De dislikegegevens konden nu niet worden geladen. Probeer de pagina te vernieuwen."
   },
-  "premiumTierNotice_title": {
-    "message": "Premium-analyse vergrendeld"
-  },
   "premiumTierNotice_message": {
     "message": "Je Patreon-lidmaatschap bevat geen Premium-niveau. Upgrade je bijdrage om uitgebreide video-analyses te ontgrendelen."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Upgraden op Patreon"
   },
   "changelog_cta_primary": {
     "message": "Upgraden op Patreon"

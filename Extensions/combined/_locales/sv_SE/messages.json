@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Ogilla-data kunde inte läsas in. Försök att ladda om sidan."
   },
-  "premiumTierNotice_title": {
-    "message": "Premiumanalys låst"
-  },
   "premiumTierNotice_message": {
     "message": "Ditt Patreon-medlemskap innehåller inte Premium-nivån. Uppgradera ditt stöd för att låsa upp avancerad videoanalys."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Uppgradera på Patreon"
   },
   "changelog_cta_primary": {
     "message": "Uppgradera på Patreon"

@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "Beğenmeme verileri şu anda yüklenemedi. Sayfayı yeniden yüklemeyi deneyin."
   },
-  "premiumTierNotice_title": {
-    "message": "Premium istatistikler kilitli"
-  },
   "premiumTierNotice_message": {
     "message": "Patreon üyeliğiniz Premium seviyesini içermiyor. Gelişmiş video istatistiklerinin kilidini açmak için desteğinizi yükseltin."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Patreon'da yükselt"
   },
   "changelog_cta_primary": {
     "message": "Patreon'da yükselt"

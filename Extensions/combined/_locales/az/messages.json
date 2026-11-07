@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Hazırda bəyənməmə məlumatı yüklənmədi. Səhifəni yenidən yükləyin."
   },
-  "premiumTierNotice_title": {
-    "message": "Premium analitika bloklanıb"
-  },
   "premiumTierNotice_message": {
     "message": "Patreon üzvlüyünüzdə Premium səviyyə yoxdur. Təkmil video analitikasını açmaq üçün dəstəyinizi yüksəldin."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Patreonda yüksəldin"
   },
   "changelog_cta_primary": {
     "message": "Patreonda yüksəlt"

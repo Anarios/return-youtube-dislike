@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Не удалось загрузить данные по дизлайкам. Попробуйте обновить страницу."
   },
-  "premiumTierNotice_title": {
-    "message": "Премиальная аналитика заблокирована"
-  },
   "premiumTierNotice_message": {
     "message": "В вашей подписке на Patreon нет уровня Premium. Повышайте поддержку, чтобы получить доступ к расширенной видеоаналитике."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Обновить на Patreon"
   },
   "changelog_cta_primary": {
     "message": "Повысить уровень на Patreon"

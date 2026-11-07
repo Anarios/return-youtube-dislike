@@ -29,6 +29,7 @@ jest.mock("./panel", () => ({
   applyChartExpansionState: jest.fn(),
   applyPanelView: jest.fn(),
   setPanelExpanded: jest.fn(),
+  cancelPanelRetry: jest.fn(),
 }));
 
 jest.mock("./rawCounts", () => ({
@@ -62,11 +63,6 @@ jest.mock("./lists", () => ({
 jest.mock("./teaser", () => ({
   setTeaserSuppressed: jest.fn(),
   TEASER_SUPPRESSION_REASON_PREMIUM: "premium",
-}));
-
-jest.mock("./tierNotice", () => ({
-  showTierNotice: jest.fn(),
-  hideTierNotice: jest.fn(),
 }));
 
 jest.mock("./utils", () => {
@@ -132,7 +128,6 @@ const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
 const { setTeaserSuppressed: mockSetTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } =
   jest.requireMock("./teaser");
-const { showTierNotice: mockShowTierNotice, hideTierNotice: mockHideTierNotice } = jest.requireMock("./tierNotice");
 
 jest.mock("../utils", () => {
   const actual = jest.requireActual("../utils");
@@ -147,6 +142,10 @@ import { initPremiumAnalytics, requestAnalytics, teardownPremiumAnalytics, updat
 const premiumAnalyticsModule = require("./index");
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
+
+const WATCH_VIDEO_ID = "abcdefghijk";
+const { getVideoId: mockGetVideoId } = jest.requireMock("../utils");
+const defaultGetVideoId = mockGetVideoId.getMockImplementation();
 
 const enMessages = require("../../_locales/en/messages.json");
 const jaMessages = require("../../_locales/ja/messages.json");
@@ -225,6 +224,7 @@ describe("premiumAnalytics", () => {
 
   afterEach(() => {
     teardownPremiumAnalytics();
+    mockGetVideoId.mockImplementation(defaultGetVideoId);
     document.documentElement.removeAttribute("dark");
     delete global.fetch;
     delete global.chrome;
@@ -530,13 +530,11 @@ describe("premiumAnalytics", () => {
     expect(global.fetch.mock.calls.length).toBeGreaterThan(initialFetchCalls);
     expect(mockSetLoadingState).toHaveBeenCalledWith(true);
     expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true, TEASER_SUPPRESSION_REASON_PREMIUM);
-    expect(mockHideTierNotice).toHaveBeenCalled();
 
     updatePremiumSession({ token: null, active: false });
     expect(mockDisposeActivityChart).toHaveBeenCalled();
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
     expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(false, TEASER_SUPPRESSION_REASON_PREMIUM);
-    expect(mockHideTierNotice).toHaveBeenCalled();
   });
 
   it("avoids duplicate fetch when session details unchanged", async () => {
@@ -548,12 +546,49 @@ describe("premiumAnalytics", () => {
     expect(global.fetch.mock.calls.length).toBe(initialFetchCalls);
   });
 
-  it("shows tier notice when membership is not premium", () => {
-    updatePremiumSession({ token: "token", active: true, membershipTier: "supporter" });
+  it.each(["supporter", "commenter"])("adds nothing to the watch page for active %s members", (membershipTier) => {
+    document.body.innerHTML = '<div id="secondary"><div id="secondary-inner"></div></div>';
+    const initialFetchCalls = global.fetch.mock.calls.length;
 
-    expect(mockShowTierNotice).toHaveBeenCalled();
+    try {
+      updatePremiumSession({ token: "token", active: true, membershipTier });
+      document.dispatchEvent(new Event("yt-navigate-finish"));
+
+      expect(document.querySelector("#secondary-inner").childElementCount).toBe(0);
+      expect(mockEnsurePanel).not.toHaveBeenCalled();
+      expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+      expect(global.fetch.mock.calls.length).toBe(initialFetchCalls);
+    } finally {
+      document.body.innerHTML = "";
+    }
+  });
+
+  it("keeps the Premium panel away after a member drops below Premium", () => {
+    mockGetVideoId.mockReturnValue(WATCH_VIDEO_ID);
+    initPremiumAnalytics();
+    updatePremiumSession({ token: "token", active: true, membershipTier: "premium" });
+    mockEnsurePanel.mockClear();
+
+    updatePremiumSession({ token: "token", active: true, membershipTier: "supporter" });
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+
     expect(mockEnsurePanel).not.toHaveBeenCalled();
-    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+    expect(panelMocks.cancelPanelRetry).toHaveBeenCalled();
+    expect(analyticsState.initialized).toBe(false);
+  });
+
+  it("loads analytics when a member upgrades to Premium on the same video", async () => {
+    mockGetVideoId.mockReturnValue(WATCH_VIDEO_ID);
+    initPremiumAnalytics();
+    updatePremiumSession({ token: "token", active: true, membershipTier: "supporter" });
+    await flushPromises();
+    const initialFetchCalls = global.fetch.mock.calls.length;
+
+    updatePremiumSession({ token: "token", active: true, membershipTier: "premium" });
+    initPremiumAnalytics();
+    await flushPromises();
+
+    expect(global.fetch.mock.calls.length).toBeGreaterThan(initialFetchCalls);
   });
 
   it("sends the selected range in days without explicit timestamps", async () => {

@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "目前無法載入不喜歡資料，請嘗試重新整理頁面。"
   },
-  "premiumTierNotice_title": {
-    "message": "Premium 進階分析已鎖定"
-  },
   "premiumTierNotice_message": {
     "message": "您的 Patreon 會員資格未包含 Premium 等級。升級贊助即可解鎖進階影片分析功能。"
-  },
-  "premiumTierNotice_cta": {
-    "message": "前往 Patreon 升級"
   },
   "changelog_cta_primary": {
     "message": "在 Patreon 上升級"

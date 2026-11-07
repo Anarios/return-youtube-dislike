@@ -1,8 +1,11 @@
 import { analyticsState, RANGE_OPTIONS, RANGE_ANCHORS } from "./state";
-import { sanitizeCount } from "./utils";
+import { createRetryTimer, sanitizeCount } from "./utils";
 import { localize } from "../utils";
 import { renderRawCounts } from "./rawCounts";
 
+const PANEL_RETRY_DELAY_MS = 500;
+
+const panelRetry = createRetryTimer(() => ensurePanel(), PANEL_RETRY_DELAY_MS);
 let callbacks = {
   onRangePreset: () => {},
   onRangeAnchorChange: () => {},
@@ -29,7 +32,7 @@ export function ensurePanel() {
   const secondaryInner =
     document.querySelector("#secondary #secondary-inner") || document.querySelector("#secondary-inner");
   if (!secondaryInner) {
-    setTimeout(ensurePanel, 500);
+    panelRetry.schedule();
     return null;
   }
 
@@ -50,6 +53,10 @@ export function ensurePanel() {
   renderRawCounts();
 
   return panel;
+}
+
+export function cancelPanelRetry() {
+  panelRetry.cancel();
 }
 
 export function updateRangeButtons() {
