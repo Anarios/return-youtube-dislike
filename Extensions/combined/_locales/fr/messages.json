@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "Impossible de charger les données de Je n’aime pas pour le moment. Veuillez recharger la page."
   },
-  "premiumTierNotice_title": {
-    "message": "Analyses Premium bloquées"
-  },
   "premiumTierNotice_message": {
     "message": "Votre adhésion Patreon n’inclut pas le niveau Premium. Améliorez votre soutien pour débloquer les analyses vidéo avancées."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Passer au niveau supérieur sur Patreon"
   },
   "changelog_cta_primary": {
     "message": "Passer à Patreon Premium"

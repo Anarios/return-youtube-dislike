@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Dislike-Daten konnten gerade nicht geladen werden. Versuchen Sie, die Seite neu zu laden."
   },
-  "premiumTierNotice_title": {
-    "message": "Premium-Analysen gesperrt"
-  },
   "premiumTierNotice_message": {
     "message": "Deine Patreon-Mitgliedschaft enthält keine Premium-Stufe. Erhöhe deinen Beitrag, um die erweiterten Videoanalysen freizuschalten."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Auf Patreon upgraden"
   },
   "changelog_cta_primary": {
     "message": "Auf Patreon upgraden"

@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "در حال حاضر نتوانستیم داده‌های دیسلایک را بارگذاری کنیم. صفحه را دوباره بارگذاری کنید."
   },
-  "premiumTierNotice_title": {
-    "message": "تحلیل‌های پریمیوم قفل است"
-  },
   "premiumTierNotice_message": {
     "message": "عضویت Patreon شما شامل سطح Premium نیست. برای باز کردن قفل تحلیل‌های پیشرفته ویدیو، حمایت مالی خود را ارتقا دهید."
-  },
-  "premiumTierNotice_cta": {
-    "message": "ارتقا در Patreon"
   },
   "changelog_cta_primary": {
     "message": "ارتقا در Patreon"

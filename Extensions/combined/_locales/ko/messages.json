@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "지금은 싫어요 데이터를 불러올 수 없습니다. 페이지를 새로고침해 보세요."
   },
-  "premiumTierNotice_title": {
-    "message": "프리미엄 분석이 잠겨 있습니다"
-  },
   "premiumTierNotice_message": {
     "message": "현재 Patreon 멤버십에는 프리미엄 등급이 포함되어 있지 않습니다. 후원을 업그레이드하여 고급 동영상 분석을 이용하세요."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Patreon에서 업그레이드"
   },
   "changelog_cta_primary": {
     "message": "Patreon에서 업그레이드하세요"

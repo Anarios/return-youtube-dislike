@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "Не ўдалося загрузіць дадзеныя аб непадабайках. Паспрабуйце абнавіць старонку."
   },
-  "premiumTierNotice_title": {
-    "message": "Прэміум-аналітыка заблакіравана"
-  },
   "premiumTierNotice_message": {
     "message": "У вашай падпісцы на Patreon няма ўзроўню Premium. Павысьце ўзровень падтрымкі, каб атрымаць доступ да пашыранай відэааналітыкі."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Павысіць узровень на Patreon"
   },
   "changelog_cta_primary": {
     "message": "Павысіць узровень на Patreon"

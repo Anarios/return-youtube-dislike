@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Không thể tải dữ liệu lượt không thích lúc này. Thử tải lại trang."
   },
-  "premiumTierNotice_title": {
-    "message": "Phân tích Premium đã bị khóa"
-  },
   "premiumTierNotice_message": {
     "message": "Tư cách thành viên Patreon của bạn chưa bao gồm hạng Premium. Nâng cấp gói ủng hộ để mở khóa các số liệu phân tích video nâng cao."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Nâng cấp trên Patreon"
   },
   "changelog_cta_primary": {
     "message": "Nâng cấp trên Patreon"

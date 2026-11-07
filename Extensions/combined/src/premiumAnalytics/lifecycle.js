@@ -8,6 +8,7 @@ import {
   applyChartExpansionState,
   applyPanelView,
   setPanelExpanded,
+  cancelPanelRetry,
 } from "./panel";
 import {
   resizeActivityChart,
@@ -23,7 +24,6 @@ import { loadRawCounts, resetRawCounts } from "./rawCounts";
 import { MS_PER_DAY, EXPANDABLE_SECTIONS } from "./constants";
 import { requestAnalytics, scheduleSelectionFetch, normalizeSelection } from "./requests";
 import { setTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } from "./teaser";
-import { showTierNotice, hideTierNotice } from "./tierNotice";
 import { observeTheme } from "./theme";
 
 let resizeListener = null;
@@ -242,6 +242,7 @@ function handleChartSelection(range) {
 }
 
 function teardownPanel() {
+  cancelPanelRetry();
   resetRawCounts();
   const state = analyticsState;
   state.currentVideoId = null;
@@ -274,7 +275,6 @@ function teardownPremiumAnalytics() {
     window.removeEventListener("resize", resizeListener);
   }
   document.removeEventListener("yt-navigate-finish", handleNavigation);
-  hideTierNotice();
   analyticsState.initialized = false;
 }
 
@@ -287,22 +287,17 @@ function updatePremiumSession({ token, active, membershipTier }) {
 
   if (!analyticsState.sessionActive) {
     setTeaserSuppressed(false, TEASER_SUPPRESSION_REASON_PREMIUM);
-    hideTierNotice();
-    teardownPanel();
+    teardownPremiumAnalytics();
     return;
   }
 
-  const hasPremiumTier = analyticsState.membershipTier === "premium";
-
-  if (!hasPremiumTier) {
-    setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_PREMIUM);
-    showTierNotice();
-    teardownPanel();
-    return;
-  }
-
-  hideTierNotice();
   setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+
+  if (analyticsState.membershipTier !== "premium") {
+    teardownPremiumAnalytics();
+    return;
+  }
+
   ensurePanel();
 
   const tokenChanged = analyticsState.sessionToken && analyticsState.sessionToken !== previousToken;

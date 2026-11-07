@@ -999,8 +999,7 @@ ytd-menu-renderer.ytd-watch-metadata {
   color: var(--yt-spec-call-to-action, #3ea6ff);
 }
 
-.ryd-premium-analytics,
-.ryd-premium-tier-notice {
+.ryd-premium-analytics {
   --ryd-analytics-bg: var(--yt-spec-base-background, #fff);
   --ryd-analytics-fg: var(--yt-spec-text-primary, #0f0f0f);
   --ryd-analytics-muted: var(--yt-spec-text-secondary, #606060);
@@ -1009,8 +1008,7 @@ ytd-menu-renderer.ytd-watch-metadata {
   --ryd-analytics-row: rgba(15, 23, 42, 0.03);
 }
 
-html[dark]:not([dark="false"]):not([light]) .ryd-premium-analytics,
-html[dark]:not([dark="false"]):not([light]) .ryd-premium-tier-notice {
+html[dark]:not([dark="false"]):not([light]) .ryd-premium-analytics {
   --ryd-analytics-bg: var(--yt-spec-base-background, #202020);
   --ryd-analytics-fg: var(--yt-spec-text-primary, #fff);
   --ryd-analytics-muted: var(--yt-spec-text-secondary, #bbb);
@@ -1109,75 +1107,6 @@ html[dark] .ryd-premium-teaser {
 
 .ryd-premium-teaser.is-loading {
   opacity: 0.65;
-}
-
-.ryd-premium-tier-notice {
-  background: var(--ryd-analytics-bg);
-  border: 1px solid var(--ryd-analytics-border);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 16px;
-  color: var(--ryd-analytics-fg);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-  font-family: Roboto, Arial, sans-serif;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.ryd-premium-tier-notice__content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex: 1 1 240px;
-}
-
-.ryd-premium-tier-notice__title {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.ryd-premium-tier-notice__message {
-  margin: 0;
-  font-size: 13px;
-  color: var(--ryd-analytics-muted);
-  line-height: 1.5;
-}
-
-.ryd-premium-tier-notice__why {
-  margin: 0;
-  font-size: 12px;
-  color: var(--ryd-analytics-muted);
-  line-height: 1.5;
-}
-
-.ryd-premium-tier-notice__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.ryd-premium-tier-notice__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: #2563eb;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 13px;
-  text-decoration: none;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
-}
-
-.ryd-premium-tier-notice__cta:hover {
-  background: #1d4ed8;
-  transform: translateY(-1px);
 }
 
 .ryd-premium-teaser__summary {

@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Data dislajků se nepodařilo načíst. Zkuste stránku znovu načíst."
   },
-  "premiumTierNotice_title": {
-    "message": "Prémiová analytika je uzamčená"
-  },
   "premiumTierNotice_message": {
     "message": "Vaše členství na Patreonu nezahrnuje úroveň Premium. Povýšte svůj příspěvek a zpřístupněte si pokročilou video analytiku."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Povýšit na Patreonu"
   },
   "changelog_cta_primary": {
     "message": "Upgradovat na Patreonu"

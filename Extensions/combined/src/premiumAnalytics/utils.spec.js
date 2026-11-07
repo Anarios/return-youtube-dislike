@@ -2,13 +2,7 @@
  * @jest-environment jsdom
  */
 
-import {
-  sanitizeCount,
-  toEpoch,
-  capitalize,
-  debounce,
-  safeJson,
-} from "./utils";
+import { sanitizeCount, toEpoch, capitalize, debounce, createRetryTimer, safeJson } from "./utils";
 
 describe("premiumAnalytics.utils", () => {
   describe("sanitizeCount", () => {
@@ -50,6 +44,51 @@ describe("premiumAnalytics.utils", () => {
       expect(capitalize("")).toBe("");
       expect(capitalize()).toBe("");
       expect(capitalize(null)).toBe("");
+    });
+  });
+
+  describe("createRetryTimer", () => {
+    beforeEach(() => {
+      jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+      jest.clearAllTimers();
+      jest.useRealTimers();
+    });
+
+    it("keeps a single pending retry however often it is scheduled", () => {
+      const callback = jest.fn();
+      const retry = createRetryTimer(callback, 250);
+
+      retry.schedule();
+      retry.schedule();
+
+      expect(jest.getTimerCount()).toBe(1);
+      jest.advanceTimersByTime(250);
+      expect(callback).toHaveBeenCalledTimes(1);
+    });
+
+    it("can be scheduled again after the retry runs", () => {
+      const callback = jest.fn(() => retry.schedule());
+      const retry = createRetryTimer(callback, 250);
+
+      retry.schedule();
+      jest.advanceTimersByTime(250);
+
+      expect(jest.getTimerCount()).toBe(1);
+    });
+
+    it("never runs a cancelled retry", () => {
+      const callback = jest.fn();
+      const retry = createRetryTimer(callback, 250);
+
+      retry.schedule();
+      retry.cancel();
+      jest.advanceTimersByTime(1000);
+
+      expect(callback).not.toHaveBeenCalled();
+      expect(jest.getTimerCount()).toBe(0);
     });
   });
 

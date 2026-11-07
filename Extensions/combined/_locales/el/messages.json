@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Δεν ήταν δυνατή η φόρτωση των δεδομένων dislikes. Δοκιμάστε να ανανεώσετε τη σελίδα."
   },
-  "premiumTierNotice_title": {
-    "message": "Οι premium αναλύσεις είναι κλειδωμένες"
-  },
   "premiumTierNotice_message": {
     "message": "Η συνδρομή σου στο Patreon δεν περιλαμβάνει το επίπεδο Premium. Αναβάθμισε τη στήριξή σου για να ξεκλειδώσεις προηγμένα στατιστικά βίντεο."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Αναβάθμιση στο Patreon"
   },
   "changelog_cta_primary": {
     "message": "Αναβάθμιση στο Patreon"

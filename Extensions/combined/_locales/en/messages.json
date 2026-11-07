@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "We could not load dislike data just now. Try reloading the page."
   },
-  "premiumTierNotice_title": {
-    "message": "Premium analytics locked"
-  },
   "premiumTierNotice_message": {
     "message": "Your Patreon membership doesn't include the Premium tier. Upgrade your pledge to unlock advanced video analytics."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Upgrade on Patreon"
   },
   "changelog_cta_primary": {
     "message": "Upgrade on Patreon"

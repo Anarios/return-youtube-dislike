@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "No pudimos cargar los datos de dislikes en este momento. Intenta recargar la página."
   },
-  "premiumTierNotice_title": {
-    "message": "Análisis premium bloqueados"
-  },
   "premiumTierNotice_message": {
     "message": "Tu membresía de Patreon no incluye el nivel Premium. Mejora tu aporte para desbloquear análisis avanzados de videos."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Mejorar en Patreon"
   },
   "changelog_cta_primary": {
     "message": "Actualízate en Patreon"

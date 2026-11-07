@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "低評価データを読み込めませんでした。ページを更新してください。"
   },
-  "premiumTierNotice_title": {
-    "message": "Premium 分析はロックされています"
-  },
   "premiumTierNotice_message": {
     "message": "ご利用中の Patreon メンバーシップには Premium プランが含まれていません。上位プランにアップグレードすると、高度な動画分析を利用できます。"
-  },
-  "premiumTierNotice_cta": {
-    "message": "Patreon でアップグレード"
   },
   "changelog_cta_primary": {
     "message": "Patreon でアップグレードする"
