@@ -6,6 +6,7 @@ import {
   TEASER_SUPPRESSION_REASON_PREMIUM,
 } from "./premiumAnalytics/teaser";
 import { isPrivateBrowsingContext } from "./private-browsing";
+import { getBrowser } from "./utils";
 import { hasFeaturePermission, onDataPermissionsChanged } from "./core-data-consent";
 import { hasAuthenticationDataPermission, usesFirefoxDataCollectionConsent } from "./data-collection-permissions";
 
@@ -16,9 +17,21 @@ let patreonState = {
 };
 let premiumGeneration = 0;
 const COUNTS_SUPPRESSION_REASON = "counts";
+const ORPHANED_SUPPRESSION_REASON = "orphaned";
+
+// Turning off or updating the extension leaves this script running in open tabs
+// without extension APIs, so the panels would show raw message keys and no data.
+function removePremiumFeaturesIfOrphaned() {
+  if (getBrowser()?.runtime?.id) return;
+  document.removeEventListener("yt-navigate-finish", removePremiumFeaturesIfOrphaned, true);
+  premiumGeneration++;
+  setTeaserSuppressed(true, ORPHANED_SUPPRESSION_REASON);
+  disablePremiumFeatures();
+}
 
 function initPatreonFeatures() {
   if (isPrivateBrowsingContext()) return;
+  document.addEventListener("yt-navigate-finish", removePremiumFeaturesIfOrphaned, true);
   if (usesFirefoxDataCollectionConsent()) setTeaserSuppressed(true, COUNTS_SUPPRESSION_REASON);
   initPremiumTeaser();
   if (usesFirefoxDataCollectionConsent()) enablePremiumFeatures();
