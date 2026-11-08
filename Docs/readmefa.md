@@ -13,7 +13,7 @@ Read this in other languages: [English](readme.md), [فارسی](readmefa.md), [
 
 - [دانلود، نصب و استفاده](https://github.com/Anarios/return-youtube-dislike/wiki/Downloading,-Installing-&-Using)
 - [عیب‌یابی](https://github.com/Anarios/return-youtube-dislike/wiki/Troubleshooting-Guide)
-<!-- - [FAQ](FAQ.md)
+<!-- - [FAQ](FAQfa.md)
 - [When & How to Report Bugs](Guide__Bug_Reporting.md)
 - [Contributing](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md) -->
 <!-- - [How to update wiki](/) -->
@@ -22,8 +22,8 @@ Read this in other languages: [English](readme.md), [فارسی](readmefa.md), [
 
 ## پرسش‌های متداول
 
-- [عمومی](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
-- [امنیتی](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md)
+- [عمومی](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQfa.md)
+- [امنیتی](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQfa.md)
 
 <!-- - [Privacy](FAQ_Privacy.md)
 - [Technical](FAQ_Technical.md)
