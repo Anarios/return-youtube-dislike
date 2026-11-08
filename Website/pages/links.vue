@@ -131,6 +131,10 @@ export default {
         tag: "khangquangtran",
         lang: "Tiếng Việt",
       },
+      {
+        tag: "Radoslav Ďurač",
+        lang: "Slovenčina",
+      },
     ],
     coolProjects: [
       {

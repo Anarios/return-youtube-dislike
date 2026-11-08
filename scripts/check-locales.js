@@ -8,6 +8,7 @@ const EMPTY_WEBSITE_FRAGMENTS = new Set([
   "cs:help.bullet11",
   "de:help.bullet11",
   "es:help.bullet11",
+  "sk:help.bullet11",
   "uk:help.bullet11",
   "vi:help.bullet11",
 ]);

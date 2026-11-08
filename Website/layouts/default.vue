@@ -105,6 +105,7 @@ export default {
       { name: "Bahasa Indonesia", locale: "id" },
       { name: "Tiếng Việt", locale: "vi" },
       { name: "Slovenščina", locale: "sl" },
+      { name: "Slovenčina", locale: "sk" },
       { name: "Azərbaycanca", locale: "az" },
       { name: "Italiano", locale: "it-IT" },
       { name: "Nederlands", locale: "nl" },

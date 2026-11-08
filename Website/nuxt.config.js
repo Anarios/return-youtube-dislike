@@ -14,6 +14,7 @@ import id from "./_locales/id";
 import vi from "./_locales/vi";
 import be from "./_locales/be";
 import sl from "./_locales/sl";
+import sk from "./_locales/sk";
 import az from "./_locales/az";
 import itIT from "./_locales/it-IT";
 import nl from "./_locales/nl";
@@ -64,7 +65,31 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     lang: {
-      locales: { en, es, tr, ru, cs, ja, fr, uk, ko, pl, de, hu, id, vi, be, sl, az, "it-IT": itIT, nl, pt_BR, sv, fa },
+      locales: {
+        en,
+        es,
+        tr,
+        ru,
+        cs,
+        ja,
+        fr,
+        uk,
+        ko,
+        pl,
+        de,
+        hu,
+        id,
+        vi,
+        be,
+        sl,
+        sk,
+        az,
+        "it-IT": itIT,
+        nl,
+        pt_BR,
+        sv,
+        fa,
+      },
       current: "en",
     },
     theme: {

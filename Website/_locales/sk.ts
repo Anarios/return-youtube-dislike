@@ -1,0 +1,137 @@
+import { sk } from "vuetify/src/locale";
+// By Radoslav Ďurač
+export default {
+  ...sk,
+  home: {
+    name: "Domov",
+    title: "Return YouTube Dislike",
+    subtitle: "Rozšírenie prehliadača a API, ktoré zobrazí disliky na YouTube",
+    ukraine: "Podporte Ukrajinu",
+    sponsors: "Sponzori",
+    becomeSponsor: "Staňte sa naším sponzorom",
+  },
+  install: {
+    name: "Inštalácia",
+    title: "Vyberte svoju platformu",
+    subtitle: "Dostupné pre Firefox a všetky prehliadače založené na Chromiu",
+    title2: "Ďalšie platformy",
+    subtitle2: "Ak váš prehliadač ešte nie je podporovaný, vyskúšajte tento UserScript",
+    title3: "Implementácie tretích strán",
+    subtitle3: "Žiadna zodpovednosť na našej strane, používajte na vlastné nebezpečenstvo",
+    firefox: "Firefox",
+    chrome: "Chrome",
+    edge: "Edge",
+    opera: "Opera",
+    brave: "Brave",
+    userscript: "Používateľský skript",
+    tampermonkey: "Tampermonkey",
+    androidReVanced: "Android - ReVanced",
+    androidMorphe: "Android - Morphe",
+    androidTubular: "Android (Tubular – fork NewPipe)",
+    iosJailbroken: "iOS (s jailbreakom)",
+    iosUYouPlus: "iOS (uYou+)",
+  },
+  api: {
+    name: "API",
+    title: "Vitajte v oficiálnej dokumentácii RYD!",
+    subtitle: "Na začiatok vyberte sekciu z menu.",
+    rights: {
+      title: "Práva na použitie",
+      subtitle: "Použitie tohto API tretími stranami je povolené s nasledujúcimi obmedzeniami:",
+      bullet1: "Uvedenie: ",
+      bullet1text:
+        "Tento projekt by mal byť viditeľne uvedený buď s odkazom na tento repozitár, alebo s odkazom na returnyoutubedislike.com",
+      bullet2: "Obmedzenie požiadaviek: ",
+      bullet2text:
+        "Pre API platí obmedzenie na 100 požiadaviek za minútu a 10 000 za deň. Pri prekročení tohto limitu aplikácia vráti stavový kód 429, ktorý znamená, že by ste mali obmedziť svoje požiadavky",
+    },
+    url: {
+      title: "Informácie o URL",
+      subtitle: "API je dostupné na nasledujúcej základnej URL: ",
+    },
+    endpoints: {
+      title: "Dostupné endpointy",
+      subtitle: "Zoznam dostupných endpointov nájdete tu: ",
+    },
+    fetching: {
+      title: "Základný návod na prístup",
+      subtitle: "Príklad získania hlasov daného ID YouTube videa: ",
+      title2: "Príklad požiadavky: ",
+      url: "URL požiadavky: ",
+      method: "Spôsob žiadosti: ",
+      headers: "Hlavičky: ",
+      response: "Odpoveď: ",
+      error1: 'Neplatné YouTube ID vráti stavový kód 404 "Not Found"',
+      error2: 'Nesprávne formátované YouTube ID vráti stavový kód 400 "Bad Request"',
+    },
+  },
+  help: {
+    name: "Pomocník",
+    title: "Riešenie problémov",
+    bullet1: "Uistite sa, že používate najnovšiu verziu rozšírenia. Momentálne je to verzia ",
+    bullet11: "",
+    bullet2:
+      "Skúste odstrániť a znova nainštalovať rozšírenie a potom reštartovať váš prehliadač (všetky aktívne okná, nie len jednu kartu)",
+    bullet3: "Uistite sa, že sa otvorí nasledujúci odkaz: ",
+    bullet31: "mali by ste vidieť tento text: ",
+    bullet4: "Ak nepomôže ani jedna z možností vyššie, nahláste svoj problém do kanála",
+    bullet41: "v našom",
+    bullet4a: "Povedzte nám, aký máte operačný systém, názov prehliadača a verziu prehliadača",
+    bullet4b: "Urobte snímku obrazovky s problémom (napr. stránka YouTube videa) s otvorenou konzolou (stlačte ",
+    bullet4b1: ") - ukážkovú snímku nájdete nižšie.",
+    bullet4c: "Urobte snímku obrazovky stránky rozšírení vášho prehliadača s nainštalovaným rozšírením.",
+    bullet4c1: "Na zobrazenie rozšírení zadajte nasledujúcu adresu do adresného riadka: ",
+    firefox: "pre Firefox",
+    chrome: "pre Chrome, Edge, Brave, Opera, Vivaldi",
+    detected: "Zistené:",
+    altExampleScreenshot: "ukážková snímka obrazovky",
+  },
+  faq: {
+    name: "FAQ",
+    title: "Často kladené otázky",
+    subtitle: "Stále máte otázky? Pripojte sa na náš Discord server!",
+    bullet1: "Ako získava rozšírenie svoje dáta?",
+    bullet1text:
+      "Kombináciou archivovaných dát z obdobia pred oficiálnym vypnutím rozhrania API YouTube dislike a extrapolovaného správania používateľov rozšírenia.",
+    bullet2: "Prečo sa neaktualizuje počet dislikov?",
+    bullet2text:
+      "V súčasnosti sa počty dislikov videí ukladajú do vyrovnávacej pamäte a neaktualizujú sa príliš často. Ich aktualizácia sa líši v závislosti od popularity videa, ale môže trvať od niekoľkých hodín do niekoľkých dní.",
+    bullet3: "Ako to funguje?",
+    bullet3text:
+      "Rozšírenie načíta ID videa, ktoré sledujete, a pomocou nášho rozhrania API získa počet dislikov (a ďalšie polia, ako sú zobrazenia, lajky atď.). Rozšírenie potom na stránke zobrazí počet a pomer dislikov. Ak sa vám video páči alebo nepáči, zaznamená sa to a odošle do databázy, takže sa dá extrapolovať presný počet dislikov.",
+    bullet4: "Môžem s vami zdieľať počet svojich dislikov?",
+    bullet4text:
+      "Už čoskoro. Hľadáme spôsob, ako použiť rozhranie OAuth alebo iné rozhranie API iba na čítanie s obmedzeným rozsahom, aby tvorcovia mohli overiteľne zdieľať svoje počty dislikov.",
+    bullet5: "Aké dáta zbierate a ako sa s nimi zaobchádza?",
+    bullet5text:
+      'Rozšírenie zhromažďuje iba údaje, ktoré sú nevyhnutne potrebné na jeho správne fungovanie, napríklad IP adresu alebo ID sledovaného videa. Žiadne z vašich údajov nebudú nikdy predané tretím stranám. Ak sa chcete dozvedieť viac o tom, ako sa staráme o zabezpečenie a ochranu osobných údajov, pozrite si naše <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">bezpečnostné FAQ</a>.',
+    bullet6: "Ako funguje API/Backend?",
+    bullet6text:
+      "Backend používa archivované dáta z obdobia, keď rozhranie YouTube ešte vracalo počet dislikov, počty lajkov/dislikov používateľov a extrapoláciu. V blízkej budúcnosti umožníme tvorcom obsahu jednoducho a bezpečne odosielať počet dislikov a do našej súčasnej databázy pridáme archivované dáta ArchiveTeamu (4,56 miliardy videí). Môžete si tiež pozrieť video na túto tému.",
+    bullet7: "Prečo počet dislikov zobrazuje 'DISLIKES DISABLED'?",
+    bullet7text:
+      "Niekedy sa pri nedávno nahranom videu môže zobraziť 'DISLIKES DISABLED' (disliky zakázané), aj keď ich tvorca nezakázal, čo je spôsobené tým, ako zisťujeme, či sú disliky zakázané. Malo by to samo zmiznúť počas niekoľkých hodín alebo tým, že danému videu dáte lajk či dislike.",
+  },
+  donate: {
+    name: "Prispieť",
+    subtitle: "Môžete podporiť naše úsilie zachovať internet bezplatný akýmkoľvek darom!",
+    patreon: "Patreon",
+    crypto: "Kryptomena",
+  },
+  links: {
+    name: "Odkazy",
+    title: "Odkazy projektu",
+    subtitle: "Odkazy na projekt a jeho vývojárov",
+    contact: "Kontaktujte ma",
+    translators: "Prekladatelia",
+    coolProjects: "Super projekty",
+    sponsorBlockDescription: "Preskočte reklamy integrované vo videách",
+    filmotDescription: "Prehľadávajte YouTube videá pomocou titulkov",
+    github: "GitHub",
+    discord: "Discord",
+  },
+  layout: {
+    notSupported: "nie je podporovaný.",
+    considerUpgrade: "Zvážte aktualizáciu na najnovšiu verziu.",
+  },
+};
