@@ -16,6 +16,7 @@ import dutch from "../../_locales/nl/messages.json";
 import polish from "../../_locales/pl/messages.json";
 import portuguese from "../../_locales/pt_BR/messages.json";
 import russian from "../../_locales/ru/messages.json";
+import slovak from "../../_locales/sk/messages.json";
 import slovenian from "../../_locales/sl/messages.json";
 import swedish from "../../_locales/sv_SE/messages.json";
 import turkish from "../../_locales/tr/messages.json";
@@ -43,6 +44,7 @@ const catalogs = {
   pl: polish,
   "pt-BR": portuguese,
   ru: russian,
+  sk: slovak,
   sl: slovenian,
   "sv-SE": swedish,
   tr: turkish,
