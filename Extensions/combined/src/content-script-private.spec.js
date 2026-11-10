@@ -43,7 +43,7 @@ const execute = new Function(
 
 function harness(
   privateContext,
-  { firefox = false, counts = true, shorts = false, shortsNoDislike = false, dismissed = false } = {},
+  { firefox = false, counts = true, shorts = false, shortsNoDislike = false, dismissed = false, manifest } = {},
 ) {
   const page = document.implementation.createHTMLDocument();
   const pageWindow = new EventTarget();
@@ -115,7 +115,7 @@ function harness(
     "./src/buttons": buttonFunctions,
     "./src/state": state,
     "./src/utils": {
-      getBrowser: () => ({ storage, runtime: { getURL: (path) => path } }),
+      getBrowser: () => ({ storage, runtime: { getURL: (path) => path, getManifest: () => manifest } }),
       getVideoId: () => "abcdefghijk",
       isVideoLoaded: () => true,
     },
@@ -195,6 +195,17 @@ test.each([false, true])(
     expect(context.dependencies["./src/discussion"].initDiscussion).toHaveBeenCalledTimes(privateContext ? 0 : 1);
   },
 );
+
+test("Safari starts vote count rendering without waiting for a dynamically inserted helper", async () => {
+  const manifest = JSON.parse(readFileSync(join(__dirname, "../manifest-safari.json"), "utf8"));
+  const context = harness(false, { manifest });
+  context.page.head.appendChild = jest.fn();
+
+  await context.run();
+
+  expect(context.page.head.appendChild).not.toHaveBeenCalled();
+  expect(context.state.setInitialState).toHaveBeenCalledTimes(1);
+});
 
 test("missing Firefox count permission shows the control beside hydrated Shorts reactions", async () => {
   const context = harness(false, { firefox: true, counts: false, shorts: true });

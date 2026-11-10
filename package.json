@@ -37,7 +37,7 @@
     "test:live:youtube:interactive": "npm run test:live:youtube",
     "test:live:youtube:read-only": "playwright test --config playwright.live-youtube.config.js",
     "test:all": "npm test -- --runInBand && npm run test:e2e:systematic",
-    "build:safari": "webpack --mode=production && xcrun safari-web-extension-converter Extensions/combined/dist/safari --project-location Extensions/combined/dist --bundle-identifier com.returnyoutubedislike.safari-ext --force",
+    "build:safari": "webpack --mode=production && xcrun safari-web-extension-packager Extensions/combined/dist/safari --project-location Extensions/combined/dist --app-name \"Return YouTube Dislike for Safari\" --bundle-identifier com.sakshyad.returnyoutubedislike.Return-YouTube-Dislike-for-Safari --macos-only --swift --copy-resources --no-open --no-prompt --force",
     "prepare": "husky install"
   },
   "lint-staged": {
