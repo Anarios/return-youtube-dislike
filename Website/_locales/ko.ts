@@ -31,6 +31,8 @@ export default {
     androidTubular: "Android (Tubular - NewPipe 포크)",
     iosJailbroken: "iOS (탈옥)",
     iosUYouPlus: "iOS (uYou+)",
+    safariZorro: "Safari (macOS, iOS) - Zorro Dislikes",
+    safariZorroGitHub: "Safari - Zorro Dislikes (GitHub)",
   },
   api: {
     name: "API",
