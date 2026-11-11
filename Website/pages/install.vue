@@ -84,6 +84,14 @@
       <v-icon style="margin-right: 0.5em">mdi-apple</v-icon>
       {{ $vuetify.lang.t("$vuetify.install.iosUYouPlus") }}
     </v-btn>
+    <v-btn class="mainAltButton" :href="safariZorroAppStore" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-apple-safari</v-icon>
+      {{ $vuetify.lang.t("$vuetify.install.safariZorro") }}
+    </v-btn>
+    <v-btn class="mainAltButton" :href="safariZorroGitHub" target="_blank">
+      <v-icon style="margin-right: 0.5em">mdi-github</v-icon>
+      {{ $vuetify.lang.t("$vuetify.install.safariZorroGitHub") }}
+    </v-btn>
   </div>
 </template>
 
@@ -111,6 +119,8 @@ export default {
 
       androidVueTube: "https://vuetube.app",
       iosuYouPlus: "https://github.com/qnblackcat/uYouPlus",
+      safariZorroAppStore: "https://apps.apple.com/us/app/zorro-dislikes-for-youtube/id6829810650",
+      safariZorroGitHub: "https://github.com/skar404/youtube-dislike-for-safari",
 
       androidNewPipe: "https://github.com/polymorphicshade/Tubular",
       reVanced: "https://revanced.app/",
