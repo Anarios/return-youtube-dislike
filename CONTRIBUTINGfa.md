@@ -1,4 +1,4 @@
-Read this in other languages: [English](CONTRIBUTING.md), [فارسی](CONTRIBUTINGfa.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [беларуская](CONTRIBUTINGbe.md), [български](CONTRIBUTINGbg.md), [中文](CONTRIBUTINGcn.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md), [Slovenščina](CONTRIBUTINGsl.md)
+این مطلب را به زبان‌های دیگر بخوانید: [English](CONTRIBUTING.md), [فارسی](CONTRIBUTINGfa.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [беларуская](CONTRIBUTINGbe.md), [български](CONTRIBUTINGbg.md), [中文](CONTRIBUTINGcn.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md), [Slovenščina](CONTRIBUTINGsl.md)
 
 # به راهنمای مشارکت Return YouTube Dislikes خوش آمدید
 
@@ -10,7 +10,7 @@ Read this in other languages: [English](CONTRIBUTING.md), [فارسی](CONTRIBUT
 
 #### پیش‌نیازها
 
-برای ایجاد نسخه bundled از سورس، باید node و npm را نصب داشته باشید.
+برای ساخت نسخه بسته‌بندی‌شده از کد منبع، باید node و npm را نصب داشته باشید.
 
 نسخه‌های استفاده‌شده در زمان راه‌اندازی:
 
@@ -41,13 +41,13 @@ npm run build // برای ایجاد فایل(های) بیلد به صورت ی�
 
 ### مشکلات
 
-#### باز کردن یک issue جدید
+#### ثبت یک گزارش مشکل جدید
 
-اگر مشکلی با افزونه دارید، لطفاً جستجو کنید تا مطمئن شوید مشکل قبلاً گزارش نشده است. اگر گزارش نشده بود، یک issue باز کنید؛ استفاده از فرم issue به شدت توصیه می‌شود اما اجباری نیست.
+اگر مشکلی با افزونه دارید، لطفاً جستجو کنید تا مطمئن شوید مشکل قبلاً گزارش نشده است. اگر گزارش نشده بود، یک گزارش مشکل ثبت کنید؛ استفاده از فرم گزارش مشکل به شدت توصیه می‌شود اما اجباری نیست.
 
-#### حل یک issue
+#### رفع یک مشکل گزارش‌شده
 
-اگر مشکلی پیدا کردید که احساس می‌کنید قادر به حل آن هستید، خجالت نکشید. یک PR همراه با رفع مشکل باز کنید و حتماً به issueای که حل می‌کنید اشاره کنید.
+اگر مشکلی پیدا کردید که احساس می‌کنید قادر به حل آن هستید، خجالت نکشید. یک درخواست ادغام (PR) با تغییرات لازم برای رفع مشکل باز کنید و حتماً به گزارش مشکلی که رفع می‌کنید اشاره کنید.
 
 ### درخواست ویژگی
 
@@ -57,9 +57,9 @@ npm run build // برای ایجاد فایل(های) بیلد به صورت ی�
 
 #### پیاده‌سازی یک درخواست ویژگی
 
-اگر ویژگی پیدا کردید که فکر می‌کنید می‌توانید آن را پیاده‌سازی کنید، خجالت نکشید. یک PR همراه با رفع مشکل باز کنید و حتماً به ویژگی‌ای که پیاده‌سازی می‌کنید اشاره نمایید.
+اگر ویژگی پیدا کردید که فکر می‌کنید می‌توانید آن را پیاده‌سازی کنید، خجالت نکشید. یک درخواست ادغام با پیاده‌سازی آن باز کنید و حتماً به ویژگی‌ای که پیاده‌سازی می‌کنید اشاره نمایید.
 
-### چه PRهایی را می‌پذیریم؟
+### چه درخواست‌های ادغامی را می‌پذیریم؟
 
 - رفع مشکلات.
 - پیاده‌سازی ویژگی‌ها.
