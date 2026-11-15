@@ -1,4 +1,9 @@
 {
+  "targets": ">= 0%",
   "presets": ["@babel/preset-env"],
-  "plugins": ["rewire"]
+  "env": {
+    "test": {
+      "plugins": ["./scripts/babel-rewire.cjs"]
+    }
+  }
 }
