@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Yorum gönder"
   },
+  "discussion_replyTo": {
+    "message": "$1 adlı kullanıcıya yanıt"
+  },
+  "discussion_replyContext": {
+    "message": "Yanıtlanan yorumu göster"
+  },
   "discussion_reply": {
     "message": "Yanıtla"
   },

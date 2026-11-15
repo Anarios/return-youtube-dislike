@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Апублікаваць каментарый"
   },
+  "discussion_replyTo": {
+    "message": "У адказ на каментарый $1"
+  },
+  "discussion_replyContext": {
+    "message": "Паказаць зыходны каментарый"
+  },
   "discussion_reply": {
     "message": "Адказаць"
   },

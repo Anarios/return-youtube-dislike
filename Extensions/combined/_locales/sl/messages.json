@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Objavi komentar"
   },
+  "discussion_replyTo": {
+    "message": "V odgovor na komentar uporabnika $1"
+  },
+  "discussion_replyContext": {
+    "message": "Prikaži izvirni komentar"
+  },
   "discussion_reply": {
     "message": "Odgovori"
   },

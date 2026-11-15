@@ -489,6 +489,8 @@
   "discussion_empty": { "message": "Комментариев пока нет. Начните обсуждение." },
   "discussion_comment": { "message": "Комментарий" },
   "discussion_post": { "message": "Отправить" },
+  "discussion_replyTo": { "message": "В ответ на комментарий $1" },
+  "discussion_replyContext": { "message": "Показать исходный комментарий" },
   "discussion_reply": { "message": "Ответить" },
   "discussion_postReply": { "message": "Отправить ответ" },
   "discussion_cancel": { "message": "Отмена" },

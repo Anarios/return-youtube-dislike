@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Reactie plaatsen"
   },
+  "discussion_replyTo": {
+    "message": "In reactie op $1"
+  },
+  "discussion_replyContext": {
+    "message": "Bovenliggende reactie bekijken"
+  },
   "discussion_reply": {
     "message": "Beantwoorden"
   },

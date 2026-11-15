@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Опублікувати коментар"
   },
+  "discussion_replyTo": {
+    "message": "У відповідь на коментар $1"
+  },
+  "discussion_replyContext": {
+    "message": "Показати вихідний коментар"
+  },
   "discussion_reply": {
     "message": "Відповісти"
   },

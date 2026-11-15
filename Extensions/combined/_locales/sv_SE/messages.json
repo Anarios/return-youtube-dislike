@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Publicera kommentar"
   },
+  "discussion_replyTo": {
+    "message": "Som svar till $1"
+  },
+  "discussion_replyContext": {
+    "message": "Visa kommentaren som besvarades"
+  },
   "discussion_reply": {
     "message": "Svara"
   },

@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Kirim komentar"
   },
+  "discussion_replyTo": {
+    "message": "Menanggapi $1"
+  },
+  "discussion_replyContext": {
+    "message": "Lihat komentar yang ditanggapi"
+  },
   "discussion_reply": {
     "message": "Balas"
   },

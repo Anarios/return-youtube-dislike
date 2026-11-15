@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Şərh paylaş"
   },
+  "discussion_replyTo": {
+    "message": "$1 istifadəçisinə cavab"
+  },
+  "discussion_replyContext": {
+    "message": "Cavab verilən şərhə bax"
+  },
   "discussion_reply": {
     "message": "Cavab ver"
   },

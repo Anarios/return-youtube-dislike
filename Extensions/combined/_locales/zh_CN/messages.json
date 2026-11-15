@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "发表评论"
   },
+  "discussion_replyTo": {
+    "message": "回复 $1"
+  },
+  "discussion_replyContext": {
+    "message": "查看所回复的评论"
+  },
   "discussion_reply": {
     "message": "回复"
   },

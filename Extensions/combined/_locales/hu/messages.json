@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Hozzászólás küldése"
   },
+  "discussion_replyTo": {
+    "message": "Válasz $1 hozzászólására"
+  },
+  "discussion_replyContext": {
+    "message": "Eredeti hozzászólás megtekintése"
+  },
   "discussion_reply": {
     "message": "Válasz"
   },

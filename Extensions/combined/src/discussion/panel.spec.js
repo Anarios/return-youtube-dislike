@@ -345,6 +345,710 @@ test("replies preserve the root and immediate target IDs", async () => {
   expect(root.querySelectorAll(".ryd-discussion-reply")).toHaveLength(2);
 });
 
+describe("multilevel reply threads", () => {
+  const CHILD = "55555555-5555-4555-8555-555555555555";
+  const GRANDCHILD = "66666666-6666-4666-8666-666666666666";
+  const SIBLING = "77777777-7777-4777-8777-777777777777";
+  const SECOND_CHILD = "88888888-8888-4888-8888-888888888888";
+  const CREATED = "99999999-9999-4999-8999-999999999999";
+
+  const reply = (id, replyToId, second, overrides = {}) =>
+    comment({
+      id,
+      parentId: ROOT,
+      replyToId,
+      text: `Reply ${second}`,
+      createdAt: `2026-09-01T12:00:${String(second).padStart(2, "0")}Z`,
+      ...overrides,
+    });
+  const row = (root, id) => root.querySelector(`[data-comment-id='${id}']`);
+  const hierarchy = (root) =>
+    [...root.querySelectorAll(".ryd-discussion-reply")].map((item) => [
+      item.dataset.commentId,
+      Number(item.dataset.replyDepth),
+    ]);
+  const parentButtons = (root, id) =>
+    [...row(root, id).children].filter((item) => item.matches("[data-action='reply-context']"));
+  const parentButton = (root, id) => parentButtons(root, id)[0];
+  function expectResolvedParent(button, nickname = "Writer") {
+    expect(button.tagName).toBe("BUTTON");
+    expect(button.hidden).toBe(false);
+    expect(button.textContent).toBe("");
+    expect(button.getAttribute("aria-label")).toBe(discussionText("replyContext"));
+    expect(button.title).toBe(nickname ? discussionText("replyTo", [nickname]) : discussionText("replyContext"));
+    expect(button.classList.contains("ryd-discussion-parent-missing")).toBe(false);
+  }
+  const expand = async (root) => {
+    root.querySelector("[data-action='load-replies']").click();
+    await flush();
+  };
+
+  test("groups each branch under its immediate target and orders siblings chronologically", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 6 })]);
+    request.mockResolvedValueOnce({
+      items: [
+        reply(SECOND_CHILD, REPLY, 5),
+        reply(GRANDCHILD, CHILD, 4),
+        reply(SIBLING, ROOT, 2),
+        reply(CHILD, REPLY, 3),
+        reply(REPLY, ROOT, 1),
+        reply(CREATED, null, 6),
+      ],
+      nextCursor: null,
+    });
+    await expand(root);
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [SECOND_CHILD, 2],
+      [SIBLING, 1],
+      [CREATED, 1],
+    ]);
+    const replyContainer = row(root, ROOT).querySelector(".ryd-discussion-replies");
+    expect(
+      [...root.querySelectorAll(".ryd-discussion-reply")].every((item) => item.parentElement === replyContainer),
+    ).toBe(true);
+    expect(replyContainer.querySelector("[data-action='load-replies']:not([hidden])")).toBeNull();
+    expect(parentButtons(root, ROOT)).toHaveLength(0);
+    for (const [id, target] of [
+      [REPLY, ROOT],
+      [CHILD, REPLY],
+      [GRANDCHILD, CHILD],
+      [SECOND_CHILD, REPLY],
+      [SIBLING, ROOT],
+      [CREATED, ROOT],
+    ]) {
+      expect(parentButtons(root, id)).toHaveLength(1);
+      expect(parentButton(root, id).dataset.replyToId).toBe(target);
+      expectResolvedParent(parentButton(root, id));
+    }
+  });
+
+  const rails = (root, id) =>
+    [...row(root, id).children].filter((item) => item.classList.contains("ryd-discussion-reply-rail"));
+  const railDepths = (root, id) => rails(root, id).map((rail) => Number(rail.dataset.replyRailDepth));
+  const pathSegments = (root, owner) => [...root.querySelectorAll(`[data-reply-path-owner='${owner}']`)];
+  function expectActivePath(root, owner = null) {
+    const segments = [...root.querySelectorAll("[data-reply-path-owner]")];
+    expect(segments.length).toBeGreaterThan(0);
+    if (owner) expect(pathSegments(root, owner).length).toBeGreaterThan(0);
+    for (const segment of segments)
+      expect(segment.classList.contains("is-path-highlighted")).toBe(segment.dataset.replyPathOwner === owner);
+  }
+  const pointer = (target, type, relatedTarget = null) =>
+    target.dispatchEvent(new MouseEvent(type, { bubbles: true, relatedTarget }));
+
+  test("hovering a trunk, ancestor continuation or elbow highlights only their complete shared connection", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 5 })]);
+    request.mockResolvedValueOnce({
+      items: [
+        reply(REPLY, ROOT, 1),
+        reply(CHILD, REPLY, 2),
+        reply(GRANDCHILD, CHILD, 3),
+        reply(SECOND_CHILD, REPLY, 4),
+        reply(SIBLING, ROOT, 5),
+      ],
+      nextCursor: null,
+    });
+    await expand(root);
+    const trunk = [...row(root, ROOT).children].find((item) => item.classList.contains("ryd-discussion-reply-stem"));
+    const siblingContinuation = [...row(root, REPLY).children].find((item) =>
+      item.classList.contains("ryd-discussion-reply-continuation"),
+    );
+    const continuation = rails(root, GRANDCHILD).find((item) => item.dataset.replyRailDepth === "1");
+    const elbow = parentButton(root, SIBLING);
+    const unrelated = parentButton(root, SECOND_CHILD);
+    const sharedConnection = [trunk, siblingContinuation, continuation, elbow];
+    for (const segment of sharedConnection) expect(segment.dataset.replyPathOwner).toBe(ROOT);
+    expect(unrelated.dataset.replyPathOwner).toBe(REPLY);
+    expectActivePath(root);
+    pointer(trunk, "pointerover");
+    expectActivePath(root, ROOT);
+    for (let index = 1; index < sharedConnection.length; index++) {
+      const previous = sharedConnection[index - 1];
+      const next = sharedConnection[index];
+      pointer(previous, "pointerout", next);
+      expectActivePath(root, ROOT);
+      pointer(next, "pointerover", previous);
+      expectActivePath(root, ROOT);
+    }
+    pointer(elbow, "pointerout", unrelated);
+    pointer(unrelated, "pointerover", elbow);
+    expectActivePath(root, REPLY);
+    pointer(unrelated, "pointerout");
+    expectActivePath(root);
+  });
+
+  test("connector keyboard focus and straight-segment activation navigate to the correct parent", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 3 })]);
+    request.mockResolvedValueOnce({
+      items: [reply(REPLY, ROOT, 1), reply(CHILD, REPLY, 2), reply(SIBLING, ROOT, 3)],
+      nextCursor: null,
+    });
+    await expand(root);
+    const elbow = parentButton(root, CHILD);
+    elbow.focus();
+    expectActivePath(root, REPLY);
+    elbow.blur();
+    expectActivePath(root);
+    elbow.focus();
+    elbow.click();
+    await flush();
+    expect(document.activeElement).toBe(row(root, REPLY));
+    expectActivePath(root);
+    const continuation = rails(root, CHILD).find((item) => item.dataset.replyRailDepth === "1");
+    expect(continuation.tabIndex).toBe(-1);
+    expect(continuation.getAttribute("aria-hidden")).toBe("true");
+    continuation.click();
+    await flush();
+    expect(document.activeElement).toBe(row(root, ROOT));
+    expect(root.querySelectorAll(".is-highlighted")).toHaveLength(1);
+    expect(request.mock.calls.filter(([operation]) => operation === "comment")).toHaveLength(0);
+  });
+
+  test("pagination joins new segments to the hovered connection and refresh clears the highlight", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 4 })]);
+    request
+      .mockResolvedValueOnce({
+        items: [reply(REPLY, ROOT, 1), reply(CHILD, REPLY, 2)],
+        nextCursor: "more-paths",
+      })
+      .mockResolvedValueOnce({
+        items: [reply(GRANDCHILD, CHILD, 3), reply(SIBLING, ROOT, 4)],
+        nextCursor: null,
+      });
+    await expand(root);
+    const elbow = parentButton(root, REPLY);
+    pointer(elbow, "pointerover");
+    expectActivePath(root, ROOT);
+    row(root, ROOT).querySelector(".ryd-discussion-replies > button").click();
+    await flush();
+    expect(request).toHaveBeenLastCalledWith("replies", { rootId: ROOT, cursor: "more-paths" });
+    expectActivePath(root, ROOT);
+    expect(parentButton(root, SIBLING).classList.contains("is-path-highlighted")).toBe(true);
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [SIBLING, 1],
+    ]);
+    let finishRefresh;
+    request.mockImplementationOnce(() => new Promise((resolve) => (finishRefresh = resolve)));
+    const refreshing = panel.load();
+    expectActivePath(root);
+    finishRefresh({ items: [comment({ replyCount: 4 })], nextCursor: null });
+    await refreshing;
+    expect(root.querySelector(".is-path-highlighted")).toBeNull();
+  });
+
+  test("renders ancestor continuations only while later siblings remain in each branch", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 5 })]);
+    request.mockResolvedValueOnce({
+      items: [
+        reply(REPLY, ROOT, 1),
+        reply(CHILD, REPLY, 2),
+        reply(GRANDCHILD, CHILD, 3),
+        reply(SECOND_CHILD, REPLY, 4),
+        reply(SIBLING, ROOT, 5),
+      ],
+      nextCursor: null,
+    });
+    await expand(root);
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [SECOND_CHILD, 2],
+      [SIBLING, 1],
+    ]);
+    expect(row(root, ROOT).dataset.replyHasChildren).toBe("true");
+    for (const [id, hasSibling, hasChildren, ancestorDepths] of [
+      [REPLY, true, true, []],
+      [CHILD, true, true, [1]],
+      [GRANDCHILD, false, false, [1, 2]],
+      [SECOND_CHILD, false, false, [1]],
+      [SIBLING, false, false, []],
+    ]) {
+      expect(row(root, id).dataset.replyHasSibling).toBe(String(hasSibling));
+      expect(row(root, id).dataset.replyHasChildren).toBe(String(hasChildren));
+      expect(railDepths(root, id)).toEqual(ancestorDepths);
+      for (const rail of rails(root, id)) {
+        expect(rail.tagName).toBe("SPAN");
+        expect(rail.getAttribute("aria-hidden")).toBe("true");
+        expect(rail.textContent).toBe("");
+        expect(rail.tabIndex).toBe(-1);
+        expect(rail.querySelector("button, a, input")).toBeNull();
+      }
+    }
+  });
+
+  test("reattaching an orphan branch replaces its outdated ancestor rails", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 5 })]);
+    request
+      .mockResolvedValueOnce({
+        items: [
+          reply(CHILD, REPLY, 2),
+          reply(GRANDCHILD, CHILD, 3),
+          reply(CREATED, GRANDCHILD, 4),
+          reply(SIBLING, CHILD, 5),
+        ],
+        nextCursor: "missing-parent",
+      })
+      .mockResolvedValueOnce({ items: [reply(REPLY, ROOT, 1)], nextCursor: null });
+    await expand(root);
+    expect(row(root, ROOT).dataset.replyHasChildren).toBe("false");
+    expect(hierarchy(root)).toEqual([
+      [CHILD, 1],
+      [GRANDCHILD, 2],
+      [CREATED, 3],
+      [SIBLING, 2],
+    ]);
+    expect(railDepths(root, CREATED)).toEqual([2]);
+    row(root, ROOT).querySelector(".ryd-discussion-replies > button").click();
+    await flush();
+    expect(row(root, ROOT).dataset.replyHasChildren).toBe("true");
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [CREATED, 4],
+      [SIBLING, 3],
+    ]);
+    expect(railDepths(root, CREATED)).toEqual([3]);
+    expect(railDepths(root, SIBLING)).toEqual([]);
+    expect(rails(root, CREATED)[0].getAttribute("aria-hidden")).toBe("true");
+  });
+
+  test("keeps an unloaded target's reply visible and reattaches its entire branch when the next page arrives", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 4 })]);
+    request
+      .mockResolvedValueOnce({
+        items: [reply(CHILD, REPLY, 3), reply(GRANDCHILD, CHILD, 4), reply(SIBLING, ROOT, 2)],
+        nextCursor: "earlier-target",
+      })
+      .mockResolvedValueOnce({ items: [reply(REPLY, ROOT, 1), reply(CHILD, REPLY, 3)], nextCursor: null });
+    await expand(root);
+    expect(hierarchy(root)).toEqual([
+      [SIBLING, 1],
+      [CHILD, 1],
+      [GRANDCHILD, 2],
+    ]);
+    const missing = parentButton(root, CHILD);
+    expect(missing.textContent).toBe(discussionText("replyContext"));
+    expect(missing.getAttribute("aria-label")).toBe(discussionText("replyContext"));
+    expect(missing.title).toBe(discussionText("replyContext"));
+    expect(missing.classList.contains("ryd-discussion-parent-missing")).toBe(true);
+    row(root, GRANDCHILD).querySelector("[data-action='reply']").click();
+    const form = row(root, GRANDCHILD).querySelector("form");
+    typeIdentityDraft(form, "Keep drafting while history loads");
+    const input = form.querySelector("textarea");
+    input.setSelectionRange(5, 13);
+    row(root, ROOT).querySelector(".ryd-discussion-replies > button").click();
+    await flush();
+    expect(request).toHaveBeenLastCalledWith("replies", { rootId: ROOT, cursor: "earlier-target" });
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [SIBLING, 1],
+    ]);
+    expect(row(root, GRANDCHILD).querySelector("textarea")).toBe(input);
+    expect(document.activeElement).toBe(input);
+    expect(input.value).toBe("Keep drafting while history loads");
+    expect([input.selectionStart, input.selectionEnd]).toEqual([5, 13]);
+    expectResolvedParent(parentButton(root, CHILD));
+  });
+
+  test("posting to a deep reply inserts into that branch without moving its siblings", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 4 })]);
+    request.mockResolvedValueOnce({
+      items: [reply(REPLY, ROOT, 1), reply(SIBLING, ROOT, 2), reply(CHILD, REPLY, 3), reply(GRANDCHILD, CHILD, 4)],
+      nextCursor: null,
+    });
+    await expand(root);
+    row(root, GRANDCHILD).querySelector("[data-action='reply']").click();
+    request.mockResolvedValueOnce(reply(CREATED, GRANDCHILD, 5, { text: "Fourth-level response" }));
+    submit(row(root, GRANDCHILD).querySelector("form"), "Fourth-level response");
+    await flush();
+    expect(request).toHaveBeenLastCalledWith(
+      "createComment",
+      expect.objectContaining({ videoId: VIDEO, parentId: ROOT, replyToId: GRANDCHILD, text: "Fourth-level response" }),
+    );
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [CREATED, 4],
+      [SIBLING, 1],
+    ]);
+    expect(row(root, CREATED).querySelector(".ryd-discussion-comment-text").textContent).toBe("Fourth-level response");
+    expect(request.mock.calls.filter(([operation]) => operation === "replies")).toHaveLength(1);
+  });
+
+  test("a named parent button moves focus to the immediate reply target", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 3 })]);
+    request.mockResolvedValueOnce({
+      items: [reply(REPLY, ROOT, 1), reply(CHILD, REPLY, 2), reply(GRANDCHILD, CHILD, 3)],
+      nextCursor: null,
+    });
+    await expand(root);
+    const context = row(root, GRANDCHILD).querySelector("[data-action='reply-context']");
+    expectResolvedParent(context);
+    expect(context.title).not.toContain("Reply 2");
+    context.focus();
+    expect(document.activeElement).toBe(context);
+    context.click();
+    await flush();
+    expect(document.activeElement).toBe(row(root, CHILD));
+    expect(root.querySelectorAll(".is-highlighted")).toHaveLength(1);
+    expect(row(root, CHILD).classList.contains("is-highlighted")).toBe(true);
+  });
+
+  test.each([ROOT, null])("a direct reply with target %s can jump to its root", async (target) => {
+    const root = await mount({ session }, [comment({ replyCount: 1 })]);
+    request.mockResolvedValueOnce({ items: [reply(REPLY, target, 1)], nextCursor: null });
+    await expand(root);
+    const context = parentButton(root, REPLY);
+    expectResolvedParent(context);
+    expect(context.type).toBe("button");
+    expect(context.tabIndex).toBe(0);
+    expect(context.dataset.replyToId).toBe(ROOT);
+    context.focus();
+    expect(document.activeElement).toBe(context);
+    context.click();
+    await flush();
+    expect(document.activeElement).toBe(row(root, ROOT));
+    expect(row(root, ROOT).classList.contains("is-highlighted")).toBe(true);
+    expect(hierarchy(root)).toEqual([[REPLY, 1]]);
+    expect(request.mock.calls.filter(([operation]) => operation === "comment")).toHaveLength(0);
+  });
+
+  test("a missing parent connector loads its exact target and becomes an empty parent jump", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 2 })]);
+    request.mockResolvedValueOnce({ items: [reply(CHILD, REPLY, 2)], nextCursor: null });
+    await expand(root);
+    const context = parentButton(root, CHILD);
+    expect(context.textContent).toBe(discussionText("replyContext"));
+    expect(context.dataset.replyToId).toBe(REPLY);
+    request.mockImplementation(async (operation, payload) =>
+      operation === "comment" && payload.id === REPLY ? reply(REPLY, ROOT, 1) : comment({ replyCount: 2 }),
+    );
+    context.click();
+    await flush();
+    expect(request.mock.calls).toContainEqual(["comment", { id: REPLY }]);
+    expect(document.activeElement).toBe(row(root, REPLY));
+    expectResolvedParent(parentButton(root, CHILD));
+    expect(parentButton(root, CHILD).dataset.replyToId).toBe(REPLY);
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+    ]);
+  });
+
+  test("parent navigation supersedes an in-flight deep link without replacing the visible thread", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 3 })]);
+    request.mockResolvedValueOnce({
+      items: [reply(REPLY, ROOT, 1), reply(CHILD, REPLY, 2), reply(GRANDCHILD, CHILD, 3)],
+      nextCursor: null,
+    });
+    await expand(root);
+    let finish;
+    request.mockImplementation((operation) => {
+      if (operation === "comment") return new Promise((resolve) => (finish = resolve));
+      return Promise.resolve({ items: [], nextCursor: null });
+    });
+    const pending = panel.focusComment(SIBLING);
+    row(root, GRANDCHILD).querySelector("[data-action='reply-context']").click();
+    await flush();
+    expect(document.activeElement).toBe(row(root, CHILD));
+    finish(reply(SIBLING, ROOT, 4));
+    await pending;
+    expect(document.activeElement).toBe(row(root, CHILD));
+    expect(row(root, SIBLING)).toBeNull();
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+    ]);
+  });
+
+  test("editing and deleting an ancestor preserves its visible descendants and their depths", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 3 })]);
+    const ancestor = reply(REPLY, ROOT, 1);
+    request.mockResolvedValueOnce({
+      items: [ancestor, reply(CHILD, REPLY, 2), reply(GRANDCHILD, CHILD, 3)],
+      nextCursor: null,
+    });
+    await expand(root);
+    row(root, REPLY).querySelector("[data-action='edit']").click();
+    request.mockResolvedValueOnce({ ...ancestor, text: "Edited ancestor", editedAt: "2026-09-01T12:01:00Z" });
+    submit(row(root, REPLY).querySelector("form"), "Edited ancestor");
+    await flush();
+    expect(request).toHaveBeenLastCalledWith("editComment", { id: REPLY, text: "Edited ancestor" });
+    expect(row(root, REPLY).querySelector(".ryd-discussion-comment-text").textContent).toBe("Edited ancestor");
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+    ]);
+    row(root, REPLY).querySelector("[data-action='delete']").click();
+    request.mockResolvedValueOnce({ ...ancestor, deleted: true, text: "", author: null });
+    row(root, REPLY).querySelector("[data-action='confirm-delete']").click();
+    await flush();
+    expect(request).toHaveBeenLastCalledWith("deleteComment", { id: REPLY });
+    expect(row(root, REPLY).querySelector(".ryd-discussion-comment-text").textContent).toBe(discussionText("deleted"));
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+    ]);
+    row(root, GRANDCHILD).querySelector("[data-action='reply']").click();
+    expect(row(root, GRANDCHILD).querySelector("textarea")).not.toBeNull();
+  });
+
+  test("a focused deep link shows its ancestry and merges loaded history without duplicate rows", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 4 })]);
+    const replies = [
+      reply(REPLY, ROOT, 1),
+      reply(SIBLING, ROOT, 2),
+      reply(CHILD, REPLY, 3),
+      reply(GRANDCHILD, CHILD, 4),
+    ];
+    request.mockImplementation(async (operation, payload) => {
+      if (operation === "comment")
+        return payload.id === ROOT ? comment({ replyCount: 4 }) : replies.find((item) => item.id === payload.id);
+      if (operation === "replies") return { items: replies, nextCursor: null };
+      return { items: [], nextCursor: null };
+    });
+    await panel.focusComment(GRANDCHILD);
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+    ]);
+    expect(document.activeElement).toBe(row(root, GRANDCHILD));
+    expect(row(root, GRANDCHILD).classList.contains("is-highlighted")).toBe(true);
+    await expand(root);
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [SIBLING, 1],
+    ]);
+    expect(root.querySelectorAll(".is-highlighted")).toHaveLength(1);
+  });
+
+  test("a focused link survives unavailable ancestry and reattaches when ordinary history supplies it", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 4 })]);
+    const replies = [
+      reply(REPLY, ROOT, 1),
+      reply(SIBLING, ROOT, 2),
+      reply(CHILD, REPLY, 3),
+      reply(GRANDCHILD, CHILD, 4),
+    ];
+    request.mockImplementation(async (operation, payload) => {
+      if (operation === "comment") {
+        if (payload.id === ROOT) return comment({ replyCount: 4 });
+        if (payload.id === REPLY) throw { code: "not_found" };
+        return replies.find((item) => item.id === payload.id);
+      }
+      if (operation === "replies") return { items: replies, nextCursor: null };
+      return { items: [], nextCursor: null };
+    });
+    await panel.focusComment(GRANDCHILD);
+    expect(hierarchy(root)).toEqual([
+      [CHILD, 1],
+      [GRANDCHILD, 2],
+    ]);
+    expect(document.activeElement).toBe(row(root, GRANDCHILD));
+    await expand(root);
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [SIBLING, 1],
+    ]);
+    expect(root.querySelectorAll(`[data-comment-id='${GRANDCHILD}']`)).toHaveLength(1);
+  });
+
+  test("overlapping history replaces a focused ancestor's deleted text and its descendant's context", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 3 })]);
+    const replies = [reply(REPLY, ROOT, 1), reply(CHILD, REPLY, 2), reply(GRANDCHILD, CHILD, 3)];
+    request.mockImplementation(async (operation, payload) => {
+      if (operation === "comment")
+        return payload.id === ROOT ? comment({ replyCount: 3 }) : replies.find((item) => item.id === payload.id);
+      if (operation === "replies")
+        return {
+          items: [replies[0], { ...replies[1], deleted: true, text: "", author: null }, replies[2]],
+          nextCursor: null,
+        };
+      return { items: [], nextCursor: null };
+    });
+    await panel.focusComment(GRANDCHILD);
+    expect(row(root, CHILD).querySelector(".ryd-discussion-comment-text").textContent).toBe("Reply 2");
+    expectResolvedParent(parentButton(root, GRANDCHILD));
+    expect(parentButton(root, GRANDCHILD).title).not.toContain("Reply 2");
+    await expand(root);
+    expect(row(root, CHILD).querySelector(".ryd-discussion-comment-text").textContent).toBe(discussionText("deleted"));
+    expect(row(root, CHILD).querySelector(".ryd-discussion-author").textContent).toBe(discussionText("deleted"));
+    expect(row(root, CHILD).querySelector("[data-action='edit']")).toBeNull();
+    const context = row(root, GRANDCHILD).querySelector("[data-action='reply-context']");
+    expectResolvedParent(context, null);
+    expect(context.getAttribute("aria-label")).not.toContain("Writer");
+    expect(context.title).not.toContain("Writer");
+    expect(context.title).not.toContain("Reply 2");
+    expect(root.querySelectorAll(`[data-comment-id='${CHILD}']`)).toHaveLength(1);
+  });
+
+  test.each(["edit", "delete"])("an older reply page cannot undo a completed local %s", async (action) => {
+    const root = await mount({ session }, [comment({ replyCount: 4 })]);
+    const ancestor = reply(CHILD, REPLY, 2);
+    request.mockResolvedValueOnce({
+      items: [reply(REPLY, ROOT, 1), ancestor, reply(GRANDCHILD, CHILD, 3)],
+      nextCursor: "remaining",
+    });
+    await expand(root);
+    let finishPage;
+    request.mockImplementation((operation) => {
+      if (operation === "replies") return new Promise((resolve) => (finishPage = resolve));
+      return Promise.resolve(
+        action === "edit"
+          ? { ...ancestor, text: "Updated while loading", editedAt: "2026-09-01T12:01:00Z" }
+          : { ...ancestor, deleted: true, text: "", author: null },
+      );
+    });
+    row(root, ROOT).querySelector(".ryd-discussion-replies > button").click();
+    row(root, CHILD).querySelector(`[data-action='${action}']`).click();
+    if (action === "edit") submit(row(root, CHILD).querySelector("form"), "Updated while loading");
+    else row(root, CHILD).querySelector("[data-action='confirm-delete']").click();
+    await flush();
+    finishPage({ items: [reply(CHILD, REPLY, 2), reply(SIBLING, ROOT, 4)], nextCursor: null });
+    await flush();
+    const expected = action === "edit" ? "Updated while loading" : discussionText("deleted");
+    expect(row(root, CHILD).querySelector(".ryd-discussion-comment-text").textContent).toBe(expected);
+    expectResolvedParent(parentButton(root, GRANDCHILD), action === "edit" ? "Writer" : null);
+    expect(parentButton(root, GRANDCHILD).title).not.toContain("Reply 2");
+    expect(parentButton(root, GRANDCHILD).title).not.toContain("Updated while loading");
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+      [SIBLING, 1],
+    ]);
+  });
+
+  test("loading another root page preserves an expanded branch and its active reply draft", async () => {
+    const root = await mount({ session }, [comment({ replyCount: 3 })]);
+    request.mockResolvedValueOnce({ items: [comment({ replyCount: 3 })], nextCursor: "more-roots" });
+    await panel.load();
+    request.mockResolvedValueOnce({
+      items: [reply(REPLY, ROOT, 1), reply(CHILD, REPLY, 2), reply(GRANDCHILD, CHILD, 3)],
+      nextCursor: null,
+    });
+    await expand(root);
+    row(root, GRANDCHILD).querySelector("[data-action='reply']").click();
+    const form = row(root, GRANDCHILD).querySelector("form");
+    typeIdentityDraft(form, "Draft while loading more threads");
+    const input = form.querySelector("textarea");
+    input.setSelectionRange(6, 11);
+    request.mockResolvedValueOnce({ items: [comment({ id: SIBLING, text: "Another thread" })], nextCursor: null });
+    root.querySelector(".ryd-discussion-more").click();
+    await flush();
+    expect(request).toHaveBeenLastCalledWith("comments", { videoId: VIDEO, sort: "top", cursor: "more-roots" });
+    expect(row(root, GRANDCHILD).querySelector("textarea")).toBe(input);
+    expect(document.activeElement).toBe(input);
+    expect(input.value).toBe("Draft while loading more threads");
+    expect([input.selectionStart, input.selectionEnd]).toEqual([6, 11]);
+    expect(hierarchy(root)).toEqual([
+      [REPLY, 1],
+      [CHILD, 2],
+      [GRANDCHILD, 3],
+    ]);
+    expect(row(root, SIBLING).querySelector(".ryd-discussion-comment-text").textContent).toBe("Another thread");
+  });
+
+  test("an in-flight sorted list updates a focused root's reply count and applies the returned root order", async () => {
+    const root = await mount({ session }, []);
+    let finishList;
+    request.mockImplementation((operation) => {
+      if (operation === "comments") return new Promise((resolve) => (finishList = resolve));
+      if (operation === "comment") return Promise.resolve(comment({ replyCount: 0 }));
+      return Promise.resolve({ items: [reply(REPLY, ROOT, 1)], nextCursor: null });
+    });
+    root.querySelector("[data-sort='new']").click();
+    await panel.focusComment(ROOT);
+    const focused = row(root, ROOT);
+    expect(focused.querySelector("[data-action='load-replies']").hidden).toBe(true);
+    finishList({
+      items: [
+        comment({ id: SIBLING, text: "Newer root", createdAt: "2026-09-01T12:02:00Z" }),
+        comment({ replyCount: 4 }),
+      ],
+      nextCursor: null,
+    });
+    await flush();
+    expect(request.mock.calls).toContainEqual(["comments", { videoId: VIDEO, sort: "new" }]);
+    expect([...root.querySelector(".ryd-discussion-comments").children].map((item) => item.dataset.commentId)).toEqual([
+      SIBLING,
+      ROOT,
+    ]);
+    expect(row(root, ROOT)).toBe(focused);
+    expect(document.activeElement).toBe(focused);
+    const loadReplies = focused.querySelector("[data-action='load-replies']");
+    expect(loadReplies.hidden).toBe(false);
+    expect(loadReplies.textContent).toBe(discussionText("loadReplies", [4]));
+    loadReplies.click();
+    await flush();
+    expect(request).toHaveBeenLastCalledWith("replies", { rootId: ROOT });
+    expect(hierarchy(root)).toEqual([[REPLY, 1]]);
+  });
+
+  test.each(["edited", "hidden"])(
+    "stale history cannot undo a completed reaction while retaining a remotely %s reply",
+    async (remoteChange) => {
+      const root = await mount({ session }, [comment({ replyCount: 1 })]);
+      const target = reply(REPLY, ROOT, 1, { author: otherSession.profile, likes: 0, dislikes: 0 });
+      let finishHistory;
+      request.mockImplementation((operation, payload) => {
+        if (operation === "comment") return Promise.resolve(payload.id === ROOT ? comment({ replyCount: 1 }) : target);
+        if (operation === "replies") return new Promise((resolve) => (finishHistory = resolve));
+        if (operation === "react") return Promise.resolve({ commentId: REPLY, likes: 1, dislikes: 0, myReaction: 1 });
+        return Promise.resolve({ items: [], nextCursor: null });
+      });
+      await panel.focusComment(REPLY);
+      root.querySelector("[data-action='load-replies']").click();
+      row(root, REPLY).querySelector("[data-reaction='1']").click();
+      await flush();
+      expect(row(root, REPLY).querySelector("[data-reaction='1']").getAttribute("aria-pressed")).toBe("true");
+      finishHistory({
+        items: [
+          {
+            ...target,
+            likes: 0,
+            myReaction: 0,
+            ...(remoteChange === "edited"
+              ? { text: "Updated by the author", editedAt: "2026-09-01T12:01:00Z" }
+              : { hidden: true, text: "" }),
+          },
+        ],
+        nextCursor: null,
+      });
+      await flush();
+      const refreshed = row(root, REPLY);
+      expect(root.querySelectorAll(`[data-comment-id='${REPLY}']`)).toHaveLength(1);
+      if (remoteChange === "edited") {
+        expect(refreshed.querySelector(".ryd-discussion-comment-text").textContent).toBe("Updated by the author");
+        expect(refreshed.querySelector("[data-reaction='1']").textContent).toBe("1");
+        expect(refreshed.querySelector("[data-reaction='1']").getAttribute("aria-pressed")).toBe("true");
+      } else {
+        expect(refreshed.querySelector(".ryd-discussion-comment-text").textContent).toBe(discussionText("deleted"));
+        expect(refreshed.querySelector("[data-reaction]")).toBeNull();
+      }
+    },
+  );
+});
+
 test("posting a reply preserves loaded pages and merges the next page without duplicating the new reply", async () => {
   const previous = Array.from({ length: 21 }, (_, index) =>
     comment({

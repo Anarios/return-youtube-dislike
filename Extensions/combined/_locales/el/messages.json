@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Δημοσίευση σχολίου"
   },
+  "discussion_replyTo": {
+    "message": "Απάντηση στον χρήστη $1"
+  },
+  "discussion_replyContext": {
+    "message": "Προβολή αρχικού σχολίου"
+  },
   "discussion_reply": {
     "message": "Απάντηση"
   },

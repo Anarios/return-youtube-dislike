@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "Kommentar posten"
   },
+  "discussion_replyTo": {
+    "message": "Antwort auf den Kommentar von $1"
+  },
+  "discussion_replyContext": {
+    "message": "Ursprünglichen Kommentar anzeigen"
+  },
   "discussion_reply": {
     "message": "Antworten"
   },

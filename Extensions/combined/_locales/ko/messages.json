@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "댓글 게시"
   },
+  "discussion_replyTo": {
+    "message": "$1님에게 보낸 답글"
+  },
+  "discussion_replyContext": {
+    "message": "원래 댓글 보기"
+  },
   "discussion_reply": {
     "message": "답글"
   },

@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "發布留言"
   },
+  "discussion_replyTo": {
+    "message": "回覆 $1"
+  },
+  "discussion_replyContext": {
+    "message": "查看所回覆的留言"
+  },
   "discussion_reply": {
     "message": "回覆"
   },

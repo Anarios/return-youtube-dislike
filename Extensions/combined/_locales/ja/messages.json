@@ -539,6 +539,12 @@
   "discussion_post": {
     "message": "コメントを投稿"
   },
+  "discussion_replyTo": {
+    "message": "$1 さんへの返信"
+  },
+  "discussion_replyContext": {
+    "message": "返信先のコメントを表示"
+  },
   "discussion_reply": {
     "message": "返信"
   },

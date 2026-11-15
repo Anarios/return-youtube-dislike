@@ -510,6 +510,8 @@
   "discussion_empty": { "message": "No comments yet. Start the conversation." },
   "discussion_comment": { "message": "Comment" },
   "discussion_post": { "message": "Post comment" },
+  "discussion_replyTo": { "message": "In reply to $1" },
+  "discussion_replyContext": { "message": "View parent comment" },
   "discussion_reply": { "message": "Reply" },
   "discussion_postReply": { "message": "Post reply" },
   "discussion_cancel": { "message": "Cancel" },

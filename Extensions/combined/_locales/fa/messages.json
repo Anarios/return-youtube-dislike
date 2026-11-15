@@ -536,6 +536,12 @@
   "discussion_post": {
     "message": "ارسال نظر"
   },
+  "discussion_replyTo": {
+    "message": "در پاسخ به $1"
+  },
+  "discussion_replyContext": {
+    "message": "مشاهدهٔ نظر اصلی"
+  },
   "discussion_reply": {
     "message": "پاسخ"
   },
