@@ -39,10 +39,12 @@ const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 describe("Patreon authentication consent", () => {
   let messageListener;
   let permissionRemovedListener;
+  let documentListenerSpy;
 
   beforeEach(() => {
     isPrivateBrowsingContext.mockReturnValue(false);
     jest.clearAllMocks();
+    documentListenerSpy = jest.spyOn(document, "addEventListener");
     document.body.innerHTML = '<div class="ryd-premium-feature"></div>';
     patreonState.authenticated = false;
     patreonState.user = null;
@@ -50,6 +52,7 @@ describe("Patreon authentication consent", () => {
 
     global.chrome = {
       runtime: {
+        id: "extension-id",
         onMessage: {
           addListener: jest.fn((listener) => {
             messageListener = listener;
@@ -73,6 +76,10 @@ describe("Patreon authentication consent", () => {
   });
 
   afterEach(() => {
+    documentListenerSpy.mock.calls.forEach(([type, listener, options]) => {
+      document.removeEventListener(type, listener, options);
+    });
+    documentListenerSpy.mockRestore();
     delete global.chrome;
   });
 
@@ -86,6 +93,126 @@ describe("Patreon authentication consent", () => {
     expect(consentMocks.hasAuthenticationDataPermission).not.toHaveBeenCalled();
     expect(permissionMocks.onDataPermissionsChanged).not.toHaveBeenCalled();
     expect(jest.requireMock("./premiumAnalytics/teaser").initPremiumTeaser).not.toHaveBeenCalled();
+    expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
+  });
+
+  it("removes premium panels on navigation only once the extension context is gone", async () => {
+    const { setTeaserSuppressed } = jest.requireMock("./premiumAnalytics/teaser");
+    const navigate = () => document.dispatchEvent(new Event("yt-navigate-finish"));
+    chrome.runtime.id = "extension-id";
+    initPatreonFeatures();
+    await flushPromises();
+    document.body.innerHTML = '<div class="ryd-premium-feature"></div>';
+    analyticsMocks.teardownPremiumAnalytics.mockClear();
+    setTeaserSuppressed.mockClear();
+
+    navigate();
+    expect(document.querySelector(".ryd-premium-feature")).not.toBeNull();
+    expect(analyticsMocks.teardownPremiumAnalytics).not.toHaveBeenCalled();
+    expect(setTeaserSuppressed).not.toHaveBeenCalled();
+
+    delete chrome.runtime.id;
+    navigate();
+    expect(document.querySelector(".ryd-premium-feature")).toBeNull();
+    expect(setTeaserSuppressed).toHaveBeenCalledWith(true, "orphaned");
+    expect(analyticsMocks.teardownPremiumAnalytics).toHaveBeenCalledTimes(1);
+
+    navigate();
+    expect(analyticsMocks.teardownPremiumAnalytics).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not restore premium panels when a permission check resolves after the extension context is gone", async () => {
+    const pending = [];
+    permissionMocks.hasFeaturePermission.mockImplementation(() => new Promise((resolve) => pending.push(resolve)));
+    consentMocks.hasAuthenticationDataPermission.mockResolvedValue(true);
+    chrome.storage.sync.get.mockImplementation((_keys, callback) =>
+      callback({
+        patreonAuthenticated: true,
+        patreonUser: { hasActiveMembership: true, membershipTier: "premium" },
+        patreonSessionToken: "token",
+      }),
+    );
+    chrome.runtime.id = "extension-id";
+    initPatreonFeatures();
+    await flushPromises();
+    expect(pending.length).toBeGreaterThan(0);
+
+    delete chrome.runtime.id;
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+    pending.forEach((resolve) => resolve(true));
+    await flushPromises();
+
+    expect(analyticsMocks.updatePremiumSession).not.toHaveBeenCalled();
+    expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
+  });
+
+  it.each([false, true])(
+    "ignores a cached session that returns after orphan teardown (Firefox consent: %s)",
+    async (firefoxConsent) => {
+      let completeRead;
+      consentMocks.usesFirefoxDataCollectionConsent.mockReturnValue(firefoxConsent);
+      consentMocks.hasAuthenticationDataPermission.mockResolvedValue(true);
+      chrome.storage.sync.get.mockImplementation((_keys, callback) => (completeRead = callback));
+      initPatreonFeatures();
+      await flushPromises();
+      expect(completeRead).toEqual(expect.any(Function));
+
+      delete chrome.runtime.id;
+      document.dispatchEvent(new Event("yt-navigate-finish"));
+      analyticsMocks.updatePremiumSession.mockClear();
+      completeRead({
+        patreonAuthenticated: true,
+        patreonUser: { hasActiveMembership: true, membershipTier: "premium" },
+        patreonSessionToken: "old-token",
+      });
+      await flushPromises();
+
+      expect(patreonState.sessionToken).toBeNull();
+      expect(analyticsMocks.updatePremiumSession).not.toHaveBeenCalled();
+      expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
+    },
+  );
+
+  it("does not read a cached session when authentication consent resolves after orphan teardown", async () => {
+    let completeConsent;
+    consentMocks.hasAuthenticationDataPermission.mockReturnValueOnce(
+      new Promise((resolve) => (completeConsent = resolve)),
+    );
+    initPatreonFeatures();
+    await flushPromises();
+
+    delete chrome.runtime.id;
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+    completeConsent(true);
+    await flushPromises();
+
+    expect(chrome.storage.sync.get).not.toHaveBeenCalled();
+    expect(patreonState.sessionToken).toBeNull();
+    expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
+  });
+
+  it("ignores a pending authenticated broadcast after orphan teardown", async () => {
+    initPatreonFeatures();
+    await flushPromises();
+    let completeConsent;
+    consentMocks.hasAuthenticationDataPermission.mockReturnValueOnce(
+      new Promise((resolve) => (completeConsent = resolve)),
+    );
+    messageListener({
+      message: "patreon_status_changed",
+      authenticated: true,
+      user: { hasActiveMembership: true, membershipTier: "premium" },
+      sessionToken: "old-token",
+    });
+
+    delete chrome.runtime.id;
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+    analyticsMocks.updatePremiumSession.mockClear();
+    completeConsent(true);
+    await flushPromises();
+
+    expect(patreonState.sessionToken).toBeNull();
+    expect(analyticsMocks.updatePremiumSession).not.toHaveBeenCalled();
     expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
   });
 

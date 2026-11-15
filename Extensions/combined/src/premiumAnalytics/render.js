@@ -14,10 +14,11 @@ import { updateCountryList } from "./lists";
 
 import { MS_PER_DAY } from "./constants";
 
-function renderAnalytics(data) {
+function renderAnalytics(data, isCurrentRequest) {
+  if (!isCurrentRequest()) return;
   const panel = ensurePanel();
   if (!panel) {
-    setTimeout(() => renderAnalytics(data), 200);
+    setTimeout(() => renderAnalytics(data, isCurrentRequest), 200);
     return;
   }
 
@@ -58,7 +59,8 @@ function renderAnalytics(data) {
   analyticsState.latestSubdivisions = data?.geo?.subdivisions ?? [];
 
   if (analyticsState.mapView === "subdivision") {
-    const focusCode = typeof analyticsState.mapFocusCountry === "string" ? analyticsState.mapFocusCountry.toUpperCase() : "";
+    const focusCode =
+      typeof analyticsState.mapFocusCountry === "string" ? analyticsState.mapFocusCountry.toUpperCase() : "";
     const hasFocusedSubdivisions =
       focusCode &&
       analyticsState.latestSubdivisions.some(
