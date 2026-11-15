@@ -15,11 +15,13 @@ import {
 } from "./buttons";
 import { addLikeDislikeEventListener, storageChangeHandler, __RewireAPI__ as eventsRewire } from "./events";
 import {
+  clearRenderedVoteState,
   extConfig,
   isVideoDisliked,
   isVideoLiked,
   refreshReactionPresentation,
   restoreCurrentState,
+  setDislikes,
   setLikes,
   storedData,
   NEUTRAL_STATE,
@@ -425,6 +427,184 @@ test("mobile boolean reaction labels still determine the current native vote", (
     buttonsRewire.__ResetDependency__("isMobile");
     stateRewire.__ResetDependency__("isMobile");
   }
+});
+
+describe("dislike count accessible name", () => {
+  test.each(["fr", "it"])("announces digit-free compact counts formatted in %s", async (locale) => {
+    const { nativeDislikeButton } = mount();
+    const count = new Intl.NumberFormat(locale, { notation: "compact", compactDisplay: "long" }).format(1000);
+    expect(count).not.toMatch(/\p{N}/u);
+    setDislikes(count);
+    await flushMutations();
+    expect(nativeDislikeButton.getAttribute("aria-label")).toBe(`Dislike this video, ${count}`);
+    refreshReactionPresentation();
+    await flushMutations();
+    expect(nativeDislikeButton.getAttribute("aria-label")).toBe(`Dislike this video, ${count}`);
+  });
+
+  test.each(["12", "Dislike 12", "Retry in 30 seconds"])("does not treat native text %j as a count", async (text) => {
+    const controls = mount();
+    controls.dislikeTextContainer.textContent = text;
+    refreshReactionPresentation();
+    await flushMutations();
+    expect(controls.nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video");
+  });
+
+  test("adds the rendered count to the native label and follows later counts", async () => {
+    const { nativeDislikeButton } = mount();
+    setDislikes("1.2K");
+    await flushMutations();
+    expect(nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video, 1.2K");
+    setDislikes("1.3K");
+    await flushMutations();
+    expect(nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video, 1.3K");
+  });
+
+  test("announces a count when its text container must be created", async () => {
+    const controls = mount();
+    controls.dislikeButton.querySelector(".ytSpecButtonShapeNextButtonTextContent").remove();
+    setDislikes("12");
+    await flushMutations();
+    expect(getButtonControls().dislikeTextContainer.textContent).toBe("12");
+    expect(controls.nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video, 12");
+  });
+
+  test.each(["Remove dislike", "Dislike this video, undo your vote"])(
+    "keeps the count when YouTube rewrites the label to %j",
+    async (label) => {
+      const { nativeDislikeButton } = mount();
+      setDislikes("12");
+      await flushMutations();
+      nativeDislikeButton.setAttribute("aria-label", label);
+      await flushMutations();
+      expect(nativeDislikeButton.getAttribute("aria-label")).toBe(`${label}, 12`);
+      setDislikes("13");
+      await flushMutations();
+      expect(nativeDislikeButton.getAttribute("aria-label")).toBe(`${label}, 13`);
+    },
+  );
+
+  test("does not repeat the count on a cloned button", async () => {
+    const { nativeDislikeButton } = mount();
+    setDislikes("12");
+    await flushMutations();
+    const clone = nativeDislikeButton.cloneNode(true);
+    nativeDislikeButton.replaceWith(clone);
+    await flushMutations();
+    expect(clone.getAttribute("aria-label")).toBe("Dislike this video, 12");
+    setDislikes("13");
+    await flushMutations();
+    expect(clone.getAttribute("aria-label")).toBe("Dislike this video, 13");
+  });
+
+  test.each(["", "Dislike", "Disabled by owner", "Retry in 30 seconds"])(
+    "restores the native label for the text %j",
+    async (text) => {
+      const controls = mount();
+      setDislikes("12");
+      await flushMutations();
+      controls.dislikeTextContainer.textContent = text;
+      await flushMutations();
+      expect(controls.nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video");
+      expect(controls.nativeDislikeButton.hasAttribute("data-ryd-native-aria-label")).toBe(false);
+      expect(controls.nativeDislikeButton.hasAttribute("data-ryd-dislike-count")).toBe(false);
+    },
+  );
+
+  test("does not announce a disabled-count message even when its translation contains digits", async () => {
+    const controls = mount();
+    setDislikes("12");
+    controls.likeButton.querySelector(".ytSpecButtonShapeNextButtonTextContent").textContent = "Like";
+    const restore = stateRewire.__set__("localize", () => "Counts disabled by owner 123");
+    try {
+      setDislikes("13");
+      await flushMutations();
+      expect(controls.dislikeTextContainer.textContent).toBe("Counts disabled by owner 123");
+      expect(controls.nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video");
+    } finally {
+      restore();
+    }
+  });
+
+  test.each([false, true])("clears the outgoing name immediately (controls replaced: %s)", async (replaced) => {
+    const outgoing = mount();
+    setDislikes("12");
+    await flushMutations();
+    const destination = replaced ? mount() : null;
+    if (destination) setDislikes("34");
+    clearRenderedVoteState(outgoing);
+    expect(outgoing.dislikeTextContainer.textContent).toBe("");
+    expect(outgoing.nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video");
+    expect(outgoing.nativeDislikeButton.hasAttribute("data-ryd-native-aria-label")).toBe(false);
+    expect(outgoing.nativeDislikeButton.hasAttribute("data-ryd-dislike-count")).toBe(false);
+    if (destination) expect(destination.nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video, 34");
+    await flushMutations();
+    expect(outgoing.nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video");
+  });
+
+  test("settles after one label write instead of retriggering its observer", async () => {
+    const { nativeDislikeButton } = mount();
+    const writes = [];
+    const observer = new MutationObserver((records) => writes.push(...records));
+    observer.observe(nativeDislikeButton, { attributes: true, attributeFilter: ["aria-label"] });
+    setDislikes("12");
+    await flushMutations();
+    await flushMutations();
+    observer.disconnect();
+    expect(writes).toHaveLength(1);
+  });
+
+  // The smartimation observer watches every attribute, so any repeated write would loop forever.
+  test.each(["12", "mille"])("writes no attributes at all when the count %j has not changed", async (count) => {
+    const { nativeDislikeButton } = mount();
+    setDislikes(count);
+    await flushMutations();
+    const writes = [];
+    const observer = new MutationObserver((records) => writes.push(...records));
+    observer.observe(nativeDislikeButton, { attributes: true });
+    setDislikes(count);
+    refreshReactionPresentation();
+    await flushMutations();
+    observer.disconnect();
+    expect(writes.map((record) => record.attributeName)).toEqual([]);
+  });
+
+  test("does not invent a label when the button has none", async () => {
+    const { nativeDislikeButton } = mount();
+    nativeDislikeButton.removeAttribute("aria-label");
+    setDislikes("12");
+    await flushMutations();
+    expect(nativeDislikeButton.hasAttribute("aria-label")).toBe(false);
+  });
+
+  test("announces the rendered count when YouTube supplies a label after hydration", async () => {
+    const { nativeDislikeButton } = mount();
+    nativeDislikeButton.removeAttribute("aria-label");
+    setDislikes("12");
+    await flushMutations();
+    nativeDislikeButton.setAttribute("aria-label", "Dislike this video");
+    await flushMutations();
+    expect(nativeDislikeButton.getAttribute("aria-label")).toBe("Dislike this video, 12");
+  });
+
+  test.each(["false", "true"])("leaves mobile label %j alone when rendering a count", async (label) => {
+    const controls = mount();
+    controls.buttons.classList.add("slim-video-action-bar-actions");
+    controls.likeButton.querySelector(".ytSpecButtonShapeNextButtonTextContent").classList.add("button-renderer-text");
+    controls.nativeDislikeButton.setAttribute("aria-label", label);
+    buttonsRewire.__set__("isMobile", () => true);
+    stateRewire.__set__("isMobile", () => true);
+    try {
+      expect(setDislikes("13")).toBe(true);
+      refreshReactionPresentation();
+      await flushMutations();
+      expect(controls.dislikeTextContainer.textContent).toBe("13");
+      expect(controls.nativeDislikeButton.getAttribute("aria-label")).toBe(label);
+    } finally {
+      buttonsRewire.__ResetDependency__("isMobile");
+      stateRewire.__ResetDependency__("isMobile");
+    }
+  });
 });
 
 test("synthetic Shorts Dislike clears the native Like without activating a prepended speed control", () => {
