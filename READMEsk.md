@@ -26,7 +26,7 @@ Navyše 13. decembra 2021 [odstránil](https://support.google.com/youtube/thread
 
 ## Čo rozšírenie robí
 
-Keďže YouTube API už štatistiky dislajkov neposkytuje, náš backend kombinuje získané štatistiky dislajkov s odhadmi, ktoré extrapoluje z údajov od používateľov rozšírenia.
+Keďže YouTube API už štatistiky dislajkov neposkytuje, náš backend kombinuje automaticky zozbierané štatistiky dislajkov s odhadmi, ktoré extrapoluje z údajov od používateľov rozšírenia.
 
 [Často kladené otázky](Docs/FAQsk.md)
 
@@ -66,7 +66,8 @@ Príklad získania hlasov pre zadané ID videa YouTube:
 }
 ```
 
-Neexistujúce ID videa YouTube vráti stavový kód _404_ „Not Found“.  
+Neexistujúce ID videa YouTube vráti stavový kód _404_ „Not Found“.
+
 Nesprávne naformátované ID videa YouTube vráti stavový kód _400_ „Bad Request“.
 
 <!---

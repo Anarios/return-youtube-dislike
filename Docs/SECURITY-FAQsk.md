@@ -20,7 +20,7 @@ ID dokáže služba priradiť odoslané hlasy k tej istej inštalácii rozšíre
 ### Aké údaje presne máte?
 
 Pri požiadavkách na počet dislajkov: ID aktuálneho videa a – ak je k dispozícii – viditeľný počet lajkov. Pri registrácii
-a odosielaní hlasov: náhodné ID používateľa rozšírenia, ID videa, zvolený hlas a časovú pečiatku. Pri reakciách na
+a odosielaní hlasov: náhodné ID používateľa rozšírenia, ID videa, zvolený hlas a časová pečiatka. Pri reakciách na
 komentáre RYD: to isté náhodné ID používateľa rozšírenia, ID komentára a reakciu. Komentáre a odpovede RYD, ktoré
 uverejnia prihlásení členovia, sú verejné a ukladajú sa spolu s ich prezývkou RYD. API dostáva aj vašu IP adresu.
 Nespracované adresy zostávajú len v operačnej pamäti (RAM) a na ochranu pred zneužitím sa ukladajú ich hashe. Voliteľné

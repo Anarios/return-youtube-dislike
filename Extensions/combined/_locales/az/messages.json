@@ -539,6 +539,21 @@
   "discussion_post": {
     "message": "Şərh paylaş"
   },
+  "discussion_viewReplies": {
+    "message": "Cavabları göstər"
+  },
+  "discussion_moreReplies": {
+    "message": "Daha çox cavab göstər"
+  },
+  "discussion_viewReply": {
+    "message": "Cavabı göstər"
+  },
+  "discussion_collapseReplies": {
+    "message": "Cavabları gizlət"
+  },
+  "discussion_replyContext": {
+    "message": "Cavab verilən şərhə bax"
+  },
   "discussion_reply": {
     "message": "Cavab ver"
   },

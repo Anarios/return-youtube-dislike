@@ -15,10 +15,10 @@
     "message": "Tmavý motív YouTube"
   },
   "colorThemeLike": {
-    "message": "Páči sa mi to"
+    "message": "Páči sa mi"
   },
   "colorThemeDislike": {
-    "message": "Nepáči sa mi to"
+    "message": "Nepáči sa mi"
   },
   "colorizeRatio": {
     "message": "Zafarbiť pruh pomeru"
@@ -36,7 +36,7 @@
     "message": "Jediná vec, vďaka ktorej rozšírenie funguje, sú vaše príspevky. Zvážte, prosím, podporu projektu."
   },
   "customColors": {
-    "message": "Vlastné farby pre lištu dislikov a tlačidlá"
+    "message": "Vlastné farby pre lištu dislajkov a tlačidlá"
   },
   "customNumberFormats": {
     "message": "Vlastné formáty čísel"
@@ -51,7 +51,7 @@
     "message": "Zakázať protokolovanie do konzoly"
   },
   "extensionDesc": {
-    "message": "Vráti možnosť zobrazenia počtu dislikov"
+    "message": "Vracia možnosť zobraziť počet dislajkov"
   },
   "extensionName": {
     "message": "Return YouTube Dislike"
@@ -96,7 +96,7 @@
     "message": "Informácie o členstve na Patreone slúžia na overenie prístupu k prémiovým funkciám. Údaje o vašej karte ani bankovom účte nedostávame."
   },
   "paidFeaturesWhy": {
-    "message": "Počty hodnotení Nepáči sa zostávajú zadarmo pre všetkých. Platené doplnky pomáhajú platiť servery, ktoré ich zabezpečujú: viac ako 15 TB dát a zhruba 20 miliónov používateľov denne s rozpočtom niekoľkých stoviek dolárov mesačne."
+    "message": "Počty dislajkov zostávajú zadarmo pre všetkých. Platené doplnky pomáhajú platiť servery, ktoré ich zabezpečujú: viac ako 15 TB dát a zhruba 20 miliónov používateľov denne s rozpočtom niekoľkých stoviek dolárov mesačne."
   },
   "githubLoggedOutMessage": {
     "message": "Prémiové funkcie sú dostupné pre prispievateľov na GitHube"
@@ -141,7 +141,7 @@
     "message": "Odhlásiť sa"
   },
   "patreonPermissionRequired": {
-    "message": "Prihlásenie vyžaduje oprávnenie „identity“. Povoľte ho, prosím."
+    "message": "Prihlásenie vyžaduje oprávnenie „identity“. Ak chcete pokračovať, povoľte ho."
   },
   "patreonTierBasic": {
     "message": "Základná úroveň"
@@ -153,7 +153,7 @@
     "message": "Žiadne aktívne členstvo"
   },
   "patreonTierPremium": {
-    "message": "Prémiový podporovateľ"
+    "message": "Podporovateľ Premium"
   },
   "patreonTierSupporter": {
     "message": "Podporovateľ"
@@ -162,10 +162,10 @@
     "message": "Používateľ Patreonu"
   },
   "reformatLikes": {
-    "message": "Preformátovať čísla palcov hore"
+    "message": "Preformátovať počty lajkov"
   },
   "reformatLikesHover": {
-    "message": "Urobiť formát palcov hore/dole konzistentný."
+    "message": "Zjednotiť formát počtov lajkov a dislajkov."
   },
   "hidePremiumTeaser": {
     "message": "Skryť nespracované počty"
@@ -189,10 +189,10 @@
     "message": "Podpora YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Percentá v nápovede pri lište like/dislike"
+    "message": "Percentá v nápovede pri lište lajkov a dislajkov"
   },
   "showTooltipPercentageHover": {
-    "message": "Zobraziť percentá v nápovede pri lište like/dislike."
+    "message": "Zobraziť percentá v nápovede pri lište lajkov a dislajkov."
   },
   "textColorTheme1": {
     "message": "Klasický"
@@ -204,16 +204,16 @@
     "message": "Neón"
   },
   "textDeveloper": {
-    "message": "vytvoril Dmitry Selivanov & komunita"
+    "message": "vytvorili Dmitry Selivanov a komunita"
   },
   "textLikesDisabled": {
     "message": "zakázané majiteľom"
   },
   "textSettings": {
-    "message": "Zakázať odosielanie palcov hore/dole"
+    "message": "Zakázať odosielanie hlasov"
   },
   "textSettingsHover": {
-    "message": "Vaše hlasy sa nezapočítajú a neprejavia sa v počtoch nepáči sa."
+    "message": "Vaše lajky a dislajky sa nezapočítajú a neprejavia sa v počtoch dislajkov."
   },
   "textTempUnavailable": {
     "message": "dočasne nedostupné"
@@ -237,7 +237,7 @@
     "message": "Zapojenie v čase"
   },
   "premiumAnalytics_listsTitle": {
-    "message": "Najlepšie krajiny"
+    "message": "Rebríček krajín"
   },
   "premiumAnalytics_listLikesTitle": {
     "message": "Krajiny s najviac lajkami"
@@ -315,13 +315,13 @@
     "message": "Používatelia rozšírenia"
   },
   "premiumAnalytics_totalsLikes": {
-    "message": "$1 lajkov"
+    "message": "Lajky: $1"
   },
   "premiumAnalytics_totalsDislikes": {
-    "message": "$1 dislajkov"
+    "message": "Dislajky: $1"
   },
   "premiumAnalytics_summaryMeta": {
-    "message": "Zaznamenaných $1 interakcií z $2 krajín ($3 unikátnych IP)"
+    "message": "Zaznamenané interakcie: $1 · Krajiny: $2 · Jedinečné IP adresy: $3"
   },
   "premiumAnalytics_bucketHour": {
     "message": "Hlasy za hodinu"
@@ -333,19 +333,19 @@
     "message": "Hlasy za týždeň"
   },
   "premiumAnalytics_bucketHours": {
-    "message": "Hlasy každých $1 hodín"
+    "message": "Hlasy za $1 h"
   },
   "premiumAnalytics_bucketDays": {
-    "message": "Hlasy každých $1 dní"
+    "message": "Hlasy za $1 d"
   },
   "premiumAnalytics_bucketMinutes": {
-    "message": "Hlasy každých $1 minút"
+    "message": "Hlasy za $1 min"
   },
   "premiumAnalytics_bucketMinute": {
     "message": "Hlasy za minútu"
   },
   "premiumAnalytics_bucketSeconds": {
-    "message": "Hlasy každých $1 sekúnd"
+    "message": "Hlasy za $1 s"
   },
   "premiumAnalytics_bucketSecond": {
     "message": "Hlasy za sekundu"
@@ -432,7 +432,7 @@
     "message": "Počet nespracovaných dislajkov"
   },
   "premiumTeaser_statLikes": {
-    "message": "Hrubý počet lajkov"
+    "message": "Nespracovaný počet lajkov"
   },
   "premiumTeaser_statusLoading": {
     "message": "Získavanie najnovších súčtov dislajkov…"
@@ -441,10 +441,10 @@
     "message": "Dáta dislajkov sa nepodarilo načítať. Skúste stránku znova načítať."
   },
   "premiumTierNotice_message": {
-    "message": "Vaše členstvo na Patreone nezahŕňa úroveň Premium. Zvýšte svoj príspevok a sprístupnite si pokročilú video analytiku."
+    "message": "Vaše členstvo na Patreone nezahŕňa úroveň Premium. Zvýšte svoj príspevok a sprístupnite si pokročilé štatistiky videí."
   },
   "changelog_cta_primary": {
-    "message": "Upgradovať na Patreone"
+    "message": "Zvýšiť úroveň členstva na Patreone"
   },
   "changelog_cta_secondary": {
     "message": "Prečítať sprievodcu nastavením"
@@ -456,10 +456,10 @@
     "message": "Časová os živej aktivity"
   },
   "changelog_feature_map_title": {
-    "message": "Interaktívna mapa sveta a USA"
+    "message": "Interaktívna teplotná mapa sveta a USA"
   },
   "changelog_feature_quality_title": {
-    "message": "Rebríček najlepších krajín"
+    "message": "Rebríček krajín"
   },
   "changelog_screenshot_label_timeline": {
     "message": "Zástupný obrázok: prehľad časovej osi"
@@ -468,10 +468,10 @@
     "message": "Zástupný obrázok: mapa globálnej aktivity"
   },
   "changelog_screenshot_label_teaser": {
-    "message": "Zástupný symbol: rebríček krajín"
+    "message": "Zástupný obrázok: rebríček krajín"
   },
   "changelog_upgrade_step1": {
-    "message": "Otvorte popup Return YouTube Dislike a prihláste sa cez Patreon."
+    "message": "Otvorte vyskakovacie okno Return YouTube Dislike a prihláste sa cez Patreon."
   },
   "changelog_support_heading": {
     "message": "Potrebujete pomôcť?"
@@ -489,13 +489,13 @@
     "message": "Zobraziť ukážky pred a po"
   },
   "hideClutterButtonsDescription": {
-    "message": "Ponechať viditeľné len tlačidlá Páči sa mi to a Nepáči sa mi to. Zdieľať, Uložiť, Super vďaka a ďalšie voliteľné akcie zostanú dostupné v ponuke YouTube s tromi bodkami (Ďalšie akcie)."
+    "message": "Ponechať viditeľné len tlačidlá Páči sa mi a Nepáči sa mi. Zdieľať, Uložiť, Super vďaka a ďalšie voliteľné akcie zostanú dostupné v ponuke YouTube s tromi bodkami (Ďalšie akcie)."
   },
   "hideClutterButtonsBefore": {
     "message": "Pred: všetky tlačidlá akcií sú viditeľné"
   },
   "hideClutterButtonsAfter": {
-    "message": "Po: viditeľné zostávajú len tlačidlá Páči sa mi to a Nepáči sa mi to"
+    "message": "Po: viditeľné zostávajú len tlačidlá Páči sa mi a Nepáči sa mi"
   },
   "discussion_title": {
     "message": "Komentáre RYD"
@@ -536,6 +536,21 @@
   "discussion_post": {
     "message": "Zverejniť komentár"
   },
+  "discussion_viewReplies": {
+    "message": "Zobraziť odpovede"
+  },
+  "discussion_moreReplies": {
+    "message": "Zobraziť ďalšie odpovede"
+  },
+  "discussion_viewReply": {
+    "message": "Zobraziť odpoveď"
+  },
+  "discussion_collapseReplies": {
+    "message": "Skryť odpovede"
+  },
+  "discussion_replyContext": {
+    "message": "Zobraziť nadradený komentár"
+  },
   "discussion_reply": {
     "message": "Odpovedať"
   },
@@ -570,10 +585,10 @@
     "message": "Načítať ďalšie"
   },
   "discussion_like": {
-    "message": "Páči sa mi to"
+    "message": "Páči sa mi"
   },
   "discussion_dislike": {
-    "message": "Nepáči sa mi to"
+    "message": "Nepáči sa mi"
   },
   "discussion_signInRequired": {
     "message": "Na pokračovanie sa prihláste vo vyskakovacom okne rozšírenia."
@@ -594,7 +609,7 @@
     "message": "Verejná prezývka RYD"
   },
   "discussion_nicknameHint": {
-    "message": "3–32 písmen, číslic, medzier, bodiek, spojovníkov alebo podčiarkovníkov. Toto meno sa zobrazí pri vašich komentároch."
+    "message": "3–32 znakov: písmená, číslice, medzery, bodky, spojovníky alebo podčiarkovníky. Táto prezývka sa zobrazí pri vašich komentároch."
   },
   "discussion_nicknameSave": {
     "message": "Uložiť prezývku"
@@ -603,7 +618,7 @@
     "message": "Táto prezývka je už obsadená. Zvoľte inú."
   },
   "discussion_nicknameInvalid": {
-    "message": "Použite 3–32 písmen, číslic, medzier, bodiek, spojovníkov alebo podčiarkovníkov."
+    "message": "Použite 3–32 znakov: písmená, číslice, medzery, bodky, spojovníky alebo podčiarkovníky."
   },
   "discussion_nicknameChange": {
     "message": "Zmeniť prezývku"
@@ -696,13 +711,13 @@
     "message": "Máte prečítané všetky oznámenia."
   },
   "discussion_notificationReply": {
-    "message": "$1 odpovedá na váš komentár"
+    "message": "Odpoveď na váš komentár od $1"
   },
   "discussion_notificationLike": {
     "message": "Niekomu sa páčil váš komentár"
   },
   "discussion_notificationLikes": {
-    "message": "Váš komentár získal tento počet označení Páči sa mi to: $1"
+    "message": "Váš komentár získal tento počet označení Páči sa mi: $1"
   },
   "discussion_someone": {
     "message": "Niekto"
@@ -717,7 +732,7 @@
     "message": "Zobraziť diskusiu"
   },
   "discussion_signedOutInbox": {
-    "message": "Prihláste sa a zobrazte odpovede a označenia páči sa pri svojich komentároch."
+    "message": "Prihláste sa a pozrite si odpovede a lajky pri svojich komentároch."
   },
   "discussion_discussionTab": {
     "message": "Diskusia"
@@ -756,16 +771,16 @@
     "message": "Všetko je pripravené"
   },
   "changelog_hero_title": {
-    "message": "Hodnotenia Nepáči sa sú späť."
+    "message": "Dislajky sú späť."
   },
   "changelog_hero_body": {
-    "message": "Otvorte ľubovoľné video na YouTube a počet hodnotení Nepáči sa uvidíte hneď vedľa Páči sa, kam patrí. Verzia 4.1 prináša aj komentáre RYD, priestor na diskusiu o videách mimo komentárov YouTube."
+    "message": "Otvorte ľubovoľné video na YouTube a počet dislajkov uvidíte hneď vedľa lajkov, kam patrí. Verzia 4.1 prináša aj komentáre RYD, priestor na diskusiu o videách mimo komentárov YouTube."
   },
   "changelog_hero_eyebrow_counts_off": {
     "message": "Ešte jeden krok"
   },
   "changelog_hero_body_counts_off": {
-    "message": "Nižšie zapnite počty nepáči sa a uvidíte ich na YouTube hneď vedľa páči sa. Verzia 4.1 prináša aj komentáre RYD, priestor na diskusiu o videách mimo komentárov YouTube."
+    "message": "Nižšie zapnite zobrazovanie počtov dislajkov a uvidíte ich na YouTube hneď vedľa lajkov. Verzia 4.1 prináša aj komentáre RYD, priestor na diskusiu o videách mimo komentárov YouTube."
   },
   "changelog_new_badge": {
     "message": "Nové vo verzii 4.1"
@@ -780,13 +795,13 @@
     "message": "Komunitná diskusia pod videami a Shorts s vypnutými komentármi YouTube, ktorú prevádzkuje Return YouTube Dislike. Čítať a reagovať môže každý. Členovia úrovní Commenter a Premium môžu písať komentáre a odpovedať."
   },
   "changelog_comments_point_replies": {
-    "message": "Odpovede vo vláknach s hodnotením Páči sa a Nepáči sa"
+    "message": "Odpovede vo vláknach s lajkami a dislajkami"
   },
   "changelog_comments_point_nickname": {
     "message": "Píšte pod verejnou prezývkou, ktorú si zvolíte"
   },
   "changelog_comments_point_notifications": {
-    "message": "Oznámenia, keď niekto odpovie na váš komentár alebo mu dá páči sa"
+    "message": "Oznámenia, keď niekto odpovie na váš komentár alebo mu dá lajk"
   },
   "changelog_comments_point_moderation": {
     "message": "Nahlasovanie a moderovanie pre slušnú diskusiu"
@@ -795,28 +810,28 @@
     "message": "Panel komentárov RYD s diskusným vláknom pod videom"
   },
   "changelog_notifications_shot_alt": {
-    "message": "Oznámenia RYD s odpoveďami a hodnoteniami Páči sa pri vašich komentároch"
+    "message": "Oznámenia RYD s odpoveďami a lajkami pri vašich komentároch"
   },
   "changelog_sample_note": {
     "message": "Snímky obrazovky obsahujú ukážkové dáta."
   },
   "changelog_analytics_title": {
-    "message": "Analýzy Premium"
+    "message": "Prémiové štatistiky"
   },
   "changelog_analytics_body": {
-    "message": "Pozrite sa, ako je video prijímané v priebehu času a po celom svete. Vyberte 7, 30 alebo 90 dní či celé obdobie a porovnajte hodnotenia Páči sa, Nepáči sa a ich pomer."
+    "message": "Pozrite sa, ako je video prijímané v priebehu času a po celom svete. Vyberte 7, 30 alebo 90 dní či celé obdobie a porovnajte lajky, dislajky a ich pomer."
   },
   "changelog_analytics_timeline_title": {
     "message": "Časová os aktivity"
   },
   "changelog_analytics_timeline_body": {
-    "message": "Hodnotenia Páči sa a Nepáči sa v čase, až po jednotlivé hodiny."
+    "message": "Lajky a dislajky v čase, až po jednotlivé hodiny."
   },
   "changelog_analytics_countries_title": {
     "message": "Rebríček krajín"
   },
   "changelog_analytics_countries_body": {
-    "message": "Zistite, v ktorých krajinách dostáva video najviac hodnotení Páči sa a Nepáči sa."
+    "message": "Zistite, v ktorých krajinách dostáva video najviac lajkov a dislajkov."
   },
   "changelog_analytics_world_title": {
     "message": "Mapa sveta"
@@ -840,10 +855,10 @@
     "message": "Return YouTube Dislike je malý open-source projekt, ktorý tvorí Dmitry Selivanov a komunita. Každý deň odpovedá zhruba 20 miliónom ľudí a stará sa o viac ako 15 TB dát. To všetko beží za pár stoviek dolárov mesačne, čo nie je veľa na to, aby sme vrátili niečo, čo sa miliardová firma rozhodla vziať."
   },
   "changelog_appeal_free": {
-    "message": "Počty hodnotení Nepáči sa sú zadarmo a zadarmo zostanú. O to celé ide. Servery však zadarmo nie sú a prevádzkové náklady nám úprimne veľa na výber nenechali: aby sme projekt udržali pri živote, museli sme zaviesť funkcie Premium — komentáre RYD a analýzy Premium. Každé členstvo pomáha tieto náklady pokryť."
+    "message": "Počty dislajkov sú zadarmo a zadarmo zostanú. O to celé ide. Servery však zadarmo nie sú a prevádzkové náklady nám úprimne veľa na výber nenechali: aby sme projekt udržali pri živote, museli sme zaviesť prémiové funkcie — komentáre RYD a prémiové štatistiky. Každé členstvo pomáha tieto náklady pokryť."
   },
   "changelog_appeal_ask": {
-    "message": "Ak vás RYD niekedy ušetril clickbaitového videa alebo návodu, ktorý nefungoval, zvážte, prosím, pripojenie sa na Patreone. A ak teraz nie je vhodná chvíľa, je to úplne v poriadku. Ďakujeme, že ho používate a hlasujete: každý hlas robí počty o niečo presnejšími."
+    "message": "Ak vás RYD niekedy uchránil pred clickbaitovým videom alebo návodom, ktorý nefungoval, zvážte, prosím, členstvo na Patreone. A ak teraz nie je vhodná chvíľa, je to úplne v poriadku. Ďakujeme, že ho používate a hlasujete: každý hlas robí počty o niečo presnejšími."
   },
   "changelog_appeal_cta": {
     "message": "Pridajte sa na Patreone"
@@ -864,7 +879,7 @@
     "message": "Aj v tomto vydaní"
   },
   "changelog_also_counts": {
-    "message": "V rozšírení aj v používateľskom skripte sa počty hodnotení Páči sa a Nepáči sa zobrazujú spoľahlivejšie."
+    "message": "V rozšírení aj v používateľskom skripte sa počty lajkov a dislajkov zobrazujú spoľahlivejšie."
   },
   "changelog_also_consent": {
     "message": "Vylepšený postup udelenia súhlasu s použitím dát vo Firefoxe."
@@ -888,16 +903,16 @@
     "message": "Nech sa vaše hlasy počítajú"
   },
   "consent_vote_body": {
-    "message": "Firefox teraz vyžaduje, aby sa vás každé rozšírenie opýtalo, skôr než bude zdieľať akékoľvek dáta. Povoľte to, aby RYD mohol započítavať vaše páči sa, nepáči sa a reakcie na komentáre. Toto oprávnenie platí len pre YouTube, nie pre iné webové stránky."
+    "message": "Firefox teraz vyžaduje, aby si každé rozšírenie pred zdieľaním akýchkoľvek údajov vyžiadalo váš súhlas. Povoľte zdieľanie, aby RYD mohol započítavať vaše lajky, dislajky a reakcie na komentáre. Toto oprávnenie platí len pre YouTube, nie pre iné webové stránky."
   },
   "consent_account_title": {
     "message": "Vybrať oprávnenia účtu"
   },
   "consent_account_body": {
-    "message": "Prihláste sa k funkciám účtu vrátane profilu, oznámení a analýz Premium."
+    "message": "Prihláste sa a používajte funkcie účtu vrátane profilu, oznámení a prémiových štatistík."
   },
   "consent_next_step": {
-    "message": "Výberom Povoliť vo Firefoxe zobrazíte oprávnenia. Môžete ich odmietnuť."
+    "message": "Výberom možnosti „Povoliť vo Firefoxe“ si môžete prezrieť oprávnenia. Môžete ich odmietnuť."
   },
   "consent_allow": {
     "message": "Povoliť vo Firefoxe"
@@ -921,25 +936,25 @@
     "message": "Čo znamenajú kategórie oprávnení Firefoxu?"
   },
   "consent_details_intro": {
-    "message": "Firefox zoskupuje dáta do širokých kategórií. Takto jednotlivé kategórie používa RYD:"
+    "message": "Firefox zoskupuje údaje do širokých kategórií. Takto sa jednotlivé označenia vzťahujú na RYD:"
   },
   "consent_browsing_label": {
     "message": "Aktivita prehliadania"
   },
   "consent_browsing_body": {
-    "message": "Iba ID videa na YouTube, ktoré otvoríte, na načítanie jeho počtov nepáči sa a komentárov RYD. Nikdy vaša história prehliadania ani iné webové stránky."
+    "message": "Iba ID videa na YouTube, ktoré otvoríte, na načítanie jeho počtu dislajkov a komentárov RYD. Nikdy vaša história prehliadania ani iné webové stránky."
   },
   "consent_content_label": {
     "message": "Obsah webových stránok"
   },
   "consent_content_body": {
-    "message": "Počet páči sa zobrazený pri videu YouTube na zlepšenie odhadov počtu nepáči sa."
+    "message": "Počet lajkov zobrazený pri videu na YouTube, ktorý pomáha zlepšovať odhady počtu dislajkov."
   },
   "consent_activity_label": {
     "message": "Aktivita na webových stránkach"
   },
   "consent_activity_body": {
-    "message": "Vaše páči sa, nepáči sa a reakcie na komentáre RYD na YouTube, aby sa počítali. Odosielajú sa s náhodným ID, ktoré nie je prepojené s vaším účtom Google ani YouTube."
+    "message": "Vaše lajky, dislajky a reakcie na komentáre RYD na YouTube, aby sa započítali. Odosielajú sa s náhodným ID, ktoré nie je prepojené s vaším účtom Google ani YouTube."
   },
   "consent_identity_label": {
     "message": "Osobné identifikačné údaje"
@@ -960,10 +975,10 @@
     "message": "Tieto oprávnenia môžete kedykoľvek zmeniť v nastaveniach doplnkov Firefoxu (about:addons)."
   },
   "consent_private_counts": {
-    "message": "Anonymné okná zobrazujú iba počty s využitím oprávnenia zapnutého v bežnom okne. Hlasovanie, prihlásenie, analýzy Premium a diskusie v nich nie sú dostupné."
+    "message": "Súkromné okná zobrazujú iba počty s využitím oprávnenia povoleného v bežnom okne. Hlasovanie, prihlásenie, prémiové štatistiky a diskusie v nich nie sú dostupné."
   },
   "consent_voter_timing": {
-    "message": "Hlasovacie ID sa odosiela iba pri hlasovaní alebo reakcii. Vaše vlastné reakcie na komentáre sa pamätajú v tomto zariadení."
+    "message": "Vaše hlasovacie ID sa odosiela iba pri hlasovaní alebo reakcii. Vaše vlastné reakcie na komentáre sa ukladajú v tomto zariadení."
   },
   "popup_signin_next_click": {
     "message": "Je potrebné ešte jedno kliknutie: nižšie zvoľte prihlasovacie tlačidlo, skontrolujte oprávnenia účtu vo Firefoxe a pokračujte."
@@ -972,7 +987,7 @@
     "message": "Nové pravidlá súkromia vo Firefoxe"
   },
   "changelog_firefox_intro_body": {
-    "message": "Vo Firefoxe potrebuje RYD váš súhlas, skôr než môže zobrazovať počty Nepáči sa. Tu je presne, čo tento súhlas zahŕňa — a čo nie."
+    "message": "Vo Firefoxe potrebuje RYD váš súhlas, skôr než môže zobrazovať počty dislajkov. Tu sa presne dozviete, čo tento súhlas zahŕňa — a čo nie."
   },
   "changelog_firefox_vote_granted": {
     "message": "Ďakujeme. Vaše hlasy sa teraz započítavajú."
@@ -981,7 +996,7 @@
     "message": "Váš hlas zatiaľ nie je započítaný. Firefox teraz vyžaduje vaše povolenie, skôr než ho RYD bude môcť odoslať. Toto povolenie platí len pre YouTube, nie pre iné webové stránky."
   },
   "vote_not_counted": {
-    "message": "Vaše hlasy sa nezapočítavajú a neprejavia sa v počtoch nepáči sa."
+    "message": "Vaše lajky a dislajky sa nezapočítavajú a neprejavia sa v počtoch dislajkov."
   },
   "vote_count_mine": {
     "message": "Započítať moje hlasy"
@@ -1002,19 +1017,19 @@
     "message": "Počty zostávajú vypnuté. Neskôr ich môžete zapnúť tu."
   },
   "counts_consent_enabled": {
-    "message": "Počty nepáči sa sú zapnuté."
+    "message": "Zobrazovanie počtov dislajkov je zapnuté."
   },
   "counts_consent_private": {
-    "message": "Najprv zapnite počty nepáči sa v bežnom okne. Anonymné okná zobrazujú iba počty."
+    "message": "Najprv zapnite zobrazovanie počtov dislajkov v bežnom okne. Súkromné okná zobrazujú iba počty."
   },
   "data_consent_reason": {
-    "message": "Firefox teraz vyžaduje, aby sa vás každé rozšírenie opýtalo, skôr než bude zdieľať akékoľvek dáta. Povoľte RYD zobrazovať počty nepáči sa a započítavať vaše hlasy. Toto oprávnenie platí len pre YouTube, nie pre iné webové stránky."
+    "message": "Firefox teraz vyžaduje, aby si každé rozšírenie pred zdieľaním akýchkoľvek údajov vyžiadalo váš súhlas. Povoľte RYD zobrazovať počty dislajkov a započítavať vaše hlasy. Toto oprávnenie platí len pre YouTube, nie pre iné webové stránky."
   },
   "data_consent_title": {
-    "message": "Zobrazte počty nepáči sa a nech sa vaše hlasy počítajú"
+    "message": "Zobrazte počty dislajkov a nech sa vaše hlasy počítajú"
   },
   "data_consent_body": {
-    "message": "Firefox teraz vyžaduje, aby sa vás každé rozšírenie opýtalo, skôr než bude zdieľať akékoľvek dáta. Pre všetky rozšírenia používa rovnaké všeobecné označenia. Pre RYD znamenajú jednotlivé označenia toto:"
+    "message": "Firefox teraz vyžaduje, aby si každé rozšírenie pred zdieľaním akýchkoľvek údajov vyžiadalo váš súhlas. Pre všetky rozšírenia používa rovnaké všeobecné označenia. Pre RYD znamenajú jednotlivé označenia toto:"
   },
   "data_consent_scope": {
     "message": "RYD funguje len na YouTube. Povolením mu nedáte prístup k žiadnym iným webovým stránkam."

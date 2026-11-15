@@ -539,6 +539,21 @@
   "discussion_post": {
     "message": "Yorum gönder"
   },
+  "discussion_viewReplies": {
+    "message": "Yanıtları göster"
+  },
+  "discussion_moreReplies": {
+    "message": "Daha fazla yanıt göster"
+  },
+  "discussion_viewReply": {
+    "message": "Yanıtı göster"
+  },
+  "discussion_collapseReplies": {
+    "message": "Yanıtları gizle"
+  },
+  "discussion_replyContext": {
+    "message": "Yanıtlanan yorumu göster"
+  },
   "discussion_reply": {
     "message": "Yanıtla"
   },

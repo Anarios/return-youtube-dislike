@@ -539,6 +539,21 @@
   "discussion_post": {
     "message": "Hozzászólás küldése"
   },
+  "discussion_viewReplies": {
+    "message": "Válaszok megtekintése"
+  },
+  "discussion_moreReplies": {
+    "message": "További válaszok megjelenítése"
+  },
+  "discussion_viewReply": {
+    "message": "Válasz megtekintése"
+  },
+  "discussion_collapseReplies": {
+    "message": "Válaszok elrejtése"
+  },
+  "discussion_replyContext": {
+    "message": "Eredeti hozzászólás megtekintése"
+  },
   "discussion_reply": {
     "message": "Válasz"
   },

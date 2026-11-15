@@ -5,7 +5,7 @@ export default {
   home: {
     name: "Domov",
     title: "Return YouTube Dislike",
-    subtitle: "Rozšírenie prehliadača a API, ktoré zobrazí disliky na YouTube",
+    subtitle: "Rozšírenie prehliadača a API, ktoré zobrazujú počet označení „Nepáči sa mi“ na YouTube",
     ukraine: "Podporte Ukrajinu",
     sponsors: "Sponzori",
     becomeSponsor: "Staňte sa naším sponzorom",
@@ -37,13 +37,13 @@ export default {
     subtitle: "Na začiatok vyberte sekciu z menu.",
     rights: {
       title: "Práva na použitie",
-      subtitle: "Použitie tohto API tretími stranami je povolené s nasledujúcimi obmedzeniami:",
+      subtitle: "Použitie tohto otvoreného API tretími stranami je povolené s nasledujúcimi obmedzeniami:",
       bullet1: "Uvedenie: ",
       bullet1text:
         "Tento projekt by mal byť viditeľne uvedený buď s odkazom na tento repozitár, alebo s odkazom na returnyoutubedislike.com",
       bullet2: "Obmedzenie požiadaviek: ",
       bullet2text:
-        "Pre API platí obmedzenie na 100 požiadaviek za minútu a 10 000 za deň. Pri prekročení tohto limitu aplikácia vráti stavový kód 429, ktorý znamená, že by ste mali obmedziť svoje požiadavky",
+        "Pre každého klienta API platí obmedzenie na 100 požiadaviek za minútu a 10 000 za deň. Pri prekročení tohto limitu API vráti stavový kód 429, ktorý znamená, že by vaša aplikácia mala obmedziť svoje požiadavky",
     },
     url: {
       title: "Informácie o URL",
@@ -68,8 +68,8 @@ export default {
   help: {
     name: "Pomocník",
     title: "Riešenie problémov",
-    bullet1: "Uistite sa, že používate najnovšiu verziu rozšírenia. Momentálne je to verzia ",
-    bullet11: "",
+    bullet1: "Uistite sa, že máte nainštalovanú verziu rozšírenia ",
+    bullet11: "– aktuálne najnovšiu.",
     bullet2:
       "Skúste odstrániť a znova nainštalovať rozšírenie a potom reštartovať váš prehliadač (všetky aktívne okná, nie len jednu kartu)",
     bullet3: "Uistite sa, že sa otvorí nasledujúci odkaz: ",
@@ -92,25 +92,25 @@ export default {
     subtitle: "Stále máte otázky? Pripojte sa na náš Discord server!",
     bullet1: "Ako získava rozšírenie svoje dáta?",
     bullet1text:
-      "Kombináciou archivovaných dát z obdobia pred oficiálnym vypnutím rozhrania API YouTube dislike a extrapolovaného správania používateľov rozšírenia.",
-    bullet2: "Prečo sa neaktualizuje počet dislikov?",
+      "Kombináciou archivovaných dát z obdobia pred oficiálnym zrušením prístupu k počtu označení „Nepáči sa mi“ cez rozhranie API YouTube a extrapolovaného správania používateľov rozšírenia.",
+    bullet2: "Prečo sa neaktualizuje počet označení „Nepáči sa mi“?",
     bullet2text:
-      "V súčasnosti sa počty dislikov videí ukladajú do vyrovnávacej pamäte a neaktualizujú sa príliš často. Ich aktualizácia sa líši v závislosti od popularity videa, ale môže trvať od niekoľkých hodín do niekoľkých dní.",
+      "V súčasnosti sa počty označení „Nepáči sa mi“ pri videách ukladajú do vyrovnávacej pamäte a neaktualizujú sa príliš často. Ich aktualizácia sa líši v závislosti od popularity videa, ale môže trvať od niekoľkých hodín do niekoľkých dní.",
     bullet3: "Ako to funguje?",
     bullet3text:
-      "Rozšírenie načíta ID videa, ktoré sledujete, a pomocou nášho rozhrania API získa počet dislikov (a ďalšie polia, ako sú zobrazenia, lajky atď.). Rozšírenie potom na stránke zobrazí počet a pomer dislikov. Ak sa vám video páči alebo nepáči, zaznamená sa to a odošle do databázy, takže sa dá extrapolovať presný počet dislikov.",
-    bullet4: "Môžem s vami zdieľať počet svojich dislikov?",
+      "Rozšírenie načíta ID videa, ktoré sledujete, a pomocou nášho rozhrania API získa počet označení „Nepáči sa mi“ (a ďalšie údaje, ako sú zobrazenia, označenia „Páči sa mi“ atď.). Rozšírenie potom na stránke zobrazí počet a podiel negatívnych hodnotení. Ak pri videu kliknete na „Páči sa mi“ alebo „Nepáči sa mi“, zaznamená sa to a odošle do databázy, takže sa dá extrapolovať presný počet označení „Nepáči sa mi“.",
+    bullet4: "Môžem s vami zdieľať počet označení „Nepáči sa mi“ pri svojich videách?",
     bullet4text:
-      "Už čoskoro. Hľadáme spôsob, ako použiť rozhranie OAuth alebo iné rozhranie API iba na čítanie s obmedzeným rozsahom, aby tvorcovia mohli overiteľne zdieľať svoje počty dislikov.",
+      "Už čoskoro. Hľadáme spôsob, ako použiť rozhranie OAuth alebo iné rozhranie API iba na čítanie s obmedzeným rozsahom, aby tvorcovia mohli overiteľne zdieľať počty označení „Nepáči sa mi“ pri svojich videách.",
     bullet5: "Aké dáta zbierate a ako sa s nimi zaobchádza?",
     bullet5text:
-      'Rozšírenie zhromažďuje iba údaje, ktoré sú nevyhnutne potrebné na jeho správne fungovanie, napríklad IP adresu alebo ID sledovaného videa. Žiadne z vašich údajov nebudú nikdy predané tretím stranám. Ak sa chcete dozvedieť viac o tom, ako sa staráme o zabezpečenie a ochranu osobných údajov, pozrite si naše <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">bezpečnostné FAQ</a>.',
+      'Rozšírenie zhromažďuje iba údaje, ktoré sú nevyhnutne potrebné na jeho správne fungovanie, napríklad IP adresu alebo ID sledovaného videa. Žiadne z vašich údajov nebudú nikdy predané tretím stranám. Ak sa chcete dozvedieť viac o tom, ako sa staráme o zabezpečenie a ochranu osobných údajov, pozrite si naše <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQsk.md">bezpečnostné FAQ</a>.',
     bullet6: "Ako funguje API/Backend?",
     bullet6text:
-      "Backend používa archivované dáta z obdobia, keď rozhranie YouTube ešte vracalo počet dislikov, počty lajkov/dislikov používateľov a extrapoláciu. V blízkej budúcnosti umožníme tvorcom obsahu jednoducho a bezpečne odosielať počet dislikov a do našej súčasnej databázy pridáme archivované dáta ArchiveTeamu (4,56 miliardy videí). Môžete si tiež pozrieť video na túto tému.",
-    bullet7: "Prečo počet dislikov zobrazuje 'DISLIKES DISABLED'?",
+      "Backend používa archivované dáta z obdobia, keď rozhranie YouTube ešte vracalo počet označení „Nepáči sa mi“, pozitívne a negatívne hodnotenia používateľov rozšírenia a extrapoláciu. V blízkej budúcnosti umožníme tvorcom obsahu jednoducho a bezpečne odosielať počty označení „Nepáči sa mi“ pri svojich videách a do našej súčasnej databázy pridáme archivované dáta ArchiveTeamu (4,56 miliardy videí). Môžete si tiež pozrieť video na túto tému.",
+    bullet7: "Prečo sa namiesto počtu označení „Nepáči sa mi“ zobrazuje 'DISLIKES DISABLED'?",
     bullet7text:
-      "Niekedy sa pri nedávno nahranom videu môže zobraziť 'DISLIKES DISABLED' (disliky zakázané), aj keď ich tvorca nezakázal, čo je spôsobené tým, ako zisťujeme, či sú disliky zakázané. Malo by to samo zmiznúť počas niekoľkých hodín alebo tým, že danému videu dáte lajk či dislike.",
+      "Niekedy sa pri nedávno nahranom videu môže zobraziť 'DISLIKES DISABLED' (hodnotenie „Nepáči sa mi“ je vypnuté), aj keď ho tvorca nevypol, čo je spôsobené tým, ako zisťujeme, či je toto hodnotenie vypnuté. Malo by to samo zmiznúť počas niekoľkých hodín alebo, dúfajme, tým, že pri videu kliknete na „Páči sa mi“ alebo „Nepáči sa mi“ a obnovíte stránku.",
   },
   donate: {
     name: "Prispieť",

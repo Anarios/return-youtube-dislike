@@ -30,6 +30,8 @@
       offset-y
       rounded="lg"
       nudge-top="16"
+      max-height="calc(100vh - 2rem - 88px)"
+      content-class="language-menu"
       class="d-flex flex-column"
       transition="slide-y-reverse-transition"
     >
@@ -243,6 +245,10 @@ body {
   position: fixed;
   bottom: 2rem;
   right: 1rem;
+}
+
+.language-menu {
+  overscroll-behavior-y: contain;
 }
 
 @media (max-width: 768px) {

@@ -1,4 +1,4 @@
-Prečítajte si to v iných jazykoch: [English](CONTRIBUTING.md), [فارسی](CONTRIBUTINGfa.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [беларуская](CONTRIBUTINGbe.md), [български](CONTRIBUTINGbg.md), [中文](CONTRIBUTINGcn.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Slovenčina](CONTRIBUTINGsk.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md), [Slovenščina](CONTRIBUTINGsl.md)
+Prečítajte si to v iných jazykoch: [English](CONTRIBUTING.md), [فارسی](CONTRIBUTINGfa.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [беларуская](CONTRIBUTINGbe.md), [български](CONTRIBUTINGbg.md), [简体中文](CONTRIBUTINGcn.md), [繁體中文](CONTRIBUTINGtw.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md), [Slovenščina](CONTRIBUTINGsl.md), [Slovenčina](CONTRIBUTINGsk.md)
 
 # Vitajte v návode na prispievanie do Return YouTube Dislike
 
@@ -6,34 +6,33 @@ Prečítajte si to v iných jazykoch: [English](CONTRIBUTING.md), [فارسی](C
 
 ## Začíname
 
-Na formátovanie používajte Prettier s predvolenými nastaveniami.
+Na formátovanie používajte Prettier s nastaveniami tohto projektu.
 
 #### Predpoklady
 
-Na vytvorenie zbaleného (bundled) zdrojového kódu potrebujete mať nainštalovaný node a npm.
+Na zostavenie rozšírenia zo zdrojového kódu potrebujete Node.js a npm. Používajte verzie uvedené v súboroch [.nvmrc](.nvmrc) a [package.json](package.json).
 
-Verzie použité pri príprave projektu:
-
-- node: 12.18.4
-- npm: 6.14.6
-
-Ak chcete vytvoriť súbor `bundled-content-script.js`, ktorý obsahuje väčšinu logiky rozšírenia, najprv nainštalujte všetky závislosti.
-
-1. Prejdite do koreňového priečinka repozitára a spustite:
+1. Prejdite do koreňového priečinka repozitára a nainštalujte závislosti:
 
 ```
-npm install
+npm ci
 ```
 
-2. Spustite tento príkaz, ktorý vytvorí súbor `bundled-content-script.js` používaný v `manifest.json`:
+2. Pri vývoji spustite tento príkaz, ktorý vytvorí vývojové zostavenie a začne sledovať zmeny súborov:
 
 ```
-npm start // vytvorí zostavené súbory a spustí sledovanie súborov, ktoré ich pri uložení znova načíta
-
-// alebo
-
-npm run build // vytvorí zostavené súbory jednorazovo
+npm run dev
 ```
+
+Po uložení zmien sa rozšírenie automaticky zostaví znova. Pri testovaní v prehliadači znova načítajte rozšírenie aj testovanú stránku.
+
+Produkčné zostavenie vytvoríte príkazom:
+
+```
+npm run build
+```
+
+Zostavenia pre Chrome a Firefox nájdete v priečinkoch `Extensions/combined/dist/chrome` a `Extensions/combined/dist/firefox`. V Chrome môžete v režime pre vývojárov načítať priečinok `chrome` ako rozbalené rozšírenie. Vo Firefoxe môžete na testovanie načítať súbor `manifest.json` z priečinka `firefox` ako dočasný doplnok.
 
 Gratulujeme, teraz môžete začať vyvíjať!
 
