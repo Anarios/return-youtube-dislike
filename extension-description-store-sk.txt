@@ -1,0 +1,26 @@
+Return YouTube Dislike obnoví možnosť vidieť palce dole na YouTube.
+
+Komentáre RYD vám umožňujú čítať diskusie a reagovať na ne pod videami a Shorts, kde sú komentáre YouTube vypnuté. Členovia úrovní Commenter a Premium môžu písať komentáre a odpovedať a dostávajú oznámenia o odpovediach a palcoch hore.
+
+Základné počty palcov dole sú zadarmo pre všetkých. Niektoré voliteľné funkcie, napríklad písanie komentárov RYD a prémiové štatistiky videa, vyžadujú platené členstvo na Patreone alebo prístup pre oprávnených prispievateľov na GitHube. Tieto platené doplnky pomáhajú platiť servery, vďaka ktorým zostávajú počty palcov dole zadarmo: viac ako 15 TB dát a zhruba 20 miliónov používateľov denne s rozpočtom niekoľkých stoviek dolárov mesačne.
+
+Vaše hlasy pomáhajú spresňovať odhady. Odosielajú sa s náhodným ID, ktoré sa vytvorí, keď prvýkrát zahlasujete alebo zareagujete na komentár, a nie je prepojené s vaším účtom Google ani YouTube. Odosielanie hlasov môžete zastaviť voľbou „Zakázať odosielanie hlasov“ v ponuke rozšírenia.
+
+Ak rozšírenie nefunguje: otvorte kartu Rozšírenia (chrome://extensions/), zakážte toto rozšírenie a znova ho povoľte. To by malo vyriešiť väčšinu problémov, pretože Chromium obsahuje chybu, ktorá v niektorých prípadoch naruší fungovanie rozšírenia. Dúfame, že ju tím Chromia čoskoro opraví.
+
+YouTube 13. decembra 2021 odstránil zo svojho API možnosť získať počet palcov dole.
+Toto rozšírenie chce používateľom vrátiť možnosť rozhodovať sa podľa hodnotení. Na zobrazenie čo najpresnejšieho hodnotenia používa kombináciu archivovaných údajov o palcoch hore a dole a hlasov používateľov rozšírenia.
+
+V súčasnosti obsahuje údaje o palcoch hore a dole pri viac ako 200 miliónoch videí uložené pred 13. decembrom 2021.
+
+Údaje neustále pribúdajú a aktualizujú sa aj pri videách nahraných po 13. decembri 2021.
+
+Čím viac ľudí bude rozšírenie používať, tým presnejšie bude.
+
+Pri menej populárnych videách nahraných po 13. decembri 2021 môžu byť zobrazené údaje menej presné než pri populárnejších videách.
+
+Toto rozšírenie je vo fáze aktívneho vývoja. Ak narazíte na akékoľvek problémy, neváhajte ich nahlásiť na našej stránke na GitHube alebo na serveri Discord.
+
+Ďalšie funkcie prídu čoskoro!
+
+https://github.com/Anarios/return-youtube-dislike
