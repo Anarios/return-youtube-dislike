@@ -105,23 +105,23 @@ export default {
       "Een combinatie van gearchiveerde gegevens van voordat de officiële YouTube-dislike-API werd afgesloten, en geëxtrapoleerd gebruikersgedrag van extensies.",
     bullet2: "Waarom wordt het aantal dislikes niet bijgewerkt?",
     bullet2text:
-      "Op dit moment worden video's die niet leuk zijn in de cache opgeslagen en worden ze niet vaak bijgewerkt. Het varieert afhankelijk van de populariteit van een video, maar het kan een paar uur tot een paar dagen duren om te updaten.",
+      "Op dit moment worden de aantallen dislikes van video's in de cache opgeslagen en worden ze niet vaak bijgewerkt. Het varieert afhankelijk van de populariteit van een video, maar het kan een paar uur tot een paar dagen duren om te updaten.",
     bullet3: "Hoe werkt dit?",
     bullet3text:
-      "De extensie verzamelt de video-ID van de video die je aan het bekijken bent en haalt de afkeer (en andere velden zoals weergaven, vind-ik-leuks enz.) op met behulp van onze API. De extensie geeft vervolgens het aantal dislikes en de verhouding weer op de pagina. Als je een video leuk of niet leuk vindt, wordt deze opgenomen en naar de database gestuurd, zodat een nauwkeurige telling van de dislikes kan worden geëxtrapoleerd.",
+      "De extensie verzamelt de video-ID van de video die je aan het bekijken bent en haalt het aantal dislikes (en andere velden zoals weergaven, vind-ik-leuks enz.) op met behulp van onze API. De extensie geeft vervolgens het aantal dislikes en de verhouding tussen likes en dislikes weer op de pagina. Als je een video een like of dislike geeft, wordt die stem vastgelegd en naar de database gestuurd, zodat het aantal dislikes zo nauwkeurig mogelijk kan worden geëxtrapoleerd.",
     bullet4: "Kan ik mijn niet leuk-teller met je delen?",
     bullet4text:
-      "Binnenkort beschikbaar. We onderzoeken het gebruik van Oauth of een andere alleen-lezen API met een beperkte reikwijdte, zodat makers hun afkeer-aantallen verifieerbaarheid kunnen delen.",
+      "Binnenkort beschikbaar. We onderzoeken het gebruik van OAuth of een andere alleen-lezen API met een beperkte reikwijdte, zodat makers hun aantallen dislikes op een verifieerbare manier kunnen delen.",
     bullet5: "Welke gegevens verzamelt u en hoe worden deze verwerkt?",
     bullet5text:
       'De extensie verzamelt alleen gegevens die strikt noodzakelijk zijn om goed te kunnen functioneren, zoals het IP-adres of de ID van de video die u bekijkt. Geen van uw gegevens zal ooit worden verkocht aan derden. Als u meer wilt weten over hoe wij omgaan met beveiliging en privacy, bekijk dan onze <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">beveilings FAQ</a>.',
     bullet6: "Hoe werkt de API/Backend?",
     bullet6text:
-      "De backend gebruikt gearchiveerde gegevens van toen de youtube-api nog steeds het aantal dislikes retourneerde, extensiegebruikers zoals het aantal likes/dislikes en extrapolatie. In de nabije toekomst zullen we het voor makers van inhoud mogelijk maken om eenvoudig en veilig hun afkeuren-aantal in te dienen en we zullen de gearchiveerde gegevens van ArchiveTeam (4,56 miljard video's) toevoegen aan onze huidige database. U kunt ook een video over het onderwerp bekijken.",
+      "De backend gebruikt gearchiveerde gegevens uit de tijd dat de YouTube-API nog het aantal dislikes teruggaf, de aantallen likes en dislikes van extensiegebruikers en extrapolatie. In de nabije toekomst zullen we het voor makers van inhoud mogelijk maken om eenvoudig en veilig hun aantallen dislikes in te dienen en we zullen de gearchiveerde gegevens van ArchiveTeam (4,56 miljard video's) toevoegen aan onze huidige database. U kunt ook een video over het onderwerp bekijken.",
     bullet7:
-      "Waarom wordt bij het aantal dislikes 'DISLIKES DISABLED' weergegeven?",
+      "Waarom wordt bij het aantal dislikes 'Uitgeschakeld door eigenaar' weergegeven?",
     bullet7text:
-      "Soms kan een recent geüploade video 'DISLIKES UITGESCHAKELD' weergeven, zelfs als de maker dit niet heeft uitgeschakeld. Dit komt door de manier waarop we detecteren of dislikes zijn uitgeschakeld, het zou binnen een paar uur moeten verdwijnen of door de video leuk of niet leuk te vinden en de pagina vernieuwen (hopelijk).",
+      "Soms kan een recent geüploade video 'Uitgeschakeld door eigenaar' weergeven, zelfs als de maker dit niet heeft uitgeschakeld. Dit komt door de manier waarop we detecteren of dislikes zijn uitgeschakeld. Het bericht zou binnen een paar uur moeten verdwijnen, of door de video een like of dislike te geven en de pagina te vernieuwen (hopelijk).",
   },
   donate: {
     name: "Doneer",

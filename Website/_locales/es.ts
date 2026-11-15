@@ -121,9 +121,9 @@ export default {
     bullet6: "¿Cómo funciona la API y el «backend»?",
     bullet6text:
       "El «backend» utiliza datos archivados de cuando la API de YouTube seguía proporcionando el contador de «dislikes», los votos de usuarios de la extensión y su extrapolación. En un futuro cercano permitiremos que los creadores de contenido puedan proporcionar sus cifras de «dislikes» de forma fácil y segura, e incorporaremos los datos archivados de ArchiveTeam (4.560 millones de vídeos) en nuestra base de datos. También puedes ver un vídeo al respecto.",
-    bullet7: "¿Porque el contador de «dislikes» dice «DISLIKES DESACTIVADOS»?",
+    bullet7: "¿Por qué el contador de «dislikes» dice «desactivado por el propietario»?",
     bullet7text:
-      "En ocasiones, un vídeo subido recientemente puede mostrar «DISLIKES DESACTIVADOS» aunque su creador no los haya desactivado, esto se debe a la forma en que detectamos si los «dislikes» están desactivados. El mensaje debería desaparecer en unas horas o al darle «like» o «dislike» al vídeo y actualizar la página (con suerte).",
+      "En ocasiones, un vídeo subido recientemente puede mostrar «desactivado por el propietario» aunque su creador no los haya desactivado, esto se debe a la forma en que detectamos si los «dislikes» están desactivados. El mensaje debería desaparecer en unas horas o al darle «like» o «dislike» al vídeo y actualizar la página (con suerte).",
   },
   donate: {
     name: "Donar",

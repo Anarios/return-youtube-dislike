@@ -99,22 +99,22 @@ export default {
       "Una combinazione di dati archiviati da prima della disattivazione dell'API ufficiale di YouTube per i Non mi piace e di dati estrapolati dall'utilizzo dell'estensione da parte degli utenti.",
     bullet2: "Perché il contatore dei Non mi piace non si aggiorna?",
     bullet2text:
-      "Adesso i Non mi piace sono precaricati e non vengono aggiornati spesso. Dipende dalla popolarità del video, ma può volerci da qualche ora a qualche giorno per aggiornarsi.",
+      "Al momento i conteggi dei Non mi piace sono memorizzati nella cache e non vengono aggiornati spesso. Dipende dalla popolarità del video, ma può volerci da qualche ora a qualche giorno per aggiornarsi.",
     bullet3: "Come funziona?",
     bullet3text:
       "L'estensione legge l'ID del video che stai guardando e ottiene il numero di Non mi piace (e altri parametri come visualizzazioni, Mi piace, ecc.) usando il nostro API. L'estensione, quindi, mostra il numero di Non mi piace e il rapporto sulla pagina. Se metti Mi piace o Non mi piace a un video, questo viene registrato e inviato al database così da estrapolare un numero di Non mi piace accurato.",
     bullet4: "Posso condividere il mio numero di Non mi piace con voi?",
     bullet4text:
-      "In arrivo a breve. Stiamo valutando l'utilizzo di Oauth o di un altro API in sola lettura con un'estensione limitata per permettere ai creatori di condividere la verificabilità del loro conteggio di Non mi piace.",
+      "In arrivo a breve. Stiamo valutando l'utilizzo di OAuth o di un'altra API in sola lettura con un ambito limitato per permettere ai creatori di condividere in modo verificabile il loro conteggio di Non mi piace.",
     bullet5: "Che dati raccogliete e come sono trattati?",
     bullet5text:
       'L\'estensione raccoglie solo i dati strettamente necessari per funzionare in modo corretto, come l\'indirizzo IP o l\'ID del video che stai guardando. I tuoi dati non verranno mai venduti a terze parti. Se vuoi sapere di più su come gestiamo la sicurezza e la privacy, consulta le nostre <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQit.md">domande frequenti sulla sicurezza</a>.',
     bullet6: "Come funziona l'API/backend?",
     bullet6text:
       "Il backend utilizza dati archiviati da quando l'API di YouTube restituiva ancora il numero di Non mi piace e dati sui Mi Piace/Non mi piace estrapolati dall'utilizzo dell'estensione da parte degli utenti. Nel prossimo futuro permetteremo ai creatori di contenuti di presentare il loro numero di Non mi piace in modo semplice e sicuro e aggiungeremo i dati archiviati da ArchiveTeam (4,56 miliardi di video) al nostro database corrente. Puoi anche guardare un video a riguardo.",
-    bullet7: "Perché il conteggio dei Non mi piace dice 'NON MI PIACE DISATTIVATI'?",
+    bullet7: "Perché il conteggio dei Non mi piace dice 'Disattivati dal proprietario'?",
     bullet7text:
-      "A volte un video caricato da poco potrebbe mostrare 'MI PIACE DISATTIVATI' anche se il creatore non li ha disattivati, ciò è dato da come rileviamo se i Non mi piace sono disattivati, dovrebbe sparire da solo in un paio d'ore o dopo aver messo Mi piace o Non mi piace al video e riaricato la pagina (si spera).",
+      "A volte un video caricato da poco potrebbe mostrare 'Disattivati dal proprietario' anche se il creatore non li ha disattivati, ciò è dato da come rileviamo se i Non mi piace sono disattivati, dovrebbe sparire da solo in un paio d'ore o dopo aver messo Mi piace o Non mi piace al video e ricaricato la pagina (si spera).",
   },
   donate: {
     name: "Dona",

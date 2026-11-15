@@ -108,9 +108,9 @@ export default {
     bullet6: "Kako deluje API oziroma zaledje?",
     bullet6text:
       "Zaledje uporablja arhivirane podatke iz časa, ko je YouTubov API še vračal število nevšečkov, število všečkov in nevšečkov uporabnikov razširitve ter ekstrapolacijo. V bližnji prihodnosti bomo ustvarjalcem vsebin omogočili preprosto in varno oddajo njihovega števila nevšečkov, v našo zbirko podatkov pa bomo dodali arhivirane podatke skupine ArchiveTeam (4,56 milijarde videov). Na to temo si lahko ogledate tudi video.",
-    bullet7: "Zakaj je pri številu nevšečkov prikazano »DISLIKES DISABLED«?",
+    bullet7: "Zakaj je pri številu nevšečkov prikazano »Onemogočil lastnik«?",
     bullet7text:
-      "Pri nedavno naloženem videu je včasih prikazano »DISLIKES DISABLED«, tudi če ustvarjalec nevšečkov ni onemogočil. To je posledica načina, kako zaznavamo onemogočene nevšečke; sporočilo bi moralo izginiti v nekaj urah ali potem, ko videu daste všeček oziroma nevšeček in znova naložite stran (upajmo).",
+      "Pri nedavno naloženem videu je včasih prikazano »Onemogočil lastnik«, tudi če ustvarjalec nevšečkov ni onemogočil. To je posledica načina, kako zaznavamo onemogočene nevšečke; sporočilo bi moralo izginiti v nekaj urah ali potem, ko videu daste všeček oziroma nevšeček in znova naložite stran (upajmo).",
   },
   donate: {
     name: "Donacije",

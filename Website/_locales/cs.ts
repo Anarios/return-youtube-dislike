@@ -118,9 +118,9 @@ export default {
     bullet6: "Jak funguje API/Backend?",
     bullet6text:
       "Backend používá archivovaná data z doby, kdy rozhraní YouTube ještě vracelo počet disliků, počty lajků/disliků uživatelů a extrapolaci. V blízké budoucnosti umožníme tvůrcům obsahu snadno a bezpečně odesílat počet disliků a do naší současné databáze přidáme archivovaná data ArchiveTeamu (4,56 miliardy videí). Můžete si také prohlédnout video na toto téma.",
-    bullet7: "Proč počet disliků zobrazuje 'DISLIKES DISABLED'?",
+    bullet7: "Proč počet disliků zobrazuje 'zakázáno majitelem'?",
     bullet7text:
-      "Někdy se u nedávno nahraného videa může zobrazit 'DISLIKES DISABLED' (disliky zakázány), i když je tvůrce nezakázal, což je způsobeno tím, jak zjišťujeme, zda jsou dislike zakázány. Mělo by to samo zmizet během několika hodin nebo tím, že dáte lajk či dislike danému videu.",
+      "Někdy se u nedávno nahraného videa může zobrazit 'zakázáno majitelem' (disliky zakázány), i když je tvůrce nezakázal, což je způsobeno tím, jak zjišťujeme, zda jsou dislike zakázány. Mělo by to samo zmizet během několika hodin nebo snad poté, co dáte lajk či dislike danému videu a obnovíte stránku.",
   },
   donate: {
     name: "Přispět",

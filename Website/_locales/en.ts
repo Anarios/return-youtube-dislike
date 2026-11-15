@@ -112,9 +112,9 @@ export default {
     bullet6: "How does the API/Backend work?",
     bullet6text:
       "The backend is using archived data from when the youtube api was still returning the dislike count, extension users like/dislike count and extrapolation. In the near future we will be allowing content creators to submit their dislike count easily and safely and we will be adding ArchiveTeam's archived data (4.56 billion videos) into our current database. You can also view a video on the topic.",
-    bullet7: "Why does the dislike count show 'DISLIKES DISABLED'?",
+    bullet7: "Why does the dislike count say “Disabled by Owner”?",
     bullet7text:
-      "Sometimes a recently uploaded video might show 'DISLIKES DISABLED' even if the creator hasn't disabled it, this is due to how we are detecting if dislikes are disabled, it should go away in a few hours or by liking or disliking the video and refreshing the page (hopefully).",
+      "On a newly uploaded video, the extension can mistakenly show this message even when the creator has left ratings enabled. It usually clears within a few hours. You can also try liking or disliking the video and then refreshing the page.",
   },
   donate: {
     name: "Donate",

@@ -109,19 +109,19 @@ export default {
       "Hal-hazırda dislike hallarını cache-də saxlayırıq və çox tez-tez yeniləmirik. Videonun populyarlığından asılı olaraq dəyişir, lakin yenilənməsi bir neçə saat və ya bir neçə gün çəkə bilər.",
     bullet3: "Bu necə işləyir?",
     bullet3text:
-      "Genişləndirmə izlədiyiniz videonun ID-sini alır, API vasitəsilə dislike sayını qaytarır (həmçinin baxış sayınızı, bəyənmələrinizi və s. digər sahələri də). Genişləndirmə daha sonra dislike sayını və nisbətini göstərir. Bir videonu bəyənsəniz və ya bəyənməsəniz bu məlumat yadda saxlanılır və düzgün dislike sayını təxmin etmək üçün verilənlər bazasına göndərilir.",
+      "Genişləndirmə izlədiyiniz videonun ID-sini toplayır və API-miz vasitəsilə videonun dislike sayını (həmçinin baxış və like sayları kimi digər məlumatları) alır. Daha sonra genişləndirmə səhifədə dislike sayını və nisbətini göstərir. Bir videoya like və ya dislike versəniz, verdiyiniz səs qeydə alınır və dəqiq dislike sayını təxmin etmək üçün verilənlər bazasına göndərilir.",
     bullet4: "Dislike sayımı sizinlə paylaşa bilərəm?",
     bullet4text:
       "Çox yaxın gələcəkdə bəli. Məzmun istehsalçılarının dislike sayıları üçün doğrulanma paylaşa bilmələri üçün Oauth və ya fərqli bir oxumaq üçün məhdud API istifadə etməyi planlaşdırırıq.",
     bullet5: "Hansı məlumatları toplayırsınız və bunlar necə işlənir?",
     bullet5text:
-      "Genişləndirmə yalnız düzgün işləmək üçün zəruri olan məlumatları toplayır (IP adresiniz və ya videonun ID-si kimi). Məlumatlarınız heç vaxt üçüncü tərəflərə satılmayacaq. Təhlükəsizliyi və məxfiliyi necə təmin etdiyimiz haqqında daha ətraflı məlumat üçün <a href=\"https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md\">security FAQ</a>'ya baxın.",
+      "Genişləndirmə yalnız düzgün işləmək üçün zəruri olan məlumatları toplayır (IP adresiniz və ya videonun ID-si kimi). Məlumatlarınız heç vaxt üçüncü tərəflərə satılmayacaq. Təhlükəsizliyi və məxfiliyi necə təmin etdiyimiz haqqında daha ətraflı məlumat üçün <a href=\"https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md\">təhlükəsizlik haqqında tez-tez verilən suallara</a> baxın.",
     bullet6: "API/Backend necə işləyir?",
     bullet6text:
-      "Proqram, YouTube API-sinin dislike sayını arxivləşdirilmiş məlumatlar və genişləndirmə istifadəçisi məlumatlarını istifadə edir. Yaxın gələcəkdə məzmun istehsalçılarının dislike sayını göndərməsinə icazə verəcəyik və ArchiveTeam-in arxivlənmiş məlumatlarını verilənlər bazasına əlavə edəcəyik.",
-    bullet7: "Dislike sayı niyə 'DISLIKE'LAR QAPALI' olaraq göstərilir?",
+      "Server tərəfi YouTube API-sinin hələ dislike sayını qaytardığı dövrdə arxivlənmiş məlumatlardan, genişləndirmə istifadəçilərinin like/dislike saylarından və ekstrapolyasiyadan istifadə edir. Yaxın gələcəkdə məzmun yaradıcılarının dislike saylarını asan və təhlükəsiz şəkildə göndərməsinə imkan verəcəyik və ArchiveTeam-in arxivlənmiş məlumatlarını (4,56 milyard video) mövcud verilənlər bazamıza əlavə edəcəyik. Bu mövzu haqqında videoya da baxa bilərsiniz.",
+    bullet7: "Dislike sayı niyə 'Sahibi tərəfindən deaktiv edilib' olaraq göstərilir?",
     bullet7text:
-      "Yazı zamanı dislike sayını deaktiv edən videolar üçün dislike sayını göstərmirik. Genişləndirmə belə videolar üçün 'DISLIKE'LAR QAPALI' mesajını göstərir.",
+      "Bəzən yeni yüklənmiş videoda məzmun yaradıcısı dislike sayını deaktiv etməsə belə, bu mesaj görünə bilər. Bu, dislike sayının deaktiv olub-olmadığını müəyyənləşdirmə üsulumuzla bağlıdır. Ümid edirik ki, bu hal bir neçə saat ərzində və ya videoya like/dislike verib səhifəni yenilədikdən sonra aradan qalxacaq.",
   },
   donate: {
     name: "Bağış Et",

@@ -118,9 +118,9 @@ export default {
     bullet6: "Jak działa API/Backend?",
     bullet6text:
       "Backend używa danych zarchiwizowanych w momencie, gdy API YouTube wciąż zwracało liczby łapek w dół, oraz danych zebranych i ekstrapolowanych od użytkowników rozszerzenia. W niedalekiej przyszłości pozwolimy twórcom łatwo i bezpieczne udostępniać swoje liczniki łapek w dół oraz będziemy dodawać dane zarchiwizowane przez ArchiveTeam (4,56 miliardów filmów) do naszej bazy danych. Można też obejrzeć film na ten temat. ",
-    bullet7: "Dlaczego licznik łapek w dół pokazuje 'WYŁĄCZONE PRZEZ TWÓRCĘ'?",
+    bullet7: "Dlaczego licznik łapek w dół pokazuje 'Wyłączone przez twórcę'?",
     bullet7text:
-      "Czasami świeżo wrzucony film pokazuje 'WYŁĄCZONE PRZEZ TWÓRCĘ' nawet wtedy, gdy twórca nie wyłączył łapek. Jest to spowodowane naszym sposobem wykrywania wyłączonych łapek, powinno zniknąć za parę godzin, albo po oddaniu łapki i odświeżeniu strony (oby).",
+      "Czasami świeżo wrzucony film pokazuje 'Wyłączone przez twórcę' nawet wtedy, gdy twórca nie wyłączył łapek. Jest to spowodowane naszym sposobem wykrywania wyłączonych łapek, powinno zniknąć za parę godzin, albo po oddaniu łapki i odświeżeniu strony (oby).",
   },
   donate: {
     name: "Wesprzyj",
