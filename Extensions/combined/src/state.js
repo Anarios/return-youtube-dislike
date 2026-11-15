@@ -258,6 +258,7 @@ function getState(storedData) {
 //---   Sets The Likes And Dislikes Values   ---//
 const reformattedLikeText = new WeakMap();
 const DISLIKE_NATIVE_LABEL_ATTRIBUTE = "data-ryd-native-aria-label";
+const DISLIKE_RENDERED_COUNT_ATTRIBUTE = "data-ryd-dislike-count";
 
 function getLikeTextNode() {
   const container = getLikeTextContainer();
@@ -340,27 +341,33 @@ function refreshReactionPresentation() {
 
 // An aria-label replaces a button's text for screen readers, so the count we
 // render is never announced unless it is part of the label.
-function refreshDislikeCountLabel() {
-  const { dislikeTextContainer, nativeDislikeButton: button } = getButtonControls();
+function refreshDislikeCountLabel(controls = getButtonControls(), renderedCount) {
+  const { dislikeTextContainer, nativeDislikeButton: button } = controls;
   // Mobile toggles use aria-label for their pressed state.
   if (isMobile() || !button) return;
   const label = button.getAttribute("aria-label");
   // Kept on the element because cloned buttons retain the label we wrote.
   const savedLabel = button.getAttribute(DISLIKE_NATIVE_LABEL_ATTRIBUTE);
-  const nativeLabel = savedLabel !== null && label?.startsWith(`${savedLabel}, `) ? savedLabel : label;
-  if (!nativeLabel) return;
-  const text = dislikeTextContainer?.textContent.trim() ?? "";
-  // The container can also hold words, such as a Shorts label or a status message.
-  const hasCount = /\p{N}/u.test(text);
-  const nextSavedLabel = hasCount ? nativeLabel : null;
-  const nextLabel = hasCount ? `${nativeLabel}, ${text}` : nativeLabel;
+  const savedCount = button.getAttribute(DISLIKE_RENDERED_COUNT_ATTRIBUTE);
+  const nativeLabel = savedLabel !== null && label === `${savedLabel}, ${savedCount}` ? savedLabel : label;
+  // Only setDislikes knows whether it rendered a count. Localized counts can be
+  // digit-free, while native placeholders and status messages can contain digits.
+  let count = renderedCount;
+  if (count === undefined)
+    count = savedCount !== null && dislikeTextContainer?.textContent === savedCount ? savedCount : null;
+  const nextSavedLabel = count !== null && nativeLabel ? nativeLabel : null;
+  const nextLabel = nextSavedLabel !== null ? `${nativeLabel}, ${count}` : nativeLabel;
   // Every write must be skipped when unchanged: the smartimation observer watches
   // all attributes and calls back into setDislikes, so a repeated write freezes the page.
-  if (savedLabel !== nextSavedLabel) {
-    if (hasCount) button.setAttribute(DISLIKE_NATIVE_LABEL_ATTRIBUTE, nativeLabel);
-    else button.removeAttribute(DISLIKE_NATIVE_LABEL_ATTRIBUTE);
+  for (const [attribute, previous, next] of [
+    [DISLIKE_NATIVE_LABEL_ATTRIBUTE, savedLabel, nextSavedLabel],
+    [DISLIKE_RENDERED_COUNT_ATTRIBUTE, savedCount, count],
+  ]) {
+    if (previous === next) continue;
+    if (next !== null) button.setAttribute(attribute, next);
+    else button.removeAttribute(attribute);
   }
-  if (label !== nextLabel) button.setAttribute("aria-label", nextLabel);
+  if (nextLabel !== null && label !== nextLabel) button.setAttribute("aria-label", nextLabel);
 }
 
 function setDislikes(dislikesCount) {
@@ -372,8 +379,10 @@ function setDislikes(dislikesCount) {
   _container?.removeAttribute("is-empty");
 
   let _dislikeText;
+  let renderedCount = null;
   if (!isLikesDisabled(controls)) {
     _dislikeText = dislikesCount;
+    if (dislikesCount != null && String(dislikesCount) !== "") renderedCount = String(dislikesCount);
   } else {
     logger.log("likes count disabled by creator");
     _dislikeText = localize("TextLikesDisabled");
@@ -384,7 +393,7 @@ function setDislikes(dislikesCount) {
     _container.textContent = _dislikeText;
   }
   // An unchanged count produces no mutation for the observer to act on.
-  refreshDislikeCountLabel();
+  refreshDislikeCountLabel(controls, renderedCount);
   return true;
 }
 
@@ -545,6 +554,7 @@ function clearRenderedVoteState(controls = getButtonControls()) {
   if (controls.dislikeTextContainer) {
     controls.dislikeTextContainer.innerText = "";
   }
+  refreshDislikeCountLabel(controls, null);
   if (isSyntheticShortsDislike(controls.dislikeButton)) {
     setSyntheticShortsDislikeEnabled(false, controls.dislikeButton);
     setSyntheticShortsDislikePressed(false, controls.dislikeButton);
