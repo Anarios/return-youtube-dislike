@@ -7,6 +7,26 @@ const EXTENSION_ARTIFACT = path.resolve(
   process.env.RYD_EXTENSION_ARTIFACT || path.join(__dirname, "../../combined/dist/chrome"),
 );
 
+function recordVisibleRawKeyFrames() {
+  if (location.protocol !== "chrome-extension:") return;
+  const frames = [];
+  const start = performance.now();
+  const sample = () => {
+    const body = document.body;
+    if (body && getComputedStyle(body).visibility === "visible" && body.innerHTML.includes("__MSG_"))
+      frames.push(Math.round(performance.now() - start));
+    if (performance.now() - start < 1000) requestAnimationFrame(sample);
+  };
+  requestAnimationFrame(sample);
+  window.__rydVisibleRawKeyFrames = frames;
+}
+
+async function assertToolbarPopupFits(page, width) {
+  await page.setViewportSize({ width, height: 100 });
+  expect(await page.evaluate(() => document.documentElement.scrollHeight)).toBeLessThanOrEqual(600);
+  await page.setViewportSize({ width, height: 1000 });
+}
+
 async function assertSettingsLayout(page, direction, testInfo) {
   await page.locator("#advancedToggle").click();
   await expect(page.locator("#advancedSettings")).toHaveCSS("opacity", "1");
@@ -130,6 +150,7 @@ for (const { locale, language, direction } of [
         attribute: document.documentElement.dir,
         computed: getComputedStyle(document.documentElement).direction,
       }));
+      await adapter.context.addInitScript(recordVisibleRawKeyFrames);
       const page = await adapter.context.newPage();
       const pageErrors = [];
       page.on("pageerror", (error) => pageErrors.push(error.message));
@@ -137,18 +158,32 @@ for (const { locale, language, direction } of [
         if (message.type() === "error") pageErrors.push(message.text());
       });
       for (const [name, url, widths] of [
-        ["popup", "popup.html", [375]],
+        ["popup", "popup.html", [440]],
         ["release", "changelog/4/changelog_4.1.html", [375, 1280]],
       ]) {
         for (const width of widths) {
           await page.setViewportSize({ width, height: 1000 });
           await page.goto(`chrome-extension://${adapter.extensionId}/${url}`, { waitUntil: "load" });
+          expect(await page.evaluate(() => window.__rydVisibleRawKeyFrames)).toEqual([]);
+          await expect(page.locator("body")).toHaveCSS("visibility", "visible");
+          expect(
+            await page.evaluate(() =>
+              [...document.querySelectorAll("link[rel='stylesheet']")].every((link) => link.sheet),
+            ),
+          ).toBe(true);
+          if (name === "popup")
+            expect(
+              await page.evaluate(() => getComputedStyle(document.getElementById("advancedSettings")).opacity),
+            ).toBe("0");
           await expect(page.locator("html")).toHaveAttribute("dir", direction);
           await expect(page.locator("html")).toHaveCSS("direction", direction);
           expect(await page.evaluate(() => document.documentElement.innerHTML.includes("__MSG_"))).toBe(false);
           expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
           await page.screenshot({ path: testInfo.outputPath(`${name}-${width}.png`), fullPage: true });
-          if (name === "popup") await assertSettingsLayout(page, direction, testInfo);
+          if (name === "popup") {
+            await assertToolbarPopupFits(page, width);
+            await assertSettingsLayout(page, direction, testInfo);
+          }
         }
       }
       expect(

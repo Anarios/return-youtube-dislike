@@ -2,9 +2,10 @@
 
 import { readFileSync } from "fs";
 import { join } from "path";
-import { transformSync } from "@babel/core";
 import * as initializationCycle from "./initialization-cycle";
 
+// Load the ESM compiler through Node while the fixture runs in Jest's CommonJS environment.
+const { transformSync } = process.getBuiltinModule("node:module").createRequire(__filename)("@babel/core");
 const source = readFileSync(join(__dirname, "../ryd.content-script.js"), "utf8");
 const executable = transformSync(source, {
   babelrc: false,

@@ -16,6 +16,7 @@ import {
   setLoadingState,
   applyChartExpansionState,
   applyPanelView,
+  cancelPanelRetry,
 } from "./panel";
 
 const enMessages = require("../../_locales/en/messages.json");
@@ -221,6 +222,43 @@ describe("premiumAnalytics.panel", () => {
     expect(document.querySelector("#secondary-inner").firstChild).toBe(panel);
     expect(panel.querySelector(".ryd-analytics__expand")).toBeNull();
     expect(panel.querySelectorAll(".ryd-analytics__section-expand")).toHaveLength(3);
+  });
+
+  it("mounts the panel once the secondary column appears, with one pending retry", () => {
+    jest.useFakeTimers();
+
+    try {
+      document.body.innerHTML = "";
+      expect(ensurePanel()).toBeNull();
+      expect(ensurePanel()).toBeNull();
+      expect(jest.getTimerCount()).toBe(1);
+
+      mountSecondaryContainer();
+      jest.advanceTimersByTime(500);
+
+      expect(document.querySelectorAll(".ryd-premium-analytics")).toHaveLength(1);
+    } finally {
+      jest.clearAllTimers();
+      jest.useRealTimers();
+    }
+  });
+
+  it("does not mount the panel after its pending retry is cancelled", () => {
+    jest.useFakeTimers();
+
+    try {
+      document.body.innerHTML = "";
+      expect(ensurePanel()).toBeNull();
+
+      cancelPanelRetry();
+      mountSecondaryContainer();
+      jest.advanceTimersByTime(1000);
+
+      expect(document.querySelector(".ryd-premium-analytics")).toBeNull();
+    } finally {
+      jest.clearAllTimers();
+      jest.useRealTimers();
+    }
   });
 
   it("renders preset range buttons without custom toggle", () => {

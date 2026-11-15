@@ -4,6 +4,7 @@ import {
   onDataPermissionsChanged,
   requestFeaturePermission,
 } from "./src/core-data-consent";
+import { renderDataPermissionList } from "./src/data-permission-list";
 import { isPrivateBrowsingContext } from "./src/private-browsing";
 
 function localizeHtmlPage() {
@@ -36,12 +37,7 @@ let promptPending = false;
 
 document.getElementById("consent-title").textContent = message(`consent_${page.copy}_title`);
 document.getElementById("consent-body").textContent = message(`consent_${page.copy}_body`);
-
-function showRequestedDetails() {
-  if (window.location.hash === "#permission-details") document.getElementById("permission-details").open = true;
-}
-showRequestedDetails();
-window.addEventListener("hashchange", showRequestedDetails);
+renderDataPermissionList(document.getElementById("permission-list"), feature, message);
 
 if (privateBrowsing) {
   document.getElementById("consent-title").textContent = message("extensionName");

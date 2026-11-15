@@ -1,6 +1,10 @@
 module.exports = {
   resetMocks: true,
   collectCoverage: false,
+  transform: {
+    "[/\\\\]Website[/\\\\].+\\.js$": ["babel-jest", { babelrc: false, presets: ["@babel/preset-env"] }],
+    "\\.[jt]sx?$": "babel-jest",
+  },
   modulePathIgnorePatterns: ["<rootDir>/.private/"],
   collectCoverageFrom: [
     "Extensions/common/**/*.js",

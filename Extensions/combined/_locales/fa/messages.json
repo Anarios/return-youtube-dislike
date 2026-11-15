@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "وضعیت API:"
-  },
-  "apiStatusOffline": {
-    "message": "آفلاین"
-  },
-  "apiStatusOnline": {
-    "message": "آنلاین"
-  },
   "colorTheme": {
     "message": "تم رنگی:"
   },
@@ -24,10 +15,10 @@
     "message": "تم تیره YouTube"
   },
   "colorThemeLike": {
-    "message": "Like"
+    "message": "پسندیدن"
   },
   "colorThemeDislike": {
-    "message": "Dislike"
+    "message": "نپسندیدن"
   },
   "colorizeRatio": {
     "message": "رنگی کردن نوار نسبت"
@@ -45,7 +36,7 @@
     "message": "تنها چیزی که این افزونه را فعال نگه می‌دارد کمک‌های مالی شماست، لطفاً از این پروژه حمایت کنید."
   },
   "customColors": {
-    "message": "رنگ‌های سفارشی برای نوار dislike و دکمه‌ها"
+    "message": "رنگ‌های سفارشی برای نوار نپسندها و دکمه‌ها"
   },
   "customNumberFormats": {
     "message": "فرمت‌های سفارشی اعداد"
@@ -60,7 +51,7 @@
     "message": "غیرفعال کردن لاگ در کنسول"
   },
   "extensionDesc": {
-    "message": "امکان مشاهده dislikeها را بازمی‌گرداند"
+    "message": "امکان مشاهدهٔ نپسندها را بازمی‌گرداند"
   },
   "extensionName": {
     "message": "Return YouTube Dislike"
@@ -81,7 +72,7 @@
     "message": "کمک مالی"
   },
   "linkFAQ": {
-    "message": "FAQ"
+    "message": "پرسش‌های متداول"
   },
   "linkGithub": {
     "message": "GitHub"
@@ -95,9 +86,6 @@
   "numberFormat": {
     "message": "فرمت اعداد:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "ویژگی‌های پریمیوم برای حامیان Patreon در دسترس است"
   },
@@ -106,6 +94,9 @@
   },
   "patreonPrivacyNote": {
     "message": "اطلاعات عضویت Patreon برای تأیید دسترسی پریمیوم استفاده می‌شود. ما جزئیات کارت یا حساب بانکی شما را دریافت نمی‌کنیم."
+  },
+  "paidFeaturesWhy": {
+    "message": "تعداد نپسندها برای همه رایگان می‌ماند. امکانات پولی به پرداخت هزینهٔ سرورهای پشت آن کمک می‌کنند: بیش از ۱۵ ترابایت داده و حدود ۲۰ میلیون کاربر در روز، با بودجه‌ای چند صد دلاری در ماه."
   },
   "githubLoggedOutMessage": {
     "message": "ویژگی‌های پریمیوم برای مشارکت‌کنندگان GitHub در دسترس است"
@@ -126,7 +117,7 @@
     "message": "این حساب GitHub به عنوان مشارکت‌کننده در Return YouTube Dislike ثبت نشده است. با حسابی که در پروژه مشارکت داشته وارد شوید. مشارکت‌های اخیر ممکن است چند ساعت طول بکشد تا نمایش داده شوند."
   },
   "githubLoginBrowserUnavailable": {
-    "message": "ورود با GitHub برای آدرس callback این مرورگر پیکربندی نشده است. لطفاً با پشتیبانی تماس بگیرید."
+    "message": "ورود با GitHub برای نشانی بازگشت این مرورگر پیکربندی نشده است. لطفاً با پشتیبانی تماس بگیرید."
   },
   "githubLoginExpired": {
     "message": "مهلت این تلاش برای ورود با GitHub به پایان رسیده یا قابل تأیید نبود. لطفاً ورود جدیدی را آغاز کنید."
@@ -171,10 +162,10 @@
     "message": "کاربر Patreon"
   },
   "reformatLikes": {
-    "message": "قالب‌بندی مجدد اعداد like"
+    "message": "قالب‌بندی مجدد تعداد پسندها"
   },
   "reformatLikesHover": {
-    "message": "یکسان‌سازی قالب اعداد like و dislike."
+    "message": "یکسان‌سازی قالب تعداد پسندها و نپسندها."
   },
   "hidePremiumTeaser": {
     "message": "مخفی کردن شمارش‌های خام"
@@ -194,23 +185,14 @@
   "hidePremiumAnalyticsHover": {
     "message": "مخفی کردن پنل بینش‌های ویدیویی پریمیوم در صفحات تماشای YouTube."
   },
-  "roundNumbers": {
-    "message": "نمایش اعداد گرد شده به پایین"
-  },
-  "roundNumbersHover": {
-    "message": "گرد کردن اعداد به سمت پایین (رفتار پیش‌فرض YouTube)."
-  },
   "shortsSupport": {
     "message": "پشتیبانی از YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "درصد در tooltip نوار like/dislike"
+    "message": "درصد در راهنمای شناور نوار پسند و نپسند"
   },
   "showTooltipPercentageHover": {
-    "message": "نمایش درصد در tooltip نوار like/dislike."
-  },
-  "textColorTheme": {
-    "message": "تم رنگی:"
+    "message": "نمایش درصد در راهنمای شناور نوار پسند و نپسند."
   },
   "textColorTheme1": {
     "message": "کلاسیک"
@@ -221,50 +203,20 @@
   "textColorTheme3": {
     "message": "نئون"
   },
-  "textColorizeRatioBar": {
-    "message": "رنگی کردن نوار نسبت"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "استفاده از رنگ‌های سفارشی برای نوار نسبت."
-  },
-  "textColorizeThumbs": {
-    "message": "رنگی کردن شست‌ها"
-  },
-  "textColorizeThumbsHover": {
-    "message": "استفاده از رنگ‌های سفارشی برای آیکون‌های شست."
-  },
-  "textConsistentFormat": {
-    "message": "یکسان‌سازی قالب اعداد like و dislike"
-  },
-  "textConsistentFormatHover": {
-    "message": "قالب‌بندی مجدد اعداد like."
-  },
   "textDeveloper": {
     "message": "توسط Dmitry Selivanov و جامعه کاربری"
   },
   "textLikesDisabled": {
     "message": "غیرفعال‌شده توسط مالک"
   },
-  "textNumberFormat": {
-    "message": "فرمت اعداد:"
-  },
-  "textRoundingNumbers": {
-    "message": "گرد کردن آمار like/dislike به سمت پایین (رفتار پیش‌فرض YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "نمایش آمار گرد شده به سمت پایین."
-  },
   "textSettings": {
-    "message": "غیرفعال کردن ارسال like/dislike"
+    "message": "غیرفعال کردن ارسال پسندها و نپسندها"
   },
   "textSettingsHover": {
-    "message": "پسندیدن‌ها و نپسندیدن‌های شما شمرده نمی‌شوند و در تعداد نپسندیدن‌ها دیده نخواهند شد."
+    "message": "پسندها و نپسندهای شما شمرده نمی‌شوند و در تعداد نپسندها دیده نخواهند شد."
   },
   "textTempUnavailable": {
     "message": "موقت غیرقابل دسترس"
-  },
-  "textUpdate": {
-    "message": "به‌روزرسانی به"
   },
   "tooltipPercentageMode": {
     "message": "حالت درصد:"
@@ -288,10 +240,10 @@
     "message": "کشورهای برتر"
   },
   "premiumAnalytics_listLikesTitle": {
-    "message": "کشورهای دارای بیشترین Like"
+    "message": "کشورهای دارای بیشترین پسند"
   },
   "premiumAnalytics_listDislikesTitle": {
-    "message": "کشورهای دارای بیشترین Dislike"
+    "message": "کشورهای دارای بیشترین نپسند"
   },
   "premiumAnalytics_mapTitle": {
     "message": "جغرافیا"
@@ -309,10 +261,10 @@
     "message": "بازگشت به نقشه جهان"
   },
   "premiumAnalytics_modeLikes": {
-    "message": "Likeها"
+    "message": "پسندها"
   },
   "premiumAnalytics_modeDislikes": {
-    "message": "Dislikeها"
+    "message": "نپسندها"
   },
   "premiumAnalytics_modeRatio": {
     "message": "نسبت"
@@ -363,10 +315,10 @@
     "message": "کاربران افزونه"
   },
   "premiumAnalytics_totalsLikes": {
-    "message": "$1 لایک"
+    "message": "$1 پسند"
   },
   "premiumAnalytics_totalsDislikes": {
-    "message": "$1 دیسلایک"
+    "message": "$1 نپسند"
   },
   "premiumAnalytics_summaryMeta": {
     "message": "ثبت $1 تعامل از $2 کشور ($3 IP یکتا)"
@@ -414,10 +366,10 @@
     "message": "تحلیل‌های پریمیوم برای حامیان فعال Patreon در دسترس است."
   },
   "premiumAnalytics_errorSession": {
-    "message": "سشن منقضی شد. دوباره با Patreon وارد شوید."
+    "message": "نشست منقضی شد. دوباره با Patreon وارد شوید."
   },
   "premiumAnalytics_errorBackend": {
-    "message": "بک‌اند تحلیل‌ها در حال حاضر در دسترس نیست."
+    "message": "سرویس تحلیل‌ها در سمت سرور در حال حاضر در دسترس نیست."
   },
   "premiumAnalytics_errorNetwork": {
     "message": "امکان اتصال به سرویس تحلیل‌ها وجود ندارد."
@@ -429,25 +381,25 @@
     "message": "فعالیت"
   },
   "premiumAnalytics_likeRatio": {
-    "message": "نسبت Like"
+    "message": "نسبت پسند"
   },
   "premiumAnalytics_visualHighRatio": {
-    "message": "نسبت Like بالاتر"
+    "message": "نسبت پسند بالاتر"
   },
   "premiumAnalytics_visualLowRatio": {
-    "message": "نسبت Like پایین‌تر"
+    "message": "نسبت پسند پایین‌تر"
   },
   "premiumAnalytics_visualHighLikes": {
-    "message": "Likeهای بیشتر"
+    "message": "پسندهای بیشتر"
   },
   "premiumAnalytics_visualLowLikes": {
-    "message": "Likeهای کمتر"
+    "message": "پسندهای کمتر"
   },
   "premiumAnalytics_visualHighDislikes": {
-    "message": "Dislikeهای بیشتر"
+    "message": "نپسندهای بیشتر"
   },
   "premiumAnalytics_visualLowDislikes": {
-    "message": "Dislikeهای کمتر"
+    "message": "نپسندهای کمتر"
   },
   "premiumAnalytics_visualHighGeneric": {
     "message": "$1 بیشتر"
@@ -456,19 +408,19 @@
     "message": "$1 کمتر"
   },
   "premiumAnalytics_tooltipLikes": {
-    "message": "تعداد Likeها: $1"
+    "message": "تعداد پسندها: $1"
   },
   "premiumAnalytics_tooltipDislikes": {
-    "message": "تعداد Dislikeها: $1"
+    "message": "تعداد نپسندها: $1"
   },
   "premiumAnalytics_tooltipRatio": {
-    "message": "نسبت Likeها: $1"
+    "message": "نسبت پسندها: $1"
   },
   "premiumTeaser_title": {
     "message": "تحلیل ویدیو"
   },
   "premiumTeaser_subtitle": {
-    "message": "دیسلایک‌های خام، گزارش‌های مستقیمی از کاربران این افزونه هستند که این ویدیو را تماشا می‌کنند."
+    "message": "نپسندهای خام، گزارش‌های مستقیمی از کاربران این افزونه هستند که این ویدیو را تماشا می‌کنند."
   },
   "premiumTeaser_cta": {
     "message": "باز کردن پریمیوم"
@@ -477,58 +429,19 @@
     "message": "پیش‌نمایش تحلیل‌های کامل"
   },
   "premiumTeaser_statRaw": {
-    "message": "تعداد دیسلایک خام"
-  },
-  "premiumTeaser_statDislikes": {
-    "message": "دیسلایک‌های تخمینی"
+    "message": "تعداد نپسند خام"
   },
   "premiumTeaser_statLikes": {
-    "message": "تعداد لایک خام"
+    "message": "تعداد پسند خام"
   },
   "premiumTeaser_statusLoading": {
-    "message": "در حال دریافت آخرین مجموع دیسلایک‌ها…"
+    "message": "در حال دریافت آخرین مجموع نپسندها…"
   },
   "premiumTeaser_statusError": {
-    "message": "در حال حاضر نتوانستیم داده‌های دیسلایک را بارگذاری کنیم. صفحه را دوباره بارگذاری کنید."
-  },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "نحوه باز کردن قفل تحلیل‌های پریمیوم"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "بینش‌های ویدیویی پریمیوم را در سه مرحله سریع فعال کنید:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "از پنجره بازشوی افزونه Return YouTube Dislike با Patreon وارد شوید."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "سطح Premium را انتخاب کنید تا جدول زمانی فعالیت، رده‌بندی کشورها و نقشه تعاملی فعال شوند."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "صفحه YouTube را دوباره بارگذاری کنید تا روندهای ساعتی، کشورهای برتر و تفکیک ایالت‌های آمریکا را برای هر ویدیو مشاهده کنید."
-  },
-  "premiumTierNotice_title": {
-    "message": "تحلیل‌های پریمیوم قفل است"
+    "message": "در حال حاضر نتوانستیم داده‌های نپسند را بارگذاری کنیم. صفحه را دوباره بارگذاری کنید."
   },
   "premiumTierNotice_message": {
     "message": "عضویت Patreon شما شامل سطح Premium نیست. برای باز کردن قفل تحلیل‌های پیشرفته ویدیو، حمایت مالی خود را ارتقا دهید."
-  },
-  "premiumTierNotice_cta": {
-    "message": "ارتقا در Patreon"
-  },
-  "changelog_title": {
-    "message": "گزارش تغییرات تحلیل‌های پریمیوم · ۲۰ اکتبر ۲۰۲۵"
-  },
-  "changelog_badge": {
-    "message": "انتشار پریمیوم"
-  },
-  "changelog_heading": {
-    "message": "تحلیل‌های پریمیوم، با طراحی نو"
-  },
-  "changelog_subheading": {
-    "message": "خط زمانی فعالیت زنده، رده‌بندی کشورهای برتر و نقشه تعاملی گنجانده‌شده در Return YouTube Dislike Premium را کاوش کنید."
-  },
-  "changelog_releaseDate": {
-    "message": "منتشر شده در ۲۰ اکتبر ۲۰۲۵"
   },
   "changelog_cta_primary": {
     "message": "ارتقا در Patreon"
@@ -542,23 +455,11 @@
   "changelog_feature_timeline_title": {
     "message": "خط زمانی فعالیت زنده"
   },
-  "changelog_feature_timeline_body": {
-    "message": "جریان likeها و dislikeها را به صورت زنده تماشا کنید. بدون بارگذاری مجدد، پیش‌تنظیم‌های ساعتی، روزانه یا تمام زمان‌ها را تغییر دهید، پنجره را به روز اول یا آخرین آرا متصل کنید و هر جهش را بررسی کنید تا ببینید چه چیزی تعامل را برانگیخته است."
-  },
   "changelog_feature_map_title": {
     "message": "نقشه حرارتی تعاملی جهان و ایالات متحده"
   },
-  "changelog_feature_map_body": {
-    "message": "در سراسر جهان حرکت کنید یا به ایالت‌های آمریکا بروید تا نقاط پرتعامل را ببینید. Likeها، dislikeها و نسبت‌ها را در tooltip ارتقایافته مقایسه کنید و مناطقی را که زودتر از همه به آپلودهای شما واکنش نشان می‌دهند برجسته نمایید."
-  },
   "changelog_feature_quality_title": {
     "message": "رده‌بندی کشورهای برتر"
-  },
-  "changelog_feature_quality_body": {
-    "message": "هر کشور را بر اساس فعالیت خام، likeها، dislikeها یا نسبت رتبه‌بندی کنید. با همان پیش‌تنظیم‌های خط زمانی فیلتر کنید تا متوجه شوید کمپین‌ها در کجا موفق بوده‌اند و برای انتشار بعدی برنامه‌ریزی کنید."
-  },
-  "changelog_screenshot_placeholder": {
-    "message": "تصویر به‌زودی ارائه می‌شود—در زمان آماده بودن، این نما را در DevTools ضبط کنید."
   },
   "changelog_screenshot_label_timeline": {
     "message": "محل جای‌گذاری: نمای کلی خط زمانی"
@@ -569,32 +470,8 @@
   "changelog_screenshot_label_teaser": {
     "message": "محل جای‌گذاری: رده‌بندی کشورها"
   },
-  "changelog_section_upgrade": {
-    "message": "نحوه باز کردن قفل تحلیل‌های پریمیوم"
-  },
-  "changelog_upgrade_body": {
-    "message": "آماده‌اید؟ این مراحل سریع را دنبال کنید و برگه YouTube خود را تازه‌سازی نمایید."
-  },
   "changelog_upgrade_step1": {
     "message": "پنجره بازشوی Return YouTube Dislike را باز کرده و با Patreon وارد شوید."
-  },
-  "changelog_upgrade_step2": {
-    "message": "سطح Premium را انتخاب کنید تا جریان داده‌های تحلیلی برای حساب شما فعال شود."
-  },
-  "changelog_upgrade_step3": {
-    "message": "هر صفحه تماشای YouTube را مجدداً بارگذاری کنید—خط زمانی، نقشه و رده‌بندی‌ها بلافاصله نمایش داده می‌شوند."
-  },
-  "changelog_section_release": {
-    "message": "نکات برجسته انتشار"
-  },
-  "changelog_release_item1": {
-    "message": "پیش‌تنظیم‌های خط زمانی فعالیت، داده‌های زنده را با لنگرهای بازه برای اولین و آخرین دسته‌ها پخش می‌کنند."
-  },
-  "changelog_release_item2": {
-    "message": "جدول رده‌بندی کشورها بلافاصله به‌روزرسانی می‌شود تا بتوانید مناطق رو به رشد را بدون ترک پنل مشاهده کنید."
-  },
-  "changelog_release_item3": {
-    "message": "نقشه تعاملی، نقاط پرتعامل جهانی و ایالت‌های آمریکا را با tooltipها و معیارهای شفاف‌تر برجسته می‌کند."
   },
   "changelog_support_heading": {
     "message": "به کمک نیاز دارید؟"
@@ -612,13 +489,13 @@
     "message": "نمایش نمونه‌های قبل و بعد"
   },
   "hideClutterButtonsDescription": {
-    "message": "فقط دکمه‌های Like و Dislike را قابل مشاهده نگه دارید. دکمه‌های Share، Save، Thanks و سایر اقدامات اختیاری در منوی سه‌نقطه More در YouTube در دسترس می‌مانند."
+    "message": "فقط دکمه‌های پسندیدن و نپسندیدن را قابل مشاهده نگه دارید. دکمه‌های اشتراک‌گذاری، ذخیره، سپاس و سایر اقدامات اختیاری در منوی سه‌نقطهٔ «بیشتر» در YouTube در دسترس می‌مانند."
   },
   "hideClutterButtonsBefore": {
     "message": "قبل: همه دکمه‌های عملیات قابل مشاهده هستند"
   },
   "hideClutterButtonsAfter": {
-    "message": "بعد: فقط Like و Dislike قابل مشاهده می‌مانند"
+    "message": "بعد: فقط دکمه‌های پسندیدن و نپسندیدن قابل مشاهده می‌مانند"
   },
   "discussion_title": {
     "message": "نظرات RYD"
@@ -653,14 +530,26 @@
   "discussion_empty": {
     "message": "هنوز نظری ثبت نشده است. گفتگو را آغاز کنید."
   },
-  "discussion_replyEmpty": {
-    "message": "هنوز پاسخی وجود ندارد."
-  },
   "discussion_comment": {
     "message": "نظر"
   },
   "discussion_post": {
     "message": "ارسال نظر"
+  },
+  "discussion_viewReplies": {
+    "message": "مشاهدهٔ پاسخ‌ها"
+  },
+  "discussion_moreReplies": {
+    "message": "نمایش پاسخ‌های بیشتر"
+  },
+  "discussion_viewReply": {
+    "message": "مشاهدهٔ پاسخ"
+  },
+  "discussion_collapseReplies": {
+    "message": "پنهان کردن پاسخ‌ها"
+  },
+  "discussion_replyContext": {
+    "message": "مشاهدهٔ نظر اصلی"
   },
   "discussion_reply": {
     "message": "پاسخ"
@@ -696,13 +585,10 @@
     "message": "بارگذاری بیشتر"
   },
   "discussion_like": {
-    "message": "Like"
+    "message": "پسندیدن"
   },
   "discussion_dislike": {
-    "message": "Dislike"
-  },
-  "discussion_reacting": {
-    "message": "در حال ذخیره واکنش…"
+    "message": "نپسندیدن"
   },
   "discussion_signInRequired": {
     "message": "برای ادامه، از پنجره بازشوی افزونه وارد شوید."
@@ -797,12 +683,6 @@
   "discussion_moderationReason": {
     "message": "دلیل اقدام مدیریتی"
   },
-  "discussion_moderationSaved": {
-    "message": "اقدام مدیریتی ذخیره شد."
-  },
-  "discussion_reported": {
-    "message": "$1 گزارش"
-  },
   "discussion_unavailable": {
     "message": "نظرات RYD برای این ویدیو در دسترس نیست."
   },
@@ -834,16 +714,10 @@
     "message": "$1 به نظر شما پاسخ داد"
   },
   "discussion_notificationLike": {
-    "message": "یک نفر نظر شما را like کرد"
+    "message": "یک نفر نظر شما را پسندید"
   },
   "discussion_notificationLikes": {
-    "message": "نظر شما $1 like دریافت کرد"
-  },
-  "discussion_notificationDislike": {
-    "message": "یک نفر نظر شما را dislike کرد"
-  },
-  "discussion_notificationReaction": {
-    "message": "یک نفر به نظر شما واکنش نشان داد"
+    "message": "نظر شما $1 پسند دریافت کرد"
   },
   "discussion_someone": {
     "message": "یک نفر"
@@ -857,23 +731,14 @@
   "discussion_view": {
     "message": "مشاهده گفتگو"
   },
-  "discussion_unread": {
-    "message": "$1 اعلان خوانده‌نشده"
-  },
   "discussion_signedOutInbox": {
-    "message": "برای دیدن پاسخ‌ها و like‌هایی که نظرات شما دریافت کرده‌اند وارد شوید."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "این گفتگو دیگر در دسترس نیست."
+    "message": "برای دیدن پاسخ‌ها و پسندهایی که نظرات شما دریافت کرده‌اند وارد شوید."
   },
   "discussion_discussionTab": {
     "message": "گفتگو"
   },
   "discussion_nickname": {
     "message": "نام مستعار"
-  },
-  "discussion_reportCount": {
-    "message": "گزارش‌ها"
   },
   "discussion_reportStatus": {
     "message": "وضعیت گزارش"
@@ -887,20 +752,8 @@
   "discussion_author": {
     "message": "نویسنده"
   },
-  "discussion_me": {
-    "message": "شما"
-  },
   "discussion_saving": {
     "message": "در حال ذخیره…"
-  },
-  "discussion_confirm": {
-    "message": "تأیید"
-  },
-  "discussion_notificationUpdated": {
-    "message": "فعالیت جدید روی نظرات شما"
-  },
-  "discussion_showThread": {
-    "message": "نمایش رشته پیام"
   },
   "discussion_loadReplies": {
     "message": "نمایش پاسخ‌ها ($1)"
@@ -918,16 +771,16 @@
     "message": "همه‌چیز آماده است"
   },
   "changelog_hero_title": {
-    "message": "Dislikeها برگشتند."
+    "message": "نپسندها برگشتند."
   },
   "changelog_hero_body": {
-    "message": "هر ویدیویی را در YouTube باز کنید تا تعداد dislikeها را درست کنار likeها، همان‌جایی که باید باشد، ببینید. نسخهٔ ۴.۱ همچنین نظرات RYD را معرفی می‌کند؛ فضایی برای گفتگو دربارهٔ ویدیوها خارج از بخش نظرات خود YouTube."
+    "message": "هر ویدیویی را در YouTube باز کنید تا تعداد نپسندها را درست کنار پسندها، همان‌جایی که باید باشد، ببینید. نسخهٔ ۴.۱ همچنین نظرات RYD را معرفی می‌کند؛ فضایی برای گفتگو دربارهٔ ویدیوها خارج از بخش نظرات خود YouTube."
   },
   "changelog_hero_eyebrow_counts_off": {
     "message": "یک قدم دیگر"
   },
   "changelog_hero_body_counts_off": {
-    "message": "نمایش تعداد نپسندیدن‌ها را در پایین فعال کنید تا آن‌ها را در YouTube کنار پسندیدن‌ها ببینید. نسخهٔ ۴.۱ همچنین نظرات RYD را معرفی می‌کند؛ فضایی برای گفتگو دربارهٔ ویدیوها خارج از بخش نظرات خود YouTube."
+    "message": "نمایش تعداد نپسندها را در پایین فعال کنید تا آن‌ها را در YouTube کنار پسندها ببینید. نسخهٔ ۴.۱ همچنین نظرات RYD را معرفی می‌کند؛ فضایی برای گفتگو دربارهٔ ویدیوها خارج از بخش نظرات خود YouTube."
   },
   "changelog_new_badge": {
     "message": "تازه‌های نسخهٔ ۴.۱"
@@ -942,13 +795,13 @@
     "message": "گفتگویی میان کاربران زیر ویدیوها و Shorts که نظرات YouTube در آن‌ها خاموش است، به میزبانی Return YouTube Dislike. همه می‌توانند بخوانند و واکنش نشان دهند. اعضای Commenter و Premium می‌توانند نظر و پاسخ ارسال کنند."
   },
   "changelog_comments_point_replies": {
-    "message": "پاسخ‌های رشته‌ای با like و dislike"
+    "message": "پاسخ‌های رشته‌ای با امکان پسندیدن و نپسندیدن"
   },
   "changelog_comments_point_nickname": {
     "message": "ارسال نظر با نام مستعار عمومی به انتخاب شما"
   },
   "changelog_comments_point_notifications": {
-    "message": "دریافت اعلان وقتی کسی به نظر شما پاسخ می‌دهد یا آن را like می‌کند"
+    "message": "دریافت اعلان وقتی کسی به نظر شما پاسخ می‌دهد یا آن را می‌پسندد"
   },
   "changelog_comments_point_moderation": {
     "message": "گزارش و نظارت برای حفظ احترام در گفتگوها"
@@ -957,7 +810,7 @@
     "message": "پنل نظرات RYD با یک گفتگوی رشته‌ای زیر ویدیو"
   },
   "changelog_notifications_shot_alt": {
-    "message": "اعلان‌های RYD با فهرست پاسخ‌ها و likeهای نظرات شما"
+    "message": "اعلان‌های RYD با فهرست پاسخ‌ها و پسندهای نظرات شما"
   },
   "changelog_sample_note": {
     "message": "تصاویر صفحه داده‌های نمونه را نشان می‌دهند."
@@ -966,19 +819,19 @@
     "message": "تحلیل‌های پریمیوم"
   },
   "changelog_analytics_body": {
-    "message": "ببینید یک ویدیو در گذر زمان و در سراسر جهان چگونه بازخورد می‌گیرد. بازهٔ ۷، ۳۰ یا ۹۰ روزه یا تمام زمان‌ها را انتخاب کنید و likeها، dislikeها و نسبت آن‌ها را مقایسه کنید."
+    "message": "ببینید یک ویدیو در گذر زمان و در سراسر جهان چگونه بازخورد می‌گیرد. بازهٔ ۷، ۳۰ یا ۹۰ روزه یا تمام زمان‌ها را انتخاب کنید و پسندها، نپسندها و نسبت آن‌ها را مقایسه کنید."
   },
   "changelog_analytics_timeline_title": {
     "message": "خط زمانی فعالیت"
   },
   "changelog_analytics_timeline_body": {
-    "message": "Likeها و dislikeها در گذر زمان، با جزئیات ساعتی."
+    "message": "پسندها و نپسندها در گذر زمان، با جزئیات ساعتی."
   },
   "changelog_analytics_countries_title": {
     "message": "کشورهای برتر"
   },
   "changelog_analytics_countries_body": {
-    "message": "ببینید کدام کشورها یک ویدیو را بیشتر like یا dislike می‌کنند."
+    "message": "ببینید کاربران کدام کشورها یک ویدیو را بیشتر می‌پسندند یا نمی‌پسندند."
   },
   "changelog_analytics_world_title": {
     "message": "نقشهٔ جهان"
@@ -992,11 +845,29 @@
   "changelog_analytics_us_body": {
     "message": "برای بررسی تعامل کاربران در هر ایالت، بزرگ‌نمایی کنید."
   },
+  "changelog_appeal_title": {
+    "message": "یک درخواست کوچک و کمی معذب‌کننده"
+  },
+  "changelog_appeal_intro": {
+    "message": "سلام. اینجا همان جایی است که دربارهٔ پول حرف می‌زنیم، و راستش را بخواهید، در آن خیلی خوب نیستیم."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike یک پروژهٔ کوچک متن‌باز است که Dmitry Selivanov و جامعهٔ کاربری آن را ساخته‌اند. هر روز به حدود ۲۰ میلیون نفر پاسخ می‌دهد و از بیش از ۱۵ ترابایت داده نگهداری می‌کند. همهٔ این‌ها با چند صد دلار در ماه اداره می‌شود؛ مبلغ زیادی نیست برای برگرداندن چیزی که یک شرکت میلیارد دلاری تصمیم گرفت حذفش کند."
+  },
+  "changelog_appeal_free": {
+    "message": "تعداد نپسندها رایگان است و رایگان می‌ماند. تمام هدف همین است. اما سرورها رایگان نیستند و راستش، هزینه‌های نگهداری آن‌ها چارهٔ زیادی برایمان نگذاشت: برای اینکه پروژه سرپا بماند، مجبور شدیم قابلیت‌های پریمیوم را اضافه کنیم — نظرات RYD و تحلیل‌های پریمیوم. هر عضویت به پوشش این هزینه‌ها کمک می‌کند."
+  },
+  "changelog_appeal_ask": {
+    "message": "اگر RYD حتی یک بار شما را از یک ویدیوی کلیک‌بیت یا آموزشی که کار نکرد نجات داده، لطفاً به پیوستن در Patreon فکر کنید. و اگر الان زمان مناسبی نیست، هیچ اشکالی ندارد. از اینکه از آن استفاده می‌کنید و رأی می‌دهید سپاسگزاریم: هر رأی اعداد را کمی دقیق‌تر می‌کند."
+  },
+  "changelog_appeal_cta": {
+    "message": "در Patreon عضو شوید"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry و جامعهٔ RYD"
+  },
   "changelog_join_title": {
     "message": "دریافت ویژگی‌های پریمیوم"
-  },
-  "changelog_join_free": {
-    "message": "تعداد dislikeها برای همه رایگان است. عضویت اختیاری است و به حمایت از پروژه کمک می‌کند."
   },
   "changelog_join_step1": {
     "message": "در Patreon عضو شوید. سطح Commenter به شما امکان ارسال نظر می‌دهد؛ Premium تحلیل‌ها را نیز اضافه می‌کند."
@@ -1008,7 +879,7 @@
     "message": "همچنین در این نسخه"
   },
   "changelog_also_counts": {
-    "message": "نمایش قابل‌اعتمادتر تعداد likeها و dislikeها در افزونه و اسکریپت کاربر."
+    "message": "نمایش قابل‌اعتمادتر تعداد پسندها و نپسندها در افزونه و اسکریپت کاربر."
   },
   "changelog_also_consent": {
     "message": "بهبود روند رضایت‌دهی دربارهٔ داده‌ها در Firefox."
@@ -1032,13 +903,13 @@
     "message": "بگذارید رأی‌هایتان شمرده شود"
   },
   "consent_vote_body": {
-    "message": "بدون اشتراک‌گذاری رأی‌ها، پسندیدن‌ها و نپسندیدن‌های شما شمرده نمی‌شوند و در تعداد نپسندیدن‌ها دیده نمی‌شوند. اشتراک‌گذاری، رأی‌های شما و تعداد پسندیدن‌هایی را که می‌بینید ارسال می‌کند. این کار به نمایش تعداد نپسندیدن‌ها نیاز دارد، بنابراین اگر خاموش باشد Firefox فعال‌کردن آن را هم درخواست می‌کند."
+    "message": "Firefox اکنون هر افزونه‌ای را ملزم می‌کند که پیش از اشتراک‌گذاری هر داده‌ای از شما بپرسد. اجازه دهید تا RYD بتواند پسندها، نپسندها و واکنش‌های شما به نظرات را بشمارد. این مجوز فقط شامل YouTube است، نه وب‌سایت‌های دیگر."
   },
   "consent_account_title": {
     "message": "انتخاب مجوزهای حساب"
   },
   "consent_account_body": {
-    "message": "برای استفاده از قابلیت‌های حساب، از جمله نمایه، اعلان‌ها و تحلیل‌های Premium وارد شوید."
+    "message": "برای استفاده از قابلیت‌های حساب، از جمله نمایه، اعلان‌ها و تحلیل‌های پریمیوم وارد شوید."
   },
   "consent_next_step": {
     "message": "برای بررسی مجوزها، در Firefox گزینهٔ اجازه دادن را انتخاب کنید. می‌توانید نپذیرید."
@@ -1071,19 +942,19 @@
     "message": "فعالیت مرور"
   },
   "consent_browsing_body": {
-    "message": "شناسهٔ ویدیوی YouTube که برای بارگذاری تعداد نپسندیدن‌ها و گفتگوها استفاده می‌شود. خودتان انتخاب می‌کنید که اجازه دهید یا نه."
+    "message": "فقط شناسهٔ ویدیویی که در YouTube باز می‌کنید، برای بارگذاری نپسندها و نظرات RYD آن. هرگز نه تاریخچهٔ مرور شما و نه وب‌سایت‌های دیگر."
   },
   "consent_content_label": {
     "message": "محتوای وب‌سایت"
   },
   "consent_content_body": {
-    "message": "تعداد پسندیدن‌های نمایش‌داده‌شده در ویدیوی YouTube برای بهبود برآورد نپسندیدن‌ها."
+    "message": "تعداد پسندهای نمایش‌داده‌شده در ویدیوی YouTube برای بهبود برآورد نپسندها."
   },
   "consent_activity_label": {
     "message": "فعالیت وب‌سایت"
   },
   "consent_activity_body": {
-    "message": "پسندیدن‌ها، نپسندیدن‌ها، رأی‌های پس‌گرفته‌شده و واکنش‌های شما به دیدگاه‌های RYD که همراه یک شناسه تصادفی ذخیره‌شده برای رأی‌دادن فرستاده می‌شوند."
+    "message": "پسندها، نپسندها و واکنش‌های شما به نظرات RYD در YouTube، تا شمرده شوند. همراه یک شناسهٔ تصادفی فرستاده می‌شوند که با حساب Google یا YouTube شما مرتبط نیست."
   },
   "consent_identity_label": {
     "message": "اطلاعات شناسایی شخصی"
@@ -1101,10 +972,10 @@
     "message": "RYD بیرون از youtube.com چیزی جمع‌آوری نمی‌کند و به حساب YouTube شما دسترسی ندارد. تا وارد نشوید، نام یا ایمیلی دریافت نمی‌کند."
   },
   "consent_settings": {
-    "message": "می‌توانید بعداً مجوزهای اختیاری را در تنظیمات افزونه در Firefox تغییر دهید."
+    "message": "می‌توانید این مجوزها را هر زمان در تنظیمات افزودنی‌های Firefox (about:addons) تغییر دهید."
   },
   "consent_private_counts": {
-    "message": "پنجره‌های خصوصی فقط تعداد را با استفاده از مجوز فعال‌شده در یک پنجرهٔ عادی نشان می‌دهند. رأی‌دادن، ورود، تحلیل‌های Premium و گفتگوها در آنجا در دسترس نیستند."
+    "message": "پنجره‌های خصوصی فقط تعداد را با استفاده از مجوز فعال‌شده در یک پنجرهٔ عادی نشان می‌دهند. رأی‌دادن، ورود، تحلیل‌های پریمیوم و گفتگوها در آنجا در دسترس نیستند."
   },
   "consent_voter_timing": {
     "message": "شناسه رأی‌دادن شما فقط هنگام رأی یا واکنش فرستاده می‌شود. واکنش‌های خودتان به دیدگاه‌ها در این دستگاه به خاطر سپرده می‌شوند."
@@ -1112,14 +983,20 @@
   "popup_signin_next_click": {
     "message": "یک کلیک دیگر لازم است: دکمه ورود را در پایین انتخاب کنید تا مجوزهای حساب Firefox را بررسی کنید و ادامه دهید."
   },
+  "changelog_firefox_intro_title": {
+    "message": "قوانین جدید حریم خصوصی Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "در Firefox، RYD پیش از نمایش نپسندها به اجازهٔ شما نیاز دارد. در ادامه دقیقاً می‌بینید این اجازه شامل چه چیزهایی می‌شود — و چه چیزهایی نه."
+  },
   "changelog_firefox_vote_granted": {
     "message": "سپاسگزاریم. رأی‌های شما اکنون شمرده می‌شوند."
   },
   "vote_consent_hint": {
-    "message": "رأی شما شمرده نمی‌شود و در تعداد نپسندیدن‌ها دیده نخواهد شد. برای شمرده شدن آن، اشتراک‌گذاری رأی‌ها را روشن کنید."
+    "message": "رأی شما هنوز شمرده نشده است. Firefox اکنون برای اینکه RYD بتواند آن را بفرستد، به اجازهٔ شما نیاز دارد. این مجوز فقط شامل YouTube است، نه وب‌سایت‌های دیگر."
   },
   "vote_not_counted": {
-    "message": "پسندیدن‌ها و نپسندیدن‌های شما شمرده نمی‌شوند و در تعداد نپسندیدن‌ها دیده نمی‌شوند."
+    "message": "پسندها و نپسندهای شما شمرده نمی‌شوند و در تعداد نپسندها دیده نمی‌شوند."
   },
   "vote_count_mine": {
     "message": "رأی‌های من شمرده شود"
@@ -1133,9 +1010,6 @@
   "discussion_consentContinue": {
     "message": "ادامه"
   },
-  "counts_consent_enable": {
-    "message": "فعال‌کردن نمایش تعداد نپسندیدن‌ها"
-  },
   "counts_consent_toolbar": {
     "message": "برای ادامه، Return YouTube Dislike را از منوی افزونه‌های Firefox باز کنید."
   },
@@ -1143,18 +1017,21 @@
     "message": "نمایش تعداد خاموش می‌ماند. می‌توانید بعداً آن را از همین‌جا فعال کنید."
   },
   "counts_consent_enabled": {
-    "message": "نمایش تعداد نپسندیدن‌ها فعال است."
+    "message": "نمایش تعداد نپسندها فعال است."
   },
   "counts_consent_private": {
-    "message": "ابتدا نمایش تعداد نپسندیدن‌ها را در یک پنجرهٔ عادی فعال کنید. پنجره‌های خصوصی فقط تعداد را نشان می‌دهند."
+    "message": "ابتدا نمایش تعداد نپسندها را در یک پنجرهٔ عادی فعال کنید. پنجره‌های خصوصی فقط تعداد را نشان می‌دهند."
   },
   "data_consent_reason": {
-    "message": "Firefox برای اینکه RYD بتواند تعداد نپسندیدن‌ها را نمایش دهد و پسندیدن‌ها و نپسندیدن‌های شما را بشمارد، به اجازهٔ شما نیاز دارد."
+    "message": "Firefox اکنون هر افزونه‌ای را ملزم می‌کند که پیش از اشتراک‌گذاری هر داده‌ای از شما بپرسد. به RYD اجازه دهید نپسندها را نشان دهد و رأی‌هایتان را بشمارد. این مجوز فقط شامل YouTube است، نه وب‌سایت‌های دیگر."
   },
   "data_consent_title": {
-    "message": "نپسندیدن‌ها را ببینید و بگذارید رأی‌هایتان شمرده شود"
+    "message": "نپسندها را ببینید و بگذارید رأی‌هایتان شمرده شود"
   },
   "data_consent_body": {
-    "message": "RYD شناسهٔ ویدیو را برای بارگذاری تعداد نپسندیدن‌ها می‌فرستد. با اجازهٔ شما، تعداد پسندیدن‌هایی که می‌بینید نیز برای بهبود برآوردها فرستاده می‌شود و پسندیدن‌ها، نپسندیدن‌ها و واکنش‌های شما به دیدگاه‌ها همراه یک شناسهٔ تصادفی رأی‌دادن فرستاده می‌شوند تا شمرده شوند."
+    "message": "Firefox اکنون هر افزونه‌ای را ملزم می‌کند که پیش از اشتراک‌گذاری هر داده‌ای از شما بپرسد. برای همهٔ افزونه‌ها از برچسب‌های کلی یکسانی استفاده می‌کند، پس معنای هر کدام برای RYD این است:"
+  },
+  "data_consent_scope": {
+    "message": "RYD فقط روی YouTube کار می‌کند. با دادن این اجازه، RYD به هیچ وب‌سایت دیگری دسترسی پیدا نمی‌کند."
   }
 }

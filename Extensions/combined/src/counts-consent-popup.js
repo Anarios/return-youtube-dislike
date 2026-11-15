@@ -5,9 +5,12 @@ import {
   requestFeaturePermission,
   usesFirefoxDataCollectionConsent,
 } from "./core-data-consent";
+import { renderDataPermissionList } from "./data-permission-list";
 import { isPrivateBrowsingContext } from "./private-browsing";
 import { closeToolbarPopup } from "./toolbar-popup";
 import { withdrawVoteSubmissionIntent } from "./vote-submission-intent";
+
+const REQUESTED_FEATURE = "voteOptIn";
 
 function initCountsConsentPopup({ beforeShow = () => {} } = {}) {
   if (!usesFirefoxDataCollectionConsent() || isPrivateBrowsingContext()) return;
@@ -17,6 +20,7 @@ function initCountsConsentPopup({ beforeShow = () => {} } = {}) {
   const dismiss = document.getElementById("ryd-counts-consent-dismiss");
   const status = document.getElementById("ryd-counts-consent-status");
   const message = (key) => consentApi().i18n.getMessage(key);
+  renderDataPermissionList(document.getElementById("ryd-counts-consent-permissions"), REQUESTED_FEATURE, message);
   let revision = 0;
   let dismissed = false;
   let pending = false;
@@ -38,7 +42,7 @@ function initCountsConsentPopup({ beforeShow = () => {} } = {}) {
     if (pending) return;
     pending = true;
     revision++;
-    const request = requestFeaturePermission("voteOptIn");
+    const request = requestFeaturePermission(REQUESTED_FEATURE);
     withdrawVoteSubmissionIntent();
     allow.disabled = true;
     dismiss.disabled = true;

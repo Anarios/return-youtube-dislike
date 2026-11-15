@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Стан API:"
-  },
-  "apiStatusOffline": {
-    "message": "Афлайн"
-  },
-  "apiStatusOnline": {
-    "message": "Анлайн"
-  },
   "colorTheme": {
     "message": "Колеравая тэма:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Фармат лікаў:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Прэміум-функцыі даступныя для падпісчыкаў на Patreon"
   },
@@ -88,6 +76,9 @@
   },
   "patreonPrivacyNote": {
     "message": "Інфармацыя аб падпісцы на Patreon выкарыстоўваецца для праверкі прэміум-доступу. Мы не атрымліваем дадзеныя вашай карты або банкаўскага рахунку."
+  },
+  "paidFeaturesWhy": {
+    "message": "Колькасць непадабаек застаецца бясплатнай для ўсіх. Платныя дадаткі дапамагаюць аплачваць серверы, на якіх яна працуе: больш за 15 ТБ даных і каля 20 мільёнаў карыстальнікаў у дзень, а бюджэт — некалькі сотняў долараў на месяц."
   },
   "githubLoggedOutMessage": {
     "message": "Прэміум-функцыі даступныя для ўдзельнікаў распрацоўкі на GitHub"
@@ -176,12 +167,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Хаваць панэль прэміум-аналітыкі відэа на старонках прагляду YouTube."
   },
-  "roundNumbers": {
-    "message": "Паказваць лікі, акругленыя ў меншы бок"
-  },
-  "roundNumbersHover": {
-    "message": "Акругляць лікі ў меншы бок (стандартныя паводзіны YouTube)."
-  },
   "shortsSupport": {
     "message": "Падтрымка YouTube Shorts"
   },
@@ -190,9 +175,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Адлюстроўваць працэнты ў падказцы паласы падабаек/непадабаек."
-  },
-  "textColorTheme": {
-    "message": "Колеравая тэма:"
   },
   "textColorTheme1": {
     "message": "Класічная"
@@ -221,38 +203,11 @@
   "colorThemeDislike": {
     "message": "Не падабаецца"
   },
-  "textColorizeRatioBar": {
-    "message": "Размаляваць паласу суадносін"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Выкарыстоўваць уласныя колеры для паласы суадносін."
-  },
-  "textColorizeThumbs": {
-    "message": "Размаляваць кнопкі"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Выкарыстоўваць уласныя колеры для значкоў падабаек і непадабаек."
-  },
-  "textConsistentFormat": {
-    "message": "Прывесці фармат падабаек і непадабаек да адзінага выгляду"
-  },
-  "textConsistentFormatHover": {
-    "message": "Перафарматаваць лік падабаек."
-  },
   "textDeveloper": {
     "message": "ад Дзмітрыя Селіванава і супольнасці"
   },
   "textLikesDisabled": {
     "message": "Адключана аўтарам"
-  },
-  "textNumberFormat": {
-    "message": "Фармат лікаў:"
-  },
-  "textRoundingNumbers": {
-    "message": "Акругляць статыстыку падабаек/непадабаек у меншы бок (звычайныя паводзіны YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Паказваць значэнні, акругленыя ў меншы бок."
   },
   "textSettings": {
     "message": "Адключыць адпраўку падабаек/непадабаек"
@@ -262,9 +217,6 @@
   },
   "textTempUnavailable": {
     "message": "Часова недаступна"
-  },
-  "textUpdate": {
-    "message": "Абнаўленне да"
   },
   "tooltipPercentageMode": {
     "message": "Рэжым працэнтаў:"
@@ -479,9 +431,6 @@
   "premiumTeaser_statRaw": {
     "message": "Колькасць неапрацаваных непадабаек"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Разліковая колькасць непадабаек"
-  },
   "premiumTeaser_statLikes": {
     "message": "Колькасць неапрацаваных падабаек"
   },
@@ -491,29 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "Не ўдалося загрузіць дадзеныя аб непадабайках. Паспрабуйце абнавіць старонку."
   },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Як адкрыць прэміум-аналітыку"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Адкрыйце прэміум-аналітыку відэа ў тры простыя крокі:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Увайдзіце праз Patreon ва ўсплывальным акне пашырэння Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Абярыце ўзровень Premium, каб уключыць храналогію актыўнасці, рэйтынгі краін і інтэрактыўную карту."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Перазагрузіце YouTube, каб убачыць пагадзінныя трэнды, топ краін і дэталізацыю па штатах ЗША для кожнага відэа."
-  },
-  "premiumTierNotice_title": {
-    "message": "Прэміум-аналітыка заблакіравана"
-  },
   "premiumTierNotice_message": {
     "message": "У вашай падпісцы на Patreon няма ўзроўню Premium. Павысьце ўзровень падтрымкі, каб атрымаць доступ да пашыранай відэааналітыкі."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Павысіць узровень на Patreon"
   },
   "changelog_cta_primary": {
     "message": "Павысіць узровень на Patreon"
@@ -605,14 +533,26 @@
   "discussion_empty": {
     "message": "Каментарыяў пакуль няма. Пачніце размову."
   },
-  "discussion_replyEmpty": {
-    "message": "Адказаў пакуль няма."
-  },
   "discussion_comment": {
     "message": "Каментарый"
   },
   "discussion_post": {
     "message": "Апублікаваць каментарый"
+  },
+  "discussion_viewReplies": {
+    "message": "Паказаць адказы"
+  },
+  "discussion_moreReplies": {
+    "message": "Паказаць яшчэ адказы"
+  },
+  "discussion_viewReply": {
+    "message": "Паказаць адказ"
+  },
+  "discussion_collapseReplies": {
+    "message": "Схаваць адказы"
+  },
+  "discussion_replyContext": {
+    "message": "Паказаць зыходны каментарый"
   },
   "discussion_reply": {
     "message": "Адказаць"
@@ -652,9 +592,6 @@
   },
   "discussion_dislike": {
     "message": "Не падабаецца"
-  },
-  "discussion_reacting": {
-    "message": "Захаванне рэакцыі…"
   },
   "discussion_signInRequired": {
     "message": "Каб працягнуць, увайдзіце праз усплывальнае акно пашырэння."
@@ -749,12 +686,6 @@
   "discussion_moderationReason": {
     "message": "Прычына мадэрацыі"
   },
-  "discussion_moderationSaved": {
-    "message": "Дзеянне мадэрацыі захавана."
-  },
-  "discussion_reported": {
-    "message": "Скаргаў: $1"
-  },
   "discussion_unavailable": {
     "message": "Каментарыі RYD недаступны для гэтага відэа."
   },
@@ -791,12 +722,6 @@
   "discussion_notificationLikes": {
     "message": "Ваш каментарый атрымаў падабайкі: $1"
   },
-  "discussion_notificationDislike": {
-    "message": "Камусьці не спадабаўся ваш каментарый"
-  },
-  "discussion_notificationReaction": {
-    "message": "Хтосьці адрэагаваў на ваш каментарый"
-  },
   "discussion_someone": {
     "message": "Хтосьці"
   },
@@ -809,23 +734,14 @@
   "discussion_view": {
     "message": "Паглядзець абмеркаванне"
   },
-  "discussion_unread": {
-    "message": "Непрачытаных апавяшчэнняў: $1"
-  },
   "discussion_signedOutInbox": {
     "message": "Увайдзіце, каб бачыць адказы і падабайкі на вашы каментарыі."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Гэтае абмеркаванне больш недаступна."
   },
   "discussion_discussionTab": {
     "message": "Абмеркаванне"
   },
   "discussion_nickname": {
     "message": "Псеўданім"
-  },
-  "discussion_reportCount": {
-    "message": "Скаргі"
   },
   "discussion_reportStatus": {
     "message": "Статус скаргі"
@@ -839,20 +755,8 @@
   "discussion_author": {
     "message": "Аўтар"
   },
-  "discussion_me": {
-    "message": "Вы"
-  },
   "discussion_saving": {
     "message": "Захаванне…"
-  },
-  "discussion_confirm": {
-    "message": "Пацвердзіць"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Новая актыўнасць у вашых каментарыях"
-  },
-  "discussion_showThread": {
-    "message": "Паказаць галіну абмеркавання"
   },
   "discussion_loadReplies": {
     "message": "Паказаць адказы ($1)"
@@ -941,11 +845,29 @@
   "changelog_analytics_us_body": {
     "message": "Разгледзьце актыўнасць па штатах падрабязней."
   },
+  "changelog_appeal_title": {
+    "message": "Маленькая, крыху няёмкая просьба"
+  },
+  "changelog_appeal_intro": {
+    "message": "Прывітанне. Гэта тая частка, дзе мы гаворым пра грошы, і, шчыра кажучы, у нас гэта не вельмі атрымліваецца."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike — невялікі праект з адкрытым кодам, які ствараюць Дзмітрый Селіванаў і супольнасць. Кожны дзень ён адказвае прыкладна 20 мільёнам людзей і захоўвае больш за 15 ТБ даных. Усё гэта працуе на некалькі сотняў долараў у месяц — не так шмат, каб вярнуць тое, што вырашыла прыбраць кампанія коштам у мільярды долараў."
+  },
+  "changelog_appeal_free": {
+    "message": "Колькасць непадабаек бясплатная і застанецца бясплатнай. У гэтым увесь сэнс. Але серверы не бясплатныя, і, шчыра кажучы, выдаткі на іх утрыманне не пакінулі нам асаблівага выбару: каб праект працаваў далей, нам давялося ўвесці функцыі Premium — каментарыі RYD і аналітыку Premium. Кожная падпіска дапамагае пакрываць гэтыя выдаткі."
+  },
+  "changelog_appeal_ask": {
+    "message": "Калі RYD хоць раз уратаваў вас ад клікбэйтнага відэа ці інструкцыі, якая не спрацавала, калі ласка, падумайце пра падтрымку на Patreon. А калі зараз не той момант — нічога страшнага. Дзякуй, што карыстаецеся ім і галасуеце: кожны голас робіць лічбы крыху дакладнейшымі."
+  },
+  "changelog_appeal_cta": {
+    "message": "Далучайцеся на Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Дзмітрый і супольнасць RYD"
+  },
   "changelog_join_title": {
     "message": "Атрымайце магчымасці Premium"
-  },
-  "changelog_join_free": {
-    "message": "Колькасць непадабаек даступная ўсім бясплатна. Удзел добраахвотны і дапамагае падтрымліваць праект."
   },
   "changelog_join_step1": {
     "message": "Далучайцеся на Patreon. Commenter дазваляе пісаць каментарыі, а Premium таксама дадае аналітыку."
@@ -981,7 +903,7 @@
     "message": "Няхай вашы ацэнкі ўлічваюцца"
   },
   "consent_vote_body": {
-    "message": "Без перадачы ацэнак вашы лайкі і дызлайкі не ўлічваюцца і не адлюстроўваюцца ў колькасці дызлайкаў. Перадача адпраўляе вашы ацэнкі і бачную колькасць лайкаў. Для яе патрэбны паказ дызлайкаў, таму Firefox таксама папросіць уключыць яго, калі ён выключаны."
+    "message": "Цяпер Firefox патрабуе, каб кожнае пашырэнне пыталася ў вас, перш чым перадаваць якія-небудзь даныя. Дазвольце гэта, каб RYD мог улічваць вашы лайкі, дызлайкі і рэакцыі на каментарыі. Гэты дазвол датычыцца толькі YouTube, а не іншых сайтаў."
   },
   "consent_account_title": {
     "message": "Выбар дазволаў уліковага запісу"
@@ -1020,7 +942,7 @@
     "message": "Актыўнасць прагляду"
   },
   "consent_browsing_body": {
-    "message": "Ідэнтыфікатар відэа YouTube для загрузкі колькасці дызлайкаў і абмеркаванняў. Вы самі вырашаеце, ці дазваляць гэта."
+    "message": "Толькі ідэнтыфікатар відэа YouTube, якое вы адкрываеце, каб загрузіць яго дызлайкі і каментарыі RYD. Ніколі — ні ваша гісторыя наведванняў, ні іншыя сайты."
   },
   "consent_content_label": {
     "message": "Змесціва сайтаў"
@@ -1032,7 +954,7 @@
     "message": "Актыўнасць на сайтах"
   },
   "consent_activity_body": {
-    "message": "Вашы лайкі, дызлайкі, скасаваныя ацэнкі і рэакцыі на каментарыі RYD, дасланыя з захаваным выпадковым ідэнтыфікатарам галасавання."
+    "message": "Вашы лайкі, дызлайкі і рэакцыі на каментарыі RYD на YouTube, каб яны ўлічваліся. Дасылаюцца з выпадковым ідэнтыфікатарам, не звязаным з вашым уліковым запісам Google ці YouTube."
   },
   "consent_identity_label": {
     "message": "Асабістыя ідэнтыфікацыйныя звесткі"
@@ -1050,7 +972,7 @@
     "message": "RYD нічога не збірае па-за youtube.com і не мае доступу да вашага ўліковага запісу YouTube. Без уваходу RYD не атрымлівае вашага імя ці электроннай пошты."
   },
   "consent_settings": {
-    "message": "Неабавязковыя дазволы можна змяніць пазней у наладах пашырэння ў Firefox."
+    "message": "Гэтыя дазволы можна змяніць у любы час у наладах дадаткаў Firefox (about:addons)."
   },
   "consent_private_counts": {
     "message": "У прыватных вокнах паказваецца толькі колькасць з выкарыстаннем дазволу, уключанага ў звычайным акне. Галасаванне, уваход, аналітыка Premium і абмеркаванні там недаступныя."
@@ -1061,11 +983,17 @@
   "popup_signin_next_click": {
     "message": "Патрэбна яшчэ адно націсканне: выберыце кнопку ўваходу ніжэй, каб праглядзець дазволы ўліковага запісу ў Firefox і працягнуць."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Новыя правілы прыватнасці Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "У Firefox RYD патрэбны ваш дазвол, перш чым ён зможа паказваць непадабайкі. Вось што менавіта ахоплівае гэты дазвол — і чаго не ахоплівае."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Дзякуй. Цяпер вашы ацэнкі ўлічваюцца."
   },
   "vote_consent_hint": {
-    "message": "Ваша ацэнка не ўлічваецца і не адлюструецца ў колькасці дызлайкаў. Уключыце перадачу ацэнак, каб яна ўлічвалася."
+    "message": "Ваша ацэнка пакуль не ўлічана. Цяпер Firefox патрабуе вашага дазволу, перш чым RYD зможа яе адправіць. Гэты дазвол датычыцца толькі YouTube, а не іншых сайтаў."
   },
   "vote_not_counted": {
     "message": "Вашы лайкі і дызлайкі не ўлічваюцца і не адлюстроўваюцца ў колькасці дызлайкаў."
@@ -1082,9 +1010,6 @@
   "discussion_consentContinue": {
     "message": "Працягнуць"
   },
-  "counts_consent_enable": {
-    "message": "Уключыць паказ дызлайкаў"
-  },
   "counts_consent_toolbar": {
     "message": "Каб працягнуць, адкрыйце Return YouTube Dislike з меню пашырэнняў Firefox."
   },
@@ -1098,12 +1023,15 @@
     "message": "Спачатку ўключыце паказ дызлайкаў у звычайным акне. У прыватных вокнах паказваецца толькі колькасць."
   },
   "data_consent_reason": {
-    "message": "Firefox патрабуе вашага дазволу, каб RYD мог паказваць колькасць дызлайкаў і ўлічваць вашы лайкі і дызлайкі."
+    "message": "Цяпер Firefox патрабуе, каб кожнае пашырэнне пыталася ў вас, перш чым перадаваць якія-небудзь даныя. Дазвольце RYD паказваць дызлайкі і ўлічваць вашы ацэнкі. Гэты дазвол датычыцца толькі YouTube, а не іншых сайтаў."
   },
   "data_consent_title": {
     "message": "Паказвайце дызлайкі, і няхай вашы ацэнкі ўлічваюцца"
   },
   "data_consent_body": {
-    "message": "RYD адпраўляе ідэнтыфікатар відэа, каб загрузіць колькасць дызлайкаў. Калі дазволіць, RYD таксама адпраўляе колькасць лайкаў, якую вы бачыце, для паляпшэння ацэнкі, а таксама вашы лайкі, дызлайкі і рэакцыі на каментарыі з выпадковым ідэнтыфікатарам галасавання, каб яны ўлічваліся."
+    "message": "Цяпер Firefox патрабуе, каб кожнае пашырэнне пыталася ў вас, перш чым перадаваць якія-небудзь даныя. Ён выкарыстоўвае аднолькавыя агульныя назвы для ўсіх пашырэнняў, таму вось што кожная з іх азначае для RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD працуе толькі на YouTube. Гэты дазвол не дае яму доступу ні да аднаго іншага сайта."
   }
 }

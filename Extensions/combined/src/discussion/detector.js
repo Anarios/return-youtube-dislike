@@ -71,11 +71,6 @@ export function findDiscussionSurface(route = discussionRoute()) {
     }
     if (route.surface === "watch" && root.getAttribute("video-id") !== route.videoId) continue;
     const state = nativeState(root);
-    if (
-      state?.madeForKids === true ||
-      ["is-made-for-kids", "made-for-kids"].some((key) => root.hasAttribute(key) && root.getAttribute(key) !== "false")
-    )
-      continue;
     const disabled = state?.videoId === route.videoId && state.disabled === true;
     if (!disabled && !(route.surface === "watch" && disabledWatchNotice(root))) continue;
     const host =

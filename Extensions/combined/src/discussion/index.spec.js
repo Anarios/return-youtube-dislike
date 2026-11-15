@@ -65,13 +65,18 @@ beforeEach(() => {
       },
     },
   };
+  answerNativeState({ disabled: true });
+});
+
+function answerNativeState({ disabled }) {
+  document.removeEventListener(NATIVE_STATE_REQUEST, listener, true);
   listener = (event) =>
     event.target.setAttribute(
       NATIVE_STATE_ATTRIBUTE,
-      JSON.stringify({ videoId: event.target.getAttribute("video-id"), disabled: true, madeForKids: false }),
+      JSON.stringify({ videoId: event.target.getAttribute("video-id"), disabled }),
     );
   document.addEventListener(NATIVE_STATE_REQUEST, listener, true);
-});
+}
 
 test("private discussion initialization creates no requests, bridge, UI or subscriptions", () => {
   isPrivateBrowsingContext.mockReturnValue(true);
@@ -594,11 +599,11 @@ test.each(["navigation-event", "different-video"])(
 );
 
 test("remembered Shorts open intent cannot retain an ineligible panel", async () => {
-  const reel = shortsFixture();
+  shortsFixture();
   feature = initDiscussion({ request });
   await flush();
   document.getElementById("ryd-discussion-launcher").click();
-  reel.setAttribute("made-for-kids", "true");
+  answerNativeState({ disabled: false });
   await feature.refresh();
   expect(document.getElementById("ryd-discussion-drawer")).toBeNull();
   expect(document.getElementById("ryd-discussion-launcher")).toBeNull();

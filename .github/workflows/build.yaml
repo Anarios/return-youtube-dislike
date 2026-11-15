@@ -11,10 +11,12 @@ on:
       - "Extensions/e2e/**"
       - "Website/_locales/**"
       - "Website/utils/locale*"
-      - "Website/nuxt.config.js"
+      - "Website/utils/messages.js"
+      - "Website/plugins/vuetify.js"
       - "Website/layouts/default.vue"
       - ".github/workflows/build.yaml"
       - ".babelrc"
+      - "scripts/babel-rewire.cjs"
       - ".gitattributes"
       - ".nvmrc"
       - "extension-build-receipt*.js"
@@ -36,10 +38,12 @@ on:
       - "Extensions/e2e/**"
       - "Website/_locales/**"
       - "Website/utils/locale*"
-      - "Website/nuxt.config.js"
+      - "Website/utils/messages.js"
+      - "Website/plugins/vuetify.js"
       - "Website/layouts/default.vue"
       - ".github/workflows/build.yaml"
       - ".babelrc"
+      - "scripts/babel-rewire.cjs"
       - ".gitattributes"
       - ".nvmrc"
       - "extension-build-receipt*.js"
@@ -73,10 +77,10 @@ jobs:
           dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge 20260816ubuntu0.24.04.1
 
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -115,21 +119,21 @@ jobs:
         run: npm run test:e2e:userscript:run
 
       - name: Upload Chrome artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ryd-chrome
           path: ./Extensions/combined/dist/chrome
           retention-days: 7
 
       - name: Upload Firefox artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ryd-firefox
           path: ./Extensions/combined/dist/firefox
           retention-days: 7
 
       - name: Upload Safari artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ryd-safari
           path: ./Extensions/combined/dist/safari
@@ -137,7 +141,7 @@ jobs:
 
       - name: Upload Playwright failure artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-browser-failures
           path: |

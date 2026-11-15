@@ -41,14 +41,17 @@ jobs:
           dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge 20260816ubuntu0.24.04.1
 
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: Website/package-lock.json
+
+      - name: Use pinned npm
+        run: npm install --global npm@10.8.2
 
       - name: Install dependencies
         run: npm ci
@@ -60,3 +63,11 @@ jobs:
 
       - name: Check website locales
         run: node scripts/check-locales.js --website
+
+      - name: Build website server
+        run: npm run build
+        working-directory: Website
+
+      - name: Generate static website
+        run: npm run generate
+        working-directory: Website

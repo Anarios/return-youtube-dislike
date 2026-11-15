@@ -1,40 +1,44 @@
 <template>
-  <v-app dark>
+  <v-app>
     <!-- height = 4rem, margin-y = 1rem -->
-    <v-app-bar app class="topBar glass elevation-0 fly-in-from-top my-4 mx-auto">
+    <v-app-bar height="64" class="topBar glass elevation-0 fly-in-from-top my-4 mx-auto">
       <!-- Translator desktop -->
-      <v-tabs centered center-active color="primary" router show-arrows>
-        <v-tab v-for="link in links" :key="link.path" :to="link.path">
-          {{ $vuetify.lang.t(`$vuetify.${link.name}.name`) }}
+      <v-tabs
+        v-model="activeTab"
+        :mandatory="false"
+        align-tabs="center"
+        center-active
+        color="primary"
+        show-arrows
+        height="64"
+      >
+        <v-tab v-for="link in links" :key="link.path" :value="link.path" :to="link.path" :exact="link.path === '/'">
+          {{ t(`$vuetify.${link.name}.name`) }}
         </v-tab>
       </v-tabs>
     </v-app-bar>
 
     <!-- abstract background -->
-    <v-img src="/ui/abstract.svg" style="position: fixed; left: 0; right: 0; width: 100vw; height: 100vh" />
+    <v-img src="/ui/abstract.svg" class="abstract-background" cover aria-hidden="true" />
 
     <v-main style="padding-top: 4rem !important">
       <!-- min-height helps keep content centered, use .debug to to see it -->
-      <center
-        class="py-8 mx-auto d-flex flex-column justify-center items-center"
-        style="width: 90vw; min-height: calc(100vh - 8rem)"
-      >
-        <nuxt />
-      </center>
+      <div class="page-content py-8 mx-auto d-flex flex-column justify-center">
+        <slot />
+      </div>
     </v-main>
 
     <!-- Translator mobile -->
     <v-menu
-      top
-      left
-      offset-y
+      location="top end"
+      :offset="16"
       rounded="lg"
-      nudge-top="16"
-      class="d-flex flex-column"
+      max-height="calc(100vh - 2rem - 88px)"
+      content-class="language-menu"
       transition="slide-y-reverse-transition"
     >
-      <template #activator="{ on, attrs }">
-        <v-btn id="translator" text fab class="glass" v-bind="attrs" v-on="on">
+      <template #activator="{ props }">
+        <v-btn id="translator" variant="text" icon size="56" class="glass" v-bind="props">
           <v-icon>mdi-translate</v-icon>
         </v-btn>
       </template>
@@ -43,30 +47,32 @@
           v-for="(lang, index) in langs"
           :key="index"
           link
-          :class="$vuetify.lang.current === lang.locale ? 'primary--text' : ''"
+          :class="current === lang.locale ? 'text-primary' : ''"
           @click="changeLocale(lang.locale)"
         >
-          <v-list-item-title v-text="lang.name"></v-list-item-title>
+          <v-list-item-title>{{ lang.name }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
 
     <!--   Debugger Notification   -->
     <v-snackbar
-      v-model="alert.show"
+      v-model="showBrowserAlert"
       :timeout="-1"
       class="ma-4 desktop-only"
       transition="slide-y-reverse-transition"
       color="primary"
-      bottom
-      left
-      text
+      location="bottom start"
+      variant="text"
     >
       <v-icon color="primary" class="mr-4">mdi-alert-circle-outline</v-icon>
-      <span class="my-auto" v-html="alert.html"></span>
+      <span v-if="unsupportedBrowser" class="my-auto">
+        <b class="unsupported-browser">{{ unsupportedBrowser.name }} {{ unsupportedBrowser.major }}</b>
+        {{ t("$vuetify.layout.notSupported") }} {{ t("$vuetify.layout.considerUpgrade") }}
+      </span>
 
-      <template #action="{ attrs }">
-        <v-btn v-bind="attrs" color="primary" text icon @click="alert.show = false">
+      <template #actions>
+        <v-btn color="primary" variant="text" icon @click="showBrowserAlert = false">
           <v-icon>mdi-close-circle-outline</v-icon>
         </v-btn>
       </template>
@@ -74,95 +80,83 @@
   </v-app>
 </template>
 
-<script>
+<script setup>
+import { useLocale } from "vuetify";
 import { readLocalePreference, writeLocalePreference } from "../utils/locale";
 
-export default {
-  data: () => ({
-    links: [
-      { name: "home", path: "/" },
-      { name: "install", path: "/install" },
-      { name: "api", path: "/docs" },
-      { name: "help", path: "/help" },
-      { name: "faq", path: "/faq" },
-      { name: "donate", path: "/donate" },
-      { name: "links", path: "/links" },
-    ],
-    langs: [
-      { name: "English", locale: "en" },
-      { name: "Español", locale: "es" },
-      { name: "Türkçe", locale: "tr" },
-      { name: "Português (Brasil)", locale: "pt_BR" },
-      { name: "Русский", locale: "ru" },
-      { name: "Čeština", locale: "cs" },
-      { name: "日本語", locale: "ja" },
-      { name: "Français", locale: "fr" },
-      { name: "Deutsch", locale: "de" },
-      { name: "Українська", locale: "uk" },
-      { name: "Беларуская", locale: "be" },
-      { name: "한국어", locale: "ko" },
-      { name: "Polski", locale: "pl" },
-      { name: "Bahasa Indonesia", locale: "id" },
-      { name: "Tiếng Việt", locale: "vi" },
-      { name: "Slovenščina", locale: "sl" },
-      { name: "Azərbaycanca", locale: "az" },
-      { name: "Italiano", locale: "it-IT" },
-      { name: "Nederlands", locale: "nl" },
-      { name: "Svenska", locale: "sv" },
-      { name: "Magyar", locale: "hu" },
-      { name: "فارسی", locale: "fa" },
-    ],
-    alert: {
-      show: false,
-      html: "",
-    },
-  }),
-  head() {
-    const { current, locales, defaultLocale } = this.$vuetify.lang;
-    const locale = locales[current] ? current : defaultLocale;
-    return {
-      htmlAttrs: {
-        lang: locale.replace("_", "-"),
-        dir: this.$vuetify.rtl ? "rtl" : "ltr",
-      },
-    };
+const { current, messages, isRtl, t } = useLocale();
+const userAgent = useUserAgent();
+const route = useRoute();
+const links = [
+  { name: "home", path: "/" },
+  { name: "install", path: "/install" },
+  { name: "api", path: "/docs" },
+  { name: "help", path: "/help" },
+  { name: "faq", path: "/faq" },
+  { name: "donate", path: "/donate" },
+  { name: "links", path: "/links" },
+];
+const activeTab = computed({
+  get: () =>
+    links.find((link) => route.path === link.path || (link.path !== "/" && route.path.startsWith(`${link.path}/`)))
+      ?.path ?? null,
+  // Each tab's router link performs navigation; selection follows the resulting route.
+  set: () => {},
+});
+const langs = [
+  { name: "English", locale: "en" },
+  { name: "Español", locale: "es" },
+  { name: "Türkçe", locale: "tr" },
+  { name: "Português (Brasil)", locale: "pt_BR" },
+  { name: "Русский", locale: "ru" },
+  { name: "Čeština", locale: "cs" },
+  { name: "日本語", locale: "ja" },
+  { name: "Français", locale: "fr" },
+  { name: "Deutsch", locale: "de" },
+  { name: "Українська", locale: "uk" },
+  { name: "Беларуская", locale: "be" },
+  { name: "한국어", locale: "ko" },
+  { name: "Polski", locale: "pl" },
+  { name: "Bahasa Indonesia", locale: "id" },
+  { name: "Tiếng Việt", locale: "vi" },
+  { name: "Slovenščina", locale: "sl" },
+  { name: "Slovenčina", locale: "sk" },
+  { name: "Azərbaycanca", locale: "az" },
+  { name: "Italiano", locale: "it-IT" },
+  { name: "Nederlands", locale: "nl" },
+  { name: "Svenska", locale: "sv" },
+  { name: "Magyar", locale: "hu" },
+  { name: "فارسی", locale: "fa" },
+];
+const showBrowserAlert = ref(false);
+const unsupportedBrowser = ref(null);
+let browserWarningTimeout;
+
+useHead(() => ({
+  htmlAttrs: {
+    lang: (messages.value[current.value] ? current.value : "en").replace("_", "-"),
+    dir: isRtl.value ? "rtl" : "ltr",
   },
-  created() {
-    // fetch locale preference or browser default
-    if (process.client) {
-      this.applyLocale(readLocalePreference(localStorage, navigator.language, Object.keys(this.$vuetify.lang.locales)));
+}));
+
+function changeLocale(locale) {
+  current.value = writeLocalePreference(localStorage, navigator.language, locale, Object.keys(messages.value));
+}
+
+onMounted(() => {
+  // Restore the browser preference after hydration of the English static page.
+  current.value = readLocalePreference(localStorage, navigator.language, Object.keys(messages.value));
+  browserWarningTimeout = setTimeout(() => {
+    const { name, version } = userAgent.value;
+    const major = Number.parseInt(version.split(".")[0], 10);
+    if ((name === "Chrome" && major < 70) || (name === "Firefox" && major < 60)) {
+      unsupportedBrowser.value = { name, major };
+      showBrowserAlert.value = true;
     }
-  },
-  mounted() {
-    // Browser preferences can differ from the prerendered page's language.
-    this.$nextTick(() => this.$meta().refresh());
-    setTimeout(() => {
-      // Chrome < 70 or FF < 60 unsupported warning popup
-      if (
-        (this.$ua._parsed.name == "Chrome" && parseInt(this.$ua._parsed.version.split(".")[0]) < 70) ||
-        (this.$ua._parsed.name == "Firefox" && parseInt(this.$ua._parsed.version.split(".")[0]) < 60)
-      ) {
-        this.alert.html = `<b style="background: #222; border-radius: .5rem; padding: .25rem .25rem .25rem .5rem; margin: 0 .25rem;">${
-          this.$ua._parsed.name
-        } ${this.$ua._parsed.version.split(".")[0]}</b> ${this.$vuetify.lang.t(
-          "$vuetify.layout.notSupported"
-        )} ${this.$vuetify.lang.t("$vuetify.layout.considerUpgrade")}`;
-        this.alert.show = true;
-      }
-    }, 1000);
-  },
-  methods: {
-    applyLocale(locale) {
-      this.$vuetify.lang.current = locale;
-      this.$vuetify.rtl = locale === "fa";
-    },
-    changeLocale(locale) {
-      this.applyLocale(
-        writeLocalePreference(localStorage, navigator.language, locale, Object.keys(this.$vuetify.lang.locales))
-      );
-    },
-  },
-};
+  }, 1000);
+});
+
+onBeforeUnmount(() => clearTimeout(browserWarningTimeout));
 </script>
 
 <style>
@@ -208,7 +202,7 @@ body {
   outline: 2px solid red;
 }
 
-.v-sheet.v-snack__wrapper {
+.v-snackbar__wrapper {
   border-radius: 0.75rem !important;
 }
 
@@ -223,7 +217,48 @@ body {
   padding: 0 3rem;
   width: fit-content !important;
   border-radius: 1rem !important;
+  left: 0 !important;
+  right: 0 !important;
   /* overflow: hidden; */
+}
+
+.topBar .v-toolbar__content {
+  justify-content: center;
+}
+
+.topBar .v-tab:not(.v-tab--selected) {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 959px) {
+  .topBar .v-toolbar__content {
+    height: 56px !important;
+  }
+
+  .topBar .v-tabs {
+    --v-tabs-height: 56px !important;
+  }
+}
+
+.abstract-background {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.page-content {
+  width: 90vw;
+  min-height: calc(100vh - 8rem);
+  text-align: center;
+}
+
+.unsupported-browser {
+  background: #222;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+  margin: 0 0.25rem;
 }
 .glass {
   backdrop-filter: blur(16px) saturate(200%);
@@ -242,6 +277,10 @@ body {
   position: fixed;
   bottom: 2rem;
   right: 1rem;
+}
+
+.language-menu {
+  overscroll-behavior-y: contain;
 }
 
 @media (max-width: 768px) {
@@ -300,26 +339,26 @@ body {
   transition-property: opacity, transform;
 }
 
-.swoop-left-enter,
-.swoop-right-leave-active {
+.swoop-left-enter-from,
+.swoop-right-leave-to {
   opacity: 0;
   transform: translate(1rem, 0);
 }
 
-.swoop-left-leave-active,
-.swoop-right-enter {
+.swoop-left-leave-to,
+.swoop-right-enter-from {
   opacity: 0;
   transform: translate(-1rem, 0);
 }
 
-.swoop-in-enter,
-.swoop-out-leave-active {
+.swoop-in-enter-from,
+.swoop-out-leave-to {
   opacity: 0;
   transform: scale(0.9);
 }
 
-.swoop-in-leave-active,
-.swoop-out-enter {
+.swoop-in-leave-to,
+.swoop-out-enter-from {
   opacity: 0;
   transform: scale(1.1);
 }
@@ -361,26 +400,26 @@ body {
     transition-property: opacity;
   }
 
-  .swoop-left-enter,
-  .swoop-right-leave-active {
+  .swoop-left-enter-from,
+  .swoop-right-leave-to {
     opacity: 0;
     transform: none;
   }
 
-  .swoop-left-leave-active,
-  .swoop-right-enter {
+  .swoop-left-leave-to,
+  .swoop-right-enter-from {
     opacity: 0;
     transform: none;
   }
 
-  .swoop-in-enter,
-  .swoop-out-leave-active {
+  .swoop-in-enter-from,
+  .swoop-out-leave-to {
     opacity: 0;
     transform: none;
   }
 
-  .swoop-in-leave-active,
-  .swoop-out-enter {
+  .swoop-in-leave-to,
+  .swoop-out-enter-from {
     opacity: 0;
     transform: none;
   }

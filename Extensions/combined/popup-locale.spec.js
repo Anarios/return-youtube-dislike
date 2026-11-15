@@ -42,6 +42,27 @@ describe("popup locale direction", () => {
     expect(document.getElementById("number_format_compactLong").textContent).toMatch(/123/);
   });
 
+  test("keeps the original stylesheets while localizing so the popup never renders unstyled", () => {
+    const stylesheets = [...document.querySelectorAll("link[rel='stylesheet']")];
+
+    require("./popup");
+
+    expect(stylesheets.length).toBeGreaterThan(0);
+    expect(stylesheets.every((link) => link.isConnected)).toBe(true);
+    expect(document.title).toBe("Return YouTube Dislike");
+    expect(document.querySelector("title").title).toBe("Return YouTube Dislike");
+  });
+
+  test("explains why paid features exist in the signed-out account card", () => {
+    require("./popup");
+
+    const messages = require("./_locales/en/messages.json");
+    const why = document.getElementById("paid-features-why");
+    expect(why.textContent).toBe(messages.paidFeaturesWhy.message);
+    expect(why.previousElementSibling.id).toBe("patreon-login-btn");
+    expect(why.nextElementSibling.id).toBe("patreon-privacy-note");
+  });
+
   test.each(["rtl", "ltr"])("uses %s locale direction while localizing the popup", (direction) => {
     const getMessage = chrome.i18n.getMessage.getMockImplementation();
     chrome.i18n.getMessage.mockImplementation((key) => (key === "@@bidi_dir" ? direction : getMessage(key)));

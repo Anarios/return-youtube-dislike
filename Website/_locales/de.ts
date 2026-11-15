@@ -1,4 +1,4 @@
-import { en } from "vuetify/src/locale";
+import { en } from "vuetify/locale";
 // By tubyoub
 export default {
   ...en,
@@ -99,19 +99,19 @@ export default {
       "Momentan werden die Dislikes von Videos im Cache gespeichert und nicht sehr häufig aktualisiert. Die Aktualisierung hängt von der Popularität eines Videos ab, das kann zwischen ein paar Stunden und ein paar Tagen dauern.",
     bullet3: "Wie funktioniert die Extension?",
     bullet3text:
-      "Die Erweiterung sammelt die Video-ID des Videos, das du dir ansiehst, und ruft die Dislikes (und andere Felder wie Views, Likes usw.) über unsere API ab. Die Erweiterung zeigt dann die Anzahl der Dislikes und das Like/Dislike-Verhältnis auf der Seite an. Wenn dir ein Video gefällt oder nicht gefällt, wird dies aufgezeichnet und an die Datenbank gesendet, so dass eine genaue Anzahl der Dislikes bestimmt werden kann.",
+      "Die Erweiterung sammelt die Video-ID des Videos, das du dir ansiehst, und ruft die Anzahl der Dislikes (und andere Felder wie Views, Likes usw.) über unsere API ab. Die Erweiterung zeigt dann die Anzahl der Dislikes und das Like/Dislike-Verhältnis auf der Seite an. Wenn du ein Video mit Like oder Dislike bewertest, wird diese Bewertung erfasst und an die Datenbank gesendet, damit die Anzahl der Dislikes möglichst genau hochgerechnet werden kann.",
     bullet4: "Kann ich meine Dislikes mit euch teilen?",
     bullet4text:
-      "Demnächst. Wir prüfen die Verwendung von Oauth oder einer anderen Read-Only-API mit begrenztem Umfang, damit die Youtuber ihre Dislike-Anzahl verifizieren können.",
+      "Demnächst. Wir prüfen die Verwendung von OAuth oder einer anderen Read-Only-API mit begrenztem Umfang, damit Youtuber ihre Dislike-Anzahl auf überprüfbare Weise mit uns teilen können.",
     bullet5: "Was für Daten sammelt ihr und wie werden sie verarbeitet?",
     bullet5text:
       'Die Erweiterung sammelt nur Daten, die für ihr ordnungsgemäßes Funktionieren unbedingt erforderlich sind, z.B. die IP-Adresse oder die ID des Videos, das du dir ansiehst. Keine deiner Daten werden jemals an Dritte verkauft. Wenn du mehr darüber erfahren möchtest, wie wir mit Sicherheit und Datenschutz umgehen, lesen Sie unsere <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md"> Sicherheits-FAQ</a>.',
     bullet6: "Wie Funktioniert die API / das Backend?",
     bullet6text:
-      "Das Backend verwendet archivierte von damals, als die YouTube API noch die Anzahl der Dislikes, die Anzahl der Likes und Dislikes der Extension-Nutzer und die Hochrechnung zurückgab. In naher Zukunft werden wir es Youtubern ermöglichen, ihre Dislike-Anzahl einfach und sicher zu übermitteln, und wir werden die archivierten Daten von ArchiveTeam (4,56 Milliarden Videos) in unsere aktuelle Datenbank aufnehmen. Du kannst dir auch ein Video zu diesem Thema ansehen.",
-    bullet7: "Warum zeigt der Dislike-Counter manchmal 'DISLIKES DISABLED'?",
+      "Das Backend verwendet sowohl archivierte Daten aus der Zeit, als die YouTube-API noch die Anzahl der Dislikes zurückgab, als auch die Like- und Dislike-Zahlen der Erweiterungsnutzer und rechnet daraus die Dislike-Anzahl hoch. In naher Zukunft werden wir es Youtubern ermöglichen, ihre Dislike-Anzahl einfach und sicher zu übermitteln, und wir werden die archivierten Daten von ArchiveTeam (4,56 Milliarden Videos) in unsere aktuelle Datenbank aufnehmen. Du kannst dir auch ein Video zu diesem Thema ansehen.",
+    bullet7: "Warum zeigt der Dislike-Counter manchmal 'Deaktiviert vom Ersteller'?",
     bullet7text:
-      "Manchmal wird bei einem kürzlich hochgeladenen Video 'DISLIKES DISABLED' angezeigt, auch wenn der Youtuber es nicht deaktiviert hat. Das liegt daran, wie wir erkennen, ob Dislikes deaktiviert sind. Es sollte in ein paar Stunden verschwinden oder indem man das Video liked oder disliked und die Seite aktualisiert (hoffentlich).",
+      "Manchmal wird bei einem kürzlich hochgeladenen Video 'Deaktiviert vom Ersteller' angezeigt, auch wenn der Youtuber es nicht deaktiviert hat. Das liegt daran, wie wir erkennen, ob Dislikes deaktiviert sind. Es sollte in ein paar Stunden verschwinden oder indem man das Video liked oder disliked und die Seite aktualisiert (hoffentlich).",
   },
   donate: {
     name: "Spenden",

@@ -1,31 +1,70 @@
-Leia isso em outros idiomas: [русский](SECURITY-FAQru.md), [Nederlands](SECURITY_FAQnl.md), [Français](SECURITY-FAQfr.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [العربية](SECURITY-FAQar.md), [Bahasa Indonesia](SECURITY-FAQid.md), [中文](SECURITY-FAQcn.md), [Slovenščina](SECURITY-FAQsl.md)
+Leia em outros idiomas: [English](SECURITY-FAQ.md), [فارسی](SECURITY-FAQfa.md), [беларуская](SECURITY-FAQbe.md), [русский](SECURITY-FAQru.md), [Nederlands](SECURITY-FAQnl.md), [Français](SECURITY-FAQfr.md), [Italiano](SECURITY-FAQit.md), [Türkçe](SECURITY-FAQtr.md), [українська](SECURITY-FAQuk.md), [Polski](SECURITY-FAQpl.md), [Deutsch](SECURITY-FAQde.md), [العربية](SECURITY_FAQar.md), [Bahasa Indonesia](SECURITY-FAQid.md), [中文](SECURITY-FAQcn.md), [български](SECURITY-FAQbg.md), [Tiếng Việt](SECURITY-FAQvi.md), [Slovenščina](SECURITY-FAQsl.md), [Slovenčina](SECURITY-FAQsk.md)
 
 # Segurança
 
-### Are you tracking my viewing history?
+### Vocês rastreiam meu histórico de visualizações?
 
-No. The extension's code is public and you can see it for yourself. The only information being sent is the video ID, which is required to fetch the dislike count for the videos. There are no additional headers being sent. Over the communication layer, your public IP will be exposed to the server, as well as the time when the request was made. However, none of these are uniquely identifying you in any way. Assuming a zero-trust environment, the best we could get is a dynamic IP. Which, today is yours, tomorrow is your neighbor's. If you're really worried about your IP being traced, you probably already use a VPN.
+A extensão envia à API do Return YouTube Dislike o ID do vídeo que você está vendo e, quando disponível, o número de
+votos de “Gostei” exibido no vídeo. O servidor usa esses dados para fornecer e melhorar a estimativa de votos de
+“Não gostei”. A requisição também revela dados comuns de rede, como o endereço IP público e o horário do acesso. A extensão
+não envia o nome da sua conta do YouTube, seus comentários no YouTube, dados privados do YouTube nem o conteúdo de
+páginas não relacionadas, e não mantém uma lista local separada do histórico de visualizações. No Firefox, o ID do vídeo
+e a contagem de marcações “Gostei” só são enviados após você autorizar o envio de cada um deles.
 
-### Can you uniquely identify me if I dislike?
+### Quando clico em “Não gostei”, vocês conseguem me identificar?
 
-Yes. When you dislike a video, we create a randomly generated unique ID for you that is not tied to your Google account. This is done to prevent botting. But there is no way to tie this random Id to you or your personal YouTube account.
+Na primeira vez que você vota ou reage a um comentário do RYD, a extensão cria um ID aleatório persistente para proteger
+o envio de votos contra abusos. A extensão não envia esse ID quando você abre um vídeo ou lê os comentários. Ele não é derivado da
+sua conta do Google ou do YouTube nem vinculado a ela, mas a Mozilla classifica identificadores persistentes como dados
+pessoais. O ID permite que o serviço associe os votos enviados à mesma instalação da extensão.
 
-### Quais as informações que você tem, exatamente?
+### Quais informações vocês têm, exatamente?
 
-Somente seu video ID. Não temos seus comentarios, seu nome de usuario, ou qualquer outro Not your comments, not your username, not who you've shared the video with, not any additional metadata. NADA. Apenas seu Video ID.
+- Nas consultas à contagem de “Não gostei”, a API recebe o ID do vídeo atual e, quando disponível, o número de votos de
+  “Gostei” exibido no vídeo.
+- No registro e no envio de votos, os dados incluem o ID aleatório de usuário da extensão, o ID do vídeo, o voto escolhido,
+  a data e a hora.
+- Quando você reage a um comentário do RYD, a API recebe o mesmo ID aleatório, o ID do comentário e a reação.
+  Os comentários e as respostas que membros conectados publicam no RYD são públicos e ficam armazenados com o apelido
+  de quem os publicou.
 
-### How is my IP stored?
+A API também recebe seu endereço IP. O endereço original fica na memória RAM. Para controlar abusos, armazenamos seu hash.
 
-The backend keeps unhashed IP addresses in volatile memory (RAM) only. These addresses aren't stored on a hard drive, and therefore aren't logged. We hash the IP addresses, and that's stored instead. This is done to prevent database vandalism.
+Quando você escolhe entrar pelo Patreon ou pelo GitHub, os recursos premium opcionais usam os dados fornecidos no login.
+São eles o ID da conta, o nome, o endereço de e-mail, a imagem de perfil, as informações de assinatura e o token de sessão
+do serviço. Na versão 4.1.0 da extensão e na versão correspondente do backend, o serviço determina o acesso pelo Patreon
+a partir dos IDs dos níveis da assinatura aos quais você tem direito no momento. Quando necessário, considera também
+o valor atual que dá direito aos benefícios e se a assinatura é mensal ou anual. A extensão não recebe esses campos de
+valor e periodicidade nem dados de cartão de pagamento ou de conta bancária.
 
-### I heard some discussion over OAuth, and access to my YouTube account!
+### Como meu IP é armazenado?
 
-This feature will be optional, and very much opt-in. If you are a YouTube creator, and would like to share your dislike stats with us, you can. The way [OAuth](https://en.wikipedia.org/wiki/OAuth#:~:text=but%20without%20giving%20them%20the%20passwords.) was structured, it's actually very secure. You can revoke access to your account at any time, and can give very specific permissions to us. We will not ask for any permissions that aren't required. We'll only ask for permissions to view your video stats.
+Os endereços IP originais ficam na memória RAM. Armazenamos seus hashes. Essas informações são usadas para prevenir
+abusos e para análises agregadas. Elas não são vendidas nem usadas para publicidade.
 
-### How can I trust this dislike count?
+### Como funciona o login com OAuth? Ele dá acesso à minha conta do YouTube?
 
-We have implemented measures to prevent bot attacks and are gonna continue to work on improving the effectiveness of the bot prevention system: this will help us keep the dislike count as a good representative of the actual count. Of course it will never be 100% accurate so it's up to you to decide whether you trust the count or not.
+O login para acessar as análises premium é opcional e só começa depois que o usuário escolhe entrar pelo Patreon ou
+pelo GitHub na extensão. O fluxo OAuth retorna dados da conta e um token de sessão do Return YouTube Dislike usado para
+autenticar requisições à API premium. Na versão 4.1.0 da extensão e na versão correspondente do backend, o serviço
+verifica o acesso pelo Patreon com base nos IDs dos níveis da assinatura aos quais você tem direito no momento. Quando
+necessário, também considera o valor atual que dá direito aos benefícios e a periodicidade da assinatura. O serviço não
+solicita datas nem status de cobranças, o total pago ao longo do tempo ou o status de apoiador.
 
-### Why don't you share the backend code?
+O Firefox solicita as permissões opcionais “Informações de autenticação” e “Informações de identificação pessoal” antes
+do início do tráfego de dados da conta. Sair da conta remove os dados da conta e a sessão armazenados na extensão. Revogar
+a permissão de dados de autenticação do Firefox também limpa a sessão da conta e bloqueia novas comunicações da conta
+até que você dê seu consentimento e faça login novamente. Quando ativada, a sincronização do navegador pode sincronizar
+o identificador da instalação, as configurações e a sessão da conta.
 
-We will share it at some point - but there's really no real reason to share it right now. It gives a false sense of security - because in a zero-trust system, we could just as well disclose one version but deploy another. There are plenty of reasons to keep the code hidden, specifically, how we battle spam. Hiding/Obfuscating the spam handling code is a fairly standard practice.
+### Posso confiar na contagem de “Não gostei”?
+
+Adotamos medidas para impedir ataques de bots e continuaremos a aperfeiçoá-las. Isso ajuda a manter a estimativa de
+votos de “Não gostei” próxima da contagem real. Ela nunca será 100% exata. Cabe a você decidir se confia na estimativa.
+
+### Por que vocês não compartilham o código do backend?
+
+Vamos compartilhá-lo em algum momento, mas não há um motivo real para fazer isso agora. Compartilhar o código dá uma
+falsa sensação de segurança, porque, em um sistema de confiança zero, poderíamos divulgar uma versão e colocar outra em
+produção. Há muitos motivos para manter o código fechado, especialmente a forma como combatemos spam. Ocultar ou
+ofuscar o código que lida com spam é uma prática bastante comum.

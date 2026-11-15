@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Stav API:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Barevný motiv:"
   },
@@ -77,9 +68,6 @@
   "numberFormat": {
     "message": "Formát čísel:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Prémiové funkce jsou dostupné pro podporovatele na Patreonu"
   },
@@ -89,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Informace o členství na Patreonu slouží k ověření přístupu k prémiovým funkcím. Údaje o vaší kartě ani bankovním účtu nedostáváme."
   },
+  "paidFeaturesWhy": {
+    "message": "Počty hodnocení Nelíbí se zůstávají zdarma pro všechny. Placené doplňky pomáhají platit servery, které je zajišťují: přes 15 TB dat a zhruba 20 milionů uživatelů denně s rozpočtem několika stovek dolarů měsíčně."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Prémiové funkce jsou dostupné pro přispěvatele na GitHubu"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Přihlásit se pomocí GitHubu (přispěvatel)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Nepodařilo se zahájit přihlášení přes GitHub. Zkuste to znovu."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Přihlášení přes GitHub se nepodařilo dokončit. Zkuste to znovu."
   },
   "patreonLoginCompleteFailed": {
     "message": "Přihlášení se nepodařilo dokončit. Zkuste to znovu."
@@ -155,12 +146,6 @@
   "hidePremiumAnalyticsHover": {
     "message": "Skrýt panel prémiových statistik videa na stránkách přehrávání na YouTube."
   },
-  "roundNumbers": {
-    "message": "Zobrazit čísla zaokrouhlená dolů"
-  },
-  "roundNumbersHover": {
-    "message": "Zaokrouhlit čísla dolů (výchozí chování YouTube)."
-  },
   "shortsSupport": {
     "message": "Podpora YouTube Shorts"
   },
@@ -169,9 +154,6 @@
   },
   "showTooltipPercentageHover": {
     "message": "Zobrazit procenta v nápovědě u lišty like/dislike."
-  },
-  "textColorTheme": {
-    "message": "Barevný motiv:"
   },
   "textColorTheme1": {
     "message": "Klasický"
@@ -200,38 +182,11 @@
   "colorThemeDislike": {
     "message": "To se mi nelíbí"
   },
-  "textColorizeRatioBar": {
-    "message": "Obarvit pruh poměru"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Použít vlastní barvy pro pruh poměru."
-  },
-  "textColorizeThumbs": {
-    "message": "Obarvit ikony"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Použít vlastní barvy pro ikony."
-  },
-  "textConsistentFormat": {
-    "message": "Použít stejný formát čísel pro palce nahoru/dolů"
-  },
-  "textConsistentFormatHover": {
-    "message": "Přeformátovat počet palců nahoru."
-  },
   "textDeveloper": {
     "message": "vytvořil Dmitry Selivanov & komunita"
   },
   "textLikesDisabled": {
     "message": "zakázáno majitelem"
-  },
-  "textNumberFormat": {
-    "message": "Formát čísel:"
-  },
-  "textRoundingNumbers": {
-    "message": "Zaokrouhlit dolů statistiky palců nahoru/dolů (výchozí chování YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Zobrazit statistiky zaokrouhlené dolů."
   },
   "textSettings": {
     "message": "Zakázat odesílání palců nahoru/dolů"
@@ -241,9 +196,6 @@
   },
   "textTempUnavailable": {
     "message": "dočasně nedostupné"
-  },
-  "textUpdate": {
-    "message": "aktualizovat na"
   },
   "tooltipPercentageMode": {
     "message": "Režim procent:"
@@ -458,9 +410,6 @@
   "premiumTeaser_statRaw": {
     "message": "Počet nezpracovaných dislajků"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Odhadované dislajky"
-  },
   "premiumTeaser_statLikes": {
     "message": "Hrubý počet lajků"
   },
@@ -470,29 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Data dislajků se nepodařilo načíst. Zkuste stránku znovu načíst."
   },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Jak odemknout prémiové statistiky"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Odemkněte prémiové statistiky videa ve třech krocích:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Přihlaste se přes Patreon v okně rozšíření Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Vyberte úroveň Premium pro aktivaci časových os aktivity, žebříčků zemí a interaktivní mapy."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Znovu načtěte YouTube a uvidíte hodinové trendy, hlavní země a detailní přehled států USA pro každé video."
-  },
-  "premiumTierNotice_title": {
-    "message": "Prémiová analytika je uzamčená"
-  },
   "premiumTierNotice_message": {
     "message": "Vaše členství na Patreonu nezahrnuje úroveň Premium. Povýšte svůj příspěvek a zpřístupněte si pokročilou video analytiku."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Povýšit na Patreonu"
   },
   "changelog_cta_primary": {
     "message": "Upgradovat na Patreonu"
@@ -534,19 +462,19 @@
     "message": "Zeptejte se komunity"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Skrýt nadbytečná tlačítka"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Zobrazit ukázky před a po"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Ponechat viditelná jen tlačítka To se mi líbí a To se mi nelíbí. Sdílet, Uložit, Super díky a další volitelné akce zůstanou dostupné v nabídce YouTube se třemi tečkami (Další akce)."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Před: všechna tlačítka akcí jsou viditelná"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Po: viditelná zůstávají jen tlačítka To se mi líbí a To se mi nelíbí"
   },
   "changelog_brand_logo_alt": {
     "message": "Logo Return YouTube Dislike"
@@ -605,14 +533,26 @@
   "discussion_empty": {
     "message": "Zatím tu nejsou žádné komentáře. Zahajte diskuzi."
   },
-  "discussion_replyEmpty": {
-    "message": "Zatím žádné odpovědi."
-  },
   "discussion_comment": {
     "message": "Komentář"
   },
   "discussion_post": {
     "message": "Zveřejnit komentář"
+  },
+  "discussion_viewReplies": {
+    "message": "Zobrazit odpovědi"
+  },
+  "discussion_moreReplies": {
+    "message": "Zobrazit další odpovědi"
+  },
+  "discussion_viewReply": {
+    "message": "Zobrazit odpověď"
+  },
+  "discussion_collapseReplies": {
+    "message": "Skrýt odpovědi"
+  },
+  "discussion_replyContext": {
+    "message": "Zobrazit původní komentář"
   },
   "discussion_reply": {
     "message": "Odpovědět"
@@ -652,9 +592,6 @@
   },
   "discussion_dislike": {
     "message": "To se mi nelíbí"
-  },
-  "discussion_reacting": {
-    "message": "Ukládání reakce…"
   },
   "discussion_signInRequired": {
     "message": "Pro pokračování se přihlaste ve vyskakovacím okně rozšíření."
@@ -749,12 +686,6 @@
   "discussion_moderationReason": {
     "message": "Důvod moderování"
   },
-  "discussion_moderationSaved": {
-    "message": "Akce moderátora byla uložena."
-  },
-  "discussion_reported": {
-    "message": "Počet hlášení: $1"
-  },
   "discussion_unavailable": {
     "message": "Komentáře RYD nejsou pro toto video dostupné."
   },
@@ -791,12 +722,6 @@
   "discussion_notificationLikes": {
     "message": "Váš komentář získal tento počet označení To se mi líbí: $1"
   },
-  "discussion_notificationDislike": {
-    "message": "Někomu se nelíbil váš komentář"
-  },
-  "discussion_notificationReaction": {
-    "message": "Někdo reagoval na váš komentář"
-  },
   "discussion_someone": {
     "message": "Někdo"
   },
@@ -809,23 +734,14 @@
   "discussion_view": {
     "message": "Zobrazit diskuzi"
   },
-  "discussion_unread": {
-    "message": "Nepřečtená oznámení: $1"
-  },
   "discussion_signedOutInbox": {
     "message": "Přihlaste se a zobrazte odpovědi a označení líbí se u svých komentářů."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Tato diskuze již není dostupná."
   },
   "discussion_discussionTab": {
     "message": "Diskuze"
   },
   "discussion_nickname": {
     "message": "Přezdívka"
-  },
-  "discussion_reportCount": {
-    "message": "Hlášení"
   },
   "discussion_reportStatus": {
     "message": "Stav hlášení"
@@ -839,20 +755,8 @@
   "discussion_author": {
     "message": "Autor"
   },
-  "discussion_me": {
-    "message": "Vy"
-  },
   "discussion_saving": {
     "message": "Ukládání…"
-  },
-  "discussion_confirm": {
-    "message": "Potvrdit"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Nová aktivita u vašich komentářů"
-  },
-  "discussion_showThread": {
-    "message": "Zobrazit vlákno"
   },
   "discussion_loadReplies": {
     "message": "Zobrazit odpovědi ($1)"
@@ -941,11 +845,29 @@
   "changelog_analytics_us_body": {
     "message": "Prohlédněte si aktivitu podle jednotlivých států."
   },
+  "changelog_appeal_title": {
+    "message": "Malá, trochu trapná prosba"
+  },
+  "changelog_appeal_intro": {
+    "message": "Ahoj. Teď přichází část, kdy mluvíme o penězích, a upřímně, moc nám to nejde."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike je malý open-source projekt, který tvoří Dmitry Selivanov a komunita. Každý den odpovídá zhruba 20 milionům lidí a stará se o víc než 15 TB dat. To všechno běží za pár set dolarů měsíčně, což není moc na to, abychom vrátili něco, co se miliardová firma rozhodla vzít."
+  },
+  "changelog_appeal_free": {
+    "message": "Počty hodnocení Nelíbí se jsou zdarma a zdarma zůstanou. O to celé jde. Servery ale zdarma nejsou a provozní náklady nám upřímně moc na výběr nenechaly: abychom projekt udrželi při životě, museli jsme zavést funkce Premium — komentáře RYD a analýzy Premium. Každé členství pomáhá tyto náklady pokrýt."
+  },
+  "changelog_appeal_ask": {
+    "message": "Pokud vás RYD někdy ušetřil clickbaitového videa nebo návodu, který nefungoval, zvažte prosím připojení na Patreonu. A pokud teď není vhodná chvíle, je to úplně v pořádku. Děkujeme, že ho používáte a hlasujete: každý hlas dělá počty o něco přesnější."
+  },
+  "changelog_appeal_cta": {
+    "message": "Přidejte se na Patreonu"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry a komunita RYD"
+  },
   "changelog_join_title": {
     "message": "Získejte funkce Premium"
-  },
-  "changelog_join_free": {
-    "message": "Počty hodnocení Nelíbí se jsou zdarma pro všechny. Členství je dobrovolné a pomáhá podporovat projekt."
   },
   "changelog_join_step1": {
     "message": "Přidejte se na Patreonu. Úroveň Commenter umožňuje psát komentáře; Premium přidává i analýzy."
@@ -981,7 +903,7 @@
     "message": "Ať se vaše hlasy počítají"
   },
   "consent_vote_body": {
-    "message": "Bez sdílení hlasů se vaše hlasy nezapočítávají a neprojeví se v počtech nelíbí se. Sdílení odesílá vaše hlasy a zobrazený počet líbí se. Vyžaduje počty nelíbí se, takže Firefox požádá i o jejich zapnutí, pokud jsou vypnuté."
+    "message": "Firefox nově vyžaduje, aby se vás každé rozšíření zeptalo, než bude sdílet jakákoli data. Povolte to, aby RYD mohl započítávat vaše líbí se, nelíbí se a reakce na komentáře. Toto oprávnění platí jen pro YouTube, ne pro jiné webové stránky."
   },
   "consent_account_title": {
     "message": "Vybrat oprávnění účtu"
@@ -1020,7 +942,7 @@
     "message": "Aktivita prohlížení"
   },
   "consent_browsing_body": {
-    "message": "ID videa na YouTube používané k načtení počtů nelíbí se a diskusí. Sami rozhodnete, zda to povolíte."
+    "message": "Pouze ID videa na YouTube, které otevřete, k načtení jeho počtů nelíbí se a komentářů RYD. Nikdy vaše historie prohlížení ani jiné webové stránky."
   },
   "consent_content_label": {
     "message": "Obsah webových stránek"
@@ -1032,7 +954,7 @@
     "message": "Aktivita na webových stránkách"
   },
   "consent_activity_body": {
-    "message": "Vaše líbí se, nelíbí se, odebrané hlasy a reakce na komentáře RYD, odesílané s uloženým náhodným hlasovacím ID."
+    "message": "Vaše líbí se, nelíbí se a reakce na komentáře RYD na YouTube, aby se počítaly. Odesílají se s náhodným ID, které není propojeno s vaším účtem Google ani YouTube."
   },
   "consent_identity_label": {
     "message": "Osobní identifikační údaje"
@@ -1050,7 +972,7 @@
     "message": "RYD nic neshromažďuje mimo youtube.com a nemá přístup k vašemu účtu YouTube. Bez přihlášení neobdrží jméno ani e-mail."
   },
   "consent_settings": {
-    "message": "Volitelná oprávnění můžete později změnit v nastavení rozšíření ve Firefoxu."
+    "message": "Tato oprávnění můžete kdykoli změnit v nastavení doplňků Firefoxu (about:addons)."
   },
   "consent_private_counts": {
     "message": "Anonymní okna zobrazují pouze počty s využitím oprávnění zapnutého v běžném okně. Hlasování, přihlášení, analýzy Premium a diskuse v nich nejsou dostupné."
@@ -1061,11 +983,17 @@
   "popup_signin_next_click": {
     "message": "Je potřeba ještě jedno kliknutí: níže zvolte přihlašovací tlačítko, zkontrolujte oprávnění účtu ve Firefoxu a pokračujte."
   },
+  "changelog_firefox_intro_title": {
+    "message": "Nová pravidla soukromí ve Firefoxu"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "Ve Firefoxu potřebuje RYD váš souhlas, než může zobrazovat počty Nelíbí se. Tady je přesně, co tento souhlas zahrnuje — a co ne."
+  },
   "changelog_firefox_vote_granted": {
     "message": "Děkujeme. Vaše hlasy se nyní započítávají."
   },
   "vote_consent_hint": {
-    "message": "Váš hlas se nezapočítá a neprojeví se v počtech nelíbí se. Zapněte sdílení hlasů, aby se započítal."
+    "message": "Váš hlas zatím není započítán. Firefox nově vyžaduje vaše svolení, než ho RYD bude moci odeslat. Toto svolení platí jen pro YouTube, ne pro jiné webové stránky."
   },
   "vote_not_counted": {
     "message": "Vaše hlasy se nezapočítávají a neprojeví se v počtech nelíbí se."
@@ -1082,9 +1010,6 @@
   "discussion_consentContinue": {
     "message": "Pokračovat"
   },
-  "counts_consent_enable": {
-    "message": "Zapnout počty nelíbí se"
-  },
   "counts_consent_toolbar": {
     "message": "Chcete-li pokračovat, otevřete Return YouTube Dislike z nabídky rozšíření Firefoxu."
   },
@@ -1098,12 +1023,15 @@
     "message": "Nejprve zapněte počty nelíbí se v běžném okně. Anonymní okna zobrazují pouze počty."
   },
   "data_consent_reason": {
-    "message": "Firefox potřebuje vaše svolení, než bude RYD moci zobrazit počty nelíbí se a započítávat vaše líbí se a nelíbí se."
+    "message": "Firefox nově vyžaduje, aby se vás každé rozšíření zeptalo, než bude sdílet jakákoli data. Povolte RYD zobrazovat počty nelíbí se a započítávat vaše hlasy. Toto oprávnění platí jen pro YouTube, ne pro jiné webové stránky."
   },
   "data_consent_title": {
     "message": "Zobrazte počty nelíbí se a ať se vaše hlasy počítají"
   },
   "data_consent_body": {
-    "message": "RYD odesílá ID videa, aby načetl počty nelíbí se. Povolením navíc sdílíte počet líbí se, který vidíte, pro zlepšení odhadů, a své líbí se, nelíbí se a reakce na komentáře s náhodným hlasovacím ID, aby se počítaly."
+    "message": "Firefox nově vyžaduje, aby se vás každé rozšíření zeptalo, než bude sdílet jakákoli data. Pro všechna rozšíření používá stejná obecná označení. Pro RYD znamenají jednotlivá označení toto:"
+  },
+  "data_consent_scope": {
+    "message": "RYD funguje jen na YouTube. Povolením mu nedáte přístup k žádným jiným webovým stránkám."
   }
 }

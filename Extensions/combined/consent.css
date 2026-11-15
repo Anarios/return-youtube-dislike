@@ -32,16 +32,15 @@ h1 {
 p {
   margin: 14px 0;
 }
-details {
+#permission-details {
   margin: 20px 0;
   padding: 16px;
   border: 1px solid light-dark(#ddd, #555);
   border-radius: 12px;
   font-size: 14px;
 }
-summary {
-  cursor: pointer;
-  font-weight: 600;
+#permission-details h2 {
+  margin-block-start: 0;
 }
 dt {
   margin-block-start: 18px;
@@ -82,8 +81,7 @@ button {
   border-color: #c00;
   color: white;
 }
-button:focus-visible,
-summary:focus-visible {
+button:focus-visible {
   outline: 3px solid #388bff;
   outline-offset: 3px;
 }

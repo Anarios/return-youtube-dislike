@@ -16,6 +16,7 @@ import dutch from "../../_locales/nl/messages.json";
 import polish from "../../_locales/pl/messages.json";
 import portuguese from "../../_locales/pt_BR/messages.json";
 import russian from "../../_locales/ru/messages.json";
+import slovak from "../../_locales/sk/messages.json";
 import slovenian from "../../_locales/sl/messages.json";
 import swedish from "../../_locales/sv_SE/messages.json";
 import turkish from "../../_locales/tr/messages.json";
@@ -43,6 +44,7 @@ const catalogs = {
   pl: polish,
   "pt-BR": portuguese,
   ru: russian,
+  sk: slovak,
   sl: slovenian,
   "sv-SE": swedish,
   tr: turkish,
@@ -69,11 +71,17 @@ export function discussionLanguage(language = document.documentElement.lang || n
   }
 }
 
+function catalogMessage(name, language) {
+  return catalogs[discussionLanguage(language)][name]?.message || english[name]?.message;
+}
+
 export function discussionText(key, substitutions = [], language) {
-  const name = `discussion_${key}`;
-  const catalog = catalogs[discussionLanguage(language)];
-  const text = catalog[name]?.message || english[name]?.message || key;
+  const text = catalogMessage(`discussion_${key}`, language) || key;
   return text.replace(/\$(\d+)/g, (_, number) => String(substitutions[Number(number) - 1] ?? ""));
+}
+
+export function extensionText(name, language) {
+  return catalogMessage(name, language) || name;
 }
 
 export function discussionError(error) {
@@ -88,7 +96,6 @@ export function discussionError(error) {
     unauthorized: "signInRequired",
     comments_not_allowed: "unavailable",
     comments_disabled_required: "unavailable",
-    made_for_kids: "unavailable",
     video_not_eligible: "unavailable",
     comment_not_found: "commentUnavailable",
     not_found: "commentUnavailable",

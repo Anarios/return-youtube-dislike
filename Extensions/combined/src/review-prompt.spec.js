@@ -16,6 +16,7 @@ jest.mock("./utils", () => ({
     })[key],
 }));
 jest.mock("./buttons", () => ({ getDislikeButton: jest.fn() }));
+jest.mock("./config", () => ({ config: { reviewPromptEnabled: true } }));
 
 let getBrowser;
 let getDislikeButton;
@@ -63,6 +64,14 @@ test.each([1, -1])("reports valid local reactions without showing until authoriz
     vote,
     canShow: true,
   });
+  expect(prompt()).toBeNull();
+});
+
+test("stays silent while the review request is disabled", async () => {
+  require("./config").config.reviewPromptEnabled = false;
+  api.runtime.sendMessage.mockResolvedValue({ showPrompt: true });
+  await recordReviewAction(videoId, -1);
+  expect(api.runtime.sendMessage).not.toHaveBeenCalled();
   expect(prompt()).toBeNull();
 });
 

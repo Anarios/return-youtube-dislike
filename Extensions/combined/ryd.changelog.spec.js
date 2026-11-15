@@ -68,10 +68,18 @@ describe("Firefox welcome opt-ins", () => {
   test("without counts the hero says counts are off and one combined opt-in waits for a click", async () => {
     await open();
     expect(byId("ryd-firefox-optin").hidden).toBe(false);
+    expect(byId("ryd-firefox-intro-title").textContent.trim()).toBe(text("changelog_firefox_intro_title"));
+    expect(byId("ryd-firefox-intro-title").nextElementSibling.textContent).toBe(text("changelog_firefox_intro_body"));
     expect(byId("ryd-hero-eyebrow").textContent).toBe(text("changelog_hero_eyebrow_counts_off"));
     expect(byId("ryd-hero-body").textContent).toBe(text("changelog_hero_body_counts_off"));
     expect(byId("ryd-firefox-consent-title").textContent).toBe(text("data_consent_title"));
-    expect(byId("ryd-firefox-consent-title").nextElementSibling.textContent).toBe(text("data_consent_body"));
+    const scope = byId("ryd-firefox-consent-title").nextElementSibling;
+    expect(scope.textContent).toBe(text("data_consent_scope"));
+    expect(scope.nextElementSibling.textContent).toBe(text("data_consent_body"));
+    expect(
+      [...document.querySelectorAll("#ryd-firefox-consent-permissions dt")].map((term) => term.textContent),
+    ).toEqual(["consent_browsing_label", "consent_activity_label", "consent_content_label"].map(text));
+    expect(byId("ryd-firefox-consent-permissions").nextElementSibling.textContent).toBe(text("consent_settings"));
     expect(byId("ryd-firefox-consent-allow").textContent.trim()).toBe(text("consent_allow"));
     expect(byId("ryd-firefox-consent-actions").hidden).toBe(false);
     expect(byId("ryd-firefox-consent-status").textContent).toBe("");

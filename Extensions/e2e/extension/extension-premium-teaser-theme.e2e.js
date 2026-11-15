@@ -63,6 +63,7 @@ async function expectTeaserPalette(page, theme, legacyTokens) {
     ".ryd-premium-teaser__highlights-title": "rgb(156, 163, 175)",
     ".ryd-premium-teaser__highlights-list": "rgb(147, 173, 200)",
     ".ryd-premium-teaser__secondary": "rgb(142, 164, 200)",
+    ".ryd-premium-teaser__why": "rgb(156, 163, 175)",
     ".ryd-premium-teaser__status": "rgb(156, 163, 175)",
     ".ryd-premium-teaser__close": "rgb(148, 163, 184)",
     ".ryd-premium-teaser__toggle": "rgb(148, 163, 184)",

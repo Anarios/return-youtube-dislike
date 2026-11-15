@@ -50,12 +50,12 @@ describe("Firefox feature permission page", () => {
     delete global.browser;
   });
 
-  test("localizes the document, supports RTL and leaves explanations collapsed", () => {
+  test("localizes the document, supports RTL and shows the explanations", () => {
     openExplainer({ direction: "rtl" });
     expect(document.documentElement.dir).toBe("rtl");
     expect(document.documentElement.lang).toBe("en");
     expect(document.documentElement.innerHTML).not.toContain("__MSG_");
-    expect(document.getElementById("permission-details").open).toBe(false);
+    expect(document.getElementById("permission-details").hidden).toBe(false);
   });
 
   test.each([
@@ -78,18 +78,17 @@ describe("Firefox feature permission page", () => {
     expect(document.getElementById("consent-body").textContent).toBe(chrome.i18n.getMessage(body));
   });
 
-  test("reading the five Firefox category explanations requests no permission", () => {
-    expect(document.querySelectorAll("dt")).toHaveLength(5);
-    document.querySelector("summary").click();
+  test.each([
+    ["voteOptIn", ["consent_browsing_label", "consent_activity_label", "consent_content_label"]],
+    ["reactions", ["consent_browsing_label", "consent_activity_label", "consent_content_label"]],
+    ["account", ["consent_auth_label", "consent_identity_label"]],
+  ])("the %s page explains only the Firefox categories it asks for", (feature, labels) => {
+    openExplainer({ feature });
+    const terms = [...document.querySelectorAll("#permission-list dt")].map((term) => term.textContent);
+    expect(terms).toEqual(labels.map((key) => chrome.i18n.getMessage(key)));
+    expect(document.querySelectorAll("#permission-list dd")).toHaveLength(labels.length);
     expect(permission.requestFeaturePermission).not.toHaveBeenCalled();
     expect(browser.runtime.sendMessage).not.toHaveBeenCalled();
-  });
-
-  test("Read more links expand explanations without requesting permission", () => {
-    window.history.replaceState(null, "", "/#permission-details");
-    openExplainer();
-    expect(document.getElementById("permission-details").open).toBe(true);
-    expect(permission.requestFeaturePermission).not.toHaveBeenCalled();
   });
 
   test.each([

@@ -1,4 +1,4 @@
-import { vi } from "vuetify/src/locale";
+import { vi } from "vuetify/locale";
 
 export default {
   ...vi,
@@ -111,7 +111,7 @@ export default {
       'Tiện ích này chỉ thu thập dữ liệu cần thiết để hoạt động chính xác, bao gồm địa chỉ IP và ID của vi-đê-ô mà bạn xem. Dữ liệu của bạn không bị bán cho bên thứ ba. Nếu bạn muốn biết thêm về cách chúng tôi đảm bảo tính bảo mật và quyền riêng tư, vui lòng tham khảo <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQvi.md">những câu hỏi thường gặp về bảo mật</a>.',
     bullet6: "API/Đầu sau hoạt động ra sao?",
     bullet6text:
-      'Đầu cuối sử dụng dữ liệu được lưu trữ từ thời API của YoutTube vẫn còn cung cấp số lượt "không thích", số lượt "thích"/"không thích" từ người dùng và ước tính ngoại suy. Trong tương lai gần, tiện ích sẽ cho phép các nhà sáng tạo nội dung gửi số lượt "không thích" về cho nhóm phát triển một cách dễ dàng và bảo mật và chúng tôi cũng sẽ gộp dữ liệu của ArchiveTeam (4,56 triệu vi-đê-ô) vào cơ sở dữ liệu của chúng tôi. Bạn có thể xem vi-đê-ô về chủ đề này để biết thêm thông tin.',
+      'Phần phụ trợ sử dụng dữ liệu được lưu trữ từ thời API của YouTube vẫn còn cung cấp số lượt "không thích", số lượt "thích"/"không thích" từ người dùng tiện ích mở rộng và ước tính ngoại suy. Trong tương lai gần, tiện ích sẽ cho phép các nhà sáng tạo nội dung gửi số lượt "không thích" về cho nhóm phát triển một cách dễ dàng và bảo mật và chúng tôi cũng sẽ gộp dữ liệu của ArchiveTeam (4,56 tỷ vi-đê-ô) vào cơ sở dữ liệu của chúng tôi. Bạn có thể xem vi-đê-ô về chủ đề này để biết thêm thông tin.',
     bullet7: "Tại sao nút \"Không thích\" hiện nội dung 'Chủ kênh đã Tắt Đánh giá'?",
     bullet7text:
       "Đôi khi vi-đê-ô mới được đăng tải sẽ hiển thị nút đánh giá với nội dung 'Chủ kênh đã Tắt Đánh giá' mặc dù chủ kênh không hề tắt chức năng đánh giá. Việc này là do cách thức mà tiện ích này xác định việc tắt đánh giá. Tình trạng này có thể sẽ biến mất sau vài giờ hoặc sau khi bạn đánh giá \"thích\" hay \"không thích\" vi-đê-ô này kèm theo việc tải lại trang.",

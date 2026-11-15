@@ -7,6 +7,7 @@ const { LiveBuildMarkerPlugin, createLiveBuildId } = require("./webpack.live-bui
 
 const extensionVersion = (process.env.npm_package_version || require("./package.json").version).replace("-", ".");
 const entries = ["ryd.content-script", "ryd.background", "popup", "ryd.changelog", "consent"];
+const discussionSharedMessageKeys = new Set(["paidFeaturesWhy"]);
 
 const ignorePatterns = [
   "**/manifest-**",
@@ -172,7 +173,11 @@ module.exports = (env = {}, argv = {}) => {
           type: "json",
           parser: {
             parse: (source) =>
-              Object.fromEntries(Object.entries(JSON.parse(source)).filter(([key]) => key.startsWith("discussion_"))),
+              Object.fromEntries(
+                Object.entries(JSON.parse(source)).filter(
+                  ([key]) => key.startsWith("discussion_") || discussionSharedMessageKeys.has(key),
+                ),
+              ),
           },
         },
       ],
