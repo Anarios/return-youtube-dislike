@@ -20,7 +20,7 @@ describe("popup account consent lifecycle", () => {
     consent = true;
     document.documentElement.innerHTML = fs.readFileSync(path.join(__dirname, "popup.html"), "utf8");
     global.chrome = {
-      i18n: { getMessage: () => "" },
+      i18n: { getMessage: (key) => (key === "legendSettings" ? "Settings" : "") },
       runtime: {
         getManifest: () => require("./manifest-firefox.json"),
         getURL: (path) => `moz-extension://fixture/${path}`,
@@ -91,6 +91,28 @@ describe("popup account consent lifecycle", () => {
       expect(focus).toHaveBeenCalledTimes(1);
     },
   );
+
+  test("the Settings disclosure keeps its accessible state in sync when opened, closed and reopened", () => {
+    const toggle = document.getElementById("advancedToggle");
+    const settings = document.getElementById("advancedSettings");
+    const accessibleName = toggle.getAttribute("aria-label");
+    expect(accessibleName).toBe("Settings");
+    expect(toggle.tagName).toBe("BUTTON");
+    expect(toggle.type).toBe("button");
+    expect(toggle.getAttribute("aria-controls")).toBe(settings.id);
+    expect(toggle.getAttribute("aria-expanded")).toBe("false");
+    expect(settings.hasAttribute("inert")).toBe(true);
+
+    for (const expanded of [true, false, true]) {
+      toggle.click();
+      expect(toggle.getAttribute("aria-expanded")).toBe(String(expanded));
+      expect(settings.inert).toBe(!expanded);
+      expect(settings.style.pointerEvents).toBe(expanded ? "auto" : "none");
+      expect(settings.style.opacity).toBe(expanded ? "1" : "0");
+      expect(toggle.getAttribute("aria-label")).toBe(accessibleName);
+      expect(toggle.getAttribute("aria-controls")).toBe(settings.id);
+    }
+  });
 
   test("the RYD comments switch saves its choice and follows synced changes", () => {
     const toggle = document.getElementById("hide_ryd_comments");
