@@ -1,5 +1,6 @@
 export const NATIVE_STATE_ATTRIBUTE = "data-ryd-discussion-native-state";
 export const NATIVE_STATE_REQUEST = "ryd-discussion-state-request";
+export const SHORTS_LAUNCHER_ID = "ryd-discussion-launcher";
 
 export function discussionRoute(url = location.href) {
   try {
@@ -70,11 +71,6 @@ export function findDiscussionSurface(route = discussionRoute()) {
     }
     if (route.surface === "watch" && root.getAttribute("video-id") !== route.videoId) continue;
     const state = nativeState(root);
-    if (
-      state?.madeForKids === true ||
-      ["is-made-for-kids", "made-for-kids"].some((key) => root.hasAttribute(key) && root.getAttribute(key) !== "false")
-    )
-      continue;
     const disabled = state?.videoId === route.videoId && state.disabled === true;
     if (!disabled && !(route.surface === "watch" && disabledWatchNotice(root))) continue;
     const host =

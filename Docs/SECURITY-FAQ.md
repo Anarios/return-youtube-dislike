@@ -7,23 +7,28 @@ Read this in other languages: [English](SECURITY-FAQ.md), [فارسی](SECURITY-
 The extension sends the current video ID and, when available, its visible like count to the Return YouTube Dislike API
 because the server needs them to return and improve the dislike estimate. The request also exposes standard network
 metadata such as the public IP address and request time. The extension does not send your YouTube account name,
-comments, private YouTube data, or the contents of unrelated pages, and it does not keep a separate local watch-history
-list.
+YouTube comments, private YouTube data, or the contents of unrelated pages, and it does not keep a separate local watch-history
+list. In Firefox, the video ID and the like count are each sent only after you allow them.
 
 ### Can you uniquely identify me if I dislike?
 
-The extension creates a persistent random ID for abuse-resistant vote submission. It is not derived from or linked to
+The first time you vote or react to an RYD comment, the extension creates a persistent random ID for
+abuse-resistant vote submission. Opening videos and reading comments do not send it. It is not derived from or linked to
 your Google or YouTube account, but Mozilla classifies persistent identifiers as personal data. The ID lets the service
 associate submitted votes with the same extension installation.
 
 ### What information do you have, exactly?
 
 For dislike-count requests: the current video ID and, when available, the visible like count. For registration and vote
-submission: the random extension user ID, video ID, selected vote, and timestamp. The API also receives your IP address.
+submission: the random extension user ID, video ID, selected vote, and timestamp. For RYD comment reactions: the same
+random extension user ID, the comment ID, and the reaction. RYD comments and replies that signed-in members post are
+public and stored with their RYD nickname. The API also receives your IP address.
 Raw addresses stay in RAM and hashes are stored for abuse controls. Optional premium features use the account ID, name,
 email address, profile image, membership information, and service session token returned by a Patreon or GitHub sign-in
-initiated by the user. For version 4.0.6 and its matching
-backend release, Patreon access is determined from currently entitled tier IDs rather than financial information.
+initiated by the user. For version 4.1.0 and its matching
+backend release, Patreon access is determined from currently entitled tier IDs and, where needed, the current
+entitlement amount and monthly or annual membership cadence. The extension does not receive these amount and cadence
+fields or any payment-card or bank-account details.
 
 ### How is my IP stored?
 
@@ -34,9 +39,11 @@ analytics. It is not sold or used for advertising.
 
 Premium analytics sign-in is optional and starts only after the user chooses Patreon or GitHub login in the extension.
 The OAuth flow returns account details and a Return YouTube Dislike session token used to authenticate premium API
-requests. In version 4.0.6 and its matching backend release, Patreon eligibility uses currently entitled tier IDs;
-the service does not request or use membership amounts, charge dates or status, lifetime payments, or patron status.
-Firefox asks for separate authentication-data consent before account traffic begins. Signing out removes
+requests. In version 4.1.0 and its matching backend release, Patreon eligibility uses currently entitled tier IDs and, where
+needed, the current entitlement amount and membership cadence; the service does not request charge dates or status,
+lifetime payments, or patron status.
+Firefox asks for the optional "Authentication information" and "Personally identifying information" permissions
+before account traffic begins. Signing out removes
 the stored account details and session from the extension. Revoking Firefox's authentication-data permission also clears the
 account session and blocks further account traffic until you grant consent and sign in again. Browser sync may
 synchronize the installation identifier, settings, and account session when enabled.

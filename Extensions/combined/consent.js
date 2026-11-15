@@ -1,76 +1,107 @@
-import { consentApi, hasCoreDataPermission, requestCoreDataPermission } from "./src/core-data-consent";
+import {
+  FEATURE_DATA_PERMISSIONS,
+  hasFeaturePermission,
+  onDataPermissionsChanged,
+  requestFeaturePermission,
+} from "./src/core-data-consent";
+import { renderDataPermissionList } from "./src/data-permission-list";
+import { isPrivateBrowsingContext } from "./src/private-browsing";
 
+function localizeHtmlPage() {
+  const locale = chrome.i18n.getMessage("@@ui_locale");
+  if (locale) document.documentElement.lang = locale.replaceAll("_", "-");
+  const direction = chrome.i18n.getMessage("@@bidi_dir");
+  if (direction === "rtl" || direction === "ltr") document.documentElement.dir = direction;
+  document.documentElement.innerHTML = document.documentElement.innerHTML.replace(/__MSG_(\w+)__/g, (_, key) =>
+    chrome.i18n.getMessage(key),
+  );
+}
+
+localizeHtmlPage();
+const privateBrowsing = isPrivateBrowsingContext();
+const CONSENT_PAGES = Object.freeze({
+  voteOptIn: Object.freeze({ permission: "voteOptIn", grantedBy: "voting", copy: "vote" }),
+  account: Object.freeze({ permission: "account", copy: "account" }),
+});
+const requestedFeature = new URLSearchParams(window.location.search).get("feature");
+const page = Object.hasOwn(CONSENT_PAGES, requestedFeature) ? CONSENT_PAGES[requestedFeature] : CONSENT_PAGES.voteOptIn;
+const feature = page.permission;
+const grantedFeature = page.grantedBy ?? feature;
 const continueButton = document.getElementById("consent-continue");
 const declineButton = document.getElementById("consent-decline");
+const actions = document.getElementById("consent-actions");
 const status = document.getElementById("consent-status");
-const canRequestPermissions = typeof consentApi()?.permissions?.request === "function";
+const message = (key) => chrome.i18n.getMessage(key);
+let permissionRevision = 0;
+let promptPending = false;
 
-if (!canRequestPermissions) {
-  document.getElementById("consent-next-step").textContent =
-    "Continue opens RYD's permission page. Firefox will only ask after you select Allow in Firefox there. " +
-    "If you decline, RYD will not load counts or submit votes. YouTube's own buttons will still work.";
-} else if (window.parent === window) {
-  continueButton.textContent = "Allow in Firefox";
-  document.getElementById("consent-next-step").textContent =
-    "Select Allow in Firefox to review Firefox's request. If you decline, RYD will not load counts or submit votes. " +
-    "YouTube's own buttons will still work.";
-  void hasCoreDataPermission().then((granted) => {
-    if (granted) {
-      document.getElementById("consent-actions").hidden = true;
-      status.textContent = "RYD is enabled. You can return to YouTube.";
+document.getElementById("consent-title").textContent = message(`consent_${page.copy}_title`);
+document.getElementById("consent-body").textContent = message(`consent_${page.copy}_body`);
+renderDataPermissionList(document.getElementById("permission-list"), feature, message);
+
+if (privateBrowsing) {
+  document.getElementById("consent-title").textContent = message("extensionName");
+  document.getElementById("consent-body").textContent = message("consent_private_counts");
+  document.getElementById("consent-next-step").hidden = true;
+  actions.hidden = true;
+  document.getElementById("permission-details").hidden = true;
+} else {
+  void refreshPermissionState();
+  const unsubscribe = onDataPermissionsChanged(({ added, removed }) => {
+    const required = FEATURE_DATA_PERMISSIONS[grantedFeature];
+    if (![...added, ...removed].some((category) => required.includes(category))) return;
+    permissionRevision++;
+    if (promptPending) return;
+    if (removed.some((category) => required.includes(category))) {
+      actions.hidden = false;
+      status.textContent = message("consent_declined_status");
     }
+    void refreshPermissionState("consent_declined_status");
   });
-}
+  window.addEventListener("unload", unsubscribe, { once: true });
 
-function notifyParent(type) {
-  if (window.parent !== window) window.parent.postMessage({ type }, "*");
-}
-
-async function dismiss() {
-  try {
-    await consentApi().storage.local.set({ rydConsentDismissed: true });
-  } catch (_) {}
-  status.textContent = "RYD is paused. You can enable it here whenever you're ready.";
-  notifyParent("ryd-consent-dismissed");
-}
-
-continueButton.addEventListener("click", () => {
-  if (!canRequestPermissions) {
+  continueButton.addEventListener("click", () => {
+    promptPending = true;
+    permissionRevision++;
+    const request = requestFeaturePermission(feature);
+    notifyPromptState(true);
     continueButton.disabled = true;
-    void consentApi()
-      .runtime.sendMessage({ message: "ryd_open_consent" })
-      .then(
-        (response) => {
-          continueButton.disabled = false;
-          status.textContent = response?.success
-            ? "Finish enabling RYD in the permission page."
-            : "Open the RYD extension menu to review permissions.";
-        },
-        () => {
-          continueButton.disabled = false;
-          status.textContent = "Open the RYD extension menu to review permissions.";
-        },
-      );
-    return;
-  }
-  notifyParent("ryd-consent-requested");
-  const request = requestCoreDataPermission();
-  continueButton.disabled = true;
-  declineButton.disabled = true;
-  status.textContent = "Choose whether to allow the permissions in Firefox.";
-  void request.then(async (granted) => {
-    if (granted && (await hasCoreDataPermission())) {
-      try {
-        await consentApi().storage.local.remove("rydConsentDismissed");
-      } catch (_) {}
-      document.getElementById("consent-actions").hidden = true;
-      status.textContent = "RYD is enabled. You can return to YouTube.";
-      notifyParent("ryd-consent-granted");
-    } else {
-      await dismiss();
-      continueButton.disabled = false;
-      declineButton.disabled = false;
-    }
+    declineButton.disabled = true;
+    status.textContent = message("consent_prompt_status");
+    void finishRequest(request);
   });
-});
-declineButton.addEventListener("click", dismiss);
+  declineButton.addEventListener("click", () => {
+    permissionRevision++;
+    status.textContent = message("consent_declined_status");
+  });
+}
+
+async function finishRequest(request) {
+  let deniedMessage = "consent_declined_status";
+  try {
+    await request;
+  } catch (_) {
+    deniedMessage = "consent_error_status";
+  } finally {
+    promptPending = false;
+    notifyPromptState(false);
+    await refreshPermissionState(deniedMessage);
+    continueButton.disabled = false;
+    declineButton.disabled = false;
+  }
+}
+
+async function refreshPermissionState(deniedMessage = "") {
+  const revision = ++permissionRevision;
+  const granted = await hasFeaturePermission(grantedFeature);
+  if (promptPending || revision !== permissionRevision) return;
+  actions.hidden = granted;
+  status.textContent = granted ? message("consent_granted_status") : deniedMessage ? message(deniedMessage) : "";
+}
+
+function notifyPromptState(pending) {
+  try {
+    const result = browser.runtime.sendMessage({ message: "ryd_consent_prompt_state", pending });
+    result?.catch?.(() => {});
+  } catch (_) {}
+}

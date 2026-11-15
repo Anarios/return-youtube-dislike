@@ -7,13 +7,6 @@ Website/package-lock.json
 
 # Private maintainer guidance and local workspace state
 /.private/
-.codex/
-.agents/
-AGENTS.md
-AGENTS.local.md
-AGENTS.override.md
-.claude/
-CLAUDE.md
 # Retired private-document locations; do not reintroduce them into public source.
 /Docs/SSH_ACCESS.md
 /Docs/DiscussionApi.md

@@ -6,15 +6,26 @@
 jest.mock("./bar", () => ({ createRateBar: jest.fn() }));
 
 import { createRateBar } from "./bar";
-import { getButtonControls, getLikeTextContainer } from "./buttons";
-import { addLikeDislikeEventListener, storageChangeHandler } from "./events";
+import {
+  ensureSyntheticShortsDislikeButton,
+  getButtonControls,
+  getLikeTextContainer,
+  setSyntheticShortsDislikeEnabled,
+  __RewireAPI__ as buttonsRewire,
+} from "./buttons";
+import { addLikeDislikeEventListener, storageChangeHandler, __RewireAPI__ as eventsRewire } from "./events";
 import {
   extConfig,
+  isVideoDisliked,
+  isVideoLiked,
   refreshReactionPresentation,
   restoreCurrentState,
   setLikes,
   storedData,
   NEUTRAL_STATE,
+  LIKED_STATE,
+  DISLIKED_STATE,
+  __RewireAPI__ as stateRewire,
 } from "./state";
 
 const { createRateBar: renderRateBar } = jest.requireActual("./bar");
@@ -80,6 +91,8 @@ beforeEach(() => {
     coloredThumbs: false,
     colorTheme: "classic",
     disableVoteSubmission: true,
+    showTooltipPercentage: false,
+    tooltipPercentageMode: "dash_like",
   });
 });
 
@@ -340,4 +353,273 @@ test("Shorts only color pressed thumbs and restore native colors after toggling 
   await flushMutations();
   expect(controls.nativeLikeButton.hasAttribute("data-ryd-thumb-color")).toBe(false);
   expect(controls.nativeDislikeButton.style.getPropertyValue("--ryd-thumb-color")).toBe("red");
+});
+
+function prependSpeedControl(host) {
+  const speed = document.createElement("button");
+  speed.textContent = "1x";
+  host.prepend(speed);
+  return speed;
+}
+
+test.each([false, true])("reaction state and thumb colors ignore prepended controls (Shorts: %s)", (shorts) => {
+  const controls = mount({ shorts });
+  const likeSpeed = prependSpeedControl(controls.likeButton);
+  const dislikeSpeed = prependSpeedControl(controls.dislikeButton);
+  extConfig.coloredThumbs = true;
+
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  expect(isVideoLiked()).toBe(true);
+  expect(isVideoDisliked()).toBe(false);
+  refreshReactionPresentation();
+  expect(controls.nativeLikeButton.style.getPropertyValue("--ryd-thumb-color")).toBe("lime");
+  expect(likeSpeed.hasAttribute("data-ryd-thumb-color")).toBe(false);
+  expect(dislikeSpeed.hasAttribute("data-ryd-thumb-color")).toBe(false);
+
+  controls.nativeLikeButton.setAttribute("aria-pressed", "false");
+  controls.nativeDislikeButton.setAttribute("aria-pressed", "true");
+  expect(isVideoLiked()).toBe(false);
+  expect(isVideoDisliked()).toBe(true);
+  refreshReactionPresentation();
+  expect(controls.nativeDislikeButton.style.getPropertyValue("--ryd-thumb-color")).toBe("red");
+});
+
+test.each([false, true])("delegated votes activate native reactions and ignore speed clicks (Shorts: %s)", (shorts) => {
+  const controls = mount({ shorts });
+  const speed = prependSpeedControl(controls.likeButton);
+  speed.click();
+  expect(storedData.previousState).toBe(NEUTRAL_STATE);
+  expect(storedData.likes).toBe(730);
+
+  controls.nativeLikeButton.click();
+  expect(storedData.previousState).toBe(LIKED_STATE);
+  expect(storedData.likes).toBe(731);
+  speed.click();
+  expect(storedData.previousState).toBe(LIKED_STATE);
+  expect(storedData.likes).toBe(731);
+
+  controls.nativeDislikeButton.click();
+  expect(storedData.previousState).toBe(DISLIKED_STATE);
+  expect(storedData.likes).toBe(730);
+  expect(storedData.dislikes).toBe(13);
+});
+
+test("mobile boolean reaction labels still determine the current native vote", () => {
+  const controls = mount();
+  controls.buttons.classList.add("slim-video-action-bar-actions");
+  controls.nativeLikeButton.removeAttribute("aria-pressed");
+  controls.nativeDislikeButton.removeAttribute("aria-pressed");
+  controls.nativeLikeButton.setAttribute("aria-label", "true");
+  controls.nativeDislikeButton.setAttribute("aria-label", "false");
+  buttonsRewire.__set__("isMobile", () => true);
+  stateRewire.__set__("isMobile", () => true);
+  try {
+    expect(getButtonControls(controls.buttons).ready).toBe(true);
+    expect(isVideoLiked()).toBe(true);
+    expect(isVideoDisliked()).toBe(false);
+    controls.nativeLikeButton.setAttribute("aria-label", "false");
+    controls.nativeDislikeButton.setAttribute("aria-label", "true");
+    expect(isVideoLiked()).toBe(false);
+    expect(isVideoDisliked()).toBe(true);
+  } finally {
+    buttonsRewire.__ResetDependency__("isMobile");
+    stateRewire.__ResetDependency__("isMobile");
+  }
+});
+
+test("synthetic Shorts Dislike clears the native Like without activating a prepended speed control", () => {
+  const controls = mount({ shorts: true });
+  const speed = prependSpeedControl(controls.likeButton);
+  const speedClicked = jest.fn();
+  speed.addEventListener("click", speedClicked);
+  const nativeLikeClicked = jest.fn();
+  controls.nativeLikeButton.addEventListener("click", nativeLikeClicked);
+  controls.dislikeButton.remove();
+  const dislike = ensureSyntheticShortsDislikeButton(controls.buttons, { isHydrated: true, isStable: true });
+  setSyntheticShortsDislikeEnabled(true, dislike);
+  addLikeDislikeEventListener(controls.likeButton, dislike);
+  controls.nativeLikeButton.setAttribute("aria-pressed", "true");
+  storedData.previousState = LIKED_STATE;
+
+  dislike.querySelector("button").click();
+
+  expect(nativeLikeClicked).toHaveBeenCalledTimes(1);
+  expect(speedClicked).not.toHaveBeenCalled();
+  expect(speed.hasAttribute("aria-pressed")).toBe(false);
+  expect(controls.nativeLikeButton.getAttribute("aria-pressed")).toBe("false");
+  expect(dislike.querySelector("button").getAttribute("aria-pressed")).toBe("true");
+  expect(storedData).toMatchObject({ previousState: DISLIKED_STATE, likes: 729, dislikes: 13 });
+});
+
+describe("live tooltip preferences", () => {
+  function mountTooltip({ enabled = false, mode = "dash_like", nested = false } = {}) {
+    mount({ likes: 260 });
+    storedData.dislikes = 4;
+    extConfig.showTooltipPercentage = enabled;
+    extConfig.tooltipPercentageMode = mode;
+    createRateBar.mockImplementation(renderRateBar);
+    renderRateBar(storedData.likes, storedData.dislikes);
+    const bar = document.querySelector("#ryd-bar-container");
+    bar.getBoundingClientRect = () => ({ top: 0, left: 0, right: 200, bottom: 2, width: 200, height: 2 });
+    const tooltip = document.querySelector("#ryd-dislike-tooltip");
+    if (nested) {
+      const content = document.createElement("div");
+      content.id = "tooltip";
+      content.innerHTML = tooltip.innerHTML;
+      tooltip.replaceChildren(content);
+    }
+    createRateBar.mockClear();
+    return tooltip;
+  }
+
+  const tooltipText = (tooltip) => tooltip.textContent.replace(/\s+/g, " ").trim();
+
+  test.each([
+    ["dash_like", "260 / 4 - 98.5%"],
+    ["dash_dislike", "260 / 4 - 1.5%"],
+    ["both", "98.5% / 1.5%"],
+    ["only_like", "98.5%"],
+    ["only_dislike", "1.5%"],
+  ])("updates an existing nested tooltip when sync mode changes to %s", (mode, expected) => {
+    const tooltip = mountTooltip({ enabled: true, mode: mode === "dash_like" ? "both" : "dash_like", nested: true });
+    const beforeCounts = { ...storedData };
+
+    storageChangeHandler({ tooltipPercentageMode: { newValue: mode } }, "sync");
+
+    expect(tooltipText(tooltip)).toBe(expected);
+    expect(document.querySelector("#ryd-dislike-tooltip")).toBe(tooltip);
+    expect(storedData).toEqual(beforeCounts);
+  });
+
+  test.each([true, false])("updates the existing tooltip when percentages become %s", (enabled) => {
+    const tooltip = mountTooltip({ enabled: !enabled, mode: "only_dislike" });
+
+    storageChangeHandler({ showTooltipPercentage: { newValue: enabled } }, "sync");
+
+    expect(tooltipText(tooltip)).toBe(enabled ? "1.5%" : "260 / 4");
+    expect(document.querySelector("#ryd-dislike-tooltip")).toBe(tooltip);
+  });
+
+  test("applies a combined preference event before repainting once", () => {
+    const tooltip = mountTooltip();
+
+    storageChangeHandler(
+      { showTooltipPercentage: { newValue: true }, tooltipPercentageMode: { newValue: "only_dislike" } },
+      "sync",
+    );
+
+    expect(tooltipText(tooltip)).toBe("1.5%");
+    expect(createRateBar).toHaveBeenCalledTimes(1);
+  });
+
+  test("removing tooltip settings restores their existing defaults", () => {
+    const tooltip = mountTooltip({ enabled: true, mode: "only_dislike" });
+
+    storageChangeHandler(
+      { showTooltipPercentage: { oldValue: true }, tooltipPercentageMode: { oldValue: "only_dislike" } },
+      "sync",
+    );
+    expect(tooltipText(tooltip)).toBe("260 / 4");
+    storageChangeHandler({ showTooltipPercentage: { newValue: true } }, "sync");
+    expect(tooltipText(tooltip)).toBe("260 / 4 - 98.5%");
+  });
+
+  test.each(["local", "session", "managed", undefined])("ignores tooltip preferences outside sync (%s)", (area) => {
+    const tooltip = mountTooltip();
+
+    storageChangeHandler(
+      { showTooltipPercentage: { newValue: true }, tooltipPercentageMode: { newValue: "only_dislike" } },
+      area,
+    );
+
+    expect(tooltipText(tooltip)).toBe("260 / 4");
+    expect(extConfig.showTooltipPercentage).toBe(false);
+    expect(extConfig.tooltipPercentageMode).toBe("dash_like");
+    expect(createRateBar).not.toHaveBeenCalled();
+  });
+
+  test.each(["/watch?v=zyxwvutsrqp", "/feed/subscriptions"])(
+    "retains preferences without repainting outgoing cached counts on %s",
+    (url) => {
+      const tooltip = mountTooltip();
+      history.replaceState({}, "", url);
+
+      storageChangeHandler(
+        { showTooltipPercentage: { newValue: true }, tooltipPercentageMode: { newValue: "only_dislike" } },
+        "sync",
+      );
+
+      expect(extConfig.showTooltipPercentage).toBe(true);
+      expect(extConfig.tooltipPercentageMode).toBe("only_dislike");
+      expect(tooltipText(tooltip)).toBe("260 / 4");
+      expect(createRateBar).not.toHaveBeenCalled();
+    },
+  );
+
+  test("private tabs retain their existing isolation from normal tooltip preferences", () => {
+    const tooltip = mountTooltip();
+    const restore = eventsRewire.__set__("isPrivateBrowsingContext", () => true);
+    try {
+      storageChangeHandler(
+        { showTooltipPercentage: { newValue: true }, tooltipPercentageMode: { newValue: "only_dislike" } },
+        "sync",
+      );
+      expect(extConfig.showTooltipPercentage).toBe(false);
+      expect(extConfig.tooltipPercentageMode).toBe("dash_like");
+      expect(tooltipText(tooltip)).toBe("260 / 4");
+      expect(createRateBar).not.toHaveBeenCalled();
+    } finally {
+      restore();
+    }
+  });
+});
+
+describe("live dislike number format", () => {
+  test.each([
+    ["compactShort", false, "1.3K", "11299"],
+    ["compactLong", false, "1.3 thousand", "11299"],
+    ["standard", false, "1,335", "11299"],
+    ["compactShort", true, "1.3K", "11K"],
+    ["compactLong", true, "1.3 thousand", "11 thousand"],
+    ["standard", true, "1,335", "11,299"],
+  ])("formats cached dislikes as %s with native Like reformatting=%s", (mode, reformatLikes, dislikes, likes) => {
+    document.documentElement.lang = "en";
+    const controls = mount({ likes: 11299 });
+    const nativeLikeText = getLikeTextContainer().firstChild;
+    storedData.dislikes = 1335;
+    extConfig.numberDisplayReformatLikes = reformatLikes;
+    extConfig.numberDisplayFormat = mode === "standard" ? "compactShort" : "standard";
+    controls.dislikeTextContainer.innerText = mode === "standard" ? "1.3K" : "1,335";
+    const readVotes = jest.fn();
+    const restore = stateRewire.__set__("requestVoteData", readVotes);
+    try {
+      storageChangeHandler({ numberDisplayFormat: { newValue: mode } }, "sync");
+
+      expect(controls.dislikeTextContainer.innerText).toBe(dislikes);
+      expect(getLikeTextContainer().firstChild).toBe(nativeLikeText);
+      expect(nativeLikeText.data).toBe(likes);
+      expect(storedData.likes).toBe(11299);
+      expect(storedData.dislikes).toBe(1335);
+      expect(readVotes).not.toHaveBeenCalled();
+    } finally {
+      restore();
+    }
+  });
+
+  test.each(["/watch?v=zyxwvutsrqp", "/feed/subscriptions"])(
+    "does not format outgoing cached dislikes on %s",
+    (url) => {
+      const controls = mount({ likes: 11299 });
+      storedData.dislikes = 1335;
+      controls.dislikeTextContainer.innerText = "1,335";
+      history.replaceState({}, "", url);
+      createRateBar.mockClear();
+
+      storageChangeHandler({ numberDisplayFormat: { newValue: "compactLong" } }, "sync");
+
+      expect(extConfig.numberDisplayFormat).toBe("compactLong");
+      expect(controls.dislikeTextContainer.innerText).toBe("1,335");
+      expect(createRateBar).not.toHaveBeenCalled();
+    },
+  );
 });

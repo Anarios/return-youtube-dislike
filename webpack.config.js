@@ -7,6 +7,7 @@ const { LiveBuildMarkerPlugin, createLiveBuildId } = require("./webpack.live-bui
 
 const extensionVersion = (process.env.npm_package_version || require("./package.json").version).replace("-", ".");
 const entries = ["ryd.content-script", "ryd.background", "popup", "ryd.changelog", "consent"];
+const discussionSharedMessageKeys = new Set(["paidFeaturesWhy"]);
 
 const ignorePatterns = [
   "**/manifest-**",
@@ -19,6 +20,7 @@ const ignorePatterns = [
   "**/readme.md",
   ...entries.map((entry) => `**/${entry}.js`),
 ];
+const nonFirefoxIgnorePatterns = [...ignorePatterns, "**/consent.html", "**/consent.css"];
 
 const manifestTransform = (content, filename, discussionTestOrigin = "") => {
   const filteredContent = content
@@ -69,9 +71,9 @@ class MirrorJsOutputsPlugin {
           );
 
           await Promise.all(
-            jsAssets.map((asset) =>
-              fsp.copyFile(path.join(outputPath, asset), path.join(targetDir, path.basename(asset))),
-            ),
+            jsAssets
+              .filter((asset) => asset !== "consent.js" || dir === "firefox")
+              .map((asset) => fsp.copyFile(path.join(outputPath, asset), path.join(targetDir, path.basename(asset)))),
           );
         }),
       );
@@ -171,7 +173,11 @@ module.exports = (env = {}, argv = {}) => {
           type: "json",
           parser: {
             parse: (source) =>
-              Object.fromEntries(Object.entries(JSON.parse(source)).filter(([key]) => key.startsWith("discussion_"))),
+              Object.fromEntries(
+                Object.entries(JSON.parse(source)).filter(
+                  ([key]) => key.startsWith("discussion_") || discussionSharedMessageKeys.has(key),
+                ),
+              ),
           },
         },
       ],
@@ -203,7 +209,7 @@ module.exports = (env = {}, argv = {}) => {
             from: "./Extensions/combined",
             to: "./chrome",
             globOptions: {
-              ignore: ignorePatterns,
+              ignore: nonFirefoxIgnorePatterns,
             },
             transform: i18nTransform,
           },
@@ -229,7 +235,7 @@ module.exports = (env = {}, argv = {}) => {
             from: "./Extensions/combined",
             to: "./safari",
             globOptions: {
-              ignore: ignorePatterns,
+              ignore: nonFirefoxIgnorePatterns,
             },
             transform: i18nTransform,
           },

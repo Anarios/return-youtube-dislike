@@ -2,8 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
-jest.mock("./src/consent-prompt", () => ({ waitForCoreDataConsent: () => new Promise(() => {}) }));
-jest.mock("./src/core-data-consent", () => ({ onCoreDataPermissionChanged: jest.fn() }));
+jest.mock("./src/discussion/popup", () => ({ initDiscussionPopup: jest.fn() }));
 
 const customColors = {
   light: { like: "#123456", dislike: "#654321" },
@@ -89,6 +88,12 @@ describe("popup color settings", () => {
     expect(document.getElementById("custom_colors_dark").hidden).toBe(true);
     expectPreview("light", "like", "lime");
     expectPreview("dark", "dislike", "red");
+    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+  });
+
+  test("uses the default number format before first-run storage is initialized", () => {
+    expect(() => openPopup({ numberDisplayFormat: undefined })).not.toThrow();
+    expect(document.getElementById("number_format").value).toBe("compactShort");
     expect(chrome.storage.sync.set).not.toHaveBeenCalled();
   });
 

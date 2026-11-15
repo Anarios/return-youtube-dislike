@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API‑Status:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Farbschema:"
   },
@@ -34,6 +25,9 @@
   },
   "disableLoggingHover": {
     "message": "Deaktiviert das Protokollieren von API‑Antworten in der Konsole."
+  },
+  "developerSettings": {
+    "message": "Entwickleroptionen"
   },
   "disableLoggingLabel": {
     "message": "Protokollierung in Konsole deaktivieren"
@@ -74,9 +68,6 @@
   "numberFormat": {
     "message": "Zahlenformat:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Premiumfunktionen sind für Patreon‑Unterstützer verfügbar"
   },
@@ -86,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Informationen zu deiner Patreon-Mitgliedschaft werden verwendet, um deinen Premium-Zugang zu überprüfen. Wir erhalten keine Karten- oder Bankdaten von dir."
   },
+  "paidFeaturesWhy": {
+    "message": "Dislike-Zahlen bleiben für alle kostenlos. Kostenpflichtige Extras helfen, die Server dahinter zu bezahlen: über 15 TB Daten und rund 20 Millionen Nutzer am Tag, bei einem Budget von ein paar hundert Dollar im Monat."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Premiumfunktionen sind für GitHub-Mitwirkende verfügbar"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Mit GitHub anmelden (Mitwirkende)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "GitHub-Anmeldung konnte nicht gestartet werden. Bitte versuche es erneut."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "GitHub-Anmeldung konnte nicht abgeschlossen werden. Bitte versuche es erneut."
   },
   "patreonLoginCompleteFailed": {
     "message": "Anmeldung konnte nicht abgeschlossen werden. Bitte versuche es erneut."
@@ -135,28 +129,31 @@
     "message": "Das Format der Likes und Dislikes einheitlich machen."
   },
   "hidePremiumTeaser": {
-    "message": "Premium-Teaser-Panel ausblenden"
+    "message": "Rohzahlen ausblenden"
   },
   "hidePremiumTeaserHover": {
-    "message": "Premium-Teaser auf YouTube-Wiedergabeseiten nicht anzeigen."
+    "message": "Das Panel mit Rohzahlen auf YouTube-Wiedergabeseiten nicht anzeigen."
   },
-  "roundNumbers": {
-    "message": "Zeige abgerundete Zahlen"
+  "hideRydComments": {
+    "message": "RYD-Kommentare ausblenden"
   },
-  "roundNumbersHover": {
-    "message": "Zahlen abrunden (Standardverhalten von YouTube)."
+  "hideRydCommentsHover": {
+    "message": "RYD-Kommentare bei Videos mit deaktivierten YouTube-Kommentaren nicht anzeigen."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Premium-Video-Analyse ausblenden"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Das Panel „Premium-Video-Analyse“ auf YouTube-Wiedergabeseiten ausblenden."
   },
   "shortsSupport": {
     "message": "YouTube Shorts Unterstützung"
   },
   "showTooltipPercentage": {
-    "message": "Prozentangabe in der Like/Dislike‑Leiste (Tooltip)."
+    "message": "Prozentangabe in der Like/Dislike‑Leiste (Tooltip)"
   },
   "showTooltipPercentageHover": {
     "message": "Prozentangabe im Tooltip der Like/Dislike‑Leiste anzeigen."
-  },
-  "textColorTheme": {
-    "message": "Farbschema:"
   },
   "textColorTheme1": {
     "message": "Klassisch"
@@ -185,50 +182,20 @@
   "colorThemeDislike": {
     "message": "Gefällt mir nicht"
   },
-  "textColorizeRatioBar": {
-    "message": "Verhältnisbalken einfärben"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Benutzerdefinierte Farben für die Verhältnisleiste verwenden."
-  },
-  "textColorizeThumbs": {
-    "message": "Like/Dislike-Icons einfärben"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Benutzerdefinierte Farben für die Like/Dislike-Icons verwenden."
-  },
-  "textConsistentFormat": {
-    "message": "Das Format der Likes und Dislikes einheitlich machen."
-  },
-  "textConsistentFormatHover": {
-    "message": "Likes neu formatieren"
-  },
   "textDeveloper": {
     "message": "von Dmitry Selivanov & der Community"
   },
   "textLikesDisabled": {
     "message": "Deaktiviert vom Ersteller"
   },
-  "textNumberFormat": {
-    "message": "Zahlenformat:"
-  },
-  "textRoundingNumbers": {
-    "message": "Runde Likes/Dislikes ab (Standardverhalten von YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Zeige abgerundete Zahlen."
-  },
   "textSettings": {
     "message": "Deaktiviere Like/Dislike-Übermittlung"
   },
   "textSettingsHover": {
-    "message": "Stoppt deine Likes und Dislikes zu zählen."
+    "message": "Deine Likes und Dislikes werden nicht gezählt und erscheinen nicht in den Dislike-Zahlen."
   },
   "textTempUnavailable": {
     "message": "Temporär nicht verfügbar"
-  },
-  "textUpdate": {
-    "message": "Aktualisieren auf"
   },
   "tooltipPercentageMode": {
     "message": "Prozentmodus:"
@@ -443,9 +410,6 @@
   "premiumTeaser_statRaw": {
     "message": "Rohzahl der Dislikes"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Geschätzte Dislikes"
-  },
   "premiumTeaser_statLikes": {
     "message": "Rohzahl der Likes"
   },
@@ -455,29 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Dislike-Daten konnten gerade nicht geladen werden. Versuchen Sie, die Seite neu zu laden."
   },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "So schalten Sie Premium-Analysen frei"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Schalten Sie Premium-Video-Insights in drei schnellen Schritten frei:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Melden Sie sich im Pop-up der Return YouTube Dislike-Erweiterung mit Patreon an."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Wählen Sie die Premium-Stufe, um Aktivitätsverläufe, Länderranglisten und die interaktive Karte zu aktivieren."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Laden Sie YouTube neu, um stündliche Trends, Top-Länder und Detailansichten der US-Bundesstaaten für jedes Video zu sehen."
-  },
-  "premiumTierNotice_title": {
-    "message": "Premium-Analysen gesperrt"
-  },
   "premiumTierNotice_message": {
     "message": "Deine Patreon-Mitgliedschaft enthält keine Premium-Stufe. Erhöhe deinen Beitrag, um die erweiterten Videoanalysen freizuschalten."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Auf Patreon upgraden"
   },
   "changelog_cta_primary": {
     "message": "Auf Patreon upgraden"
@@ -519,19 +462,19 @@
     "message": "Frag die Community"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Unnötige Schaltflächen ausblenden"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Vorher-Nachher-Beispiele anzeigen"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Nur „Mag ich“ und „Mag ich nicht“ sichtbar lassen. „Teilen“, „Speichern“, „Danke“ und andere optionale Aktionen bleiben über „Mehr Aktionen“, das Drei-Punkte-Menü von YouTube, verfügbar."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Vorher: Alle Aktionsschaltflächen sind sichtbar"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Nachher: Nur „Mag ich“ und „Mag ich nicht“ bleiben sichtbar"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-Logo"
@@ -590,9 +533,6 @@
   "discussion_empty": {
     "message": "Noch keine Kommentare. Beginne die Unterhaltung."
   },
-  "discussion_replyEmpty": {
-    "message": "Noch keine Antworten."
-  },
   "discussion_comment": {
     "message": "Kommentar"
   },
@@ -637,9 +577,6 @@
   },
   "discussion_dislike": {
     "message": "Gefällt mir nicht"
-  },
-  "discussion_reacting": {
-    "message": "Reaktion wird gespeichert…"
   },
   "discussion_signInRequired": {
     "message": "Melde dich im Popup der Erweiterung an, um fortzufahren."
@@ -734,12 +671,6 @@
   "discussion_moderationReason": {
     "message": "Grund für die Moderation"
   },
-  "discussion_moderationSaved": {
-    "message": "Moderationsmaßnahme gespeichert."
-  },
-  "discussion_reported": {
-    "message": "$1 Meldungen"
-  },
   "discussion_unavailable": {
     "message": "RYD-Kommentare sind für dieses Video nicht verfügbar."
   },
@@ -776,12 +707,6 @@
   "discussion_notificationLikes": {
     "message": "Dein Kommentar hat $1 Likes erhalten"
   },
-  "discussion_notificationDislike": {
-    "message": "Jemandem gefällt dein Kommentar nicht"
-  },
-  "discussion_notificationReaction": {
-    "message": "Jemand hat auf deinen Kommentar reagiert"
-  },
   "discussion_someone": {
     "message": "Jemand"
   },
@@ -794,23 +719,14 @@
   "discussion_view": {
     "message": "Diskussion ansehen"
   },
-  "discussion_unread": {
-    "message": "$1 ungelesene Benachrichtigungen"
-  },
   "discussion_signedOutInbox": {
-    "message": "Melde dich an, um Antworten und Reaktionen auf deine Kommentare zu sehen."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Diese Diskussion ist nicht mehr verfügbar."
+    "message": "Melde dich an, um Antworten und Likes zu deinen Kommentaren zu sehen."
   },
   "discussion_discussionTab": {
     "message": "Diskussion"
   },
   "discussion_nickname": {
     "message": "Nutzername"
-  },
-  "discussion_reportCount": {
-    "message": "Meldungen"
   },
   "discussion_reportStatus": {
     "message": "Meldungsstatus"
@@ -824,20 +740,8 @@
   "discussion_author": {
     "message": "Verfasser"
   },
-  "discussion_me": {
-    "message": "Du"
-  },
   "discussion_saving": {
     "message": "Wird gespeichert…"
-  },
-  "discussion_confirm": {
-    "message": "Bestätigen"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Neue Aktivitäten zu deinen Kommentaren"
-  },
-  "discussion_showThread": {
-    "message": "Thread anzeigen"
   },
   "discussion_loadReplies": {
     "message": "Antworten anzeigen ($1)"
@@ -857,6 +761,12 @@
   "changelog_hero_body": {
     "message": "Öffne ein beliebiges YouTube-Video und du siehst die Dislike-Zahl direkt neben den Likes, wo sie hingehört. Version 4.1 bringt außerdem RYD-Kommentare: einen Ort, um außerhalb von YouTubes eigenem Kommentarbereich über Videos zu sprechen."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Noch ein Schritt"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Aktiviere unten die Dislike-Zahlen, um sie auf YouTube direkt neben den Likes zu sehen. Version 4.1 bringt außerdem RYD-Kommentare: einen Ort, um außerhalb von YouTubes eigenem Kommentarbereich über Videos zu sprechen."
+  },
   "changelog_new_badge": {
     "message": "Neu in 4.1"
   },
@@ -867,7 +777,7 @@
     "message": "Entdecke RYD-Kommentare"
   },
   "changelog_comments_body": {
-    "message": "Ein Diskussionsbereich unter Videos und Shorts, bereitgestellt von Return YouTube Dislike und getrennt von YouTubes Kommentaren. Alle können mitlesen und reagieren. Mitglieder mit Commenter oder Premium können Beiträge und Antworten schreiben."
+    "message": "Ein Diskussionsbereich unter Videos und Shorts mit deaktivierten YouTube-Kommentaren, bereitgestellt von Return YouTube Dislike. Alle können mitlesen und reagieren. Mitglieder mit Commenter oder Premium können Beiträge und Antworten schreiben."
   },
   "changelog_comments_point_replies": {
     "message": "Antworten in Threads mit Likes und Dislikes"
@@ -876,7 +786,7 @@
     "message": "Schreibe unter einem öffentlichen Nicknamen deiner Wahl"
   },
   "changelog_comments_point_notifications": {
-    "message": "Benachrichtigungen bei Antworten oder Reaktionen"
+    "message": "Benachrichtigungen, wenn jemand auf deinen Kommentar antwortet oder ihn likt"
   },
   "changelog_comments_point_moderation": {
     "message": "Melden und Moderation für einen respektvollen Umgang"
@@ -920,11 +830,29 @@
   "changelog_analytics_us_body": {
     "message": "Betrachte die Beteiligung nach Bundesstaat im Detail."
   },
+  "changelog_appeal_title": {
+    "message": "Eine kleine, etwas unangenehme Bitte"
+  },
+  "changelog_appeal_intro": {
+    "message": "Hallo. Jetzt kommt der Teil, in dem es um Geld geht – und ehrlich gesagt sind wir darin nicht besonders gut."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike ist ein kleines Open-Source-Projekt von Dmitry Selivanov und der Community. Jeden Tag beantwortet es Anfragen von rund 20 Millionen Menschen und verwaltet mehr als 15 TB Daten. All das läuft mit ein paar hundert Dollar im Monat – nicht viel, um etwas zurückzubringen, das ein Milliardenkonzern abgeschafft hat."
+  },
+  "changelog_appeal_free": {
+    "message": "Dislike-Zahlen sind kostenlos und bleiben es auch. Genau darum geht es. Server sind es aber nicht, und ehrlich gesagt haben uns die laufenden Kosten kaum eine Wahl gelassen: Damit das Projekt weiterläuft, mussten wir Premium-Funktionen einführen – RYD-Kommentare und Premium-Analysen. Jede Mitgliedschaft hilft, diese Kosten zu decken."
+  },
+  "changelog_appeal_ask": {
+    "message": "Wenn RYD dich schon einmal vor einem Clickbait-Video oder einer Anleitung bewahrt hat, die nicht funktioniert hat, überleg dir bitte, auf Patreon mitzumachen. Und wenn es gerade nicht passt, ist das völlig in Ordnung. Danke, dass du RYD nutzt und abstimmst: Jede Stimme macht die Zahlen ein bisschen genauer."
+  },
+  "changelog_appeal_cta": {
+    "message": "Werde Mitglied auf Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry und die RYD-Community"
+  },
   "changelog_join_title": {
     "message": "Hol dir Premium-Funktionen"
-  },
-  "changelog_join_free": {
-    "message": "Dislike-Zahlen sind für alle kostenlos. Eine Mitgliedschaft ist freiwillig und unterstützt das Projekt."
   },
   "changelog_join_step1": {
     "message": "Werde Mitglied auf Patreon. Mit Commenter kannst du Kommentare schreiben; Premium bietet zusätzlich Analysen."
@@ -943,5 +871,152 @@
   },
   "changelog_also_translations": {
     "message": "Neue und verbesserte Übersetzungen."
+  },
+  "reviewPromptTitle": {
+    "message": "Gefällt dir RYD?"
+  },
+  "reviewPromptBody": {
+    "message": "Google hat die Regeln für Bewertungen im Chrome Web Store geändert. Trotz 16.000+ Fünf-Sterne-Rezensionen haben einige neuere negative Rezensionen die Bewertung von RYD von 4,6 auf 2,5 gedrückt.\n\nWenn dir RYD hilft, hinterlasse bitte eine ehrliche Rezension."
+  },
+  "reviewPromptAction": {
+    "message": "Rezension schreiben"
+  },
+  "consent_page_title": {
+    "message": "Berechtigungen für RYD-Funktionen"
+  },
+  "consent_vote_title": {
+    "message": "Damit deine Bewertungen zählen"
+  },
+  "consent_vote_body": {
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Erlaube das, damit RYD deine Likes, Dislikes und Reaktionen auf Kommentare zählen kann. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
+  },
+  "consent_account_title": {
+    "message": "Kontoberechtigungen auswählen"
+  },
+  "consent_account_body": {
+    "message": "Melde dich an, um Kontofunktionen wie dein Profil, Benachrichtigungen und Premium-Analysen zu nutzen."
+  },
+  "consent_next_step": {
+    "message": "Wähle in Firefox „Erlauben“, um die Berechtigungen zu prüfen. Du kannst ablehnen."
+  },
+  "consent_allow": {
+    "message": "In Firefox erlauben"
+  },
+  "consent_not_now": {
+    "message": "Jetzt nicht"
+  },
+  "consent_prompt_status": {
+    "message": "Entscheide, ob du diese Berechtigungen in Firefox erlauben möchtest."
+  },
+  "consent_granted_status": {
+    "message": "Die Berechtigungen sind aktiviert. Du kannst zu YouTube zurückkehren."
+  },
+  "consent_declined_status": {
+    "message": "Diese optionalen Funktionen bleiben deaktiviert. Du kannst die Berechtigungen später ändern."
+  },
+  "consent_error_status": {
+    "message": "Die Berechtigungen konnten nicht aktualisiert werden. Bitte versuche es erneut."
+  },
+  "consent_details_summary": {
+    "message": "Was bedeuten die Berechtigungskategorien von Firefox?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox fasst Daten in breite Kategorien zusammen. Das bedeuten die einzelnen Kategorien für RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Surfaktivitäten"
+  },
+  "consent_browsing_body": {
+    "message": "Nur die ID des YouTube-Videos, das du öffnest, um seine Dislikes und RYD-Kommentare zu laden. Nie dein Browserverlauf oder andere Websites."
+  },
+  "consent_content_label": {
+    "message": "Website-Inhalte"
+  },
+  "consent_content_body": {
+    "message": "Die beim YouTube-Video angezeigte Anzahl von Likes, um Dislike-Schätzungen zu verbessern."
+  },
+  "consent_activity_label": {
+    "message": "Website-Aktivitäten"
+  },
+  "consent_activity_body": {
+    "message": "Deine Likes, Dislikes und RYD-Kommentarreaktionen auf YouTube, damit sie zählen. Gesendet mit einer zufälligen ID, die nicht mit deinem Google- oder YouTube-Konto verknüpft ist."
+  },
+  "consent_identity_label": {
+    "message": "Personenbezogene Daten"
+  },
+  "consent_identity_body": {
+    "message": "Deine Profilinformationen, etwa Anzeigename und E-Mail-Adresse, nur wenn du dich anmeldest."
+  },
+  "consent_auth_label": {
+    "message": "Authentifizierungsinformationen"
+  },
+  "consent_auth_body": {
+    "message": "Die Autorisierungs- und Sitzungsdaten, die zum Anmelden und Nutzen von Kontofunktionen erforderlich sind."
+  },
+  "consent_scope": {
+    "message": "RYD erfasst nichts außerhalb von youtube.com und greift nicht auf dein YouTube-Konto zu. Ohne Anmeldung erhält RYD weder deinen Namen noch deine E-Mail-Adresse."
+  },
+  "consent_settings": {
+    "message": "Du kannst diese Berechtigungen jederzeit in den Add-on-Einstellungen von Firefox (about:addons) ändern."
+  },
+  "consent_private_counts": {
+    "message": "Private Fenster zeigen nur Zahlen an und nutzen dafür die in einem normalen Fenster aktivierte Berechtigung. Abstimmen, Anmelden, Premium-Analysen und Diskussionen sind dort nicht verfügbar."
+  },
+  "consent_voter_timing": {
+    "message": "Deine Abstimmungs-ID wird nur beim Abstimmen oder Reagieren gesendet. Deine eigenen Kommentarreaktionen werden auf diesem Gerät gespeichert."
+  },
+  "popup_signin_next_click": {
+    "message": "Ein weiterer Klick ist nötig: Wähle unten deine Anmeldeschaltfläche, um die Kontoberechtigungen von Firefox zu prüfen und fortzufahren."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Die neuen Datenschutzregeln von Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "In Firefox braucht RYD deine Erlaubnis, bevor es Dislikes anzeigen kann. Hier steht genau, was diese Erlaubnis umfasst – und was nicht."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Danke. Deine Bewertungen zählen jetzt."
+  },
+  "vote_consent_hint": {
+    "message": "Deine Bewertung wird noch nicht gezählt. Bevor RYD sie senden kann, verlangt Firefox jetzt deine Erlaubnis. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
+  },
+  "vote_not_counted": {
+    "message": "Deine Likes und Dislikes werden nicht gezählt und erscheinen nicht in den Dislike-Zahlen."
+  },
+  "vote_count_mine": {
+    "message": "Meine Bewertungen mitzählen"
+  },
+  "vote_consent_dismiss": {
+    "message": "Nicht erneut fragen"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Aktiviere das Teilen von Bewertungen, um auf Kommentare zu reagieren. Deine Reaktion wird gesendet, sobald es aktiviert ist."
+  },
+  "discussion_consentContinue": {
+    "message": "Weiter"
+  },
+  "counts_consent_toolbar": {
+    "message": "Öffne Return YouTube Dislike über das Erweiterungsmenü von Firefox, um fortzufahren."
+  },
+  "counts_consent_declined": {
+    "message": "Die Zahlen bleiben deaktiviert. Du kannst sie später hier aktivieren."
+  },
+  "counts_consent_enabled": {
+    "message": "Dislike-Zahlen sind aktiviert."
+  },
+  "counts_consent_private": {
+    "message": "Aktiviere Dislike-Zahlen zuerst in einem normalen Fenster. Private Fenster zeigen nur Zahlen an."
+  },
+  "data_consent_reason": {
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Erlaube RYD, Dislikes anzuzeigen und deine Bewertungen zu zählen. Diese Erlaubnis gilt nur für YouTube, nicht für andere Websites."
+  },
+  "data_consent_title": {
+    "message": "Dislikes anzeigen und deine Bewertungen zählen lassen"
+  },
+  "data_consent_body": {
+    "message": "Firefox verlangt jetzt von jeder Erweiterung, dich zu fragen, bevor sie Daten teilt. Dabei verwendet Firefox für alle Erweiterungen dieselben allgemeinen Bezeichnungen. Das bedeuten sie jeweils für RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD funktioniert nur auf YouTube. Wenn du das erlaubst, erhält RYD dadurch keinen Zugriff auf andere Websites."
   }
 }

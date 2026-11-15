@@ -5,7 +5,7 @@ import { setActivityBucketLabel } from "../panel";
 import { clampRangeToBounds, combineBounds, computeChartBounds, updateGlobalBounds } from "./time";
 import { toEpoch, sanitizeCount } from "../utils";
 import { localize } from "../../utils";
-import { getTextColor, getMutedTextColor, getBorderColor } from "../theme";
+import { getTextColor, getMutedTextColor, getBorderColor, getSurfaceColor } from "../theme";
 import { logRangeSelection, logTimeBounds } from "../logging";
 
 let activityTranslator = (key, substitutions) => localize(key, substitutions);
@@ -195,7 +195,7 @@ export function renderActivityChart(timeSeries) {
     ),
   };
 
-  const dataZoom = createDataZoom(sliderBounds, selectionBounds);
+  const dataZoom = createDataZoom(sliderBounds, selectionBounds, isSinglePoint);
 
   analyticsState.suppressZoomEvents = true;
   activityChart.setOption({
@@ -207,7 +207,7 @@ export function renderActivityChart(timeSeries) {
       type: "time",
       min: axisBounds.min,
       max: axisBounds.max,
-      axisLabel: { color: getMutedTextColor() },
+      axisLabel: { color: getMutedTextColor(), hideOverlap: true },
       axisLine: { lineStyle: { color: getBorderColor() } },
     },
     yAxis: {
@@ -273,6 +273,28 @@ export function resizeActivityChart() {
   analyticsState.activityChart?.resize();
 }
 
+export function refreshActivityTheme() {
+  analyticsState.activityChart?.setOption({
+    legend: { textStyle: { color: getTextColor() } },
+    xAxis: {
+      axisLabel: { color: getMutedTextColor() },
+      axisLine: { lineStyle: { color: getBorderColor() } },
+    },
+    yAxis: {
+      axisLabel: { color: getMutedTextColor() },
+      splitLine: { lineStyle: { color: getBorderColor(0.35) } },
+    },
+    dataZoom: [
+      {
+        backgroundColor: getSurfaceColor(0.05, 0.05),
+        borderColor: getBorderColor(0.1),
+        textStyle: { color: getMutedTextColor() },
+        handleStyle: { color: getTextColor(), borderColor: getBorderColor(0.6) },
+      },
+    ],
+  });
+}
+
 export function disposeActivityChart() {
   if (analyticsState.activityChart) {
     analyticsState.activityChart.off?.("dataZoom", handleDataZoom);
@@ -291,14 +313,15 @@ export function unregisterZoomSelectionListener(listener) {
   zoomListeners.delete(listener);
 }
 
-function createDataZoom(bounds, selection) {
+function createDataZoom(bounds, selection, singlePoint) {
   const slider = {
     type: "slider",
     xAxisIndex: 0,
     height: 18,
     bottom: 20,
-    backgroundColor: "rgba(255,255,255,0.05)",
-    borderColor: "rgba(255,255,255,0.1)",
+    showDataShadow: singlePoint ? false : "auto",
+    backgroundColor: getSurfaceColor(0.05, 0.05),
+    borderColor: getBorderColor(0.1),
     textStyle: { color: getMutedTextColor() },
     handleStyle: { color: getTextColor(), borderColor: getBorderColor(0.6) },
     realtime: true,

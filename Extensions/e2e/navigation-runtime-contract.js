@@ -16,13 +16,17 @@ const NON_CURRENT_DUPLICATE_SCENARIO_IDS = Object.freeze([
 ]);
 const SUPPORTED_RUNTIME_NAMES = Object.freeze(["userscript", "extension"]);
 
-function registerNavigationRuntimeContractScenarios({ register, runtimeName }) {
+function assertRuntimeRegistration({ register, runtimeName }, subject) {
   if (!SUPPORTED_RUNTIME_NAMES.includes(runtimeName)) {
-    throw new TypeError(`Unsupported navigation contract runtime: ${runtimeName}`);
+    throw new TypeError(`Unsupported ${subject} runtime: ${runtimeName}`);
   }
   if (typeof register !== "function") {
-    throw new TypeError("The navigation runtime contract requires a scenario register callback.");
+    throw new TypeError(`The ${subject} requires a register callback.`);
   }
+}
+
+function registerNavigationRuntimeContractScenarios({ register, runtimeName }) {
+  assertRuntimeRegistration({ register, runtimeName }, "navigation contract");
   for (const scenario of NAVIGATION_MATRIX) {
     register({
       scenario,
@@ -70,6 +74,18 @@ function createNavigationRuntimeContractAdapter({
 
 function interactionRecords(records) {
   return records.filter((record) => record.method === "POST" && INTERACTION_PATHS.has(record.pathname));
+}
+
+function expectExactVoteSequence(records, votes, message) {
+  expect(
+    interactionRecords(records).map(({ body, pathname }) => ({ pathname, value: body?.value, videoId: body?.videoId })),
+    message,
+  ).toEqual(
+    votes.flatMap(({ value, videoId }) => [
+      { pathname: "/interact/vote", value, videoId },
+      { pathname: "/interact/confirmVote", value: undefined, videoId },
+    ]),
+  );
 }
 
 async function expectCredentials(adapter) {
@@ -252,7 +268,9 @@ async function runNavigationRuntimeContract({ adapter, afterNavigation, afterRea
 
 module.exports = {
   NON_CURRENT_DUPLICATE_SCENARIO_IDS,
+  assertRuntimeRegistration,
   createNavigationRuntimeContractAdapter,
+  expectExactVoteSequence,
   expectNonCurrentDuplicateActivationIgnored,
   expectDestinationReactionContract,
   expectSuccessfulVoteActivation,

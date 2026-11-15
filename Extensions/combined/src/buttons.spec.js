@@ -1,13 +1,21 @@
 /** @jest-environment jsdom */
 
+jest.mock("./private-browsing", () => ({
+  ...jest.requireActual("./private-browsing"),
+  isPrivateBrowsingContext: jest.fn(),
+}));
+
+const { isPrivateBrowsingContext } = require("./private-browsing");
 const { extConfig, refreshReactionPresentation } = require("./state");
 const {
+  captureShortsNativeControlInventory: captureExtensionShortsNativeControlInventory,
   ensureSyntheticShortsDislikeButton,
   getButtonControls,
   getButtons,
   getDislikeButton,
   getDislikeTextContainer,
   getLikeButton,
+  getNativeButton,
   getShortsCandidateVideoId,
   getShortsCandidateVideoIds,
   hasRenderedBox,
@@ -16,7 +24,9 @@ const {
   refreshDislikeTextTypography,
   setSyntheticShortsDislikeEnabled,
   setSyntheticShortsDislikePressed,
+  __RewireAPI__: buttonsRewire,
 } = require("./buttons");
+const { captureShortsNativeControlInventory } = require("../../common/shorts-control-readiness");
 
 function controls(id, videoId, attributes = "") {
   return `
@@ -91,6 +101,7 @@ function setNativeTextBoxes() {
 
 describe("desktop watch button ownership", () => {
   beforeEach(() => {
+    isPrivateBrowsingContext.mockReturnValue(false);
     history.replaceState({}, "", "/watch?v=BBBBBBBBBBB");
     extConfig.selectors.buttons.regular.desktopMenu = ["ytd-menu-renderer.ytd-watch-metadata > div"];
     extConfig.selectors.buttons.regular.desktopNoMenu = ["#top-level-buttons-computed"];
@@ -298,6 +309,159 @@ describe("desktop watch button ownership", () => {
 
     expect(getButtonControls(current).ready).toBe(true);
     expect(getButtons()).toBe(current);
+  });
+
+  test("prefers the native toggle subtree even before its pressed state hydrates", () => {
+    document.body.innerHTML = `
+      <like-button-view-model>
+        <div><button id="speed" aria-pressed="true">1x</button></div>
+        <toggle-button-view-model><button-view-model><label><button id="native"></button></label></button-view-model></toggle-button-view-model>
+      </like-button-view-model>`;
+    const host = document.querySelector("like-button-view-model");
+    const nativeButton = host.querySelector("#native");
+    expect(getNativeButton(host)).toBe(nativeButton);
+
+    nativeButton.remove();
+    expect(getNativeButton(host)).toBeUndefined();
+    host.querySelector("button-view-model").appendChild(nativeButton);
+    nativeButton.setAttribute("aria-pressed", "false");
+    expect(getNativeButton(host)).toBe(nativeButton);
+  });
+
+  test("waits for modern native reactions when only an unrelated button is present", () => {
+    document.body.innerHTML = `
+      <ytd-watch-flexy video-id="BBBBBBBBBBB">${controls("current", "BBBBBBBBBBB")}</ytd-watch-flexy>`;
+    const current = document.querySelector("#current");
+    const host = current.querySelector("like-button-view-model");
+    const nativeButton = host.querySelector("button");
+    const speed = document.createElement("button");
+    speed.textContent = "1x";
+    host.prepend(speed);
+    nativeButton.remove();
+    setBox(current);
+    expect(getNativeButton(host)).toBeUndefined();
+    expect(getButtonControls(current).ready).toBe(false);
+    expect(getButtons()).toBeUndefined();
+
+    host.appendChild(nativeButton);
+    expect(getNativeButton(host)).toBe(nativeButton);
+    expect(getButtonControls(current).ready).toBe(true);
+  });
+
+  test("retains configured native selectors for legacy controls and legacy Shorts paper toggles", () => {
+    const host = document.createElement("ytd-toggle-button-renderer");
+    host.innerHTML = '<button id="legacy"></button><tp-yt-paper-button id="button"></tp-yt-paper-button>';
+    expect(getNativeButton(host)).toBe(host.querySelector("button"));
+    const selectors = extConfig.selectors.buttons.nativeButton;
+    try {
+      extConfig.selectors.buttons.nativeButton = ["#legacy"];
+      expect(getNativeButton(host)).toBe(host.querySelector("#legacy"));
+      history.replaceState({}, "", "/shorts/BBBBBBBBBBB");
+      host.querySelector("button").setAttribute("aria-pressed", "true");
+      expect(getNativeButton(host)).toBe(host.querySelector("tp-yt-paper-button"));
+    } finally {
+      extConfig.selectors.buttons.nativeButton = selectors;
+    }
+  });
+
+  test.each(["button", "tp-yt-paper-button"])("accepts a direct legacy %s activation target", (tagName) => {
+    const control = document.createElement(tagName);
+    control.id = "button";
+    expect(getNativeButton(control)).toBe(control);
+  });
+
+  test("accepts mobile native reactions with boolean labels before pressed-state attributes exist", () => {
+    document.body.innerHTML = `
+      <div id="mobile">
+        <like-button-view-model><button aria-label="true"><span role="text">100</span></button></like-button-view-model>
+        <dislike-button-view-model><button aria-label="false"><span role="text"></span></button></dislike-button-view-model>
+      </div>`;
+    buttonsRewire.__set__("isMobile", () => true);
+    try {
+      const mobile = document.querySelector("#mobile");
+      const snapshot = getButtonControls(mobile);
+      expect(snapshot.ready).toBe(true);
+      expect(snapshot.nativeLikeButton).toBe(mobile.querySelector("button[aria-label='true']"));
+      expect(snapshot.nativeDislikeButton).toBe(mobile.querySelector("button[aria-label='false']"));
+    } finally {
+      buttonsRewire.__ResetDependency__("isMobile");
+    }
+  });
+
+  test("uses the native Like for Shorts inventory and synthetic styling when another control is prepended", () => {
+    history.replaceState({}, "", "/shorts/BBBBBBBBBBB");
+    document.body.innerHTML = `
+      <ytd-reel-video-renderer video-id="BBBBBBBBBBB" is-active>
+        <reel-action-bar-view-model>
+          <like-button-view-model>
+            <div><button class="fixture-speed">1x</button></div>
+            <toggle-button-view-model><button-view-model><label class="fixture-native-label">
+              <button class="ytSpecButtonShapeNextHost" aria-pressed="false"><svg><path d="M3 12h18"></path></svg></button>
+              <div class="fixture-native-count"><span role="text">100</span></div>
+            </label></button-view-model></toggle-button-view-model>
+          </like-button-view-model>
+          <button-view-model><button>Comments</button></button-view-model>
+          <button-view-model><button>Share</button></button-view-model>
+          <button-view-model><button>More</button></button-view-model>
+        </reel-action-bar-view-model>
+      </ytd-reel-video-renderer>`;
+    const actionBar = document.querySelector("reel-action-bar-view-model");
+    const nativeLikeButton = document.querySelector("button[aria-pressed]");
+    setBox(actionBar);
+    setBox(nativeLikeButton.querySelector("svg"));
+    const options = { getNativeLikeButton: getNativeButton };
+    const inventory = captureShortsNativeControlInventory(actionBar, options);
+    expect(inventory.nativeLikeButton).toBe(nativeLikeButton);
+    expect(inventory.activationTargets[0]).toBe(nativeLikeButton);
+
+    const dislike = ensureSyntheticShortsDislikeButton(actionBar, { isHydrated: true, isStable: true });
+    expect(dislike.querySelector("button").className).toBe(nativeLikeButton.className);
+    expect(dislike.querySelector("label").classList.contains("fixture-native-label")).toBe(true);
+    expect(getButtonControls(actionBar)).toMatchObject({ nativeLikeButton, ready: true });
+    expect(captureShortsNativeControlInventory(actionBar, options).activationTargets).toEqual(
+      inventory.activationTargets,
+    );
+
+    nativeLikeButton.removeAttribute("aria-pressed");
+    expect(getButtonControls(actionBar).ready).toBe(false);
+    nativeLikeButton.setAttribute("aria-pressed", "false");
+    expect(getButtonControls(actionBar).ready).toBe(true);
+  });
+
+  test("keeps extension-owned Shorts actions out of the native control inventory", () => {
+    history.replaceState({}, "", "/shorts/BBBBBBBBBBB");
+    document.body.innerHTML = `
+      <ytd-reel-video-renderer video-id="BBBBBBBBBBB" is-active>
+        <reel-action-bar-view-model>
+          <like-button-view-model>
+            <toggle-button-view-model><button-view-model><label>
+              <button aria-pressed="false"><svg><path d="M3 12h18"></path></svg></button>
+            </label></button-view-model></toggle-button-view-model>
+          </like-button-view-model>
+          <button-view-model><button>Comments</button></button-view-model>
+          <button-view-model><button>Share</button></button-view-model>
+          <pivot-button-view-model><a href="/source/BBBBBBBBBBB/shorts">Sound</a></pivot-button-view-model>
+        </reel-action-bar-view-model>
+      </ytd-reel-video-renderer>`;
+    const actionBar = document.querySelector("reel-action-bar-view-model");
+    const nativeLikeButton = actionBar.querySelector("button[aria-pressed]");
+    setBox(actionBar);
+    setBox(nativeLikeButton.querySelector("svg"));
+    const nativeChildren = [...actionBar.children];
+    const inventory = captureShortsNativeControlInventory(actionBar, { getNativeLikeButton: getNativeButton });
+
+    expect(ensureSyntheticShortsDislikeButton(actionBar, { isHydrated: true, isStable: true })).toBe(
+      actionBar.querySelector("[data-ryd-synthetic-shorts-dislike]"),
+    );
+    const launcher = document.createElement("button");
+    launcher.id = "ryd-discussion-launcher";
+    actionBar.insertBefore(launcher, actionBar.querySelector("pivot-button-view-model"));
+
+    const extensionInventory = captureExtensionShortsNativeControlInventory(actionBar);
+    expect(extensionInventory.nativeChildren).toEqual(nativeChildren);
+    expect(extensionInventory.activationTargets).toEqual(inventory.activationTargets);
+    expect(extensionInventory.nativeLikeButton).toBe(nativeLikeButton);
+    expect(captureShortsNativeControlInventory(actionBar, { getNativeLikeButton: getNativeButton })).toBeNull();
   });
 
   test("does not clone a text template from outside the selected reaction tree", () => {
@@ -564,6 +728,43 @@ describe("desktop watch button ownership", () => {
     expect(dislike.querySelector("button").getAttribute("aria-disabled")).toBe("false");
     expect(dislike.querySelector("button").getAttribute("aria-pressed")).toBe("true");
     expect(dislike.classList.contains("style-default-active")).toBe(true);
+  });
+
+  test("keeps a private synthetic Shorts count disabled and unpressed through direct setters", () => {
+    isPrivateBrowsingContext.mockReturnValue(true);
+    history.replaceState({}, "", "/shorts/BBBBBBBBBBB");
+    document.body.innerHTML = `
+      <ytd-reel-video-renderer video-id="BBBBBBBBBBB" is-active>
+        <reel-action-bar-view-model>
+          <like-button-view-model><button aria-pressed="true"><span role="text">100</span></button></like-button-view-model>
+          <button-view-model><button type="button">Comments</button></button-view-model>
+        </reel-action-bar-view-model>
+      </ytd-reel-video-renderer>`;
+    const actionBar = document.querySelector("reel-action-bar-view-model");
+    setBox(actionBar);
+    const dislike = ensureSyntheticShortsDislikeButton(actionBar, {
+      currentVideoId: "BBBBBBBBBBB",
+      isHydrated: true,
+      isStable: true,
+    });
+    const nativeLike = actionBar.querySelector("like-button-view-model button");
+    const nativeClick = jest.fn();
+    nativeLike.addEventListener("click", nativeClick);
+    const syntheticClick = jest.fn();
+    dislike.querySelector("button").addEventListener("click", syntheticClick);
+
+    setSyntheticShortsDislikeEnabled(true, dislike);
+    setSyntheticShortsDislikePressed(true, dislike);
+    dislike.querySelector("button").click();
+
+    expect(dislike.querySelector("button").disabled).toBe(true);
+    expect(dislike.querySelector("button").getAttribute("aria-disabled")).toBe("true");
+    expect(dislike.querySelector("button").getAttribute("aria-pressed")).toBe("false");
+    expect(dislike.classList.contains("style-default-active")).toBe(false);
+    expect(getButtonControls(actionBar).ready).toBe(true);
+    expect(syntheticClick).not.toHaveBeenCalled();
+    expect(nativeClick).not.toHaveBeenCalled();
+    expect(nativeLike.getAttribute("aria-pressed")).toBe("true");
   });
 
   test("does not mutate an offscreen URL-matching Shorts placeholder before activation", () => {

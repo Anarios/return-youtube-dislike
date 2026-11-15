@@ -2,6 +2,12 @@ jest.mock("./config", () => ({
   getApiEndpoint: (pathname) => `https://api.test${pathname}`,
 }));
 
+jest.mock("./private-browsing", () => ({
+  ...jest.requireActual("./private-browsing"),
+  isPrivateBrowsingContext: jest.fn(),
+}));
+import { isPrivateBrowsingContext } from "./private-browsing";
+
 import {
   cancelObsoleteVoteDataRequests,
   clearVoteDataRequestCache,
@@ -24,8 +30,21 @@ function response(payload = { dislikes: 12, likes: 34 }) {
 }
 
 beforeEach(() => {
+  isPrivateBrowsingContext.mockReturnValue(false);
   clearVoteDataRequestCache();
   global.fetch = jest.fn().mockResolvedValue(response());
+});
+
+test("private count requests omit credentials and HTTP cache use without account headers", async () => {
+  isPrivateBrowsingContext.mockReturnValue(true);
+  await requestVoteData(VIDEO_A);
+  expect(fetch).toHaveBeenCalledWith(`https://api.test/votes?videoId=${VIDEO_A}`, {
+    method: "GET",
+    headers: { Accept: "application/json" },
+    credentials: "omit",
+    cache: "no-store",
+    signal: expect.any(AbortSignal),
+  });
 });
 
 afterAll(() => {

@@ -1,9 +1,11 @@
+import { logger } from "./logging";
 import { getBrowser, getVideoId, numberFormat, createObserver, querySelector } from "./utils";
 import {
   checkForSignInButton,
   getButtons,
   getDislikeButton,
   getLikeButton,
+  getNativeButton,
   isSyntheticShortsDislike,
   setSyntheticShortsDislikePressed,
 } from "./buttons";
@@ -11,8 +13,10 @@ import {
   setDislikes,
   extConfig,
   storedData,
+  getState,
   refreshReactionPresentation,
   persistSyntheticShortsDislikeState,
+  updateDisableLogging,
 } from "./state";
 import { publishHideClutterButtons } from "./clutter-button-setting";
 import { createRateBar } from "./bar";
@@ -27,18 +31,64 @@ import {
 } from "../../common/vote-transition";
 import { resolveDelegatedVoteActivation } from "../../common/delegated-vote-activation";
 import { normalizeCustomColors, observeYouTubeTheme } from "../../common/color-themes";
+import { isPrivateBrowsingContext } from "./private-browsing";
+import { recordReviewAction } from "./review-prompt";
+import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "./core-data-consent";
+import { getDataConsentPrompt } from "./data-consent-prompt";
+
+function dispatchVote(vote, videoId) {
+  const result = getBrowser().runtime.sendMessage({ message: "send_vote", vote, videoId });
+  if (result && typeof result.catch === "function") {
+    result.catch((error) => console.error("Vote submission failed", error));
+  }
+}
+
+let dataConsentPrompt = null;
+let firefoxVoteSequence = 0;
+let countPermissionAvailable = true;
+
+function cancelPendingFirefoxVote() {
+  firefoxVoteSequence += 1;
+  dataConsentPrompt?.clearPendingVote();
+}
+
+function setCountPermissionAvailable(available) {
+  countPermissionAvailable = available;
+  if (!available) cancelPendingFirefoxVote();
+}
 
 function sendVote(vote) {
-  if (shouldSubmitVote({ disableVoteSubmission: extConfig.disableVoteSubmission })) {
-    const result = getBrowser().runtime.sendMessage({
-      message: "send_vote",
-      vote: vote,
-      videoId: getVideoId(window.location.href),
-    });
-    if (result && typeof result.catch === "function") {
-      result.catch((error) => console.error("Vote submission failed", error));
-    }
+  if (isPrivateBrowsingContext()) return;
+  if (!shouldSubmitVote({ disableVoteSubmission: extConfig.disableVoteSubmission })) return;
+  if (usesFirefoxDataCollectionConsent() && !countPermissionAvailable) return;
+  const videoId = getVideoId(window.location.href);
+  if (!usesFirefoxDataCollectionConsent()) {
+    dispatchVote(vote, videoId);
+    return;
   }
+  if (!dataConsentPrompt) dataConsentPrompt = getDataConsentPrompt();
+  const sequence = ++firefoxVoteSequence;
+  dataConsentPrompt.clearPendingVote();
+  const context = dataConsentPrompt.capturePageContext(videoId);
+  void hasFeaturePermission("voting").then((granted) => {
+    if (sequence !== firefoxVoteSequence || !dataConsentPrompt.isCurrent(context)) return;
+    if (granted) {
+      dispatchVote(vote, videoId);
+      return;
+    }
+    void dataConsentPrompt.offerVote(context, () => {
+      if (
+        sequence !== firefoxVoteSequence ||
+        !dataConsentPrompt.isCurrent(context) ||
+        !getLikeButton() ||
+        !getDislikeButton() ||
+        checkForSignInButton()
+      )
+        return;
+      const state = getState(storedData).current;
+      dispatchVote(state === LIKED_STATE ? 1 : state === DISLIKED_STATE ? -1 : 0, videoId);
+    });
+  });
 }
 
 function updateDOMDislikes() {
@@ -55,7 +105,7 @@ function clearNativeLikeForSyntheticDislike(action, stateBeforeActivation, synth
   if (!syntheticShortsDislike || action !== DISLIKE_ACTION || stateBeforeActivation !== LIKED_STATE) return;
 
   const likeButton = getLikeButton();
-  const nativeLikeButton = likeButton?.querySelector("button");
+  const nativeLikeButton = getNativeButton(likeButton);
   if (!nativeLikeButton) return;
   suppressNextLikeActivation = true;
   try {
@@ -68,6 +118,8 @@ function clearNativeLikeForSyntheticDislike(action, stateBeforeActivation, synth
 }
 
 function handleVoteAction(action) {
+  if (isPrivateBrowsingContext()) return;
+  if (usesFirefoxDataCollectionConsent() && !countPermissionAvailable) return;
   if (checkForSignInButton() === false) {
     const videoId = getVideoId(window.location.href);
     if (!videoId || storedData.videoId !== videoId) return;
@@ -88,6 +140,7 @@ function handleVoteAction(action) {
       );
     }
     updateDOMDislikes();
+    void recordReviewAction(videoId, transition.value);
   }
 }
 
@@ -127,7 +180,13 @@ function delegatedReactionClicked(event) {
   const buttons = getButtons();
   const likeButton = getLikeButton(buttons);
   const dislikeButton = getDislikeButton(buttons);
-  const activation = resolveDelegatedVoteActivation({ buttons, dislikeButton, event, likeButton });
+  const activation = resolveDelegatedVoteActivation({
+    buttons,
+    dislikeButton,
+    event,
+    getActivationTarget: getNativeButton,
+    likeButton,
+  });
   if (activation?.action === DISLIKE_ACTION) {
     dislikeClicked();
   } else if (activation?.action === LIKE_ACTION) {
@@ -143,6 +202,10 @@ function ensureDelegatedReactionListener() {
 
 function addLikeDislikeEventListener(likeButton = getLikeButton(), dislikeButton = getDislikeButton()) {
   if (!likeButton || !dislikeButton) return;
+  if (isPrivateBrowsingContext()) {
+    observeReactionPresentation(likeButton, dislikeButton);
+    return;
+  }
   ensureDelegatedReactionListener();
   observeReactionPresentation(likeButton, dislikeButton);
   if (!boundDislikeButtons.has(dislikeButton)) {
@@ -169,7 +232,7 @@ function createSmartimationObserver(buttons = getButtons()) {
 
   const smartimationContainer = querySelector(extConfig.selectors.buttons.smartimation, buttons);
   if (smartimationContainer && smartimationObserver.container != smartimationContainer) {
-    console.log("Initializing smartimation mutation observer");
+    logger.log("Initializing smartimation mutation observer");
     smartimationObserver.disconnect();
     smartimationObserver.observe(smartimationContainer);
     smartimationObserver.container = smartimationContainer;
@@ -177,6 +240,10 @@ function createSmartimationObserver(buttons = getButtons()) {
 }
 
 function storageChangeHandler(changes, area) {
+  if (isPrivateBrowsingContext()) return;
+  if (changes.disableLogging !== undefined && area === "sync") {
+    updateDisableLogging(changes.disableLogging.newValue);
+  }
   if (changes.disableVoteSubmission !== undefined) {
     handleDisableVoteSubmissionChangeEvent(changes.disableVoteSubmission.newValue);
   }
@@ -196,6 +263,16 @@ function storageChangeHandler(changes, area) {
   if (changes.numberDisplayFormat !== undefined) {
     handleNumberDisplayFormatChangeEvent(changes.numberDisplayFormat.newValue);
   }
+  if (area === "sync" && (changes.showTooltipPercentage !== undefined || changes.tooltipPercentageMode !== undefined)) {
+    if (changes.showTooltipPercentage !== undefined) {
+      extConfig.showTooltipPercentage = changes.showTooltipPercentage.newValue ?? false;
+    }
+    if (changes.tooltipPercentageMode !== undefined) {
+      extConfig.tooltipPercentageMode = changes.tooltipPercentageMode.newValue || "dash_like";
+    }
+    const videoId = getVideoId(window.location.href);
+    if (videoId && storedData.videoId === videoId) createRateBar(storedData.likes, storedData.dislikes);
+  }
   if (changes.numberDisplayReformatLikes !== undefined) {
     handleNumberDisplayReformatLikesChangeEvent(changes.numberDisplayReformatLikes.newValue);
   }
@@ -209,6 +286,7 @@ function storageChangeHandler(changes, area) {
 
 function handleDisableVoteSubmissionChangeEvent(value) {
   extConfig.disableVoteSubmission = value;
+  if (value === true) cancelPendingFirefoxVote();
 }
 
 function handleColoredThumbsChangeEvent(value) {
@@ -242,6 +320,7 @@ function observeColorTheme() {
 function handleNumberDisplayFormatChangeEvent(value) {
   extConfig.numberDisplayFormat = value;
   refreshReactionPresentation();
+  updateDOMDislikes();
 }
 
 function handleNumberDisplayReformatLikesChangeEvent(value) {
@@ -266,4 +345,5 @@ export {
   storageChangeHandler,
   updateDOMDislikes,
   observeColorTheme,
+  setCountPermissionAvailable,
 };

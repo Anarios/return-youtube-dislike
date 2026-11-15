@@ -9,6 +9,12 @@ const {
 } = require("../hermetic-artifact-smoke");
 const { VIDEO_A, VIDEO_B, openNavigationFixture, openWatchFixture } = require("../../UserScript/e2e/harness");
 const { LIVE_RUNTIME_PROFILES } = require("../live-runtime-adapter");
+const { EXTENSION_MATRIX_RUNTIME } = require("../../UserScript/e2e/navigation-matrix");
+const {
+  createNavigationRuntimeContractAdapter,
+  expectExactVoteSequence,
+  expectSuccessfulVoteActivation,
+} = require("../navigation-runtime-contract");
 
 const REPOSITORY_ROOT = path.resolve(__dirname, "../../..");
 const EXTENSION_ARTIFACT = path.resolve(
@@ -194,6 +200,54 @@ test.describe("generated extension artifact on the mobile YouTube hostname", () 
       expect(statsRequests(runtime, VIDEO_A)).toHaveLength(1);
       await expect(runtime.page.locator(".ryd-tooltip, #ryd-bar-container, #ryd-bar")).toHaveCount(0);
       expect(interactionRecords(runtime, 0)).toHaveLength(0);
+    });
+  });
+
+  test("mobile Watch in-page navigation submits every vote for the current video", async ({}, testInfo) => {
+    await withMobileExtension(testInfo, async (runtime) => {
+      const adapter = createNavigationRuntimeContractAdapter({
+        backend: runtime.adapter.backend,
+        matrixRuntime: EXTENSION_MATRIX_RUNTIME,
+        page: runtime.page,
+        readInteractionRecords: () => runtime.apiServer.records,
+        runtimeName: "extension",
+      });
+      const reactions = runtime.page.locator(
+        '.slim-video-action-bar-actions[data-fixture-shell="mobile"] > .segmented-buttons',
+      );
+      const likeButton = reactions.locator(":scope > like-button-view-model button");
+      const dislikeButton = reactions.locator(":scope > dislike-button-view-model button");
+      const navigateInPage = async (videoId) => {
+        await runtime.page.evaluate((destination) => window.__youtubeFixture.navigate(destination), videoId);
+        await expect(runtime.page).toHaveURL(
+          (url) => url.hostname === "m.youtube.com" && url.searchParams.get("v") === videoId,
+        );
+        await expect(likeButton).toBeVisible();
+        await expect(dislikeButton.locator("#text, [role='text']").first()).toHaveText(
+          String(COUNTS[videoId].dislikes),
+        );
+      };
+
+      await openWatchFixture(runtime.page, VIDEO_A, { hostname: "m.youtube.com" });
+      await expectVisibleReactionPair(reactions, COUNTS[VIDEO_A]);
+      await expectSuccessfulVoteActivation(adapter, VIDEO_A, 1, likeButton);
+
+      await navigateInPage(VIDEO_B);
+      await expectSuccessfulVoteActivation(adapter, VIDEO_B, 1, likeButton);
+      await expectSuccessfulVoteActivation(adapter, VIDEO_B, -1, dislikeButton);
+
+      await navigateInPage(VIDEO_A);
+      await expectSuccessfulVoteActivation(adapter, VIDEO_A, -1, dislikeButton);
+
+      expectExactVoteSequence(runtime.apiServer.records, [
+        { value: 1, videoId: VIDEO_A },
+        { value: 1, videoId: VIDEO_B },
+        { value: -1, videoId: VIDEO_B },
+        { value: -1, videoId: VIDEO_A },
+      ]);
+      expect(statsRequests(runtime, VIDEO_A)).toHaveLength(2);
+      expect(statsRequests(runtime, VIDEO_B)).toHaveLength(1);
+      expect(runtime.adapter.backend.requestsFor("POST", "/interact/vote")).toHaveLength(0);
     });
   });
 

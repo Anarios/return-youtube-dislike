@@ -1,4 +1,5 @@
 import {
+  captureShortsNativeControlInventory,
   ensureSyntheticShortsDislikeButton,
   getButtonControls,
   getButtons,
@@ -12,14 +13,17 @@ import {
   shortsNativeControlInventoryIsReadyForFallback,
 } from "./src/buttons";
 import {
+  ensureRemoteSelectors,
   hasLoadedStateForVideo,
   initExtConfig,
   isLikesDisabled,
   isShorts,
   clearRenderedVoteState,
+  remoteSelectorsSettled,
   restoreCurrentState,
   setInitialState,
   storedData,
+  NEUTRAL_STATE,
 } from "./src/state";
 import { getBrowser, getVideoId, isVideoLoaded } from "./src/utils";
 import {
@@ -27,6 +31,7 @@ import {
   createSmartimationObserver,
   storageChangeHandler,
   observeColorTheme,
+  setCountPermissionAvailable,
 } from "./src/events";
 import { hasUsableRateBar } from "./src/bar";
 import {
@@ -38,12 +43,16 @@ import {
 } from "./src/initialization-cycle";
 import { initPatreonFeatures } from "./src/patreon";
 import { initDiscussion } from "./src/discussion";
-import { waitForCoreDataConsent } from "./src/consent-prompt";
-import { onCoreDataPermissionChanged } from "./src/core-data-consent";
+import {
+  hasFeaturePermission,
+  onDataPermissionsChanged,
+  usesFirefoxDataCollectionConsent,
+} from "./src/core-data-consent";
+import { getDataConsentPrompt } from "./src/data-consent-prompt";
 import { cancelObsoleteVoteDataRequests, clearVoteDataRequestCache } from "./src/vote-data-request";
+import { isPrivateBrowsingContext } from "./src/private-browsing";
 import {
   actionBarHasHydratedData,
-  captureShortsNativeControlInventory,
   getShortsControlSurfaceStabilityMs,
   shortsNativeControlInventoryMatches,
 } from "../common/shorts-control-readiness";
@@ -68,10 +77,40 @@ let initializationCheckRunning = false;
 let pendingShortsMutationSurface = null;
 let shortsRouteEpoch = 0;
 let observedRouteKey = null;
-let coreConsentGranted = false;
+let privatePageActive = true;
+const privateBrowsingContext = isPrivateBrowsingContext();
+const firefoxDataConsent = usesFirefoxDataCollectionConsent();
+const dataConsentPrompt = firefoxDataConsent && !privateBrowsingContext ? getDataConsentPrompt() : null;
+dataConsentPrompt?.onPageOfferEnded(updateInitializationWatch);
+let countsPermissionGranted = !firefoxDataConsent;
+let countsPermissionEpoch = 0;
+let contentReady = false;
+let initializationWatchTimer = null;
 const pendingNavigation = createPendingNavigationTracker();
 const SHORTS_HYDRATION_ATTRIBUTE = "data-ryd-shorts-action-bar-hydrated";
 const SHORTS_HYDRATION_REQUEST_EVENT = "ryd-shorts-action-bar-hydration-request";
+
+function clearPrivateVoteState() {
+  clearVoteDataRequestCache();
+  Object.assign(storedData, { likes: 0, dislikes: 0, previousState: NEUTRAL_STATE, videoId: null });
+}
+
+if (privateBrowsingContext) {
+  window.addEventListener("pagehide", () => {
+    privatePageActive = false;
+    clearPrivateVoteState();
+    clearRenderedVoteState();
+    initializedVideoId = null;
+    isSetInitialStateDone = false;
+    if (jsInitChecktimer !== null) {
+      clearInterval(jsInitChecktimer);
+      jsInitChecktimer = null;
+    }
+  });
+  window.addEventListener("pageshow", () => {
+    privatePageActive = true;
+  });
+}
 
 function injectPageWorldHelpers() {
   return new Promise((resolve) => {
@@ -100,31 +139,67 @@ function pageWorldActionBarHasHydratedData(actionBar) {
   return hydrated;
 }
 
-await waitForCoreDataConsent();
-coreConsentGranted = true;
-onCoreDataPermissionChanged((granted) => {
-  coreConsentGranted = granted;
-  if (!granted) {
+function applyCountsPermission(granted) {
+  countsPermissionEpoch += 1;
+  countsPermissionGranted = granted;
+  setCountPermissionAvailable(granted);
+  dataConsentPrompt?.hidePageOffer();
+  clearPrivateVoteState();
+  clearRenderedVoteState(initializedButtons ? getButtonControls(initializedButtons) : undefined);
+  initializedVideoId = null;
+  isSetInitialStateDone = false;
+  if (jsInitChecktimer !== null) {
+    clearInterval(jsInitChecktimer);
+    jsInitChecktimer = null;
+  }
+  if (granted) void ensureRemoteSelectors();
+  if (!contentReady) return;
+  updateInitializationWatch();
+  void triggerInitializationCycle();
+}
+
+async function recheckCountsPermission() {
+  if (!firefoxDataConsent || countsPermissionGranted) return;
+  const epoch = countsPermissionEpoch;
+  const granted = await hasFeaturePermission("counts");
+  if (granted && epoch === countsPermissionEpoch && !countsPermissionGranted) applyCountsPermission(true);
+}
+
+function observeCountPermissions() {
+  onDataPermissionsChanged(({ added, removed }) => {
+    if (added.includes("browsingActivity") || removed.includes("browsingActivity")) {
+      applyCountsPermission(!removed.includes("browsingActivity"));
+      return;
+    }
+    if (![...added, ...removed].includes("websiteContent")) return;
     clearVoteDataRequestCache();
     storedData.videoId = null;
     initializedVideoId = null;
     isSetInitialStateDone = false;
-    clearRenderedVoteState();
-    void waitForCoreDataConsent().then(() => {
-      coreConsentGranted = true;
-    });
-  }
-});
+    if (contentReady && countsPermissionGranted) void triggerInitializationCycle();
+  });
+}
+observeCountPermissions();
+if (firefoxDataConsent) {
+  const epoch = countsPermissionEpoch;
+  const [granted] = await Promise.all([hasFeaturePermission("counts"), dataConsentPrompt?.loadPageOfferDismissal()]);
+  if (epoch === countsPermissionEpoch) countsPermissionGranted = granted;
+  setCountPermissionAvailable(countsPermissionGranted);
+}
 const pageWorldHelpersReady = injectPageWorldHelpers();
 // Listen before asynchronous initialization so settings changed in another tab
 // are applied while the page is still loading.
-getBrowser().storage.onChanged.addListener(storageChangeHandler);
-isStorageListenerRegistered = true;
+if (!privateBrowsingContext) {
+  getBrowser().storage.onChanged.addListener(storageChangeHandler);
+  isStorageListenerRegistered = true;
+}
 await initExtConfig();
 observeColorTheme();
 await pageWorldHelpersReady;
-initPatreonFeatures();
-initDiscussion();
+if (!privateBrowsingContext) {
+  initPatreonFeatures();
+  initDiscussion();
+}
 
 function ensureShortsNavigationObserver() {
   if (!isShorts()) {
@@ -192,7 +267,7 @@ function syncShortsRouteEpoch() {
   }
 }
 
-function getStableShortsControls(videoId) {
+function getStableShortsControls(videoId, allowSyntheticDislike = true) {
   const buttons = getButtons();
   const isHydrated = pageWorldActionBarHasHydratedData(buttons);
   const needsSyntheticDislike =
@@ -272,6 +347,13 @@ function getStableShortsControls(videoId) {
   }
 
   if (needsSyntheticDislike) {
+    if (!allowSyntheticDislike) {
+      const consentControls = getButtonControls(preMutationButtons);
+      return {
+        ...consentControls,
+        ready: Boolean(consentControls.nativeLikeButton),
+      };
+    }
     ensureSyntheticShortsDislikeButton(preMutationButtons, {
       allowUnhydratedFallback: preMutationAllowsFallback,
       currentVideoId: videoId,
@@ -303,7 +385,7 @@ function getStableShortsControls(videoId) {
 }
 
 async function checkForInitialization() {
-  if (!coreConsentGranted) return;
+  if (privateBrowsingContext && !privatePageActive) return;
   if (initializationCheckRunning) return;
   initializationCheckRunning = true;
   try {
@@ -314,9 +396,15 @@ async function checkForInitialization() {
 
     const videoId = getVideoId(window.location.href);
     const pendingOrigin = pendingNavigation.get();
-    if (pendingOrigin && (!pendingOrigin.videoId || pendingOrigin.videoId === videoId)) return;
-    const controls = isShorts() ? getStableShortsControls(videoId) : getButtonControls();
-    if (!controls) return;
+    if (pendingOrigin && (!pendingOrigin.videoId || pendingOrigin.videoId === videoId)) {
+      dataConsentPrompt?.hidePageOffer();
+      return;
+    }
+    const controls = isShorts() ? getStableShortsControls(videoId, countsPermissionGranted) : getButtonControls();
+    if (!controls) {
+      dataConsentPrompt?.hidePageOffer();
+      return;
+    }
     const { buttons, dislikeButton, likeButton, nativeDislikeButton, nativeLikeButton } = controls;
     const shortsRoute = isShorts();
     if (
@@ -327,16 +415,27 @@ async function checkForInitialization() {
         isVideoLoaded: !shortsRoute && isVideoLoaded(),
       })
     ) {
+      if (!countsPermissionGranted) {
+        dataConsentPrompt?.syncPageOffer(controls, videoId);
+        return;
+      }
+      dataConsentPrompt?.hidePageOffer();
       if (!getDislikeTextContainer(controls)) return;
       createSmartimationObserver(buttons);
       addLikeDislikeEventListener(likeButton, dislikeButton);
+      const initializationPermissionEpoch = countsPermissionEpoch;
       let rendered;
       if (hasLoadedStateForVideo(videoId)) {
         rendered = restoreCurrentState();
       } else {
         rendered = await setInitialState();
       }
-      if (rendered === false || !coreConsentGranted) return;
+      if (!countsPermissionGranted || initializationPermissionEpoch !== countsPermissionEpoch) {
+        clearPrivateVoteState();
+        clearRenderedVoteState();
+        return;
+      }
+      if (rendered === false || (privateBrowsingContext && !privatePageActive)) return;
       const currentControls = getButtonControls();
       if (
         videoId !== getVideoId(window.location.href) ||
@@ -364,13 +463,19 @@ async function checkForInitialization() {
         clearInterval(jsInitChecktimer);
         jsInitChecktimer = null;
       }
-      if (!isStorageListenerRegistered) {
+      if (!privateBrowsingContext && !isStorageListenerRegistered) {
         getBrowser().storage.onChanged.addListener(storageChangeHandler);
         isStorageListenerRegistered = true;
       }
+    } else if (!countsPermissionGranted) {
+      dataConsentPrompt?.hidePageOffer();
     }
   } catch (exception) {
-    console.warn("Initialization failed; retrying when the current controls are ready.", exception);
+    if (privateBrowsingContext) {
+      console.warn("Initialization failed; retrying when the current controls are ready.");
+    } else {
+      console.warn("Initialization failed; retrying when the current controls are ready.", exception);
+    }
   } finally {
     initializationCheckRunning = false;
   }
@@ -384,9 +489,10 @@ const initializationCycle = createInitializationCycleRunner(async () => {
     jsInitChecktimer = null;
   }
 
+  await remoteSelectorsSettled();
   await checkForInitialization();
 
-  if (!isSetInitialStateDone) {
+  if (!isSetInitialStateDone && countsPermissionGranted) {
     jsInitChecktimer = setInterval(() => {
       checkForInitialization();
     }, 111);
@@ -400,7 +506,7 @@ const initializationCycle = createInitializationCycleRunner(async () => {
 });
 
 function triggerInitializationCycle() {
-  if (!coreConsentGranted) return Promise.resolve();
+  if (privateBrowsingContext && !privatePageActive) return Promise.resolve();
   return initializationCycle.request();
 }
 
@@ -409,7 +515,9 @@ async function setEventListeners() {
 }
 
 document.addEventListener("yt-navigate-start", function () {
+  dataConsentPrompt?.hidePageOffer();
   clearVoteDataRequestCache();
+  if (privateBrowsingContext) clearPrivateVoteState();
   shortsRouteEpoch += 1;
   pendingShortsMutationSurface = null;
   pendingNavigation.begin(() => {
@@ -449,6 +557,7 @@ document.addEventListener("yt-navigate-start", function () {
 document.addEventListener("yt-navigate-finish", async function (event) {
   pendingNavigation.clear();
   syncShortsRouteEpoch();
+  await recheckCountsPermission();
   await setEventListeners();
 });
 
@@ -517,12 +626,31 @@ function watchControlsNeedInitialization() {
   );
 }
 
-setInterval(() => {
-  if (!coreConsentGranted) return;
+function watchInitialization() {
+  if (privateBrowsingContext && !privatePageActive) return;
   syncShortsRouteEpoch();
   if (isShorts()) ensureShortsNavigationObserver();
+  if (!countsPermissionGranted) {
+    void checkForInitialization();
+    return;
+  }
   if (watchControlsNeedInitialization()) void triggerInitializationCycle();
-}, 500);
+}
 
+function initializationWatchNeeded() {
+  return countsPermissionGranted || (dataConsentPrompt !== null && dataConsentPrompt.canOfferOnPage());
+}
+
+function updateInitializationWatch() {
+  if (!initializationWatchNeeded()) {
+    if (initializationWatchTimer !== null) clearInterval(initializationWatchTimer);
+    initializationWatchTimer = null;
+    return;
+  }
+  initializationWatchTimer ??= setInterval(watchInitialization, 500);
+}
+
+updateInitializationWatch();
 // Navigation must be observable even while the first count request is pending.
+contentReady = true;
 await setEventListeners();

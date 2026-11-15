@@ -21,8 +21,7 @@ storitvi omogoča, da oddane glasove poveže z isto namestitvijo razširitve.
 Pri zahtevah za število nevšečkov: ID trenutnega videa in, kadar je na voljo, vidno število všečkov. Pri registraciji in
 oddaji glasov: naključni uporabniški ID razširitve, ID videa, izbrani glas, časovni žig in omrežni naslov, uporabljen za
 nadzor nad zlorabami. Izbirne premium funkcije uporabljajo ID računa, ime, e-poštni naslov, profilno sliko, podatke o
-članstvu in žeton seje storitve, ki ga vrne prijava s Patreonom ali GitHubom, ki jo sproži uporabnik. Pri različici 4.0.6 in
-pripadajoči izdaji zaledja se dostop prek Patreona določi iz trenutno dodeljenih ID-jev stopenj, ne iz finančnih podatkov.
+članstvu in žeton seje storitve, ki ga vrne prijava s Patreonom ali GitHubom, ki jo sproži uporabnik.
 
 ### Kako je shranjen moj naslov IP?
 
@@ -33,8 +32,7 @@ preprečevanja zlorab in združene analitike. Naslova ne prodajamo in ga ne upor
 
 Prijava v premium analitiko je izbirna in se začne šele, ko uporabnik v razširitvi izbere prijavo s Patreonom ali GitHubom.
 Postopek OAuth vrne podatke o računu in žeton seje Return YouTube Dislike, ki se uporablja za overjanje premium zahtev
-API-ja. Pri različici 4.0.6 in pripadajoči izdaji zaledja se upravičenost prek Patreona določi iz trenutno dodeljenih ID-jev stopenj;
-storitev ne zahteva in ne uporablja zneskov članstva, datumov ali stanja bremenitev, skupnega zneska vseh dosedanjih plačil ali statusa podpornika.
+API-ja.
 Firefox pred začetkom prometa, povezanega z računom, zahteva ločeno privolitev za podatke za overjanje. Z odjavo se
 shranjeni podatki o računu in seja odstranijo iz razširitve. Preklic Firefoxovega dovoljenja za podatke za overjanje prav tako počisti
 sejo računa in prepreči nadaljnji promet, povezan z računom, dokler znova ne date privolitve in se ne prijavite. Sinhronizacija

@@ -1,5 +1,7 @@
+import { logger, setLoggingDisabled } from "./logging";
 import { extConfig, isShorts } from "./state";
 import { getThemeColor, isYouTubeDarkTheme } from "../../common/color-themes";
+import { getLiveVideoId } from "../../common/live-video-id";
 
 const DEFAULT_SHORTS_LOADED_SELECTORS = {
   containers: [".reel-video-in-sequence-new"],
@@ -33,7 +35,7 @@ function getNumberFormatter(optionSelect) {
           ?.getAttribute("href"),
       )?.searchParams?.get("locale");
     } catch {
-      console.log("Cannot find browser locale. Use en as default for number formatting.");
+      logger.log("Cannot find browser locale. Use en as default for number formatting.");
       userLocales = "en";
     }
   }
@@ -91,7 +93,7 @@ function getBrowser() {
   } else if (typeof browser !== "undefined" && typeof browser.runtime !== "undefined") {
     return browser;
   } else {
-    console.log("browser is not supported");
+    logger.log("browser is not supported");
     return false;
   }
 }
@@ -106,7 +108,7 @@ function getVideoId(url) {
     if (pathname.startsWith("/shorts")) {
       return pathname.slice(8);
     }
-    return urlObject.searchParams.get("v");
+    return urlObject.searchParams.get("v") ?? getLiveVideoId(pathname);
   }
 }
 
@@ -242,22 +244,8 @@ function isVideoLoaded() {
   return querySelector(videoLoadedSelectors.map((selector) => selector.replace("{videoId}", videoId))) !== undefined;
 }
 
-const originalConsole = {
-  log: console.log.bind(console),
-  debug: console.debug.bind(console),
-  info: console.info.bind(console),
-  warn: console.warn.bind(console),
-  error: console.error.bind(console),
-};
-
 function initializeLogging() {
-  if (extConfig.disableLogging) {
-    console.log = () => {};
-    console.debug = () => {};
-  } else {
-    console.log = originalConsole.log;
-    console.debug = originalConsole.debug;
-  }
+  setLoggingDisabled(extConfig.disableLogging);
 }
 
 function getColorFromTheme(voteIsLike) {

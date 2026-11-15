@@ -9,6 +9,7 @@ const {
 } = require("../../UserScript/e2e/navigation-matrix");
 const {
   createNavigationRuntimeContractAdapter,
+  expectExactVoteSequence,
   registerNavigationRuntimeContractScenarios,
   runNavigationRuntimeContract,
 } = require("../navigation-runtime-contract");
@@ -21,6 +22,13 @@ const {
   runShortsPlaceholderPoolContract,
   shortsPlaceholderPoolUrl,
 } = require("../shorts-placeholder-pool-contract");
+const { openNavigationFixture } = require("../../UserScript/e2e/harness");
+const {
+  VOTE_IDENTITY_JOURNEY_COUNTS,
+  VOTE_IDENTITY_JOURNEY_VIEWPORT,
+  registerVoteIdentityJourneys,
+  runVoteIdentityJourney,
+} = require("../vote-identity-journey-contract");
 
 const REPOSITORY_ROOT = path.resolve(__dirname, "../../..");
 const EXTENSION_ARTIFACT = path.resolve(
@@ -622,6 +630,36 @@ test.describe("generated extension artifact navigation matrix", () => {
   });
 });
 
+test.describe("generated extension artifact vote identity journeys", () => {
+  registerVoteIdentityJourneys({
+    runtimeName: "extension",
+    register: ({ journey, title }) => {
+      test(title, async ({}, testInfo) => {
+        test.setTimeout(45_000);
+        await withExtensionArtifact(testInfo, { countsByVideo: VOTE_IDENTITY_JOURNEY_COUNTS }, async (runtime) => {
+          await runtime.page.setViewportSize(VOTE_IDENTITY_JOURNEY_VIEWPORT);
+          await openNavigationFixture(runtime.page, {
+            pageKind: journey.origin.kind,
+            videoId: journey.origin.videoId,
+          });
+          await runVoteIdentityJourney({
+            adapter: createNavigationRuntimeContractAdapter({
+              backend: runtime.adapter.backend,
+              matrixRuntime: EXTENSION_MATRIX_RUNTIME,
+              page: runtime.page,
+              readInteractionRecords: () => runtime.apiServer.records,
+              runtimeName: "extension",
+            }),
+            journey,
+          });
+          expect(runtime.adapter.backend.requestsFor("POST", "/interact/vote")).toEqual([]);
+          await assertHermeticRuntime(runtime, journey.id);
+        });
+      });
+    },
+  });
+});
+
 test.describe("generated extension artifact current Shorts topology", () => {
   test("premium teaser and the Shorts renderer share one aggregate request per navigation", async ({}, testInfo) => {
     const scenario = NAVIGATION_MATRIX.find(({ id }) => id === "short-next-short-active-reel");
@@ -919,25 +957,38 @@ test.describe("generated extension artifact real watch topology", () => {
     );
   });
 
-  test("history back and forward repeatedly replace controls without losing or duplicating the current surface", async ({}, testInfo) => {
+  test("history back and forward repeatedly replace controls and vote only for the current entry's video", async ({}, testInfo) => {
     await withExtensionArtifact(
       testInfo,
       { countsByVideo: COUNTS, installRoute: installOwnedLifecycleRoute },
       async (runtime) => {
+        const currentLikeButton = runtime.page.locator(
+          '[data-fixture-current-actions="true"] like-button-view-model button',
+        );
         await openLifecycleFixture(runtime);
         await expectCurrentSurface(runtime, DEFAULT_VIDEO_IDS.A, COUNTS[DEFAULT_VIDEO_IDS.A]);
+        await expectOneVoteAndConfirmation(runtime, DEFAULT_VIDEO_IDS.A, 1, currentLikeButton);
         await runtime.page.locator("#fixture-history-next").click();
         await expectNoSkeletonMisbind(runtime, DEFAULT_VIDEO_IDS.B);
         await hydrateAndExpect(runtime, DEFAULT_VIDEO_IDS.B, COUNTS[DEFAULT_VIDEO_IDS.B]);
+        await expectOneVoteAndConfirmation(runtime, DEFAULT_VIDEO_IDS.B, 1, currentLikeButton);
 
         await runtime.page.goBack();
         await expectNoSkeletonMisbind(runtime, DEFAULT_VIDEO_IDS.A, { statsRequestCount: 1 });
         await hydrateAndExpect(runtime, DEFAULT_VIDEO_IDS.A, COUNTS[DEFAULT_VIDEO_IDS.A]);
+        await expectOneVoteAndConfirmation(runtime, DEFAULT_VIDEO_IDS.A, 1, currentLikeButton);
 
         await runtime.page.goForward();
         await expectNoSkeletonMisbind(runtime, DEFAULT_VIDEO_IDS.B, { statsRequestCount: 1 });
         await hydrateAndExpect(runtime, DEFAULT_VIDEO_IDS.B, COUNTS[DEFAULT_VIDEO_IDS.B]);
+        await expectOneVoteAndConfirmation(runtime, DEFAULT_VIDEO_IDS.B, -1);
 
+        expectExactVoteSequence(runtime.apiServer.records, [
+          { value: 1, videoId: DEFAULT_VIDEO_IDS.A },
+          { value: 1, videoId: DEFAULT_VIDEO_IDS.B },
+          { value: 1, videoId: DEFAULT_VIDEO_IDS.A },
+          { value: -1, videoId: DEFAULT_VIDEO_IDS.B },
+        ]);
         expect(statsRequests(runtime, DEFAULT_VIDEO_IDS.A)).toHaveLength(2);
         expect(statsRequests(runtime, DEFAULT_VIDEO_IDS.B)).toHaveLength(2);
         await expect(runtime.page.locator(".ryd-tooltip")).toHaveCount(1);

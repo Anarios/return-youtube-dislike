@@ -6,6 +6,12 @@
 jest.mock("./buttons", () => {
   const dislikeTextContainer = {
     innerText: "native dislike",
+    get textContent() {
+      return this.innerText;
+    },
+    set textContent(value) {
+      this.innerText = String(value);
+    },
     removeAttribute: jest.fn(),
   };
   const likeButton = {
@@ -43,6 +49,7 @@ jest.mock("./buttons", () => {
       return dislikeTextContainer;
     },
     getLikeButton: () => likeButton,
+    getNativeButton: (control) => control?.native,
     getLikeTextContainer: () => ({ innerText: "35" }),
     isSyntheticShortsDislike: (button) => button?.synthetic === true,
     setSyntheticShortsDislikeEnabled: jest.fn(),
@@ -79,14 +86,19 @@ import { dislikeClicked, likeClicked } from "./events";
 import { clearVoteDataRequestCache } from "./vote-data-request";
 import {
   clearRenderedVoteState,
+  ensureRemoteSelectors,
+  remoteSelectorsSettled,
   extConfig,
   getLikeCountFromButton,
+  initExtConfig,
   initializeHideClutterButtons,
   initializeSelectors,
+  updateDisableLogging,
   restoreCurrentState,
   setDislikes,
   setState,
   storedData,
+  persistSyntheticShortsDislikeState,
   __RewireAPI__ as stateRewire,
 } from "./state";
 
@@ -126,12 +138,57 @@ afterEach(() => {
   stateRewire.__ResetDependency__("nativeLikeCounts");
   stateRewire.__ResetDependency__("isMobile");
   stateRewire.__ResetDependency__("syntheticDislikeStore");
+  stateRewire.__ResetDependency__("isPrivateBrowsingContext");
+  stateRewire.__ResetDependency__("initializeLogging");
 });
 
 afterAll(() => {
   delete global.fetch;
   delete globalThis.__mockBrowser;
   delete globalThis.__mockControlsUnavailable;
+});
+
+test.each([true, false, undefined])("initializes the logging preference (%s)", (value) => {
+  const initializeLogging = jest.fn();
+  stateRewire.__set__("initializeLogging", initializeLogging);
+  const set = jest.fn();
+  globalThis.__mockBrowser = {
+    storage: { sync: { get: (_keys, callback) => callback({ disableLogging: value }), set } },
+  };
+
+  stateRewire.__get__("initializeDisableLogging")();
+
+  expect(extConfig.disableLogging).toBe(value ?? true);
+  expect(initializeLogging).toHaveBeenCalledTimes(1);
+  if (value === undefined) expect(set).toHaveBeenCalledWith({ disableLogging: true });
+  else expect(set).not.toHaveBeenCalled();
+});
+
+test.each([true, false, undefined])("a late logging preference read cannot override a live update (%s)", (value) => {
+  const initializeLogging = jest.fn();
+  stateRewire.__set__("initializeLogging", initializeLogging);
+  let finishRead;
+  const set = jest.fn();
+  globalThis.__mockBrowser = {
+    storage: { sync: { get: (_keys, callback) => (finishRead = callback), set } },
+  };
+  stateRewire.__get__("initializeDisableLogging")();
+
+  updateDisableLogging(false);
+  finishRead({ disableLogging: value });
+
+  expect(extConfig.disableLogging).toBe(false);
+  expect(initializeLogging).toHaveBeenCalledTimes(1);
+  expect(set).not.toHaveBeenCalled();
+});
+
+test("removing the logging preference restores the default suppression", () => {
+  const initializeLogging = jest.fn();
+  stateRewire.__set__("initializeLogging", initializeLogging);
+  updateDisableLogging(false);
+  updateDisableLogging(undefined);
+  expect(extConfig.disableLogging).toBe(true);
+  expect(initializeLogging).toHaveBeenCalledTimes(2);
 });
 
 test("hide-clutter initialization persists and publishes the default-off value", async () => {
@@ -533,4 +590,224 @@ test("falls back to bundled selectors when the remote selector request never set
   } finally {
     jest.useRealTimers();
   }
+});
+
+test("remote selectors are fetched again only until one request succeeds", async () => {
+  stateRewire.__set__("remoteSelectorsLoaded", false);
+  fetch.mockRejectedValueOnce(new Error("consent required"));
+  await ensureRemoteSelectors();
+  fetch.mockResolvedValueOnce({ ok: true, json: async () => ({}) });
+  await ensureRemoteSelectors();
+  await ensureRemoteSelectors();
+  expect(fetch.mock.calls.filter(([url]) => url.endsWith("/configs/selectors"))).toHaveLength(2);
+});
+
+test("concurrent selector loads share one request that later cycles wait for", async () => {
+  stateRewire.__set__("remoteSelectorsLoaded", false);
+  let respond;
+  fetch.mockImplementationOnce(() => new Promise((resolve) => (respond = resolve)));
+  const first = ensureRemoteSelectors();
+  const second = ensureRemoteSelectors();
+  let settled = false;
+  const waiting = remoteSelectorsSettled().then(() => (settled = true));
+  await Promise.resolve();
+  expect(settled).toBe(false);
+  respond({ ok: true, json: async () => ({}) });
+  await expect(first).resolves.toBe(true);
+  await expect(second).resolves.toBe(true);
+  await waiting;
+  expect(settled).toBe(true);
+  expect(fetch.mock.calls.filter(([url]) => url.endsWith("/configs/selectors"))).toHaveLength(1);
+  await expect(remoteSelectorsSettled()).resolves.toBeUndefined();
+});
+
+describe("private count display", () => {
+  beforeEach(() => {
+    stateRewire.__set__("isPrivateBrowsingContext", () => true);
+  });
+
+  test.each([false, true])("reads only display preferences without default writes (saved=%s)", async (saved) => {
+    const initializeLogging = jest.fn();
+    stateRewire.__set__("initializeLogging", initializeLogging);
+    const preferences = saved
+      ? {
+          coloredThumbs: true,
+          coloredBar: true,
+          colorTheme: "custom",
+          customColors: { light: { like: "#123456", dislike: "#654321" } },
+          numberDisplayFormat: "standard",
+          showTooltipPercentage: true,
+          tooltipPercentageMode: "percentage",
+          numberDisplayReformatLikes: true,
+          hideClutterButtons: true,
+          disableLogging: false,
+          patreonSessionToken: "synthetic-normal-session",
+        }
+      : {};
+    Object.assign(extConfig, {
+      coloredThumbs: false,
+      coloredBar: false,
+      colorTheme: "classic",
+      numberDisplayFormat: "compactShort",
+      showTooltipPercentage: false,
+      tooltipPercentageMode: "dash_like",
+      numberDisplayReformatLikes: false,
+      hideClutterButtons: false,
+    });
+    const storage = {
+      sync: {
+        get: jest.fn((_keys, callback) => callback(preferences)),
+        set: jest.fn(),
+      },
+      local: { get: jest.fn(), set: jest.fn(), remove: jest.fn() },
+      onChanged: { addListener: jest.fn(), removeListener: jest.fn() },
+    };
+    globalThis.__mockBrowser = { storage };
+    fetch.mockResolvedValueOnce({ ok: true, json: async () => ({}) });
+    const consoleLog = console.log;
+    const consoleDebug = console.debug;
+
+    await initExtConfig();
+
+    expect(storage.sync.get).toHaveBeenCalledTimes(1);
+    expect(storage.sync.get).toHaveBeenCalledWith(
+      [
+        "coloredThumbs",
+        "coloredBar",
+        "colorTheme",
+        "customColors",
+        "numberDisplayFormat",
+        "showTooltipPercentage",
+        "tooltipPercentageMode",
+        "numberDisplayReformatLikes",
+        "hideClutterButtons",
+      ],
+      expect.any(Function),
+    );
+    expect(storage.sync.set).not.toHaveBeenCalled();
+    expect(storage.local.get).not.toHaveBeenCalled();
+    expect(storage.local.set).not.toHaveBeenCalled();
+    expect(storage.local.remove).not.toHaveBeenCalled();
+    expect(storage.onChanged.addListener).not.toHaveBeenCalled();
+    expect(initializeLogging).toHaveBeenCalledTimes(1);
+    expect(console.log).toBe(consoleLog);
+    expect(console.debug).toBe(consoleDebug);
+    expect(extConfig.coloredBar).toBe(saved);
+    expect(extConfig.numberDisplayFormat).toBe(saved ? "standard" : "compactShort");
+    expect(extConfig.customColors.light.like).toBe(saved ? "#123456" : "#007600");
+    expect(extConfig.disableLogging).toBe(true);
+    expect(extConfig).not.toHaveProperty("patreonSessionToken");
+    expect(fetch).toHaveBeenCalledWith(
+      "https://example.test/configs/selectors",
+      expect.objectContaining({ method: "GET", credentials: "omit", cache: "no-store" }),
+    );
+  });
+
+  test("private initialization suppresses its own count diagnostics without replacing console methods", async () => {
+    const { logger, setLoggingDisabled } = jest.requireActual("./logging");
+    const log = jest.spyOn(console, "log").mockImplementation(() => {});
+    const debug = jest.spyOn(console, "debug").mockImplementation(() => {});
+    const ownLog = jest.spyOn(logger, "log");
+    const initializeLogging = jest.fn(() => setLoggingDisabled(extConfig.disableLogging));
+    stateRewire.__set__("initializeLogging", initializeLogging);
+    const storage = {
+      sync: {
+        get: jest.fn((_keys, callback) => callback({ disableLogging: false })),
+        set: jest.fn(),
+      },
+    };
+    globalThis.__mockBrowser = { storage };
+    fetch
+      .mockResolvedValueOnce({ ok: true, json: async () => ({}) })
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 65, likes: 100 }) });
+    extConfig.disableLogging = false;
+    setLoggingDisabled(false);
+
+    try {
+      await initExtConfig();
+      await setState(storedData);
+      logger.debug("Private count diagnostic");
+
+      expect(initializeLogging).toHaveBeenCalledTimes(1);
+      expect(extConfig.disableLogging).toBe(true);
+      expect(ownLog).toHaveBeenCalledWith("Video is loaded. Adding buttons...");
+      expect(log).not.toHaveBeenCalled();
+      expect(debug).not.toHaveBeenCalled();
+      expect(console.log).toBe(log);
+      expect(console.debug).toBe(debug);
+      expect(storage.sync.get.mock.calls[0][0]).not.toContain("disableLogging");
+      expect(storage.sync.set).not.toHaveBeenCalled();
+    } finally {
+      setLoggingDisabled(false);
+      ownLog.mockRestore();
+      log.mockRestore();
+      debug.mockRestore();
+    }
+  });
+
+  test("never restores or writes synthetic Shorts history, including direct persistence calls", async () => {
+    const store = { isDisliked: jest.fn(async () => true), setDisliked: jest.fn(async () => undefined) };
+    stateRewire.__set__("syntheticDislikeStore", store);
+    stateRewire.__set__("isMobile", () => false);
+    getDislikeButton().synthetic = true;
+    fetch.mockResolvedValueOnce({ ok: true, json: async () => ({ dislikes: 65, likes: 100 }) });
+
+    await setState(storedData);
+    await persistSyntheticShortsDislikeState("abcdefghijk", true);
+    await persistSyntheticShortsDislikeState("abcdefghijk", false);
+
+    expect(store.isDisliked).not.toHaveBeenCalled();
+    expect(store.setDisliked).not.toHaveBeenCalled();
+    expect(storedData).toMatchObject({ dislikes: 65, previousState: "NEUTRAL_STATE", videoId: "abcdefghijk" });
+    expect(setSyntheticShortsDislikePressed).toHaveBeenLastCalledWith(false, getDislikeButton());
+  });
+
+  test("omits private response and count payloads from diagnostics", async () => {
+    const payload = { dislikes: 654321, likes: 100, videoId: "private-test-video", marker: "private-count-payload" };
+    const log = jest.spyOn(console, "log").mockImplementation(() => {});
+    fetch.mockResolvedValueOnce({ ok: true, json: async () => payload });
+    try {
+      await setState(storedData);
+      expect(JSON.stringify(log.mock.calls)).not.toMatch(/654321|private-test-video|private-count-payload/);
+    } finally {
+      log.mockRestore();
+    }
+  });
+
+  test("does not save a missing clutter preference when initialized directly", async () => {
+    const storage = { get: jest.fn((_keys, callback) => callback({})), set: jest.fn() };
+    globalThis.__mockBrowser = { storage: { sync: storage } };
+    await initializeHideClutterButtons();
+    expect(storage.set).not.toHaveBeenCalled();
+  });
+
+  test("discards a late private selector response after page exit", async () => {
+    const pending = deferred();
+    fetch.mockReturnValueOnce(pending.promise);
+    const initialization = initializeSelectors();
+    const signal = fetch.mock.calls[0][1].signal;
+    window.dispatchEvent(new Event("pagehide"));
+    expect(signal.aborted).toBe(true);
+    pending.resolve({ ok: true, json: async () => ({ privateSelectorMarker: true }) });
+    await expect(initialization).resolves.toBe(false);
+    expect(extConfig.selectors).not.toHaveProperty("privateSelectorMarker");
+  });
+});
+
+describe("vote submission preference", () => {
+  test("is read and defaulted in synced storage", async () => {
+    const storage = {
+      sync: { get: jest.fn((_keys, callback) => callback({})), set: jest.fn() },
+      local: { get: jest.fn((_keys, callback) => callback({})), set: jest.fn() },
+      onChanged: { addListener: jest.fn(), removeListener: jest.fn() },
+    };
+    globalThis.__mockBrowser = { storage };
+    fetch.mockResolvedValueOnce({ ok: true, json: async () => ({}) });
+
+    await initExtConfig();
+
+    const requested = storage.sync.get.mock.calls.flatMap(([keys]) => [].concat(keys));
+    expect(requested).toContain("disableVoteSubmission");
+    expect(storage.sync.set).toHaveBeenCalledWith({ disableVoteSubmission: false });
+  });
 });

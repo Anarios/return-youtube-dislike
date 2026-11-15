@@ -755,7 +755,7 @@
               const button = control?.querySelector("button");
               if (control && button) {
                 control.setAttribute("data-fixture-native-hydration-pending", role);
-                delayedNativeButtons.push({ button, control });
+                delayedNativeButtons.push({ button, control, parent: button.parentElement });
                 button.remove();
               }
             }
@@ -772,9 +772,15 @@
           }
           if (delayedNativeButtons.length > 0) {
             setTimeout(() => {
-              for (const { button, control } of delayedNativeButtons) {
-                if (replacement.isConnected && control.isConnected && !control.querySelector("button")) {
-                  control.appendChild(button);
+              for (const { button, control, parent } of delayedNativeButtons) {
+                if (
+                  replacement.isConnected &&
+                  control.isConnected &&
+                  parent.isConnected &&
+                  control.contains(parent) &&
+                  !control.querySelector("button")
+                ) {
+                  parent.appendChild(button);
                   control.removeAttribute("data-fixture-native-hydration-pending");
                 }
               }

@@ -138,6 +138,18 @@ describe("premiumAnalytics.teaser", () => {
     expect(details?.hasAttribute("hidden")).toBe(true);
   });
 
+  it("explains why paid features exist below the Premium call to action", async () => {
+    getVideoId.mockReturnValue("abcdefghijk");
+
+    await initPremiumTeaser();
+    await flushPromises();
+
+    const links = document.querySelector(".ryd-premium-teaser__links");
+    const why = links?.nextElementSibling;
+    expect(why?.className).toBe("ryd-premium-teaser__why");
+    expect(why?.textContent).toBe(enMessages.paidFeaturesWhy.message);
+  });
+
   it("shares aggregate vote data with the main renderer but still refreshes for a real Like count", async () => {
     getVideoId.mockReturnValue("abcdefghijk");
 
@@ -214,6 +226,90 @@ describe("premiumAnalytics.teaser", () => {
       }
     },
   );
+
+  it("does not mount the panel when it is suppressed before the page container appears", async () => {
+    jest.useFakeTimers();
+
+    try {
+      document.body.innerHTML = "";
+      getVideoId.mockReturnValue("abcdefghijk");
+      await initPremiumTeaser();
+      jest.advanceTimersByTime(500);
+
+      setTeaserSuppressed(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+      mountSecondary();
+      jest.advanceTimersByTime(1000);
+
+      expect(document.querySelector(".ryd-premium-teaser")).toBeNull();
+      expect(global.fetch).not.toHaveBeenCalled();
+    } finally {
+      jest.clearAllTimers();
+      jest.useRealTimers();
+    }
+  });
+
+  it("keeps one pending panel retry while the page container is missing", async () => {
+    jest.useFakeTimers();
+
+    try {
+      document.body.innerHTML = "";
+      getVideoId.mockReturnValue("abcdefghijk");
+      await initPremiumTeaser();
+      jest.advanceTimersByTime(5000);
+
+      expect(jest.getTimerCount()).toBe(1);
+
+      mountSecondary();
+      jest.advanceTimersByTime(500);
+
+      expect(document.querySelectorAll(".ryd-premium-teaser")).toHaveLength(1);
+      expect(global.fetch).toHaveBeenCalledTimes(1);
+    } finally {
+      jest.clearAllTimers();
+      jest.useRealTimers();
+    }
+  });
+
+  it("drops the pending panel retry when the viewer leaves the watch page", async () => {
+    jest.useFakeTimers();
+    const navigationListenerSpy = jest.spyOn(document, "addEventListener");
+
+    try {
+      document.body.innerHTML = "";
+      getVideoId.mockReturnValue("abcdefghijk");
+      await initPremiumTeaser();
+      expect(jest.getTimerCount()).toBe(1);
+
+      getVideoId.mockReturnValue(null);
+      navigationListenerSpy.mock.calls.find(([name]) => name === "yt-navigate-finish")[1]();
+
+      expect(jest.getTimerCount()).toBe(0);
+    } finally {
+      navigationListenerSpy.mockRestore();
+      jest.clearAllTimers();
+      jest.useRealTimers();
+    }
+  });
+
+  it("fills the counts again when the host rebuilds the column for the same video", async () => {
+    const navigationListenerSpy = jest.spyOn(document, "addEventListener");
+
+    try {
+      getVideoId.mockReturnValue("abcdefghijk");
+      await initPremiumTeaser();
+      await flushPromises();
+
+      mountSecondary();
+      navigationListenerSpy.mock.calls.find(([name]) => name === "yt-navigate-finish")[1]();
+      await flushPromises();
+
+      const panel = document.querySelector(".ryd-premium-teaser");
+      expect(panel.querySelector("#ryd-premium-teaser-likes").textContent).toBe("654");
+      expect(panel.querySelector("#ryd-premium-teaser-dislikes").textContent).toBe("456");
+    } finally {
+      navigationListenerSpy.mockRestore();
+    }
+  });
 
   it("toggles the expanded state when the toggle is clicked", async () => {
     getVideoId.mockReturnValue("togglevideo");

@@ -10,6 +10,7 @@ jest.mock("../theme", () => ({
   getTextColor: () => "#ffffff",
   getMutedTextColor: () => "#b3b3b3",
   getBorderColor: () => "#444444",
+  getSurfaceColor: () => "rgba(255,255,255,0.06)",
 }));
 jest.mock("../logging", () => ({ logRangeSelection: jest.fn(), logTimeBounds: jest.fn() }));
 

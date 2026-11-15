@@ -1,5 +1,6 @@
 import { createVoteClient } from "../../common/vote-client";
 import { resolveDelegatedVoteActivation } from "../../common/delegated-vote-activation";
+import { getLiveVideoId } from "../../common/live-video-id";
 import { getThemeColor, isYouTubeDarkTheme, observeYouTubeTheme } from "../../common/color-themes";
 import {
   actionBarHasHydratedData,
@@ -839,20 +840,38 @@ function getDislikeTextContainer(dislikeButton = getDislikeButton()) {
   let result =
     dislikeButton.querySelector("#text") ??
     dislikeButton.getElementsByTagName("yt-formatted-string")[0] ??
-    dislikeButton.querySelector("span[role='text']");
+    dislikeButton.querySelector("span[role='text']") ??
+    dislikeButton.querySelector(
+      ".ytSpecButtonShapeNextButtonTextContent, .yt-spec-button-shape-next__button-text-content",
+    );
   if (result == null) {
     const activationTarget = getActivationTarget(dislikeButton);
     if (!activationTarget?.matches("button, tp-yt-paper-button#button")) {
       return null;
     }
 
-    const textSpan = document.createElement("span");
-    textSpan.id = "text";
-    textSpan.setAttribute("role", "text");
-    textSpan.style.marginLeft = "6px";
-    activationTarget.appendChild(textSpan);
-    activationTarget.style.width = "auto";
-    result = textSpan;
+    const shorts = isShorts();
+    const usesNativeShape =
+      !shorts &&
+      activationTarget.matches(
+        ".ytSpecButtonShapeNextHost, .yt-spec-button-shape-next, " +
+          ".ytSpecButtonShapeNextIconButton, .yt-spec-button-shape-next--icon-button, " +
+          ".ytSpecButtonShapeNextIconLeading, .yt-spec-button-shape-next--icon-leading",
+      );
+    const text = document.createElement(usesNativeShape ? "div" : "span");
+    text.id = "text";
+    text.setAttribute("role", "text");
+    if (usesNativeShape) {
+      text.className = "ytSpecButtonShapeNextButtonTextContent yt-spec-button-shape-next__button-text-content";
+      activationTarget.classList.remove("ytSpecButtonShapeNextIconButton", "yt-spec-button-shape-next--icon-button");
+      activationTarget.classList.add("ytSpecButtonShapeNextIconLeading", "yt-spec-button-shape-next--icon-leading");
+    } else {
+      if (shorts) text.style.marginLeft = "6px";
+      else text.style.marginInlineStart = "6px";
+      activationTarget.style.width = "auto";
+    }
+    activationTarget.appendChild(text);
+    result = text;
   }
   return result;
 }
@@ -980,14 +999,21 @@ function getState() {
   return NEUTRAL_STATE;
 }
 
+function setCountText(container, count) {
+  const text = String(count);
+  if (container.textContent !== text) {
+    container.textContent = text;
+  }
+}
+
 function setLikes(likesCount) {
   if (isMobile) {
     const container = getButtons()?.children[0]?.querySelector(".button-renderer-text");
-    if (container) container.innerText = likesCount;
+    if (container) setCountText(container, likesCount);
     return;
   }
   const container = getLikeTextContainer();
-  if (container) container.innerText = likesCount;
+  if (container) setCountText(container, likesCount);
 }
 
 function setDislikes(dislikesCount) {
@@ -1001,9 +1027,14 @@ function setDislikes(dislikesCount) {
     return;
   }
   _container.removeAttribute("is-empty");
-  if (_container.innerText !== dislikesCount) {
-    _container.innerText = dislikesCount;
-  }
+  setCountText(_container, dislikesCount);
+}
+
+function renderMobileDislikes() {
+  const dislikeButton = getDislikeButton();
+  if (!dislikeButton) return;
+  const container = dislikeButton.querySelector(".button-renderer-text") ?? getDislikeTextContainer();
+  if (container) setCountText(container, mobileDislikes);
 }
 
 function getLikeCountFromButton() {
@@ -1048,14 +1079,14 @@ function getLikeCountFromButton() {
       background: #737373;
       background: color-mix(
         in srgb,
-        var(--yt-spec-text-primary, #f1f1f1) 55%,
-        var(--yt-spec-base-background, #0f0f0f) 45%
+        var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1)) 55%,
+        var(--yt-sys-color-baseline--base-background, var(--yt-spec-base-background, #0f0f0f)) 45%
       );
       border-radius: 2px;
     }
 
     #return-youtube-dislike-bar {
-      background: var(--yt-spec-text-primary, #f1f1f1);
+      background: var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1));
       border-radius: 2px;
       transition: all 0.15s ease-in-out;
     }
@@ -1378,7 +1409,10 @@ function clearWatchPresentation(buttons, dislikeButton) {
   const dislikeText =
     dislikeButton?.querySelector("#text") ??
     dislikeButton?.getElementsByTagName("yt-formatted-string")[0] ??
-    dislikeButton?.querySelector("span[role='text']");
+    dislikeButton?.querySelector("span[role='text']") ??
+    dislikeButton?.querySelector(
+      ".ytSpecButtonShapeNextButtonTextContent, .yt-spec-button-shape-next__button-text-content",
+    );
   if (dislikeText) {
     dislikeText.textContent = "";
   }
@@ -1783,7 +1817,7 @@ function getVideoId() {
     if (shortVideoId) {
       return shortVideoId;
     }
-    return urlObject.searchParams.get("v");
+    return urlObject.searchParams.get("v") ?? getLiveVideoId(pathname);
   }
 }
 
@@ -2588,7 +2622,6 @@ function handleNavigateFinish(event) {
 (function () {
   "use strict";
   observeYouTubeTheme(refreshColorPresentation);
-  void voteClient.ensureRegistered().catch(reportVoteFailure);
   document.addEventListener("click", handleDelegatedVoteClick, true);
   window.addEventListener("yt-navigate-start", handleNavigateStart, true);
   window.addEventListener("yt-navigate-finish", handleNavigateFinish, true);
@@ -2598,12 +2631,5 @@ function handleNavigateFinish(event) {
   setEventListeners();
 })();
 if (isMobile) {
-  setInterval(() => {
-    const dislikeButton = getDislikeButton();
-    if (dislikeButton?.querySelector(".button-renderer-text") === null) {
-      getDislikeTextContainer().innerText = mobileDislikes;
-    } else {
-      if (dislikeButton) dislikeButton.querySelector(".button-renderer-text").innerText = mobileDislikes;
-    }
-  }, 1000);
+  setInterval(renderMobileDislikes, 1000);
 }

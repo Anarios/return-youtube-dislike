@@ -7,25 +7,32 @@ function readExtensionFile(relativePath) {
   return fs.readFileSync(path.join(extensionRoot, relativePath), "utf8");
 }
 
+test.each(["chrome", "firefox", "safari"])("%s notifications do not request an alarms permission", (browser) => {
+  const manifest = JSON.parse(readExtensionFile(`manifest-${browser}.json`));
+  expect(manifest.permissions ?? []).not.toContain("alarms");
+  expect(manifest.optional_permissions ?? []).not.toContain("alarms");
+});
+
 describe("Firefox AMO policy declarations", () => {
   test("declares every transmitted data category and the built-in consent minimum", () => {
     const manifest = JSON.parse(readExtensionFile("manifest-firefox.json"));
     const gecko = manifest.browser_specific_settings.gecko;
 
-    expect(manifest.incognito).toBe("not_allowed");
+    expect(manifest.incognito).toBe("spanning");
     expect(gecko.id).toBe("{762f9885-5a13-4abd-9c77-433dcd38b8fd}");
     expect(gecko.strict_min_version).toBe("140.0");
     expect(gecko.data_collection_permissions).toEqual({
       required: ["none"],
       optional: [
-        "personallyIdentifyingInfo",
         "browsingActivity",
         "websiteContent",
         "websiteActivity",
+        "personallyIdentifyingInfo",
         "authenticationInfo",
       ],
     });
     expect(manifest.browser_specific_settings.gecko_android).toBeUndefined();
+    expect(manifest.web_accessible_resources).not.toContain("consent.html");
   });
 
   test("does not contact ancillary services when extension pages open", () => {

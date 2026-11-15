@@ -239,6 +239,26 @@ describe("Shorts control mutation readiness", () => {
     ).toBe(false);
   });
 
+  test("preserves default activation targets while allowing an explicit native Like resolver", () => {
+    const actionBar = document.createElement("reel-action-bar-view-model");
+    actionBar.innerHTML = `
+      <like-button-view-model><a href="#settings">Settings</a><button aria-pressed="false"></button></like-button-view-model>
+      <button-view-model><button></button></button-view-model>
+      <button-view-model><button></button></button-view-model>
+      <pivot-button-view-model><a role="button" tabindex="0"></a></pivot-button-view-model>`;
+    document.body.appendChild(actionBar);
+    appendNativeLikeSvg(actionBar);
+    const nativeLikeButton = actionBar.querySelector("button");
+    const baseline = captureShortsNativeControlInventory(actionBar);
+    expect(baseline.nativeLikeButton).toBe(nativeLikeButton);
+    expect(baseline.activationTargets[0]).toBe(actionBar.querySelector("a[href]"));
+
+    const resolved = captureShortsNativeControlInventory(actionBar, { getNativeLikeButton: () => nativeLikeButton });
+    expect(resolved.nativeLikeButton).toBe(nativeLikeButton);
+    expect(resolved.activationTargets[0]).toBe(nativeLikeButton);
+    expect(captureShortsNativeControlInventory(actionBar, { getNativeLikeButton: () => undefined })).toBeNull();
+  });
+
   test("accepts only the real no-href Pivot anchor button topology", () => {
     const actionBar = document.createElement("reel-action-bar-view-model");
     actionBar.innerHTML = `
