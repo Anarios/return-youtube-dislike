@@ -1,4 +1,4 @@
-import { cs } from "vuetify/src/locale";
+import { cs } from "vuetify/locale";
 // By Fjuro
 export default {
   ...cs,

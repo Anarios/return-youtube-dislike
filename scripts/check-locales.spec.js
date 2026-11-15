@@ -13,7 +13,7 @@ const {
 } = require("./check-locales");
 
 const message = (text) => ({ message: text });
-const websiteSource = (body) => `import { en } from "vuetify/src/locale"; export default { ...en, ${body} };`;
+const websiteSource = (body) => `import { en } from "vuetify/locale"; export default { ...en, ${body} };`;
 
 test("extension completeness follows added English keys and validates extra message shapes", () => {
   const result = compareExtension(
@@ -128,13 +128,13 @@ test("empty website exceptions apply only to the existing sentence fragments", (
   ]);
 });
 
-const config = (registered = "en, fr") => `import en from "./_locales/en"; import fr from "./_locales/fr";
-  export default { vuetify: { lang: { locales: { ${registered} } } } };`;
+const config = (registered = "en, fr") => `import en from "../_locales/en"; import fr from "../_locales/fr";
+  export default { ${registered} };`;
 const layout = (locales = '"en", "fr"') =>
-  `<script>export default {data: () => ({langs: [${locales
+  `<script setup>const langs = [${locales
     .split(", ")
     .map((locale) => `{locale: ${locale}}`)
-    .join(",")} ]})};</script>`;
+    .join(",")} ];</script>`;
 
 test("validates website registration, matching imports, picker coverage, and duplicate codes", () => {
   expect(checkWebsiteRegistration(config(), layout(), ["en", "fr"])).toEqual([]);

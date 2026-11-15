@@ -1,4 +1,4 @@
-import { sk } from "vuetify/src/locale";
+import { sk } from "vuetify/locale";
 // By Radoslav Ďurač
 export default {
   ...sk,

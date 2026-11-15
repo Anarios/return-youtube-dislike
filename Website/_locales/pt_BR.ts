@@ -1,4 +1,4 @@
-import { pt } from "vuetify/src/locale";
+import { pt } from "vuetify/locale";
 // by Unnamed-orbert
 export default {
   ...pt,

@@ -1,4 +1,4 @@
-import { ko } from "vuetify/src/locale";
+import { ko } from "vuetify/locale";
 //libaraldev
 export default {
   ...ko,

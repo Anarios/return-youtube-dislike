@@ -1,0 +1,56 @@
+@layer vuetify-core.reset {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer vuetify-core.base {
+  html {
+    font-size: 16px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .v-application {
+    font-family: "Roboto", sans-serif;
+    line-height: 1.5;
+  }
+
+  .v-application p {
+    margin-bottom: 16px;
+  }
+
+  .v-application ul,
+  .v-application ol {
+    padding-inline-start: 24px;
+  }
+
+  .v-application a {
+    color: rgb(var(--v-theme-primary));
+    cursor: pointer;
+  }
+}
+
+@layer vuetify-overrides {
+  .v-btn {
+    letter-spacing: 0.0892857143em;
+    text-indent: 0.0892857143em;
+    text-transform: uppercase;
+  }
+
+  .v-btn .v-icon--size-default {
+    font-size: 24px;
+  }
+
+  .v-btn--variant-elevated:not([class*="bg-"]),
+  .v-btn--variant-flat:not([class*="bg-"]) {
+    background: #272727;
+  }
+
+  .v-btn--variant-elevated,
+  .v-btn--variant-flat {
+    --v-elevation-overlay: transparent;
+  }
+}

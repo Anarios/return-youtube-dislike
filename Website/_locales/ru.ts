@@ -1,4 +1,4 @@
-import { ru } from "vuetify/src/locale";
+import { ru } from "vuetify/locale";
 // By Nikita Krupin
 export default {
   ...ru,

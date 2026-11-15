@@ -1,4 +1,4 @@
-import { vi } from "vuetify/src/locale";
+import { vi } from "vuetify/locale";
 
 export default {
   ...vi,

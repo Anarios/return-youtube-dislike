@@ -1,4 +1,4 @@
-﻿import { tr } from "vuetify/src/locale";
+import { tr } from "vuetify/locale";
 // By Batuhan Kara & İlyas Zan
 export default {
   ...tr,

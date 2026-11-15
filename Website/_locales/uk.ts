@@ -1,4 +1,4 @@
-import { uk } from "vuetify/src/locale";
+import { uk } from "vuetify/locale";
 // By dsty#1614
 export default {
   ...uk,

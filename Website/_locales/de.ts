@@ -1,4 +1,4 @@
-import { en } from "vuetify/src/locale";
+import { en } from "vuetify/locale";
 // By tubyoub
 export default {
   ...en,

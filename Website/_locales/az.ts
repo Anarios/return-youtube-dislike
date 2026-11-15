@@ -1,4 +1,4 @@
-import { az } from "vuetify/src/locale";
+import { az } from "vuetify/locale";
 // By HAJİAGHA SADİKHOV
 export default {
   ...az,

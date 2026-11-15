@@ -1,36 +1,25 @@
 <template>
   <div style="line-height: 2rem">
-    <h2 class="primary--text">
-      {{ $vuetify.lang.t("$vuetify.api.fetching.title") }}
+    <h2 class="text-primary">
+      {{ t("$vuetify.api.fetching.title") }}
     </h2>
 
     <div class="ma-2">
-      {{ $vuetify.lang.t("$vuetify.api.fetching.subtitle") }}
+      {{ t("$vuetify.api.fetching.subtitle") }}
 
-      <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank">
-        kxOuG8jMIgI
-      </a>
+      <a href="https://youtube.com/watch?v=kxOuG8jMIgI" target="_blank"> kxOuG8jMIgI </a>
     </div>
 
-    <h3 class="mt-6">{{ $vuetify.lang.t("$vuetify.api.fetching.title2") }}</h3>
+    <h3 class="mt-6">{{ t("$vuetify.api.fetching.title2") }}</h3>
     <div class="ma-2">
-      {{ $vuetify.lang.t("$vuetify.api.fetching.url") }}
-      <a
-        :href="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
-        target="_blank"
-        v-text="apiUrl + '/votes?videoId=kxOuG8jMIgI'"
-      />
+      {{ t("$vuetify.api.fetching.url") }}
+      <a :href="apiUrl + '/votes?videoId=kxOuG8jMIgI'" target="_blank" v-text="apiUrl + '/votes?videoId=kxOuG8jMIgI'" />
       <br />
-      {{ $vuetify.lang.t("$vuetify.api.fetching.method") }}
-      <a
-        href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET"
-        target="_blank"
-      >
-        HTTP/GET
-      </a>
+      {{ t("$vuetify.api.fetching.method") }}
+      <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET" target="_blank"> HTTP/GET </a>
     </div>
     <div class="mt-4 ml-2">
-      {{ $vuetify.lang.t("$vuetify.api.fetching.headers") }}
+      {{ t("$vuetify.api.fetching.headers") }}
     </div>
     <div class="code px-4 py-2">
       Accept: text/html,application/xhtml+xml,application/xml;q=0.9<br />
@@ -39,7 +28,7 @@
       Connection: keep-alive
     </div>
     <div class="mt-4 ml-2">
-      {{ $vuetify.lang.t("$vuetify.api.fetching.response") }}
+      {{ t("$vuetify.api.fetching.response") }}
     </div>
     <div class="code px-4 py-2">
       {
@@ -54,22 +43,19 @@
       }
     </div>
     <br />
-    <v-alert border="left" color="orange" text type="info" class="mb-0">
-      <span>{{ $vuetify.lang.t("$vuetify.api.fetching.error1") }}</span>
+    <v-alert border="start" color="orange" variant="tonal" type="info" class="mb-0">
+      <span>{{ t("$vuetify.api.fetching.error1") }}</span>
       <br />
-      <span>{{ $vuetify.lang.t("$vuetify.api.fetching.error2") }}</span>
+      <span>{{ t("$vuetify.api.fetching.error2") }}</span>
     </v-alert>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      apiUrl: process.env.apiUrl,
-    };
-  },
-};
+<script setup>
+import { useLocale } from "vuetify";
+
+const { t } = useLocale();
+const apiUrl = useRuntimeConfig().public.apiUrl;
 </script>
 
 <style scoped>

@@ -47,7 +47,7 @@ function readWebsiteLocale(source) {
   const statements = parseModule(source);
   const spreads = new Set();
   for (const statement of statements) {
-    if (statement.type === "ImportDeclaration" && statement.source.value === "vuetify/src/locale") {
+    if (statement.type === "ImportDeclaration" && statement.source.value === "vuetify/locale") {
       for (const specifier of statement.specifiers) spreads.add(specifier.local.name);
     } else if (statement.type !== "ExportDefaultDeclaration") {
       throw new Error("Expected only a Vuetify locale import and a default locale object");
@@ -178,31 +178,32 @@ function findProperty(node, name) {
   return matches[0].value;
 }
 
-function checkWebsiteRegistration(configSource, layoutSource, languages) {
-  const statements = parseModule(configSource);
+function checkWebsiteRegistration(messagesSource, layoutSource, languages) {
+  const statements = parseModule(messagesSource);
   const imports = new Map();
   for (const statement of statements.filter((item) => item.type === "ImportDeclaration")) {
     for (const specifier of statement.specifiers) imports.set(specifier.local.name, statement.source.value);
   }
-  let config = statements.find((statement) => statement.type === "ExportDefaultDeclaration")?.declaration;
-  for (const key of ["vuetify", "lang", "locales"]) config = findProperty(config, key);
+  const messages = statements.find((statement) => statement.type === "ExportDefaultDeclaration")?.declaration;
+  if (messages?.type !== "ObjectExpression") throw new Error("Expected a literal website locale registry");
   const registered = new Set();
   const errors = [];
-  for (const prop of config.properties) {
+  for (const prop of messages.properties) {
     if (prop.type !== "ObjectProperty") throw new Error("Expected literal website locale registrations");
     const language = propertyName(prop);
     if (registered.has(language)) errors.push(`${language}: duplicate registration`);
     registered.add(language);
-    if (prop.value.type !== "Identifier" || imports.get(prop.value.name) !== `./_locales/${language}`) {
+    if (prop.value.type !== "Identifier" || imports.get(prop.value.name) !== `../_locales/${language}`) {
       errors.push(`${language}: registration must use its matching locale import`);
     }
   }
   const script = layoutSource.match(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/)?.[1];
   if (!script) throw new Error("Website layout script is missing");
-  const layout = parseModule(script).find((statement) => statement.type === "ExportDefaultDeclaration")?.declaration;
-  const data = findProperty(layout, "data");
-  const langs = findProperty(data.body, "langs");
-  if (data.type !== "ArrowFunctionExpression" || langs.type !== "ArrayExpression") {
+  const langs = parseModule(script)
+    .filter((statement) => statement.type === "VariableDeclaration")
+    .flatMap((statement) => statement.declarations)
+    .find((declaration) => declaration.id.name === "langs")?.init;
+  if (langs?.type !== "ArrayExpression") {
     throw new Error("Expected a literal website language picker array");
   }
   const selectable = new Set();
@@ -250,7 +251,7 @@ function checkCatalogs(root, system) {
   });
   if (website) {
     const errors = checkWebsiteRegistration(
-      fs.readFileSync(path.join(root, "Website/nuxt.config.js"), "utf8"),
+      fs.readFileSync(path.join(root, "Website/utils/messages.js"), "utf8"),
       fs.readFileSync(path.join(root, "Website/layouts/default.vue"), "utf8"),
       files.map(({ language }) => language),
     );

@@ -1,4 +1,4 @@
-import { fa } from "vuetify/src/locale";
+import { fa } from "vuetify/locale";
 
 export default {
   ...fa,

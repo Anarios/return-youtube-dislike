@@ -1,4 +1,4 @@
-import { es } from "vuetify/src/locale";
+import { es } from "vuetify/locale";
 // By Alejandro Gayol
 export default {
   ...es,

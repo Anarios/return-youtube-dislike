@@ -1,4 +1,4 @@
-import { id } from "vuetify/src/locale";
+import { id } from "vuetify/locale";
 
 export default {
   ...id,

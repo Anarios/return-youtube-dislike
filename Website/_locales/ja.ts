@@ -1,4 +1,4 @@
-import { ja } from "vuetify/src/locale";
+import { ja } from "vuetify/locale";
 
 export default {
   ...ja,

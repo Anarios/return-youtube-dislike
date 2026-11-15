@@ -1,4 +1,4 @@
-import { hu } from 'vuetify/src/locale';
+import { hu } from 'vuetify/locale';
 // By Gergely Pap
 export default {
     ...hu,

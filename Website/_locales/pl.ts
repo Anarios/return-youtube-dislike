@@ -1,4 +1,4 @@
-import { pl } from "vuetify/src/locale";
+import { pl } from "vuetify/locale";
 // by itsbudyn#6502
 export default {
   ...pl,
