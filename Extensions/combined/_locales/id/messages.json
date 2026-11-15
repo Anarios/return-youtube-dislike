@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Data tidak suka tidak dapat dimuat saat ini. Coba muat ulang halaman."
   },
-  "premiumTierNotice_title": {
-    "message": "Analitik premium terkunci"
-  },
   "premiumTierNotice_message": {
     "message": "Keanggotaan Patreon Anda belum mencakup tingkat Premium. Tingkatkan dukungan Anda untuk membuka analitik video lanjutan."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Tingkatkan di Patreon"
   },
   "changelog_cta_primary": {
     "message": "Tingkatkan di Patreon"
@@ -544,6 +538,21 @@
   },
   "discussion_post": {
     "message": "Kirim komentar"
+  },
+  "discussion_viewReplies": {
+    "message": "Lihat balasan"
+  },
+  "discussion_moreReplies": {
+    "message": "Tampilkan balasan lainnya"
+  },
+  "discussion_viewReply": {
+    "message": "Lihat balasan"
+  },
+  "discussion_collapseReplies": {
+    "message": "Sembunyikan balasan"
+  },
+  "discussion_replyContext": {
+    "message": "Lihat komentar yang ditanggapi"
   },
   "discussion_reply": {
     "message": "Balas"

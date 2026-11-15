@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "Не ўдалося загрузіць дадзеныя аб непадабайках. Паспрабуйце абнавіць старонку."
   },
-  "premiumTierNotice_title": {
-    "message": "Прэміум-аналітыка заблакіравана"
-  },
   "premiumTierNotice_message": {
     "message": "У вашай падпісцы на Patreon няма ўзроўню Premium. Павысьце ўзровень падтрымкі, каб атрымаць доступ да пашыранай відэааналітыкі."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Павысіць узровень на Patreon"
   },
   "changelog_cta_primary": {
     "message": "Павысіць узровень на Patreon"
@@ -544,6 +538,21 @@
   },
   "discussion_post": {
     "message": "Апублікаваць каментарый"
+  },
+  "discussion_viewReplies": {
+    "message": "Паказаць адказы"
+  },
+  "discussion_moreReplies": {
+    "message": "Паказаць яшчэ адказы"
+  },
+  "discussion_viewReply": {
+    "message": "Паказаць адказ"
+  },
+  "discussion_collapseReplies": {
+    "message": "Схаваць адказы"
+  },
+  "discussion_replyContext": {
+    "message": "Паказаць зыходны каментарый"
   },
   "discussion_reply": {
     "message": "Адказаць"

@@ -2,9 +2,11 @@ import { getChangelogUrl } from "../../config";
 import { getBrowser, getVideoId, localize } from "../../utils";
 import { extConfig } from "../../state";
 import { requestVoteData } from "../../vote-data-request";
+import { createRetryTimer } from "../utils";
 
 const PATREON_JOIN_URL = "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649";
 const CHANGELOG_URL = getChangelogUrl();
+const PANEL_RETRY_DELAY_MS = 250;
 
 export const TEASER_SUPPRESSION_REASON_LEGACY = "legacy";
 export const TEASER_SUPPRESSION_REASON_PREMIUM = "premium";
@@ -20,6 +22,8 @@ const teaserState = {
   storageListener: null,
   expanded: false,
 };
+
+const panelRetry = createRetryTimer(() => fetchAndRender(teaserState.currentVideoId), PANEL_RETRY_DELAY_MS);
 
 export async function initPremiumTeaser() {
   if (teaserState.initialized) return;
@@ -137,7 +141,9 @@ function handleNavigation() {
   }
 
   if (teaserState.currentVideoId === videoId) {
-    ensurePanel();
+    if (!teaserState.panelElement?.isConnected) {
+      fetchAndRender(videoId);
+    }
     return;
   }
 
@@ -158,17 +164,13 @@ function resolveVideoId() {
 }
 
 function fetchAndRender(videoId) {
-  if (teaserState.suppressed || teaserState.currentVideoId !== videoId || resolveVideoId() !== videoId) {
+  if (!videoId || teaserState.suppressed || teaserState.currentVideoId !== videoId || resolveVideoId() !== videoId) {
     return;
   }
 
   const panel = ensurePanel();
   if (!panel) {
-    setTimeout(() => {
-      if (!teaserState.suppressed) {
-        fetchAndRender(videoId);
-      }
-    }, 200);
+    if (!teaserState.suppressed) panelRetry.schedule();
     return;
   }
 
@@ -218,7 +220,6 @@ function ensurePanel() {
 
   const container = document.querySelector("#secondary #secondary-inner") || document.querySelector("#secondary-inner");
   if (!container) {
-    setTimeout(ensurePanel, 250);
     return null;
   }
 
@@ -277,6 +278,7 @@ function removePanel(includeStrayNodes = false) {
 
 function resetState() {
   teaserState.currentVideoId = null;
+  panelRetry.cancel();
   if (teaserState.abortController) {
     teaserState.abortController.abort();
     teaserState.abortController = null;

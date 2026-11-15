@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Non è stato possibile caricare i dati dei Non mi piace. Prova a ricaricare la pagina."
   },
-  "premiumTierNotice_title": {
-    "message": "Analitiche Premium bloccate"
-  },
   "premiumTierNotice_message": {
     "message": "Il tuo abbonamento Patreon non include il livello Premium. Effettua un upgrade per sbloccare le analitiche video avanzate."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Esegui l’upgrade su Patreon"
   },
   "changelog_cta_primary": {
     "message": "Esegui l’upgrade su Patreon"
@@ -544,6 +538,21 @@
   },
   "discussion_post": {
     "message": "Pubblica commento"
+  },
+  "discussion_viewReplies": {
+    "message": "Visualizza risposte"
+  },
+  "discussion_moreReplies": {
+    "message": "Mostra altre risposte"
+  },
+  "discussion_viewReply": {
+    "message": "Visualizza risposta"
+  },
+  "discussion_collapseReplies": {
+    "message": "Nascondi risposte"
+  },
+  "discussion_replyContext": {
+    "message": "Visualizza il commento a cui si risponde"
   },
   "discussion_reply": {
     "message": "Rispondi"

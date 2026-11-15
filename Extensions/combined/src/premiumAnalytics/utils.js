@@ -24,6 +24,24 @@ export function debounce(fn, delay) {
   };
 }
 
+export function createRetryTimer(callback, delay) {
+  let timeoutId = null;
+  return {
+    schedule() {
+      if (timeoutId !== null) return;
+      timeoutId = setTimeout(() => {
+        timeoutId = null;
+        callback();
+      }, delay);
+    },
+    cancel() {
+      if (timeoutId === null) return;
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    },
+  };
+}
+
 export function safeJson(response) {
   return response
     .clone()

@@ -7,7 +7,7 @@
 [![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
 [![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
 
-Read this in other languages: [English](README.md), [فارسی](READMEfa.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [беларуская](READMEbe.md), [български](READMEbg.md), [繁體中文](READMEtw.md), [简体中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Italiano](READMEit.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md), [Slovenščina](READMEsl.md)
+Leggi questo documento in altre lingue: [English](README.md), [فارسی](READMEfa.md), [العربية](READMEar.md), [Azərbaycan dili](READMEaz.md), [беларуская](READMEbe.md), [български](READMEbg.md), [繁體中文](READMEtw.md), [简体中文](READMEcn.md), [Danish](READMEda.md), [Deutsch](READMEde.md), [Español](READMEes.md), [Français](READMEfr.md), [Italiano](READMEit.md), [Ελληνικά](READMEgr.md), [Magyar](READMEhu.md), [Bahasa Indonesia](READMEid.md), [日本語](READMEja.md), [한국어](READMEkr.md), [Nederlands](READMEnl.md), [Polski](READMEpl.md), [Português do Brasil](READMEpt_BR.md), [русский](READMEru.md), [Svenska](READMEsv.md), [Türkçe](READMEtr.md), [українська](READMEuk.md), [Tiếng Việt](READMEvi.md), [Slovenščina](READMEsl.md)
 
 # Return YouTube Dislike
 
@@ -18,7 +18,7 @@ Read this in other languages: [English](README.md), [فارسی](READMEfa.md), [
     <img width="400px" src="https://user-images.githubusercontent.com/18729296/141743755-2be73297-250e-4cd1-ac93-8978c5a39d10.png"/>
 </p>
 
-## La Storia
+## La storia
 
 Il 10 novembre 2021, Google ha [annunciato](https://blog.youtube/news-and-events/update-to-youtube/) che il conteggio dei non mi piace su YouTube sarebbe stato rimosso.
 
@@ -28,7 +28,7 @@ Inoltre, il campo `dislike` nell'API di YouTube è stato [rimosso](https://suppo
 
 Con la rimozione delle statistiche dei non mi piace dall'API di YouTube, il nostro backend è passato all'utilizzo di una combinazione di statistiche estratte tramite scraping e stime estrapolate dai dati degli utenti dell'estensione.
 
-[FAQ](https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/FAQ.md)
+[FAQ](Docs/FAQ.md)
 
 ## Perché è importante
 
@@ -36,9 +36,9 @@ Puoi scoprire di più sul nostro sito web: [returnyoutubedislike.com](https://ww
 
 ## Documentazione API
 
-L'uso di terze parti di questa API aperta è consentito con le seguenti restrizioni:
+L'utilizzo di questa API aperta da parte di terzi è consentito con le seguenti restrizioni:
 
-- **Attribuzione**: Questo progetto deve essere chiaramente attribuito con un link a [returnyoutubedislike.com](https://returnyoutubedislike.com/).
+- **Attribuzione**: Questo progetto deve essere chiaramente citato con un link a [returnyoutubedislike.com](https://returnyoutubedislike.com/).
 - **Limite di frequenza (Rate Limiting)**: Sono previsti limiti di frequenza per client pari a 100 richieste al minuto e 10.000 al giorno. Il superamento restituirà un codice di stato _429_ per indicare all'applicazione di rallentare le richieste.
 
 L'API è accessibile al seguente URL di base:
@@ -78,7 +78,7 @@ Puoi visualizzare tutta la documentazione sul nostro sito web.
 
 ## Contribuire
 
-Si prega di leggere la [guida ai contributi](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTING.md).
+Si prega di leggere la [guida ai contributi](CONTRIBUTINGit.md).
 
 ## Supporta questo progetto!
 
@@ -89,4 +89,3 @@ Puoi supportare questo progetto effettuando una donazione tramite il link sottos
 ## Sponsor
 
 [Diventa nostro sponsor per comparire nel repository e sul sito web](https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008601)
-

@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "Beğenmeme verileri şu anda yüklenemedi. Sayfayı yeniden yüklemeyi deneyin."
   },
-  "premiumTierNotice_title": {
-    "message": "Premium istatistikler kilitli"
-  },
   "premiumTierNotice_message": {
     "message": "Patreon üyeliğiniz Premium seviyesini içermiyor. Gelişmiş video istatistiklerinin kilidini açmak için desteğinizi yükseltin."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Patreon'da yükselt"
   },
   "changelog_cta_primary": {
     "message": "Patreon'da yükselt"
@@ -544,6 +538,21 @@
   },
   "discussion_post": {
     "message": "Yorum gönder"
+  },
+  "discussion_viewReplies": {
+    "message": "Yanıtları göster"
+  },
+  "discussion_moreReplies": {
+    "message": "Daha fazla yanıt göster"
+  },
+  "discussion_viewReply": {
+    "message": "Yanıtı göster"
+  },
+  "discussion_collapseReplies": {
+    "message": "Yanıtları gizle"
+  },
+  "discussion_replyContext": {
+    "message": "Yanıtlanan yorumu göster"
   },
   "discussion_reply": {
     "message": "Yanıtla"

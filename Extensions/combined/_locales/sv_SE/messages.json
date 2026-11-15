@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Ogilla-data kunde inte läsas in. Försök att ladda om sidan."
   },
-  "premiumTierNotice_title": {
-    "message": "Premiumanalys låst"
-  },
   "premiumTierNotice_message": {
     "message": "Ditt Patreon-medlemskap innehåller inte Premium-nivån. Uppgradera ditt stöd för att låsa upp avancerad videoanalys."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Uppgradera på Patreon"
   },
   "changelog_cta_primary": {
     "message": "Uppgradera på Patreon"
@@ -544,6 +538,21 @@
   },
   "discussion_post": {
     "message": "Publicera kommentar"
+  },
+  "discussion_viewReplies": {
+    "message": "Visa svar"
+  },
+  "discussion_moreReplies": {
+    "message": "Visa fler svar"
+  },
+  "discussion_viewReply": {
+    "message": "Visa svar"
+  },
+  "discussion_collapseReplies": {
+    "message": "Dölj svar"
+  },
+  "discussion_replyContext": {
+    "message": "Visa kommentaren som besvarades"
   },
   "discussion_reply": {
     "message": "Svara"

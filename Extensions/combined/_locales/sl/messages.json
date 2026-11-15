@@ -440,14 +440,8 @@
   "premiumTeaser_statusError": {
     "message": "Podatkov o nevšečkih zdaj ni bilo mogoče naložiti. Poskusite znova naložiti stran."
   },
-  "premiumTierNotice_title": {
-    "message": "Premium analitika je zaklenjena"
-  },
   "premiumTierNotice_message": {
     "message": "Vaše članstvo na Patreonu ne vključuje stopnje Premium. Nadgradite svoj prispevek in odklenite napredno analitiko videov."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Nadgradi na Patreonu"
   },
   "changelog_cta_primary": {
     "message": "Nadgradi na Patreonu"
@@ -544,6 +538,21 @@
   },
   "discussion_post": {
     "message": "Objavi komentar"
+  },
+  "discussion_viewReplies": {
+    "message": "Prikaži odgovore"
+  },
+  "discussion_moreReplies": {
+    "message": "Prikaži več odgovorov"
+  },
+  "discussion_viewReply": {
+    "message": "Prikaži odgovor"
+  },
+  "discussion_collapseReplies": {
+    "message": "Skrij odgovore"
+  },
+  "discussion_replyContext": {
+    "message": "Prikaži izvirni komentar"
   },
   "discussion_reply": {
     "message": "Odgovori"

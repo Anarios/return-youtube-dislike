@@ -1,13 +1,4 @@
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Rating&style=flat&logo=google)](https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
-[![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/gebbhagfogifgggkldgodflihgfeippi?label=Chrome%20Users&style=flat&logo=google)](https://chromewebstore.google.com/detail/return-youtube-dislike/gebbhagfogifgggkldgodflihgfeippi)
-[![Mozilla rating](https://img.shields.io/amo/stars/return-youtube-dislikes?label=Firefox%20Rating&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
-[![Mozilla downloads](https://img.shields.io/amo/users/return-youtube-dislikes?label=Firefox%20Users&style=flat&logo=firefox)](https://addons.mozilla.org/en-US/firefox/addon/return-youtube-dislikes/)
-[![Commit rate](https://img.shields.io/github/commit-activity/m/Anarios/return-youtube-dislike?label=Commits&style=flat)](https://github.com/Anarios/return-youtube-dislike/commits/main)
-[![Issues](https://img.shields.io/github/issues/Anarios/return-youtube-dislike?style=flat&label=Issues)](https://github.com/Anarios/return-youtube-dislike/issues)
-[![Discord](https://img.shields.io/discord/909435648170160229?label=Discord&style=flat&logo=discord)](https://discord.gg/UMxyMmCgfF)
-[![License](https://img.shields.io/badge/License-GPLv3-blue.svg?style=flat)](https://github.com/Anarios/return-youtube-dislike/blob/main/LICENSE)
-
-Leggi questo in altre lingue: [English](CONTRIBUTING.md), [فارسی](CONTRIBUTINGfa.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [беларуская](CONTRIBUTINGbe.md), [български](CONTRIBUTINGbg.md), [中文](CONTRIBUTINGcn.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Italiano](CONTRIBUTINGit.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md), [Slovenščina](CONTRIBUTINGsl.md)
+Leggi questo documento in altre lingue: [English](CONTRIBUTING.md), [فارسی](CONTRIBUTINGfa.md), [العربية](CONTRIBUTINGar.md), [Azərbaycan dili](CONTRIBUTINGaz.md), [беларуская](CONTRIBUTINGbe.md), [български](CONTRIBUTINGbg.md), [简体中文](CONTRIBUTINGcn.md), [繁體中文](CONTRIBUTINGtw.md), [Dansk](CONTRIBUTINGda.md), [Deutsch](CONTRIBUTINGde.md), [Español](CONTRIBUTINGes.md), [Français](CONTRIBUTINGfr.md), [Italiano](CONTRIBUTINGit.md), [Ελληνικά](CONTRIBUTINGgr.md), [Magyar](CONTRIBUTINGhu.md), [Bahasa Indonesia](CONTRIBUTINGid.md), [日本語](CONTRIBUTINGja.md), [한국어](CONTRIBUTINGkr.md), [Nederlands](CONTRIBUTINGnl.md), [Polski](CONTRIBUTINGpl.md), [Português do Brasil](CONTRIBUTINGpt_BR.md), [русский](CONTRIBUTINGru.md), [Svenska](CONTRIBUTINGsv.md), [Türkçe](CONTRIBUTINGtr.md), [українська](CONTRIBUTINGuk.md), [Tiếng Việt](CONTRIBUTINGvi.md), [Slovenščina](CONTRIBUTINGsl.md)
 
 # Benvenuto nella guida ai contributi di Return YouTube Dislike
 
@@ -15,34 +6,33 @@ Grazie per aver dedicato il tuo tempo a contribuire al nostro progetto! Tutte le
 
 ## Per iniziare
 
-Si prega di utilizzare Prettier con le impostazioni predefinite per la formattazione del codice.
+Utilizza Prettier con la configurazione del progetto per la formattazione del codice.
 
 #### Prerequisiti
 
-È necessario avere Node.js e npm installati per creare la versione pacchettizzata (bundle) del codice sorgente.
+È necessario avere Node.js e npm installati per creare la versione pacchettizzata (bundle) del codice sorgente. Utilizza le versioni indicate in [.nvmrc](.nvmrc) e [package.json](package.json).
 
-Versioni utilizzate durante la configurazione:
-
-- node: 12.18.4
-- npm: 6.14.6
-
-Per generare il file `bundled-content-script.js`, che contiene la maggior parte della business logic dell'estensione, occorre prima installare tutte le dipendenze.
-
-1. Vai nella cartella radice della repository ed esegui:
+1. Vai nella cartella radice del repository ed esegui questo comando per installare le dipendenze:
 
 ```bash
-npm install
+npm ci
 ```
 
-2. Esegui il comando seguente per creare `bundled-content-script.js`, utilizzato in `manifest.json`:
+2. Durante lo sviluppo, esegui questo comando per creare la build di sviluppo e monitorare le modifiche ai file:
 
 ```bash
-npm start # crea i file di build e avvia un file watcher che ricarica automaticamente a ogni salvataggio
-
-# oppure
-
-npm run build # crea i file di build una sola volta
+npm run dev
 ```
+
+La build viene aggiornata automaticamente a ogni salvataggio. Per provare le modifiche nel browser, ricarica l'estensione e la pagina di prova.
+
+Per creare una build di produzione, esegui:
+
+```bash
+npm run build
+```
+
+Le build per Chrome e Firefox vengono generate rispettivamente in `Extensions/combined/dist/chrome` e `Extensions/combined/dist/firefox`. In Chrome, attiva la modalità sviluppatore e carica la cartella `chrome` come estensione non pacchettizzata; in Firefox, carica il file `manifest.json` della cartella `firefox` come componente aggiuntivo temporaneo per le prove.
 
 Congratulazioni, ora sei pronto a sviluppare!
 

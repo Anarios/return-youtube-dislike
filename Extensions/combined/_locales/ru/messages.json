@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Не удалось загрузить данные по дизлайкам. Попробуйте обновить страницу."
   },
-  "premiumTierNotice_title": {
-    "message": "Премиальная аналитика заблокирована"
-  },
   "premiumTierNotice_message": {
     "message": "В вашей подписке на Patreon нет уровня Premium. Повышайте поддержку, чтобы получить доступ к расширенной видеоаналитике."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Обновить на Patreon"
   },
   "changelog_cta_primary": {
     "message": "Повысить уровень на Patreon"
@@ -495,6 +489,11 @@
   "discussion_empty": { "message": "Комментариев пока нет. Начните обсуждение." },
   "discussion_comment": { "message": "Комментарий" },
   "discussion_post": { "message": "Отправить" },
+  "discussion_viewReplies": { "message": "Показать ответы" },
+  "discussion_moreReplies": { "message": "Показать ещё ответы" },
+  "discussion_viewReply": { "message": "Показать ответ" },
+  "discussion_collapseReplies": { "message": "Скрыть ответы" },
+  "discussion_replyContext": { "message": "Показать исходный комментарий" },
   "discussion_reply": { "message": "Ответить" },
   "discussion_postReply": { "message": "Отправить ответ" },
   "discussion_cancel": { "message": "Отмена" },

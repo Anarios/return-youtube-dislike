@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "目前無法載入不喜歡資料，請嘗試重新整理頁面。"
   },
-  "premiumTierNotice_title": {
-    "message": "Premium 進階分析已鎖定"
-  },
   "premiumTierNotice_message": {
     "message": "您的 Patreon 會員資格未包含 Premium 等級。升級贊助即可解鎖進階影片分析功能。"
-  },
-  "premiumTierNotice_cta": {
-    "message": "前往 Patreon 升級"
   },
   "changelog_cta_primary": {
     "message": "在 Patreon 上升級"
@@ -544,6 +538,21 @@
   },
   "discussion_post": {
     "message": "發布留言"
+  },
+  "discussion_viewReplies": {
+    "message": "查看回覆"
+  },
+  "discussion_moreReplies": {
+    "message": "顯示更多回覆"
+  },
+  "discussion_viewReply": {
+    "message": "查看回覆"
+  },
+  "discussion_collapseReplies": {
+    "message": "隱藏回覆"
+  },
+  "discussion_replyContext": {
+    "message": "查看所回覆的留言"
   },
   "discussion_reply": {
     "message": "回覆"

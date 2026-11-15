@@ -1,9 +1,9 @@
-# Return YouTube Dislike 4.1.5
+# Return YouTube Dislike 4.1.7
 
-4.1.5 shows RYD comments on more videos and restores a missing label.
+4.1.7 stops showing an upgrade prompt to paying members.
 
-- RYD comments now appear on every video and Short where YouTube comments aren't available, whatever the video's audience setting.
-- RYD comments also appear when YouTube replaces the comments with a notice that has no "Learn more" link, and on Shorts that have no comment button.
-- Videos with hidden like counts show "Disabled by Owner" under the dislike button again, instead of an untranslated label.
+- Patreon members on the Supporter and Commenter tiers no longer see a "Premium analytics locked" card next to videos.
+- An empty raw counts panel showing only dashes no longer appears.
+- Premium Video Insights now appears or disappears straight away when your membership changes while YouTube is open.
 
 Requires Firefox 140 or newer.

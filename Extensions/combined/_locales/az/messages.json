@@ -419,14 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Hazırda bəyənməmə məlumatı yüklənmədi. Səhifəni yenidən yükləyin."
   },
-  "premiumTierNotice_title": {
-    "message": "Premium analitika bloklanıb"
-  },
   "premiumTierNotice_message": {
     "message": "Patreon üzvlüyünüzdə Premium səviyyə yoxdur. Təkmil video analitikasını açmaq üçün dəstəyinizi yüksəldin."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Patreonda yüksəldin"
   },
   "changelog_cta_primary": {
     "message": "Patreonda yüksəlt"
@@ -544,6 +538,21 @@
   },
   "discussion_post": {
     "message": "Şərh paylaş"
+  },
+  "discussion_viewReplies": {
+    "message": "Cavabları göstər"
+  },
+  "discussion_moreReplies": {
+    "message": "Daha çox cavab göstər"
+  },
+  "discussion_viewReply": {
+    "message": "Cavabı göstər"
+  },
+  "discussion_collapseReplies": {
+    "message": "Cavabları gizlət"
+  },
+  "discussion_replyContext": {
+    "message": "Cavab verilən şərhə bax"
   },
   "discussion_reply": {
     "message": "Cavab ver"
