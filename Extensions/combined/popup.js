@@ -585,6 +585,7 @@ if (!privateBrowsing) {
     }
     config.advanced = !config.advanced;
     adv.inert = !config.advanced;
+    advancedToggle.setAttribute("aria-expanded", String(config.advanced));
   });
 
   chrome.storage.onChanged.addListener(storageChangeHandler);
