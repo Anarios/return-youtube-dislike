@@ -539,6 +539,21 @@
   "discussion_post": {
     "message": "コメントを投稿"
   },
+  "discussion_viewReplies": {
+    "message": "返信を表示"
+  },
+  "discussion_moreReplies": {
+    "message": "他の返信を表示"
+  },
+  "discussion_viewReply": {
+    "message": "返信を表示"
+  },
+  "discussion_collapseReplies": {
+    "message": "返信を非表示にする"
+  },
+  "discussion_replyContext": {
+    "message": "返信先のコメントを表示"
+  },
   "discussion_reply": {
     "message": "返信"
   },

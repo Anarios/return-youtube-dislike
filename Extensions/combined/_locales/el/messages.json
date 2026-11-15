@@ -539,6 +539,21 @@
   "discussion_post": {
     "message": "Δημοσίευση σχολίου"
   },
+  "discussion_viewReplies": {
+    "message": "Προβολή απαντήσεων"
+  },
+  "discussion_moreReplies": {
+    "message": "Εμφάνιση περισσότερων απαντήσεων"
+  },
+  "discussion_viewReply": {
+    "message": "Προβολή απάντησης"
+  },
+  "discussion_collapseReplies": {
+    "message": "Απόκρυψη απαντήσεων"
+  },
+  "discussion_replyContext": {
+    "message": "Προβολή αρχικού σχολίου"
+  },
   "discussion_reply": {
     "message": "Απάντηση"
   },

@@ -539,6 +539,21 @@
   "discussion_post": {
     "message": "Апублікаваць каментарый"
   },
+  "discussion_viewReplies": {
+    "message": "Паказаць адказы"
+  },
+  "discussion_moreReplies": {
+    "message": "Паказаць яшчэ адказы"
+  },
+  "discussion_viewReply": {
+    "message": "Паказаць адказ"
+  },
+  "discussion_collapseReplies": {
+    "message": "Схаваць адказы"
+  },
+  "discussion_replyContext": {
+    "message": "Паказаць зыходны каментарый"
+  },
   "discussion_reply": {
     "message": "Адказаць"
   },

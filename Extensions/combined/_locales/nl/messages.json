@@ -539,6 +539,21 @@
   "discussion_post": {
     "message": "Reactie plaatsen"
   },
+  "discussion_viewReplies": {
+    "message": "Reacties bekijken"
+  },
+  "discussion_moreReplies": {
+    "message": "Meer reacties weergeven"
+  },
+  "discussion_viewReply": {
+    "message": "Reactie bekijken"
+  },
+  "discussion_collapseReplies": {
+    "message": "Reacties verbergen"
+  },
+  "discussion_replyContext": {
+    "message": "Bovenliggende reactie bekijken"
+  },
   "discussion_reply": {
     "message": "Beantwoorden"
   },

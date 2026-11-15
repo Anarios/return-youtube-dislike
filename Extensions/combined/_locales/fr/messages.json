@@ -539,6 +539,21 @@
   "discussion_post": {
     "message": "Publier le commentaire"
   },
+  "discussion_viewReplies": {
+    "message": "Voir les réponses"
+  },
+  "discussion_moreReplies": {
+    "message": "Afficher plus de réponses"
+  },
+  "discussion_viewReply": {
+    "message": "Voir la réponse"
+  },
+  "discussion_collapseReplies": {
+    "message": "Masquer les réponses"
+  },
+  "discussion_replyContext": {
+    "message": "Voir le commentaire d’origine"
+  },
   "discussion_reply": {
     "message": "Répondre"
   },
