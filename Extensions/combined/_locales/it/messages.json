@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "Pubblica commento"
   },
-  "discussion_replyTo": {
-    "message": "In risposta a $1"
+  "discussion_viewReplies": {
+    "message": "Visualizza risposte"
+  },
+  "discussion_moreReplies": {
+    "message": "Mostra altre risposte"
+  },
+  "discussion_viewReply": {
+    "message": "Visualizza risposta"
+  },
+  "discussion_collapseReplies": {
+    "message": "Nascondi risposte"
   },
   "discussion_replyContext": {
     "message": "Visualizza il commento a cui si risponde"

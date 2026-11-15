@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "Đăng bình luận"
   },
-  "discussion_replyTo": {
-    "message": "Trả lời $1"
+  "discussion_viewReplies": {
+    "message": "Xem phản hồi"
+  },
+  "discussion_moreReplies": {
+    "message": "Xem thêm phản hồi"
+  },
+  "discussion_viewReply": {
+    "message": "Xem phản hồi"
+  },
+  "discussion_collapseReplies": {
+    "message": "Ẩn phản hồi"
   },
   "discussion_replyContext": {
     "message": "Xem bình luận được trả lời"

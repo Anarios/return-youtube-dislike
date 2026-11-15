@@ -415,12 +415,29 @@ export function createDiscussionPanel({
     let repliesCursor = null;
     let replyLoading = false;
     let repliesLoaded = false;
+    const collapsedOwners = new Set();
+    let orderedReplies = [];
+    let singleReplyOwners = new Set();
     let pathGroups = new Map();
     let pointerPath = null;
     let focusedPath = null;
     let activePath = null;
     let detachPathEvents = () => {};
-    const moreReplies = button(t("more"), () => loadReplies(true));
+    const moreReplies = button(
+      t("moreReplies"),
+      () => loadReplies(true),
+      "ryd-discussion-button ryd-discussion-reply-more",
+    );
+    moreReplies.dataset.replyPathOwner = rootId;
+    const hideReplies = button(
+      t("collapseReplies"),
+      () => thread.toggle(rootId),
+      "ryd-discussion-button ryd-discussion-reply-hide",
+    );
+    hideReplies.dataset.action = "collapse-replies";
+    hideReplies.dataset.replyOwnerId = rootId;
+    hideReplies.dataset.replyPathOwner = rootId;
+    hideReplies.setAttribute("aria-expanded", "true");
     const alive = () => current() && rootRow?.isConnected && rootReplyHandlers.get(rootId) === thread;
     function pathAt(target) {
       const segment = target?.closest?.("[data-reply-path-owner]");
@@ -459,9 +476,9 @@ export function createDiscussionPanel({
         },
         click(event) {
           const segment = pathAt(event.target);
-          if (!segment || segment.classList.contains("ryd-discussion-reply-context")) return;
+          if (!segment || segment.tagName === "BUTTON") return;
           event.preventDefault();
-          void focusComment(segment.dataset.replyPathOwner);
+          thread.toggle(segment.dataset.replyPathOwner);
         },
       };
       for (const [type, handler] of Object.entries(handlers)) row.addEventListener(type, handler);
@@ -473,6 +490,8 @@ export function createDiscussionPanel({
       for (const segment of pathGroups.get(activePath) || []) segment.classList.remove("is-path-highlighted");
       pathGroups = new Map();
       for (const segment of rootRow.querySelectorAll("[data-reply-path-owner]")) {
+        const hidden = segment.closest("[hidden]");
+        if (hidden && rootRow.contains(hidden)) continue;
         const owner = segment.dataset.replyPathOwner;
         if (!pathGroups.has(owner)) pathGroups.set(owner, []);
         pathGroups.get(owner).push(segment);
@@ -483,7 +502,7 @@ export function createDiscussionPanel({
       highlightPath();
     }
     function pathSegment(row, className, enabled, owner) {
-      let segment = row.querySelector(`:scope > .${className}`);
+      let segment = [...row.children].find((child) => child.classList.contains(className));
       if (!enabled) {
         segment?.remove();
         return;
@@ -503,11 +522,64 @@ export function createDiscussionPanel({
       context.dataset.replyPathOwner = targetId;
       context.classList.toggle("ryd-discussion-parent-missing", !target);
       context.textContent = target ? "" : t("replyContext");
-      context.title =
-        target && !target.deleted && !target.hidden && target.author?.nickname
-          ? t("replyTo", [target.author.nickname])
-          : t("replyContext");
-      context.setAttribute("aria-label", t("replyContext"));
+      context.title = t(target ? "collapseReplies" : "replyContext");
+      context.setAttribute("aria-label", context.title);
+      if (target) context.setAttribute("aria-expanded", String(!collapsedOwners.has(targetId)));
+      else context.removeAttribute("aria-expanded");
+    }
+    function refreshDisclosure(row, owner, hasChildren) {
+      const collapsed = collapsedOwners.has(owner);
+      row.dataset.replyCollapsed = String(collapsed);
+      if (owner === rootId) return;
+      let reopen = [...row.children].find((child) => child.classList.contains("ryd-discussion-reply-reopen"));
+      if (!reopen && collapsed && hasChildren) {
+        reopen = button("", () => thread.toggle(owner), "ryd-discussion-button ryd-discussion-reply-reopen");
+        reopen.dataset.action = "toggle-replies";
+        reopen.dataset.replyOwnerId = owner;
+        reopen.dataset.replyPathOwner = owner;
+        row.append(reopen);
+      }
+      if (!reopen) return;
+      reopen.hidden = !collapsed || !hasChildren;
+      reopen.textContent = t(singleReplyOwners.has(owner) ? "viewReply" : "viewReplies");
+      reopen.setAttribute("aria-label", reopen.textContent);
+      reopen.setAttribute("aria-expanded", "false");
+    }
+    function revealCollapsedOwner(ownerRow, disclosure) {
+      if (!disclosure) return;
+      const ownerBounds = ownerRow.getBoundingClientRect();
+      const disclosureBounds = disclosure.getBoundingClientRect();
+      const drawerBounds = surface === "shorts" ? root.getBoundingClientRect() : null;
+      const top = drawerBounds
+        ? drawerBounds.top
+        : Math.max(0, document.querySelector("ytd-masthead")?.getBoundingClientRect().bottom || 0);
+      const bottom = drawerBounds ? drawerBounds.bottom : window.innerHeight;
+      if (ownerBounds.top >= top && disclosureBounds.bottom <= bottom) return;
+      if (drawerBounds)
+        root.scrollTop += ownerBounds.top < top ? ownerBounds.top - top : disclosureBounds.bottom - bottom;
+      else ownerRow.scrollIntoView?.({ block: "nearest" });
+    }
+    function retainVisibleFocus(active) {
+      const hidden = active?.closest?.("[hidden]");
+      if (!hidden || !rootRow.contains(hidden)) return;
+      let owner = active.closest(".ryd-discussion-comment")?.dataset.commentId;
+      const visited = new Set();
+      while (owner && !visited.has(owner)) {
+        visited.add(owner);
+        const ownerRow = owner === rootId ? rootRow : views.get(owner)?.node;
+        if (collapsedOwners.has(owner) && ownerRow && !ownerRow.hidden) {
+          const disclosure = [...ownerRow.children].find((child) =>
+            child.classList.contains("ryd-discussion-reply-reopen"),
+          );
+          if (disclosure && !disclosure.hidden) {
+            disclosure.focus({ preventScroll: true });
+            revealCollapsedOwner(ownerRow, disclosure);
+            return;
+          }
+        }
+        if (owner === rootId) break;
+        owner = views.get(owner)?.comment.replyToId || rootId;
+      }
     }
     const thread = {
       node,
@@ -517,14 +589,67 @@ export function createDiscussionPanel({
       get(id) {
         return views.get(id)?.comment;
       },
-      attach(row, actions) {
+      toggle(owner) {
+        const ownerRow = owner === rootId ? rootRow : views.get(owner)?.node;
+        if (owner === rootId && !views.size && !repliesLoaded && comment.replyCount) {
+          void loadReplies();
+          return;
+        }
+        if (!ownerRow || (owner === rootId ? !views.size : ownerRow.dataset.replyHasChildren !== "true")) return;
+        focusSequence++;
+        const active = document.activeElement;
+        const collapsed = !collapsedOwners.has(owner);
+        if (collapsed) collapsedOwners.add(owner);
+        else collapsedOwners.delete(owner);
+        thread.clearPaths();
+        thread.render(false);
+        const reopen = [...ownerRow.children].find((child) => child.classList.contains("ryd-discussion-reply-reopen"));
+        if (active && rootRow.contains(active) && (active.closest("[hidden]") || !collapsed)) {
+          const destination = collapsed ? reopen : ownerRow;
+          if (destination) {
+            destination.tabIndex = -1;
+            if (collapsed) destination.removeAttribute("tabindex");
+            destination.focus({ preventScroll: true });
+          }
+        }
+        if (collapsed) revealCollapsedOwner(ownerRow, reopen);
+      },
+      activateParent(reply) {
+        const owner = reply.replyToId || rootId;
+        if (owner === rootId || views.has(owner)) thread.toggle(owner);
+        else void focusComment(owner);
+      },
+      reveal(id) {
+        if (id === rootId || !views.has(id)) return;
+        let owner = views.get(id).comment.replyToId || rootId;
+        let changed = collapsedOwners.delete(rootId);
+        const visited = new Set([id, rootId]);
+        while (owner && !visited.has(owner)) {
+          visited.add(owner);
+          changed = collapsedOwners.delete(owner) || changed;
+          const parent = views.get(owner)?.comment;
+          if (!parent) break;
+          owner = parent.replyToId || rootId;
+        }
+        if (changed) thread.render(false);
+      },
+      attach(row) {
         rootRow = row;
         bindPathEvents(row);
-        showReplies = button(t("loadReplies", [comment.replyCount || 0]), () => loadReplies());
+        showReplies = button(
+          t("replies", [comment.replyCount || 0]),
+          () => (collapsedOwners.has(rootId) ? thread.toggle(rootId) : loadReplies()),
+          "ryd-discussion-button ryd-discussion-reply-reopen",
+        );
         showReplies.dataset.action = "load-replies";
+        showReplies.dataset.replyOwnerId = rootId;
+        showReplies.dataset.replyPathOwner = rootId;
+        showReplies.setAttribute("aria-label", t("loadReplies", [comment.replyCount || 0]));
+        showReplies.setAttribute("aria-expanded", "false");
         showReplies.hidden = repliesLoaded || !comment.replyCount;
         showReplies.disabled = replyLoading;
-        actions.append(showReplies);
+        row.append(showReplies);
+        thread.refreshCount();
       },
       clearPaths() {
         pointerPath = null;
@@ -534,8 +659,17 @@ export function createDiscussionPanel({
       refreshCount() {
         comment.replyCount = Math.max(comment.replyCount || 0, views.size);
         if (!showReplies) return;
-        showReplies.textContent = t("loadReplies", [comment.replyCount]);
-        showReplies.hidden = repliesLoaded || !comment.replyCount;
+        showReplies.textContent = t("replies", [comment.replyCount]);
+        showReplies.setAttribute("aria-label", t("loadReplies", [comment.replyCount]));
+        showReplies.dataset.action = collapsedOwners.has(rootId) ? "toggle-replies" : "load-replies";
+        showReplies.hidden = (repliesLoaded && !collapsedOwners.has(rootId)) || !comment.replyCount;
+        showReplies.disabled = replyLoading && !collapsedOwners.has(rootId);
+        if (!repliesLoaded && !views.size) {
+          const initialReplies = Boolean(comment.replyCount);
+          rootRow.dataset.replyHasChildren = String(initialReplies);
+          pathSegment(rootRow, "ryd-discussion-reply-stem", initialReplies, rootId);
+          refreshPathGroups();
+        }
       },
       refreshRootContexts() {
         for (const view of views.values())
@@ -558,24 +692,47 @@ export function createDiscussionPanel({
         views.set(updated.id, { comment: updated, node: row });
         thread.render();
       },
-      render() {
-        const ordered = orderReplies(
-          [...views.values()].map((view) => view.comment),
-          rootId,
-        );
+      render(reorder = true) {
+        const activeBeforeRender = document.activeElement;
+        if (reorder) {
+          orderedReplies = orderReplies(
+            [...views.values()].map((view) => view.comment),
+            rootId,
+            { rootContinuation: repliesLoaded },
+          );
+          singleReplyOwners = new Set();
+          for (let index = 0; index < orderedReplies.length; index++) {
+            const item = orderedReplies[index];
+            if (
+              orderedReplies[index + 1]?.depth > item.depth &&
+              (!orderedReplies[index + 2] || orderedReplies[index + 2].depth <= item.depth)
+            )
+              singleReplyOwners.add(item.comment.id);
+          }
+        }
+        const ordered = orderedReplies;
+        thread.refreshCount();
+        const rootCollapsed = collapsedOwners.has(rootId);
+        node.hidden = rootCollapsed;
         rootRow.dataset.replyHasChildren = String(
           ordered.some(({ comment: reply }) => !reply.replyToId || reply.replyToId === rootId),
         );
         pathSegment(rootRow, "ryd-discussion-reply-stem", rootRow.dataset.replyHasChildren === "true", rootId);
+        refreshDisclosure(rootRow, rootId, views.size > 0);
+        let hiddenBelowDepth = rootCollapsed ? 0 : null;
         const rows = ordered.map(
           ({ comment: reply, depth, partial, hasNextSibling, hasChildren, continuationPaths }) => {
             const row = views.get(reply.id).node;
+            if (hiddenBelowDepth !== null && depth <= hiddenBelowDepth) hiddenBelowDepth = null;
+            row.hidden = hiddenBelowDepth !== null;
+            if (!row.hidden && collapsedOwners.has(reply.id)) hiddenBelowDepth = depth;
             row.dataset.replyDepth = String(depth);
             row.style.setProperty("--ryd-reply-depth", String(depth));
             row.dataset.replyContext = partial ? "partial" : "complete";
             row.dataset.replyHasSibling = String(hasNextSibling);
             row.dataset.replyHasChildren = String(hasChildren);
             pathSegment(row, "ryd-discussion-reply-stem", hasChildren, reply.id);
+            refreshDisclosure(row, reply.id, hasChildren);
             pathSegment(row, "ryd-discussion-reply-continuation", hasNextSibling, reply.replyToId || rootId);
             const rails = new Map(
               [...row.querySelectorAll(":scope > .ryd-discussion-reply-rail")].map((rail) => [
@@ -602,8 +759,12 @@ export function createDiscussionPanel({
           },
         );
         if (repliesCursor) rows.push(moreReplies);
+        else if (repliesLoaded && views.size) rows.push(hideReplies);
+        moreReplies.hidden = rootCollapsed;
+        hideReplies.hidden = rootCollapsed;
         orderNodes(node, rows);
         refreshPathGroups();
+        retainVisibleFocus(activeBeforeRender);
         thread.refreshCount();
       },
       add(created) {
@@ -665,7 +826,7 @@ export function createDiscussionPanel({
     const notice = statusNode();
     const controls = element("div", "ryd-discussion-inline-editor");
     if (comment.parentId) {
-      const context = button("", () => focusComment(comment.replyToId || rootId), "ryd-discussion-reply-context");
+      const context = button("", () => thread.activateParent(comment), "ryd-discussion-reply-context");
       context.dataset.action = "reply-context";
       row.append(context);
     }
@@ -810,7 +971,7 @@ export function createDiscussionPanel({
     }
     if (!comment.parentId) {
       rootReplyHandlers.set(comment.id, thread);
-      thread.attach(row, actions);
+      thread.attach(row);
     }
     return row;
   }
@@ -1029,6 +1190,11 @@ export function createDiscussionPanel({
   function focusRenderedComment(id) {
     const focused = [...list.querySelectorAll("[data-comment-id]")].find((item) => item.dataset.commentId === id);
     if (!focused) return false;
+    for (const thread of rootReplyHandlers.values())
+      if (thread.get(id)) {
+        thread.reveal(id);
+        break;
+      }
     highlightedId = id;
     for (const row of list.querySelectorAll("[data-comment-id]"))
       row.classList.toggle("is-highlighted", row === focused);

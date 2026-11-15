@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "Objavi komentar"
   },
-  "discussion_replyTo": {
-    "message": "V odgovor na komentar uporabnika $1"
+  "discussion_viewReplies": {
+    "message": "Prikaži odgovore"
+  },
+  "discussion_moreReplies": {
+    "message": "Prikaži več odgovorov"
+  },
+  "discussion_viewReply": {
+    "message": "Prikaži odgovor"
+  },
+  "discussion_collapseReplies": {
+    "message": "Skrij odgovore"
   },
   "discussion_replyContext": {
     "message": "Prikaži izvirni komentar"

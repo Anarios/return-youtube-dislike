@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "Опублікувати коментар"
   },
-  "discussion_replyTo": {
-    "message": "У відповідь на коментар $1"
+  "discussion_viewReplies": {
+    "message": "Показати відповіді"
+  },
+  "discussion_moreReplies": {
+    "message": "Показати більше відповідей"
+  },
+  "discussion_viewReply": {
+    "message": "Показати відповідь"
+  },
+  "discussion_collapseReplies": {
+    "message": "Приховати відповіді"
   },
   "discussion_replyContext": {
     "message": "Показати вихідний коментар"

@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "發布留言"
   },
-  "discussion_replyTo": {
-    "message": "回覆 $1"
+  "discussion_viewReplies": {
+    "message": "查看回覆"
+  },
+  "discussion_moreReplies": {
+    "message": "顯示更多回覆"
+  },
+  "discussion_viewReply": {
+    "message": "查看回覆"
+  },
+  "discussion_collapseReplies": {
+    "message": "隱藏回覆"
   },
   "discussion_replyContext": {
     "message": "查看所回覆的留言"

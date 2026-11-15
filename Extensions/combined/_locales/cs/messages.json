@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "Zveřejnit komentář"
   },
-  "discussion_replyTo": {
-    "message": "V odpovědi na komentář od $1"
+  "discussion_viewReplies": {
+    "message": "Zobrazit odpovědi"
+  },
+  "discussion_moreReplies": {
+    "message": "Zobrazit další odpovědi"
+  },
+  "discussion_viewReply": {
+    "message": "Zobrazit odpověď"
+  },
+  "discussion_collapseReplies": {
+    "message": "Skrýt odpovědi"
   },
   "discussion_replyContext": {
     "message": "Zobrazit původní komentář"

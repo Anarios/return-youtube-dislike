@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "Reactie plaatsen"
   },
-  "discussion_replyTo": {
-    "message": "In reactie op $1"
+  "discussion_viewReplies": {
+    "message": "Reacties bekijken"
+  },
+  "discussion_moreReplies": {
+    "message": "Meer reacties weergeven"
+  },
+  "discussion_viewReply": {
+    "message": "Reactie bekijken"
+  },
+  "discussion_collapseReplies": {
+    "message": "Reacties verbergen"
   },
   "discussion_replyContext": {
     "message": "Bovenliggende reactie bekijken"

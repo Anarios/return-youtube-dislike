@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "Kirim komentar"
   },
-  "discussion_replyTo": {
-    "message": "Menanggapi $1"
+  "discussion_viewReplies": {
+    "message": "Lihat balasan"
+  },
+  "discussion_moreReplies": {
+    "message": "Tampilkan balasan lainnya"
+  },
+  "discussion_viewReply": {
+    "message": "Lihat balasan"
+  },
+  "discussion_collapseReplies": {
+    "message": "Sembunyikan balasan"
   },
   "discussion_replyContext": {
     "message": "Lihat komentar yang ditanggapi"

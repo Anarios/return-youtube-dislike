@@ -536,8 +536,17 @@
   "discussion_post": {
     "message": "ارسال نظر"
   },
-  "discussion_replyTo": {
-    "message": "در پاسخ به $1"
+  "discussion_viewReplies": {
+    "message": "مشاهدهٔ پاسخ‌ها"
+  },
+  "discussion_moreReplies": {
+    "message": "نمایش پاسخ‌های بیشتر"
+  },
+  "discussion_viewReply": {
+    "message": "مشاهدهٔ پاسخ"
+  },
+  "discussion_collapseReplies": {
+    "message": "پنهان کردن پاسخ‌ها"
   },
   "discussion_replyContext": {
     "message": "مشاهدهٔ نظر اصلی"

@@ -4,7 +4,7 @@ function timestamp(value) {
   return String(value).replace(/(?:\.(\d+))?Z$/, (_, fraction = "") => `.${fraction.padEnd(9, "0")}Z`);
 }
 
-export function orderReplies(replies, rootId) {
+export function orderReplies(replies, rootId, { rootContinuation = false } = {}) {
   const comments = [...new Map(replies.filter((item) => item.id !== rootId).map((item) => [item.id, item])).values()];
   comments.sort((a, b) => timestamp(a.createdAt).localeCompare(timestamp(b.createdAt)) || a.id.localeCompare(b.id));
   const byId = new Map(comments.map((comment) => [comment.id, comment]));
@@ -46,7 +46,7 @@ export function orderReplies(replies, rootId) {
   for (const comment of roots) if (!comment.replyToId || comment.replyToId === rootId) lastRootChild = comment;
   for (const comment of roots) {
     const partial = Boolean(comment.replyToId && comment.replyToId !== rootId);
-    visit(comment, partial, !partial && comment !== lastRootChild);
+    visit(comment, partial, !partial && (comment !== lastRootChild || rootContinuation));
   }
   for (const comment of comments) if (!visited.has(comment.id)) visit(comment, true);
   return ordered;

@@ -539,8 +539,17 @@
   "discussion_post": {
     "message": "Kommentar posten"
   },
-  "discussion_replyTo": {
-    "message": "Antwort auf den Kommentar von $1"
+  "discussion_viewReplies": {
+    "message": "Antworten ansehen"
+  },
+  "discussion_moreReplies": {
+    "message": "Weitere Antworten anzeigen"
+  },
+  "discussion_viewReply": {
+    "message": "Antwort ansehen"
+  },
+  "discussion_collapseReplies": {
+    "message": "Antworten ausblenden"
   },
   "discussion_replyContext": {
     "message": "Ursprünglichen Kommentar anzeigen"
