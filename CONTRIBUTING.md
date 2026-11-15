@@ -6,42 +6,35 @@ Thank you for investing your time in contributing to our project! All your chang
 
 ## Getting Started
 
-Please use Prettier for formatting. The config lives in `package.json`, and a pre-commit hook formats staged files automatically.
+Use the Node.js version in [`.nvmrc`](.nvmrc) and the npm version in the `packageManager` field of [`package.json`](package.json). Format your changes with Prettier using the configuration in the same file.
 
-#### Prerequisites
+From the repository root, install the dependencies recorded in the lockfile.
 
-You need to have node and npm installed to create the bundled version of the source.
-
-Versions used when setting up (see `engines` in `package.json`):
-
-- node: 22.17.0
-- npm: 10.8.2
-
-To create the bundled scripts (such as `ryd.content-script.js`) that contain most of the business logic of this extension you have to install all dependencies first.
-
-1. Go to the root of the repo and run:
-
-```
-npm install
+```sh
+npm ci
 ```
 
-2. Run one of the following commands to create the bundled extension in `Extensions/combined/dist/` (`chrome`, `firefox` and `safari` folders)
+For development, start the watcher. It rebuilds the extension when you save a source file.
 
-```
-npm run dev // to create the build file(s) and start a file watcher that rebuilds on save
-
-// or
-
-npm run build // to create the build file(s) once
+```sh
+npm run dev
 ```
 
-3. Run the unit tests with:
+For a one-time production build, run the following command.
 
+```sh
+npm run build
 ```
+
+Both commands write browser-specific bundles to the `chrome`, `firefox`, and `safari` folders under `Extensions/combined/dist/`.
+
+To try the Chrome build, open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select `Extensions/combined/dist/chrome`. To see content script changes after a rebuild, reload the extension there and refresh the YouTube tab.
+
+Run the unit tests from the repository root.
+
+```sh
 npm test
 ```
-
-Congratulations, You are now ready to develop!
 
 If you are new to developing Chrome extensions, or need extra help, please see [this YouTube tutorial](https://www.youtube.com/watch?v=mdOj6HYE3_0)
 
