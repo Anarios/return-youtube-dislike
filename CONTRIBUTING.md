@@ -6,36 +6,35 @@ Thank you for investing your time in contributing to our project! All your chang
 
 ## Getting Started
 
-Please use Prettier with default settings for formatting.
+Use the Node.js version in [`.nvmrc`](.nvmrc) and the npm version in the `packageManager` field of [`package.json`](package.json). Format your changes with Prettier using the configuration in the same file.
 
-#### Prerequisites
+From the repository root, install the dependencies recorded in the lockfile.
 
-You need to have node and npm installed to create the bundled version of the source.
-
-Versions used when setting up:
-
-- node: 12.18.4
-- npm: 6.14.6
-
-To create the `bundled-content-script.js` that contains most of the business logic of this extension you have to install all dependencies first.
-
-1. Go to the root of the repo and run:
-
-```
-npm install
+```sh
+npm ci
 ```
 
-2. Run the following command to create `bundled-content-script.js` which is used in `manifest.json`
+For development, start the watcher. It rebuilds the extension when you save a source file.
 
-```
-npm start // to create the build file(s) and start a file watcher that hot-reloads on save
-
-// or
-
-npm run build // to create the build file(s) once
+```sh
+npm run dev
 ```
 
-Congratulations, You are now ready to develop!
+For a one-time production build, run the following command.
+
+```sh
+npm run build
+```
+
+Both commands write browser-specific bundles to the `chrome`, `firefox`, and `safari` folders under `Extensions/combined/dist/`.
+
+To try the Chrome build, open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**, and select `Extensions/combined/dist/chrome`. To see content script changes after a rebuild, reload the extension there and refresh the YouTube tab.
+
+Run the unit tests from the repository root.
+
+```sh
+npm test
+```
 
 If you are new to developing Chrome extensions, or need extra help, please see [this YouTube tutorial](https://www.youtube.com/watch?v=mdOj6HYE3_0)
 
