@@ -3,6 +3,7 @@ const { test, expect } = require("@playwright/test");
 const { VIDEO_A, VIDEO_B } = require("../../UserScript/e2e/harness");
 const { assertInvariantContinuously } = require("../continuous-invariants");
 const { HermeticExtensionArtifactAdapter, startHermeticApiServer } = require("../hermetic-artifact-smoke");
+const { config } = require("../../combined/src/config");
 
 const EXTENSION_ARTIFACT = path.resolve(
   process.env.RYD_EXTENSION_ARTIFACT || path.join(__dirname, "../../combined/dist/chrome"),
@@ -79,12 +80,23 @@ async function expectAnchoredPrompt(page, viewport, placement) {
   return layout;
 }
 
+function skipUnlessReviewPrompt(enabled) {
+  test.skip(
+    config.reviewPromptEnabled !== enabled,
+    `The review request is ${config.reviewPromptEnabled ? "enabled" : "disabled"} in config.js.`,
+  );
+}
+
 async function readReviewState(adapter) {
   return adapter.worker.evaluate(async (key) => (await chrome.storage.local.get(key))[key], STATE_KEY);
 }
 
+async function seedReviewState(adapter, state) {
+  await adapter.worker.evaluate(async ([key, value]) => chrome.storage.local.set({ [key]: value }), [STATE_KEY, state]);
+}
+
 async function seedEligibility(adapter) {
-  await adapter.worker.evaluate(async (key) => chrome.storage.local.set({ [key]: { eligible: true } }), STATE_KEY);
+  await seedReviewState(adapter, { eligible: true });
 }
 
 async function openReadyWatch(adapter, videoId) {
@@ -113,6 +125,7 @@ async function withArtifact(testInfo, contextOptions, run) {
 }
 
 test("review request counts distinct reacted videos, waits for a later dislike, and stays dismissed after reload", async ({}, testInfo) => {
+  skipUnlessReviewPrompt(true);
   await withArtifact(testInfo, {}, async (adapter) => {
     const page = adapter.page;
     await openReadyWatch(adapter, VIDEO_IDS[0]);
@@ -153,11 +166,47 @@ test("review request counts distinct reacted videos, waits for a later dislike, 
   });
 });
 
+test("review request counts videos reached by in-page navigation and prompts on a later dislike", async ({}, testInfo) => {
+  skipUnlessReviewPrompt(true);
+  await withArtifact(testInfo, {}, async (adapter) => {
+    const page = adapter.page;
+    const votedVideos = () =>
+      adapter.apiServer.records
+        .filter((record) => record.method === "POST" && record.pathname === "/interact/vote")
+        .map((record) => record.body.videoId);
+    await adapter.openSpaWatch(VIDEO_IDS[0]);
+    await page.evaluate(() => {
+      window.__reviewSameDocument = true;
+    });
+
+    for (let index = 0; index < VIDEO_IDS.length; index += 1) {
+      if (index > 0) {
+        await page.evaluate((videoId) => window.__navigationFixture.navigate("watch", videoId), VIDEO_IDS[index]);
+      }
+      await expect(page).toHaveURL(new RegExp(`v=${VIDEO_IDS[index]}`));
+      await expect(page.locator(DISLIKE_TEXT)).toHaveText("25");
+      const lastVideo = index === VIDEO_IDS.length - 1;
+      await page.locator(REACTION(lastVideo || index % 2 ? "dislike" : "like")).click();
+      await expect.poll(votedVideos).toEqual(VIDEO_IDS.slice(0, index + 1));
+      if (lastVideo) break;
+      await expect
+        .poll(() => readReviewState(adapter))
+        .toEqual(index === 4 ? { eligible: true } : { videoIds: VIDEO_IDS.slice(0, index + 1) });
+      await expect(page.locator(PROMPT)).toHaveCount(0);
+    }
+
+    await expect(page.locator(PROMPT)).toBeVisible();
+    await expect.poll(() => readReviewState(adapter)).toEqual({ shown: true });
+    expect(await page.evaluate(() => window.__reviewSameDocument === true)).toBe(true);
+  });
+});
+
 for (const viewport of [
   { width: 1280, height: 800 },
   { width: 360, height: 640 },
 ]) {
   test(`review request is unobtrusive and keyboard accessible at ${viewport.width}px in both themes`, async ({}, testInfo) => {
+    skipUnlessReviewPrompt(true);
     await withArtifact(testInfo, { viewport }, async (adapter) => {
       const page = adapter.page;
       await seedEligibility(adapter);
@@ -242,6 +291,7 @@ for (const viewport of [
 }
 
 test("review request clears during SPA navigation and is shown only once across tabs", async ({}, testInfo) => {
+  skipUnlessReviewPrompt(true);
   await withArtifact(testInfo, {}, async (adapter) => {
     const page = adapter.page;
     await seedEligibility(adapter);
@@ -274,6 +324,7 @@ test("review request clears during SPA navigation and is shown only once across 
 });
 
 test("a lost review request remains consumed after another reaction, reload, and another tab", async ({}, testInfo) => {
+  skipUnlessReviewPrompt(true);
   await withArtifact(testInfo, {}, async (adapter) => {
     const page = adapter.page;
     await adapter.context.addInitScript(() => {
@@ -351,6 +402,33 @@ test("a lost review request remains consumed after another reaction, reload, and
       await expect.poll(() => readReviewState(adapter)).toEqual({ shown: true });
     } finally {
       await otherPage.close();
+    }
+  });
+});
+
+test("a disabled review request never appears and leaves the stored review state untouched", async ({}, testInfo) => {
+  skipUnlessReviewPrompt(false);
+  await withArtifact(testInfo, {}, async (adapter) => {
+    const page = adapter.page;
+    const dislikeWithoutPrompt = async (videoId) => {
+      await openReadyWatch(adapter, videoId);
+      await page.locator(REACTION("dislike")).click();
+      await expect(page.locator(DISLIKE_TEXT)).toHaveText("26");
+      await assertInvariantContinuously({
+        label: "a disabled review request must never be inserted",
+        durationMs: 500,
+        read: () => page.locator(PROMPT).count(),
+        isValid: (count) => count === 0,
+      });
+    };
+
+    for (const videoId of VIDEO_IDS) await dislikeWithoutPrompt(videoId);
+    expect(await readReviewState(adapter)).toBeUndefined();
+
+    for (const state of [{ eligible: true }, { shown: true }]) {
+      await seedReviewState(adapter, state);
+      await dislikeWithoutPrompt(VIDEO_A);
+      expect(await readReviewState(adapter)).toEqual(state);
     }
   });
 });

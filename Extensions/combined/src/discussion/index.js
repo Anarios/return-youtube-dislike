@@ -1,11 +1,13 @@
 import { createDiscussionRequestScope, requestDiscussion, subscribeDiscussionEvents } from "./client";
-import { discussionRoute, findDiscussionSurface } from "./detector";
+import { SHORTS_LAUNCHER_ID, discussionRoute, findDiscussionSurface } from "./detector";
 import { discussionLanguage, discussionText as t } from "./localize";
 import { createDiscussionPanel } from "./panel";
 import { showDiscussionToast } from "./inbox";
 import { button, element, discussionLinkTarget, isDiscussionCommentId } from "./dom";
 import { isPrivateBrowsingContext } from "../private-browsing";
+import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "../core-data-consent";
 
+const HIDE_COMMENTS_KEY = "hideRydComments";
 let installed = null;
 
 export function initDiscussion({ request = requestDiscussion } = {}) {
@@ -27,6 +29,90 @@ export function initDiscussion({ request = requestDiscussion } = {}) {
   let language = discussionLanguage();
   let scheduled = null;
   let sessionGeneration = 0;
+  let reactionsAllowed = !usesFirefoxDataCollectionConsent();
+  let permissionGeneration = 0;
+  let sessionRequest = null;
+  let browsingAllowed = false;
+  let browsingGeneration = 0;
+  let commentsHidden = true;
+
+  async function loadCapabilities() {
+    const expected = ++browsingGeneration;
+    if (commentsHidden) return;
+    try {
+      if (!(await hasFeaturePermission("counts")) || disposed || expected !== browsingGeneration) return;
+      const value = await request("capabilities");
+      if (disposed || expected !== browsingGeneration) return;
+      browsingAllowed = true;
+      capabilities = value || {};
+      refresh();
+    } catch (_) {}
+  }
+
+  function applyCommentsSetting(hidden) {
+    if (disposed || hidden === commentsHidden) return;
+    commentsHidden = hidden;
+    if (hidden) refresh();
+    else void loadCapabilities();
+  }
+
+  function commentsSettingChanged(changes, area) {
+    if (area === "sync" && changes[HIDE_COMMENTS_KEY])
+      applyCommentsSetting(changes[HIDE_COMMENTS_KEY].newValue === true);
+  }
+
+  function updateSession(value) {
+    const changed =
+      ["authenticated", "canPost", "isModerator", "membershipTier"].some((key) => session?.[key] !== value?.[key]) ||
+      ["id", "nickname", "suspended"].some((key) => session?.profile?.[key] !== value?.profile?.[key]);
+    session = value;
+    if (changed) panel?.setSession(session);
+    if (changed && session?.authenticated && inbox) panel?.setInbox(inbox);
+    if (!session?.authenticated) {
+      inbox = null;
+      document.querySelector(".ryd-discussion-toast")?.remove();
+    }
+  }
+
+  function recoverSession() {
+    if (disposed || document.visibilityState !== "visible") return;
+    if (sessionRequest) return sessionRequest;
+    const expected = sessionGeneration;
+    sessionRequest = (async () => {
+      try {
+        if (
+          !(await hasFeaturePermission("account")) ||
+          disposed ||
+          document.visibilityState !== "visible" ||
+          expected !== sessionGeneration
+        )
+          return;
+        const value = await request("session");
+        if (!disposed && expected === sessionGeneration) updateSession(value);
+      } catch (_) {
+      } finally {
+        sessionRequest = null;
+      }
+    })();
+    return sessionRequest;
+  }
+
+  function visibilityChange() {
+    if (document.visibilityState === "visible") recoverSession();
+  }
+
+  function pageActivity() {
+    refresh();
+    recoverSession();
+  }
+
+  async function refreshPermissions() {
+    const expected = ++permissionGeneration;
+    const allowed = await hasFeaturePermission("voting");
+    if (disposed || expected !== permissionGeneration) return;
+    reactionsAllowed = allowed;
+    panel?.setPermissions({ reactions: allowed });
+  }
 
   const bridge = document.createElement("script");
   bridge.src = chrome.runtime.getURL("comments-bridge.js");
@@ -119,7 +205,8 @@ export function initDiscussion({ request = requestDiscussion } = {}) {
       language = nextLanguage;
       clear();
     }
-    const next = capabilities.enabled === true ? findDiscussionSurface(route) : null;
+    const next =
+      browsingAllowed && !commentsHidden && capabilities.enabled === true ? findDiscussionSurface(route) : null;
     if (!next) {
       clear();
       return;
@@ -142,6 +229,7 @@ export function initDiscussion({ request = requestDiscussion } = {}) {
       surface: next.surface,
       session,
       capabilities,
+      reactionsAllowed,
       request: panelScope.request,
       ...(next.surface === "shorts" ? { onClose: closeDrawer } : {}),
     });
@@ -150,13 +238,13 @@ export function initDiscussion({ request = requestDiscussion } = {}) {
       next.host.insertAdjacentElement("afterend", panel.root);
     } else {
       launcher = button("RYD", openDrawer, "ryd-discussion-launcher");
-      launcher.id = "ryd-discussion-launcher";
+      launcher.id = SHORTS_LAUNCHER_ID;
       launcher.dataset.videoId = next.videoId;
       launcher.setAttribute("aria-label", t("open"));
       launcher.setAttribute("title", t("open"));
       launcher.setAttribute("aria-haspopup", "dialog");
       launcher.setAttribute("aria-expanded", "false");
-      next.host.insertAdjacentElement("afterend", launcher);
+      next.host.insertBefore(launcher, next.host.querySelector(":scope > pivot-button-view-model"));
       backdrop = element("div", "ryd-discussion-backdrop");
       backdrop.hidden = true;
       backdrop.addEventListener("click", closeDrawer);
@@ -185,7 +273,7 @@ export function initDiscussion({ request = requestDiscussion } = {}) {
   }
   function navigationFinish() {
     navigationPending = false;
-    refresh();
+    pageActivity();
   }
   function keyboard(event) {
     if (!panel || surface?.surface !== "shorts" || panel.root.hidden) return;
@@ -221,7 +309,9 @@ export function initDiscussion({ request = requestDiscussion } = {}) {
   window.addEventListener("pagehide", navigationStart);
   window.addEventListener("pageshow", navigationFinish);
   window.addEventListener("hashchange", refresh);
-  window.addEventListener("popstate", refresh);
+  window.addEventListener("popstate", pageActivity);
+  window.addEventListener("online", recoverSession);
+  document.addEventListener("visibilitychange", visibilityChange);
   document.addEventListener("click", notificationLinkClick, true);
   document.addEventListener("keydown", keyboard, true);
   const timer = setInterval(refresh, 1000);
@@ -229,36 +319,50 @@ export function initDiscussion({ request = requestDiscussion } = {}) {
     if (disposed) return;
     if (event.type === "session") {
       sessionGeneration++;
-      session = event.data;
-      panel?.setSession(session);
-      if (!session?.authenticated) {
-        inbox = null;
-        document.querySelector(".ryd-discussion-toast")?.remove();
-      }
+      updateSession(event.data);
     }
     if (event.type === "inbox") {
       inbox = event.data;
       panel?.setInbox(inbox);
     }
     if (event.type === "toast" && session.authenticated) showDiscussionToast(event.data);
+    if (event.type === "permissions") {
+      const removed = event.data?.removed || [];
+      const added = event.data?.added || [];
+      if (
+        [...added, ...removed].some((category) =>
+          ["authenticationInfo", "personallyIdentifyingInfo"].includes(category),
+        )
+      )
+        sessionGeneration++;
+      if ([...added, ...removed].every((category) => category === "websiteActivity")) {
+        refreshPermissions();
+        return;
+      }
+      if (removed.some((category) => ["authenticationInfo", "personallyIdentifyingInfo"].includes(category))) {
+        updateSession({ authenticated: false, profile: null, canPost: false, isModerator: false });
+      }
+      if (removed.includes("browsingActivity")) {
+        browsingGeneration++;
+        browsingAllowed = false;
+        capabilities = {};
+        clear();
+      }
+      if (added.includes("browsingActivity")) void loadCapabilities();
+      if (!browsingAllowed) {
+        refreshPermissions();
+        return;
+      }
+      panel?.setSession(session);
+      panel?.load();
+      refreshPermissions();
+      refresh();
+    }
   });
-  const initialSession = sessionGeneration;
-  request("session")
-    .then((value) => {
-      if (!disposed && initialSession === sessionGeneration) {
-        session = value;
-        panel?.setSession(session);
-      }
-    })
-    .catch(() => {});
-  request("capabilities")
-    .then((value) => {
-      if (!disposed) {
-        capabilities = value || {};
-        refresh();
-      }
-    })
-    .catch(() => {});
+  refreshPermissions();
+  recoverSession();
+  chrome.storage.onChanged.addListener(commentsSettingChanged);
+  chrome.storage.sync.get([HIDE_COMMENTS_KEY], (values) => applyCommentsSetting(values?.[HIDE_COMMENTS_KEY] === true));
   refresh();
   installed = {
     refresh,
@@ -270,13 +374,16 @@ export function initDiscussion({ request = requestDiscussion } = {}) {
       clearTimeout(scheduled);
       observer.disconnect();
       unsubscribe();
+      chrome.storage.onChanged.removeListener(commentsSettingChanged);
       bridge.remove();
       document.removeEventListener("yt-navigate-start", navigationStart);
       document.removeEventListener("yt-navigate-finish", navigationFinish);
       window.removeEventListener("pagehide", navigationStart);
       window.removeEventListener("pageshow", navigationFinish);
       window.removeEventListener("hashchange", refresh);
-      window.removeEventListener("popstate", refresh);
+      window.removeEventListener("popstate", pageActivity);
+      window.removeEventListener("online", recoverSession);
+      document.removeEventListener("visibilitychange", visibilityChange);
       document.removeEventListener("click", notificationLinkClick, true);
       document.removeEventListener("keydown", keyboard, true);
       installed = null;

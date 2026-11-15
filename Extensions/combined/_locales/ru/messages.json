@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "Состояние API:"
-  },
-  "apiStatusOffline": {
-    "message": "Офлайн"
-  },
-  "apiStatusOnline": {
-    "message": "Онлайн"
-  },
   "colorTheme": {
     "message": "Цветовая схема:"
   },
@@ -34,6 +25,9 @@
   },
   "disableLoggingHover": {
     "message": "Отключает логирование ответов API в консоль."
+  },
+  "developerSettings": {
+    "message": "Параметры для разработчиков"
   },
   "disableLoggingLabel": {
     "message": "Отключить логирование в консоль"
@@ -74,9 +68,6 @@
   "numberFormat": {
     "message": "Числовой формат"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Премиум‑функции доступны подписчикам на Patreon"
   },
@@ -86,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Информация о подписке на Patreon используется для проверки доступа к премиум-функциям. Мы не получаем данные вашей карты или банковского счёта."
   },
+  "paidFeaturesWhy": {
+    "message": "Дизлайки остаются бесплатными для всех. Платные дополнения помогают оплачивать серверы, на которых они работают: более 15 ТБ данных и около 20 миллионов пользователей в день, а бюджет — несколько сотен долларов в месяц."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Премиум‑функции доступны участникам проекта на GitHub"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Войти через GitHub (участник проекта)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Не удалось начать вход через GitHub. Попробуйте еще раз."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Не удалось завершить вход через GitHub. Попробуйте еще раз."
   },
   "patreonLoginCompleteFailed": {
     "message": "Не удалось завершить вход. Попробуйте еще раз."
@@ -135,28 +129,31 @@
     "message": "Делает значение статистики более последовательным."
   },
   "hidePremiumTeaser": {
-    "message": "Скрывать панель премиум-тизера"
+    "message": "Скрывать необработанные значения"
   },
   "hidePremiumTeaserHover": {
-    "message": "Не показывать премиум-тизер на страницах просмотра YouTube."
+    "message": "Не показывать панель с необработанными значениями на страницах просмотра YouTube."
   },
-  "roundNumbers": {
-    "message": "Показывать округленные числа"
+  "hideRydComments": {
+    "message": "Скрывать комментарии RYD"
   },
-  "roundNumbersHover": {
-    "message": "Округлить значение счетчика (это параметр YouTube по умолчанию)."
+  "hideRydCommentsHover": {
+    "message": "Не показывать комментарии RYD под видео, где комментарии YouTube отключены."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Скрыть премиальную аналитику по видео"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Скрыть панель премиальной аналитики по видео на страницах просмотра YouTube."
   },
   "shortsSupport": {
     "message": "Поддержка YouTube Shorts"
   },
   "showTooltipPercentage": {
-    "message": "Процент в подсказке полосы лайков/дизлайков."
+    "message": "Процент в подсказке полосы лайков/дизлайков"
   },
   "showTooltipPercentageHover": {
     "message": "Показывать процент в подсказке полосы лайков/дизлайков."
-  },
-  "textColorTheme": {
-    "message": "Цветовая тема:"
   },
   "textColorTheme1": {
     "message": "Классическая"
@@ -185,50 +182,20 @@
   "colorThemeDislike": {
     "message": "Не нравится"
   },
-  "textColorizeRatioBar": {
-    "message": "Раскрасьте полосу неприязни"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Используйте пользовательские цвета для полосы неприязни."
-  },
-  "textColorizeThumbs": {
-    "message": "Раскрасьте кнопки"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Раскрасьте кнопки нравится и не нравится с помощью пользовательских цветов."
-  },
-  "textConsistentFormat": {
-    "message": "Привести формат лайков и дизлайков к единому виду"
-  },
-  "textConsistentFormatHover": {
-    "message": "Переформатировать число лайков."
-  },
   "textDeveloper": {
     "message": "Дмитрий Селиванов и сообщество"
   },
   "textLikesDisabled": {
     "message": "Отключено владельцем"
   },
-  "textNumberFormat": {
-    "message": "Числовой формат:"
-  },
-  "textRoundingNumbers": {
-    "message": "Округлить статистику лайков/дизлайков (стандартное поведение YouTube)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Показывать округленные данные."
-  },
   "textSettings": {
     "message": "Отключить отправку лайков/дизлайков"
   },
   "textSettingsHover": {
-    "message": "Отключает отправку ваших отметок нравится/не нравится"
+    "message": "Ваши лайки и дизлайки не будут учитываться и не отразятся в числе дизлайков."
   },
   "textTempUnavailable": {
     "message": "Временно недоступно"
-  },
-  "textUpdate": {
-    "message": "обновление до"
   },
   "tooltipPercentageMode": {
     "message": "Режим процентов:"
@@ -443,9 +410,6 @@
   "premiumTeaser_statRaw": {
     "message": "Количество необработанных дизлайков"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Оценочные дизлайки"
-  },
   "premiumTeaser_statLikes": {
     "message": "Сырое количество лайков"
   },
@@ -455,29 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Не удалось загрузить данные по дизлайкам. Попробуйте обновить страницу."
   },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Как открыть премиальную аналитику"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Откройте премиальную аналитику видео в три быстрых шага:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Войдите через Patreon во всплывающем окне расширения Return YouTube Dislike."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Выберите уровень Premium, чтобы включить временные шкалы активности, рейтинги стран и интерактивную карту."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Перезагрузите YouTube, чтобы увидеть почасовые тренды, топ стран и детализацию по штатам США для каждого видео."
-  },
-  "premiumTierNotice_title": {
-    "message": "Премиальная аналитика заблокирована"
-  },
   "premiumTierNotice_message": {
     "message": "В вашей подписке на Patreon нет уровня Premium. Повышайте поддержку, чтобы получить доступ к расширенной видеоаналитике."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Обновить на Patreon"
   },
   "changelog_cta_primary": {
     "message": "Повысить уровень на Patreon"
@@ -519,19 +462,19 @@
     "message": "Спросить сообщество"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Скрывать лишние кнопки"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Показать примеры «до» и «после»"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Оставлять видимыми только кнопки «Нравится» и «Не нравится». «Поделиться», «Сохранить», «Суперспасибо» и другие дополнительные действия останутся доступны в меню YouTube с тремя точками («Другие действия»)."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "До: видны все кнопки действий"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "После: видны только «Нравится» и «Не нравится»"
   },
   "discussion_title": { "message": "Комментарии RYD" },
   "discussion_subtitle": { "message": "Обсуждение сообщества Return YouTube Dislike." },
@@ -544,9 +487,13 @@
   "discussion_refresh": { "message": "Обновить" },
   "discussion_loading": { "message": "Загрузка комментариев…" },
   "discussion_empty": { "message": "Комментариев пока нет. Начните обсуждение." },
-  "discussion_replyEmpty": { "message": "Ответов пока нет." },
   "discussion_comment": { "message": "Комментарий" },
   "discussion_post": { "message": "Отправить" },
+  "discussion_viewReplies": { "message": "Показать ответы" },
+  "discussion_moreReplies": { "message": "Показать ещё ответы" },
+  "discussion_viewReply": { "message": "Показать ответ" },
+  "discussion_collapseReplies": { "message": "Скрыть ответы" },
+  "discussion_replyContext": { "message": "Показать исходный комментарий" },
   "discussion_reply": { "message": "Ответить" },
   "discussion_postReply": { "message": "Отправить ответ" },
   "discussion_cancel": { "message": "Отмена" },
@@ -560,7 +507,6 @@
   "discussion_more": { "message": "Показать ещё" },
   "discussion_like": { "message": "Нравится" },
   "discussion_dislike": { "message": "Не нравится" },
-  "discussion_reacting": { "message": "Сохранение реакции…" },
   "discussion_signInRequired": { "message": "Чтобы продолжить, войдите в аккаунт через меню расширения." },
   "discussion_tierRequired": { "message": "Писать могут участники с активным уровнем Commenter и выше." },
   "discussion_join": { "message": "Стать участником Commenter" },
@@ -598,8 +544,6 @@
   "discussion_ban": { "message": "Заблокировать автора" },
   "discussion_unban": { "message": "Разблокировать автора" },
   "discussion_moderationReason": { "message": "Причина модерации" },
-  "discussion_moderationSaved": { "message": "Действие модератора сохранено." },
-  "discussion_reported": { "message": "Жалоб: $1" },
   "discussion_unavailable": { "message": "Комментарии RYD недоступны для этого видео." },
   "discussion_commentUnavailable": { "message": "Этот комментарий больше недоступен." },
   "discussion_error": { "message": "Не удалось подключиться. Попробуйте ещё раз." },
@@ -612,27 +556,18 @@
   "discussion_notificationReply": { "message": "$1 ответил(а) на ваш комментарий" },
   "discussion_notificationLike": { "message": "Кому-то понравился ваш комментарий" },
   "discussion_notificationLikes": { "message": "Новых лайков у вашего комментария: $1" },
-  "discussion_notificationDislike": { "message": "Кому-то не понравился ваш комментарий" },
-  "discussion_notificationReaction": { "message": "Кто-то оценил ваш комментарий" },
   "discussion_someone": { "message": "Кто-то" },
   "discussion_markRead": { "message": "Отметить прочитанным" },
   "discussion_markAllRead": { "message": "Прочитать все" },
   "discussion_view": { "message": "Открыть обсуждение" },
-  "discussion_unread": { "message": "Непрочитанных уведомлений: $1" },
-  "discussion_signedOutInbox": { "message": "Войдите, чтобы видеть ответы и реакции на ваши комментарии." },
-  "discussion_notificationUnavailable": { "message": "Это обсуждение больше недоступно." },
+  "discussion_signedOutInbox": { "message": "Войдите, чтобы видеть ответы и лайки на ваши комментарии." },
   "discussion_discussionTab": { "message": "Обсуждение" },
   "discussion_nickname": { "message": "Псевдоним" },
-  "discussion_reportCount": { "message": "Жалобы" },
   "discussion_reportStatus": { "message": "Статус жалоб" },
   "discussion_openReports": { "message": "Открытые жалобы" },
   "discussion_resolvedReports": { "message": "Закрытые жалобы" },
   "discussion_author": { "message": "Автор" },
-  "discussion_me": { "message": "Вы" },
   "discussion_saving": { "message": "Сохранение…" },
-  "discussion_confirm": { "message": "Подтвердить" },
-  "discussion_notificationUpdated": { "message": "Новая активность в ваших комментариях" },
-  "discussion_showThread": { "message": "Показать ветку" },
   "discussion_loadReplies": { "message": "Показать ответы ($1)" },
   "patreonTierCommenter": { "message": "Commenter" },
   "changelog_brand_logo_alt": {
@@ -671,6 +606,12 @@
   "changelog_hero_body": {
     "message": "Откройте любое видео на YouTube, и вы увидите число дизлайков рядом с лайками, на своём месте. В версии 4.1 также появились комментарии RYD — место для обсуждения видео вне раздела комментариев YouTube."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Ещё один шаг"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Включите показ дизлайков ниже, чтобы видеть их рядом с лайками на YouTube. В версии 4.1 также появились комментарии RYD — место для обсуждения видео вне раздела комментариев YouTube."
+  },
   "changelog_new_badge": {
     "message": "Новое в 4.1"
   },
@@ -681,7 +622,7 @@
     "message": "Знакомьтесь: комментарии RYD"
   },
   "changelog_comments_body": {
-    "message": "Обсуждения сообщества под видео и Shorts в Return YouTube Dislike, отдельно от комментариев YouTube. Читать и ставить реакции могут все. Участники с уровнями Commenter и Premium могут писать комментарии и ответы."
+    "message": "Обсуждения сообщества в Return YouTube Dislike под видео и Shorts, где комментарии YouTube отключены. Читать и ставить реакции могут все. Участники с уровнями Commenter и Premium могут писать комментарии и ответы."
   },
   "changelog_comments_point_replies": {
     "message": "Ветки ответов с лайками и дизлайками"
@@ -690,7 +631,7 @@
     "message": "Пишите под выбранным вами публичным ником"
   },
   "changelog_comments_point_notifications": {
-    "message": "Уведомления об ответах и реакциях"
+    "message": "Уведомления, когда на ваш комментарий отвечают или ставят ему лайк"
   },
   "changelog_comments_point_moderation": {
     "message": "Жалобы и модерация для вежливого общения"
@@ -734,11 +675,29 @@
   "changelog_analytics_us_body": {
     "message": "Рассмотрите активность по штатам подробнее."
   },
+  "changelog_appeal_title": {
+    "message": "Маленькая, немного неловкая просьба"
+  },
+  "changelog_appeal_intro": {
+    "message": "Привет. Это та часть, где мы говорим о деньгах, и, честно говоря, у нас это не очень получается."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike — небольшой проект с открытым исходным кодом, который делают Дмитрий Селиванов и сообщество. Каждый день он отвечает примерно 20 миллионам человек и хранит более 15 ТБ данных. Всё это работает на несколько сотен долларов в месяц — не так уж много, чтобы вернуть то, что решила убрать компания стоимостью в миллиарды долларов."
+  },
+  "changelog_appeal_free": {
+    "message": "Дизлайки бесплатны и останутся бесплатными. В этом весь смысл. Но серверы не бесплатны, и, честно говоря, расходы на них не оставили нам особого выбора: чтобы проект продолжал работать, нам пришлось ввести функции Premium — комментарии RYD и аналитику Premium. Каждая подписка помогает покрывать эти расходы."
+  },
+  "changelog_appeal_ask": {
+    "message": "Если RYD хоть раз спас вас от кликбейтного видео или инструкции, которая не сработала, пожалуйста, подумайте о поддержке на Patreon. А если сейчас не время — ничего страшного. Спасибо, что пользуетесь им и голосуете: каждый голос делает цифры чуть точнее."
+  },
+  "changelog_appeal_cta": {
+    "message": "Присоединяйтесь на Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Дмитрий и сообщество RYD"
+  },
   "changelog_join_title": {
     "message": "Получите возможности Premium"
-  },
-  "changelog_join_free": {
-    "message": "Число дизлайков доступно всем бесплатно. Участие добровольное и помогает поддерживать проект."
   },
   "changelog_join_step1": {
     "message": "Присоединяйтесь на Patreon. Commenter позволяет писать комментарии, а Premium также добавляет аналитику."
@@ -766,5 +725,143 @@
   },
   "reviewPromptAction": {
     "message": "Оставить отзыв"
+  },
+  "consent_page_title": {
+    "message": "Разрешения функций RYD"
+  },
+  "consent_vote_title": {
+    "message": "Пусть ваши оценки учитываются"
+  },
+  "consent_vote_body": {
+    "message": "Firefox теперь требует, чтобы каждое расширение спрашивало вас, прежде чем передавать какие-либо данные. Разрешите это, чтобы RYD мог учитывать ваши лайки, дизлайки и реакции на комментарии. Это разрешение касается только YouTube, а не других сайтов."
+  },
+  "consent_account_title": {
+    "message": "Выбор разрешений аккаунта"
+  },
+  "consent_account_body": {
+    "message": "Войдите для доступа к функциям аккаунта, включая профиль, уведомления и аналитику Premium."
+  },
+  "consent_next_step": {
+    "message": "Выберите «Разрешить» в Firefox, чтобы просмотреть разрешения. Вы можете отказаться."
+  },
+  "consent_allow": {
+    "message": "Разрешить в Firefox"
+  },
+  "consent_not_now": {
+    "message": "Не сейчас"
+  },
+  "consent_prompt_status": {
+    "message": "Выберите, предоставлять ли эти разрешения в Firefox."
+  },
+  "consent_granted_status": {
+    "message": "Разрешения предоставлены. Можно вернуться на YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Эти необязательные функции остаются выключенными. Разрешения можно изменить позже."
+  },
+  "consent_error_status": {
+    "message": "Не удалось обновить разрешения. Попробуйте ещё раз."
+  },
+  "consent_details_summary": {
+    "message": "Что означают категории разрешений Firefox?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox объединяет данные в широкие категории. Вот что каждая из них означает для RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Активность браузера"
+  },
+  "consent_browsing_body": {
+    "message": "Только идентификатор открытого вами видео YouTube, чтобы загрузить его дизлайки и комментарии RYD. Никогда — ни ваша история посещений, ни другие сайты."
+  },
+  "consent_content_label": {
+    "message": "Содержимое сайтов"
+  },
+  "consent_content_body": {
+    "message": "Число лайков, показанное у видео YouTube, для улучшения оценки числа дизлайков."
+  },
+  "consent_activity_label": {
+    "message": "Активность на сайтах"
+  },
+  "consent_activity_body": {
+    "message": "Ваши лайки, дизлайки и реакции на комментарии RYD на YouTube, чтобы они учитывались. Отправляются со случайным идентификатором, не связанным с вашим аккаунтом Google или YouTube."
+  },
+  "consent_identity_label": {
+    "message": "Персональные идентификационные данные"
+  },
+  "consent_identity_body": {
+    "message": "Данные вашего профиля, например отображаемое имя и электронная почта, только если вы решите войти."
+  },
+  "consent_auth_label": {
+    "message": "Данные аутентификации"
+  },
+  "consent_auth_body": {
+    "message": "Данные авторизации и сеанса, необходимые для входа и использования функций аккаунта."
+  },
+  "consent_scope": {
+    "message": "RYD ничего не собирает за пределами youtube.com и не получает доступ к вашему аккаунту YouTube. Без входа RYD не получает ваше имя или электронную почту."
+  },
+  "consent_settings": {
+    "message": "Эти разрешения можно изменить в любое время в настройках дополнений Firefox (about:addons)."
+  },
+  "consent_private_counts": {
+    "message": "В приватных окнах отображаются только счётчики с использованием разрешения, включённого в обычном окне. Голосование, вход, аналитика Premium и обсуждения в них недоступны."
+  },
+  "consent_voter_timing": {
+    "message": "Идентификатор голосования отправляется только при оценке или реакции. Ваши реакции на комментарии запоминаются на этом устройстве."
+  },
+  "popup_signin_next_click": {
+    "message": "Нужен ещё один щелчок: нажмите кнопку входа ниже, чтобы просмотреть разрешения аккаунта в Firefox и продолжить."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Новые правила приватности Firefox"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "В Firefox RYD нужно ваше разрешение, прежде чем он сможет показывать дизлайки. Вот что именно охватывает это разрешение — и чего не охватывает."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Спасибо. Теперь ваши оценки учитываются."
+  },
+  "vote_consent_hint": {
+    "message": "Ваша оценка пока не учтена. Теперь Firefox требует вашего разрешения, прежде чем RYD сможет её отправить. Это разрешение касается только YouTube, а не других сайтов."
+  },
+  "vote_not_counted": {
+    "message": "Ваши лайки и дизлайки не учитываются и не отражаются в числе дизлайков."
+  },
+  "vote_count_mine": {
+    "message": "Учитывать мои оценки"
+  },
+  "vote_consent_dismiss": {
+    "message": "Больше не спрашивать"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Включите отправку оценок, чтобы реагировать на комментарии. Ваша реакция будет отправлена, как только она будет включена."
+  },
+  "discussion_consentContinue": {
+    "message": "Продолжить"
+  },
+  "counts_consent_toolbar": {
+    "message": "Чтобы продолжить, откройте Return YouTube Dislike из меню расширений Firefox."
+  },
+  "counts_consent_declined": {
+    "message": "Счётчики остаются выключенными. Вы можете включить их здесь позже."
+  },
+  "counts_consent_enabled": {
+    "message": "Показ числа дизлайков включён."
+  },
+  "counts_consent_private": {
+    "message": "Сначала включите показ дизлайков в обычном окне. В приватных окнах отображаются только счётчики."
+  },
+  "data_consent_reason": {
+    "message": "Firefox теперь требует, чтобы каждое расширение спрашивало вас, прежде чем передавать какие-либо данные. Разрешите RYD показывать дизлайки и учитывать ваши оценки. Это разрешение касается только YouTube, а не других сайтов."
+  },
+  "data_consent_title": {
+    "message": "Показывайте дизлайки, и пусть ваши оценки учитываются"
+  },
+  "data_consent_body": {
+    "message": "Firefox теперь требует, чтобы каждое расширение спрашивало вас, прежде чем передавать какие-либо данные. Он использует одни и те же общие названия для всех расширений, поэтому вот что каждое из них означает для RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD работает только на YouTube. Это разрешение не даёт ему доступа ни к одному другому сайту."
   }
 }

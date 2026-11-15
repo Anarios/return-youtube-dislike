@@ -3,6 +3,7 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 import { initDiscussionPopup } from "./popup";
+import { initCountsConsentPopup } from "../counts-consent-popup";
 import { requestDiscussion, subscribeDiscussionEvents } from "./client";
 
 jest.mock("./client", () => ({
@@ -20,6 +21,7 @@ let toggle;
 let root;
 let receive;
 let scrollTo;
+let popupController;
 
 beforeEach(() => {
   document.documentElement.className = "";
@@ -36,7 +38,7 @@ beforeEach(() => {
   Object.defineProperty(window, "scrollX", { configurable: true, value: 0 });
   Object.defineProperty(window, "scrollY", { configurable: true, value: 0 });
   scrollTo = jest.spyOn(window, "scrollTo").mockImplementation(() => {});
-  initDiscussionPopup();
+  popupController = initDiscussionPopup();
   toggle = document.getElementById("ryd-discussion-inbox-toggle");
   root = document.getElementById("ryd-discussion-popup");
 });
@@ -52,11 +54,6 @@ test("opens an independent inbox view with focused back navigation and an inacti
   expect(root.parentElement).toBe(document.body);
   expect(root.hidden).toBe(true);
   expect(root.inert).toBe(true);
-  const consent = document.createElement("div");
-  consent.id = "ryd-consent-prompt";
-  consent.inert = false;
-  document.body.append(consent);
-
   toggle.click();
 
   expect(root.hidden).toBe(false);
@@ -64,18 +61,16 @@ test("opens an independent inbox view with focused back navigation and an inacti
   expect(toggle.getAttribute("aria-expanded")).toBe("true");
   expect(document.activeElement).toBe(root.querySelector(".ryd-discussion-inbox-back"));
   for (const node of document.body.children) {
-    if (node === root || node === consent || ["SCRIPT", "STYLE", "LINK"].includes(node.tagName)) continue;
+    if (node === root || ["SCRIPT", "STYLE", "LINK"].includes(node.tagName)) continue;
     expect(node.hidden).toBe(true);
     expect(node.inert).toBe(true);
   }
-  expect(consent.hidden).toBe(false);
-  expect(consent.inert).toBe(false);
   expect(requestDiscussion).toHaveBeenLastCalledWith("notifications", {});
 });
 
 test.each(["back", "Escape"])("%s returns to the original home state, focus, and scroll", async (action) => {
   await flush();
-  const home = document.querySelector("center");
+  const home = document.querySelector("main");
   home.inert = false;
   const settings = document.getElementById("advancedSettings");
   settings.hidden = true;
@@ -111,6 +106,56 @@ test("a shared inbox update preserves the current screen and its navigation", as
   expect(document.activeElement).toBe(toggle);
 });
 
+test("on-demand reads keep the notifications count current without a live inbox event", async () => {
+  const ids = ["11111111-1111-4111-8111-111111111111", "22222222-2222-4222-8222-222222222222"];
+  const read = new Set();
+  const unreadCount = () => ids.length - read.size;
+  requestDiscussion.mockImplementation(async (operation, payload) => {
+    if (operation === "session") return session;
+    if (operation === "readNotifications") {
+      for (const id of payload.all ? ids : payload.ids) read.add(id);
+      return { unreadCount: unreadCount(), revision: String(read.size + 2) };
+    }
+    return {
+      items: ids.map((id) => ({
+        id,
+        type: "likes",
+        likeCount: 1,
+        createdAt: "2026-09-01T00:00:00Z",
+        read: read.has(id),
+      })),
+      nextCursor: null,
+      unreadCount: unreadCount(),
+    };
+  });
+  await flush();
+  window.dispatchEvent(new Event("unload"));
+  document.body.innerHTML = new DOMParser().parseFromString(popupHtml, "text/html").body.innerHTML;
+  requestDiscussion.mockClear();
+  initDiscussionPopup();
+  toggle = document.getElementById("ryd-discussion-inbox-toggle");
+  root = document.getElementById("ryd-discussion-popup");
+  await flush();
+  expect(toggle.textContent).toBe("Notifications (2)");
+  toggle.click();
+  await flush();
+  root.querySelector(".ryd-discussion-notification button").click();
+  await flush();
+  expect(toggle.textContent).toBe("Notifications (1)");
+  root.querySelector(".ryd-discussion-inbox > .ryd-discussion-toolbar button").click();
+  await flush();
+  root.querySelector(".ryd-discussion-inbox-back").click();
+  expect(toggle.textContent).toBe("Notifications");
+  expect(requestDiscussion.mock.calls.map(([operation]) => operation)).toEqual([
+    "session",
+    "notifications",
+    "notifications",
+    "readNotifications",
+    "readNotifications",
+    "notifications",
+  ]);
+});
+
 test("private Firefox popup initialization does not request or subscribe to account data", async () => {
   await flush();
   window.dispatchEvent(new Event("unload"));
@@ -140,4 +185,47 @@ test("Escape on the home screen leaves the popup unchanged", () => {
   expect(event.defaultPrevented).toBe(false);
   expect(root.hidden).toBe(true);
   expect(scrollTo).not.toHaveBeenCalled();
+});
+
+test("opening the inbox makes an explicit notification request after popup session recovery", async () => {
+  await flush();
+  expect(requestDiscussion).toHaveBeenCalledWith("session");
+  requestDiscussion.mockClear();
+  toggle.click();
+  await flush();
+  expect(requestDiscussion).toHaveBeenCalledTimes(1);
+  expect(requestDiscussion).toHaveBeenCalledWith("notifications", {});
+});
+
+test("revoking count access restores the inbox background before presenting usable count controls", async () => {
+  await flush();
+  let granted = true;
+  let revoke;
+  Object.assign(chrome, {
+    runtime: { getManifest: () => require("../../manifest-firefox.json") },
+    permissions: {
+      getAll: async () => ({ data_collection: granted ? ["browsingActivity"] : [] }),
+      onAdded: { addListener: jest.fn(), removeListener: jest.fn() },
+      onRemoved: { addListener: (listener) => (revoke = listener), removeListener: jest.fn() },
+    },
+  });
+  chrome.i18n.getMessage = (key) => key;
+  initCountsConsentPopup({ beforeShow: () => popupController.close() });
+  await flush();
+  toggle.click();
+  const section = document.getElementById("ryd-counts-consent");
+  expect(section.inert).toBe(true);
+  granted = false;
+  revoke({ data_collection: ["browsingActivity"] });
+  await flush();
+  expect(root.hidden).toBe(true);
+  expect(section.hidden).toBe(false);
+  expect(section.inert).not.toBe(true);
+  expect(document.documentElement.classList.contains("ryd-discussion-inbox-open")).toBe(false);
+  document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", cancelable: true }));
+  expect(section.hidden).toBe(false);
+  document.getElementById("ryd-counts-consent-dismiss").click();
+  expect(section.hidden).toBe(true);
+  expect(document.body.classList.contains("ryd-counts-consent-open")).toBe(false);
+  expect(document.querySelector("main").hidden).toBe(false);
 });

@@ -114,13 +114,13 @@ test("source archive excludes private maintainer notes even when they exist besi
     fs.copyFileSync(path.join(root, name), destination);
   }
   const privateFiles = [
-    "AGENTS.md",
+    "MAINTAINER_NOTES.md",
     "AMO_SUBMISSION_NOTES.md",
     "Docs/SSH_ACCESS.md",
     "Docs/DiscussionApi.md",
     "Docs/DiscussionValidation.md",
     ".private/operations/SSH_ACCESS.md",
-    ".agents/local.md",
+    ".maintainer/local.md",
   ];
   for (const name of privateFiles) {
     const destination = path.join(temporary, name);

@@ -27,6 +27,14 @@ jest.mock("./panel", () => ({
   hidePanel: jest.fn(),
   togglePanel: jest.fn(),
   applyChartExpansionState: jest.fn(),
+  applyPanelView: jest.fn(),
+  setPanelExpanded: jest.fn(),
+  cancelPanelRetry: jest.fn(),
+}));
+
+jest.mock("./rawCounts", () => ({
+  loadRawCounts: jest.fn(),
+  resetRawCounts: jest.fn(),
 }));
 
 jest.mock("./activity", () => ({
@@ -55,11 +63,6 @@ jest.mock("./lists", () => ({
 jest.mock("./teaser", () => ({
   setTeaserSuppressed: jest.fn(),
   TEASER_SUPPRESSION_REASON_PREMIUM: "premium",
-}));
-
-jest.mock("./tierNotice", () => ({
-  showTierNotice: jest.fn(),
-  hideTierNotice: jest.fn(),
 }));
 
 jest.mock("./utils", () => {
@@ -125,7 +128,6 @@ const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
 const { setTeaserSuppressed: mockSetTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } =
   jest.requireMock("./teaser");
-const { showTierNotice: mockShowTierNotice, hideTierNotice: mockHideTierNotice } = jest.requireMock("./tierNotice");
 
 jest.mock("../utils", () => {
   const actual = jest.requireActual("../utils");
@@ -141,7 +143,12 @@ const premiumAnalyticsModule = require("./index");
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 
+const WATCH_VIDEO_ID = "abcdefghijk";
+const { getVideoId: mockGetVideoId } = jest.requireMock("../utils");
+const defaultGetVideoId = mockGetVideoId.getMockImplementation();
+
 const enMessages = require("../../_locales/en/messages.json");
+const jaMessages = require("../../_locales/ja/messages.json");
 
 function getMessage(key, substitutions) {
   const entry = enMessages[key];
@@ -175,7 +182,10 @@ describe("premiumAnalytics", () => {
     analyticsState.currentVideoId = "video1234567";
     analyticsState.zoomListenerRegistered = false;
     analyticsState.initialized = false;
+    analyticsState.panelView = "full";
+    analyticsState.panelDismissed = false;
     global.chrome = {
+      runtime: {},
       i18n: {
         getMessage,
       },
@@ -214,9 +224,155 @@ describe("premiumAnalytics", () => {
 
   afterEach(() => {
     teardownPremiumAnalytics();
+    mockGetVideoId.mockImplementation(defaultGetVideoId);
     document.documentElement.removeAttribute("dark");
     delete global.fetch;
     delete global.chrome;
+  });
+
+  it("persists display changes, closes enlarged charts, and resizes on reopening", () => {
+    const set = jest.fn();
+    chrome.storage = { sync: { set } };
+    initPremiumAnalytics();
+    const { onPanelViewChange } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    analyticsState.expandedChart = "map";
+    onPanelViewChange("raw");
+    expect(analyticsState.panelView).toBe("raw");
+    expect(analyticsState.expandedChart).toBeNull();
+    expect(panelMocks.setPanelExpanded).toHaveBeenCalledWith(false);
+    expect(set).toHaveBeenLastCalledWith({ premiumAnalyticsView: "raw" });
+    onPanelViewChange("hidden");
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(analyticsState.panelDismissed).toBe(false);
+    expect(set).toHaveBeenLastCalledWith({ premiumAnalyticsView: "hidden" });
+    mockResizeActivityChart.mockClear();
+    mockResizeMapChart.mockClear();
+    onPanelViewChange("full");
+    expect(mockResizeActivityChart).toHaveBeenCalledTimes(1);
+    expect(mockResizeMapChart).toHaveBeenCalledTimes(1);
+    expect(set).toHaveBeenLastCalledWith({ premiumAnalyticsView: "full" });
+  });
+
+  it("restores and synchronizes the display preference without overwriting a newer click", () => {
+    let storageCallback;
+    let storageListener;
+    const removeListener = jest.fn();
+    chrome.storage = {
+      sync: {
+        get: jest.fn((keys, callback) => {
+          storageCallback = callback;
+        }),
+        set: jest.fn(),
+      },
+      onChanged: {
+        addListener: jest.fn((listener) => {
+          storageListener = listener;
+        }),
+        removeListener,
+      },
+    };
+    initPremiumAnalytics();
+    storageCallback({ premiumAnalyticsView: "raw" });
+    expect(analyticsState.panelView).toBe("raw");
+    const { onPanelViewChange } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    onPanelViewChange("full");
+    storageCallback({ premiumAnalyticsView: "raw" });
+    expect(analyticsState.panelView).toBe("full");
+    storageListener({ premiumAnalyticsView: { newValue: "raw" } }, "sync");
+    expect(analyticsState.panelView).toBe("raw");
+    storageListener({ hidePremiumTeaser: { newValue: true } }, "sync");
+    expect(analyticsState.panelView).toBe("raw");
+    expect(analyticsState.panelDismissed).toBe(true);
+    storageListener({ premiumAnalyticsView: { newValue: "full" } }, "sync");
+    expect(analyticsState.panelView).toBe("full");
+    expect(analyticsState.panelDismissed).toBe(true);
+    storageListener({ hidePremiumTeaser: { newValue: false } }, "sync");
+    expect(analyticsState.panelView).toBe("full");
+    expect(analyticsState.panelDismissed).toBe(false);
+    storageListener({ premiumAnalyticsView: { newValue: "raw" } }, "sync");
+    resetStateForVideo();
+    expect(analyticsState.panelView).toBe("raw");
+    teardownPremiumAnalytics();
+    expect(removeListener).toHaveBeenCalledWith(storageListener);
+    storageCallback({ premiumAnalyticsView: "full" });
+    expect(analyticsState.panelView).toBe("raw");
+  });
+
+  it.each(["raw", "hidden"])("restores a saved dismissed panel in its %s view from the popup setting", (view) => {
+    let listener;
+    chrome.storage = {
+      sync: { get: jest.fn((keys, callback) => callback({ premiumAnalyticsView: view, hidePremiumTeaser: true })) },
+      onChanged: {
+        addListener: jest.fn((callback) => {
+          listener = callback;
+        }),
+        removeListener: jest.fn(),
+      },
+    };
+    initPremiumAnalytics();
+    expect(analyticsState.panelView).toBe(view);
+    expect(analyticsState.panelDismissed).toBe(true);
+    listener({ hidePremiumTeaser: { newValue: false } }, "sync");
+    expect(analyticsState.panelView).toBe(view);
+    expect(analyticsState.panelDismissed).toBe(false);
+  });
+
+  it("dismisses a header-only panel through the shared setting without losing its display mode", () => {
+    let initialRead;
+    let listener;
+    const set = jest.fn();
+    chrome.storage = {
+      sync: {
+        get: jest.fn((keys, callback) => {
+          initialRead = callback;
+        }),
+        set,
+      },
+      onChanged: {
+        addListener: jest.fn((callback) => {
+          listener = callback;
+        }),
+        removeListener: jest.fn(),
+      },
+    };
+    initPremiumAnalytics();
+    const { onPanelViewChange, onPanelDismiss } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    onPanelViewChange("hidden");
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(analyticsState.panelDismissed).toBe(false);
+    onPanelDismiss();
+    expect(set).toHaveBeenLastCalledWith({ hidePremiumTeaser: true });
+    expect(analyticsState.panelDismissed).toBe(true);
+    initialRead({ premiumAnalyticsView: "full", hidePremiumTeaser: false });
+    resetStateForVideo();
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(analyticsState.panelDismissed).toBe(true);
+    listener({ hidePremiumTeaser: { newValue: false } }, "sync");
+    expect(analyticsState.panelView).toBe("hidden");
+    expect(analyticsState.panelDismissed).toBe(false);
+    onPanelViewChange("full");
+    expect(analyticsState.panelView).toBe("full");
+    expect(analyticsState.panelDismissed).toBe(false);
+  });
+
+  it("applies saved dismissal even when a view click wins the initial storage race", () => {
+    let initialRead;
+    chrome.storage = {
+      sync: {
+        get: jest.fn((keys, callback) => {
+          initialRead = callback;
+        }),
+        set: jest.fn(),
+      },
+      onChanged: { addListener: jest.fn(), removeListener: jest.fn() },
+    };
+    initPremiumAnalytics();
+    const { onPanelViewChange } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    onPanelViewChange("raw");
+    initialRead({ premiumAnalyticsView: "full", hidePremiumTeaser: true });
+    expect(analyticsState.panelView).toBe("raw");
+    expect(analyticsState.panelDismissed).toBe(true);
+    expect(chrome.storage.sync.set).toHaveBeenLastCalledWith({ premiumAnalyticsView: "raw" });
   });
 
   it("repaints existing charts after a host theme toggle without fetching or changing the selected range", async () => {
@@ -271,6 +427,17 @@ describe("premiumAnalytics", () => {
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
     expect(mockToEpoch).toHaveBeenCalledWith("2025-01-01T00:00:00Z");
     expect(mockToEpoch).toHaveBeenCalledWith("2025-01-07T00:00:00Z");
+  });
+
+  it("shows the localized loading message while analytics load", async () => {
+    const loadingMessage = jaMessages.premiumAnalytics_loading.message;
+    global.chrome.i18n.getMessage = (key, substitutions) =>
+      key === "premiumAnalytics_loading" ? loadingMessage : getMessage(key, substitutions);
+
+    requestAnalytics();
+    await flushPromises();
+
+    expect(mockSetFooterMessage).toHaveBeenCalledWith(loadingMessage);
   });
 
   it("does not use a cached analytics token after authentication consent is removed", async () => {
@@ -363,13 +530,11 @@ describe("premiumAnalytics", () => {
     expect(global.fetch.mock.calls.length).toBeGreaterThan(initialFetchCalls);
     expect(mockSetLoadingState).toHaveBeenCalledWith(true);
     expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true, TEASER_SUPPRESSION_REASON_PREMIUM);
-    expect(mockHideTierNotice).toHaveBeenCalled();
 
     updatePremiumSession({ token: null, active: false });
     expect(mockDisposeActivityChart).toHaveBeenCalled();
     expect(mockSetLoadingState).toHaveBeenCalledWith(false);
     expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(false, TEASER_SUPPRESSION_REASON_PREMIUM);
-    expect(mockHideTierNotice).toHaveBeenCalled();
   });
 
   it("avoids duplicate fetch when session details unchanged", async () => {
@@ -381,12 +546,49 @@ describe("premiumAnalytics", () => {
     expect(global.fetch.mock.calls.length).toBe(initialFetchCalls);
   });
 
-  it("shows tier notice when membership is not premium", () => {
-    updatePremiumSession({ token: "token", active: true, membershipTier: "supporter" });
+  it.each(["supporter", "commenter"])("adds nothing to the watch page for active %s members", (membershipTier) => {
+    document.body.innerHTML = '<div id="secondary"><div id="secondary-inner"></div></div>';
+    const initialFetchCalls = global.fetch.mock.calls.length;
 
-    expect(mockShowTierNotice).toHaveBeenCalled();
+    try {
+      updatePremiumSession({ token: "token", active: true, membershipTier });
+      document.dispatchEvent(new Event("yt-navigate-finish"));
+
+      expect(document.querySelector("#secondary-inner").childElementCount).toBe(0);
+      expect(mockEnsurePanel).not.toHaveBeenCalled();
+      expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+      expect(global.fetch.mock.calls.length).toBe(initialFetchCalls);
+    } finally {
+      document.body.innerHTML = "";
+    }
+  });
+
+  it("keeps the Premium panel away after a member drops below Premium", () => {
+    mockGetVideoId.mockReturnValue(WATCH_VIDEO_ID);
+    initPremiumAnalytics();
+    updatePremiumSession({ token: "token", active: true, membershipTier: "premium" });
+    mockEnsurePanel.mockClear();
+
+    updatePremiumSession({ token: "token", active: true, membershipTier: "supporter" });
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+
     expect(mockEnsurePanel).not.toHaveBeenCalled();
-    expect(mockSetTeaserSuppressed).toHaveBeenCalledWith(true, TEASER_SUPPRESSION_REASON_PREMIUM);
+    expect(panelMocks.cancelPanelRetry).toHaveBeenCalled();
+    expect(analyticsState.initialized).toBe(false);
+  });
+
+  it("loads analytics when a member upgrades to Premium on the same video", async () => {
+    mockGetVideoId.mockReturnValue(WATCH_VIDEO_ID);
+    initPremiumAnalytics();
+    updatePremiumSession({ token: "token", active: true, membershipTier: "supporter" });
+    await flushPromises();
+    const initialFetchCalls = global.fetch.mock.calls.length;
+
+    updatePremiumSession({ token: "token", active: true, membershipTier: "premium" });
+    initPremiumAnalytics();
+    await flushPromises();
+
+    expect(global.fetch.mock.calls.length).toBeGreaterThan(initialFetchCalls);
   });
 
   it("sends the selected range in days without explicit timestamps", async () => {

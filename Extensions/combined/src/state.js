@@ -348,11 +348,12 @@ function setDislikes(dislikesCount) {
     _dislikeText = dislikesCount;
   } else {
     logger.log("likes count disabled by creator");
-    _dislikeText = localize("TextLikesDisabled");
+    _dislikeText = localize("textLikesDisabled");
   }
 
-  if (_dislikeText != null && _container?.innerText !== _dislikeText) {
-    _container.innerText = _dislikeText;
+  // Compare raw text so CSS text transforms cannot retrigger the mutation observer indefinitely.
+  if (_dislikeText != null && _container.textContent !== String(_dislikeText)) {
+    _container.textContent = _dislikeText;
   }
   return true;
 }
@@ -572,6 +573,23 @@ function initializePrivateDisplayPreferences() {
   });
 }
 
+let remoteSelectorsLoaded = false;
+let remoteSelectorRequest = null;
+
+function ensureRemoteSelectors() {
+  if (remoteSelectorsLoaded) return Promise.resolve(true);
+  if (!remoteSelectorRequest) {
+    remoteSelectorRequest = initializeSelectors().finally(() => {
+      remoteSelectorRequest = null;
+    });
+  }
+  return remoteSelectorRequest;
+}
+
+function remoteSelectorsSettled() {
+  return remoteSelectorRequest ?? Promise.resolve();
+}
+
 async function initializeSelectors() {
   const controller = new AbortController();
   const privateContext = isPrivateBrowsingContext();
@@ -593,6 +611,7 @@ async function initializeSelectors() {
     const result = await response.json();
     if (privateContext && controller.signal.aborted) return false;
     extConfig.selectors = mergeConfig(DEFAULT_SELECTORS, result);
+    remoteSelectorsLoaded = true;
     if (!isPrivateBrowsingContext()) logger.log(result);
     return true;
   } catch (error) {
@@ -766,6 +785,8 @@ export {
   extConfig,
   initExtConfig,
   initializeSelectors,
+  ensureRemoteSelectors,
+  remoteSelectorsSettled,
   storedData,
   isLikesDisabled,
   hasLoadedStateForVideo,

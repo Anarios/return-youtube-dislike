@@ -1,8 +1,10 @@
 import { isMobile, isShorts, extConfig } from "./state";
 import { getVideoId, querySelector, querySelectorAll } from "./utils";
 import { isPrivateBrowsingContext } from "./private-browsing";
+import { SHORTS_LAUNCHER_ID } from "./discussion/detector";
 import {
   actionBarHasHydratedData,
+  captureShortsNativeControlInventory as captureSharedShortsNativeControlInventory,
   getShortsIdentityLinkVideoIds,
   isShortsControlSurfaceReadyForMutation as sharedShortsSurfaceIsReady,
   shortsNativeControlInventoryIsReadyForFallback as sharedShortsNativeInventoryIsReadyForFallback,
@@ -13,6 +15,7 @@ const createdDislikeTextTypography = new WeakMap();
 const COUNT_TYPOGRAPHY_ATTRIBUTE = "data-ryd-count-typography";
 const COUNT_TYPOGRAPHY_PROPERTIES = ["font-size", "font-weight", "font-family", "line-height"];
 const SYNTHETIC_SHORTS_DISLIKE_SELECTOR = "[data-ryd-synthetic-shorts-dislike]";
+const EXTENSION_SHORTS_ACTION_SELECTOR = `${SYNTHETIC_SHORTS_DISLIKE_SELECTOR}, #${SHORTS_LAUNCHER_ID}`;
 const SHORTS_DISLIKE_ICON_PATH =
   "m8.482 1.5.294.005a9.01 9.01 0 013.918 1.04l.257.143.203.116c.17.097.357.16.55.185l.194.012h1.477l.115.006c.53.054.95.475 1.004 1.005l.006.114v4.499c0 .621-.504 1.125-1.125 1.125h-1.343a.75.75 0 00-.66.395l-.048.107-2.24 6.402a.75.75 0 01-.832.491l-.78-.13a3 3 0 01-2.439-3.587L7.5 11.25H4.454a2.749 2.749 0 01-2.683-2.151 2.762 2.762 0 01.479-2.237l-.016-.065A2.862 2.862 0 013 4.125v-.032c0-.227.037-.453.108-.668l.08-.211A2.816 2.816 0 015.78 1.5h2.703ZM5.78 3c-.566 0-1.069.362-1.248.9a.613.613 0 00-.031.193v.654l-.44.44c-.333.332-.47.813-.364 1.271l.015.065.157.675-.413.557a1.248 1.248 0 00.999 1.995H7.5a1.501 1.501 0 011.467 1.815L8.5 13.742a1.5 1.5 0 001.22 1.794l.157.027 2.031-5.806a2.25 2.25 0 012.124-1.507H15V4.501h-1.102a3.001 3.001 0 01-1.489-.396l-.202-.116A7.504 7.504 0 008.482 3H5.78Z";
 
@@ -215,6 +218,13 @@ function shortsControlSurfaceIsReadyForMutation(
     isStable,
     isViewportIntersecting: hasMeaningfulViewportPresence(buttons),
     visibleCandidateCount: getVisibleShortsControlSurfaceCount(),
+  });
+}
+
+function captureShortsNativeControlInventory(buttons) {
+  return captureSharedShortsNativeControlInventory(buttons, {
+    getNativeLikeButton: getNativeButton,
+    syntheticSelector: EXTENSION_SHORTS_ACTION_SELECTOR,
   });
 }
 
@@ -725,6 +735,7 @@ function checkForSignInButton() {
 }
 
 export {
+  captureShortsNativeControlInventory,
   ensureSyntheticShortsDislikeButton,
   getButtons,
   getButtonControls,

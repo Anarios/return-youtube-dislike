@@ -2,7 +2,7 @@
 // @name         Return YouTube Dislike
 // @namespace    https://www.returnyoutubedislike.com/
 // @homepage     https://www.returnyoutubedislike.com/
-// @version      3.2.1
+// @version      3.2.2
 // @encoding     utf-8
 // @description  Return of the YouTube Dislike, Based off https://www.returnyoutubedislike.com/
 // @icon         https://github.com/Anarios/return-youtube-dislike/raw/main/Icons/Return%20Youtube%20Dislike%20-%20Transparent.png
@@ -527,6 +527,28 @@ function resolveDelegatedVoteActivation({
 
 
 
+;// CONCATENATED MODULE: ./Extensions/common/live-video-id.js
+const LIVE_VIDEO_PATHNAME = /^\/live\/([A-Za-z0-9_-]{11})\/?$/;
+const CHANNEL_LIVE_PATHNAME = /^\/(?:@[^/]+|c\/[^/]+|channel\/[^/]+|user\/[^/]+)\/live\/?$/;
+const VISIBLE_WATCH_ROOT_SELECTOR = "ytd-watch-flexy:not([hidden]), ytd-watch-grid:not([hidden])";
+const VIDEO_ID_PATTERN = /^[A-Za-z0-9_-]{11}$/;
+
+function getCanonicalWatchVideoId() {
+  const href = document.querySelector("link[rel='canonical']")?.href;
+  if (!href || !document.querySelector(VISIBLE_WATCH_ROOT_SELECTOR)) return null;
+  const canonical = new URL(href);
+  const videoId = canonical.pathname === "/watch" ? canonical.searchParams.get("v") : null;
+  return VIDEO_ID_PATTERN.test(videoId ?? "") ? videoId : null;
+}
+
+function getLiveVideoId(pathname) {
+  const linkedVideoId = LIVE_VIDEO_PATHNAME.exec(pathname)?.[1];
+  if (linkedVideoId) return linkedVideoId;
+  return CHANNEL_LIVE_PATHNAME.test(pathname) ? getCanonicalWatchVideoId() : null;
+}
+
+
+
 ;// CONCATENATED MODULE: ./Extensions/common/color-themes.js
 const DEFAULT_CUSTOM_COLORS = Object.freeze({
   light: Object.freeze({ like: "#007600", dislike: "#b300b3" }),
@@ -920,8 +942,9 @@ function createGmSyntheticDislikeStore() {
 
 
 ;// CONCATENATED MODULE: ./Extensions/UserScript/userscript-version.json
-const userscript_version_namespaceObject = "3.2.1";
+const userscript_version_namespaceObject = "3.2.2";
 ;// CONCATENATED MODULE: ./Extensions/UserScript/src/userscript-entry.js
+
 
 
 
@@ -1902,14 +1925,21 @@ function getState() {
   return NEUTRAL_STATE;
 }
 
+function setCountText(container, count) {
+  const text = String(count);
+  if (container.textContent !== text) {
+    container.textContent = text;
+  }
+}
+
 function setLikes(likesCount) {
   if (isMobile) {
     const container = getButtons()?.children[0]?.querySelector(".button-renderer-text");
-    if (container) container.innerText = likesCount;
+    if (container) setCountText(container, likesCount);
     return;
   }
   const container = getLikeTextContainer();
-  if (container) container.innerText = likesCount;
+  if (container) setCountText(container, likesCount);
 }
 
 function setDislikes(dislikesCount) {
@@ -1923,9 +1953,14 @@ function setDislikes(dislikesCount) {
     return;
   }
   _container.removeAttribute("is-empty");
-  if (_container.innerText !== dislikesCount) {
-    _container.innerText = dislikesCount;
-  }
+  setCountText(_container, dislikesCount);
+}
+
+function renderMobileDislikes() {
+  const dislikeButton = getDislikeButton();
+  if (!dislikeButton) return;
+  const container = dislikeButton.querySelector(".button-renderer-text") ?? getDislikeTextContainer();
+  if (container) setCountText(container, mobileDislikes);
 }
 
 function getLikeCountFromButton() {
@@ -1970,14 +2005,14 @@ function getLikeCountFromButton() {
       background: #737373;
       background: color-mix(
         in srgb,
-        var(--yt-spec-text-primary, #f1f1f1) 55%,
-        var(--yt-spec-base-background, #0f0f0f) 45%
+        var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1)) 55%,
+        var(--yt-sys-color-baseline--base-background, var(--yt-spec-base-background, #0f0f0f)) 45%
       );
       border-radius: 2px;
     }
 
     #return-youtube-dislike-bar {
-      background: var(--yt-spec-text-primary, #f1f1f1);
+      background: var(--yt-sys-color-baseline--text-primary, var(--yt-spec-text-primary, #f1f1f1));
       border-radius: 2px;
       transition: all 0.15s ease-in-out;
     }
@@ -2708,7 +2743,7 @@ function getVideoId() {
     if (shortVideoId) {
       return shortVideoId;
     }
-    return urlObject.searchParams.get("v");
+    return urlObject.searchParams.get("v") ?? getLiveVideoId(pathname);
   }
 }
 
@@ -3513,7 +3548,6 @@ function handleNavigateFinish(event) {
 (function () {
   "use strict";
   observeYouTubeTheme(refreshColorPresentation);
-  void voteClient.ensureRegistered().catch(reportVoteFailure);
   document.addEventListener("click", handleDelegatedVoteClick, true);
   window.addEventListener("yt-navigate-start", handleNavigateStart, true);
   window.addEventListener("yt-navigate-finish", handleNavigateFinish, true);
@@ -3523,14 +3557,7 @@ function handleNavigateFinish(event) {
   setEventListeners();
 })();
 if (isMobile) {
-  setInterval(() => {
-    const dislikeButton = getDislikeButton();
-    if (dislikeButton?.querySelector(".button-renderer-text") === null) {
-      getDislikeTextContainer().innerText = mobileDislikes;
-    } else {
-      if (dislikeButton) dislikeButton.querySelector(".button-renderer-text").innerText = mobileDislikes;
-    }
-  }, 1000);
+  setInterval(renderMobileDislikes, 1000);
 }
 
 })();

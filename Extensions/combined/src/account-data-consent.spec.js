@@ -1,15 +1,9 @@
 import { fetchWithAccountConsent } from "./account-data-consent";
-import { CORE_DATA_PERMISSIONS } from "./core-data-consent";
+import { FEATURE_DATA_PERMISSIONS } from "./core-data-consent";
 
-const URL = "https://api.example/account";
-const OPTIONS = { headers: { Authorization: "Bearer synthetic-token" } };
+const url = "https://api.example/api/discussion/me";
+const options = { headers: { Authorization: "Bearer synthetic" } };
 const flush = () => new Promise((resolve) => setTimeout(resolve, 0));
-const deferred = () => {
-  let resolve;
-  const promise = new Promise((done) => (resolve = done));
-  return { promise, resolve };
-};
-
 function event() {
   const listeners = new Set();
   return {
@@ -19,13 +13,17 @@ function event() {
     size: () => listeners.size,
   };
 }
+function deferred() {
+  let resolve;
+  const promise = new Promise((done) => (resolve = done));
+  return { promise, resolve };
+}
 
-describe("account request consent boundary", () => {
+describe("account feature request boundary", () => {
   let granted;
   let fetchImpl;
-
   beforeEach(() => {
-    granted = [...CORE_DATA_PERMISSIONS, "authenticationInfo"];
+    granted = [...FEATURE_DATA_PERMISSIONS.account];
     global.browser = {
       runtime: {
         getManifest: () => ({ browser_specific_settings: { gecko: { data_collection_permissions: {} } } }),
@@ -34,189 +32,140 @@ describe("account request consent boundary", () => {
       },
       permissions: {
         getAll: jest.fn(async () => ({ data_collection: [...granted] })),
-        request: jest.fn(),
         onAdded: event(),
         onRemoved: event(),
       },
     };
     fetchImpl = jest.fn(async () => new Response('{"valid":true}'));
   });
-
   afterEach(() => {
     expect(browser.runtime.onMessage.size()).toBe(0);
-    if (browser.permissions) {
-      expect(browser.permissions.onAdded.size()).toBe(0);
-      expect(browser.permissions.onRemoved.size()).toBe(0);
-    }
+    expect(browser.permissions?.onRemoved.size() ?? 0).toBe(0);
     delete global.browser;
   });
 
-  function revokeAuthentication() {
-    granted = [...CORE_DATA_PERMISSIONS];
-    browser.permissions.onRemoved.emit({ data_collection: ["authenticationInfo"] });
-  }
-
-  test("granted account requests return their response without requesting permissions", async () => {
-    const response = await fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
-    expect(await response.json()).toEqual({ valid: true });
-    expect(fetchImpl).toHaveBeenCalledWith(URL, expect.objectContaining(OPTIONS));
-    expect(browser.permissions.request).not.toHaveBeenCalled();
-  });
-
-  test.each(["missing", "unavailable"])("%s authentication consent blocks account traffic", async (state) => {
-    granted = [...CORE_DATA_PERMISSIONS];
-    if (state === "unavailable") {
-      browser.permissions.getAll
-        .mockResolvedValueOnce({ data_collection: [...CORE_DATA_PERMISSIONS] })
-        .mockRejectedValueOnce(new Error("Unavailable"));
-    }
-    await expect(fetchWithAccountConsent(URL, OPTIONS, fetchImpl)).rejects.toThrow("consent");
-    expect(fetchImpl).not.toHaveBeenCalled();
-  });
-
-  test("rechecks authentication after a delayed core query even without a removal event", async () => {
-    const coreCheck = deferred();
-    browser.permissions.getAll.mockReturnValueOnce(coreCheck.promise);
-    const pending = fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
-    granted = [...CORE_DATA_PERMISSIONS];
-    coreCheck.resolve({ data_collection: [...CORE_DATA_PERMISSIONS, "authenticationInfo"] });
-    await expect(pending).rejects.toThrow("consent");
-    expect(fetchImpl).not.toHaveBeenCalled();
-  });
-
-  test.each([false, true])("revocation during a core query blocks traffic after regrant=%s", async (regrant) => {
-    const coreCheck = deferred();
-    browser.permissions.getAll.mockReturnValueOnce(coreCheck.promise);
-    const pending = fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
-    revokeAuthentication();
-    if (regrant) granted.push("authenticationInfo");
-    coreCheck.resolve({ data_collection: [...granted] });
-    await expect(pending).rejects.toThrow("consent");
-    expect(fetchImpl).not.toHaveBeenCalled();
-  });
-
-  test.each(["authenticationInfo", CORE_DATA_PERMISSIONS[0]])(
-    "revoking %s during the final account query blocks a stale granting result",
-    async (permission) => {
-      const accountCheck = deferred();
-      browser.permissions.getAll
-        .mockResolvedValueOnce({ data_collection: [...granted] })
-        .mockReturnValueOnce(accountCheck.promise);
-      const pending = fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
-      await flush();
-      browser.permissions.onRemoved.emit({ data_collection: [permission] });
-      accountCheck.resolve({ data_collection: [...granted] });
-      await expect(pending).rejects.toThrow("consent");
-      expect(fetchImpl).not.toHaveBeenCalled();
-    },
-  );
-
-  test("revocation aborts in-flight work and discards a body that finishes after regrant", async () => {
-    const body = deferred();
-    let signal;
-    fetchImpl.mockImplementationOnce(async (_, options) => {
-      signal = options.signal;
-      return { arrayBuffer: () => body.promise };
-    });
-    const pending = fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
-    await flush();
-    revokeAuthentication();
-    granted.push("authenticationInfo");
-    expect(signal.aborted).toBe(true);
-    body.resolve(new ArrayBuffer(0));
-    await expect(pending).rejects.toThrow("consent");
-  });
-
-  test("a final permission check discards a completed response if removal events are unavailable", async () => {
-    fetchImpl.mockImplementationOnce(async () => {
-      granted = [...CORE_DATA_PERMISSIONS];
-      return new Response('{"valid":true}');
-    });
-    await expect(fetchWithAccountConsent(URL, OPTIONS, fetchImpl)).rejects.toThrow("consent");
+  test("account calls require both account categories, without unrelated vote or content access", async () => {
+    expect(await (await fetchWithAccountConsent(url, options, fetchImpl)).json()).toEqual({ valid: true });
     expect(fetchImpl).toHaveBeenCalledTimes(1);
   });
 
-  test("content requests observe account revocation while their background permission query is pending", async () => {
-    delete browser.permissions;
-    const accountCheck = deferred();
-    browser.runtime.sendMessage.mockImplementation(({ message }) =>
-      message === "ryd_has_core_consent" ? Promise.resolve({ granted: true }) : accountCheck.promise,
-    );
-    const pending = fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
-    await flush();
-    browser.runtime.onMessage.emit({ message: "patreon_status_changed", authenticated: false });
-    accountCheck.resolve({ granted: true });
+  test.each(FEATURE_DATA_PERMISSIONS.account)("missing %s blocks the account request", async (category) => {
+    granted = granted.filter((value) => value !== category);
+    await expect(fetchWithAccountConsent(url, options, fetchImpl)).rejects.toThrow("consent");
+    expect(fetchImpl).not.toHaveBeenCalled();
+  });
+
+  test("posting through the account wrapper needs browsing access next to the account grant", async () => {
+    const postingUrl = "https://api.example/api/discussion/comments/1";
+    const postingOptions = { ...options, method: "PUT", body: '{"body":"draft"}' };
+    await expect(fetchWithAccountConsent(postingUrl, postingOptions, fetchImpl)).rejects.toThrow("consent");
+    expect(fetchImpl).not.toHaveBeenCalled();
+    granted.push("browsingActivity");
+    await fetchWithAccountConsent(postingUrl, postingOptions, fetchImpl);
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+  });
+
+  test.each(["authenticationInfo", "personallyIdentifyingInfo"])(
+    "revoking %s aborts an in-flight account response even after a regrant",
+    async (category) => {
+      const body = deferred();
+      let signal;
+      fetchImpl.mockImplementationOnce(async (_, requestOptions) => {
+        signal = requestOptions.signal;
+        return { arrayBuffer: () => body.promise };
+      });
+      const pending = fetchWithAccountConsent(url, options, fetchImpl);
+      await flush();
+      browser.permissions.onRemoved.emit({ data_collection: [category] });
+      expect(signal.aborted).toBe(true);
+      body.resolve(new ArrayBuffer(0));
+      await expect(pending).rejects.toThrow("consent");
+    },
+  );
+
+  test("revoking a voting category does not interrupt account calls", async () => {
+    fetchImpl.mockImplementationOnce(async (_, requestOptions) => {
+      browser.permissions.onRemoved.emit({ data_collection: ["websiteActivity", "websiteContent"] });
+      expect(requestOptions.signal.aborted).toBe(false);
+      return new Response("{}");
+    });
+    await expect(fetchWithAccountConsent(url, options, fetchImpl)).resolves.toBeInstanceOf(Response);
+  });
+
+  test("permission checks fail closed when a delayed grant is revoked", async () => {
+    const check = deferred();
+    browser.permissions.getAll.mockReturnValueOnce(check.promise);
+    const pending = fetchWithAccountConsent(url, options, fetchImpl);
+    browser.permissions.onRemoved.emit({ data_collection: ["authenticationInfo"] });
+    check.resolve({ data_collection: granted });
     await expect(pending).rejects.toThrow("consent");
     expect(fetchImpl).not.toHaveBeenCalled();
   });
 
-  test("content revocation aborts a pending body and rejects its result", async () => {
+  test("a grant revoked without an event after the pre-send check discards the response", async () => {
+    browser.permissions.getAll.mockImplementationOnce(async () => {
+      const result = { data_collection: [...granted] };
+      granted = [];
+      return result;
+    });
+    await expect(fetchWithAccountConsent(url, options, fetchImpl)).rejects.toThrow("consent");
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+    expect(browser.permissions.getAll).toHaveBeenCalledTimes(2);
+  });
+
+  test.each(["logout", "category"])("content relay aborts a pending body on %s", async (kind) => {
     delete browser.permissions;
     browser.runtime.sendMessage.mockResolvedValue({ granted: true });
     const body = deferred();
     let signal;
-    fetchImpl.mockImplementationOnce(async (_, options) => {
-      signal = options.signal;
+    fetchImpl.mockImplementationOnce(async (_, requestOptions) => {
+      signal = requestOptions.signal;
       return { arrayBuffer: () => body.promise };
     });
-    const pending = fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
+    const pending = fetchWithAccountConsent(url, options, fetchImpl);
     await flush();
-    browser.runtime.onMessage.emit({ message: "patreon_status_changed", authenticated: false });
+    browser.runtime.onMessage.emit(
+      kind === "logout"
+        ? { message: "patreon_status_changed", authenticated: false }
+        : { message: "ryd_data_permissions_changed", added: [], removed: ["personallyIdentifyingInfo"] },
+    );
     expect(signal.aborted).toBe(true);
     body.resolve(new ArrayBuffer(0));
     await expect(pending).rejects.toThrow("consent");
   });
 
-  test.each(["native", "content"])(
-    "core revocation during the final %s account query discards a buffered response",
-    async (context) => {
-      const accountCheck = deferred();
-      if (context === "native") {
-        browser.permissions.getAll
-          .mockResolvedValueOnce({ data_collection: [...granted] })
-          .mockResolvedValueOnce({ data_collection: [...granted] })
-          .mockResolvedValueOnce({ data_collection: [...granted] })
-          .mockReturnValueOnce(accountCheck.promise);
-      } else {
-        delete browser.permissions;
-        let accountQueries = 0;
-        browser.runtime.sendMessage.mockImplementation(({ message }) => {
-          if (message === "ryd_has_core_consent" || ++accountQueries === 1) return Promise.resolve({ granted: true });
-          return accountCheck.promise;
-        });
-      }
-      const pending = fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
-      await flush();
-      expect(fetchImpl).toHaveBeenCalledTimes(1);
-      if (context === "native") {
-        browser.permissions.onRemoved.emit({ data_collection: [CORE_DATA_PERMISSIONS[0]] });
-        accountCheck.resolve({ data_collection: [...granted] });
-      } else {
-        browser.runtime.onMessage.emit({ message: "ryd_core_consent_changed", granted: false });
-        accountCheck.resolve({ granted: true });
-      }
-      await expect(pending).rejects.toThrow("consent");
-    },
-  );
-
-  test("caller cancellation prevents a pending account request from starting", async () => {
-    const accountCheck = deferred();
-    browser.permissions.getAll
-      .mockResolvedValueOnce({ data_collection: [...granted] })
-      .mockReturnValueOnce(accountCheck.promise);
+  test("private windows and caller cancellation prevent sending", async () => {
+    browser.extension = { inIncognitoContext: true };
+    await expect(fetchWithAccountConsent(url, options, fetchImpl)).rejects.toThrow("count display");
+    delete browser.extension;
     const controller = new AbortController();
-    const pending = fetchWithAccountConsent(URL, { ...OPTIONS, signal: controller.signal }, fetchImpl);
-    await flush();
-    controller.abort();
-    accountCheck.resolve({ data_collection: [...granted] });
-    await expect(pending).rejects.toThrow("consent");
+    const cancelled = new DOMException("Caller cancelled", "AbortError");
+    controller.abort(cancelled);
+    await expect(fetchWithAccountConsent(url, { ...options, signal: controller.signal }, fetchImpl)).rejects.toBe(
+      cancelled,
+    );
     expect(fetchImpl).not.toHaveBeenCalled();
   });
 
-  test("other browsers keep their ordinary request behavior", async () => {
+  test("a caller cancellation during the request is reported as that cancellation", async () => {
+    const controller = new AbortController();
+    const cancelled = new DOMException("Caller cancelled", "AbortError");
+    let signal;
+    fetchImpl.mockImplementationOnce(async (_, requestOptions) => {
+      signal = requestOptions.signal;
+      controller.abort(cancelled);
+      return new Response("{}");
+    });
+    await expect(fetchWithAccountConsent(url, { ...options, signal: controller.signal }, fetchImpl)).rejects.toBe(
+      cancelled,
+    );
+    expect(signal.aborted).toBe(true);
+  });
+
+  test("other browsers retain their ordinary requests", async () => {
     browser.runtime.getManifest = () => ({});
-    await fetchWithAccountConsent(URL, OPTIONS, fetchImpl);
-    expect(fetchImpl).toHaveBeenCalledWith(URL, OPTIONS);
+    await fetchWithAccountConsent(url, options, fetchImpl);
+    expect(fetchImpl).toHaveBeenCalledWith(url, options);
     expect(browser.permissions.getAll).not.toHaveBeenCalled();
   });
 });

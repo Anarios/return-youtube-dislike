@@ -3,15 +3,15 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "dev": "set NODE_OPTIONS=--openssl-legacy-provider && nuxt",
+    "dev": "node --openssl-legacy-provider node_modules/nuxt/bin/nuxt.js",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "set NODE_OPTIONS=--openssl-legacy-provider && nuxt generate",
+    "generate": "node --openssl-legacy-provider node_modules/nuxt/bin/nuxt.js generate",
     "lint": "eslint --fix --ext .js,.vue --ignore-path .eslintignore ."
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
-    "core-js": "^3.44.0",
+    "core-js": "^3.50.0",
     "nuxt": "^2.15.7",
     "nuxt-user-agent": "^1.2.2",
     "vuetify": "^2.5.5"

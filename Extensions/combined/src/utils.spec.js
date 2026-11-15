@@ -248,6 +248,79 @@ describe("utils", () => {
 
       expect(getVideoId("https://www.youtube.com/clip/foobar")).toBe("clip123");
     });
+
+    it.each([
+      [
+        "a watch URL with parameters around the id",
+        "https://www.youtube.com/watch?app=desktop&v=a-B_c1D2e3F&list=PLx&t=42s",
+      ],
+      ["a watch URL with a fragment", "https://www.youtube.com/watch?v=a-B_c1D2e3F#comments"],
+      ["a mobile watch URL", "https://m.youtube.com/watch?v=a-B_c1D2e3F&pp=ygUEdGVzdA%3D%3D"],
+      ["a Shorts URL with share parameters", "https://www.youtube.com/shorts/a-B_c1D2e3F?feature=share&si=abc"],
+      ["a mobile Shorts URL", "https://m.youtube.com/shorts/a-B_c1D2e3F"],
+      ["a mobile live URL", "https://m.youtube.com/live/a-B_c1D2e3F?si=share"],
+    ])("reads the current video id from %s", (_, url) => {
+      expect(getVideoId(url)).toBe("a-B_c1D2e3F");
+    });
+
+    it("reads a clip's source video from the identifier meta tag and never returns the clip slug", () => {
+      document.head.insertAdjacentHTML("beforeend", '<meta itemprop="identifier" content="a-B_c1D2e3F">');
+
+      expect(getVideoId("https://www.youtube.com/clip/UgkxClipSlug_-?si=share")).toBe("a-B_c1D2e3F");
+    });
+
+    it.each([
+      "https://www.youtube.com/embed/a-B_c1D2e3F",
+      "https://www.youtube.com/results?search_query=a-B_c1D2e3F",
+      "https://www.youtube.com/feed/subscriptions",
+      "https://m.youtube.com/@FixtureChannel/videos",
+    ])("returns no video identity for %s", (url) => {
+      expect(getVideoId(url)).toBeNull();
+    });
+
+    describe("live URLs", () => {
+      const renderLiveWatchPage = ({ hidden = false } = {}) => {
+        document.head.insertAdjacentHTML(
+          "beforeend",
+          `<link rel="canonical" href="https://www.youtube.com/watch?v=0sfDth4lMLc">`,
+        );
+        document.body.innerHTML = `<ytd-watch-flexy video-id="0sfDth4lMLc"${hidden ? " hidden" : ""}></ytd-watch-flexy>`;
+      };
+
+      afterEach(() => {
+        document.head.querySelector("link[rel='canonical']")?.remove();
+        document.body.innerHTML = "";
+      });
+
+      it("reads the video from a live link path", () => {
+        expect(getVideoId("https://www.youtube.com/live/0sfDth4lMLc?si=share")).toBe("0sfDth4lMLc");
+      });
+
+      it("uses the canonical watch identity when a channel live URL has no video parameter", () => {
+        renderLiveWatchPage();
+
+        expect(getVideoId("https://www.youtube.com/@LofiGirl/live")).toBe("0sfDth4lMLc");
+      });
+
+      it("prefers the URL video parameter over the canonical watch identity", () => {
+        renderLiveWatchPage();
+
+        expect(getVideoId("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).toBe("dQw4w9WgXcQ");
+      });
+
+      it("does not reuse the live identity after leaving the live route", () => {
+        renderLiveWatchPage();
+
+        expect(getVideoId("https://www.youtube.com/@LofiGirl")).toBeNull();
+        expect(getVideoId("https://www.youtube.com/")).toBeNull();
+      });
+
+      it("ignores the canonical identity while the watch page is hidden", () => {
+        renderLiveWatchPage({ hidden: true });
+
+        expect(getVideoId("https://www.youtube.com/@LofiGirl/live")).toBeNull();
+      });
+    });
   });
 
   describe("isInViewport", () => {

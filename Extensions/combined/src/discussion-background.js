@@ -3,6 +3,7 @@ import { createVoteClient, solvePuzzle } from "../../common/vote-client";
 import { discussionConfig } from "./discussion-config";
 import { isFirefoxExtension, isNormalMessageSender } from "./private-browsing";
 
+const MEMBERSHIP_TIERS = Object.freeze(["none", "supporter", "commenter", "premium"]);
 const ANONYMOUS_SESSION = Object.freeze({
   authenticated: false,
   profile: null,
@@ -10,7 +11,9 @@ const ANONYMOUS_SESSION = Object.freeze({
   isModerator: false,
   membershipTier: "none",
 });
-const RECONNECT_ALARM = "ryd-discussion-reconnect";
+const RECOVERY_DELAYS = [1000, 3000, 10000];
+const REACTION_STORAGE_KEY = "rydDiscussionReactions";
+const MAX_REACTION_VIDEOS = 100;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const VIDEO_ID = /^[a-zA-Z0-9_-]{11}$/;
 const VIDEO_OPERATIONS = new Set([
@@ -83,12 +86,25 @@ function isYouTubePage(url) {
   }
 }
 
+function isYouTubeOrigin(url) {
+  try {
+    return new URL(url).origin === "https://www.youtube.com";
+  } catch (_) {
+    return false;
+  }
+}
+
 function validateRequest(api, request, sender) {
   if (sender?.id !== api.runtime.id) throw new DiscussionError("invalid_sender");
   const extensionUrl = api.runtime.getURL?.("");
   const ownPage = extensionUrl && typeof sender.url === "string" && sender.url.startsWith(extensionUrl);
-  const videoPage = sender.frameId === 0 && isYouTubePage(sender.url) && isYouTubePage(sender.tab?.url);
+  const videoPage = sender.frameId === 0 && isYouTubeOrigin(sender.url) && isYouTubePage(sender.tab?.url);
   const operation = request?.operation;
+  const topPage =
+    ["capabilities", "session"].includes(operation) &&
+    sender.frameId === 0 &&
+    isYouTubeOrigin(sender.url) &&
+    isYouTubeOrigin(sender.tab?.url);
   const cancellationPage =
     operation === "cancelScope" &&
     sender.frameId === 0 &&
@@ -99,7 +115,7 @@ function validateRequest(api, request, sender) {
         return false;
       }
     });
-  if (!ownPage && !videoPage && !cancellationPage) throw new DiscussionError("invalid_sender");
+  if (!ownPage && !videoPage && !cancellationPage && !topPage) throw new DiscussionError("invalid_sender");
   const fields = Object.hasOwn(OPERATIONS, operation) ? OPERATIONS[operation] : null;
   const payload = request.payload ?? {};
   if (
@@ -186,16 +202,32 @@ function safeSession(data) {
     profile: profile ? { id: profile.id, nickname: profile.nickname, suspended: profile.suspended === true } : null,
     canPost: data.canPost === true,
     isModerator: data.isModerator === true,
-    membershipTier: ["none", "supporter", "commenter", "premium"].includes(data.membershipTier)
-      ? data.membershipTier
-      : "none",
+    membershipTier: MEMBERSHIP_TIERS.includes(data.membershipTier) ? data.membershipTier : "none",
   };
 }
 
-function createConnection(url, accessTokenFactory) {
+function discussionEvent(type, data) {
+  return { message: "ryd_discussion_event", type, data };
+}
+
+function canReceiveLiveNotifications(session) {
+  return (
+    session.authenticated === true &&
+    MEMBERSHIP_TIERS.indexOf(session.membershipTier) >= MEMBERSHIP_TIERS.indexOf("commenter") &&
+    Boolean(session.profile?.nickname)
+  );
+}
+
+function createConnection(url, accessTokenFactory, random = Math.random) {
   return new HubConnectionBuilder()
     .withUrl(url, { transport: HttpTransportType.WebSockets, skipNegotiation: true, accessTokenFactory })
-    .withAutomaticReconnect([0, 2000, 10000, 30000])
+    .withAutomaticReconnect({
+      nextRetryDelayInMilliseconds({ previousRetryCount }) {
+        const delays = [500, 2000, 10000, 30000];
+        const delay = delays[previousRetryCount];
+        return delay == null ? null : Math.round(delay * (0.75 + random() * 0.5));
+      },
+    })
     .withKeepAliveInterval(15000)
     .withServerTimeout(45000)
     .configureLogging(LogLevel.None)
@@ -208,24 +240,36 @@ export function createDiscussionBackground({
   fetchImpl = (...args) => fetch(...args),
   accountFetchImpl = fetchImpl,
   hasConsent = async () => true,
+  hasFeatureConsent = (feature) => (feature === "account" ? hasConsent() : true),
   settings = discussionConfig,
   connectionFactory = createConnection,
   solve = solvePuzzle,
+  random = Math.random,
 } = {}) {
   const local = api.storage.local;
   const origin = settings.apiOrigin.replace(/\/$/, "");
   const pendingRequests = new Map();
   const reactionQueues = new Map();
   const navigationScopes = new Map();
+  const cancelledScopes = new Set();
   let generation = 0;
   let accountEpoch = 0;
   let token = "";
   let session = { ...ANONYMOUS_SESSION };
   let connection = null;
   let connecting = null;
+  let activityCatchup = null;
+  let refreshing = null;
+  let recoveryTimer = null;
+  let recoveryRevision = 0;
+  let recoveryAttempt = 0;
+  let recoveryActive = false;
   let accountQueue = Promise.resolve();
   let catchupQueue = Promise.resolve();
   let stateQueue = Promise.resolve();
+  let reactionStateQueue = Promise.resolve();
+  let voterEpoch = 0;
+  const permissionEpochs = { account: 0, voting: 0, counts: 0 };
   let rejectedToken = "";
   let accountBlocked = false;
   let hintedRevision = "0";
@@ -275,13 +319,22 @@ export function createDiscussionBackground({
     if (!value) return null;
     const documentId = sender.documentId || "top-frame";
     const key = `${sender.tab.id}:${documentId}:${value.id}`;
+    if (cancelledScopes.has(key)) throw new DiscussionError("navigation_changed");
+    if (!navigationScopes.has(key))
+      for (const [oldKey, oldScope] of navigationScopes)
+        if (oldScope.tabId === sender.tab.id && oldKey !== key) {
+          cancelScope(oldScope);
+          navigationScopes.delete(oldKey);
+        }
     if (!navigationScopes.has(key))
       navigationScopes.set(key, {
         tabId: sender.tab.id,
+        key,
         documentId,
         videoId: value.videoId,
         cancelled: false,
         controllers: new Set(),
+        authors: new Map(),
       });
     const scope = navigationScopes.get(key);
     if (scope.videoId !== value.videoId) throw new DiscussionError("invalid_scope");
@@ -291,17 +344,29 @@ export function createDiscussionBackground({
   function cancelScope(scope) {
     scope.cancelled = true;
     for (const controller of scope.controllers) controller.abort();
+    navigationScopes.delete(scope.key);
+    cancelledScopes.add(scope.key);
+    while (cancelledScopes.size > 100) cancelledScopes.delete(cancelledScopes.values().next().value);
   }
 
   async function request(
     path,
-    { method = "GET", body, auth = token, expected = generation, scope, accountBound = true } = {},
+    { method = "GET", body, auth = token, expected = generation, scope, accountBound = true, feature = "account" } = {},
   ) {
-    const assertRequest = () => assertCurrent(accountBound ? expected : generation);
+    const features = new Set([feature]);
+    if (scope || /^\/(?:videos\/[^/]+\/comments(?:\/|$)|comments\/[^/]+(?:\/|$))/.test(path)) features.add("counts");
+    const epochs = [...features].map((value) => [value, permissionEpochs[value]]);
+    const assertRequest = () => {
+      assertCurrent(accountBound ? expected : generation);
+      for (const [value, epoch] of epochs)
+        if (epoch !== permissionEpochs[value]) throw new DiscussionError(`${value}_consent_required`);
+    };
+    for (const value of features)
+      if (!(await hasFeatureConsent(value))) throw new DiscussionError(`${value}_consent_required`);
     assertRequest();
     assertScope(scope);
     const controller = new AbortController();
-    pendingRequests.set(controller, accountBound);
+    pendingRequests.set(controller, { accountBound, features });
     scope?.controllers.add(controller);
     const timeout = setTimeout(() => controller.abort(), 20000);
     try {
@@ -352,7 +417,7 @@ export function createDiscussionBackground({
   }
 
   async function broadcast(type, data, expected = generation) {
-    const message = { message: "ryd_discussion_event", type, data };
+    const message = discussionEvent(type, data);
     if (expected !== generation || stopped) return;
     const tabs = await callBrowser(
       api,
@@ -362,7 +427,10 @@ export function createDiscussionBackground({
     );
     if (expected !== generation || stopped) return;
     const firefox = isFirefoxExtension(api);
-    const targets = (tabs || []).filter((tab) => isYouTubePage(tab.url) && (!firefox || tab.incognito === false));
+    const targets = (tabs || []).filter(
+      (tab) =>
+        (type === "toast" ? isYouTubePage(tab.url) : isYouTubeOrigin(tab.url)) && (!firefox || tab.incognito === false),
+    );
     await Promise.allSettled(
       (type === "toast" ? targets.slice(0, 1) : targets).map((tab) =>
         callBrowser(api, api.tabs, "sendMessage", tab.id, message),
@@ -420,10 +488,6 @@ export function createDiscussionBackground({
 
   async function publishInbox(expected, changed = [], showToast = false) {
     assertCurrent(expected);
-    await writeState(expected, "set", {
-      [settings.stateStorageKey]: { profileId: session.profile?.id ?? null, ...inbox },
-    });
-    assertCurrent(expected);
     await updateBadge(expected);
     await broadcast("inbox", inbox, expected);
     if (showToast) {
@@ -437,7 +501,7 @@ export function createDiscussionBackground({
       .catch(() => {})
       .then(async () => {
         assertCurrent(expected);
-        if (!session.authenticated || !token) return;
+        if (!canReceiveLiveNotifications(session) || !token || !(await hasFeatureConsent("account"))) return;
         const since = inbox.revision;
         const isChanges = hasInboxSnapshot;
         const changed = [];
@@ -452,6 +516,7 @@ export function createDiscussionBackground({
           cursor = page.nextCursor;
         } while (cursor && isChanges);
         assertCurrent(expected);
+        if (!canReceiveLiveNotifications(session)) return;
         const previous = new Map(inbox.items.map((item) => [item.id, item]));
         const novel = changed.filter((item) => previous.get(item.id)?.revision !== item.revision);
         for (const item of changed) previous.set(item.id, item);
@@ -470,13 +535,38 @@ export function createDiscussionBackground({
     return work;
   }
 
+  function catchupOnActivity(expected = generation) {
+    if (activityCatchup) return activityCatchup;
+    const work = catchup(false, expected);
+    activityCatchup = work;
+    work
+      .finally(() => {
+        if (activityCatchup === work) activityCatchup = null;
+      })
+      .catch(() => {});
+    return work;
+  }
+
+  function shareInbox(tabId) {
+    if (!hasInboxSnapshot || !canReceiveLiveNotifications(session)) return;
+    callBrowser(api, api.tabs, "sendMessage", tabId, discussionEvent("inbox", inbox)).catch(() => {});
+  }
+
+  function assertLiveNotifications(expected) {
+    assertCurrent(expected);
+    if (!canReceiveLiveNotifications(session)) throw new DiscussionError("notifications_unavailable");
+  }
+
   async function connect(expected = generation) {
-    if (connecting || connection || !session.authenticated || !token || stopped) return connecting;
+    if (connecting || connection || !canReceiveLiveNotifications(session) || !token || stopped) return connecting;
+    if (!(await hasFeatureConsent("account"))) return;
+    assertCurrent(expected);
+    if (connecting || connection) return connecting;
     const work = (async () => {
       assertCurrent(expected);
       const activeToken = token;
       const socket = connectionFactory(`${origin}/api/discussion/notifications/hub`, async () => {
-        assertCurrent(expected);
+        assertLiveNotifications(expected);
         const ticket = await request("/notifications/ticket", { method: "POST", auth: activeToken, expected });
         return ticket.token;
       });
@@ -500,6 +590,7 @@ export function createDiscussionBackground({
       try {
         await socket.start();
         assertCurrent(expected);
+        finishRecovery(recoveryRevision);
         await catchup(false, expected).catch(() => {});
       } catch (error) {
         if (connection === socket) connection = null;
@@ -515,33 +606,50 @@ export function createDiscussionBackground({
     }
   }
 
-  function clearSession(blockAccount = false, preserveQueuedRequests = false) {
-    if (blockAccount) accountBlocked = true;
-    if (!preserveQueuedRequests) accountEpoch++;
-    generation++;
-    for (const [controller, accountBound] of pendingRequests) if (accountBound) controller.abort();
+  function resetLiveNotifications() {
     const previousConnection = connection;
     connection = null;
     connecting = null;
+    activityCatchup = null;
     previousConnection?.stop().catch(() => {});
-    token = "";
     hintedRevision = "0";
     hasInboxSnapshot = false;
-    session = { ...ANONYMOUS_SESSION };
     inbox = { items: [], unreadCount: 0, revision: "0", nextCursor: null };
+  }
+
+  function stopLiveNotifications() {
+    if (!connection && !connecting && !hasInboxSnapshot) return;
+    resetLiveNotifications();
+    updateBadge().catch(() => {});
+    broadcast("inbox", inbox).catch(() => {});
+  }
+
+  function clearSession(blockAccount = false, preserveQueuedRequests = false, preserveRecovery = false) {
+    if (!preserveRecovery) {
+      recoveryRevision++;
+      finishRecovery(recoveryRevision);
+      refreshing = null;
+    }
+    if (blockAccount) accountBlocked = true;
+    if (!preserveQueuedRequests) accountEpoch++;
+    generation++;
+    for (const [controller, state] of pendingRequests) if (state.accountBound) controller.abort();
+    resetLiveNotifications();
+    token = "";
+    session = { ...ANONYMOUS_SESSION };
     writeState(generation, "remove", [settings.stateStorageKey]).catch(() => {});
     updateBadge().catch(() => {});
     broadcast("session", session).catch(() => {});
     broadcast("inbox", inbox).catch(() => {});
   }
 
-  function refreshSession() {
+  function loadSession() {
     const work = accountQueue
       .catch(() => {})
       .then(async () => {
         const beforeRead = generation;
         if (stopped || accountBlocked) return session;
-        const consent = await hasConsent();
+        const consent = await hasFeatureConsent("account");
         assertCurrent(beforeRead);
         let nextToken = "";
         if (consent) {
@@ -562,7 +670,7 @@ export function createDiscussionBackground({
           (nextToken === token && (!nextToken || session.authenticated))
         )
           return session;
-        clearSession(false, true);
+        if (token && token !== nextToken) clearSession(false, true, true);
         const expected = generation;
         token = nextToken;
         if (!token) return session;
@@ -572,76 +680,176 @@ export function createDiscussionBackground({
           assertCurrent(expected);
           if (error.status !== 401) throw error;
           rejectedToken = token;
-          token = "";
-          session = { ...ANONYMOUS_SESSION };
+          clearSession(false, true, true);
           return session;
         }
         assertCurrent(expected);
         await broadcast("session", session, expected);
-        await catchup(false, expected).catch(() => {});
-        connect(expected).catch(() => {});
         return session;
       });
     accountQueue = work;
     return work;
   }
 
-  async function withReactions(result, expected, single = false, scope) {
+  function finishRecovery(revision) {
+    if (revision !== recoveryRevision) return;
+    if (recoveryTimer !== null) clearTimeout(recoveryTimer);
+    recoveryTimer = null;
+    recoveryActive = false;
+    recoveryAttempt = 0;
+  }
+
+  function scheduleRecovery(revision, error) {
+    if (revision !== recoveryRevision || stopped || accountBlocked || !recoveryActive || recoveryTimer !== null) return;
+    const permanent =
+      ["session_changed", "account_consent_required", "notifications_unavailable"].includes(error?.code) ||
+      (error?.status > 0 && error.status < 500 && error.status !== 408);
+    const delay = RECOVERY_DELAYS[recoveryAttempt];
+    if (permanent || delay == null) {
+      finishRecovery(revision);
+      return;
+    }
+    recoveryAttempt++;
+    recoveryTimer = setTimeout(
+      () => {
+        recoveryTimer = null;
+        if (revision === recoveryRevision && !stopped && !accountBlocked) refreshSession(true).catch(() => {});
+      },
+      Math.round(delay * (0.75 + random() * 0.5)),
+    );
+  }
+
+  function refreshSession(retrying = false) {
+    if (refreshing) return refreshing;
+    if (stopped || accountBlocked || (!retrying && recoveryTimer !== null)) return Promise.resolve(session);
+    if (!recoveryActive) {
+      recoveryActive = true;
+      recoveryAttempt = 0;
+    }
+    const revision = recoveryRevision;
+    const work = loadSession().then(
+      (value) => {
+        if (revision !== recoveryRevision) throw new DiscussionError("session_changed");
+        if (!canReceiveLiveNotifications(value)) {
+          stopLiveNotifications();
+          finishRecovery(revision);
+        } else if (connection?.state === "Connected") {
+          if (!hasInboxSnapshot && !connecting) catchupOnActivity().catch(() => {});
+          finishRecovery(revision);
+        } else {
+          if (!connecting && (!retrying || !hasInboxSnapshot)) catchupOnActivity().catch(() => {});
+          connect().catch((error) => scheduleRecovery(revision, error));
+        }
+        return value;
+      },
+      (error) => {
+        scheduleRecovery(revision, error);
+        throw error;
+      },
+    );
+    refreshing = work;
+    work
+      .finally(() => {
+        if (refreshing === work) refreshing = null;
+      })
+      .catch(() => {});
+    return work;
+  }
+
+  async function withLocalReactions(result, single = false, scope) {
     assertScope(scope);
     const items = single ? [result] : result.items || [];
     if (!items.length) return result;
+    for (const item of items) if (scope && item.author?.id) scope.authors.set(item.id, item.author.id);
+    const epoch = voterEpoch;
+    await reactionStateQueue.catch(() => {});
     try {
-      const registered = await credentials.getRegisteredUser();
-      assertCurrent(expected);
+      const allowed = await hasFeatureConsent("voting");
+      const data = allowed ? await store("get", [REACTION_STORAGE_KEY]) : {};
       assertScope(scope);
-      if (!registered) {
-        for (const item of items) item.myReaction = 0;
-        return result;
+      const videos =
+        epoch === voterEpoch && Array.isArray(data?.[REACTION_STORAGE_KEY]) ? data[REACTION_STORAGE_KEY] : [];
+      for (const item of items) {
+        const reactions = videos.find((entry) => entry.videoId === (scope?.videoId || item.videoId))?.reactions;
+        item.myReaction = [-1, 1].includes(reactions?.[item.id]) ? reactions[item.id] : 0;
       }
-      const { userId } = registered;
-      const values = await request("/reactions/state", {
-        method: "POST",
-        body: { userId, commentIds: items.map((item) => item.id) },
-        expected,
-        scope,
-      });
-      const ownValues = new Map((values.items || []).map((item) => [item.commentId, item.value]));
-      for (const item of items) item.myReaction = ownValues.get(item.id) ?? 0;
     } catch (error) {
-      assertCurrent(expected);
       assertScope(scope);
-      // Public reading remains available when stored vote credentials are unavailable.
+      for (const item of items) item.myReaction = 0;
     }
     return result;
   }
 
+  function rememberReaction(videoId, commentId, value, epoch) {
+    const work = reactionStateQueue
+      .catch(() => {})
+      .then(async () => {
+        if (epoch !== voterEpoch || !VIDEO_ID.test(videoId || "") || ![-1, 0, 1].includes(value)) return;
+        const data = await store("get", [REACTION_STORAGE_KEY]);
+        if (epoch !== voterEpoch || !(await hasFeatureConsent("voting"))) return;
+        const previous = Array.isArray(data?.[REACTION_STORAGE_KEY]) ? data[REACTION_STORAGE_KEY] : [];
+        const reactions = { ...previous.find((item) => item.videoId === videoId)?.reactions };
+        if (value === 0) delete reactions[commentId];
+        else reactions[commentId] = value;
+        const videos = previous.filter((item) => item.videoId !== videoId);
+        if (Object.keys(reactions).length) videos.push({ videoId, reactions });
+        await store("set", { [REACTION_STORAGE_KEY]: videos.slice(-MAX_REACTION_VIDEOS) });
+      });
+    reactionStateQueue = work;
+    return work;
+  }
+
+  function clearReactions(invalidate = true) {
+    if (invalidate) voterEpoch++;
+    const work = reactionStateQueue.catch(() => {}).then(() => store("remove", [REACTION_STORAGE_KEY]));
+    reactionStateQueue = work;
+    return work;
+  }
+
   function react(payload, expected, scope) {
+    const epoch = voterEpoch;
+    const browsingEpoch = permissionEpochs.counts;
+    const assertReaction = () => {
+      assertScope(scope);
+      if (browsingEpoch !== permissionEpochs.counts) throw new DiscussionError("counts_consent_required");
+      if (epoch !== voterEpoch) throw new DiscussionError("voting_consent_required");
+      if (session.authenticated && scope?.authors.get(payload.id) === session.profile?.id)
+        throw new DiscussionError("own_comment");
+    };
     const previous = reactionQueues.get(payload.id) || Promise.resolve();
     const work = previous
       .catch(() => {})
       .then(async () => {
-        assertCurrent(expected);
-        assertScope(scope);
+        assertReaction();
+        if (!(await hasFeatureConsent("voting"))) throw new DiscussionError("voting_consent_required");
+        assertReaction();
         const { userId } = await credentials.ensureRegistered();
-        assertCurrent(expected);
-        assertScope(scope);
+        assertReaction();
         for (let attempt = 0; attempt < 3; attempt++) {
           const puzzle = await request(`/comments/${payload.id}/reaction/challenge`, {
             method: "POST",
             body: { userId, value: payload.value },
             expected,
             scope,
+            auth: "",
+            accountBound: false,
+            feature: "voting",
           });
           const solved = await solve(puzzle);
-          assertCurrent(expected);
-          assertScope(scope);
+          assertReaction();
           if (!solved) continue;
-          return request(`/comments/${payload.id}/reaction/confirm`, {
+          const result = await request(`/comments/${payload.id}/reaction/confirm`, {
             method: "POST",
             body: { userId, challengeId: puzzle.challengeId, solution: solved.solution },
             expected,
             scope,
+            auth: "",
+            accountBound: false,
+            feature: "voting",
           });
+          assertReaction();
+          await rememberReaction(scope?.videoId, payload.id, result.myReaction, epoch);
+          return result;
         }
         throw new DiscussionError("puzzle_failed", "Please try the reaction again");
       });
@@ -655,18 +863,44 @@ export function createDiscussionBackground({
   }
 
   async function execute(operation, payload, scope) {
-    assertScope(scope);
-    if (operation === "capabilities") return request("/capabilities", { auth: "", accountBound: false });
     const queuedEpoch = accountEpoch;
+    const browsingEpoch = permissionEpochs.counts;
+    const assertBrowsing = () => {
+      if (VIDEO_OPERATIONS.has(operation) && browsingEpoch !== permissionEpochs.counts)
+        throw new DiscussionError("counts_consent_required");
+    };
+    assertScope(scope);
+    if (VIDEO_OPERATIONS.has(operation)) {
+      if (!(await hasFeatureConsent("counts"))) throw new DiscussionError("counts_consent_required");
+      assertBrowsing();
+    }
+    const { id, cursor } = payload;
+    const query = cursor ? `?cursor=${encodeURIComponent(cursor)}` : "";
+    const publicRead = (path) => request(path, { auth: "", accountBound: false, feature: "counts", scope });
+    if (operation === "capabilities") return publicRead("/capabilities");
+    if (operation === "comments")
+      return withLocalReactions(
+        await publicRead(
+          `/videos/${payload.videoId}/comments?sort=${payload.sort || "top"}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`,
+        ),
+        false,
+        scope,
+      );
+    if (operation === "replies")
+      return withLocalReactions(await publicRead(`/comments/${payload.rootId}/replies${query}`), false, scope);
+    if (operation === "comment") return withLocalReactions(await publicRead(`/comments/${id}`), true, scope);
+    if (operation === "react") return react(payload, generation, scope);
+    if (operation !== "session" && !(await hasFeatureConsent("account")))
+      throw new DiscussionError("account_consent_required");
     await refreshSession();
+    assertBrowsing();
     if (queuedEpoch !== accountEpoch) throw new DiscussionError("session_changed");
     assertScope(scope);
     const expected = generation;
-    const { id, cursor } = payload;
-    const query = cursor ? `?cursor=${encodeURIComponent(cursor)}` : "";
     const send = (path, options = {}) => request(path, { ...options, scope });
     switch (operation) {
       case "session":
+        if (token && !session.authenticated) throw new DiscussionError("session_unavailable");
         return session;
       case "profile": {
         const data = safeSession(
@@ -674,27 +908,9 @@ export function createDiscussionBackground({
         );
         session = data;
         await broadcast("session", session, expected);
+        refreshSession().catch(() => {});
         return data;
       }
-      case "comments":
-        return withReactions(
-          await send(
-            `/videos/${payload.videoId}/comments?sort=${payload.sort || "top"}${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`,
-            { expected },
-          ),
-          expected,
-          false,
-          scope,
-        );
-      case "replies":
-        return withReactions(
-          await send(`/comments/${payload.rootId}/replies${query}`, { expected }),
-          expected,
-          false,
-          scope,
-        );
-      case "comment":
-        return withReactions(await send(`/comments/${id}`, { expected }), expected, true, scope);
       case "createComment": {
         const { videoId, ...body } = payload;
         return send(`/videos/${videoId}/comments`, { method: "POST", body, expected });
@@ -703,8 +919,6 @@ export function createDiscussionBackground({
         return send(`/comments/${id}`, { method: "PATCH", body: { text: payload.text }, expected });
       case "deleteComment":
         return send(`/comments/${id}`, { method: "DELETE", expected });
-      case "react":
-        return react(payload, expected, scope);
       case "report":
         return send(`/comments/${id}/reports`, { method: "POST", body: { reason: payload.reason }, expected });
       case "reports":
@@ -747,11 +961,15 @@ export function createDiscussionBackground({
       if (!isNormalMessageSender(api, sender)) throw new DiscussionError("private_browsing");
       const { operation, payload, scope: scopeValue } = validateRequest(api, requestMessage, sender);
       const scope = scopeFor(scopeValue, sender);
+      const browsingEpoch = permissionEpochs.counts;
       if (operation === "cancelScope") {
         cancelScope(scope);
         return { ok: true, data: { cancelled: true } };
       }
       const data = await execute(operation, payload, scope);
+      if (operation === "session" && sender.tab) shareInbox(sender.tab.id);
+      if (VIDEO_OPERATIONS.has(operation) && browsingEpoch !== permissionEpochs.counts)
+        throw new DiscussionError("counts_consent_required");
       assertScope(scope);
       if (
         scope &&
@@ -773,6 +991,17 @@ export function createDiscussionBackground({
   }
 
   function onStorageChanged(changes, area) {
+    if (
+      (area === "sync" && changes.userId?.oldValue !== changes.userId?.newValue && changes.userId) ||
+      (settings.testMode &&
+        area === "local" &&
+        changes[settings.credentialStorageKey] &&
+        changes[settings.credentialStorageKey].oldValue?.userId !==
+          changes[settings.credentialStorageKey].newValue?.userId)
+    )
+      clearReactions(
+        Boolean(changes.userId?.oldValue || changes[settings.credentialStorageKey]?.oldValue?.userId),
+      ).catch(() => {});
     const changed = settings.testMode
       ? area === "local" && changes[settings.authStorageKey]
       : area === "sync" && (changes.patreonAuthenticated || changes.patreonSessionToken || changes.patreonUser);
@@ -784,6 +1013,7 @@ export function createDiscussionBackground({
   }
 
   function initialize() {
+    store("remove", [settings.stateStorageKey]).catch(() => {});
     if (isFirefoxExtension(api)) {
       api.tabs?.onCreated?.addListener((tab) => updateTabBadge(tab).catch(() => {}));
       api.tabs?.onUpdated?.addListener((tabId, change, tab) => updateTabBadge(tab).catch(() => {}));
@@ -795,15 +1025,9 @@ export function createDiscussionBackground({
           cancelScope(scope);
           navigationScopes.delete(key);
         }
+      for (const key of cancelledScopes) if (key.startsWith(`${tabId}:`)) cancelledScopes.delete(key);
     });
-    api.alarms?.onAlarm?.addListener((alarm) => {
-      if (alarm.name !== RECONNECT_ALARM || stopped) return;
-      refreshSession()
-        .then(() => Promise.allSettled([catchup(false), connect()]))
-        .catch(() => {});
-    });
-    // Alarm recovery also covers service-worker termination and offline browser startup.
-    api.alarms?.create(RECONNECT_ALARM, { periodInMinutes: 1 });
+    api.runtime.onStartup?.addListener(() => refreshSession().catch(() => {}));
     refreshSession().catch(() => {});
   }
 
@@ -816,14 +1040,29 @@ export function createDiscussionBackground({
       return refreshSession();
     },
     onStorageChanged,
+    async onDataPermissionsChanged({ added = [], removed = [] } = {}) {
+      const features = new Set();
+      if (removed.includes("browsingActivity")) features.add("counts");
+      if (removed.includes("websiteActivity")) features.add("voting");
+      if (removed.some((category) => ["authenticationInfo", "personallyIdentifyingInfo"].includes(category)))
+        features.add("account");
+      for (const feature of features) permissionEpochs[feature]++;
+      for (const [controller, state] of pendingRequests)
+        if ([...state.features].some((feature) => features.has(feature))) controller.abort();
+      const reactionsCleared = features.has("voting") || features.has("counts") ? clearReactions() : null;
+      if (features.has("account")) clearSession();
+      await broadcast("permissions", { added, removed });
+      await reactionsCleared;
+      if (added.some((category) => ["authenticationInfo", "personallyIdentifyingInfo"].includes(category)))
+        await refreshSession().catch(() => {});
+    },
     initialize,
     stop() {
       clearSession();
       stopped = true;
       for (const controller of pendingRequests.keys()) controller.abort();
-      api.alarms?.clear(RECONNECT_ALARM);
     },
   };
 }
 
-export { ANONYMOUS_SESSION, createConnection, validateRequest };
+export { ANONYMOUS_SESSION, canReceiveLiveNotifications, createConnection, validateRequest };

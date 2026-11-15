@@ -1,46 +1,76 @@
 # Return YouTube Dislike Privacy Policy
 
-Last updated: September 10, 2026
+Last updated: November 1, 2026
 
-This policy describes version 4.0.6 and its matching backend release.
+This policy describes version 4.1.0 and its matching backend release.
 
 Return YouTube Dislike transmits only the data needed to provide its dislike-count, voting, abuse-prevention, and
-optional premium features. It does not sell personal data or use it for advertising.
+optional account, comment, and premium features. It does not sell personal data or use it for advertising.
 
-## Data required for the extension to work
+## Data used for dislike counts and voting
 
-- On registration, the extension generates a persistent random installation identifier and sends it to the Return
-  YouTube Dislike API. The identifier is not derived from or linked to a YouTube or Google account, but it is a
-  persistent identifier and is treated as personal data.
-- When a YouTube video is opened, the extension sends that video's ID and, when available, its visible like count to
-  retrieve and improve the dislike estimate.
-- When the user submits a Like, Dislike, or vote removal and vote submission is enabled, the extension sends the random
-  installation identifier, video ID, and selected action.
+- When a YouTube video or Short is opened, the extension sends that video's ID and, when available, its visible like
+  count to retrieve and improve the dislike estimate. The video ID is also used to load RYD comments for that video.
+  In Firefox, the video ID and the like count are each sent only after you allow them, as described under "User
+  controls".
+- The first time you vote or react to an RYD comment, the extension creates a persistent random installation
+  identifier and registers it with the Return YouTube Dislike API. An identifier saved by an earlier version is reused.
+  Opening videos or reading comments does not create or send it. The identifier is not derived from or linked to a
+  YouTube or Google account, but it is a persistent identifier and is treated as personal data.
+- When you select Like, Dislike, or remove your vote and vote sharing is on, the extension sends the random
+  installation identifier, video ID, and selected action. Votes are sent without your account session.
 - API requests necessarily expose the network IP address and request time. The service uses this information for
   security, abuse prevention, aggregate analytics, and operation of the API.
 
-The extension does not send a YouTube account name, comments, private YouTube data, or the contents of unrelated web
-pages. It does not maintain a separate local list of videos watched.
+The extension does not send a YouTube account name, native YouTube comment text, private YouTube data, or the contents
+of unrelated web pages. RYD comments that you choose to post are processed separately as described below. The
+extension does not maintain a separate local list of videos watched.
 
 ## Optional account and premium data
 
 Patreon and GitHub sign-in are optional. The account flow starts only after the user selects a sign-in button and, in
-Firefox, grants the separate authentication-data permission. The selected provider and the Return YouTube Dislike API
+Firefox, grants the optional "Authentication information" and "Personally identifying information" permissions.
+The selected provider and the Return YouTube Dislike API
 process the OAuth authorization response. The API returns the provider account ID, name, profile image,
 account-access status, access tier, and a Return YouTube Dislike session token as applicable to that provider. GitHub
 sign-in may also return an email address. Patreon sign-in does not request or return email, account-status fields,
 or connected social accounts; the name and profile image identify the signed-in account in the popup. To
-determine Patreon access, the matching backend uses currently entitled tier IDs. It does not request or use membership
-amounts, charge dates or status, lifetime payments, or patron status. The extension does not receive payment-card or
-bank-account details.
+determine Patreon access, the service uses currently entitled tier IDs and, where needed, the current entitlement
+amount and monthly or annual membership cadence. These amount and cadence fields are used by the service to determine
+access and are not returned to the extension. It does not request charge dates or status, lifetime payments, or patron
+status. The extension does not receive payment-card or bank-account details.
 
 Those account details and the session token are stored in browser extension storage and used to authenticate premium
-analytics requests. The session token expires after 30 days. Signing out deletes the locally stored account details and
-session token. Revoking Firefox's authentication-data permission clears that local account session and prevents further
-account and premium requests. Pending responses cannot restore the session; the user must sign in again to resume it.
+analytics and account-only comment features. The session token expires after 30 days. Signing out deletes the locally
+stored account details and session token. Revoking Firefox's "Authentication information" permission clears that
+local account session and prevents further account and premium requests. Pending responses cannot restore the
+session; the user must sign in again to resume it. Revoking "Personally identifying information" pauses account
+features without deleting the stored session; allowing it again resumes them while the session is still valid.
 
 Patreon and GitHub process sign-in information under their own privacy policies. The extension never receives the
 user's Patreon or GitHub password.
+
+## Optional RYD comments and notifications
+
+RYD discussions are separate from YouTube's comments. When you choose a nickname or post a comment or reply, the
+service stores that information with your RYD profile and the relevant video or discussion. Your nickname, public
+profile identifier, comment text, timestamps, and reaction totals can be seen by other users. Your profile is linked
+internally to the provider account used to sign in.
+
+Reading comments does not send the random installation identifier or your account session. When you react to an RYD
+comment, the extension sends the random installation identifier with the selected comment and reaction, without your
+account session. Your own reactions are remembered only in local extension storage on the device where you made them,
+for up to 100 recent videos, so they can be highlighted when you return. This record is not synchronized, so a
+reaction made on another device is not highlighted. It is cleared when the identifier changes and, in Firefox, when
+the "Website activity" or "Browsing activity" permission is revoked. Replies
+and likes can create notifications for the recipient's RYD profile. Notifications include the relevant discussion,
+actor nickname or grouped reaction count, timestamps, and read status. Reports and moderation records include the
+account making the report or taking the action, the reported content or target, the reason, and timestamps.
+
+Deleting your own comment clears its stored text and removes its author and text from public display, but a record
+of the comment remains. Moderation may hide content while retaining it for review. Signing out or removing the
+extension does not delete comments, profiles, or other service records. No fixed automatic deletion period is
+promised for profiles, discussion records, reports, moderation records, or notifications.
 
 ## Storage, retention, and sharing
 
@@ -57,9 +87,28 @@ network infrastructure providers, and by Patreon or GitHub only when the user ch
 
 ## User controls
 
-Firefox displays its built-in consent prompt before the required data is transmitted. Refusing the required consent
-prevents installation or acceptance of the update. Vote submission can be disabled in the extension settings. Optional account access can be
-declined or revoked without disabling ordinary dislike counts. Firefox private-window access is disabled.
+In every browser, the "Disable like/dislike submission" setting stops the extension from sending your
+Like, Dislike, and vote-removal actions. It does not affect RYD comment reactions, which are sent only when you select
+a reaction.
+
+Firefox does not require any data permission to install the extension. Each feature asks for the Firefox permission it
+needs when you turn it on, and you can change these permissions at any time in Firefox's add-on settings:
+
+- "Browsing activity": the YouTube video ID, used to load dislike counts, RYD comments, and Premium analytics. Votes
+  and reactions also need it.
+- "Website content": the like count shown on the video, used to improve the dislike estimate.
+- "Website activity": your votes and RYD comment reactions, sent with the random installation identifier.
+- "Authentication information" and "Personally identifying information": needed together to sign in and use account
+  features, including your profile, notifications, Premium analytics, and posting, editing or reporting comments.
+
+Declining or revoking a permission turns off only the features that need it; the extension stays installed. Revoking
+"Browsing activity" stops counts, comments, votes, reactions, and Premium analytics without signing you out. Revoking
+"Website content" stops sending the like count. Revoking "Website activity" stops votes and reactions. Revoking the
+account permissions works as described under "Optional account and premium data".
+
+If you allow the extension in Firefox private windows, private windows show dislike counts only, using the "Browsing
+activity" permission granted in a normal window. They do not send the like count, and voting, reactions, accounts,
+premium analytics, and RYD discussions are disabled there.
 
 Users can clear extension storage or remove the extension to delete locally stored data. Requests concerning service
 data can be made through the project's support channels at https://returnyoutubedislike.com/help.

@@ -2,8 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
-jest.mock("./src/consent-prompt", () => ({ waitForCoreDataConsent: () => new Promise(() => {}) }));
-jest.mock("./src/core-data-consent", () => ({ onCoreDataPermissionChanged: jest.fn() }));
+jest.mock("./src/discussion/popup", () => ({ initDiscussionPopup: jest.fn() }));
 
 const customColors = {
   light: { like: "#123456", dislike: "#654321" },

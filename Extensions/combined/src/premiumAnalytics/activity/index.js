@@ -195,7 +195,7 @@ export function renderActivityChart(timeSeries) {
     ),
   };
 
-  const dataZoom = createDataZoom(sliderBounds, selectionBounds);
+  const dataZoom = createDataZoom(sliderBounds, selectionBounds, isSinglePoint);
 
   analyticsState.suppressZoomEvents = true;
   activityChart.setOption({
@@ -207,7 +207,7 @@ export function renderActivityChart(timeSeries) {
       type: "time",
       min: axisBounds.min,
       max: axisBounds.max,
-      axisLabel: { color: getMutedTextColor() },
+      axisLabel: { color: getMutedTextColor(), hideOverlap: true },
       axisLine: { lineStyle: { color: getBorderColor() } },
     },
     yAxis: {
@@ -313,12 +313,13 @@ export function unregisterZoomSelectionListener(listener) {
   zoomListeners.delete(listener);
 }
 
-function createDataZoom(bounds, selection) {
+function createDataZoom(bounds, selection, singlePoint) {
   const slider = {
     type: "slider",
     xAxisIndex: 0,
     height: 18,
     bottom: 20,
+    showDataShadow: singlePoint ? false : "auto",
     backgroundColor: getSurfaceColor(0.05, 0.05),
     borderColor: getBorderColor(0.1),
     textStyle: { color: getMutedTextColor() },

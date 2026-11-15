@@ -5,6 +5,7 @@ const {
   expectSuccessfulVoteActivation,
   registerNavigationRuntimeContractScenarios,
 } = require("./navigation-runtime-contract");
+const { VOTE_IDENTITY_JOURNEYS } = require("./vote-identity-journey-contract");
 
 const USER_ID = "A".repeat(36);
 const VIDEO_ID = "abcdefghijk";
@@ -41,7 +42,7 @@ function activationAdapter(records) {
   });
 }
 
-function collectWrapperNavigationTitles(wrapperPath, runtimeName) {
+function collectWrapperRegistrations(wrapperPath) {
   const mockSharedRegistrationCalls = [];
   const mockTitles = [];
   const mockTest = (title) => mockTitles.push(title);
@@ -69,7 +70,7 @@ function collectWrapperNavigationTitles(wrapperPath, runtimeName) {
 
   return {
     sharedRegistrationCalls: mockSharedRegistrationCalls,
-    titles: mockTitles.filter((title) => title.startsWith(`${runtimeName} navigation matrix:`)),
+    titles: mockTitles,
   };
 }
 
@@ -90,9 +91,21 @@ test.each([
   ["userscript", "../UserScript/e2e/userscript-navigation-matrix.e2e"],
   ["extension", "./extension/extension-artifact-navigation.e2e"],
 ])("the %s Playwright wrapper registers the complete shared catalog", (runtimeName, wrapperPath) => {
-  const registration = collectWrapperNavigationTitles(wrapperPath, runtimeName);
+  const registration = collectWrapperRegistrations(wrapperPath);
   expect(registration.sharedRegistrationCalls).toEqual([runtimeName]);
-  expect(registration.titles).toEqual(NAVIGATION_MATRIX.map(({ id }) => `${runtimeName} navigation matrix: ${id}`));
+  expect(registration.titles.filter((title) => title.startsWith(`${runtimeName} navigation matrix:`))).toEqual(
+    NAVIGATION_MATRIX.map(({ id }) => `${runtimeName} navigation matrix: ${id}`),
+  );
+});
+
+test.each([
+  ["userscript", "../UserScript/e2e/userscript-navigation-matrix.e2e"],
+  ["extension", "./extension/extension-artifact-navigation.e2e"],
+])("the %s Playwright wrapper registers every shared vote identity journey", (runtimeName, wrapperPath) => {
+  const { titles } = collectWrapperRegistrations(wrapperPath);
+  expect(titles.filter((title) => title.startsWith(`${runtimeName} vote identity journey:`))).toEqual(
+    VOTE_IDENTITY_JOURNEYS.map(({ id }) => `${runtimeName} vote identity journey: ${id}`),
+  );
 });
 
 test("keeps one navigation runner for every shared scenario and no unused runners", () => {

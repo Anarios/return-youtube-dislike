@@ -1,13 +1,4 @@
 {
-  "apiStatusLabel": {
-    "message": "API‑status:"
-  },
-  "apiStatusOffline": {
-    "message": "Offline"
-  },
-  "apiStatusOnline": {
-    "message": "Online"
-  },
   "colorTheme": {
     "message": "Färgtema:"
   },
@@ -34,6 +25,9 @@
   },
   "disableLoggingHover": {
     "message": "Inaktiverar loggning av API‑svar i konsolen."
+  },
+  "developerSettings": {
+    "message": "Utvecklaralternativ"
   },
   "disableLoggingLabel": {
     "message": "Inaktivera loggning till konsolen"
@@ -74,9 +68,6 @@
   "numberFormat": {
     "message": "Sifforformat:"
   },
-  "patreonBadgePrefix": {
-    "message": "Patreon"
-  },
   "patreonLoggedOutMessage": {
     "message": "Premiumfunktioner är tillgängliga för Patreon‑stödjare"
   },
@@ -86,17 +77,20 @@
   "patreonPrivacyNote": {
     "message": "Information om ditt Patreon-medlemskap används för att verifiera din premiumåtkomst. Vi får inte dina kort- eller bankuppgifter."
   },
+  "paidFeaturesWhy": {
+    "message": "Antalet ogilla-markeringar förblir gratis för alla. Betalda extrafunktioner hjälper till att betala servrarna bakom dem: över 15 TB data och omkring 20 miljoner användare per dag, med en budget på några hundra dollar i månaden."
+  },
   "githubLoggedOutMessage": {
-    "message": "Premium features available for GitHub contributors"
+    "message": "Premiumfunktioner är tillgängliga för GitHub-bidragsgivare"
   },
   "githubLogin": {
-    "message": "Login with GitHub (Contributor)"
+    "message": "Logga in med GitHub (bidragsgivare)"
   },
   "githubLoginStartFailed": {
-    "message": "Failed to initiate GitHub login. Please try again."
+    "message": "Det gick inte att starta GitHub-inloggningen. Försök igen."
   },
   "githubLoginCompleteFailed": {
-    "message": "Failed to complete GitHub login. Please try again."
+    "message": "Det gick inte att slutföra GitHub-inloggningen. Försök igen."
   },
   "patreonLoginCompleteFailed": {
     "message": "Det gick inte att slutföra inloggningen. Försök igen."
@@ -135,28 +129,31 @@
     "message": "Gör formatet på gilla och ogilla konsekvent."
   },
   "hidePremiumTeaser": {
-    "message": "Dölj premiumteaser-panelen"
+    "message": "Dölj råa antal"
   },
   "hidePremiumTeaserHover": {
-    "message": "Visa inte premiumteasern på YouTubes tittarsidor."
+    "message": "Visa inte panelen med råa antal på YouTubes tittarsidor."
   },
-  "roundNumbers": {
-    "message": "Visa avrundade siffror"
+  "hideRydComments": {
+    "message": "Dölj RYD-kommentarer"
   },
-  "roundNumbersHover": {
-    "message": "Avrunda siffrorna neråt (standard YouTube-beteende)."
+  "hideRydCommentsHover": {
+    "message": "Visa inte RYD-kommentarer på videor där YouTube-kommentarer är avstängda."
+  },
+  "hidePremiumAnalytics": {
+    "message": "Dölj Premium-videoinblickar"
+  },
+  "hidePremiumAnalyticsHover": {
+    "message": "Dölj panelen med Premium-videoinblickar på YouTubes tittarsidor."
   },
   "shortsSupport": {
     "message": "YouTube Shorts Support"
   },
   "showTooltipPercentage": {
-    "message": "Procent i verktygstips för gilla/ogilla‑fältet."
+    "message": "Procent i verktygstips för gilla/ogilla‑fältet"
   },
   "showTooltipPercentageHover": {
     "message": "Visa procent i verktygstipset för gilla/ogilla‑fältet."
-  },
-  "textColorTheme": {
-    "message": "Färgtema:"
   },
   "textColorTheme1": {
     "message": "Klassisk"
@@ -185,50 +182,20 @@
   "colorThemeDislike": {
     "message": "Ogilla"
   },
-  "textColorizeRatioBar": {
-    "message": "Färgsätt förhållandefältet"
-  },
-  "textColorizeRatioBarHover": {
-    "message": "Använd anpassade färger för förhållandefältet."
-  },
-  "textColorizeThumbs": {
-    "message": "Färglägg tummarna"
-  },
-  "textColorizeThumbsHover": {
-    "message": "Använd anpassade färger för tumikoner."
-  },
-  "textConsistentFormat": {
-    "message": "Gör formatet på gilla och ogilla konsekvent"
-  },
-  "textConsistentFormatHover": {
-    "message": "Omformatera som siffror."
-  },
   "textDeveloper": {
     "message": "av Dmitry Selivanov & Community"
   },
   "textLikesDisabled": {
     "message": "Inaktiverad av ägaren"
   },
-  "textNumberFormat": {
-    "message": "Sifforformat:"
-  },
-  "textRoundingNumbers": {
-    "message": "Avrunda statistiken neråt för gilla/ogilla (standard YouTube-beteende)"
-  },
-  "textRoundingNumbersHover": {
-    "message": "Visa avrundad statistik."
-  },
   "textSettings": {
     "message": "Inaktivera gilla-/ogilla-inskickningar"
   },
   "textSettingsHover": {
-    "message": "Slutar räkna dina gilla och ogilla."
+    "message": "Dina gilla och ogilla räknas inte och syns inte i antalet ogilla."
   },
   "textTempUnavailable": {
     "message": "Tillfälligt otillgänglig"
-  },
-  "textUpdate": {
-    "message": "Uppdatera till"
   },
   "tooltipPercentageMode": {
     "message": "Procentläge:"
@@ -443,9 +410,6 @@
   "premiumTeaser_statRaw": {
     "message": "Antal råa ogilla-markeringar"
   },
-  "premiumTeaser_statDislikes": {
-    "message": "Beräknade ogilla-markeringar"
-  },
   "premiumTeaser_statLikes": {
     "message": "Rått antal gilla-markeringar"
   },
@@ -455,29 +419,8 @@
   "premiumTeaser_statusError": {
     "message": "Ogilla-data kunde inte läsas in. Försök att ladda om sidan."
   },
-  "premiumTeaser_breadcrumbsAria": {
-    "message": "Så låser du upp Premiumanalyser"
-  },
-  "premiumTeaser_breadcrumbsTitle": {
-    "message": "Lås upp Premium-videoinblickar i tre snabba steg:"
-  },
-  "premiumTeaser_breadcrumbStep1": {
-    "message": "Logga in med Patreon via popup-fönstret i Return YouTube Dislike-tillägget."
-  },
-  "premiumTeaser_breadcrumbStep2": {
-    "message": "Välj Premium-nivån för att aktivera aktivitetsgrafer, landstopplistor och den interaktiva kartan."
-  },
-  "premiumTeaser_breadcrumbStep3": {
-    "message": "Ladda om YouTube för att se timvisa trender, toppländer och detaljer per delstat i USA för varje video."
-  },
-  "premiumTierNotice_title": {
-    "message": "Premiumanalys låst"
-  },
   "premiumTierNotice_message": {
     "message": "Ditt Patreon-medlemskap innehåller inte Premium-nivån. Uppgradera ditt stöd för att låsa upp avancerad videoanalys."
-  },
-  "premiumTierNotice_cta": {
-    "message": "Uppgradera på Patreon"
   },
   "changelog_cta_primary": {
     "message": "Uppgradera på Patreon"
@@ -519,19 +462,19 @@
     "message": "Fråga samhället"
   },
   "hideClutterButtons": {
-    "message": "Hide clutter buttons"
+    "message": "Dölj onödiga knappar"
   },
   "hideClutterButtonsHelpLabel": {
-    "message": "Show before and after examples"
+    "message": "Visa exempel på före och efter"
   },
   "hideClutterButtonsDescription": {
-    "message": "Keep only Like and Dislike visible. Share, Save, Thanks, and other optional actions stay available in YouTube's three-dot More menu."
+    "message": "Behåll bara knapparna Gilla och Ogilla synliga. Dela, Spara, Tack och andra valfria åtgärder finns kvar under Fler åtgärder, YouTubes trepunktsmeny."
   },
   "hideClutterButtonsBefore": {
-    "message": "Before: all action buttons are visible"
+    "message": "Före: alla åtgärdsknappar visas"
   },
   "hideClutterButtonsAfter": {
-    "message": "After: only Like and Dislike stay visible"
+    "message": "Efter: bara Gilla och Ogilla visas"
   },
   "changelog_brand_logo_alt": {
     "message": "Return YouTube Dislike-logotyp"
@@ -590,14 +533,26 @@
   "discussion_empty": {
     "message": "Inga kommentarer ännu. Starta diskussionen."
   },
-  "discussion_replyEmpty": {
-    "message": "Inga svar ännu."
-  },
   "discussion_comment": {
     "message": "Kommentar"
   },
   "discussion_post": {
     "message": "Publicera kommentar"
+  },
+  "discussion_viewReplies": {
+    "message": "Visa svar"
+  },
+  "discussion_moreReplies": {
+    "message": "Visa fler svar"
+  },
+  "discussion_viewReply": {
+    "message": "Visa svar"
+  },
+  "discussion_collapseReplies": {
+    "message": "Dölj svar"
+  },
+  "discussion_replyContext": {
+    "message": "Visa kommentaren som besvarades"
   },
   "discussion_reply": {
     "message": "Svara"
@@ -637,9 +592,6 @@
   },
   "discussion_dislike": {
     "message": "Ogilla"
-  },
-  "discussion_reacting": {
-    "message": "Sparar reaktion…"
   },
   "discussion_signInRequired": {
     "message": "Logga in via tilläggets popupfönster för att fortsätta."
@@ -734,12 +686,6 @@
   "discussion_moderationReason": {
     "message": "Orsak till moderering"
   },
-  "discussion_moderationSaved": {
-    "message": "Modereringsåtgärden har sparats."
-  },
-  "discussion_reported": {
-    "message": "$1 rapporter"
-  },
   "discussion_unavailable": {
     "message": "RYD-kommentarer är inte tillgängliga för den här videon."
   },
@@ -776,12 +722,6 @@
   "discussion_notificationLikes": {
     "message": "Din kommentar fick $1 gilla-markeringar"
   },
-  "discussion_notificationDislike": {
-    "message": "Någon ogillade din kommentar"
-  },
-  "discussion_notificationReaction": {
-    "message": "Någon reagerade på din kommentar"
-  },
   "discussion_someone": {
     "message": "Någon"
   },
@@ -794,23 +734,14 @@
   "discussion_view": {
     "message": "Visa diskussion"
   },
-  "discussion_unread": {
-    "message": "$1 olästa aviseringar"
-  },
   "discussion_signedOutInbox": {
-    "message": "Logga in för att se svar och reaktioner på dina kommentarer."
-  },
-  "discussion_notificationUnavailable": {
-    "message": "Den här diskussionen är inte längre tillgänglig."
+    "message": "Logga in för att se svar och gilla-markeringar på dina kommentarer."
   },
   "discussion_discussionTab": {
     "message": "Diskussion"
   },
   "discussion_nickname": {
     "message": "Smeknamn"
-  },
-  "discussion_reportCount": {
-    "message": "Rapporter"
   },
   "discussion_reportStatus": {
     "message": "Rapportstatus"
@@ -824,20 +755,8 @@
   "discussion_author": {
     "message": "Författare"
   },
-  "discussion_me": {
-    "message": "Du"
-  },
   "discussion_saving": {
     "message": "Sparar…"
-  },
-  "discussion_confirm": {
-    "message": "Bekräfta"
-  },
-  "discussion_notificationUpdated": {
-    "message": "Ny aktivitet på dina kommentarer"
-  },
-  "discussion_showThread": {
-    "message": "Visa tråd"
   },
   "discussion_loadReplies": {
     "message": "Visa svar ($1)"
@@ -857,6 +776,12 @@
   "changelog_hero_body": {
     "message": "Öppna valfri YouTube-video så ser du antalet ogilla-markeringar precis bredvid gilla-markeringarna, där det hör hemma. Version 4.1 introducerar också RYD-kommentarer, en plats där du kan prata om videor utanför YouTubes eget kommentarsfält."
   },
+  "changelog_hero_eyebrow_counts_off": {
+    "message": "Ett steg kvar"
+  },
+  "changelog_hero_body_counts_off": {
+    "message": "Aktivera antalet ogilla nedan för att se det bredvid gilla-markeringarna på YouTube. Version 4.1 introducerar också RYD-kommentarer, en plats där du kan prata om videor utanför YouTubes eget kommentarsfält."
+  },
   "changelog_new_badge": {
     "message": "Nytt i 4.1"
   },
@@ -867,7 +792,7 @@
     "message": "Upptäck RYD-kommentarer"
   },
   "changelog_comments_body": {
-    "message": "Ett diskussionsforum under videor och Shorts, som drivs av Return YouTube Dislike och är separat från YouTubes kommentarer. Alla kan läsa och reagera. Medlemmar på nivåerna Commenter och Premium kan skriva kommentarer och svar."
+    "message": "Ett diskussionsforum under videor och Shorts där YouTubes kommentarer är avstängda, som drivs av Return YouTube Dislike. Alla kan läsa och reagera. Medlemmar på nivåerna Commenter och Premium kan skriva kommentarer och svar."
   },
   "changelog_comments_point_replies": {
     "message": "Trådade svar med gilla- och ogilla-markeringar"
@@ -876,7 +801,7 @@
     "message": "Skriv med ett offentligt smeknamn som du väljer"
   },
   "changelog_comments_point_notifications": {
-    "message": "Aviseringar när någon svarar eller reagerar"
+    "message": "Aviseringar när någon svarar på eller gillar din kommentar"
   },
   "changelog_comments_point_moderation": {
     "message": "Rapportering och moderering för respektfulla samtal"
@@ -920,11 +845,29 @@
   "changelog_analytics_us_body": {
     "message": "Se engagemanget per delstat i detalj."
   },
+  "changelog_appeal_title": {
+    "message": "En liten, lite pinsam vädjan"
+  },
+  "changelog_appeal_intro": {
+    "message": "Hej. Det här är delen där vi pratar om pengar, och ärligt talat är vi inte så bra på det."
+  },
+  "changelog_appeal_costs": {
+    "message": "Return YouTube Dislike är ett litet projekt med öppen källkod, byggt av Dmitry Selivanov och communityn. Varje dag svarar det ungefär 20 miljoner människor och tar hand om mer än 15 TB data. Allt det körs på några hundra dollar i månaden, vilket inte är mycket för att ta tillbaka något som ett miljardföretag bestämde sig för att ta bort."
+  },
+  "changelog_appeal_free": {
+    "message": "Antalet ogilla-markeringar är gratis och kommer att förbli det. Det är hela poängen. Men servrar är inte gratis, och ärligt talat lämnade driftskostnaderna oss inte mycket val: för att hålla projektet igång var vi tvungna att införa Premium-funktioner – RYD-kommentarer och Premiumanalys. Varje medlemskap hjälper till att täcka de kostnaderna."
+  },
+  "changelog_appeal_ask": {
+    "message": "Om RYD någon gång har räddat dig från en clickbaitvideo eller en guide som inte fungerade, fundera gärna på att gå med på Patreon. Och om det inte passar just nu är det helt okej. Tack för att du använder det och röstar: varje röst gör siffrorna lite mer exakta."
+  },
+  "changelog_appeal_cta": {
+    "message": "Bli medlem på Patreon"
+  },
+  "changelog_appeal_signature": {
+    "message": "— Dmitry och RYD-communityn"
+  },
   "changelog_join_title": {
     "message": "Skaffa Premiumfunktioner"
-  },
-  "changelog_join_free": {
-    "message": "Antalet ogilla-markeringar är gratis för alla. Medlemskap är frivilligt och hjälper till att stödja projektet."
   },
   "changelog_join_step1": {
     "message": "Bli medlem på Patreon. Med Commenter kan du skriva kommentarer; Premium ger dig även analysfunktioner."
@@ -952,5 +895,143 @@
   },
   "reviewPromptAction": {
     "message": "Skriv en recension"
+  },
+  "consent_page_title": {
+    "message": "Behörigheter för RYD-funktioner"
+  },
+  "consent_vote_title": {
+    "message": "Låt dina röster räknas"
+  },
+  "consent_vote_body": {
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Tillåt det så att RYD kan räkna dina gilla, ogilla och reaktioner på kommentarer. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
+  },
+  "consent_account_title": {
+    "message": "Välj kontobehörigheter"
+  },
+  "consent_account_body": {
+    "message": "Logga in för kontofunktioner, inklusive din profil, aviseringar och Premium-analys."
+  },
+  "consent_next_step": {
+    "message": "Välj Tillåt i Firefox för att granska behörigheterna. Du kan avböja."
+  },
+  "consent_allow": {
+    "message": "Tillåt i Firefox"
+  },
+  "consent_not_now": {
+    "message": "Inte nu"
+  },
+  "consent_prompt_status": {
+    "message": "Välj om du vill tillåta dessa behörigheter i Firefox."
+  },
+  "consent_granted_status": {
+    "message": "Behörigheterna är aktiverade. Du kan återvända till YouTube."
+  },
+  "consent_declined_status": {
+    "message": "Dessa valfria funktioner förblir avstängda. Du kan ändra behörigheterna senare."
+  },
+  "consent_error_status": {
+    "message": "Behörigheterna kunde inte uppdateras. Försök igen."
+  },
+  "consent_details_summary": {
+    "message": "Vad betyder Firefox behörighetskategorier?"
+  },
+  "consent_details_intro": {
+    "message": "Firefox grupperar data i breda kategorier. Så här används de av RYD:"
+  },
+  "consent_browsing_label": {
+    "message": "Surfaktivitet"
+  },
+  "consent_browsing_body": {
+    "message": "Bara ID:t för YouTube-videon som du öppnar, för att läsa in dess ogilla och RYD-kommentarer. Aldrig din surfhistorik eller andra webbplatser."
+  },
+  "consent_content_label": {
+    "message": "Webbplatsinnehåll"
+  },
+  "consent_content_body": {
+    "message": "Antalet gilla som visas vid YouTube-videon, för att förbättra uppskattningar av ogilla."
+  },
+  "consent_activity_label": {
+    "message": "Webbplatsaktivitet"
+  },
+  "consent_activity_body": {
+    "message": "Dina gilla, ogilla och reaktioner på RYD-kommentarer på YouTube, så att de räknas. Skickas med ett slumpmässigt ID som inte är kopplat till ditt Google- eller YouTube-konto."
+  },
+  "consent_identity_label": {
+    "message": "Personligt identifierbar information"
+  },
+  "consent_identity_body": {
+    "message": "Dina profiluppgifter, som visningsnamn och e-postadress, endast om du väljer att logga in."
+  },
+  "consent_auth_label": {
+    "message": "Autentiseringsinformation"
+  },
+  "consent_auth_body": {
+    "message": "De auktoriserings- och sessionsuppgifter som behövs för att logga in och använda kontofunktioner."
+  },
+  "consent_scope": {
+    "message": "RYD samlar inget utanför youtube.com och kommer inte åt ditt YouTube-konto. Inget namn eller e-post tas emot om du inte loggar in."
+  },
+  "consent_settings": {
+    "message": "Du kan när som helst ändra de här behörigheterna i Firefox tilläggsinställningar (about:addons)."
+  },
+  "consent_private_counts": {
+    "message": "Privata fönster visar bara antalet med behörigheten som aktiverats i ett vanligt fönster. Röstning, inloggning, Premium-analys och diskussioner är inte tillgängliga där."
+  },
+  "consent_voter_timing": {
+    "message": "Ditt röstnings-ID skickas bara när du röstar eller reagerar. Dina egna reaktioner på kommentarer sparas på den här enheten."
+  },
+  "popup_signin_next_click": {
+    "message": "Ytterligare ett klick behövs: välj din inloggningsknapp nedan för att granska Firefox kontobehörigheter och fortsätta."
+  },
+  "changelog_firefox_intro_title": {
+    "message": "Firefox nya integritetsregler"
+  },
+  "changelog_firefox_intro_body": {
+    "message": "I Firefox behöver RYD ditt tillstånd innan det kan visa ogilla-markeringar. Här är exakt vad tillståndet omfattar – och vad det inte omfattar."
+  },
+  "changelog_firefox_vote_granted": {
+    "message": "Tack. Dina röster räknas nu."
+  },
+  "vote_consent_hint": {
+    "message": "Din röst räknas inte än. Firefox kräver nu ditt tillstånd innan RYD kan skicka den. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
+  },
+  "vote_not_counted": {
+    "message": "Dina gilla och ogilla räknas inte och syns inte i antalet ogilla."
+  },
+  "vote_count_mine": {
+    "message": "Räkna mina röster"
+  },
+  "vote_consent_dismiss": {
+    "message": "Fråga inte igen"
+  },
+  "discussion_reactionConsentRequired": {
+    "message": "Aktivera röstdelning för att reagera på kommentarer. Din reaktion skickas när den har aktiverats."
+  },
+  "discussion_consentContinue": {
+    "message": "Fortsätt"
+  },
+  "counts_consent_toolbar": {
+    "message": "Öppna Return YouTube Dislike från Firefox tilläggsmeny för att fortsätta."
+  },
+  "counts_consent_declined": {
+    "message": "Antalet förblir avstängt. Du kan aktivera det här senare."
+  },
+  "counts_consent_enabled": {
+    "message": "Antalet ogilla är aktiverat."
+  },
+  "counts_consent_private": {
+    "message": "Aktivera först antalet ogilla i ett vanligt fönster. Privata fönster visar bara antalet."
+  },
+  "data_consent_reason": {
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Tillåt RYD att visa ogilla och räkna dina röster. Det här tillståndet gäller bara YouTube, inte andra webbplatser."
+  },
+  "data_consent_title": {
+    "message": "Visa ogilla och låt dina röster räknas"
+  },
+  "data_consent_body": {
+    "message": "Firefox kräver nu att alla tillägg frågar dig innan de delar någon data. Samma breda etiketter används för alla tillägg. Det här betyder varje etikett för RYD:"
+  },
+  "data_consent_scope": {
+    "message": "RYD fungerar bara på YouTube. Att tillåta detta ger inte RYD åtkomst till någon annan webbplats."
   }
 }

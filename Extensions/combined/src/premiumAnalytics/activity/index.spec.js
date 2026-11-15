@@ -308,6 +308,38 @@ describe("premiumAnalytics.activity", () => {
     expect(chartOptions.series[1].symbolSize).toBe(14);
   });
 
+  it("draws a single point without the slider's data preview", () => {
+    renderActivityChart({
+      bucket: "hour",
+      totalRangeStartUtc: "2026-10-20T14:00:00Z",
+      totalRangeEndUtc: "2026-10-20T14:00:00Z",
+      selectedRangeStartUtc: "2026-10-20T14:00:00Z",
+      selectedRangeEndUtc: "2026-11-19T14:00:00Z",
+      points: [{ timestampUtc: "2026-10-20T14:00:00Z", likes: 1, dislikes: 0 }],
+    });
+    expect(chartInstance.setOption.mock.calls.at(-1)[0].dataZoom[0].showDataShadow).toBe(false);
+
+    renderActivityChart({
+      bucket: "hour",
+      totalRangeStartUtc: "2026-10-20T14:00:00Z",
+      totalRangeEndUtc: "2026-10-20T16:00:00Z",
+      points: [
+        { timestampUtc: "2026-10-20T14:00:00Z", likes: 1, dislikes: 0 },
+        { timestampUtc: "2026-10-20T16:00:00Z", likes: 2, dislikes: 1 },
+      ],
+    });
+    expect(chartInstance.setOption.mock.calls.at(-1)[0].dataZoom[0].showDataShadow).toBe("auto");
+  });
+
+  it("hides time labels that would overlap on a narrow chart", () => {
+    renderActivityChart({
+      bucket: "hour",
+      points: [{ timestampUtc: "2026-10-20T14:00:00Z", likes: 1, dislikes: 0 }],
+    });
+
+    expect(chartInstance.setOption.mock.calls.at(-1)[0].xAxis.axisLabel).toHaveProperty("hideOverlap", true);
+  });
+
   it("derives bounds from data when range metadata is missing", () => {
     jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 1_000, max: 2_000 });
     renderActivityChart({

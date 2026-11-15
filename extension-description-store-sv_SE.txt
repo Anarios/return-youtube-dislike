@@ -1,5 +1,11 @@
 Return YouTube Dislike återställer möjligheten att se ogillningar på YouTube.
 
+Med RYD-kommentarer kan du läsa och reagera på diskussioner under videor och Shorts där YouTube-kommentarer är avstängda. Medlemmar på nivåerna Commenter och Premium kan skriva kommentarer och svar och får aviseringar om svar och gilla-markeringar.
+
+Kärnfunktionen, antalet ogillningar, är gratis för alla. Vissa valfria funktioner, som att skriva RYD-kommentarer och Premium-videoinblickar, kräver ett betalt medlemskap på Patreon eller åtkomst som behörig bidragsgivare på GitHub. De här betalda extrafunktionerna hjälper till att betala för servrarna som håller antalet ogillningar gratis: över 15 TB data och omkring 20 miljoner användare per dag, med en budget på några hundra dollar i månaden.
+
+Dina röster hjälper till att förbättra uppskattningarna. De skickas med ett slumpmässigt ID som skapas första gången du röstar eller reagerar på en kommentar och som inte är kopplat till ditt Google- eller YouTube-konto. Du kan sluta skicka röster med ”Inaktivera gilla-/ogilla-inskickningar” i tilläggets meny.
+
 Om det inte fungerar: öppna fliken Tillägg (chrome://extensions/), inaktivera detta tillägg och aktivera det igen. Detta åtgärdar de flesta problem eftersom det finns en bugg i Chromium som i vissa fall gör att tillägget slutar fungera. Förhoppningsvis åtgärdar Chromium-teamet detta snart.
 
 Från och med den 13 december 2021 tog YouTube bort möjligheten att se ogillningar från sitt API.

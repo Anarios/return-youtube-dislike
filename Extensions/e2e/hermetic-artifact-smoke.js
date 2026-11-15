@@ -1156,6 +1156,30 @@ function interactionRecordsSince(records, startIndex) {
     );
 }
 
+function assertFirstActivationRegistersOnce(records, startIndex, activationIndex, runtime) {
+  assert.equal(
+    records.slice(startIndex, activationIndex).filter((record) => record.pathname === "/puzzle/registration").length,
+    0,
+    `The ${runtime} registered a voter before the first activation.`,
+  );
+  const afterActivation = records.slice(activationIndex).filter((record) => record.method !== "OPTIONS");
+  assert.deepEqual(
+    afterActivation.map(({ method, pathname }) => [method, pathname]),
+    [
+      ["GET", "/puzzle/registration"],
+      ["POST", "/puzzle/registration"],
+      ["POST", "/interact/vote"],
+      ["POST", "/interact/confirmVote"],
+    ],
+    `The ${runtime} must register once on the first activation before submitting the vote.`,
+  );
+  const [registration, registrationConfirmation, vote] = afterActivation;
+  assert.deepEqual(registration.query, { userId: vote.body.userId });
+  assert.deepEqual(registrationConfirmation.query, registration.query);
+  assert.equal(registrationConfirmation.responseStatus, 200);
+  assert.equal(registrationConfirmation.responseBody, true);
+}
+
 function readArtifactVoteHandshake(records, startIndex, videoId, value) {
   const interactions = interactionRecordsSince(records, startIndex);
   const votes = interactions.filter((record) => record.pathname === "/interact/vote");
@@ -1390,17 +1414,7 @@ class HermeticUserscriptArtifactAdapter {
 
   async assertSpaVoteNetwork(fromVideoId, toVideoId, interactionStartIndex) {
     const stats = assertSpaStatsTraffic(this.backend, fromVideoId, toVideoId);
-    const requestsAfterActivation = this.backend.requests.slice(interactionStartIndex);
-    assert.ok(
-      requestsAfterActivation.every(
-        (record) => record.method === "POST" && ["/interact/vote", "/interact/confirmVote"].includes(record.pathname),
-      ),
-      `The userscript made unexpected requests after activation: ${JSON.stringify(
-        readSpaTraffic({
-          requests: requestsAfterActivation,
-        }),
-      )}`,
-    );
+    assertFirstActivationRegistersOnce(this.backend.requests, 0, interactionStartIndex, "userscript");
     return stats;
   }
 
@@ -1647,31 +1661,7 @@ class HermeticExtensionArtifactAdapter {
       0,
       "The extension content script bypassed its background confirmation transport.",
     );
-    const backgroundAfterActivation = this.apiServer.records
-      .slice(interactionStartIndex)
-      .filter((record) => record.method !== "OPTIONS");
-    assert.equal(
-      this.apiServer.records
-        .slice(this.apiRecordStart, interactionStartIndex)
-        .filter((record) => record.pathname === "/puzzle/registration").length,
-      0,
-      "The extension registered a voter before the first activation.",
-    );
-    assert.deepEqual(
-      backgroundAfterActivation.map(({ method, pathname }) => [method, pathname]),
-      [
-        ["GET", "/puzzle/registration"],
-        ["POST", "/puzzle/registration"],
-        ["POST", "/interact/vote"],
-        ["POST", "/interact/confirmVote"],
-      ],
-      "The first activation must register once before submitting the vote.",
-    );
-    const [registration, confirmation, vote] = backgroundAfterActivation;
-    assert.deepEqual(registration.query, { userId: vote.body.userId });
-    assert.deepEqual(confirmation.query, registration.query);
-    assert.equal(confirmation.responseStatus, 200);
-    assert.equal(confirmation.responseBody, true);
+    assertFirstActivationRegistersOnce(this.apiServer.records, this.apiRecordStart, interactionStartIndex, "extension");
     assert.equal(this.apiServer.unexpectedRequests.length, 0, "The extension made an unexpected test-server request.");
     return stats;
   }

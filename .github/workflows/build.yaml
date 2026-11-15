@@ -23,6 +23,7 @@ on:
       - "package.json"
       - "package-lock.json"
       - "scripts/check-locales*"
+      - "scripts/with-trusted-node*"
       - "playwright*.js"
       - "webpack*.js"
   pull_request:
@@ -47,19 +48,35 @@ on:
       - "package.json"
       - "package-lock.json"
       - "scripts/check-locales*"
+      - "scripts/with-trusted-node*"
       - "playwright*.js"
       - "webpack*.js"
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
+    if: github.event_name != 'pull_request' || github.event.pull_request.user.login != 'dependabot[bot]'
     runs-on: ubuntu-24.04
+    env:
+      NODE_OPTIONS: --use-openssl-ca
+      SSL_CERT_FILE: /etc/ssl/certs/ca-certificates.crt
+      SSL_CERT_DIR: /etc/ssl/certs
 
     steps:
+      - name: Update trusted certificate authorities
+        run: |
+          sudo apt-get update -o APT::Update::Error-Mode=any
+          sudo apt-get install --yes --no-install-recommends --only-upgrade ca-certificates
+          dpkg --compare-versions "$(dpkg-query -W -f='${Version}' ca-certificates)" ge 20260816ubuntu0.24.04.1
+
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: npm
@@ -98,26 +115,29 @@ jobs:
         run: npm run test:e2e:userscript:run
 
       - name: Upload Chrome artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ryd-chrome
           path: ./Extensions/combined/dist/chrome
+          retention-days: 7
 
       - name: Upload Firefox artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ryd-firefox
           path: ./Extensions/combined/dist/firefox
+          retention-days: 7
 
       - name: Upload Safari artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ryd-safari
           path: ./Extensions/combined/dist/safari
+          retention-days: 7
 
       - name: Upload Playwright failure artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: playwright-browser-failures
           path: |

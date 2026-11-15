@@ -1,9 +1,16 @@
 import { config } from "../config";
 import { getBrowser, localize } from "../utils";
+import { localizePage } from "../localize-page";
 
 const PATREON_JOIN_URL = "https://www.patreon.com/join/returnyoutubedislike/checkout?rid=8008649";
 const SUPPORT_DOC_URL = config.links?.help ?? "https://returnyoutubedislike.com/help";
 const COMMUNITY_URL = config.links?.discord ?? "https://discord.gg/mYnESY4Md5";
+const EXTERNAL_ACTIONS = {
+  "ryd-changelog-appeal-join": PATREON_JOIN_URL,
+  "ryd-changelog-upgrade": PATREON_JOIN_URL,
+  "ryd-changelog-support": SUPPORT_DOC_URL,
+  "ryd-changelog-contact": COMMUNITY_URL,
+};
 
 export function initChangelogPage() {
   if (document.readyState === "loading") {
@@ -15,7 +22,7 @@ export function initChangelogPage() {
 
 function setup() {
   applyLocaleMetadata();
-  localizeHtmlPage();
+  localizePage(localize);
   decorateScreenshotPlaceholders();
   bindActions();
 }
@@ -30,21 +37,6 @@ function applyLocaleMetadata() {
     if (direction === "rtl" || direction === "ltr") document.documentElement.dir = direction;
   } catch (error) {
     console.debug("Unable to resolve UI locale", error);
-  }
-}
-
-function localizeHtmlPage() {
-  const elements = document.getElementsByTagName("html");
-  for (let index = 0; index < elements.length; index += 1) {
-    const element = elements[index];
-    const original = element.innerHTML.toString();
-    const localized = original.replace(/__MSG_(\w+)__/g, (match, key) => {
-      return key ? localize(key) : "";
-    });
-
-    if (localized !== original) {
-      element.innerHTML = localized;
-    }
   }
 }
 
@@ -79,28 +71,10 @@ function getPlaceholderLabelKey(type) {
 
 function bindActions() {
   const browser = getBrowser();
-
-  const upgradeButton = document.getElementById("ryd-changelog-upgrade");
-  if (upgradeButton) {
-    upgradeButton.addEventListener("click", (event) => {
+  for (const [id, url] of Object.entries(EXTERNAL_ACTIONS)) {
+    document.getElementById(id)?.addEventListener("click", (event) => {
       event.preventDefault();
-      openExternal(PATREON_JOIN_URL, browser);
-    });
-  }
-
-  const supportButton = document.getElementById("ryd-changelog-support");
-  if (supportButton) {
-    supportButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      openExternal(SUPPORT_DOC_URL, browser);
-    });
-  }
-
-  const contactButton = document.getElementById("ryd-changelog-contact");
-  if (contactButton) {
-    contactButton.addEventListener("click", (event) => {
-      event.preventDefault();
-      openExternal(COMMUNITY_URL, browser);
+      openExternal(url, browser);
     });
   }
 }
