@@ -265,7 +265,11 @@ function teardownPremiumAnalytics() {
   panelViewRevision++;
   panelDismissedRevision++;
   if (panelViewStorageListener) {
-    getBrowser()?.storage?.onChanged?.removeListener(panelViewStorageListener);
+    try {
+      getBrowser()?.storage?.onChanged?.removeListener(panelViewStorageListener);
+    } catch {
+      // An invalidated extension context still needs its page resources removed.
+    }
     panelViewStorageListener = null;
   }
   themeObserver?.disconnect();

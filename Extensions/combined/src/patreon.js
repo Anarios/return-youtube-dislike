@@ -16,6 +16,7 @@ let patreonState = {
   sessionToken: null,
 };
 let premiumGeneration = 0;
+let sessionGeneration = 0;
 const COUNTS_SUPPRESSION_REASON = "counts";
 const ORPHANED_SUPPRESSION_REASON = "orphaned";
 
@@ -25,6 +26,7 @@ function removePremiumFeaturesIfOrphaned() {
   if (getBrowser()?.runtime?.id) return;
   document.removeEventListener("yt-navigate-finish", removePremiumFeaturesIfOrphaned, true);
   premiumGeneration++;
+  sessionGeneration++;
   setTeaserSuppressed(true, ORPHANED_SUPPRESSION_REASON);
   disablePremiumFeatures();
 }
@@ -35,7 +37,6 @@ function initPatreonFeatures() {
   if (usesFirefoxDataCollectionConsent()) setTeaserSuppressed(true, COUNTS_SUPPRESSION_REASON);
   initPremiumTeaser();
   if (usesFirefoxDataCollectionConsent()) enablePremiumFeatures();
-  let sessionGeneration = 0;
   const loadCachedSession = (granted, generation) => {
     if (generation !== sessionGeneration) return;
     if (!granted) {

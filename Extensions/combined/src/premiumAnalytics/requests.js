@@ -121,8 +121,8 @@ function requestAnalyticsWithConsent({ selection } = {}) {
       return response.json();
     })
     .then((data) => {
-      if (!data || !isCurrentRequest()) return;
-      renderAnalytics(data);
+      if (!data) return;
+      renderAnalytics(data, isCurrentRequest);
     })
     .catch((error) => {
       console.error("Premium analytics failed", error);

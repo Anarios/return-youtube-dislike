@@ -495,6 +495,59 @@ describe("premiumAnalytics", () => {
     expect(mockRenderSummary).toHaveBeenCalledTimes(renderCount);
   });
 
+  it("renders a current response when the sidebar returns during a delayed render", async () => {
+    jest.useFakeTimers();
+    try {
+      mockEnsurePanel.mockReturnValue(null);
+      requestAnalytics();
+      await jest.advanceTimersByTimeAsync(0);
+      expect(mockRenderSummary).not.toHaveBeenCalled();
+      expect(jest.getTimerCount()).toBe(1);
+
+      mockEnsurePanel.mockReturnValue({ querySelector: jest.fn() });
+      await jest.advanceTimersByTimeAsync(200);
+      expect(mockRenderActivityChart).toHaveBeenCalledTimes(1);
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      expect(jest.getTimerCount()).toBe(0);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it.each(["teardown", "same video", "changed range"])(
+    "ignores a delayed render after %s invalidates its request",
+    async (invalidation) => {
+      jest.useFakeTimers();
+      try {
+        mockEnsurePanel.mockReturnValue(null);
+        requestAnalytics();
+        await jest.advanceTimersByTimeAsync(0);
+        expect(mockRenderSummary).not.toHaveBeenCalled();
+        expect(jest.getTimerCount()).toBe(1);
+
+        if (invalidation === "changed range") {
+          analyticsState.currentRange = 30;
+        } else {
+          teardownPremiumAnalytics();
+          analyticsState.currentVideoId = "video1234567";
+        }
+        if (invalidation !== "teardown") requestAnalytics();
+        await jest.advanceTimersByTimeAsync(0);
+        mockEnsurePanel.mockReturnValue({ querySelector: jest.fn() });
+        mockEnsurePanel.mockClear();
+        await jest.advanceTimersByTimeAsync(200);
+
+        const currentRenders = invalidation === "teardown" ? 0 : 1;
+        expect(mockEnsurePanel).toHaveBeenCalledTimes(currentRenders);
+        expect(mockRenderActivityChart).toHaveBeenCalledTimes(currentRenders);
+        expect(mockRenderSummary).toHaveBeenCalledTimes(currentRenders);
+        expect(jest.getTimerCount()).toBe(0);
+      } finally {
+        jest.useRealTimers();
+      }
+    },
+  );
+
   it("handles error responses gracefully", async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
@@ -518,6 +571,43 @@ describe("premiumAnalytics", () => {
     expect(mockDisposeActivityChart).toHaveBeenCalled();
     expect(mockDisposeMapChart).toHaveBeenCalled();
     expect(analyticsState.initialized).toBe(false);
+  });
+
+  it("finishes page cleanup when the invalidated extension event API throws", () => {
+    mockGetVideoId.mockReturnValue(WATCH_VIDEO_ID);
+    chrome.runtime.id = "extension-id";
+    chrome.storage = {
+      sync: { get: jest.fn((_keys, callback) => callback({})) },
+      onChanged: { addListener: jest.fn(), removeListener: jest.fn() },
+    };
+    initPremiumAnalytics();
+    const panel = document.createElement("section");
+    panel.className = "ryd-premium-analytics";
+    document.body.appendChild(panel);
+    analyticsState.panelElement = panel;
+    delete chrome.runtime.id;
+    chrome.storage.onChanged.removeListener.mockImplementation(() => {
+      throw new Error("Extension context invalidated.");
+    });
+
+    expect(() => teardownPremiumAnalytics()).not.toThrow();
+    expect(panel.isConnected).toBe(false);
+    expect(analyticsState.panelElement).toBeNull();
+    expect(analyticsState.initialized).toBe(false);
+    expect(panelMocks.cancelPanelRetry).toHaveBeenCalled();
+    expect(mockDisposeActivityChart).toHaveBeenCalled();
+    expect(mockDisposeMapChart).toHaveBeenCalled();
+
+    mockEnsurePanel.mockClear();
+    mockResizeActivityChart.mockClear();
+    mockResizeMapChart.mockClear();
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+    window.dispatchEvent(new Event("resize"));
+    expect(mockEnsurePanel).not.toHaveBeenCalled();
+    expect(mockResizeActivityChart).not.toHaveBeenCalled();
+    expect(mockResizeMapChart).not.toHaveBeenCalled();
+    expect(() => teardownPremiumAnalytics()).not.toThrow();
+    expect(chrome.storage.onChanged.removeListener).toHaveBeenCalledTimes(1);
   });
 
   it("updates session state and triggers refresh", async () => {

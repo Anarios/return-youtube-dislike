@@ -39,10 +39,12 @@ const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 describe("Patreon authentication consent", () => {
   let messageListener;
   let permissionRemovedListener;
+  let documentListenerSpy;
 
   beforeEach(() => {
     isPrivateBrowsingContext.mockReturnValue(false);
     jest.clearAllMocks();
+    documentListenerSpy = jest.spyOn(document, "addEventListener");
     document.body.innerHTML = '<div class="ryd-premium-feature"></div>';
     patreonState.authenticated = false;
     patreonState.user = null;
@@ -50,6 +52,7 @@ describe("Patreon authentication consent", () => {
 
     global.chrome = {
       runtime: {
+        id: "extension-id",
         onMessage: {
           addListener: jest.fn((listener) => {
             messageListener = listener;
@@ -73,6 +76,10 @@ describe("Patreon authentication consent", () => {
   });
 
   afterEach(() => {
+    documentListenerSpy.mock.calls.forEach(([type, listener, options]) => {
+      document.removeEventListener(type, listener, options);
+    });
+    documentListenerSpy.mockRestore();
     delete global.chrome;
   });
 
@@ -135,6 +142,76 @@ describe("Patreon authentication consent", () => {
     pending.forEach((resolve) => resolve(true));
     await flushPromises();
 
+    expect(analyticsMocks.updatePremiumSession).not.toHaveBeenCalled();
+    expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
+  });
+
+  it.each([false, true])(
+    "ignores a cached session that returns after orphan teardown (Firefox consent: %s)",
+    async (firefoxConsent) => {
+      let completeRead;
+      consentMocks.usesFirefoxDataCollectionConsent.mockReturnValue(firefoxConsent);
+      consentMocks.hasAuthenticationDataPermission.mockResolvedValue(true);
+      chrome.storage.sync.get.mockImplementation((_keys, callback) => (completeRead = callback));
+      initPatreonFeatures();
+      await flushPromises();
+      expect(completeRead).toEqual(expect.any(Function));
+
+      delete chrome.runtime.id;
+      document.dispatchEvent(new Event("yt-navigate-finish"));
+      analyticsMocks.updatePremiumSession.mockClear();
+      completeRead({
+        patreonAuthenticated: true,
+        patreonUser: { hasActiveMembership: true, membershipTier: "premium" },
+        patreonSessionToken: "old-token",
+      });
+      await flushPromises();
+
+      expect(patreonState.sessionToken).toBeNull();
+      expect(analyticsMocks.updatePremiumSession).not.toHaveBeenCalled();
+      expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
+    },
+  );
+
+  it("does not read a cached session when authentication consent resolves after orphan teardown", async () => {
+    let completeConsent;
+    consentMocks.hasAuthenticationDataPermission.mockReturnValueOnce(
+      new Promise((resolve) => (completeConsent = resolve)),
+    );
+    initPatreonFeatures();
+    await flushPromises();
+
+    delete chrome.runtime.id;
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+    completeConsent(true);
+    await flushPromises();
+
+    expect(chrome.storage.sync.get).not.toHaveBeenCalled();
+    expect(patreonState.sessionToken).toBeNull();
+    expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
+  });
+
+  it("ignores a pending authenticated broadcast after orphan teardown", async () => {
+    initPatreonFeatures();
+    await flushPromises();
+    let completeConsent;
+    consentMocks.hasAuthenticationDataPermission.mockReturnValueOnce(
+      new Promise((resolve) => (completeConsent = resolve)),
+    );
+    messageListener({
+      message: "patreon_status_changed",
+      authenticated: true,
+      user: { hasActiveMembership: true, membershipTier: "premium" },
+      sessionToken: "old-token",
+    });
+
+    delete chrome.runtime.id;
+    document.dispatchEvent(new Event("yt-navigate-finish"));
+    analyticsMocks.updatePremiumSession.mockClear();
+    completeConsent(true);
+    await flushPromises();
+
+    expect(patreonState.sessionToken).toBeNull();
     expect(analyticsMocks.updatePremiumSession).not.toHaveBeenCalled();
     expect(analyticsMocks.initPremiumAnalytics).not.toHaveBeenCalled();
   });
