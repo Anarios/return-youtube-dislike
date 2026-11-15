@@ -108,7 +108,7 @@ export default {
       "In arrivo a breve. Stiamo valutando l'utilizzo di Oauth o di un altro API in sola lettura con un'estensione limitata per permettere ai creatori di condividere la verificabilità del loro conteggio di Non mi piace.",
     bullet5: "Che dati raccogliete e come sono trattati?",
     bullet5text:
-      'L\'estensione raccoglie solo i dati strettamente necessari per funzionare in modo corretto, come l\'indirizzo IP o l\'ID del video che stai guardando. I tuoi dati non verranno mai venduti a terze parti. Se vuoi sapere di più su come gestiamo la sicurezza e la privacy dai un\'occhiata al nostro <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">security FAQ</a>.',
+      'L\'estensione raccoglie solo i dati strettamente necessari per funzionare in modo corretto, come l\'indirizzo IP o l\'ID del video che stai guardando. I tuoi dati non verranno mai venduti a terze parti. Se vuoi sapere di più su come gestiamo la sicurezza e la privacy dai un\'occhiata al nostro <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQit.md">domande frequenti sulla sicurezza</a>.',
     bullet6: "Come funziona l'API/backend?",
     bullet6text:
       "Il backend utilizza dati archiviati da quando l'API di YouTube restituiva ancora il numero di Non mi piace e dati sui Mi Piace/Non mi piace estrapolati dall'utilizzo dell'estensione da parte degli utenti. Nel prossimo futuro permetteremo ai creatori di contenuti di presentare il loro numero di Non mi piace in modo semplice e sicuro e aggiungeremo i dati archiviati da ArchiveTeam (4,56 miliardi di video) al nostro database corrente. Puoi anche guardare un video a riguardo.",

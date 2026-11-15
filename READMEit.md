@@ -28,7 +28,7 @@ Inoltre, il campo `dislike` nell'API di YouTube è stato [rimosso](https://suppo
 
 Con la rimozione delle statistiche dei non mi piace dall'API di YouTube, il nostro backend è passato all'utilizzo di una combinazione di statistiche estratte tramite scraping e stime estrapolate dai dati degli utenti dell'estensione.
 
-[FAQ](Docs/FAQ.md)
+[FAQ](Docs/FAQit.md)
 
 ## Perché è importante
 
