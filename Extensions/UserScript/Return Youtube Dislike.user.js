@@ -32,8 +32,8 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 26:
-/***/ ((module) => {
+/***/ 110
+(module) {
 
 const LIKED_STATE = "LIKED_STATE";
 const DISLIKED_STATE = "DISLIKED_STATE";
@@ -94,22 +94,22 @@ module.exports = {
 };
 
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
 /******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
+/******/ 	const __webpack_module_cache__ = {};
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		const cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 		const module = __webpack_module_cache__[moduleId] = {
 /******/ 			// no module.id needed
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
@@ -123,12 +123,16 @@ module.exports = {
 /******/ 	}
 /******/
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
 
-;// CONCATENATED MODULE: ./Extensions/common/vote-client.js
+// EXTERNAL MODULE: ./Extensions/common/vote-transition-core.js
+var vote_transition_core_namespaceFn = () => {
+	return __webpack_require__(110);
+};
+
+;// ./Extensions/common/vote-client.js
 const DEFAULT_API_BASE_URL = "https://returnyoutubedislikeapi.com";
 const USER_ID_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 const VALID_VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
@@ -452,7 +456,7 @@ function createVoteClient({
 
 
 
-;// CONCATENATED MODULE: ./Extensions/common/delegated-vote-activation.js
+;// ./Extensions/common/delegated-vote-activation.js
 function defaultGetActivationTarget(control) {
   if (control?.matches?.("button, tp-yt-paper-button#button")) {
     return control;
@@ -527,7 +531,7 @@ function resolveDelegatedVoteActivation({
 
 
 
-;// CONCATENATED MODULE: ./Extensions/common/live-video-id.js
+;// ./Extensions/common/live-video-id.js
 const LIVE_VIDEO_PATHNAME = /^\/live\/([A-Za-z0-9_-]{11})\/?$/;
 const CHANNEL_LIVE_PATHNAME = /^\/(?:@[^/]+|c\/[^/]+|channel\/[^/]+|user\/[^/]+)\/live\/?$/;
 const VISIBLE_WATCH_ROOT_SELECTOR = "ytd-watch-flexy:not([hidden]), ytd-watch-grid:not([hidden])";
@@ -549,7 +553,7 @@ function getLiveVideoId(pathname) {
 
 
 
-;// CONCATENATED MODULE: ./Extensions/common/color-themes.js
+;// ./Extensions/common/color-themes.js
 const DEFAULT_CUSTOM_COLORS = Object.freeze({
   light: Object.freeze({ like: "#007600", dislike: "#b300b3" }),
   dark: Object.freeze({ like: "#00d000", dislike: "#ff77ff" }),
@@ -606,7 +610,7 @@ function observeYouTubeTheme(onChange, ownerDocument = document) {
 
 
 
-;// CONCATENATED MODULE: ./Extensions/common/shorts-control-readiness.js
+;// ./Extensions/common/shorts-control-readiness.js
 const SHORTS_HYDRATED_SURFACE_STABILITY_MS = 250;
 const SHORTS_UNHYDRATED_SURFACE_STABILITY_MS = 1500;
 const SHORTS_LINK_SELECTOR = "a[href*='/shorts/']";
@@ -765,7 +769,7 @@ function shortsNativeControlInventoryIsReadyForFallback(
 
 
 
-;// CONCATENATED MODULE: ./Extensions/common/vote-transition.js
+;// ./Extensions/common/vote-transition.js
 const {
   DISLIKED_STATE,
   DISLIKE_ACTION,
@@ -775,11 +779,11 @@ const {
   applyVoteTransitionCounts,
   resolveVoteTransition,
   shouldSubmitVote,
-} = __webpack_require__(26);
+} = (vote_transition_core_namespaceFn());
 
 
 
-;// CONCATENATED MODULE: ./Extensions/UserScript/src/gm-credential-store.js
+;// ./Extensions/UserScript/src/gm-credential-store.js
 const CREDENTIALS_KEY = "rydVoteCredentials";
 
 function hasModernMethod(name) {
@@ -852,7 +856,7 @@ function createGmCredentialStore() {
 
 
 
-;// CONCATENATED MODULE: ./Extensions/UserScript/src/gm-synthetic-dislike-store.js
+;// ./Extensions/UserScript/src/gm-synthetic-dislike-store.js
 const SYNTHETIC_DISLIKE_KEY_PREFIX = "rydSyntheticDislikedShort:";
 
 // Each currently disliked Short owns one independent key. Deliberately do not
@@ -941,9 +945,9 @@ function createGmSyntheticDislikeStore() {
 
 
 
-;// CONCATENATED MODULE: ./Extensions/UserScript/userscript-version.json
+;// ./Extensions/UserScript/userscript-version.json
 const userscript_version_namespaceObject = "3.2.2";
-;// CONCATENATED MODULE: ./Extensions/UserScript/src/userscript-entry.js
+;// ./Extensions/UserScript/src/userscript-entry.js
 
 
 
@@ -954,7 +958,8 @@ const userscript_version_namespaceObject = "3.2.2";
 
 
 
-if (false) {}
+if (false) // removed by dead control flow
+{}
 
 const API_BASE_URL = "https://returnyoutubedislikeapi.com";
 const fetchImpl = globalThis.fetch.bind(globalThis);
