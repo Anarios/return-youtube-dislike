@@ -1,4 +1,4 @@
-import { sk } from "vuetify/src/locale";
+import { sk } from "vuetify/locale";
 // By Radoslav Ďurač
 export default {
   ...sk,
@@ -108,9 +108,9 @@ export default {
     bullet6: "Ako funguje API/Backend?",
     bullet6text:
       "Backend používa archivované dáta z obdobia, keď rozhranie YouTube ešte vracalo počet označení „Nepáči sa mi“, pozitívne a negatívne hodnotenia používateľov rozšírenia a extrapoláciu. V blízkej budúcnosti umožníme tvorcom obsahu jednoducho a bezpečne odosielať počty označení „Nepáči sa mi“ pri svojich videách a do našej súčasnej databázy pridáme archivované dáta ArchiveTeamu (4,56 miliardy videí). Môžete si tiež pozrieť video na túto tému.",
-    bullet7: "Prečo sa namiesto počtu označení „Nepáči sa mi“ zobrazuje 'DISLIKES DISABLED'?",
+    bullet7: "Prečo sa namiesto počtu označení „Nepáči sa mi“ zobrazuje 'zakázané majiteľom'?",
     bullet7text:
-      "Niekedy sa pri nedávno nahranom videu môže zobraziť 'DISLIKES DISABLED' (hodnotenie „Nepáči sa mi“ je vypnuté), aj keď ho tvorca nevypol, čo je spôsobené tým, ako zisťujeme, či je toto hodnotenie vypnuté. Malo by to samo zmiznúť počas niekoľkých hodín alebo, dúfajme, tým, že pri videu kliknete na „Páči sa mi“ alebo „Nepáči sa mi“ a obnovíte stránku.",
+      "Niekedy sa pri nedávno nahranom videu môže zobraziť 'zakázané majiteľom' (hodnotenie „Nepáči sa mi“ je vypnuté), aj keď ho tvorca nevypol, čo je spôsobené tým, ako zisťujeme, či je toto hodnotenie vypnuté. Malo by to samo zmiznúť počas niekoľkých hodín alebo, dúfajme, tým, že pri videu kliknete na „Páči sa mi“ alebo „Nepáči sa mi“ a obnovíte stránku.",
   },
   donate: {
     name: "Prispieť",

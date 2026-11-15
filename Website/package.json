@@ -2,28 +2,38 @@
   "name": "return-youtube-dislike-site",
   "version": "1.1.0",
   "private": true,
+  "type": "module",
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": "22.23.4",
+    "npm": "10.8.2"
+  },
   "scripts": {
-    "dev": "node --openssl-legacy-provider node_modules/nuxt/bin/nuxt.js",
+    "dev": "node scripts/dev.mjs",
     "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "node --openssl-legacy-provider node_modules/nuxt/bin/nuxt.js generate",
-    "lint": "eslint --fix --ext .js,.vue --ignore-path .eslintignore ."
+    "start": "node scripts/start.mjs",
+    "generate": "nuxt generate",
+    "lint": "eslint --fix ."
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.13.6",
-    "core-js": "^3.50.0",
-    "nuxt": "^2.15.7",
-    "nuxt-user-agent": "^1.2.2",
-    "vuetify": "^2.5.5"
+    "@fontsource/roboto": "5.3.0",
+    "@mdi/font": "6.9.96",
+    "nuxt": "4.6.4",
+    "srvx": "1.0.8",
+    "vue": "3.5.45",
+    "vue-router": "5.5.1",
+    "vuetify": "4.3.3",
+    "woothee": "1.11.1"
   },
   "devDependencies": {
-    "@nuxtjs/vuetify": "^1.12.3",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-loader": "^4.0.2",
-    "eslint-plugin-prettier": "^4.2.5",
-    "eslint-plugin-vue": "^8.2.0",
-    "prettier": "^2.5.1"
+    "@eslint/js": "10.0.1",
+    "eslint": "10.15.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.7",
+    "eslint-plugin-vue": "10.12.1",
+    "globals": "17.14.0",
+    "prettier": "3.10.1",
+    "vite-plugin-vuetify": "2.1.3",
+    "vue-eslint-parser": "10.4.2"
   }
 }

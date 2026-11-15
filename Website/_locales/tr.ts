@@ -1,4 +1,4 @@
-﻿import { tr } from "vuetify/src/locale";
+import { tr } from "vuetify/locale";
 // By Batuhan Kara & İlyas Zan
 export default {
   ...tr,
@@ -109,19 +109,19 @@ export default {
       "Şu anda dislike durumları önbelleğe alınır ve çok sık güncellenmez. Bir videonun popülerliğine bağlı olarak değişir ancak güncellenmesi birkaç saat ilâ birkaç gün sürebilir.",
     bullet3: "Bu nasıl çalışıyor?",
     bullet3text:
-      "Uzantı, izlediğiniz videonun ID'sini alır, API'miz üzerinden dislike sayılarınızı geri getirir (aynı zamanda görüntülenmenizi, like'ınızı vb. diğer alanları da). Uzantı daha sonra sayfada dislike sayısını ve oranını görüntüler. Bir videoya like veya dislike atarsanız bu kaydedilir ve veri tabanına gönderilir, böylece doğru dislike sayısını tahmin edebilir.",
+      "Uzantı, izlediğiniz videonun ID'sini toplar ve API'miz üzerinden videonun dislike sayısını (ayrıca görüntülenme ve like sayıları gibi diğer bilgileri) alır. Ardından sayfada dislike sayısını ve oranını gösterir. Bir videoya like veya dislike verirseniz, verdiğiniz oy kaydedilir ve doğru dislike sayısının tahmin edilebilmesi için veri tabanına gönderilir.",
     bullet4: "Dislike sayımı sizinle paylaşabilir miyim?",
     bullet4text:
       "Çok yakında evet. İçerik üreticilerinin dislike sayıları için doğrulanabilirliğini paylaşabilmeleri amacıyla Oauth ya da sınırlı bir kapsamda farklı bir salt okunur API kullanmayı düşünüyoruz.",
     bullet5: "Hangi verileri topluyorsunuz ve bunlar nasıl işleniyor?",
     bullet5text:
-      "Uzantı, yalnızca izlediğiniz videonun IP adresi veya videonun ID'si gibi düzgün çalışması için kesinlikle gerekli olan verileri toplar. Verileriniz asla 3. taraflara satılmayacaktır. Güvenliği ve gizliliği nasıl ele aldığımız hakkında daha fazla bilgi için <a href=\"https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md\">security FAQ</a>'ya gidin.",
+      "Uzantı, yalnızca IP adresiniz veya izlediğiniz videonun ID'si gibi düzgün çalışması için kesinlikle gerekli olan verileri toplar. Verileriniz asla 3. taraflara satılmayacaktır. Güvenliği ve gizliliği nasıl ele aldığımız hakkında daha fazla bilgi için <a href=\"https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md\">güvenlikle ilgili sıkça sorulan sorulara</a> bakın.",
     bullet6: "API/Backend nasıl çalışıyor?",
     bullet6text:
-      "Yazılım, YouTube API'sinin dislike sayısını ve uzantı kullanıcılarının like/dislike sayısı sonuçların genişletilmesinin döndürmeye devam ettiği zamana ait arşivlenmiş verileri kullanır. Yakın zamanda içerik üreticilerin dislike sayısını kolay ve güvenli bir şekilde göndermelerine izin vereceğiz ve ArchiveTeam'in arşivlenmiş verilerini (4,56 milyar video) veri tabanımıza ekleyeceğiz. Ayrıca konu ile ilgili videoyu da izleyebilirsiniz.",
-    bullet7: "Dislike sayısı neden 'DISLIKE'LAR KAPALI' olarak gözüküyor?",
+      "Sunucu tarafı, YouTube API'sinin hâlâ dislike sayısını döndürdüğü dönemden arşivlenmiş verileri, uzantı kullanıcılarının like/dislike sayılarını ve ekstrapolasyonu kullanır. Yakın gelecekte içerik üreticilerinin dislike sayılarını kolay ve güvenli bir şekilde göndermelerine olanak sağlayacağız ve ArchiveTeam'in arşivlenmiş verilerini (4,56 milyar video) mevcut veri tabanımıza ekleyeceğiz. Ayrıca konuyla ilgili bir video da izleyebilirsiniz.",
+    bullet7: "Dislike sayısı neden 'Sahibi Tarafından Devre Dışı Bırakıldı' olarak gözüküyor?",
     bullet7text:
-      "Yazma sırasında like ve dislike sayısını devre dışı bırakan videoların dislike sayılarını göstermiyoruz. Uzantı, bu videolar için 'DISLIKE'LAR KAPALI' mesajını görüntüler. Yakında tüm videolarda dislike sayısını göstereceğiz. Bu, yalnızca geçici bir çözümdür. Bu nedenle insanlar uzantının bozuk olduğunu düşünmez (zaten iyi çalışmıyor). Bazen yakın zamanda yüklenen bir videoda, içerik üreticisi onu devre dışı bırakmamış olsa bile 'DISLIKE'LAR KAPALI' olarak gözükebilir. Bunun nedeni, dislike sayısını devre dışı bırakıp bırakmadığını tespit etmemizdir. Birkaç saat içinde videoyu like ya da dislike atarsanız veya sayfayı yenilerseniz kaybolması gerekir (umarız).",
+      "Bazen yeni yüklenen bir videoda, içerik üreticisi dislike sayısını devre dışı bırakmamış olsa bile bu mesaj görünebilir. Bu durum, dislike sayısının devre dışı olup olmadığını tespit etme yöntemimizden kaynaklanır. Birkaç saat içinde ya da videoya like veya dislike verip sayfayı yeniledikten sonra ortadan kalkması beklenir (umarız).",
   },
   donate: {
     name: "Bağış Yap",

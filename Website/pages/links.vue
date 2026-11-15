@@ -1,25 +1,25 @@
 <template>
   <div class="pt-12">
     <h1 class="title-text">
-      {{ $vuetify.lang.t("$vuetify.links.title") }}
+      {{ t("$vuetify.links.title") }}
     </h1>
 
     <p style="color: #9999; margin-top: 0.5rem; margin-bottom: 1rem">
-      {{ $vuetify.lang.t("$vuetify.links.subtitle") }}
+      {{ t("$vuetify.links.subtitle") }}
     </p>
 
     <v-btn class="mainAltButton" :href="githubLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-github</v-icon>
-      {{ $vuetify.lang.t("$vuetify.links.github") }}
+      {{ t("$vuetify.links.github") }}
     </v-btn>
 
     <v-btn class="mainAltButton" :href="discordLink" target="_blank">
       <v-icon style="margin-right: 0.5em">mdi-discord</v-icon>
-      {{ $vuetify.lang.t("$vuetify.links.discord") }}
+      {{ t("$vuetify.links.discord") }}
     </v-btn>
 
     <h1 style="margin-top: 1em">
-      {{ $vuetify.lang.t("$vuetify.links.contact") }}
+      {{ t("$vuetify.links.contact") }}
     </h1>
 
     <v-icon style="margin-right: 0.5em">mdi-email</v-icon>
@@ -33,9 +33,9 @@
       <a class="attr-link" href="https://github.com/PickleNik" target="_blank"> PickleNik#0864 </a>
     </p>
     <!-- Translators -->
-    <div style="color: #555; width: 250px" class="my-8">
-      <b class="white--text">
-        {{ $vuetify.lang.t("$vuetify.links.translators") }}
+    <div style="color: #555; width: 250px; max-width: 100%" class="my-8 mx-auto">
+      <b class="text-white">
+        {{ t("$vuetify.links.translators") }}
       </b>
       <br />
       <div v-for="translator in translators" :key="translator.tag" class="d-flex">
@@ -43,33 +43,30 @@
       </div>
     </div>
     <!-- Cool Projects -->
-    <div style="color: #555; width: 400px">
-      <b class="white--text">
-        {{ $vuetify.lang.t("$vuetify.links.coolProjects") }}
+    <div style="color: #555; width: 400px; max-width: 100%" class="mx-auto">
+      <b class="text-white">
+        {{ t("$vuetify.links.coolProjects") }}
       </b>
       <br />
       <div v-for="project in coolProjects" :key="project.url" class="d-flex justify-center">
-        <a class="attr-link" :href="project.url" target="_blank"
-          >{{ project.name }} - {{ $vuetify.lang.t(project.description) }}
-        </a>
+        <a class="attr-link" :href="project.url" target="_blank">{{ project.name }} - {{ t(project.description) }} </a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { useLocale } from "vuetify";
+
 export default {
-  transition(to, from) {
-    if (!from) return "swoop-in";
-    let routes = ["index", "install", "docs", "help", "faq", "donate", "links"];
-    if (routes.indexOf(to.name) < 0) return "swoop-out";
-    if (routes.indexOf(from.name) < 0) return "swoop-in";
-    return routes.indexOf(to.name) > routes.indexOf(from.name) ? "swoop-left" : "swoop-right";
+  setup() {
+    const { t } = useLocale();
+    return { t };
   },
   data: () => ({
     githubLink: "https://github.com/Anarios/return-youtube-dislike",
     discordLink: "https://discord.gg/mYnESY4Md5",
-    emailLink: "mailto:selivano.d@gmail.com ",
+    emailLink: "mailto:selivano.d@gmail.com",
     translators: [
       {
         tag: "alexuspromago#9473",

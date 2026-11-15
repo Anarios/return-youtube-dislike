@@ -1,4 +1,4 @@
-import { hu } from 'vuetify/src/locale';
+import { hu } from 'vuetify/locale';
 // By Gergely Pap
 export default {
     ...hu,
@@ -112,13 +112,13 @@ export default {
             'Hamarosan. Vizsáljuk egy Oauth vagy hasonló, csak olvasható, korlátozott API használatának lehetőségét, hogy a tartalomkészítők a valós dislike számaikat is meg tudják osztani.',
         bullet5: 'Milyen adatot gyűjtötök és hogyan kezelitek azokat?',
         bullet5text:
-            'A bővítmény csak olyan adatot gyűjt, ami a megfelelő működéshez nélkülözhetetlen, ilyen az IP cím és az éppen megtekintett videó ID-ja. Soha, semmilyen adatot nem adunk el harmadik fél számára. Ha szeretnél többet megtudni az adatkezelésünkről és a biztonságról, nézd meg a <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">Security GYIK-et</a>!',
+            'A bővítmény csak olyan adatot gyűjt, ami a megfelelő működéshez nélkülözhetetlen, ilyen az IP cím és az éppen megtekintett videó ID-ja. Soha, semmilyen adatot nem adunk el harmadik fél számára. Ha szeretnél többet megtudni az adatkezelésünkről és a biztonságról, nézd meg a <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">biztonsági GYIK-et</a>!',
         bullet6: 'Hogyan működik az API/Backend?',
         bullet6text:
             'A backend a YouTube API változása előtt archivált adatokat és a bővítményt használók like/dislike adatait használja fel egy extrapolált értékhez. Hamarosan támogatni fogjuk, hogy a tartalomkészítők könnyen és biztonságosan beküldhessék a pontos dislike számaikat, illetve az ArchiveTeam által archivált (4,56 milliárd videót tartalmazó) adathalmazt is felvisszük az adatbázisunkba. Erről egy videót is megtekinthetsz.',
-        bullet7: "Miért mutatja a számláló, hogy 'DISLIKES DISABLED'?",
+        bullet7: "Miért mutatja a számláló, hogy 'tulajdonos által kikapcsolva'?",
         bullet7text:
-            "Egy nemrég feltöltött videónál néha előfordulhat a 'DISLIKES DISABLED' üzenet akkor is, ha a készítője nem kapcsolta ki azt. Ennek köze van ahhoz, ahogyan a kikapcsolt dislike-okat ellenőrizzük, de pár órán belül el kell tűnnie, vagy ha nem, like-olás vagy dislike-olás utáni oldalfrissítésre (remélhetőleg).",
+            "Egy nemrég feltöltött videónál néha előfordulhat a 'tulajdonos által kikapcsolva' üzenet akkor is, ha a készítője nem kapcsolta ki azt. Ennek köze van ahhoz, ahogyan a kikapcsolt dislike-okat ellenőrizzük, de pár órán belül el kell tűnnie, vagy ha nem, like-olás vagy dislike-olás utáni oldalfrissítésre (remélhetőleg).",
     },
     donate: {
         name: 'Támogatás',

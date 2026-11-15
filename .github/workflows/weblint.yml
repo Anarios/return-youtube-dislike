@@ -50,6 +50,9 @@ jobs:
           cache: npm
           cache-dependency-path: Website/package-lock.json
 
+      - name: Use pinned npm
+        run: npm install --global npm@10.8.2
+
       - name: Install dependencies
         run: npm ci
         working-directory: Website
@@ -60,3 +63,11 @@ jobs:
 
       - name: Check website locales
         run: node scripts/check-locales.js --website
+
+      - name: Build website server
+        run: npm run build
+        working-directory: Website
+
+      - name: Generate static website
+        run: npm run generate
+        working-directory: Website

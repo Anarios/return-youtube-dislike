@@ -23,4 +23,4 @@ function writeLocalePreference(storage, browserLocale, locale, supportedLocales)
   return resolvedLocale;
 }
 
-module.exports = { resolveLocale, readLocalePreference, writeLocalePreference };
+export { resolveLocale, readLocalePreference, writeLocalePreference };

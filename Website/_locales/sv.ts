@@ -1,4 +1,4 @@
-import { sv } from "vuetify/src/locale";
+import { sv } from "vuetify/locale";
 
 export default {
   ...sv,
@@ -106,19 +106,19 @@ export default {
       "Just nu cachelagras ogilla för videoklipp och de uppdateras inte särskilt ofta. Det varierar beroende på en videos popularitet, men det kan ta allt från några timmar till några dagar att uppdatera.",
     bullet3: "Hur fungerar detta?",
     bullet3text:
-      "Tillägget samlar in video-ID:t för videon du tittar på och hämtar ogilla (and other fields like views, likes etc) med hjälp av vårt API. Tillägget visar sedan antalet ogilla och förhållandet på sidan. Om du gillar eller ogillar en video, spelas det in och skickas till databasen så att ett korrekt antal ogilla kan extrapoleras.",
+      "Tillägget samlar in video-ID:t för videon du tittar på och hämtar antalet ogilla-markeringar (och andra uppgifter som visningar, gilla-markeringar osv.) med hjälp av vårt API. Tillägget visar sedan antalet ogilla-markeringar och förhållandet mellan gilla- och ogilla-markeringar på sidan. Om du gillar eller ogillar en video registreras din röst och skickas till databasen så att antalet ogilla-markeringar kan uppskattas så noggrant som möjligt genom extrapolering.",
     bullet4: "Kan jag dela mina antalet ogilla med dig?",
     bullet4text:
-      "Kommer snart. Vi tittar på att använda Oauth eller ett annat skrivskyddat API med ett begränsat omfång så att kreatörer kan dela med sig av verifierbarheten av sina antal ogilla.",
+      "Kommer snart. Vi tittar på att använda OAuth eller ett annat skrivskyddat API med ett begränsat omfång så att kreatörer kan dela antalet ogilla-markeringar på ett verifierbart sätt.",
     bullet5: "Vilken data samlar du in och hur behandlas den?",
     bullet5text:
       'Tillägget samlar bara in data som är absolut nödvändig för att den ska fungera korrekt, som IP-adressen eller ID:t på videon du tittar på. Inga uppgifter kommer någonsin att säljas till tredjepart. Om du vill veta mer om hur vi hanterar säkerhet och integritet läs då vår <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQ.md">vanliga frågor om säkerhet</a>.',
     bullet6: "Hur fungerar API/Backend?",
     bullet6text:
-      "Backend använder arkiverad data från när YouTubes API fortfarande returnerade antalet ogilla. Inom en snar framtid kommer vi att tillåta innehållsskapare att enkelt och säkert skicka in sina ogilla och vi kommer att lägga till ArchiveTeams arkiverade data (4,56 miljarder videor) i vår nuvarande databas. Du kan också se en video om ämnet.",
-    bullet7: "Varför visar antalet ogilla 'OGILLA ÄR INAKTIVERAT'?",
+      "Backend använder arkiverade data från när YouTubes API fortfarande returnerade antalet ogilla-markeringar, tilläggsanvändarnas gilla- och ogilla-markeringar samt extrapolering. Inom en snar framtid kommer vi att låta innehållsskapare enkelt och säkert skicka in antalet ogilla-markeringar och vi kommer att lägga till ArchiveTeams arkiverade data (4,56 miljarder videor) i vår nuvarande databas. Du kan också se en video om ämnet.",
+    bullet7: "Varför visar antalet ogilla 'Inaktiverad av ägaren'?",
     bullet7text:
-      "I bland kan en nyligen uppladdad video visa 'OGILLA ÄR INAKTIVERAT' även om ägaren inte har inaktiverat den. Detta beror på hur informationen om ogilla är inaktiverat hämtas ut. Det bör försvinna inom några timmar eller genom att gilla eller ogilla videon och uppdatera sidan (förhoppningsvis).",
+      "Ibland kan en nyligen uppladdad video visa 'Inaktiverad av ägaren' även om ägaren inte har inaktiverat den. Detta beror på hur informationen om ogilla är inaktiverat hämtas ut. Det bör försvinna inom några timmar eller genom att gilla eller ogilla videon och uppdatera sidan (förhoppningsvis).",
   },
   donate: {
     name: "Donera",

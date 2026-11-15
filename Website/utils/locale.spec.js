@@ -1,4 +1,3 @@
-/* eslint-env jest */
 const { readLocalePreference, resolveLocale, writeLocalePreference } = require("./locale");
 
 const supportedLocales = ["en", "es", "it-IT", "pt_BR", "az", "nl", "sv", "hu"];
@@ -42,7 +41,7 @@ describe("website locale preferences", () => {
 
   test.each(["pt_BR", "pt-BR", "it-IT", "es"])("preserves a supported saved choice %s", (locale) => {
     expect(readLocalePreference(createStorage({ locale }), "nl-NL", supportedLocales)).toBe(
-      resolveLocale(locale, supportedLocales)
+      resolveLocale(locale, supportedLocales),
     );
   });
 

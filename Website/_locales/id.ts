@@ -1,4 +1,4 @@
-import { id } from "vuetify/src/locale";
+import { id } from "vuetify/locale";
 
 export default {
   ...id,
@@ -105,16 +105,16 @@ export default {
       "Extension mengumpulkan id dari video yang sedang ditonton, mengambil data dislike (dan lainnya seperti jumlah views, likes, dll) menggunakan API kami. Lalu extension akan menampilkan jumlah dislike dan rasio pada halaman. Jika kamu melakukan like atau dislike pada suatu video, datanya disimpan ke database sehingga data dislike yang lebih akurat akan dapat diperkirakan.",
     bullet4: "Bisakah saya membagikan jumlah dislike saya kepada kalian?",
     bullet4text:
-      "Nanti. Kami sedang mencari tahu Oauth atau perbedaan antara API yang hanya bisa dibaca dengan scope terbatas sehingga pada creator bisa membagikan jumlah dislike mereka yang terverifikasi.",
+      "Segera hadir. Kami sedang mempertimbangkan penggunaan OAuth atau API lain yang hanya bisa dibaca dengan cakupan akses terbatas agar kreator dapat membagikan jumlah dislike mereka secara terverifikasi.",
     bullet5: "Data apa saja yang kalian ambil dan apa yang terjadi kepada data tersebut?",
     bullet5text:
       'Extension hanya mengambil data yang diperlukan untuk berjalan seperti seharusnya, seperti alamat IP atau id dari video yang sedang ditonton. Tidak ada satupun data yang akan dijual ke pihak ketiga. Jika kamu mau tahu lebih lanjut bagaimana kami menangani keamanan dan privasi, tolong cek <a href="https://github.com/Anarios/return-youtube-dislike/blob/main/Docs/SECURITY-FAQid.md">pertanyaan mengenai keamanan</a>.',
     bullet6: "Bagaimana cara kerja API/backend?",
     bullet6text:
       "Backend menggunakan data arsip ketika Youtube masih memberikan data jumlah dislike, jumlah like/dislike dari pengguna extension, dan perkiraan. Pada waktu dekat kami akan mengizinkan creator untuk mengirimkan data jumlah dislike mereka secara mudah dan aman dan kami akan menambahkan data arsip dari ArchiveTeam (4.56 miliar video) kepada database kami. Kamu juga dapat melihat video pada topik.",
-    bullet7: "Mengapa jumlah dislike memunculkan kata 'DISLIKES DISABLED'?",
+    bullet7: "Mengapa jumlah dislike memunculkan kata 'Dimatikan oleh Pemilik'?",
     bullet7text:
-      "Kadang-kadang video yang baru saja diupload akan memunculkan 'DISLIKES DISABLED' walaupun creatornya belum mematikannya. ini dikarenakan bagaimana cara kami melakukan pengecekan terhadap dislike yang dimatikan, ini akan hilang dalam beberapa jam atau dengan cara memberi like/dislike kepada video tersebut dan merefresh halamannya (semoga saja berhasil).",
+      "Terkadang video yang baru diunggah dapat menampilkan pesan ini meskipun pembuatnya tidak menonaktifkan jumlah tidak suka. Hal ini disebabkan oleh cara kami mendeteksi apakah jumlah tidak suka dinonaktifkan. Semoga pesan ini hilang setelah beberapa jam atau setelah kamu memberi suka atau tidak suka pada video tersebut lalu memuat ulang halaman.",
   },
   donate: {
     name: "Donasi",
