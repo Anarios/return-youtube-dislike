@@ -77,7 +77,7 @@ https://returnyoutubedislikeapi.com/swagger/index.html
 
 ## 貢獻
 
-請閱讀[貢獻指南（簡體中文）](https://github.com/Anarios/return-youtube-dislike/blob/main/CONTRIBUTINGcn.md)。
+請閱讀[貢獻指南](CONTRIBUTINGtw.md)。
 
 ## 支持本專案！
 
