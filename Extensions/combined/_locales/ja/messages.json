@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "投票 ID は投票やリアクションを行ったときにのみ送信します。コメントに対するあなたのリアクションは、この端末に記憶されます。"
   },
+  "popup_saved_account_unverified": {
+    "message": "保存済みのアカウントを確認できませんでした。ポップアップを開き直して、もう一度お試しください。"
+  },
   "popup_signin_next_click": {
     "message": "もう一度クリックする必要があります。下のログインボタンを選択し、Firefox のアカウント権限を確認して続行してください。"
   },

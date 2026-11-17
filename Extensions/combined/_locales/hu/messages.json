@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "A szavazási azonosítódat csak szavazáskor vagy reagáláskor küldjük el. A saját hozzászólásreakcióidat ezen az eszközön jegyezzük meg."
   },
+  "popup_saved_account_unverified": {
+    "message": "Nem sikerült ellenőrizni a mentett fiókodat. Nyisd meg újra a felugró ablakot az újabb próbálkozáshoz."
+  },
   "popup_signin_next_click": {
     "message": "Még egy kattintás szükséges: alább válaszd ki a bejelentkezési gombot a Firefox fiókengedélyeinek áttekintéséhez és a folytatáshoz."
   },

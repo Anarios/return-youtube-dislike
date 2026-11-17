@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Je stem-ID wordt alleen verstuurd als je stemt of reageert. Je eigen reacties op opmerkingen worden op dit apparaat onthouden."
   },
+  "popup_saved_account_unverified": {
+    "message": "We konden je opgeslagen account niet verifiëren. Open het pop-upvenster opnieuw om het nog eens te proberen."
+  },
   "popup_signin_next_click": {
     "message": "Nog één klik nodig: kies hieronder je aanmeldknop om de accountmachtigingen van Firefox te bekijken en door te gaan."
   },

@@ -266,7 +266,8 @@ button {
   background: var(--ryd-surface);
 }
 
-#signin-next-click {
+#signin-next-click,
+#patreon-suspended-status {
   margin-bottom: 12px;
   padding: 8px 12px;
   border: 1px solid var(--ryd-accent-line);

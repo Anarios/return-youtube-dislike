@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Seu ID de votação só é enviado quando você vota ou reage. Suas próprias reações a comentários são lembradas neste dispositivo."
   },
+  "popup_saved_account_unverified": {
+    "message": "Não conseguimos verificar sua conta salva. Reabra a janela da extensão para tentar novamente."
+  },
   "popup_signin_next_click": {
     "message": "É necessário mais um clique: selecione seu botão de login abaixo para revisar as permissões de conta do Firefox e continuar."
   },

@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Oylama kimliğiniz yalnızca oy verdiğinizde veya tepki gösterdiğinizde gönderilir. Yorumlara kendi tepkileriniz bu cihazda hatırlanır."
   },
+  "popup_saved_account_unverified": {
+    "message": "Kayıtlı hesabınızı doğrulayamadık. Tekrar denemek için açılır pencereyi yeniden açın."
+  },
   "popup_signin_next_click": {
     "message": "Bir tıklama daha gerekli: Firefox’un hesap izinlerini inceleyip devam etmek için aşağıdaki giriş düğmenizi seçin."
   },

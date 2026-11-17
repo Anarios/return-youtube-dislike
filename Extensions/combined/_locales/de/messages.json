@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Deine Abstimmungs-ID wird nur beim Abstimmen oder Reagieren gesendet. Deine eigenen Kommentarreaktionen werden auf diesem Gerät gespeichert."
   },
+  "popup_saved_account_unverified": {
+    "message": "Dein gespeichertes Konto konnte nicht überprüft werden. Öffne das Popup erneut, um es noch einmal zu versuchen."
+  },
   "popup_signin_next_click": {
     "message": "Ein weiterer Klick ist nötig: Wähle unten deine Anmeldeschaltfläche, um die Kontoberechtigungen von Firefox zu prüfen und fortzufahren."
   },

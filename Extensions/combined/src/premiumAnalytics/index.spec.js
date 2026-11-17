@@ -70,7 +70,6 @@ jest.mock("./utils", () => {
   return {
     __esModule: true,
     ...actual,
-    debounce: jest.fn((fn) => fn),
     safeJson: jest.fn(async () => ({ error: "membership_inactive" })),
     toEpoch: jest.fn(actual.toEpoch),
   };
@@ -122,7 +121,7 @@ const {
   disposeMapChart: mockDisposeMapChart,
 } = mapMocks;
 
-const { debounce: mockDebounce, safeJson: mockSafeJson, toEpoch: mockToEpoch } = utilsMocks;
+const { safeJson: mockSafeJson, toEpoch: mockToEpoch } = utilsMocks;
 
 const { logFetchRequest: mockLogFetchRequest } = loggingMocks;
 const { getApiEndpoint: mockGetApiEndpoint } = configMocks;
@@ -147,6 +146,18 @@ const WATCH_VIDEO_ID = "abcdefghijk";
 const { getVideoId: mockGetVideoId } = jest.requireMock("../utils");
 const defaultGetVideoId = mockGetVideoId.getMockImplementation();
 
+function initOnWatchPage() {
+  const videoId = "video123456";
+  mockGetVideoId.mockReturnValue(videoId);
+  analyticsState.currentVideoId = videoId;
+  initPremiumAnalytics();
+}
+
+function rateLimitResponse(retryAfter = "1") {
+  const headers = new Headers(retryAfter === null ? {} : { "Retry-After": retryAfter });
+  return { ok: false, status: 429, headers };
+}
+
 const enMessages = require("../../_locales/en/messages.json");
 const jaMessages = require("../../_locales/ja/messages.json");
 
@@ -170,6 +181,7 @@ function getMessage(key, substitutions) {
 describe("premiumAnalytics", () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockGetApiEndpoint.mockImplementation((path) => `https://api.example${path}`);
     mockHasAuthenticationDataPermission.mockResolvedValue(true);
     mockUsesFirefoxDataCollectionConsent.mockReturnValue(false);
     resetStateForVideo();
@@ -429,6 +441,163 @@ describe("premiumAnalytics", () => {
     expect(mockToEpoch).toHaveBeenCalledWith("2025-01-07T00:00:00Z");
   });
 
+  it("aborts a previous range response body without clearing the replacement's loading state", async () => {
+    const logError = jest.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      initOnWatchPage();
+      const { onRangePreset } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+      const response = await fetch();
+      fetch.mockClear();
+      const readBody = jest.fn();
+      let completeReplacement;
+      fetch
+        .mockImplementationOnce(async (_url, { signal }) => {
+          readBody.mockImplementation(
+            () => new Promise((_, reject) => signal.addEventListener("abort", () => reject(signal.reason))),
+          );
+          return { ok: true, json: readBody };
+        })
+        .mockImplementationOnce(() => new Promise((resolve) => (completeReplacement = resolve)));
+
+      requestAnalytics();
+      await flushPromises();
+      expect(readBody).toHaveBeenCalledTimes(1);
+      const firstSignal = fetch.mock.calls[0][1].signal;
+      onRangePreset(30);
+      await flushPromises();
+
+      expect(firstSignal.aborted).toBe(true);
+      expect(fetch.mock.calls[1][1].signal.aborted).toBe(false);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+      expect(mockRenderSummary).not.toHaveBeenCalled();
+      expect(logError).not.toHaveBeenCalled();
+
+      completeReplacement(response);
+      await flushPromises();
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+    } finally {
+      logError.mockRestore();
+    }
+  });
+
+  it.each(["success", "still busy"])(
+    "retries only the latest rapid preset once when recovery is %s",
+    async (result) => {
+      jest.useFakeTimers();
+      try {
+        initOnWatchPage();
+        const { onRangePreset } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+        const response = await fetch();
+        fetch.mockClear();
+        mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
+        fetch
+          .mockReturnValueOnce(new Promise(() => {}))
+          .mockReturnValueOnce(new Promise(() => {}))
+          .mockResolvedValueOnce(rateLimitResponse())
+          .mockResolvedValueOnce(result === "success" ? response : rateLimitResponse());
+
+        requestAnalytics();
+        onRangePreset(90);
+        onRangePreset(30);
+        await jest.advanceTimersByTimeAsync(999);
+
+        expect(fetch).toHaveBeenCalledTimes(3);
+        expect(fetch.mock.calls[0][1].signal.aborted).toBe(true);
+        expect(fetch.mock.calls[1][1].signal.aborted).toBe(true);
+        expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+        expect(mockRenderSummary).not.toHaveBeenCalled();
+
+        await jest.advanceTimersByTimeAsync(1);
+        expect(fetch).toHaveBeenCalledTimes(4);
+        const latestUrl = fetch.mock.calls[2][0];
+        expect(new URL(latestUrl).searchParams.get("rangeDays")).toBe("30");
+        expect(fetch.mock.calls[3][0]).toBe(latestUrl);
+        await jest.advanceTimersByTimeAsync(1000);
+        expect(fetch).toHaveBeenCalledTimes(4);
+        expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+        expect(mockRenderSummary).toHaveBeenCalledTimes(result === "success" ? 1 : 0);
+        if (result === "still busy") {
+          expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_errorGeneric"));
+        }
+      } finally {
+        jest.useRealTimers();
+      }
+    },
+  );
+
+  it.each([
+    ["analytics_busy", "1", false],
+    ["rate_limited", "1", true],
+    ["analytics_busy", null, true],
+    ["analytics_busy", "0", true],
+    ["analytics_busy", "1.5", true],
+    ["analytics_busy", "61", true],
+  ])("keeps the regular error for %s with Retry-After %j and overlap %s", async (error, retryAfter, replacing) => {
+    jest.useFakeTimers();
+    try {
+      initOnWatchPage();
+      mockSafeJson.mockResolvedValue({ error });
+      if (replacing) {
+        fetch.mockReturnValueOnce(new Promise(() => {}));
+        requestAnalytics();
+      }
+      fetch.mockResolvedValueOnce(rateLimitResponse(retryAfter));
+      requestAnalytics();
+      await jest.advanceTimersByTimeAsync(61000);
+
+      expect(fetch).toHaveBeenCalledTimes(replacing ? 2 : 1);
+      expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_errorGeneric"));
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it.each(["preset", "video change", "account change", "teardown"])(
+    "cancels a pending busy retry after %s",
+    async (invalidation) => {
+      jest.useFakeTimers();
+      try {
+        initOnWatchPage();
+        const { onRangePreset } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+        mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
+        fetch.mockReturnValueOnce(new Promise(() => {})).mockResolvedValueOnce(rateLimitResponse());
+        requestAnalytics();
+        onRangePreset(90);
+        await jest.advanceTimersByTimeAsync(100);
+        expect(jest.getTimerCount()).toBe(1);
+
+        if (invalidation !== "teardown") fetch.mockResolvedValueOnce(rateLimitResponse());
+        if (invalidation === "preset") {
+          onRangePreset(30);
+        } else if (invalidation === "video change") {
+          mockGetVideoId.mockReturnValue(WATCH_VIDEO_ID);
+          document.dispatchEvent(new Event("yt-navigate-finish"));
+        } else if (invalidation === "account change") {
+          updatePremiumSession({ token: "new-account-token", active: true, membershipTier: "premium" });
+        } else {
+          teardownPremiumAnalytics();
+        }
+        await jest.advanceTimersByTimeAsync(900);
+        const attempts = invalidation === "teardown" ? 2 : 3;
+        expect(fetch).toHaveBeenCalledTimes(attempts);
+        await jest.advanceTimersByTimeAsync(100);
+        const retries = invalidation === "preset" || invalidation === "video change";
+        expect(fetch).toHaveBeenCalledTimes(attempts + Number(retries));
+        if (retries) {
+          expect(fetch.mock.calls[3][0]).toBe(fetch.mock.calls[2][0]);
+          const url = new URL(fetch.mock.calls[3][0]);
+          if (invalidation === "preset") expect(url.searchParams.get("rangeDays")).toBe("30");
+          else expect(url.pathname).toContain(WATCH_VIDEO_ID);
+        }
+        expect(jest.getTimerCount()).toBe(0);
+      } finally {
+        jest.useRealTimers();
+      }
+    },
+  );
+
   it("shows the localized loading message while analytics load", async () => {
     const loadingMessage = jaMessages.premiumAnalytics_loading.message;
     global.chrome.i18n.getMessage = (key, substitutions) =>
@@ -468,17 +637,51 @@ describe("premiumAnalytics", () => {
     expect(analyticsState.sessionActive).toBe(false);
   });
 
-  it("ignores an analytics response from a session that was signed out", async () => {
-    let completeRequest;
-    const response = await fetch();
-    fetch.mockClear();
-    fetch.mockReturnValueOnce(new Promise((resolve) => (completeRequest = resolve)));
-    requestAnalytics();
-    updatePremiumSession({ token: null, active: false });
-    completeRequest(response);
+  it.each(["sign-out", "downgrade", "leaving the watch page"])(
+    "aborts and ignores an analytics response after %s",
+    async (invalidation) => {
+      initOnWatchPage();
+      let completeRequest;
+      const response = await fetch();
+      fetch.mockClear();
+      fetch.mockReturnValueOnce(new Promise((resolve) => (completeRequest = resolve)));
+      requestAnalytics();
+      const signal = fetch.mock.calls[0][1].signal;
+      if (invalidation === "sign-out") {
+        updatePremiumSession({ token: null, active: false });
+      } else if (invalidation === "downgrade") {
+        updatePremiumSession({ token: "token", active: true, membershipTier: "supporter" });
+      } else {
+        mockGetVideoId.mockReturnValue(null);
+        document.dispatchEvent(new Event("yt-navigate-finish"));
+      }
+      expect(signal.aborted).toBe(true);
+      completeRequest(response);
+      await flushPromises();
+      expect(mockRenderActivityChart).not.toHaveBeenCalled();
+      expect(mockRenderSummary).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([true, false])("ignores a superseded Firefox consent result of %s", async (granted) => {
+    mockUsesFirefoxDataCollectionConsent.mockReturnValue(true);
+    initOnWatchPage();
+    let completePermissionCheck;
+    mockHasAuthenticationDataPermission.mockReturnValueOnce(
+      new Promise((resolve) => (completePermissionCheck = resolve)),
+    );
+    const pendingRequest = requestAnalytics({ selection: { from: Date.UTC(2025, 0, 2), to: Date.UTC(2025, 0, 5) } });
+
+    const { onRangePreset } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+    onRangePreset(30);
     await flushPromises();
-    expect(mockRenderActivityChart).not.toHaveBeenCalled();
-    expect(mockRenderSummary).not.toHaveBeenCalled();
+    completePermissionCheck(granted);
+    await pendingRequest;
+
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(new URL(fetch.mock.calls[0][0]).searchParams.get("rangeDays")).toBe("30");
+    expect(analyticsState.sessionToken).toBe("token");
+    expect(analyticsState.sessionActive).toBe(true);
   });
 
   it("does not render a previous account response after a new account requests the same range", async () => {
@@ -487,7 +690,9 @@ describe("premiumAnalytics", () => {
     fetch.mockClear();
     fetch.mockReturnValueOnce(new Promise((resolve) => (completeOldRequest = resolve)));
     requestAnalytics();
+    const signal = fetch.mock.calls[0][1].signal;
     updatePremiumSession({ token: "new-account-token", active: true, membershipTier: "premium" });
+    expect(signal.aborted).toBe(true);
     await flushPromises();
     const renderCount = mockRenderSummary.mock.calls.length;
     completeOldRequest(response);
@@ -783,7 +988,6 @@ describe("premiumAnalytics", () => {
   });
 
   it("restores a preset when a custom selection rounds to the same number of days", async () => {
-    mockGetApiEndpoint.mockImplementation((path) => `https://api.example${path}`);
     initPremiumAnalytics();
     const callbacks = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
     analyticsState.currentVideoId = "abcdefghijk";
@@ -873,28 +1077,65 @@ describe("premiumAnalytics", () => {
     });
   });
 
-  it("refetches analytics when zoom selection changes", async () => {
-    initPremiumAnalytics();
-    requestAnalytics();
-    await flushPromises();
+  it("aborts obsolete analytics immediately and debounces successive chart selections", async () => {
+    jest.useFakeTimers();
+    try {
+      initOnWatchPage();
+      const onSelection = mockRegisterZoomSelectionListener.mock.calls.at(-1)[0];
+      mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
+      fetch.mockReturnValueOnce(new Promise(() => {})).mockResolvedValueOnce(rateLimitResponse());
+      requestAnalytics();
+      const signal = fetch.mock.calls[0][1].signal;
 
-    const previousKey = analyticsState.activeRequestKey;
+      const from = Date.UTC(2025, 0, 2);
+      const to = Date.UTC(2025, 0, 5);
+      onSelection({ from, to: Date.UTC(2025, 0, 4) });
+      expect(signal.aborted).toBe(true);
+      await jest.advanceTimersByTimeAsync(200);
+      onSelection({ from, to });
+      await jest.advanceTimersByTimeAsync(399);
+      expect(fetch).toHaveBeenCalledTimes(1);
+      await jest.advanceTimersByTimeAsync(1);
 
-    const from = Date.UTC(2025, 0, 2);
-    const to = Date.UTC(2025, 0, 5);
-    analyticsState.sessionActive = true;
-    analyticsState.sessionToken = "token";
-    analyticsState.currentVideoId = "video1234567";
-    const initialApiCalls = mockGetApiEndpoint.mock.calls.length;
+      expect(fetch).toHaveBeenCalledTimes(2);
+      const { searchParams } = new URL(fetch.mock.calls[1][0]);
+      expect(searchParams.get("selectedRangeStartUtc")).toBe(new Date(from).toISOString());
+      expect(searchParams.get("selectedRangeEndUtc")).toBe(new Date(to).toISOString());
+      await jest.advanceTimersByTimeAsync(1000);
+      expect(fetch).toHaveBeenCalledTimes(3);
+      expect(fetch.mock.calls[2][0]).toBe(fetch.mock.calls[1][0]);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
 
-    requestAnalytics({ selection: { from, to } });
-    await flushPromises();
+  it.each(["preset", "video change", "teardown"])("drops a queued chart selection after %s", async (invalidation) => {
+    jest.useFakeTimers();
+    try {
+      initOnWatchPage();
+      const onSelection = mockRegisterZoomSelectionListener.mock.calls.at(-1)[0];
+      onSelection({ from: Date.UTC(2025, 0, 2), to: Date.UTC(2025, 0, 5) });
+      if (invalidation === "preset") {
+        const { onRangePreset } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
+        onRangePreset(30);
+      } else if (invalidation === "video change") {
+        mockGetVideoId.mockReturnValue(WATCH_VIDEO_ID);
+        document.dispatchEvent(new Event("yt-navigate-finish"));
+      } else {
+        teardownPremiumAnalytics();
+      }
+      await jest.advanceTimersByTimeAsync(400);
 
-    expect(mockGetApiEndpoint.mock.calls.length).toBeGreaterThan(initialApiCalls);
-    const lastCall = mockGetApiEndpoint.mock.calls.at(-1)?.[0];
-    expect(lastCall).toContain(encodeURIComponent(new Date(from).toISOString()));
-    expect(lastCall).toContain(encodeURIComponent(new Date(to).toISOString()));
-    expect(analyticsState.activeRequestKey).not.toBe(previousKey);
-    expect(analyticsState.activeRequestKey).toContain(new Date(from).toISOString());
+      if (invalidation === "teardown") {
+        expect(fetch).not.toHaveBeenCalled();
+      } else {
+        expect(fetch).toHaveBeenCalledTimes(1);
+        const url = new URL(fetch.mock.calls[0][0]);
+        expect(url.searchParams.has("selectedRangeStartUtc")).toBe(false);
+        if (invalidation === "video change") expect(url.pathname).toContain(WATCH_VIDEO_ID);
+      }
+    } finally {
+      jest.useRealTimers();
+    }
   });
 });

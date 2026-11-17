@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "ID bình chọn chỉ được gửi khi bạn bình chọn hoặc phản ứng. Phản ứng của chính bạn với bình luận được ghi nhớ trên thiết bị này."
   },
+  "popup_saved_account_unverified": {
+    "message": "Không thể xác minh tài khoản đã lưu của bạn. Hãy mở lại cửa sổ bật lên để thử lại."
+  },
   "popup_signin_next_click": {
     "message": "Cần thêm một lần nhấp: chọn nút đăng nhập bên dưới để xem quyền tài khoản của Firefox và tiếp tục."
   },

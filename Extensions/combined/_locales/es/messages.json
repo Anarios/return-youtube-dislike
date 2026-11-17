@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Tu ID de votación solo se envía cuando votas o reaccionas. Tus propias reacciones a comentarios se recuerdan en este dispositivo."
   },
+  "popup_saved_account_unverified": {
+    "message": "No pudimos verificar tu cuenta guardada. Vuelve a abrir la ventana emergente para intentarlo de nuevo."
+  },
   "popup_signin_next_click": {
     "message": "Hace falta otro clic: selecciona abajo tu botón de inicio de sesión para revisar los permisos de cuenta de Firefox y continuar."
   },

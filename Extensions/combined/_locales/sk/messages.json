@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Vaše hlasovacie ID sa odosiela iba pri hlasovaní alebo reakcii. Vaše vlastné reakcie na komentáre sa ukladajú v tomto zariadení."
   },
+  "popup_saved_account_unverified": {
+    "message": "Uložený účet sa nepodarilo overiť. Skúste to znova otvorením okna rozšírenia."
+  },
   "popup_signin_next_click": {
     "message": "Je potrebné ešte jedno kliknutie: nižšie zvoľte prihlasovacie tlačidlo, skontrolujte oprávnenia účtu vo Firefoxe a pokračujte."
   },

@@ -319,6 +319,7 @@ describe("popup account consent lifecycle", () => {
 
   test("rechecks a suspended credential and waits for recovery before displaying the saved profile", async () => {
     const saved = { patreonAuthenticated: false, patreonUser: cachedUser, patreonSessionToken: "test-token" };
+    const status = document.getElementById("patreon-suspended-status");
     let finishVerify;
     fetch.mockReturnValue(new Promise((resolve) => (finishVerify = resolve)));
     chrome.runtime.sendMessage.mockImplementation((request, callback) => callback?.({ success: true }));
@@ -326,6 +327,7 @@ describe("popup account consent lifecycle", () => {
     await readCachedSession(saved);
     await flushPromises();
     expectLoggedOut();
+    expect(status.hidden).toBe(false);
     expect(fetch).toHaveBeenCalledTimes(1);
 
     finishVerify(verificationResponse({ valid: true, membershipTier: "premium" }));
@@ -338,6 +340,7 @@ describe("popup account consent lifecycle", () => {
 
     await readCachedSession({ ...saved, patreonAuthenticated: true });
     expect(document.getElementById("patreon-user-name").textContent).toBe(cachedUser.fullName);
+    expect(status.hidden).toBe(true);
     expect(fetch).toHaveBeenCalledTimes(1);
   });
 
@@ -361,6 +364,7 @@ describe("popup account consent lifecycle", () => {
 
   test("lets a suspended account explicitly clear its retained sign-in", async () => {
     fetch.mockReturnValue(new Promise(() => {}));
+    const status = document.getElementById("patreon-suspended-status");
     const slot = document.getElementById("patreon-suspended-actions");
     const logout = document.getElementById("patreon-logout-btn");
     await readCachedSession({
@@ -369,11 +373,13 @@ describe("popup account consent lifecycle", () => {
       patreonSessionToken: "test-token",
     });
 
+    expect(status.hidden).toBe(false);
     expect(slot.hidden).toBe(false);
     expect(slot.closest("#patreon-logged-out")).not.toBeNull();
     expect(slot.contains(logout)).toBe(true);
     logout.click();
 
+    expect(status.hidden).toBe(true);
     expect(slot.hidden).toBe(true);
     expect(chrome.storage.sync.remove).toHaveBeenCalledWith([
       "patreonAuthenticated",
@@ -387,6 +393,7 @@ describe("popup account consent lifecycle", () => {
     localizeMembershipLabels();
     await readCachedSession({});
     expectPremiumVisibilityLabel(false);
+    expect(document.getElementById("patreon-suspended-status").hidden).toBe(true);
     expect(document.getElementById("patreon-suspended-actions").hidden).toBe(true);
   });
 

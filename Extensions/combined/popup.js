@@ -172,6 +172,7 @@ function initPatreonAuth() {
   const githubLoginBtn = document.getElementById("github-login-btn");
   const logoutBtn = document.getElementById("patreon-logout-btn");
   const accountProfile = logoutBtn.parentElement;
+  const suspendedStatus = document.getElementById("patreon-suspended-status");
   const suspendedActions = document.getElementById("patreon-suspended-actions");
   const userAvatar = document.getElementById("patreon-user-avatar");
   const userName = document.getElementById("patreon-user-name");
@@ -228,6 +229,7 @@ function initPatreonAuth() {
   function showLoggedOutView({ suspended = false } = {}) {
     loggedOutView.style.display = "block";
     loggedInView.style.display = "none";
+    suspendedStatus.hidden = !suspended;
     suspendedActions.hidden = !suspended;
     const logoutContainer = suspended ? suspendedActions : accountProfile;
     if (logoutBtn.parentElement !== logoutContainer) logoutContainer.append(logoutBtn);
@@ -246,6 +248,7 @@ function initPatreonAuth() {
     document.getElementById("signin-next-click").hidden = true;
     loggedOutView.style.display = "none";
     loggedInView.style.display = "block";
+    suspendedStatus.hidden = true;
     suspendedActions.hidden = true;
     if (logoutBtn.parentElement !== accountProfile) accountProfile.append(logoutBtn);
     updateHidePremiumSettingLabel(user);

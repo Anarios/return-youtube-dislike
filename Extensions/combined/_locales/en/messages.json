@@ -806,6 +806,9 @@
   "consent_voter_timing": {
     "message": "Your voting ID is sent only when you vote or react. Your own comment reactions are remembered on this device."
   },
+  "popup_saved_account_unverified": {
+    "message": "We couldn’t verify your saved account. Reopen the popup to try again."
+  },
   "popup_signin_next_click": {
     "message": "One more click is needed: select your sign-in button below to review Firefox’s account permissions and continue."
   },

@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "투표 ID는 투표하거나 반응할 때만 전송됩니다. 내가 남긴 댓글 반응은 이 기기에 기억됩니다."
   },
+  "popup_saved_account_unverified": {
+    "message": "저장된 계정을 확인할 수 없습니다. 팝업을 다시 열어 재시도하세요."
+  },
   "popup_signin_next_click": {
     "message": "한 번 더 클릭해야 합니다. 아래의 로그인 버튼을 선택하여 Firefox 계정 권한을 확인하고 계속하세요."
   },

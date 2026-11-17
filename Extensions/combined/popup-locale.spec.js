@@ -63,6 +63,22 @@ describe("popup locale direction", () => {
     expect(why.nextElementSibling.id).toBe("patreon-privacy-note");
   });
 
+  test("localizes the saved account status before both sign-in options", () => {
+    const messages = require("./_locales/pl/messages.json");
+    chrome.i18n.getMessage.mockImplementation((key) => messages[key]?.message || "");
+
+    require("./popup");
+
+    const status = document.getElementById("patreon-suspended-status");
+    expect(status.textContent).toBe(messages.popup_saved_account_unverified.message);
+    expect(status.getAttribute("role")).toBe("status");
+    expect(status.hidden).toBe(true);
+    for (const buttonId of ["patreon-login-btn", "github-login-btn"]) {
+      const button = document.getElementById(buttonId);
+      expect(status.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    }
+  });
+
   test.each(["rtl", "ltr"])("uses %s locale direction while localizing the popup", (direction) => {
     const getMessage = chrome.i18n.getMessage.getMockImplementation();
     chrome.i18n.getMessage.mockImplementation((key) => (key === "@@bidi_dir" ? direction : getMessage(key)));

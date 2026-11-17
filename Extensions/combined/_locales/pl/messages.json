@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Identyfikator głosowania jest wysyłany tylko przy głosowaniu lub reagowaniu. Twoje reakcje na komentarze są zapamiętywane na tym urządzeniu."
   },
+  "popup_saved_account_unverified": {
+    "message": "Nie udało się zweryfikować zapisanego konta. Otwórz ponownie okno rozszerzenia, aby spróbować jeszcze raz."
+  },
   "popup_signin_next_click": {
     "message": "Potrzebne jest jeszcze jedno kliknięcie: wybierz poniżej przycisk logowania, aby sprawdzić uprawnienia konta w Firefoksie i kontynuować."
   },

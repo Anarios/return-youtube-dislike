@@ -23,7 +23,6 @@ function resetGlobals() {
   analyticsState.currentRange = 30;
   analyticsState.rangeAnchor = "first";
   analyticsState.currentMode = "ratio";
-  analyticsState.activeRequestKey = null;
   analyticsState.latestCountries = [];
   analyticsState.latestSubdivisions = [];
   analyticsState.sessionToken = null;
