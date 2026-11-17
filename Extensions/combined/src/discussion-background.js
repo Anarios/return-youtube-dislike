@@ -821,6 +821,8 @@ export function createDiscussionBackground({
         throw error;
       },
     );
+    // An ordinary read queued behind verification should see the resulting session even if the retry fails.
+    if (verification) return work;
     refreshing = work;
     work
       .finally(() => {

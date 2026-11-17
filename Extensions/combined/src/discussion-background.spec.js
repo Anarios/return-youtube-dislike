@@ -1073,11 +1073,14 @@ describe("discussion worker boundary", () => {
       expect(tabEvents(worker, "session").every((session) => !session.authenticated)).toBe(true);
       expect(sessionStorage.remove).not.toHaveBeenCalled();
       const concurrent = worker.client.revalidateVerifiedSession("account-token");
+      const tabRead = worker.send("session");
       worker.client.onStorageChanged({ patreonUser: { newValue: { membershipTier: "commenter" } } }, "sync");
+      await flush();
       recheck.resolve();
 
       expect((await verified).authenticated).toBe(true);
       expect((await concurrent).authenticated).toBe(true);
+      expect(await tabRead).toMatchObject({ ok: true, data: { authenticated: true } });
       expect((await worker.send("session")).data.authenticated).toBe(true);
       expect(worker.calls.filter((call) => call.path === "/me")).toHaveLength(restart ? 1 : 2);
       expect(sessionStorage.remove).toHaveBeenCalledTimes(1);
@@ -1113,6 +1116,8 @@ describe("discussion worker boundary", () => {
     [200, { authenticated: false }],
   ])("keeps the credential quarantined after an unsuccessful verified retry (HTTP %s)", async (status, body) => {
     const sessionStorage = storageArea();
+    const started = deferred();
+    const recheck = deferred();
     let checks = 0;
     const rejected = { ok: false, status: 401, json: async () => ({ code: "authentication_required" }) };
     const h = harness({
@@ -1122,7 +1127,10 @@ describe("discussion worker boundary", () => {
         if (path === "/me") {
           const check = ++checks;
           if (check === 1) return rejected;
-          if (check === 2) return { ok: status === 200, status, json: async () => body };
+          if (check === 2) {
+            started.resolve();
+            return recheck.promise;
+          }
         }
         if (path === "/me/profile") return rejected;
       },
@@ -1131,8 +1139,13 @@ describe("discussion worker boundary", () => {
 
     const retry = h.client.revalidateVerifiedSession("account-token");
     expect(h.client.revalidateVerifiedSession("account-token")).toBe(retry);
+    await started.promise;
+    const tabRead = h.send("session");
+    await flush();
+    recheck.resolve({ ok: status === 200, status, json: async () => body });
     if (status === 503) await expect(retry).rejects.toMatchObject({ status });
     else expect(await retry).toEqual(ANONYMOUS_SESSION);
+    expect(await tabRead).toEqual({ ok: true, data: ANONYMOUS_SESSION });
 
     expect((await h.send("profile", { nickname: "Tester" })).error.status).toBe(401);
     expect(h.calls.find((call) => call.path === "/me/profile").options.headers.Authorization).toBeUndefined();
