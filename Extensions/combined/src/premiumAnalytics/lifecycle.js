@@ -22,7 +22,7 @@ import { getBrowser, getVideoId } from "../utils";
 import { loadRawCounts, resetRawCounts } from "./rawCounts";
 
 import { MS_PER_DAY, EXPANDABLE_SECTIONS } from "./constants";
-import { requestAnalytics, scheduleSelectionFetch, normalizeSelection } from "./requests";
+import { cancelAnalyticsRequests, requestAnalytics, scheduleSelectionFetch, normalizeSelection } from "./requests";
 import { setTeaserSuppressed, TEASER_SUPPRESSION_REASON_PREMIUM } from "./teaser";
 import { observeTheme } from "./theme";
 
@@ -242,11 +242,11 @@ function handleChartSelection(range) {
 }
 
 function teardownPanel() {
+  cancelAnalyticsRequests();
   cancelPanelRetry();
   resetRawCounts();
   const state = analyticsState;
   state.currentVideoId = null;
-  state.activeRequestKey = null;
   state.latestCountries = [];
   resetStateForVideo();
   state.panelExpanded = false;
@@ -287,7 +287,7 @@ function updatePremiumSession({ token, active, membershipTier }) {
   const wasActive = analyticsState.sessionActive;
   const previousTier = analyticsState.membershipTier;
 
-  setSession(token || null, active, membershipTier);
+  setSession(token || null, token && active, membershipTier);
 
   if (!analyticsState.sessionActive) {
     setTeaserSuppressed(false, TEASER_SUPPRESSION_REASON_PREMIUM);

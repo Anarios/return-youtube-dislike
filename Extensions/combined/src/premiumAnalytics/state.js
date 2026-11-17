@@ -15,7 +15,6 @@ export const analyticsState = {
   currentRange: 30,
   rangeAnchor: "first",
   currentMode: "ratio",
-  activeRequestKey: null,
   latestCountries: [],
   latestSubdivisions: [],
   sessionToken: null,
