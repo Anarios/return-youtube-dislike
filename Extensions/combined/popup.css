@@ -294,6 +294,10 @@ button {
   width: 100%;
 }
 
+#patreon-suspended-actions {
+  margin-top: 8px;
+}
+
 .button-icon {
   flex: none;
   width: 16px;

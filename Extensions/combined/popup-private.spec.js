@@ -91,7 +91,7 @@ describe("private popup", () => {
       expect(document.getElementById("ryd-private-counts-message")).toBeNull();
       expect(require("./src/discussion/popup").initDiscussionPopup).toHaveBeenCalledTimes(1);
       expect(chrome.storage.sync.get).toHaveBeenCalledWith(
-        ["patreonUser", "patreonSessionToken"],
+        ["patreonAuthenticated", "patreonUser", "patreonSessionToken"],
         expect.any(Function),
       );
       expect(chrome.storage.onChanged.addListener).toHaveBeenCalledTimes(2);

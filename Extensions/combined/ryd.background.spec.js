@@ -8,6 +8,7 @@ jest.mock("./src/core-data-consent", () => ({
 }));
 
 const normalSender = { id: "extension-id", tab: { id: 1, incognito: false, windowId: 1 } };
+const popupSender = { ...normalSender, url: "moz-extension://fixture/popup.html" };
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 const startData = () => {
   const loginUrl = fetch.mock.calls.filter(([url]) => url.includes("/github/login?")).at(-1)?.[0];
@@ -1048,5 +1049,281 @@ describe("background account consent lifecycle", () => {
     expect(stored.patreonSessionToken).toBe("new-token");
     expect(stored.patreonUser.fullName).toBe("New");
     expect(newResponse).toHaveBeenCalledWith(expect.objectContaining({ success: true }));
+  });
+
+  test.each([true, false])("suspends a rejected account and restores it when active=%s is verified", async (active) => {
+    const user = { fullName: "Old", membershipTier: "supporter" };
+    const stored = {
+      patreonAuthenticated: true,
+      patreonUser: user,
+      patreonSessionToken: "old-token",
+      hidePremiumTeaser: true,
+    };
+    chrome.storage.sync.get.mockImplementation((keys, callback) => callback(stored));
+    chrome.storage.sync.set.mockImplementation((data, callback) => {
+      Object.assign(stored, data);
+      callback();
+    });
+
+    const response = jest.fn();
+    messageListener({ message: "patreon_session_invalid", sessionToken: "old-token" }, popupSender, response);
+    await flushPromises();
+
+    expect(stored).toEqual({
+      patreonAuthenticated: false,
+      patreonUser: user,
+      patreonSessionToken: "old-token",
+      hidePremiumTeaser: true,
+    });
+    expect(response).toHaveBeenCalledWith({ success: true });
+    expect(chrome.tabs.sendMessage).toHaveBeenCalledWith(
+      1,
+      { message: "patreon_status_changed", authenticated: false, user: null, sessionToken: null },
+      expect.any(Function),
+    );
+
+    messageListener({ message: "patreon_session_invalid", sessionToken: "old-token" }, popupSender, jest.fn());
+    await flushPromises();
+    expect(chrome.storage.sync.set).toHaveBeenCalledTimes(1);
+
+    messageListener(
+      { message: "patreon_membership_verified", sessionToken: "old-token", active, membershipTier: "premium" },
+      popupSender,
+      response,
+    );
+    await flushPromises();
+
+    const restoredUser = { ...user, membershipTier: "premium", hasActiveMembership: active };
+    expect(stored).toEqual({
+      patreonAuthenticated: true,
+      patreonUser: restoredUser,
+      patreonSessionToken: "old-token",
+      hidePremiumTeaser: true,
+    });
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+    expect(chrome.tabs.sendMessage).toHaveBeenLastCalledWith(
+      1,
+      { message: "patreon_status_changed", authenticated: true, user: restoredUser, sessionToken: "old-token" },
+      expect.any(Function),
+    );
+  });
+
+  test("clears a suspended credential when verification confirms expiry", async () => {
+    const stored = {
+      patreonAuthenticated: false,
+      patreonUser: { fullName: "Expired" },
+      patreonSessionToken: "expired-token",
+      hidePremiumTeaser: true,
+    };
+    chrome.storage.sync.get.mockImplementation((keys, callback) => callback(stored));
+    chrome.storage.sync.remove.mockImplementation((keys, callback) => {
+      for (const key of keys) delete stored[key];
+      callback();
+    });
+
+    const response = jest.fn();
+    messageListener({ message: "patreon_session_expired", sessionToken: "expired-token" }, popupSender, response);
+    await flushPromises();
+
+    expect(stored).toEqual({ hidePremiumTeaser: true });
+    expect(response).toHaveBeenCalledWith({ success: true });
+    expect(chrome.tabs.sendMessage).toHaveBeenCalledWith(
+      1,
+      { message: "patreon_status_changed", authenticated: false, user: null, sessionToken: null },
+      expect.any(Function),
+    );
+  });
+
+  test("ignores a session invalidation from a non-popup sender", async () => {
+    const response = jest.fn();
+    messageListener({ message: "patreon_session_invalid", sessionToken: "old-token" }, normalSender, response);
+    await flushPromises();
+
+    expect(response).toHaveBeenCalledWith({ success: false });
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+  });
+
+  test.each([
+    ["rejected", { message: "patreon_session_invalid" }],
+    ["expired", { message: "patreon_session_expired" }],
+    ["valid", { message: "patreon_membership_verified", active: true, membershipTier: "premium" }],
+    ["inactive", { message: "patreon_membership_verified", active: false, membershipTier: null }],
+  ])("compares a stale %s result after a newer sign-in finishes saving", async (outcome, request) => {
+    const stored = { patreonSessionToken: "old-token" };
+    let finishSave;
+    chrome.storage.sync.get.mockImplementation((keys, callback) => callback(stored));
+    chrome.storage.sync.set
+      .mockImplementationOnce((data, callback) => {
+        finishSave = () => {
+          Object.assign(stored, data);
+          callback();
+        };
+      })
+      .mockImplementation((data, callback) => {
+        Object.assign(stored, data);
+        callback();
+      });
+    const user = { fullName: "New" };
+    fetch.mockResolvedValueOnce({ ok: true, json: async () => startData() }).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ success: true, user, sessionToken: "new-token" }),
+    });
+
+    messageListener({ message: "patreon_oauth_login" }, normalSender, jest.fn());
+    await flushPromises();
+    const response = jest.fn();
+    messageListener({ ...request, sessionToken: "old-token" }, popupSender, response);
+    await flushPromises();
+    expect(response).not.toHaveBeenCalled();
+
+    finishSave();
+    await flushPromises();
+
+    expect(response).toHaveBeenCalledWith({ success: true });
+    expect(stored).toMatchObject({ patreonUser: user, patreonSessionToken: "new-token" });
+    expect(chrome.storage.sync.set).toHaveBeenCalledTimes(2);
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+    expect(chrome.tabs.sendMessage).toHaveBeenCalledTimes(1);
+    expect(chrome.tabs.sendMessage).toHaveBeenCalledWith(
+      1,
+      { message: "patreon_status_changed", authenticated: true, user, sessionToken: "new-token" },
+      expect.any(Function),
+    );
+  });
+
+  test.each([
+    [true, "premium", "premium"],
+    [false, null, "supporter"],
+  ])("merges active=%s and tier=%s into current account metadata", async (active, membershipTier, expectedTier) => {
+    const user = { fullName: "Current", imageUrl: "https://example.org/current", membershipTier: "supporter" };
+    const stored = { patreonSessionToken: "current-token", patreonUser: user };
+    chrome.storage.sync.get.mockImplementation((keys, callback) => callback(stored));
+    chrome.storage.sync.set.mockImplementation((data, callback) => {
+      Object.assign(stored, data);
+      callback();
+    });
+    const request = { message: "patreon_membership_verified", sessionToken: "current-token", active, membershipTier };
+    const response = jest.fn();
+
+    messageListener(request, popupSender, response);
+    await flushPromises();
+
+    expect(response).toHaveBeenCalledWith({ success: true });
+    expect(stored.patreonUser).toEqual({ ...user, membershipTier: expectedTier, hasActiveMembership: active });
+
+    messageListener(request, popupSender, jest.fn());
+    await flushPromises();
+    expect(chrome.storage.sync.set).toHaveBeenCalledTimes(1);
+  });
+
+  test("does not interrupt an in-flight sign-in or broadcast a delayed sign-out over it", async () => {
+    const exchange = deferred();
+    const user = { fullName: "New" };
+    fetch.mockResolvedValueOnce({ ok: true, json: async () => startData() }).mockReturnValueOnce(exchange.promise);
+    chrome.storage.sync.get.mockImplementation((keys, callback) => callback({ patreonSessionToken: "old-token" }));
+    const tabs = [{ id: 1, url: "https://www.youtube.com/watch?v=video123456", incognito: false }];
+    let finishSignOutBroadcast;
+    chrome.tabs.query.mockImplementationOnce((query, callback) => {
+      finishSignOutBroadcast = () => callback(tabs);
+    });
+
+    const loginResponse = jest.fn();
+    messageListener({ message: "patreon_oauth_login" }, normalSender, loginResponse);
+    await flushPromises();
+    const invalidationResponse = jest.fn();
+    messageListener(
+      { message: "patreon_session_invalid", sessionToken: "old-token" },
+      popupSender,
+      invalidationResponse,
+    );
+    await flushPromises();
+    expect(invalidationResponse).toHaveBeenCalledWith({ success: true });
+    expect(chrome.storage.sync.set).toHaveBeenCalledWith({ patreonAuthenticated: false }, expect.any(Function));
+
+    exchange.resolve({ ok: true, json: async () => ({ success: true, user, sessionToken: "new-token" }) });
+    await flushPromises();
+    finishSignOutBroadcast();
+
+    expect(loginResponse).toHaveBeenCalledWith({ success: true, user });
+    expect(chrome.tabs.sendMessage).toHaveBeenCalledTimes(1);
+    expect(chrome.tabs.sendMessage).toHaveBeenCalledWith(
+      1,
+      { message: "patreon_status_changed", authenticated: true, user, sessionToken: "new-token" },
+      expect.any(Function),
+    );
+  });
+
+  test("drops in-progress and queued verification results after Firefox account consent is revoked and regranted", async () => {
+    const stored = { patreonAuthenticated: true, patreonUser: { fullName: "Old" }, patreonSessionToken: "old-token" };
+    let finishRead;
+    const accountRead = jest.fn((callback) => (finishRead = () => callback(stored)));
+    chrome.storage.sync.get.mockImplementation((keys, callback) => {
+      if (keys.includes("patreonUser")) accountRead(callback);
+      else callback({});
+    });
+    const expired = jest.fn();
+    messageListener({ message: "patreon_session_expired", sessionToken: "old-token" }, popupSender, expired);
+    await flushPromises();
+    expect(accountRead).toHaveBeenCalledTimes(1);
+
+    const verified = jest.fn();
+    messageListener(
+      { message: "patreon_membership_verified", sessionToken: "old-token", active: true, membershipTier: "premium" },
+      popupSender,
+      verified,
+    );
+    consent = false;
+    removeConsent("personallyIdentifyingInfo");
+    consent = true;
+    addConsent("personallyIdentifyingInfo");
+    finishRead();
+    await flushPromises();
+
+    expect(expired).toHaveBeenCalledWith({ success: true });
+    expect(verified).toHaveBeenCalledWith({ success: true });
+    expect(accountRead).toHaveBeenCalledTimes(1);
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+    expect(chrome.tabs.sendMessage.mock.calls.some(([, message]) => message.message === "patreon_status_changed")).toBe(
+      false,
+    );
+  });
+
+  test("a pending suspension recovery cannot sign a tab back in after explicit logout", async () => {
+    const stored = {
+      patreonAuthenticated: false,
+      patreonUser: { fullName: "Old" },
+      patreonSessionToken: "old-token",
+    };
+    let finishRestore;
+    chrome.storage.sync.get.mockImplementation((keys, callback) => callback(stored));
+    chrome.storage.sync.set.mockImplementationOnce((data, callback) => {
+      finishRestore = () => {
+        Object.assign(stored, data);
+        callback();
+      };
+    });
+    chrome.storage.sync.remove.mockImplementation((keys, callback) => {
+      for (const key of keys) delete stored[key];
+      callback();
+    });
+
+    messageListener(
+      { message: "patreon_membership_verified", sessionToken: "old-token", active: true, membershipTier: "premium" },
+      popupSender,
+      jest.fn(),
+    );
+    await flushPromises();
+    messageListener({ message: "patreon_logout" }, popupSender, jest.fn());
+    finishRestore();
+    await flushPromises();
+
+    expect(stored).toEqual({});
+    const broadcasts = chrome.tabs.sendMessage.mock.calls
+      .map(([, message]) => message)
+      .filter((message) => message.message === "patreon_status_changed");
+    expect(broadcasts).toEqual([
+      { message: "patreon_status_changed", authenticated: false, user: null, sessionToken: null },
+    ]);
   });
 });
