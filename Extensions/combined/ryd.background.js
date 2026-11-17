@@ -255,7 +255,7 @@ function applyPatreonVerification({ message, sessionToken, active, membershipTie
       return;
     }
 
-    const signedOut = { authenticated: false, user: null, token: null };
+    const signedOut = { authenticated: false, user: null, token: null, broadcast: true };
     const suspended = stored.patreonAuthenticated === false;
     if (message === "patreon_session_expired") {
       chrome.storage.sync.remove(ACCOUNT_SESSION_KEYS, () => complete(signedOut));
@@ -275,19 +275,27 @@ function applyPatreonVerification({ message, sessionToken, active, membershipTie
 
     const updatedUser = { ...user, hasActiveMembership: active };
     if (membershipTier || !active) updatedUser.membershipTier = membershipTier || user.membershipTier || "none";
-    if (suspended) {
-      chrome.storage.sync.set({ patreonAuthenticated: true, patreonUser: updatedUser }, () =>
-        complete({ authenticated: true, user: updatedUser, token: sessionToken }),
-      );
-    } else if (user.hasActiveMembership === active && user.membershipTier === updatedUser.membershipTier) {
-      complete();
+    const broadcast =
+      suspended || user.hasActiveMembership !== active || user.membershipTier !== updatedUser.membershipTier;
+    const account = {
+      authenticated: true,
+      user: updatedUser,
+      token: sessionToken,
+      broadcast,
+      revalidateDiscussion: stored.patreonAuthenticated === true,
+    };
+    if (broadcast) {
+      const update = { patreonUser: updatedUser };
+      if (suspended) update.patreonAuthenticated = true;
+      chrome.storage.sync.set(update, () => complete(account));
     } else {
-      chrome.storage.sync.set({ patreonUser: updatedUser }, complete);
+      complete(account);
     }
   }).then((account) => {
-    if (account && verificationEpoch === accountVerificationEpoch) {
+    if (!account || verificationEpoch !== accountVerificationEpoch) return;
+    if (account.broadcast)
       broadcastPatreonStatus(account.authenticated, account.user, account.token, { verificationEpoch });
-    }
+    if (account.revalidateDiscussion) discussionBackground.revalidateVerifiedSession(account.token).catch(() => {});
   });
 }
 

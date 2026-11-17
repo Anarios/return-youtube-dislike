@@ -263,6 +263,7 @@ export function createDiscussionBackground({
   let connecting = null;
   let activityCatchup = null;
   let refreshing = null;
+  let revalidating = null;
   let recoveryTimer = null;
   let recoveryRevision = 0;
   let recoveryAttempt = 0;
@@ -451,7 +452,7 @@ export function createDiscussionBackground({
           !response.redirected &&
           accountBound &&
           auth &&
-          auth === token
+          (path === "/me" || auth === token)
         ) {
           const written = rememberRejectedAccount(auth);
           if (path !== "/me") clearSession();
@@ -701,7 +702,7 @@ export function createDiscussionBackground({
     broadcast("inbox", inbox).catch(() => {});
   }
 
-  function loadSession() {
+  function loadSession(verification) {
     const work = accountQueue
       .catch(() => {})
       .then(async () => {
@@ -726,13 +727,28 @@ export function createDiscussionBackground({
         if (nextToken === token && (!nextToken || session.authenticated)) return session;
         const rejected = nextToken && (await isRejectedAccount(nextToken));
         assertCurrent(beforeRead);
+        if (
+          verification &&
+          (!rejected ||
+            verification.credential !== nextToken ||
+            verification.rejection !== rejectedAccount ||
+            verification.accountEpoch !== accountEpoch)
+        )
+          return session;
         if (token && token !== nextToken) clearSession(false, true, true);
-        if (rejected) return session;
+        if (rejected && !verification) return session;
         const expected = generation;
-        token = nextToken;
-        if (!token) return session;
+        if (!nextToken) return session;
+        token = verification ? "" : nextToken;
         try {
-          session = safeSession(await request("/me", { expected }));
+          const updatedSession = safeSession(await request("/me", { auth: nextToken, expected }));
+          if (verification) {
+            if (!updatedSession.authenticated) return session;
+            await clearRejectedAccount();
+            assertCurrent(expected);
+            token = nextToken;
+          }
+          session = updatedSession;
         } catch (error) {
           assertCurrent(expected);
           if (error.status !== 401) throw error;
@@ -775,15 +791,16 @@ export function createDiscussionBackground({
     );
   }
 
-  function refreshSession(retrying = false) {
-    if (refreshing) return refreshing;
-    if (stopped || accountBlocked || (!retrying && recoveryTimer !== null)) return Promise.resolve(session);
+  function refreshSession(retrying = false, verification) {
+    if (refreshing && !verification) return refreshing;
+    if (stopped || accountBlocked || (!verification && !retrying && recoveryTimer !== null))
+      return Promise.resolve(session);
     if (!recoveryActive) {
       recoveryActive = true;
       recoveryAttempt = 0;
     }
     const revision = recoveryRevision;
-    const work = loadSession().then(
+    const work = loadSession(verification).then(
       (value) => {
         if (revision !== recoveryRevision) throw new DiscussionError("session_changed");
         if (!canReceiveLiveNotifications(value)) {
@@ -799,7 +816,8 @@ export function createDiscussionBackground({
         return value;
       },
       (error) => {
-        scheduleRecovery(revision, error);
+        if (verification) finishRecovery(revision);
+        else scheduleRecovery(revision, error);
         throw error;
       },
     );
@@ -1058,9 +1076,14 @@ export function createDiscussionBackground({
       clearReactions(
         Boolean(changes.userId?.oldValue || changes[settings.credentialStorageKey]?.oldValue?.userId),
       ).catch(() => {});
+    const membership = changes.patreonUser;
+    const membershipChanged =
+      token &&
+      (membership?.oldValue?.membershipTier !== membership?.newValue?.membershipTier ||
+        membership?.oldValue?.hasActiveMembership !== membership?.newValue?.hasActiveMembership);
     const changed = settings.testMode
       ? area === "local" && changes[settings.authStorageKey]
-      : area === "sync" && (changes.patreonAuthenticated || changes.patreonSessionToken || changes.patreonUser);
+      : area === "sync" && (changes.patreonAuthenticated || changes.patreonSessionToken || membershipChanged);
     if (changed) {
       clearSession();
       const authentication = changes.patreonAuthenticated;
@@ -1092,6 +1115,21 @@ export function createDiscussionBackground({
   return {
     handleMessage,
     refreshSession,
+    revalidateVerifiedSession(credential) {
+      if (rejectedAccount === null || (credential === token && session.authenticated)) return Promise.resolve(session);
+      if (
+        revalidating?.credential === credential &&
+        revalidating.rejection === rejectedAccount &&
+        revalidating.accountEpoch === accountEpoch
+      )
+        return revalidating.work;
+      const verification = { credential, rejection: rejectedAccount, accountEpoch };
+      const work = refreshSession(false, verification).finally(() => {
+        if (revalidating?.work === work) revalidating = null;
+      });
+      revalidating = { ...verification, work };
+      return work;
+    },
     clearSession,
     resumeSession() {
       accountBlocked = false;

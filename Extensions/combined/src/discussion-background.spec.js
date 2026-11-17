@@ -1044,6 +1044,287 @@ describe("discussion worker boundary", () => {
     h.client.stop();
   });
 
+  test.each([false, true])(
+    "rechecks an already-authenticated credential after popup verification (worker restarted: %s)",
+    async (restart) => {
+      const sessionStorage = storageArea();
+      const recheck = deferred();
+      const started = deferred();
+      let reject = true;
+      const fetchOverride = (path) => {
+        if (path !== "/me") return;
+        if (reject) return { ok: false, status: 401, json: async () => ({ code: "authentication_required" }) };
+        started.resolve();
+        return recheck.promise;
+      };
+      const h = harness({ authenticated: true, sessionStorage, fetchOverride });
+      expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+      let worker = h;
+      if (restart) {
+        h.client.stop();
+        worker = harness({ sync: h.sync, sessionStorage, fetchOverride });
+        expect((await worker.send("session")).data).toEqual(ANONYMOUS_SESSION);
+      }
+      expect(h.sync.data.patreonAuthenticated).toBe(true);
+
+      reject = false;
+      const verified = worker.client.revalidateVerifiedSession("account-token");
+      await started.promise;
+      expect(tabEvents(worker, "session").every((session) => !session.authenticated)).toBe(true);
+      expect(sessionStorage.remove).not.toHaveBeenCalled();
+      const concurrent = worker.client.revalidateVerifiedSession("account-token");
+      worker.client.onStorageChanged({ patreonUser: { newValue: { membershipTier: "commenter" } } }, "sync");
+      recheck.resolve();
+
+      expect((await verified).authenticated).toBe(true);
+      expect((await concurrent).authenticated).toBe(true);
+      expect((await worker.send("session")).data.authenticated).toBe(true);
+      expect(worker.calls.filter((call) => call.path === "/me")).toHaveLength(restart ? 1 : 2);
+      expect(sessionStorage.remove).toHaveBeenCalledTimes(1);
+      worker.client.stop();
+    },
+  );
+
+  test("a verified retry that still returns 401 starts a fresh cooldown", async () => {
+    const sessionStorage = storageArea();
+    const h = harness({
+      authenticated: true,
+      sessionStorage,
+      fetchOverride: (path) =>
+        path === "/me"
+          ? { ok: false, status: 401, json: async () => ({ code: "authentication_required" }) }
+          : undefined,
+    });
+    expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+
+    const verified = h.client.revalidateVerifiedSession("account-token");
+    const concurrent = h.client.revalidateVerifiedSession("account-token");
+    await Promise.all([verified, concurrent]);
+
+    expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(2);
+    expect(sessionStorage.set).toHaveBeenCalledTimes(2);
+    expect(sessionStorage.remove).not.toHaveBeenCalled();
+    h.client.stop();
+  });
+
+  test.each([
+    [503, { code: "temporarily_unavailable" }],
+    [200, { authenticated: false }],
+  ])("keeps the credential quarantined after an unsuccessful verified retry (HTTP %s)", async (status, body) => {
+    const sessionStorage = storageArea();
+    let checks = 0;
+    const rejected = { ok: false, status: 401, json: async () => ({ code: "authentication_required" }) };
+    const h = harness({
+      authenticated: true,
+      sessionStorage,
+      fetchOverride: (path) => {
+        if (path === "/me") {
+          const check = ++checks;
+          if (check === 1) return rejected;
+          if (check === 2) return { ok: status === 200, status, json: async () => body };
+        }
+        if (path === "/me/profile") return rejected;
+      },
+    });
+    expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+
+    const retry = h.client.revalidateVerifiedSession("account-token");
+    expect(h.client.revalidateVerifiedSession("account-token")).toBe(retry);
+    if (status === 503) await expect(retry).rejects.toMatchObject({ status });
+    else expect(await retry).toEqual(ANONYMOUS_SESSION);
+
+    expect((await h.send("profile", { nickname: "Tester" })).error.status).toBe(401);
+    expect(h.calls.find((call) => call.path === "/me/profile").options.headers.Authorization).toBeUndefined();
+    expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+    expect(checks).toBe(2);
+    expect(sessionStorage.set).toHaveBeenCalledTimes(1);
+    expect(sessionStorage.remove).not.toHaveBeenCalled();
+    expect((await h.client.revalidateVerifiedSession("account-token")).authenticated).toBe(true);
+    expect(checks).toBe(3);
+    expect(sessionStorage.remove).toHaveBeenCalledTimes(1);
+    h.client.stop();
+  });
+
+  test("does not spend a popup verification on a fresh 401 that arrived after the recheck was requested", async () => {
+    const started = deferred();
+    const rejected = deferred();
+    const sessionStorage = storageArea();
+    const h = harness({
+      authenticated: true,
+      sessionStorage,
+      fetchOverride: (path) => {
+        if (path !== "/me") return;
+        started.resolve();
+        return rejected.promise;
+      },
+    });
+    const initial = h.send("session");
+    await started.promise;
+    const verified = h.client.revalidateVerifiedSession("account-token");
+    rejected.resolve({ ok: false, status: 401, json: async () => ({ code: "authentication_required" }) });
+
+    expect((await initial).data).toEqual(ANONYMOUS_SESSION);
+    expect(await verified).toEqual(ANONYMOUS_SESSION);
+    expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(1);
+    expect(sessionStorage.remove).not.toHaveBeenCalled();
+    h.client.stop();
+  });
+
+  test("waits for an in-flight rejection write before retrying a verified credential", async () => {
+    const started = deferred();
+    const commitRejection = deferred();
+    const sessionStorage = storageArea();
+    const save = sessionStorage.set.getMockImplementation();
+    sessionStorage.set.mockImplementationOnce(async (data) => {
+      started.resolve();
+      await commitRejection.promise;
+      await save(data);
+    });
+    let checks = 0;
+    const h = harness({
+      authenticated: true,
+      sessionStorage,
+      fetchOverride: (path) =>
+        path === "/me" && checks++ === 0
+          ? { ok: false, status: 401, json: async () => ({ code: "authentication_required" }) }
+          : undefined,
+    });
+    const initial = h.send("session");
+    await started.promise;
+    const verified = h.client.revalidateVerifiedSession("account-token");
+    expect(checks).toBe(1);
+    commitRejection.resolve();
+
+    expect((await initial).data).toEqual(ANONYMOUS_SESSION);
+    expect((await verified).authenticated).toBe(true);
+    expect(checks).toBe(2);
+    expect(sessionStorage.data).toEqual({});
+    h.client.stop();
+  });
+
+  test("ignores a verified credential that has already been replaced", async () => {
+    const h = harness({
+      authenticated: true,
+      fetchOverride: (path) =>
+        path === "/me"
+          ? { ok: false, status: 401, json: async () => ({ code: "authentication_required" }) }
+          : undefined,
+    });
+    expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+    h.sync.data.patreonSessionToken = "replacement-token";
+
+    await h.client.revalidateVerifiedSession("account-token");
+
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(1);
+    h.client.stop();
+  });
+
+  test.each(["logout", "revoke consent", "replace the account"])(
+    "discards a pending verified /me when the user changes state: %s",
+    async (change) => {
+      const started = deferred();
+      const oldAccount = deferred();
+      let consent = true;
+      let checks = 0;
+      const h = harness({
+        authenticated: true,
+        featureConsent: async (feature) => feature !== "account" || consent,
+        fetchOverride: (path, options) => {
+          if (path !== "/me" || options.headers.Authorization === "Bearer replacement-token") return;
+          if (checks++ === 0)
+            return { ok: false, status: 401, json: async () => ({ code: "authentication_required" }) };
+          started.resolve();
+          return oldAccount.promise;
+        },
+      });
+      expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+      const verified = h.client.revalidateVerifiedSession("account-token").catch((error) => error);
+      await started.promise;
+
+      if (change === "logout") {
+        h.client.clearSession(true);
+      } else if (change === "revoke consent") {
+        consent = false;
+        await h.client.onDataPermissionsChanged({ removed: ["personallyIdentifyingInfo"] });
+      } else {
+        h.sync.data.patreonSessionToken = "replacement-token";
+        h.client.onStorageChanged({ patreonSessionToken: { newValue: "replacement-token" } }, "sync");
+      }
+      oldAccount.resolve({
+        ok: true,
+        status: 200,
+        json: async () => ({ authenticated: true, membershipTier: "supporter" }),
+      });
+
+      expect(await verified).toMatchObject({ code: "session_changed" });
+      expect((await h.send("session")).data.authenticated).toBe(change === "replace the account");
+      expect(tabEvents(h, "session").some((session) => session.membershipTier === "supporter")).toBe(false);
+      expect(checks).toBe(2);
+      h.client.stop();
+    },
+  );
+
+  test("does not refresh a healthy account on popup verification or a name-only metadata change", async () => {
+    const h = harness({ authenticated: true, sessionStorage: storageArea() });
+    expect((await h.send("session")).data.authenticated).toBe(true);
+    h.sync.get.mockClear();
+
+    await h.client.revalidateVerifiedSession("account-token");
+    h.client.onStorageChanged(
+      {
+        patreonUser: {
+          oldValue: { fullName: "Before", membershipTier: "commenter", hasActiveMembership: true },
+          newValue: { fullName: "After", membershipTier: "commenter", hasActiveMembership: true },
+        },
+      },
+      "sync",
+    );
+    await flush();
+
+    expect(h.sync.get).not.toHaveBeenCalled();
+    expect(h.calls.filter((call) => call.path === "/me")).toHaveLength(1);
+    h.client.stop();
+  });
+
+  test("a genuine tier change supersedes an ordinary /me still resolving the old membership", async () => {
+    const started = deferred();
+    const oldMembership = deferred();
+    let checks = 0;
+    const h = harness({
+      authenticated: true,
+      account: { membershipTier: "premium" },
+      fetchOverride: (path) => {
+        if (path !== "/me" || checks++ !== 0) return;
+        started.resolve();
+        return oldMembership.promise;
+      },
+    });
+    const initial = h.send("session");
+    await started.promise;
+    h.client.onStorageChanged(
+      {
+        patreonUser: {
+          oldValue: { membershipTier: "supporter", hasActiveMembership: true },
+          newValue: { membershipTier: "premium", hasActiveMembership: true },
+        },
+      },
+      "sync",
+    );
+    oldMembership.resolve({
+      ok: true,
+      status: 200,
+      json: async () => ({ authenticated: true, membershipTier: "supporter" }),
+    });
+
+    expect((await initial).error.code).toBe("session_changed");
+    expect((await h.send("session")).data).toMatchObject({ authenticated: true, membershipTier: "premium" });
+    expect(checks).toBe(2);
+    expect(tabEvents(h, "session").some((session) => session.membershipTier === "supporter")).toBe(false);
+    h.client.stop();
+  });
+
   test("honors a Firefox consent-filtered rejection without allowing authenticated redirects", async () => {
     const sessionStorage = storageArea();
     const h = harness({

@@ -111,7 +111,9 @@ describe("background account consent lifecycle", () => {
       i18n: { getMessage: (key) => key },
       storage: {
         sync: {
-          get: jest.fn(),
+          get: jest.fn((keys, callback) => {
+            if (Array.isArray(keys) && keys.length === 2 && keys.includes("patreonSessionToken")) callback({});
+          }),
           set: jest.fn((data, callback) => callback?.()),
           remove: jest.fn((keys, callback) => callback?.()),
         },
@@ -1195,8 +1197,13 @@ describe("background account consent lifecycle", () => {
     [true, "premium", "premium"],
     [false, null, "supporter"],
   ])("merges active=%s and tier=%s into current account metadata", async (active, membershipTier, expectedTier) => {
-    const user = { fullName: "Current", imageUrl: "https://example.org/current", membershipTier: "supporter" };
-    const stored = { patreonSessionToken: "current-token", patreonUser: user };
+    const user = {
+      fullName: "Current",
+      imageUrl: "https://example.org/current",
+      membershipTier: "supporter",
+      hasActiveMembership: true,
+    };
+    const stored = { patreonAuthenticated: true, patreonSessionToken: "current-token", patreonUser: user };
     chrome.storage.sync.get.mockImplementation((keys, callback) => callback(stored));
     chrome.storage.sync.set.mockImplementation((data, callback) => {
       Object.assign(stored, data);
@@ -1214,6 +1221,74 @@ describe("background account consent lifecycle", () => {
     messageListener(request, popupSender, jest.fn());
     await flushPromises();
     expect(chrome.storage.sync.set).toHaveBeenCalledTimes(1);
+    expect(
+      chrome.tabs.sendMessage.mock.calls.filter(([, event]) => event.message === "patreon_status_changed"),
+    ).toEqual([
+      [
+        1,
+        {
+          message: "patreon_status_changed",
+          authenticated: true,
+          user: stored.patreonUser,
+          sessionToken: "current-token",
+        },
+        expect.any(Function),
+      ],
+    ]);
+  });
+
+  test("hands a verified unchanged account to discussion for one recheck after a discussion-only 401", async () => {
+    const stored = {
+      patreonAuthenticated: true,
+      patreonSessionToken: "current-token",
+      patreonUser: { fullName: "Current", membershipTier: "supporter", hasActiveMembership: true },
+    };
+    chrome.storage.sync.get.mockImplementation((keys, callback) => callback(stored));
+    chrome.tabs.sendMessage.mockImplementation((id, message, callback) => callback?.());
+    const approved = deferred();
+    const me = jest
+      .fn()
+      .mockResolvedValueOnce(Response.json({ code: "authentication_required" }, { status: 401 }))
+      .mockReturnValueOnce(approved.promise);
+    fetch.mockImplementation((url) => {
+      if (new URL(url).pathname === "/api/discussion/me") return me();
+      throw new Error("Unexpected network request");
+    });
+    const requestSession = () =>
+      new Promise((resolve) =>
+        messageListener({ message: "ryd_discussion", operation: "session" }, popupSender, resolve),
+      );
+    const completeVerification = () =>
+      new Promise((resolve) =>
+        messageListener(
+          {
+            message: "patreon_membership_verified",
+            sessionToken: "current-token",
+            active: true,
+            membershipTier: "supporter",
+          },
+          popupSender,
+          resolve,
+        ),
+      );
+    expect(await requestSession()).toMatchObject({ ok: true, data: { authenticated: false } });
+    expect(me).toHaveBeenCalledTimes(1);
+    expect(stored.patreonAuthenticated).toBe(true);
+
+    expect(await completeVerification()).toEqual({ success: true });
+    await flushPromises();
+    expect(me).toHaveBeenCalledTimes(2);
+    const session = requestSession();
+    approved.resolve(Response.json({ authenticated: true, membershipTier: "supporter" }));
+    expect(await session).toMatchObject({ ok: true, data: { authenticated: true } });
+
+    expect(await completeVerification()).toEqual({ success: true });
+    await flushPromises();
+    expect(me).toHaveBeenCalledTimes(2);
+    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+    expect(chrome.tabs.sendMessage.mock.calls.some(([, event]) => event.message === "patreon_status_changed")).toBe(
+      false,
+    );
   });
 
   test("does not interrupt an in-flight sign-in or broadcast a delayed sign-out over it", async () => {
