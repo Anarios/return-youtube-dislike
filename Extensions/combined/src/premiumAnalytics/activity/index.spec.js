@@ -243,6 +243,16 @@ describe("premiumAnalytics.activity", () => {
     expect(latestOptions.series[0].symbol).toBe("none");
   });
 
+  it("dispatches both zoom controls without chart throttling", () => {
+    renderActivityChart({ points: [] });
+
+    const { dataZoom } = chartInstance.setOption.mock.calls.at(-1)[0];
+    expect(dataZoom).toEqual([
+      expect.objectContaining({ type: "slider", throttle: 0, realtime: true }),
+      expect.objectContaining({ type: "inside", throttle: 0 }),
+    ]);
+  });
+
   it("configures slider bounds from declared range", () => {
     jest.spyOn(timeModule, "computeChartBounds").mockReturnValue({ min: 100, max: 200 });
     renderActivityChart({

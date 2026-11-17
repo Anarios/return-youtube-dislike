@@ -2,7 +2,7 @@ import { getApiEndpoint } from "../config";
 import { fetchWithAccountConsent } from "../account-data-consent";
 import { analyticsState, COUNTRY_LIMIT } from "./state";
 import { ensurePanel, updateRangeButtons, updateRangeAnchorButtons, setFooterMessage, setLoadingState } from "./panel";
-import { debounce, safeJson } from "./utils";
+import { safeJson } from "./utils";
 import { logFetchRequest } from "./logging";
 import { localize } from "../utils";
 import { hasAuthenticationDataPermission, usesFirefoxDataCollectionConsent } from "../data-collection-permissions";
@@ -13,40 +13,72 @@ import { renderAnalytics } from "./render";
 const HOURLY_THRESHOLD_DAYS = 7;
 const HOURLY_THRESHOLD_MS = HOURLY_THRESHOLD_DAYS * MS_PER_DAY;
 const MS_PER_HOUR = 60 * 60 * 1000;
-let requestSequence = 0;
+const SELECTION_FETCH_DELAY_MS = 400;
+const MAX_BUSY_RETRY_SECONDS = 60;
+let currentRequest = null;
 
-function requestAnalytics(options = {}) {
+function cancelAnalyticsRequests() {
+  const request = currentRequest;
+  currentRequest = null;
+  clearTimeout(request?.timer);
+  request?.controller?.abort();
+  return request;
+}
+
+function requestAnalytics({ selection } = {}, delay = 0) {
+  const superseded = cancelAnalyticsRequests();
   const state = analyticsState;
-
-  if (!state.currentVideoId || !state.sessionToken || !state.sessionActive) {
+  const { currentVideoId, sessionToken, sessionActive, membershipTier } = state;
+  if (!currentVideoId || !sessionToken || !sessionActive || membershipTier !== "premium") {
+    clearLoadingMessage();
     return;
   }
 
-  if (state.membershipTier !== "premium") {
-    return;
-  }
+  const request = {
+    sessionToken,
+    controller: null,
+    timer: null,
+    // A replacement can supersede another selection while it is still waiting to fetch.
+    retryOnBusy: Boolean(
+      superseded?.sessionToken === sessionToken && (superseded.controller || superseded.retryOnBusy),
+    ),
+  };
+  currentRequest = request;
+  const isCurrentRequest = () =>
+    currentRequest === request &&
+    state.currentVideoId === currentVideoId &&
+    state.sessionToken === sessionToken &&
+    state.sessionActive &&
+    state.membershipTier === "premium";
 
-  if (!usesFirefoxDataCollectionConsent()) return requestAnalyticsWithConsent(options);
-
-  const sessionToken = state.sessionToken;
-  return hasAuthenticationDataPermission().then((granted) => {
-    if (state.sessionToken !== sessionToken) return;
+  const startRequest = (granted) => {
+    if (!isCurrentRequest()) return;
     if (!granted) {
+      currentRequest = null;
       state.sessionToken = null;
       state.sessionActive = false;
+      clearLoadingMessage();
       return;
     }
 
-    return requestAnalyticsWithConsent(options);
-  });
-}
+    requestAnalyticsWithConsent(selection, request, isCurrentRequest);
+  };
 
-function requestAnalyticsWithConsent({ selection } = {}) {
-  const state = analyticsState;
+  const checkConsent = () => {
+    if (!isCurrentRequest()) return;
+    if (!usesFirefoxDataCollectionConsent()) return startRequest(true);
+    return hasAuthenticationDataPermission().then(startRequest);
+  };
 
-  if (!state.currentVideoId || !state.sessionToken || !state.sessionActive || state.membershipTier !== "premium") {
+  if (delay) {
+    scheduleRequest(request, checkConsent, delay);
     return;
   }
+  return checkConsent();
+}
+
+function requestAnalyticsWithConsent(selection, request, isCurrentRequest) {
+  const state = analyticsState;
 
   ensurePanel();
   setFooterMessage(localize("premiumAnalytics_loading"));
@@ -63,14 +95,12 @@ function requestAnalyticsWithConsent({ selection } = {}) {
   params.set("bucket", bucket);
   params.set("countryLimit", `${COUNTRY_LIMIT}`);
 
-  let requestKey;
   if (effectiveSelection) {
     const startIso = msToIso(effectiveSelection.from);
     const endIso = msToIso(effectiveSelection.to);
     if (startIso && endIso) {
       params.set("selectedRangeStartUtc", startIso);
       params.set("selectedRangeEndUtc", endIso);
-      requestKey = `${state.currentVideoId}:${startIso}:${endIso}`;
       state.usingCustomRange = true;
       state.currentRange = Math.max(0, Math.round((effectiveSelection.to - effectiveSelection.from) / MS_PER_DAY));
       state.customSelection = { ...effectiveSelection };
@@ -78,44 +108,55 @@ function requestAnalyticsWithConsent({ selection } = {}) {
     } else {
       params.set("rangeDays", `${state.currentRange}`);
       params.set("rangeAnchor", rangeAnchor);
-      requestKey = `${state.currentVideoId}:${state.currentRange}:${rangeAnchor}`;
       state.usingCustomRange = false;
       state.customSelection = null;
     }
   } else {
     params.set("rangeDays", `${state.currentRange}`);
     params.set("rangeAnchor", rangeAnchor);
-    requestKey = `${state.currentVideoId}:${state.currentRange}:${rangeAnchor}`;
     state.usingCustomRange = false;
     state.customSelection = null;
   }
 
   state.pendingSelection = effectiveSelection || null;
-  requestKey = `${requestKey}:${++requestSequence}`;
-  state.activeRequestKey = requestKey;
   state.latestBucketMs = bucket === "hour" ? MS_PER_HOUR : MS_PER_DAY;
 
   logFetchRequest(state.currentVideoId, params);
 
   const url = getApiEndpoint(`/api/patreon/analytics/video/${state.currentVideoId}?${params.toString()}`);
-  const sessionToken = state.sessionToken;
-  const isCurrentRequest = () =>
-    analyticsState.activeRequestKey === requestKey &&
-    analyticsState.sessionToken === sessionToken &&
-    analyticsState.sessionActive;
+  fetchAnalytics(url, request, isCurrentRequest);
+}
+
+function fetchAnalytics(url, request, isCurrentRequest) {
+  request.controller = new AbortController();
 
   fetchWithAccountConsent(url, {
     headers: {
-      Authorization: `Bearer ${sessionToken}`,
+      Authorization: `Bearer ${request.sessionToken}`,
       "Content-Type": "application/json",
     },
     credentials: "omit",
+    signal: request.controller.signal,
   })
     .then(async (response) => {
       if (!isCurrentRequest()) return null;
       if (!response.ok) {
         const payload = await safeJson(response);
-        if (isCurrentRequest()) handleError(response.status, payload?.error);
+        if (!isCurrentRequest()) return null;
+        const retryDelay = retryAfterMs(request, response, payload?.error);
+        if (retryDelay) {
+          scheduleRequest(
+            request,
+            () => {
+              if (!isCurrentRequest()) return;
+              request.retryOnBusy = false;
+              fetchAnalytics(url, request, isCurrentRequest);
+            },
+            retryDelay,
+          );
+        } else {
+          handleError(response.status, payload?.error);
+        }
         return null;
       }
       return response.json();
@@ -125,26 +166,43 @@ function requestAnalyticsWithConsent({ selection } = {}) {
       renderAnalytics(data, isCurrentRequest);
     })
     .catch((error) => {
+      if (!isCurrentRequest() || error?.name === "AbortError") return;
       console.error("Premium analytics failed", error);
-      if (isCurrentRequest()) {
-        handleError(0, "network_error");
-      }
+      handleError(0, "network_error");
     })
     .finally(() => {
+      request.controller = null;
+      if (request.timer !== null) return;
+      request.retryOnBusy = false;
       if (isCurrentRequest()) {
         setLoadingState(false);
       }
     });
 }
 
-function commitSelectionFetch(selection) {
-  requestAnalytics({ selection });
+function retryAfterMs(request, response, error) {
+  if (!request.retryOnBusy || response.status !== 429 || error !== "analytics_busy") return 0;
+  const header = response.headers?.get("Retry-After");
+  if (!header || !/^\d+$/.test(header)) return 0;
+  const seconds = Number(header);
+  return seconds > 0 && seconds <= MAX_BUSY_RETRY_SECONDS ? seconds * 1000 : 0;
 }
 
-const debounceSelectionFetch = debounce(commitSelectionFetch, 400);
+function scheduleRequest(request, callback, delay) {
+  request.timer = setTimeout(() => {
+    request.timer = null;
+    callback();
+  }, delay);
+}
 
 function scheduleSelectionFetch(selection) {
-  debounceSelectionFetch(selection);
+  requestAnalytics({ selection }, SELECTION_FETCH_DELAY_MS);
+}
+
+function clearLoadingMessage() {
+  if (!analyticsState.isLoading) return;
+  setFooterMessage("");
+  setLoadingState(false);
 }
 
 function normalizeSelection(selection) {
@@ -186,7 +244,7 @@ function handleError(status, code) {
   setLoadingState(false);
 }
 
-export { requestAnalytics, scheduleSelectionFetch, normalizeSelection };
+export { cancelAnalyticsRequests, requestAnalytics, scheduleSelectionFetch, normalizeSelection };
 
 function resolveAnchor() {
   const anchor = typeof analyticsState.rangeAnchor === "string" ? analyticsState.rangeAnchor.toLowerCase() : "";

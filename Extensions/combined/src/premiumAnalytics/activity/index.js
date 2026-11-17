@@ -314,9 +314,11 @@ export function unregisterZoomSelectionListener(listener) {
 }
 
 function createDataZoom(bounds, selection, singlePoint) {
+  // The selection request is debounced separately. Dispatch zoom before a later preset click can supersede it.
   const slider = {
     type: "slider",
     xAxisIndex: 0,
+    throttle: 0,
     height: 18,
     bottom: 20,
     showDataShadow: singlePoint ? false : "auto",
@@ -330,6 +332,7 @@ function createDataZoom(bounds, selection, singlePoint) {
   const inside = {
     type: "inside",
     xAxisIndex: 0,
+    throttle: 0,
   };
 
   const { min, max } = bounds;
