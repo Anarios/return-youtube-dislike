@@ -245,6 +245,7 @@ describe("popup account consent lifecycle", () => {
 
   test.each([
     ["invalid", "patreon_session_invalid"],
+    ["unverifiable", "patreon_session_invalid"],
     ["expired", "patreon_session_expired"],
     ["legacyformat", "patreon_session_expired"],
   ])("asks the background to handle verification reason %s", async (failureReason, message) => {
@@ -260,7 +261,7 @@ describe("popup account consent lifecycle", () => {
     );
     expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
     await readCachedSession(
-      failureReason === "invalid"
+      message === "patreon_session_invalid"
         ? { patreonAuthenticated: false, patreonUser: cachedUser, patreonSessionToken: "test-token" }
         : {},
     );
@@ -272,6 +273,7 @@ describe("popup account consent lifecycle", () => {
     { valid: true, membershipTier: "premium" },
     { valid: false, failureReason: "membershipinactive" },
     { valid: false, failureReason: "invalid" },
+    { valid: false, failureReason: "unverifiable" },
   ])("rereads the latest account after stale verification %j", async (verification) => {
     fetch.mockResolvedValueOnce(verificationResponse(verification));
     chrome.runtime.sendMessage.mockImplementation((request, callback) => callback?.({ success: true }));
@@ -300,17 +302,20 @@ describe("popup account consent lifecycle", () => {
     expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
   });
 
-  test("keeps the account when the verification response lacks an explicit validity result", async () => {
-    jest.spyOn(console, "warn").mockImplementation(() => {});
-    fetch.mockResolvedValue(verificationResponse({ failureReason: "invalid" }));
+  test.each([{ failureReason: "unverifiable" }, { valid: false }, { valid: false, failureReason: "unknown" }])(
+    "keeps the account when verification returns unrecognized data %j",
+    async (data) => {
+      jest.spyOn(console, "warn").mockImplementation(() => {});
+      fetch.mockResolvedValue(verificationResponse(data));
 
-    await readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
-    await flushPromises();
+      await readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
+      await flushPromises();
 
-    expect(document.getElementById("patreon-user-name").textContent).toBe(cachedUser.fullName);
-    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
-    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
-  });
+      expect(document.getElementById("patreon-user-name").textContent).toBe(cachedUser.fullName);
+      expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+      expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+    },
+  );
 
   test("rechecks a suspended credential and waits for recovery before displaying the saved profile", async () => {
     const saved = { patreonAuthenticated: false, patreonUser: cachedUser, patreonSessionToken: "test-token" };

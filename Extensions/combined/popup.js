@@ -323,7 +323,7 @@ function initPatreonAuth() {
         return { status: "expired", membershipTier };
       }
 
-      if (failureReason === "invalid") {
+      if (failureReason === "invalid" || failureReason === "unverifiable") {
         return { status: "invalid", membershipTier, failureReason };
       }
 
