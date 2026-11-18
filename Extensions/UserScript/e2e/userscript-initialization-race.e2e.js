@@ -9,6 +9,7 @@ const {
   installHermeticRoutes,
   openShortsFixture,
   readGmValue,
+  USERSCRIPT_CLIENT_DETAILS,
 } = require("./harness");
 
 const EXISTING_CREDENTIALS = {
@@ -102,6 +103,7 @@ async function expectCompletedHandshakes(backend, expectedValues) {
       userId: EXISTING_CREDENTIALS.userId,
       videoId: VIDEO_A,
       value: expectedValues[index],
+      ...USERSCRIPT_CLIENT_DETAILS,
     });
     expect(confirmations[index].body).toMatchObject({
       userId: EXISTING_CREDENTIALS.userId,
@@ -119,7 +121,7 @@ async function expectSingleCompletedHandshake(backend, { value, videoId }) {
   const confirmations = backend.requestsFor("POST", "/interact/confirmVote");
   expect(votes).toHaveLength(1);
   expect(confirmations).toHaveLength(1);
-  expect(votes[0].body).toEqual({ userId: EXISTING_CREDENTIALS.userId, videoId, value });
+  expect(votes[0].body).toEqual({ userId: EXISTING_CREDENTIALS.userId, videoId, value, ...USERSCRIPT_CLIENT_DETAILS });
   expect(confirmations[0].body).toMatchObject({ userId: EXISTING_CREDENTIALS.userId, videoId });
 }
 
@@ -202,6 +204,7 @@ test("stale native Shorts hydration preserves video A's captured dislike across 
       userId: EXISTING_CREDENTIALS.userId,
       videoId: VIDEO_A,
       value: -1,
+      ...USERSCRIPT_CLIENT_DETAILS,
     });
     await page.evaluate((videoId) => window.__shortsFixture.recycleActiveRenderer(videoId), VIDEO_B);
   } finally {

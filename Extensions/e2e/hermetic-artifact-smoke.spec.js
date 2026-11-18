@@ -191,6 +191,13 @@ function validSpaSnapshot() {
 }
 
 const ARTIFACT_USER_ID = "A".repeat(36);
+const ARTIFACT_VOTE_BODY = Object.freeze({
+  userId: ARTIFACT_USER_ID,
+  value: -1,
+  videoId: "zyxwvutsrqp",
+  clientVersion: "4.1.7",
+  clientKind: "chromium",
+});
 
 function validVoteHandshake(change = {}) {
   return {
@@ -207,7 +214,7 @@ function validVoteHandshake(change = {}) {
     interactionPaths: ["/interact/vote", "/interact/confirmVote"],
     sharedUserId: ARTIFACT_USER_ID,
     vote: {
-      body: { userId: ARTIFACT_USER_ID, value: -1, videoId: "zyxwvutsrqp" },
+      body: ARTIFACT_VOTE_BODY,
       responded: true,
       responseBody: { challenge: "AAAAAAAAAAAAAAAAAAAAAA==", difficulty: 0 },
       responseStatus: 200,
@@ -674,7 +681,7 @@ test("recognizes only one ordered, successful destination dislike handshake", ()
   const records = [
     { method: "POST", pathname: "/puzzle/registration" },
     {
-      body: { userId: ARTIFACT_USER_ID, value: -1, videoId: "zyxwvutsrqp" },
+      body: ARTIFACT_VOTE_BODY,
       method: "POST",
       pathname: "/interact/vote",
       respondedAt: 122,

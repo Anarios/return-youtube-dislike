@@ -1,6 +1,7 @@
 import { createVoteClient } from "../../common/vote-client";
 import { resolveDelegatedVoteActivation } from "../../common/delegated-vote-activation";
 import { getLiveVideoId } from "../../common/live-video-id";
+import { readPlaybackPosition } from "../../common/playback-position";
 import { getThemeColor, isYouTubeDarkTheme, observeYouTubeTheme } from "../../common/color-themes";
 import {
   actionBarHasHydratedData,
@@ -37,6 +38,7 @@ const voteClient = createVoteClient({
   fetchImpl,
   credentialStore: createGmCredentialStore(),
   cryptoImpl: globalThis.crypto,
+  clientDetails: { clientVersion: USER_SCRIPT_VERSION, clientKind: "userscript" },
 });
 const syntheticDislikeStore = createGmSyntheticDislikeStore();
 
@@ -1667,7 +1669,9 @@ function reconcileHydratingVoteTransition(hydration, transition, syntheticShorts
 
 function submitVoteTransition(videoId, transition, signedOut) {
   if (shouldSubmitVote({ disableVoteSubmission: extConfig.disableVoteSubmission, signedOut })) {
-    void voteClient.submitVote(videoId, transition.value).catch(reportVoteFailure);
+    void voteClient
+      .submitVote(videoId, transition.value, { playbackPosition: readPlaybackPosition(videoId) })
+      .catch(reportVoteFailure);
   }
 }
 

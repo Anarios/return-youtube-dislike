@@ -1,4 +1,9 @@
-const { hasExactKeys, isFourByteProofSolution, isVoteProtocolBodyPairValid } = require("./vote-protocol-contract");
+const {
+  hasExactKeys,
+  isFourByteProofSolution,
+  isVoteBodyShapeValid,
+  isVoteProtocolBodyPairValid,
+} = require("./vote-protocol-contract");
 
 const USER_ID = "A".repeat(36);
 const VIDEO_ID = "abcdefghijk";
@@ -7,7 +12,7 @@ const SOLUTION = Buffer.alloc(4).toString("base64");
 function validBodies() {
   return {
     confirmation: { solution: SOLUTION, userId: USER_ID, videoId: VIDEO_ID },
-    vote: { userId: USER_ID, value: -1, videoId: VIDEO_ID },
+    vote: { userId: USER_ID, value: -1, videoId: VIDEO_ID, clientVersion: "4.1.7", clientKind: "chromium" },
   };
 }
 
@@ -16,11 +21,30 @@ test("accepts only the exact vote and four-byte confirmation protocol bodies", (
   expect(isVoteProtocolBodyPairValid(bodies.vote, bodies.confirmation, { value: -1, videoId: VIDEO_ID })).toBe(true);
 });
 
+test.each([0, 3600])("accepts a vote body with the playback position %p", (playbackPosition) => {
+  const bodies = validBodies();
+  expect(
+    isVoteProtocolBodyPairValid({ ...bodies.vote, playbackPosition }, bodies.confirmation, {
+      value: -1,
+      videoId: VIDEO_ID,
+    }),
+  ).toBe(true);
+});
+
+test.each(["chromium", "firefox", "safari", "userscript"])("accepts the client kind %s", (clientKind) => {
+  expect(isVoteBodyShapeValid({ ...validBodies().vote, clientKind })).toBe(true);
+});
+
 test.each([
   ["short user ID", ({ vote }) => ({ ...vote, userId: "short" })],
   ["extra vote key", ({ vote }) => ({ ...vote, unexpected: true })],
   ["wrong video", ({ vote }) => ({ ...vote, videoId: "lmnopqrstuv" })],
   ["wrong value", ({ vote }) => ({ ...vote, value: 1 })],
+  ["missing client version", ({ vote }) => ({ ...vote, clientVersion: undefined })],
+  ["malformed client version", ({ vote }) => ({ ...vote, clientVersion: "4.1.7-beta" })],
+  ["unknown client kind", ({ vote }) => ({ ...vote, clientKind: "edge" })],
+  ["fractional playback position", ({ vote }) => ({ ...vote, playbackPosition: 1.5 })],
+  ["negative playback position", ({ vote }) => ({ ...vote, playbackPosition: -1 })],
 ])("rejects a vote body with a %s", (_label, changeVote) => {
   const bodies = validBodies();
   bodies.vote = changeVote(bodies);

@@ -102,6 +102,7 @@ function createClient({
   cryptoImpl = createCryptoImpl(),
   puzzleAttempts,
   votePuzzleAttempts,
+  clientDetails,
 } = {}) {
   return createVoteClient({
     apiBaseUrl: API_BASE_URL,
@@ -110,6 +111,7 @@ function createClient({
     cryptoImpl,
     ...(puzzleAttempts === undefined ? {} : { puzzleAttempts }),
     ...(votePuzzleAttempts === undefined ? {} : { votePuzzleAttempts }),
+    ...(clientDetails === undefined ? {} : { clientDetails }),
   });
 }
 
@@ -424,6 +426,48 @@ describe("createVoteClient submission", () => {
     });
   });
 
+  it("sends the playback position and client details with the vote but not the confirmation", async () => {
+    const credentialStore = createCredentialStore({ userId: "existing-user", registrationConfirmed: true });
+    const fetchImpl = jest
+      .fn()
+      .mockResolvedValueOnce(jsonResponse(votePuzzle()))
+      .mockResolvedValueOnce(jsonResponse(true));
+    const client = createClient({
+      fetchImpl,
+      credentialStore,
+      clientDetails: { clientVersion: "4.1.7", clientKind: "firefox" },
+    });
+
+    await expect(client.submitVote(VIDEO_A, 1, { playbackPosition: 125 })).resolves.toBe(true);
+
+    expect(parseBody(fetchImpl.mock.calls[0])).toEqual({
+      userId: "existing-user",
+      videoId: VIDEO_A,
+      value: 1,
+      playbackPosition: 125,
+      clientVersion: "4.1.7",
+      clientKind: "firefox",
+    });
+    expect(parseBody(fetchImpl.mock.calls[1])).toEqual({
+      solution: ZERO_SOLUTION,
+      userId: "existing-user",
+      videoId: VIDEO_A,
+    });
+  });
+
+  it.each([-1, 2.5, "30", Number.NaN])("omits the invalid playback position %p", async (playbackPosition) => {
+    const credentialStore = createCredentialStore({ userId: "existing-user", registrationConfirmed: true });
+    const fetchImpl = jest
+      .fn()
+      .mockResolvedValueOnce(jsonResponse(votePuzzle()))
+      .mockResolvedValueOnce(jsonResponse(true));
+    const client = createClient({ fetchImpl, credentialStore });
+
+    await expect(client.submitVote(VIDEO_A, 0, { playbackPosition })).resolves.toBe(true);
+
+    expect(parseBody(fetchImpl.mock.calls[0])).toEqual({ userId: "existing-user", videoId: VIDEO_A, value: 0 });
+  });
+
   it("shares one cold registration across concurrent first votes", async () => {
     const credentialStore = createCredentialStore();
     const registrationResponse = deferred();
@@ -463,7 +507,7 @@ describe("createVoteClient submission", () => {
       .mockResolvedValueOnce(jsonResponse(true));
     const client = createClient({ fetchImpl, credentialStore });
 
-    await expect(client.submitVote(VIDEO_A, 1)).resolves.toBe(true);
+    await expect(client.submitVote(VIDEO_A, 1, { playbackPosition: 42 })).resolves.toBe(true);
 
     expect(fetchImpl).toHaveBeenCalledTimes(5);
     expect(credentialStore.clear).toHaveBeenCalledTimes(1);
@@ -472,12 +516,14 @@ describe("createVoteClient submission", () => {
       userId: "expired-user",
       videoId: VIDEO_A,
       value: 1,
+      playbackPosition: 42,
     });
     expect(fetchImpl.mock.calls[1][0]).toBe(`${API_BASE_URL}/puzzle/registration?userId=${GENERATED_USER_ID}`);
     expect(parseBody(fetchImpl.mock.calls[3])).toEqual({
       userId: GENERATED_USER_ID,
       videoId: VIDEO_A,
       value: 1,
+      playbackPosition: 42,
     });
     expect(parseBody(fetchImpl.mock.calls[4])).toEqual({
       solution: ZERO_SOLUTION,

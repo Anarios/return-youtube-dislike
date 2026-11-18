@@ -9,6 +9,7 @@ const {
   installHermeticRoutes,
   openNavigationFixture,
   openShortsFixture,
+  USERSCRIPT_CLIENT_DETAILS,
 } = require("./harness");
 
 const EXISTING_CREDENTIALS = {
@@ -231,7 +232,12 @@ test("the live read-only prelude leaves one native Shorts Like activation", asyn
   const confirmations = harness.backend.requestsFor("POST", "/interact/confirmVote");
   expect(votes).toHaveLength(1);
   expect(confirmations).toHaveLength(1);
-  expect(votes[0].body).toEqual({ userId: EXISTING_CREDENTIALS.userId, videoId: VIDEO_A, value: 1 });
+  expect(votes[0].body).toEqual({
+    userId: EXISTING_CREDENTIALS.userId,
+    videoId: VIDEO_A,
+    value: 1,
+    ...USERSCRIPT_CLIENT_DETAILS,
+  });
   expect(confirmations[0].body).toMatchObject({ userId: EXISTING_CREDENTIALS.userId, videoId: VIDEO_A });
   await expect(nativeLike).toHaveAttribute("aria-pressed", "true");
   await expect(finalShort.locator("[data-ryd-synthetic-shorts-dislike] button")).toHaveAttribute(

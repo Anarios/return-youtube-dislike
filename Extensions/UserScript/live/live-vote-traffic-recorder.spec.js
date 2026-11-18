@@ -6,7 +6,7 @@ const SOLUTION = Buffer.alloc(4).toString("base64");
 
 function vote({ status = 200, userId = USER_ID, value = 1, videoId = VIDEO_ID } = {}) {
   return {
-    body: { userId, value, videoId },
+    body: { userId, value, videoId, playbackPosition: 12, clientVersion: "3.2.2", clientKind: "userscript" },
     pathname: "/interact/vote",
     responseError: null,
     status,
@@ -82,7 +82,7 @@ describe("live logical vote handshake validation", () => {
     [
       "extra vote body key",
       [{ ...vote(), body: { ...vote().body, extra: true } }, confirmation()],
-      /exactly userId, value, and videoId/,
+      /exactly userId, value, videoId, client details, and an optional playback position/,
     ],
     [
       "extra confirmation body key",

@@ -1,5 +1,6 @@
 import { config, getApiUrl, getApiEndpoint, getChangelogUrl } from "./src/config";
 import { createVoteClient } from "../common/vote-client";
+import { getClientDetails } from "./src/client-details";
 import { createBrowserCredentialStore } from "./src/vote-client-adapter";
 import { loginWithGitHub } from "./src/github-auth";
 import { createDiscussionBackground } from "./src/discussion-background";
@@ -84,6 +85,7 @@ function createCurrentVoteClient() {
       ]),
     ),
     cryptoImpl: globalThis.crypto,
+    clientDetails: getClientDetails(api),
   });
 }
 
@@ -604,7 +606,7 @@ function handleMessage(request, sender, sendResponse) {
       .then(() => {
         if (usesFirefoxDataCollectionConsent() && generation !== votingPermissionGeneration) throw coreConsentError();
         if (extConfig.disableVoteSubmission) throw new Error("Vote submission is disabled.");
-        return voteClient.submitVote(request.videoId, request.vote);
+        return voteClient.submitVote(request.videoId, request.vote, { playbackPosition: request.playbackPosition });
       })
       .then(() => sendResponse?.({ success: true }))
       .catch((error) => sendResponse?.({ success: false, error: error.message }));

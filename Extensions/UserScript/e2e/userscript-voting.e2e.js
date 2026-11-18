@@ -10,6 +10,7 @@ const {
   openShortsFixture,
   openWatchFixture,
   readGmValue,
+  USERSCRIPT_CLIENT_DETAILS,
 } = require("./harness");
 
 const EXISTING_CREDENTIALS = {
@@ -110,7 +111,22 @@ test("fresh startup registers only on the first vote and submits a complete disl
   context,
   page,
 }) => {
-  const harness = await launchHarness({ context, page });
+  const harness = await launchHarness(
+    { context, page },
+    {
+      beforeInject: (fixture) =>
+        fixture.locator("ytd-watch-flexy").evaluate((root) => {
+          const player = document.createElement("div");
+          player.id = "movie_player";
+          player.style.cssText = "position:absolute;width:1px;height:1px";
+          const video = document.createElement("video");
+          video.className = "html5-main-video";
+          video.currentTime = 42.77;
+          player.append(video);
+          root.append(player);
+        }),
+    },
+  );
   const { backend } = harness;
   await waitForDislikeCount(page, 25);
 
@@ -143,7 +159,13 @@ test("fresh startup registers only on the first vote and submits a complete disl
 
   const vote = backend.requestsFor("POST", "/interact/vote")[0];
   const confirmation = backend.requestsFor("POST", "/interact/confirmVote")[0];
-  expect(vote.body).toEqual({ userId: credentials.userId, videoId: VIDEO_A, value: -1 });
+  expect(vote.body).toEqual({
+    userId: credentials.userId,
+    videoId: VIDEO_A,
+    value: -1,
+    playbackPosition: 42,
+    ...USERSCRIPT_CLIENT_DETAILS,
+  });
   expect(confirmation.body.userId).toBe(credentials.userId);
   expect(confirmation.body.videoId).toBe(VIDEO_A);
   expect(Buffer.from(confirmation.body.solution, "base64")).toHaveLength(4);
@@ -168,6 +190,7 @@ test("credentials survive a page reload and prevent duplicate registration", asy
     userId: firstCredentials.userId,
     videoId: VIDEO_A,
     value: -1,
+    ...USERSCRIPT_CLIENT_DETAILS,
   });
   await expectNoRuntimeFailures(harness);
 });
@@ -191,6 +214,7 @@ test("a second page reuses the registered identity", async ({ context, page }) =
     userId: credentials.userId,
     videoId: VIDEO_B,
     value: 1,
+    ...USERSCRIPT_CLIENT_DETAILS,
   });
   await expectNoRuntimeFailures(harness);
 });

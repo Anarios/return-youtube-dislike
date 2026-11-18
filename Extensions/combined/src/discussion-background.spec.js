@@ -84,7 +84,7 @@ function harness({
     runtime: {
       id: "extension-id",
       getURL: (path) => `${firefox ? "moz" : "chrome"}-extension://extension-id/${path}`,
-      getManifest: () => (firefox ? { browser_specific_settings: { gecko: {} } } : {}),
+      getManifest: () => ({ version: "4.1.7", ...(firefox ? { browser_specific_settings: { gecko: {} } } : {}) }),
       sendMessage: jest.fn((message, callback) => callback?.()),
       onStartup: { addListener: jest.fn() },
     },
@@ -1772,14 +1772,47 @@ describe("discussion worker boundary", () => {
     await h.send("react", { id: ID, value: -1 });
     delete h.sync.data.patreonSessionToken;
     await h.send("react", { id: ID, value: 0 });
+    const client = { clientVersion: "4.1.7", clientKind: "chromium" };
     expect(h.calls.filter((call) => call.path.endsWith("/reaction/challenge")).map((call) => call.body)).toEqual([
-      { userId: "existing-voter-secret", value: 1 },
-      { userId: "existing-voter-secret", value: -1 },
-      { userId: "existing-voter-secret", value: 0 },
+      { userId: "existing-voter-secret", value: 1, ...client },
+      { userId: "existing-voter-secret", value: -1, ...client },
+      { userId: "existing-voter-secret", value: 0, ...client },
     ]);
     expect(h.sync.set).not.toHaveBeenCalled();
     expect(h.sync.remove).not.toHaveBeenCalled();
     expect((await h.send("session")).data).toEqual(ANONYMOUS_SESSION);
+    h.client.stop();
+  });
+
+  test.each([
+    [false, 83, { playbackPosition: 83, clientVersion: "4.1.7", clientKind: "chromium" }],
+    [true, 0, { playbackPosition: 0, clientVersion: "4.1.7", clientKind: "firefox" }],
+    [false, -4, { clientVersion: "4.1.7", clientKind: "chromium" }],
+    [false, 2.5, { clientVersion: "4.1.7", clientKind: "chromium" }],
+  ])(
+    "sends the reaction's playback position and client details with the challenge only (Firefox %s, position %p)",
+    async (firefox, playbackPosition, details) => {
+      const h = harness({ firefox });
+      const normalTab = { ...sender, tab: { ...sender.tab, incognito: false } };
+      expect((await h.send("react", { id: ID, value: 1, playbackPosition }, normalTab)).ok).toBe(true);
+      expect(h.calls.find((call) => call.path.endsWith("/reaction/challenge")).body).toEqual({
+        userId: "existing-voter-secret",
+        value: 1,
+        ...details,
+      });
+      expect(Object.keys(h.calls.find((call) => call.path.endsWith("/reaction/confirm")).body).sort()).toEqual([
+        "challengeId",
+        "solution",
+        "userId",
+      ]);
+      h.client.stop();
+    },
+  );
+
+  test("rejects reaction payloads with unknown fields", async () => {
+    const h = harness();
+    expect((await h.send("react", { id: ID, value: 1, videoTime: 4 })).ok).toBe(false);
+    expect(h.calls.some((call) => call.path.endsWith("/reaction/challenge"))).toBe(false);
     h.client.stop();
   });
 

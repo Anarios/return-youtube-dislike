@@ -202,6 +202,28 @@ test("signed-out users can react without seeing author or moderator controls", a
   expect(request).toHaveBeenLastCalledWith("react", { id: ROOT, value: 0 });
 });
 
+function mountPlaybackPosition(currentTime) {
+  const player = document.createElement("div");
+  player.id = "movie_player";
+  player.className = "html5-video-player";
+  player.getClientRects = () => [{ width: 640, height: 360 }];
+  const video = document.createElement("video");
+  video.className = "html5-main-video";
+  Object.defineProperty(video, "currentTime", { configurable: true, writable: true, value: currentTime });
+  player.append(video);
+  document.body.append(player);
+  return video;
+}
+
+test("a reaction carries the main player's position at the click", async () => {
+  mountPlaybackPosition(148.6);
+  const root = await mount();
+  request.mockResolvedValueOnce({ commentId: ROOT, likes: 3, dislikes: 1, myReaction: -1 });
+  root.querySelector("[data-reaction='-1']").click();
+  await flush();
+  expect(request).toHaveBeenLastCalledWith("react", { id: ROOT, value: -1, playbackPosition: 148 });
+});
+
 test("explains why posting is paid between the membership gate and the join link", async () => {
   const root = await mount();
   const gate = root.querySelector(".ryd-discussion-composer > .ryd-discussion-gate");
@@ -1625,14 +1647,17 @@ describe("reactions without Firefox website activity", () => {
   });
 
   test("only the latest pending reaction is sent after the grant", async () => {
+    const video = mountPlaybackPosition(15.1);
     const root = await mount({ reactionsAllowed: false }, [comment({ author: otherSession.profile })]);
     root.querySelector("[data-reaction='1']").click();
+    video.currentTime = 21.2;
     root.querySelector("[data-reaction='-1']").click();
+    video.currentTime = 37.3;
     request.mockResolvedValueOnce({ commentId: ROOT, likes: 2, dislikes: 2, myReaction: -1 });
     panel.setPermissions({ reactions: true });
     await flush();
     expect(request.mock.calls.filter(([operation]) => operation === "react")).toEqual([
-      ["react", { id: ROOT, value: -1 }],
+      ["react", { id: ROOT, value: -1, playbackPosition: 21 }],
     ]);
   });
 

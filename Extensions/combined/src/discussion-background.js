@@ -1,5 +1,7 @@
 import { HubConnectionBuilder, HttpTransportType, LogLevel } from "@microsoft/signalr";
 import { createVoteClient, solvePuzzle } from "../../common/vote-client";
+import { normalizePlaybackPosition } from "../../common/playback-position";
+import { getClientDetails } from "./client-details";
 import { discussionConfig } from "./discussion-config";
 import { isFirefoxExtension, isNormalMessageSender } from "./private-browsing";
 
@@ -38,7 +40,7 @@ const OPERATIONS = {
   createComment: ["videoId", "text", "parentId", "replyToId", "requestId"],
   editComment: ["id", "text"],
   deleteComment: ["id"],
-  react: ["id", "value"],
+  react: ["id", "value", "playbackPosition"],
   report: ["id", "reason"],
   reports: ["cursor", "status"],
   dismissReport: ["id", "reason"],
@@ -248,6 +250,7 @@ export function createDiscussionBackground({
   random = Math.random,
 } = {}) {
   const local = api.storage.local;
+  const clientDetails = getClientDetails(api);
   const sessionStorage = api.storage.session;
   const rejectionStorageKey = `${settings.stateStorageKey}RejectedAccount`;
   const origin = settings.apiOrigin.replace(/\/$/, "");
@@ -901,10 +904,11 @@ export function createDiscussionBackground({
         assertReaction();
         const { userId } = await credentials.ensureRegistered();
         assertReaction();
+        const playbackPosition = normalizePlaybackPosition(payload.playbackPosition);
         for (let attempt = 0; attempt < 3; attempt++) {
           const puzzle = await request(`/comments/${payload.id}/reaction/challenge`, {
             method: "POST",
-            body: { userId, value: payload.value },
+            body: { userId, value: payload.value, playbackPosition, ...clientDetails },
             expected,
             scope,
             auth: "",

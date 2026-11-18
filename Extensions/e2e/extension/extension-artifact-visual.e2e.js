@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { test, expect } = require("@playwright/test");
+const { CLIENT_VERSION_PATTERN } = require("../vote-protocol-contract");
 const { VIDEO_A } = require("../../UserScript/e2e/harness");
 const { HermeticExtensionArtifactAdapter, startHermeticApiServer } = require("../hermetic-artifact-smoke");
 const {
@@ -128,6 +129,8 @@ function expectExactVoteHandshake(interactions, transition) {
     userId: expect.stringMatching(/^[A-Za-z0-9]{36}$/),
     value: transition.value,
     videoId: VIDEO_A,
+    clientVersion: expect.stringMatching(CLIENT_VERSION_PATTERN),
+    clientKind: "chromium",
   });
   expect(interactions[1].body).toEqual({
     solution: expect.any(String),

@@ -3,6 +3,7 @@ const {
   USER_ID_PATTERN,
   hasExactKeys,
   isFourByteProofSolution,
+  isVoteBodyShapeValid,
   isVoteProtocolBodyPairValid,
 } = require("../../../e2e/vote-protocol-contract");
 const { inspectYoutubeSessionDocument, normalizeChannelHandle } = require("./live-authenticated-context");
@@ -1839,9 +1840,9 @@ function assertLogicalVoteHandshake(records, videoId, value) {
   assert.match(userId ?? "", USER_ID_PATTERN, "The vote request must use a 36-character protocol user ID.");
   for (const vote of votes) {
     assert.equal(
-      hasExactKeys(vote.body, ["userId", "value", "videoId"]),
+      isVoteBodyShapeValid(vote.body),
       true,
-      "The vote request body must contain exactly userId, value, and videoId.",
+      "The vote request body must contain exactly userId, value, videoId, client details, and an optional playback position.",
     );
     assert.equal(vote.body?.userId, userId, "Vote puzzle retries used different user IDs.");
     assert.equal(vote.body?.videoId, videoId, "Vote puzzle retry targeted a different video.");
