@@ -1,5 +1,6 @@
 import { getApiEndpoint } from "../config";
 import { fetchWithAccountConsent } from "../account-data-consent";
+import { DataConsentError } from "../core-data-consent";
 import { analyticsState, COUNTRY_LIMIT } from "./state";
 import { ensurePanel, updateRangeButtons, updateRangeAnchorButtons, setFooterMessage, setLoadingState } from "./panel";
 import { safeJson } from "./utils";
@@ -14,8 +15,14 @@ const HOURLY_THRESHOLD_DAYS = 7;
 const HOURLY_THRESHOLD_MS = HOURLY_THRESHOLD_DAYS * MS_PER_DAY;
 const MS_PER_HOUR = 60 * 60 * 1000;
 const SELECTION_FETCH_DELAY_MS = 400;
-const DEFAULT_BUSY_RETRY_SECONDS = 3;
-const MAX_BUSY_RETRY_SECONDS = 60;
+const DEFAULT_BUSY_RETRY_MS = 3000;
+const MAX_BUSY_RETRY_WAIT_MS = 10000;
+const MAX_BUSY_RETRY_JITTER_MS = 1000;
+const STANDARD_HTTP_DATE = /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} [A-Z][a-z]{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/;
+const RFC850_DATE =
+  /^(?<weekday>Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (?<day>\d{2})-(?<month>[A-Z][a-z]{2})-(?<year>\d{2}) (?<time>\d{2}:\d{2}:\d{2}) GMT$/;
+const ASCTIME_DATE =
+  /^(?<weekday>[A-Z][a-z]{2}) (?<month>[A-Z][a-z]{2}) (?<day>[ \d]\d) (?<time>\d{2}:\d{2}:\d{2}) (?<year>\d{4})$/;
 let currentRequest = null;
 
 function cancelAnalyticsRequests() {
@@ -117,65 +124,103 @@ function requestAnalyticsWithConsent(selection, request, isCurrentRequest) {
   state.pendingSelection = effectiveSelection || null;
   state.latestBucketMs = bucket === "hour" ? MS_PER_HOUR : MS_PER_DAY;
 
-  logFetchRequest(state.currentVideoId, params);
-
-  const url = getApiEndpoint(`/api/patreon/analytics/video/${state.currentVideoId}?${params.toString()}`);
-  fetchAnalytics(url, request, isCurrentRequest);
+  const videoId = state.currentVideoId;
+  const url = getApiEndpoint(`/api/patreon/analytics/video/${videoId}?${params.toString()}`);
+  fetchAnalytics(url, request, isCurrentRequest, () => logFetchRequest(videoId, params));
 }
 
-function fetchAnalytics(url, request, isCurrentRequest, retryOnBusy = true) {
-  request.controller = new AbortController();
+async function fetchAnalytics(url, request, isCurrentRequest, logAttempt, retryOnBusy = true) {
+  const controller = new AbortController();
+  request.controller = controller;
 
-  fetchWithAccountConsent(url, {
-    headers: {
-      Authorization: `Bearer ${request.sessionToken}`,
-      "Content-Type": "application/json",
-    },
-    credentials: "omit",
-    signal: request.controller.signal,
-  })
-    .then(async (response) => {
-      if (!isCurrentRequest()) return null;
-      if (!response.ok) {
-        const payload = await safeJson(response);
-        if (!isCurrentRequest()) return null;
-        if (retryOnBusy && response.status === 429 && payload?.error === "analytics_busy") {
-          scheduleRequest(
-            request,
-            () => {
-              if (isCurrentRequest()) fetchAnalytics(url, request, isCurrentRequest, false);
-            },
-            retryAfterMs(response),
-          );
-        } else {
-          handleError(response.status, payload?.error);
-        }
-        return null;
+  try {
+    const response = await fetchWithAccountConsent(
+      url,
+      {
+        headers: {
+          Authorization: `Bearer ${request.sessionToken}`,
+          "Content-Type": "application/json",
+        },
+        credentials: "omit",
+        signal: controller.signal,
+      },
+      (input, options) => {
+        if (!isCurrentRequest()) controller.abort();
+        if (options.signal.aborted) throw options.signal.reason ?? new DOMException("Aborted", "AbortError");
+        logAttempt();
+        return globalThis.fetch(input, options);
+      },
+    );
+    if (!isCurrentRequest()) return;
+    if (response.ok) {
+      const data = await response.json();
+      if (data && isCurrentRequest()) renderAnalytics(data, isCurrentRequest);
+      return;
+    }
+
+    const payload = await safeJson(response);
+    if (!isCurrentRequest()) return;
+    if (retryOnBusy && response.status === 429 && payload?.error === "analytics_busy") {
+      const wait = retryAfterMs(response);
+      if (wait <= MAX_BUSY_RETRY_WAIT_MS) {
+        const jitter = Math.floor(Math.random() * MAX_BUSY_RETRY_JITTER_MS);
+        scheduleRequest(
+          request,
+          () => {
+            if (isCurrentRequest()) fetchAnalytics(url, request, isCurrentRequest, logAttempt, false);
+          },
+          wait + jitter,
+        );
+        return;
       }
-      return response.json();
-    })
-    .then((data) => {
-      if (!data) return;
-      renderAnalytics(data, isCurrentRequest);
-    })
-    .catch((error) => {
-      if (!isCurrentRequest() || error?.name === "AbortError") return;
+    }
+    handleError(response.status, payload?.error);
+  } catch (error) {
+    if (!isCurrentRequest() || error?.name === "AbortError") return;
+    if (error instanceof DataConsentError) {
+      setFooterMessage("");
+    } else {
       console.error("Premium analytics failed", error);
       handleError(0, "network_error");
-    })
-    .finally(() => {
+    }
+  } finally {
+    if (request.controller === controller) {
       request.controller = null;
-      if (request.timer !== null) return;
-      if (isCurrentRequest()) {
+      if (request.timer === null && isCurrentRequest()) {
         setLoadingState(false);
       }
-    });
+    }
+  }
 }
 
 function retryAfterMs(response) {
   const header = response.headers?.get("Retry-After")?.trim();
-  const seconds = header && /^\d+(?:\.\d+)?$/.test(header) ? Number(header) : DEFAULT_BUSY_RETRY_SECONDS;
-  return Math.min(seconds, MAX_BUSY_RETRY_SECONDS) * 1000;
+  if (!header) return DEFAULT_BUSY_RETRY_MS;
+  if (/^\d+$/.test(header)) return Number(header) * 1000;
+
+  const now = Date.now();
+  const normalized = normalizeHttpDate(header, now);
+  if (!normalized) return DEFAULT_BUSY_RETRY_MS;
+  const timestamp = Date.parse(normalized);
+  // Reject invalid calendar dates and weekdays that Date.parse can silently correct.
+  if (new Date(timestamp).toUTCString() !== normalized) return DEFAULT_BUSY_RETRY_MS;
+  return Math.max(0, timestamp - now);
+}
+
+function normalizeHttpDate(header, now) {
+  if (STANDARD_HTTP_DATE.test(header)) return header;
+  const parts = (RFC850_DATE.exec(header) ?? ASCTIME_DATE.exec(header))?.groups;
+  if (!parts) return null;
+
+  const { weekday, day, month, year, time } = parts;
+  let fullYear = year;
+  if (year.length === 2) {
+    // Use the year with these two digits that is no more than 50 years ahead.
+    const latestYear = new Date(now).getUTCFullYear() + 50;
+    const candidate = Math.floor(latestYear / 100) * 100 + Number(year);
+    fullYear = String(candidate > latestYear ? candidate - 100 : candidate);
+  }
+  return `${weekday.slice(0, 3)}, ${day.trim().padStart(2, "0")} ${month} ${fullYear} ${time} GMT`;
 }
 
 function scheduleRequest(request, callback, delay) {
