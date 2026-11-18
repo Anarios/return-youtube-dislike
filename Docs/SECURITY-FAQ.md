@@ -19,21 +19,24 @@ associate submitted votes with the same extension installation.
 
 ### What information do you have, exactly?
 
-For dislike-count requests: the current video ID and, when available, the visible like count. For registration and vote
-submission: the random extension user ID, video ID, selected vote, and timestamp. For RYD comment reactions: the same
-random extension user ID, the comment ID, and the reaction. RYD comments and replies that signed-in members post are
-public and stored with their RYD nickname. The API also receives your IP address.
-Raw addresses stay in RAM and hashes are stored for abuse controls. Optional premium features use the account ID, name,
-email address, profile image, membership information, and service session token returned by a Patreon or GitHub sign-in
-initiated by the user. For version 4.1.0 and its matching
+Dislike-count requests include the video ID and, when available, its visible like count. Registration uses a random
+installation ID. Shared votes are recorded with that ID, the video ID, the selected vote, and the time. RYD comment
+reactions use the same installation ID with the comment ID and selected reaction. Votes and reactions can also include
+which extension or userscript you used, its version and, when available, the playback position in whole seconds
+when you clicked.
+Removing a reaction marks its record as removed. Comments and replies you post are public under your RYD nickname.
+
+Optional premium features use the account ID, name, email address, profile image, membership information, and service
+session token returned by a Patreon or GitHub sign-in initiated by the user. For version 4.1.0 and its matching
 backend release, Patreon access is determined from currently entitled tier IDs and, where needed, the current
 entitlement amount and monthly or annual membership cadence. The extension does not receive these amount and cadence
 fields or any payment-card or bank-account details.
 
 ### How is my IP stored?
 
-Raw IP addresses stay in RAM and hashes are stored. This information is used for abuse prevention and aggregate
-analytics. It is not sold or used for advertising.
+The service stores your IP address and, when available, the browser description sent with the request (the user-agent
+string). It keeps these with completed registrations, votes, posted comments and replies, and RYD comment reactions.
+IP addresses are used for abuse prevention and aggregate analytics. They are not sold or used for advertising.
 
 ### I heard some discussion over OAuth, and access to my YouTube account!
 
