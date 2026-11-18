@@ -5,19 +5,36 @@
 
 ### Tiện ích mở rộng này có theo dõi lịch sử xem vi-đê-ô của tôi không?
 
-Không. Mã nguồn của tiện ích mở rộng này được cung cấp công khai và bạn có thể kiểm tra mã nguồn nếu muốn. Thông tin duy nhất được tiện ích này gửi đi là ID của vi-đê-ô vì việc truy vấn số lượt đánh giá "không thích" cần ID của vi-đê-ô. Không thông tin nào khác được gửi đi. Ở lớp truyền tải, máy chủ sẽ biết được địa chỉ IP của bạn cũng như thời điểm mà truy vấn được tạo. Tuy nhiên, những thông tin này không thể định danh chính xác bạn. Giả sử với môi trường bất tín, chúng tôi cùng lắm chỉ có thể biết được địa chỉ IP động. Địa chỉ IP động là của bạn ngày hôm nay, nhưng sẽ là của người khác vào ngày mai. Nếu bạn lo lắng rằng địa chỉ IP của mình bị theo dõi, bạn có thể sử dụng mạng riêng ảo.
+Tiện ích gửi ID của vi-đê-ô đang xem và số lượt đánh giá "thích" đang hiển thị (nếu có) tới API Return YouTube Dislike để
+máy chủ trả về số lượt đánh giá "không thích" ước tính và cải thiện kết quả ước tính. Qua yêu cầu này, máy chủ cũng biết
+được các thông tin mạng thông thường như địa chỉ IP công khai và thời điểm gửi yêu cầu. Tiện ích không gửi tên tài khoản
+YouTube, bình luận trên YouTube, dữ liệu riêng tư trên YouTube hay nội dung của các trang không liên quan. Tiện ích cũng
+không lưu danh sách lịch sử xem riêng trên thiết bị. Trên Firefox, tiện ích chỉ gửi từng loại dữ liệu (ID vi-đê-ô và số lượt
+đánh giá "thích") sau khi bạn cấp quyền tương ứng.
 
 ### Nhóm phát triển có thể định danh chính xác tôi không nếu như tôi có đánh giá "không thích"?
 
-Có. Khi bạn đưa ra đánh giá "không thích" với một vi-đê-ô, chúng tội sẽ tạo ra một số định danh duy nhất ngẫu nhiên cho bạn, nhưng số định danh này không có bất kì mối liên hệ nào với tài khoản Google của bạn. Việc tạo số định danh là nhằm tránh người dùng bot. Không có bất kì cách nào để liên hệ số định danh này với bạn hay với tài khoản YouTube của bạn.
+Lần đầu bạn đánh giá vi-đê-ô hoặc bày tỏ cảm xúc với bình luận RYD, tiện ích tạo một mã định danh ngẫu nhiên để dùng lâu dài
+và giúp ngăn chặn hành vi lạm dụng. Tiện ích không gửi mã này khi bạn mở vi-đê-ô hoặc đọc bình luận. Mã này không được tạo từ
+tài khoản Google hay YouTube và không liên kết với các tài khoản đó. Dịch vụ dùng mã này để nhận biết các lượt đánh giá được
+gửi từ cùng một bản cài đặt tiện ích.
 
 ### Chính xác thì thông tin nào được thu thập?
 
-Chỉ có ID của vi-đê-ô sẽ được thu thập. Bình luận của bạn, không. Tên người dùng của bạn, không. Thông tin của người mà bạn chia sẻ vi-đê-ô, không. Siêu dữ liệu khác, không. Không có bất kì thông tin nào khác được thu thập. Chỉ duy nhất ID của vi-đê-ô.
+Yêu cầu lấy số lượt đánh giá "không thích" có ID vi-đê-ô và số lượt đánh giá "thích" đang hiển thị (nếu có). Khi đăng ký,
+tiện ích sử dụng mã định danh bản cài đặt được tạo ngẫu nhiên. Mỗi lượt đánh giá được gửi đi sẽ được ghi lại cùng với mã
+này, ID vi-đê-ô, lựa chọn đánh giá và thời điểm gửi. Khi bạn bày tỏ cảm xúc với bình luận RYD, dịch vụ ghi lại mã định danh
+của cùng bản cài đặt, ID bình luận và cảm xúc bạn đã chọn. Bản ghi lượt đánh giá và cảm xúc còn có thể chứa thông tin về
+tiện ích hoặc tập lệnh người dùng bạn sử dụng, phiên bản của tiện ích hoặc tập lệnh đó, và vị trí phát tại thời điểm bạn
+nhấp (tính bằng giây nguyên, nếu có). Nếu bạn bỏ cảm xúc đã chọn, bản ghi sẽ được đánh dấu là đã gỡ. Bình luận và câu trả
+lời bạn đăng được hiển thị công khai dưới biệt danh RYD của bạn.
 
 ### Địa chỉ IP của tôi được lưu trữ ra sao?
 
-Đầu sau chỉ giữ địa chỉ IP không được băm trong bộ nhớ khả biến (RAM). Những địa chỉ này không được lưu vào bộ nhớ bất biến (như ổ đĩa cứng) và như vậy không bị ghi chép lại. Chúng tôi băm địa chỉ IP rồi mới lưu lại những địa chỉ đã băm. Việc lưu địa chỉ đã băm là nhằm tránh việc phá hoại cơ sở dữ liệu.
+Dịch vụ lưu địa chỉ IP của bạn và thông tin mô tả trình duyệt (chuỗi user-agent) nếu trình duyệt gửi kèm thông tin này
+trong yêu cầu. Dịch vụ lưu các thông tin này cùng với lượt đăng ký đã hoàn tất, lượt đánh giá, bình luận và câu trả lời đã
+đăng, cũng như các lượt bày tỏ cảm xúc với bình luận RYD. Địa chỉ IP được dùng để ngăn chặn hành vi lạm dụng và phân tích
+dữ liệu tổng hợp. Dịch vụ không bán hoặc dùng địa chỉ IP cho quảng cáo.
 
 ### Tôi có bắt gặp một số cuộc thảo luận về OAuth cũng như về việc truy cập tài khoản YouTube của tôi!
 

@@ -18,15 +18,21 @@ storitvi omogoča, da oddane glasove poveže z isto namestitvijo razširitve.
 
 ### Katere podatke imate, natančno?
 
-Pri zahtevah za število nevšečkov: ID trenutnega videa in, kadar je na voljo, vidno število všečkov. Pri registraciji in
-oddaji glasov: naključni uporabniški ID razširitve, ID videa, izbrani glas, časovni žig in omrežni naslov, uporabljen za
-nadzor nad zlorabami. Izbirne premium funkcije uporabljajo ID računa, ime, e-poštni naslov, profilno sliko, podatke o
+Pri zahtevi za število nevšečkov razširitev pošlje ID videa in, kadar je na voljo, prikazano število všečkov.
+Pri registraciji uporabi naključni ID namestitve. Ob glasovanju storitev s tem ID-jem shrani ID videa, izbrani glas
+in čas. Ob odzivu na komentar RYD z istim ID-jem shrani ID komentarja in izbrani odziv. Glas ali odziv lahko vsebuje
+tudi vrsto in različico razširitve ali uporabniškega skripta ter položaj predvajanja v celih sekundah ob kliku, če je
+ta podatek na voljo. Ko odziv odstranite, ga storitev v zapisu označi kot odstranjenega. Vaši komentarji in odgovori
+so javni pod vašim vzdevkom RYD.
+
+Izbirne premium funkcije uporabljajo ID računa, ime, e-poštni naslov, profilno sliko, podatke o
 članstvu in žeton seje storitve, ki ga vrne prijava s Patreonom ali GitHubom, ki jo sproži uporabnik.
 
 ### Kako je shranjen moj naslov IP?
 
-API ob vsaki zahtevi prejme vaš omrežni naslov. Potrjeni zapisi glasov ohranijo uporabljeni omrežni naslov zaradi
-preprečevanja zlorab in združene analitike. Naslova ne prodajamo in ga ne uporabljamo za oglaševanje.
+Storitev ob zaključenih registracijah, glasovih, objavljenih komentarjih in odgovorih ter odzivih na komentarje RYD
+shrani vaš naslov IP. Če brskalnik z zahtevo pošlje tudi svoj opis (niz User-Agent), shrani še tega. Naslove IP
+uporabljamo za preprečevanje zlorab in zbirno statistiko. Ne prodajamo jih in jih ne uporabljamo za oglaševanje.
 
 ### Slišal sem nekaj razprav o protokolu OAuth in dostopu do mojega računa na YouTubu!
 

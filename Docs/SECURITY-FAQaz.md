@@ -4,19 +4,19 @@ Read this in other languages: [беларуская](SECURITY-FAQbe.md), [Englis
 
 ### Baxış tarixçəmi izləyirsiniz?
 
-Xeyr. Artırmanın kodu ictimaiyyətə açıqdır və siz bunu özünüz görə bilərsiniz. Göndərilən yeganə məlumat videolar üçün bəyənməmə sayını almaq üçün tələb olunan video ID-dir. Göndərilən başqa əlavə başlıq yoxdur. Rabitə təbəqəsi vasitəsilə ictimai IP-niz serverə və sorğunun edildiyi vaxta məruz qalacaq. Bununla belə, bunların heç biri sizi heç bir şəkildə unikal şəkildə müəyyənləşdirmir. Sıfır etibar mühitini fərz etsək, əldə edə biləcəyimiz ən yaxşısı dinamik IP-dir. Bu İP bu gün sənin, sabah qonşunun ola bilər. Əgər həqiqətən IP-nizin izlənilməsindən narahatsınızsa, yəqin ki, artıq VPN-dən istifadə edirsiniz.
+Xeyr. Artırmanın kodu ictimaiyyətə açıqdır və ona özünüz baxa bilərsiniz. Artırma bəyənməmə sayını təxmin etmək və bu təxmini dəqiqləşdirmək üçün cari videonun identifikatorunu və göstərilirsə, bəyənmə sayını göndərir. Sorğu zamanı ictimai IP ünvanınız və sorğunun vaxtı kimi standart şəbəkə məlumatları da serverə məlum olur. Artırma cihazınızda ayrıca baxış tarixçəsi saxlamır.
 
 ### Videonu bəyənməsəm, məni unikal şəkildə tanıya bilərsiniz??
 
-Bəli. Videonu bəyənmədiyiniz zaman biz sizin üçün Google hesabınızla əlaqəli olmayan təsadüfi yaradılmış unikal ID yaradırıq. Bu, botlardan istifadənin qarşısını almaq üçün edilir. Bununla belə, bu təsadüfi identifikatoru sizə və ya şəxsi YouTube hesabınıza bağlamağın heç bir yolu yoxdur.
+Artırma ilk dəfə səs verdiyinizdə və ya RYD-də şərhə reaksiya göstərdiyinizdə səsvermədə sui-istifadənin qarşısını almaq üçün qalıcı, təsadüfi identifikator yaradır. Sadəcə videonu açdıqda və ya şərhləri oxuduqda bu identifikator göndərilmir. İdentifikator Google və ya YouTube hesabınız əsasında yaradılmır və həmin hesablarla əlaqəli deyil. Mozilla qalıcı identifikatorları şəxsi məlumat kimi təsnif edir. Xidmət bu identifikatordan göndərilən səsləri eyni artırma quraşdırılması ilə əlaqələndirmək üçün istifadə edir.
 
 ### Sizdə dəqiq olaraq hansı məlumat var??
 
-Sadəcə video identifikatoru. Şərhləriniz, istifadəçi adınız, videonu kiminlə paylaşdığınız, heç bir əlavə metadata deyil. heç nə. Sadəcə video identifikatoru.
+Bəyənməmə sayı sorğularına videonun identifikatoru və göstərilirsə, bəyənmə sayı daxildir. Qeydiyyat zamanı quraşdırmaya aid təsadüfi identifikatordan istifadə olunur. Səs verildikdə həmin identifikator, videonun identifikatoru, seçilmiş səs və səsvermə vaxtı saxlanılır. RYD şərhlərinə reaksiyalar üçün həmin identifikatordan, şərhin identifikatorundan və seçilmiş reaksiyadan istifadə olunur. Səs və reaksiya qeydlərində hansı artırmadan və ya istifadəçi skriptindən istifadə etdiyiniz, onun versiyası və varsa, klik anındakı oynatma mövqeyi (tam saniyə ilə) də göstərilə bilər. Reaksiyanı geri götürdükdə onun qeydi silinmiş kimi işarələnir. RYD-də dərc etdiyiniz şərhlər və cavablar ictimaiyyətə açıqdır və RYD-dəki ləqəbinizlə göstərilir. Artırma YouTube hesabınızın adını və ya YouTube şərhlərinizi göndərmir.
 
 ### Mənim IP ünvanım necə saxlanılır?
 
-Server orijinal IP ünvanlarını yalnız operativ yaddaşda (RAM) saxlayır. Sui-istifadənin qarşısını almaq üçün orijinal ünvanların əvəzinə onların heş dəyərlərini saxlayırıq.
+Xidmət IP ünvanınızı və sorğu ilə göndərildiyi halda, brauzeri təsvir edən məlumatı (User-Agent sətrini) saxlayır. Bu məlumatlar tamamlanmış qeydiyyatlar, səslər, dərc edilmiş şərhlər və cavablar, eləcə də RYD şərhlərinə reaksiyalarla birlikdə saxlanılır. IP ünvanlarından sui-istifadənin qarşısını almaq və ümumiləşdirilmiş statistika hazırlamaq üçün istifadə olunur. IP ünvanları satılmır və reklam məqsədilə istifadə edilmir.
 
 ### OAuth vasitəsilə YouTube hesabıma daxil olmaq haqqında bəzi mübahisələr eşitdim!
 

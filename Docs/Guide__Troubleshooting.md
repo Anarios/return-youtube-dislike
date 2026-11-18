@@ -41,7 +41,7 @@ If the basic checks didn't resolve anything
 
 - If you **don't see something like** this, then the **API is down** and **everything is fine on your side**.
   `{"id":"QOFEgexls14","dateCreated":"2021-12-28T02:53:20.995329Z","likes":2968,"dislikes":204,"rating":4.725047080979285,"viewCount":29157,"deleted":false}`
-- If you see some responses but not in the above format (with likes and dislikes) then probably you are being rate-limited. It is done to prevent bot attacks and database vandalization. Raw IP addresses stay in RAM and hashes are stored to help prevent abuse. If many people are accessing the server from the same IP (as in the case of public/institutional Wi-Fi) then it's possible that the IP is being rate-limited. If that's the case, there's no way for us to differentiate you from a bot/attacker.
+- If the response is missing the like and dislike counts, you may have reached a rate limit. On shared Wi-Fi, requests from several people can count toward the same IP limit. See the [Security FAQ](SECURITY-FAQ.md#how-is-my-ip-stored) for how the service stores IP addresses.
 
 **If you see "Certificate error" and [if you are on Windows 7 (or earlier) read this](#install-certificates)**
 

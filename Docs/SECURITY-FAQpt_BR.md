@@ -22,13 +22,14 @@ pessoais. O ID permite que o serviço associe os votos enviados à mesma instala
 
 - Nas consultas à contagem de “Não gostei”, a API recebe o ID do vídeo atual e, quando disponível, o número de votos de
   “Gostei” exibido no vídeo.
-- No registro e no envio de votos, os dados incluem o ID aleatório de usuário da extensão, o ID do vídeo, o voto escolhido,
-  a data e a hora.
-- Quando você reage a um comentário do RYD, a API recebe o mesmo ID aleatório, o ID do comentário e a reação.
-  Os comentários e as respostas que membros conectados publicam no RYD são públicos e ficam armazenados com o apelido
-  de quem os publicou.
-
-A API também recebe seu endereço IP. O endereço original fica na memória RAM. Para controlar abusos, armazenamos seu hash.
+- No cadastro, o serviço usa um ID aleatório da instalação. Os votos enviados são armazenados com esse ID, o ID do
+  vídeo, o voto escolhido e o horário.
+- Quando você reage a um comentário do RYD, a API recebe o mesmo ID da instalação, o ID do comentário e a reação
+  escolhida.
+- Votos e reações podem incluir a extensão ou o script de usuário usado, a versão correspondente e, quando disponível,
+  a posição da reprodução em segundos inteiros no momento do clique. Se você retirar uma reação, o serviço marca o
+  registro correspondente como removido.
+- Os comentários e as respostas que você publica no RYD ficam visíveis a todos sob seu apelido do RYD.
 
 Quando você escolhe entrar pelo Patreon ou pelo GitHub, os recursos premium opcionais usam os dados fornecidos no login.
 São eles o ID da conta, o nome, o endereço de e-mail, a imagem de perfil, as informações de assinatura e o token de sessão
@@ -39,8 +40,10 @@ valor e periodicidade nem dados de cartão de pagamento ou de conta bancária.
 
 ### Como meu IP é armazenado?
 
-Os endereços IP originais ficam na memória RAM. Armazenamos seus hashes. Essas informações são usadas para prevenir
-abusos e para análises agregadas. Elas não são vendidas nem usadas para publicidade.
+O serviço armazena seu endereço IP e, quando disponível, a identificação do navegador enviada com a requisição
+(user-agent). Esses dados ficam associados a cadastros concluídos, votos, comentários e respostas publicados no RYD
+e reações a comentários do RYD. O serviço usa os endereços IP para prevenir abusos e fazer análises agregadas.
+Não os vende nem os usa para publicidade.
 
 ### Como funciona o login com OAuth? Ele dá acesso à minha conta do YouTube?
 

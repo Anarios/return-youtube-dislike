@@ -4,19 +4,36 @@ Read this in other languages: [беларуская](SECURITY-FAQbe.md), [Englis
 
 ### Czy śledzicie moją historię wyświetleń?
 
-Nie. Kod rozszerzenia jest publiczny i można samemu to zobaczyć. Jedyne informacje, które są wysyłane, to ID filmu, które jest wymagane do pobrania liczby łapek w dół dla filmów. Nie są wysyłane żadne dodatkowe nagłówki. W warstwie sieciowej, Twój adres IP będzie jawny dla serwera wraz z czasem wykonania żądania. Jednakże, żadne z tych danych nie identyfikują Ciebie jednoznacznie w żaden sposób. Zakładając środowisko zerowego zaufania, najczulsze dane, jakie możemy otrzymać, jest dynamiczny adres IP, który dzisiaj jest Twój, a jutro Twojego sąsiada. Jeżeli boisz się śledzenia poprzez adres IP, pewnie już korzystasz z VPN.
+Rozszerzenie przesyła do API Return YouTube Dislike identyfikator aktualnego filmu oraz widoczną liczbę łapek w górę,
+jeśli jest dostępna. Serwer potrzebuje tych danych, aby podać i doprecyzować szacowaną liczbę łapek w dół. Przy żądaniu
+serwer otrzymuje też standardowe dane sieciowe, takie jak Twój publiczny adres IP i czas wysłania żądania. Rozszerzenie
+nie przesyła nazwy Twojego konta YouTube, komentarzy z YouTube, prywatnych danych z YouTube ani treści innych stron.
+Nie zapisuje też osobnej lokalnej historii oglądania.
 
 ### Czy możecie mnie jednoznacznie zidentyfikować, jeżeli zostawię łapkę w dół?
 
-Tak. Kiedy zostawiasz łapkę w dół, tworzymy losowo generowane ID dla Ciebie, które nie jest związane z Twoim kontem Google. Powodem takiego rozwiązania jest zapobieganie botowaniu. Mimo to, nie ma sposobu powiązania tego losowego ID z Tobą lub Twoim osobistym kontem Google.
+Gdy po raz pierwszy oddajesz głos lub reagujesz na komentarz w RYD, rozszerzenie tworzy stały losowy identyfikator,
+który pomaga zapobiegać nadużyciom podczas głosowania. Rozszerzenie nie wysyła go, gdy otwierasz filmy lub czytasz
+komentarze. Identyfikator nie jest tworzony na podstawie Twojego konta Google lub YouTube i nie jest z nim powiązany.
+Mozilla zalicza stałe identyfikatory do danych osobowych. Dzięki temu identyfikatorowi serwis może powiązać oddane głosy
+z tą samą instalacją rozszerzenia.
 
 ### Jakie informacje wy macie, konkretnie?
 
-Tylko ID filmu. Komentarze - nie. Nazwa użytkownika - nie. Osoby, którym udostępniłeś film - nie. Jakiekolwiek dodatkowe metadane - nie. Nic. Tylko ID filmu.
+Żądania o liczbę łapek w dół zawierają identyfikator filmu oraz widoczną liczbę łapek w górę, jeśli jest dostępna.
+Do rejestracji służy losowy identyfikator instalacji. Przy oddaniu głosu zapisujemy ten identyfikator, identyfikator filmu,
+wybraną ocenę i czas oddania głosu. Przy reakcjach na komentarze w RYD zapisujemy ten sam identyfikator instalacji,
+identyfikator komentarza i wybraną reakcję. Przy głosach i reakcjach serwis może również zapisać, którego rozszerzenia
+lub skryptu użytkownika używasz, jego wersję oraz pozycję odtwarzania w chwili kliknięcia (w pełnych sekundach), jeśli
+jest dostępna. Gdy usuwasz reakcję, serwis oznacza jej zapis jako usunięty. Opublikowane przez Ciebie komentarze i
+odpowiedzi są widoczne publicznie pod Twoją nazwą użytkownika w RYD.
 
 ### Jak mój adres IP jest przechowywany?
 
-Backend trzyma niehashowane adresy IP tylko w pamięci zmiennej (RAM). Te adresy nie są przechowywane na dysku twardym, przez co nie są rejestrowane. Zamiast tego przechowujemy zhashowany adres IP. Jest to zrobione po to aby zapobiec wandalizmom.
+Serwis zapisuje Twój adres IP. Jeśli żądanie zawiera opis przeglądarki (ciąg User-Agent), serwis zapisuje również ten
+opis. Dane te są zapisywane przy zakończonych rejestracjach, oddanych głosach, opublikowanych komentarzach i
+odpowiedziach oraz reakcjach na komentarze w RYD. Adresy IP służą do zapobiegania nadużyciom i zbiorczej analizy
+danych. Nie sprzedajemy ich ani nie wykorzystujemy do celów reklamowych.
 
 ### Słyszałem jakąś dyskusję o OAuth, i dostępie do mojego konta YouTube.
 
