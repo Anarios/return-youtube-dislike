@@ -18,11 +18,6 @@ const SELECTION_FETCH_DELAY_MS = 400;
 const DEFAULT_BUSY_RETRY_MS = 3000;
 const MAX_BUSY_RETRY_WAIT_MS = 10000;
 const MAX_BUSY_RETRY_JITTER_MS = 1000;
-const STANDARD_HTTP_DATE = /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} [A-Z][a-z]{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/;
-const RFC850_DATE =
-  /^(?<weekday>Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (?<day>\d{2})-(?<month>[A-Z][a-z]{2})-(?<year>\d{2}) (?<time>\d{2}:\d{2}:\d{2}) GMT$/;
-const ASCTIME_DATE =
-  /^(?<weekday>[A-Z][a-z]{2}) (?<month>[A-Z][a-z]{2}) (?<day>[ \d]\d) (?<time>\d{2}:\d{2}:\d{2}) (?<year>\d{4})$/;
 let currentRequest = null;
 
 function cancelAnalyticsRequests() {
@@ -195,32 +190,7 @@ async function fetchAnalytics(url, request, isCurrentRequest, logAttempt, retryO
 
 function retryAfterMs(response) {
   const header = response.headers?.get("Retry-After")?.trim();
-  if (!header) return DEFAULT_BUSY_RETRY_MS;
-  if (/^\d+$/.test(header)) return Number(header) * 1000;
-
-  const now = Date.now();
-  const normalized = normalizeHttpDate(header, now);
-  if (!normalized) return DEFAULT_BUSY_RETRY_MS;
-  const timestamp = Date.parse(normalized);
-  // Reject invalid calendar dates and weekdays that Date.parse can silently correct.
-  if (new Date(timestamp).toUTCString() !== normalized) return DEFAULT_BUSY_RETRY_MS;
-  return Math.max(0, timestamp - now);
-}
-
-function normalizeHttpDate(header, now) {
-  if (STANDARD_HTTP_DATE.test(header)) return header;
-  const parts = (RFC850_DATE.exec(header) ?? ASCTIME_DATE.exec(header))?.groups;
-  if (!parts) return null;
-
-  const { weekday, day, month, year, time } = parts;
-  let fullYear = year;
-  if (year.length === 2) {
-    // Use the year with these two digits that is no more than 50 years ahead.
-    const latestYear = new Date(now).getUTCFullYear() + 50;
-    const candidate = Math.floor(latestYear / 100) * 100 + Number(year);
-    fullYear = String(candidate > latestYear ? candidate - 100 : candidate);
-  }
-  return `${weekday.slice(0, 3)}, ${day.trim().padStart(2, "0")} ${month} ${fullYear} ${time} GMT`;
+  return /^\d+$/.test(header ?? "") ? Number(header) * 1000 : DEFAULT_BUSY_RETRY_MS;
 }
 
 function scheduleRequest(request, callback, delay) {

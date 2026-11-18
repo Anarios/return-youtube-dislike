@@ -143,7 +143,6 @@ const premiumAnalyticsModule = require("./index");
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 const WATCH_VIDEO_ID = "abcdefghijk";
-const RETRY_CLOCK = new Date("2026-05-26T12:00:00Z");
 const { getVideoId: mockGetVideoId } = jest.requireMock("../utils");
 const defaultGetVideoId = mockGetVideoId.getMockImplementation();
 
@@ -560,59 +559,47 @@ describe("premiumAnalytics", () => {
     ["1", 1000, 0],
     ["1", 1500, 0.5],
     ["10", 10999, 0.9999],
-    ["Tue, 26 May 2026 12:00:02 GMT", 2250, 0.5, 250],
-    ["Tuesday, 26-May-26 12:00:02 GMT", 2000, 0],
-    ["Tue May 26 12:00:02 2026", 2000, 0],
-    ["Friday, 31-Apr-26 12:00:02 GMT", 3000, 0],
-    ["Fri Apr 31 12:00:02 2026", 3000, 0],
-    ["Monday, 26-May-26 12:00:02 GMT", 3000, 0],
-    ["Mon May 26 12:00:02 2026", 3000, 0],
+    ["Thu, 01 Jan 2099 00:00:00 GMT", 3000, 0],
     ["1.5", 3500, 0.5],
     [null, 3000, 0],
     ["", 3000, 0],
     ["-1", 3000, 0],
     ["0x1", 3000, 0],
     ["1e0", 3000, 0],
-    ["2026-05-26T12:00:02Z", 3000, 0],
     ["invalid", 3000, 0],
-  ])(
-    "retries the initial busy request with Retry-After %j at %i ms",
-    async (retryAfter, delay, randomValue, offset = 0) => {
-      jest.useFakeTimers();
-      try {
-        jest.setSystemTime(RETRY_CLOCK.getTime() + offset);
-        random.mockReturnValue(randomValue);
-        mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
-        fetch.mockResolvedValueOnce(rateLimitResponse(retryAfter));
-        requestAnalytics();
-        await jest.advanceTimersByTimeAsync(delay - 1);
+  ])("retries the initial busy request with Retry-After %j at %i ms", async (retryAfter, delay, randomValue) => {
+    jest.useFakeTimers();
+    try {
+      random.mockReturnValue(randomValue);
+      mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
+      fetch.mockResolvedValueOnce(rateLimitResponse(retryAfter));
+      requestAnalytics();
+      await jest.advanceTimersByTimeAsync(delay - 1);
 
-        expect(fetch).toHaveBeenCalledTimes(1);
-        expect(mockLogFetchRequest).toHaveBeenCalledTimes(1);
-        expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_loading"));
-        expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
-        await jest.advanceTimersByTimeAsync(1);
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(mockLogFetchRequest).toHaveBeenCalledTimes(1);
+      expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_loading"));
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+      await jest.advanceTimersByTimeAsync(1);
 
-        expect(fetch).toHaveBeenCalledTimes(2);
-        expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
-        expect(mockLogFetchRequest).toHaveBeenCalledTimes(2);
-        const [first, retry] = mockLogFetchRequest.mock.calls;
-        expect(retry[0]).toBe(first[0]);
-        expect(retry[1].toString()).toBe(first[1].toString());
-        expect(mockRenderSummary).toHaveBeenCalledTimes(1);
-        expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
-      } finally {
-        jest.useRealTimers();
-      }
-    },
-  );
+      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
+      expect(mockLogFetchRequest).toHaveBeenCalledTimes(2);
+      const [first, retry] = mockLogFetchRequest.mock.calls;
+      expect(retry[0]).toBe(first[0]);
+      expect(retry[1].toString()).toBe(first[1].toString());
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
 
-  it.each(["11", "60", "120", "Tue, 26 May 2026 12:01:00 GMT"])(
+  it.each(["11", "60", "120"])(
     "shows the error immediately without scheduling a retry for Retry-After %j",
     async (retryAfter) => {
       jest.useFakeTimers();
       try {
-        jest.setSystemTime(RETRY_CLOCK);
         mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
         fetch.mockResolvedValueOnce(rateLimitResponse(retryAfter));
         requestAnalytics();
@@ -629,32 +616,28 @@ describe("premiumAnalytics", () => {
     },
   );
 
-  it.each(["0", "Tue, 26 May 2026 11:59:59 GMT"])(
-    "schedules Retry-After %j asynchronously with no base delay",
-    async (retryAfter) => {
-      jest.useFakeTimers();
-      try {
-        jest.setSystemTime(RETRY_CLOCK);
-        mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
-        fetch.mockResolvedValueOnce(rateLimitResponse(retryAfter));
-        requestAnalytics();
-        await Promise.resolve();
-        await Promise.resolve();
+  it("schedules a zero-second retry asynchronously", async () => {
+    jest.useFakeTimers();
+    try {
+      mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
+      fetch.mockResolvedValueOnce(rateLimitResponse("0"));
+      requestAnalytics();
+      await Promise.resolve();
+      await Promise.resolve();
 
-        expect(fetch).toHaveBeenCalledTimes(1);
-        expect(jest.getTimerCount()).toBe(1);
-        expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
-        await jest.advanceTimersByTimeAsync(0);
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(jest.getTimerCount()).toBe(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+      await jest.advanceTimersByTimeAsync(0);
 
-        expect(fetch).toHaveBeenCalledTimes(2);
-        expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
-        expect(mockRenderSummary).toHaveBeenCalledTimes(1);
-        expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
-      } finally {
-        jest.useRealTimers();
-      }
-    },
-  );
+      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
 
   it.each([
     [429, "rate_limited"],

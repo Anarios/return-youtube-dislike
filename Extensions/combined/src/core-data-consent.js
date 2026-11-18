@@ -20,6 +20,7 @@ function usesFirefoxDataCollectionConsent() {
 class DataConsentError extends Error {
   constructor() {
     super("Data consent required for this feature.");
+    this.name = "DataConsentError";
   }
 }
 
