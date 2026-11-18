@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Il tuo ID di voto viene inviato solo quando voti o reagisci. Le tue reazioni ai commenti sono ricordate su questo dispositivo."
   },
+  "popup_saved_account_unverified": {
+    "message": "Non siamo riusciti a verificare il tuo account salvato. Riapri il popup per riprovare."
+  },
   "popup_signin_next_click": {
     "message": "Serve un altro clic: seleziona il pulsante di accesso qui sotto per esaminare i permessi dell’account in Firefox e continuare."
   },

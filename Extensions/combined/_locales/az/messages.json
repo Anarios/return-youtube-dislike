@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Səsvermə identifikatorunuz yalnız səs və ya reaksiya verdikdə göndərilir. Şərhlərə öz reaksiyalarınız bu cihazda yadda saxlanılır."
   },
+  "popup_saved_account_unverified": {
+    "message": "Yadda saxlanmış hesabınızı təsdiqləyə bilmədik. Yenidən cəhd etmək üçün açılan pəncərəni təkrar açın."
+  },
   "popup_signin_next_click": {
     "message": "Daha bir klik lazımdır: Firefox-un hesab icazələrini nəzərdən keçirib davam etmək üçün aşağıdakı giriş düymənizi seçin."
   },

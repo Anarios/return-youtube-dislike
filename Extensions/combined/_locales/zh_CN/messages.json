@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "仅在您投票或回应时发送投票 ID。您自己的评论回应会保存在此设备上。"
   },
+  "popup_saved_account_unverified": {
+    "message": "无法验证您保存的账户。请重新打开弹出窗口再试一次。"
+  },
   "popup_signin_next_click": {
     "message": "还需点击一次：请选择下方的登录按钮，查看 Firefox 的账户权限并继续。"
   },

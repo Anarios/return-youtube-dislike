@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "僅在您投票或回應時傳送投票 ID。您自己的留言反應會記錄在此裝置上。"
   },
+  "popup_saved_account_unverified": {
+    "message": "無法驗證您儲存的帳號。請重新開啟彈出視窗再試一次。"
+  },
   "popup_signin_next_click": {
     "message": "還需要點擊一次：請選擇下方的登入按鈕，檢視 Firefox 的帳號權限並繼續。"
   },

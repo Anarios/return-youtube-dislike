@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "ID pemungutan suara Anda hanya dikirim saat Anda memberi suara atau reaksi. Reaksi Anda sendiri terhadap komentar diingat pada perangkat ini."
   },
+  "popup_saved_account_unverified": {
+    "message": "Kami tidak dapat memverifikasi akun yang tersimpan. Buka kembali popup untuk mencoba lagi."
+  },
   "popup_signin_next_click": {
     "message": "Perlu satu klik lagi: pilih tombol masuk di bawah untuk meninjau izin akun Firefox dan melanjutkan."
   },

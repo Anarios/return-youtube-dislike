@@ -6,6 +6,7 @@ jest.mock("./src/account-data-consent", () => ({ fetchWithAccountConsent: (...ar
 
 const flushPromises = () => new Promise((resolve) => setTimeout(resolve, 0));
 const cachedUser = { fullName: "Test User", imageUrl: "https://example.org/avatar", membershipTier: "none" };
+const verificationResponse = (data, status = 200) => ({ ok: status >= 200 && status < 300, json: async () => data });
 
 describe("popup account consent lifecycle", () => {
   let readCachedSession;
@@ -210,7 +211,8 @@ describe("popup account consent lifecycle", () => {
     "updates the visibility label after verifying cached %s membership with active=%s",
     async (membershipTier, active, verification, premium) => {
       localizeMembershipLabels();
-      fetch.mockResolvedValue({ json: async () => verification });
+      fetch.mockResolvedValue(verificationResponse(verification));
+      chrome.runtime.sendMessage.mockImplementation((request, callback) => callback?.({ success: true }));
       document.getElementById("hide_premium_teaser").click();
       expect(chrome.storage.sync.set).toHaveBeenCalledWith({ hidePremiumTeaser: true });
       await readCachedSession({
@@ -218,15 +220,181 @@ describe("popup account consent lifecycle", () => {
         patreonSessionToken: "test-token",
       });
       await flushPromises();
+      expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(
+        {
+          message: "patreon_membership_verified",
+          sessionToken: "test-token",
+          active: verification.valid,
+          membershipTier: verification.membershipTier,
+        },
+        expect.any(Function),
+      );
+      expect(chrome.storage.sync.set).toHaveBeenCalledTimes(1);
+      await readCachedSession({
+        patreonUser: {
+          ...cachedUser,
+          membershipTier: verification.membershipTier,
+          hasActiveMembership: verification.valid,
+        },
+        patreonSessionToken: "test-token",
+      });
       expectPremiumVisibilityLabel(premium);
       expect(document.getElementById("hide_premium_teaser").checked).toBe(true);
     },
   );
 
+  test.each([
+    ["invalid", "patreon_session_invalid"],
+    ["unverifiable", "patreon_session_invalid"],
+    ["expired", "patreon_session_expired"],
+    ["legacyformat", "patreon_session_expired"],
+  ])("asks the background to handle verification reason %s", async (failureReason, message) => {
+    fetch.mockResolvedValue(verificationResponse({ valid: false, failureReason }));
+    chrome.runtime.sendMessage.mockImplementation((request, callback) => callback?.({ success: true }));
+
+    await readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
+    await flushPromises();
+
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(
+      { message, sessionToken: "test-token" },
+      expect.any(Function),
+    );
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+    await readCachedSession(
+      message === "patreon_session_invalid"
+        ? { patreonAuthenticated: false, patreonUser: cachedUser, patreonSessionToken: "test-token" }
+        : {},
+    );
+    expectLoggedOut();
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  test.each([
+    { valid: true, membershipTier: "premium" },
+    { valid: false, failureReason: "membershipinactive" },
+    { valid: false, failureReason: "invalid" },
+    { valid: false, failureReason: "unverifiable" },
+  ])("rereads the latest account after stale verification %j", async (verification) => {
+    fetch.mockResolvedValueOnce(verificationResponse(verification));
+    chrome.runtime.sendMessage.mockImplementation((request, callback) => callback?.({ success: true }));
+
+    await readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "old-token" });
+    await flushPromises();
+    await readCachedSession({ patreonUser: { ...cachedUser, fullName: "New User" }, patreonSessionToken: "new-token" });
+    await flushPromises();
+
+    expect(document.getElementById("patreon-user-name").textContent).toBe("New User");
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledTimes(1);
+    expect(chrome.storage.sync.set).not.toHaveBeenCalled();
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+  });
+
+  test.each([401, 429, 500, 503])("keeps the account when verification returns HTTP %s", async (status) => {
+    jest.spyOn(console, "warn").mockImplementation(() => {});
+    fetch.mockResolvedValue(verificationResponse({ valid: false, failureReason: "invalid" }, status));
+
+    await readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
+    await flushPromises();
+
+    expect(document.getElementById("patreon-user-name").textContent).toBe(cachedUser.fullName);
+    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+  });
+
+  test.each([{ failureReason: "unverifiable" }, { valid: false }, { valid: false, failureReason: "unknown" }])(
+    "keeps the account when verification returns unrecognized data %j",
+    async (data) => {
+      jest.spyOn(console, "warn").mockImplementation(() => {});
+      fetch.mockResolvedValue(verificationResponse(data));
+
+      await readCachedSession({ patreonUser: cachedUser, patreonSessionToken: "test-token" });
+      await flushPromises();
+
+      expect(document.getElementById("patreon-user-name").textContent).toBe(cachedUser.fullName);
+      expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+      expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+    },
+  );
+
+  test("rechecks a suspended credential and waits for recovery before displaying the saved profile", async () => {
+    const saved = { patreonAuthenticated: false, patreonUser: cachedUser, patreonSessionToken: "test-token" };
+    const status = document.getElementById("patreon-suspended-status");
+    let finishVerify;
+    fetch.mockReturnValue(new Promise((resolve) => (finishVerify = resolve)));
+    chrome.runtime.sendMessage.mockImplementation((request, callback) => callback?.({ success: true }));
+
+    await readCachedSession(saved);
+    await flushPromises();
+    expectLoggedOut();
+    expect(status.hidden).toBe(false);
+    expect(fetch).toHaveBeenCalledTimes(1);
+
+    finishVerify(verificationResponse({ valid: true, membershipTier: "premium" }));
+    await flushPromises();
+    expectLoggedOut();
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith(
+      { message: "patreon_membership_verified", sessionToken: "test-token", active: true, membershipTier: "premium" },
+      expect.any(Function),
+    );
+
+    await readCachedSession({ ...saved, patreonAuthenticated: true });
+    expect(document.getElementById("patreon-user-name").textContent).toBe(cachedUser.fullName);
+    expect(status.hidden).toBe(true);
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  test("keeps a suspended account signed out when verification returns HTTP 503", async () => {
+    jest.spyOn(console, "warn").mockImplementation(() => {});
+    fetch.mockResolvedValue(verificationResponse({ valid: false, failureReason: "invalid" }, 503));
+
+    await readCachedSession({
+      patreonAuthenticated: false,
+      patreonUser: cachedUser,
+      patreonSessionToken: "test-token",
+    });
+    await flushPromises();
+
+    expectLoggedOut();
+    expect(document.getElementById("patreon-user-name").textContent).toBe("");
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(chrome.runtime.sendMessage).not.toHaveBeenCalled();
+    expect(chrome.storage.sync.remove).not.toHaveBeenCalled();
+  });
+
+  test("lets a suspended account explicitly clear its retained sign-in", async () => {
+    fetch.mockReturnValue(new Promise(() => {}));
+    const status = document.getElementById("patreon-suspended-status");
+    const slot = document.getElementById("patreon-suspended-actions");
+    const logout = document.getElementById("patreon-logout-btn");
+    await readCachedSession({
+      patreonAuthenticated: false,
+      patreonUser: cachedUser,
+      patreonSessionToken: "test-token",
+    });
+
+    expect(status.hidden).toBe(false);
+    expect(slot.hidden).toBe(false);
+    expect(slot.closest("#patreon-logged-out")).not.toBeNull();
+    expect(slot.contains(logout)).toBe(true);
+    logout.click();
+
+    expect(status.hidden).toBe(true);
+    expect(slot.hidden).toBe(true);
+    expect(chrome.storage.sync.remove).toHaveBeenCalledWith([
+      "patreonAuthenticated",
+      "patreonUser",
+      "patreonSessionToken",
+    ]);
+    expect(chrome.runtime.sendMessage).toHaveBeenCalledWith({ message: "patreon_logout" });
+  });
+
   test("keeps the raw-count visibility label for logged-out users", async () => {
     localizeMembershipLabels();
     await readCachedSession({});
     expectPremiumVisibilityLabel(false);
+    expect(document.getElementById("patreon-suspended-status").hidden).toBe(true);
+    expect(document.getElementById("patreon-suspended-actions").hidden).toBe(true);
   });
 
   test.each(["patreon-login-btn", "github-login-btn"])(
@@ -432,6 +600,7 @@ describe("popup account consent lifecycle", () => {
   test("does not restore an account when authentication consent is removed during the final account-permission query", async () => {
     let resolvePermission;
     fetch.mockResolvedValue({
+      ok: true,
       json: async () => {
         chrome.permissions.getAll.mockImplementationOnce(() => new Promise((resolve) => (resolvePermission = resolve)));
         return { valid: true, membershipTier: "premium" };
@@ -464,7 +633,7 @@ describe("popup account consent lifecycle", () => {
       expect(fetch).toHaveBeenCalledTimes(1);
       if (event === "revocation") revoke();
       else document.getElementById("patreon-logout-btn").click();
-      resolveVerify({ json: async () => ({ valid: true, membershipTier: "premium" }) });
+      resolveVerify(verificationResponse({ valid: true, membershipTier: "premium" }));
       await flushPromises();
       expect(chrome.storage.sync.set).not.toHaveBeenCalled();
       expectLoggedOut();

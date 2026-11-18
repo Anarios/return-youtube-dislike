@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Ditt röstnings-ID skickas bara när du röstar eller reagerar. Dina egna reaktioner på kommentarer sparas på den här enheten."
   },
+  "popup_saved_account_unverified": {
+    "message": "Det gick inte att verifiera ditt sparade konto. Öppna popupfönstret igen för att försöka på nytt."
+  },
   "popup_signin_next_click": {
     "message": "Ytterligare ett klick behövs: välj din inloggningsknapp nedan för att granska Firefox kontobehörigheter och fortsätta."
   },

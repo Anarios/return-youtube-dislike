@@ -12,6 +12,7 @@ const ANONYMOUS_SESSION = Object.freeze({
   membershipTier: "none",
 });
 const RECOVERY_DELAYS = [1000, 3000, 10000];
+const ACCOUNT_REJECTION_COOLDOWN_MS = 15 * 60 * 1000;
 const REACTION_STORAGE_KEY = "rydDiscussionReactions";
 const MAX_REACTION_VIDEOS = 100;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -247,6 +248,8 @@ export function createDiscussionBackground({
   random = Math.random,
 } = {}) {
   const local = api.storage.local;
+  const sessionStorage = api.storage.session;
+  const rejectionStorageKey = `${settings.stateStorageKey}RejectedAccount`;
   const origin = settings.apiOrigin.replace(/\/$/, "");
   const pendingRequests = new Map();
   const reactionQueues = new Map();
@@ -260,6 +263,7 @@ export function createDiscussionBackground({
   let connecting = null;
   let activityCatchup = null;
   let refreshing = null;
+  let revalidating = null;
   let recoveryTimer = null;
   let recoveryRevision = 0;
   let recoveryAttempt = 0;
@@ -270,7 +274,9 @@ export function createDiscussionBackground({
   let reactionStateQueue = Promise.resolve();
   let voterEpoch = 0;
   const permissionEpochs = { account: 0, voting: 0, counts: 0 };
-  let rejectedToken = "";
+  // Undefined allows loading a prior worker's rejection. Null means this worker cleared it.
+  let rejectedAccount;
+  let rejectionWrite = Promise.resolve();
   let accountBlocked = false;
   let hintedRevision = "0";
   let hasInboxSnapshot = false;
@@ -278,6 +284,54 @@ export function createDiscussionBackground({
   let stopped = false;
 
   const store = (method, ...args) => callBrowser(api, local, method, ...args);
+
+  async function fingerprintAccount(credential) {
+    const digest = await globalThis.crypto.subtle.digest("SHA-256", new TextEncoder().encode(credential));
+    return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
+  }
+
+  function rememberRejectedAccount(credential) {
+    const retryAt = Date.now() + ACCOUNT_REJECTION_COOLDOWN_MS;
+    const fingerprint = fingerprintAccount(credential).catch(() => null);
+    rejectedAccount = { fingerprint, retryAt };
+    if (!sessionStorage) return Promise.resolve();
+    const consentEpoch = permissionEpochs.account;
+    rejectionWrite = rejectionWrite
+      .then(async () => {
+        const digest = await fingerprint;
+        if (digest && consentEpoch === permissionEpochs.account)
+          await sessionStorage.set({ [rejectionStorageKey]: { fingerprint: digest, retryAt } });
+      })
+      .catch(() => {});
+    return rejectionWrite;
+  }
+
+  function clearRejectedAccount() {
+    rejectedAccount = null;
+    rejectionWrite = rejectionWrite.then(() => sessionStorage?.remove([rejectionStorageKey])).catch(() => {});
+    return rejectionWrite;
+  }
+
+  async function isRejectedAccount(credential) {
+    try {
+      await rejectionWrite;
+      let rejection = rejectedAccount;
+      if (rejection === undefined && sessionStorage) {
+        const data = await sessionStorage.get([rejectionStorageKey]);
+        rejection = data?.[rejectionStorageKey];
+      }
+      const remaining = rejection?.retryAt - Date.now();
+      return (
+        remaining > 0 &&
+        remaining <= ACCOUNT_REJECTION_COOLDOWN_MS &&
+        (await rejection.fingerprint) === (await fingerprintAccount(credential)) &&
+        rejection.retryAt > Date.now()
+      );
+    } catch (_) {
+      return false;
+    }
+  }
+
   const writeState = (expected, method, ...args) => {
     const work = stateQueue
       .catch(() => {})
@@ -370,10 +424,12 @@ export function createDiscussionBackground({
     scope?.controllers.add(controller);
     const timeout = setTimeout(() => controller.abort(), 20000);
     try {
-      const response = await (auth ? accountFetchImpl : fetchImpl)(`${origin}/api/discussion${path}`, {
+      const url = `${origin}/api/discussion${path}`;
+      const response = await (auth ? accountFetchImpl : fetchImpl)(url, {
         method,
         credentials: "omit",
         cache: "no-store",
+        ...(auth ? { redirect: "error" } : {}),
         signal: controller.signal,
         headers: {
           Accept: "application/json",
@@ -388,16 +444,19 @@ export function createDiscussionBackground({
       assertRequest();
       assertScope(scope);
       if (!response.ok) {
+        // The consent wrapper can rebuild the response without its URL. Authenticated requests disallow redirects.
         if (
           response.status === 401 &&
           data?.code === "authentication_required" &&
+          (response.url === "" || response.url === url) &&
+          !response.redirected &&
           accountBound &&
           auth &&
-          auth === token &&
-          path !== "/me"
+          (path === "/me" || auth === token)
         ) {
-          rejectedToken = token;
-          clearSession();
+          const written = rememberRejectedAccount(auth);
+          if (path !== "/me") clearSession();
+          await written;
         }
         throw new DiscussionError(data?.code || "request_failed", data?.message || "Request failed", response.status);
       }
@@ -643,7 +702,7 @@ export function createDiscussionBackground({
     broadcast("inbox", inbox).catch(() => {});
   }
 
-  function loadSession() {
+  function loadSession(verification) {
     const work = accountQueue
       .catch(() => {})
       .then(async () => {
@@ -665,21 +724,34 @@ export function createDiscussionBackground({
           }
         }
         assertCurrent(beforeRead);
+        if (nextToken === token && (!nextToken || session.authenticated)) return session;
+        const rejected = nextToken && (await isRejectedAccount(nextToken));
+        assertCurrent(beforeRead);
         if (
-          (nextToken && nextToken === rejectedToken) ||
-          (nextToken === token && (!nextToken || session.authenticated))
+          verification &&
+          (!rejected ||
+            verification.credential !== nextToken ||
+            verification.rejection !== rejectedAccount ||
+            verification.accountEpoch !== accountEpoch)
         )
           return session;
         if (token && token !== nextToken) clearSession(false, true, true);
+        if (rejected && !verification) return session;
         const expected = generation;
-        token = nextToken;
-        if (!token) return session;
+        if (!nextToken) return session;
+        token = verification ? "" : nextToken;
         try {
-          session = safeSession(await request("/me", { expected }));
+          const updatedSession = safeSession(await request("/me", { auth: nextToken, expected }));
+          if (verification) {
+            if (!updatedSession.authenticated) return session;
+            await clearRejectedAccount();
+            assertCurrent(expected);
+            token = nextToken;
+          }
+          session = updatedSession;
         } catch (error) {
           assertCurrent(expected);
           if (error.status !== 401) throw error;
-          rejectedToken = token;
           clearSession(false, true, true);
           return session;
         }
@@ -719,15 +791,16 @@ export function createDiscussionBackground({
     );
   }
 
-  function refreshSession(retrying = false) {
-    if (refreshing) return refreshing;
-    if (stopped || accountBlocked || (!retrying && recoveryTimer !== null)) return Promise.resolve(session);
+  function refreshSession(retrying = false, verification) {
+    if (refreshing && !verification) return refreshing;
+    if (stopped || accountBlocked || (!verification && !retrying && recoveryTimer !== null))
+      return Promise.resolve(session);
     if (!recoveryActive) {
       recoveryActive = true;
       recoveryAttempt = 0;
     }
     const revision = recoveryRevision;
-    const work = loadSession().then(
+    const work = loadSession(verification).then(
       (value) => {
         if (revision !== recoveryRevision) throw new DiscussionError("session_changed");
         if (!canReceiveLiveNotifications(value)) {
@@ -743,10 +816,13 @@ export function createDiscussionBackground({
         return value;
       },
       (error) => {
-        scheduleRecovery(revision, error);
+        if (verification) finishRecovery(revision);
+        else scheduleRecovery(revision, error);
         throw error;
       },
     );
+    // An ordinary read queued behind verification should see the resulting session even if the retry fails.
+    if (verification) return work;
     refreshing = work;
     work
       .finally(() => {
@@ -1002,12 +1078,19 @@ export function createDiscussionBackground({
       clearReactions(
         Boolean(changes.userId?.oldValue || changes[settings.credentialStorageKey]?.oldValue?.userId),
       ).catch(() => {});
+    const membership = changes.patreonUser;
+    const membershipChanged =
+      token &&
+      (membership?.oldValue?.membershipTier !== membership?.newValue?.membershipTier ||
+        membership?.oldValue?.hasActiveMembership !== membership?.newValue?.hasActiveMembership);
     const changed = settings.testMode
       ? area === "local" && changes[settings.authStorageKey]
-      : area === "sync" && (changes.patreonAuthenticated || changes.patreonSessionToken || changes.patreonUser);
+      : area === "sync" && (changes.patreonAuthenticated || changes.patreonSessionToken || membershipChanged);
     if (changed) {
-      rejectedToken = "";
       clearSession();
+      const authentication = changes.patreonAuthenticated;
+      if (!settings.testMode && authentication?.oldValue === false && authentication.newValue === true)
+        clearRejectedAccount();
       refreshSession().catch(() => {});
     }
   }
@@ -1034,6 +1117,21 @@ export function createDiscussionBackground({
   return {
     handleMessage,
     refreshSession,
+    revalidateVerifiedSession(credential) {
+      if (rejectedAccount === null || (credential === token && session.authenticated)) return Promise.resolve(session);
+      if (
+        revalidating?.credential === credential &&
+        revalidating.rejection === rejectedAccount &&
+        revalidating.accountEpoch === accountEpoch
+      )
+        return revalidating.work;
+      const verification = { credential, rejection: rejectedAccount, accountEpoch };
+      const work = refreshSession(false, verification).finally(() => {
+        if (revalidating?.work === work) revalidating = null;
+      });
+      revalidating = { ...verification, work };
+      return work;
+    },
     clearSession,
     resumeSession() {
       accountBlocked = false;
@@ -1050,9 +1148,14 @@ export function createDiscussionBackground({
       for (const [controller, state] of pendingRequests)
         if ([...state.features].some((feature) => features.has(feature))) controller.abort();
       const reactionsCleared = features.has("voting") || features.has("counts") ? clearReactions() : null;
-      if (features.has("account")) clearSession();
+      let rejectionCleared;
+      if (features.has("account")) {
+        clearSession();
+        rejectionCleared = clearRejectedAccount();
+      }
       await broadcast("permissions", { added, removed });
       await reactionsCleared;
+      await rejectionCleared;
       if (added.some((category) => ["authenticationInfo", "personallyIdentifyingInfo"].includes(category)))
         await refreshSession().catch(() => {});
     },

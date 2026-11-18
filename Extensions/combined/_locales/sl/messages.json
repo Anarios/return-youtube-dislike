@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "ID glasovanja se pošlje samo ob glasovanju ali odzivu. Vaši odzivi na komentarje se shranijo v tej napravi."
   },
+  "popup_saved_account_unverified": {
+    "message": "Vašega shranjenega računa ni bilo mogoče preveriti. Za nov poskus znova odprite pojavno okno."
+  },
   "popup_signin_next_click": {
     "message": "Potreben je še en klik: spodaj izberite gumb za prijavo, da pregledate dovoljenja računa v Firefoxu in nadaljujete."
   },

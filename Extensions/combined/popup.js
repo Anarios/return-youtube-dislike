@@ -171,59 +171,52 @@ function initPatreonAuth() {
   const loginBtn = document.getElementById("patreon-login-btn");
   const githubLoginBtn = document.getElementById("github-login-btn");
   const logoutBtn = document.getElementById("patreon-logout-btn");
+  const accountProfile = logoutBtn.parentElement;
+  const suspendedStatus = document.getElementById("patreon-suspended-status");
+  const suspendedActions = document.getElementById("patreon-suspended-actions");
   const userAvatar = document.getElementById("patreon-user-avatar");
   const userName = document.getElementById("patreon-user-name");
   const userTier = document.getElementById("patreon-tier");
   let authenticationGeneration = 0;
   let accountReadGeneration = 0;
   let openingPermissionPage = false;
-  function refreshAccountView() {
+  function refreshAccountView({ verify = true } = {}) {
     const initialGeneration = authenticationGeneration;
     const readGeneration = ++accountReadGeneration;
     const isCurrent = () => initialGeneration === authenticationGeneration && readGeneration === accountReadGeneration;
-    chrome.storage.sync.get(["patreonUser", "patreonSessionToken"], async (data) => {
+    chrome.storage.sync.get(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], async (data) => {
       if (!isCurrent()) return;
       const cachedUser = data.patreonUser;
       const sessionToken = data.patreonSessionToken;
 
       if (sessionToken && cachedUser) {
+        const suspended = data.patreonAuthenticated === false;
         const granted = await hasAuthenticationDataPermission();
         if (!isCurrent()) return;
-        if (!granted) {
-          showLoggedOutView();
-          return;
-        }
-
-        // Show cached state immediately to avoid flicker on popup reopen.
-        showLoggedInView(cachedUser);
+        if (!granted || suspended) showLoggedOutView({ suspended });
+        else showLoggedInView(cachedUser);
+        if (!granted || !verify) return;
 
         verifySession(sessionToken, initialGeneration).then(async (result) => {
           if (!isCurrent()) return;
           const stillGranted = await hasAuthenticationDataPermission();
           if (!isCurrent() || !stillGranted) return;
-          if (result.status === "valid") {
-            if (result.membershipTier && result.membershipTier !== cachedUser.membershipTier) {
-              const updatedUser = { ...cachedUser, membershipTier: result.membershipTier, hasActiveMembership: true };
-              showLoggedInView(updatedUser);
-              chrome.storage.sync.set({ patreonUser: updatedUser });
-            } else if (cachedUser.hasActiveMembership !== true) {
-              const updatedUser = { ...cachedUser, hasActiveMembership: true };
-              showLoggedInView(updatedUser);
-              chrome.storage.sync.set({ patreonUser: updatedUser });
-            }
-          } else if (result.status === "inactive") {
-            const updatedUser = {
-              ...cachedUser,
-              hasActiveMembership: false,
-              membershipTier: result.membershipTier || cachedUser.membershipTier || "none",
+          const onAccountUpdated = (response) => {
+            if (!chrome.runtime.lastError && isCurrent() && response?.success) refreshAccountView({ verify: false });
+          };
+          if (result.status === "valid" || result.status === "inactive") {
+            const request = {
+              message: "patreon_membership_verified",
+              sessionToken,
+              membershipTier: result.membershipTier,
+              active: result.status === "valid",
             };
-            showLoggedInView(updatedUser);
-            chrome.storage.sync.set({ patreonUser: updatedUser });
+            chrome.runtime.sendMessage(request, onAccountUpdated);
           } else if (result.status === "error") {
             console.warn("Patreon session verification skipped:", result.reason || "network_error");
-          } else {
-            showLoggedOutView();
-            chrome.storage.sync.remove(["patreonUser", "patreonSessionToken"]);
+          } else if (result.status === "expired" || result.status === "invalid") {
+            const message = result.status === "expired" ? "patreon_session_expired" : "patreon_session_invalid";
+            chrome.runtime.sendMessage({ message, sessionToken }, onAccountUpdated);
           }
         });
       } else {
@@ -233,9 +226,13 @@ function initPatreonAuth() {
   }
   refreshAccountView();
 
-  function showLoggedOutView() {
+  function showLoggedOutView({ suspended = false } = {}) {
     loggedOutView.style.display = "block";
     loggedInView.style.display = "none";
+    suspendedStatus.hidden = !suspended;
+    suspendedActions.hidden = !suspended;
+    const logoutContainer = suspended ? suspendedActions : accountProfile;
+    if (logoutBtn.parentElement !== logoutContainer) logoutContainer.append(logoutBtn);
     userAvatar.removeAttribute("src");
     userAvatar.style.display = "none";
     userName.textContent = "";
@@ -251,6 +248,9 @@ function initPatreonAuth() {
     document.getElementById("signin-next-click").hidden = true;
     loggedOutView.style.display = "none";
     loggedInView.style.display = "block";
+    suspendedStatus.hidden = true;
+    suspendedActions.hidden = true;
+    if (logoutBtn.parentElement !== accountProfile) accountProfile.append(logoutBtn);
     updateHidePremiumSettingLabel(user);
 
     userName.textContent = user.fullName || user.email || chrome.i18n.getMessage("patreonUserFallback");
@@ -302,8 +302,12 @@ function initPatreonAuth() {
         body: JSON.stringify({ sessionToken: token }),
       });
 
+      if (!response.ok) {
+        return { status: "error", reason: "http_error" };
+      }
+
       const data = await response.json().catch(() => null);
-      if (!data) {
+      if (typeof data?.valid !== "boolean") {
         return { status: "error", reason: "invalid_response" };
       }
 
@@ -322,7 +326,7 @@ function initPatreonAuth() {
         return { status: "expired", membershipTier };
       }
 
-      if (failureReason === "invalid") {
+      if (failureReason === "invalid" || failureReason === "unverifiable") {
         return { status: "invalid", membershipTier, failureReason };
       }
 

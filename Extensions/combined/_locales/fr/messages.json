@@ -980,6 +980,9 @@
   "consent_voter_timing": {
     "message": "Votre identifiant de vote n’est envoyé que lorsque vous votez ou réagissez. Vos propres réactions aux commentaires sont mémorisées sur cet appareil."
   },
+  "popup_saved_account_unverified": {
+    "message": "Impossible de vérifier votre compte enregistré. Rouvrez la fenêtre de l’extension pour réessayer."
+  },
   "popup_signin_next_click": {
     "message": "Un clic supplémentaire est nécessaire : sélectionnez votre bouton de connexion ci-dessous pour examiner les autorisations de compte de Firefox et continuer."
   },

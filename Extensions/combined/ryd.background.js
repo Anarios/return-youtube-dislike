@@ -24,10 +24,13 @@ const defaultIconName = config.defaultIconName;
 let api;
 const CHANGELOG_STORAGE_KEY = "lastShownChangelogVersion";
 const DATA_PERMISSIONS_MIGRATION_KEY = "featureDataPermissionsMigrated";
+const ACCOUNT_SESSION_KEYS = ["patreonAuthenticated", "patreonUser", "patreonSessionToken"];
 
 /** stores extension's global config */
 let extConfig = { ...config.defaultExtConfig };
 let authenticationGeneration = 0;
+let accountVerificationEpoch = 0;
+let patreonStatusRevision = 0;
 let accountStorageQueue = Promise.resolve();
 let consentPageOpening = null;
 let consentPageTabId = null;
@@ -110,9 +113,16 @@ discussionBackground.initialize();
 
 initExtConfig();
 
-function broadcastPatreonStatus(authenticated, user, sessionToken, generation = authenticationGeneration) {
+function broadcastPatreonStatus(authenticated, user, sessionToken, { generation, verificationEpoch } = {}) {
+  const revision = ++patreonStatusRevision;
   chrome.tabs.query({}, (tabs) => {
-    if (generation !== authenticationGeneration) return;
+    if (
+      revision !== patreonStatusRevision ||
+      (generation !== undefined && generation !== authenticationGeneration) ||
+      (verificationEpoch !== undefined && verificationEpoch !== accountVerificationEpoch)
+    ) {
+      return;
+    }
     tabs
       .filter((tab) => {
         if (isFirefoxExtension(api) && tab.incognito !== false) return false;
@@ -191,7 +201,7 @@ function persistPatreonAuth(user, sessionToken, generation, done) {
         done?.(false);
         return;
       }
-      broadcastPatreonStatus(true, user, sessionToken, generation);
+      broadcastPatreonStatus(true, user, sessionToken, { generation });
       done?.(true);
     })
     .catch(() => done?.(false));
@@ -201,10 +211,10 @@ function queueAccountStorageMutation(operation) {
   const pending = accountStorageQueue.then(
     () =>
       new Promise((resolve, reject) => {
-        operation(() => {
+        operation((result) => {
           if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
-          else resolve();
-        });
+          else resolve(result);
+        })?.catch(reject);
       }),
   );
   accountStorageQueue = pending.catch(() => {});
@@ -213,10 +223,11 @@ function queueAccountStorageMutation(operation) {
 
 function clearPatreonAuth(done) {
   const generation = ++authenticationGeneration;
+  accountVerificationEpoch++;
   discussionBackground.clearSession(true);
-  broadcastPatreonStatus(false, null, null, generation);
+  broadcastPatreonStatus(false, null, null, { generation });
   queueAccountStorageMutation((complete) => {
-    chrome.storage.sync.remove(["patreonAuthenticated", "patreonUser", "patreonSessionToken"], complete);
+    chrome.storage.sync.remove(ACCOUNT_SESSION_KEYS, complete);
   })
     .then(() => {
       discussionBackground.resumeSession().catch(() => {});
@@ -225,7 +236,73 @@ function clearPatreonAuth(done) {
     .catch((error) => console.error("Account session cleanup failed", error));
 }
 
+function applyPatreonVerification({ message, sessionToken, active, membershipTier }) {
+  const verificationEpoch = accountVerificationEpoch;
+  const canApplyVerification = async () =>
+    verificationEpoch === accountVerificationEpoch &&
+    (!usesFirefoxDataCollectionConsent() || (await hasAuthenticationDataPermission({ queryBackground: false }))) &&
+    verificationEpoch === accountVerificationEpoch;
+
+  return queueAccountStorageMutation(async (complete) => {
+    if (!(await canApplyVerification())) {
+      complete();
+      return;
+    }
+
+    const stored = await readStorage("sync", ACCOUNT_SESSION_KEYS);
+    if (stored.patreonSessionToken !== sessionToken || !(await canApplyVerification())) {
+      complete();
+      return;
+    }
+
+    const signedOut = { authenticated: false, user: null, token: null, broadcast: true };
+    const suspended = stored.patreonAuthenticated === false;
+    if (message === "patreon_session_expired") {
+      chrome.storage.sync.remove(ACCOUNT_SESSION_KEYS, () => complete(signedOut));
+      return;
+    }
+    if (message === "patreon_session_invalid") {
+      if (suspended) complete();
+      else chrome.storage.sync.set({ patreonAuthenticated: false }, () => complete(signedOut));
+      return;
+    }
+
+    const user = stored.patreonUser;
+    if (!user) {
+      complete();
+      return;
+    }
+
+    const updatedUser = { ...user, hasActiveMembership: active };
+    if (membershipTier || !active) updatedUser.membershipTier = membershipTier || user.membershipTier || "none";
+    const broadcast =
+      suspended || user.hasActiveMembership !== active || user.membershipTier !== updatedUser.membershipTier;
+    const account = {
+      authenticated: true,
+      user: updatedUser,
+      token: sessionToken,
+      broadcast,
+      revalidateDiscussion: stored.patreonAuthenticated === true,
+    };
+    if (broadcast) {
+      const update = { patreonUser: updatedUser };
+      if (suspended) update.patreonAuthenticated = true;
+      chrome.storage.sync.set(update, () => complete(account));
+    } else {
+      complete(account);
+    }
+  }).then((account) => {
+    if (!account || verificationEpoch !== accountVerificationEpoch) return;
+    if (account.broadcast)
+      broadcastPatreonStatus(account.authenticated, account.user, account.token, { verificationEpoch });
+    if (account.revalidateDiscussion) discussionBackground.revalidateVerifiedSession(account.token).catch(() => {});
+  });
+}
+
 onDataPermissionsChanged((change) => {
+  if ([...change.added, ...change.removed].some((category) => FEATURE_DATA_PERMISSIONS.account.includes(category))) {
+    accountVerificationEpoch++;
+  }
   const voting = (category) => FEATURE_DATA_PERMISSIONS.voting.includes(category);
   if (change.removed.some(voting)) {
     votingPermissionGeneration++;
@@ -472,6 +549,28 @@ function handleMessage(request, sender, sendResponse) {
     return true;
   } else if (request.message === "patreon_logout") {
     clearPatreonAuth();
+  } else if (
+    request.message === "patreon_session_invalid" ||
+    request.message === "patreon_session_expired" ||
+    request.message === "patreon_membership_verified"
+  ) {
+    if (!isOwnPopupSender(sender) || typeof request.sessionToken !== "string" || !request.sessionToken) {
+      sendResponse({ success: false });
+      return;
+    }
+    if (
+      request.message === "patreon_membership_verified" &&
+      (typeof request.active !== "boolean" ||
+        (typeof request.membershipTier !== "string" && request.membershipTier !== null))
+    ) {
+      sendResponse({ success: false });
+      return;
+    }
+    applyPatreonVerification(request).then(
+      () => sendResponse({ success: true }),
+      () => sendResponse({ success: false }),
+    );
+    return true;
   } else if (request.message === "ryd_open_tab") {
     const targetUrl = typeof request?.url === "string" ? request.url : null;
     const allowedUrls = new Set([
