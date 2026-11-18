@@ -14,6 +14,7 @@ const HOURLY_THRESHOLD_DAYS = 7;
 const HOURLY_THRESHOLD_MS = HOURLY_THRESHOLD_DAYS * MS_PER_DAY;
 const MS_PER_HOUR = 60 * 60 * 1000;
 const SELECTION_FETCH_DELAY_MS = 400;
+const DEFAULT_BUSY_RETRY_SECONDS = 3;
 const MAX_BUSY_RETRY_SECONDS = 60;
 let currentRequest = null;
 
@@ -22,11 +23,10 @@ function cancelAnalyticsRequests() {
   currentRequest = null;
   clearTimeout(request?.timer);
   request?.controller?.abort();
-  return request;
 }
 
 function requestAnalytics({ selection } = {}, delay = 0) {
-  const superseded = cancelAnalyticsRequests();
+  cancelAnalyticsRequests();
   const state = analyticsState;
   const { currentVideoId, sessionToken, sessionActive, membershipTier } = state;
   if (!currentVideoId || !sessionToken || !sessionActive || membershipTier !== "premium") {
@@ -38,10 +38,6 @@ function requestAnalytics({ selection } = {}, delay = 0) {
     sessionToken,
     controller: null,
     timer: null,
-    // A replacement can supersede another selection while it is still waiting to fetch.
-    retryOnBusy: Boolean(
-      superseded?.sessionToken === sessionToken && (superseded.controller || superseded.retryOnBusy),
-    ),
   };
   currentRequest = request;
   const isCurrentRequest = () =>
@@ -127,7 +123,7 @@ function requestAnalyticsWithConsent(selection, request, isCurrentRequest) {
   fetchAnalytics(url, request, isCurrentRequest);
 }
 
-function fetchAnalytics(url, request, isCurrentRequest) {
+function fetchAnalytics(url, request, isCurrentRequest, retryOnBusy = true) {
   request.controller = new AbortController();
 
   fetchWithAccountConsent(url, {
@@ -143,16 +139,13 @@ function fetchAnalytics(url, request, isCurrentRequest) {
       if (!response.ok) {
         const payload = await safeJson(response);
         if (!isCurrentRequest()) return null;
-        const retryDelay = retryAfterMs(request, response, payload?.error);
-        if (retryDelay) {
+        if (retryOnBusy && response.status === 429 && payload?.error === "analytics_busy") {
           scheduleRequest(
             request,
             () => {
-              if (!isCurrentRequest()) return;
-              request.retryOnBusy = false;
-              fetchAnalytics(url, request, isCurrentRequest);
+              if (isCurrentRequest()) fetchAnalytics(url, request, isCurrentRequest, false);
             },
-            retryDelay,
+            retryAfterMs(response),
           );
         } else {
           handleError(response.status, payload?.error);
@@ -173,19 +166,16 @@ function fetchAnalytics(url, request, isCurrentRequest) {
     .finally(() => {
       request.controller = null;
       if (request.timer !== null) return;
-      request.retryOnBusy = false;
       if (isCurrentRequest()) {
         setLoadingState(false);
       }
     });
 }
 
-function retryAfterMs(request, response, error) {
-  if (!request.retryOnBusy || response.status !== 429 || error !== "analytics_busy") return 0;
-  const header = response.headers?.get("Retry-After");
-  if (!header || !/^\d+$/.test(header)) return 0;
-  const seconds = Number(header);
-  return seconds > 0 && seconds <= MAX_BUSY_RETRY_SECONDS ? seconds * 1000 : 0;
+function retryAfterMs(response) {
+  const header = response.headers?.get("Retry-After")?.trim();
+  const seconds = header && /^\d+(?:\.\d+)?$/.test(header) ? Number(header) : DEFAULT_BUSY_RETRY_SECONDS;
+  return Math.min(seconds, MAX_BUSY_RETRY_SECONDS) * 1000;
 }
 
 function scheduleRequest(request, callback, delay) {

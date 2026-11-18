@@ -527,26 +527,72 @@ describe("premiumAnalytics", () => {
   );
 
   it.each([
-    ["analytics_busy", "1", false],
-    ["rate_limited", "1", true],
-    ["analytics_busy", null, true],
-    ["analytics_busy", "0", true],
-    ["analytics_busy", "1.5", true],
-    ["analytics_busy", "61", true],
-  ])("keeps the regular error for %s with Retry-After %j and overlap %s", async (error, retryAfter, replacing) => {
+    ["1", 1000],
+    ["1.5", 1500],
+    ["61", 60000],
+    [null, 3000],
+    ["", 3000],
+    ["-1", 3000],
+    ["0x1", 3000],
+    ["1e0", 3000],
+    ["invalid", 3000],
+  ])("retries the initial busy request with Retry-After %j at %i ms", async (retryAfter, delay) => {
     jest.useFakeTimers();
     try {
-      initOnWatchPage();
-      mockSafeJson.mockResolvedValue({ error });
-      if (replacing) {
-        fetch.mockReturnValueOnce(new Promise(() => {}));
-        requestAnalytics();
-      }
+      mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
       fetch.mockResolvedValueOnce(rateLimitResponse(retryAfter));
       requestAnalytics();
-      await jest.advanceTimersByTimeAsync(61000);
+      await jest.advanceTimersByTimeAsync(delay - 1);
 
-      expect(fetch).toHaveBeenCalledTimes(replacing ? 2 : 1);
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_loading"));
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+      await jest.advanceTimersByTimeAsync(1);
+
+      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it("schedules a zero-second busy retry asynchronously", async () => {
+    jest.useFakeTimers();
+    try {
+      mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
+      fetch.mockResolvedValueOnce(rateLimitResponse("0"));
+      requestAnalytics();
+      await Promise.resolve();
+      await Promise.resolve();
+
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(jest.getTimerCount()).toBe(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+      await jest.advanceTimersByTimeAsync(0);
+
+      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it.each([
+    [429, "rate_limited"],
+    [503, "analytics_busy"],
+  ])("keeps the regular error for HTTP %i with error %s", async (status, error) => {
+    jest.useFakeTimers();
+    try {
+      mockSafeJson.mockResolvedValue({ error });
+      fetch.mockResolvedValueOnce({ ...rateLimitResponse(), status });
+      requestAnalytics();
+      await jest.advanceTimersByTimeAsync(1000);
+
+      expect(fetch).toHaveBeenCalledTimes(1);
       expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_errorGeneric"));
       expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
     } finally {
@@ -562,9 +608,8 @@ describe("premiumAnalytics", () => {
         initOnWatchPage();
         const { onRangePreset } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
         mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
-        fetch.mockReturnValueOnce(new Promise(() => {})).mockResolvedValueOnce(rateLimitResponse());
+        fetch.mockResolvedValueOnce(rateLimitResponse());
         requestAnalytics();
-        onRangePreset(90);
         await jest.advanceTimersByTimeAsync(100);
         expect(jest.getTimerCount()).toBe(1);
 
@@ -579,17 +624,21 @@ describe("premiumAnalytics", () => {
         } else {
           teardownPremiumAnalytics();
         }
+        const attempts = invalidation === "teardown" ? 1 : 2;
+        expect(fetch).toHaveBeenCalledTimes(attempts);
         await jest.advanceTimersByTimeAsync(900);
-        const attempts = invalidation === "teardown" ? 2 : 3;
         expect(fetch).toHaveBeenCalledTimes(attempts);
         await jest.advanceTimersByTimeAsync(100);
-        const retries = invalidation === "preset" || invalidation === "video change";
+        const retries = invalidation !== "teardown";
         expect(fetch).toHaveBeenCalledTimes(attempts + Number(retries));
         if (retries) {
-          expect(fetch.mock.calls[3][0]).toBe(fetch.mock.calls[2][0]);
-          const url = new URL(fetch.mock.calls[3][0]);
+          expect(fetch.mock.calls[2][0]).toBe(fetch.mock.calls[1][0]);
+          const url = new URL(fetch.mock.calls[2][0]);
           if (invalidation === "preset") expect(url.searchParams.get("rangeDays")).toBe("30");
-          else expect(url.pathname).toContain(WATCH_VIDEO_ID);
+          if (invalidation === "video change") expect(url.pathname).toContain(WATCH_VIDEO_ID);
+          if (invalidation === "account change") {
+            expect(fetch.mock.calls[2][1].headers.Authorization).toBe("Bearer new-account-token");
+          }
         }
         expect(jest.getTimerCount()).toBe(0);
       } finally {
