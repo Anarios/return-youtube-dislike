@@ -155,7 +155,12 @@ function initOnWatchPage() {
 
 function rateLimitResponse(retryAfter = "1") {
   const headers = new Headers(retryAfter === null ? {} : { "Retry-After": retryAfter });
-  return { ok: false, status: 429, headers };
+  return errorResponse(429, "analytics_busy", headers);
+}
+
+function errorResponse(status, error, headers = new Headers()) {
+  const json = async () => ({ error });
+  return { ok: false, status, headers, json, clone: () => ({ json }) };
 }
 
 const enMessages = require("../../_locales/en/messages.json");
@@ -179,8 +184,11 @@ function getMessage(key, substitutions) {
 }
 
 describe("premiumAnalytics", () => {
+  let random;
+
   beforeEach(() => {
     jest.clearAllMocks();
+    random = jest.spyOn(Math, "random").mockReturnValue(0);
     mockGetApiEndpoint.mockImplementation((path) => `https://api.example${path}`);
     mockHasAuthenticationDataPermission.mockResolvedValue(true);
     mockUsesFirefoxDataCollectionConsent.mockReturnValue(false);
@@ -236,11 +244,31 @@ describe("premiumAnalytics", () => {
 
   afterEach(() => {
     teardownPremiumAnalytics();
+    random.mockRestore();
     mockGetVideoId.mockImplementation(defaultGetVideoId);
     document.documentElement.removeAttribute("dark");
     delete global.fetch;
     delete global.chrome;
   });
+
+  it.each([`/watch?v=${WATCH_VIDEO_ID}`, `/shorts/${WATCH_VIDEO_ID}`])(
+    "starts analytics immediately when navigating to %s",
+    async (path) => {
+      const originalUrl = window.location.href;
+      window.history.replaceState(null, "", path);
+      mockGetVideoId.mockImplementation(jest.requireActual("../utils").getVideoId);
+      try {
+        initPremiumAnalytics();
+
+        expect(fetch).toHaveBeenCalledTimes(1);
+        expect(new URL(fetch.mock.calls[0][0]).pathname).toContain(WATCH_VIDEO_ID);
+        await flushPromises();
+        expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      } finally {
+        window.history.replaceState(null, "", originalUrl);
+      }
+    },
+  );
 
   it("persists display changes, closes enlarged charts, and resizes on reopening", () => {
     const set = jest.fn();
@@ -515,6 +543,7 @@ describe("premiumAnalytics", () => {
         expect(fetch.mock.calls[3][0]).toBe(latestUrl);
         await jest.advanceTimersByTimeAsync(1000);
         expect(fetch).toHaveBeenCalledTimes(4);
+        expect(jest.getTimerCount()).toBe(0);
         expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
         expect(mockRenderSummary).toHaveBeenCalledTimes(result === "success" ? 1 : 0);
         if (result === "still busy") {
@@ -527,29 +556,195 @@ describe("premiumAnalytics", () => {
   );
 
   it.each([
-    ["analytics_busy", "1", false],
-    ["rate_limited", "1", true],
-    ["analytics_busy", null, true],
-    ["analytics_busy", "0", true],
-    ["analytics_busy", "1.5", true],
-    ["analytics_busy", "61", true],
-  ])("keeps the regular error for %s with Retry-After %j and overlap %s", async (error, retryAfter, replacing) => {
+    ["1", 1000, 0],
+    ["1", 1500, 0.5],
+    ["10", 10999, 0.9999],
+    ["Thu, 01 Jan 2099 00:00:00 GMT", 3000, 0],
+    ["1.5", 3500, 0.5],
+    [null, 3000, 0],
+    ["", 3000, 0],
+    ["-1", 3000, 0],
+    ["0x1", 3000, 0],
+    ["1e0", 3000, 0],
+    ["invalid", 3000, 0],
+  ])("retries the initial busy request with Retry-After %j at %i ms", async (retryAfter, delay, randomValue) => {
     jest.useFakeTimers();
     try {
-      initOnWatchPage();
-      mockSafeJson.mockResolvedValue({ error });
-      if (replacing) {
-        fetch.mockReturnValueOnce(new Promise(() => {}));
-        requestAnalytics();
-      }
+      random.mockReturnValue(randomValue);
+      mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
       fetch.mockResolvedValueOnce(rateLimitResponse(retryAfter));
       requestAnalytics();
-      await jest.advanceTimersByTimeAsync(61000);
+      await jest.advanceTimersByTimeAsync(delay - 1);
 
-      expect(fetch).toHaveBeenCalledTimes(replacing ? 2 : 1);
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(mockLogFetchRequest).toHaveBeenCalledTimes(1);
+      expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_loading"));
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+      await jest.advanceTimersByTimeAsync(1);
+
+      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
+      expect(mockLogFetchRequest).toHaveBeenCalledTimes(2);
+      const [first, retry] = mockLogFetchRequest.mock.calls;
+      expect(retry[0]).toBe(first[0]);
+      expect(retry[1].toString()).toBe(first[1].toString());
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it.each(["11", "60", "120"])(
+    "shows the error immediately without scheduling a retry for Retry-After %j",
+    async (retryAfter) => {
+      jest.useFakeTimers();
+      try {
+        mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
+        fetch.mockResolvedValueOnce(rateLimitResponse(retryAfter));
+        requestAnalytics();
+        await jest.advanceTimersByTimeAsync(0);
+
+        expect(fetch).toHaveBeenCalledTimes(1);
+        expect(mockLogFetchRequest).toHaveBeenCalledTimes(1);
+        expect(jest.getTimerCount()).toBe(0);
+        expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_errorGeneric"));
+        expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+      } finally {
+        jest.useRealTimers();
+      }
+    },
+  );
+
+  it("schedules a zero-second retry asynchronously", async () => {
+    jest.useFakeTimers();
+    try {
+      mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
+      fetch.mockResolvedValueOnce(rateLimitResponse("0"));
+      requestAnalytics();
+      await Promise.resolve();
+      await Promise.resolve();
+
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(jest.getTimerCount()).toBe(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+      await jest.advanceTimersByTimeAsync(0);
+
+      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it.each([
+    [429, "rate_limited"],
+    [503, "analytics_timeout"],
+    [503, "analytics_budget_exceeded"],
+  ])("keeps the regular error for HTTP %i with error %s", async (status, error) => {
+    jest.useFakeTimers();
+    try {
+      mockSafeJson.mockImplementation(jest.requireActual("./utils").safeJson);
+      fetch.mockResolvedValueOnce(errorResponse(status, error, new Headers({ "Retry-After": "1" })));
+      requestAnalytics();
+      await jest.advanceTimersByTimeAsync(1000);
+
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(jest.getTimerCount()).toBe(0);
       expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_errorGeneric"));
       expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
     } finally {
+      jest.useRealTimers();
+    }
+  });
+
+  it.each([
+    [401, "invalid_session", "premiumAnalytics_errorSession"],
+    [409, "session_upgrade_required", "premiumAnalytics_errorReauth"],
+    [null, null, "premiumAnalytics_errorNetwork"],
+  ])("handles a failed retry with status %j through the usual error path", async (status, error, message) => {
+    jest.useFakeTimers();
+    const logError = jest.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      mockSafeJson.mockImplementation(jest.requireActual("./utils").safeJson);
+      fetch.mockResolvedValueOnce(rateLimitResponse());
+      if (status === null) {
+        fetch.mockRejectedValueOnce(new TypeError("Failed to fetch"));
+      } else {
+        fetch.mockResolvedValueOnce(errorResponse(status, error));
+      }
+
+      requestAnalytics();
+      await jest.advanceTimersByTimeAsync(999);
+      expect(fetch).toHaveBeenCalledTimes(1);
+      await jest.advanceTimersByTimeAsync(1);
+
+      expect(fetch).toHaveBeenCalledTimes(2);
+      expect(fetch.mock.calls[1][0]).toBe(fetch.mock.calls[0][0]);
+      expect(jest.getTimerCount()).toBe(0);
+      expect(mockRenderSummary).not.toHaveBeenCalled();
+      expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage(message));
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+      expect(logError).toHaveBeenCalledTimes(Number(status === null));
+    } finally {
+      logError.mockRestore();
+      jest.useRealTimers();
+    }
+  });
+
+  it.each(["abort rejection", "late body"])("ignores a retry's %s after navigating to a new video", async (result) => {
+    jest.useFakeTimers();
+    const logError = jest.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      initOnWatchPage();
+      const response = await fetch.getMockImplementation()();
+      let completeRetry;
+      let completeReplacement;
+      const readRetryBody = jest.fn();
+      mockSafeJson.mockImplementation(jest.requireActual("./utils").safeJson);
+      fetch
+        .mockResolvedValueOnce(rateLimitResponse())
+        .mockImplementationOnce(async (_url, { signal }) => {
+          readRetryBody.mockImplementation(
+            () =>
+              new Promise((resolve, reject) => {
+                if (result === "abort rejection") {
+                  signal.addEventListener("abort", () => reject(signal.reason));
+                }
+                completeRetry = resolve;
+              }),
+          );
+          return { ok: true, json: readRetryBody };
+        })
+        .mockImplementationOnce(() => new Promise((resolve) => (completeReplacement = resolve)));
+
+      requestAnalytics();
+      await jest.advanceTimersByTimeAsync(1000);
+      expect(readRetryBody).toHaveBeenCalledTimes(1);
+      const retrySignal = fetch.mock.calls[1][1].signal;
+      expect(retrySignal.aborted).toBe(false);
+
+      mockGetVideoId.mockReturnValue(WATCH_VIDEO_ID);
+      document.dispatchEvent(new Event("yt-navigate-finish"));
+      expect(fetch).toHaveBeenCalledTimes(3);
+      expect(retrySignal.aborted).toBe(true);
+      if (result === "late body") completeRetry(await response.json());
+      await jest.advanceTimersByTimeAsync(0);
+
+      expect(logError).not.toHaveBeenCalled();
+      expect(mockRenderSummary).not.toHaveBeenCalled();
+      expect(mockSetFooterMessage).toHaveBeenLastCalledWith(getMessage("premiumAnalytics_loading"));
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(true);
+
+      completeReplacement(response);
+      await jest.advanceTimersByTimeAsync(0);
+      expect(mockRenderSummary).toHaveBeenCalledTimes(1);
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+      expect(jest.getTimerCount()).toBe(0);
+    } finally {
+      logError.mockRestore();
       jest.useRealTimers();
     }
   });
@@ -562,9 +757,8 @@ describe("premiumAnalytics", () => {
         initOnWatchPage();
         const { onRangePreset } = mockConfigurePanelCallbacks.mock.calls.at(-1)[0];
         mockSafeJson.mockResolvedValue({ error: "analytics_busy" });
-        fetch.mockReturnValueOnce(new Promise(() => {})).mockResolvedValueOnce(rateLimitResponse());
+        fetch.mockResolvedValueOnce(rateLimitResponse());
         requestAnalytics();
-        onRangePreset(90);
         await jest.advanceTimersByTimeAsync(100);
         expect(jest.getTimerCount()).toBe(1);
 
@@ -579,17 +773,21 @@ describe("premiumAnalytics", () => {
         } else {
           teardownPremiumAnalytics();
         }
+        const attempts = invalidation === "teardown" ? 1 : 2;
+        expect(fetch).toHaveBeenCalledTimes(attempts);
         await jest.advanceTimersByTimeAsync(900);
-        const attempts = invalidation === "teardown" ? 2 : 3;
         expect(fetch).toHaveBeenCalledTimes(attempts);
         await jest.advanceTimersByTimeAsync(100);
-        const retries = invalidation === "preset" || invalidation === "video change";
+        const retries = invalidation !== "teardown";
         expect(fetch).toHaveBeenCalledTimes(attempts + Number(retries));
         if (retries) {
-          expect(fetch.mock.calls[3][0]).toBe(fetch.mock.calls[2][0]);
-          const url = new URL(fetch.mock.calls[3][0]);
+          expect(fetch.mock.calls[2][0]).toBe(fetch.mock.calls[1][0]);
+          const url = new URL(fetch.mock.calls[2][0]);
           if (invalidation === "preset") expect(url.searchParams.get("rangeDays")).toBe("30");
-          else expect(url.pathname).toContain(WATCH_VIDEO_ID);
+          if (invalidation === "video change") expect(url.pathname).toContain(WATCH_VIDEO_ID);
+          if (invalidation === "account change") {
+            expect(fetch.mock.calls[2][1].headers.Authorization).toBe("Bearer new-account-token");
+          }
         }
         expect(jest.getTimerCount()).toBe(0);
       } finally {
@@ -618,6 +816,60 @@ describe("premiumAnalytics", () => {
     expect(fetch).not.toHaveBeenCalled();
     expect(analyticsState.sessionToken).toBeNull();
     expect(analyticsState.sessionActive).toBe(false);
+  });
+
+  it("does not send or log a retry after Firefox revokes authentication consent", async () => {
+    jest.useFakeTimers();
+    const logError = jest.spyOn(console, "error").mockImplementation(() => {});
+    const originalResponse = global.Response;
+    try {
+      const actualConsent = jest.requireActual("../data-collection-permissions");
+      let accountGranted = true;
+      const sendMessage = jest.fn(async ({ message, feature }) => {
+        if (message !== "ryd_has_feature_consent") return undefined;
+        return { granted: feature === "counts" || (feature === "account" && accountGranted) };
+      });
+      chrome.runtime = {
+        getManifest: () => require("../../manifest-firefox.json"),
+        onMessage: { addListener: jest.fn(), removeListener: jest.fn() },
+        sendMessage,
+      };
+      mockUsesFirefoxDataCollectionConsent.mockImplementation(actualConsent.usesFirefoxDataCollectionConsent);
+      mockHasAuthenticationDataPermission.mockImplementation(actualConsent.hasAuthenticationDataPermission);
+      mockSafeJson.mockImplementation(jest.requireActual("./utils").safeJson);
+
+      // jsdom lacks Response. Keep the request and permission checks in the real consent wrappers.
+      global.Response = jest.fn((body, { headers, status }) =>
+        errorResponse(status, JSON.parse(Buffer.from(body).toString("utf8")).error, headers),
+      );
+      fetch.mockResolvedValueOnce({
+        ...rateLimitResponse(),
+        arrayBuffer: async () => Uint8Array.from(Buffer.from('{"error":"analytics_busy"}')).buffer,
+      });
+
+      await requestAnalytics();
+      await jest.advanceTimersByTimeAsync(999);
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(mockLogFetchRequest).toHaveBeenCalledTimes(1);
+      expect(jest.getTimerCount()).toBe(1);
+      sendMessage.mockClear();
+      accountGranted = false;
+
+      await jest.advanceTimersByTimeAsync(1);
+      expect(sendMessage).toHaveBeenCalledWith({ message: "ryd_has_feature_consent", feature: "account" });
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(mockLogFetchRequest).toHaveBeenCalledTimes(1);
+      expect(jest.getTimerCount()).toBe(0);
+      expect(logError).not.toHaveBeenCalled();
+      expect(mockRenderSummary).not.toHaveBeenCalled();
+      expect(mockSetFooterMessage).toHaveBeenLastCalledWith("");
+      expect(mockSetLoadingState).toHaveBeenLastCalledWith(false);
+    } finally {
+      if (originalResponse) global.Response = originalResponse;
+      else delete global.Response;
+      logError.mockRestore();
+      jest.useRealTimers();
+    }
   });
 
   it.each([[], undefined])("does not send a bearer token without an explicit Firefox grant: %j", async (granted) => {

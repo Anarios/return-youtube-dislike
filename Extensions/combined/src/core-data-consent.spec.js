@@ -266,6 +266,7 @@ describe("Firefox feature data permissions", () => {
     granted = granted.filter((category) => category !== "browsingActivity");
     browser.permissions.onRemoved.emit({ data_collection: ["browsingActivity"] });
     expect(videoSignal.aborted).toBe(true);
+    expect(videoSignal.reason.name).toBe("DataConsentError");
     await fetchWithCoreConsent("https://api.example/api/auth/verify", { method: "POST" }, fetchImpl);
     granted.push("browsingActivity");
     browser.permissions.onAdded.emit({ data_collection: ["browsingActivity"] });

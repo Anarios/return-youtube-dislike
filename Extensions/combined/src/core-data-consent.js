@@ -17,8 +17,15 @@ function usesFirefoxDataCollectionConsent() {
   return Boolean(consentApi()?.runtime?.getManifest?.()?.browser_specific_settings?.gecko?.data_collection_permissions);
 }
 
+class DataConsentError extends Error {
+  constructor() {
+    super("Data consent required for this feature.");
+    this.name = "DataConsentError";
+  }
+}
+
 function coreConsentError() {
-  return new Error("Data consent required for this feature.");
+  return new DataConsentError();
 }
 
 async function hasFeaturePermission(feature, { queryBackground = true } = {}) {
@@ -217,6 +224,7 @@ function fetchWithCoreConsent(input, options = {}, fetchImpl = globalThis.fetch)
 }
 
 export {
+  DataConsentError,
   FEATURE_DATA_PERMISSIONS,
   consentApi,
   coreConsentError,
