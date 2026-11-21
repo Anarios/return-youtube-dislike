@@ -15,8 +15,9 @@ setelah kamu memberi izin.
 
 Saat pertama kali kamu memberi like atau dislike pada video atau bereaksi terhadap komentar RYD, ekstensi membuat ID acak
 yang digunakan seterusnya untuk membantu mencegah penyalahgunaan. Ekstensi tidak mengirim ID ini saat kamu membuka video
-atau membaca komentar. ID ini tidak berasal dari atau terhubung dengan akun Google atau YouTube kamu. Layanan menggunakan
-ID ini untuk mengenali suara yang dikirim dari pemasangan ekstensi yang sama.
+atau membaca komentar. ID ini tidak berasal dari atau terhubung dengan akun Google atau YouTube kamu, tetapi Mozilla
+menggolongkan ID persisten sebagai data pribadi. Layanan menggunakan ID ini untuk mengenali suara yang dikirim dari
+pemasangan ekstensi yang sama.
 
 ### Informasi apa saja yang kalian punya?
 

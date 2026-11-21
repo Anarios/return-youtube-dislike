@@ -16,8 +16,8 @@ không lưu danh sách lịch sử xem riêng trên thiết bị. Trên Firefox,
 
 Lần đầu bạn đánh giá vi-đê-ô hoặc bày tỏ cảm xúc với bình luận RYD, tiện ích tạo một mã định danh ngẫu nhiên để dùng lâu dài
 và giúp ngăn chặn hành vi lạm dụng. Tiện ích không gửi mã này khi bạn mở vi-đê-ô hoặc đọc bình luận. Mã này không được tạo từ
-tài khoản Google hay YouTube và không liên kết với các tài khoản đó. Dịch vụ dùng mã này để nhận biết các lượt đánh giá được
-gửi từ cùng một bản cài đặt tiện ích.
+tài khoản Google hay YouTube và không liên kết với các tài khoản đó, nhưng Mozilla xếp mã định danh cố định vào loại dữ liệu
+cá nhân. Dịch vụ dùng mã này để nhận biết các lượt đánh giá được gửi từ cùng một bản cài đặt tiện ích.
 
 ### Chính xác thì thông tin nào được thu thập?
 

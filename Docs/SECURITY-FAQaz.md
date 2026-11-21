@@ -4,7 +4,7 @@ Read this in other languages: [беларуская](SECURITY-FAQbe.md), [Englis
 
 ### Baxış tarixçəmi izləyirsiniz?
 
-Xeyr. Artırmanın kodu ictimaiyyətə açıqdır və ona özünüz baxa bilərsiniz. Artırma bəyənməmə sayını təxmin etmək və bu təxmini dəqiqləşdirmək üçün cari videonun identifikatorunu və göstərilirsə, bəyənmə sayını göndərir. Sorğu zamanı ictimai IP ünvanınız və sorğunun vaxtı kimi standart şəbəkə məlumatları da serverə məlum olur. Artırma cihazınızda ayrıca baxış tarixçəsi saxlamır.
+Xeyr. Artırmanın kodu ictimaiyyətə açıqdır və ona özünüz baxa bilərsiniz. Artırma bəyənməmə sayını təxmin etmək və bu təxmini dəqiqləşdirmək üçün cari videonun identifikatorunu və göstərilirsə, bəyənmə sayını göndərir. Sorğu zamanı ictimai IP ünvanınız və sorğunun vaxtı kimi standart şəbəkə məlumatları da serverə məlum olur. Artırma cihazınızda ayrıca baxış tarixçəsi saxlamır. Firefox-da videonun identifikatoru və bəyənmə sayı yalnız hər biri üçün icazə verdikdən sonra göndərilir.
 
 ### Videonu bəyənməsəm, məni unikal şəkildə tanıya bilərsiniz??
 

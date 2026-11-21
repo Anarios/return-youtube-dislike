@@ -4,7 +4,7 @@ Read this in other languages: [беларуская](SECURITY-FAQbe.md), [Englis
 
 ### İzleme geçmişimi takip ediyor musunuz?
 
-Hayır. Uzantının kodu herkese açıktır ve kendiniz görebilirsiniz. Uzantı, dislike sayısını tahmin etmek ve bu tahmini iyileştirmek için açık olan videonun kimliğini ve varsa görüntülenen beğeni sayısını gönderir. İstek sırasında genel IP adresiniz ve istek zamanı gibi standart ağ bilgileri de sunucuya ulaşır. Uzantı, cihazınızda ayrı bir izleme geçmişi tutmaz.
+Hayır. Uzantının kodu herkese açıktır ve kendiniz görebilirsiniz. Uzantı, dislike sayısını tahmin etmek ve bu tahmini iyileştirmek için açık olan videonun kimliğini ve varsa görüntülenen beğeni sayısını gönderir. İstek sırasında genel IP adresiniz ve istek zamanı gibi standart ağ bilgileri de sunucuya ulaşır. Uzantı, cihazınızda ayrı bir izleme geçmişi tutmaz. Firefox'ta video kimliği ve beğeni sayısı ancak her biri için izin verdikten sonra gönderilir.
 
 ### Bir videoya dislike atarsam, beni benzersiz bir şekilde tanımlayabilir misiniz?
 

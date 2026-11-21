@@ -8,7 +8,8 @@ Rozszerzenie przesyła do API Return YouTube Dislike identyfikator aktualnego fi
 jeśli jest dostępna. Serwer potrzebuje tych danych, aby podać i doprecyzować szacowaną liczbę łapek w dół. Przy żądaniu
 serwer otrzymuje też standardowe dane sieciowe, takie jak Twój publiczny adres IP i czas wysłania żądania. Rozszerzenie
 nie przesyła nazwy Twojego konta YouTube, komentarzy z YouTube, prywatnych danych z YouTube ani treści innych stron.
-Nie zapisuje też osobnej lokalnej historii oglądania.
+Nie zapisuje też osobnej lokalnej historii oglądania. W przeglądarce Firefox identyfikator filmu i liczba łapek w górę
+są przesyłane dopiero po wyrażeniu przez Ciebie zgody na każde z nich osobno.
 
 ### Czy możecie mnie jednoznacznie zidentyfikować, jeżeli zostawię łapkę w dół?
 
