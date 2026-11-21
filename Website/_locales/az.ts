@@ -33,6 +33,8 @@ export default {
     androidTubular: "Android (Tubular - NewPipe çatalı)",
     iosJailbroken: "iOS (Jailbreakli)",
     iosUYouPlus: "iOS (uYou+)",
+    safariZorro: "Safari (macOS, iOS) - Zorro Dislikes",
+    safariZorroGitHub: "Safari - Zorro Dislikes (GitHub)",
   },
   api: {
     name: "API",

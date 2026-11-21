@@ -4,6 +4,7 @@
   - [Desktop (all OS supported by these browsers)](#desktop-all-os-supported-by-these-browsers)
     - [Chromium Based Browsers](#chromium-based-browsers)
     - [Firefox Based Browsers](#firefox-based-browsers)
+    - [Safari (macOS)](#safari-macos)
   - [Mobile](#mobile)
     - [Android](#android)
     - [iOS](#ios)
@@ -64,6 +65,14 @@ It should be able to work on [all Chromium-based browsers (list here)][4]. But t
 
 <br>
 
+#### Safari (macOS)
+
+- [Safari - Zorro Dislikes for YouTube (App Store)](https://apps.apple.com/us/app/zorro-dislikes-for-youtube/id6829810650)
+
+  This is a Safari port [**developed by a separate developer**](https://github.com/skar404/youtube-dislike-for-safari) not related to the owner of github.com/Anarios/return-youtube-dislike
+
+<br>
+
 ### Mobile
 
 #### Android
@@ -107,6 +116,10 @@ For now, you can try this
 - [For Jailbroken iOS - **WE TAKE NO RESPONSIBILITY. USE AT YOUR OWN RISK**](https://chariz.com/get/return-youtube-dislike)
 
   This is an iOS port [**developed by a separate team**](https://github.com/PoomSmart/Return-YouTube-Dislikes) not related to the owner of github.com/Anarios/return-youtube-dislike
+
+- [Safari (iOS/iPadOS) - Zorro Dislikes for YouTube (App Store)](https://apps.apple.com/us/app/zorro-dislikes-for-youtube/id6829810650)
+
+  This is a Safari port [**developed by a separate developer**](https://github.com/skar404/youtube-dislike-for-safari) not related to the owner of github.com/Anarios/return-youtube-dislike
 
 #### Userscript
 

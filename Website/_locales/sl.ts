@@ -30,6 +30,8 @@ export default {
     androidTubular: "Android (Tubular – fork NewPipe)",
     iosJailbroken: "iOS (z odklenjenim sistemom)",
     iosUYouPlus: "iOS (uYou+)",
+    safariZorro: "Safari (macOS, iOS) - Zorro Dislikes",
+    safariZorroGitHub: "Safari - Zorro Dislikes (GitHub)",
   },
   api: {
     name: "API",
