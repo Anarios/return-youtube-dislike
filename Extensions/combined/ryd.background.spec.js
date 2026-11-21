@@ -408,11 +408,23 @@ describe("background account consent lifecycle", () => {
 
   test.each([-1, 0, 1])("submits vote %s through the client that registers on demand", async (vote) => {
     const response = jest.fn();
-    messageListener({ message: "send_vote", videoId: "video123456", vote }, normalSender, response);
+    messageListener(
+      { message: "send_vote", videoId: "video123456", vote, playbackPosition: 95 },
+      normalSender,
+      response,
+    );
     await flushPromises();
     const voteClient = require("../common/vote-client").createVoteClient.mock.results[0].value;
-    expect(voteClient.submitVote).toHaveBeenCalledWith("video123456", vote);
+    expect(voteClient.submitVote).toHaveBeenCalledWith("video123456", vote, { playbackPosition: 95 });
     expect(response).toHaveBeenCalledWith({ success: true });
+  });
+
+  test("creates the vote client with this build's version and browser kind", () => {
+    expect(require("../common/vote-client").createVoteClient).toHaveBeenCalledWith(
+      expect.objectContaining({
+        clientDetails: { clientVersion: require("./manifest-firefox.json").version, clientKind: "firefox" },
+      }),
+    );
   });
 
   test("the disable switch stops YouTube votes on Firefox even with the permission granted", async () => {
@@ -468,7 +480,7 @@ describe("background account consent lifecycle", () => {
     expect(chrome.action.setIcon).toHaveBeenLastCalledWith({ path: "/icons/icon128.png" });
     expect(chrome.action.setTitle).toHaveBeenLastCalledWith({ title: "extensionName" });
     expect(await vote()).toEqual({ success: true });
-    expect(submitted()).toEqual([["video123456", 1]]);
+    expect(submitted()).toEqual([["video123456", 1, { playbackPosition: undefined }]]);
   });
 
   test("revoke then regrant drops an old solved or queued vote while a fresh click can proceed", async () => {

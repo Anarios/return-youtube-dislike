@@ -4,6 +4,7 @@ import { element, button, statusNode, shortDate, thumbIcon, isDiscussionCommentI
 import { createDiscussionInbox, notificationsLabel } from "./inbox";
 import { orderReplies } from "./reply-tree";
 import { consentApi } from "../core-data-consent";
+import { readPlaybackPosition } from "../../../common/playback-position";
 
 const SIGNED_OUT = { authenticated: false, canPost: false, isModerator: false, profile: null };
 const REACTION_CONSENT_FEATURE = "voteOptIn";
@@ -126,9 +127,9 @@ export function createDiscussionPanel({
     return Boolean(session.authenticated && session.profile?.id && comment.author?.id === session.profile.id);
   }
 
-  function requestReactionConsent(target, value) {
+  function requestReactionConsent(target, value, playbackPosition) {
     clearReactionConsentPrompts();
-    pendingReaction = { comment: target.comment, value };
+    pendingReaction = { comment: target.comment, value, playbackPosition };
     showConsentPrompt(target.notice, { text: "reactionConsentRequired", feature: REACTION_CONSENT_FEATURE });
   }
 
@@ -148,13 +149,17 @@ export function createDiscussionPanel({
     return row?.alive() ? row : null;
   }
 
-  async function sendReaction(comment, value) {
+  async function sendReaction(comment, value, playbackPosition) {
     if (isOwnComment(comment)) return;
     const target = renderedReaction(comment.id);
     target?.notice.replaceChildren();
     if (target) setReactionsBusy(target, true);
     try {
-      const result = await request("react", { id: comment.id, value: comment.myReaction === value ? 0 : value });
+      const result = await request("react", {
+        id: comment.id,
+        value: comment.myReaction === value ? 0 : value,
+        playbackPosition,
+      });
       const latest = renderedReaction(comment.id);
       Object.assign(latest?.comment || comment, result);
       localReactionVersions.set(comment.id, ++commentMutationSequence);
@@ -169,17 +174,18 @@ export function createDiscussionPanel({
   async function react(id, value) {
     const target = renderedReaction(id);
     if (!target || isOwnComment(target.comment)) return;
+    const playbackPosition = readPlaybackPosition(videoId);
     if (!reactionsAllowed) {
-      requestReactionConsent(target, value);
+      requestReactionConsent(target, value, playbackPosition);
       return;
     }
-    await sendReaction(target.comment, value);
+    await sendReaction(target.comment, value, playbackPosition);
   }
 
   function performPendingReaction() {
     const pending = pendingReaction;
     pendingReaction = null;
-    if (pending && current()) void sendReaction(pending.comment, pending.value);
+    if (pending && current()) void sendReaction(pending.comment, pending.value, pending.playbackPosition);
   }
 
   function clearOwnReactions() {

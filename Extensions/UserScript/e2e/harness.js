@@ -13,6 +13,10 @@ const API_ORIGIN = "https://returnyoutubedislikeapi.com";
 const CREDENTIAL_KEY = "rydVoteCredentials";
 const VIDEO_A = "abcdefghijk";
 const VIDEO_B = "zyxwvutsrqp";
+const USERSCRIPT_CLIENT_DETAILS = Object.freeze({
+  clientVersion: require("../userscript-version.json"),
+  clientKind: "userscript",
+});
 const ZERO_DIFFICULTY_PUZZLE = {
   challenge: Buffer.alloc(16).toString("base64"),
   difficulty: 0,
@@ -457,4 +461,5 @@ module.exports = {
   openShortsFixture,
   openWatchFixture,
   readGmValue,
+  USERSCRIPT_CLIENT_DETAILS,
 };

@@ -9,6 +9,7 @@ const {
 } = require("../hermetic-artifact-smoke");
 const { VIDEO_A, VIDEO_B, openNavigationFixture, openWatchFixture } = require("../../UserScript/e2e/harness");
 const { LIVE_RUNTIME_PROFILES } = require("../live-runtime-adapter");
+const { CLIENT_VERSION_PATTERN } = require("../vote-protocol-contract");
 const { EXTENSION_MATRIX_RUNTIME } = require("../../UserScript/e2e/navigation-matrix");
 const {
   createNavigationRuntimeContractAdapter,
@@ -322,6 +323,8 @@ test.describe("generated extension artifact on the mobile YouTube hostname", () 
         userId: expect.stringMatching(/^[A-Za-z0-9]{36}$/),
         value: -1,
         videoId: VIDEO_B,
+        clientVersion: expect.stringMatching(CLIENT_VERSION_PATTERN),
+        clientKind: "chromium",
       });
       expect(handshake.vote).toMatchObject({ responded: true, responseStatus: 200 });
       expect(handshake.confirmation.body).toEqual({

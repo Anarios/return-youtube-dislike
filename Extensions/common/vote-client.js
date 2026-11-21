@@ -1,3 +1,5 @@
+import { normalizePlaybackPosition } from "./playback-position";
+
 const DEFAULT_API_BASE_URL = "https://returnyoutubedislikeapi.com";
 const USER_ID_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 const VALID_VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
@@ -115,6 +117,7 @@ function createVoteClient({
   cryptoImpl = globalThis.crypto,
   puzzleAttempts = 2,
   votePuzzleAttempts = 3,
+  clientDetails = {},
 } = {}) {
   if (typeof fetchImpl !== "function") throw new TypeError("fetchImpl is required");
   if (!credentialStore?.load || !credentialStore?.save || !credentialStore?.clear) {
@@ -244,18 +247,29 @@ function createVoteClient({
     );
   }
 
-  async function performVote(videoId, value, authenticationRetriesRemaining) {
+  async function performVote(videoId, value, playbackPosition, authenticationRetriesRemaining) {
     let { userId } = await ensureRegistered();
 
     for (let attempt = 0; attempt < votePuzzleAttempts; attempt++) {
-      const voteResponse = await postJson("/interact/vote", { userId, videoId, value }, "Vote submission");
+      const voteResponse = await postJson(
+        "/interact/vote",
+        {
+          userId,
+          videoId,
+          value,
+          playbackPosition,
+          clientVersion: clientDetails.clientVersion,
+          clientKind: clientDetails.clientKind,
+        },
+        "Vote submission",
+      );
 
       if (voteResponse.status === 401) {
         if (authenticationRetriesRemaining <= 0) {
           throw new VoteClientError("Vote submission was unauthorized after re-registration", { status: 401 });
         }
         ({ userId } = await ensureRegistered({ force: true }));
-        return performVote(videoId, value, authenticationRetriesRemaining - 1);
+        return performVote(videoId, value, playbackPosition, authenticationRetriesRemaining - 1);
       }
       if (!isSuccessful(voteResponse)) {
         throw new VoteClientError("Vote submission was rejected", { status: voteResponse.status });
@@ -275,7 +289,7 @@ function createVoteClient({
           throw new VoteClientError("Vote confirmation was unauthorized after re-registration", { status: 401 });
         }
         await ensureRegistered({ force: true });
-        return performVote(videoId, value, authenticationRetriesRemaining - 1);
+        return performVote(videoId, value, playbackPosition, authenticationRetriesRemaining - 1);
       }
       if (!isSuccessful(confirmResponse)) {
         throw new VoteClientError("Vote confirmation was rejected", { status: confirmResponse.status });
@@ -289,7 +303,7 @@ function createVoteClient({
     throw new VoteClientError("Unable to solve the vote puzzle");
   }
 
-  function submitVote(videoId, value) {
+  function submitVote(videoId, value, { playbackPosition } = {}) {
     if (typeof videoId !== "string" || !VALID_VIDEO_ID.test(videoId)) {
       return Promise.reject(new TypeError("videoId must be an 11-character YouTube video ID"));
     }
@@ -297,8 +311,9 @@ function createVoteClient({
       return Promise.reject(new TypeError("value must be -1, 0, or 1"));
     }
 
+    const position = normalizePlaybackPosition(playbackPosition);
     const previous = voteQueues.get(videoId) ?? Promise.resolve();
-    const current = previous.catch(() => undefined).then(() => performVote(videoId, value, 1));
+    const current = previous.catch(() => undefined).then(() => performVote(videoId, value, position, 1));
     voteQueues.set(videoId, current);
     current.then(
       () => {

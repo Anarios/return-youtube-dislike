@@ -30,14 +30,15 @@ import {
   shouldSubmitVote,
 } from "../../common/vote-transition";
 import { resolveDelegatedVoteActivation } from "../../common/delegated-vote-activation";
+import { readPlaybackPosition } from "../../common/playback-position";
 import { normalizeCustomColors, observeYouTubeTheme } from "../../common/color-themes";
 import { isPrivateBrowsingContext } from "./private-browsing";
 import { recordReviewAction } from "./review-prompt";
 import { hasFeaturePermission, usesFirefoxDataCollectionConsent } from "./core-data-consent";
 import { getDataConsentPrompt } from "./data-consent-prompt";
 
-function dispatchVote(vote, videoId) {
-  const result = getBrowser().runtime.sendMessage({ message: "send_vote", vote, videoId });
+function dispatchVote(vote, videoId, playbackPosition) {
+  const result = getBrowser().runtime.sendMessage({ message: "send_vote", vote, videoId, playbackPosition });
   if (result && typeof result.catch === "function") {
     result.catch((error) => console.error("Vote submission failed", error));
   }
@@ -62,8 +63,9 @@ function sendVote(vote) {
   if (!shouldSubmitVote({ disableVoteSubmission: extConfig.disableVoteSubmission })) return;
   if (usesFirefoxDataCollectionConsent() && !countPermissionAvailable) return;
   const videoId = getVideoId(window.location.href);
+  const playbackPosition = readPlaybackPosition(videoId);
   if (!usesFirefoxDataCollectionConsent()) {
-    dispatchVote(vote, videoId);
+    dispatchVote(vote, videoId, playbackPosition);
     return;
   }
   if (!dataConsentPrompt) dataConsentPrompt = getDataConsentPrompt();
@@ -73,7 +75,7 @@ function sendVote(vote) {
   void hasFeaturePermission("voting").then((granted) => {
     if (sequence !== firefoxVoteSequence || !dataConsentPrompt.isCurrent(context)) return;
     if (granted) {
-      dispatchVote(vote, videoId);
+      dispatchVote(vote, videoId, playbackPosition);
       return;
     }
     void dataConsentPrompt.offerVote(context, () => {
@@ -86,7 +88,7 @@ function sendVote(vote) {
       )
         return;
       const state = getState(storedData).current;
-      dispatchVote(state === LIKED_STATE ? 1 : state === DISLIKED_STATE ? -1 : 0, videoId);
+      dispatchVote(state === LIKED_STATE ? 1 : state === DISLIKED_STATE ? -1 : 0, videoId, playbackPosition);
     });
   });
 }

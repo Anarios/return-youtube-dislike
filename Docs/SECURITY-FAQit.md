@@ -20,12 +20,14 @@ come dati personali. L'ID consente al servizio di associare i voti inviati alla 
 
 ### Quali informazioni avete, esattamente?
 
-Per le richieste del numero di Non mi piace: l'ID del video corrente e, quando disponibile, il numero visibile di
-Mi piace. Per la registrazione e l'invio dei voti: l'ID utente casuale dell'estensione, l'ID del video, il voto scelto
-e la data e l'ora. Per le reazioni ai commenti RYD: lo stesso ID utente casuale dell'estensione, l'ID del commento
-e la reazione. I commenti e le risposte RYD pubblicati dai membri che hanno effettuato l'accesso sono pubblici e
-vengono memorizzati insieme al loro nickname RYD. L'API riceve anche il tuo indirizzo IP.
-Gli indirizzi IP in chiaro rimangono nella RAM e vengono memorizzati i relativi hash per i controlli contro gli abusi.
+Per le richieste del numero di Non mi piace, l'API riceve l'ID del video corrente e, quando disponibile, il numero
+visibile di Mi piace. Per la registrazione usa un ID di installazione casuale. Il servizio registra i voti inviati
+con questo ID, l'ID del video, il voto scelto e l'ora. Le reazioni ai commenti RYD usano lo stesso ID di installazione,
+l'ID del commento e la reazione scelta. I voti e le reazioni possono includere anche l'estensione o lo script utente
+utilizzato, la relativa versione e, quando disponibile, la posizione di riproduzione in secondi interi al momento
+del clic. Se ritiri una reazione, il servizio contrassegna il relativo record come rimosso. I commenti e le risposte
+che pubblichi sono visibili a tutti con il tuo nickname RYD.
+
 Le funzionalità premium facoltative usano l'ID dell'account, il nome, l'indirizzo email, l'immagine del profilo,
 le informazioni sull'abbonamento e il token di sessione del servizio restituiti da un accesso tramite Patreon o
 GitHub avviato dall'utente. Nella versione 4.1.0 e nella corrispondente versione del backend, l'accesso tramite
@@ -36,8 +38,10 @@ o sui conti bancari.
 
 ### Come viene memorizzato il mio indirizzo IP?
 
-Gli indirizzi IP in chiaro rimangono nella RAM e vengono memorizzati i relativi hash. Queste informazioni vengono
-usate per prevenire gli abusi e per analisi aggregate. Non vengono vendute né usate per la pubblicità.
+Il servizio memorizza il tuo indirizzo IP e, quando disponibile, la stringa che descrive il browser inviata con la
+richiesta (user-agent). Conserva questi dati insieme alle registrazioni completate, ai voti, ai commenti e alle
+risposte pubblicati su RYD e alle reazioni ai commenti RYD. Il servizio usa gli indirizzi IP per prevenire gli abusi
+e per analisi aggregate. Non li vende e non li usa per la pubblicità.
 
 ### Ho sentito parlare di OAuth e dell'accesso al mio account YouTube!
 

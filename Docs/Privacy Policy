@@ -1,8 +1,6 @@
 # Return YouTube Dislike Privacy Policy
 
-Last updated: November 1, 2026
-
-This policy describes version 4.1.0 and its matching backend release.
+Last updated: November 18, 2026
 
 Return YouTube Dislike transmits only the data needed to provide its dislike-count, voting, abuse-prevention, and
 optional account, comment, and premium features. It does not sell personal data or use it for advertising.
@@ -18,7 +16,10 @@ optional account, comment, and premium features. It does not sell personal data 
   Opening videos or reading comments does not create or send it. The identifier is not derived from or linked to a
   YouTube or Google account, but it is a persistent identifier and is treated as personal data.
 - When you select Like, Dislike, or remove your vote and vote sharing is on, the extension sends the random
-  installation identifier, video ID, and selected action. Votes are sent without your account session.
+  installation identifier, video ID, and selected action. Shared votes and RYD comment reactions can also include
+  which extension or userscript you used, its version and, when available, the playback position in whole seconds
+  when you clicked.
+  Votes are sent without your account session.
 - API requests necessarily expose the network IP address and request time. The service uses this information for
   security, abuse prevention, aggregate analytics, and operation of the API.
 
@@ -59,10 +60,11 @@ internally to the provider account used to sign in.
 
 Reading comments does not send the random installation identifier or your account session. When you react to an RYD
 comment, the extension sends the random installation identifier with the selected comment and reaction, without your
-account session. Your own reactions are remembered only in local extension storage on the device where you made them,
-for up to 100 recent videos, so they can be highlighted when you return. This record is not synchronized, so a
-reaction made on another device is not highlighted. It is cleared when the identifier changes and, in Firefox, when
-the "Website activity" or "Browsing activity" permission is revoked. Replies
+account session. If you remove a reaction, it no longer counts and the service keeps its record marked as removed.
+The extension also remembers your reactions on this device for up to 100 recent videos so it can highlight them
+when you return. This local record is not synchronized, so a reaction made on another device is not highlighted.
+It is cleared when the identifier changes and, in Firefox, when the "Website activity" or "Browsing activity"
+permission is revoked. Replies
 and likes can create notifications for the recipient's RYD profile. Notifications include the relevant discussion,
 actor nickname or grouped reaction count, timestamps, and read status. Reports and moderation records include the
 account making the report or taking the action, the reported content or target, the reason, and timestamps.
@@ -76,8 +78,10 @@ promised for profiles, discussion records, reports, moderation records, or notif
 
 The identifier, settings, and optional account session use browser extension sync storage, which may be synchronized
 through the browser's sync service when the user enables it. The random installation identifier remains in extension storage until the extension data is cleared, registration is
-reset, or the extension is removed. Confirmed vote records contain the identifier, video ID, vote, timestamp, and an
-IP-address hash used for abuse controls. Raw IP addresses stay in RAM and hashes are stored.
+reset, or the extension is removed. Confirmed votes include the identifier, video ID, vote, and timestamp. For votes
+and comment reactions, the service keeps the client and playback details sent with the action. It stores the IP
+address and browser user-agent string, when available, with completed registrations, votes, posted comments and
+replies, and comment reactions.
 Registration and vote records are retained by the service while they are
 needed to calculate results, maintain vote integrity, and prevent abuse; no shorter automatic deletion period is
 promised.

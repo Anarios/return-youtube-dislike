@@ -2,6 +2,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { test, expect } = require("@playwright/test");
 const { HermeticExtensionArtifactAdapter, startHermeticApiServer } = require("../hermetic-artifact-smoke");
+const { CLIENT_VERSION_PATTERN } = require("../vote-protocol-contract");
 const {
   EXTENSION_MATRIX_RUNTIME,
   NAVIGATION_MATRIX,
@@ -506,7 +507,7 @@ async function replaceCurrentHostAndExpect(runtime, videoId, counts) {
   await expectCurrentSurface(runtime, videoId, counts);
 }
 
-async function expectOneVoteAndConfirmation(runtime, videoId, value, activationTarget) {
+async function expectOneVoteAndConfirmation(runtime, videoId, value, activationTarget, playbackPosition) {
   const interactionStart = runtime.apiServer.records.length;
   const target =
     activationTarget ?? runtime.page.locator('[data-fixture-current-actions="true"] dislike-button-view-model button');
@@ -528,6 +529,9 @@ async function expectOneVoteAndConfirmation(runtime, videoId, value, activationT
     userId: expect.stringMatching(/^[A-Za-z0-9]{36}$/),
     value,
     videoId,
+    clientVersion: expect.stringMatching(CLIENT_VERSION_PATTERN),
+    clientKind: "chromium",
+    ...(playbackPosition === undefined ? {} : { playbackPosition }),
   });
   expect(interactions[1].body).toEqual({
     solution: expect.any(String),
@@ -817,8 +821,18 @@ test.describe("generated extension artifact synthetic Shorts vote transitions", 
         const nativeReactionStatsBefore = await runtime.page.evaluate(() =>
           globalThis.__navigationFixture.nativeReactionSnapshot(),
         );
+        await renderer.evaluate((root) => {
+          const player = document.createElement("div");
+          player.id = "shorts-player";
+          player.style.cssText = "position:absolute;width:1px;height:1px";
+          const video = document.createElement("video");
+          video.className = "html5-main-video";
+          video.currentTime = 7.81;
+          player.append(video);
+          root.append(player);
+        });
         const activationTarget = transition.action === "like" ? likeButton : dislikeButton;
-        await expectOneVoteAndConfirmation(runtime, videoId, transition.value, activationTarget);
+        await expectOneVoteAndConfirmation(runtime, videoId, transition.value, activationTarget, 7);
 
         const expectedLikes = initialCounts.likes + transition.likesDelta;
         const expectedDislikes = initialCounts.dislikes + transition.dislikesDelta;

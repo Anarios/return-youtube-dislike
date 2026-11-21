@@ -7,6 +7,7 @@ const {
   installGmEnvironment,
   installHermeticRoutes,
   openWatchFixture,
+  USERSCRIPT_CLIENT_DETAILS,
 } = require("./harness");
 
 const EXISTING_CREDENTIALS = {
@@ -67,7 +68,7 @@ test("the first synchronous click on a replaced current control votes once while
   await page.waitForTimeout(650);
 
   expect(backend.requestsFor("POST", "/interact/vote").map(({ body }) => body)).toEqual([
-    { userId: EXISTING_CREDENTIALS.userId, value: -1, videoId: VIDEO_A },
+    { userId: EXISTING_CREDENTIALS.userId, value: -1, videoId: VIDEO_A, ...USERSCRIPT_CLIENT_DETAILS },
   ]);
   expect(backend.requestsFor("POST", "/interact/confirmVote")).toHaveLength(1);
   expect(backend.blockedRequests).toEqual([]);

@@ -62,7 +62,10 @@ jest.mock("./bar", () => ({
   createRateBar: jest.fn(),
 }));
 
+jest.mock("../../common/playback-position", () => ({ readPlaybackPosition: jest.fn() }));
+
 import { createRateBar } from "./bar";
+import { readPlaybackPosition } from "../../common/playback-position";
 import { getButtons, getDislikeButton, getLikeButton, isSyntheticShortsDislike } from "./buttons";
 import {
   extConfig,
@@ -109,11 +112,42 @@ beforeEach(() => {
   getButtons.mockReset();
   getDislikeButton.mockReset();
   getLikeButton.mockReset();
+  readPlaybackPosition.mockReset();
   storedData.dislikes = 100;
   storedData.likes = 300;
   storedData.previousState = "NEUTRAL_STATE";
   storedData.videoId = "abcdefghijk";
   history.replaceState({}, "", "/watch?v=abcdefghijk");
+});
+
+test("a vote carries the playback position read at the click", () => {
+  readPlaybackPosition.mockReturnValue(214);
+  sendVote(1);
+  expect(readPlaybackPosition).toHaveBeenCalledTimes(1);
+  expect(mockSendMessage).toHaveBeenCalledWith({
+    message: "send_vote",
+    videoId: "abcdefghijk",
+    vote: 1,
+    playbackPosition: 214,
+  });
+});
+
+test("a Firefox vote granted later keeps the playback position of its click", async () => {
+  usesFirefoxDataCollectionConsent.mockReturnValue(true);
+  readPlaybackPosition.mockReturnValueOnce(37).mockReturnValue(90);
+  sendVote(1);
+  await Promise.resolve();
+  const granted = mockHint.offerVote.mock.calls[0][1];
+  getLikeButton.mockReturnValue(document.createElement("div"));
+  getDislikeButton.mockReturnValue(document.createElement("div"));
+  getState.mockReturnValue({ current: "LIKED_STATE" });
+  granted();
+  expect(mockSendMessage).toHaveBeenCalledWith({
+    message: "send_vote",
+    videoId: "abcdefghijk",
+    vote: 1,
+    playbackPosition: 37,
+  });
 });
 
 test("Firefox does not submit a denied vote and offers permission only after the click", async () => {

@@ -13,7 +13,7 @@ const VIDEO_ID = "abcdefghijk";
 function successfulInteractionRecords(value = -1) {
   return [
     {
-      body: { userId: USER_ID, value, videoId: VIDEO_ID },
+      body: { userId: USER_ID, value, videoId: VIDEO_ID, clientVersion: "3.2.2", clientKind: "userscript" },
       method: "POST",
       pathname: "/interact/vote",
       respondedAt: Date.now(),

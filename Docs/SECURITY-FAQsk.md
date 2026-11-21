@@ -19,12 +19,14 @@ ID dokáže služba priradiť odoslané hlasy k tej istej inštalácii rozšíre
 
 ### Aké údaje presne máte?
 
-Pri požiadavkách na počet dislajkov: ID aktuálneho videa a – ak je k dispozícii – viditeľný počet lajkov. Pri registrácii
-a odosielaní hlasov: náhodné ID používateľa rozšírenia, ID videa, zvolený hlas a časová pečiatka. Pri reakciách na
-komentáre RYD: to isté náhodné ID používateľa rozšírenia, ID komentára a reakciu. Komentáre a odpovede RYD, ktoré
-uverejnia prihlásení členovia, sú verejné a ukladajú sa spolu s ich prezývkou RYD. API dostáva aj vašu IP adresu.
-Nespracované adresy zostávajú len v operačnej pamäti (RAM) a na ochranu pred zneužitím sa ukladajú ich hashe. Voliteľné
-prémiové funkcie používajú ID účtu, meno, e-mailovú adresu, profilový obrázok, údaje o členstve a token relácie služby,
+Pri žiadosti o počet dislajkov rozšírenie odosiela ID videa a viditeľný počet lajkov, ak je k dispozícii. Pri registrácii
+sa používa náhodné ID inštalácie. S týmto ID sa pri hlasovaní ukladá ID videa, zvolený hlas a čas. Pri reakcii na
+komentár RYD sa s rovnakým ID ukladá ID komentára a zvolená reakcia. Hlas alebo reakcia môžu obsahovať aj typ a verziu
+rozšírenia alebo používateľského skriptu a, ak je k dispozícii, pozíciu prehrávania v celých sekundách v okamihu
+kliknutia. Ak reakciu odstránite, jej záznam sa označí ako odstránený. Vaše komentáre a odpovede sú verejné pod vašou
+prezývkou RYD.
+
+Voliteľné prémiové funkcie používajú ID účtu, meno, e-mailovú adresu, profilový obrázok, údaje o členstve a token relácie služby,
 ktoré vráti prihlásenie cez Patreon alebo GitHub spustené používateľom. Vo verzii 4.1.0 a v príslušnom vydaní backendu
 sa prístup cez Patreon určuje podľa ID úrovní, na ktoré má používateľ aktuálne nárok, a v prípade potreby aj podľa
 aktuálnej výšky nároku a mesačnej či ročnej frekvencie členstva. Rozšírenie tieto údaje o výške a frekvencii nedostáva,
@@ -32,8 +34,9 @@ rovnako ako žiadne údaje o platobnej karte či bankovom účte.
 
 ### Ako ukladáte moju IP adresu?
 
-Nespracované IP adresy zostávajú len v operačnej pamäti (RAM) a ukladajú sa ich hashe. Tieto údaje slúžia na ochranu
-pred zneužitím a na súhrnné štatistiky. Nepredávame ich a nepoužívame na reklamu.
+Pri dokončených registráciách, hlasoch, uverejnených komentároch a odpovediach aj pri reakciách na komentáre RYD
+služba ukladá vašu IP adresu. Ak prehliadač s požiadavkou odošle aj svoj opis (reťazec User-Agent), uloží sa spolu
+s ňou. IP adresy používame na ochranu pred zneužitím a na súhrnné štatistiky. Nepredávame ich ani ich nepoužívame na reklamu.
 
 ### Počul som diskusie o OAuth a o prístupe k môjmu účtu YouTube!
 

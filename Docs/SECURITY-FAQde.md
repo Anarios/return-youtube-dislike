@@ -5,19 +5,37 @@ Read this in other languages: [беларуская](SECURITY-FAQbe.md), [рус
 
 ### Verfolgen Sie meine Anzeigehistorie?
 
-Nein. Der Code der Erweiterung ist öffentlich und Sie können ihn selbst einsehen. Die einzige übermittelte Information ist die Video-ID, die benötigt wird, um die Anzahl der Dislikes für die Videos abzurufen. Es werden keine zusätzlichen Header gesendet. Über die Kommunikationsschicht wird Ihre öffentliche IP-Adresse an den Server übermittelt, sowie die Zeit, zu der die Anfrage gestellt wurde. Keine dieser Informationen identifiziert Sie auf eindeutige Weise. Unter der Annahme einer Zero-Trust-Umgebung ist das Beste, was wir bekommen können, eine dynamische IP. Die heute Ihnen gehört, gehört morgen Ihrem Nachbarn. Wenn Sie sich wirklich Sorgen machen, dass Ihre IP zurückverfolgt wird, verwenden Sie wahrscheinlich bereits ein VPN.
+Die Erweiterung sendet die aktuelle Video-ID und, falls verfügbar, die angezeigte Anzahl der Likes an die API von Return
+YouTube Dislike. Der Dienst benötigt diese Angaben, um die Anzahl der Dislikes zu schätzen und die Schätzung zu verbessern.
+Bei der Anfrage erhält der Server auch übliche Netzwerkmetadaten wie Ihre öffentliche IP-Adresse und den Zeitpunkt der
+Anfrage. Die Erweiterung sendet weder den Namen Ihres YouTube-Kontos noch YouTube-Kommentare, private YouTube-Daten oder
+Inhalte von Seiten ohne Bezug zum Video. Sie führt keine separate lokale Liste der angesehenen Videos. In Firefox werden
+Video-ID und Anzahl der Likes erst gesendet, wenn Sie die jeweilige Übertragung erlauben.
 
 ### Können Sie mich eindeutig identifizieren, wenn ich etwas dislike?
 
-Ja. Wenn Sie ein Video nicht mögen, erstellen wir eine zufällig generierte eindeutige ID für Sie, die nicht mit Ihrem Google-Konto verknüpft ist. Dies geschieht, um das Botting zu verhindern. Es gibt jedoch keine Möglichkeit, diese zufällige ID mit Ihnen oder Ihrem persönlichen YouTube-Konto zu verknüpfen.
+Wenn Sie zum ersten Mal abstimmen oder auf einen RYD-Kommentar reagieren, erstellt die Erweiterung eine dauerhafte
+zufällige ID, um Missbrauch bei der Stimmabgabe zu verhindern. Beim Öffnen von Videos oder Lesen von Kommentaren wird
+diese ID nicht gesendet. Sie wird weder aus Ihrem Google- oder YouTube-Konto abgeleitet noch damit verknüpft. Mozilla
+stuft dauerhafte Kennungen als personenbezogene Daten ein. Die ID ermöglicht es dem Dienst, abgegebene Stimmen
+derselben Installation der Erweiterung zuzuordnen.
 
 ### Welche Informationen haben Sie genau?
 
-Nur die Video-ID. Nicht Ihre Kommentare, nicht Ihren Benutzernamen, nicht mit wem Sie das Video geteilt haben, keine zusätzlichen Metadaten. Nichts. Nur die Video-ID.
+Abfragen der Dislike-Zahl enthalten die Video-ID und, falls verfügbar, die angezeigte Anzahl der Likes. Für die
+Registrierung verwendet der Dienst eine zufällige Installations-ID. Er speichert übermittelte Stimmen mit dieser ID,
+der Video-ID, der gewählten Stimme und dem Zeitpunkt. Reaktionen auf RYD-Kommentare verwenden dieselbe Installations-ID,
+die Kommentar-ID und die gewählte Reaktion. Bei Stimmen und Reaktionen können auch die verwendete Erweiterung oder das
+verwendete Nutzerskript, die jeweilige Version und, falls verfügbar, die Wiedergabeposition in ganzen Sekunden zum
+Zeitpunkt des Klicks erfasst werden. Wenn Sie eine Reaktion zurücknehmen, markiert der Dienst den Eintrag als entfernt.
+Kommentare und Antworten, die Sie in RYD veröffentlichen, sind unter Ihrem RYD-Namen öffentlich.
 
 ### Wie wird meine IP gespeichert?
 
-Der Backend speichert nicht gehashte IP-Adressen nur im flüchtigen Speicher (RAM). Diese Adressen werden nicht auf einer Festplatte gespeichert und daher nicht protokolliert. Wir hashen die IP-Adressen und speichern diese stattdessen. Dies geschieht, um Datenbankvandalismus zu verhindern.
+Der Dienst speichert Ihre IP-Adresse und, falls verfügbar, die mit der Anfrage gesendete Browserkennung (User-Agent).
+Er speichert diese Angaben zusammen mit abgeschlossenen Registrierungen, abgegebenen Stimmen, veröffentlichten Kommentaren
+und Antworten sowie Reaktionen auf RYD-Kommentare. Der Dienst verwendet IP-Adressen zur Missbrauchsprävention und für
+aggregierte Analysen. Er verkauft sie nicht und verwendet sie nicht für Werbung.
 
 ### Ich habe etwas über OAuth gehört und den Zugriff auf mein YouTube-Konto!
 

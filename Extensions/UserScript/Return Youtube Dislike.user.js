@@ -132,7 +132,224 @@ var vote_transition_core_namespaceFn = () => {
 	return __webpack_require__(110);
 };
 
+;// ./Extensions/common/shorts-control-readiness.js
+const SHORTS_HYDRATED_SURFACE_STABILITY_MS = 250;
+const SHORTS_UNHYDRATED_SURFACE_STABILITY_MS = 1500;
+const SHORTS_LINK_SELECTOR = "a[href*='/shorts/']";
+const SHORTS_CANONICAL_PLAYER_LINK_SELECTOR = "a.ytp-title-link[href*='/shorts/']";
+const SHORTS_ICON_GRAPHIC_SELECTOR = "path, circle, ellipse, line, polygon, polyline, rect";
+
+function getShortsIdentityLinkVideoIds(root, baseUrl = "https://www.youtube.com/") {
+  const identities = new Set();
+  if (!root?.querySelectorAll) {
+    return identities;
+  }
+
+  const links = Array.from(root.querySelectorAll(SHORTS_LINK_SELECTOR));
+  const canonicalPlayerLinks = links.filter((link) => link.matches(SHORTS_CANONICAL_PLAYER_LINK_SELECTOR));
+  // The player title link identifies the reel. Other /shorts/ links can be
+  // unrelated calls to action in the current Short's description/metapanel.
+  // Choose the canonical subset before parsing so malformed player metadata
+  // cannot make an unrelated description link look authoritative.
+  const identityLinks = canonicalPlayerLinks.length > 0 ? canonicalPlayerLinks : links;
+
+  for (const link of identityLinks) {
+    try {
+      const href = link.getAttribute("href");
+      if (!href) continue;
+      const videoId = new URL(href, baseUrl).pathname.match(/^\/shorts\/([^/]+)\/?$/)?.[1];
+      if (videoId) identities.add(videoId);
+    } catch {
+      // Ignore malformed or incomplete links while YouTube hydrates the reel.
+    }
+  }
+
+  return identities;
+}
+
+function getShortsControlSurfaceStabilityMs(isHydrated) {
+  return isHydrated ? SHORTS_HYDRATED_SURFACE_STABILITY_MS : SHORTS_UNHYDRATED_SURFACE_STABILITY_MS;
+}
+
+function isShortsControlSurfaceReadyForMutation({
+  allowUnhydratedFallback = false,
+  candidateVideoIds = [],
+  currentVideoId,
+  isConnected,
+  isHydrated,
+  isRendered,
+  isStable,
+  isViewportIntersecting,
+  visibleCandidateCount,
+}) {
+  const uniqueCandidateVideoIds = new Set(Array.from(candidateVideoIds).filter(Boolean));
+  const hasExactIdentity = uniqueCandidateVideoIds.size === 1 && uniqueCandidateVideoIds.has(currentVideoId);
+  const isUnambiguousIdentitylessSurface = uniqueCandidateVideoIds.size === 0 && visibleCandidateCount === 1;
+
+  return Boolean(
+    currentVideoId &&
+      isConnected &&
+      (isHydrated || allowUnhydratedFallback) &&
+      isRendered &&
+      isStable &&
+      isViewportIntersecting &&
+      (hasExactIdentity || isUnambiguousIdentitylessSurface),
+  );
+}
+
+function actionBarHasHydratedData(actionBar) {
+  return Boolean(actionBar) && (!("data" in actionBar) || Boolean(actionBar.data));
+}
+
+function capturePaintedShortsIcon(button) {
+  const svg = button?.querySelector("svg") ?? null;
+  if (!svg?.isConnected) return null;
+
+  const graphic = Array.from(svg.querySelectorAll(SHORTS_ICON_GRAPHIC_SELECTOR)).find(
+    (candidate) => candidate.tagName.toLowerCase() !== "path" || (candidate.getAttribute("d") ?? "").trim().length > 0,
+  );
+  if (!graphic?.isConnected) return null;
+
+  const rect = svg.getBoundingClientRect();
+  if (!(rect.width > 0 && rect.height > 0)) return null;
+
+  return { graphic, svg };
+}
+
+function captureShortsNativeControlInventory(
+  actionBar,
+  { getNativeLikeButton, syntheticSelector = "[data-ryd-synthetic-shorts-dislike]" } = {},
+) {
+  const nativeChildren = Array.from(actionBar?.children ?? []).filter((child) => !child.matches(syntheticSelector));
+  const likeButton = actionBar?.querySelector("like-button-view-model") ?? null;
+  const nativeLikeButton = getNativeLikeButton
+    ? getNativeLikeButton(likeButton)
+    : likeButton?.querySelector("button") ?? null;
+  const nativeLikeIcon = capturePaintedShortsIcon(nativeLikeButton);
+  const activationTargets = nativeChildren.map((child) =>
+    child === likeButton && getNativeLikeButton
+      ? nativeLikeButton
+      : child.querySelector("button, a[href], a[role='button'][tabindex='0'], tp-yt-paper-button#button"),
+  );
+  if (
+    !likeButton?.isConnected ||
+    !nativeLikeButton?.isConnected ||
+    !nativeLikeIcon ||
+    nativeChildren.length < 4 ||
+    !nativeChildren.includes(likeButton) ||
+    activationTargets.some((target) => !target?.isConnected)
+  ) {
+    return null;
+  }
+  return {
+    activationTargets,
+    likeButton,
+    nativeChildren,
+    nativeLikeButton,
+    nativeLikeGraphic: nativeLikeIcon.graphic,
+    nativeLikeSvg: nativeLikeIcon.svg,
+  };
+}
+
+function shortsNativeControlInventoryMatches(left, right) {
+  return Boolean(
+    left &&
+      right &&
+      left.likeButton === right.likeButton &&
+      left.nativeLikeButton === right.nativeLikeButton &&
+      left.nativeLikeGraphic === right.nativeLikeGraphic &&
+      left.nativeLikeSvg === right.nativeLikeSvg &&
+      left.nativeChildren.length === right.nativeChildren.length &&
+      left.nativeChildren.every((child, index) => child === right.nativeChildren[index]) &&
+      left.activationTargets.every((target, index) => target === right.activationTargets[index]),
+  );
+}
+
+function shortsNativeControlInventoryIsReadyForFallback(
+  inventory,
+  { getTopmostElement, isMeaningfullyInViewport, isRendered },
+) {
+  if (
+    !inventory?.activationTargets?.length ||
+    typeof getTopmostElement !== "function" ||
+    typeof isMeaningfullyInViewport !== "function" ||
+    typeof isRendered !== "function"
+  ) {
+    return false;
+  }
+
+  return inventory.activationTargets.every((target) => {
+    if (!target?.isConnected || !isRendered(target) || !isMeaningfullyInViewport(target)) {
+      return false;
+    }
+
+    const rect = target.getBoundingClientRect();
+    const topmostElement = getTopmostElement(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    return Boolean(topmostElement && (topmostElement === target || target.contains(topmostElement)));
+  });
+}
+
+
+
+;// ./Extensions/common/playback-position.js
+
+
+const PLAYER_SELECTOR = "#shorts-player, #movie_player, .html5-video-player";
+const SHORTS_RENDERER_SELECTOR = "ytd-reel-video-renderer, ytm-reel-video-renderer, ytm-shorts-video-renderer";
+const PLAYER_OWNER_SELECTOR = `${SHORTS_RENDERER_SELECTOR}, ytd-watch-flexy, ytd-watch-grid`;
+const VIDEO_SELECTOR = "video.html5-main-video";
+const MAX_PLAYBACK_POSITION = 2_147_483_646;
+
+function normalizePlaybackPosition(value) {
+  return Number.isInteger(value) && value >= 0 && value <= MAX_PLAYBACK_POSITION ? value : undefined;
+}
+
+function getOwnerVideoIds(owner, shorts, pageUrl) {
+  if (!owner) return [];
+  const ids = [owner.getAttribute("video-id"), owner.getAttribute("data-video-id")].filter(Boolean);
+  if (ids.length > 0 || !shorts) return ids;
+  return [...getShortsIdentityLinkVideoIds(owner, pageUrl)];
+}
+
+function findPlayer(videoId, root) {
+  const location = (root.ownerDocument ?? root).location;
+  const shorts = location.pathname.startsWith("/shorts/");
+  const players = Array.from(root.querySelectorAll(PLAYER_SELECTOR), (player) => {
+    const owner = player.closest(PLAYER_OWNER_SELECTOR);
+    return { player, owner, ownerIds: getOwnerVideoIds(owner, shorts, location.href) };
+  }).filter(({ player, owner, ownerIds }) => {
+    return (
+      ownerIds.every((ownerId) => ownerId === videoId) &&
+      (!owner || owner.matches(SHORTS_RENDERER_SELECTOR) === shorts) &&
+      (shorts || player.id !== "shorts-player") &&
+      !player.closest("#inline-preview-player, [hidden], [aria-hidden='true'], [inert]") &&
+      player.getClientRects().length > 0
+    );
+  });
+  // YouTube can keep players for previous or upcoming videos mounted during navigation.
+  const matching = players.filter(({ ownerIds }) => ownerIds.length > 0);
+  if (matching.length > 0) return matching.length === 1 ? matching[0].player : undefined;
+
+  const active = players.filter(({ owner }) => shorts && owner?.hasAttribute("is-active"));
+  if (active.length > 0) return active.length === 1 ? active[0].player : undefined;
+
+  const primaryId = shorts ? "shorts-player" : "movie_player";
+  const primary = players.filter(({ player }) => player.id === primaryId);
+  const fallback = primary.length > 0 ? primary : players;
+  return fallback.length === 1 ? fallback[0].player : undefined;
+}
+
+function readPlaybackPosition(videoId, root = document) {
+  const player = findPlayer(videoId, root);
+  if (!player || player.classList.contains("ad-showing")) return undefined;
+  return normalizePlaybackPosition(Math.floor(player.querySelector(VIDEO_SELECTOR)?.currentTime));
+}
+
+
+
 ;// ./Extensions/common/vote-client.js
+
+
 const DEFAULT_API_BASE_URL = "https://returnyoutubedislikeapi.com";
 const USER_ID_CHARSET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 const VALID_VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
@@ -250,6 +467,7 @@ function createVoteClient({
   cryptoImpl = globalThis.crypto,
   puzzleAttempts = 2,
   votePuzzleAttempts = 3,
+  clientDetails = {},
 } = {}) {
   if (typeof fetchImpl !== "function") throw new TypeError("fetchImpl is required");
   if (!credentialStore?.load || !credentialStore?.save || !credentialStore?.clear) {
@@ -379,18 +597,29 @@ function createVoteClient({
     );
   }
 
-  async function performVote(videoId, value, authenticationRetriesRemaining) {
+  async function performVote(videoId, value, playbackPosition, authenticationRetriesRemaining) {
     let { userId } = await ensureRegistered();
 
     for (let attempt = 0; attempt < votePuzzleAttempts; attempt++) {
-      const voteResponse = await postJson("/interact/vote", { userId, videoId, value }, "Vote submission");
+      const voteResponse = await postJson(
+        "/interact/vote",
+        {
+          userId,
+          videoId,
+          value,
+          playbackPosition,
+          clientVersion: clientDetails.clientVersion,
+          clientKind: clientDetails.clientKind,
+        },
+        "Vote submission",
+      );
 
       if (voteResponse.status === 401) {
         if (authenticationRetriesRemaining <= 0) {
           throw new VoteClientError("Vote submission was unauthorized after re-registration", { status: 401 });
         }
         ({ userId } = await ensureRegistered({ force: true }));
-        return performVote(videoId, value, authenticationRetriesRemaining - 1);
+        return performVote(videoId, value, playbackPosition, authenticationRetriesRemaining - 1);
       }
       if (!isSuccessful(voteResponse)) {
         throw new VoteClientError("Vote submission was rejected", { status: voteResponse.status });
@@ -410,7 +639,7 @@ function createVoteClient({
           throw new VoteClientError("Vote confirmation was unauthorized after re-registration", { status: 401 });
         }
         await ensureRegistered({ force: true });
-        return performVote(videoId, value, authenticationRetriesRemaining - 1);
+        return performVote(videoId, value, playbackPosition, authenticationRetriesRemaining - 1);
       }
       if (!isSuccessful(confirmResponse)) {
         throw new VoteClientError("Vote confirmation was rejected", { status: confirmResponse.status });
@@ -424,7 +653,7 @@ function createVoteClient({
     throw new VoteClientError("Unable to solve the vote puzzle");
   }
 
-  function submitVote(videoId, value) {
+  function submitVote(videoId, value, { playbackPosition } = {}) {
     if (typeof videoId !== "string" || !VALID_VIDEO_ID.test(videoId)) {
       return Promise.reject(new TypeError("videoId must be an 11-character YouTube video ID"));
     }
@@ -432,8 +661,9 @@ function createVoteClient({
       return Promise.reject(new TypeError("value must be -1, 0, or 1"));
     }
 
+    const position = normalizePlaybackPosition(playbackPosition);
     const previous = voteQueues.get(videoId) ?? Promise.resolve();
-    const current = previous.catch(() => undefined).then(() => performVote(videoId, value, 1));
+    const current = previous.catch(() => undefined).then(() => performVote(videoId, value, position, 1));
     voteQueues.set(videoId, current);
     current.then(
       () => {
@@ -606,165 +836,6 @@ function observeYouTubeTheme(onChange, ownerDocument = document) {
   });
   observer.observe(ownerDocument.documentElement, { attributes: true, attributeFilter: ["dark"] });
   return observer;
-}
-
-
-
-;// ./Extensions/common/shorts-control-readiness.js
-const SHORTS_HYDRATED_SURFACE_STABILITY_MS = 250;
-const SHORTS_UNHYDRATED_SURFACE_STABILITY_MS = 1500;
-const SHORTS_LINK_SELECTOR = "a[href*='/shorts/']";
-const SHORTS_CANONICAL_PLAYER_LINK_SELECTOR = "a.ytp-title-link[href*='/shorts/']";
-const SHORTS_ICON_GRAPHIC_SELECTOR = "path, circle, ellipse, line, polygon, polyline, rect";
-
-function getShortsIdentityLinkVideoIds(root, baseUrl = "https://www.youtube.com/") {
-  const identities = new Set();
-  if (!root?.querySelectorAll) {
-    return identities;
-  }
-
-  const links = Array.from(root.querySelectorAll(SHORTS_LINK_SELECTOR));
-  const canonicalPlayerLinks = links.filter((link) => link.matches(SHORTS_CANONICAL_PLAYER_LINK_SELECTOR));
-  // The player title link identifies the reel. Other /shorts/ links can be
-  // unrelated calls to action in the current Short's description/metapanel.
-  // Choose the canonical subset before parsing so malformed player metadata
-  // cannot make an unrelated description link look authoritative.
-  const identityLinks = canonicalPlayerLinks.length > 0 ? canonicalPlayerLinks : links;
-
-  for (const link of identityLinks) {
-    try {
-      const href = link.getAttribute("href");
-      if (!href) continue;
-      const videoId = new URL(href, baseUrl).pathname.match(/^\/shorts\/([^/]+)\/?$/)?.[1];
-      if (videoId) identities.add(videoId);
-    } catch {
-      // Ignore malformed or incomplete links while YouTube hydrates the reel.
-    }
-  }
-
-  return identities;
-}
-
-function getShortsControlSurfaceStabilityMs(isHydrated) {
-  return isHydrated ? SHORTS_HYDRATED_SURFACE_STABILITY_MS : SHORTS_UNHYDRATED_SURFACE_STABILITY_MS;
-}
-
-function isShortsControlSurfaceReadyForMutation({
-  allowUnhydratedFallback = false,
-  candidateVideoIds = [],
-  currentVideoId,
-  isConnected,
-  isHydrated,
-  isRendered,
-  isStable,
-  isViewportIntersecting,
-  visibleCandidateCount,
-}) {
-  const uniqueCandidateVideoIds = new Set(Array.from(candidateVideoIds).filter(Boolean));
-  const hasExactIdentity = uniqueCandidateVideoIds.size === 1 && uniqueCandidateVideoIds.has(currentVideoId);
-  const isUnambiguousIdentitylessSurface = uniqueCandidateVideoIds.size === 0 && visibleCandidateCount === 1;
-
-  return Boolean(
-    currentVideoId &&
-      isConnected &&
-      (isHydrated || allowUnhydratedFallback) &&
-      isRendered &&
-      isStable &&
-      isViewportIntersecting &&
-      (hasExactIdentity || isUnambiguousIdentitylessSurface),
-  );
-}
-
-function actionBarHasHydratedData(actionBar) {
-  return Boolean(actionBar) && (!("data" in actionBar) || Boolean(actionBar.data));
-}
-
-function capturePaintedShortsIcon(button) {
-  const svg = button?.querySelector("svg") ?? null;
-  if (!svg?.isConnected) return null;
-
-  const graphic = Array.from(svg.querySelectorAll(SHORTS_ICON_GRAPHIC_SELECTOR)).find(
-    (candidate) => candidate.tagName.toLowerCase() !== "path" || (candidate.getAttribute("d") ?? "").trim().length > 0,
-  );
-  if (!graphic?.isConnected) return null;
-
-  const rect = svg.getBoundingClientRect();
-  if (!(rect.width > 0 && rect.height > 0)) return null;
-
-  return { graphic, svg };
-}
-
-function captureShortsNativeControlInventory(
-  actionBar,
-  { getNativeLikeButton, syntheticSelector = "[data-ryd-synthetic-shorts-dislike]" } = {},
-) {
-  const nativeChildren = Array.from(actionBar?.children ?? []).filter((child) => !child.matches(syntheticSelector));
-  const likeButton = actionBar?.querySelector("like-button-view-model") ?? null;
-  const nativeLikeButton = getNativeLikeButton
-    ? getNativeLikeButton(likeButton)
-    : likeButton?.querySelector("button") ?? null;
-  const nativeLikeIcon = capturePaintedShortsIcon(nativeLikeButton);
-  const activationTargets = nativeChildren.map((child) =>
-    child === likeButton && getNativeLikeButton
-      ? nativeLikeButton
-      : child.querySelector("button, a[href], a[role='button'][tabindex='0'], tp-yt-paper-button#button"),
-  );
-  if (
-    !likeButton?.isConnected ||
-    !nativeLikeButton?.isConnected ||
-    !nativeLikeIcon ||
-    nativeChildren.length < 4 ||
-    !nativeChildren.includes(likeButton) ||
-    activationTargets.some((target) => !target?.isConnected)
-  ) {
-    return null;
-  }
-  return {
-    activationTargets,
-    likeButton,
-    nativeChildren,
-    nativeLikeButton,
-    nativeLikeGraphic: nativeLikeIcon.graphic,
-    nativeLikeSvg: nativeLikeIcon.svg,
-  };
-}
-
-function shortsNativeControlInventoryMatches(left, right) {
-  return Boolean(
-    left &&
-      right &&
-      left.likeButton === right.likeButton &&
-      left.nativeLikeButton === right.nativeLikeButton &&
-      left.nativeLikeGraphic === right.nativeLikeGraphic &&
-      left.nativeLikeSvg === right.nativeLikeSvg &&
-      left.nativeChildren.length === right.nativeChildren.length &&
-      left.nativeChildren.every((child, index) => child === right.nativeChildren[index]) &&
-      left.activationTargets.every((target, index) => target === right.activationTargets[index]),
-  );
-}
-
-function shortsNativeControlInventoryIsReadyForFallback(
-  inventory,
-  { getTopmostElement, isMeaningfullyInViewport, isRendered },
-) {
-  if (
-    !inventory?.activationTargets?.length ||
-    typeof getTopmostElement !== "function" ||
-    typeof isMeaningfullyInViewport !== "function" ||
-    typeof isRendered !== "function"
-  ) {
-    return false;
-  }
-
-  return inventory.activationTargets.every((target) => {
-    if (!target?.isConnected || !isRendered(target) || !isMeaningfullyInViewport(target)) {
-      return false;
-    }
-
-    const rect = target.getBoundingClientRect();
-    const topmostElement = getTopmostElement(rect.left + rect.width / 2, rect.top + rect.height / 2);
-    return Boolean(topmostElement && (topmostElement === target || target.contains(topmostElement)));
-  });
 }
 
 
@@ -958,6 +1029,7 @@ const userscript_version_namespaceObject = "3.2.2";
 
 
 
+
 if (false) // removed by dead control flow
 {}
 
@@ -968,6 +1040,7 @@ const voteClient = createVoteClient({
   fetchImpl,
   credentialStore: createGmCredentialStore(),
   cryptoImpl: globalThis.crypto,
+  clientDetails: { clientVersion: userscript_version_namespaceObject, clientKind: "userscript" },
 });
 const syntheticDislikeStore = createGmSyntheticDislikeStore();
 
@@ -2598,7 +2671,9 @@ function reconcileHydratingVoteTransition(hydration, transition, syntheticShorts
 
 function submitVoteTransition(videoId, transition, signedOut) {
   if (shouldSubmitVote({ disableVoteSubmission: extConfig.disableVoteSubmission, signedOut })) {
-    void voteClient.submitVote(videoId, transition.value).catch(reportVoteFailure);
+    void voteClient
+      .submitVote(videoId, transition.value, { playbackPosition: readPlaybackPosition(videoId) })
+      .catch(reportVoteFailure);
   }
 }
 
@@ -2893,7 +2968,7 @@ let initializedLikeButton = null;
 let initializedDislikeButton = null;
 let lifecyclePageKey = null;
 
-const SHORTS_RENDERER_SELECTOR =
+const userscript_entry_SHORTS_RENDERER_SELECTOR =
   "ytd-reel-video-renderer, ytm-reel-video-renderer, ytm-shorts-video-renderer, ytm-reel-player-overlay-renderer";
 const SHORTS_CONTROL_SELECTOR = `like-button-view-model, dislike-button-view-model, ${SYNTHETIC_SHORTS_DISLIKE_SELECTOR}`;
 
@@ -2901,7 +2976,7 @@ function getShortsRenderer(element) {
   if (!element || element.nodeType !== Node.ELEMENT_NODE) {
     return null;
   }
-  return element.matches(SHORTS_RENDERER_SELECTOR) ? element : element.closest?.(SHORTS_RENDERER_SELECTOR) ?? null;
+  return element.matches(userscript_entry_SHORTS_RENDERER_SELECTOR) ? element : element.closest?.(userscript_entry_SHORTS_RENDERER_SELECTOR) ?? null;
 }
 
 function rendererOwnsCurrentShort(renderer) {
@@ -2921,16 +2996,16 @@ function elementTouchesCurrentShortRenderer(element) {
   if (containingRenderer) {
     return rendererOwnsCurrentShort(containingRenderer);
   }
-  return Array.from(element?.querySelectorAll?.(SHORTS_RENDERER_SELECTOR) ?? []).some(rendererOwnsCurrentShort);
+  return Array.from(element?.querySelectorAll?.(userscript_entry_SHORTS_RENDERER_SELECTOR) ?? []).some(rendererOwnsCurrentShort);
 }
 
 function mutationTouchesShortsControls(mutation) {
   if (mutation.type === "attributes") {
-    if (mutation.attributeName === "is-active" && mutation.target.matches(SHORTS_RENDERER_SELECTOR)) {
+    if (mutation.attributeName === "is-active" && mutation.target.matches(userscript_entry_SHORTS_RENDERER_SELECTOR)) {
       return true;
     }
     if (
-      (mutation.target.matches(SHORTS_RENDERER_SELECTOR) || mutation.target.matches("a")) &&
+      (mutation.target.matches(userscript_entry_SHORTS_RENDERER_SELECTOR) || mutation.target.matches("a")) &&
       elementTouchesCurrentShortRenderer(mutation.target)
     ) {
       return true;
