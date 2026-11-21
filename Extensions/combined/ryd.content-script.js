@@ -186,7 +186,12 @@ if (firefoxDataConsent) {
   if (epoch === countsPermissionEpoch) countsPermissionGranted = granted;
   setCountPermissionAvailable(countsPermissionGranted);
 }
-const pageWorldHelpersReady = injectPageWorldHelpers();
+// Safari loads this helper directly in the page world. A script element
+// inserted from its isolated world may never report load or error.
+const menuHelperIsDeclared = getBrowser()
+  .runtime.getManifest?.()
+  ?.content_scripts?.some(({ world, js }) => world === "MAIN" && js?.includes("menu-fixer.js"));
+const pageWorldHelpersReady = menuHelperIsDeclared ? Promise.resolve() : injectPageWorldHelpers();
 // Listen before asynchronous initialization so settings changed in another tab
 // are applied while the page is still loading.
 if (!privateBrowsingContext) {
