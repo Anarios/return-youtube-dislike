@@ -1,3 +1,10 @@
+import { COUNTRY_DISPLAY_NAMES } from "./constants";
+
+export function getCountryDisplayName(countryCode, countryName) {
+  const code = typeof countryCode === "string" ? countryCode.trim().toUpperCase() : "";
+  return COUNTRY_DISPLAY_NAMES.get(code) ?? countryName;
+}
+
 export function sanitizeCount(value) {
   const number = Number(value);
   if (!Number.isFinite(number) || number <= 0) {

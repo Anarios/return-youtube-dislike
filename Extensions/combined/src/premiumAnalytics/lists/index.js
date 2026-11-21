@@ -1,4 +1,4 @@
-import { sanitizeCount } from "../utils";
+import { getCountryDisplayName, sanitizeCount } from "../utils";
 import { localize } from "../../utils";
 
 function createPlaceholder() {
@@ -11,7 +11,8 @@ function createPlaceholder() {
 function renderEntry({ countryCode, countryName, likes, dislikes }, type) {
   const value = type === "likes" ? likes : dislikes;
   const safeValue = sanitizeCount(value);
-  const name = countryName || countryCode || localize("premiumAnalytics_unknownRegion");
+  const name =
+    getCountryDisplayName(countryCode, countryName) || countryCode || localize("premiumAnalytics_unknownRegion");
   const codeSuffix = countryCode ? ` (${countryCode})` : "";
   const row = document.createElement("li");
   const country = document.createElement("span");

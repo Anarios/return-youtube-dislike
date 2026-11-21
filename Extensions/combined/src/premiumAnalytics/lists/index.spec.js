@@ -14,6 +14,12 @@ describe("premium country list", () => {
     expect(container.querySelector(".ryd-analytics__value").textContent).toBe((1200).toLocaleString());
   });
 
+  test("shows Türkiye under its English name", () => {
+    const container = document.createElement("ul");
+    updateCountryList(container, [{ countryCode: "TR", countryName: "Türkiye", likes: 5 }], "likes");
+    expect(container.querySelector(".ryd-analytics__country").textContent).toBe("Turkey (TR)");
+  });
+
   test("replaces previous entries with the empty placeholder and sanitizes counts", () => {
     const container = document.createElement("ul");
     updateCountryList(container, [{ countryCode: "US", dislikes: '<img src="x">' }], "dislikes");

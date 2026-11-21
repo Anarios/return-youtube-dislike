@@ -45,6 +45,7 @@ jest.mock("topojson-client", () => {
     { properties: { name: "Solomon Is." }, geometry: polygon },
     { properties: { name: "Timor-Leste" }, geometry: polygon },
     { properties: { name: "W. Sahara" }, geometry: polygon },
+    { properties: { name: "Turkey" }, geometry: polygon },
   ];
   const stateFeatures = [
     { properties: { name: "California" }, geometry: polygon },
@@ -79,6 +80,7 @@ jest.mock("country-code-lookup", () => {
     { iso2: "SB", iso3: "SLB", country: "Solomon Islands", officialName: "Solomon Islands" },
     { iso2: "TL", iso3: "TLS", country: "East Timor", officialName: "Democratic Republic of Timor-Leste" },
     { iso2: "EH", iso3: "ESH", country: "Western Sahara", officialName: "Sahrawi Arab Democratic Republic" },
+    { iso2: "TR", iso3: "TUR", country: "Türkiye", officialName: "Republic of Türkiye" },
   ];
   const byIso = jest.fn((code) => countries.find((c) => c.iso2 === code || c.iso3 === code));
   const byCountry = jest.fn((name) => countries.find((c) => c.country === name || c.officialName === name));
@@ -306,6 +308,17 @@ describe("premiumAnalytics.map", () => {
     const names = option.series[0].data.map((entry) => entry.name);
     expect(names).toContain("Côte d'Ivoire");
     expect(names).toContain("S. Sudan");
+  });
+
+  it("labels Türkiye as Turkey and keeps the Turkey outline when the lookup spells it Türkiye", () => {
+    const chart = createChartStub();
+    analyticsState.mapChart = chart;
+
+    renderMap([{ countryCode: "TR", countryName: "Türkiye", likes: 5, dislikes: 2 }]);
+
+    const [entry] = chart.setOption.mock.calls[0][0].series[0].data;
+    expect(entry.name).toBe("Turkey");
+    expect(entry.displayName).toBe("Turkey");
   });
 
   it("switches metric based on mode", () => {

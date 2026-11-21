@@ -2,7 +2,15 @@
  * @jest-environment jsdom
  */
 
-import { sanitizeCount, toEpoch, capitalize, debounce, createRetryTimer, safeJson } from "./utils";
+import {
+  sanitizeCount,
+  toEpoch,
+  capitalize,
+  debounce,
+  createRetryTimer,
+  safeJson,
+  getCountryDisplayName,
+} from "./utils";
 
 describe("premiumAnalytics.utils", () => {
   describe("sanitizeCount", () => {
@@ -135,6 +143,19 @@ describe("premiumAnalytics.utils", () => {
       };
 
       await expect(safeJson(response)).resolves.toBeNull();
+    });
+  });
+
+  describe("getCountryDisplayName", () => {
+    it.each([
+      ["TR", "Türkiye", "Turkey"],
+      ["tr", "Türkiye", "Turkey"],
+      [" TR ", undefined, "Turkey"],
+      ["DE", "Germany", "Germany"],
+      [undefined, "Germany", "Germany"],
+      ["", undefined, undefined],
+    ])("shows %p with remote name %p as %p", (countryCode, countryName, expected) => {
+      expect(getCountryDisplayName(countryCode, countryName)).toBe(expected);
     });
   });
 });
