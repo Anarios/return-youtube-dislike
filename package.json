@@ -83,6 +83,53 @@
     "webpack": "^5.112.2",
     "webpack-cli": "^7.2.3"
   },
+  "overrides": {
+    "@babel/plugin-syntax-async-generators": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-bigint": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-class-properties": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-class-static-block": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-import-attributes": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-import-meta": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-json-strings": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-logical-assignment-operators": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-nullish-coalescing-operator": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-numeric-separator": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-object-rest-spread": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-optional-catch-binding": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-optional-chaining": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-private-property-in-object": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    },
+    "@babel/plugin-syntax-top-level-await": {
+      "@babel/core": "^7.0.0-0 || ^8.0.0-0"
+    }
+  },
   "prettier": {
     "printWidth": 120
   }
