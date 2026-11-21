@@ -5,7 +5,7 @@ import worldData from "world-atlas/countries-110m.json";
 import usStatesData from "us-atlas/states-10m.json";
 
 import { analyticsState } from "../state";
-import { sanitizeCount } from "../utils";
+import { getCountryDisplayName, sanitizeCount } from "../utils";
 import { localize } from "../../utils";
 import { getMutedTextColor, getBorderColor, getSurfaceColor, getHoverFillColor } from "../theme";
 
@@ -293,7 +293,7 @@ function buildCountryEntries(entries) {
     const ratio = total > 0 ? likes / total : null;
     const countryCode = typeof entry.countryCode === "string" ? entry.countryCode.toUpperCase() : "";
     const fallbackName = translateMessage("premiumAnalytics_unknownRegion");
-    const displayName = entry.countryName || countryCode || fallbackName;
+    const displayName = getCountryDisplayName(countryCode, entry.countryName) || countryCode || fallbackName;
     const mapName = resolveMapRegionName(countryCode, displayName);
 
     return {
