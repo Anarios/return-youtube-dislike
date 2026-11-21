@@ -80,7 +80,7 @@
     "jest-environment-jsdom": "^30.0.4",
     "lint-staged": "^16.1.2",
     "prettier": "^3.2.2",
-    "webpack": "^5.89.0",
+    "webpack": "^5.112.2",
     "webpack-cli": "^7.2.3"
   },
   "prettier": {
