@@ -35,7 +35,7 @@
       </v-btn>
 
       <v-btn class="mainAltButton" :href="discordLink" target="_blank">
-        <v-icon style="margin-right: 0.5em">mdi-discord</v-icon>
+        <v-icon :icon="discordIcon" style="margin-right: 0.5em" />
         {{ t("$vuetify.links.discord") }}
       </v-btn>
     </div>
@@ -68,11 +68,12 @@
 
 <script>
 import { useLocale } from "vuetify";
+import { discordIcon } from "../utils/icons";
 
 export default {
   setup() {
     const { t } = useLocale();
-    return { t };
+    return { t, discordIcon };
   },
   data() {
     return {

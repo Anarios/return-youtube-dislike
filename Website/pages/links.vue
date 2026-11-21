@@ -14,7 +14,7 @@
     </v-btn>
 
     <v-btn class="mainAltButton" :href="discordLink" target="_blank">
-      <v-icon style="margin-right: 0.5em">mdi-discord</v-icon>
+      <v-icon :icon="discordIcon" style="margin-right: 0.5em" />
       {{ t("$vuetify.links.discord") }}
     </v-btn>
 
@@ -26,10 +26,10 @@
     <a class="attr-link" :href="emailLink" target="_blank">selivano.d@gmail.com</a>
 
     <p style="color: #555" class="my-8">
-      Site by <v-icon color="#555">mdi-discord</v-icon>
+      Site by <v-icon :icon="discordIcon" color="#555" />
       <a class="attr-link" href="https://github.com/Frontesque" target="_blank"> Front#2990 </a>
       <br />
-      & <v-icon color="#555">mdi-discord</v-icon>
+      & <v-icon :icon="discordIcon" color="#555" />
       <a class="attr-link" href="https://github.com/PickleNik" target="_blank"> PickleNik#0864 </a>
     </p>
     <!-- Translators -->
@@ -57,11 +57,12 @@
 
 <script>
 import { useLocale } from "vuetify";
+import { discordIcon } from "../utils/icons";
 
 export default {
   setup() {
     const { t } = useLocale();
-    return { t };
+    return { t, discordIcon };
   },
   data: () => ({
     githubLink: "https://github.com/Anarios/return-youtube-dislike",
