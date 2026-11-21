@@ -48,7 +48,7 @@
           :href="discordLink"
           target="_blank"
         >
-          <v-icon size="1rem" style="margin-right: 0.5em">mdi-discord</v-icon>
+          <v-icon :icon="discordIcon" size="1rem" style="margin-right: 0.5em" />
           {{ t("$vuetify.links.discord") }}
         </v-btn>
         <ol class="ps-6 pe-0" type="a">
@@ -111,6 +111,7 @@
 import { computed, onMounted, ref } from "vue";
 import { useLocale } from "vuetify";
 import { version as extensionVersion } from "../../package.json";
+import { discordIcon } from "../utils/icons";
 
 const { t, isRtl } = useLocale();
 const userAgent = useUserAgent();
