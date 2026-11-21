@@ -117,6 +117,7 @@ const CANONICAL_SYNONYM_GROUPS = [
   ["eqguinea", "equatorialguinea"],
   ["timorleste", "easttimor"],
   ["solomonisls", "solomonislands", "solomonis"],
+  ["turkey", "turkiye"],
 ];
 const CANONICAL_SYNONYM_LOOKUP = buildSynonymLookup(CANONICAL_SYNONYM_GROUPS);
 const FEATURE_NAME_BY_CANONICAL = buildFeatureCanonicalMap(NORMALIZED_WORLD_FEATURES);
