@@ -22,7 +22,7 @@
     "srvx": "1.0.8",
     "vue": "3.5.45",
     "vue-router": "5.5.1",
-    "vuetify": "4.3.3",
+    "vuetify": "4.3.4",
     "woothee": "1.11.1"
   },
   "devDependencies": {
