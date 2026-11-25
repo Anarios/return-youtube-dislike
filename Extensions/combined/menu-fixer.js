@@ -115,7 +115,13 @@
     if (!button) return null;
 
     const text = getMenuItemText(button);
-    const serviceEndpoint = button.onTap ?? button.serviceEndpoint ?? button.navigationEndpoint ?? button.command;
+    const commands = button.onTap?.serialCommand?.commands;
+    // The overflow renderer expects the native Share endpoint directly.
+    const shareEndpoint = Array.isArray(commands)
+      ? commands.find((command) => command?.innertubeCommand?.shareEntityServiceEndpoint)?.innertubeCommand
+      : undefined;
+    const serviceEndpoint =
+      shareEndpoint ?? button.onTap ?? button.serviceEndpoint ?? button.navigationEndpoint ?? button.command;
     const iconType = button.iconName ?? button.icon?.iconType;
     if (!text || !serviceEndpoint) return null;
 
