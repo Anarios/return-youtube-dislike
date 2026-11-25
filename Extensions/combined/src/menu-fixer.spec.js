@@ -34,7 +34,22 @@ function attachRenderer(controller, id = "menu") {
 }
 
 function makeCurrentMenuData() {
-  const shareCommand = { serialCommand: { commands: [{ innertubeCommand: { shareEntityServiceEndpoint: {} } }] } };
+  const shareEndpoint = {
+    clickTrackingParams: "share-tracking",
+    commandMetadata: { webCommandMetadata: { sendPost: true, apiUrl: "/youtubei/v1/share/get_share_panel" } },
+    shareEntityServiceEndpoint: {
+      serializedShareEntity: "video-share-entity",
+      commands: [
+        {
+          openPopupAction: {
+            popup: { unifiedSharePanelRenderer: { showLoadingSpinner: true } },
+            popupType: "DIALOG",
+            beReused: true,
+          },
+        },
+      ],
+    },
+  };
   const reaction = {
     segmentedLikeDislikeButtonViewModel: {
       likeButtonViewModel: { accessibilityId: "id.video.like.button" },
@@ -46,7 +61,14 @@ function makeCurrentMenuData() {
       accessibilityId: "id.video.share.button",
       accessibilityText: "Share",
       iconName: "SHARE",
-      onTap: shareCommand,
+      onTap: {
+        serialCommand: {
+          commands: [
+            { logGestureCommand: { gestureType: "GESTURE_EVENT_TYPE_LOG_GENERIC_CLICK" } },
+            { innertubeCommand: shareEndpoint },
+          ],
+        },
+      },
       title: "Share",
       trackingParams: "share-tracking",
     },
@@ -61,7 +83,7 @@ function makeCurrentMenuData() {
     reaction,
     save,
     share,
-    shareCommand,
+    shareEndpoint,
   };
 }
 
@@ -456,7 +478,7 @@ describe("menu fixer", () => {
   });
 
   test("hide-clutter mode moves every optional action into overflow without calling native layout", () => {
-    const { data, reaction, save, share, shareCommand } = makeCurrentMenuData();
+    const { data, reaction, save, share, shareEndpoint } = makeCurrentMenuData();
     const controller = { ...makeController(), data };
     const original = jest.fn();
     const guarded = createMenuUpdateGuard(original, controller, {
@@ -476,7 +498,7 @@ describe("menu fixer", () => {
         menuItem: {
           menuServiceItemRenderer: {
             icon: { iconType: "SHARE" },
-            serviceEndpoint: shareCommand,
+            serviceEndpoint: shareEndpoint,
             text: { runs: [{ text: "Share" }] },
             trackingParams: "share-tracking",
           },
