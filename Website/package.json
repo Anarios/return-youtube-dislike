@@ -18,7 +18,7 @@
   "dependencies": {
     "@fontsource/roboto": "5.3.0",
     "@mdi/font": "7.4.47",
-    "nuxt": "4.6.4",
+    "nuxt": "4.7.0",
     "srvx": "1.0.8",
     "vue": "3.5.45",
     "vue-router": "5.5.1",
